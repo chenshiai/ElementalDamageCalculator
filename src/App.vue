@@ -73,7 +73,7 @@ export default defineComponent({
       return ((calculate(data.elementalMystery) * 12) / 5).toFixed(1);
     });
     const crystallization = computed(() => {
-      return ((calculate(data.elementalMystery) * 12) / 8).toFixed(1);
+      return ((calculate(data.elementalMystery) * 8) / 5).toFixed(1);
     });
 
     const electroChargedDamage = computed(() => {
