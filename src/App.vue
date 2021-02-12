@@ -2,7 +2,7 @@
   <div class="title">元素精通计算器</div>
   <div class="tips">
     <span style="color: red">※注意事项※</span>
-    计算公式为玩家自主逆推拟合而成，<b>存在一定的误差</b>，岩结晶护盾值暂无，仅供参考。<b>没有计算敌人抗性，实际数值请以游戏内为准</b>。
+    计算公式为玩家自主逆推拟合而成，<b>存在一定的误差</b>，岩结晶护盾值数据不足，仅供参考。<b>没有计算敌人抗性，实际数值请以游戏内为准</b>。
   </div>
   <div class="base-damage">
     <span class="base-damage__title">
@@ -37,9 +37,12 @@
     <span class="damage-tag">
       <span class="damage-tag__title superconduct">超导</span>{{ superconductDamage }}
     </span>
+    <span v-if="crystallizeValue > 0" class="damage-tag">
+      <span class="damage-tag__title crystallize">结晶</span>{{ crystallizeValue }}
+    </span>
   </div>
   <div class="supporter">
-    逆推公式提供者<a href="https://space.bilibili.com/392692625/article">bionukg@BiliBili</a>
+    逆推公式提供者：<a href="https://space.bilibili.com/392692625/article">bionukg@BiliBili</a>
   </div>
   <div class="supporter">
     基础伤害数值来源：<a href="https://bbs.mihoyo.com/ys/article/2215872">鈴@米游社【空荧酒馆】</a>
@@ -95,6 +98,13 @@ export default defineComponent({
     const superconductDamage = computed(() => {
       return calculateDamage(Base.superconduct[data.level], data.elementalMystery);
     });
+    
+    const crystallizeValue = computed(() => {
+      if (Base.crystallize[data.level]) {
+        return Math.round(Base.crystallize[data.level] * (1 + (calculate(data.elementalMystery) * 8) / 5 / 100));
+      }
+      return 0;
+    })
 
     return { 
       data, 
@@ -106,6 +116,7 @@ export default defineComponent({
       crushedIceDamage, 
       diffuseDamage,
       superconductDamage,
+      crystallizeValue,
     };
   },
 });
@@ -184,6 +195,10 @@ export default defineComponent({
 
 .superconduct {
   color: #7ee9f1;
+}
+
+.crystallize {
+  color: #b48f14;
 }
 
 .detail {
