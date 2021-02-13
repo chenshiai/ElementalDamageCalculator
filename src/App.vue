@@ -2,7 +2,7 @@
   <div class="title">元素精通计算器</div>
   <div class="tips">
     <span style="color: red">※注意事项※</span>
-    计算公式为玩家自主逆推拟合而成，<b>存在一定的误差</b>，岩结晶护盾值数据不足，仅供参考。<b>没有计算敌人抗性，实际数值请以游戏内为准</b>。
+    计算公式为玩家自主逆推拟合而成，仅供参考，<b>存在一定的误差</b>，数值越高误差越大。结晶护盾值的数据暂时不足。<b>没有计算敌人抗性，实际数值请以游戏内为准</b>。
   </div>
   <div class="base-damage">
     <span class="base-damage__title">
