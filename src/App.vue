@@ -53,13 +53,17 @@
 import { computed, defineComponent, reactive } from "vue";
 import Base from "./constant";
 
-const calculate = (elementalMystery) => {
+// 增幅反应公式
+const increase = (elementalMystery) => {
   return Math.log(+elementalMystery / 569.5 + 1) / Math.log(1.0086944);
 };
 
-const calculateDamage = (baseDamage, elementalMystery) => {
-  return Math.round(baseDamage * (1 + (calculate(elementalMystery) * 12) / 5 / 100));
+// 聚变反应公式
+const calculate2 = (elementalMystery) => {
+  if (elementalMystery <= 0) return 0;
+  return 6.66 / (1 + 1400 / elementalMystery) * 100;
 };
+
 
 export default defineComponent({
   name: "Elemental Damage Calculator",
@@ -69,39 +73,56 @@ export default defineComponent({
       level: 1,
       base: Base,
     });
+
+    // 增幅倍率
     const Rate = computed(() => {
-      return calculate(data.elementalMystery).toFixed(1);
+      return (increase(data.elementalMystery)).toFixed(1);
     });
+
+    // 聚变倍率
     const servitude = computed(() => {
-      return ((calculate(data.elementalMystery) * 12) / 5).toFixed(1);
+      return calculate2(data.elementalMystery).toFixed(1);
     });
+
+    // 结晶倍率
     const crystallization = computed(() => {
-      return ((calculate(data.elementalMystery) * 8) / 5).toFixed(1);
-    });
-
-    const electroChargedDamage = computed(() => {
-      return calculateDamage(Base.electroCharged[data.level], data.elementalMystery);
-    });
-
-    const overloadDamage = computed(() => {
-      return calculateDamage(Base.overload[data.level], data.elementalMystery);
-    });
-
-    const crushedIceDamage = computed(() => {
-      return calculateDamage(Base.crushedIce[data.level], data.elementalMystery);
-    });
-
-    const diffuseDamage = computed(() => {
-      return calculateDamage(Base.diffuse[data.level], data.elementalMystery);
-    });
-
-    const superconductDamage = computed(() => {
-      return calculateDamage(Base.superconduct[data.level], data.elementalMystery);
+      return (calculate2(data.elementalMystery) / 12 * 8).toFixed(1);
     });
     
+    // 聚变反应伤害公式
+    const calculateDamage = (baseDamage) => {
+      return Math.round(baseDamage * (1 + calculate2(data.elementalMystery) / 100));
+    };
+
+    // 感电伤害值
+    const electroChargedDamage = computed(() => {
+      return calculateDamage(Base.electroCharged[data.level]);
+    });
+
+    // 超载伤害值
+    const overloadDamage = computed(() => {
+      return calculateDamage(Base.overload[data.level]);
+    });
+
+    // 碎冰伤害值
+    const crushedIceDamage = computed(() => {
+      return calculateDamage(Base.crushedIce[data.level]);
+    });
+
+    // 扩散伤害值
+    const diffuseDamage = computed(() => {
+      return calculateDamage(Base.diffuse[data.level]);
+    });
+
+    // 超导伤害值
+    const superconductDamage = computed(() => {
+      return calculateDamage(Base.superconduct[data.level]);
+    });
+
+    // 结晶数值
     const crystallizeValue = computed(() => {
       if (Base.crystallize[data.level]) {
-        return Math.round(Base.crystallize[data.level] * (1 + (calculate(data.elementalMystery) * 8) / 5 / 100));
+        return Math.round(Base.crystallize[data.level] * (1 + (calculate2(data.elementalMystery) / 12 * 5) / 100));
       }
       return 0;
     })
