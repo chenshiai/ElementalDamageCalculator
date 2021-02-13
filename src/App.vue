@@ -122,7 +122,7 @@ export default defineComponent({
     // 结晶数值
     const crystallizeValue = computed(() => {
       if (Base.crystallize[data.level]) {
-        return Math.round(Base.crystallize[data.level] * (1 + (calculate2(data.elementalMystery) / 12 * 5) / 100));
+        return Math.round(Base.crystallize[data.level] * (1 + (calculate2(data.elementalMystery) / 12 * 8 / 100)));
       }
       return 0;
     })
