@@ -64,6 +64,12 @@ const calculate2 = (elementalMystery) => {
   return 6.66 / (1 + 1400 / elementalMystery) * 100;
 };
 
+// 聚变反应公式2
+const calculate3 = (elementalMystery) => {
+  if (+elementalMystery <= 0) return 0;
+  return (6.665 - (9340 / (1401 + +elementalMystery))) * 100;
+};
+
 
 export default defineComponent({
   name: "Elemental Damage Calculator",
@@ -76,22 +82,22 @@ export default defineComponent({
 
     // 增幅倍率
     const Rate = computed(() => {
-      return (increase(data.elementalMystery)).toFixed(1);
+      return (calculate3(data.elementalMystery) / 2.3945).toFixed(1);
     });
 
     // 聚变倍率
     const servitude = computed(() => {
-      return calculate2(data.elementalMystery).toFixed(1);
+      return calculate3(data.elementalMystery).toFixed(1);
     });
 
     // 结晶倍率
     const crystallization = computed(() => {
-      return (calculate2(data.elementalMystery) / 12 * 8).toFixed(1);
+      return (calculate3(data.elementalMystery) / 12 * 8).toFixed(1);
     });
     
     // 聚变反应伤害公式
     const calculateDamage = (baseDamage) => {
-      return Math.round(baseDamage * (1 + calculate2(data.elementalMystery) / 100));
+      return Math.round(baseDamage * (1 + calculate3(data.elementalMystery) / 100));
     };
 
     // 感电伤害值
