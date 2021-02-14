@@ -14,6 +14,22 @@
       <input class="base-damage__input" v-model="data.elementalMystery" />
     </span>
   </div>
+  <div class="holy-relic">
+    <span class="holy-relic__title">
+      圣遗物套装<span class="tips">点击选择，再次点击可以取消选择</span>
+    </span>
+    <div class="check">
+      <span :class="['damage-tag', 'witch', data.check === 'witch' && 'active']" @click="changeCheck('witch')">
+        炽烈的炎之魔女
+      </span>
+      <span :class="['damage-tag', 'thunder', data.check === 'thunder' && 'active']" @click="changeCheck('thunder')">
+        如雷的盛怒
+      </span>
+      <span :class="['damage-tag', 'emerald', data.check === 'emerald' && 'active']" @click="changeCheck('emerald')">
+        翠绿之影
+      </span>
+    </div>
+  </div>
   <div class="detail">
     增幅反应伤害提高：{{ Rate }}%
     <br />
@@ -78,6 +94,7 @@ export default defineComponent({
       elementalMystery: 0,
       level: 1,
       base: Base,
+      check: '',
     });
 
     // 增幅倍率
@@ -102,12 +119,18 @@ export default defineComponent({
 
     // 感电伤害值
     const electroChargedDamage = computed(() => {
-      return calculateDamage(Base.electroCharged[data.level]);
+      const basenumber = Base.electroCharged[data.level];
+      const r = calculateDamage(basenumber);
+      if (data.check === 'thunder') return Math.round(basenumber * 0.4) + r;
+      return r;
     });
 
     // 超载伤害值
     const overloadDamage = computed(() => {
-      return calculateDamage(Base.overload[data.level]);
+      const basenumber = Base.overload[data.level];
+      const r = calculateDamage(basenumber);
+      if (data.check === 'thunder' || data.check === 'witch') return Math.round(basenumber * 0.4) + r;
+      return r;
     });
 
     // 碎冰伤害值
@@ -117,21 +140,34 @@ export default defineComponent({
 
     // 扩散伤害值
     const diffuseDamage = computed(() => {
-      return calculateDamage(Base.diffuse[data.level]);
+      const basenumber = Base.diffuse[data.level];
+      if (data.check === 'emerald') return Math.round(basenumber * 0.6) + calculateDamage(basenumber);
+      return calculateDamage(basenumber);
     });
 
     // 超导伤害值
     const superconductDamage = computed(() => {
-      return calculateDamage(Base.superconduct[data.level]);
+      const basenumber = Base.superconduct[data.level];
+      const r = calculateDamage(basenumber);
+      if (data.check === 'thunder') return Math.round(basenumber * 0.4) + r;
+      return r;
     });
 
     // 结晶数值
     const crystallizeValue = computed(() => {
       if (Base.crystallize[data.level]) {
-        return Math.round(Base.crystallize[data.level] * (1 + (calculate2(data.elementalMystery) / 12 * 8 / 100)));
+        return Math.round(Base.crystallize[data.level] * (1 + (calculate3(data.elementalMystery) / 12 * 8 / 100)));
       }
       return 0;
-    })
+    });
+
+    const changeCheck = (relic) => {
+      if (data.check === relic) {
+        data.check = '';
+      } else {
+        data.check = relic;
+      }
+    };
 
     return { 
       data, 
@@ -144,6 +180,7 @@ export default defineComponent({
       diffuseDamage,
       superconductDamage,
       crystallizeValue,
+      changeCheck,
     };
   },
 });
@@ -174,10 +211,20 @@ export default defineComponent({
   padding: 16px;
 }
 
+.holy-relic {
+  margin-bottom: 16px;
+}
+
+.holy-relic__title,
 .base-damage__title {
   font-size: 18px;
-  margin-bottom: 12px;
   font-weight: bold;
+  display: inline-block;
+  padding: 0 4px;
+}
+
+.holy-relic__title {
+  margin-bottom: 12px;
 }
 
 .base-damage__input {
@@ -226,6 +273,26 @@ export default defineComponent({
 
 .crystallize {
   color: #b48f14;
+}
+
+.witch {
+  opacity: 0.5;
+  color: #f51e1e;
+}
+
+.thunder {
+  opacity: 0.5;
+  color: #ce1dfa;
+}
+
+.emerald {
+  opacity: 0.5;
+  color: #2ee27f;
+}
+
+.active {
+  font-weight: bold;
+  opacity: 1;
 }
 
 .detail {
