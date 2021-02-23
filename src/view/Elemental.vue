@@ -48,26 +48,23 @@
   </div>
   <div class="result" v-if="data.level > 0 && data.level <= 90">
     <span class="damage-tag">
-      <span class="damage-tag__title elector">感电</span
-      >{{ electroChargedDamage }}
+      <span class="damage-tag__title elector">感电</span>
+      {{ electroChargedDamage }}
     </span>
     <span class="damage-tag">
       <span class="damage-tag__title overload">超载</span>{{ overloadDamage }}
     </span>
     <span class="damage-tag">
-      <span class="damage-tag__title crushe-ice">碎冰</span
-      >{{ crushedIceDamage }}
+      <span class="damage-tag__title crushe-ice">碎冰</span>{{ crushedIceDamage }}
     </span>
     <span class="damage-tag">
       <span class="damage-tag__title diffuse">扩散</span>{{ diffuseDamage }}
     </span>
     <span class="damage-tag">
-      <span class="damage-tag__title superconduct">超导</span
-      >{{ superconductDamage }}
+      <span class="damage-tag__title superconduct">超导</span>{{ superconductDamage }}
     </span>
     <span v-if="crystallizeValue > 0" class="damage-tag">
-      <span class="damage-tag__title crystallize">结晶</span
-      >{{ crystallizeValue }}
+      <span class="damage-tag__title crystallize">结晶</span>{{ crystallizeValue }}
     </span>
   </div>
   <div class="supporter">
@@ -83,12 +80,7 @@
 <script>
 import { computed, defineComponent, reactive } from "vue";
 import Base from "../constant";
-
-// 聚变反应公式2
-const calculate3 = (elementalMystery) => {
-  if (+elementalMystery <= 0) return 0;
-  return (6.665 - 9340 / (1401 + +elementalMystery)) * 100;
-};
+import { calculate } from "../utils";
 
 export default defineComponent({
   name: "Elemental Damage Calculator",
@@ -102,23 +94,23 @@ export default defineComponent({
 
     // 增幅倍率
     const Rate = computed(() => {
-      return (calculate3(data.elementalMystery) / 2.3945).toFixed(1);
+      return (calculate(data.elementalMystery) / 2.3945).toFixed(1);
     });
 
     // 聚变倍率
     const servitude = computed(() => {
-      return calculate3(data.elementalMystery).toFixed(1);
+      return calculate(data.elementalMystery).toFixed(1);
     });
 
     // 结晶倍率
     const crystallization = computed(() => {
-      return ((calculate3(data.elementalMystery) / 12) * 8).toFixed(1);
+      return ((calculate(data.elementalMystery) / 12) * 8).toFixed(1);
     });
 
     // 聚变反应伤害公式
     const calculateDamage = (baseDamage) => {
       return Math.round(
-        baseDamage * (1 + calculate3(data.elementalMystery) / 100)
+        baseDamage * (1 + calculate(data.elementalMystery) / 100)
       );
     };
 
@@ -165,7 +157,7 @@ export default defineComponent({
       if (Base.crystallize[data.level]) {
         return Math.round(
           Base.crystallize[data.level] *
-            (1 + ((calculate3(data.elementalMystery) / 12) * 8) / 100)
+            (1 + ((calculate(data.elementalMystery) / 12) * 8) / 100)
         );
       }
       return 0;
