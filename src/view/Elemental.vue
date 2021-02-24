@@ -1,89 +1,131 @@
 <template>
-  <div class="title">元素精通计算器</div>
-  <div class="tips">
-    <span style="color: red">※注意事项※</span>
-    计算公式为玩家自主逆推拟合而成，仅供参考，<b>存在一定的误差</b>，数值越高误差越大。结晶护盾值的数据暂时不足。<b>没有计算敌人抗性，实际数值请以游戏内为准</b>。
-  </div>
-  <div class="base-damage">
-    <span class="base-damage__title">
+  <tab-title>精通伤害</tab-title>
+  <div class="base-data">
+    <div class="base-damage__title">
       角色等级
-      <input class="base-damage__input" v-model="data.level" />
-    </span>
-    <span class="base-damage__title">
+      <van-stepper
+        v-model="data.level"
+        integer
+        button-size="20"
+        theme="round"
+        min="1"
+        max="90"
+      />
+      <span class="holy-relic-tips">点击数字可以手动输入</span>
+    </div>
+    <div class="base-damage__title">
       元素精通
-      <input class="base-damage__input" v-model="data.elementalMystery" />
-    </span>
+      <van-stepper
+        v-model="data.elementalMystery"
+        integer
+        button-size="20"
+        theme="round"
+        min="0"
+      />
+      <span class="holy-relic-tips">滑块最大值为2000</span>
+    </div>
+    <van-slider
+      v-model="data.elementalMystery"
+      :max="2000"
+      active-color="#645856"
+    >
+      <template #button>
+        <div class="elemental-slider-button">{{ data.elementalMystery }}</div>
+      </template>
+    </van-slider>
   </div>
   <div class="holy-relic">
-    <span class="holy-relic__title">
-      圣遗物套装<span class="tips">点击选择，再次点击可以取消选择</span>
-    </span>
-    <div class="check">
+    <div class="holy-relic__title">
+      圣遗物套装
+      <span class="holy-relic-tips">点击选择，再次点击可以取消选择</span>
+    </div>
+    <div class="holy-relic__check">
       <span
-        :class="['damage-tag', 'witch', data.check === 'witch' && 'active']"
+        :class="[
+          'holy-relic-content',
+          'witch',
+          data.check === 'witch' && 'active',
+        ]"
         @click="changeCheck('witch')"
       >
+        <img class="holy-relic__img" src="../assets/witch.png" />
         炽烈的炎之魔女
       </span>
       <span
-        :class="['damage-tag', 'thunder', data.check === 'thunder' && 'active']"
+        :class="[
+          'holy-relic-content',
+          'thunder',
+          data.check === 'thunder' && 'active',
+        ]"
         @click="changeCheck('thunder')"
       >
+        <img class="holy-relic__img" src="../assets/thunder.png" />
         如雷的盛怒
       </span>
       <span
-        :class="['damage-tag', 'emerald', data.check === 'emerald' && 'active']"
+        :class="[
+          'holy-relic-content',
+          'emerald',
+          data.check === 'emerald' && 'active',
+        ]"
         @click="changeCheck('emerald')"
       >
+        <img class="holy-relic__img" src="../assets/emerald.png" />
         翠绿之影
       </span>
     </div>
   </div>
   <div class="detail">
-    增幅反应伤害提高：{{ Rate }}%
+    增幅反应伤害提升{{ Rate }}%<span class="more-rate">{{ moreRate }}</span>
     <br />
-    聚变反应伤害提高：{{ servitude }}%
+    剧变反应伤害提升{{ servitude }}%
+    <span class="more-rate">{{ servitudeMoreRate }}</span>
     <br />
-    结晶反应护盾提高：{{ crystallization }}%
+    结晶反应护盾提升{{ crystallization }}%
+    <span class="more-rate">{{ crystallizationMoreRate }}</span>
   </div>
   <div class="result" v-if="data.level > 0 && data.level <= 90">
-    <span class="damage-tag">
-      <span class="damage-tag__title elector">感电</span>
-      {{ electroChargedDamage }}
-    </span>
-    <span class="damage-tag">
+    <div class="damage-tag">
+      <span class="damage-tag__title elector">感电</span>{{ electroChargedDamage }}
+    </div>
+    <div class="damage-tag">
       <span class="damage-tag__title overload">超载</span>{{ overloadDamage }}
-    </span>
-    <span class="damage-tag">
+    </div>
+    <div class="damage-tag">
       <span class="damage-tag__title crushe-ice">碎冰</span>{{ crushedIceDamage }}
-    </span>
-    <span class="damage-tag">
+    </div>
+    <div class="damage-tag">
       <span class="damage-tag__title diffuse">扩散</span>{{ diffuseDamage }}
-    </span>
-    <span class="damage-tag">
+    </div>
+    <div class="damage-tag">
       <span class="damage-tag__title superconduct">超导</span>{{ superconductDamage }}
-    </span>
-    <span v-if="crystallizeValue > 0" class="damage-tag">
+    </div>
+    <div class="damage-tag">
       <span class="damage-tag__title crystallize">结晶</span>{{ crystallizeValue }}
-    </span>
-  </div>
-  <div class="supporter">
-    逆推公式提供者：
-    <a href="https://space.bilibili.com/392692625/article">bionukg@BiliBili</a>
+    </div>
   </div>
   <div class="supporter">
     基础伤害数值来源：
-    <a href="https://bbs.mihoyo.com/ys/article/2215872">鈴@米游社【空荧酒馆】</a>
+    <a href="https://bbs.mihoyo.com/ys/article/2215872"
+      >鈴@米游社【空荧酒馆】</a
+    >
   </div>
 </template>
 
 <script>
-import { computed, defineComponent, reactive } from "vue";
+import { computed, defineComponent, reactive, ref } from "vue";
 import Base from "../constant";
 import { calculate } from "../utils";
+import TabTitle from "./TabTitle.vue";
+import { Slider, Stepper } from "vant";
 
 export default defineComponent({
   name: "Elemental Damage Calculator",
+  components: {
+    [Slider.name]: Slider,
+    [Stepper.name]: Stepper,
+    [TabTitle.name]: TabTitle,
+  },
   setup() {
     const data = reactive({
       elementalMystery: 0,
@@ -105,6 +147,27 @@ export default defineComponent({
     // 结晶倍率
     const crystallization = computed(() => {
       return ((calculate(data.elementalMystery) / 12) * 8).toFixed(1);
+    });
+
+    const moreRate = computed(() => {
+      if (data.check === "witch") {
+        return " +15%";
+      }
+      return "";
+    });
+
+    const servitudeMoreRate = computed(() => {
+      if (data.check === "thunder" || data.check === "witch") {
+        return " +40%";
+      }
+      return "";
+    });
+
+    const crystallizationMoreRate = computed(() => {
+      if (data.check === "emerald") {
+        return " +60%";
+      }
+      return "";
     });
 
     // 聚变反应伤害公式
@@ -160,7 +223,7 @@ export default defineComponent({
             (1 + ((calculate(data.elementalMystery) / 12) * 8) / 100)
         );
       }
-      return 0;
+      return '无数据';
     });
 
     const changeCheck = (relic) => {
@@ -183,46 +246,56 @@ export default defineComponent({
       superconductDamage,
       crystallizeValue,
       changeCheck,
+      moreRate,
+      servitudeMoreRate,
+      crystallizationMoreRate,
     };
   },
 });
 </script>
 
 <style>
-.title {
-  box-sizing: border-box;
-  line-height: 46px;
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 24px;
-
-  color: #fff;
-  border: 4px solid #b69f9b;
-  background-color: #997874;
-  box-shadow: 0 2px 6px #978c8b;
-}
-
-.tips {
-  margin: 0 16px 16px 16px;
-  font-size: 12px;
-  text-align: left;
-}
-
-.base-damage {
+.base-data {
   line-height: 24px;
-  padding: 16px;
+}
+
+.base-data .van-stepper--round .van-stepper__minus {
+  color: #997874;
+  border-color: #997874;
+}
+.base-data .van-stepper--round .van-stepper__plus {
+  border: none;
+  color: #fff;
+  background-color: #997874;
+}
+
+.base-data .van-stepper.van-stepper--round {
+  margin-left: 20px;
 }
 
 .holy-relic {
+  margin-top: 24px;
   margin-bottom: 16px;
+}
+
+.holy-relic-tips {
+  font-size: 12px;
+  margin-left: 12px;
+  color: #928986;
 }
 
 .holy-relic__title,
 .base-damage__title {
   font-size: 18px;
   font-weight: bold;
-  display: inline-block;
+  margin-bottom: 12px;
+}
+
+.elemental-slider-button {
+  background-color: #766461;
+  color: #fff;
   padding: 0 4px;
+  border-radius: 6px;
 }
 
 .holy-relic__title {
@@ -237,20 +310,37 @@ export default defineComponent({
   box-sizing: border-box;
 }
 
-.damage-tag {
+.holy-relic__check {
+  display: flex;
+}
+
+.holy-relic-content {
   display: inline-block;
-  background-color: #f7f1e6;
-  border: 1px solid #997874;
-  line-height: 24px;
+  flex: 1;
+  text-align: center;
   padding: 0 6px;
-  border-radius: 12px;
-  margin-right: 10px;
-  margin-bottom: 4px;
+  font-size: 14px;
+}
+
+.holy-relic__img {
+  width: 100%;
+}
+
+.damage-tag {
+  line-height: 20px;
+  border-bottom: 2px solid #997874;
+  font-weight: bold;
+  margin-bottom: 12px;
+  min-width: 30%;
 }
 
 .damage-tag__title {
   margin-right: 6px;
-  font-weight: bold;
+  font-size: 24px;
+}
+
+.more-rate {
+  color: #2ee27f;
 }
 
 .elector {
@@ -299,13 +389,18 @@ export default defineComponent({
 
 .detail {
   font-size: 14px;
-  padding: 0 16px;
+  padding: 4px 8px;
   margin-bottom: 16px;
+  border-radius: 6px;
+  color: #fff;
+  background-color: #645856;
 }
 
 .result {
-  padding: 0 16px;
   margin-bottom: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .supporter {

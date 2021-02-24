@@ -1,7 +1,6 @@
 <template>
-  <div>
-    <van-slider v-model="data.value" @change="onChange" />
-  </div>
+  <div></div>
+  <!-- <van-slider v-model="data.value" @change="onChange" /> -->
 </template>
 
 <script>
@@ -19,7 +18,11 @@ export default defineComponent({
     const data = reactive({
       value: 100,
     });
-    return { data };
+
+    const onChange = (value) => {
+      console.log(value);
+    };
+    return { data, onChange };
   }
 })
 </script>
