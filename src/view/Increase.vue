@@ -1,17 +1,16 @@
 <template>
-  <div></div>
-  <!-- <van-slider v-model="data.value" @change="onChange" /> -->
+  <tab-title>伤害期望</tab-title>
 </template>
 
 <script>
 import { defineComponent, reactive } from 'vue';
-import { Slider } from 'vant';
+import TabTitle from "./TabTitle.vue";
 
 export default defineComponent({
   name: "increase",
 
   components: {
-    [Slider.name]: Slider,
+    [TabTitle.name]: TabTitle,
   },
 
   setup() {

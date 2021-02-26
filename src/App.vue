@@ -1,16 +1,22 @@
 <template>
-  <!-- <div class="top-overhang">
+  <div class="top-overhang">
     <div class="top-tabs">
-      <div class="top-tabs__item">精通伤害</div>
-      <div class="top-tabs__item">伤害期望</div>
+      <router-link to="/" class="top-tabs__item">
+        精通伤害
+      </router-link>
+      <router-link to="/increasing-range" class="top-tabs__item">
+        伤害期望
+      </router-link>
       <div class="top-tabs__item">收益对比</div>
     </div>
-  </div> -->
+  </div>
   <div class="tips">
     官方未公开计算公式，存在一定的误差。没计算敌人抗性，实际值请以游戏内为准，仅供参考。
   </div>
   <div class="content">
-    <router-view></router-view>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
   </div>
   <div class="foot">
     <span>更新计划：</span>
@@ -83,12 +89,19 @@ export default defineComponent({
   background-color: #997874;
   border: 2px solid #b7a19e;
   text-align: center;
-  line-height: 40px;
+  line-height: 36px;
+  height: 40px;
   color: #fff;
   border-radius: 10px;
   font-weight: 600;
   flex: 1;
   margin-right: 16px;
+}
+
+.router-link-active {
+  background-color: #fff;
+  border-color: #997874;
+  color: #645856;
 }
 
 .top-tabs__item:nth-last-child(1) {
