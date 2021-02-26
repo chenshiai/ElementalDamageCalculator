@@ -14,14 +14,6 @@ export default defineComponent({
   },
 
   setup() {
-    const data = reactive({
-      value: 100,
-    });
-
-    const onChange = (value) => {
-      console.log(value);
-    };
-    return { data, onChange };
   }
 })
 </script>

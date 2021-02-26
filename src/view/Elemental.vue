@@ -127,8 +127,8 @@ export default defineComponent({
   },
   setup() {
     const data = reactive({
-      elementalMystery: 0,
-      level: 1,
+      elementalMystery: 786,
+      level: 80,
       base: Base,
       check: "",
     });
