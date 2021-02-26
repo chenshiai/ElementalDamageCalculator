@@ -82,7 +82,6 @@
     <span class="more-rate">{{ servitudeMoreRate }}</span>
     <br />
     结晶反应护盾提升{{ crystallization }}%
-    <span class="more-rate">{{ crystallizationMoreRate }}</span>
   </div>
   <div class="result" v-if="data.level > 0 && data.level <= 90">
     <div class="damage-tag">
@@ -157,15 +156,14 @@ export default defineComponent({
     });
 
     const servitudeMoreRate = computed(() => {
-      if (data.check === THUNDER || data.check === WITCH) {
-        return " +40%";
+      if (data.check === "thunder") {
+        return " 超载、超导、感电 +40%"
       }
-      return "";
-    });
-
-    const crystallizationMoreRate = computed(() => {
-      if (data.check === EMERALD) {
-        return " +60%";
+      if (data.check === "witch") {
+        return " 超载 +40%"
+      }
+      if (data.check === "emerald") {
+        return " 扩散 +60%";
       }
       return "";
     });
@@ -248,7 +246,6 @@ export default defineComponent({
       changeCheck,
       moreRate,
       servitudeMoreRate,
-      crystallizationMoreRate,
     };
   },
 });
