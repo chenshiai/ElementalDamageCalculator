@@ -1,4 +1,4 @@
-const base = {
+export const base = {
   electroCharged: [0,
     20, 22, 23, 24, 27, 29, 31, 34, 37, 40,
     44, 48, 53, 58, 64, 70, 77, 83, 90, 97,
@@ -64,4 +64,6 @@ const base = {
   },
 }
 
-export default base;
+export const WITCH = "witch";
+export const THUNDER = "thunder"
+export const EMERALD = "emerald";

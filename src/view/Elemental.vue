@@ -114,13 +114,13 @@
 
 <script>
 import { computed, defineComponent, reactive, ref } from "vue";
-import Base from "../constant";
+import { base as Base, WITCH, THUNDER, EMERALD } from "../constant";
 import { calculate } from "../utils";
 import TabTitle from "./TabTitle.vue";
 import { Slider, Stepper } from "vant";
 
 export default defineComponent({
-  name: "Elemental Damage Calculator",
+  name: "elemental-damage-calculator",
   components: {
     [Slider.name]: Slider,
     [Stepper.name]: Stepper,
@@ -150,21 +150,21 @@ export default defineComponent({
     });
 
     const moreRate = computed(() => {
-      if (data.check === "witch") {
+      if (data.check === WITCH) {
         return " +15%";
       }
       return "";
     });
 
     const servitudeMoreRate = computed(() => {
-      if (data.check === "thunder" || data.check === "witch") {
+      if (data.check === THUNDER || data.check === WITCH) {
         return " +40%";
       }
       return "";
     });
 
     const crystallizationMoreRate = computed(() => {
-      if (data.check === "emerald") {
+      if (data.check === EMERALD) {
         return " +60%";
       }
       return "";
@@ -181,7 +181,7 @@ export default defineComponent({
     const electroChargedDamage = computed(() => {
       const basenumber = Base.electroCharged[data.level];
       const r = calculateDamage(basenumber);
-      if (data.check === "thunder") return Math.round(basenumber * 0.4) + r;
+      if (data.check === THUNDER) return Math.round(basenumber * 0.4) + r;
       return r;
     });
 
@@ -189,7 +189,7 @@ export default defineComponent({
     const overloadDamage = computed(() => {
       const basenumber = Base.overload[data.level];
       const r = calculateDamage(basenumber);
-      if (data.check === "thunder" || data.check === "witch")
+      if (data.check === THUNDER || data.check === WITCH)
         return Math.round(basenumber * 0.4) + r;
       return r;
     });
@@ -202,7 +202,7 @@ export default defineComponent({
     // 扩散伤害值
     const diffuseDamage = computed(() => {
       const basenumber = Base.diffuse[data.level];
-      if (data.check === "emerald")
+      if (data.check === EMERALD)
         return Math.round(basenumber * 0.6) + calculateDamage(basenumber);
       return calculateDamage(basenumber);
     });
@@ -211,7 +211,7 @@ export default defineComponent({
     const superconductDamage = computed(() => {
       const basenumber = Base.superconduct[data.level];
       const r = calculateDamage(basenumber);
-      if (data.check === "thunder") return Math.round(basenumber * 0.4) + r;
+      if (data.check === THUNDER) return Math.round(basenumber * 0.4) + r;
       return r;
     });
 
