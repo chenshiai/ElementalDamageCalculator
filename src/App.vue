@@ -5,7 +5,7 @@
         精通伤害
       </router-link>
       <router-link to="/increasing-range" class="top-tabs__item">
-        伤害期望
+        伤害计算
       </router-link>
       <div class="top-tabs__item">收益对比</div>
     </div>
@@ -14,9 +14,11 @@
     官方未公开计算公式，存在一定的误差。没计算敌人抗性，实际值请以游戏内为准，仅供参考。
   </div>
   <div class="content">
-    <keep-alive>
-      <router-view></router-view>
-    </keep-alive>
+    <router-view v-slot="{ Component }">
+      <keep-alive>
+        <component :is="Component" />
+      </keep-alive>
+    </router-view>
   </div>
   <div class="foot">
     <span>更新日志：</span>
@@ -44,7 +46,7 @@ export default defineComponent({
 
 .top-overhang {
   background-color: #766461;
-  height: 60px;
+  height: 40px;
   width: 100%;
   border-radius: 0 0 30px 30px;
   position: relative;
@@ -118,5 +120,10 @@ export default defineComponent({
 .foot {
   padding: 16px;
   font-size: 14px;
+}
+
+.van-cell.van-cell--clickable,
+.van-cell.van-cell--center {
+  background-color: #F7F1E6;
 }
 </style>

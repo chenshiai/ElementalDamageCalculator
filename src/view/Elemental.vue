@@ -270,6 +270,10 @@ export default defineComponent({
   margin-left: 20px;
 }
 
+.van-slider {
+  margin-bottom: 22px;
+}
+
 .holy-relic {
   margin-top: 24px;
   margin-bottom: 16px;
@@ -291,8 +295,8 @@ export default defineComponent({
 .elemental-slider-button {
   background-color: #766461;
   color: #fff;
-  padding: 0 4px;
-  border-radius: 6px;
+  padding: 2px 4px;
+  border-radius: 4px;
 }
 
 .holy-relic__title {
