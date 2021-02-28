@@ -150,7 +150,7 @@ export default defineComponent({
 
     const moreRate = computed(() => {
       if (data.check === WITCH) {
-        return " +15%";
+        return " x 115%";
       }
       return "";
     });

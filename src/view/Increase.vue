@@ -18,7 +18,7 @@
         integer
         button-size="20"
         theme="round"
-        min="1"
+        min="0"
       />
       <span class="holy-relic-tips">人物面板攻击力白字</span>
     </div>
@@ -46,7 +46,7 @@
     <van-slider
       v-show="sliderChecked"
       v-model="data.extraATK"
-      :max="6000"
+      :max="3000"
       active-color="#645856"
     >
       <template #button>
@@ -229,6 +229,8 @@
   <div class="increase-result">
     <span>计算结果</span>
     {{ increaseResult }}
+    暴击伤害
+    {{ increaseResult * (1 + data.critDemage / 100)}}
   </div>
 </template>
 
@@ -281,12 +283,15 @@ export default defineComponent({
     const increaseResult = computed(() => {
       const { baseATK, extraATK, elementDemage, evaporationDemage, atkRate, atkType } = data;
       let elerate = 1;
+      let eva = evaporationDemage;
       if (atkType === "evaporation") {
-        elerate = 2 + evaporationDemage / 100;
+        elerate = 2;
       } else if (atkType === "evaporation2") {
-        elerate = 1.5 + evaporationDemage / 100;
+        elerate = 1.5;
+      } else {
+        eva = 0;
       }
-      return Math.round((baseATK + extraATK) * (atkRate / 100) * (1 + elementDemage / 100) * elerate * (190/390) * 0.9);
+      return Math.round((baseATK + extraATK) * (atkRate / 100) * (1 + elementDemage / 100) * elerate * (1 + eva / 100) * (180/371) * 0.9);
     });
 
     return {
