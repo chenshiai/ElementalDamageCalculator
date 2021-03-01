@@ -1,6 +1,6 @@
 <template>
   <tab-title>伤害计算</tab-title>
-  <van-cell class="eva-cell" center title="使用滑块调整数值">
+  <van-cell class="eva-cell" center title="开启滑块辅助调整数值">
     <template #right-icon>
       <van-switch
         v-model="sliderChecked"
@@ -219,12 +219,59 @@
       />
     </template>
   </van-cell>
-  <div v-show="otherChecked" class="other-panle">
-    <div class="data-panel__title">人物等级</div>
-    <div class="data-panel__title">敌人等级</div>
-    <div class="data-panel__title">敌人抗性</div>
-    <div class="data-panel__title">减抗</div>
-    <div class="data-panel__title">减防</div>
+  <div v-show="otherChecked" class="data-panel">
+    <div class="data-panel__title">
+      人物等级
+      <van-stepper
+        v-model="otherData.characterLevel"
+        button-size="20"
+        theme="round"
+        integer
+        min="1"
+        max="90"
+      />
+    </div>
+    <div class="data-panel__title">
+      敌人等级
+      <van-stepper
+        v-model="otherData.enemyLevel"
+        button-size="20"
+        theme="round"
+        integer
+        min="1"
+      />
+    </div>
+    <div class="data-panel__title">
+      敌人抗性%
+      <van-stepper
+        v-model="otherData.enemyResistance"
+        button-size="20"
+        theme="round"
+        integer
+      />
+    </div>
+    <div class="data-panel__title">
+      减少抗性%
+      <van-stepper
+        v-model="otherData.weaken"
+        button-size="20"
+        theme="round"
+        integer
+        min="0"
+      />
+      <span class="holy-relic-tips">圣遗物、人物天赋等效果合计</span>
+    </div>
+    <div class="data-panel__title">
+      减少防御%
+      <van-stepper
+        v-model="otherData.armour"
+        button-size="20"
+        theme="round"
+        min="0"
+        integer
+      />
+      <span class="holy-relic-tips">圣遗物、人物天赋等效果合计</span>
+    </div>
   </div>
   <div class="increase-result">
     <span>计算结果</span>
@@ -238,6 +285,7 @@
 import { computed, defineComponent, reactive, ref } from "vue";
 import { Slider, Stepper, Switch, Cell, RadioGroup, Radio } from "vant";
 import TabTitle from "./TabTitle.vue";
+import { getReactionRate, getResistanceRate, getDefRate } from "../utils";
 
 export default defineComponent({
   name: "increase",
@@ -262,6 +310,13 @@ export default defineComponent({
       atkRate: 100,
       atkType: "none",
     });
+    const otherData = reactive({
+      characterLevel: 80,
+      enemyLevel: 80,
+      enemyResistance: 10,
+      weaken: 0,
+      armour: 0,
+    });
     const checked = ref(false);
     const sliderChecked = ref(false);
     const otherChecked = ref(false);
@@ -282,20 +337,23 @@ export default defineComponent({
 
     const increaseResult = computed(() => {
       const { baseATK, extraATK, elementDemage, evaporationDemage, atkRate, atkType } = data;
-      let elerate = 1;
+      const { characterLevel, enemyLevel, enemyResistance, weaken, armour} = otherData;
+      // 计算增幅加成
+      const elerate = getReactionRate(atkType);
+      const resistanceRate = getResistanceRate(enemyResistance, weaken);
+      const defRate = getDefRate(characterLevel, enemyLevel, armour);
+
       let eva = evaporationDemage;
-      if (atkType === "evaporation") {
-        elerate = 2;
-      } else if (atkType === "evaporation2") {
-        elerate = 1.5;
-      } else {
+      if (atkType === "none") {
         eva = 0;
       }
-      return Math.round((baseATK + extraATK) * (atkRate / 100) * (1 + elementDemage / 100) * elerate * (1 + eva / 100) * (180/371) * 0.9);
+
+      return Math.round((baseATK + extraATK) * (atkRate / 100) * (1 + elementDemage / 100) * elerate * (1 + eva / 100) * defRate * resistanceRate);
     });
 
     return {
       data,
+      otherData,
       evaporationComputed,
       checked,
       changeSwitch,
