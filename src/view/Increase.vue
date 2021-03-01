@@ -274,10 +274,16 @@
     </div>
   </div>
   <div class="increase-result">
-    <span>计算结果</span>
-    {{ increaseResult }}
+    伤害数值
+    <div class="normal-demage">
+      {{ increaseResult }}
+    </div>
     暴击伤害
-    {{ increaseResult * (1 + data.critDemage / 100)}}
+    <div class="crit-demage">
+      {{ Math.round(increaseResult * (1 + data.critDemage / 100)) }}
+      <span class="middle-exclamation-mark">!</span>
+      <span class="large-exclamation-mark">!</span>
+    </div>
   </div>
 </template>
 
