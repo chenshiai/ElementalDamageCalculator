@@ -209,7 +209,7 @@
       </van-radio-group>
     </div>
   </div>
-  <van-cell class="eva-cell" center title="展开更多乘区">
+  <van-cell class="eva-cell" center title="展开防御、抗性乘区">
     <template #right-icon>
       <van-switch
         v-model="otherChecked"
@@ -273,23 +273,50 @@
       <span class="holy-relic-tips">圣遗物、人物天赋等效果合计</span>
     </div>
   </div>
-  <div class="increase-result">
-    伤害数值
-    <div class="normal-demage">
-      {{ increaseResult }}
-    </div>
-    暴击伤害
-    <div class="crit-demage">
-      {{ Math.round(increaseResult * (1 + data.critDemage / 100)) }}
-      <span class="middle-exclamation-mark">!</span>
-      <span class="large-exclamation-mark">!</span>
-    </div>
+  <div class="increase-result" draggable="true">
+    <van-grid :column-num="2">
+      <van-grid-item>
+        伤害数值
+        <div class="normal-demage">
+          {{ increaseResult }}
+        </div>
+      </van-grid-item>
+      <van-grid-item>
+        暴击伤害
+        <div class="crit-demage">
+          {{ Math.round(increaseResult * (1 + data.critDemage / 100)) }}
+          <i>
+            <span class="exclamation-mark">!</span>
+            <span class="exclamation-mark">!</span>
+          </i>
+        </div>
+      </van-grid-item>
+    </van-grid>
   </div>
+  <van-cell class="eva-cell" center title="开启悬浮窗展示">
+    <template #right-icon>
+      <van-switch
+        v-model="floatChecked"
+        active-color="#766461"
+        inactive-color="#b7a19e"
+        size="16"
+      />
+    </template>
+  </van-cell>
 </template>
 
 <script>
 import { computed, defineComponent, reactive, ref } from "vue";
-import { Slider, Stepper, Switch, Cell, RadioGroup, Radio } from "vant";
+import {
+  Slider,
+  Stepper,
+  Switch,
+  Cell,
+  RadioGroup,
+  Radio,
+  Grid,
+  GridItem,
+} from "vant";
 import TabTitle from "./TabTitle.vue";
 import { getReactionRate, getResistanceRate, getDefRate } from "../utils";
 
@@ -297,13 +324,15 @@ export default defineComponent({
   name: "increase",
 
   components: {
+    [Grid.name]: Grid,
     [Cell.name]: Cell,
+    [Radio.name]: Radio,
     [Switch.name]: Switch,
     [Slider.name]: Slider,
     [Stepper.name]: Stepper,
+    [GridItem.name]: GridItem,
     [TabTitle.name]: TabTitle,
     [RadioGroup.name]: RadioGroup,
-    [Radio.name]: Radio,
   },
 
   setup() {
@@ -326,6 +355,7 @@ export default defineComponent({
     const checked = ref(false);
     const sliderChecked = ref(false);
     const otherChecked = ref(false);
+    const floatChecked = ref(false);
 
     const evaporationComputed = computed(() => {
       return checked.value
@@ -342,8 +372,21 @@ export default defineComponent({
     };
 
     const increaseResult = computed(() => {
-      const { baseATK, extraATK, elementDemage, evaporationDemage, atkRate, atkType } = data;
-      const { characterLevel, enemyLevel, enemyResistance, weaken, armour} = otherData;
+      const {
+        baseATK,
+        extraATK,
+        elementDemage,
+        evaporationDemage,
+        atkRate,
+        atkType,
+      } = data;
+      const {
+        characterLevel,
+        enemyLevel,
+        enemyResistance,
+        weaken,
+        armour,
+      } = otherData;
       // 计算增幅加成
       const elerate = getReactionRate(atkType);
       const resistanceRate = getResistanceRate(enemyResistance, weaken);
@@ -354,7 +397,15 @@ export default defineComponent({
         eva = 0;
       }
 
-      return Math.round((baseATK + extraATK) * (atkRate / 100) * (1 + elementDemage / 100) * elerate * (1 + eva / 100) * defRate * resistanceRate);
+      return Math.round(
+        (baseATK + extraATK) *
+          (atkRate / 100) *
+          (1 + elementDemage / 100) *
+          elerate *
+          (1 + eva / 100) *
+          defRate *
+          resistanceRate
+      );
     });
 
     return {
@@ -365,6 +416,7 @@ export default defineComponent({
       changeSwitch,
       sliderChecked,
       otherChecked,
+      floatChecked,
       increaseResult,
     };
   },
@@ -400,5 +452,20 @@ export default defineComponent({
 }
 .ice {
   color: #62ebf0;
+}
+.normal-demage {
+  font-size: 20px;
+}
+.crit-demage {
+  font-size: 26px;
+}
+.normal-demage,
+.crit-demage {
+  font-weight: bold;
+  line-height: 26px;
+}
+.exclamation-mark {
+  display: inline-block;
+  transform: scaleY(1.4);
 }
 </style>

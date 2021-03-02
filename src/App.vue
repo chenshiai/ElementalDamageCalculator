@@ -7,7 +7,7 @@
       <router-link to="/increasing-range" class="top-tabs__item">
         伤害计算
       </router-link>
-      <div class="top-tabs__item">收益对比</div>
+      <div class="top-tabs__item" @click="$toast('施工中')">？？？</div>
     </div>
   </div>
   <div class="tips">
