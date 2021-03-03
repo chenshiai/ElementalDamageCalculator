@@ -196,7 +196,7 @@
           <van-cell clickable @click="data.atkType = 'evaporation2'">
             <template #title>
               <div>
-                <span class="water">水</span>· <span class="fire">火</span>/
+                <span class="fire">火</span>· <span class="water">水</span>/
                 <span class="ice">冰</span>· <span class="fire">火</span>~
                 蒸发/融化150%
               </div>
