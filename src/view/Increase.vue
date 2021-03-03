@@ -273,27 +273,25 @@
       <span class="holy-relic-tips">圣遗物、人物天赋等效果合计</span>
     </div>
   </div>
-  <div class="increase-result" draggable="true">
-    <van-grid :column-num="2">
-      <van-grid-item>
-        伤害数值
-        <div class="normal-demage">
-          {{ increaseResult }}
-        </div>
-      </van-grid-item>
-      <van-grid-item>
-        暴击伤害
-        <div class="crit-demage">
-          {{ Math.round(increaseResult * (1 + data.critDemage / 100)) }}
-          <i>
-            <span class="exclamation-mark">!</span>
-            <span class="exclamation-mark">!</span>
-          </i>
-        </div>
-      </van-grid-item>
-    </van-grid>
+  <div :class="['result-grid', floatChecked && 'increase-result__top']">
+    <div class="grid-item">
+      伤害数值
+      <div class="normal-demage">
+        {{ increaseResult }}
+      </div>
+    </div>
+    <div class="grid-item">
+      暴击伤害
+      <div class="crit-demage">
+        {{ Math.round(increaseResult * (1 + data.critDemage / 100)) }}
+        <i>
+          <span class="exclamation-mark">!</span>
+          <span class="exclamation-mark">!</span>
+        </i>
+      </div>
+    </div>
   </div>
-  <van-cell class="eva-cell" center title="开启悬浮窗展示">
+  <van-cell class="eva-cell" center title="置顶展示">
     <template #right-icon>
       <van-switch
         v-model="floatChecked"
@@ -307,16 +305,7 @@
 
 <script>
 import { computed, defineComponent, reactive, ref } from "vue";
-import {
-  Slider,
-  Stepper,
-  Switch,
-  Cell,
-  RadioGroup,
-  Radio,
-  Grid,
-  GridItem,
-} from "vant";
+import { Slider, Stepper, Switch, Cell, RadioGroup, Radio } from "vant";
 import TabTitle from "./TabTitle.vue";
 import { getReactionRate, getResistanceRate, getDefRate } from "../utils";
 
@@ -324,13 +313,11 @@ export default defineComponent({
   name: "increase",
 
   components: {
-    [Grid.name]: Grid,
     [Cell.name]: Cell,
     [Radio.name]: Radio,
     [Switch.name]: Switch,
     [Slider.name]: Slider,
     [Stepper.name]: Stepper,
-    [GridItem.name]: GridItem,
     [TabTitle.name]: TabTitle,
     [RadioGroup.name]: RadioGroup,
   },
@@ -453,6 +440,20 @@ export default defineComponent({
 .ice {
   color: #62ebf0;
 }
+
+.result-grid {
+  display: flex;
+  width: 100%;
+  top: 0;
+  transition: top 0.3s;
+  background-color: #fff;
+  border: 1px solid #997874;
+  padding: 6px 0;
+}
+.grid-item {
+  flex: 1;
+  text-align: center;
+}
 .normal-demage {
   font-size: 20px;
 }
@@ -463,9 +464,15 @@ export default defineComponent({
 .crit-demage {
   font-weight: bold;
   line-height: 26px;
+  font-family: 'sao_font';
 }
 .exclamation-mark {
   display: inline-block;
   transform: scaleY(1.4);
+}
+.increase-result__top {
+  position: fixed;
+  top: 60px;
+  width: calc(100% - 32px);
 }
 </style>

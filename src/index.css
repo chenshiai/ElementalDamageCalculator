@@ -8,6 +8,11 @@ body {
   height: 100vh;
 }
 
+@font-face {
+  font-family: 'sao_font';
+  src: url('./assets/sao.woff2');
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
