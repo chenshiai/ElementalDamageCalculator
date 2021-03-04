@@ -11,7 +11,7 @@
     </div>
   </div>
   <div class="tips">
-    官方未公开计算公式，存在一定的误差。没计算敌人抗性，实际值请以游戏内为准，仅供参考。
+    官方未公开计算公式，存在一定的误差。精通伤害没计算敌人抗性，实际值请以游戏内为准，仅供参考。
   </div>
   <div class="content">
     <router-view v-slot="{ Component }">
@@ -20,22 +20,19 @@
       </keep-alive>
     </router-view>
   </div>
-  <div class="foot">
-    <span>更新日志：</span>
-    <p>
-      2021-03-03: 单次伤害计算已完成。下一步计划，部分角色特殊加成伤害计算。
-    </p>
-    <p>
-      2021-02-26: 角色等级初始值设置为80级，元素精通初始值设置为786，增幅反应加成刚好是100整。
-    </p>
-  </div>
+  <foot />
 </template>
 
 <script>
 import { defineComponent } from "vue";
+import Foot from "./component/Foot.vue";
 
 export default defineComponent({
   name: "DamageCalculator",
+
+  components: {
+    [Foot.name]: Foot,
+  }
 });
 </script>
 
@@ -119,10 +116,6 @@ export default defineComponent({
   padding: 0 16px 0 16px;
 }
 
-.foot {
-  padding: 16px;
-  font-size: 14px;
-}
 
 .van-cell.van-cell--clickable,
 .van-cell.van-cell--center {

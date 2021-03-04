@@ -1,0 +1,27 @@
+<template>
+  <div class="foot">
+    <span>更新日志：</span>
+    <p>
+      2021-03-05: 新增【攻击力总计】，攻击力调整更加直观；新增了【伤害加成便签】，让伤害加成调整更方便快捷。
+    </p>
+    <p>
+      2021-03-03: 单次伤害计算已完成。下一步计划，部分角色特殊加成伤害计算。
+    </p>
+    <p>
+      2021-02-26: 角色等级初始值设置为80级，元素精通初始值设置为786，增幅反应加成刚好是100整。
+    </p>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'foot'
+}
+</script>
+
+<style>
+.foot {
+  padding: 16px;
+  font-size: 14px;
+}
+</style>

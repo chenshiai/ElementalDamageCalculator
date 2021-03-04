@@ -9,6 +9,7 @@
       :decimal-length="decimalLength"
       :max="stepperMax"
       :min="stepperMin"
+      input-width="40px"
       @change="onChange"
     />
     <span class="holy-relic-tips">{{ tips }}</span>
@@ -22,11 +23,25 @@
     active-color="#645856"
     @change="onChange"
   />
+  <div v-if="notes" class="data-notes">
+    <div class="add-note-button"><van-icon name="plus" size="30" /></div>
+    <div
+      v-for="(item, index) in notes"
+      :key="index"
+      :class="['memo', selectedMemos[item.title] && 'selected']"
+    >
+      <div @click="selectMemo(item)">
+        <div class="memo-detail">+{{ item.detail }}</div>
+        <div class="memo-title">{{ item.title }}</div>
+      </div>
+      <van-icon @click="deleteMemo(item)" class="memo-close" name="delete-o" />
+    </div>
+  </div>
 </template>
 
 <script>
 import { defineComponent, ref } from "vue";
-import { Slider, Stepper} from "vant";
+import { Slider, Stepper, Icon } from "vant";
 
 export default defineComponent({
   name: "data-item",
@@ -45,9 +60,12 @@ export default defineComponent({
     sliderMax: Number | String,
     sliderMin: Number | String,
     sliderStep: Number | String,
+
+    notes: Array,
   },
 
   components: {
+    [Icon.name]: Icon,
     [Slider.name]: Slider,
     [Stepper.name]: Stepper,
   },
@@ -59,11 +77,79 @@ export default defineComponent({
   },
 
   setup(props) {
-    const value = ref(props.modelValue);
+    const value = ref(+props.modelValue);
+    const selectedMemos = ref({});
 
-    return { value };
-  }
+    const selectMemo = (item) => {
+      const key = item.title;
+      const detail = +item.detail;
+      if (selectedMemos.value[key]) {
+        value.value = +value.value - +selectedMemos.value[key];
+        delete selectedMemos.value[key];
+      } else {
+        selectedMemos.value[key] = detail;
+        value.value = +value.value + +selectedMemos.value[key];
+      }
+    };
+
+    const deleteMemo = (item) => {
+      console.log(item);
+    };
+
+    return { value, selectMemo, selectedMemos, deleteMemo };
+  },
 });
 </script>
 
-<style></style>
+<style>
+.data-notes {
+  border: 1px solid #997874;
+  flex-wrap: wrap;
+  display: flex;
+  margin-bottom: 12px;
+  padding: 6px 6px 6px 0;
+  max-height: 140px;
+  overflow: scroll;
+}
+.data-notes .memo {
+  height: 36px;
+  margin-left: 6px;
+  margin-bottom: 4px;
+  border: 1px solid #997874;
+  border-radius: 6px;
+  box-sizing: border-box;
+  padding: 2px 6px;
+  color: #997874;
+  font-size: 14px;
+  position: relative;
+  min-width: 70px;
+}
+.memo.selected {
+  background-color: #997874;
+  color: #fff;
+}
+.add-note-button {
+  border: 1px solid #997874;
+  padding: 2px 6px;
+  text-align: center;
+  box-sizing: border-box;
+  color: #997874;
+  height: 36px;
+  margin-bottom: 4px;
+  border-radius: 6px;
+  margin-left: 6px;
+}
+.memo-detail {
+  font-weight: bold;
+  line-height: 16px;
+}
+.memo-title {
+  font-size: 12px;
+  line-height: 14px;
+}
+.data-notes .memo-close {
+  position: absolute;
+  top: 2px;
+  right: 6px;
+}
+</style>

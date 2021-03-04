@@ -11,9 +11,13 @@
     </template>
   </van-cell>
   <div class="data-panel">
-    <div class="data-panel__title">
+    <div class="data-panel__title atk-top">
       攻击力总计
       <span class="atk-total">{{ data.baseATK + data.extraATK }}</span>
+      <span class="atk-detial">
+        {{ data.baseATK }} +
+        <span style="color: #49ff39">{{ data.extraATK }}</span>
+      </span>
     </div>
     <data-item
       v-model="data.baseATK"
@@ -24,109 +28,83 @@
       sliderMax="1200"
       :showSlider="sliderChecked"
     />
-    <!--
-    <div class="data-panel__title">
-      基础攻击力
-      <van-stepper
-        v-model="data.baseATK"
-        integer
-        button-size="20"
-        theme="round"
-        min="0"
-      />
-      <span class="holy-relic-tips">人物面板攻击力白字</span>
-    </div>
-    <van-slider
-      v-show="sliderChecked"
-      v-model="data.baseATK"
-      :max="1200"
-      active-color="#645856"
-    >
-      <template #button>
-        <div class="elemental-slider-button">{{ data.baseATK }}</div>
-      </template>
-    </van-slider>
-    -->
-    <div class="data-panel__title">
-      额外攻击力
-      <van-stepper
-        v-model="data.extraATK"
-        integer
-        button-size="20"
-        theme="round"
-        min="0"
-      />
-      <span class="holy-relic-tips">人物面板攻击力绿字</span>
-    </div>
-    <van-slider
-      v-show="sliderChecked"
+    <data-item
       v-model="data.extraATK"
-      :max="3000"
-      active-color="#645856"
-    >
-      <template #button>
-        <div class="elemental-slider-button">{{ data.extraATK }}</div>
-      </template>
-    </van-slider>
-
-    <div class="data-panel__title">
-      暴击伤害%
-      <van-stepper
-        v-model="data.critDemage"
-        button-size="20"
-        theme="round"
-        min="50"
-        decimal-length="1"
-        input-width="40px"
-      />
-      <span class="holy-relic-tips">小数位需要手动输入，下同</span>
-    </div>
-    <van-slider
-      v-show="sliderChecked"
+      title="额外攻击力"
+      tips="人物面板攻击力绿字"
+      stepperInteger
+      stepperMin="0"
+      sliderMax="3000"
+      :showSlider="sliderChecked"
+    />
+    <data-item
       v-model="data.critDemage"
-      :max="600"
-      :min="50"
-      step="0.1"
-      active-color="#645856"
-    >
-      <template #button>
-        <div class="elemental-slider-button">
-          {{ (+data.critDemage).toFixed(1) }}
-        </div>
-      </template>
-    </van-slider>
-
-    <div class="data-panel__title">
-      伤害加成%
-      <van-stepper
-        v-model="data.elementDemage"
-        button-size="20"
-        theme="round"
-        min="0"
-        input-width="40px"
-        decimal-length="1"
-      />
-      <span class="holy-relic-tips">注意区分伤害加成类型</span>
-    </div>
-    <van-slider
-      v-show="sliderChecked"
+      title="暴击伤害%"
+      tips="小数位需要手动输入，下同"
+      stepperMin="50"
+      sliderMin="50"
+      sliderMax="600"
+      sliderStep="0.1"
+      decimalLength="1"
+      :showSlider="sliderChecked"
+    />
+    <data-item
       v-model="data.elementDemage"
-      :max="600"
-      step="0.1"
-      active-color="#645856"
-    >
-      <template #button>
-        <div class="elemental-slider-button">
-          {{ (+data.elementDemage).toFixed(1) }}
-        </div>
-      </template>
-    </van-slider>
+      title="伤害加成%"
+      tips="注意区分伤害加成类型"
+      stepperMin="0"
+      sliderMax="600"
+      sliderStep="0.1"
+      decimalLength="1"
+      :showSlider="sliderChecked"
+      :notes="[
+        {
+          detail: 15,
+          title: '2件套·元素伤害',
+        },
+        {
+          detail: 46.6,
+          title: '空之杯·元素伤害',
+        },
+        {
+          detail: 58.3,
+          title: '空之杯·物理伤害',
+        },
+        {
+          detail: 20,
+          title: '宗室2·元素爆发',
+        },
+        {
+          detail: 35,
+          title: '平雷渡火·全伤害',
+        },
+        {
+          detail: 35,
+          title: '角斗4·普攻伤害',
+        },
+        {
+          detail: 35,
+          title: '乐团4·重击伤害',
+        },
+        {
+          detail: 35,
+          title: '磐岩4·元素伤害',
+        },
+        {
+          detail: 25,
+          title: '染血2·物理伤害',
+        },
+        {
+          detail: 50,
+          title: '染血4·重击伤害',
+        },
+      ]"
+    />
     <div class="detail">
       伤害加成的数值 = 造成伤害提高 + 元素/物理伤害加成 + 普攻/重击造成伤害提高
       + 元素战技/元素爆发伤害提高 + 对元素影响下的敌人伤害提高 +
       人物技能增伤等。
     </div>
-
     <div class="data-panel__title">
       精通加成%
       <van-stepper
@@ -146,13 +124,7 @@
       :min="checked ? 15 : 0"
       step="0.1"
       active-color="#645856"
-    >
-      <template #button>
-        <div class="elemental-slider-button">
-          {{ (+data.evaporationDemage).toFixed(1) }}
-        </div>
-      </template>
-    </van-slider>
+    />
     <van-cell class="eva-cell" center title="炽烈的炎之魔女4件套效果">
       <template #right-icon>
         <van-switch
@@ -164,34 +136,20 @@
         />
       </template>
     </van-cell>
-    <div class="data-panel__title">
-      伤害倍率%
-      <van-stepper
-        v-model="data.atkRate"
-        button-size="20"
-        theme="round"
-        input-width="45px"
-        decimal-length="1"
-      />
-      <span class="holy-relic-tips">本次攻击的倍率</span>
-    </div>
-    <van-slider
-      v-show="sliderChecked"
+    <data-item
       v-model="data.atkRate"
-      :max="1500"
-      step="0.1"
-      active-color="#645856"
-    >
-      <template #button>
-        <div class="elemental-slider-button">
-          {{ (+data.atkRate).toFixed(1) }}
-        </div>
-      </template>
-    </van-slider>
+      title="伤害倍率%"
+      tips="本次攻击的倍率"
+      sliderMax="1500"
+      sliderStep="0.1"
+      decimalLength="1"
+      :showSlider="sliderChecked"
+    />
+
     <div class="data-panel__title">
       反应类型
-      <van-radio-group style="margin-top: 12px" v-model="data.atkType">
-        <van-cell-group>
+      <van-cell-group>
+        <van-radio-group style="margin-top: 12px" v-model="data.atkType">
           <van-cell title="无反应" clickable @click="data.atkType = 'none'">
             <template #right-icon>
               <van-radio name="none" checked-color="#766461" />
@@ -221,8 +179,8 @@
               <van-radio name="evaporation2" checked-color="#766461" />
             </template>
           </van-cell>
-        </van-cell-group>
-      </van-radio-group>
+        </van-radio-group>
+      </van-cell-group>
     </div>
   </div>
   <van-cell class="eva-cell" center title="展开防御、抗性乘区">
@@ -264,6 +222,7 @@
         button-size="20"
         theme="round"
         integer
+        min="-999"
       />
     </div>
     <div class="data-panel__title">
@@ -321,7 +280,15 @@
 
 <script>
 import { computed, defineComponent, reactive, ref } from "vue";
-import { Slider, Stepper, Switch, Cell, RadioGroup, Radio } from "vant";
+import {
+  Slider,
+  Stepper,
+  Switch,
+  CellGroup,
+  Cell,
+  RadioGroup,
+  Radio,
+} from "vant";
 import TabTitle from "./TabTitle.vue";
 import { getReactionRate, getResistanceRate, getDefRate } from "../utils";
 import DataItem from "../component/DataItem.vue";
@@ -337,6 +304,7 @@ export default defineComponent({
     [Stepper.name]: Stepper,
     [DataItem.name]: DataItem,
     [TabTitle.name]: TabTitle,
+    [CellGroup.name]: CellGroup,
     [RadioGroup.name]: RadioGroup,
   },
 
@@ -345,7 +313,7 @@ export default defineComponent({
       baseATK: 550,
       extraATK: 660,
       critDemage: 50.0,
-      elementDemage: 46.6,
+      elementDemage: 0,
       evaporationDemage: 0.0,
       atkRate: 100,
       atkType: "none",
@@ -432,8 +400,20 @@ export default defineComponent({
 .data-panel {
   margin-bottom: 24px;
 }
+.atk-top {
+  padding: 2px 16px;
+  border-radius: 4px;
+  background-color: #997874;
+  color: #fff;
+}
 .atk-total {
   margin-left: 12px;
+}
+.atk-detial {
+  display: inline-block;
+  margin-left: 24px;
+  padding: 0 12px;
+  font-size: 14px;
 }
 .eva-cell {
   margin-bottom: 12px;
@@ -462,6 +442,10 @@ export default defineComponent({
   color: #62ebf0;
 }
 
+.van-slider__button-wrapper .van-slider__button {
+  box-shadow: 0 2px 2px #997874;
+}
+
 .result-grid {
   display: flex;
   width: 100%;
@@ -485,7 +469,7 @@ export default defineComponent({
 .crit-demage {
   font-weight: bold;
   line-height: 26px;
-  font-family: 'sao_font';
+  font-family: "sao_font";
 }
 .exclamation-mark {
   display: inline-block;
