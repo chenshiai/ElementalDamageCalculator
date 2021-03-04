@@ -23,8 +23,14 @@
     active-color="#645856"
     @change="onChange"
   />
-  <div v-if="notes" class="data-notes">
-    <div class="add-note-button"><van-icon name="plus" size="30" /></div>
+  <div v-show="notes" class="notes-button" @click="isExpand = !isExpand">
+    {{ title }}标签组
+    <van-icon size="12" :name="isExpand ? 'arrow-up' : 'arrow-down'" />
+  </div>
+  <div v-show="notes && isExpand" class="data-notes">
+    <div class="add-note-button">
+      <van-icon @click="addNewNote" name="plus" size="30" />
+    </div>
     <div
       v-for="(item, index) in notes"
       :key="index"
@@ -36,6 +42,9 @@
       </div>
       <van-icon @click="deleteMemo(item)" class="memo-close" name="delete-o" />
     </div>
+  </div>
+  <div v-if="detail" class="detail">
+    {{ detail }}
   </div>
 </template>
 
@@ -62,6 +71,7 @@ export default defineComponent({
     sliderStep: Number | String,
 
     notes: Array,
+    detail: String,
   },
 
   components: {
@@ -76,9 +86,10 @@ export default defineComponent({
     },
   },
 
-  setup(props) {
+  setup(props, { emit }) {
     const value = ref(+props.modelValue);
     const selectedMemos = ref({});
+    const isExpand = ref(true);
 
     const selectMemo = (item) => {
       const key = item.title;
@@ -93,10 +104,25 @@ export default defineComponent({
     };
 
     const deleteMemo = (item) => {
-      console.log(item);
+      const key = item.title;
+      if (selectedMemos.value[key]) {
+        value.value = +value.value - +selectedMemos.value[key];
+        delete selectedMemos.value[key];
+      }
+      const notesFilter = [];
+      props.notes.forEach((item) => {
+        if (item.title !== key) {
+          notesFilter.push(item);
+        } 
+      });
+      emit('noteChange', notesFilter);
     };
 
-    return { value, selectMemo, selectedMemos, deleteMemo };
+    const addNewNote = () => {
+
+    };
+
+    return { value, selectMemo, selectedMemos, deleteMemo, isExpand, addNewNote };
   },
 });
 </script>
@@ -106,7 +132,6 @@ export default defineComponent({
   border: 1px solid #997874;
   flex-wrap: wrap;
   display: flex;
-  margin-bottom: 12px;
   padding: 6px 6px 6px 0;
   max-height: 140px;
   overflow: scroll;
@@ -146,6 +171,14 @@ export default defineComponent({
 .memo-title {
   font-size: 12px;
   line-height: 14px;
+}
+.notes-button {
+  background-color: #997874;
+  color: #fff;
+  text-align: center;
+  font-size: 14px;
+  line-height: 20px;
+  border-radius: 4px;
 }
 .data-notes .memo-close {
   position: absolute;

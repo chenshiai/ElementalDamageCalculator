@@ -51,60 +51,18 @@
     <data-item
       v-model="data.elementDemage"
       title="伤害加成%"
-      tips="注意区分伤害加成类型"
+      tips="注意伤害加成触发的方式"
       stepperMin="0"
       sliderMax="600"
       sliderStep="0.1"
       decimalLength="1"
       :showSlider="sliderChecked"
-      :notes="[
-        {
-          detail: 15,
-          title: '2件套·元素伤害',
-        },
-        {
-          detail: 46.6,
-          title: '空之杯·元素伤害',
-        },
-        {
-          detail: 58.3,
-          title: '空之杯·物理伤害',
-        },
-        {
-          detail: 20,
-          title: '宗室2·元素爆发',
-        },
-        {
-          detail: 35,
-          title: '平雷渡火·全伤害',
-        },
-        {
-          detail: 35,
-          title: '角斗4·普攻伤害',
-        },
-        {
-          detail: 35,
-          title: '乐团4·重击伤害',
-        },
-        {
-          detail: 35,
-          title: '磐岩4·元素伤害',
-        },
-        {
-          detail: 25,
-          title: '染血2·物理伤害',
-        },
-        {
-          detail: 50,
-          title: '染血4·重击伤害',
-        },
-      ]"
-    />
-    <div class="detail">
-      伤害加成的数值 = 造成伤害提高 + 元素/物理伤害加成 + 普攻/重击造成伤害提高
+      :notes="EDNotes"
+      @noteChange="EDNoteChange"
+      detail="伤害加成的数值 = 造成伤害提高 + 元素/物理伤害加成 + 普攻/重击造成伤害提高
       + 元素战技/元素爆发伤害提高 + 对元素影响下的敌人伤害提高 +
-      人物技能增伤等。
-    </div>
+      人物技能增伤等。"
+    />
     <div class="data-panel__title">
       精通加成%
       <van-stepper
@@ -279,7 +237,7 @@
 </template>
 
 <script>
-import { computed, defineComponent, reactive, ref } from "vue";
+import { computed, defineComponent, reactive, ref, onMounted } from "vue";
 import {
   Slider,
   Stepper,
@@ -292,6 +250,7 @@ import {
 import TabTitle from "./TabTitle.vue";
 import { getReactionRate, getResistanceRate, getDefRate } from "../utils";
 import DataItem from "../component/DataItem.vue";
+import { EnhancedDamageNotes } from "../constant";
 
 export default defineComponent({
   name: "increase",
@@ -381,6 +340,14 @@ export default defineComponent({
       );
     });
 
+    const EDNotes = ref([]);
+    onMounted(() => {
+      EDNotes.value = EnhancedDamageNotes;
+    });
+    const EDNoteChange = (value) => {
+      EDNotes.value = value;
+    };
+
     return {
       data,
       otherData,
@@ -391,6 +358,8 @@ export default defineComponent({
       otherChecked,
       floatChecked,
       increaseResult,
+      EDNotes,
+      EDNoteChange,
     };
   },
 });
@@ -400,14 +369,8 @@ export default defineComponent({
 .data-panel {
   margin-bottom: 24px;
 }
-.atk-top {
-  padding: 2px 16px;
-  border-radius: 4px;
-  background-color: #997874;
-  color: #fff;
-}
 .atk-total {
-  margin-left: 12px;
+  margin-left: 28px;
 }
 .atk-detial {
   display: inline-block;

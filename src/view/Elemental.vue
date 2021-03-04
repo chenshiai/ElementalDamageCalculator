@@ -394,6 +394,7 @@ export default defineComponent({
   margin-bottom: 16px;
   border-radius: 6px;
   color: #fff;
+  margin-top: 12px;
   background-color: #645856;
 }
 
