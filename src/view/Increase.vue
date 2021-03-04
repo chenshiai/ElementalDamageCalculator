@@ -12,6 +12,20 @@
   </van-cell>
   <div class="data-panel">
     <div class="data-panel__title">
+      攻击力总计
+      <span class="atk-total">{{ data.baseATK + data.extraATK }}</span>
+    </div>
+    <data-item
+      v-model="data.baseATK"
+      title="基础攻击力"
+      tips="人物面板攻击力白字"
+      stepperInteger
+      stepperMin="0"
+      sliderMax="1200"
+      :showSlider="sliderChecked"
+    />
+    <!--
+    <div class="data-panel__title">
       基础攻击力
       <van-stepper
         v-model="data.baseATK"
@@ -32,6 +46,7 @@
         <div class="elemental-slider-button">{{ data.baseATK }}</div>
       </template>
     </van-slider>
+    -->
     <div class="data-panel__title">
       额外攻击力
       <van-stepper
@@ -113,7 +128,7 @@
     </div>
 
     <div class="data-panel__title">
-      增幅加成%
+      精通加成%
       <van-stepper
         v-model="data.evaporationDemage"
         button-size="20"
@@ -122,7 +137,7 @@
         input-width="40px"
         decimal-length="1"
       />
-      <span class="holy-relic-tips">蒸发、融化的额外提升</span>
+      <span class="holy-relic-tips">蒸发、融化的伤害提升</span>
     </div>
     <van-slider
       v-show="sliderChecked"
@@ -150,7 +165,7 @@
       </template>
     </van-cell>
     <div class="data-panel__title">
-      攻击倍率%
+      伤害倍率%
       <van-stepper
         v-model="data.atkRate"
         button-size="20"
@@ -158,6 +173,7 @@
         input-width="45px"
         decimal-length="1"
       />
+      <span class="holy-relic-tips">本次攻击的倍率</span>
     </div>
     <van-slider
       v-show="sliderChecked"
@@ -308,6 +324,7 @@ import { computed, defineComponent, reactive, ref } from "vue";
 import { Slider, Stepper, Switch, Cell, RadioGroup, Radio } from "vant";
 import TabTitle from "./TabTitle.vue";
 import { getReactionRate, getResistanceRate, getDefRate } from "../utils";
+import DataItem from "../component/DataItem.vue";
 
 export default defineComponent({
   name: "increase",
@@ -318,6 +335,7 @@ export default defineComponent({
     [Switch.name]: Switch,
     [Slider.name]: Slider,
     [Stepper.name]: Stepper,
+    [DataItem.name]: DataItem,
     [TabTitle.name]: TabTitle,
     [RadioGroup.name]: RadioGroup,
   },
@@ -413,6 +431,9 @@ export default defineComponent({
 <style>
 .data-panel {
   margin-bottom: 24px;
+}
+.atk-total {
+  margin-left: 12px;
 }
 .eva-cell {
   margin-bottom: 12px;
