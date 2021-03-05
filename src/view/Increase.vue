@@ -341,12 +341,15 @@ export default defineComponent({
     });
 
     const EDNotes = ref([]);
-    onMounted(() => {
-      EDNotes.value = EnhancedDamageNotes;
-    });
     const EDNoteChange = (value) => {
       EDNotes.value = value;
+      window.localStorage.setItem("GenShinImpactEDNotes", JSON.stringify(value));
     };
+
+    onMounted(() => {
+      const notes = window.localStorage.getItem("GenShinImpactEDNotes");
+      EDNotes.value = JSON.parse(notes) || EnhancedDamageNotes;
+    });
 
     return {
       data,
