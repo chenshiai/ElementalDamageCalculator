@@ -163,6 +163,10 @@ export default defineComponent({
     });
 
     const addNewNote = () => {
+      if (!newMemo.detail || !newMemo.title) {
+        Toast.fail("不能为空值");
+        return;
+      }
       const newNotes = [
         {
           detail: newMemo.detail,
