@@ -23,13 +23,17 @@
     active-color="#645856"
     @change="onChange"
   />
-  <div v-show="notes" class="notes-button" @click="isExpand = !isExpand">
+  <div
+    v-show="notes"
+    :class="['notes-button', isExpand && 'expand']"
+    @click="isExpand = !isExpand"
+  >
     {{ title }}标签组
     <van-icon size="12" :name="isExpand ? 'arrow-up' : 'arrow-down'" />
   </div>
   <div v-show="notes && isExpand" class="data-notes">
     <div class="add-note-button">
-      <van-icon @click="addNewNote" name="plus" size="30" />
+      <van-icon @click="openNewNotePop" name="plus" size="30" />
     </div>
     <div
       v-for="(item, index) in notes"
@@ -46,14 +50,41 @@
   <div v-if="detail" class="detail">
     {{ detail }}
   </div>
+  <van-popup v-model:show="showPopup" position="top">
+    <div class="popup-title">新增『{{ title }}』标签</div>
+    <van-field
+      v-model="newMemo.detail"
+      type="number"
+      label="具体数值"
+      placeholder="输入数值（支持一位小数）"
+      :formatter="formatterDetail"
+      format-trigger="onBlur"
+      required
+    />
+    <van-field
+      v-model="newMemo.title"
+      type="text"
+      label="标签名称"
+      placeholder="输入备注说明（不要与其他标签重复）"
+      required
+    />
+    <div class="popup-bottons">
+      <div @click="showPopup = false" class="popup-bottons__item">取消</div>
+      <div @click="addNewNote" class="popup-bottons__item popup-bottons__add">
+        新增
+      </div>
+    </div>
+  </van-popup>
 </template>
 
 <script>
-import { defineComponent, ref } from "vue";
-import { Slider, Stepper, Icon } from "vant";
+import { defineComponent, reactive, ref } from "vue";
+import { Slider, Stepper, Icon, Popup, Field, Toast } from "vant";
 
 export default defineComponent({
   name: "data-item",
+
+  emits: ["update:modelValue", "noteChange"],
 
   props: {
     modelValue: Number | String,
@@ -76,6 +107,8 @@ export default defineComponent({
 
   components: {
     [Icon.name]: Icon,
+    [Field.name]: Field,
+    [Popup.name]: Popup,
     [Slider.name]: Slider,
     [Stepper.name]: Stepper,
   },
@@ -105,29 +138,69 @@ export default defineComponent({
 
     const deleteMemo = (item) => {
       const key = item.title;
+      const notesFilter = [];
+
       if (selectedMemos.value[key]) {
         value.value = +value.value - +selectedMemos.value[key];
         delete selectedMemos.value[key];
       }
-      const notesFilter = [];
       props.notes.forEach((item) => {
         if (item.title !== key) {
           notesFilter.push(item);
-        } 
+        }
       });
-      emit('noteChange', notesFilter);
+      emit("noteChange", notesFilter);
     };
+
+    const showPopup = ref(false);
+    const openNewNotePop = () => {
+      showPopup.value = true;
+    };
+
+    const newMemo = reactive({
+      detail: "",
+      title: "",
+    });
 
     const addNewNote = () => {
-
+      const newNotes = [
+        {
+          detail: newMemo.detail,
+          title: newMemo.title,
+        },
+      ];
+      selectMemo(newMemo);
+      newMemo.detail = "";
+      newMemo.title = "";
+      props.notes.forEach((item) => {
+        newNotes.push(item);
+      });
+      emit("noteChange", newNotes);
+      Toast.success("添加成功");
     };
 
-    return { value, selectMemo, selectedMemos, deleteMemo, isExpand, addNewNote };
+    const formatterDetail = (value) => {
+      if (!value) return "";
+      return (+value).toFixed(1);
+    };
+
+    return {
+      value,
+      selectMemo,
+      selectedMemos,
+      deleteMemo,
+      isExpand,
+      openNewNotePop,
+      showPopup,
+      newMemo,
+      addNewNote,
+      formatterDetail,
+    };
   },
 });
 </script>
 
-<style>
+<style scoped>
 .data-notes {
   border: 1px solid #997874;
   flex-wrap: wrap;
@@ -177,12 +250,36 @@ export default defineComponent({
   color: #fff;
   text-align: center;
   font-size: 14px;
-  line-height: 20px;
+  line-height: 24px;
   border-radius: 4px;
+}
+.notes-button.expand {
+  border-radius: 4px 4px 0 0;
 }
 .data-notes .memo-close {
   position: absolute;
   top: 2px;
   right: 6px;
+}
+.popup-title {
+  text-align: center;
+  font-size: 18px;
+  line-height: 36px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #997874;
+}
+.popup-bottons {
+  display: flex;
+  line-height: 36px;
+  text-align: center;
+}
+.popup-bottons__item {
+  flex: 1;
+  font-size: 20px;
+}
+.popup-bottons__add {
+  background-color: #997874;
+  color: #fff;
 }
 </style>
