@@ -1,5 +1,5 @@
 <template>
-  <tab-title>精通伤害</tab-title>
+  <tab-title>剧变反应查看</tab-title>
   <div class="base-data">
     <div class="base-damage__title">
       角色等级
@@ -98,12 +98,6 @@
     <div class="damage-tag">
       <span class="damage-tag__title crystallize">结晶</span>{{ crystallizeValue }}
     </div>
-  </div>
-  <div class="supporter">
-    基础伤害数值来源：
-    <a href="https://bbs.mihoyo.com/ys/article/2215872"
-      >鈴@米游社【空荧酒馆】</a
-    >
   </div>
 </template>
 
@@ -281,6 +275,8 @@ export default defineComponent({
   color: #928986;
 }
 
+.question-title,
+.data-panel__title,
 .holy-relic__title,
 .base-damage__title {
   font-size: 18px;
@@ -399,9 +395,5 @@ export default defineComponent({
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-}
-
-.supporter {
-  font-size: 12px;
 }
 </style>

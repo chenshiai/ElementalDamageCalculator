@@ -1,5 +1,5 @@
 <template>
-  <tab-title>伤害计算</tab-title>
+  <tab-title>单次伤害计算</tab-title>
   <van-cell class="eva-cell" center title="开启滑块辅助调整数值">
     <template #right-icon>
       <van-switch
@@ -382,11 +382,6 @@ export default defineComponent({
   font-size: 14px;
 }
 .eva-cell {
-  margin-bottom: 12px;
-}
-.data-panel__title {
-  font-size: 18px;
-  font-weight: bold;
   margin-bottom: 12px;
 }
 .data-panel .van-stepper--round .van-stepper__minus {
