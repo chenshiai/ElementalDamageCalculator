@@ -12,7 +12,7 @@
   </div>
   <span class="question-title">敌人抗性是多少</span>
   <div>
-    <img src="../assets/IMG_1457.png" class="question-img" />
+    <img src="../assets/IMG_1457.png" class="question-img" @click="imagePreview"/>
     <p>
       帖子链接:
       <a href="https://nga.178.com/read.php?tid=24079044&forder_by=postdatedesc&rand=277&rand=230">
@@ -46,14 +46,19 @@
 <script>
 import { defineComponent } from "vue";
 import TabTitle from "../component/TabTitle.vue";
-import { Image as VanImage } from "vant";
+import { ImagePreview } from "vant";
 
 export default defineComponent({
   name: "question",
 
   components: {
     [TabTitle.name]: TabTitle,
-    [VanImage.name]: VanImage,
+  },
+
+  methods: {
+    imagePreview() {
+      ImagePreview(['https://damage-calculator.oss-cn-hangzhou.aliyuncs.com/IMG_1457.PNG']);
+    },
   },
 });
 </script>
