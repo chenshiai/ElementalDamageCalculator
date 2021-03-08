@@ -247,7 +247,7 @@ import {
   RadioGroup,
   Radio,
 } from "vant";
-import TabTitle from "./TabTitle.vue";
+import TabTitle from "../component/TabTitle.vue";
 import { getReactionRate, getResistanceRate, getDefRate } from "../utils";
 import DataItem from "../component/DataItem.vue";
 import { EnhancedDamageNotes } from "../constant";

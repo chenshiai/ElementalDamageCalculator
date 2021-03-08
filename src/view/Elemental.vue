@@ -28,11 +28,7 @@
       v-model="data.elementalMystery"
       :max="2000"
       active-color="#645856"
-    >
-      <template #button>
-        <div class="elemental-slider-button">{{ data.elementalMystery }}</div>
-      </template>
-    </van-slider>
+    />
   </div>
   <div class="holy-relic">
     <div class="holy-relic__title">
@@ -115,7 +111,7 @@
 import { computed, defineComponent, reactive, ref } from "vue";
 import { base as Base, WITCH, THUNDER, EMERALD } from "../constant";
 import { calculate } from "../utils";
-import TabTitle from "./TabTitle.vue";
+import TabTitle from "../component/TabTitle.vue";
 import { Slider, Stepper } from "vant";
 
 export default defineComponent({
