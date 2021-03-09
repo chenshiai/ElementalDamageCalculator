@@ -32,9 +32,7 @@
     <van-icon size="12" :name="isExpand ? 'arrow-up' : 'arrow-down'" />
   </div>
   <div v-show="notes && isExpand" class="data-notes">
-    <div class="add-note-button">
-      <van-icon @click="openNewNotePop" name="plus" size="30" />
-    </div>
+    <div class="add-note-button" @click="openNewNotePop">点此新增标签</div>
     <div
       v-for="(item, index) in notes"
       :key="index"
@@ -59,14 +57,12 @@
       placeholder="输入数值（支持一位小数）"
       :formatter="formatterDetail"
       format-trigger="onBlur"
-      required
     />
     <van-field
       v-model="newMemo.title"
       type="text"
       label="标签名称"
       placeholder="输入备注说明（不要与其他标签重复）"
-      required
     />
     <div class="popup-bottons">
       <div @click="showPopup = false" class="popup-bottons__item">取消</div>
@@ -237,9 +233,11 @@ export default defineComponent({
   box-sizing: border-box;
   color: #997874;
   height: 36px;
+  line-height: 30px;
   margin-bottom: 4px;
   border-radius: 6px;
   margin-left: 6px;
+  font-size: 14px;
 }
 .memo-detail {
   font-weight: bold;

@@ -125,17 +125,17 @@ export default defineComponent({
 
     // 增幅倍率
     const Rate = computed(() => {
-      return (calculate(data.elementalMystery) / 2.3945).toFixed(1);
+      return (calculate(data.elementalMystery)).toFixed(1);
     });
 
     // 聚变倍率
     const servitude = computed(() => {
-      return calculate(data.elementalMystery).toFixed(1);
+      return (calculate(data.elementalMystery) / 5 * 12).toFixed(1);
     });
 
     // 结晶倍率
     const crystallization = computed(() => {
-      return ((calculate(data.elementalMystery) / 12) * 8).toFixed(1);
+      return ((calculate(data.elementalMystery) / 5 * 8)).toFixed(1);
     });
 
     const moreRate = computed(() => {
@@ -161,7 +161,7 @@ export default defineComponent({
     // 聚变反应伤害公式
     const calculateDamage = (baseDamage) => {
       return Math.round(
-        baseDamage * (1 + calculate(data.elementalMystery) / 100)
+        baseDamage * (1 + calculate(data.elementalMystery) / 5 * 12 / 100)
       );
     };
 
@@ -208,7 +208,7 @@ export default defineComponent({
       if (Base.crystallize[data.level]) {
         return Math.round(
           Base.crystallize[data.level] *
-            (1 + ((calculate(data.elementalMystery) / 12) * 8) / 100)
+            (1 + (calculate(data.elementalMystery) / 5 * 8 / 100))
         );
       }
       return '无数据';

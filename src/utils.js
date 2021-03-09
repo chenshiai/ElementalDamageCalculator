@@ -1,8 +1,7 @@
-// 聚变反应计算公式
 export const calculate = (elementalMystery) => {
   if (+elementalMystery <= 0) return 0;
-  return (6.665 - 9340 / (1401 + +elementalMystery)) * 100;
-};
+  return 2.78 * elementalMystery / (elementalMystery + 1400) * 100;
+}
 
 export const getReactionRate = (atkType) => {
   if (atkType === "evaporation") {
