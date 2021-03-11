@@ -67,6 +67,7 @@ export const base = {
 export const WITCH = "witch";
 export const THUNDER = "thunder"
 export const EMERALD = "emerald";
+export const PERCENT = "percent";
 
 // 增伤区标签
 export const EnhancedDamageNotes = [
@@ -109,5 +110,16 @@ export const EnhancedDamageNotes = [
   {
     detail: 50,
     title: '染血4·重击伤害',
+  },
+];
+
+export const ATKNotes = [
+  {
+    detail: 25,
+    title: "热诚之火"
+  },
+  {
+    detail: 48,
+    title: "讨龙英杰传"
   },
 ];

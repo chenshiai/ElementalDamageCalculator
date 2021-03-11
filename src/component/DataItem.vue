@@ -9,7 +9,7 @@
       :decimal-length="decimalLength"
       :max="stepperMax"
       :min="stepperMin"
-      input-width="40px"
+      input-width="46px"
       @change="onChange"
     />
     <span class="holy-relic-tips">{{ tips }}</span>
@@ -233,7 +233,7 @@ export default defineComponent({
   box-sizing: border-box;
   color: #997874;
   height: 36px;
-  line-height: 30px;
+  line-height: 32px;
   margin-bottom: 4px;
   border-radius: 6px;
   margin-left: 6px;

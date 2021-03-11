@@ -40,7 +40,7 @@
     <data-item
       v-model="data.critDemage"
       title="暴击伤害%"
-      tips="小数位需要手动输入，下同"
+      tips="小数需要手动输入"
       stepperMin="50"
       sliderMin="50"
       sliderMax="600"
@@ -217,10 +217,6 @@
       暴击伤害
       <div class="crit-demage">
         {{ Math.round(increaseResult * (1 + data.critDemage / 100)) }}
-        <i>
-          <span class="exclamation-mark">!</span>
-          <span class="exclamation-mark">!</span>
-        </i>
       </div>
     </div>
   </div>
@@ -430,7 +426,6 @@ export default defineComponent({
 .crit-demage {
   font-weight: bold;
   line-height: 26px;
-  font-family: "sao_font";
 }
 .exclamation-mark {
   display: inline-block;

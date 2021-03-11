@@ -5,6 +5,7 @@
       角色等级
       <van-stepper
         v-model="data.level"
+        input-width="46px"
         integer
         button-size="20"
         theme="round"
@@ -18,6 +19,7 @@
       <van-stepper
         v-model="data.elementalMystery"
         integer
+        input-width="46px"
         button-size="20"
         theme="round"
         min="0"
@@ -257,7 +259,7 @@ export default defineComponent({
 }
 
 .base-data .van-stepper.van-stepper--round {
-  margin-left: 20px;
+  margin-left: 18px;
 }
 
 .van-slider {
@@ -271,7 +273,7 @@ export default defineComponent({
 
 .holy-relic-tips {
   font-size: 12px;
-  margin-left: 12px;
+  margin-left: 4px;
   color: #928986;
 }
 
@@ -376,7 +378,6 @@ export default defineComponent({
 }
 
 .active {
-  font-weight: bold;
   opacity: 1;
 }
 
