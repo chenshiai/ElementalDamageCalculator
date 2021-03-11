@@ -149,13 +149,13 @@ export default defineComponent({
 
     const servitudeMoreRate = computed(() => {
       if (data.check === THUNDER) {
-        return " 超载、超导、感电 +40%"
+        return " 超载/超导/感电+40%"
       }
       if (data.check === WITCH) {
-        return " 超载 +40%"
+        return " 超载+40%"
       }
       if (data.check === EMERALD) {
-        return " 扩散 +60%";
+        return " 扩散+60%";
       }
       return "";
     });

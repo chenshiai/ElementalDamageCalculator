@@ -9,12 +9,17 @@ body {
 }
 
 @font-face {
-  font-family: 'genshin';
-  src: url('./assets/GenShin.ttf');
+  font-family: 'eng';
+  src: url('./assets/_-webfont.woff');
+}
+
+@font-face {
+  font-family: 'zhn';
+  src: url('./assets/HYWenHei-85W.ttf');
 }
 
 #app {
-  font-family: 'genshin', Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'eng', 'zhn', Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
