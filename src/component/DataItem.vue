@@ -220,7 +220,7 @@ export default defineComponent({
   color: #997874;
   font-size: 14px;
   position: relative;
-  min-width: 70px;
+  min-width: 80px;
 }
 .memo.selected {
   background-color: #997874;
