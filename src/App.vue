@@ -99,7 +99,6 @@ export default defineComponent({
   height: 40px;
   color: #fff;
   border-radius: 10px;
-  font-weight: 600;
   flex: 1;
   margin-right: 16px;
 }

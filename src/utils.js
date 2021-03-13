@@ -30,3 +30,6 @@ export const getDefRate = (characterLevel, enemyLevel, armour) => {
   return (100 + characterLevel) / (100 + characterLevel + enemyDef);
 };
 
+export const floatNum = (value, digits = 1) => {
+  return Number((+value).toFixed(digits));
+};

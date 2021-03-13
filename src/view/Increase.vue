@@ -1,5 +1,6 @@
 <template>
   <tab-title>单次伤害计算</tab-title>
+  {{ state }}
   <van-cell class="eva-cell" center title="开启滑块辅助调整数值">
     <template #right-icon>
       <van-switch
@@ -13,14 +14,14 @@
   <div class="data-panel">
     <div class="data-panel__title atk-top">
       攻击力总计
-      <span class="atk-total">{{ data.baseATK + data.extraATK }}</span>
+      <span class="atk-total">{{ baseATK + extraATK }}</span>
       <span class="atk-detial">
-        {{ data.baseATK }} +
-        <span style="color: #49ff39">{{ data.extraATK }}</span>
+        {{ baseATK }} +
+        <span style="color: #49ff39">{{ extraATK }}</span>
       </span>
     </div>
     <data-item
-      v-model="data.baseATK"
+      v-model="baseATK"
       title="基础攻击力"
       tips="人物面板攻击力白字"
       stepperInteger
@@ -29,7 +30,7 @@
       :showSlider="sliderChecked"
     />
     <data-item
-      v-model="data.extraATK"
+      v-model="extraATK"
       title="额外攻击力"
       tips="人物面板攻击力绿字"
       stepperInteger
@@ -38,18 +39,18 @@
       :showSlider="sliderChecked"
     />
     <data-item
-      v-model="data.critDemage"
+      v-model="critDemage"
       title="暴击伤害%"
       tips="小数需要手动输入"
-      stepperMin="50"
-      sliderMin="50"
+      stepperMin="0"
+      sliderMin="0"
       sliderMax="600"
       sliderStep="0.1"
       decimalLength="1"
       :showSlider="sliderChecked"
     />
     <data-item
-      v-model="data.elementDemage"
+      v-model="elementDemage"
       title="伤害加成%"
       tips="注意伤害加成触发的方式"
       stepperMin="0"
@@ -57,6 +58,10 @@
       sliderStep="0.1"
       decimalLength="1"
       :showSlider="sliderChecked"
+    />
+    <note-group
+      v-model="elementDemage"
+      title="伤害加成%"
       :notes="EDNotes"
       @noteChange="EDNoteChange"
       detail="伤害加成的数值 = 造成伤害提高 + 元素/物理伤害加成 + 普攻/重击造成伤害提高
@@ -66,7 +71,7 @@
     <div class="data-panel__title">
       精通加成%
       <van-stepper
-        v-model="data.evaporationDemage"
+        v-model="evaporationDemage"
         button-size="20"
         theme="round"
         :min="checked ? 15 : 0"
@@ -77,7 +82,7 @@
     </div>
     <van-slider
       v-show="sliderChecked"
-      v-model="data.evaporationDemage"
+      v-model="evaporationDemage"
       :max="240"
       :min="checked ? 15 : 0"
       step="0.1"
@@ -95,9 +100,10 @@
       </template>
     </van-cell>
     <data-item
-      v-model="data.atkRate"
+      v-model="atkRate"
       title="伤害倍率%"
       tips="本次攻击的倍率"
+      stepperMin="0"
       sliderMax="1500"
       sliderStep="0.1"
       decimalLength="1"
@@ -107,13 +113,13 @@
     <div class="data-panel__title">
       反应类型
       <van-cell-group>
-        <van-radio-group style="margin-top: 12px" v-model="data.atkType">
-          <van-cell title="无反应" clickable @click="data.atkType = 'none'">
+        <van-radio-group style="margin-top: 12px" v-model="atkType">
+          <van-cell title="无反应" clickable @click="atkType = 'none'">
             <template #right-icon>
               <van-radio name="none" checked-color="#766461" />
             </template>
           </van-cell>
-          <van-cell clickable @click="data.atkType = 'evaporation'">
+          <van-cell clickable @click="atkType = 'evaporation'">
             <template #title>
               <div>
                 <span class="water">水</span>· <span class="fire">火</span>/
@@ -125,7 +131,7 @@
               <van-radio name="evaporation" checked-color="#766461" />
             </template>
           </van-cell>
-          <van-cell clickable @click="data.atkType = 'evaporation2'">
+          <van-cell clickable @click="atkType = 'evaporation2'">
             <template #title>
               <div>
                 <span class="fire">火</span>· <span class="water">水</span>/
@@ -155,7 +161,7 @@
     <div class="data-panel__title">
       人物等级
       <van-stepper
-        v-model="otherData.characterLevel"
+        v-model="characterLevel"
         button-size="20"
         theme="round"
         integer
@@ -166,7 +172,7 @@
     <div class="data-panel__title">
       敌人等级
       <van-stepper
-        v-model="otherData.enemyLevel"
+        v-model="enemyLevel"
         button-size="20"
         theme="round"
         integer
@@ -176,7 +182,7 @@
     <div class="data-panel__title">
       敌人抗性%
       <van-stepper
-        v-model="otherData.enemyResistance"
+        v-model="enemyResistance"
         button-size="20"
         theme="round"
         integer
@@ -186,24 +192,22 @@
     <div class="data-panel__title">
       减少抗性%
       <van-stepper
-        v-model="otherData.weaken"
+        v-model="weaken"
         button-size="20"
         theme="round"
         integer
         min="0"
       />
-      <span class="holy-relic-tips">圣遗物、人物天赋等效果合计</span>
     </div>
     <div class="data-panel__title">
       减少防御%
       <van-stepper
-        v-model="otherData.armour"
+        v-model="armour"
         button-size="20"
         theme="round"
         min="0"
         integer
       />
-      <span class="holy-relic-tips">圣遗物、人物天赋等效果合计</span>
     </div>
   </div>
   <div :class="['result-grid', floatChecked && 'increase-result__top']">
@@ -216,7 +220,7 @@
     <div class="grid-item">
       暴击伤害
       <div class="crit-demage">
-        {{ Math.round(increaseResult * (1 + data.critDemage / 100)) }}
+        {{ Math.round(increaseResult * (1 + critDemage / 100)) }}
       </div>
     </div>
   </div>
@@ -233,7 +237,7 @@
 </template>
 
 <script>
-import { computed, defineComponent, reactive, ref, onMounted } from "vue";
+import { computed, defineComponent, reactive, ref, onMounted, toRefs } from "vue";
 import {
   Slider,
   Stepper,
@@ -246,6 +250,8 @@ import {
 import TabTitle from "../component/TabTitle.vue";
 import { getReactionRate, getResistanceRate, getDefRate } from "../utils";
 import DataItem from "../component/DataItem.vue";
+import NoteGroup from "../component/NoteGroup.vue";
+import { useStore } from "vuex";
 import { EnhancedDamageNotes } from "../constant";
 
 export default defineComponent({
@@ -260,42 +266,22 @@ export default defineComponent({
     [DataItem.name]: DataItem,
     [TabTitle.name]: TabTitle,
     [CellGroup.name]: CellGroup,
+    [NoteGroup.name]: NoteGroup,
     [RadioGroup.name]: RadioGroup,
   },
 
   setup() {
-    const data = reactive({
-      baseATK: 550,
-      extraATK: 660,
-      critDemage: 50.0,
-      elementDemage: 0,
-      evaporationDemage: 0.0,
-      atkRate: 100,
-      atkType: "none",
-    });
-    const otherData = reactive({
-      characterLevel: 80,
-      enemyLevel: 80,
-      enemyResistance: 10,
-      weaken: 0,
-      armour: 0,
-    });
     const checked = ref(false);
     const sliderChecked = ref(false);
     const otherChecked = ref(false);
     const floatChecked = ref(false);
-
-    const evaporationComputed = computed(() => {
-      return checked.value
-        ? (+data.evaporationDemage + 15).toFixed(1)
-        : (+data.evaporationDemage).toFixed(1);
-    });
-
+    const store = useStore();
+  
     const changeSwitch = (val) => {
       if (val) {
-        data.evaporationDemage = +data.evaporationDemage + 15;
+        store.commit('setEvaporationDemage', +store.state.evaporationDemage + 15)
       } else {
-        data.evaporationDemage = +data.evaporationDemage - 15;
+        store.commit('setEvaporationDemage', +store.state.evaporationDemage - 15)
       }
     };
 
@@ -307,14 +293,12 @@ export default defineComponent({
         evaporationDemage,
         atkRate,
         atkType,
-      } = data;
-      const {
         characterLevel,
         enemyLevel,
         enemyResistance,
         weaken,
         armour,
-      } = otherData;
+      } = store.state;
       // 计算增幅加成
       const elerate = getReactionRate(atkType);
       const resistanceRate = getResistanceRate(enemyResistance, weaken);
@@ -348,9 +332,7 @@ export default defineComponent({
     });
 
     return {
-      data,
-      otherData,
-      evaporationComputed,
+      ...toRefs(store.state),
       checked,
       changeSwitch,
       sliderChecked,
