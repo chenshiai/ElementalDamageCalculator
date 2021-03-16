@@ -73,14 +73,14 @@
       </span>
     </div>
   </div>
-  <div class="detail">
+  <detail-block>
     增幅反应伤害提升{{ Rate }}%<span class="more-rate">{{ moreRate }}</span>
     <br />
     剧变反应伤害提升{{ servitude }}%
     <span class="more-rate">{{ servitudeMoreRate }}</span>
     <br />
     结晶反应护盾提升{{ crystallization }}%
-  </div>
+  </detail-block>
   <div class="result" v-if="data.level > 0 && data.level <= 90">
     <div class="damage-tag">
       <span class="damage-tag__title elector">感电</span>{{ electroChargedDamage }}
@@ -108,6 +108,7 @@ import { computed, defineComponent, reactive, ref } from "vue";
 import { base as Base, WITCH, THUNDER, EMERALD } from "../constant";
 import { calculate } from "../utils";
 import TabTitle from "../component/TabTitle.vue";
+import DetailBlock from "../component/Detail.vue";
 import { Slider, Stepper } from "vant";
 
 export default defineComponent({
@@ -116,6 +117,7 @@ export default defineComponent({
     [Slider.name]: Slider,
     [Stepper.name]: Stepper,
     [TabTitle.name]: TabTitle,
+    [DetailBlock.name]: DetailBlock,
   },
   setup() {
     const data = reactive({
@@ -379,16 +381,6 @@ export default defineComponent({
 
 .active {
   opacity: 1;
-}
-
-.detail {
-  font-size: 14px;
-  padding: 4px 8px;
-  margin-bottom: 16px;
-  border-radius: 6px;
-  color: #fff;
-  margin-top: 12px;
-  background-color: #645856;
 }
 
 .result {

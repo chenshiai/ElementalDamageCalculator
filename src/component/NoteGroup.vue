@@ -21,9 +21,6 @@
       <van-icon @click="deleteMemo(item)" class="memo-close" name="delete-o" />
     </div>
   </div>
-  <div v-if="detail" class="detail">
-    {{ detail }}
-  </div>
   <van-popup v-model:show="showPopup" position="top">
     <div class="popup-title">新增『{{ title }}』标签</div>
     <van-field
@@ -65,30 +62,36 @@ export default defineComponent({
     [Popup.name]: Popup,
   },
 
-  props:{
+  props: {
     modelValue: String | Number,
     title: String,
     notes: Array,
-    detail: String,
   },
 
   setup(props, { emit }) {
     const selectedMemos = ref({});
     const isExpand = ref(false);
     const changeValue = (value) => {
-      emit("update:modelValue", value)
+      emit("update:modelValue", value);
     };
     const selectMemo = (item) => {
       const key = item.title;
       const detail = +item.detail;
       if (selectedMemos.value[key]) {
-        if (floatNum(props.modelValue) - floatNum(selectedMemos.value[key]) >= 0) {
-          changeValue(floatNum(props.modelValue) - floatNum(selectedMemos.value[key]));
+        if (
+          floatNum(props.modelValue) - floatNum(selectedMemos.value[key]) >=
+          0
+        ) {
+          changeValue(
+            floatNum(props.modelValue) - floatNum(selectedMemos.value[key])
+          );
         }
         delete selectedMemos.value[key];
       } else {
         selectedMemos.value[key] = detail;
-        changeValue(floatNum(props.modelValue) + floatNum(selectedMemos.value[key]));
+        changeValue(
+          floatNum(props.modelValue) + floatNum(selectedMemos.value[key])
+        );
       }
     };
     const deleteMemo = (item) => {
@@ -97,7 +100,9 @@ export default defineComponent({
       emit("noteChange", notesFilter);
 
       if (selectedMemos.value[key]) {
-        changeValue(floatNum(props.modelValue) - floatNum(selectedMemos.value[key]));
+        changeValue(
+          floatNum(props.modelValue) - floatNum(selectedMemos.value[key])
+        );
         delete selectedMemos.value[key];
       }
     };
@@ -134,7 +139,7 @@ export default defineComponent({
 
     const formatterDetail = (value) => {
       if (!value) return "";
-      return (+value).toFixed(1);
+      return floatNum(value);
     };
 
     return {
@@ -147,11 +152,10 @@ export default defineComponent({
       formatterDetail,
       selectedMemos,
       openNewNotePop,
-    }
+    };
   },
 });
 </script>
-
 
 <style scoped>
 .data-notes {

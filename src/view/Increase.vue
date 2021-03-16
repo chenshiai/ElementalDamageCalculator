@@ -64,10 +64,12 @@
       title="伤害加成%"
       :notes="EDNotes"
       @noteChange="EDNoteChange"
-      detail="伤害加成的数值 = 造成伤害提高 + 元素/物理伤害加成 + 普攻/重击造成伤害提高
-      + 元素战技/元素爆发伤害提高 + 对元素影响下的敌人伤害提高 +
-      人物技能增伤等。"
     />
+    <detail-block>
+      伤害加成的数值 = 造成伤害提高 + 元素/物理伤害加成 + 普攻/重击造成伤害提高
+      + 元素战技/元素爆发伤害提高 + 对元素影响下的敌人伤害提高 +
+      人物技能增伤等。
+    </detail-block>
     <div class="data-panel__title">
       精通加成%
       <van-stepper
@@ -237,7 +239,13 @@
 </template>
 
 <script>
-import { computed, defineComponent, reactive, ref, onMounted, toRefs } from "vue";
+import {
+  computed,
+  defineComponent,
+  ref,
+  onMounted,
+  toRefs,
+} from "vue";
 import {
   Slider,
   Stepper,
@@ -251,6 +259,7 @@ import TabTitle from "../component/TabTitle.vue";
 import { getReactionRate, getResistanceRate, getDefRate } from "../utils";
 import DataItem from "../component/DataItem.vue";
 import NoteGroup from "../component/NoteGroup.vue";
+import DetailBlock from "../component/Detail.vue";
 import { useStore } from "vuex";
 import { EnhancedDamageNotes } from "../constant";
 
@@ -268,6 +277,7 @@ export default defineComponent({
     [CellGroup.name]: CellGroup,
     [NoteGroup.name]: NoteGroup,
     [RadioGroup.name]: RadioGroup,
+    [DetailBlock.name]: DetailBlock,
   },
 
   setup() {
@@ -276,12 +286,18 @@ export default defineComponent({
     const otherChecked = ref(false);
     const floatChecked = ref(false);
     const store = useStore();
-  
+
     const changeSwitch = (val) => {
       if (val) {
-        store.commit('setEvaporationDemage', +store.state.evaporationDemage + 15)
+        store.commit(
+          "setEvaporationDemage",
+          +store.state.evaporationDemage + 15
+        );
       } else {
-        store.commit('setEvaporationDemage', +store.state.evaporationDemage - 15)
+        store.commit(
+          "setEvaporationDemage",
+          +store.state.evaporationDemage - 15
+        );
       }
     };
 
@@ -323,7 +339,10 @@ export default defineComponent({
     const EDNotes = ref([]);
     const EDNoteChange = (value) => {
       EDNotes.value = value;
-      window.localStorage.setItem("GenShinImpactEDNotes", JSON.stringify(value));
+      window.localStorage.setItem(
+        "GenShinImpactEDNotes",
+        JSON.stringify(value)
+      );
     };
 
     onMounted(() => {
