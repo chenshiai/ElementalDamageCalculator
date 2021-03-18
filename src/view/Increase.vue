@@ -44,7 +44,7 @@
       @noteChange="ATKNoteChange"
     />
     <detail-block>
-      这里『攻击力提升』的数值，是以『基础攻击力』的百分比来算的，会直接加在上方『攻击力总计』的绿字里。
+      这里『攻击力加成』的数值，是以『基础攻击力』的百分比来算的，会直接加在上方『攻击力总计』的绿字里。
     </detail-block>
     <data-item
       v-model="critDemage"
@@ -313,6 +313,7 @@ export default defineComponent({
       const {
         baseATK,
         extraATK,
+        extraPercentATK,
         elementDemage,
         evaporationDemage,
         atkRate,
@@ -334,7 +335,7 @@ export default defineComponent({
       }
 
       return Math.round(
-        (baseATK + extraATK) *
+        (baseATK + extraATK + baseATK * (extraPercentATK / 100)) *
           (atkRate / 100) *
           (1 + elementDemage / 100) *
           elerate *
@@ -350,7 +351,7 @@ export default defineComponent({
         extraATK,
         extraPercentATK,
       } = store.state;
-      return floatNum(extraATK + baseATK * (extraPercentATK / 100), 0);
+      return Math.round(extraATK + baseATK * (extraPercentATK / 100));
     });
 
     const EDNotes = ref([]);
@@ -365,12 +366,17 @@ export default defineComponent({
     const ATKNotes = ref([]);
     const ATKNoteChange = (value) => {
       ATKNotes.value = value;
+      window.localStorage.setItem(
+        "GenShinImpactATKNotes",
+        JSON.stringify(value)
+      );
     };
 
     onMounted(() => {
-      const notes = window.localStorage.getItem("GenShinImpactEDNotes");
-      EDNotes.value = JSON.parse(notes) || EnhancedDamageNotes;
-      ATKNotes.value = AtkPercentNotes;
+      const edNotes = window.localStorage.getItem("GenShinImpactEDNotes");
+      const atkNotes = window.localStorage.getItem("GenShinImpactATKNotes");
+      EDNotes.value = JSON.parse(edNotes) || EnhancedDamageNotes;
+      ATKNotes.value = JSON.parse(atkNotes) || AtkPercentNotes;
     });
 
     return {
