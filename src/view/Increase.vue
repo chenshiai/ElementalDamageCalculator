@@ -31,7 +31,7 @@
     <data-item
       v-model="extraATK"
       title="额外攻击力"
-      tips="人物面板攻击力绿字"
+      tips="攻击力固定数值加成"
       stepperInteger
       stepperMin="0"
       sliderMax="3000"
@@ -44,7 +44,7 @@
       @noteChange="ATKNoteChange"
     />
     <detail-block>
-      这里『攻击力加成』的数值，是以『基础攻击力』的百分比来算的，会直接加在上方『攻击力总计』的绿字里。
+      这里『攻击力加成%』的数值，是以『基础攻击力』的百分比来算的，会直接加在上方『攻击力总计』的绿字里。
     </detail-block>
     <data-item
       v-model="critDemage"
