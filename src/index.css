@@ -16,7 +16,7 @@ body {
 
 @font-face {
   font-family: 'zhn';
-  src: url('../public/HYWenHei-85W.ttf');
+  src: url('../HYWenHei-85W.ttf');
 }
 
 #app {
