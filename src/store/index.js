@@ -4,6 +4,7 @@ const state = () => {
   return {
     baseATK: 550,
     extraATK: 660,
+    extraPercentATK: 0,
     critDemage: 50.0,
     elementDemage: 0,
     evaporationDemage: 0.0,
@@ -21,35 +22,35 @@ const mutations = {
   setBaseATK(state, value) {
     state.baseATK = value;
   },
-  
+
   setExtraATK(state, value) {
     state.extraATK = value;
   },
-  
+
   setCritDemage(state, value) {
     state.critDemage = value;
   },
-  
+
   setElementDemage(state, value) {
     state.elementDemage = value;
   },
-  
+
   setEvaporationDemage(state, value) {
     state.evaporationDemage = value;
   },
-  
+
   setAtkRate(state, value) {
     state.atkRate = value;
   },
-  
+
   setAtkType(state, value) {
     state.atkType = value;
   },
-  
+
   setCharacterLevel(state, value) {
     state.characterLevel = value;
   },
-  
+
   setEnemyLevel(state, value) {
     state.enemyLevel = value;
   },

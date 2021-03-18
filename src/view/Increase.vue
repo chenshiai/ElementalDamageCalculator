@@ -1,6 +1,5 @@
 <template>
   <tab-title>单次伤害计算</tab-title>
-  {{ state }}
   <van-cell class="eva-cell" center title="开启滑块辅助调整数值">
     <template #right-icon>
       <van-switch
@@ -14,10 +13,10 @@
   <div class="data-panel">
     <div class="data-panel__title atk-top">
       攻击力总计
-      <span class="atk-total">{{ baseATK + extraATK }}</span>
+      <span class="atk-total">{{ baseATK + extraATKNumber }}</span>
       <span class="atk-detial">
         {{ baseATK }} +
-        <span style="color: #49ff39">{{ extraATK }}</span>
+        <span style="color: #49ff39">{{ extraATKNumber }}</span>
       </span>
     </div>
     <data-item
@@ -38,6 +37,15 @@
       sliderMax="3000"
       :showSlider="sliderChecked"
     />
+    <note-group
+      v-model="extraPercentATK"
+      title="攻击力加成%"
+      :notes="ATKNotes"
+      @noteChange="ATKNoteChange"
+    />
+    <detail-block>
+      这里『攻击力提升』的数值，是以『基础攻击力』的百分比来算的，会直接加在上方『攻击力总计』的绿字里。
+    </detail-block>
     <data-item
       v-model="critDemage"
       title="暴击伤害%"
@@ -256,12 +264,12 @@ import {
   Radio,
 } from "vant";
 import TabTitle from "../component/TabTitle.vue";
-import { getReactionRate, getResistanceRate, getDefRate } from "../utils";
+import { getReactionRate, getResistanceRate, getDefRate, floatNum } from "../utils";
 import DataItem from "../component/DataItem.vue";
 import NoteGroup from "../component/NoteGroup.vue";
 import DetailBlock from "../component/Detail.vue";
 import { useStore } from "vuex";
-import { EnhancedDamageNotes } from "../constant";
+import { EnhancedDamageNotes, AtkPercentNotes } from "../constant";
 
 export default defineComponent({
   name: "increase",
@@ -336,6 +344,15 @@ export default defineComponent({
       );
     });
 
+    const extraATKNumber = computed(() => {
+      const {
+        baseATK,
+        extraATK,
+        extraPercentATK,
+      } = store.state;
+      return floatNum(extraATK + baseATK * (extraPercentATK / 100), 0);
+    });
+
     const EDNotes = ref([]);
     const EDNoteChange = (value) => {
       EDNotes.value = value;
@@ -345,13 +362,20 @@ export default defineComponent({
       );
     };
 
+    const ATKNotes = ref([]);
+    const ATKNoteChange = (value) => {
+      ATKNotes.value = value;
+    };
+
     onMounted(() => {
       const notes = window.localStorage.getItem("GenShinImpactEDNotes");
       EDNotes.value = JSON.parse(notes) || EnhancedDamageNotes;
+      ATKNotes.value = AtkPercentNotes;
     });
 
     return {
       ...toRefs(store.state),
+      extraATKNumber,
       checked,
       changeSwitch,
       sliderChecked,
@@ -360,6 +384,8 @@ export default defineComponent({
       increaseResult,
       EDNotes,
       EDNoteChange,
+      ATKNotes,
+      ATKNoteChange,
     };
   },
 });

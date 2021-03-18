@@ -113,13 +113,13 @@ export const EnhancedDamageNotes = [
   },
 ];
 
-export const ATKNotes = [
-  {
-    detail: 25,
-    title: "热诚之火"
-  },
+export const AtkPercentNotes = [
   {
     detail: 48,
-    title: "讨龙英杰传"
+    title: "精炼5阶·讨龙"
+  },
+  {
+    detail: 25,
+    title: "元素共鸣·热诚之火"
   },
 ];
