@@ -81,24 +81,9 @@
     <br />
     结晶反应护盾提升{{ crystallization }}%
   </detail-block>
-  <div class="result" v-if="data.level > 0 && data.level <= 90">
-    <div class="damage-tag">
-      <span class="damage-tag__title elector">感电</span>{{ electroChargedDamage }}
-    </div>
-    <div class="damage-tag">
-      <span class="damage-tag__title overload">超载</span>{{ overloadDamage }}
-    </div>
-    <div class="damage-tag">
-      <span class="damage-tag__title crushe-ice">碎冰</span>{{ crushedIceDamage }}
-    </div>
-    <div class="damage-tag">
-      <span class="damage-tag__title diffuse">扩散</span>{{ diffuseDamage }}
-    </div>
-    <div class="damage-tag">
-      <span class="damage-tag__title superconduct">超导</span>{{ superconductDamage }}
-    </div>
-    <div class="damage-tag">
-      <span class="damage-tag__title crystallize">结晶</span>{{ crystallizeValue }}
+  <div class="result">
+    <div class="damage-tag" v-for="(item, index) in demageResult" :key="index">
+      <span :class="['damage-tag__title', item.class]">{{ item.name }}</span>{{ item.detail }}
     </div>
   </div>
 </template>
@@ -226,16 +211,47 @@ export default defineComponent({
       }
     };
 
+    const demageResult = computed(() => {
+      return [
+        {
+          name: "感电",
+          class: "elector",
+          detail: electroChargedDamage.value,
+        },
+        {
+          name: "超载",
+          class: "overload",
+          detail: overloadDamage.value,
+        },
+        {
+          name: "碎冰",
+          class: "crushe-ice",
+          detail: crushedIceDamage.value,
+        },
+        {
+          name: "扩散",
+          class: "diffuse",
+          detail: diffuseDamage.value,
+        },
+        {
+          name: "超导",
+          class: "superconduct",
+          detail: superconductDamage.value,
+        },
+        {
+          name: "结晶",
+          class: "crystallize",
+          detail: crystallizeValue.value,
+        },
+      ];
+    });
+
     return {
       data,
       Rate,
       servitude,
       crystallization,
-      electroChargedDamage,
-      overloadDamage,
-      crushedIceDamage,
-      diffuseDamage,
-      superconductDamage,
+      demageResult,
       crystallizeValue,
       changeCheck,
       moreRate,

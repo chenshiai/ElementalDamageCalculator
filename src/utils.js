@@ -1,3 +1,5 @@
+import { Toast } from "vant";
+
 export const calculate = (elementalMystery) => {
   if (+elementalMystery <= 0) return 0;
   return 2.78 * elementalMystery / (elementalMystery + 1400) * 100;
@@ -32,4 +34,14 @@ export const getDefRate = (characterLevel, enemyLevel, armour) => {
 
 export const floatNum = (value, digits = 1) => {
   return Number((+value).toFixed(digits));
+};
+
+export const getTargetNotes = (name, defaultValue, description) => {
+  const notes = window.localStorage.getItem(name);
+  try {
+    return JSON.parse(notes) || defaultValue;
+  } catch {
+    Toast.fail(description);
+    return defaultValue;
+  }
 };

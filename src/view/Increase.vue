@@ -264,7 +264,7 @@ import {
   Radio,
 } from "vant";
 import TabTitle from "../component/TabTitle.vue";
-import { getReactionRate, getResistanceRate, getDefRate, floatNum } from "../utils";
+import { getReactionRate, getResistanceRate, getDefRate, getTargetNotes } from "../utils";
 import DataItem from "../component/DataItem.vue";
 import NoteGroup from "../component/NoteGroup.vue";
 import DetailBlock from "../component/Detail.vue";
@@ -373,10 +373,8 @@ export default defineComponent({
     };
 
     onMounted(() => {
-      const edNotes = window.localStorage.getItem("GenShinImpactEDNotes");
-      const atkNotes = window.localStorage.getItem("GenShinImpactATKNotes");
-      EDNotes.value = JSON.parse(edNotes) || EnhancedDamageNotes;
-      ATKNotes.value = JSON.parse(atkNotes) || AtkPercentNotes;
+      EDNotes.value = getTargetNotes("GenShinImpactEDNotes", EnhancedDamageNotes, "伤害加成标签组读取失败");
+      ATKNotes.value = getTargetNotes("GenShinImpactATKNotes", AtkPercentNotes, "攻击力加成标签组读取失败");
     });
 
     return {
