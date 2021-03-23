@@ -7,13 +7,13 @@
       <router-link to="/increasing-range" class="top-tabs__item">
         伤害计算
       </router-link>
+      <router-link to="/cloud-team" class="top-tabs__item">
+        云上辉星
+      </router-link>
       <router-link to="/question-answer" class="top-tabs__item">
         常见问题
       </router-link>
     </div>
-  </div>
-  <div class="tips">
-    官方未公开计算公式，存在一定的误差。精通伤害没计算敌人抗性，实际值请以游戏内为准，仅供参考。
   </div>
   <div class="content">
     <router-view v-slot="{ Component }">
@@ -45,31 +45,13 @@ export default defineComponent({
   color: #7c6f6e;
 }
 
-.top-overhang {
-  background-color: #766461;
-  height: 40px;
-  width: 100%;
-  border-radius: 0 0 30px 30px;
-  position: relative;
-  margin-bottom: 40px;
-}
-
 .tips {
-  margin: 16px;
+  margin: 16px 0;
   font-size: 12px;
   padding: 0 30px 0 30px;
   color: #928986;
   text-align: center;
   position: relative;
-}
-
-.tips::before,
-.tips::after {
-  content: "~";
-  position: absolute;
-  top: 0;
-  font-size: 30px;
-  line-height: 20px;
 }
 
 .tips::after {
@@ -78,6 +60,24 @@ export default defineComponent({
 
 .tips::before {
   right: 10px;
+}
+
+.tips::before,
+.tips::after {
+  content: "~";
+  position: absolute;
+  top: 0;
+  font-size: 22px;
+  line-height: 20px;
+}
+
+.top-overhang {
+  background-color: #766461;
+  height: 40px;
+  width: 100%;
+  border-radius: 0 0 30px 30px;
+  position: relative;
+  margin-bottom: 40px;
 }
 
 .top-tabs {
@@ -100,7 +100,7 @@ export default defineComponent({
   color: #fff;
   border-radius: 10px;
   flex: 1;
-  margin-right: 16px;
+  margin-right: 8px;
 }
 
 .router-link-active {

@@ -25,18 +25,18 @@ export default defineComponent({
 }
 
 .tab-title::before {
-  content: '«';
+  content: '《';
   position: absolute;
   left: 4px;
-  font-size: 22px;
+  font-size: 12px;
   color: #B59C96;
 }
 
 .tab-title:after {
-  content: '»';
+  content: '》';
   position: absolute;
   right: 4px;
-  font-size: 22px;
+  font-size: 12px;
   color: #B59C96;
 }
 

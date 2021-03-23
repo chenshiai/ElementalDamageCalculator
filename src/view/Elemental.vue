@@ -1,4 +1,7 @@
 <template>
+  <div class="tips">
+    官方未公开计算公式，存在一定的误差。精通伤害没计算敌人抗性，实际值请以游戏内为准，仅供参考。
+  </div>
   <tab-title>剧变反应查看</tab-title>
   <div class="base-data">
     <div class="base-damage__title">
