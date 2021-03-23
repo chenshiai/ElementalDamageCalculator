@@ -10,7 +10,10 @@ const route = createRouter({
     { path: "/", component: Elemental },
     { path: "/increasing-range", component: Increase },
     { path: "/question-answer", component: Question },
-    { path: "/cloud-team", component: CloudTeam }
+    {
+      path: "/cloud-team",
+      component: CloudTeam,
+    },
   ],
 });
 

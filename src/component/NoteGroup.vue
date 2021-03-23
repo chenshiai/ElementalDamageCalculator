@@ -21,7 +21,7 @@
       <van-icon @click="deleteMemo(item)" class="memo-close" name="delete-o" />
     </div>
   </div>
-  <van-popup v-model:show="showPopup" position="top">
+  <van-popup teleport="#app" v-model:show="showPopup" position="top">
     <div class="popup-title">新增『{{ title }}』标签</div>
     <van-field
       v-model="newMemo.detail"
