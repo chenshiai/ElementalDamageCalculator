@@ -10,7 +10,7 @@
 <script>
 import { defineComponent, ref } from "vue";
 import TabTitle from "./TabTitle.vue";
-import CloudTeamConfig from "../../public/CloudTeamConfig";
+import { CloudTeamConfig } from "../../public/CloudTeamConfig";
 
 export default defineComponent({
   name: "selector",

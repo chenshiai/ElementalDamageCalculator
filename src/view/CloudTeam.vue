@@ -1,12 +1,25 @@
 <template>
   <div class="tips">
-    各种标签的配置，均受到作者本人的主观意识影响，并不代表绝对的公正客观，仅供参考。
+    角色自身能力的纵向对比。命座的获取难度、操作难度、实际效果等多方面因素都会影响评级，未计入圣遗物以及武器的影响，仅供参考。
   </div>
   <tab-title>标签化云配队</tab-title>
   <div class="team-list">
-    <div class="team-list__item" v-for="(item, index) in config" :key="index" @click="show = true">
-      <img :src="item.avatar" />
-      <div class="team-list__item-name">{{ item.name }}</div>
+    <div class="team-list__item" v-for="(item, index) in config" :key="index">
+      <div class="team-list__item-avatar" @click="show = true">
+        <img :src="item.avatar" />
+        <div class="team-list__item-name">{{ item.name }}</div>
+      </div>
+      <div class="team-list__tags">
+        <div class="tag" v-for="(tag, index) in item.battle" :key="index">
+          <span :class="['tag-weight', 'tag-level' + tag.level]">{{ WEIGHT[tag.level] }}</span>{{ BATTLE_TYPE_TEXT[tag.type] }}
+        </div>
+        <div class="tag" v-for="(tag, index) in item.enemy" :key="index">
+          <span :class="['tag-weight', 'tag-level' + tag.level]">{{ WEIGHT[tag.level] }}</span>{{ ENEMY_TYPE_TEXT[tag.type] }}
+        </div>
+        <div class="tag" v-for="(tag, index) in item.team" :key="index">
+          <span :class="['tag-weight', 'tag-level' + tag.level]">{{ WEIGHT[tag.level] }}</span>{{ TEAM_TYPE_TEXT[tag.type] }}
+        </div>
+      </div>
     </div>
   </div>
   <van-popup
@@ -16,7 +29,7 @@
     position="right"
     :style="{ width: '100%', height: '100vh' }"
   >
-    <selector />
+    <!-- <selector /> -->
   </van-popup>
 </template>
 
@@ -24,8 +37,14 @@
 import { defineComponent, ref } from "vue";
 import TabTitle from "../component/TabTitle.vue";
 import Selector from "../component/Selector.vue";
-import CloudTeamConfig from "../../public/CloudTeamConfig";
-import { Popup } from 'vant';
+import {
+  CloudTeamConfig,
+  BATTLE_TYPE_TEXT,
+  WEIGHT,
+  ENEMY_TYPE_TEXT,
+  TEAM_TYPE_TEXT,
+} from "../../public/CloudTeamConfig";
+import { Popup } from "vant";
 
 export default defineComponent({
   name: "cloud-team",
@@ -43,7 +62,11 @@ export default defineComponent({
     return {
       show,
       config,
-    }
+      WEIGHT,
+      BATTLE_TYPE_TEXT,
+      ENEMY_TYPE_TEXT,
+      TEAM_TYPE_TEXT,
+    };
   },
 });
 </script>
@@ -51,21 +74,27 @@ export default defineComponent({
 <style>
 .team-list {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
 }
 .team-list__item {
+  display: flex;
+  min-width: 49%;
+  margin-bottom: 6px;
+}
+.team-list__item-avatar {
   height: 100px;
   width: 76px;
   box-sizing: border-box;
   border: 2px solid #766461;
-  border-radius: 4px;
+  border-radius: 4px 0 0 4px;
   overflow: hidden;
 }
 .team-list__item-name {
   line-height: 20px;
   font-size: 14px;
   text-align: center;
-  background-color: #F7F1E6;
+  background-color: #f7f1e6;
 }
 .team-list__item img {
   position: relative;
@@ -74,5 +103,40 @@ export default defineComponent({
   display: inline-block;
   vertical-align: middle;
   max-height: 76px;
+}
+.team-list__tags {
+  border: 2px solid #766461;
+  box-sizing: border-box;
+  border-radius: 0 4px 4px 0;
+  padding: 2px;
+  flex-grow: 1;
+  color: #fff;
+  overflow-y: scroll;
+  height: 100px;
+  background-color: #645856;
+}
+.tag {
+  line-height: 12px;
+  font-size: 12px;
+  border-radius: 6px;
+  margin-bottom: 6px;
+}
+.tag-weight {
+  margin-right: 4px;
+}
+.tag-level1 {
+  color: #f7f1e6;
+}
+.tag-level2 {
+  color: #8cffbc;
+}
+.tag-level3 {
+  color: #6596ff;
+}
+.tag-level4 {
+  color: #c875ff;
+}
+.tag-level5 {
+  color: #ffff2d;
 }
 </style>
