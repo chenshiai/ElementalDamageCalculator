@@ -88,160 +88,6 @@ const WEIGHT = {
 
 const CloudTeamConfig = [
   {
-    name: "温迪",
-    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2020/07/18/75795471/3223bc2038ec73ad9ea8919492e4b326_4966616735668393445.png",
-    element: ELEMENT_TYPE.Anemo,
-    weapon: WEAPON_TYPE.Bow,
-    battle: [
-      {
-        type: BATTLE_TYPE.BackGround,
-        level: 5,
-      },
-    ],
-    enemy: [
-      {
-        type: ENEMY_TYPE.Control,
-        level: 5,
-      },
-      {
-        type: ENEMY_TYPE.Reduce,
-        level: 3,
-      },
-    ],
-    team: [
-      {
-        type: TEAM_TYPE.Mobility,
-        level: 2,
-      },
-    ],
-  },
-  {
-    name: "莫娜",
-    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2020/09/14/75379477/5ddec58ede0a4193d1bd72f0f792b4fa_1223323503797186476.png?x-oss-process=image/quality,q_75/resize,s_108",
-    element: ELEMENT_TYPE.Hydro,
-    weapon: WEAPON_TYPE.Magic,
-    battle: [
-      {
-        type: BATTLE_TYPE.QuickSwitch,
-        level: 5,
-      },
-      {
-        type: BATTLE_TYPE.Resident,
-        level: 3,
-      },
-      {
-        type: BATTLE_TYPE.BackGround,
-        level: 1,
-      },
-    ],
-    enemy: [
-      {
-        type: ENEMY_TYPE.Control,
-        level: 3,
-      },
-    ],
-    team: [
-      {
-        type: TEAM_TYPE.Berserk,
-        level: 5,
-      },
-      {
-        type: TEAM_TYPE.Mobility,
-        level: 1,
-      },
-    ],
-  },
-  {
-    name: "甘雨",
-    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/01/12/79683714/98b621e69fc78ed0682e3640ca25b70f_480038643635949740.png",
-    element: ELEMENT_TYPE.Cryo,
-    weapon: WEAPON_TYPE.Bow,
-    battle: [
-      {
-        type: BATTLE_TYPE.Resident,
-        level: 5,
-      },
-      {
-        type: BATTLE_TYPE.BackGround,
-        level: 3,
-      },
-      {
-        type: BATTLE_TYPE.QuickSwitch,
-        level: 2,
-      },
-    ],
-    enemy: [
-      {
-        type: ENEMY_TYPE.Control,
-        level: 2,
-      },
-    ],
-    team: [
-      {
-        type: TEAM_TYPE.Mobility,
-        level: 1,
-      },
-    ],
-  },
-  {
-    name: "迪奥娜",
-    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2020/11/13/79683714/388edca3eca68b5f52ee7fc2e1c6891e_7254442964581563215.png",
-    element: ELEMENT_TYPE.Cryo,
-    weapon: WEAPON_TYPE.Bow,
-    battle: [
-      {
-        type: BATTLE_TYPE.Resident,
-        level: 3,
-      },
-      {
-        type: BATTLE_TYPE.BackGround,
-        level: 2,
-      },
-    ],
-    enemy: [
-      {
-        type: ENEMY_TYPE.Weaken,
-        level: 3,
-      },
-    ],
-    team: [
-      {
-        type: TEAM_TYPE.Shield,
-        level: 4,
-      },
-      {
-        type: TEAM_TYPE.Treatment,
-        level: 3,
-      },
-      {
-        type: TEAM_TYPE.Berserk,
-        level: 3,
-      },
-      {
-        type: TEAM_TYPE.Mobility,
-        level: 3,
-      },
-    ],
-  },
-  {
-    name: "迪卢克",
-    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2020/07/18/75795471/6e6f57317ce859314331bded68c335e7_8439425746236421329.png",
-    element: ELEMENT_TYPE.Pyro,
-    weapon: WEAPON_TYPE.GreatSword,
-    battle: [
-      {
-        type: BATTLE_TYPE.Resident,
-        level: 5,
-      },
-      {
-        type: BATTLE_TYPE.QuickSwitch,
-        level: 4,
-      },
-    ],
-    enemy: [],
-    team: [],
-  },
-  {
     name: "安柏",
     avatar: "https://uploadstatic.mihoyo.com/ys-obc/2020/07/18/75795471/5b485364766df8c31b00909a6461fbde_1958980903694002182.png",
     element: ELEMENT_TYPE.Pyro,
@@ -384,6 +230,10 @@ const CloudTeamConfig = [
     ],
     enemy: [
       {
+        type: ENEMY_TYPE.Control,
+        level: 3,
+      },
+      {
         type: ENEMY_TYPE.Reduce,
         level: 3,
       },
@@ -450,6 +300,34 @@ const CloudTeamConfig = [
     ],
   },
   {
+    name: "温迪",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2020/07/18/75795471/3223bc2038ec73ad9ea8919492e4b326_4966616735668393445.png",
+    element: ELEMENT_TYPE.Anemo,
+    weapon: WEAPON_TYPE.Bow,
+    battle: [
+      {
+        type: BATTLE_TYPE.BackGround,
+        level: 5,
+      },
+    ],
+    enemy: [
+      {
+        type: ENEMY_TYPE.Control,
+        level: 5,
+      },
+      {
+        type: ENEMY_TYPE.Reduce,
+        level: 3,
+      },
+    ],
+    team: [
+      {
+        type: TEAM_TYPE.Mobility,
+        level: 2,
+      },
+    ],
+  },
+  {
     name: "雷泽",
     avatar: "https://uploadstatic.mihoyo.com/ys-obc/2020/07/18/75795471/911d75007d943edf93cf5ad1cd683ea6_8252392376740297184.png",
     element: ELEMENT_TYPE.Electro,
@@ -476,6 +354,24 @@ const CloudTeamConfig = [
         level: 2,
       },
     ],
+  },
+  {
+    name: "迪卢克",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2020/07/18/75795471/6e6f57317ce859314331bded68c335e7_8439425746236421329.png",
+    element: ELEMENT_TYPE.Pyro,
+    weapon: WEAPON_TYPE.GreatSword,
+    battle: [
+      {
+        type: BATTLE_TYPE.Resident,
+        level: 5,
+      },
+      {
+        type: BATTLE_TYPE.QuickSwitch,
+        level: 3,
+      },
+    ],
+    enemy: [],
+    team: [],
   },
   {
     name: "班尼特",
@@ -707,6 +603,42 @@ const CloudTeamConfig = [
     ],
   },
   {
+    name: "莫娜",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2020/09/14/75379477/5ddec58ede0a4193d1bd72f0f792b4fa_1223323503797186476.png?x-oss-process=image/quality,q_75/resize,s_108",
+    element: ELEMENT_TYPE.Hydro,
+    weapon: WEAPON_TYPE.Magic,
+    battle: [
+      {
+        type: BATTLE_TYPE.QuickSwitch,
+        level: 5,
+      },
+      {
+        type: BATTLE_TYPE.Resident,
+        level: 3,
+      },
+      {
+        type: BATTLE_TYPE.BackGround,
+        level: 1,
+      },
+    ],
+    enemy: [
+      {
+        type: ENEMY_TYPE.Control,
+        level: 3,
+      },
+    ],
+    team: [
+      {
+        type: TEAM_TYPE.Berserk,
+        level: 5,
+      },
+      {
+        type: TEAM_TYPE.Mobility,
+        level: 1,
+      },
+    ],
+  },
+  {
     name: "刻晴",
     avatar: "https://uploadstatic.mihoyo.com/ys-obc/2020/09/14/4328207/ca22c4fbab990df0b1b59fe69b2a1a86_1351176061461950474.png",
     element: ELEMENT_TYPE.Electro,
@@ -785,6 +717,46 @@ const CloudTeamConfig = [
       {
         type: TEAM_TYPE.Berserk,
         level: 2,
+      },
+    ],
+  },
+  {
+    name: "迪奥娜",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2020/11/13/79683714/388edca3eca68b5f52ee7fc2e1c6891e_7254442964581563215.png",
+    element: ELEMENT_TYPE.Cryo,
+    weapon: WEAPON_TYPE.Bow,
+    battle: [
+      {
+        type: BATTLE_TYPE.Resident,
+        level: 3,
+      },
+      {
+        type: BATTLE_TYPE.BackGround,
+        level: 2,
+      },
+    ],
+    enemy: [
+      {
+        type: ENEMY_TYPE.Weaken,
+        level: 3,
+      },
+    ],
+    team: [
+      {
+        type: TEAM_TYPE.Shield,
+        level: 4,
+      },
+      {
+        type: TEAM_TYPE.Treatment,
+        level: 3,
+      },
+      {
+        type: TEAM_TYPE.Berserk,
+        level: 3,
+      },
+      {
+        type: TEAM_TYPE.Mobility,
+        level: 3,
       },
     ],
   },
@@ -884,6 +856,38 @@ const CloudTeamConfig = [
       {
         type: TEAM_TYPE.Berserk,
         level: 3,
+      },
+    ],
+  },
+  {
+    name: "甘雨",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/01/12/79683714/98b621e69fc78ed0682e3640ca25b70f_480038643635949740.png",
+    element: ELEMENT_TYPE.Cryo,
+    weapon: WEAPON_TYPE.Bow,
+    battle: [
+      {
+        type: BATTLE_TYPE.Resident,
+        level: 5,
+      },
+      {
+        type: BATTLE_TYPE.BackGround,
+        level: 3,
+      },
+      {
+        type: BATTLE_TYPE.QuickSwitch,
+        level: 2,
+      },
+    ],
+    enemy: [
+      {
+        type: ENEMY_TYPE.Control,
+        level: 2,
+      },
+    ],
+    team: [
+      {
+        type: TEAM_TYPE.Mobility,
+        level: 1,
       },
     ],
   },
