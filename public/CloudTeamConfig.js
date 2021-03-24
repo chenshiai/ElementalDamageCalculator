@@ -405,6 +405,10 @@ const CloudTeamConfig = [
         type: BATTLE_TYPE.Resident,
         level: 5,
       },
+      {
+        type: BATTLE_TYPE.BackGround,
+        level: 2,
+      },
     ],
     enemy: [],
     team: [
@@ -539,7 +543,7 @@ const CloudTeamConfig = [
       },
       {
         type: BATTLE_TYPE.Resident,
-        level: 4,
+        level: 3,
       },
     ],
     enemy: [
@@ -705,8 +709,8 @@ const CloudTeamConfig = [
   {
     name: "刻晴",
     avatar: "https://uploadstatic.mihoyo.com/ys-obc/2020/09/14/4328207/ca22c4fbab990df0b1b59fe69b2a1a86_1351176061461950474.png",
-    element: ELEMENT_TYPE.Anemo,
-    weapon: WEAPON_TYPE.Magic,
+    element: ELEMENT_TYPE.Electro,
+    weapon: WEAPON_TYPE.Sword,
     battle: [
       {
         type: BATTLE_TYPE.QuickSwitch,
@@ -726,6 +730,210 @@ const CloudTeamConfig = [
       {
         type: TEAM_TYPE.Charged,
         level: 1,
+      },
+    ],
+  },
+  {
+    name: "七七",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2020/09/14/4328207/a8d9152cbec315bd3af1b81ab38bcbb8_2744380235787568847.png",
+    element: ELEMENT_TYPE.Cryo,
+    weapon: WEAPON_TYPE.Sword,
+    battle: [
+      {
+        type: BATTLE_TYPE.Resident,
+        level: 4,
+      },
+      {
+        type: BATTLE_TYPE.BackGround,
+        level: 2,
+      },
+    ],
+    enemy: [
+      {
+        type: ENEMY_TYPE.Weaken,
+        level: 2,
+      }
+    ],
+    team: [
+      {
+        type: TEAM_TYPE.Treatment,
+        level: 5,
+      },
+    ],
+  },
+  {
+    name: "达达利亚",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2020/11/13/79683714/ede4db74ff5f46784c48a26bae407810_84074802520519805.png",
+    element: ELEMENT_TYPE.Hydro,
+    weapon: WEAPON_TYPE.Bow,
+    battle: [
+      {
+        type: BATTLE_TYPE.QuickSwitch,
+        level: 5,
+      },
+      {
+        type: BATTLE_TYPE.Resident,
+        level: 4,
+      },
+      {
+        type: BATTLE_TYPE.BackGround,
+        level: 2,
+      },
+    ],
+    enemy: [],
+    team: [
+      {
+        type: TEAM_TYPE.Berserk,
+        level: 2,
+      },
+    ],
+  },
+  {
+    name: "钟离",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2020/12/02/79683714/2f041f81243e39c1ec2eb11de80d286c_351019689489206326.png",
+    element: ELEMENT_TYPE.Geo,
+    weapon: WEAPON_TYPE.LonGarm,
+    battle: [
+      {
+        type: BATTLE_TYPE.QuickSwitch,
+        level: 5,
+      },
+      {
+        type: BATTLE_TYPE.BackGround,
+        level: 3,
+      },
+      {
+        type: BATTLE_TYPE.Resident,
+        level: 3,
+      },
+    ],
+    enemy: [
+      {
+        type: ENEMY_TYPE.Reduce,
+        level: 5,
+      },
+      {
+        type: ENEMY_TYPE.Control,
+        level: 4,
+      },
+    ],
+    team: [
+      {
+        type: TEAM_TYPE.Shield,
+        level: 5,
+      },
+      {
+        type: TEAM_TYPE.Treatment,
+        level: 1,
+      },
+    ],
+  },
+  {
+    name: "辛焱",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2020/12/02/79683714/c7b3665bd2b3ad209efc97568b557bd4_1094164531862604477.png",
+    element: ELEMENT_TYPE.Pyro,
+    weapon: WEAPON_TYPE.GreatSword,
+    battle: [
+      {
+        type: BATTLE_TYPE.QuickSwitch,
+        level: 5,
+      },
+      {
+        type: BATTLE_TYPE.Resident,
+        level: 4,
+      },
+      {
+        type: BATTLE_TYPE.BackGround,
+        level: 2,
+      },
+    ],
+    enemy: [
+      {
+        type: ENEMY_TYPE.Reduce,
+        level: 3,
+      },
+    ],
+    team: [
+      {
+        type: TEAM_TYPE.Shield,
+        level: 3,
+      },
+      {
+        type: TEAM_TYPE.Berserk,
+        level: 2,
+      },
+    ],
+  },
+  {
+    name: "阿贝多",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2020/12/24/79683714/94f83e571af56dd826b3328a697f5106_4392078467778948636.png",
+    element: ELEMENT_TYPE.Geo,
+    weapon: WEAPON_TYPE.Sword,
+    battle: [
+      {
+        type: BATTLE_TYPE.BackGround,
+        level: 5,
+      },
+      {
+        type: BATTLE_TYPE.QuickSwitch,
+        level: 4,
+      },
+    ],
+    enemy: [],
+    team: [
+      {
+        type: TEAM_TYPE.Berserk,
+        level: 3,
+      },
+    ],
+  },
+  {
+    name: "魈",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/02/03/79683714/668511c42d3299a5c66be98f720408e5_3932851024865379558.png",
+    element: ELEMENT_TYPE.Anemo,
+    weapon: WEAPON_TYPE.LonGarm,
+    battle: [
+      {
+        type: BATTLE_TYPE.Resident,
+        level: 5,
+      },
+      {
+        type: BATTLE_TYPE.QuickSwitch,
+        level: 3,
+      },
+    ],
+    enemy: [],
+    team: [
+      {
+        type: TEAM_TYPE.Mobility,
+        level: 4,
+      },
+    ],
+  },
+  {
+    name: "胡桃",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/03/03/4328207/6a54af5aca341883859f5d24da3000fe_2050065262186292792.png",
+    element: ELEMENT_TYPE.Anemo,
+    weapon: WEAPON_TYPE.LonGarm,
+    battle: [
+      {
+        type: BATTLE_TYPE.Resident,
+        level: 5,
+      },
+      {
+        type: BATTLE_TYPE.QuickSwitch,
+        level: 4,
+      },
+      {
+        type: BATTLE_TYPE.BackGround,
+        level: 2,
+      },
+    ],
+    enemy: [],
+    team: [
+      {
+        type: TEAM_TYPE.Mobility,
+        level: 2,
       },
     ],
   },
