@@ -512,10 +512,6 @@ const CloudTeamConfig = [
         type: TEAM_TYPE.Berserk,
         level: 2,
       },
-      {
-        type: TEAM_TYPE.Mobility,
-        level: 1,
-      },
     ],
   },
   {
@@ -800,10 +796,6 @@ const CloudTeamConfig = [
       },
       {
         type: TEAM_TYPE.Treatment,
-        level: 1,
-      },
-      {
-        type: TEAM_TYPE.Mobility,
         level: 1,
       },
     ],
