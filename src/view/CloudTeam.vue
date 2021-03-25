@@ -6,19 +6,25 @@
   <div class="team-list">
     <div class="team-list__item" v-for="(item, index) in config" :key="index">
       <div class="team-list__item-avatar" @click="show = true">
-        <img :src="item.avatar" />
-        <div class="team-list__item-name">{{ item.name }}</div>
+        <template v-if="item.avatar">
+          <img :src="item.avatar" />
+          <div class="team-list__item-name">{{ item.name }}</div>
+        </template>
+        <div class="empty" v-else></div>
       </div>
       <div class="team-list__tags">
-        <div class="tag" v-for="(tag, index) in item.battle" :key="index">
-          <span :class="['tag-weight', 'tag-level' + tag.level]">{{ WEIGHT[tag.level] }}</span>{{ BATTLE_TYPE_TEXT[tag.type] }}
-        </div>
-        <div class="tag" v-for="(tag, index) in item.enemy" :key="index">
-          <span :class="['tag-weight', 'tag-level' + tag.level]">{{ WEIGHT[tag.level] }}</span>{{ ENEMY_TYPE_TEXT[tag.type] }}
-        </div>
-        <div class="tag" v-for="(tag, index) in item.team" :key="index">
-          <span :class="['tag-weight', 'tag-level' + tag.level]">{{ WEIGHT[tag.level] }}</span>{{ TEAM_TYPE_TEXT[tag.type] }}
-        </div>
+        <template v-if="item.battle || item.enemy || item.team">
+          <div class="tag" v-for="(tag, index) in item.battle" :key="index">
+            <span :class="['tag-weight', 'tag-level' + tag.level]">{{ WEIGHT[tag.level] }}</span>{{ BATTLE_TYPE_TEXT[tag.type] }}
+          </div>
+          <div class="tag" v-for="(tag, index) in item.enemy" :key="index">
+            <span :class="['tag-weight', 'tag-level' + tag.level]">{{ WEIGHT[tag.level] }}</span>{{ ENEMY_TYPE_TEXT[tag.type] }}
+          </div>
+          <div class="tag" v-for="(tag, index) in item.team" :key="index">
+            <span :class="['tag-weight', 'tag-level' + tag.level]">{{ WEIGHT[tag.level] }}</span>{{ TEAM_TYPE_TEXT[tag.type] }}
+          </div>
+        </template>
+        <div class="empty-tags" v-else>虚位以待</div>
       </div>
     </div>
   </div>
@@ -29,7 +35,7 @@
     position="right"
     :style="{ width: '100%', height: '100vh' }"
   >
-    <!-- <selector /> -->
+    <selector />
   </van-popup>
 </template>
 
@@ -38,25 +44,25 @@ import { defineComponent, ref } from "vue";
 import TabTitle from "../component/TabTitle.vue";
 import Selector from "../component/Selector.vue";
 import {
-  CloudTeamConfig,
   BATTLE_TYPE_TEXT,
   WEIGHT,
   ENEMY_TYPE_TEXT,
   TEAM_TYPE_TEXT,
 } from "../../public/CloudTeamConfig";
-import { Popup } from "vant";
+import { Icon, Popup } from "vant";
 
 export default defineComponent({
   name: "cloud-team",
 
   components: {
     [Popup.name]: Popup,
+    [Icon.name]: Icon,
     [Selector.name]: Selector,
     [TabTitle.name]: TabTitle,
   },
 
   setup() {
-    const config = ref(CloudTeamConfig);
+    const config = ref([{}, {}, {}, {}]);
     const show = ref(false);
 
     return {
@@ -79,6 +85,7 @@ export default defineComponent({
 }
 .team-list__item {
   display: flex;
+  background-color: #b7a19e;
   min-width: 49%;
   margin-bottom: 6px;
 }
@@ -139,4 +146,28 @@ export default defineComponent({
 .tag-level5 {
   color: #ffff2d;
 }
+.team-list .empty {
+  text-align: center;
+  position: relative;
+  height: 100%;
+}
+.team-list .empty::after,
+.team-list .empty::before {
+  content: "";
+  background-color: #F7F1E6;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  border-radius: 4px;
+}
+.team-list .empty::after {
+  width: 4px;
+  height: 28px;
+}
+.team-list .empty::before {
+  width: 28px;
+  height: 4px;
+} 
 </style>

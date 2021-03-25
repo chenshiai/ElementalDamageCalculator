@@ -1,11 +1,12 @@
 // 元素
 const ELEMENT_TYPE = {
-  Pyro: "火",
-  Hydro: "水",
-  Cryo: "冰",
-  Electro: "雷",
-  Anemo: "风",
-  Geo: "岩",
+  Pyro: "Pyro", // 火
+  Hydro: "Hydro", // 水
+  Cryo: "Cryo", // 冰
+  Electro: "Electro", // 雷
+  Anemo: "Anemo", // 风
+  Geo: "Geo", // 岩
+  Dendro: "Dendro", // 草
 };
 
 // 武器类型
@@ -925,7 +926,7 @@ const CloudTeamConfig = [
   {
     name: "胡桃",
     avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/03/03/4328207/6a54af5aca341883859f5d24da3000fe_2050065262186292792.png",
-    element: ELEMENT_TYPE.Anemo,
+    element: ELEMENT_TYPE.Pyro,
     weapon: WEAPON_TYPE.LonGarm,
     battle: [
       {
