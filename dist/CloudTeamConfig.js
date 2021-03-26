@@ -1,20 +1,21 @@
 // 元素
 const ELEMENT_TYPE = {
-  Pyro: "火",
-  Hydro: "水",
-  Cryo: "冰",
-  Electro: "雷",
-  Anemo: "风",
-  Geo: "岩",
+  Pyro: "Pyro", // 火
+  Hydro: "Hydro", // 水
+  Cryo: "Cryo", // 冰
+  Electro: "Electro", // 雷
+  Anemo: "Anemo", // 风
+  Geo: "Geo", // 岩
+  Dendro: "Dendro", // 草
 };
 
 // 武器类型
 const WEAPON_TYPE = {
-  Sword: "单手剑",
-  GreatSword: "双手剑",
-  Bow: "弓",
-  Magic: "法器",
-  LonGarm: "长柄",
+  Sword: "Sword",
+  GreatSword: "GreatSword",
+  Bow: "Bow",
+  Magic: "Magic",
+  LonGarm: "LonGarm",
 };
 
 // 输出类型
@@ -29,9 +30,9 @@ const BATTLE_TYPE = {
 
 // 输出类型标签文本
 const BATTLE_TYPE_TEXT = {
-  [BATTLE_TYPE.Resident]: "驻场输出",
+  [BATTLE_TYPE.Resident]: "持续驻场",
   [BATTLE_TYPE.BackGround]: "后台输出",
-  [BATTLE_TYPE.QuickSwitch]: "速切输出",
+  [BATTLE_TYPE.QuickSwitch]: "速切爆发",
 };
 
 // 对敌影响
@@ -50,7 +51,7 @@ const ENEMY_TYPE_TEXT = {
   [ENEMY_TYPE.Control]: "控制效果",
   [ENEMY_TYPE.Reduce]: "减防&减抗",
   [ENEMY_TYPE.Break]: "破盾效率",
-  [ENEMY_TYPE.Weaken]: "敌方削弱",
+  [ENEMY_TYPE.Weaken]: "敌方虚弱",
 };
 
 // 友方影响
@@ -512,6 +513,10 @@ const CloudTeamConfig = [
         type: TEAM_TYPE.Berserk,
         level: 2,
       },
+      {
+        type: TEAM_TYPE.Mobility,
+        level: 1,
+      },
     ],
   },
   {
@@ -798,6 +803,10 @@ const CloudTeamConfig = [
         type: TEAM_TYPE.Treatment,
         level: 1,
       },
+      {
+        type: TEAM_TYPE.Mobility,
+        level: 1,
+      },
     ],
   },
   {
@@ -917,7 +926,7 @@ const CloudTeamConfig = [
   {
     name: "胡桃",
     avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/03/03/4328207/6a54af5aca341883859f5d24da3000fe_2050065262186292792.png",
-    element: ELEMENT_TYPE.Anemo,
+    element: ELEMENT_TYPE.Pyro,
     weapon: WEAPON_TYPE.LonGarm,
     battle: [
       {
