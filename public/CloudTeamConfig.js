@@ -30,8 +30,8 @@ const BATTLE_TYPE = {
 
 // 输出类型标签文本
 const BATTLE_TYPE_TEXT = {
-  [BATTLE_TYPE.Resident]: "持续驻场",
-  [BATTLE_TYPE.BackGround]: "后台输出",
+  [BATTLE_TYPE.Resident]: "驻场输出",
+  [BATTLE_TYPE.BackGround]: "后台脱手",
   [BATTLE_TYPE.QuickSwitch]: "速切爆发",
 };
 
