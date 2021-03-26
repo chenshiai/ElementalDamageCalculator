@@ -15,7 +15,8 @@ const state = () => {
     enemyResistance: 10,
     weaken: 0,
     armour: 0,
-  }
+    characterSelect: [{}, {}, {}, {}],
+  };
 };
 
 const mutations = {
@@ -64,7 +65,12 @@ const mutations = {
   },
 
   setArmour(state, value) {
-    state.setArmour = value;
+    state.armour = value;
+  },
+  setCharacterSelect(state, value) {
+    state.characterSelect = new Array(4).fill({}).map((_item, index) => {
+      return value[index] || {};
+    });
   },
 };
 

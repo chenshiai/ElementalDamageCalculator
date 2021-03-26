@@ -11,11 +11,11 @@ const ELEMENT_TYPE = {
 
 // 武器类型
 const WEAPON_TYPE = {
-  Sword: "单手剑",
-  GreatSword: "双手剑",
-  Bow: "弓",
-  Magic: "法器",
-  LonGarm: "长柄",
+  Sword: "Sword",
+  GreatSword: "GreatSword",
+  Bow: "Bow",
+  Magic: "Magic",
+  LonGarm: "LonGarm",
 };
 
 // 输出类型
@@ -30,9 +30,9 @@ const BATTLE_TYPE = {
 
 // 输出类型标签文本
 const BATTLE_TYPE_TEXT = {
-  [BATTLE_TYPE.Resident]: "驻场输出",
+  [BATTLE_TYPE.Resident]: "持续驻场",
   [BATTLE_TYPE.BackGround]: "后台输出",
-  [BATTLE_TYPE.QuickSwitch]: "速切输出",
+  [BATTLE_TYPE.QuickSwitch]: "速切爆发",
 };
 
 // 对敌影响
@@ -51,7 +51,7 @@ const ENEMY_TYPE_TEXT = {
   [ENEMY_TYPE.Control]: "控制效果",
   [ENEMY_TYPE.Reduce]: "减防&减抗",
   [ENEMY_TYPE.Break]: "破盾效率",
-  [ENEMY_TYPE.Weaken]: "敌方削弱",
+  [ENEMY_TYPE.Weaken]: "敌方虚弱",
 };
 
 // 友方影响

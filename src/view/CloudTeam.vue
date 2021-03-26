@@ -4,7 +4,7 @@
   </div>
   <tab-title>标签化云配队</tab-title>
   <div class="team-list">
-    <div class="team-list__item" v-for="(item, index) in config" :key="index">
+    <div class="team-list__item" v-for="(item, index) in characterSelect" :key="index">
       <div class="team-list__item-avatar" @click="show = true">
         <template v-if="item.avatar">
           <img :src="item.avatar" />
@@ -31,16 +31,15 @@
   <van-popup
     teleport="#app"
     v-model:show="show"
-    closeable
     position="right"
     :style="{ width: '100%', height: '100vh' }"
   >
-    <selector />
+    <selector @close="show = false"/>
   </van-popup>
 </template>
 
 <script>
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, toRefs } from "vue";
 import TabTitle from "../component/TabTitle.vue";
 import Selector from "../component/Selector.vue";
 import {
@@ -50,6 +49,7 @@ import {
   TEAM_TYPE_TEXT,
 } from "../../public/CloudTeamConfig";
 import { Icon, Popup } from "vant";
+import { useStore } from "vuex";
 
 export default defineComponent({
   name: "cloud-team",
@@ -62,12 +62,12 @@ export default defineComponent({
   },
 
   setup() {
-    const config = ref([{}, {}, {}, {}]);
+    const store = useStore();
     const show = ref(false);
 
     return {
+      ...toRefs(store.state),
       show,
-      config,
       WEIGHT,
       BATTLE_TYPE_TEXT,
       ENEMY_TYPE_TEXT,
@@ -169,5 +169,5 @@ export default defineComponent({
 .team-list .empty::before {
   width: 28px;
   height: 4px;
-} 
+}
 </style>
