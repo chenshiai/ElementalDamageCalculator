@@ -111,27 +111,27 @@ const CloudTeamConfig = [
     battle: [
       {
         type: BATTLE_TYPE.QuickSwitch,
-        level: 5,
+        level: 11,
       },
       {
         type: BATTLE_TYPE.Resident,
-        level: 4,
+        level: 8,
       },
     ],
     enemy: [
       {
         type: ENEMY_TYPE.Control,
-        level: 2,
+        level: 3,
       },
     ],
     team: [
       {
         type: TEAM_TYPE.Berserk,
-        level: 1,
+        level: 2,
       },
       {
         type: TEAM_TYPE.Mobility,
-        level: 1,
+        level: 2,
       },
     ],
   },
@@ -143,26 +143,26 @@ const CloudTeamConfig = [
     battle: [
       {
         type: BATTLE_TYPE.Resident,
-        level: 5,
+        level: 11,
       },
       {
         type: BATTLE_TYPE.BackGround,
-        level: 4,
+        level: 8,
       },
     ],
     enemy: [],
     team: [
       {
         type: TEAM_TYPE.Shield,
-        level: 1,
+        level: 2,
       },
       {
         type: TEAM_TYPE.Charged,
-        level: 1,
+        level: 2,
       },
       {
         type: TEAM_TYPE.Mobility,
-        level: 2,
+        level: 3,
       },
     ],
   },
@@ -174,17 +174,17 @@ const CloudTeamConfig = [
     battle: [
       {
         type: BATTLE_TYPE.Resident,
-        level: 5,
+        level: 11,
       },
       {
         type: BATTLE_TYPE.BackGround,
-        level: 3,
+        level: 5,
       },
     ],
     enemy: [
       {
         type: ENEMY_TYPE.Reduce,
-        level: 3,
+        level: 5,
       }
     ],
     team: [],
@@ -197,35 +197,35 @@ const CloudTeamConfig = [
     battle: [
       {
         type: BATTLE_TYPE.Resident,
-        level: 5,
+        level: 11,
       },
     ],
     enemy: [
       {
         type: ENEMY_TYPE.Control,
-        level: 4,
+        level: 8,
       },
       {
         type: ENEMY_TYPE.Reduce,
-        level: 3,
+        level: 5,
       }
     ],
     team: [
       {
         type: TEAM_TYPE.Treatment,
-        level: 4,
+        level: 8,
       },
       {
         type: TEAM_TYPE.Mobility,
-        level: 2,
+        level: 3,
       },
       {
         type: TEAM_TYPE.Berserk,
-        level: 2,
+        level: 3,
       },
       {
         type: TEAM_TYPE.DMGreduction,
-        level: 2,
+        level: 3,
       },
     ],
   },
@@ -237,27 +237,27 @@ const CloudTeamConfig = [
     battle: [
       {
         type: BATTLE_TYPE.Resident,
-        level: 5,
+        level: 11,
       },
       {
         type: BATTLE_TYPE.QuickSwitch,
-        level: 2,
+        level: 3,
       },
     ],
     enemy: [
       {
         type: ENEMY_TYPE.Control,
-        level: 3,
+        level: 5,
       },
       {
         type: ENEMY_TYPE.Reduce,
-        level: 3,
+        level: 5,
       },
     ],
     team: [
       {
         type: TEAM_TYPE.Charged,
-        level: 3,
+        level: 5,
       },
     ],
   },
@@ -269,22 +269,22 @@ const CloudTeamConfig = [
     battle: [
       {
         type: BATTLE_TYPE.Resident,
-        level: 5,
+        level: 11,
       },
       {
         type: BATTLE_TYPE.BackGround,
-        level: 2,
+        level: 3,
       },
     ],
     enemy: [],
     team: [
       {
         type: TEAM_TYPE.Shield,
-        level: 4,
+        level: 8,
       },
       {
         type: TEAM_TYPE.Treatment,
-        level: 3,
+        level: 5,
       },
     ],
   },
@@ -296,22 +296,22 @@ const CloudTeamConfig = [
     battle: [
       {
         type: BATTLE_TYPE.Resident,
-        level: 3,
+        level: 5,
       },
     ],
     enemy: [],
     team: [
       {
         type: TEAM_TYPE.Treatment,
-        level: 4,
+        level: 8,
       },
       {
         type: TEAM_TYPE.Berserk,
-        level: 2,
+        level: 3,
       },
       {
         type: TEAM_TYPE.Mobility,
-        level: 2,
+        level: 3,
       },
     ],
   },
@@ -323,23 +323,23 @@ const CloudTeamConfig = [
     battle: [
       {
         type: BATTLE_TYPE.BackGround,
-        level: 5,
+        level: 11,
       },
     ],
     enemy: [
       {
         type: ENEMY_TYPE.Control,
-        level: 5,
+        level: 11,
       },
       {
         type: ENEMY_TYPE.Reduce,
-        level: 3,
+        level: 5,
       },
     ],
     team: [
       {
         type: TEAM_TYPE.Mobility,
-        level: 2,
+        level: 3,
       },
     ],
   },
@@ -351,23 +351,23 @@ const CloudTeamConfig = [
     battle: [
       {
         type: BATTLE_TYPE.Resident,
-        level: 5,
+        level: 11,
       },
       {
         type: BATTLE_TYPE.QuickSwitch,
-        level: 3,
+        level: 5,
       },
     ],
     enemy: [
       {
         type: ENEMY_TYPE.Reduce,
-        level: 3,
+        level: 5,
       },
     ],
     team: [
       {
         type: TEAM_TYPE.Mobility,
-        level: 2,
+        level: 3,
       },
     ],
   },
@@ -379,11 +379,11 @@ const CloudTeamConfig = [
     battle: [
       {
         type: BATTLE_TYPE.Resident,
-        level: 5,
+        level: 11,
       },
       {
         type: BATTLE_TYPE.QuickSwitch,
-        level: 3,
+        level: 5,
       },
     ],
     enemy: [],
@@ -397,22 +397,22 @@ const CloudTeamConfig = [
     battle: [
       {
         type: BATTLE_TYPE.Resident,
-        level: 5,
+        level: 11,
       },
       {
         type: BATTLE_TYPE.QuickSwitch,
-        level: 2,
+        level: 3,
       },
     ],
     enemy: [],
     team: [
       {
         type: TEAM_TYPE.Berserk,
-        level: 5,
+        level: 11,
       },
       {
         type: TEAM_TYPE.Treatment,
-        level: 4,
+        level: 8,
       },
     ],
   },
@@ -424,18 +424,18 @@ const CloudTeamConfig = [
     battle: [
       {
         type: BATTLE_TYPE.BackGround,
-        level: 5,
+        level: 11,
       },
       {
         type: BATTLE_TYPE.Resident,
-        level: 4,
+        level: 8,
       },
     ],
     enemy: [],
     team: [
       {
         type: TEAM_TYPE.Mobility,
-        level: 2,
+        level: 3,
       },
     ],
   },
@@ -447,31 +447,31 @@ const CloudTeamConfig = [
     battle: [
       {
         type: BATTLE_TYPE.BackGround,
-        level: 5,
+        level: 11,
       },
       {
         type: BATTLE_TYPE.QuickSwitch,
-        level: 4,
+        level: 8,
       },
       {
         type: BATTLE_TYPE.Resident,
-        level: 3,
+        level: 5,
       },
     ],
     enemy: [
       {
         type: ENEMY_TYPE.Reduce,
-        level: 3,
+        level: 5,
       },
     ],
     team: [
       {
         type: TEAM_TYPE.DMGreduction,
-        level: 4,
+        level: 8,
       },
       {
         type: TEAM_TYPE.Shield,
-        level: 3,
+        level: 5,
       },
     ],
   },
@@ -483,22 +483,22 @@ const CloudTeamConfig = [
     battle: [
       {
         type: BATTLE_TYPE.Resident,
-        level: 5,
+        level: 11,
       },
       {
         type: BATTLE_TYPE.QuickSwitch,
-        level: 3,
+        level: 5,
       },
     ],
     enemy: [],
     team: [
       {
         type: TEAM_TYPE.DMGreduction,
-        level: 3,
+        level: 5,
       },
       {
         type: TEAM_TYPE.Berserk,
-        level: 2,
+        level: 3,
       },
     ],
   },
@@ -510,27 +510,27 @@ const CloudTeamConfig = [
     battle: [
       {
         type: BATTLE_TYPE.BackGround,
-        level: 5,
+        level: 11,
       },
       {
         type: BATTLE_TYPE.QuickSwitch,
-        level: 3,
+        level: 5,
       },
     ],
     enemy: [
       {
         type: ENEMY_TYPE.Reduce,
-        level: 4,
+        level: 8,
       },
     ],
     team: [
       {
         type: TEAM_TYPE.Berserk,
-        level: 2,
+        level: 3,
       },
       {
         type: TEAM_TYPE.Mobility,
-        level: 1,
+        level: 2,
       },
     ],
   },
@@ -542,27 +542,27 @@ const CloudTeamConfig = [
     battle: [
       {
         type: BATTLE_TYPE.BackGround,
-        level: 5,
+        level: 11,
       },
       {
         type: BATTLE_TYPE.QuickSwitch,
-        level: 3,
+        level: 5,
       },
     ],
     enemy: [
       {
         type: ENEMY_TYPE.Reduce,
-        level: 3,
+        level: 5,
       },
     ],
     team: [
       {
         type: TEAM_TYPE.DMGreduction,
-        level: 4,
+        level: 8,
       },
       {
         type: TEAM_TYPE.Treatment,
-        level: 2,
+        level: 3,
       },
     ],
   },
@@ -574,23 +574,23 @@ const CloudTeamConfig = [
     battle: [
       {
         type: BATTLE_TYPE.QuickSwitch,
-        level: 5,
+        level: 11,
       },
       {
         type: BATTLE_TYPE.Resident,
-        level: 4,
+        level: 8,
       },
     ],
     enemy: [
       {
         type: ENEMY_TYPE.Reduce,
-        level: 3,
+        level: 5,
       },
     ],
     team: [
       {
         type: TEAM_TYPE.Berserk,
-        level: 2,
+        level: 3,
       },
     ],
   },
@@ -602,23 +602,23 @@ const CloudTeamConfig = [
     battle: [
       {
         type: BATTLE_TYPE.BackGround,
-        level: 4,
+        level: 8,
       },
       {
         type: BATTLE_TYPE.Resident,
-        level: 3,
+        level: 5,
       },
     ],
     enemy: [
       {
         type: ENEMY_TYPE.Control,
-        level: 4,
+        level: 8,
       },
     ],
     team: [
       {
         type: TEAM_TYPE.Berserk,
-        level: 4,
+        level: 8,
       },
     ],
   },
@@ -630,31 +630,31 @@ const CloudTeamConfig = [
     battle: [
       {
         type: BATTLE_TYPE.QuickSwitch,
-        level: 5,
+        level: 11,
       },
       {
         type: BATTLE_TYPE.Resident,
-        level: 3,
+        level: 5,
       },
       {
         type: BATTLE_TYPE.BackGround,
-        level: 1,
+        level: 2,
       },
     ],
     enemy: [
       {
         type: ENEMY_TYPE.Control,
-        level: 3,
+        level: 5,
       },
     ],
     team: [
       {
         type: TEAM_TYPE.Berserk,
-        level: 5,
+        level: 11,
       },
       {
         type: TEAM_TYPE.Mobility,
-        level: 1,
+        level: 2,
       },
     ],
   },
@@ -666,22 +666,22 @@ const CloudTeamConfig = [
     battle: [
       {
         type: BATTLE_TYPE.QuickSwitch,
-        level: 5,
+        level: 11,
       },
       {
         type: BATTLE_TYPE.Resident,
-        level: 4,
+        level: 8,
       },
     ],
     enemy: [],
     team: [
       {
         type: TEAM_TYPE.Mobility,
-        level: 4,
+        level: 8,
       },
       {
         type: TEAM_TYPE.Charged,
-        level: 1,
+        level: 2,
       },
     ],
   },
@@ -693,23 +693,23 @@ const CloudTeamConfig = [
     battle: [
       {
         type: BATTLE_TYPE.Resident,
-        level: 4,
+        level: 8,
       },
       {
         type: BATTLE_TYPE.BackGround,
-        level: 2,
+        level: 3,
       },
     ],
     enemy: [
       {
         type: ENEMY_TYPE.Weaken,
-        level: 2,
+        level: 3,
       }
     ],
     team: [
       {
         type: TEAM_TYPE.Treatment,
-        level: 5,
+        level: 11,
       },
     ],
   },
@@ -721,22 +721,22 @@ const CloudTeamConfig = [
     battle: [
       {
         type: BATTLE_TYPE.QuickSwitch,
-        level: 5,
+        level: 11,
       },
       {
         type: BATTLE_TYPE.Resident,
-        level: 4,
+        level: 8,
       },
       {
         type: BATTLE_TYPE.BackGround,
-        level: 2,
+        level: 3,
       },
     ],
     enemy: [],
     team: [
       {
         type: TEAM_TYPE.Berserk,
-        level: 2,
+        level: 3,
       },
     ],
   },
@@ -748,35 +748,35 @@ const CloudTeamConfig = [
     battle: [
       {
         type: BATTLE_TYPE.Resident,
-        level: 3,
+        level: 5,
       },
       {
         type: BATTLE_TYPE.BackGround,
-        level: 2,
+        level: 3,
       },
     ],
     enemy: [
       {
         type: ENEMY_TYPE.Weaken,
-        level: 3,
+        level: 5,
       },
     ],
     team: [
       {
         type: TEAM_TYPE.Shield,
-        level: 4,
+        level: 8,
       },
       {
         type: TEAM_TYPE.Treatment,
-        level: 3,
+        level: 5,
       },
       {
         type: TEAM_TYPE.Berserk,
-        level: 3,
+        level: 5,
       },
       {
         type: TEAM_TYPE.Mobility,
-        level: 3,
+        level: 5,
       },
     ],
   },
@@ -788,39 +788,39 @@ const CloudTeamConfig = [
     battle: [
       {
         type: BATTLE_TYPE.QuickSwitch,
-        level: 5,
+        level: 11,
       },
       {
         type: BATTLE_TYPE.BackGround,
-        level: 3,
+        level: 5,
       },
       {
         type: BATTLE_TYPE.Resident,
-        level: 3,
+        level: 5,
       },
     ],
     enemy: [
       {
         type: ENEMY_TYPE.Reduce,
-        level: 5,
+        level: 11,
       },
       {
         type: ENEMY_TYPE.Control,
-        level: 4,
+        level: 8,
       },
     ],
     team: [
       {
         type: TEAM_TYPE.Shield,
-        level: 5,
+        level: 11,
       },
       {
         type: TEAM_TYPE.Treatment,
-        level: 1,
+        level: 2,
       },
       {
         type: TEAM_TYPE.Mobility,
-        level: 1,
+        level: 2,
       },
     ],
   },
@@ -832,31 +832,31 @@ const CloudTeamConfig = [
     battle: [
       {
         type: BATTLE_TYPE.QuickSwitch,
-        level: 5,
+        level: 11,
       },
       {
         type: BATTLE_TYPE.Resident,
-        level: 4,
+        level: 8,
       },
       {
         type: BATTLE_TYPE.BackGround,
-        level: 2,
+        level: 3,
       },
     ],
     enemy: [
       {
         type: ENEMY_TYPE.Reduce,
-        level: 3,
+        level: 5,
       },
     ],
     team: [
       {
         type: TEAM_TYPE.Shield,
-        level: 3,
+        level: 5,
       },
       {
         type: TEAM_TYPE.Berserk,
-        level: 2,
+        level: 3,
       },
     ],
   },
@@ -868,18 +868,18 @@ const CloudTeamConfig = [
     battle: [
       {
         type: BATTLE_TYPE.BackGround,
-        level: 5,
+        level: 11,
       },
       {
         type: BATTLE_TYPE.QuickSwitch,
-        level: 4,
+        level: 8,
       },
     ],
     enemy: [],
     team: [
       {
         type: TEAM_TYPE.Berserk,
-        level: 3,
+        level: 5,
       },
     ],
   },
@@ -891,31 +891,31 @@ const CloudTeamConfig = [
     battle: [
       {
         type: BATTLE_TYPE.Resident,
-        level: 5,
+        level: 11,
       },
       {
         type: BATTLE_TYPE.BackGround,
-        level: 3,
+        level: 5,
       },
       {
         type: BATTLE_TYPE.QuickSwitch,
-        level: 2,
+        level: 3,
       },
     ],
     enemy: [
       {
         type: ENEMY_TYPE.Control,
-        level: 2,
+        level: 3,
       },
     ],
     team: [
       {
         type: TEAM_TYPE.Berserk,
-        level: 4,
+        level: 8,
       },
       {
         type: TEAM_TYPE.Mobility,
-        level: 1,
+        level: 2,
       },
     ],
   },
@@ -927,18 +927,18 @@ const CloudTeamConfig = [
     battle: [
       {
         type: BATTLE_TYPE.Resident,
-        level: 5,
+        level: 11,
       },
       {
         type: BATTLE_TYPE.QuickSwitch,
-        level: 3,
+        level: 5,
       },
     ],
     enemy: [],
     team: [
       {
         type: TEAM_TYPE.Mobility,
-        level: 4,
+        level: 8,
       },
     ],
   },
@@ -950,22 +950,22 @@ const CloudTeamConfig = [
     battle: [
       {
         type: BATTLE_TYPE.Resident,
-        level: 5,
+        level: 11,
       },
       {
         type: BATTLE_TYPE.QuickSwitch,
-        level: 4,
+        level: 8,
       },
       {
         type: BATTLE_TYPE.BackGround,
-        level: 2,
+        level: 3,
       },
     ],
     enemy: [],
     team: [
       {
         type: TEAM_TYPE.Mobility,
-        level: 2,
+        level: 3,
       },
     ],
   },
