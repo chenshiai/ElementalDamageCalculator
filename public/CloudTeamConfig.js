@@ -41,6 +41,7 @@ const ENEMY_TYPE = {
   Control: "Control",
   /** 减防&减抗 */
   Reduce: "Reduce",
+  ReduceDEF: "ReduceDEF",
   /** 破盾 */
   Break: "Break",
   /** 敌方削弱 */
@@ -49,7 +50,8 @@ const ENEMY_TYPE = {
 
 const ENEMY_TYPE_TEXT = {
   [ENEMY_TYPE.Control]: "控制效果",
-  [ENEMY_TYPE.Reduce]: "减防&减抗",
+  [ENEMY_TYPE.Reduce]: "抗性削减",
+  [ENEMY_TYPE.ReduceDEF]: "防御减少",
   [ENEMY_TYPE.Break]: "破盾效率",
   [ENEMY_TYPE.Weaken]: "敌方虚弱",
 };
@@ -72,8 +74,8 @@ const TEAM_TYPE = {
 
 const TEAM_TYPE_TEXT = {
   [TEAM_TYPE.Treatment]: "治疗能力",
-  [TEAM_TYPE.Shield]: "护盾效果",
-  [TEAM_TYPE.DMGreduction]: "减伤能力",
+  [TEAM_TYPE.Shield]: "护盾产生",
+  [TEAM_TYPE.DMGreduction]: "减伤强度",
   [TEAM_TYPE.Mobility]: "机动性",
   [TEAM_TYPE.Berserk]: "增伤效果",
   [TEAM_TYPE.Charged]: "充能效果",
@@ -183,7 +185,7 @@ const CloudTeamConfig = [
     ],
     enemy: [
       {
-        type: ENEMY_TYPE.Reduce,
+        type: ENEMY_TYPE.ReduceDEF,
         level: 5,
       }
     ],
@@ -250,7 +252,7 @@ const CloudTeamConfig = [
         level: 5,
       },
       {
-        type: ENEMY_TYPE.Reduce,
+        type: ENEMY_TYPE.ReduceDEF,
         level: 5,
       },
     ],
@@ -360,7 +362,7 @@ const CloudTeamConfig = [
     ],
     enemy: [
       {
-        type: ENEMY_TYPE.Reduce,
+        type: ENEMY_TYPE.ReduceDEF,
         level: 5,
       },
     ],
