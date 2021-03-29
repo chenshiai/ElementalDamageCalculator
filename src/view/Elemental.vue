@@ -301,7 +301,8 @@ export default defineComponent({
 .question-title,
 .data-panel__title,
 .holy-relic__title,
-.base-damage__title {
+.base-damage__title,
+.cloud-team__title {
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 12px;

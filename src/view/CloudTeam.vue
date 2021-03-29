@@ -28,6 +28,18 @@
       </div>
     </div>
   </div>
+  <div class="cloud-team__title">队伍分析</div>
+  <div class="cloud-team__title">评级目的</div>
+  <span class="cloud-team__tips">
+    并不是为了配出伤害最高的队伍，而是帮助更快地分析自身队伍的构成特点。同时对某个角色的培养方向和使用方向做引导。每个玩家心中的评级标准都是不一样的，本评级旨在给其他玩家提供参考，切勿盲目行事。
+  </span>
+  <div class="cloud-team__title">评级标准</div>
+  <span class="cloud-team__tips">
+    约定：以角色自身所拥有的能力来纵向评价，每个角色应该至少拥有一项突出能力(评级A)，再以此能力所带来的价值为标准来评价其他能力能够带来的价值。
+    <p>持续驻场：角色主要的伤害输出，依靠长时间站场。受伤害倍率、冷却时间、充能需求、操作难度和输出环境等因素影响。</p>
+    <p>后台脱手：角色主要的伤害输出，在后台即可完成绝大部分。影响因素同上。</p>
+    <p>速切爆发：角色主要的伤害输出，可以在较短的时间内完成。影响因素同上。</p>
+  </span>
   <van-popup
     teleport="#app"
     v-model:show="show"
@@ -178,5 +190,11 @@ export default defineComponent({
 .team-list .empty::before {
   width: 28px;
   height: 4px;
+}
+.cloud-team__tips {
+  font-size: 14px;
+  color: #928986;
+  margin-bottom: 16px;
+  display: inline-block;
 }
 </style>
