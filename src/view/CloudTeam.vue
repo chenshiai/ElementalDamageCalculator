@@ -15,13 +15,13 @@
       <div class="team-list__tags">
         <template v-if="item.battle || item.enemy || item.team">
           <div class="tag" v-for="(tag, index) in item.battle" :key="index">
-            <span :class="['tag-weight', 'tag-level' + tag.level]">{{ WEIGHT[tag.level] }}</span>{{ BATTLE_TYPE_TEXT[tag.type] }}
+            <span :class="['tag-weight', 'tag-level' + tag.level]">{{ WEIGHT2[tag.level] }}</span>{{ BATTLE_TYPE_TEXT[tag.type] }}
           </div>
           <div class="tag" v-for="(tag, index) in item.enemy" :key="index">
-            <span :class="['tag-weight', 'tag-level' + tag.level]">{{ WEIGHT[tag.level] }}</span>{{ ENEMY_TYPE_TEXT[tag.type] }}
+            <span :class="['tag-weight', 'tag-level' + tag.level]">{{ WEIGHT2[tag.level] }}</span>{{ ENEMY_TYPE_TEXT[tag.type] }}
           </div>
           <div class="tag" v-for="(tag, index) in item.team" :key="index">
-            <span :class="['tag-weight', 'tag-level' + tag.level]">{{ WEIGHT[tag.level] }}</span>{{ TEAM_TYPE_TEXT[tag.type] }}
+            <span :class="['tag-weight', 'tag-level' + tag.level]">{{ WEIGHT2[tag.level] }}</span>{{ TEAM_TYPE_TEXT[tag.type] }}
           </div>
         </template>
         <div class="empty-tags" v-else>虚位以待</div>
@@ -45,6 +45,7 @@ import Selector from "../component/Selector.vue";
 import {
   BATTLE_TYPE_TEXT,
   WEIGHT,
+  WEIGHT2,
   ENEMY_TYPE_TEXT,
   TEAM_TYPE_TEXT,
 } from "../../public/CloudTeamConfig";
@@ -69,6 +70,7 @@ export default defineComponent({
       ...toRefs(store.state),
       show,
       WEIGHT,
+      WEIGHT2,
       BATTLE_TYPE_TEXT,
       ENEMY_TYPE_TEXT,
       TEAM_TYPE_TEXT,
@@ -129,21 +131,28 @@ export default defineComponent({
   margin-bottom: 6px;
 }
 .tag-weight {
+  display: inline-block;
+  width: 14px;
   margin-right: 4px;
 }
-.tag-level1 {
-  color: #f7f1e6;
-}
-.tag-level2 {
+.tag-level1,
+.tag-level2,
+.tag-level3 {
   color: #8cffbc;
 }
-.tag-level3 {
+.tag-level4,
+.tag-level5,
+.tag-level6 {
   color: #6596ff;
 }
-.tag-level4 {
+.tag-level7,
+.tag-level8,
+.tag-level9 {
   color: #c875ff;
 }
-.tag-level5 {
+.tag-level10,
+.tag-level11,
+.tag-level12 {
   color: #ffff2d;
 }
 .team-list .empty {

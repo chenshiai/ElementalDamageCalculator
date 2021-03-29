@@ -87,6 +87,21 @@ const WEIGHT = {
   1: "D",
 };
 
+const WEIGHT2 = {
+  1: "C-",
+  2: "C",
+  3: "C+",
+  4: "B-",
+  5: "B",
+  6: "B+",
+  7: "A-",
+  8: "A",
+  9: "A+",
+  10: "S-",
+  11: "S",
+  12: "S+",
+};
+
 const CloudTeamConfig = [
   {
     name: "安柏",
@@ -895,6 +910,10 @@ const CloudTeamConfig = [
     ],
     team: [
       {
+        type: TEAM_TYPE.Berserk,
+        level: 4,
+      },
+      {
         type: TEAM_TYPE.Mobility,
         level: 1,
       },
@@ -955,6 +974,7 @@ const CloudTeamConfig = [
 export {
   CloudTeamConfig,
   WEIGHT,
+  WEIGHT2,
   BATTLE_TYPE_TEXT,
   ENEMY_TYPE_TEXT,
   TEAM_TYPE_TEXT,
