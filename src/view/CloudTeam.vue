@@ -15,16 +15,28 @@
       <div class="team-list__tags">
         <template v-if="item.battle || item.enemy || item.team">
           <div class="tag" v-for="(tag, index) in item.battle" :key="index">
-            <span :class="['tag-weight', 'tag-level' + tag.level]">{{ WEIGHT2[tag.level] }}</span>{{ BATTLE_TYPE_TEXT[tag.type] }}
+            <span :class="['tag-weight', 'tag-level' + tag.level]">
+              {{ WEIGHT2[tag.level] }}
+            </span>
+            {{ BATTLE_TYPE_TEXT[tag.type] }}
+            <span v-show="tag.astro" class="tag-astro">({{ tag.astro }})</span>
           </div>
           <div class="tag" v-for="(tag, index) in item.enemy" :key="index">
-            <span :class="['tag-weight', 'tag-level' + tag.level]">{{ WEIGHT2[tag.level] }}</span>{{ ENEMY_TYPE_TEXT[tag.type] }}
+            <span :class="['tag-weight', 'tag-level' + tag.level]">
+              {{ WEIGHT2[tag.level] }}
+            </span>
+            {{ ENEMY_TYPE_TEXT[tag.type] }}
+            <span v-show="tag.astro" class="tag-astro">({{ tag.astro }})</span>
           </div>
           <div class="tag" v-for="(tag, index) in item.team" :key="index">
-            <span :class="['tag-weight', 'tag-level' + tag.level]">{{ WEIGHT2[tag.level] }}</span>{{ TEAM_TYPE_TEXT[tag.type] }}
+            <span :class="['tag-weight', 'tag-level' + tag.level]">
+              {{ WEIGHT2[tag.level] }}
+            </span>
+            {{ TEAM_TYPE_TEXT[tag.type] }}
+            <span v-show="tag.astro" class="tag-astro">({{ tag.astro }})</span>
           </div>
         </template>
-        <div class="empty-tags" v-else>虚位以待</div>
+        <div class="empty-tags" v-else></div>
       </div>
     </div>
   </div>
@@ -157,7 +169,9 @@ export default defineComponent({
 .tag-weight {
   display: inline-block;
   width: 14px;
-  margin-right: 4px;
+}
+.tag-astro {
+  float: right;
 }
 .tag-level1,
 .tag-level2,

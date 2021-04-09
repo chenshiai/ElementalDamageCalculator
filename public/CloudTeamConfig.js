@@ -113,11 +113,11 @@ const CloudTeamConfig = [
     battle: [
       {
         type: BATTLE_TYPE.QuickSwitch,
-        level: 11,
+        level: 10,
       },
       {
         type: BATTLE_TYPE.Resident,
-        level: 8,
+        level: 6,
       },
     ],
     enemy: [
@@ -129,11 +129,13 @@ const CloudTeamConfig = [
     team: [
       {
         type: TEAM_TYPE.Berserk,
-        level: 2,
+        level: 5,
+        astro: 6,
       },
       {
         type: TEAM_TYPE.Mobility,
-        level: 2,
+        level: 5,
+        astro: 6,
       },
     ],
   },
