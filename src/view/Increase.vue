@@ -1,4 +1,7 @@
 <template>
+  <div class="tips">
+    滑块不够用，可以点击数字进行手动输入。
+  </div>
   <tab-title>单次伤害计算</tab-title>
   <van-cell class="eva-cell" center title="开启滑块辅助调整数值">
     <template #right-icon>
@@ -132,8 +135,8 @@
           <van-cell clickable @click="atkType = 'evaporation'">
             <template #title>
               <div>
-                <span class="water">水</span>· <span class="fire">火</span>/
-                <span class="fire">火</span>· <span class="ice">冰</span>~
+                <span class="water"></span>→<span class="fire"></span>/
+                <span class="fire"></span>→<span class="ice"></span>~
                 蒸发/融化200%
               </div>
             </template>
@@ -144,8 +147,8 @@
           <van-cell clickable @click="atkType = 'evaporation2'">
             <template #title>
               <div>
-                <span class="fire">火</span>· <span class="water">水</span>/
-                <span class="ice">冰</span>· <span class="fire">火</span>~
+                <span class="fire"></span>→<span class="water"></span>/
+                <span class="ice"></span>→<span class="fire"></span>~
                 蒸发/融化150%
               </div>
             </template>
@@ -244,6 +247,7 @@
       />
     </template>
   </van-cell>
+  <save-data />
 </template>
 
 <script>
@@ -268,6 +272,7 @@ import { getReactionRate, getResistanceRate, getDefRate, getTargetNotes } from "
 import DataItem from "../component/DataItem.vue";
 import NoteGroup from "../component/NoteGroup.vue";
 import DetailBlock from "../component/Detail.vue";
+import SaveData from "../component/SaveData.vue";
 import { useStore } from "vuex";
 import { EnhancedDamageNotes, AtkPercentNotes } from "../constant";
 
@@ -280,6 +285,7 @@ export default defineComponent({
     [Switch.name]: Switch,
     [Slider.name]: Slider,
     [Stepper.name]: Stepper,
+    [SaveData.name]: SaveData,
     [DataItem.name]: DataItem,
     [TabTitle.name]: TabTitle,
     [CellGroup.name]: CellGroup,
@@ -420,14 +426,23 @@ export default defineComponent({
   color: #fff;
   background-color: #997874;
 }
+.water,
+.fire,
+.ice {
+  background-size: 20px;
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  display: inline-block;
+}
 .water {
-  color: #0075fe;
+  background-image: url("../../hydro.png");
 }
 .fire {
-  color: #ec4735;
+  background-image: url("../../pyro.png");
 }
 .ice {
-  color: #62ebf0;
+  background-image: url("../../cryo.png");
 }
 
 .van-slider__button-wrapper .van-slider__button {
