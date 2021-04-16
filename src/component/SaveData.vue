@@ -24,7 +24,14 @@
         <span>伤害倍率%</span><span>{{ atkRate }}</span>
       </li>
       <li class="data-detail-item">
-        <span>反应类型</span><span>{{ atkType === "none" ? "无反应" : (atkType === "evaporation" ? "2.0倍增幅" : "1.5倍增幅") }}</span>
+        <span>反应类型</span
+        ><span>{{
+          atkType === "none"
+            ? "无反应"
+            : atkType === "evaporation"
+            ? "2.0倍增幅"
+            : "1.5倍增幅"
+        }}</span>
       </li>
       <li class="data-detail-item">
         <span>人物等级</span><span>{{ characterLevel }}</span>
@@ -48,16 +55,15 @@
       label="数据备注"
       placeholder="输入备注说明（不要与其他备注重复）"
     />
-    <div class="popup-bottons">
-      保存数据
-    </div>
+    <div class="popup-bottons" @click="saveData">保存数据</div>
   </van-popup>
 </template>
 
 <script>
-import { defineComponent, ref, toRefs, computed } from "vue";
+import { defineComponent, ref, toRefs } from "vue";
 import { useStore } from "vuex";
-import { Popup, Field } from "vant";
+import { Popup, Field, Toast } from "vant";
+import { getLocalStorage } from "../utils";
 
 export default defineComponent({
   name: "save-data",
@@ -72,10 +78,30 @@ export default defineComponent({
     const remark = ref("");
     const store = useStore();
 
+    const saveData = () => {
+      if (!remark.value) {
+        Toast.fail("请输入备注");
+        return;
+      }
+      try {
+        const sourceData = getLocalStorage("GenShinImpactCustomData", {});
+        sourceData[remark.value] = store.state;
+        window.localStorage.setItem(
+          "GenShinImpactCustomData",
+          JSON.stringify(sourceData)
+        );
+        Toast.success("保存成功");
+        showPopup.value = false;
+      } catch {
+        Toast.fail("保存失败");
+      }
+    };
+
     return {
       ...toRefs(store.state),
       showPopup,
       remark,
+      saveData,
     };
   },
 });

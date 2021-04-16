@@ -2,8 +2,8 @@ import { Toast } from "vant";
 
 export const calculate = (elementalMystery) => {
   if (+elementalMystery <= 0) return 0;
-  return 2.78 * elementalMystery / (elementalMystery + 1400) * 100;
-}
+  return ((2.78 * elementalMystery) / (elementalMystery + 1400)) * 100;
+};
 
 export const getReactionRate = (atkType) => {
   if (atkType === "evaporation") {
@@ -22,7 +22,7 @@ export const getResistanceRate = (enemyResistance, weaken) => {
     resistanceRate = 1 - resistance / 2 / 100;
   }
   if (resistance > 75) {
-    resistanceRate = 1 / (1 + 4 * resistance / 100);
+    resistanceRate = 1 / (1 + (4 * resistance) / 100);
   }
   return resistanceRate;
 };
@@ -36,10 +36,14 @@ export const floatNum = (value, digits = 1) => {
   return Number((+value).toFixed(digits));
 };
 
-export const getTargetNotes = (name, defaultValue, description) => {
-  const notes = window.localStorage.getItem(name);
+export const getLocalStorage = (
+  name,
+  defaultValue,
+  description = "本地数据读取失败"
+) => {
+  const value = window.localStorage.getItem(name);
   try {
-    return JSON.parse(notes) || defaultValue;
+    return JSON.parse(value) || defaultValue;
   } catch {
     Toast.fail(description);
     return defaultValue;
