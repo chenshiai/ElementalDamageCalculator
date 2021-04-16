@@ -9,7 +9,7 @@
         <span>基础攻击力</span><span>{{ baseATK }}</span>
       </li>
       <li class="data-detail-item">
-        <span>额外攻击力</span><span>{{ extraATK }}</span>
+        <span>额外攻击力</span><span>{{ Math.round(extraATK + baseATK * (extraPercentATK / 100)) }}</span>
       </li>
       <li class="data-detail-item">
         <span>暴击伤害%</span><span>{{ critDemage }}</span>
@@ -63,7 +63,7 @@
 import { defineComponent, ref, toRefs } from "vue";
 import { useStore } from "vuex";
 import { Popup, Field, Toast } from "vant";
-import { getLocalStorage } from "../utils";
+import { getLocalStorage, deepCopyObject } from "../utils";
 
 export default defineComponent({
   name: "save-data",
@@ -85,12 +85,19 @@ export default defineComponent({
       }
       try {
         const sourceData = getLocalStorage("GenShinImpactCustomData", {});
-        sourceData[remark.value] = store.state;
+        const { extraATK, baseATK, extraPercentATK } = store.state;
+
+        sourceData[remark.value] = deepCopyObject(store.state);
+        sourceData[remark.value].extraATK = extraATK + baseATK * (extraPercentATK / 100);
+        delete sourceData[remark.value].characterSelect;
+        delete sourceData[remark.value].extraPercentATK;
+
         window.localStorage.setItem(
           "GenShinImpactCustomData",
           JSON.stringify(sourceData)
         );
         Toast.success("保存成功");
+        remark.value = "";
         showPopup.value = false;
       } catch {
         Toast.fail("保存失败");

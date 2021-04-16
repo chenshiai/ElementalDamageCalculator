@@ -457,6 +457,7 @@ export default defineComponent({
   background-color: #fff;
   border: 1px solid #997874;
   padding: 6px 0;
+  z-index: 1;
 }
 .grid-item {
   flex: 1;

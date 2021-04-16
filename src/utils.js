@@ -49,3 +49,7 @@ export const getLocalStorage = (
     return defaultValue;
   }
 };
+
+export const deepCopyObject = (obj) => {
+  return JSON.parse(JSON.stringify(obj));
+}
