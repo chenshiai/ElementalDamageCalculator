@@ -2,65 +2,25 @@
   <div class="save-data" @click="showPopup = true">保存数据到本地</div>
   <van-popup teleport="#app" v-model:show="showPopup" position="top">
     <div class="tips">
-      数据将会存储在浏览器的缓存中。若清空浏览器缓存，则数据也一会同清空。
+      数据将会存储在本地浏览器的缓存中。若清空浏览器缓存，则数据也一会同清空。重复命名的新数据会替换旧数据。
     </div>
     <ul class="data-detail">
-      <li class="data-detail-item">
-        <span>基础攻击力</span><span>{{ baseATK }}</span>
-      </li>
-      <li class="data-detail-item">
-        <span>额外攻击力</span><span>{{ Math.round(extraATK + baseATK * (extraPercentATK / 100)) }}</span>
-      </li>
-      <li class="data-detail-item">
-        <span>暴击伤害%</span><span>{{ critDemage }}</span>
-      </li>
-      <li class="data-detail-item">
-        <span>伤害加成%</span><span>{{ elementDemage }}</span>
-      </li>
-      <li class="data-detail-item">
-        <span>精通加成%</span><span>{{ evaporationDemage }}</span>
-      </li>
-      <li class="data-detail-item">
-        <span>伤害倍率%</span><span>{{ atkRate }}</span>
-      </li>
-      <li class="data-detail-item">
-        <span>反应类型</span
-        ><span>{{
-          atkType === "none"
-            ? "无反应"
-            : atkType === "evaporation"
-            ? "2.0倍增幅"
-            : "1.5倍增幅"
-        }}</span>
-      </li>
-      <li class="data-detail-item">
-        <span>人物等级</span><span>{{ characterLevel }}</span>
-      </li>
-      <li class="data-detail-item">
-        <span>敌人等级</span><span>{{ enemyLevel }}</span>
-      </li>
-      <li class="data-detail-item">
-        <span>敌人抗性</span><span>{{ enemyResistance }}</span>
-      </li>
-      <li class="data-detail-item">
-        <span>减少抗性</span><span>{{ weaken }}</span>
-      </li>
-      <li class="data-detail-item">
-        <span>减少防御</span><span>{{ armour }}</span>
+      <li class="data-detail-item" v-for="(item, index) in config" :key="index">
+        <span>{{ item.label }}</span><span>{{ item.value }}</span>
       </li>
     </ul>
     <van-field
       v-model="remark"
       type="text"
-      label="数据备注"
-      placeholder="输入备注说明（不要与其他备注重复）"
+      label="数据命名"
+      placeholder="给这条数据取个名字吧"
     />
     <div class="popup-bottons" @click="saveData">保存数据</div>
   </van-popup>
 </template>
 
 <script>
-import { defineComponent, ref, toRefs } from "vue";
+import { defineComponent, ref, computed } from "vue";
 import { useStore } from "vuex";
 import { Popup, Field, Toast } from "vant";
 import { getLocalStorage, deepCopyObject } from "../utils";
@@ -78,6 +38,80 @@ export default defineComponent({
     const remark = ref("");
     const store = useStore();
 
+    const config = computed(() => {
+      const {
+        extraATK,
+        baseATK,
+        extraPercentATK,
+        critDemage,
+        elementDemage,
+        evaporationDemage,
+        atkRate,
+        atkType,
+        characterLevel,
+        enemyLevel,
+        enemyResistance,
+        weaken,
+        armour,
+      } = store.state;
+
+      return [
+        {
+          label: "基础攻击力",
+          value: baseATK,
+        },
+        {
+          label: "绿字攻击力",
+          value: Math.round(extraATK + baseATK * (extraPercentATK / 100)),
+        },
+        {
+          label: "暴击伤害%",
+          value: critDemage,
+        },
+        {
+          label: "伤害加成%",
+          value: elementDemage,
+        },
+        {
+          label: "精通加成%",
+          value: evaporationDemage,
+        },
+        {
+          label: "伤害倍率%",
+          value: atkRate,
+        },
+        {
+          label: "反应类型",
+          value:
+            atkType === "none"
+              ? "无反应"
+              : atkType === "evaporation"
+              ? "2.0倍增幅"
+              : "1.5倍增幅",
+        },
+        {
+          label: "人物等级",
+          value: characterLevel,
+        },
+        {
+          label: "敌人等级",
+          value: enemyLevel,
+        },
+        {
+          label: "敌人抗性%",
+          value: enemyResistance,
+        },
+        {
+          label: "减少抗性%",
+          value: weaken,
+        },
+        {
+          label: "减少防御%",
+          value: armour,
+        },
+      ];
+    });
+
     const saveData = () => {
       if (!remark.value) {
         Toast.fail("请输入备注");
@@ -88,7 +122,8 @@ export default defineComponent({
         const { extraATK, baseATK, extraPercentATK } = store.state;
 
         sourceData[remark.value] = deepCopyObject(store.state);
-        sourceData[remark.value].extraATK = extraATK + baseATK * (extraPercentATK / 100);
+        sourceData[remark.value].extraATK =
+          extraATK + baseATK * (extraPercentATK / 100);
         delete sourceData[remark.value].characterSelect;
         delete sourceData[remark.value].extraPercentATK;
 
@@ -105,7 +140,7 @@ export default defineComponent({
     };
 
     return {
-      ...toRefs(store.state),
+      config,
       showPopup,
       remark,
       saveData,

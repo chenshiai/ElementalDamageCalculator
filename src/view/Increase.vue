@@ -1,7 +1,5 @@
 <template>
-  <div class="tips">
-    滑块不够用，可以点击数字进行手动输入。
-  </div>
+  <div class="tips">滑块不够用，可以点击数字进行手动输入。</div>
   <tab-title>单次伤害计算</tab-title>
   <van-cell class="eva-cell" center title="开启滑块辅助调整数值">
     <template #right-icon>
@@ -34,7 +32,7 @@
     <data-item
       v-model="extraATK"
       title="额外攻击力"
-      tips="攻击力固定数值加成"
+      tips="攻击力绿字的加成"
       stepperInteger
       stepperMin="0"
       sliderMax="3000"
@@ -42,12 +40,13 @@
     />
     <note-group
       v-model="extraPercentATK"
-      title="攻击力加成%"
+      title="攻击力BUFF加成%"
       :notes="ATKNotes"
       @noteChange="ATKNoteChange"
     />
     <detail-block>
-      这里『攻击力加成%』的数值，是以『基础攻击力』的百分比来算的，会直接加在上方『攻击力总计』的绿字里。
+      这里『攻击力BUFF加成%』的数值，是以『基础攻击力』的百分比来算的，会直接加在最上方『攻击力总计』的
+      <span style="color: #49ff39">绿字</span>里。
     </detail-block>
     <data-item
       v-model="critDemage"
@@ -251,13 +250,7 @@
 </template>
 
 <script>
-import {
-  computed,
-  defineComponent,
-  ref,
-  onMounted,
-  toRefs,
-} from "vue";
+import { computed, defineComponent, ref, onMounted, toRefs } from "vue";
 import {
   Slider,
   Stepper,
@@ -268,7 +261,12 @@ import {
   Radio,
 } from "vant";
 import TabTitle from "../component/TabTitle.vue";
-import { getReactionRate, getResistanceRate, getDefRate, getLocalStorage } from "../utils";
+import {
+  getReactionRate,
+  getResistanceRate,
+  getDefRate,
+  getLocalStorage,
+} from "../utils";
 import DataItem from "../component/DataItem.vue";
 import NoteGroup from "../component/NoteGroup.vue";
 import DetailBlock from "../component/Detail.vue";
@@ -352,11 +350,7 @@ export default defineComponent({
     });
 
     const extraATKNumber = computed(() => {
-      const {
-        baseATK,
-        extraATK,
-        extraPercentATK,
-      } = store.state;
+      const { baseATK, extraATK, extraPercentATK } = store.state;
       return Math.round(extraATK + baseATK * (extraPercentATK / 100));
     });
 
@@ -379,8 +373,16 @@ export default defineComponent({
     };
 
     onMounted(() => {
-      EDNotes.value = getLocalStorage("GenShinImpactEDNotes", EnhancedDamageNotes, "伤害加成标签组读取失败");
-      ATKNotes.value = getLocalStorage("GenShinImpactATKNotes", AtkPercentNotes, "攻击力加成标签组读取失败");
+      EDNotes.value = getLocalStorage(
+        "GenShinImpactEDNotes",
+        EnhancedDamageNotes,
+        "伤害加成标签组读取失败"
+      );
+      ATKNotes.value = getLocalStorage(
+        "GenShinImpactATKNotes",
+        AtkPercentNotes,
+        "攻击力加成标签组读取失败"
+      );
     });
 
     return {
