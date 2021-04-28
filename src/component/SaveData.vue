@@ -1,12 +1,16 @@
 <template>
-  <div class="save-data" @click="showPopup = true">保存数据到本地</div>
+  <div class="save-data">
+    <div class="save-btn" @click="saveDataPop">保存数据</div>
+    <div class="save-btn" @click="lookDataPop">查看数据</div>
+  </div>
   <van-popup teleport="#app" v-model:show="showPopup" position="top">
     <div class="tips">
       数据将会存储在本地浏览器的缓存中。若清空浏览器缓存，则数据也一会同清空。重复命名的新数据会替换旧数据。
     </div>
     <ul class="data-detail">
       <li class="data-detail-item" v-for="(item, index) in config" :key="index">
-        <span>{{ item.label }}</span><span>{{ item.value }}</span>
+        <span>{{ item.label }}</span
+        ><span>{{ item.value }}</span>
       </li>
     </ul>
     <van-field
@@ -17,27 +21,67 @@
     />
     <div class="popup-bottons" @click="saveData">保存数据</div>
   </van-popup>
+  <van-popup teleport="#app" v-model:show="showDataPopup" position="top">
+    <div class="tips">勾选两条数据，可以进行对比。</div>
+    <van-collapse v-model="opened" accordion>
+      <van-checkbox-group v-model="selected" :max="2">
+        <van-collapse-item v-for="(val, name, index) in localData" :key="index">
+          <template #title>
+            <van-checkbox @click="nowShowData = val" :name="name">{{ name }}</van-checkbox>
+          </template>
+          <ul class="data-detail">
+            <li
+              class="data-detail-item"
+              v-for="(item, index) in config"
+              :key="index"
+            >
+              <span>{{ item.label }}</span>
+              <span>{{ item.value }}</span>
+            </li>
+          </ul>
+        </van-collapse-item>
+      </van-checkbox-group>
+    </van-collapse>
+    <div class="popup-bottons">对比数据</div>
+  </van-popup>
 </template>
 
 <script>
 import { defineComponent, ref, computed } from "vue";
 import { useStore } from "vuex";
-import { Popup, Field, Toast } from "vant";
+import {
+  Popup,
+  Field,
+  Toast,
+  Collapse,
+  CollapseItem,
+  Checkbox,
+  CheckboxGroup,
+} from "vant";
 import { getLocalStorage, deepCopyObject } from "../utils";
 
 export default defineComponent({
   name: "save-data",
 
   components: {
+    [Collapse.name]: Collapse,
     [Field.name]: Field,
     [Popup.name]: Popup,
+    [Checkbox.name]: Checkbox,
+    [CollapseItem.name]: CollapseItem,
+    [CheckboxGroup.name]: CheckboxGroup,
   },
 
   setup() {
     const showPopup = ref(false);
+    const showDataPopup = ref(false);
     const remark = ref("");
     const store = useStore();
+    const localData = ref(getLocalStorage("GenShinImpactCustomData", {}));
+    const selected = ref([]);
+    const opened = ref([]);
 
+    const nowShowData = ref(store.state);
     const config = computed(() => {
       const {
         extraATK,
@@ -53,7 +97,7 @@ export default defineComponent({
         enemyResistance,
         weaken,
         armour,
-      } = store.state;
+      } = nowShowData.value;
 
       return [
         {
@@ -112,6 +156,11 @@ export default defineComponent({
       ];
     });
 
+    const saveDataPop = () => {
+      nowShowData.value = store.state;
+      showPopup.value = true;
+    };
+
     const saveData = () => {
       if (!remark.value) {
         Toast.fail("请输入备注");
@@ -125,7 +174,6 @@ export default defineComponent({
         sourceData[remark.value].extraATK =
           extraATK + baseATK * (extraPercentATK / 100);
         delete sourceData[remark.value].characterSelect;
-        delete sourceData[remark.value].extraPercentATK;
 
         window.localStorage.setItem(
           "GenShinImpactCustomData",
@@ -139,11 +187,23 @@ export default defineComponent({
       }
     };
 
+    const lookDataPop = () => {
+      showDataPopup.value = true;
+      localData.value = getLocalStorage("GenShinImpactCustomData", {});
+    };
+
     return {
       config,
       showPopup,
+      saveDataPop,
+      showDataPopup,
       remark,
       saveData,
+      localData,
+      lookDataPop,
+      selected,
+      opened,
+      nowShowData,
     };
   },
 });
@@ -151,11 +211,16 @@ export default defineComponent({
 
 <style scoped>
 .save-data {
-  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.save-btn {
+  width: 45%;
   background-color: #fff;
   border: 1px solid #997874;
   text-align: center;
   line-height: 40px;
+  margin-bottom: 12px;
 }
 .data-detail {
   margin: 0 16px;
