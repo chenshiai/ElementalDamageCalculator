@@ -23,16 +23,21 @@
   </van-popup>
   <van-popup teleport="#app" v-model:show="showDataPopup" position="top">
     <div class="tips">勾选两条数据，可以进行对比。</div>
-    <van-collapse v-model="opened" accordion>
-      <van-checkbox-group v-model="selected" :max="2">
-        <van-collapse-item v-for="(val, name, index) in localData" :key="index">
+    <van-collapse v-if="Object.keys(localData).length > 0" v-model="opened">
+      <van-checkbox-group v-model="selected" :max="2" checked-color="#766461">
+        <van-collapse-item
+          v-for="(val, name, index) in localData"
+          :key="index"
+          :is-link="false"
+          :disabled="selected.length === 2 && selected.indexOf(name) < 0"
+        >
           <template #title>
-            <van-checkbox @click="nowShowData = val" :name="name">{{ name }}</van-checkbox>
+            <van-checkbox :disabled="selected.length === 2 && selected.indexOf(name) < 0" :name="name">{{ name }}</van-checkbox>
           </template>
           <ul class="data-detail">
             <li
               class="data-detail-item"
-              v-for="(item, index) in config"
+              v-for="(item, index) in formatData(val)"
               :key="index"
             >
               <span>{{ item.label }}</span>
@@ -42,7 +47,10 @@
         </van-collapse-item>
       </van-checkbox-group>
     </van-collapse>
-    <div class="popup-bottons">对比数据</div>
+    <div v-else>暂无数据</div>
+    <div v-show="Object.keys(localData).length > 0" class="popup-bottons">
+      对比数据
+    </div>
   </van-popup>
 </template>
 
@@ -81,8 +89,11 @@ export default defineComponent({
     const selected = ref([]);
     const opened = ref([]);
 
-    const nowShowData = ref(store.state);
     const config = computed(() => {
+      return formatData(store.state);
+    });
+
+    const formatData = (value) => {
       const {
         extraATK,
         baseATK,
@@ -97,7 +108,7 @@ export default defineComponent({
         enemyResistance,
         weaken,
         armour,
-      } = nowShowData.value;
+      } = value;
 
       return [
         {
@@ -154,10 +165,9 @@ export default defineComponent({
           value: armour,
         },
       ];
-    });
+    };
 
     const saveDataPop = () => {
-      nowShowData.value = store.state;
       showPopup.value = true;
     };
 
@@ -203,7 +213,7 @@ export default defineComponent({
       lookDataPop,
       selected,
       opened,
-      nowShowData,
+      formatData,
     };
   },
 });
