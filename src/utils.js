@@ -52,4 +52,55 @@ export const getLocalStorage = (
 
 export const deepCopyObject = (obj) => {
   return JSON.parse(JSON.stringify(obj));
-}
+};
+
+export const computationalFormula = (data) => {
+  const {
+    baseATK,
+    extraATK,
+    extraPercentATK,
+    critDemage,
+    elementDemage,
+    evaporationDemage,
+    atkRate,
+    atkType,
+    characterLevel,
+    enemyLevel,
+    enemyResistance,
+    weaken,
+    armour,
+  } = data;
+  // 计算增幅加成
+  const elerate = getReactionRate(atkType);
+  const resistanceRate = getResistanceRate(enemyResistance, weaken);
+  const defRate = getDefRate(characterLevel, enemyLevel, armour);
+
+  let eva = evaporationDemage;
+  if (atkType === "none") {
+    eva = 0;
+  }
+
+  const common = Math.round(
+    (baseATK + extraATK + baseATK * (extraPercentATK / 100)) *
+      (atkRate / 100) *
+      (1 + elementDemage / 100) *
+      elerate *
+      (1 + eva / 100) *
+      defRate *
+      resistanceRate
+  );
+  const crit = Math.round(
+    (baseATK + extraATK + baseATK * (extraPercentATK / 100)) *
+      (atkRate / 100) *
+      (1 + elementDemage / 100) *
+      (1 + critDemage / 100) *
+      elerate *
+      (1 + eva / 100) *
+      defRate *
+      resistanceRate
+  );
+  return {
+    common,
+    crit,
+  }
+};

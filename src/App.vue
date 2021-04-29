@@ -119,7 +119,8 @@ export default defineComponent({
 
 
 .van-cell.van-cell--clickable,
-.van-cell.van-cell--center {
+.van-cell.van-cell--center,
+.van-cell.van-collapse-item__title.van-collapse-item__title--expanded {
   background-color: #F7F1E6;
 }
 </style>

@@ -226,13 +226,13 @@
     <div class="grid-item">
       伤害数值
       <div class="normal-demage">
-        {{ increaseResult }}
+        {{ increaseResult.common }}
       </div>
     </div>
     <div class="grid-item">
       暴击伤害
       <div class="crit-demage">
-        {{ Math.round(increaseResult * (1 + critDemage / 100)) }}
+        {{ increaseResult.crit }}
       </div>
     </div>
   </div>
@@ -261,12 +261,7 @@ import {
   Radio,
 } from "vant";
 import TabTitle from "../component/TabTitle.vue";
-import {
-  getReactionRate,
-  getResistanceRate,
-  getDefRate,
-  getLocalStorage,
-} from "../utils";
+import { computationalFormula, getLocalStorage } from "../utils";
 import DataItem from "../component/DataItem.vue";
 import NoteGroup from "../component/NoteGroup.vue";
 import DetailBlock from "../component/Detail.vue";
@@ -314,39 +309,7 @@ export default defineComponent({
     };
 
     const increaseResult = computed(() => {
-      const {
-        baseATK,
-        extraATK,
-        extraPercentATK,
-        elementDemage,
-        evaporationDemage,
-        atkRate,
-        atkType,
-        characterLevel,
-        enemyLevel,
-        enemyResistance,
-        weaken,
-        armour,
-      } = store.state;
-      // 计算增幅加成
-      const elerate = getReactionRate(atkType);
-      const resistanceRate = getResistanceRate(enemyResistance, weaken);
-      const defRate = getDefRate(characterLevel, enemyLevel, armour);
-
-      let eva = evaporationDemage;
-      if (atkType === "none") {
-        eva = 0;
-      }
-
-      return Math.round(
-        (baseATK + extraATK + baseATK * (extraPercentATK / 100)) *
-          (atkRate / 100) *
-          (1 + elementDemage / 100) *
-          elerate *
-          (1 + eva / 100) *
-          defRate *
-          resistanceRate
-      );
+      return computationalFormula(store.state);
     });
 
     const extraATKNumber = computed(() => {
