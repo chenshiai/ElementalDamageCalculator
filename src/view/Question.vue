@@ -70,7 +70,7 @@ export default defineComponent({
 
   methods: {
     imagePreview() {
-      ImagePreview(['https://damage-calculator.oss-cn-hangzhou.aliyuncs.com/IMG_1457.PNG']);
+      ImagePreview(['https://saomdpb.com/IMG_1457.PNG']);
     },
   },
 });
