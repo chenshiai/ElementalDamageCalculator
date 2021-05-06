@@ -103,7 +103,7 @@ export default defineComponent({
     const show = ref(false);
 
     return {
-      ...toRefs(store.state),
+      ...toRefs(store.state.characterModule),
       show,
       WEIGHT,
       WEIGHT2,

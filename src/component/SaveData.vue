@@ -93,7 +93,7 @@ export default defineComponent({
     const opened = ref([]);
 
     const config = computed(() => {
-      return formatData(store.state);
+      return formatData(store.state.demageModule);
     });
 
     const formatData = (value) => {
@@ -181,12 +181,7 @@ export default defineComponent({
       }
       try {
         const sourceData = getLocalStorage("GenShinImpactCustomData", {});
-        const { extraATK, baseATK, extraPercentATK } = store.state;
-
-        sourceData[remark.value] = deepCopyObject(store.state);
-        sourceData[remark.value].extraATK =
-          extraATK + baseATK * (extraPercentATK / 100);
-        delete sourceData[remark.value].characterSelect;
+        sourceData[remark.value] = deepCopyObject(store.state.demageModule);
 
         window.localStorage.setItem(
           "GenShinImpactCustomData",

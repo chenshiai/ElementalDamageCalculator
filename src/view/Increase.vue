@@ -298,22 +298,22 @@ export default defineComponent({
       if (val) {
         store.commit(
           "setEvaporationDemage",
-          +store.state.evaporationDemage + 15
+          +store.state.demageModule.evaporationDemage + 15
         );
       } else {
         store.commit(
           "setEvaporationDemage",
-          +store.state.evaporationDemage - 15
+          +store.state.demageModule.evaporationDemage - 15
         );
       }
     };
 
     const increaseResult = computed(() => {
-      return computationalFormula(store.state);
+      return computationalFormula(store.state.demageModule);
     });
 
     const extraATKNumber = computed(() => {
-      const { baseATK, extraATK, extraPercentATK } = store.state;
+      const { baseATK, extraATK, extraPercentATK } = store.state.demageModule;
       return Math.round(extraATK + baseATK * (extraPercentATK / 100));
     });
 
@@ -349,7 +349,7 @@ export default defineComponent({
     });
 
     return {
-      ...toRefs(store.state),
+      ...toRefs(store.state.demageModule),
       extraATKNumber,
       checked,
       changeSwitch,
