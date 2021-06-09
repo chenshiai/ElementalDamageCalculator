@@ -1,9 +1,22 @@
 import { Toast } from "vant";
 
+/** 增幅反应 */
 export const calculate = (elementalMystery) => {
   if (+elementalMystery <= 0) return 0;
   return ((2.78 * elementalMystery) / (elementalMystery + 1400)) * 100;
 };
+
+/** 剧变反应 */
+export const calculate2 = (elementalMystery) => {
+  if (+elementalMystery <= 0) return 0;
+  return 16 * elementalMystery / (elementalMystery + 2000) * 100;
+}
+
+/** 结晶反应 */
+export const calculate3 = (elementalMystery) => {
+  if (+elementalMystery <= 0) return 0;
+  return 4.44 * elementalMystery / (elementalMystery + 1400) * 100;
+}
 
 export const getReactionRate = (atkType) => {
   if (atkType === "evaporation") {

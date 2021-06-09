@@ -94,7 +94,7 @@
 <script>
 import { computed, defineComponent, reactive, ref } from "vue";
 import { base as Base, WITCH, THUNDER, EMERALD } from "../constant";
-import { calculate } from "../utils";
+import { calculate, calculate2, calculate3 } from "../utils";
 import TabTitle from "../component/TabTitle.vue";
 import DetailBlock from "../component/Detail.vue";
 import { Slider, Stepper } from "vant";
@@ -122,12 +122,12 @@ export default defineComponent({
 
     // 聚变倍率
     const servitude = computed(() => {
-      return (calculate(data.elementalMystery) / 5 * 12).toFixed(1);
+      return (calculate2(data.elementalMystery)).toFixed(1);
     });
 
     // 结晶倍率
     const crystallization = computed(() => {
-      return ((calculate(data.elementalMystery) / 5 * 8)).toFixed(1);
+      return (calculate3(data.elementalMystery)).toFixed(1);
     });
 
     const moreRate = computed(() => {
@@ -153,7 +153,7 @@ export default defineComponent({
     // 聚变反应伤害公式
     const calculateDamage = (baseDamage) => {
       return Math.round(
-        baseDamage * (1 + calculate(data.elementalMystery) / 5 * 12 / 100)
+        baseDamage * (1 + calculate2(data.elementalMystery) / 100)
       );
     };
 
