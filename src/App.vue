@@ -7,9 +7,9 @@
       <router-link to="/increasing-range" class="top-tabs__item">
         伤害计算
       </router-link>
-      <!-- <router-link to="/cloud-team" class="top-tabs__item">
+      <router-link to="/cloud-team" class="top-tabs__item">
         云上辉星
-      </router-link> -->
+      </router-link>
       <router-link to="/question-answer" class="top-tabs__item">
         常见问题
       </router-link>

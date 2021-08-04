@@ -70,6 +70,8 @@ const TEAM_TYPE = {
   Berserk: "Berserk",
   /** 充能 */
   Charged: "Charged",
+  /** 附着 */
+  Adhere: "Adhere",
 };
 
 const TEAM_TYPE_TEXT = {
@@ -79,6 +81,7 @@ const TEAM_TYPE_TEXT = {
   [TEAM_TYPE.Mobility]: "机动性",
   [TEAM_TYPE.Berserk]: "增伤效果",
   [TEAM_TYPE.Charged]: "充能效果",
+  [TEAM_TYPE.Adhere]: "元素附着",
 };
 
 const WEIGHT = {
