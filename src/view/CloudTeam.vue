@@ -1,6 +1,6 @@
 <template>
   <div class="tips">
-    角色自身能力的纵向对比。命座的获取难度、操作难度、实际效果等多方面因素都会影响评级，未计入圣遗物以及武器的影响，仅供参考。
+    考虑到泛用性，本页展示的均为0命角色的能力，未计入圣遗物以及武器的影响，仅供参考。
   </div>
   <tab-title>标签化云配队</tab-title>
   <div class="team-list">
@@ -13,32 +13,35 @@
         <div class="empty" v-else></div>
       </div>
       <div class="team-list__tags">
-        <template v-if="item.battle || item.enemy || item.team">
-          <div class="tag" v-for="(tag, index) in item.battle" :key="index">
-            <span :class="['tag-weight', 'tag-level' + tag.level]">
-              {{ WEIGHT2[tag.level] }}
-            </span>
-            {{ BATTLE_TYPE_TEXT[tag.type] }}
-            <span v-show="tag.astro" class="tag-astro">({{ tag.astro }})</span>
-          </div>
-          <div class="tag" v-for="(tag, index) in item.enemy" :key="index">
-            <span :class="['tag-weight', 'tag-level' + tag.level]">
-              {{ WEIGHT2[tag.level] }}
-            </span>
-            {{ ENEMY_TYPE_TEXT[tag.type] }}
-            <span v-show="tag.astro" class="tag-astro">({{ tag.astro }})</span>
-          </div>
-          <div class="tag" v-for="(tag, index) in item.team" :key="index">
-            <span :class="['tag-weight', 'tag-level' + tag.level]">
-              {{ WEIGHT2[tag.level] }}
-            </span>
-            {{ TEAM_TYPE_TEXT[tag.type] }}
-            <span v-show="tag.astro" class="tag-astro">({{ tag.astro }})</span>
-          </div>
-        </template>
-        <div class="empty-tags" v-else></div>
+        <div class="tag" v-for="(tag, index) in item.battle" :class="'tag-level' + tag.level" :key="index">
+          <span :class="['tag-weight', 'tag-level' + tag.level]">
+            {{ WEIGHT2[tag.level] }}
+          </span>
+          {{ BATTLE_TYPE_TEXT[tag.type] }}
+          <span v-show="tag.astro" class="tag-astro">({{ tag.astro }})</span>
+        </div>
+        <div class="tag" v-for="(tag, index) in item.enemy" :key="index">
+          <span :class="['tag-weight', 'tag-level' + tag.level]">
+            {{ WEIGHT2[tag.level] }}
+          </span>
+          {{ ENEMY_TYPE_TEXT[tag.type] }}
+          <span v-show="tag.astro" class="tag-astro">({{ tag.astro }})</span>
+        </div>
+        <div class="tag" v-for="(tag, index) in item.team" :key="index">
+          <span :class="['tag-weight', 'tag-level' + tag.level]">
+            {{ WEIGHT2[tag.level] }}
+          </span>
+          {{ TEAM_TYPE_TEXT[tag.type] }}
+          <span v-show="tag.astro" class="tag-astro">({{ tag.astro }})</span>
+        </div>
       </div>
     </div>
+  </div>
+  <div class="scaleplate">
+    <span class="scaleplate-item not-recommend">C·不推荐</span>
+    <span class="scaleplate-item effective">B·有效果</span>
+    <span class="scaleplate-item general">A·通用</span>
+    <span class="scaleplate-item recommend">S·推荐</span>
   </div>
   <div class="cloud-team__title">队伍分析</div>
   <span class="cloud-team__tips">
@@ -70,7 +73,7 @@
     position="right"
     :style="{ width: '100%', height: '100vh' }"
   >
-    <selector @close="show = false"/>
+    <selector @close="show = false" />
   </van-popup>
 </template>
 
@@ -80,7 +83,6 @@ import TabTitle from "../component/TabTitle.vue";
 import Selector from "../component/Selector.vue";
 import {
   BATTLE_TYPE_TEXT,
-  WEIGHT,
   WEIGHT2,
   ENEMY_TYPE_TEXT,
   TEAM_TYPE_TEXT,
@@ -105,7 +107,6 @@ export default defineComponent({
     return {
       ...toRefs(store.state.characterModule),
       show,
-      WEIGHT,
       WEIGHT2,
       BATTLE_TYPE_TEXT,
       ENEMY_TYPE_TEXT,
@@ -225,5 +226,29 @@ export default defineComponent({
 }
 .cloud-team__tips b {
   color: #645856;
+}
+.scaleplate {
+  border: 1px solid #645856;
+  font-size: 12px;
+  border-radius: 4px;
+  display: flex;
+  overflow: hidden;
+}
+.scaleplate-item {
+  flex: 1;
+  text-align: center;
+  text-shadow: 1px 0 0 #F7F1E6, 0 1px 0 #F7F1E6, -1px 0 0 #F7F1E6, 0 -1px 0 #F7F1E6;
+}
+.not-recommend {
+  background-color: #8cffbc;
+}
+.effective {
+  background-color: #6596ff;
+}
+.general {
+  background-color: #c875ff;
+}
+.recommend {
+  background-color: #ffff2d;
 }
 </style>

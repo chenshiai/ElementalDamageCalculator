@@ -4,6 +4,7 @@
       <span class="pop-title__click">已选择({{ result.length }}/4)</span>
       选择伙伴
       <span class="pop-title__close" @click="$emit('close')">返回</span>
+      <span class="pop-title__clear" @click="resultChange([])">清空</span>
     </div>
     <div class="selector-area">
       <van-search
@@ -81,19 +82,23 @@ export default defineComponent({
 
     const configFilter = computed(() => {
       let res = CloudTeamConfig;
+      // 筛选元素
       if (element.value.length > 0) {
         res = res.filter((item) => element.value.indexOf(item.element) >= 0);
       }
+      // 筛选武器类型
       if (weapon.value.length > 0) {
         res = res.filter((item) => weapon.value.indexOf(item.weapon) >= 0);
       }
+      // 搜索关键字
       if (keyword.value) {
-        res = CloudTeamConfig.filter((item) => item.name === keyword.value);
+        res = CloudTeamConfig.filter((item) => item.name.indexOf(keyword.value) >= 0);
       }
       return res;
     });
 
     const resultChange = (value) => {
+      result.value = value;
       store.commit('setCharacterSelect', CloudTeamConfig.filter((item) => {
         return value.indexOf(item.name) >= 0;
       }));
@@ -123,17 +128,21 @@ export default defineComponent({
   text-align: center;
   line-height: 46px;
   background-color: #fff;
+  padding: 0 16px;
+  box-sizing: border-box;
   width: 100%;
   z-index: 1;
 }
 .pop-title__click {
-  position: absolute;
-  left: 16px;
+  float: left;
 }
 .pop-title__close {
-  position: absolute;
-  right: 16px;
+  float: right;
+  margin-left: 12px;
   color: rgb(255, 82, 82);
+}
+.pop-title__clear {
+  float: right;
 }
 .selector-area {
   background-color: #f7f1e6;
