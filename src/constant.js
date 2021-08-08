@@ -88,8 +88,16 @@ export const EnhancedDamageNotes = [
     title: '宗室2·元素爆发',
   },
   {
-    detail: 35,
-    title: '平雷渡火·全伤害',
+    detail: 7.5,
+    title: '魔女4·一层',
+  },
+  {
+    detail: 7.5,
+    title: '魔女4·二层',
+  },
+  {
+    detail: 7.5,
+    title: '魔女4·三层',
   },
   {
     detail: 35,
@@ -97,11 +105,15 @@ export const EnhancedDamageNotes = [
   },
   {
     detail: 35,
-    title: '乐团4·重击伤害',
+    title: '平雷渡火·全伤害',
   },
   {
     detail: 35,
-    title: '磐岩4·元素伤害',
+    title: '乐团4·重击伤害',
+  },
+  {
+    detail: 50,
+    title: '追忆4·普/重/下落伤害',
   },
   {
     detail: 25,

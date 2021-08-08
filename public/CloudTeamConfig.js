@@ -30,8 +30,8 @@ const BATTLE_TYPE = {
 
 // 输出类型标签文本
 const BATTLE_TYPE_TEXT = {
-  [BATTLE_TYPE.Resident]: "持续驻场",
-  [BATTLE_TYPE.BackGround]: "后台脱手",
+  [BATTLE_TYPE.Resident]: "驻场输出",
+  [BATTLE_TYPE.BackGround]: "后台输出",
   [BATTLE_TYPE.QuickSwitch]: "速切爆发",
 };
 
@@ -70,6 +70,8 @@ const TEAM_TYPE = {
   Berserk: "Berserk",
   /** 充能 */
   Charged: "Charged",
+  /** 附着 */
+  Adhere: "Adhere",
 };
 
 const TEAM_TYPE_TEXT = {
@@ -79,14 +81,7 @@ const TEAM_TYPE_TEXT = {
   [TEAM_TYPE.Mobility]: "机动性",
   [TEAM_TYPE.Berserk]: "增伤效果",
   [TEAM_TYPE.Charged]: "充能效果",
-};
-
-const WEIGHT = {
-  5: "S",
-  4: "A",
-  3: "B",
-  2: "C",
-  1: "D",
+  [TEAM_TYPE.Adhere]: "元素附着",
 };
 
 const WEIGHT2 = {
@@ -973,11 +968,37 @@ const CloudTeamConfig = [
       },
     ],
   },
+  {
+    name: "优菈",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/03/03/4328207/6a54af5aca341883859f5d24da3000fe_2050065262186292792.png",
+    element: ELEMENT_TYPE.Cryo,
+    weapon: WEAPON_TYPE.GreatSword,
+    battle: [],
+    enemy: [],
+    team: [],
+  },
+  {
+    name: "枫原万叶",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/03/03/4328207/6a54af5aca341883859f5d24da3000fe_2050065262186292792.png",
+    element: ELEMENT_TYPE.Anemo,
+    weapon: WEAPON_TYPE.Sword,
+    battle: [],
+    enemy: [],
+    team: [],
+  },
+  {
+    name: "神里绫华",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/03/03/4328207/6a54af5aca341883859f5d24da3000fe_2050065262186292792.png",
+    element: ELEMENT_TYPE.Cryo,
+    weapon: WEAPON_TYPE.Sword,
+    battle: [],
+    enemy: [],
+    team: [],
+  },
 ];
 
 export {
   CloudTeamConfig,
-  WEIGHT,
   WEIGHT2,
   BATTLE_TYPE_TEXT,
   ENEMY_TYPE_TEXT,

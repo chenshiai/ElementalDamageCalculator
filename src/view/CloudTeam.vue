@@ -1,6 +1,6 @@
 <template>
   <div class="tips">
-    角色自身能力的纵向对比。命座的获取难度、操作难度、实际效果等多方面因素都会影响评级，未计入圣遗物以及武器的影响，仅供参考。
+    考虑到泛用性，本页展示的均为0命角色的能力，未计入圣遗物以及武器的影响，仅供参考。
   </div>
   <tab-title>标签化云配队</tab-title>
   <div class="team-list">
@@ -13,32 +13,35 @@
         <div class="empty" v-else></div>
       </div>
       <div class="team-list__tags">
-        <template v-if="item.battle || item.enemy || item.team">
-          <div class="tag" v-for="(tag, index) in item.battle" :key="index">
-            <span :class="['tag-weight', 'tag-level' + tag.level]">
-              {{ WEIGHT2[tag.level] }}
-            </span>
-            {{ BATTLE_TYPE_TEXT[tag.type] }}
-            <span v-show="tag.astro" class="tag-astro">({{ tag.astro }})</span>
-          </div>
-          <div class="tag" v-for="(tag, index) in item.enemy" :key="index">
-            <span :class="['tag-weight', 'tag-level' + tag.level]">
-              {{ WEIGHT2[tag.level] }}
-            </span>
-            {{ ENEMY_TYPE_TEXT[tag.type] }}
-            <span v-show="tag.astro" class="tag-astro">({{ tag.astro }})</span>
-          </div>
-          <div class="tag" v-for="(tag, index) in item.team" :key="index">
-            <span :class="['tag-weight', 'tag-level' + tag.level]">
-              {{ WEIGHT2[tag.level] }}
-            </span>
-            {{ TEAM_TYPE_TEXT[tag.type] }}
-            <span v-show="tag.astro" class="tag-astro">({{ tag.astro }})</span>
-          </div>
-        </template>
-        <div class="empty-tags" v-else></div>
+        <div class="tag" v-for="(tag, index) in item.battle" :class="'tag-level' + tag.level" :key="index">
+          <span :class="['tag-weight', 'tag-level' + tag.level]">
+            {{ WEIGHT2[tag.level] }}
+          </span>
+          {{ BATTLE_TYPE_TEXT[tag.type] }}
+          <span v-show="tag.astro" class="tag-astro">({{ tag.astro }})</span>
+        </div>
+        <div class="tag" v-for="(tag, index) in item.enemy" :key="index">
+          <span :class="['tag-weight', 'tag-level' + tag.level]">
+            {{ WEIGHT2[tag.level] }}
+          </span>
+          {{ ENEMY_TYPE_TEXT[tag.type] }}
+          <span v-show="tag.astro" class="tag-astro">({{ tag.astro }})</span>
+        </div>
+        <div class="tag" v-for="(tag, index) in item.team" :key="index">
+          <span :class="['tag-weight', 'tag-level' + tag.level]">
+            {{ WEIGHT2[tag.level] }}
+          </span>
+          {{ TEAM_TYPE_TEXT[tag.type] }}
+          <span v-show="tag.astro" class="tag-astro">({{ tag.astro }})</span>
+        </div>
       </div>
     </div>
+  </div>
+  <div class="scaleplate">
+    <span class="scaleplate-item not-recommend">C·不推荐</span>
+    <span class="scaleplate-item effective">B·有效果</span>
+    <span class="scaleplate-item general">A·通用</span>
+    <span class="scaleplate-item recommend">S·推荐</span>
   </div>
   <div class="cloud-team__title">队伍分析</div>
   <span class="cloud-team__tips">
@@ -46,23 +49,23 @@
   </span>
   <div class="cloud-team__title">评级目的</div>
   <span class="cloud-team__tips">
-    并不是为了配出伤害最高的队伍，而是帮助更快地分析自身队伍的构成特点。同时对某个角色的培养方向和使用方向做引导。每个玩家心中的评级标准都是不一样的，本评级旨在给其他玩家提供参考，切勿盲目行事。
+    并不是为了配出伤害最高的队伍，而是帮助更快地分析自身队伍的构成特点。同时对某个角色的培养方向和使用方向做引导。注意：每个玩家心中的评级标准都是不一样的，本评级旨在给其他玩家提供参考，切勿盲目行事。
   </span>
   <div class="cloud-team__title">评级标准</div>
   <span class="cloud-team__tips">
-    约定：以角色自身所拥有的能力来纵向评价，每个角色应该至少拥有一项突出能力(评级A)，再以此能力所带来的价值为标准来评价其他能力能够带来的价值。
-    <p><b>持续驻场</b>：角色主要的伤害输出，需要依靠长时间站场来完成。受伤害倍率、冷却时间、充能需求、攻击范围、命座获取等因素影响。</p>
+    约定：评级均以0命角色为例。以角色自身所拥有的能力来纵向评价，每个角色应该至少拥有一项突出能力(评级A及以上)，再以此能力所带来的价值为标准来评价其他能力。
+    <p><b>持续驻场</b>：角色主要的伤害输出，需要依靠长时间站场来完成。受伤害倍率、冷却时间、充能需求、攻击范围等因素影响。</p>
     <p><b>后台脱手</b>：角色主要的伤害输出，只用在后台即可完成绝大部分。影响因素同上。</p>
     <p><b>速切爆发</b>：角色主要的伤害输出，可以在较短的时间内完成。影响因素同上。</p>
-    <p><b>控制效果</b>：角色技能可以影响敌人的行动，例如牵引、嘲讽、石化、阻挡和束缚等效果。受控制强度、控制时间、泛用性、冷却时间和命座获取等因素影响。</p>
-    <p><b>抗性削减</b>：角色技能可以削减敌人的元素或物理抗性。受削减量、覆盖率、易用性、冷却时间和命座获取等因素影响。</p>
+    <p><b>控制效果</b>：角色技能可以影响敌人的行动，例如牵引、嘲讽、石化、阻挡和束缚等效果。受控制强度、控制时间、泛用性和冷却时间等因素影响。</p>
+    <p><b>抗性削减</b>：角色技能可以削减敌人的元素或物理抗性。受削减量、覆盖率、易用性和冷却时间等因素影响。</p>
     <p><b>防御减少</b>：角色技能可以减少敌人的防御力。影响因素同上。</p>
     <p><b>敌方削弱</b>：角色技能可以削弱敌人的伤害能力。影响因素同上。</p>
-    <p><b>治疗能力</b>：角色技能可以治疗友方角色。受总治疗量、秒治疗量、覆盖率和命座获取等因素影响。</p>
-    <p><b>护盾产生</b>：角色技能可以产生吸收伤害的护盾。受总吸收量、覆盖率和命座获取等因素影响。</p>
-    <p><b>增伤效果</b>：角色技能可以提高友方角色的伤害。受覆盖率、泛用性和命座获取等因素影响。</p>
-    <p><b>机动性</b>：角色可以给队伍带来机动性的提升，包括但不限于 冲刺体力消耗降低、移动速度增加、快速位移、起飞上升等，受提升强度、实用性、冷却时间和命座获取等因素影响。</p>
-    <p><b>充能效果</b>：角色除了自身元素战技产生的元素微粒以外，由天赋或命座带来的额外充能，主要受到命座获取难度的影响。</p>
+    <p><b>治疗能力</b>：角色技能可以治疗友方角色。受总治疗量、秒治疗量和覆盖率等因素影响。</p>
+    <p><b>护盾产生</b>：角色技能可以产生吸收伤害的护盾。受总吸收量和覆盖率等因素影响。</p>
+    <p><b>增伤效果</b>：角色技能可以提高友方角色的伤害。受覆盖率和泛用性等因素影响。</p>
+    <p><b>机动性</b>：角色可以给队伍带来机动性的提升，包括但不限于 冲刺体力消耗降低、移动速度增加、快速位移、起飞上升等，受提升强度、实用性和冷却时间等因素影响。</p>
+    <p><b>元素附着</b>：角色可以给敌人或者队友持续带来元素附着，受持续时间、影响范围和冷却时间等因素影响</p>
   </span>
   <van-popup
     teleport="#app"
@@ -70,7 +73,7 @@
     position="right"
     :style="{ width: '100%', height: '100vh' }"
   >
-    <selector @close="show = false"/>
+    <selector @close="show = false" />
   </van-popup>
 </template>
 
@@ -80,7 +83,6 @@ import TabTitle from "../component/TabTitle.vue";
 import Selector from "../component/Selector.vue";
 import {
   BATTLE_TYPE_TEXT,
-  WEIGHT,
   WEIGHT2,
   ENEMY_TYPE_TEXT,
   TEAM_TYPE_TEXT,
@@ -105,7 +107,6 @@ export default defineComponent({
     return {
       ...toRefs(store.state.characterModule),
       show,
-      WEIGHT,
       WEIGHT2,
       BATTLE_TYPE_TEXT,
       ENEMY_TYPE_TEXT,
@@ -225,5 +226,29 @@ export default defineComponent({
 }
 .cloud-team__tips b {
   color: #645856;
+}
+.scaleplate {
+  border: 1px solid #645856;
+  font-size: 12px;
+  border-radius: 4px;
+  display: flex;
+  overflow: hidden;
+}
+.scaleplate-item {
+  flex: 1;
+  text-align: center;
+  text-shadow: 1px 0 0 #F7F1E6, 0 1px 0 #F7F1E6, -1px 0 0 #F7F1E6, 0 -1px 0 #F7F1E6;
+}
+.not-recommend {
+  background-color: #8cffbc;
+}
+.effective {
+  background-color: #6596ff;
+}
+.general {
+  background-color: #c875ff;
+}
+.recommend {
+  background-color: #ffff2d;
 }
 </style>
