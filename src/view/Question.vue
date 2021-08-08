@@ -70,7 +70,7 @@ export default defineComponent({
 
   methods: {
     imagePreview() {
-      ImagePreview(['https://saomdpb.com/IMG_1457.PNG']);
+      ImagePreview(['http://saomdpb.com/IMG_1457.PNG']);
     },
   },
 });

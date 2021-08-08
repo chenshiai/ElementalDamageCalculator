@@ -47,6 +47,12 @@
       >
         <template #title>
           {{ name }}
+          <van-icon
+            size="26"
+            @click.stop="deleteLocalData(name)"
+            class="delete-icon"
+            name="delete-o"
+          />
         </template>
         <ul class="data-detail">
           <li
@@ -67,7 +73,7 @@
 <script>
 import { defineComponent, ref, computed } from "vue";
 import { useStore } from "vuex";
-import { Popup, Field, Toast, Collapse, CollapseItem } from "vant";
+import { Popup, Field, Toast, Collapse, CollapseItem, Icon } from "vant";
 import {
   getLocalStorage,
   deepCopyObject,
@@ -81,6 +87,7 @@ export default defineComponent({
     [Collapse.name]: Collapse,
     [Field.name]: Field,
     [Popup.name]: Popup,
+    [Icon.name]: Icon,
     [CollapseItem.name]: CollapseItem,
   },
 
@@ -206,6 +213,22 @@ export default defineComponent({
       return `伤害数值：${common}  暴击伤害：${crit}`;
     };
 
+    const deleteLocalData = (name) => {
+      try {
+        const sourceData = getLocalStorage("GenShinImpactCustomData", {});
+        delete sourceData[name];
+
+        window.localStorage.setItem(
+          "GenShinImpactCustomData",
+          JSON.stringify(sourceData)
+        );
+        localData.value = sourceData;
+        Toast.success("删除成功");
+      } catch {
+        Toast.fail("删除失败");
+      }
+    };
+
     return {
       config,
       showPopup,
@@ -218,6 +241,7 @@ export default defineComponent({
       opened,
       formatData,
       getLabel,
+      deleteLocalData,
     };
   },
 });
@@ -227,6 +251,14 @@ export default defineComponent({
 .save-data {
   display: flex;
   justify-content: space-between;
+}
+.data-title {
+  position: relative;
+}
+.delete-icon {
+  position: absolute;
+  right: 16px;
+  top: 16px;
 }
 .save-btn {
   width: 45%;
