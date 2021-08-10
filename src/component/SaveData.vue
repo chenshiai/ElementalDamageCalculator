@@ -251,6 +251,7 @@ export default defineComponent({
 .save-data {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 40px;
 }
 .data-title {
   position: relative;

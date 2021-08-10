@@ -995,6 +995,24 @@ const CloudTeamConfig = [
     enemy: [],
     team: [],
   },
+  {
+    name: "宵宫",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/03/03/4328207/6a54af5aca341883859f5d24da3000fe_2050065262186292792.png",
+    element: ELEMENT_TYPE.Hydro,
+    weapon: WEAPON_TYPE.Bow,
+    battle: [],
+    enemy: [],
+    team: [],
+  },
+  {
+    name: "早柚",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/03/03/4328207/6a54af5aca341883859f5d24da3000fe_2050065262186292792.png",
+    element: ELEMENT_TYPE.Anemo,
+    weapon: WEAPON_TYPE.GreatSword,
+    battle: [],
+    enemy: [],
+    team: [],
+  },
 ];
 
 export {
@@ -1005,7 +1023,7 @@ export {
   TEAM_TYPE_TEXT,
 };
 
-/**
+/** 旧案
  * 标签化数据结构：
 权重分级：S、A、B、C、D 对应颜色，橙、紫、蓝、绿、灰
 此分级仅代表自身各项能力的突出点，而不是和其他人横向比较。

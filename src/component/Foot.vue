@@ -39,7 +39,6 @@ export default {
 
 <style>
 .foot {
-  padding: 16px;
   font-size: 14px;
 }
 </style>

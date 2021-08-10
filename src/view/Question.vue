@@ -54,10 +54,12 @@
       </a>
     </p>
   </div>
+  <foot />
 </template>
 
 <script>
 import { defineComponent } from "vue";
+import Foot from "../component/Foot.vue";
 import TabTitle from "../component/TabTitle.vue";
 import { ImagePreview } from "vant";
 
@@ -65,6 +67,7 @@ export default defineComponent({
   name: "question",
 
   components: {
+    [Foot.name]: Foot,
     [TabTitle.name]: TabTitle,
   },
 
