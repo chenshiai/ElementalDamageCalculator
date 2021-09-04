@@ -42,7 +42,9 @@
       v-model="extraPercentATK"
       title="攻击力BUFF加成%"
       :notes="ATKNotes"
-      @noteChange="ATKNoteChange"
+      @updateNoteGroup="ATKNoteChange"
+      :selectedNotes="selectedExtraATKNotes"
+      :setSelectedNotes="setSelectedExtraATKNotes"
     />
     <detail-block>
       这里『攻击力BUFF加成%』的数值，是以『基础攻击力』的百分比来算的，会直接加在最上方『攻击力总计』的
@@ -73,7 +75,9 @@
       v-model="elementDemage"
       title="伤害加成%"
       :notes="EDNotes"
-      @noteChange="EDNoteChange"
+      @updateNoteGroup="EDNoteChange"
+      :selectedNotes="selectedElementDemageNotes"
+      :setSelectedNotes="setSelectedElementDemageNotes"
     />
     <detail-block>
       伤害加成的数值 = 造成伤害提高 + 元素/物理伤害加成 + 普攻/重击造成伤害提高
@@ -246,7 +250,7 @@
       />
     </template>
   </van-cell>
-  <save-data />
+  <save-data @recalculationData="recalculationData" />
 </template>
 
 <script>
@@ -348,8 +352,52 @@ export default defineComponent({
       );
     });
 
+    const setSelectedExtraATKNotes = (value) => {
+      store.commit("setSelectedExtraATKNotes", value);
+    };
+
+    const setSelectedElementDemageNotes = (value) => {
+      store.commit("setSelectedElementDemageNotes", value);
+    };
+
+    const recalculationData = (value) => {
+      const {
+        baseATK,
+        extraATK,
+        extraPercentATK,
+        critDemage,
+        elementDemage,
+        evaporationDemage,
+        atkRate,
+        atkType,
+        characterLevel,
+        enemyLevel,
+        enemyResistance,
+        weaken,
+        armour,
+        selectedExtraATKNotes,
+        selectedElementDemageNotes,
+      } = value;
+      store.commit('setBaseATK', baseATK);
+      store.commit('setExtraATK', extraATK);
+      store.commit('setExtraPercentATK', extraPercentATK);
+      store.commit('setCritDemage', critDemage);
+      store.commit('setElementDemage', elementDemage);
+      store.commit('setEvaporationDemage', evaporationDemage);
+      store.commit('setAtkRate', atkRate);
+      store.commit('setAtkType', atkType);
+      store.commit('setCharacterLevel', characterLevel);
+      store.commit('setEnemyLevel', enemyLevel);
+      store.commit('setEnemyResistance', enemyResistance);
+      store.commit('setWeaken', weaken);
+      store.commit('setArmour', armour);
+      store.commit('setSelectedExtraATKNotes', selectedExtraATKNotes);
+      store.commit('setSelectedElementDemageNotes', selectedElementDemageNotes);
+    };
+
     return {
       ...toRefs(store.state.demageModule),
+      ...toRefs(store.state.saveDataModule),
       extraATKNumber,
       checked,
       changeSwitch,
@@ -361,6 +409,9 @@ export default defineComponent({
       EDNoteChange,
       ATKNotes,
       ATKNoteChange,
+      recalculationData,
+      setSelectedExtraATKNotes,
+      setSelectedElementDemageNotes,
     };
   },
 });

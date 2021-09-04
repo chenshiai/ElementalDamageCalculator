@@ -32,7 +32,7 @@
     v-model:show="showDataPopup"
     position="top"
   >
-    <div class="tips">点击对应数据，可以展开查看详情。</div>
+    <div class="tips">点击对应数据，可以展开查看详情。支持「重算」「删除」</div>
     <van-collapse
       class="data-popup__collapse"
       v-if="Object.keys(localData).length > 0"
@@ -47,6 +47,12 @@
       >
         <template #title>
           {{ name }}
+          <van-icon
+            name="replay"
+            @click.stop="recalculation(val)"
+            size="26"
+            class="replay-icon"
+          />
           <van-icon
             size="26"
             @click.stop="deleteLocalData(name)"
@@ -83,6 +89,8 @@ import {
 export default defineComponent({
   name: "save-data",
 
+  emits: ["recalculationData"],
+
   components: {
     [Collapse.name]: Collapse,
     [Field.name]: Field,
@@ -91,7 +99,7 @@ export default defineComponent({
     [CollapseItem.name]: CollapseItem,
   },
 
-  setup() {
+  setup(props, { emit }) {
     const showPopup = ref(false);
     const showDataPopup = ref(false);
     const remark = ref("");
@@ -186,9 +194,13 @@ export default defineComponent({
         Toast.fail("请输入备注");
         return;
       }
+      const { demageModule, saveDataModule } = store.state;
       try {
         const sourceData = getLocalStorage("GenShinImpactCustomData", {});
-        sourceData[remark.value] = deepCopyObject(store.state.demageModule);
+        sourceData[remark.value] = deepCopyObject({
+          ...demageModule,
+          ...saveDataModule,
+        });
 
         window.localStorage.setItem(
           "GenShinImpactCustomData",
@@ -229,6 +241,11 @@ export default defineComponent({
       }
     };
 
+    const recalculation = (value) => {
+      showPopup.value = false;
+      emit("recalculationData", value);
+    };
+
     return {
       config,
       showPopup,
@@ -242,6 +259,7 @@ export default defineComponent({
       formatData,
       getLabel,
       deleteLocalData,
+      recalculation,
     };
   },
 });
@@ -251,7 +269,7 @@ export default defineComponent({
 .save-data {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 40px;
+  margin-bottom: 10px;
 }
 .data-title {
   position: relative;
@@ -259,7 +277,16 @@ export default defineComponent({
 .delete-icon {
   position: absolute;
   right: 16px;
-  top: 16px;
+  top: 50%;
+  color: #f51e1e;
+  transform: translateY(-50%);
+}
+.replay-icon {
+  position: absolute;
+  right: 66px;
+  top: 50%;
+  color: #2ee27f;
+  transform: translateY(-50%);
 }
 .save-btn {
   width: 45%;

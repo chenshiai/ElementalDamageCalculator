@@ -47,14 +47,14 @@
 </template>
 
 <script>
-import { defineComponent, reactive, ref } from "vue";
+import { defineComponent, reactive, ref, watch } from "vue";
 import { Icon, Popup, Field, Toast } from "vant";
-import { floatNum } from "../utils";
+import { deepCopyObject, floatNum } from "../utils";
 
 export default defineComponent({
   name: "note-group",
 
-  emits: ["update:modelValue", "noteChange"],
+  emits: ["update:modelValue", "updateNoteGroup"],
 
   components: {
     [Icon.name]: Icon,
@@ -66,6 +66,8 @@ export default defineComponent({
     modelValue: String | Number,
     title: String,
     notes: Array,
+    selectedNotes: Object,
+    setSelectedNotes: Function,
   },
 
   setup(props, { emit }) {
@@ -93,11 +95,12 @@ export default defineComponent({
           floatNum(props.modelValue) + floatNum(selectedMemos.value[key])
         );
       }
+      props.setSelectedNotes(deepCopyObject(selectedMemos.value));
     };
     const deleteMemo = (item) => {
       const key = item.title;
       const notesFilter = props.notes.filter((item) => item.title !== key);
-      emit("noteChange", notesFilter);
+      emit("updateNoteGroup", notesFilter);
 
       if (selectedMemos.value[key]) {
         changeValue(
@@ -116,7 +119,7 @@ export default defineComponent({
       detail: "",
       title: "",
     });
-    const addNewNote = () => {
+    const addNewNote = (remind = true) => {
       if (!newMemo.detail || !newMemo.title) {
         Toast.fail("不能为空值");
         return;
@@ -130,17 +133,33 @@ export default defineComponent({
       selectMemo(newMemo);
       newMemo.detail = "";
       newMemo.title = "";
-      props.notes.forEach((item) => {
-        newNotes.push(item);
-      });
-      emit("noteChange", newNotes);
-      Toast.success("添加成功");
+
+      emit("updateNoteGroup", newNotes.concat(props.notes));
+      if (remind) Toast.success("添加成功");
     };
 
     const formatterDetail = (value) => {
       if (!value) return "";
       return floatNum(value);
     };
+
+    watch(
+      () => props.selectedNotes,
+      (newVal) => {
+        selectedMemos.value = deepCopyObject(newVal);
+        const supplementNotes = [];
+        for (let key in selectedMemos.value) {
+          if (!props.notes.find((item) => item.title === key)) {
+            supplementNotes.push({
+              title: key,
+              detail: selectedMemos.value[key],
+            });
+          }
+        }
+        if (supplementNotes.length > 0)
+          emit("updateNoteGroup", supplementNotes.concat(props.notes));
+      }
+    );
 
     return {
       isExpand,

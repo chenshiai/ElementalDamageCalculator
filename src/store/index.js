@@ -38,6 +38,9 @@ const demageModule = {
     setExtraATK(state, value) {
       state.extraATK = value;
     },
+    setExtraPercentATK(state, value) {
+      state.extraPercentATK = value;
+    },
     setCritDemage(state, value) {
       state.critDemage = value;
     },
@@ -71,10 +74,29 @@ const demageModule = {
   },
 };
 
+// 记录当前所选择Note
+const saveDataModule = {
+  state: () => {
+    return {
+      selectedExtraATKNotes: {},
+      selectedElementDemageNotes: {},
+    }
+  },
+  mutations: {
+    setSelectedExtraATKNotes(state, value) {
+      state.selectedExtraATKNotes = value || {};
+    },
+    setSelectedElementDemageNotes(state, value) {
+      state.selectedElementDemageNotes = value || {};
+    }
+  }
+}
+
 const store = createStore({
   modules: {
     characterModule,
     demageModule,
+    saveDataModule,
   },
 });
 
