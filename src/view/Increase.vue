@@ -45,6 +45,7 @@
       @updateNoteGroup="ATKNoteChange"
       :selectedNotes="selectedExtraATKNotes"
       :setSelectedNotes="setSelectedExtraATKNotes"
+      :calculationMode="AtkPercentCalculationMode"
     />
     <detail-block>
       这里『攻击力BUFF加成%』的数值，是以『基础攻击力』的百分比来算的，会直接加在最上方『攻击力总计』的
@@ -78,6 +79,7 @@
       @updateNoteGroup="EDNoteChange"
       :selectedNotes="selectedElementDemageNotes"
       :setSelectedNotes="setSelectedElementDemageNotes"
+      :calculationMode="EnhancedDemageCalculationMode"
     />
     <detail-block>
       伤害加成的数值 = 造成伤害提高 + 元素/物理伤害加成 + 普攻/重击造成伤害提高
@@ -271,7 +273,7 @@ import NoteGroup from "../component/NoteGroup.vue";
 import DetailBlock from "../component/Detail.vue";
 import SaveData from "../component/SaveData.vue";
 import { useStore } from "vuex";
-import { EnhancedDamageNotes, AtkPercentNotes } from "../constant";
+import { EnhancedDamageNotes, AtkPercentNotes, AtkPercentCalculationMode, EnhancedDemageCalculationMode } from "../constant";
 
 export default defineComponent({
   name: "increase",
@@ -412,6 +414,8 @@ export default defineComponent({
       recalculationData,
       setSelectedExtraATKNotes,
       setSelectedElementDemageNotes,
+      EnhancedDemageCalculationMode,
+      AtkPercentCalculationMode,
     };
   },
 });

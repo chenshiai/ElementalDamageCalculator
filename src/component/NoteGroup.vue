@@ -23,11 +23,24 @@
   </div>
   <van-popup teleport="#app" v-model:show="showPopup" position="top">
     <div class="popup-title">新增『{{ title }}』标签</div>
+    <van-tabs
+      v-show="calculationMode.length > 1"
+      class="calculation-mode"
+      v-model:active="active"
+      color="#997874"
+      line-width="60px"
+    >
+      <van-tab
+        v-for="mode in calculationMode"
+        :title="mode.title"
+        :key="mode.title"
+      ></van-tab>
+    </van-tabs>
     <van-field
       v-model="newMemo.detail"
       type="number"
-      label="具体数值"
-      placeholder="输入数值（支持一位小数）"
+      :label="calculationMode[active].label"
+      :placeholder="calculationMode[active].placeholder"
       :formatter="formatterDetail"
       format-trigger="onBlur"
     />
@@ -48,7 +61,7 @@
 
 <script>
 import { defineComponent, reactive, ref, watch } from "vue";
-import { Icon, Popup, Field, Toast } from "vant";
+import { Cell, Icon, Popup, Field, Toast, Tab, Tabs } from "vant";
 import { deepCopyObject, floatNum } from "../utils";
 
 export default defineComponent({
@@ -57,6 +70,9 @@ export default defineComponent({
   emits: ["update:modelValue", "updateNoteGroup"],
 
   components: {
+    [Tab.name]: Tab,
+    [Tabs.name]: Tabs,
+    [Cell.name]: Cell,
     [Icon.name]: Icon,
     [Field.name]: Field,
     [Popup.name]: Popup,
@@ -68,6 +84,7 @@ export default defineComponent({
     notes: Array,
     selectedNotes: Object,
     setSelectedNotes: Function,
+    calculationMode: Array,
   },
 
   setup(props, { emit }) {
@@ -124,13 +141,13 @@ export default defineComponent({
         Toast.fail("不能为空值");
         return;
       }
-      const newNotes = [
-        {
-          detail: newMemo.detail,
-          title: newMemo.title,
-        },
-      ];
-      selectMemo(newMemo);
+      const { getResult } = props.calculationMode[active.value];
+      const noteValue = {
+        detail: getResult(newMemo.detail),
+        title: newMemo.title,
+      };
+      const newNotes = [noteValue];
+      selectMemo(noteValue);
       newMemo.detail = "";
       newMemo.title = "";
 
@@ -142,6 +159,8 @@ export default defineComponent({
       if (!value) return "";
       return floatNum(value);
     };
+
+    const active = ref(0);
 
     watch(
       () => props.selectedNotes,
@@ -162,6 +181,7 @@ export default defineComponent({
     );
 
     return {
+      active,
       isExpand,
       newMemo,
       selectMemo,
