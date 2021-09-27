@@ -294,9 +294,13 @@ export default defineComponent({
   },
 
   setup() {
+    /** 炽烈的炎之魔女开关 */
     const checked = ref(false);
+    /** 滑块辅助调整开关 */
     const sliderChecked = ref(false);
+    /** 防御抗性乘区开关 */
     const otherChecked = ref(false);
+    /** 置顶展示开关 */
     const floatChecked = ref(false);
     const store = useStore();
 
@@ -364,35 +368,10 @@ export default defineComponent({
 
     const recalculationData = (value) => {
       const {
-        baseATK,
-        extraATK,
-        extraPercentATK,
-        critDemage,
-        elementDemage,
-        evaporationDemage,
-        atkRate,
-        atkType,
-        characterLevel,
-        enemyLevel,
-        enemyResistance,
-        weaken,
-        armour,
         selectedExtraATKNotes,
         selectedElementDemageNotes,
       } = value;
-      store.commit('setBaseATK', baseATK);
-      store.commit('setExtraATK', extraATK);
-      store.commit('setExtraPercentATK', extraPercentATK);
-      store.commit('setCritDemage', critDemage);
-      store.commit('setElementDemage', elementDemage);
-      store.commit('setEvaporationDemage', evaporationDemage);
-      store.commit('setAtkRate', atkRate);
-      store.commit('setAtkType', atkType);
-      store.commit('setCharacterLevel', characterLevel);
-      store.commit('setEnemyLevel', enemyLevel);
-      store.commit('setEnemyResistance', enemyResistance);
-      store.commit('setWeaken', weaken);
-      store.commit('setArmour', armour);
+      store.commit('setUnifiedState', value);
       store.commit('setSelectedExtraATKNotes', selectedExtraATKNotes);
       store.commit('setSelectedElementDemageNotes', selectedElementDemageNotes);
     };
