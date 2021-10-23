@@ -86,25 +86,102 @@
   </detail-block>
   <div class="result">
     <div class="damage-tag" v-for="(item, index) in demageResult" :key="index">
-      <span :class="['damage-tag__title', item.class]">{{ item.name }}</span>{{ item.detail }}
+      <span :class="['damage-tag__title', item.class]">{{ item.name }}</span
+      >{{ item.detail }}
     </div>
   </div>
+  <tab-title>护盾有多能抗</tab-title>
+  <div class="tips">
+    护盾吸收效果是护盾自身的属性，护盾强效则是被保护角色给予护盾的属性。
+  </div>
+  <div class="base-data">
+    <div class="data-panel__title">
+      护盾吸收效果
+      <van-cell-group>
+        <van-radio-group style="margin-top: 12px" v-model="shieldType">
+          <van-cell
+            clickable
+            title="岩元素护盾:150%"
+            @click="changeShield(Shield.earth)"
+          >
+            <template #right-icon>
+              <van-radio :name="Shield.earth" checked-color="#766461" />
+            </template>
+          </van-cell>
+          <van-cell
+            clickable
+            title="对应元素伤害:250%"
+            @click="changeShield(Shield.special)"
+          >
+            <template #right-icon>
+              <van-radio :name="Shield.special" checked-color="#766461" />
+            </template>
+          </van-cell>
+          <van-cell
+            title="无对应元素伤害:100%"
+            clickable
+            @click="changeShield(Shield.common)"
+          >
+            <template #right-icon>
+              <van-radio :name="Shield.common" checked-color="#766461" />
+            </template>
+          </van-cell>
+        </van-radio-group>
+      </van-cell-group>
+    </div>
+    <div class="base-damage__title">
+      护盾强效%
+      <van-stepper
+        v-model="data.shieldStrong"
+        integer
+        input-width="46px"
+        button-size="20"
+        theme="round"
+        min="0"
+      />
+      <span class="holy-relic-tips">被保护角色的护盾强效</span>
+    </div>
+    <van-slider v-model="data.shieldStrong" :max="200" active-color="#645856" />
+  </div>
+  <detail-block>
+    每1点护盾值可吸收<span class="more-rate">{{ shieldConversion }}</span>点伤害
+    <br />
+    等价于护盾拥有<span class="more-rate">{{ shieldRemission }}%</span>的伤害减免
+    <br />
+    护盾受到的伤害是在计算过角色防御力、抗性后的伤害
+  </detail-block>
 </template>
 
 <script>
-import { computed, defineComponent, reactive, ref } from "vue";
+import { computed, defineComponent, reactive, toRefs } from "vue";
 import { base as Base, WITCH, THUNDER, EMERALD } from "../constant";
 import { calculate, calculate2, calculate3 } from "../utils";
 import TabTitle from "../component/TabTitle.vue";
 import DetailBlock from "../component/Detail.vue";
-import { Slider, Stepper } from "vant";
+import { CellGroup, Cell, Slider, Stepper, RadioGroup, Radio } from "vant";
+
+const Shield = {
+  common: "common",
+  earth: "earth",
+  special: "special",
+};
+
+const ShieldRate = {
+  [Shield.common]: 1,
+  [Shield.earth]: 1.5,
+  [Shield.special]: 2.5,
+};
 
 export default defineComponent({
   name: "elemental-damage-calculator",
   components: {
+    [Cell.name]: Cell,
     [Slider.name]: Slider,
     [Stepper.name]: Stepper,
     [TabTitle.name]: TabTitle,
+    [RadioGroup.name]: RadioGroup,
+    [Radio.name]: Radio,
+    [CellGroup.name]: CellGroup,
     [DetailBlock.name]: DetailBlock,
   },
   setup() {
@@ -113,21 +190,24 @@ export default defineComponent({
       level: 80,
       base: Base,
       check: "",
+
+      shieldType: "common",
+      shieldStrong: 0,
     });
 
     // 增幅倍率
     const Rate = computed(() => {
-      return (calculate(data.elementalMystery)).toFixed(1);
+      return calculate(data.elementalMystery).toFixed(1);
     });
 
     // 聚变倍率
     const servitude = computed(() => {
-      return (calculate2(data.elementalMystery)).toFixed(1);
+      return calculate2(data.elementalMystery).toFixed(1);
     });
 
     // 结晶倍率
     const crystallization = computed(() => {
-      return (calculate3(data.elementalMystery)).toFixed(1);
+      return calculate3(data.elementalMystery).toFixed(1);
     });
 
     const moreRate = computed(() => {
@@ -139,10 +219,10 @@ export default defineComponent({
 
     const servitudeMoreRate = computed(() => {
       if (data.check === THUNDER) {
-        return " 超载/超导/感电+40%"
+        return " 超载/超导/感电+40%";
       }
       if (data.check === WITCH) {
-        return " 超载+40%"
+        return " 超载+40%";
       }
       if (data.check === EMERALD) {
         return " 扩散+60%";
@@ -200,10 +280,27 @@ export default defineComponent({
       if (Base.crystallize[data.level]) {
         return Math.round(
           Base.crystallize[data.level] *
-            (1 + (calculate(data.elementalMystery) / 5 * 8 / 100))
+            (1 + ((calculate(data.elementalMystery) / 5) * 8) / 100)
         );
       }
-      return '无数据';
+      return "无数据";
+    });
+
+    // 护盾转换
+    const shieldConversion = computed(() => {
+      return (
+        1 *
+        ShieldRate[data.shieldType] *
+        (1 + data.shieldStrong / 100)
+      ).toFixed(2);
+    });
+
+    // 护盾减免率
+    const shieldRemission = computed(() => {
+      return (
+        100 -
+        100 / (ShieldRate[data.shieldType] * (1 + data.shieldStrong / 100))
+      ).toFixed(2);
     });
 
     const changeCheck = (relic) => {
@@ -212,6 +309,10 @@ export default defineComponent({
       } else {
         data.check = relic;
       }
+    };
+
+    const changeShield = (type) => {
+      data.shieldType = type;
     };
 
     const demageResult = computed(() => {
@@ -251,6 +352,7 @@ export default defineComponent({
 
     return {
       data,
+      ...toRefs(data),
       Rate,
       servitude,
       crystallization,
@@ -259,6 +361,10 @@ export default defineComponent({
       changeCheck,
       moreRate,
       servitudeMoreRate,
+      Shield,
+      changeShield,
+      shieldRemission,
+      shieldConversion,
     };
   },
 });

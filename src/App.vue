@@ -2,7 +2,7 @@
   <div class="top-overhang">
     <div class="top-tabs">
       <router-link to="/" class="top-tabs__item">
-        精通伤害
+        剧变&护盾
       </router-link>
       <router-link to="/increasing-range" class="top-tabs__item">
         伤害计算
