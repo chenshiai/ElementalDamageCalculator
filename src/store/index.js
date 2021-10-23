@@ -71,6 +71,36 @@ const demageModule = {
     setArmour(state, value) {
       state.armour = value;
     },
+    setUnifiedState(state, value) {
+      const {
+        baseATK,
+        extraATK,
+        extraPercentATK,
+        critDemage,
+        elementDemage,
+        evaporationDemage,
+        atkRate,
+        atkType,
+        characterLevel,
+        enemyLevel,
+        enemyResistance,
+        weaken,
+        armour,
+      } = value;
+      state.baseATK = baseATK;
+      state.extraATK = extraATK;
+      state.extraPercentATK = extraPercentATK;
+      state.critDemage = critDemage;
+      state.elementDemage = elementDemage;
+      state.evaporationDemage = evaporationDemage;
+      state.atkRate = atkRate;
+      state.atkType = atkType;
+      state.characterLevel = characterLevel;
+      state.enemyLevel = enemyLevel;
+      state.enemyResistance = enemyResistance;
+      state.weaken = weaken;
+      state.armour = armour;
+    }
   },
 };
 
