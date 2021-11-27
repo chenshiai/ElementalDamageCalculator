@@ -76,59 +76,59 @@ export const PERCENT = "percent";
 export const EnhancedDamageNotes = [
   {
     detail: 15,
-    title: '2件套·元素伤害',
+    title: "2件套·元素伤害",
   },
   {
     detail: 46.6,
-    title: '空之杯·元素伤害',
+    title: "空之杯·元素伤害",
   },
   {
     detail: 58.3,
-    title: '空之杯·物理伤害',
+    title: "空之杯·物理伤害",
   },
   {
     detail: 20,
-    title: '宗室2·元素爆发',
+    title: "宗室2·元素爆发",
   },
   {
     detail: 7.5,
-    title: '魔女4·一层',
+    title: "魔女4·一层",
   },
   {
     detail: 7.5,
-    title: '魔女4·二层',
+    title: "魔女4·二层",
   },
   {
     detail: 7.5,
-    title: '魔女4·三层',
+    title: "魔女4·三层",
   },
   {
     detail: 35,
-    title: '角斗4·普攻伤害',
+    title: "角斗4·普攻伤害",
   },
   {
     detail: 35,
-    title: '平雷渡火·全伤害',
+    title: "平雷渡火·全伤害",
   },
   {
     detail: 35,
-    title: '乐团4·重击伤害',
+    title: "乐团4·重击伤害",
   },
   {
     detail: 50,
-    title: '追忆4·普/重/下落伤害',
+    title: "追忆4·普/重/下落伤害",
   },
   {
     detail: 25,
-    title: '染血2·物理伤害',
+    title: "染血2·物理伤害",
   },
   {
     detail: 50,
-    title: '染血4·重击伤害',
+    title: "染血4·重击伤害",
   },
   {
     detail: 24,
-    title: '华馆4·岩伤',
+    title: "华馆4·岩伤",
   }
 ];
 
@@ -169,6 +169,7 @@ export const EnhancedDemageCalculationMode = [
   }
 ];
 
+// 攻击力buff计算公式
 export const AtkPercentCalculationMode = [
   {
     title: "直接加攻%",
@@ -176,4 +177,178 @@ export const AtkPercentCalculationMode = [
     placeholder: "输入数值（支持一位小数）",
     getResult: (number) => number,
   }
+];
+
+// 附加伤害计算公式
+export const AdditionalDemageMode = [
+  {
+    title: "钟离·炊金馔玉",
+    children: [
+      {
+        title: "普攻·重击·下落",
+        fields: [
+          {
+            name: "hp",
+            label: "生命值",
+            placeholder: "生命值上限的1.39%",
+            type: "number",
+          }
+        ],
+        getResult: ({ hp }) => hp * 0.0139,
+      },
+      {
+        title: "地星",
+        fields: [
+          {
+            name: "hp",
+            label: "生命值",
+            type: "number",
+            placeholder: "生命值上限的1.9%",
+          }
+        ],
+        getResult: ({ hp }) => hp * 0.019,
+      },
+      {
+        title: "天星",
+        fields: [
+          {
+            name: "hp",
+            label: "生命值",
+            type: "number",
+            placeholder: "生命值上限的33%",
+          }
+        ],
+        getResult: ({ hp }) => hp * 0.33,
+      },
+    ]
+  },
+  {
+    title: "心海·仪来雨衣",
+    children: [
+      {
+        title: "技能伤害/化海月",
+        fields: [
+          {
+            name: "hp",
+            label: "生命值",
+            type: "number",
+            placeholder: "输入角色生命值",
+          },
+          {
+            name: "hpRate",
+            label: "生命上限%",
+            type: "number",
+            placeholder: "输入附加伤害倍率",
+          },
+        ],
+        getResult: ({ hp, hpRate }) => hp * hpRate / 100,
+      },
+      {
+        title: "普攻·重击",
+        fields: [
+          {
+            name: "hp",
+            label: "生命值",
+            type: "number",
+            placeholder: "输入角色生命值",
+          },
+          {
+            name: "hpRate",
+            label: "生命上限%",
+            type: "number",
+            placeholder: "输入附加伤害倍率",
+          },
+          {
+            name: "healRate",
+            label: "治疗加成%",
+            type: "number",
+            placeholder: "输入治疗加成",
+          },
+        ],
+        getResult: ({ hp, hpRate, healRate }) => {
+          return hp * (+hpRate + healRate * 0.15) / 100
+        },
+      },
+    ],
+  },
+  {
+    title: "托马·烈火攻燔",
+    children: [
+      {
+        title: "炽火崩破",
+        fields: [
+          {
+            name: "hp",
+            label: "生命值",
+            placeholder: "生命值上限的2.2%",
+            type: "number",
+          }
+        ],
+        getResult: ({ hp }) => hp * 0.022,
+      },
+    ]
+  },
+  {
+    title: "辰砂之纺锤",
+    children: [
+      {
+        title: "无垢之心",
+        fields: [
+          {
+            name: "def",
+            label: "防御力",
+            placeholder: "输入角色防御力",
+            type: "number",
+          },
+          {
+            name: "rate",
+            label: "倍率",
+            placeholder: "武器特效倍率",
+            type: "number",
+          }
+        ],
+        getResult: ({ def, rate }) => def * rate / 100,
+      },
+    ]
+  },
+  {
+    title: "阿贝多·显生之宙",
+    children: [
+      {
+        title: "诞生式·大地之潮",
+        fields: [
+          {
+            name: "def",
+            label: "防御力",
+            placeholder: "输入角色防御力",
+            type: "number",
+          },
+          {
+            name: "num",
+            label: "生灭计数",
+            placeholder: "输入生灭计数层数",
+            type: "number",
+          },
+        ],
+        getResult: ({ def, num }) => def * num * 0.3,
+      },
+    ]
+  },
+  {
+    title: "胡桃·最不安神晴又复雨",
+    children: [
+      {
+        title: "血梅香",
+        fields: [
+          {
+            name: "hp",
+            label: "生命值",
+            placeholder: "生命值上限的10%",
+            type: "number",
+          },
+        ],
+        getResult: ({ hp }) => hp * 0.1,
+      },
+    ]
+  },
 ];

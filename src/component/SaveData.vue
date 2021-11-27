@@ -116,10 +116,12 @@ export default defineComponent({
         extraATK,
         baseATK,
         extraPercentATK,
+        additionalDemage = 0,
         critDemage,
         elementDemage,
         evaporationDemage,
         atkRate,
+        extraRate = 0,
         atkType,
         characterLevel,
         enemyLevel,
@@ -138,20 +140,28 @@ export default defineComponent({
           value: Math.round(extraATK + baseATK * (extraPercentATK / 100)),
         },
         {
-          label: "暴击伤害%",
-          value: critDemage,
+          label: "伤害倍率%",
+          value: atkRate,
+        },
+        {
+          label: "倍率提升%",
+          value: extraRate,
+        },
+        {
+          label: "附加伤害值",
+          value: additionalDemage,
         },
         {
           label: "伤害加成%",
           value: elementDemage,
         },
         {
-          label: "精通加成%",
-          value: evaporationDemage,
+          label: "暴击伤害%",
+          value: critDemage,
         },
         {
-          label: "伤害倍率%",
-          value: atkRate,
+          label: "精通加成%",
+          value: evaporationDemage,
         },
         {
           label: "反应类型",

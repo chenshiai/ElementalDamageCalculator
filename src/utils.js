@@ -72,48 +72,51 @@ export const computationalFormula = (data) => {
     baseATK,
     extraATK,
     extraPercentATK,
+    additionalDemage = 0,
     critDemage,
     elementDemage,
     evaporationDemage,
     atkRate,
     atkType,
+    extraRate = 0,
     characterLevel,
     enemyLevel,
     enemyResistance,
     weaken,
     armour,
   } = data;
-  // 计算增幅加成
-  const elerate = getReactionRate(atkType);
+
+  // 攻击力
+  const atk = baseATK + extraATK + baseATK * (extraPercentATK / 100);
+  // 倍率
+  const rate = (atkRate / 100) * (1 + (extraRate / 100));
+  // 伤害加成
+  const element = 1 + elementDemage / 100;
+  // 暴伤
+  const cri = 1 + critDemage / 100;
+  // 增幅反应加成
+  const reaction = getReactionRate(atkType);
+  // 抗性
   const resistanceRate = getResistanceRate(enemyResistance, weaken);
+  // 防御减伤
   const defRate = getDefRate(characterLevel, enemyLevel, armour);
 
-  let eva = evaporationDemage;
+  // 精通加成
+  let eva = 1 + evaporationDemage / 100;
   if (atkType === "none") {
-    eva = 0;
+    eva = 1;
   }
 
-  const common = Math.round(
-    (baseATK + extraATK + baseATK * (extraPercentATK / 100)) *
-      (atkRate / 100) *
-      (1 + elementDemage / 100) *
-      elerate *
-      (1 + eva / 100) *
-      defRate *
-      resistanceRate
-  );
-  const crit = Math.round(
-    (baseATK + extraATK + baseATK * (extraPercentATK / 100)) *
-      (atkRate / 100) *
-      (1 + elementDemage / 100) *
-      (1 + critDemage / 100) *
-      elerate *
-      (1 + eva / 100) *
-      defRate *
-      resistanceRate
-  );
+  const result =
+    (atk * rate + additionalDemage) *
+    element *
+    reaction *
+    eva *
+    defRate *
+    resistanceRate;
+
   return {
-    common,
-    crit,
+    common: Math.round(result),
+    crit: Math.round(result * cri),
   }
 };

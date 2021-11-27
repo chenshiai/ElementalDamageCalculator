@@ -11,6 +11,12 @@
     </p>
   </div>
   <br />
+  <span class="question-title">【误差来自哪里】</span>
+  <div>
+    人物属性、武器属性、圣遗物属性、技能倍率等数值看起来是整数，但在游戏内实际上是精确到后两位小数的。
+    举个例子，面板显示的「攻击力+20」，实际可能是「攻击力+20.25」。
+  </div>
+  <br />
   <span class="question-title">【敌人抗性是多少】</span>
   <div>
     <img src="../assets/IMG_1457.png" class="question-img" @click="imagePreview"/>
@@ -20,12 +26,6 @@
         https://nga.178.com/read.php?tid=24079044&forder_by=postdatedesc&rand=277&rand=230
       </a>
     </p>
-  </div>
-  <br />
-  <span class="question-title">【误差来自哪里】</span>
-  <div>
-    人物属性、武器属性、圣遗物属性、技能倍率等数值看起来是整数，但在游戏内实际上是精确到后两位小数的。
-    举个例子，面板显示的「攻击力+20」，实际可能是「攻击力+20.25」。
   </div>
   <br />
   <span class="question-title">【滑块数值达到上限】</span>

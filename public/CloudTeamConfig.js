@@ -102,7 +102,7 @@ const WEIGHT2 = {
 const CloudTeamConfig = [
   {
     name: "安柏",
-    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2020/07/18/75795471/5b485364766df8c31b00909a6461fbde_1958980903694002182.png",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/06/10/75276545/140486f8ac63b834bb8b9a01c4bdf6fd_5060539351983062558.png?x-oss-process=image/quality,q_75/resize,s_120",
     element: ELEMENT_TYPE.Pyro,
     weapon: WEAPON_TYPE.Bow,
     battle: [
@@ -136,7 +136,7 @@ const CloudTeamConfig = [
   },
   {
     name: "凯亚",
-    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2020/07/18/75795471/9090035286a247b8fffef754cd0491f9_6356685042229017766.png",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/06/10/75276545/70e2863a699178ff5c08e88437889638_675962255150258828.png?x-oss-process=image/quality,q_75/resize,s_120",
     element: ELEMENT_TYPE.Cryo,
     weapon: WEAPON_TYPE.Sword,
     battle: [
@@ -167,7 +167,7 @@ const CloudTeamConfig = [
   },
   {
     name: "丽莎",
-    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2020/07/18/75795471/963e92d0a4a8c039c08db5be687d728a_5475224233492952470.png",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/06/10/75276545/260f74213dfb375810b9b452b45b1934_9012010843165140509.png?x-oss-process=image/quality,q_75/resize,s_120",
     element: ELEMENT_TYPE.Electro,
     weapon: WEAPON_TYPE.Magic,
     battle: [
@@ -190,7 +190,7 @@ const CloudTeamConfig = [
   },
   {
     name: "琴",
-    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2020/07/18/75795471/eb631369e43ffca5aa89fbfb227f7d39_2480956024089894918.png",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/06/10/75276545/64666d9da07de3b4d7050592a2b1edfc_6826199175934463568.png?x-oss-process=image/quality,q_75/resize,s_120",
     element: ELEMENT_TYPE.Anemo,
     weapon: WEAPON_TYPE.Sword,
     battle: [
@@ -230,7 +230,7 @@ const CloudTeamConfig = [
   },
   {
     name: "可莉",
-    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2020/07/18/75795471/0eec919f6330d704248dc00eb73ec6ae_8303616203857367244.png",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/06/10/75276545/0e416ead4eb9fb98170fd91170f70caf_9067225062861570256.png?x-oss-process=image/quality,q_75/resize,s_120",
     element: ELEMENT_TYPE.Pyro,
     weapon: WEAPON_TYPE.Magic,
     battle: [
@@ -262,7 +262,7 @@ const CloudTeamConfig = [
   },
   {
     name: "诺艾尔",
-    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2020/07/18/75795471/3aac2c7f25ef15dcd540fe2c3fed99b3_8230571585292379952.png",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/07/01/75276545/f3906dccf271d103fdbe50986230b82c_5688735001611237151.png?x-oss-process=image/quality,q_75/resize,s_120",
     element: ELEMENT_TYPE.Geo,
     weapon: WEAPON_TYPE.GreatSword,
     battle: [
@@ -289,7 +289,7 @@ const CloudTeamConfig = [
   },
   {
     name: "芭芭拉",
-    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2020/07/18/75795471/8b0a61c6dc241fbfb45ee736159a9df8_3700809724460481019.png",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/06/10/75276545/e396fa21894b8b26a9a32146a0ee032e_5925359947856471422.png?x-oss-process=image/quality,q_75/resize,s_120",
     element: ELEMENT_TYPE.Hydro,
     weapon: WEAPON_TYPE.Magic,
     battle: [
@@ -316,7 +316,7 @@ const CloudTeamConfig = [
   },
   {
     name: "温迪",
-    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2020/07/18/75795471/3223bc2038ec73ad9ea8919492e4b326_4966616735668393445.png",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/06/10/75276545/10a9e992bf121129710d5d34703ebc7a_3094624363673748747.png?x-oss-process=image/quality,q_75/resize,s_120",
     element: ELEMENT_TYPE.Anemo,
     weapon: WEAPON_TYPE.Bow,
     battle: [
@@ -344,7 +344,7 @@ const CloudTeamConfig = [
   },
   {
     name: "雷泽",
-    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2020/07/18/75795471/911d75007d943edf93cf5ad1cd683ea6_8252392376740297184.png",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/06/10/75276545/c56abcdd01f2599fbd68a317a5d6d6ed_2749907829167353353.png?x-oss-process=image/quality,q_75/resize,s_120",
     element: ELEMENT_TYPE.Electro,
     weapon: WEAPON_TYPE.GreatSword,
     battle: [
@@ -372,7 +372,7 @@ const CloudTeamConfig = [
   },
   {
     name: "迪卢克",
-    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2020/07/18/75795471/6e6f57317ce859314331bded68c335e7_8439425746236421329.png",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/07/01/75276545/018794b99d3d1eed8fb20994c64832e9_4671215595784997889.png?x-oss-process=image/quality,q_75/resize,s_120",
     element: ELEMENT_TYPE.Pyro,
     weapon: WEAPON_TYPE.GreatSword,
     battle: [
@@ -390,7 +390,7 @@ const CloudTeamConfig = [
   },
   {
     name: "班尼特",
-    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2020/07/18/75795471/309aa18c59ce6fd29b9ec5baebfcd291_676601747940365500.png",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/06/10/75276545/40983321f9ddffbbf8755982f7ba9837_7665543532618873826.png?x-oss-process=image/quality,q_75/resize,s_120",
     element: ELEMENT_TYPE.Pyro,
     weapon: WEAPON_TYPE.Sword,
     battle: [
@@ -417,7 +417,7 @@ const CloudTeamConfig = [
   },
   {
     name: "菲谢尔",
-    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2020/07/18/75795471/8067f15d8de5da98dbb6ce5112598b58_703948592621480452.png",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/06/10/75276545/a592a06ef1f3a9720a85d252664b590a_4791369803989386444.png?x-oss-process=image/quality,q_75/resize,s_120",
     element: ELEMENT_TYPE.Electro,
     weapon: WEAPON_TYPE.Bow,
     battle: [
@@ -440,7 +440,7 @@ const CloudTeamConfig = [
   },
   {
     name: "北斗",
-    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2020/07/18/75795471/2205006a2a2edd71d0913d2c5fec8493_3706170285492623521.png",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/06/10/75276545/cdac1c497cadc3cf0932cb29351e0fb7_7315086026986353347.png?x-oss-process=image/quality,q_75/resize,s_120",
     element: ELEMENT_TYPE.Electro,
     weapon: WEAPON_TYPE.GreatSword,
     battle: [
@@ -476,7 +476,7 @@ const CloudTeamConfig = [
   },
   {
     name: "凝光",
-    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2020/07/18/75795471/3e20148475a514c274ab317b1b295ad6_5894014233343278144.png",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/06/10/75276545/9ac338630eb5a7c12a00fecbf7c5eb90_5333896644728325230.png?x-oss-process=image/quality,q_75/resize,s_120",
     element: ELEMENT_TYPE.Geo,
     weapon: WEAPON_TYPE.Magic,
     battle: [
@@ -503,7 +503,7 @@ const CloudTeamConfig = [
   },
   {
     name: "香菱",
-    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2020/07/18/75795471/1b510cb569d7ad2688a8c4e05c872283_3782971431226275158.png",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/06/10/75276545/771f561ab0a87eaedcac8a8b43ec1f07_503752095979370097.png?x-oss-process=image/quality,q_75/resize,s_120",
     element: ELEMENT_TYPE.Pyro,
     weapon: WEAPON_TYPE.LonGarm,
     battle: [
@@ -535,7 +535,7 @@ const CloudTeamConfig = [
   },
   {
     name: "行秋",
-    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2020/07/18/75795471/4ee7dbc175a319eca4bf0ae111335c58_7615364624993664774.png",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/06/10/75276545/fde519d073451f60d70ead08f3d78e08_2962322697270044964.png?x-oss-process=image/quality,q_75/resize,s_120",
     element: ELEMENT_TYPE.Hydro,
     weapon: WEAPON_TYPE.Sword,
     battle: [
@@ -567,7 +567,7 @@ const CloudTeamConfig = [
   },
   {
     name: "重云",
-    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2020/07/18/75795471/58375bd187c155a398f77753e1f9aba3_4189287561892767231.png",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/06/10/75276545/8de98675d470f0345e8bbb6c2b67a258_2905053634606221085.png?x-oss-process=image/quality,q_75/resize,s_120",
     element: ELEMENT_TYPE.Cryo,
     weapon: WEAPON_TYPE.GreatSword,
     battle: [
@@ -595,7 +595,7 @@ const CloudTeamConfig = [
   },
   {
     name: "砂糖",
-    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2020/09/14/4328207/f527aa0b45df57842fb097b8c38bf169_6396652007566615235.png",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/06/10/75276545/84c364d0b4f8497ded8423a53b6b652f_2614103638613273137.png?x-oss-process=image/quality,q_75/resize,s_120",
     element: ELEMENT_TYPE.Anemo,
     weapon: WEAPON_TYPE.Magic,
     battle: [
@@ -623,7 +623,7 @@ const CloudTeamConfig = [
   },
   {
     name: "莫娜",
-    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2020/09/14/75379477/5ddec58ede0a4193d1bd72f0f792b4fa_1223323503797186476.png?x-oss-process=image/quality,q_75/resize,s_108",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/06/10/75276545/b2777a5d57b545e389a743a40cdad19e_542790380771394015.png?x-oss-process=image/quality,q_75/resize,s_120",
     element: ELEMENT_TYPE.Hydro,
     weapon: WEAPON_TYPE.Magic,
     battle: [
@@ -659,7 +659,7 @@ const CloudTeamConfig = [
   },
   {
     name: "刻晴",
-    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2020/09/14/4328207/ca22c4fbab990df0b1b59fe69b2a1a86_1351176061461950474.png",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/06/10/75276545/bf05efba5e494f8a030c794059b38b76_603861620414750957.png?x-oss-process=image/quality,q_75/resize,s_120",
     element: ELEMENT_TYPE.Electro,
     weapon: WEAPON_TYPE.Sword,
     battle: [
@@ -686,7 +686,7 @@ const CloudTeamConfig = [
   },
   {
     name: "七七",
-    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2020/09/14/4328207/a8d9152cbec315bd3af1b81ab38bcbb8_2744380235787568847.png",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/06/10/75276545/10c392548110876ef9485b54732c97bf_1743134530748235651.png?x-oss-process=image/quality,q_75/resize,s_120",
     element: ELEMENT_TYPE.Cryo,
     weapon: WEAPON_TYPE.Sword,
     battle: [
@@ -714,7 +714,7 @@ const CloudTeamConfig = [
   },
   {
     name: "达达利亚",
-    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2020/11/13/79683714/ede4db74ff5f46784c48a26bae407810_84074802520519805.png",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/06/10/75276545/4d7f792d7099f8f22aa324e41acaf552_2707737071030016275.png?x-oss-process=image/quality,q_75/resize,s_120",
     element: ELEMENT_TYPE.Hydro,
     weapon: WEAPON_TYPE.Bow,
     battle: [
@@ -741,7 +741,7 @@ const CloudTeamConfig = [
   },
   {
     name: "迪奥娜",
-    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2020/11/13/79683714/388edca3eca68b5f52ee7fc2e1c6891e_7254442964581563215.png",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/06/10/75276545/2c94d9a51bee6b55e32b2c2c9e5b2167_3089281923490794900.png?x-oss-process=image/quality,q_75/resize,s_120",
     element: ELEMENT_TYPE.Cryo,
     weapon: WEAPON_TYPE.Bow,
     battle: [
@@ -781,7 +781,7 @@ const CloudTeamConfig = [
   },
   {
     name: "钟离",
-    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2020/12/02/79683714/2f041f81243e39c1ec2eb11de80d286c_351019689489206326.png",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/06/10/75276545/833c4773288776c0326b48db64e73e73_7584969408292565105.png?x-oss-process=image/quality,q_75/resize,s_120",
     element: ELEMENT_TYPE.Geo,
     weapon: WEAPON_TYPE.LonGarm,
     battle: [
@@ -825,7 +825,7 @@ const CloudTeamConfig = [
   },
   {
     name: "辛焱",
-    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2020/12/02/79683714/c7b3665bd2b3ad209efc97568b557bd4_1094164531862604477.png",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/06/10/75276545/521eaf06e318a8ceaf23371bb8fbb30a_6549817404881880849.png?x-oss-process=image/quality,q_75/resize,s_120",
     element: ELEMENT_TYPE.Pyro,
     weapon: WEAPON_TYPE.GreatSword,
     battle: [
@@ -861,7 +861,7 @@ const CloudTeamConfig = [
   },
   {
     name: "阿贝多",
-    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2020/12/24/79683714/94f83e571af56dd826b3328a697f5106_4392078467778948636.png",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/06/10/75276545/c0f87c6b4784a866160a0f37c2571630_32895325137684348.png?x-oss-process=image/quality,q_75/resize,s_120",
     element: ELEMENT_TYPE.Geo,
     weapon: WEAPON_TYPE.Sword,
     battle: [
@@ -884,7 +884,7 @@ const CloudTeamConfig = [
   },
   {
     name: "烟绯",
-    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/06/10/75276545/86736a70c9670129ccd9ee9e7edc45c5_8080781344468712933.png",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/06/10/75276545/86736a70c9670129ccd9ee9e7edc45c5_7784983152471826322.png?x-oss-process=image/quality,q_75/resize,s_120",
     element: ELEMENT_TYPE.Pyro,
     weapon: WEAPON_TYPE.Magic,
     battle: [],
@@ -893,7 +893,7 @@ const CloudTeamConfig = [
   },
   {
     name: "甘雨",
-    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/01/12/79683714/98b621e69fc78ed0682e3640ca25b70f_480038643635949740.png",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/06/10/75276545/bf8c7c02828781c393c92fb29e018103_519536758251054032.png?x-oss-process=image/quality,q_75/resize,s_120",
     element: ELEMENT_TYPE.Cryo,
     weapon: WEAPON_TYPE.Bow,
     battle: [
@@ -929,7 +929,7 @@ const CloudTeamConfig = [
   },
   {
     name: "魈",
-    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/02/03/79683714/668511c42d3299a5c66be98f720408e5_3932851024865379558.png",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/06/10/75276545/6409b26d94f66cae5253903efe509649_4039198815542244801.png?x-oss-process=image/quality,q_75/resize,s_120",
     element: ELEMENT_TYPE.Anemo,
     weapon: WEAPON_TYPE.LonGarm,
     battle: [
@@ -952,7 +952,7 @@ const CloudTeamConfig = [
   },
   {
     name: "胡桃",
-    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/03/03/4328207/6a54af5aca341883859f5d24da3000fe_2050065262186292792.png",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/06/10/75276545/2ba444aec8dbddf1e2314f2c523e1e31_244848669304650705.png?x-oss-process=image/quality,q_75/resize,s_120",
     element: ELEMENT_TYPE.Pyro,
     weapon: WEAPON_TYPE.LonGarm,
     battle: [
@@ -979,7 +979,7 @@ const CloudTeamConfig = [
   },
   {
     name: "优菈",
-    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/06/10/75276545/effec245bdf118538d13ddaef6cfb70a_3736825680888428210.png",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/06/10/75276545/effec245bdf118538d13ddaef6cfb70a_7031930263255559108.png?x-oss-process=image/quality,q_75/resize,s_120",
     element: ELEMENT_TYPE.Cryo,
     weapon: WEAPON_TYPE.GreatSword,
     battle: [],
@@ -987,8 +987,17 @@ const CloudTeamConfig = [
     team: [],
   },
   {
+    name: "罗莎莉亚",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/06/10/75276545/51f38857188b696d23356e4bba6be23e_9158439165424768274.png?x-oss-process=image/quality,q_75/resize,s_120",
+    element: ELEMENT_TYPE.Cryo,
+    weapon: WEAPON_TYPE.LonGarm,
+    battle: [],
+    enemy: [],
+    team: [],
+  },
+  {
     name: "枫原万叶",
-    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/06/29/75379477/9dcca89ed8e58fdbccf375443a6079f1_1531972303681969481.jpg",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/07/01/75276545/d6140a0a33f9f0800f6fba2839750a9f_355310454552191507.png?x-oss-process=image/quality,q_75/resize,s_120",
     element: ELEMENT_TYPE.Anemo,
     weapon: WEAPON_TYPE.Sword,
     battle: [],
@@ -997,7 +1006,7 @@ const CloudTeamConfig = [
   },
   {
     name: "神里绫华",
-    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/06/07/4328207/b17fc6d3ff52788e06d6747ce01a9c5d_6968577377008285022.png",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/11/02/75379475/5356eb1558c9eac8536fe0a29971cc27_4866312682553610178.png?x-oss-process=image/quality,q_75/resize,s_120",
     element: ELEMENT_TYPE.Cryo,
     weapon: WEAPON_TYPE.Sword,
     battle: [],
@@ -1006,8 +1015,8 @@ const CloudTeamConfig = [
   },
   {
     name: "宵宫",
-    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/08/10/75276545/43014af35ae9c4cdf19a8323aa04a0a9_7972126386985237086.png",
-    element: ELEMENT_TYPE.Hydro,
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/11/02/75379475/e041144c94a4041be5c40e1fcedad6b9_1453927393949593300.png?x-oss-process=image/quality,q_75/resize,s_120",
+    element: ELEMENT_TYPE.Pyro,
     weapon: WEAPON_TYPE.Bow,
     battle: [],
     enemy: [],
@@ -1015,7 +1024,7 @@ const CloudTeamConfig = [
   },
   {
     name: "早柚",
-    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/08/10/75276545/4f50355892c08017346ea3ab80071b9c_5418900384870580611.png",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/11/02/75379475/4ba93de61668ff7d1257aea246d0193d_7926166531207679022.png?x-oss-process=image/quality,q_75/resize,s_120",
     element: ELEMENT_TYPE.Anemo,
     weapon: WEAPON_TYPE.GreatSword,
     battle: [],
@@ -1024,7 +1033,7 @@ const CloudTeamConfig = [
   },
   {
     name: "雷电将军",
-    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/11/05/183046623/12b5240ecd6c88986c69339ecba7e6bd_5511473510676695361.png",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/09/01/75379475/12b5240ecd6c88986c69339ecba7e6bd_4315368375887757892.png?x-oss-process=image/quality,q_75/resize,s_120",
     element: ELEMENT_TYPE.Electro,
     weapon: WEAPON_TYPE.LonGarm,
     battle: [],
@@ -1033,7 +1042,7 @@ const CloudTeamConfig = [
   },
   {
     name: "九条裟罗",
-    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/07/22/4328207/afae973751beb1ee26f75d96c3aff8c6_8404888118793898554.png",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/11/02/75379475/6aca9977c55c6ca83ade6d5593173b25_5748245248319174043.png?x-oss-process=image/quality,q_75/resize,s_120",
     element: ELEMENT_TYPE.Electro,
     weapon: WEAPON_TYPE.Bow,
     battle: [],
@@ -1042,7 +1051,7 @@ const CloudTeamConfig = [
   },
   {
     name: "珊瑚宫心海",
-    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/11/04/10875381/9f39bbe75aeda34accf958ecafccb5e8_8607028004237066555.png",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/11/02/75379475/9f39bbe75aeda34accf958ecafccb5e8_749944433300006002.png?x-oss-process=image/quality,q_75/resize,s_120",
     element: ELEMENT_TYPE.Hydro,
     weapon: WEAPON_TYPE.Magic,
     battle: [],
@@ -1051,7 +1060,7 @@ const CloudTeamConfig = [
   },
   {
     name: "埃洛伊",
-    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/11/05/10875381/07977b06a8dbc5b814f03a20cb7c3081_1392687211092125587.png",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/11/05/75379475/ed7ff4c06690871a93dd7d50ecd195ff_8016426398593472960.png?x-oss-process=image/quality,q_75/resize,s_120",
     element: ELEMENT_TYPE.Cryo,
     weapon: WEAPON_TYPE.Bow,
     battle: [],
@@ -1060,7 +1069,7 @@ const CloudTeamConfig = [
   },
   {
     name: "托马",
-    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/08/30/16314655/7cfee7d3ba8d583c31fd9e6297f28eff_4304866556920467625.png",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/11/02/75379475/35536a7c0817ed2d30931bca5b4ad625_8868436370119472993.png?x-oss-process=image/quality,q_75/resize,s_120",
     element: ELEMENT_TYPE.Pyro,
     weapon: WEAPON_TYPE.LonGarm,
     battle: [],

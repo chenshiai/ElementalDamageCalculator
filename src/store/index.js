@@ -19,10 +19,12 @@ const demageModule = {
       baseATK: 550,
       extraATK: 660,
       extraPercentATK: 0,
+      additionalDemage: 0,
       critDemage: 50.0,
       elementDemage: 0,
       evaporationDemage: 0.0,
       atkRate: 100,
+      extraRate: 0,
       atkType: "none",
       characterLevel: 80,
       enemyLevel: 80,
@@ -40,6 +42,9 @@ const demageModule = {
     },
     setExtraPercentATK(state, value) {
       state.extraPercentATK = value;
+    },
+    setAdditionalDemage(state, value) {
+      state.additionalDemage = value;
     },
     setCritDemage(state, value) {
       state.critDemage = value;
@@ -76,10 +81,12 @@ const demageModule = {
         baseATK,
         extraATK,
         extraPercentATK,
+        additionalDemage = 0,
         critDemage,
         elementDemage,
         evaporationDemage,
         atkRate,
+        extraRate = 0,
         atkType,
         characterLevel,
         enemyLevel,
@@ -90,10 +97,12 @@ const demageModule = {
       state.baseATK = baseATK;
       state.extraATK = extraATK;
       state.extraPercentATK = extraPercentATK;
+      state.additionalDemage = additionalDemage;
       state.critDemage = critDemage;
       state.elementDemage = elementDemage;
       state.evaporationDemage = evaporationDemage;
       state.atkRate = atkRate;
+      state.extraRate = extraRate;
       state.atkType = atkType;
       state.characterLevel = characterLevel;
       state.enemyLevel = enemyLevel;

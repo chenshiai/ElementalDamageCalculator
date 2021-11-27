@@ -34,7 +34,7 @@
         v-for="mode in calculationMode"
         :title="mode.title"
         :key="mode.title"
-      ></van-tab>
+      />
     </van-tabs>
     <van-field
       v-model="newMemo.detail"

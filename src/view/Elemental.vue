@@ -76,7 +76,7 @@
       </span>
     </div>
   </div>
-  <detail-block>
+  <detail-block keep>
     增幅反应伤害提升{{ Rate }}%<span class="more-rate">{{ moreRate }}</span>
     <br />
     剧变反应伤害提升{{ servitude }}%
@@ -143,7 +143,7 @@
     </div>
     <van-slider v-model="data.shieldStrong" :max="200" active-color="#645856" />
   </div>
-  <detail-block>
+  <detail-block keep>
     每1点护盾值可吸收<span class="more-rate">{{ shieldConversion }}</span>点伤害
     <br />
     等价于护盾拥有<span class="more-rate">{{ shieldRemission }}%</span>的伤害减免

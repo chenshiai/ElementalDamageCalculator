@@ -9,10 +9,11 @@
       :decimal-length="decimalLength"
       :max="stepperMax"
       :min="stepperMin"
-      input-width="46px"
+      input-width="56px"
       @change="onChange"
     />
     <span class="holy-relic-tips">{{ tips }}</span>
+    <slot />
   </div>
   <van-slider
     v-show="showSlider"

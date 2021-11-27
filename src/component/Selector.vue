@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="pop-title">
-      <span class="pop-title__click">已选择({{ result.length }}/4)</span>
+      <span class="pop-title__click">已选择({{ result.length }}/{{ maxSelect }})</span>
       选择伙伴
       <span class="pop-title__close" @click="$emit('close')">返回</span>
       <span class="pop-title__clear" @click="resultChange([])">清空</span>
@@ -38,7 +38,7 @@
         </van-checkbox-group>
       </div>
       选择伙伴<span class="holy-relic-tips">（可多选）</span>
-      <van-checkbox-group class="selector" v-model="result" :max="4"  @change="resultChange">
+      <van-checkbox-group class="selector" v-model="result" :max="maxSelect"  @change="resultChange">
         <van-checkbox
           class="selector-items"
           v-for="(item, index) in configFilter"
@@ -51,6 +51,10 @@
           <div :class="['logo', 'logo-' + item.element]" />
           <span class="selector-item__name">{{ item.name }}</span>
         </van-checkbox>
+        <div class="selector-items placeholder"></div>
+        <div class="selector-items placeholder"></div>
+        <div class="selector-items placeholder"></div>
+        <div class="selector-items placeholder"></div>
       </van-checkbox-group>
     </div>
   </div>
@@ -61,7 +65,6 @@ import { defineComponent, ref, computed } from "vue";
 import TabTitle from "./TabTitle.vue";
 import { CloudTeamConfig } from "../../public/CloudTeamConfig";
 import { Search, Checkbox, CheckboxGroup } from "vant";
-import { useStore } from "vuex";
 
 export default defineComponent({
   name: "selector",
@@ -73,12 +76,21 @@ export default defineComponent({
     [CheckboxGroup.name]: CheckboxGroup,
   },
 
-  setup() {
+  props: {
+    handleChange: Function,
+    maxSelect: {
+      type: Number,
+      default() {
+        return 4;
+      }
+    },
+  },
+
+  setup(props) {
     const keyword = ref("");
     const result = ref([]);
     const element = ref([]);
     const weapon= ref([]);
-    const store = useStore();
 
     const configFilter = computed(() => {
       let res = CloudTeamConfig;
@@ -99,9 +111,9 @@ export default defineComponent({
 
     const resultChange = (value) => {
       result.value = value;
-      store.commit('setCharacterSelect', CloudTeamConfig.filter((item) => {
-        return value.indexOf(item.name) >= 0;
-      }));
+      props.handleChange(CloudTeamConfig.filter((item) => {
+        return value.includes(item.name);
+      }))
     };
 
     const onInput = () => {
@@ -195,12 +207,15 @@ export default defineComponent({
 }
 .selector-items {
   position: relative;
-  width: 26%;
+  width: 86px;
   text-align: center;
   margin-bottom: 44px;
   border-radius: 4px;
   background-color: #eee2c7;
   box-shadow: 2px 2px 8px #bebebe;
+}
+.selector-items.placeholder {
+  visibility: hidden;
 }
 .check-area.element-select .van-checkbox__icon,
 .selector-items .van-checkbox__icon {
@@ -243,6 +258,7 @@ export default defineComponent({
 .selector-block .van-checkbox__label,
 .selector-items .van-checkbox__label {
   margin: 0;
+  width: 100%;
 }
 .selector-item__avatar {
   width: 100%;
@@ -279,6 +295,11 @@ export default defineComponent({
   bottom: -26px;
   left: 50%;
   font-size: 14px;
+}
+.selector-items[aria-checked="true"] .selector-item__name {
+  background-color: #998974;
+  color: #ffffff;
+  border-radius: 4px;
 }
 .logo-Pyro {
   position: relative;

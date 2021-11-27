@@ -40,28 +40,52 @@
     />
     <note-group
       v-model="extraPercentATK"
-      title="攻击力BUFF加成%"
+      title="攻击力加成%"
       :notes="ATKNotes"
       @updateNoteGroup="ATKNoteChange"
       :selectedNotes="selectedExtraATKNotes"
       :setSelectedNotes="setSelectedExtraATKNotes"
       :calculationMode="AtkPercentCalculationMode"
     />
-    <detail-block>
-      这里『攻击力BUFF加成%』的数值，是以『基础攻击力』的百分比来算的，会直接加在最上方『攻击力总计』的
-      <span style="color: #49ff39">绿字</span>里。
+    <detail-block instructions="『攻击力加成%』说明">
+      以『基础攻击力』的百分比来算，会直接加在最上方『攻击力总计』的
+      <span style="color: #49ff39">绿字</span>里。一些无法常驻的攻击力加成buff可以在这里保存，方便切换。
     </detail-block>
+    
     <data-item
-      v-model="critDemage"
-      title="暴击伤害%"
-      tips="小数需要手动输入"
+      v-model="atkRate"
+      title="伤害倍率%"
+      tips="本次攻击的倍率"
       stepperMin="0"
-      sliderMin="0"
-      sliderMax="600"
+      sliderMax="1500"
       sliderStep="0.1"
       decimalLength="1"
       :showSlider="sliderChecked"
     />
+
+    <data-item
+      v-model="extraRate"
+      title="倍率提升%"
+      tips="宵宫的E、行秋的4命"
+      stepperMin="0"
+      sliderMax="100"
+      sliderStep="0.1"
+      decimalLength="1"
+      :showSlider="sliderChecked"
+    />
+
+    <data-item
+      v-model="additionalDemage"
+      title="附加伤害值"
+      tips=""
+      stepperInteger
+      sliderMax="50000"
+      stepperMin="0"
+      :showSlider="sliderChecked"
+    >
+      <additional-demage />
+    </data-item>
+
     <data-item
       v-model="elementDemage"
       title="伤害加成%"
@@ -81,11 +105,22 @@
       :setSelectedNotes="setSelectedElementDemageNotes"
       :calculationMode="EnhancedDemageCalculationMode"
     />
-    <detail-block>
+    <detail-block instructions="『伤害加成%』说明">
       伤害加成的数值 = 造成伤害提高 + 元素/物理伤害加成 + 普攻/重击造成伤害提高
       + 元素战技/元素爆发伤害提高 + 对元素影响下的敌人伤害提高 +
       人物技能增伤等。
     </detail-block>
+    <data-item
+      v-model="critDemage"
+      title="暴击伤害%"
+      tips="小数需要手动输入"
+      stepperMin="0"
+      sliderMin="0"
+      sliderMax="600"
+      sliderStep="0.1"
+      decimalLength="1"
+      :showSlider="sliderChecked"
+    />
     <div class="data-panel__title">
       精通加成%
       <van-stepper
@@ -93,7 +128,7 @@
         button-size="20"
         theme="round"
         :min="checked ? 15 : 0"
-        input-width="40px"
+        input-width="56px"
         decimal-length="1"
       />
       <span class="holy-relic-tips">蒸发、融化的伤害提升</span>
@@ -117,16 +152,6 @@
         />
       </template>
     </van-cell>
-    <data-item
-      v-model="atkRate"
-      title="伤害倍率%"
-      tips="本次攻击的倍率"
-      stepperMin="0"
-      sliderMax="1500"
-      sliderStep="0.1"
-      decimalLength="1"
-      :showSlider="sliderChecked"
-    />
 
     <div class="data-panel__title">
       反应类型
@@ -272,6 +297,7 @@ import DataItem from "../component/DataItem.vue";
 import NoteGroup from "../component/NoteGroup.vue";
 import DetailBlock from "../component/Detail.vue";
 import SaveData from "../component/SaveData.vue";
+import AdditionalDemage from '../component/AdditionalDemage.vue';
 import { useStore } from "vuex";
 import { EnhancedDamageNotes, AtkPercentNotes, AtkPercentCalculationMode, EnhancedDemageCalculationMode } from "../constant";
 
@@ -291,6 +317,7 @@ export default defineComponent({
     [NoteGroup.name]: NoteGroup,
     [RadioGroup.name]: RadioGroup,
     [DetailBlock.name]: DetailBlock,
+    [AdditionalDemage.name]: AdditionalDemage,
   },
 
   setup() {
@@ -403,6 +430,7 @@ export default defineComponent({
 <style>
 .data-panel {
   margin-bottom: 24px;
+  line-height: 24px;
 }
 .atk-total {
   margin-left: 28px;
