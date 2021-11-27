@@ -126,16 +126,24 @@ export const EnhancedDamageNotes = [
     detail: 50,
     title: '染血4·重击伤害',
   },
+  {
+    detail: 24,
+    title: '华馆4·岩伤',
+  }
 ];
 
 export const AtkPercentNotes = [
   {
     detail: 48,
-    title: "精炼5阶·讨龙"
+    title: "精炼5阶·讨龙",
   },
   {
     detail: 25,
-    title: "元素共鸣·热诚之火"
+    title: "元素共鸣·热诚之火",
+  },
+  {
+    detail: 20,
+    title: "千岩牢固",
   },
 ];
 
