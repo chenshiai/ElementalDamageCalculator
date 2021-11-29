@@ -19,7 +19,7 @@ const demageModule = {
       baseATK: 550,
       extraATK: 660,
       extraPercentATK: 0,
-      additionalDemage: 0,
+      additionalDemageList: [],
       critDemage: 50.0,
       elementDemage: 0,
       evaporationDemage: 0.0,
@@ -43,8 +43,8 @@ const demageModule = {
     setExtraPercentATK(state, value) {
       state.extraPercentATK = value;
     },
-    setAdditionalDemage(state, value) {
-      state.additionalDemage = value;
+    setAdditionalDemageList(state, value) {
+      state.additionalDemageList = value;
     },
     setCritDemage(state, value) {
       state.critDemage = value;
@@ -81,7 +81,7 @@ const demageModule = {
         baseATK,
         extraATK,
         extraPercentATK,
-        additionalDemage = 0,
+        additionalDemageList = [],
         critDemage,
         elementDemage,
         evaporationDemage,
@@ -97,7 +97,7 @@ const demageModule = {
       state.baseATK = baseATK;
       state.extraATK = extraATK;
       state.extraPercentATK = extraPercentATK;
-      state.additionalDemage = additionalDemage;
+      state.additionalDemageList = additionalDemageList;
       state.critDemage = critDemage;
       state.elementDemage = elementDemage;
       state.evaporationDemage = evaporationDemage;

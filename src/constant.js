@@ -166,7 +166,13 @@ export const EnhancedDemageCalculationMode = [
     label: "元素充能",
     placeholder: "输入角色的元素充能",
     getResult: (number) => Math.min(number * 0.25, 75).toFixed(1),
-  }
+  },
+  {
+    title: "血赤叶红",
+    label: "元素精通",
+    placeholder: "输入六命枫原万叶的元素精通",
+    getResult: (number) => (number * 0.2).toFixed(1),
+  },
 ];
 
 // 攻击力buff计算公式
@@ -183,6 +189,7 @@ export const AtkPercentCalculationMode = [
 export const AdditionalDemageMode = [
   {
     title: "钟离·炊金馔玉",
+    img: 'https://uploadstatic.mihoyo.com/ys-obc/2021/06/10/75276545/833c4773288776c0326b48db64e73e73_7584969408292565105.png?x-oss-process=image/quality,q_75/resize,s_40',
     children: [
       {
         title: "普攻·重击·下落",
@@ -224,6 +231,7 @@ export const AdditionalDemageMode = [
   },
   {
     title: "心海·仪来雨衣",
+    img: 'https://uploadstatic.mihoyo.com/ys-obc/2021/11/02/75379475/9f39bbe75aeda34accf958ecafccb5e8_749944433300006002.png?x-oss-process=image/quality,q_75/resize,s_40',
     children: [
       {
         title: "技能伤害/化海月",
@@ -273,6 +281,7 @@ export const AdditionalDemageMode = [
   },
   {
     title: "托马·烈火攻燔",
+    img: 'https://uploadstatic.mihoyo.com/ys-obc/2021/11/02/75379475/35536a7c0817ed2d30931bca5b4ad625_8868436370119472993.png?x-oss-process=image/quality,q_75/resize,s_40',
     children: [
       {
         title: "炽火崩破",
@@ -290,6 +299,7 @@ export const AdditionalDemageMode = [
   },
   {
     title: "辰砂之纺锤",
+    img: 'https://uploadstatic.mihoyo.com/ys-obc/2021/11/09/75833613/14439ff89d1a6919bae74e00d9dc3292_8494837697999144768.png',
     children: [
       {
         title: "无垢之心",
@@ -313,6 +323,7 @@ export const AdditionalDemageMode = [
   },
   {
     title: "阿贝多·显生之宙",
+    img: 'https://uploadstatic.mihoyo.com/ys-obc/2021/06/10/75276545/c0f87c6b4784a866160a0f37c2571630_32895325137684348.png?x-oss-process=image/quality,q_75/resize,s_40',
     children: [
       {
         title: "诞生式·大地之潮",
@@ -336,6 +347,7 @@ export const AdditionalDemageMode = [
   },
   {
     title: "胡桃·最不安神晴又复雨",
+    img: 'https://uploadstatic.mihoyo.com/ys-obc/2021/06/10/75276545/2ba444aec8dbddf1e2314f2c523e1e31_244848669304650705.png?x-oss-process=image/quality,q_75/resize,s_40',
     children: [
       {
         title: "血梅香",

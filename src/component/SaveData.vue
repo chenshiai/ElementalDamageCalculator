@@ -84,6 +84,7 @@ import {
   getLocalStorage,
   deepCopyObject,
   computationalFormula,
+  sub,
 } from "../utils";
 
 export default defineComponent({
@@ -116,7 +117,7 @@ export default defineComponent({
         extraATK,
         baseATK,
         extraPercentATK,
-        additionalDemage = 0,
+        additionalDemageList = [],
         critDemage,
         elementDemage,
         evaporationDemage,
@@ -144,12 +145,12 @@ export default defineComponent({
           value: atkRate,
         },
         {
-          label: "倍率提升%",
+          label: "倍率增幅%",
           value: extraRate,
         },
         {
           label: "附加伤害值",
-          value: additionalDemage,
+          value: Math.round(sub(additionalDemageList)),
         },
         {
           label: "伤害加成%",

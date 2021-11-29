@@ -1,5 +1,19 @@
 <template>
-  <div class="additional-demage" @click="openPop">展开计算></div>
+  <div class="additional-demage-list">
+    <span v-if="additionalDemageList.length > 0">附加伤害值：</span>
+    <van-tag
+      class="demage-list-item"
+      v-for="(item, index) in additionalDemageList"
+      closeable
+      color="#997874"
+      @close="closeTag(index)"
+    >
+      {{ format(item) }}
+    </van-tag>
+  </div>
+  <div class="additional-demage-button" @click="openPop">
+    点此计算附加伤害值
+  </div>
   <van-popup
     teleport="#app"
     v-model:show="showPopup"
@@ -16,9 +30,15 @@
     >
       <van-tab
         v-for="mode in AdditionalDemageMode"
-        :title="mode.title"
         :key="mode.title"
-      />
+      >
+        <template #title>
+          <div class="additional-tab-title">
+            <img class="tab-title-img" :src="mode.img" alt="">
+            <span class="tab-title-span">{{ mode.title }}</span>
+          </div>
+        </template>
+      </van-tab>
     </van-tabs>
     <van-tabs color="#997874" line-width="60px" v-model:active="childrenActive">
       <van-tab
@@ -39,14 +59,31 @@
           :rules="[{ required: true, message: '必填项' }]"
         />
       </van-cell-group>
-      <van-button class="popup-bottons" text="确定" size="small" block type="primary" native-type="submit" />
+      <van-button
+        class="popup-bottons"
+        text="确定"
+        size="small"
+        block
+        type="primary"
+        native-type="submit"
+      />
     </van-form>
   </van-popup>
 </template>
 
 <script>
-import { defineComponent, ref, computed } from "vue";
-import { Popup, Button, Tab, Tabs, Form, Field, CellGroup } from "vant";
+import { defineComponent, ref, computed, toRefs } from "vue";
+import {
+  Popup,
+  Button,
+  Tab,
+  Tabs,
+  Tag,
+  Form,
+  Toast,
+  Field,
+  CellGroup,
+} from "vant";
 import { AdditionalDemageMode } from "../constant";
 import { useStore } from "vuex";
 
@@ -54,6 +91,7 @@ export default defineComponent({
   name: "additional-demage",
 
   components: {
+    [Tag.name]: Tag,
     [Tab.name]: Tab,
     [Form.name]: Form,
     [Tabs.name]: Tabs,
@@ -85,13 +123,29 @@ export default defineComponent({
     const handleClose = () => {
       temporaryData.value = {};
     };
+    const closeTag = (index) => {
+      const { additionalDemageList } = store.state.demageModule;
+      additionalDemageList.splice(index, 1);
+    };
+
     const onSubmit = (value) => {
       const { getResult } =
         AdditionalDemageChildren.value[childrenActive.value];
-      store.commit("setAdditionalDemage", getResult(value));
+      const result = getResult(value);
+      if (result) {
+        const { additionalDemageList } = store.state.demageModule;
+        additionalDemageList.push(result);
+        Toast.success("添加成功");
+        handleClose();
+      }
+    };
+
+    const format = (value) => {
+      return Math.round(value);
     };
 
     return {
+      ...toRefs(store.state.demageModule),
       showPopup,
       openPop,
       active,
@@ -101,23 +155,26 @@ export default defineComponent({
       AdditionalDemageMode,
       temporaryData,
       handleClose,
+      closeTag,
       handleChange,
+      format,
     };
   },
 });
 </script>
 
 <style scoped>
-.additional-demage {
-  display: inline-block;
-  width: 80px;
+.additional-demage-list {
+  margin-bottom: 4px;
+}
+.additional-demage-button {
   font-size: 12px;
-  line-height: 20px;
+  line-height: 32px;
   text-align: center;
   box-sizing: border-box;
   border-radius: 4px;
   border: 1px solid #000;
-  margin-left: 20px;
+  margin-bottom: 16px;
 }
 .popup-title {
   text-align: center;
@@ -133,5 +190,25 @@ export default defineComponent({
   border: none;
   font-size: 18px;
   border-radius: 0;
+}
+.demage-list-item {
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-right: 8px;
+  font-size: 14px;
+}
+.additional-tab-title {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+.tab-title-img {
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  margin-right: 4px;
+}
+.tab-title-span {
+  line-height: 26px;
 }
 </style>

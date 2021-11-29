@@ -65,7 +65,7 @@
 
     <data-item
       v-model="extraRate"
-      title="倍率提升%"
+      title="倍率增幅%"
       tips="宵宫的E、行秋的4命"
       stepperMin="0"
       sliderMax="100"
@@ -74,17 +74,7 @@
       :showSlider="sliderChecked"
     />
 
-    <data-item
-      v-model="additionalDemage"
-      title="附加伤害值"
-      tips=""
-      stepperInteger
-      sliderMax="50000"
-      stepperMin="0"
-      :showSlider="sliderChecked"
-    >
-      <additional-demage />
-    </data-item>
+    <additional-demage />
 
     <data-item
       v-model="elementDemage"

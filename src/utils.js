@@ -67,12 +67,19 @@ export const deepCopyObject = (obj) => {
   return JSON.parse(JSON.stringify(obj));
 };
 
+export const sub = (list) => {
+  if (list.length > 0) {
+    return list.reduce((a, b) => a + b);
+  }
+  return 0;
+};
+
 export const computationalFormula = (data) => {
   const {
     baseATK,
     extraATK,
     extraPercentATK,
-    additionalDemage = 0,
+    additionalDemageList = [],
     critDemage,
     elementDemage,
     evaporationDemage,
@@ -107,8 +114,10 @@ export const computationalFormula = (data) => {
     eva = 1;
   }
 
+  const additional = sub(additionalDemageList);
+
   const result =
-    (atk * rate + additionalDemage) *
+    (atk * rate + additional) *
     element *
     reaction *
     eva *
