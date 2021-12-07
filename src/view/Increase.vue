@@ -154,11 +154,10 @@
           </van-cell>
           <van-cell clickable @click="atkType = 'evaporation'">
             <template #title>
-              <div>
-                <span class="water"></span>→<span class="fire"></span>/
-                <span class="fire"></span>→<span class="ice"></span>~
-                蒸发/融化200%
-              </div>
+              2.0倍增幅
+              (<span class="water"></span>→<span class="fire"></span>
+              /
+              <span class="fire"></span>→<span class="ice"></span>)
             </template>
             <template #right-icon>
               <van-radio name="evaporation" checked-color="#766461" />
@@ -166,11 +165,10 @@
           </van-cell>
           <van-cell clickable @click="atkType = 'evaporation2'">
             <template #title>
-              <div>
-                <span class="fire"></span>→<span class="water"></span>/
-                <span class="ice"></span>→<span class="fire"></span>~
-                蒸发/融化150%
-              </div>
+              1.5倍增幅
+              (<span class="fire"></span>→<span class="water"></span>
+              /
+              <span class="ice"></span>→<span class="fire"></span>)
             </template>
             <template #right-icon>
               <van-radio name="evaporation2" checked-color="#766461" />

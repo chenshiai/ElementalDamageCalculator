@@ -4,6 +4,7 @@
     <van-tag
       class="demage-list-item"
       v-for="(item, index) in additionalDemageList"
+      :key="index"
       closeable
       color="#997874"
       @close="closeTag(index)"
@@ -28,13 +29,10 @@
       @change="handleChange"
       swipe-threshold="3"
     >
-      <van-tab
-        v-for="mode in AdditionalDemageMode"
-        :key="mode.title"
-      >
+      <van-tab v-for="mode in AdditionalDemageMode" :key="mode.title">
         <template #title>
           <div class="additional-tab-title">
-            <img class="tab-title-img" :src="mode.img" alt="">
+            <img class="tab-title-img" :src="mode.img" alt="" />
             <span class="tab-title-span">{{ mode.title }}</span>
           </div>
         </template>
@@ -52,6 +50,7 @@
         <van-field
           v-for="field in AdditionalDemageChildren[childrenActive].fields"
           v-model="temporaryData[field.label]"
+          :key="field.name"
           :name="field.name"
           :label="field.label"
           :type="field.type"

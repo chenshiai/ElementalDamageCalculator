@@ -312,7 +312,7 @@ export const AdditionalDemageMode = [
           },
           {
             name: "rate",
-            label: "倍率",
+            label: "倍率%",
             placeholder: "武器特效倍率",
             type: "number",
           }
