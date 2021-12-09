@@ -181,10 +181,10 @@ export default defineComponent({
   line-height: 36px;
   font-weight: bold;
   color: #fff;
-  background-color: #997874;
+  background-color: var(--button-bg);
 }
 .popup-bottons {
-  background-color: #997874;
+  background-color: var(--button-bg);
   color: #fff;
   border: none;
   font-size: 18px;

@@ -45,14 +45,19 @@ export default defineComponent({
   border-radius: 6px;
   color: #fff;
   margin-top: 12px;
-  background-color: #645856;
+  background-color: var(--main-text);
 }
 .detail-opearate {
   line-height: 16px;
   text-align: center;
 }
+.detail-content {
+  position: relative;
+}
 .detail-close-tips {
-  float: right;
-  color: #F7F1E6;
+  position: absolute;
+  color: var(--main-text);
+  right: 0;
+  bottom: -30px;
 }
 </style>

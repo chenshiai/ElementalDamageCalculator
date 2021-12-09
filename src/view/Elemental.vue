@@ -376,13 +376,13 @@ export default defineComponent({
 }
 
 .base-data .van-stepper--round .van-stepper__minus {
-  color: #997874;
-  border-color: #997874;
+  color: var(--button-bg);
+  border-color: var(--button-bg);
 }
 .base-data .van-stepper--round .van-stepper__plus {
   border: none;
   color: #fff;
-  background-color: #997874;
+  background-color: var(--button-bg);
 }
 
 .base-data .van-stepper.van-stepper--round {
@@ -401,7 +401,7 @@ export default defineComponent({
 .holy-relic-tips {
   font-size: 12px;
   margin-left: 4px;
-  color: #928986;
+  color: var(--tip-text);
 }
 
 .question-title,
@@ -451,7 +451,7 @@ export default defineComponent({
 
 .damage-tag {
   line-height: 20px;
-  border-bottom: 2px solid #997874;
+  border-bottom: 2px solid var(--button-bg);
   font-weight: bold;
   margin-bottom: 12px;
   min-width: 30%;

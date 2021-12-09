@@ -433,13 +433,13 @@ export default defineComponent({
   margin-bottom: 12px;
 }
 .data-panel .van-stepper--round .van-stepper__minus {
-  color: #997874;
-  border-color: #997874;
+  color: var(--button-bg);
+  border-color: var(--button-bg);
 }
 .data-panel .van-stepper--round .van-stepper__plus {
   border: none;
   color: #fff;
-  background-color: #997874;
+  background-color: var(--button-bg);
 }
 .water,
 .fire,
@@ -461,7 +461,7 @@ export default defineComponent({
 }
 
 .van-slider__button-wrapper .van-slider__button {
-  box-shadow: 0 2px 2px #997874;
+  box-shadow: 0 2px 2px var(--button-bg);
 }
 
 .result-grid {
@@ -470,7 +470,7 @@ export default defineComponent({
   top: 0;
   transition: top 0.3s;
   background-color: #fff;
-  border: 1px solid #997874;
+  border: 1px solid var(--button-bg);
   padding: 6px 0;
   z-index: 1;
 }

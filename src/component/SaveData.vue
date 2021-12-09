@@ -24,7 +24,7 @@
       label="数据命名"
       placeholder="给这条数据取个名字吧"
     />
-    <div class="popup-bottons" @click="saveData">保存数据</div>
+    <div class="popup-buttons" @click="saveData">保存数据</div>
   </van-popup>
   <van-popup
     class="data-popup"
@@ -302,7 +302,7 @@ export default defineComponent({
 .save-btn {
   width: 45%;
   background-color: #fff;
-  border: 1px solid #997874;
+  border: 1px solid var(--button-bg);
   text-align: center;
   line-height: 40px;
   margin-bottom: 12px;
@@ -321,13 +321,13 @@ export default defineComponent({
   display: flex;
   justify-content: space-between;
 }
-.popup-bottons {
+.popup-buttons {
   line-height: 40px;
   width: 100%;
   text-align: center;
   flex: 1;
   font-size: 20px;
-  background-color: #997874;
+  background-color: var(--button-bg);
   color: #fff;
 }
 .empty {

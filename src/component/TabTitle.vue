@@ -17,9 +17,9 @@ export default defineComponent({
   border-radius: 4px;
   text-align: center;
   line-height: 26px;
-  border: 1px solid #997874;
+  border: 1px solid var(--button-bg);
   font-weight: 600;
-  background-color: #F7F1E6;
+  background-color: var(--light-text);
   position: relative;
   margin-bottom: 16px;
 }

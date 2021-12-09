@@ -198,7 +198,7 @@ export default defineComponent({
 
 <style scoped>
 .data-notes {
-  border: 1px solid #997874;
+  border: 1px solid var(--button-bg);
   flex-wrap: wrap;
   display: flex;
   padding: 6px 6px 6px 0;
@@ -209,25 +209,25 @@ export default defineComponent({
   height: 36px;
   margin-left: 6px;
   margin-bottom: 4px;
-  border: 1px solid #997874;
+  border: 1px solid var(--button-bg);
   border-radius: 6px;
   box-sizing: border-box;
   padding: 2px 6px;
-  color: #997874;
+  color: var(--button-bg);
   font-size: 14px;
   position: relative;
   min-width: 80px;
 }
 .memo.selected {
-  background-color: #997874;
+  background-color: var(--button-bg);
   color: #fff;
 }
 .add-note-button {
-  border: 1px solid #997874;
+  border: 1px solid var(--button-bg);
   padding: 2px 6px;
   text-align: center;
   box-sizing: border-box;
-  color: #997874;
+  color: var(--button-bg);
   height: 36px;
   line-height: 32px;
   margin-bottom: 4px;
@@ -244,7 +244,7 @@ export default defineComponent({
   line-height: 14px;
 }
 .notes-button {
-  background-color: #997874;
+  background-color: var(--button-bg);
   color: #fff;
   text-align: center;
   font-size: 14px;
@@ -265,7 +265,7 @@ export default defineComponent({
   line-height: 36px;
   font-weight: bold;
   color: #fff;
-  background-color: #997874;
+  background-color: var(--button-bg);
 }
 .popup-bottons {
   display: flex;
@@ -277,7 +277,7 @@ export default defineComponent({
   font-size: 20px;
 }
 .popup-bottons__add {
-  background-color: #997874;
+  background-color: var(--button-bg);
   color: #fff;
 }
 </style>

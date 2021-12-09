@@ -7,6 +7,20 @@ body {
   background-position-y: 80%;
   user-select: none;
   height: 100vh;
+
+  --stroke-0: #F7F1E6;
+  --stroke-1: #928986;
+  --stroke-2: #997874;
+  --stroke-3: #645856;
+  /* --stroke-0: red;
+  --stroke-1: blue;
+  --stroke-2: yellow;
+  --stroke-3: green; */
+
+  --light-text: var(--stroke-0, #F7F1E6);
+  --tip-text: var(--stroke-1, #928986);
+  --button-bg: var(--stroke-2, #997874);
+  --main-text: var(--stroke-3, #645856);
 }
 
 @font-face {
@@ -24,10 +38,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
-  color: #645856;
+  color: var(--main-text);
 }
 
-@media screen and (min-width: 450px) {
+@media screen and (min-width: 1025px) {
   #app {
     width: 375px;
     margin: 0 auto;

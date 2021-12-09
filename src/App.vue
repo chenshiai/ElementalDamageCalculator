@@ -39,17 +39,11 @@ export default defineComponent({
 </script>
 
 <style>
-.my-name {
-  line-height: 120px;
-  font-size: 80px;
-  color: #7c6f6e;
-}
-
 .tips {
   margin: 16px 0;
   font-size: 12px;
   padding: 0 30px 0 30px;
-  color: #928986;
+  color: var(--tip-text);
   text-align: center;
   position: relative;
 }
@@ -72,7 +66,7 @@ export default defineComponent({
 }
 
 .top-overhang {
-  background-color: #766461;
+  background-color: var(--main-text);
   height: 40px;
   width: 100%;
   border-radius: 0 0 30px 30px;
@@ -92,8 +86,8 @@ export default defineComponent({
 
 .top-tabs__item {
   box-sizing: border-box;
-  background-color: #997874;
-  border: 2px solid #b7a19e;
+  background-color: var(--button-bg);
+  border: 2px solid var(--tip-text);
   text-align: center;
   line-height: 36px;
   height: 40px;
@@ -105,8 +99,8 @@ export default defineComponent({
 
 .router-link-active {
   background-color: #fff;
-  border-color: #997874;
-  color: #645856;
+  border-color: var(--button-bg);
+  color: var(--main-text);
 }
 
 .top-tabs__item:nth-last-child(1) {
@@ -121,6 +115,6 @@ export default defineComponent({
 .van-cell.van-cell--clickable,
 .van-cell.van-cell--center,
 .van-cell.van-collapse-item__title.van-collapse-item__title--expanded {
-  background-color: #F7F1E6;
+  background-color: var(--light-text);
 }
 </style>

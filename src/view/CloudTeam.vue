@@ -184,7 +184,7 @@ export default defineComponent({
   line-height: 20px;
   font-size: 14px;
   text-align: center;
-  background-color: #f7f1e6;
+  background-color: var(--light-text);
 }
 .team-list__item img {
   position: relative;
@@ -203,7 +203,7 @@ export default defineComponent({
   color: #fff;
   overflow-y: scroll;
   height: 100px;
-  background-color: #645856;
+  background-color: var(--main-text);
 }
 .tag {
   line-height: 12px;
@@ -246,7 +246,7 @@ export default defineComponent({
 .team-list .empty::after,
 .team-list .empty::before {
   content: "";
-  background-color: #f7f1e6;
+  background-color: var(--light-text);
   display: block;
   position: absolute;
   top: 50%;
@@ -264,15 +264,15 @@ export default defineComponent({
 }
 .cloud-team__tips {
   font-size: 14px;
-  color: #928986;
+  color: var(--tip-text);
   margin-bottom: 16px;
   display: inline-block;
 }
 .cloud-team__tips b {
-  color: #645856;
+  color: var(--main-text);
 }
 .scaleplate {
-  border: 1px solid #645856;
+  border: 1px solid var(--main-text);
   font-size: 12px;
   border-radius: 4px;
   display: flex;
@@ -281,8 +281,8 @@ export default defineComponent({
 .scaleplate-item {
   flex: 1;
   text-align: center;
-  text-shadow: 1px 0 0 #f7f1e6, 0 1px 0 #f7f1e6, -1px 0 0 #f7f1e6,
-    0 -1px 0 #f7f1e6;
+  text-shadow: 1px 0 0 var(--light-text), 0 1px 0 var(--light-text), -1px 0 0 var(--light-text),
+    0 -1px 0 var(--light-text);
 }
 .not-recommend {
   background-color: #8cffbc;

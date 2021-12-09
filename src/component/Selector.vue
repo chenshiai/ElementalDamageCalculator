@@ -157,7 +157,7 @@ export default defineComponent({
   float: right;
 }
 .selector-area {
-  background-color: #f7f1e6;
+  background-color: var(--light-text);
   padding: 16px 16px 90px 16px;
   height: calc(100vh - 46px);
   box-sizing: border-box;
@@ -183,17 +183,17 @@ export default defineComponent({
 .check-area.element-select {
   display: flex;
   flex-wrap: wrap;
-  color: #645856;
+  color: var(--main-text);
   justify-content: space-between;
 }
 .element-selece__item {
   width: 26%;
-  border: 1px solid #645856;
+  border: 1px solid var(--main-text);
   margin-bottom: 8px;
   border-radius: 4px;
 }
 .element-selece__item[aria-checked="true"] {
-  background-color: #645856;
+  background-color: var(--main-text);
 }
 .element-selece__item[aria-checked="true"] .van-checkbox__label {
   color: #fff;
@@ -201,7 +201,7 @@ export default defineComponent({
 .element-selece__item .van-checkbox__label {
   line-height: 32px;
   text-align: center;
-  color: #645856;
+  color: var(--main-text);
   display: block;
   width: 100%;
 }
