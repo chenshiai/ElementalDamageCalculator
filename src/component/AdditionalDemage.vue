@@ -172,8 +172,12 @@ export default defineComponent({
   text-align: center;
   box-sizing: border-box;
   border-radius: 4px;
-  border: 1px solid #000;
+  border: 1px solid var(--main-text);
   margin-bottom: 16px;
+}
+.additional-demage-button:hover,
+.additional-demage-button:active {
+  background-color: var(--light-text);
 }
 .popup-title {
   text-align: center;

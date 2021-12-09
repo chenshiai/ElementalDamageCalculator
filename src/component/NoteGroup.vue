@@ -235,6 +235,10 @@ export default defineComponent({
   margin-left: 6px;
   font-size: 14px;
 }
+.add-note-button:active,
+.add-note-button:hover {
+  background-color: var(--light-text);
+}
 .memo-detail {
   font-weight: bold;
   line-height: 16px;

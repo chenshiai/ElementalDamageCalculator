@@ -178,15 +178,18 @@
       </van-cell-group>
     </div>
   </div>
-  <van-cell class="eva-cell" center title="展开防御、抗性乘区">
-    <template #right-icon>
-      <van-switch
-        v-model="otherChecked"
-        active-color="#766461"
-        inactive-color="#b7a19e"
-        size="16"
-      />
+  <van-cell class="eva-cell" @click="otherChecked = !otherChecked" center>
+    <template #title>
+      点击
+      <span v-if="otherChecked">
+        收起防御、抗性乘区
+      </span>
+      <span v-else>
+        展开防御、抗性乘区
+      </div>
     </template>
+    <van-icon v-if="otherChecked" name="arrow-up" />
+    <van-icon v-else name="arrow-down" />
   </van-cell>
   <div v-show="otherChecked" class="data-panel">
     <div class="data-panel__title">
@@ -278,6 +281,7 @@ import {
   Cell,
   RadioGroup,
   Radio,
+  Icon,
 } from "vant";
 import TabTitle from "../component/TabTitle.vue";
 import { computationalFormula, getLocalStorage } from "../utils";
@@ -285,14 +289,20 @@ import DataItem from "../component/DataItem.vue";
 import NoteGroup from "../component/NoteGroup.vue";
 import DetailBlock from "../component/Detail.vue";
 import SaveData from "../component/SaveData.vue";
-import AdditionalDemage from '../component/AdditionalDemage.vue';
+import AdditionalDemage from "../component/AdditionalDemage.vue";
 import { useStore } from "vuex";
-import { EnhancedDamageNotes, AtkPercentNotes, AtkPercentCalculationMode, EnhancedDemageCalculationMode } from "../constant";
+import {
+  EnhancedDamageNotes,
+  AtkPercentNotes,
+  AtkPercentCalculationMode,
+  EnhancedDemageCalculationMode,
+} from "../constant";
 
 export default defineComponent({
   name: "increase",
 
   components: {
+    [Icon.name]: Icon,
     [Cell.name]: Cell,
     [Radio.name]: Radio,
     [Switch.name]: Switch,
@@ -382,13 +392,10 @@ export default defineComponent({
     };
 
     const recalculationData = (value) => {
-      const {
-        selectedExtraATKNotes,
-        selectedElementDemageNotes,
-      } = value;
-      store.commit('setUnifiedState', value);
-      store.commit('setSelectedExtraATKNotes', selectedExtraATKNotes);
-      store.commit('setSelectedElementDemageNotes', selectedElementDemageNotes);
+      const { selectedExtraATKNotes, selectedElementDemageNotes } = value;
+      store.commit("setUnifiedState", value);
+      store.commit("setSelectedExtraATKNotes", selectedExtraATKNotes);
+      store.commit("setSelectedElementDemageNotes", selectedElementDemageNotes);
     };
 
     return {
