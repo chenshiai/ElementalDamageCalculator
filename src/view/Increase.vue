@@ -49,9 +49,9 @@
     />
     <detail-block instructions="『攻击力加成%』说明">
       以『基础攻击力』的百分比来算，会直接加在最上方『攻击力总计』的
-      <span style="color: #49ff39">绿字</span>里。一些无法常驻的攻击力加成buff可以在这里保存，方便切换。
+      <span style="color: #49ff39">绿字</span
+      >里。一些无法常驻的攻击力加成buff可以在这里保存，方便切换。
     </detail-block>
-    
     <data-item
       v-model="atkRate"
       title="伤害倍率%"
@@ -66,7 +66,7 @@
     <data-item
       v-model="extraRate"
       title="倍率增幅%"
-      tips="宵宫的E、行秋的4命"
+      tips="宵宫E/行秋4命/安柏2命"
       stepperMin="0"
       sliderMax="100"
       sliderStep="0.1"
@@ -154,8 +154,7 @@
           </van-cell>
           <van-cell clickable @click="atkType = 'evaporation'">
             <template #title>
-              2.0倍增幅
-              (<span class="water"></span>→<span class="fire"></span>
+              2.0倍增幅(<span class="water"></span>→<span class="fire"></span>
               /
               <span class="fire"></span>→<span class="ice"></span>)
             </template>
@@ -165,8 +164,7 @@
           </van-cell>
           <van-cell clickable @click="atkType = 'evaporation2'">
             <template #title>
-              1.5倍增幅
-              (<span class="fire"></span>→<span class="water"></span>
+              1.5倍增幅(<span class="fire"></span>→<span class="water"></span>
               /
               <span class="ice"></span>→<span class="fire"></span>)
             </template>
@@ -178,71 +176,46 @@
       </van-cell-group>
     </div>
   </div>
-  <van-cell class="eva-cell" @click="otherChecked = !otherChecked" center>
-    <template #title>
-      点击
-      <span v-if="otherChecked">
-        收起防御、抗性乘区
-      </span>
-      <span v-else>
-        展开防御、抗性乘区
-      </div>
-    </template>
-    <van-icon v-if="otherChecked" name="arrow-up" />
-    <van-icon v-else name="arrow-down" />
+  <van-cell
+    class="eva-cell"
+    @click="otherChecked = !otherChecked"
+    center
+    title="防御、抗性乘区 "
+  >
+    <span>{{ otherChecked ? "收起" : "展开" }}</span>
   </van-cell>
   <div v-show="otherChecked" class="data-panel">
-    <div class="data-panel__title">
-      人物等级
-      <van-stepper
-        v-model="characterLevel"
-        button-size="20"
-        theme="round"
-        integer
-        min="1"
-        max="90"
-      />
-    </div>
-    <div class="data-panel__title">
-      敌人等级
-      <van-stepper
-        v-model="enemyLevel"
-        button-size="20"
-        theme="round"
-        integer
-        min="1"
-      />
-    </div>
-    <div class="data-panel__title">
-      敌人抗性%
-      <van-stepper
-        v-model="enemyResistance"
-        button-size="20"
-        theme="round"
-        integer
-        min="-999"
-      />
-    </div>
-    <div class="data-panel__title">
-      减少抗性%
-      <van-stepper
-        v-model="weaken"
-        button-size="20"
-        theme="round"
-        integer
-        min="0"
-      />
-    </div>
-    <div class="data-panel__title">
-      减少防御%
-      <van-stepper
-        v-model="armour"
-        button-size="20"
-        theme="round"
-        min="0"
-        integer
-      />
-    </div>
+    <data-item
+      v-model="characterLevel"
+      title="人物等级"
+      stepperMax="90"
+      stepperMin="1"
+    />
+    <data-item
+      v-model="enemyLevel"
+      title="敌人等级"
+      stepperMin="1"
+    />
+    <data-item
+      v-model="enemyResistance"
+      title="敌人抗性%"
+      stepperMin="-999"
+    >
+      <div class="extra-btn" @click="handleImagePreview">查看抗性表</div>
+    </data-item>
+    <data-item
+      v-model="weaken"
+      title="减少抗性%"
+      stepperMin="0"
+      stepperMax="300"
+    />
+    <data-item
+      v-model="armour"
+      title="减少防御%"
+      tips="目前仅能计算一个减防buff"
+      stepperMin="0"
+      stepperMax="100"
+    />
   </div>
   <div :class="['result-grid', floatChecked && 'increase-result__top']">
     <div class="grid-item">
@@ -282,6 +255,7 @@ import {
   RadioGroup,
   Radio,
   Icon,
+  ImagePreview,
 } from "vant";
 import TabTitle from "../component/TabTitle.vue";
 import { computationalFormula, getLocalStorage } from "../utils";
@@ -398,6 +372,10 @@ export default defineComponent({
       store.commit("setSelectedElementDemageNotes", selectedElementDemageNotes);
     };
 
+    const handleImagePreview = () => {
+      ImagePreview("http://saomdpb.com/IMG_1457.PNG");
+    };
+
     return {
       ...toRefs(store.state.demageModule),
       ...toRefs(store.state.saveDataModule),
@@ -417,6 +395,7 @@ export default defineComponent({
       setSelectedElementDemageNotes,
       EnhancedDemageCalculationMode,
       AtkPercentCalculationMode,
+      handleImagePreview,
     };
   },
 });
@@ -504,5 +483,13 @@ export default defineComponent({
   position: fixed;
   top: 60px;
   width: calc(100% - 32px);
+}
+.extra-btn {
+  display: inline-block;
+  margin-left: 16px;
+  font-size: 14px;
+  border: 1px solid var(--main-text);
+  border-radius: 4px;
+  padding: 0 4px;
 }
 </style>
