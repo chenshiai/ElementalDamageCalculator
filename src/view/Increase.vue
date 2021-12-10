@@ -372,7 +372,7 @@ export default defineComponent({
     };
 
     const handleImagePreview = () => {
-      ImagePreview("http://saomdpb.com/IMG_1457.PNG");
+      ImagePreview(["http://saomdpb.com/IMG_1457.PNG"]);
     };
 
     return {
