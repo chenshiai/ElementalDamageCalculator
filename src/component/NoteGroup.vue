@@ -1,27 +1,38 @@
 <template>
-  <div
-    v-show="notes"
-    :class="['notes-button', isExpand && 'expand']"
-    @click="isExpand = !isExpand"
-  >
-    『{{ title }}』标签组
-    <van-icon size="12" :name="isExpand ? 'arrow-up' : 'arrow-down'" />
-  </div>
-  <div v-show="notes && isExpand" class="data-notes">
-    <div class="add-note-button" @click="openNewNotePop">点此新增标签</div>
+  <div class="note-group">
     <div
-      v-for="(item, index) in notes"
-      :key="index"
-      :class="['memo', selectedMemos[item.title] && 'selected']"
+      v-show="notes"
+      :class="['notes-button', isExpand && 'expand']"
+      @click="isExpand = !isExpand"
     >
-      <div @click="selectMemo(item)">
-        <div class="memo-detail">+{{ item.detail }}</div>
-        <div class="memo-title">{{ item.title }}</div>
+      『{{ title }}』标签组
+      <van-icon size="12" :name="isExpand ? 'arrow-up' : 'arrow-down'" />
+    </div>
+    <div v-show="notes && isExpand" class="data-notes">
+      <div class="add-note-button" @click="showPopup = true">点此新增标签</div>
+      <div
+        v-for="(item, index) in notes"
+        :key="index"
+        :class="['memo', selectedMemos[item.title] && 'selected']"
+      >
+        <div @click="selectMemo(item)">
+          <div class="memo-detail">+{{ floatNum(item.detail, 2) }}</div>
+          <div class="memo-title">{{ item.title }}</div>
+        </div>
+        <van-icon
+          @click="deleteMemo(item)"
+          class="memo-close"
+          name="delete-o"
+        />
       </div>
-      <van-icon @click="deleteMemo(item)" class="memo-close" name="delete-o" />
     </div>
   </div>
-  <van-popup teleport="#app" v-model:show="showPopup" position="top">
+  <van-popup
+    teleport="#app"
+    v-model:show="showPopup"
+    position="top"
+    @close="handleClose"
+  >
     <div class="popup-title">新增『{{ title }}』标签</div>
     <van-tabs
       v-show="calculationMode.length > 1"
@@ -29,6 +40,7 @@
       v-model:active="active"
       color="#997874"
       line-width="60px"
+      swipe-threshold="3"
     >
       <van-tab
         v-for="mode in calculationMode"
@@ -36,32 +48,39 @@
         :key="mode.title"
       />
     </van-tabs>
-    <van-field
-      v-model="newMemo.detail"
-      type="number"
-      :label="calculationMode[active].label"
-      :placeholder="calculationMode[active].placeholder"
-      :formatter="formatterDetail"
-      format-trigger="onBlur"
-    />
-    <van-field
-      v-model="newMemo.title"
-      type="text"
-      label="标签名称"
-      placeholder="输入备注说明（不要与其他标签重复）"
-    />
-    <div class="popup-bottons">
-      <div @click="showPopup = false" class="popup-bottons__item">取消</div>
-      <div @click="addNewNote" class="popup-bottons__item popup-bottons__add">
-        新增
-      </div>
-    </div>
+    <van-form @submit="onSubmit">
+      <van-field
+        v-for="field in calculationMode[active].fields"
+        v-model="temporaryData[field.label]"
+        :key="field.name"
+        :name="field.name"
+        :type="field.type"
+        :label="field.label"
+        :placeholder="field.placeholder"
+        :rules="[{ required: true, message: '必填项' }]"
+      />
+      <van-field
+        v-model="newMemo.title"
+        type="text"
+        label="标签名称"
+        placeholder="输入备注说明（不要与其他标签重复）"
+        :rules="[{ required: true, message: '必填项' }]"
+      />
+      <van-button
+        class="bottons__add"
+        text="新增"
+        size="small"
+        block
+        type="primary"
+        native-type="submit"
+      />
+    </van-form>
   </van-popup>
 </template>
 
 <script>
 import { defineComponent, reactive, ref, watch } from "vue";
-import { Cell, Icon, Popup, Field, Toast, Tab, Tabs } from "vant";
+import { Cell, Icon, Popup, Field, Form, Toast, Button, Tab, Tabs } from "vant";
 import { deepCopyObject, floatNum } from "../utils";
 
 export default defineComponent({
@@ -74,8 +93,10 @@ export default defineComponent({
     [Tabs.name]: Tabs,
     [Cell.name]: Cell,
     [Icon.name]: Icon,
+    [Form.name]: Form,
     [Field.name]: Field,
     [Popup.name]: Popup,
+    [Button.name]: Button,
   },
 
   props: {
@@ -90,6 +111,16 @@ export default defineComponent({
   setup(props, { emit }) {
     const selectedMemos = ref({});
     const isExpand = ref(false);
+    const showPopup = ref(false);
+    const active = ref(0);
+    const temporaryData = ref({});
+    const newMemo = reactive({
+      title: "",
+    });
+
+    const handleClose = () => {
+      temporaryData.value = {};
+    };
     const changeValue = (value) => {
       emit("update:modelValue", value);
     };
@@ -97,70 +128,48 @@ export default defineComponent({
       const key = item.title;
       const detail = +item.detail;
       if (selectedMemos.value[key]) {
-        if (
-          floatNum(props.modelValue) - floatNum(selectedMemos.value[key]) >=
-          0
-        ) {
-          changeValue(
-            floatNum(props.modelValue) - floatNum(selectedMemos.value[key])
-          );
+        const res = floatNum(+props.modelValue - +selectedMemos.value[key], 2);
+        if (res >= 0) {
+          changeValue(res);
         }
         delete selectedMemos.value[key];
       } else {
         selectedMemos.value[key] = detail;
-        changeValue(
-          floatNum(props.modelValue) + floatNum(selectedMemos.value[key])
-        );
+        changeValue(floatNum(+props.modelValue + +selectedMemos.value[key], 2));
       }
       props.setSelectedNotes(deepCopyObject(selectedMemos.value));
     };
+
     const deleteMemo = (item) => {
       const key = item.title;
       const notesFilter = props.notes.filter((item) => item.title !== key);
       emit("updateNoteGroup", notesFilter);
 
       if (selectedMemos.value[key]) {
-        changeValue(
-          floatNum(props.modelValue) - floatNum(selectedMemos.value[key])
-        );
+        changeValue(floatNum(+props.modelValue - +selectedMemos.value[key], 2));
         delete selectedMemos.value[key];
       }
     };
 
-    const showPopup = ref(false);
-    const openNewNotePop = () => {
-      showPopup.value = true;
-    };
-
-    const newMemo = reactive({
-      detail: "",
-      title: "",
-    });
-    const addNewNote = (remind = true) => {
-      if (!newMemo.detail || !newMemo.title) {
-        Toast.fail("不能为空值");
-        return;
-      }
+    const onSubmit = (value) => {
       const { getResult } = props.calculationMode[active.value];
       const noteValue = {
-        detail: getResult(newMemo.detail),
+        detail: getResult(value),
         title: newMemo.title,
       };
       const newNotes = [noteValue];
+
+      // 自动选中新建的标签
       selectMemo(noteValue);
-      newMemo.detail = "";
+
+      // 将表单值设为空
       newMemo.title = "";
+      temporaryData.value = {};
 
+      // 拼接新的标签组并抛出
       emit("updateNoteGroup", newNotes.concat(props.notes));
-      if (remind) Toast.success("添加成功");
+      Toast.success("添加成功");
     };
-
-    const formatterDetail = (value) => {
-      if (!value) return "";
-      return floatNum(value);
-    };
-
-    const active = ref(0);
 
     watch(
       () => props.selectedNotes,
@@ -187,10 +196,11 @@ export default defineComponent({
       selectMemo,
       showPopup,
       deleteMemo,
-      addNewNote,
-      formatterDetail,
       selectedMemos,
-      openNewNotePop,
+      temporaryData,
+      handleClose,
+      onSubmit,
+      floatNum,
     };
   },
 });
@@ -212,7 +222,7 @@ export default defineComponent({
   border: 1px solid var(--button-bg);
   border-radius: 6px;
   box-sizing: border-box;
-  padding: 2px 6px;
+  padding: 2px 24px 2px 6px;
   color: var(--button-bg);
   font-size: 14px;
   position: relative;
@@ -235,8 +245,7 @@ export default defineComponent({
   margin-left: 6px;
   font-size: 14px;
 }
-.add-note-button:active,
-.add-note-button:hover {
+.add-note-button:active {
   background-color: var(--light-text);
 }
 .memo-detail {
@@ -283,5 +292,12 @@ export default defineComponent({
 .popup-bottons__add {
   background-color: var(--button-bg);
   color: #fff;
+}
+.bottons__add {
+  background-color: var(--button-bg);
+  color: #fff;
+  border: none;
+  font-size: 18px;
+  border-radius: 0;
 }
 </style>

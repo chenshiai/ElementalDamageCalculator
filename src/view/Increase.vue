@@ -42,80 +42,16 @@
       v-model="extraPercentATK"
       title="攻击力加成%"
       :notes="ATKNotes"
-      @updateNoteGroup="ATKNoteChange"
       :selectedNotes="selectedExtraATKNotes"
       :setSelectedNotes="setSelectedExtraATKNotes"
       :calculationMode="AtkPercentCalculationMode"
+      @updateNoteGroup="ATKNoteChange"
     />
     <detail-block instructions="『攻击力加成%』说明">
       以『基础攻击力』的百分比来算，会直接加在最上方『攻击力总计』的
       <span style="color: #49ff39">绿字</span
       >里。一些无法常驻的攻击力加成buff可以在这里保存，方便切换。
     </detail-block>
-    <data-item
-      v-model="atkRate"
-      title="伤害倍率%"
-      tips="本次攻击的倍率"
-      stepperMin="0"
-      sliderMax="1500"
-      sliderStep="0.1"
-      decimalLength="1"
-      :showSlider="sliderChecked"
-    />
-
-    <data-item
-      v-model="extraRate"
-      title="倍率增幅%"
-      tips="宵宫E/行秋4命/安柏2命"
-      stepperMin="0"
-      sliderMax="100"
-      sliderStep="0.1"
-      decimalLength="1"
-      :showSlider="sliderChecked"
-    />
-
-    <additional-demage
-      label="附加伤害值"
-      buttonText="点此计算附加伤害值"
-      :additionalMode="AdditionalDemageMode"
-      :additionalList="additionalDemageList"
-    />
-
-    <data-item
-      v-model="elementDemage"
-      title="伤害加成%"
-      tips="注意伤害加成触发的方式"
-      stepperMin="0"
-      sliderMax="600"
-      sliderStep="0.1"
-      decimalLength="1"
-      :showSlider="sliderChecked"
-    />
-    <note-group
-      v-model="elementDemage"
-      title="伤害加成%"
-      :notes="EDNotes"
-      @updateNoteGroup="EDNoteChange"
-      :selectedNotes="selectedElementDemageNotes"
-      :setSelectedNotes="setSelectedElementDemageNotes"
-      :calculationMode="EnhancedDemageCalculationMode"
-    />
-    <detail-block instructions="『伤害加成%』说明">
-      伤害加成的数值 = 造成伤害提高 + 元素/物理伤害加成 + 普攻/重击造成伤害提高
-      + 元素战技/元素爆发伤害提高 + 对元素影响下的敌人伤害提高 +
-      人物技能增伤等。
-    </detail-block>
-    <data-item
-      v-model="critDemage"
-      title="暴击伤害%"
-      tips="小数需要手动输入"
-      stepperMin="0"
-      sliderMin="0"
-      sliderMax="600"
-      sliderStep="0.1"
-      decimalLength="1"
-      :showSlider="sliderChecked"
-    />
     <div class="data-panel__title">
       精通加成%
       <van-stepper
@@ -147,6 +83,71 @@
         />
       </template>
     </van-cell>
+
+    <data-item
+      v-model="critDemage"
+      title="暴击伤害%"
+      tips="小数需要手动输入"
+      stepperMin="0"
+      sliderMin="0"
+      sliderMax="600"
+      sliderStep="0.1"
+      decimalLength="1"
+      :showSlider="sliderChecked"
+    />
+    <data-item
+      v-model="elementDemage"
+      title="伤害加成%"
+      tips="注意伤害加成触发的方式"
+      stepperMin="0"
+      sliderMax="600"
+      sliderStep="0.1"
+      decimalLength="2"
+      :showSlider="sliderChecked"
+    />
+    <note-group
+      v-model="elementDemage"
+      title="伤害加成%"
+      :notes="EDNotes"
+      :selectedNotes="selectedElementDemageNotes"
+      :setSelectedNotes="setSelectedElementDemageNotes"
+      :calculationMode="EnhancedDemageCalculationMode"
+      @updateNoteGroup="EDNoteChange"
+    />
+    <detail-block instructions="『伤害加成%』说明">
+      伤害加成有如下几类：x元素伤害提高/提升；xx造成伤害提高/提升；xx伤害加成；
+      xx伤害提升；对x元素影响下的敌人伤害提高/提升；敌人受到伤害提高/提升；敌人受到伤害降低/减少等。
+      敌人受伤效果较为特殊，不过最终伤害结算是与角色伤害加成区间加算的，例如莫娜元素爆发的星异效果。
+    </detail-block>
+
+    <data-item
+      v-model="atkRate"
+      title="伤害倍率%"
+      tips="本次攻击的倍率"
+      stepperMin="0"
+      sliderMax="1500"
+      sliderStep="0.1"
+      decimalLength="1"
+      :showSlider="sliderChecked"
+    />
+
+    <data-item
+      v-model="extraRate"
+      title="倍率增幅%"
+      tips="宵宫E/行秋4命/安柏2命"
+      stepperMin="0"
+      sliderMax="100"
+      sliderStep="0.1"
+      decimalLength="1"
+      :showSlider="sliderChecked"
+    />
+
+    <additional-demage
+      label="附加伤害值"
+      buttonText="添加附加伤害值"
+      :additionalMode="AdditionalDemageMode"
+      :additionalList="additionalDemageList"
+    />
 
     <div class="data-panel__title">
       反应类型
@@ -196,16 +197,8 @@
       stepperMax="90"
       stepperMin="1"
     />
-    <data-item
-      v-model="enemyLevel"
-      title="敌人等级"
-      stepperMin="1"
-    />
-    <data-item
-      v-model="enemyResistance"
-      title="敌人抗性%"
-      stepperMin="-999"
-    >
+    <data-item v-model="enemyLevel" title="敌人等级" stepperMin="1" />
+    <data-item v-model="enemyResistance" title="敌人抗性%" stepperMin="-999">
       <div class="extra-btn" @click="handleImagePreview">查看抗性表</div>
     </data-item>
     <data-item
@@ -214,16 +207,9 @@
       stepperMin="0"
       stepperMax="300"
     />
-    <data-item
-      v-model="armour"
-      title="减少防御%"
-      tips="目前仅能计算一个减防buff"
-      stepperMin="0"
-      stepperMax="100"
-    />
     <additional-demage
-      label="减少防御"
-      buttonText="点此添加防御减少效果"
+      label="减少防御%"
+      buttonText="添加防御减少效果"
       :additionalMode="DefCutAdditionMode"
       :additionalList="armourList"
     />

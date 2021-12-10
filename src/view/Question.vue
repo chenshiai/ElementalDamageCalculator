@@ -17,7 +17,7 @@
     举个例子，面板显示的「攻击力+20」，实际可能是「攻击力+20.25」。
   </div>
   <br />
-  <span class="question-title">【敌人抗性是多少】</span>
+  <!-- <span class="question-title">【敌人抗性是多少】</span>
   <div>
     <img src="../assets/IMG_1457.png" class="question-img" @click="imagePreview"/>
     <p>
@@ -27,7 +27,7 @@
       </a>
     </p>
   </div>
-  <br />
+  <br /> -->
   <span class="question-title">【滑块数值达到上限】</span>
   <div>
     滑块只是用来辅助调整到大概数值，而实际数值没有上限（部分特殊数值除外）。若有超过滑块上限的数值，点击数值可以进行手动输入。

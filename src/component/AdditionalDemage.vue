@@ -32,7 +32,7 @@
       <van-tab v-for="mode in additionalMode" :key="mode.title">
         <template #title>
           <div class="additional-tab-title">
-            <img class="tab-title-img" :src="mode.img" alt="" />
+            <img v-if="!!mode.img" class="tab-title-img" :src="mode.img" alt="" />
             <span class="tab-title-span">{{ mode.title }}</span>
           </div>
         </template>
@@ -178,7 +178,6 @@ export default defineComponent({
   border: 1px solid var(--main-text);
   margin-bottom: 16px;
 }
-.additional-demage-button:hover,
 .additional-demage-button:active {
   background-color: var(--light-text);
 }

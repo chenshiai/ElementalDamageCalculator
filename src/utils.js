@@ -40,8 +40,14 @@ export const getResistanceRate = (enemyResistance, weaken) => {
   return resistanceRate;
 };
 
-export const getDefRate = (characterLevel, enemyLevel, armour) => {
-  const enemyDef = (enemyLevel + 100) * (1 - armour / 100);
+export const getDefRate = (characterLevel, enemyLevel, armourList) => {
+  let enemyDef = enemyLevel + 100;
+  armourList.forEach((item) => {
+    enemyDef *= 1 - item / 100;
+  })
+  if (enemyDef < 0) {
+    enemyDef = 0;
+  }
   return (100 + characterLevel) / (100 + characterLevel + enemyDef);
 };
 
@@ -90,7 +96,7 @@ export const computationalFormula = (data) => {
     enemyLevel,
     enemyResistance,
     weaken,
-    armour,
+    armourList = [],
   } = data;
 
   // 攻击力
@@ -106,7 +112,7 @@ export const computationalFormula = (data) => {
   // 抗性
   const resistanceRate = getResistanceRate(enemyResistance, weaken);
   // 防御减伤
-  const defRate = getDefRate(characterLevel, enemyLevel, armour);
+  const defRate = getDefRate(characterLevel, enemyLevel, armourList);
 
   // 精通加成
   let eva = 1 + evaporationDemage / 100;

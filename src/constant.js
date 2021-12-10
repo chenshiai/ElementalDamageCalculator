@@ -127,6 +127,18 @@ export const EnhancedDamageNotes = [
     title: "染血4·重击伤害",
   },
   {
+    detail: 40,
+    title: "逆飞4·普攻/重击伤害",
+  },
+  {
+    detail: 25,
+    title: "苍白2·物理伤害",
+  },
+  {
+    detail: 50,
+    title: "苍白4·物理伤害",
+  },
+  {
     detail: 24,
     title: "华馆4·岩伤",
   }
@@ -135,15 +147,27 @@ export const EnhancedDamageNotes = [
 export const AtkPercentNotes = [
   {
     detail: 48,
-    title: "精炼5阶·讨龙",
+    title: "精炼5阶·讨龙英杰谭",
   },
   {
-    detail: 25,
-    title: "元素共鸣·热诚之火",
+    detail: 20,
+    title: "昔日宗室之仪",
   },
   {
     detail: 20,
     title: "千岩牢固",
+  },
+  {
+    detail: 9,
+    title: "苍白之火·一层",
+  },
+  {
+    detail: 9,
+    title: "苍白之火·二层",
+  },
+  {
+    detail: 25,
+    title: "元素共鸣·热诚之火",
   },
 ];
 
@@ -151,27 +175,69 @@ export const AtkPercentNotes = [
 export const EnhancedDemageCalculationMode = [
   {
     title: "直接增伤",
-    label: "具体数值",
-    placeholder: "输入数值（支持一位小数）",
-    getResult: (number) => number,
+    fields: [
+      {
+        name: "number",
+        type: "number",
+        label: "具体数值",
+        placeholder: "输入数值",
+      },
+    ],
+    getResult: ({ number }) => number,
   },
   {
     title: "风物之诗咏",
-    label: "元素精通",
-    placeholder: "输入枫原万叶的元素精通",
-    getResult: (number) => (number * 0.04).toFixed(1),
+    fields: [
+      {
+        name: "atromancy",
+        type: "number",
+        label: "元素精通",
+        placeholder: "输入枫原万叶的元素精通",
+      },
+    ],
+    getResult: ({ atromancy }) => atromancy * 0.04,
+  },
+  {
+    title: "雷罚恶曜之眼",
+    fields: [
+      {
+        name: "energy",
+        type: "number",
+        label: "元素能量",
+        placeholder: "输入角色元素爆发的元素能量",
+      },
+      {
+        name: "units",
+        label: "每点加成%",
+        type: "number",
+        placeholder: "雷电将军元素战技的每点元素能量的数值",
+      },
+    ],
+    getResult: ({ energy, units }) => energy * units,
   },
   {
     title: "绝缘之旗印",
-    label: "元素充能",
-    placeholder: "输入角色的元素充能",
-    getResult: (number) => Math.min(number * 0.25, 75).toFixed(1),
+    fields: [
+      {
+        name: "charge",
+        label: "元素充能",
+        type: "number",
+        placeholder: "输入角色的元素充能",
+      },
+    ],
+    getResult: ({ charge }) => Math.min(charge * 0.25, 75),
   },
   {
     title: "血赤叶红",
-    label: "元素精通",
-    placeholder: "输入六命枫原万叶的元素精通",
-    getResult: (number) => (number * 0.2).toFixed(1),
+    fields: [
+      {
+        name: "energy",
+        label: "元素精通",
+        type: "number",
+        placeholder: "输入六命枫原万叶的元素精通",
+      },
+    ],
+    getResult: ({ energy }) => energy * 0.2,
   },
 ];
 
@@ -179,9 +245,15 @@ export const EnhancedDemageCalculationMode = [
 export const AtkPercentCalculationMode = [
   {
     title: "直接加攻%",
-    label: "具体数值",
-    placeholder: "输入数值（支持一位小数）",
-    getResult: (number) => number,
+    fields: [
+      {
+        name: "number",
+        label: "具体数值",
+        type: "number",
+        placeholder: "输入数值（支持一位小数）",
+      },
+    ],
+    getResult: ({ number }) => number,
   }
 ];
 
@@ -298,11 +370,11 @@ export const AdditionalDemageMode = [
     ]
   },
   {
-    title: "辰砂之纺锤",
+    title: "辰砂之纺锤/赤角石溃杵",
     img: 'https://uploadstatic.mihoyo.com/ys-obc/2021/11/09/75833613/14439ff89d1a6919bae74e00d9dc3292_8494837697999144768.png',
     children: [
       {
-        title: "无垢之心",
+        title: "无垢之心/御伽大王御伽话",
         fields: [
           {
             name: "def",
@@ -367,16 +439,15 @@ export const AdditionalDemageMode = [
 
 export const DefCutAdditionMode = [
   {
-    title: "防御减少",
-    // img: 'https://uploadstatic.mihoyo.com/ys-obc/2021/11/09/75833613/14439ff89d1a6919bae74e00d9dc3292_8494837697999144768.png',
+    title: "减少敌人防御或无视敌人部分防御",
     children: [
       {
-        title: "注意：不同来源的防御减少效果唯一，不可加算",
+        title: "可以添加多个效果，各个效果之间不是加算",
         fields: [
           {
             name: "num",
             label: "减少防御%",
-            placeholder: "输入",
+            placeholder: "输入具体数值",
             type: "number",
           }
         ],
