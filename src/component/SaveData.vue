@@ -128,7 +128,7 @@ export default defineComponent({
         enemyLevel,
         enemyResistance,
         weaken,
-        armour,
+        armourList = [],
       } = value;
 
       return [
@@ -191,7 +191,7 @@ export default defineComponent({
         },
         {
           label: "减少防御%",
-          value: armour,
+          value: armourList.join(','),
         },
       ];
     };

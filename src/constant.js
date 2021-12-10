@@ -364,3 +364,24 @@ export const AdditionalDemageMode = [
     ]
   },
 ];
+
+export const DefCutAdditionMode = [
+  {
+    title: "防御减少",
+    // img: 'https://uploadstatic.mihoyo.com/ys-obc/2021/11/09/75833613/14439ff89d1a6919bae74e00d9dc3292_8494837697999144768.png',
+    children: [
+      {
+        title: "注意：不同来源的防御减少效果唯一，不可加算",
+        fields: [
+          {
+            name: "num",
+            label: "减少防御%",
+            placeholder: "输入",
+            type: "number",
+          }
+        ],
+        getResult: ({ num }) => num,
+      },
+    ]
+  },
+]

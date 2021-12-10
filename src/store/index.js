@@ -31,6 +31,7 @@ const demageModule = {
       enemyResistance: 10,
       weaken: 0,
       armour: 0,
+      armourList: [],
     };
   },
   mutations: {
@@ -76,6 +77,9 @@ const demageModule = {
     setArmour(state, value) {
       state.armour = value;
     },
+    setArmourList(state, value) {
+      state.armourList = value;
+    },
     setUnifiedState(state, value) {
       const {
         baseATK,
@@ -93,6 +97,7 @@ const demageModule = {
         enemyResistance,
         weaken,
         armour,
+        armourList = [],
       } = value;
       state.baseATK = baseATK;
       state.extraATK = extraATK;
@@ -109,6 +114,7 @@ const demageModule = {
       state.enemyResistance = enemyResistance;
       state.weaken = weaken;
       state.armour = armour;
+      state.armourList = armourList;
     }
   },
 };

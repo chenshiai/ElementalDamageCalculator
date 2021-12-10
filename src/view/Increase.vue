@@ -74,7 +74,12 @@
       :showSlider="sliderChecked"
     />
 
-    <additional-demage />
+    <additional-demage
+      label="附加伤害值"
+      buttonText="点此计算附加伤害值"
+      :additionalMode="AdditionalDemageMode"
+      :additionalList="additionalDemageList"
+    />
 
     <data-item
       v-model="elementDemage"
@@ -216,6 +221,12 @@
       stepperMin="0"
       stepperMax="100"
     />
+    <additional-demage
+      label="减少防御"
+      buttonText="点此添加防御减少效果"
+      :additionalMode="DefCutAdditionMode"
+      :additionalList="armourList"
+    />
   </div>
   <div :class="['result-grid', floatChecked && 'increase-result__top']">
     <div class="grid-item">
@@ -270,6 +281,8 @@ import {
   AtkPercentNotes,
   AtkPercentCalculationMode,
   EnhancedDemageCalculationMode,
+  AdditionalDemageMode,
+  DefCutAdditionMode,
 } from "../constant";
 
 export default defineComponent({
@@ -396,6 +409,8 @@ export default defineComponent({
       EnhancedDemageCalculationMode,
       AtkPercentCalculationMode,
       handleImagePreview,
+      AdditionalDemageMode,
+      DefCutAdditionMode,
     };
   },
 });

@@ -1,9 +1,9 @@
 <template>
   <div class="additional-demage-list">
-    <span v-if="additionalDemageList.length > 0">附加伤害值：</span>
+    <span v-if="additionalList.length > 0">{{ label }}：</span>
     <van-tag
       class="demage-list-item"
-      v-for="(item, index) in additionalDemageList"
+      v-for="(item, index) in additionalList"
       :key="index"
       closeable
       color="#997874"
@@ -13,7 +13,7 @@
     </van-tag>
   </div>
   <div class="additional-demage-button" @click="openPop">
-    点此计算附加伤害值
+    {{ buttonText }}
   </div>
   <van-popup
     teleport="#app"
@@ -21,7 +21,7 @@
     position="top"
     @close="handleClose"
   >
-    <div class="popup-title">附加伤害值</div>
+    <div class="popup-title">{{ label }}</div>
     <van-tabs
       color="#997874"
       line-width="60px"
@@ -29,7 +29,7 @@
       @change="handleChange"
       swipe-threshold="3"
     >
-      <van-tab v-for="mode in AdditionalDemageMode" :key="mode.title">
+      <van-tab v-for="mode in additionalMode" :key="mode.title">
         <template #title>
           <div class="additional-tab-title">
             <img class="tab-title-img" :src="mode.img" alt="" />
@@ -40,7 +40,7 @@
     </van-tabs>
     <van-tabs color="#997874" line-width="60px" v-model:active="childrenActive">
       <van-tab
-        v-for="item in AdditionalDemageChildren"
+        v-for="item in additionalModeChildren"
         :title="item.title"
         :key="item.title"
       />
@@ -48,7 +48,7 @@
     <van-form @submit="onSubmit">
       <van-cell-group inset>
         <van-field
-          v-for="field in AdditionalDemageChildren[childrenActive].fields"
+          v-for="field in additionalModeChildren[childrenActive].fields"
           v-model="temporaryData[field.label]"
           :key="field.name"
           :name="field.name"
@@ -83,11 +83,17 @@ import {
   Field,
   CellGroup,
 } from "vant";
-import { AdditionalDemageMode } from "../constant";
 import { useStore } from "vuex";
 
 export default defineComponent({
   name: "additional-demage",
+
+  props: {
+    buttonText: String,
+    label: String,
+    additionalMode: Object,
+    additionalList: Array,
+  },
 
   components: {
     [Tag.name]: Tag,
@@ -100,7 +106,7 @@ export default defineComponent({
     [CellGroup.name]: CellGroup,
   },
 
-  setup() {
+  setup(props) {
     const temporaryData = ref({});
     const showPopup = ref(false);
     const store = useStore();
@@ -112,8 +118,8 @@ export default defineComponent({
     const active = ref(0);
     const childrenActive = ref(0);
 
-    const AdditionalDemageChildren = computed(() => {
-      return AdditionalDemageMode[active.value].children || [];
+    const additionalModeChildren = computed(() => {
+      return props.additionalMode[active.value].children || [];
     });
 
     const handleChange = () => {
@@ -123,17 +129,15 @@ export default defineComponent({
       temporaryData.value = {};
     };
     const closeTag = (index) => {
-      const { additionalDemageList } = store.state.demageModule;
-      additionalDemageList.splice(index, 1);
+      props.additionalList.splice(index, 1);
     };
 
     const onSubmit = (value) => {
       const { getResult } =
-        AdditionalDemageChildren.value[childrenActive.value];
+        additionalModeChildren.value[childrenActive.value];
       const result = getResult(value);
       if (result) {
-        const { additionalDemageList } = store.state.demageModule;
-        additionalDemageList.push(result);
+        props.additionalList.push(result);
         Toast.success("添加成功");
         handleClose();
       }
@@ -150,8 +154,7 @@ export default defineComponent({
       active,
       onSubmit,
       childrenActive,
-      AdditionalDemageChildren,
-      AdditionalDemageMode,
+      additionalModeChildren,
       temporaryData,
       handleClose,
       closeTag,
