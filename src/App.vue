@@ -117,4 +117,16 @@ export default defineComponent({
 .van-cell.van-collapse-item__title.van-collapse-item__title--expanded {
   background-color: var(--light-text);
 }
+
+.question-title,
+.data-panel__title,
+.holy-relic__title,
+.base-damage__title,
+.cloud-team__title,
+.additional-demage-list__title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
 </style>

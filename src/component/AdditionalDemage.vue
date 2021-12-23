@@ -1,6 +1,11 @@
 <template>
   <div class="additional-demage-list">
-    <span v-if="additionalList.length > 0">{{ label }}：</span>
+    <span
+      class="additional-demage-list__title"
+      v-if="additionalList.length > 0"
+    >
+      {{ label }}
+    </span>
     <van-tag
       class="demage-list-item"
       v-for="(item, index) in additionalList"
@@ -32,7 +37,12 @@
       <van-tab v-for="mode in additionalMode" :key="mode.title">
         <template #title>
           <div class="additional-tab-title">
-            <img v-if="!!mode.img" class="tab-title-img" :src="mode.img" alt="" />
+            <img
+              v-if="!!mode.img"
+              class="tab-title-img"
+              :src="mode.img"
+              alt=""
+            />
             <span class="tab-title-span">{{ mode.title }}</span>
           </div>
         </template>
@@ -133,8 +143,7 @@ export default defineComponent({
     };
 
     const onSubmit = (value) => {
-      const { getResult } =
-        additionalModeChildren.value[childrenActive.value];
+      const { getResult } = additionalModeChildren.value[childrenActive.value];
       const result = getResult(value);
       if (result) {
         props.additionalList.push(result);
@@ -169,8 +178,11 @@ export default defineComponent({
 .additional-demage-list {
   margin-bottom: 4px;
 }
+.additional-demage-list__title {
+  margin-right: 12px;
+}
 .additional-demage-button {
-  font-size: 12px;
+  font-size: 14px;
   line-height: 32px;
   text-align: center;
   box-sizing: border-box;

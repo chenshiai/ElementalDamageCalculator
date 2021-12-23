@@ -1,6 +1,6 @@
 <template>
-  <div class="tips">滑块不够用，可以点击数字进行手动输入。</div>
   <tab-title>单次伤害计算</tab-title>
+  <div class="tips">滑块不够用，可以点击数字进行手动输入。</div>
   <van-cell class="eva-cell" center title="开启滑块辅助调整数值">
     <template #right-icon>
       <van-switch
@@ -23,7 +23,7 @@
     <data-item
       v-model="baseATK"
       title="基础攻击力"
-      tips="人物面板攻击力白字"
+      tips="面板攻击力白字"
       stepperInteger
       stepperMin="0"
       sliderMax="1200"
@@ -32,7 +32,7 @@
     <data-item
       v-model="extraATK"
       title="额外攻击力"
-      tips="攻击力绿字的加成"
+      tips="面板攻击力绿字"
       stepperInteger
       stepperMin="0"
       sliderMax="3000"
@@ -59,10 +59,10 @@
         button-size="20"
         theme="round"
         :min="checked ? 15 : 0"
-        input-width="56px"
+        input-width="66px"
         decimal-length="1"
       />
-      <span class="holy-relic-tips">蒸发、融化的伤害提升</span>
+      <span class="holy-relic-tips">蒸发、融化伤害提升</span>
     </div>
     <van-slider
       v-show="sliderChecked"
@@ -87,7 +87,7 @@
     <data-item
       v-model="critDemage"
       title="暴击伤害%"
-      tips="小数需要手动输入"
+      tips="小数位可手输"
       stepperMin="0"
       sliderMin="0"
       sliderMax="600"
@@ -98,7 +98,7 @@
     <data-item
       v-model="elementDemage"
       title="伤害倍率%"
-      tips="注意部分来源生效的条件"
+      tips="注意生效条件"
       stepperMin="-200"
       sliderMax="600"
       sliderMin="-200"
@@ -128,7 +128,7 @@
     <data-item
       v-model="atkRate"
       title="技能倍率%"
-      tips="本次攻击的倍率"
+      tips="本次攻击倍率"
       stepperMin="0"
       sliderMax="1500"
       sliderStep="0.1"
