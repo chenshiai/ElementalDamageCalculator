@@ -141,7 +141,7 @@ export default defineComponent({
           value: Math.round(extraATK + baseATK * (extraPercentATK / 100)),
         },
         {
-          label: "伤害倍率%",
+          label: "技能倍率%",
           value: atkRate,
         },
         {
@@ -153,7 +153,7 @@ export default defineComponent({
           value: Math.round(sub(additionalDemageList)),
         },
         {
-          label: "伤害加成%",
+          label: "伤害倍率%",
           value: elementDemage,
         },
         {

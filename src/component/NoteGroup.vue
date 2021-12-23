@@ -16,7 +16,13 @@
         :class="['memo', selectedMemos[item.title] && 'selected']"
       >
         <div @click="selectMemo(item)">
-          <div class="memo-detail">+{{ floatNum(item.detail, 2) }}</div>
+          <div class="memo-detail">
+            {{
+              floatNum(item.detail, 2) >= 0
+                ? `+${floatNum(item.detail, 2)}`
+                : floatNum(item.detail, 2)
+            }}
+          </div>
           <div class="memo-title">{{ item.title }}</div>
         </div>
         <van-icon
