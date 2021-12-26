@@ -287,7 +287,7 @@ export const AdditionalDemageMode = [
           {
             name: "hp",
             label: "生命值",
-            placeholder: "生命值上限的1.39%",
+            placeholder: "输入角色的生命值",
             type: "number",
           }
         ],
@@ -300,7 +300,7 @@ export const AdditionalDemageMode = [
             name: "hp",
             label: "生命值",
             type: "number",
-            placeholder: "生命值上限的1.9%",
+            placeholder: "输入角色的生命值",
           }
         ],
         getResult: ({ hp }) => hp * 0.019,
@@ -312,10 +312,28 @@ export const AdditionalDemageMode = [
             name: "hp",
             label: "生命值",
             type: "number",
-            placeholder: "生命值上限的33%",
+            placeholder: "输入角色的生命值",
           }
         ],
         getResult: ({ hp }) => hp * 0.33,
+      },
+    ]
+  },
+  {
+    title: "荒泷一斗·赤鬼之血",
+    img: 'https://uploadstatic.mihoyo.com/ys-obc/2021/12/14/75379475/744569537cbc493fa96d3930be3d6d87_6572446832973158295.png?x-oss-process=image/quality,q_75/resize,s_40',
+    children: [
+      {
+        title: "荒泷逆袈裟",
+        fields: [
+          {
+            name: "def",
+            label: "防御力",
+            placeholder: "输入角色的防御力",
+            type: "number",
+          },
+        ],
+        getResult: ({ def }) => def * 0.35,
       },
     ]
   },
@@ -324,50 +342,74 @@ export const AdditionalDemageMode = [
     img: 'https://uploadstatic.mihoyo.com/ys-obc/2021/11/02/75379475/9f39bbe75aeda34accf958ecafccb5e8_749944433300006002.png?x-oss-process=image/quality,q_75/resize,s_40',
     children: [
       {
-        title: "技能伤害/化海月",
-        fields: [
-          {
-            name: "hp",
-            label: "生命值",
-            type: "number",
-            placeholder: "输入角色生命值",
-          },
-          {
-            name: "hpRate",
-            label: "生命上限%",
-            type: "number",
-            placeholder: "输入附加伤害倍率",
-          },
-        ],
-        getResult: ({ hp, hpRate }) => hp * hpRate / 100,
-      },
-      {
         title: "普攻·重击",
         fields: [
           {
             name: "hp",
             label: "生命值",
             type: "number",
-            placeholder: "输入角色生命值",
+            placeholder: "输入角色的生命值",
           },
           {
             name: "hpRate",
-            label: "生命上限%",
+            label: "附加倍率%",
             type: "number",
-            placeholder: "输入附加伤害倍率",
+            placeholder: "输入技能的附加生命值伤害的倍率",
           },
           {
             name: "healRate",
             label: "治疗加成%",
             type: "number",
-            placeholder: "输入治疗加成",
+            placeholder: "输入角色的治疗加成",
           },
         ],
         getResult: ({ hp, hpRate, healRate }) => {
           return hp * (+hpRate + healRate * 0.15) / 100
         },
       },
+      {
+        title: "技能伤害/化海月",
+        fields: [
+          {
+            name: "hp",
+            label: "生命值",
+            type: "number",
+            placeholder: "输入角色的生命值",
+          },
+          {
+            name: "hpRate",
+            label: "附加倍率%",
+            type: "number",
+            placeholder: "输入技能的附加生命值伤害的倍率",
+          },
+        ],
+        getResult: ({ hp, hpRate }) => hp * hpRate / 100,
+      },
     ],
+  },
+  {
+    title: "赤角石溃杵/辰砂之纺锤",
+    img: 'https://uploadstatic.mihoyo.com/ys-obc/2021/12/14/75379475/260442fca96f0e65701ff5067b13bb60_6053712857932776206.png?x-oss-process=image/quality,q_75/resize,s_40',
+    children: [
+      {
+        title: "御伽大王御伽话/无垢之心",
+        fields: [
+          {
+            name: "def",
+            label: "防御力",
+            placeholder: "输入角色的防御力",
+            type: "number",
+          },
+          {
+            name: "rate",
+            label: "附加倍率%",
+            placeholder: "输入武器特效的倍率",
+            type: "number",
+          }
+        ],
+        getResult: ({ def, rate }) => def * rate / 100,
+      },
+    ]
   },
   {
     title: "托马·烈火攻燔",
@@ -379,53 +421,11 @@ export const AdditionalDemageMode = [
           {
             name: "hp",
             label: "生命值",
-            placeholder: "生命值上限的2.2%",
+            placeholder: "输入角色的生命值",
             type: "number",
           }
         ],
         getResult: ({ hp }) => hp * 0.022,
-      },
-    ]
-  },
-  {
-    title: "荒泷一斗",
-    img: 'https://uploadstatic.mihoyo.com/ys-obc/2021/11/09/75833613/14439ff89d1a6919bae74e00d9dc3292_8494837697999144768.png',
-    children: [
-      {
-        title: "赤鬼之血",
-        fields: [
-          {
-            name: "def",
-            label: "防御力",
-            placeholder: "「荒泷逆袈裟」伤害值提高35%的防御力",
-            type: "number",
-          },
-        ],
-        getResult: ({ def }) => def * 0.35,
-      },
-    ]
-  },
-  {
-    title: "辰砂之纺锤/赤角石溃杵",
-    img: 'https://uploadstatic.mihoyo.com/ys-obc/2021/11/09/75833613/14439ff89d1a6919bae74e00d9dc3292_8494837697999144768.png',
-    children: [
-      {
-        title: "无垢之心/御伽大王御伽话",
-        fields: [
-          {
-            name: "def",
-            label: "防御力",
-            placeholder: "输入角色防御力",
-            type: "number",
-          },
-          {
-            name: "rate",
-            label: "倍率%",
-            placeholder: "武器特效倍率",
-            type: "number",
-          }
-        ],
-        getResult: ({ def, rate }) => def * rate / 100,
       },
     ]
   },
@@ -439,17 +439,47 @@ export const AdditionalDemageMode = [
           {
             name: "def",
             label: "防御力",
-            placeholder: "输入角色防御力",
+            placeholder: "输入角色的防御力",
             type: "number",
           },
           {
             name: "num",
             label: "生灭计数",
-            placeholder: "输入生灭计数层数",
+            placeholder: "输入生灭计数的层数",
             type: "number",
           },
         ],
         getResult: ({ def, num }) => def * num * 0.3,
+      },
+    ]
+  },
+  {
+    title: "五郎·报恩之守",
+    img: 'https://uploadstatic.mihoyo.com/ys-obc/2021/12/14/75379475/627c335d187d2b6ca362f2d3518d7b85_6343066012109321963.png?x-oss-process=image/quality,q_75/resize,s_40',
+    children: [
+      {
+        title: "犬坂吠吠方圆阵",
+        fields: [
+          {
+            name: "def",
+            label: "防御力",
+            placeholder: "输入角色的防御力",
+            type: "number",
+          },
+        ],
+        getResult: ({ def }) => def * 1.56,
+      },
+      {
+        title: "兽牙逐突形胜战法",
+        fields: [
+          {
+            name: "def",
+            label: "防御力",
+            placeholder: "输入角色的防御力",
+            type: "number",
+          },
+        ],
+        getResult: ({ def }) => def * 0.156,
       },
     ]
   },
@@ -463,7 +493,7 @@ export const AdditionalDemageMode = [
           {
             name: "hp",
             label: "生命值",
-            placeholder: "生命值上限的10%",
+            placeholder: "输入角色的生命值",
             type: "number",
           },
         ],
@@ -472,22 +502,22 @@ export const AdditionalDemageMode = [
     ]
   },
   {
-    title: "不灭月华",
-    img: 'https://uploadstatic.mihoyo.com/ys-obc/2021/11/09/75833613/14439ff89d1a6919bae74e00d9dc3292_8494837697999144768.png',
+    title: "不灭月华·白夜皓月",
+    img: 'https://uploadstatic.mihoyo.com/ys-obc/2021/09/21/75379475/fe6bd7619c736f1d32476d168e4f0fee_4179112997088392370.png?x-oss-process=image/quality,q_75/resize,s_40',
     children: [
       {
-        title: "白夜皓月",
+        title: "普通攻击",
         fields: [
           {
             name: "hp",
             label: "生命值",
-            placeholder: "输入角色生命值",
+            placeholder: "输入角色的生命值",
             type: "number",
           },
           {
             name: "rate",
-            label: "倍率%",
-            placeholder: "武器特效倍率",
+            label: "附加倍率%",
+            placeholder: "输入武器特效的倍率",
             type: "number",
           }
         ],

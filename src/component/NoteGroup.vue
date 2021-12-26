@@ -213,6 +213,9 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.note-group {
+  margin-bottom: 20px;
+}
 .data-notes {
   border: 1px solid var(--button-bg);
   border-top: none;

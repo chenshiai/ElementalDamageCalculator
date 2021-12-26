@@ -37,7 +37,23 @@
       stepperMin="0"
       sliderMax="3000"
       :showSlider="sliderChecked"
-    />
+    >
+      <van-popover
+        class="data-item-popover"
+        v-model:show="showPopoverExtraATK"
+        placement="left-end"
+      >
+        <div class="data-item-popover__content">
+          攻击力加成%会以『基础攻击力』的百分比来算，会直接加在最上方『攻击力总计』的
+          <span style="color: #49ff39">绿字</span>里。
+          <br /><br />
+          一些无法常驻的攻击力加成%可以在下方的标签组里保存，方便切换。
+        </div>
+        <template #reference>
+          <van-icon size="26" name="question" />
+        </template>
+      </van-popover>
+    </data-item>
     <note-group
       v-model="extraPercentATK"
       title="攻击力加成%"
@@ -47,42 +63,17 @@
       :calculationMode="AtkPercentCalculationMode"
       @updateNoteGroup="ATKNoteChange"
     />
-    <detail-block instructions="『攻击力加成%』说明">
-      以『基础攻击力』的百分比来算，会直接加在最上方『攻击力总计』的
-      <span style="color: #49ff39">绿字</span
-      >里。一些无法常驻的攻击力加成buff可以在这里保存，方便切换。
-    </detail-block>
-    <div class="data-panel__title">
-      精通加成%
-      <van-stepper
-        v-model="evaporationDemage"
-        button-size="20"
-        theme="round"
-        :min="checked ? 15 : 0"
-        input-width="66px"
-        decimal-length="1"
-      />
-      <span class="holy-relic-tips">蒸发、融化伤害提升</span>
-    </div>
-    <van-slider
-      v-show="sliderChecked"
+    <data-item
       v-model="evaporationDemage"
-      :max="240"
-      :min="checked ? 15 : 0"
-      step="0.1"
-      active-color="#645856"
+      title="精通加成%"
+      tips="蒸发、融化伤害提升"
+      stepperMin="0"
+      :sliderMin="checked ? 15 : 0"
+      sliderMax="240"
+      sliderStep="0.1"
+      decimalLength="1"
+      :showSlider="sliderChecked"
     />
-    <van-cell class="eva-cell" center title="炽烈的炎之魔女4件套效果">
-      <template #right-icon>
-        <van-switch
-          v-model="checked"
-          active-color="#766461"
-          inactive-color="#b7a19e"
-          size="16"
-          @change="changeSwitch"
-        />
-      </template>
-    </van-cell>
 
     <data-item
       v-model="critDemage"
@@ -98,14 +89,37 @@
     <data-item
       v-model="elementDemage"
       title="伤害倍率%"
-      tips="注意生效条件"
+      tips=""
       stepperMin="-200"
       sliderMax="600"
       sliderMin="-200"
       sliderStep="0.1"
       decimalLength="2"
       :showSlider="sliderChecked"
-    />
+    >
+      <van-popover
+        class="data-item-popover"
+        v-model:show="showPopover"
+        placement="left-end"
+      >
+        <div class="data-item-popover__content">
+          <b>基础伤害值以一定比例改变：</b>
+          <br />
+          基础100% + 技能加伤% + 元素加伤% + 造成伤害% + 受到伤害%。
+          <br />
+          <p>
+            <b>技能加伤：</b>满足条件时的加伤，例如角色天赋/命座、圣遗物套装、武器技能等<br />
+            <b>元素加伤：</b>面板上的对应元素伤害加成，(物理也是元素)<br />
+            <b>造成伤害：</b>造成的伤害提高(加伤)、造成的伤害降低(降伤)<br />
+            <b>受到伤害：</b>受到的伤害提高(易伤)、受到的伤害降低(减伤)<br />
+          </p>
+          <b>可以在下方标签组中快捷添加各种加成。</b>
+        </div>
+        <template #reference>
+          <van-icon size="26" name="question" />
+        </template>
+      </van-popover>
+    </data-item>
     <note-group
       v-model="elementDemage"
       title="伤害倍率%"
@@ -115,16 +129,6 @@
       :calculationMode="EnhancedDemageCalculationMode"
       @updateNoteGroup="EDNoteChange"
     />
-    <detail-block instructions="『伤害倍率%』说明">
-      基础技能伤害值以一定比例改变：100% + 技能加伤% + 元素加伤% + 造成伤害% +
-      受到伤害%
-      <br />
-      技能加伤：满足条件时的加伤，例如角色天赋/命座、圣遗物套装、武器技能等<br />
-      元素加伤：面板上的对应元素伤害加成，(物理也是元素)<br />
-      造成伤害：造成的伤害提高(加伤)、造成的伤害降低(降伤)<br />
-      受到伤害：受到的伤害提高(易伤)、受到的伤害降低(减伤)
-    </detail-block>
-
     <data-item
       v-model="atkRate"
       title="技能倍率%"
@@ -139,13 +143,31 @@
     <data-item
       v-model="extraRate"
       title="倍率增幅%"
-      tips="宵宫E/行秋4命/安柏2命"
       stepperMin="0"
       sliderMax="100"
       sliderStep="0.1"
       decimalLength="1"
       :showSlider="sliderChecked"
-    />
+    >
+      <van-popover
+        class="data-item-popover"
+        v-model:show="showPopoverExtraRate"
+        placement="left-end"
+      >
+        <div class="data-item-popover__content">
+          <b>最终倍率 = 技能倍率 x (1 + 倍率增幅)</b>
+          <p>
+            宵宫的元素战技提升的是普攻的倍率；<br />
+            行秋的4命提升的是元素战技的倍率；<br />
+            安柏的2命提升的是元素战技的倍率；<br />
+          </p>
+          <b>基础伤害值 = 攻击力/防御力 x 最终倍率 + 附加伤害值</b>
+        </div>
+        <template #reference>
+          <van-icon size="26" name="question" />
+        </template>
+      </van-popover>
+    </data-item>
 
     <additional-demage
       label="附加伤害值"
@@ -153,6 +175,51 @@
       :additionalMode="AdditionalDemageMode"
       :additionalList="additionalDemageList"
     />
+
+    <van-cell
+      class="eva-cell"
+      @click="otherChecked = !otherChecked"
+      center
+      title="敌人防御力、抗性调整"
+    >
+      <span>{{ otherChecked ? "点击收起" : "点击展开" }}</span>
+    </van-cell>
+    <div v-show="otherChecked" class="data-panel">
+      <data-item
+        v-model="characterLevel"
+        title="人物的等级"
+        stepperMax="90"
+        stepperMin="1"
+      />
+      <data-item v-model="enemyLevel" title="敌人的等级" stepperMin="1" />
+      <data-item v-model="enemyResistance" title="敌人抗性%" stepperMin="-999">
+        <div class="extra-btn" @click="handleImagePreview">查看抗性表</div>
+      </data-item>
+      <data-item
+        v-model="weaken"
+        title="减少抗性%"
+        stepperMin="0"
+        stepperMax="300"
+      />
+      <additional-demage
+        label="减少防御%"
+        buttonText="添加防御减少效果"
+        :additionalMode="DefCutAdditionMode"
+        :additionalList="armourList"
+      />
+    </div>
+
+    <van-cell class="eva-cell" center title="炽烈的炎之魔女，增幅伤害提升15%">
+      <template #right-icon>
+        <van-switch
+          v-model="checked"
+          active-color="#766461"
+          inactive-color="#b7a19e"
+          size="16"
+          @change="changeSwitch"
+        />
+      </template>
+    </van-cell>
 
     <div class="data-panel__title">
       反应类型
@@ -186,38 +253,6 @@
         </van-radio-group>
       </van-cell-group>
     </div>
-  </div>
-  <van-cell
-    class="eva-cell"
-    @click="otherChecked = !otherChecked"
-    center
-    title="防御、抗性乘区 "
-  >
-    <span>{{ otherChecked ? "收起" : "展开" }}</span>
-  </van-cell>
-  <div v-show="otherChecked" class="data-panel">
-    <data-item
-      v-model="characterLevel"
-      title="人物等级"
-      stepperMax="90"
-      stepperMin="1"
-    />
-    <data-item v-model="enemyLevel" title="敌人等级" stepperMin="1" />
-    <data-item v-model="enemyResistance" title="敌人抗性%" stepperMin="-999">
-      <div class="extra-btn" @click="handleImagePreview">查看抗性表</div>
-    </data-item>
-    <data-item
-      v-model="weaken"
-      title="减少抗性%"
-      stepperMin="0"
-      stepperMax="300"
-    />
-    <additional-demage
-      label="减少防御%"
-      buttonText="添加防御减少效果"
-      :additionalMode="DefCutAdditionMode"
-      :additionalList="armourList"
-    />
   </div>
   <div :class="['result-grid', floatChecked && 'increase-result__top']">
     <div class="grid-item">
@@ -258,6 +293,7 @@ import {
   Radio,
   Icon,
   ImagePreview,
+  Popover,
 } from "vant";
 import TabTitle from "../component/TabTitle.vue";
 import { computationalFormula, getLocalStorage, sub } from "../utils";
@@ -289,6 +325,7 @@ export default defineComponent({
     [SaveData.name]: SaveData,
     [DataItem.name]: DataItem,
     [TabTitle.name]: TabTitle,
+    [Popover.name]: Popover,
     [CellGroup.name]: CellGroup,
     [NoteGroup.name]: NoteGroup,
     [RadioGroup.name]: RadioGroup,
@@ -305,6 +342,9 @@ export default defineComponent({
     const otherChecked = ref(false);
     /** 置顶展示开关 */
     const floatChecked = ref(false);
+    const showPopover = ref(false);
+    const showPopoverExtraRate = ref(false);
+    const showPopoverExtraATK = ref(false);
     const store = useStore();
 
     const changeSwitch = (val) => {
@@ -326,11 +366,7 @@ export default defineComponent({
     });
 
     const extraATKNumber = computed(() => {
-      const {
-        baseATK,
-        extraATK,
-        extraPercentATK,
-      } = store.state.demageModule;
+      const { baseATK, extraATK, extraPercentATK } = store.state.demageModule;
       return Math.round(extraATK + baseATK * (extraPercentATK / 100));
     });
 
@@ -383,8 +419,10 @@ export default defineComponent({
     const handleImagePreview = () => {
       ImagePreview(["http://saomdpb.com/IMG_1457.PNG"]);
     };
-
     return {
+      showPopover,
+      showPopoverExtraRate,
+      showPopoverExtraATK,
       ...toRefs(store.state.demageModule),
       ...toRefs(store.state.saveDataModule),
       extraATKNumber,
@@ -501,5 +539,12 @@ export default defineComponent({
   border: 1px solid var(--main-text);
   border-radius: 4px;
   padding: 0 4px;
+}
+.data-item-popover {
+  max-width: 80%;
+  transform: translateY(8px);
+}
+.data-item-popover__content {
+  padding: 12px;
 }
 </style>

@@ -1,11 +1,11 @@
 <template>
-  <div class="data-panel__title">
-    {{ title }}
+  <div class="data-item">
+    <span class="data-item__title">{{ title }}</span>
     <van-stepper
       v-model="value"
       :integer="stepperInteger"
-      button-size="20"
       theme="round"
+      button-size="20"
       :decimal-length="decimalLength"
       :max="stepperMax"
       :min="stepperMin"
@@ -13,7 +13,9 @@
       @change="onChange"
     />
     <span class="holy-relic-tips">{{ tips }}</span>
-    <slot />
+    <div class="data-item-slot">
+      <slot />
+    </div>
   </div>
   <van-slider
     v-show="showSlider"
@@ -78,3 +80,18 @@ export default defineComponent({
   },
 });
 </script>
+
+<style scoped>
+.data-item {
+  margin-bottom: 8px;
+}
+.data-item-slot {
+  float: right;
+}
+.data-item__title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-right: 6px;
+  line-height: 26px;
+}
+</style>

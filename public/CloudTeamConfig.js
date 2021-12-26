@@ -1078,7 +1078,7 @@ const CloudTeamConfig = [
   },
   {
     name: "荒泷一斗",
-    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/03/03/4328207/6a54af5aca341883859f5d24da3000fe_2050065262186292792.png",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/12/14/75379475/744569537cbc493fa96d3930be3d6d87_6572446832973158295.png?x-oss-process=image/quality,q_75/resize,s_120",
     element: ELEMENT_TYPE.Geo,
     weapon: WEAPON_TYPE.GreatSword,
     battle: [],
@@ -1087,7 +1087,7 @@ const CloudTeamConfig = [
   },
   {
     name: "五郎",
-    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/03/03/4328207/6a54af5aca341883859f5d24da3000fe_2050065262186292792.png",
+    avatar: "https://uploadstatic.mihoyo.com/ys-obc/2021/12/14/75379475/627c335d187d2b6ca362f2d3518d7b85_6343066012109321963.png?x-oss-process=image/quality,q_75/resize,s_120",
     element: ELEMENT_TYPE.Geo,
     weapon: WEAPON_TYPE.Bow,
     battle: [],
