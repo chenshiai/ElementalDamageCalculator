@@ -101,29 +101,28 @@ export const computationalFormula = (data) => {
 
   // 攻击力
   const atk = baseATK + extraATK + baseATK * (extraPercentATK / 100);
-  // 倍率
+  // 技能倍率
   const rate = (atkRate / 100) * (1 + (extraRate / 100));
-  // 伤害加成
-  const element = 1 + elementDemage / 100;
-  // 暴伤
-  const cri = 1 + critDemage / 100;
-  // 增幅反应加成
-  const reaction = getReactionRate(atkType);
+  // 伤害倍率
+  const element = Math.max(0, 1 + elementDemage / 100);
   // 抗性
   const resistanceRate = getResistanceRate(enemyResistance, weaken);
   // 防御减伤
   const defRate = getDefRate(characterLevel, enemyLevel, armourList);
-
+  // 暴伤
+  const cri = 1 + critDemage / 100;
+  // 增幅反应
+  const reaction = getReactionRate(atkType);
   // 精通加成
   let eva = 1 + evaporationDemage / 100;
   if (atkType === "none") {
     eva = 1;
   }
-
-  const additional = sub(additionalDemageList);
+  // 附加伤害值
+  const additionalDmg = sub(additionalDemageList);
 
   const result =
-    (atk * rate + additional) *
+    (atk * rate + additionalDmg) *
     element *
     reaction *
     eva *

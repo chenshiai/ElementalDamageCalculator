@@ -228,6 +228,24 @@ export const EnhancedDemageCalculationMode = [
     getResult: ({ charge }) => Math.min(charge * 0.25, 75),
   },
   {
+    title: "驭浪的海祇民",
+    fields: [
+      {
+        name: "energy",
+        type: "number",
+        label: "元素能量",
+        placeholder: "队伍所有角色的元素能量上限的总和",
+      },
+      {
+        name: "units",
+        label: "每点加成%",
+        type: "number",
+        placeholder: "每点元素能量提升的数值，注意上限",
+      },
+    ],
+    getResult: ({ energy, units }) => energy * units,
+  },
+  {
     title: "血赤叶红",
     fields: [
       {
@@ -370,6 +388,24 @@ export const AdditionalDemageMode = [
     ]
   },
   {
+    title: "荒泷一斗",
+    img: 'https://uploadstatic.mihoyo.com/ys-obc/2021/11/09/75833613/14439ff89d1a6919bae74e00d9dc3292_8494837697999144768.png',
+    children: [
+      {
+        title: "赤鬼之血",
+        fields: [
+          {
+            name: "def",
+            label: "防御力",
+            placeholder: "「荒泷逆袈裟」伤害值提高35%的防御力",
+            type: "number",
+          },
+        ],
+        getResult: ({ def }) => def * 0.35,
+      },
+    ]
+  },
+  {
     title: "辰砂之纺锤/赤角石溃杵",
     img: 'https://uploadstatic.mihoyo.com/ys-obc/2021/11/09/75833613/14439ff89d1a6919bae74e00d9dc3292_8494837697999144768.png',
     children: [
@@ -432,6 +468,30 @@ export const AdditionalDemageMode = [
           },
         ],
         getResult: ({ hp }) => hp * 0.1,
+      },
+    ]
+  },
+  {
+    title: "不灭月华",
+    img: 'https://uploadstatic.mihoyo.com/ys-obc/2021/11/09/75833613/14439ff89d1a6919bae74e00d9dc3292_8494837697999144768.png',
+    children: [
+      {
+        title: "白夜皓月",
+        fields: [
+          {
+            name: "hp",
+            label: "生命值",
+            placeholder: "输入角色生命值",
+            type: "number",
+          },
+          {
+            name: "rate",
+            label: "倍率%",
+            placeholder: "武器特效倍率",
+            type: "number",
+          }
+        ],
+        getResult: ({ hp, rate }) => hp * rate / 100,
       },
     ]
   },

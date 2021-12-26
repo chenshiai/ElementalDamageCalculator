@@ -16,7 +16,13 @@
         :class="['memo', selectedMemos[item.title] && 'selected']"
       >
         <div @click="selectMemo(item)">
-          <div class="memo-detail">+{{ floatNum(item.detail, 2) }}</div>
+          <div class="memo-detail">
+            {{
+              floatNum(item.detail, 2) >= 0
+                ? `+${floatNum(item.detail, 2)}`
+                : floatNum(item.detail, 2)
+            }}
+          </div>
           <div class="memo-title">{{ item.title }}</div>
         </div>
         <van-icon
@@ -209,6 +215,7 @@ export default defineComponent({
 <style scoped>
 .data-notes {
   border: 1px solid var(--button-bg);
+  border-top: none;
   flex-wrap: wrap;
   display: flex;
   padding: 6px 6px 6px 0;
@@ -219,25 +226,25 @@ export default defineComponent({
   height: 36px;
   margin-left: 6px;
   margin-bottom: 4px;
-  border: 1px solid var(--button-bg);
+  border: 1px solid var(--main-text);
   border-radius: 6px;
   box-sizing: border-box;
   padding: 2px 24px 2px 6px;
-  color: var(--button-bg);
+  color: var(--main-text);
   font-size: 14px;
   position: relative;
   min-width: 80px;
 }
 .memo.selected {
-  background-color: var(--button-bg);
+  background-color: var(--main-text);
   color: #fff;
 }
 .add-note-button {
-  border: 1px solid var(--button-bg);
+  border: 1px solid var(--main-text);
   padding: 2px 6px;
   text-align: center;
   box-sizing: border-box;
-  color: var(--button-bg);
+  color: var(--main-text);
   height: 36px;
   line-height: 32px;
   margin-bottom: 4px;
@@ -257,11 +264,11 @@ export default defineComponent({
   line-height: 14px;
 }
 .notes-button {
-  background-color: var(--button-bg);
-  color: #fff;
+  color: var(--main-text);
+  border: 1px solid var(--main-text);
   text-align: center;
   font-size: 14px;
-  line-height: 24px;
+  line-height: 32px;
   border-radius: 4px;
 }
 .notes-button.expand {

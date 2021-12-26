@@ -9,7 +9,7 @@
       :decimal-length="decimalLength"
       :max="stepperMax"
       :min="stepperMin"
-      input-width="56px"
+      input-width="66px"
       @change="onChange"
     />
     <span class="holy-relic-tips">{{ tips }}</span>

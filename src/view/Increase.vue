@@ -1,6 +1,6 @@
 <template>
-  <div class="tips">滑块不够用，可以点击数字进行手动输入。</div>
   <tab-title>单次伤害计算</tab-title>
+  <div class="tips">滑块不够用，可以点击数字进行手动输入。</div>
   <van-cell class="eva-cell" center title="开启滑块辅助调整数值">
     <template #right-icon>
       <van-switch
@@ -23,7 +23,7 @@
     <data-item
       v-model="baseATK"
       title="基础攻击力"
-      tips="人物面板攻击力白字"
+      tips="面板攻击力白字"
       stepperInteger
       stepperMin="0"
       sliderMax="1200"
@@ -32,7 +32,7 @@
     <data-item
       v-model="extraATK"
       title="额外攻击力"
-      tips="攻击力绿字的加成"
+      tips="面板攻击力绿字"
       stepperInteger
       stepperMin="0"
       sliderMax="3000"
@@ -59,10 +59,10 @@
         button-size="20"
         theme="round"
         :min="checked ? 15 : 0"
-        input-width="56px"
+        input-width="66px"
         decimal-length="1"
       />
-      <span class="holy-relic-tips">蒸发、融化的伤害提升</span>
+      <span class="holy-relic-tips">蒸发、融化伤害提升</span>
     </div>
     <van-slider
       v-show="sliderChecked"
@@ -87,7 +87,7 @@
     <data-item
       v-model="critDemage"
       title="暴击伤害%"
-      tips="小数需要手动输入"
+      tips="小数位可手输"
       stepperMin="0"
       sliderMin="0"
       sliderMax="600"
@@ -97,33 +97,38 @@
     />
     <data-item
       v-model="elementDemage"
-      title="伤害加成%"
-      tips="注意伤害加成触发的方式"
-      stepperMin="0"
+      title="伤害倍率%"
+      tips="注意生效条件"
+      stepperMin="-200"
       sliderMax="600"
+      sliderMin="-200"
       sliderStep="0.1"
       decimalLength="2"
       :showSlider="sliderChecked"
     />
     <note-group
       v-model="elementDemage"
-      title="伤害加成%"
+      title="伤害倍率%"
       :notes="EDNotes"
       :selectedNotes="selectedElementDemageNotes"
       :setSelectedNotes="setSelectedElementDemageNotes"
       :calculationMode="EnhancedDemageCalculationMode"
       @updateNoteGroup="EDNoteChange"
     />
-    <detail-block instructions="『伤害加成%』说明">
-      伤害加成有如下几类：x元素伤害提高/提升；xx造成伤害提高/提升；xx伤害加成；
-      xx伤害提升；对x元素影响下的敌人伤害提高/提升；敌人受到伤害提高/提升；敌人受到伤害降低/减少等。
-      敌人受伤效果较为特殊，不过最终伤害结算是与角色伤害加成区间加算的，例如莫娜元素爆发的星异效果。
+    <detail-block instructions="『伤害倍率%』说明">
+      基础技能伤害值以一定比例改变：100% + 技能加伤% + 元素加伤% + 造成伤害% +
+      受到伤害%
+      <br />
+      技能加伤：满足条件时的加伤，例如角色天赋/命座、圣遗物套装、武器技能等<br />
+      元素加伤：面板上的对应元素伤害加成，(物理也是元素)<br />
+      造成伤害：造成的伤害提高(加伤)、造成的伤害降低(降伤)<br />
+      受到伤害：受到的伤害提高(易伤)、受到的伤害降低(减伤)
     </detail-block>
 
     <data-item
       v-model="atkRate"
-      title="伤害倍率%"
-      tips="本次攻击的倍率"
+      title="技能倍率%"
+      tips="本次攻击倍率"
       stepperMin="0"
       sliderMax="1500"
       sliderStep="0.1"
@@ -255,7 +260,7 @@ import {
   ImagePreview,
 } from "vant";
 import TabTitle from "../component/TabTitle.vue";
-import { computationalFormula, getLocalStorage } from "../utils";
+import { computationalFormula, getLocalStorage, sub } from "../utils";
 import DataItem from "../component/DataItem.vue";
 import NoteGroup from "../component/NoteGroup.vue";
 import DetailBlock from "../component/Detail.vue";
@@ -321,7 +326,11 @@ export default defineComponent({
     });
 
     const extraATKNumber = computed(() => {
-      const { baseATK, extraATK, extraPercentATK } = store.state.demageModule;
+      const {
+        baseATK,
+        extraATK,
+        extraPercentATK,
+      } = store.state.demageModule;
       return Math.round(extraATK + baseATK * (extraPercentATK / 100));
     });
 

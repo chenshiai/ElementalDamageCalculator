@@ -1,8 +1,8 @@
 <template>
+  <tab-title>剧变反应查看</tab-title>
   <div class="tips">
     官方未公开计算公式，存在一定的误差。精通伤害没计算敌人抗性，实际值请以游戏内为准，仅供参考。
   </div>
-  <tab-title>剧变反应查看</tab-title>
   <div class="base-data">
     <div class="base-damage__title">
       角色等级
@@ -402,16 +402,6 @@ export default defineComponent({
   font-size: 12px;
   margin-left: 4px;
   color: var(--tip-text);
-}
-
-.question-title,
-.data-panel__title,
-.holy-relic__title,
-.base-damage__title,
-.cloud-team__title {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 12px;
 }
 
 .elemental-slider-button {
