@@ -157,11 +157,23 @@
         <div class="data-item-popover__content">
           <b>最终倍率 = 技能倍率 x (1 + 倍率增幅)</b>
           <p>
-            宵宫的元素战技提升的是普攻的倍率；<br />
-            行秋的4命提升的是元素战技的倍率；<br />
-            安柏的2命提升的是元素战技的倍率；<br />
+            宵宫的元素战技增幅的是普攻的倍率；<br />
+            行秋的4命与安柏的2命增幅的元素战技的倍率；<br />
           </p>
           <b>基础伤害值 = 攻击力/防御力 x 最终倍率 + 附加伤害值</b>
+          <p>
+            <b>关于附加伤害值的计算：</b>
+            <br />
+            <b>【直接加伤】</b>可以根据角色天赋等级或者武器精炼程度自由变更伤害附加的倍率。
+            <br />
+            适用角色：云堇·元素爆发，申鹤·元素战技。
+            <br />
+            适用武器：辰砂之纺锤，赤角石溃杵。
+            <br />
+            <br />
+            其他拥有固定附加倍率或者多个倍率乘区的角色或武器，提供了专属的快捷计算。
+          </p>
+          <b>可以点击下方【计算附加伤害值】进行计算</b>
         </div>
         <template #reference>
           <van-icon size="26" name="question" />
@@ -171,7 +183,7 @@
 
     <additional-demage
       label="附加伤害值"
-      buttonText="添加附加伤害值"
+      buttonText="计算附加伤害值"
       :additionalMode="AdditionalDemageMode"
       :additionalList="additionalDemageList"
     />
@@ -209,7 +221,7 @@
       />
     </div>
 
-    <van-cell class="eva-cell" center title="炽烈的炎之魔女，增幅伤害提升15%">
+    <van-cell class="eva-cell" center title="炽烈的炎之魔女，增幅反应伤害提升15%">
       <template #right-icon>
         <van-switch
           v-model="checked"

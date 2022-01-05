@@ -278,6 +278,30 @@ export const AtkPercentCalculationMode = [
 // 附加伤害计算公式
 export const AdditionalDemageMode = [
   {
+    title: "直接加伤",
+    // img: 'https://uploadstatic.mihoyo.com/ys-obc/2021/12/14/75379475/260442fca96f0e65701ff5067b13bb60_6053712857932776206.png?x-oss-process=image/quality,q_75/resize,s_40',
+    children: [
+      {
+        title: "提高具体数值的百分之多少",
+        fields: [
+          {
+            name: "def",
+            label: "相应数值",
+            placeholder: "输入角色的攻击力或防御力或生命值",
+            type: "number",
+          },
+          {
+            name: "rate",
+            label: "附加倍率%",
+            placeholder: "输入附加值的倍率",
+            type: "number",
+          }
+        ],
+        getResult: ({ def, rate }) => def * rate / 100,
+      },
+    ]
+  },
+  {
     title: "钟离·炊金馔玉",
     img: 'https://uploadstatic.mihoyo.com/ys-obc/2021/06/10/75276545/833c4773288776c0326b48db64e73e73_7584969408292565105.png?x-oss-process=image/quality,q_75/resize,s_40',
     children: [
@@ -386,30 +410,6 @@ export const AdditionalDemageMode = [
         getResult: ({ hp, hpRate }) => hp * hpRate / 100,
       },
     ],
-  },
-  {
-    title: "赤角石溃杵/辰砂之纺锤",
-    img: 'https://uploadstatic.mihoyo.com/ys-obc/2021/12/14/75379475/260442fca96f0e65701ff5067b13bb60_6053712857932776206.png?x-oss-process=image/quality,q_75/resize,s_40',
-    children: [
-      {
-        title: "御伽大王御伽话/无垢之心",
-        fields: [
-          {
-            name: "def",
-            label: "防御力",
-            placeholder: "输入角色的防御力",
-            type: "number",
-          },
-          {
-            name: "rate",
-            label: "附加倍率%",
-            placeholder: "输入武器特效的倍率",
-            type: "number",
-          }
-        ],
-        getResult: ({ def, rate }) => def * rate / 100,
-      },
-    ]
   },
   {
     title: "托马·烈火攻燔",
