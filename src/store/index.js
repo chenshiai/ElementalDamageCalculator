@@ -18,6 +18,7 @@ const demageModule = {
     return {
       baseATK: 550,
       extraATK: 660,
+      extraFixedAtk: 0,
       extraPercentATK: 0,
       additionalDemageList: [],
       critDemage: 50.0,
@@ -40,6 +41,9 @@ const demageModule = {
     },
     setExtraATK(state, value) {
       state.extraATK = value;
+    },
+    setExtraFixedAtk(state, value) {
+      state.extraFixedAtk = value;
     },
     setExtraPercentATK(state, value) {
       state.extraPercentATK = value;
@@ -84,6 +88,7 @@ const demageModule = {
       const {
         baseATK,
         extraATK,
+        extraFixedAtk = 0,
         extraPercentATK,
         additionalDemageList = [],
         critDemage,
@@ -101,6 +106,7 @@ const demageModule = {
       } = value;
       state.baseATK = baseATK;
       state.extraATK = extraATK;
+      state.extraFixedAtk = extraFixedAtk;
       state.extraPercentATK = extraPercentATK;
       state.additionalDemageList = additionalDemageList;
       state.critDemage = critDemage;
@@ -123,11 +129,15 @@ const demageModule = {
 const saveDataModule = {
   state: () => {
     return {
+      selectedFixedATKNotes: {},
       selectedExtraATKNotes: {},
       selectedElementDemageNotes: {},
     }
   },
   mutations: {
+    setSelectedFixedATKNotes(state, value) {
+      state.selectedFixedATKNotes = value || {};
+    },
     setSelectedExtraATKNotes(state, value) {
       state.selectedExtraATKNotes = value || {};
     },

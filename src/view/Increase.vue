@@ -32,7 +32,7 @@
     <data-item
       v-model="extraATK"
       title="额外攻击力"
-      tips="面板攻击力绿字"
+      tips="常驻绿字攻击力"
       stepperInteger
       stepperMin="0"
       sliderMax="3000"
@@ -45,8 +45,7 @@
       >
         <div class="data-item-popover__content">
           攻击力加成%会以『基础攻击力』的百分比来算，会直接加在最上方『攻击力总计』的
-          <span style="color: #49ff39">绿字</span>里。
-          <br /><br />
+          <span style="color: #49ff39">绿字</span>里。 <br /><br />
           一些无法常驻的攻击力加成%可以在下方的标签组里保存，方便切换。
         </div>
         <template #reference>
@@ -63,6 +62,15 @@
       :calculationMode="AtkPercentCalculationMode"
       @updateNoteGroup="ATKNoteChange"
     />
+    <note-group
+      v-model="extraFixedAtk"
+      title="固定攻击力加成"
+      :notes="FixedATKNotes"
+      :selectedNotes="selectedFixedATKNotes"
+      :setSelectedNotes="setSelectedFixedATKNotes"
+      :calculationMode="AtkFixedCalculationMode"
+      @updateNoteGroup="FixedATKNoteChange"
+    />
     <data-item
       v-model="evaporationDemage"
       title="精通加成%"
@@ -78,7 +86,7 @@
     <data-item
       v-model="critDemage"
       title="暴击伤害%"
-      tips="小数位可手输"
+      tips=""
       stepperMin="0"
       sliderMin="0"
       sliderMax="600"
@@ -89,7 +97,7 @@
     <data-item
       v-model="elementDemage"
       title="伤害倍率%"
-      tips=""
+      tips="各种增伤、易伤"
       stepperMin="-200"
       sliderMax="600"
       sliderMin="-200"
@@ -108,7 +116,8 @@
           基础100% + 技能加伤% + 元素加伤% + 造成伤害% + 受到伤害%。
           <br />
           <p>
-            <b>技能加伤：</b>满足条件时的加伤，例如角色天赋/命座、圣遗物套装、武器技能等<br />
+            <b>技能加伤：</b
+            >满足条件时的加伤，例如角色天赋/命座、圣遗物套装、武器技能等<br />
             <b>元素加伤：</b>面板上的对应元素伤害加成，(物理也是元素)<br />
             <b>造成伤害：</b>造成的伤害提高(加伤)、造成的伤害降低(降伤)<br />
             <b>受到伤害：</b>受到的伤害提高(易伤)、受到的伤害降低(减伤)<br />
@@ -164,11 +173,14 @@
           <p>
             <b>关于附加伤害值的计算：</b>
             <br />
-            <b>【直接加伤】</b>可以根据角色天赋等级或者武器精炼程度自由变更伤害附加的倍率。
+            <b>【伤害值提高】</b
+            >可以根据角色天赋等级或者武器精炼程度自由变更伤害附加的倍率。
             <br />
-            适用角色：云堇·元素爆发，申鹤·元素战技。
+            适用角色：云堇·元素爆发，申鹤·元素战技，夜兰。
             <br />
             适用武器：辰砂之纺锤，赤角石溃杵。
+            <br />
+            适用圣遗物：来歆余响。
             <br />
             <br />
             其他拥有固定附加倍率或者多个倍率乘区的角色或武器，提供了专属的快捷计算。
@@ -182,8 +194,8 @@
     </data-item>
 
     <additional-demage
-      label="附加伤害值"
-      buttonText="计算附加伤害值"
+      label="伤害值提高"
+      buttonText="计算伤害值提高"
       :additionalMode="AdditionalDemageMode"
       :additionalList="additionalDemageList"
     />
@@ -221,7 +233,11 @@
       />
     </div>
 
-    <van-cell class="eva-cell" center title="炽烈的炎之魔女，增幅反应伤害提升15%">
+    <van-cell
+      class="eva-cell"
+      center
+      title="炽烈的炎之魔女，增幅反应伤害提升15%"
+    >
       <template #right-icon>
         <van-switch
           v-model="checked"
@@ -318,6 +334,8 @@ import { useStore } from "vuex";
 import {
   EnhancedDamageNotes,
   AtkPercentNotes,
+  AtkFixedNotes,
+  AtkFixedCalculationMode,
   AtkPercentCalculationMode,
   EnhancedDemageCalculationMode,
   AdditionalDemageMode,
@@ -378,8 +396,11 @@ export default defineComponent({
     });
 
     const extraATKNumber = computed(() => {
-      const { baseATK, extraATK, extraPercentATK } = store.state.demageModule;
-      return Math.round(extraATK + baseATK * (extraPercentATK / 100));
+      const { baseATK, extraATK, extraPercentATK, extraFixedAtk } =
+        store.state.demageModule;
+      return Math.round(
+        extraATK + extraFixedAtk + baseATK * (extraPercentATK / 100)
+      );
     });
 
     const EDNotes = ref([]);
@@ -400,6 +421,15 @@ export default defineComponent({
       );
     };
 
+    const FixedATKNotes = ref([]);
+    const FixedATKNoteChange = (value) => {
+      FixedATKNotes.value = value;
+      window.localStorage.setItem(
+        "GenShinImpactFixedATKNotes",
+        JSON.stringify(value)
+      );
+    };
+
     onMounted(() => {
       EDNotes.value = getLocalStorage(
         "GenShinImpactEDNotes",
@@ -411,21 +441,33 @@ export default defineComponent({
         AtkPercentNotes,
         "攻击力加成标签组读取失败"
       );
+      FixedATKNotes.value = getLocalStorage(
+        "GenShinImpactFixedATKNotes",
+        AtkFixedNotes,
+        "攻击力加成标签组读取失败"
+      );
     });
 
+    const setSelectedFixedATKNotes = (value) => {
+      store.commit("setSelectedFixedATKNotes", value);
+    };
     const setSelectedExtraATKNotes = (value) => {
       store.commit("setSelectedExtraATKNotes", value);
     };
-
     const setSelectedElementDemageNotes = (value) => {
       store.commit("setSelectedElementDemageNotes", value);
     };
 
     const recalculationData = (value) => {
-      const { selectedExtraATKNotes, selectedElementDemageNotes } = value;
+      const {
+        selectedFixedATKNotes,
+        selectedExtraATKNotes,
+        selectedElementDemageNotes,
+      } = value;
       store.commit("setUnifiedState", value);
-      store.commit("setSelectedExtraATKNotes", selectedExtraATKNotes);
-      store.commit("setSelectedElementDemageNotes", selectedElementDemageNotes);
+      setSelectedExtraATKNotes(selectedExtraATKNotes);
+      setSelectedFixedATKNotes(selectedFixedATKNotes);
+      setSelectedElementDemageNotes(selectedElementDemageNotes);
     };
 
     const handleImagePreview = () => {
@@ -448,11 +490,15 @@ export default defineComponent({
       EDNoteChange,
       ATKNotes,
       ATKNoteChange,
+      FixedATKNotes,
+      FixedATKNoteChange,
       recalculationData,
       setSelectedExtraATKNotes,
+      setSelectedFixedATKNotes,
       setSelectedElementDemageNotes,
       EnhancedDemageCalculationMode,
       AtkPercentCalculationMode,
+      AtkFixedCalculationMode,
       handleImagePreview,
       AdditionalDemageMode,
       DefCutAdditionMode,
@@ -466,27 +512,33 @@ export default defineComponent({
   margin-bottom: 24px;
   line-height: 24px;
 }
+
 .atk-total {
   margin-left: 28px;
 }
+
 .atk-detial {
   display: inline-block;
   margin-left: 24px;
   padding: 0 12px;
   font-size: 14px;
 }
+
 .eva-cell {
   margin-bottom: 12px;
 }
+
 .data-panel .van-stepper--round .van-stepper__minus {
   color: var(--button-bg);
   border-color: var(--button-bg);
 }
+
 .data-panel .van-stepper--round .van-stepper__plus {
   border: none;
   color: #fff;
   background-color: var(--button-bg);
 }
+
 .water,
 .fire,
 .ice {
@@ -496,12 +548,15 @@ export default defineComponent({
   vertical-align: middle;
   display: inline-block;
 }
+
 .water {
   background-image: url("../../hydro.png");
 }
+
 .fire {
   background-image: url("../../pyro.png");
 }
+
 .ice {
   background-image: url("../../cryo.png");
 }
@@ -520,30 +575,37 @@ export default defineComponent({
   padding: 6px 0;
   z-index: 1;
 }
+
 .grid-item {
   flex: 1;
   text-align: center;
 }
+
 .normal-demage {
   font-size: 20px;
 }
+
 .crit-demage {
   font-size: 26px;
 }
+
 .normal-demage,
 .crit-demage {
   font-weight: bold;
   line-height: 26px;
 }
+
 .exclamation-mark {
   display: inline-block;
   transform: scaleY(1.4);
 }
+
 .increase-result__top {
   position: fixed;
   top: 60px;
   width: calc(100% - 32px);
 }
+
 .extra-btn {
   display: inline-block;
   margin-left: 16px;
@@ -552,10 +614,12 @@ export default defineComponent({
   border-radius: 4px;
   padding: 0 4px;
 }
+
 .data-item-popover {
   max-width: 80%;
   transform: translateY(8px);
 }
+
 .data-item-popover__content {
   padding: 12px;
 }

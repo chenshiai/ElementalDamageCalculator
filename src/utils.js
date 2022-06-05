@@ -84,6 +84,7 @@ export const computationalFormula = (data) => {
   const {
     baseATK,
     extraATK,
+    extraFixedAtk = 0,
     extraPercentATK,
     additionalDemageList = [],
     critDemage,
@@ -100,7 +101,7 @@ export const computationalFormula = (data) => {
   } = data;
 
   // 攻击力
-  const atk = baseATK + extraATK + baseATK * (extraPercentATK / 100);
+  const atk = baseATK + extraATK + extraFixedAtk + baseATK * (extraPercentATK / 100);
   // 技能倍率
   const rate = (atkRate / 100) * (1 + (extraRate / 100));
   // 伤害倍率

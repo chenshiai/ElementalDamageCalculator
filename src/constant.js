@@ -72,6 +72,11 @@ export const THUNDER = "thunder"
 export const EMERALD = "emerald";
 export const PERCENT = "percent";
 
+// 班尼特元素爆发加攻倍率
+const Bennett = [0.56, 0.6, 0.64, 0.7, 0.74, 0.78, 0.84, 0.9, 0.95, 1.01, 1.06, 1.12, 1.19, 1.26]
+// 九条裟罗元素战技加攻倍率
+const KujoSara = [0.43, 0.46, 0.49, 0.54, 0.57, 0.6, 0.64, 0.69, 0.73, 0.77, 0.82, 0.86, 0.91]
+
 // 增伤区标签
 export const EnhancedDamageNotes = [
   {
@@ -168,6 +173,41 @@ export const AtkPercentNotes = [
   {
     detail: 25,
     title: "元素共鸣·热诚之火",
+  },
+];
+
+export const AtkFixedNotes = [
+  {
+    detail: 66,
+    title: "二星食物",
+  },
+  {
+    detail: 81,
+    title: "二星食物·美味",
+  },
+  {
+    detail: 160,
+    title: "三星食物",
+  },
+  {
+    detail: 194,
+    title: "三星食物·美味",
+  },
+  {
+    detail: 224,
+    title: "四星食物",
+  },
+  {
+    detail: 272,
+    title: "四星食物·美味",
+  },
+  {
+    detail: 260,
+    title: "五星食物",
+  },
+  {
+    detail: 316,
+    title: "五星食物·美味",
   },
 ];
 
@@ -274,25 +314,89 @@ export const AtkPercentCalculationMode = [
     getResult: ({ number }) => number,
   }
 ];
+export const AtkFixedCalculationMode = [
+  {
+    title: "直接加攻",
+    fields: [
+      {
+        name: "number",
+        label: "具体数值",
+        type: "digit",
+        placeholder: "输入数值",
+      },
+    ],
+    getResult: ({ number }) => number,
+  },
+  {
+    title: "班尼特·美妙旅程",
+    fields: [
+      {
+        name: "lv",
+        label: "天赋等级",
+        type: "digit",
+        placeholder: "输入班尼特元素爆发等级",
+      },
+      {
+        name: "atk",
+        label: "基础攻击",
+        type: "digit",
+        placeholder: "输入班尼特的基础攻击力",
+      },
+      {
+        name: "fate",
+        label: "命之座",
+        type: "digit",
+        placeholder: "输入已解锁的命之座数量",
+      },
+    ],
+    getResult: ({ lv, atk, fate }) => {
+      lv = Math.min(14, lv);
+      lv = Math.max(1, lv);
+      return Math.round((Bennett[lv - 1] + (fate > 0 ? 0.2 : 0)) * atk);
+    },
+  },
+  {
+    title: "九条裟罗·天狗咒雷",
+    fields: [
+      {
+        name: "lv",
+        label: "天赋等级",
+        type: "digit",
+        placeholder: "输入九条裟罗元素战技等级",
+      },
+      {
+        name: "atk",
+        label: "基础攻击",
+        type: "digit",
+        placeholder: "输入九条裟罗的基础攻击力",
+      },
+    ],
+    getResult: ({ lv, atk }) => {
+      lv = Math.min(13, lv);
+      lv = Math.max(1, lv);
+      return Math.round(KujoSara[lv - 1] * atk);
+    },
+  }
+];
 
 // 附加伤害计算公式
 export const AdditionalDemageMode = [
   {
-    title: "直接加伤",
+    title: "通用伤害值提高",
     // img: 'https://uploadstatic.mihoyo.com/ys-obc/2021/12/14/75379475/260442fca96f0e65701ff5067b13bb60_6053712857932776206.png?x-oss-process=image/quality,q_75/resize,s_40',
     children: [
       {
-        title: "提高具体数值的百分之多少",
+        title: "根据基础属性的百分比来计算",
         fields: [
           {
             name: "def",
-            label: "相应数值",
-            placeholder: "输入角色的攻击力或防御力或生命值",
+            label: "基础属性",
+            placeholder: "输入角色的攻击力、防御力或生命值",
             type: "number",
           },
           {
             name: "rate",
-            label: "附加倍率%",
+            label: "对应倍率%",
             placeholder: "输入附加值的倍率",
             type: "number",
           }

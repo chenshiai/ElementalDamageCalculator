@@ -116,6 +116,7 @@ export default defineComponent({
       const {
         extraATK,
         baseATK,
+        extraFixedAtk = 0,
         extraPercentATK,
         additionalDemageList = [],
         critDemage,
@@ -138,7 +139,7 @@ export default defineComponent({
         },
         {
           label: "绿字攻击力",
-          value: Math.round(extraATK + baseATK * (extraPercentATK / 100)),
+          value: Math.round(extraATK + extraFixedAtk + baseATK * (extraPercentATK / 100)),
         },
         {
           label: "技能倍率%",

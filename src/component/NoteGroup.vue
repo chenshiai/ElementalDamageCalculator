@@ -5,11 +5,11 @@
       :class="['notes-button', isExpand && 'expand']"
       @click="isExpand = !isExpand"
     >
-      『{{ title }}』标签组
+      『{{ title }}』便签
       <van-icon size="12" :name="isExpand ? 'arrow-up' : 'arrow-down'" />
     </div>
     <div v-show="notes && isExpand" class="data-notes">
-      <div class="add-note-button" @click="showPopup = true">点此新增标签</div>
+      <div class="add-note-button" @click="showPopup = true">＋新增便签</div>
       <div
         v-for="(item, index) in notes"
         :key="index"
@@ -39,7 +39,7 @@
     position="top"
     @close="handleClose"
   >
-    <div class="popup-title">新增『{{ title }}』标签</div>
+    <div class="popup-title">新增『{{ title }}』便签</div>
     <van-tabs
       v-show="calculationMode.length > 1"
       class="calculation-mode"
@@ -69,12 +69,12 @@
         v-model="newMemo.title"
         type="text"
         label="标签名称"
-        placeholder="输入备注说明（不要与其他标签重复）"
+        placeholder="输入备注说明（不要与其他便签重名）"
         :rules="[{ required: true, message: '必填项' }]"
       />
       <van-button
         class="bottons__add"
-        text="新增"
+        text="确认添加"
         size="small"
         block
         type="primary"
@@ -214,7 +214,7 @@ export default defineComponent({
 
 <style scoped>
 .note-group {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 .data-notes {
   border: 1px solid var(--button-bg);
