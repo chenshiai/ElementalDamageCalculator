@@ -268,6 +268,18 @@ export const EnhancedDemageCalculationMode = [
     getResult: ({ charge }) => Math.min(charge * 0.25, 75),
   },
   {
+    title: "启蛰之祝词",
+    fields: [
+      {
+        name: "energy",
+        type: "number",
+        label: "元素精通",
+        placeholder: "输入八重神子的元素精通",
+      },
+    ],
+    getResult: ({ energy }) => energy * 0.15,
+  },
+  {
     title: "驭浪的海祇民",
     fields: [
       {
