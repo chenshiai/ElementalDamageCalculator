@@ -176,16 +176,10 @@
             <b>【伤害值提高】</b
             >可以根据角色天赋等级或者武器精炼程度自由变更伤害附加的倍率。
             <br />
-            适用角色：云堇·元素爆发，申鹤·元素战技，夜兰。
-            <br />
-            适用武器：辰砂之纺锤，赤角石溃杵。
-            <br />
-            适用圣遗物：来歆余响。
-            <br />
             <br />
             其他拥有固定附加倍率或者多个倍率乘区的角色或武器，提供了专属的快捷计算。
           </p>
-          <b>可以点击下方【计算附加伤害值】进行计算</b>
+          <b>可以点击下方【伤害值提高】进行计算</b>
         </div>
         <template #reference>
           <van-icon size="26" name="question" />
@@ -195,7 +189,7 @@
 
     <additional-demage
       label="伤害值提高"
-      buttonText="计算伤害值提高"
+      buttonText="伤害值提高·计算"
       :additionalMode="AdditionalDemageMode"
       :additionalList="additionalDemageList"
     />
@@ -211,7 +205,7 @@
     <div v-show="otherChecked" class="data-panel">
       <data-item
         v-model="characterLevel"
-        title="人物的等级"
+        title="角色的等级"
         stepperMax="90"
         stepperMin="1"
       />
@@ -226,7 +220,7 @@
         stepperMax="300"
       />
       <additional-demage
-        label="减少防御%"
+        label="减防/穿防%"
         buttonText="添加防御减少效果"
         :additionalMode="DefCutAdditionMode"
         :additionalList="armourList"

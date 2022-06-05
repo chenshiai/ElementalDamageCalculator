@@ -65,12 +65,14 @@
           :label="field.label"
           :type="field.type"
           :placeholder="field.placeholder"
-          :rules="[{ required: true, message: '必填项' }]"
+          :disabled="field.disabled"
+          :readonly="field.readonly"
+          :rules="[{ required: field.required, message: '必填项' }]"
         />
       </van-cell-group>
       <van-button
         class="popup-bottons"
-        text="确定"
+        text="确认添加"
         size="small"
         block
         type="primary"

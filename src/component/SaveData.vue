@@ -175,7 +175,7 @@ export default defineComponent({
               : "1.5倍增幅",
         },
         {
-          label: "人物等级",
+          label: "角色等级",
           value: characterLevel,
         },
         {
