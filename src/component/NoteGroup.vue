@@ -52,7 +52,19 @@
         v-for="mode in calculationMode"
         :title="mode.title"
         :key="mode.title"
-      />
+      >
+        <template #title>
+          <div class="additional-tab-title">
+            <img
+              v-if="!!mode.img"
+              class="additional-tab-title-img"
+              :src="mode.img"
+              alt=""
+            />
+            <span class="additional-tab-title-span">{{ mode.title }}</span>
+          </div>
+        </template>
+      </van-tab>
     </van-tabs>
     <van-form @submit="onSubmit">
       <van-field

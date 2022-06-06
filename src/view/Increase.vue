@@ -12,75 +12,155 @@
     </template>
   </van-cell>
   <div class="data-panel">
-    <div class="data-panel__title atk-top">
-      攻击力总计
-      <span class="atk-total">{{ baseATK + extraATKNumber }}</span>
-      <span class="atk-detial">
-        {{ baseATK }} +
-        <span style="color: #49ff39">{{ extraATKNumber }}</span>
-      </span>
+    <div class="data-panel__title">基础属性</div>
+    <van-cell
+      class="eva-cell"
+      @click="atkPanelChecked = !atkPanelChecked"
+      center
+      is-link
+      :arrow-direction="atkPanelChecked ? 'up' : 'down'"
+    >
+      <template #title>
+        总攻击力：{{ baseATK + extraATKNumber }}
+        <span class="atk-detial">
+          {{ baseATK }} +
+          <span style="color: #49ff39">{{ extraATKNumber }}</span>
+        </span>
+      </template>
+      <!-- <span>{{ atkPanelChecked ? "收起详情" : "展开详情" }}</span> -->
+    </van-cell>
+    <div v-show="atkPanelChecked">
+      <data-item
+        v-model="baseATK"
+        title="基础攻击力"
+        tips="面板攻击力白字"
+        stepperInteger
+        stepperMin="0"
+        sliderMax="1200"
+        :showSlider="sliderChecked"
+      />
+      <data-item
+        v-model="extraATK"
+        title="额外攻击力"
+        tips="常驻攻击力绿字"
+        stepperInteger
+        stepperMin="0"
+        sliderMax="3000"
+        :showSlider="sliderChecked"
+      >
+        <van-popover
+          class="data-item-popover"
+          v-model:show="showPopoverExtraATK"
+          placement="left-end"
+        >
+          <div class="data-item-popover__content">
+            攻击力加成%会以『基础攻击力』的百分比来算，会直接加在最上方『攻击力总计』的
+            <span style="color: #49ff39">绿字</span>里。 <br /><br />
+            一些无法常驻的攻击力加成%可以在下方的标签组里保存，方便切换。
+          </div>
+          <template #reference>
+            <van-icon size="26" name="question" />
+          </template>
+        </van-popover>
+      </data-item>
+      <note-group
+        v-model="extraPercentATK"
+        title="攻击力加成%"
+        :notes="ATKNotes"
+        :selectedNotes="selectedExtraATKNotes"
+        :setSelectedNotes="setSelectedExtraATKNotes"
+        :calculationMode="AtkPercentCalculationMode"
+        @updateNoteGroup="ATKNoteChange"
+      />
+      <note-group
+        v-model="extraFixedAtk"
+        title="固定攻击力加成"
+        :notes="FixedATKNotes"
+        :selectedNotes="selectedFixedATKNotes"
+        :setSelectedNotes="setSelectedFixedATKNotes"
+        :calculationMode="AtkFixedCalculationMode"
+        @updateNoteGroup="FixedATKNoteChange"
+      />
     </div>
+
+    <van-cell
+      class="eva-cell"
+      @click="defPanelChecked = !defPanelChecked"
+      center
+      is-link
+      :arrow-direction="defPanelChecked ? 'up' : 'down'"
+    >
+      <template #title>
+        总防御力：{{ baseATK + extraATKNumber }}
+      </template>
+    </van-cell>
+
+    <van-cell
+      class="eva-cell"
+      @click="hpPanelChecked = !hpPanelChecked"
+      center
+      is-link
+      :arrow-direction="hpPanelChecked ? 'up' : 'down'"
+    >
+      <template #title>
+        总生命值：{{ baseATK + extraATKNumber }}
+      </template>
+    </van-cell>
+
     <data-item
-      v-model="baseATK"
-      title="基础攻击力"
-      tips="面板攻击力白字"
-      stepperInteger
+      v-model="atkRate"
+      title="技能倍率%"
+      tips="默认以攻击力为基础"
       stepperMin="0"
-      sliderMax="1200"
+      sliderMax="1500"
+      sliderStep="0.1"
+      decimalLength="1"
       :showSlider="sliderChecked"
     />
+
     <data-item
-      v-model="extraATK"
-      title="额外攻击力"
-      tips="常驻绿字攻击力"
-      stepperInteger
+      v-model="extraRate"
+      title="倍率增幅%"
       stepperMin="0"
-      sliderMax="3000"
+      sliderMax="100"
+      sliderStep="0.1"
+      decimalLength="1"
       :showSlider="sliderChecked"
     >
       <van-popover
         class="data-item-popover"
-        v-model:show="showPopoverExtraATK"
+        v-model:show="showPopoverExtraRate"
         placement="left-end"
       >
         <div class="data-item-popover__content">
-          攻击力加成%会以『基础攻击力』的百分比来算，会直接加在最上方『攻击力总计』的
-          <span style="color: #49ff39">绿字</span>里。 <br /><br />
-          一些无法常驻的攻击力加成%可以在下方的标签组里保存，方便切换。
+          <b>最终倍率 = 技能倍率 x (1 + 倍率增幅)</b>
+          <p>
+            宵宫的元素战技增幅的是普攻的倍率；<br />
+            行秋的4命与安柏的2命增幅的元素战技的倍率；<br />
+          </p>
+          <b>基础伤害值 = 攻击力/防御力 x 最终倍率 + 附加伤害值</b>
+          <p>
+            <b>关于附加伤害值的计算：</b>
+            <br />
+            <b>【伤害值提高】</b
+            >可以根据角色天赋等级或者武器精炼程度自由变更伤害附加的倍率。
+            <br />
+            <br />
+            其他拥有固定附加倍率或者多个倍率乘区的角色或武器，提供了专属的快捷计算。
+          </p>
+          <b>可以点击下方【伤害值提高】进行计算</b>
         </div>
         <template #reference>
           <van-icon size="26" name="question" />
         </template>
       </van-popover>
     </data-item>
-    <note-group
-      v-model="extraPercentATK"
-      title="攻击力加成%"
-      :notes="ATKNotes"
-      :selectedNotes="selectedExtraATKNotes"
-      :setSelectedNotes="setSelectedExtraATKNotes"
-      :calculationMode="AtkPercentCalculationMode"
-      @updateNoteGroup="ATKNoteChange"
-    />
-    <note-group
-      v-model="extraFixedAtk"
-      title="固定攻击力加成"
-      :notes="FixedATKNotes"
-      :selectedNotes="selectedFixedATKNotes"
-      :setSelectedNotes="setSelectedFixedATKNotes"
-      :calculationMode="AtkFixedCalculationMode"
-      @updateNoteGroup="FixedATKNoteChange"
-    />
-    <data-item
-      v-model="evaporationDemage"
-      title="精通加成%"
-      tips="蒸发、融化伤害提升"
-      stepperMin="0"
-      :sliderMin="checked ? 15 : 0"
-      sliderMax="240"
-      sliderStep="0.1"
-      decimalLength="1"
-      :showSlider="sliderChecked"
+
+    <additional-demage
+      label="伤害值提高"
+      buttonText="伤害值提高·计算"
+      :additionalMode="AdditionalDemageMode"
+      :additionalList="additionalDemageList"
     />
 
     <data-item
@@ -138,62 +218,33 @@
       :calculationMode="EnhancedDemageCalculationMode"
       @updateNoteGroup="EDNoteChange"
     />
+    
     <data-item
-      v-model="atkRate"
-      title="技能倍率%"
-      tips="本次攻击倍率"
+      v-model="evaporationDemage"
+      title="精通加成%"
+      tips="蒸发、融化伤害提升"
       stepperMin="0"
-      sliderMax="1500"
+      :sliderMin="checked ? 15 : 0"
+      sliderMax="240"
       sliderStep="0.1"
       decimalLength="1"
       :showSlider="sliderChecked"
     />
-
-    <data-item
-      v-model="extraRate"
-      title="倍率增幅%"
-      stepperMin="0"
-      sliderMax="100"
-      sliderStep="0.1"
-      decimalLength="1"
-      :showSlider="sliderChecked"
+    <van-cell
+      class="eva-cell"
+      center
+      title="炽烈的炎之魔女，增幅反应伤害提升15%"
     >
-      <van-popover
-        class="data-item-popover"
-        v-model:show="showPopoverExtraRate"
-        placement="left-end"
-      >
-        <div class="data-item-popover__content">
-          <b>最终倍率 = 技能倍率 x (1 + 倍率增幅)</b>
-          <p>
-            宵宫的元素战技增幅的是普攻的倍率；<br />
-            行秋的4命与安柏的2命增幅的元素战技的倍率；<br />
-          </p>
-          <b>基础伤害值 = 攻击力/防御力 x 最终倍率 + 附加伤害值</b>
-          <p>
-            <b>关于附加伤害值的计算：</b>
-            <br />
-            <b>【伤害值提高】</b
-            >可以根据角色天赋等级或者武器精炼程度自由变更伤害附加的倍率。
-            <br />
-            <br />
-            其他拥有固定附加倍率或者多个倍率乘区的角色或武器，提供了专属的快捷计算。
-          </p>
-          <b>可以点击下方【伤害值提高】进行计算</b>
-        </div>
-        <template #reference>
-          <van-icon size="26" name="question" />
-        </template>
-      </van-popover>
-    </data-item>
-
-    <additional-demage
-      label="伤害值提高"
-      buttonText="伤害值提高·计算"
-      :additionalMode="AdditionalDemageMode"
-      :additionalList="additionalDemageList"
-    />
-
+      <template #right-icon>
+        <van-switch
+          v-model="checked"
+          active-color="#766461"
+          inactive-color="#b7a19e"
+          size="16"
+          @change="changeSwitch"
+        />
+      </template>
+    </van-cell>
     <van-cell
       class="eva-cell"
       @click="otherChecked = !otherChecked"
@@ -227,21 +278,6 @@
       />
     </div>
 
-    <van-cell
-      class="eva-cell"
-      center
-      title="炽烈的炎之魔女，增幅反应伤害提升15%"
-    >
-      <template #right-icon>
-        <van-switch
-          v-model="checked"
-          active-color="#766461"
-          inactive-color="#b7a19e"
-          size="16"
-          @change="changeSwitch"
-        />
-      </template>
-    </van-cell>
 
     <div class="data-panel__title">
       反应类型
@@ -360,6 +396,10 @@ export default defineComponent({
   setup() {
     /** 炽烈的炎之魔女开关 */
     const checked = ref(false);
+    /** 基础属性面板开关 */
+    const atkPanelChecked = ref(true);
+    const defPanelChecked = ref(false);
+    const hpPanelChecked = ref(false);
     /** 滑块辅助调整开关 */
     const sliderChecked = ref(false);
     /** 防御抗性乘区开关 */
@@ -477,6 +517,9 @@ export default defineComponent({
       checked,
       changeSwitch,
       sliderChecked,
+      atkPanelChecked,
+      defPanelChecked,
+      hpPanelChecked,
       otherChecked,
       floatChecked,
       increaseResult,

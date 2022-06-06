@@ -39,11 +39,11 @@
           <div class="additional-tab-title">
             <img
               v-if="!!mode.img"
-              class="tab-title-img"
+              class="additional-tab-title-img"
               :src="mode.img"
               alt=""
             />
-            <span class="tab-title-span">{{ mode.title }}</span>
+            <span class="additional-tab-title-span">{{ mode.title }}</span>
           </div>
         </template>
       </van-tab>
@@ -216,18 +216,5 @@ export default defineComponent({
   margin-right: 8px;
   font-size: 14px;
 }
-.additional-tab-title {
-  display: flex;
-  align-content: center;
-  justify-content: center;
-}
-.tab-title-img {
-  border-radius: 50%;
-  width: 26px;
-  height: 26px;
-  margin-right: 4px;
-}
-.tab-title-span {
-  line-height: 26px;
-}
+
 </style>

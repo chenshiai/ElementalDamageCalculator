@@ -130,4 +130,18 @@ export default defineComponent({
   line-height: 26px;
 }
 
+.additional-tab-title {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+.additional-tab-title-img {
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  margin-right: 4px;
+}
+.additional-tab-title-span {
+  line-height: 26px;
+}
 </style>

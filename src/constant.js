@@ -1,3 +1,6 @@
+import { ProfilePhoto, WeponIcon } from './constants/profilePhoto';
+import { Magnification } from './constants/magnification';
+
 export const base = {
   electroCharged: [0,
     20, 22, 23, 24, 27, 29, 31, 34, 37, 40,
@@ -71,11 +74,6 @@ export const WITCH = "witch";
 export const THUNDER = "thunder"
 export const EMERALD = "emerald";
 export const PERCENT = "percent";
-
-// 班尼特元素爆发加攻倍率
-const Bennett = [0.56, 0.6, 0.64, 0.7, 0.74, 0.78, 0.84, 0.9, 0.95, 1.01, 1.06, 1.12, 1.19, 1.26]
-// 九条裟罗元素战技加攻倍率
-const KujoSara = [0.43, 0.46, 0.49, 0.54, 0.57, 0.6, 0.64, 0.69, 0.73, 0.77, 0.82, 0.86, 0.91]
 
 // 增伤区标签
 export const EnhancedDamageNotes = [
@@ -341,6 +339,7 @@ export const AtkFixedCalculationMode = [
   },
   {
     title: "班尼特·美妙旅程",
+    img: ProfilePhoto.Bennett,
     fields: [
       {
         name: "lv",
@@ -364,11 +363,35 @@ export const AtkFixedCalculationMode = [
     getResult: ({ lv, atk, fate }) => {
       lv = Math.min(14, lv);
       lv = Math.max(1, lv);
-      return Math.round((Bennett[lv - 1] + (fate > 0 ? 0.2 : 0)) * atk);
+      return Math.round((Magnification.Bennett[lv - 1] + (fate > 0 ? 0.2 : 0)) * atk);
+    },
+  },
+  {
+    title: "胡桃·蝶引来生",
+    img: ProfilePhoto.HuTao,
+    fields: [
+      {
+        name: "lv",
+        label: "天赋等级",
+        type: "digit",
+        placeholder: "输入胡桃元素战技等级",
+      },
+      {
+        name: "hp",
+        label: "生命值",
+        type: "digit",
+        placeholder: "输入胡桃的生命值",
+      },
+    ],
+    getResult: ({ lv, hp }) => {
+      lv = Math.min(14, lv);
+      lv = Math.max(1, lv);
+      return Math.round(Magnification.HuTao[lv - 1] * hp);
     },
   },
   {
     title: "九条裟罗·天狗咒雷",
+    img: ProfilePhoto.KujoSara,
     fields: [
       {
         name: "lv",
@@ -386,9 +409,61 @@ export const AtkFixedCalculationMode = [
     getResult: ({ lv, atk }) => {
       lv = Math.min(13, lv);
       lv = Math.max(1, lv);
-      return Math.round(KujoSara[lv - 1] * atk);
+      return Math.round(Magnification.KujoSara[lv - 1] * atk);
     },
-  }
+  },
+  {
+    title: "诺艾尔·大扫除",
+    img: ProfilePhoto.Noelle,
+    fields: [
+      {
+        name: "lv",
+        label: "天赋等级",
+        type: "digit",
+        placeholder: "输入诺艾尔元素爆发等级",
+      },
+      {
+        name: "def",
+        label: "防御力",
+        type: "digit",
+        placeholder: "输入诺艾尔的防御力",
+      },
+      {
+        name: "fate",
+        label: "命之座",
+        type: "digit",
+        placeholder: "输入已解锁的命之座数量",
+      },
+    ],
+    getResult: ({ lv, def, fate }) => {
+      lv = Math.min(14, lv);
+      lv = Math.max(1, lv);
+      return Math.round((Magnification.Noelle[lv - 1] + (fate >= 6 ? 0.5 : 0)) * def);
+    },
+  },
+  {
+    title: "荒泷一斗·最恶鬼王·一斗轰临！！",
+    img: ProfilePhoto.AratakiItto,
+    fields: [
+      {
+        name: "lv",
+        label: "天赋等级",
+        type: "digit",
+        placeholder: "输入荒泷一斗元素爆发等级",
+      },
+      {
+        name: "def",
+        label: "防御力",
+        type: "digit",
+        placeholder: "输入荒泷一斗的防御力",
+      },
+    ],
+    getResult: ({ lv, def }) => {
+      lv = Math.min(14, lv);
+      lv = Math.max(1, lv);
+      return Math.round(Magnification.AratakiItto[lv - 1] * def);
+    },
+  },
 ];
 
 // 附加伤害计算公式
@@ -409,8 +484,8 @@ export const AdditionalDemageMode = [
           },
           {
             name: "rate",
-            label: "对应倍率%",
-            placeholder: "输入附加值的倍率",
+            label: "转换倍率%",
+            placeholder: "攻击力、防御力、生命值的百分之多少",
             type: "number",
             required: true,
           },
@@ -442,7 +517,7 @@ export const AdditionalDemageMode = [
   },
   {
     title: "钟离·炊金馔玉",
-    img: 'https://uploadstatic.mihoyo.com/ys-obc/2021/06/10/75276545/833c4773288776c0326b48db64e73e73_7584969408292565105.png?x-oss-process=image/quality,q_75/resize,s_40',
+    img: ProfilePhoto.ZhongLi,
     children: [
       {
         title: "普攻·重击·下落",
@@ -508,7 +583,7 @@ export const AdditionalDemageMode = [
   },
   {
     title: "荒泷一斗·赤鬼之血",
-    img: 'https://uploadstatic.mihoyo.com/ys-obc/2021/12/14/75379475/744569537cbc493fa96d3930be3d6d87_6572446832973158295.png?x-oss-process=image/quality,q_75/resize,s_40',
+    img: ProfilePhoto.AratakiItto,
     children: [
       {
         title: "荒泷逆袈裟",
@@ -534,7 +609,7 @@ export const AdditionalDemageMode = [
   },
   {
     title: "心海·仪来雨衣",
-    img: 'https://uploadstatic.mihoyo.com/ys-obc/2021/11/02/75379475/9f39bbe75aeda34accf958ecafccb5e8_749944433300006002.png?x-oss-process=image/quality,q_75/resize,s_40',
+    img: ProfilePhoto.Kokomi,
     children: [
       {
         title: "普攻·重击",
@@ -548,10 +623,10 @@ export const AdditionalDemageMode = [
           },
           {
             name: "hpRate",
-            label: "附加倍率%",
+            label: "提升倍率%",
             type: "number",
             required: true,
-            placeholder: "输入技能的附加生命值伤害的倍率",
+            placeholder: "元素爆发描述中，普攻/重击的倍率",
           },
           {
             name: "healRate",
@@ -584,10 +659,10 @@ export const AdditionalDemageMode = [
           },
           {
             name: "hpRate",
-            label: "附加倍率%",
+            label: "提升倍率%",
             type: "number",
             required: true,
-            placeholder: "输入技能的附加生命值伤害的倍率",
+            placeholder: "元素爆发描述中，技能伤害/化海月的倍率",
           },
         ],
         getResult: ({ hp, hpRate }) => hp * hpRate / 100,
@@ -596,7 +671,7 @@ export const AdditionalDemageMode = [
   },
   {
     title: "托马·烈火攻燔",
-    img: 'https://uploadstatic.mihoyo.com/ys-obc/2021/11/02/75379475/35536a7c0817ed2d30931bca5b4ad625_8868436370119472993.png?x-oss-process=image/quality,q_75/resize,s_40',
+    img: ProfilePhoto.Thoma,
     children: [
       {
         title: "炽火崩破",
@@ -622,7 +697,7 @@ export const AdditionalDemageMode = [
   },
   {
     title: "阿贝多·显生之宙",
-    img: 'https://uploadstatic.mihoyo.com/ys-obc/2021/06/10/75276545/c0f87c6b4784a866160a0f37c2571630_32895325137684348.png?x-oss-process=image/quality,q_75/resize,s_40',
+    img: ProfilePhoto.Albedo,
     children: [
       {
         title: "诞生式·大地之潮",
@@ -655,7 +730,7 @@ export const AdditionalDemageMode = [
   },
   {
     title: "五郎·报恩之守",
-    img: 'https://uploadstatic.mihoyo.com/ys-obc/2021/12/14/75379475/627c335d187d2b6ca362f2d3518d7b85_6343066012109321963.png?x-oss-process=image/quality,q_75/resize,s_40',
+    img: ProfilePhoto.Gorou,
     children: [
       {
         title: "犬坂吠吠方圆阵",
@@ -701,7 +776,7 @@ export const AdditionalDemageMode = [
   },
   {
     title: "胡桃·最不安神晴又复雨",
-    img: 'https://uploadstatic.mihoyo.com/ys-obc/2021/06/10/75276545/2ba444aec8dbddf1e2314f2c523e1e31_244848669304650705.png?x-oss-process=image/quality,q_75/resize,s_40',
+    img: ProfilePhoto.HuTao,
     children: [
       {
         title: "血梅香",
@@ -727,7 +802,7 @@ export const AdditionalDemageMode = [
   },
   {
     title: "不灭月华·白夜皓月",
-    img: 'https://uploadstatic.mihoyo.com/ys-obc/2021/09/21/75379475/fe6bd7619c736f1d32476d168e4f0fee_4179112997088392370.png?x-oss-process=image/quality,q_75/resize,s_40',
+    img: WeponIcon.EverlastingMoonglow,
     children: [
       {
         title: "普通攻击",
@@ -741,7 +816,7 @@ export const AdditionalDemageMode = [
           },
           {
             name: "rate",
-            label: "附加倍率%",
+            label: "提升倍率%",
             placeholder: "输入武器特效的倍率",
             required: true,
             type: "number",

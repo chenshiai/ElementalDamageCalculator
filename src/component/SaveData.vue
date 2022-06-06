@@ -191,7 +191,7 @@ export default defineComponent({
           value: weaken,
         },
         {
-          label: "减少防御%",
+          label: "减防穿防%",
           value: armourList.join(','),
         },
       ];
