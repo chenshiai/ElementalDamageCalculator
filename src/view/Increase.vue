@@ -13,7 +13,79 @@
   </van-cell>
   <div class="data-panel">
     <div class="data-panel__title">基础属性</div>
+    
     <van-cell
+      class="eva-cell"
+      @click="hpPanelChecked = !hpPanelChecked"
+      center
+      is-link
+      :arrow-direction="hpPanelChecked ? 'up' : 'down'"
+    >
+      <template #title>
+        总生命值：{{ baseHP + sumExtraHPNumber }}
+        <span class="atk-detial">
+          {{ baseHP }} +
+          <span style="color: #49ff39">{{ baseHP + sumExtraHPNumber }}</span>
+        </span>
+      </template>
+    </van-cell>
+    <div v-show="hpPanelChecked">
+      <data-item
+        v-model="baseHP"
+        title="基础生命值"
+        tips="面板生命值白字"
+        stepperInteger
+        stepperMin="0"
+        sliderMax="16000"
+        :showSlider="sliderChecked"
+      />
+      <data-item
+        v-model="extraHP"
+        title="额外生命值"
+        tips="常驻生命值绿字"
+        stepperInteger
+        stepperMin="0"
+        sliderMax="99999"
+        :showSlider="sliderChecked"
+      />
+    </div>
+    <van-cell
+      class="eva-cell"
+      @click="defPanelChecked = !defPanelChecked"
+      center
+      is-link
+      :arrow-direction="defPanelChecked ? 'up' : 'down'"
+    >
+      <template #title>
+        总防御力：{{ baseDEF + sumExtraDEFNumber }}
+        <span class="atk-detial">
+          {{ baseDEF }} +
+          <span style="color: #49ff39">{{ sumExtraDEFNumber }}</span>
+        </span>
+      </template>
+    </van-cell>
+    <div v-show="defPanelChecked">
+      <data-item
+        v-model="baseDEF"
+        title="基础防御力"
+        tips="面板防御力白字"
+        stepperInteger
+        stepperMin="0"
+        sliderMax="1200"
+        :showSlider="sliderChecked"
+      />
+      <data-item
+        v-model="extraDEF"
+        title="额外防御力"
+        tips="常驻防御力绿字"
+        stepperInteger
+        stepperMin="0"
+        sliderMax="3000"
+        :showSlider="sliderChecked"
+      />
+    </div>
+
+     <van-cell
       class="eva-cell"
       @click="atkPanelChecked = !atkPanelChecked"
       center
@@ -21,14 +93,14 @@
       :arrow-direction="atkPanelChecked ? 'up' : 'down'"
     >
       <template #title>
-        总攻击力：{{ baseATK + extraATKNumber }}
+        总攻击力：{{ baseATK + sumExtraATKNumber }}
         <span class="atk-detial">
           {{ baseATK }} +
-          <span style="color: #49ff39">{{ extraATKNumber }}</span>
+          <span style="color: #49ff39">{{ sumExtraATKNumber }}</span>
         </span>
       </template>
-      <!-- <span>{{ atkPanelChecked ? "收起详情" : "展开详情" }}</span> -->
     </van-cell>
+
     <div v-show="atkPanelChecked">
       <data-item
         v-model="baseATK"
@@ -65,47 +137,15 @@
       </data-item>
       <note-group
         v-model="extraPercentATK"
-        title="攻击力加成%"
-        :notes="ATKNotes"
+        v-bind="extraPercentATKNotesConfig"
         :selectedNotes="selectedExtraATKNotes"
-        :setSelectedNotes="setSelectedExtraATKNotes"
-        :calculationMode="AtkPercentCalculationMode"
-        @updateNoteGroup="ATKNoteChange"
       />
       <note-group
-        v-model="extraFixedAtk"
-        title="固定攻击力加成"
-        :notes="FixedATKNotes"
+        v-model="extraFixedATK"
+        v-bind="extraFixedATKNotesConfig"
         :selectedNotes="selectedFixedATKNotes"
-        :setSelectedNotes="setSelectedFixedATKNotes"
-        :calculationMode="AtkFixedCalculationMode"
-        @updateNoteGroup="FixedATKNoteChange"
       />
     </div>
-
-    <van-cell
-      class="eva-cell"
-      @click="defPanelChecked = !defPanelChecked"
-      center
-      is-link
-      :arrow-direction="defPanelChecked ? 'up' : 'down'"
-    >
-      <template #title>
-        总防御力：{{ baseATK + extraATKNumber }}
-      </template>
-    </van-cell>
-
-    <van-cell
-      class="eva-cell"
-      @click="hpPanelChecked = !hpPanelChecked"
-      center
-      is-link
-      :arrow-direction="hpPanelChecked ? 'up' : 'down'"
-    >
-      <template #title>
-        总生命值：{{ baseATK + extraATKNumber }}
-      </template>
-    </van-cell>
 
     <data-item
       v-model="atkRate"
@@ -211,14 +251,10 @@
     </data-item>
     <note-group
       v-model="elementDemage"
-      title="伤害倍率%"
-      :notes="EDNotes"
+      v-bind="elementDemageNotesConfig"
       :selectedNotes="selectedElementDemageNotes"
-      :setSelectedNotes="setSelectedElementDemageNotes"
-      :calculationMode="EnhancedDemageCalculationMode"
-      @updateNoteGroup="EDNoteChange"
     />
-    
+
     <data-item
       v-model="evaporationDemage"
       title="精通加成%"
@@ -250,9 +286,9 @@
       @click="otherChecked = !otherChecked"
       center
       title="敌人防御力、抗性调整"
-    >
-      <span>{{ otherChecked ? "点击收起" : "点击展开" }}</span>
-    </van-cell>
+      is-link
+      :arrow-direction="otherChecked ? 'up' : 'down'"
+    />
     <div v-show="otherChecked" class="data-panel">
       <data-item
         v-model="characterLevel"
@@ -270,14 +306,19 @@
         stepperMin="0"
         stepperMax="300"
       />
-      <additional-demage
-        label="减防/穿防%"
-        buttonText="添加防御减少效果"
-        :additionalMode="DefCutAdditionMode"
-        :additionalList="armourList"
+      <data-item
+        v-model="armour"
+        title="减少防御%"
+        stepperMin="0"
+        stepperMax="100"
+      />
+      <data-item
+        v-model="armourPiercing"
+        title="无视防御%"
+        stepperMin="0"
+        stepperMax="100"
       />
     </div>
-
 
     <div class="data-panel__title">
       反应类型
@@ -340,7 +381,12 @@
 </template>
 
 <script>
-import { computed, defineComponent, ref, onMounted, toRefs } from "vue";
+import {
+  computed,
+  defineComponent,
+  ref,
+  toRefs,
+} from "vue";
 import {
   Slider,
   Stepper,
@@ -354,7 +400,7 @@ import {
   Popover,
 } from "vant";
 import TabTitle from "../component/TabTitle.vue";
-import { computationalFormula, getLocalStorage, sub } from "../utils";
+import { computationalFormula } from "../utils";
 import DataItem from "../component/DataItem.vue";
 import NoteGroup from "../component/NoteGroup.vue";
 import DetailBlock from "../component/Detail.vue";
@@ -429,67 +475,34 @@ export default defineComponent({
       return computationalFormula(store.state.demageModule);
     });
 
-    const extraATKNumber = computed(() => {
-      const { baseATK, extraATK, extraPercentATK, extraFixedAtk } =
-        store.state.demageModule;
-      return Math.round(
-        extraATK + extraFixedAtk + baseATK * (extraPercentATK / 100)
-      );
-    });
-
-    const EDNotes = ref([]);
-    const EDNoteChange = (value) => {
-      EDNotes.value = value;
-      window.localStorage.setItem(
-        "GenShinImpactEDNotes",
-        JSON.stringify(value)
-      );
+    const extraPercentATKNotesConfig = {
+      title: "攻击力加成%",
+      localStorageName: "GenShinImpactATKNotes",
+      calculationMode: AtkPercentCalculationMode,
+      defaultNotes: AtkPercentNotes,
+      setSelectedNotes: (value) => {
+        store.commit("setSelectedExtraATKNotes", value);
+      },
     };
 
-    const ATKNotes = ref([]);
-    const ATKNoteChange = (value) => {
-      ATKNotes.value = value;
-      window.localStorage.setItem(
-        "GenShinImpactATKNotes",
-        JSON.stringify(value)
-      );
+    const extraFixedATKNotesConfig = {
+      title: "固定攻击力加成",
+      localStorageName: "GenShinImpactFixedATKNotes",
+      calculationMode: AtkFixedCalculationMode,
+      defaultNotes: AtkFixedNotes,
+      setSelectedNotes: (value) => {
+        store.commit("setSelectedFixedATKNotes", value);
+      },
     };
 
-    const FixedATKNotes = ref([]);
-    const FixedATKNoteChange = (value) => {
-      FixedATKNotes.value = value;
-      window.localStorage.setItem(
-        "GenShinImpactFixedATKNotes",
-        JSON.stringify(value)
-      );
-    };
-
-    onMounted(() => {
-      EDNotes.value = getLocalStorage(
-        "GenShinImpactEDNotes",
-        EnhancedDamageNotes,
-        "伤害加成标签组读取失败"
-      );
-      ATKNotes.value = getLocalStorage(
-        "GenShinImpactATKNotes",
-        AtkPercentNotes,
-        "攻击力加成标签组读取失败"
-      );
-      FixedATKNotes.value = getLocalStorage(
-        "GenShinImpactFixedATKNotes",
-        AtkFixedNotes,
-        "攻击力加成标签组读取失败"
-      );
-    });
-
-    const setSelectedFixedATKNotes = (value) => {
-      store.commit("setSelectedFixedATKNotes", value);
-    };
-    const setSelectedExtraATKNotes = (value) => {
-      store.commit("setSelectedExtraATKNotes", value);
-    };
-    const setSelectedElementDemageNotes = (value) => {
-      store.commit("setSelectedElementDemageNotes", value);
+    const elementDemageNotesConfig = {
+      title: "伤害倍率%",
+      localStorageName: "GenShinImpactEDNotes",
+      calculationMode: EnhancedDemageCalculationMode,
+      defaultNotes: EnhancedDamageNotes,
+      setSelectedNotes: (value) => {
+        store.commit("setSelectedElementDemageNotes", value);
+      },
     };
 
     const recalculationData = (value) => {
@@ -499,9 +512,9 @@ export default defineComponent({
         selectedElementDemageNotes,
       } = value;
       store.commit("setUnifiedState", value);
-      setSelectedExtraATKNotes(selectedExtraATKNotes);
-      setSelectedFixedATKNotes(selectedFixedATKNotes);
-      setSelectedElementDemageNotes(selectedElementDemageNotes);
+      store.commit("setSelectedFixedATKNotes", selectedFixedATKNotes);
+      store.commit("setSelectedExtraATKNotes", selectedExtraATKNotes);
+      store.commit("setSelectedElementDemageNotes", selectedElementDemageNotes);
     };
 
     const handleImagePreview = () => {
@@ -511,9 +524,9 @@ export default defineComponent({
       showPopover,
       showPopoverExtraRate,
       showPopoverExtraATK,
+      ...toRefs(store.getters),
       ...toRefs(store.state.demageModule),
       ...toRefs(store.state.saveDataModule),
-      extraATKNumber,
       checked,
       changeSwitch,
       sliderChecked,
@@ -523,22 +536,13 @@ export default defineComponent({
       otherChecked,
       floatChecked,
       increaseResult,
-      EDNotes,
-      EDNoteChange,
-      ATKNotes,
-      ATKNoteChange,
-      FixedATKNotes,
-      FixedATKNoteChange,
       recalculationData,
-      setSelectedExtraATKNotes,
-      setSelectedFixedATKNotes,
-      setSelectedElementDemageNotes,
-      EnhancedDemageCalculationMode,
-      AtkPercentCalculationMode,
-      AtkFixedCalculationMode,
       handleImagePreview,
       AdditionalDemageMode,
       DefCutAdditionMode,
+      elementDemageNotesConfig,
+      extraPercentATKNotesConfig,
+      extraFixedATKNotesConfig,
     };
   },
 });

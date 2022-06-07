@@ -1,110 +1,59 @@
 <template>
   <div class="note-group">
-    <div
-      v-show="notes"
-      :class="['notes-button', isExpand && 'expand']"
-      @click="isExpand = !isExpand"
-    >
+    <div v-show="localNotes" :class="['notes-button', isExpand && 'expand']" @click="isExpand = !isExpand">
       『{{ title }}』便签
       <van-icon size="12" :name="isExpand ? 'arrow-up' : 'arrow-down'" />
     </div>
-    <div v-show="notes && isExpand" class="data-notes">
+    <div v-show="(localNotes) && isExpand" class="data-notes">
       <div class="add-note-button" @click="showPopup = true">＋新增便签</div>
-      <div
-        v-for="(item, index) in notes"
-        :key="index"
-        :class="['memo', selectedMemos[item.title] && 'selected']"
-      >
+      <div v-for="(item, index) in localNotes" :key="index" :class="['memo', selectedMemos[item.title] && 'selected']">
         <div @click="selectMemo(item)">
           <div class="memo-detail">
             {{
-              floatNum(item.detail, 2) >= 0
-                ? `+${floatNum(item.detail, 2)}`
-                : floatNum(item.detail, 2)
+                floatNum(item.detail, 2) >= 0
+                  ? `+${floatNum(item.detail, 2)}`
+                  : floatNum(item.detail, 2)
             }}
           </div>
           <div class="memo-title">{{ item.title }}</div>
         </div>
-        <van-icon
-          @click="deleteMemo(item)"
-          class="memo-close"
-          name="delete-o"
-        />
+        <van-icon @click="deleteMemo(item)" class="memo-close" name="delete-o" />
       </div>
     </div>
   </div>
-  <van-popup
-    teleport="#app"
-    v-model:show="showPopup"
-    position="top"
-    @close="handleClose"
-  >
+  <van-popup teleport="#app" v-model:show="showPopup" position="top" @close="handleClose">
     <div class="popup-title">新增『{{ title }}』便签</div>
-    <van-tabs
-      v-show="calculationMode.length > 1"
-      class="calculation-mode"
-      v-model:active="active"
-      color="#997874"
-      line-width="60px"
-      swipe-threshold="3"
-    >
-      <van-tab
-        v-for="mode in calculationMode"
-        :title="mode.title"
-        :key="mode.title"
-      >
+    <van-tabs v-show="calculationMode.length > 1" class="calculation-mode" v-model:active="active" color="#997874"
+      line-width="60px" swipe-threshold="3">
+      <van-tab v-for="mode in calculationMode" :title="mode.title" :key="mode.title">
         <template #title>
           <div class="additional-tab-title">
-            <img
-              v-if="!!mode.img"
-              class="additional-tab-title-img"
-              :src="mode.img"
-              alt=""
-            />
+            <img v-if="!!mode.img" class="additional-tab-title-img" :src="mode.img" alt="" />
             <span class="additional-tab-title-span">{{ mode.title }}</span>
           </div>
         </template>
       </van-tab>
     </van-tabs>
     <van-form @submit="onSubmit">
-      <van-field
-        v-for="field in calculationMode[active].fields"
-        v-model="temporaryData[field.label]"
-        :key="field.name"
-        :name="field.name"
-        :type="field.type"
-        :label="field.label"
-        :placeholder="field.placeholder"
-        :rules="[{ required: true, message: '必填项' }]"
-      />
-      <van-field
-        v-model="newMemo.title"
-        type="text"
-        label="标签名称"
-        placeholder="输入备注说明（不要与其他便签重名）"
-        :rules="[{ required: true, message: '必填项' }]"
-      />
-      <van-button
-        class="bottons__add"
-        text="确认添加"
-        size="small"
-        block
-        type="primary"
-        native-type="submit"
-      />
+      <van-field v-for="field in calculationMode[active].fields" v-model="temporaryData[field.label]" :key="field.name"
+        :name="field.name" :type="field.type" :label="field.label" :placeholder="field.placeholder"
+        :rules="[{ required: true, message: '必填项' }]" />
+      <van-field v-model="newMemo.title" type="text" label="标签名称" placeholder="输入备注说明（不要与其他便签重名）"
+        :rules="[{ required: true, message: '必填项' }]" />
+      <van-button class="bottons__add" text="确认添加" size="small" block type="primary" native-type="submit" />
     </van-form>
   </van-popup>
 </template>
 
 <script>
-import { defineComponent, reactive, ref, watch } from "vue";
+import { defineComponent, onMounted, reactive, ref, watch } from "vue";
 import { Cell, Icon, Popup, Field, Form, Toast, Button, Tab, Tabs } from "vant";
-import { deepCopyObject, floatNum } from "../utils";
+import { deepCopyObject, floatNum, getLocalStorage } from "../utils";
 
 export default defineComponent({
   name: "note-group",
 
-  emits: ["update:modelValue", "updateNoteGroup"],
+  emits: ["update:modelValue"],
 
   components: {
     [Tab.name]: Tab,
@@ -118,15 +67,17 @@ export default defineComponent({
   },
 
   props: {
-    modelValue: String | Number,
-    title: String,
-    notes: Array,
-    selectedNotes: Object,
-    setSelectedNotes: Function,
-    calculationMode: Array,
+    modelValue: String | Number, // 关联数据
+    title: String, // 便签组名称
+    defaultNotes: Array, // 默认便签列表
+    selectedNotes: Object, // store中已选择的便签
+    setSelectedNotes: Function, // store中更新选择便签的方法
+    calculationMode: Array, // 便签表单计算公式
+    localStorageName: String, // 本地便签列表名称
   },
 
   setup(props, { emit }) {
+    const localNotes = ref([]);
     const selectedMemos = ref({});
     const isExpand = ref(false);
     const showPopup = ref(false);
@@ -142,6 +93,14 @@ export default defineComponent({
     const changeValue = (value) => {
       emit("update:modelValue", value);
     };
+    const updateNoteGroup = (value) => {
+      localNotes.value = value;
+      window.localStorage.setItem(
+        props.localStorageName,
+        JSON.stringify(value)
+      );
+    };
+
     const selectMemo = (item) => {
       const key = item.title;
       const detail = +item.detail;
@@ -160,8 +119,8 @@ export default defineComponent({
 
     const deleteMemo = (item) => {
       const key = item.title;
-      const notesFilter = props.notes.filter((item) => item.title !== key);
-      emit("updateNoteGroup", notesFilter);
+      const notesFilter = localNotes.value.filter((item) => item.title !== key);
+      updateNoteGroup(notesFilter);
 
       if (selectedMemos.value[key]) {
         changeValue(floatNum(+props.modelValue - +selectedMemos.value[key], 2));
@@ -176,7 +135,6 @@ export default defineComponent({
         title: newMemo.title,
       };
       const newNotes = [noteValue];
-
       // 自动选中新建的标签
       selectMemo(noteValue);
 
@@ -184,10 +142,15 @@ export default defineComponent({
       newMemo.title = "";
       temporaryData.value = {};
 
-      // 拼接新的标签组并抛出
-      emit("updateNoteGroup", newNotes.concat(props.notes));
+      // 拼接新的标签组并更新到localstorage
+      updateNoteGroup(newNotes.concat(localNotes.value));
       Toast.success("添加成功");
     };
+
+    onMounted(() => {
+      const { localStorageName, defaultNotes = [] } = props;
+      localNotes.value = getLocalStorage(localStorageName, defaultNotes, `${localStorageName}读取失败`)
+    });
 
     watch(
       () => props.selectedNotes,
@@ -195,7 +158,7 @@ export default defineComponent({
         selectedMemos.value = deepCopyObject(newVal);
         const supplementNotes = [];
         for (let key in selectedMemos.value) {
-          if (!props.notes.find((item) => item.title === key)) {
+          if (!localNotes.value.find((item) => item.title === key)) {
             supplementNotes.push({
               title: key,
               detail: selectedMemos.value[key],
@@ -203,12 +166,13 @@ export default defineComponent({
           }
         }
         if (supplementNotes.length > 0)
-          emit("updateNoteGroup", supplementNotes.concat(props.notes));
+          updateNoteGroup(supplementNotes.concat(localNotes.value));
       }
     );
 
     return {
       active,
+      localNotes,
       isExpand,
       newMemo,
       selectMemo,
@@ -228,6 +192,7 @@ export default defineComponent({
 .note-group {
   margin-bottom: 10px;
 }
+
 .data-notes {
   border: 1px solid var(--button-bg);
   border-top: none;
@@ -237,6 +202,7 @@ export default defineComponent({
   max-height: 140px;
   overflow: scroll;
 }
+
 .data-notes .memo {
   height: 36px;
   margin-left: 6px;
@@ -250,10 +216,12 @@ export default defineComponent({
   position: relative;
   min-width: 80px;
 }
+
 .memo.selected {
   background-color: var(--main-text);
   color: #fff;
 }
+
 .add-note-button {
   border: 1px solid var(--main-text);
   padding: 2px 6px;
@@ -267,17 +235,21 @@ export default defineComponent({
   margin-left: 6px;
   font-size: 14px;
 }
+
 .add-note-button:active {
   background-color: var(--light-text);
 }
+
 .memo-detail {
   font-weight: bold;
   line-height: 16px;
 }
+
 .memo-title {
   font-size: 12px;
   line-height: 14px;
 }
+
 .notes-button {
   color: var(--main-text);
   border: 1px solid var(--main-text);
@@ -286,14 +258,17 @@ export default defineComponent({
   line-height: 32px;
   border-radius: 4px;
 }
+
 .notes-button.expand {
   border-radius: 4px 4px 0 0;
 }
+
 .data-notes .memo-close {
   position: absolute;
   top: 2px;
   right: 6px;
 }
+
 .popup-title {
   text-align: center;
   font-size: 18px;
@@ -302,19 +277,23 @@ export default defineComponent({
   color: #fff;
   background-color: var(--button-bg);
 }
+
 .popup-bottons {
   display: flex;
   line-height: 36px;
   text-align: center;
 }
+
 .popup-bottons__item {
   flex: 1;
   font-size: 20px;
 }
+
 .popup-bottons__add {
   background-color: var(--button-bg);
   color: #fff;
 }
+
 .bottons__add {
   background-color: var(--button-bg);
   color: #fff;

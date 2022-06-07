@@ -16,80 +16,55 @@ const characterModule = {
 const demageModule = {
   state: () => {
     return {
-      baseATK: 550,
-      extraATK: 660,
-      extraFixedAtk: 0,
-      extraPercentATK: 0,
-      additionalDemageList: [],
-      critDemage: 50.0,
-      elementDemage: 0,
-      evaporationDemage: 0.0,
-      atkRate: 100,
-      extraRate: 0,
-      atkType: "none",
-      characterLevel: 80,
-      enemyLevel: 80,
-      enemyResistance: 10,
-      weaken: 0,
-      armour: 0,
-      armourList: [],
+      baseATK: 900, // 基础攻击
+      extraATK: 1100, // 额外攻击
+      extraFixedATK: 0, // 固定攻击加成
+      extraPercentATK: 0, // 百分比攻击力加成
+
+      baseDEF: 600, // 基础防御
+      extraDEF: 400, // 额外防御
+      extraFixedDEF: 0, // 固定防御加成
+      extraPercentDEF: 0, // 百分比防御加成
+
+      baseHP: 10000, // 基础生命
+      extraHP: 8000, // 额外生命
+      extraFixedHP: 0, // 固定生命值加成
+      extraPercentHP: 0, // 百分比生命加成
+
+      additionalDemageList: [], // 附加伤害列表
+      critDemage: 50.0, // 暴击伤害
+      elementDemage: 0, // 伤害倍率
+      evaporationDemage: 0.0, // 增幅提升
+      atkRate: 100, // 攻击力倍率
+      extraRate: 0, // 倍率增幅
+      atkType: "none", // 反应类型
+      characterLevel: 80, // 人物等级
+      enemyLevel: 80, // 敌人等级
+      enemyResistance: 10, // 敌人抗性
+      weaken: 0, // 敌人减抗
+      armourList: [], // 减防穿防列表
+      armour: 0, // 敌人减防
+      armourPiercing: 0, // 角色穿甲
     };
   },
   mutations: {
-    setBaseATK(state, value) {
-      state.baseATK = value;
-    },
-    setExtraATK(state, value) {
-      state.extraATK = value;
-    },
-    setExtraFixedAtk(state, value) {
-      state.extraFixedAtk = value;
-    },
-    setExtraPercentATK(state, value) {
-      state.extraPercentATK = value;
-    },
-    setAdditionalDemageList(state, value) {
-      state.additionalDemageList = value;
-    },
-    setCritDemage(state, value) {
-      state.critDemage = value;
-    },
-    setElementDemage(state, value) {
-      state.elementDemage = value;
-    },
-    setEvaporationDemage(state, value) {
-      state.evaporationDemage = value;
-    },
-    setAtkRate(state, value) {
-      state.atkRate = value;
-    },
-    setAtkType(state, value) {
-      state.atkType = value;
-    },
-    setCharacterLevel(state, value) {
-      state.characterLevel = value;
-    },
-    setEnemyLevel(state, value) {
-      state.enemyLevel = value;
-    },
-    setEnemyResistance(state, value) {
-      state.enemyResistance = value;
-    },
-    setWeaken(state, value) {
-      state.weaken = value;
-    },
-    setArmour(state, value) {
-      state.armour = value;
-    },
-    setArmourList(state, value) {
-      state.armourList = value;
-    },
     setUnifiedState(state, value) {
       const {
         baseATK,
         extraATK,
-        extraFixedAtk = 0,
+        extraFixedATK = 0,
         extraPercentATK,
+
+        baseDEF = 0,
+        extraDEF = 0,
+        extraFixedDEF = 0,
+        extraPercentDEF = 0,
+
+        baseHP = 0,
+        extraHP = 0,
+        extraFixedHP = 0,
+        extraPercentHP = 0,
+
         additionalDemageList = [],
         critDemage,
         elementDemage,
@@ -101,13 +76,24 @@ const demageModule = {
         enemyLevel,
         enemyResistance,
         weaken,
-        armour,
-        armourList = [],
+        armour = 0,
+        armourPiercing = 0,
       } = value;
       state.baseATK = baseATK;
       state.extraATK = extraATK;
-      state.extraFixedAtk = extraFixedAtk;
+      state.extraFixedATK = extraFixedATK;
       state.extraPercentATK = extraPercentATK;
+
+      state.baseDEF = baseDEF;
+      state.extraDEF = extraDEF;
+      state.extraFixedDEF = extraFixedDEF;
+      state.extraPercentDEF = extraPercentDEF;
+
+      state.baseHP = baseHP;
+      state.extraHP = extraHP;
+      state.extraFixedHP = extraFixedHP;
+      state.extraPercentHP = extraPercentHP;
+
       state.additionalDemageList = additionalDemageList;
       state.critDemage = critDemage;
       state.elementDemage = elementDemage;
@@ -120,18 +106,45 @@ const demageModule = {
       state.enemyResistance = enemyResistance;
       state.weaken = weaken;
       state.armour = armour;
-      state.armourList = armourList;
+      state.armourPiercing = armourPiercing;
     }
+  },
+  getters: {
+    sumExtraATKNumber(state) {
+      const { baseATK, extraATK, extraPercentATK, extraFixedATK } = state
+      return Math.round(
+        extraATK + extraFixedATK + baseATK * (extraPercentATK / 100)
+      );
+    },
+    sumExtraDEFNumber(state) {
+      const { baseDEF, extraDEF, extraPercentDEF, extraFixedDEF } = state
+      return Math.round(
+        extraDEF + extraFixedDEF + baseDEF * (extraPercentDEF / 100)
+      );
+    },
+    sumExtraHPNumber(state) {
+      const { baseHP, extraHP, extraPercentHP, extraFixedHP } = state
+      return Math.round(
+        extraHP + extraFixedHP + baseHP * (extraPercentHP / 100)
+      );
+    },
   },
 };
 
-// 记录当前所选择Note
+// 记录当前所选中的便签列表
 const saveDataModule = {
   state: () => {
     return {
-      selectedFixedATKNotes: {},
-      selectedExtraATKNotes: {},
-      selectedElementDemageNotes: {},
+      selectedFixedATKNotes: {}, // 固定攻击加成便签
+      selectedExtraATKNotes: {}, // 百分比攻击加成便签
+
+      selectedFixedDEFNotes: {}, // 固定防御加成便签
+      selectedExtraDEFNotes: {}, // 百分比防御加成便签
+
+      selectedFixedHPNotes: {}, // 固定生命加成便签
+      selectedExtraHPNotes: {}, // 百分比生命加成便签
+
+      selectedElementDemageNotes: {}, // 伤害倍率加成便签
     }
   },
   mutations: {
@@ -141,6 +154,21 @@ const saveDataModule = {
     setSelectedExtraATKNotes(state, value) {
       state.selectedExtraATKNotes = value || {};
     },
+
+    setSelectedFixedDEFNotes(state, value) {
+      state.selectedFixedDEFNotes = value || {};
+    },
+    setSelectedExtraDEFNotes(state, value) {
+      state.selectedExtraDEFNotes = value || {};
+    },
+
+    setSelectedFixedHPNotes(state, value) {
+      state.selectedFixedHPNotes = value || {};
+    },
+    setSelectedExtraHPNotes(state, value) {
+      state.selectedExtraHPNotes = value || {};
+    },
+
     setSelectedElementDemageNotes(state, value) {
       state.selectedElementDemageNotes = value || {};
     }

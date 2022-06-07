@@ -14,8 +14,8 @@
     </div>
     <ul class="data-detail">
       <li class="data-detail-item" v-for="(item, index) in config" :key="index">
-        <span>{{ item.label }}</span
-        ><span>{{ item.value }}</span>
+        <span>{{ item.label }}</span>
+        <span>{{ item.value }}</span>
       </li>
     </ul>
     <van-field
@@ -116,8 +116,16 @@ export default defineComponent({
       const {
         extraATK,
         baseATK,
-        extraFixedAtk = 0,
+        extraFixedATK = 0,
         extraPercentATK,
+        baseDEF = 0,
+        extraDEF = 0,
+        extraFixedDEF = 0,
+        extraPercentDEF = 0,
+        baseHP = 0,
+        extraHP = 0,
+        extraFixedHP = 0,
+        extraPercentHP = 0,
         additionalDemageList = [],
         critDemage,
         elementDemage,
@@ -129,17 +137,34 @@ export default defineComponent({
         enemyLevel,
         enemyResistance,
         weaken,
-        armourList = [],
+        armour = 0,
+        armourPiercing = 0,
       } = value;
 
       return [
+        {
+          label: "基础生命值",
+          value: baseHP,
+        },
+        {
+          label: "绿字生命值",
+          value: Math.round(extraHP + extraFixedHP + baseHP * (extraPercentHP / 100)),
+        },
+        {
+          label: "基础防御力",
+          value: baseDEF,
+        },
+        {
+          label: "绿字防御力",
+          value: Math.round(extraDEF + extraFixedDEF + baseDEF * (extraPercentDEF / 100)),
+        },
         {
           label: "基础攻击力",
           value: baseATK,
         },
         {
           label: "绿字攻击力",
-          value: Math.round(extraATK + extraFixedAtk + baseATK * (extraPercentATK / 100)),
+          value: Math.round(extraATK + extraFixedATK + baseATK * (extraPercentATK / 100)),
         },
         {
           label: "技能倍率%",
@@ -150,7 +175,7 @@ export default defineComponent({
           value: extraRate,
         },
         {
-          label: "附加伤害值",
+          label: "伤害值提升",
           value: Math.round(sub(additionalDemageList)),
         },
         {
@@ -191,8 +216,12 @@ export default defineComponent({
           value: weaken,
         },
         {
-          label: "减防穿防%",
-          value: armourList.join(','),
+          label: "减少防御%",
+          value: armour,
+        },
+        {
+          label: "无视防御%",
+          value: armourPiercing,
         },
       ];
     };

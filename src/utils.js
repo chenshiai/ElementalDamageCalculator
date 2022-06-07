@@ -40,11 +40,9 @@ export const getResistanceRate = (enemyResistance, weaken) => {
   return resistanceRate;
 };
 
-export const getDefRate = (characterLevel, enemyLevel, armourList) => {
-  let enemyDef = enemyLevel + 100;
-  armourList.forEach((item) => {
-    enemyDef *= 1 - item / 100;
-  })
+export const getDefRate = (characterLevel, enemyLevel, armour, armourPiercing) => {
+  let enemyDef = (enemyLevel + 100) * (1 - armour / 100) * (1 - armourPiercing / 100);
+
   if (enemyDef < 0) {
     enemyDef = 0;
   }
@@ -84,7 +82,7 @@ export const computationalFormula = (data) => {
   const {
     baseATK,
     extraATK,
-    extraFixedAtk = 0,
+    extraFixedATK = 0,
     extraPercentATK,
     additionalDemageList = [],
     critDemage,
@@ -97,11 +95,12 @@ export const computationalFormula = (data) => {
     enemyLevel,
     enemyResistance,
     weaken,
-    armourList = [],
+    armour = 0,
+    armourPiercing
   } = data;
 
   // 攻击力
-  const atk = baseATK + extraATK + extraFixedAtk + baseATK * (extraPercentATK / 100);
+  const atk = baseATK + extraATK + extraFixedATK + baseATK * (extraPercentATK / 100);
   // 技能倍率
   const rate = (atkRate / 100) * (1 + (extraRate / 100));
   // 伤害倍率
@@ -109,7 +108,7 @@ export const computationalFormula = (data) => {
   // 抗性
   const resistanceRate = getResistanceRate(enemyResistance, weaken);
   // 防御减伤
-  const defRate = getDefRate(characterLevel, enemyLevel, armourList);
+  const defRate = getDefRate(characterLevel, enemyLevel, armour, armourPiercing);
   // 暴伤
   const cri = 1 + critDemage / 100;
   // 增幅反应
