@@ -126,6 +126,7 @@ export default defineComponent({
         extraHP = 0,
         extraFixedHP = 0,
         extraPercentHP = 0,
+        basicPanelSelect = '攻击力',
         additionalDemageList = [],
         critDemage,
         elementDemage,
@@ -140,6 +141,8 @@ export default defineComponent({
         armour = 0,
         armourPiercing = 0,
       } = value;
+
+      console.log(basicPanelSelect);
 
       return [
         {
@@ -171,6 +174,10 @@ export default defineComponent({
           value: atkRate,
         },
         {
+          label: "结算基础",
+          value: basicPanelSelect,
+        },
+        {
           label: "倍率增幅%",
           value: extraRate,
         },
@@ -191,10 +198,10 @@ export default defineComponent({
           value: evaporationDemage,
         },
         {
-          label: "反应类型",
+          label: "增幅反应",
           value:
             atkType === "none"
-              ? "无反应"
+              ? "无"
               : atkType === "evaporation"
               ? "2.0倍增幅"
               : "1.5倍增幅",

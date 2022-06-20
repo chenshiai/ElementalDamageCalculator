@@ -13,23 +13,57 @@
   </van-cell>
   <div class="data-panel">
     <div class="data-panel__title">基础属性</div>
-    
-    <van-cell
-      class="eva-cell"
-      @click="hpPanelChecked = !hpPanelChecked"
-      center
-      is-link
-      :arrow-direction="hpPanelChecked ? 'up' : 'down'"
-    >
-      <template #title>
-        总生命值：{{ baseHP + sumExtraHPNumber }}
-        <span class="atk-detial">
-          {{ baseHP }} +
-          <span style="color: #49ff39">{{ baseHP + sumExtraHPNumber }}</span>
-        </span>
-      </template>
-    </van-cell>
-    <div v-show="hpPanelChecked">
+    <div class="data-panel__basic">
+      <div
+        :class="[
+          'basic-panel-item',
+          basicPanelSelect === '攻击力' && 'basic-panel-selected',
+        ]"
+        @click="basicInputPanelSelect('攻击力')"
+      >
+        <span class="basic-panel-item-title">攻击力</span>
+        <div class="basic-panel-item-total">
+          {{ baseATK + sumExtraATKNumber }}
+        </div>
+        <div class="basic-detial">
+          {{ baseATK }} +
+          <span style="color: #49ff39">{{ sumExtraATKNumber }}</span>
+        </div>
+      </div>
+      <div
+        :class="[
+          'basic-panel-item',
+          basicPanelSelect === '防御力' && 'basic-panel-selected',
+        ]"
+        @click="basicInputPanelSelect('防御力')"
+      >
+        <span class="basic-panel-item-title">防御力</span>
+        <div class="basic-panel-item-total">
+          {{ baseDEF + sumExtraDEFNumber }}
+        </div>
+        <div class="basic-detial">
+          {{ baseDEF }}+
+          <span style="color: #49ff39">{{ sumExtraDEFNumber }}</span>
+        </div>
+      </div>
+      <div
+        :class="[
+          'basic-panel-item',
+          basicPanelSelect === '生命值' && 'basic-panel-selected',
+        ]"
+        @click="basicInputPanelSelect('生命值')"
+      >
+        <span class="basic-panel-item-title">生命值</span>
+        <div class="basic-panel-item-total">
+          {{ baseHP + sumExtraHPNumber }}
+        </div>
+        <div class="basic-detial">
+          {{ baseHP }}+
+          <span style="color: #49ff39">{{ sumExtraHPNumber }}</span>
+        </div>
+      </div>
+    </div>
+    <div v-show="basicPanelSelect === '生命值'">
       <data-item
         v-model="baseHP"
         title="基础生命值"
@@ -49,22 +83,8 @@
         :showSlider="sliderChecked"
       />
     </div>
-    <van-cell
-      class="eva-cell"
-      @click="defPanelChecked = !defPanelChecked"
-      center
-      is-link
-      :arrow-direction="defPanelChecked ? 'up' : 'down'"
-    >
-      <template #title>
-        总防御力：{{ baseDEF + sumExtraDEFNumber }}
-        <span class="atk-detial">
-          {{ baseDEF }} +
-          <span style="color: #49ff39">{{ sumExtraDEFNumber }}</span>
-        </span>
-      </template>
-    </van-cell>
-    <div v-show="defPanelChecked">
+
+    <div v-show="basicPanelSelect === '防御力'">
       <data-item
         v-model="baseDEF"
         title="基础防御力"
@@ -84,24 +104,7 @@
         :showSlider="sliderChecked"
       />
     </div>
-
-     <van-cell
-      class="eva-cell"
-      @click="atkPanelChecked = !atkPanelChecked"
-      center
-      is-link
-      :arrow-direction="atkPanelChecked ? 'up' : 'down'"
-    >
-      <template #title>
-        总攻击力：{{ baseATK + sumExtraATKNumber }}
-        <span class="atk-detial">
-          {{ baseATK }} +
-          <span style="color: #49ff39">{{ sumExtraATKNumber }}</span>
-        </span>
-      </template>
-    </van-cell>
-
-    <div v-show="atkPanelChecked">
+    <div class="basic-input-panel" v-show="basicPanelSelect === '攻击力'">
       <data-item
         v-model="baseATK"
         title="基础攻击力"
@@ -150,7 +153,7 @@
     <data-item
       v-model="atkRate"
       title="技能倍率%"
-      tips="默认以攻击力为基础"
+      :tips="'当前以' + basicPanelSelect + '为基础'"
       stepperMin="0"
       sliderMax="1500"
       sliderStep="0.1"
@@ -381,12 +384,7 @@
 </template>
 
 <script>
-import {
-  computed,
-  defineComponent,
-  ref,
-  toRefs,
-} from "vue";
+import { computed, defineComponent, ref, toRefs } from "vue";
 import {
   Slider,
   Stepper,
@@ -442,10 +440,6 @@ export default defineComponent({
   setup() {
     /** 炽烈的炎之魔女开关 */
     const checked = ref(false);
-    /** 基础属性面板开关 */
-    const atkPanelChecked = ref(true);
-    const defPanelChecked = ref(false);
-    const hpPanelChecked = ref(false);
     /** 滑块辅助调整开关 */
     const sliderChecked = ref(false);
     /** 防御抗性乘区开关 */
@@ -474,6 +468,10 @@ export default defineComponent({
     const increaseResult = computed(() => {
       return computationalFormula(store.state.demageModule);
     });
+
+    const basicInputPanelSelect = (value) => {
+      store.commit('setBasicPanelSelect', value);
+    };
 
     const extraPercentATKNotesConfig = {
       title: "攻击力加成%",
@@ -530,9 +528,7 @@ export default defineComponent({
       checked,
       changeSwitch,
       sliderChecked,
-      atkPanelChecked,
-      defPanelChecked,
-      hpPanelChecked,
+      basicInputPanelSelect,
       otherChecked,
       floatChecked,
       increaseResult,
@@ -546,23 +542,12 @@ export default defineComponent({
     };
   },
 });
-</script>
+</script>basic-detial
 
 <style>
 .data-panel {
   margin-bottom: 24px;
   line-height: 24px;
-}
-
-.atk-total {
-  margin-left: 28px;
-}
-
-.atk-detial {
-  display: inline-block;
-  margin-left: 24px;
-  padding: 0 12px;
-  font-size: 14px;
 }
 
 .eva-cell {
@@ -663,5 +648,40 @@ export default defineComponent({
 
 .data-item-popover__content {
   padding: 12px;
+}
+.data-panel__basic {
+  width: 100%;
+  display: flex;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+.basic-panel-item {
+  flex: 1;
+  text-align: center;
+  background-color: var(--light-text);
+}
+.basic-panel-item-title {
+  font-size: 12px;
+}
+.basic-detial {
+  font-size: 14px;
+  display: none;
+}
+.basic-panel-selected {
+  background-color: var(--button-bg);
+  color: var(--light-text);
+  flex: 1.5;
+}
+.basic-panel-selected .basic-panel-item-total {
+  display: inline-block;
+  margin-left: 4px;
+}
+.basic-panel-selected .basic-detial {
+  display: block;
+}
+.basic-input-panel {
+  /* padding: 0 8px 12px 8px; */
+  /* padding-bottom: 6px; */
 }
 </style>

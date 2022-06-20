@@ -84,6 +84,15 @@ export const computationalFormula = (data) => {
     extraATK,
     extraFixedATK = 0,
     extraPercentATK,
+    baseDEF = 0,
+    extraDEF = 0,
+    extraFixedDEF = 0,
+    extraPercentDEF = 0,
+    baseHP = 0,
+    extraHP = 0,
+    extraFixedHP = 0,
+    extraPercentHP = 0,
+    basicPanelSelect = '攻击力',
     additionalDemageList = [],
     critDemage,
     elementDemage,
@@ -99,8 +108,11 @@ export const computationalFormula = (data) => {
     armourPiercing
   } = data;
 
-  // 攻击力
+  // 攻击力、防御力、生命值
   const atk = baseATK + extraATK + extraFixedATK + baseATK * (extraPercentATK / 100);
+  const def = baseDEF + extraDEF + extraFixedDEF + baseDEF * (extraPercentDEF / 100);
+  const hp = baseHP + extraHP + extraFixedHP + baseHP * (extraPercentHP / 100);
+  
   // 技能倍率
   const rate = (atkRate / 100) * (1 + (extraRate / 100));
   // 伤害倍率
@@ -121,8 +133,15 @@ export const computationalFormula = (data) => {
   // 附加伤害值
   const additionalDmg = sub(additionalDemageList);
 
+  let basic = 0; 
+  switch(basicPanelSelect) {
+    case '生命值': basic = hp; break;
+    case '防御力': basic = def; break;
+    case '攻击力': basic = atk; break;
+  }
+
   const result =
-    (atk * rate + additionalDmg) *
+    (basic * rate + additionalDmg) *
     element *
     reaction *
     eva *

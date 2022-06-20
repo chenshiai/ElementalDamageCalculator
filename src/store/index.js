@@ -31,6 +31,8 @@ const demageModule = {
       extraFixedHP: 0, // 固定生命值加成
       extraPercentHP: 0, // 百分比生命加成
 
+      basicPanelSelect: '攻击力', // 所选伤害结算的基础数值，‘攻击力’‘防御力’‘生命值’
+
       additionalDemageList: [], // 附加伤害列表
       critDemage: 50.0, // 暴击伤害
       elementDemage: 0, // 伤害倍率
@@ -48,6 +50,12 @@ const demageModule = {
     };
   },
   mutations: {
+    setEvaporationDemage(state, value) {
+      state.evaporationDemage = value;
+    },
+    setBasicPanelSelect(state, value) {
+      state.basicPanelSelect = value;
+    },
     setUnifiedState(state, value) {
       const {
         baseATK,
@@ -64,6 +72,8 @@ const demageModule = {
         extraHP = 0,
         extraFixedHP = 0,
         extraPercentHP = 0,
+
+        basicPanelSelect = '攻击力',
 
         additionalDemageList = [],
         critDemage,
@@ -93,6 +103,8 @@ const demageModule = {
       state.extraHP = extraHP;
       state.extraFixedHP = extraFixedHP;
       state.extraPercentHP = extraPercentHP;
+
+      state.basicPanelSelect = basicPanelSelect;
 
       state.additionalDemageList = additionalDemageList;
       state.critDemage = critDemage;
