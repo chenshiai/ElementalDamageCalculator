@@ -1,4 +1,5 @@
 import { Toast } from "vant";
+import { ElementalReaction, base as Base } from './constant';
 
 /** 增幅反应 */
 export const calculate = (elementalMystery) => {
@@ -18,13 +19,27 @@ export const calculate3 = (elementalMystery) => {
   return 4.44 * elementalMystery / (elementalMystery + 1400) * 100;
 }
 
+/** 激化反应 */
+export const calculate4 = (elementalMystery) => {
+  if (+elementalMystery <= 0) return 0;
+  return 5 * elementalMystery / (elementalMystery + 1200) * 100;
+}
+
 export const getReactionRate = (atkType) => {
-  if (atkType === "evaporation") {
-    return 2;
-  } else if (atkType === "evaporation2") {
-    return 1.5;
-  } else {
-    return 1;
+  switch (atkType) {
+    case 'evaporation': return 2;
+    case 'evaporation2': return 1.5;
+    default: return 1;
+  }
+};
+
+export const getAtkTypeText = (atkType) => {
+  switch (atkType) {
+    case 'evaporation': return '2.0倍增幅';
+    case 'evaporation2': return '1.5倍增幅';
+    case ElementalReaction.Aggravate: return '超激化';
+    case ElementalReaction.Spread: return '蔓激化';
+    default: return '无';
   }
 };
 
@@ -96,7 +111,7 @@ export const computationalFormula = (data) => {
     additionalDemageList = [],
     critDemage,
     elementDemage,
-    evaporationDemage,
+    elementalMystery = 0,
     atkRate,
     atkType,
     extraRate = 0,
@@ -105,14 +120,16 @@ export const computationalFormula = (data) => {
     enemyResistance,
     weaken,
     armour = 0,
-    armourPiercing
+    armourPiercing = 0,
+    witch = false,
+    thunder = false,
   } = data;
 
   // 攻击力、防御力、生命值
   const atk = baseATK + extraATK + extraFixedATK + baseATK * (extraPercentATK / 100);
   const def = baseDEF + extraDEF + extraFixedDEF + baseDEF * (extraPercentDEF / 100);
   const hp = baseHP + extraHP + extraFixedHP + baseHP * (extraPercentHP / 100);
-  
+
   // 技能倍率
   const rate = (atkRate / 100) * (1 + (extraRate / 100));
   // 伤害倍率
@@ -125,23 +142,35 @@ export const computationalFormula = (data) => {
   const cri = 1 + critDemage / 100;
   // 增幅反应
   const reaction = getReactionRate(atkType);
-  // 精通加成
-  let eva = 1 + evaporationDemage / 100;
-  if (atkType === "none") {
-    eva = 1;
+
+  // 增幅精通加成
+  let eva = 1;
+  if (atkType === "evaporation" || atkType === "evaporation2") {
+    eva += (calculate(elementalMystery) + (witch ? 15 : 0)) / 100
   }
+  
+  // 激化伤害值
+  let dmgBonus = 0;
+  if (atkType === ElementalReaction.Aggravate) {
+    dmgBonus = Base.aggravate[characterLevel] * (1 + (calculate4(elementalMystery) + (thunder ? 20 : 0)) / 100); 
+  }
+  if (atkType === ElementalReaction.Spread) {
+    dmgBonus = Base.spread[characterLevel] * (1 + calculate4(elementalMystery) / 100); 
+  }
+
   // 附加伤害值
   const additionalDmg = sub(additionalDemageList);
+  
 
-  let basic = 0; 
-  switch(basicPanelSelect) {
+  let basic = 0;
+  switch (basicPanelSelect) {
     case '生命值': basic = hp; break;
     case '防御力': basic = def; break;
     case '攻击力': basic = atk; break;
   }
 
   const result =
-    (basic * rate + additionalDmg) *
+    (basic * rate + additionalDmg + dmgBonus) *
     element *
     reaction *
     eva *

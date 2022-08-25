@@ -257,33 +257,21 @@
       v-bind="elementDemageNotesConfig"
       :selectedNotes="selectedElementDemageNotes"
     />
-
     <data-item
-      v-model="evaporationDemage"
-      title="精通加成%"
-      tips="蒸发、融化伤害提升"
+      v-model="characterLevel"
+      title="角色等级"
+      stepperMax="90"
+      stepperMin="1"
+    />
+    <data-item
+      v-model="elementalMystery"
+      title="元素精通"
+      tips=""
       stepperMin="0"
-      :sliderMin="checked ? 15 : 0"
-      sliderMax="240"
-      sliderStep="0.1"
-      decimalLength="1"
+      sliderMax="2000"
+      sliderStep="1"
       :showSlider="sliderChecked"
     />
-    <van-cell
-      class="eva-cell"
-      center
-      title="炽烈的炎之魔女，增幅反应伤害提升15%"
-    >
-      <template #right-icon>
-        <van-switch
-          v-model="checked"
-          active-color="#766461"
-          inactive-color="#b7a19e"
-          size="16"
-          @change="changeSwitch"
-        />
-      </template>
-    </van-cell>
     <van-cell
       class="eva-cell"
       @click="otherChecked = !otherChecked"
@@ -293,12 +281,6 @@
       :arrow-direction="otherChecked ? 'up' : 'down'"
     />
     <div v-show="otherChecked" class="data-panel">
-      <data-item
-        v-model="characterLevel"
-        title="角色的等级"
-        stepperMax="90"
-        stepperMin="1"
-      />
       <data-item v-model="enemyLevel" title="敌人的等级" stepperMin="1" />
       <data-item v-model="enemyResistance" title="敌人抗性%" stepperMin="-999">
         <div class="extra-btn" @click="handleImagePreview">查看抗性表</div>
@@ -352,9 +334,55 @@
               <van-radio name="evaporation2" checked-color="#766461" />
             </template>
           </van-cell>
+          <van-cell clickable @click="atkType = ElementalReaction.Aggravate">
+            <template #title>
+              超激化(<span class="electro"></span>→<span class="dendro"></span><span class="electro"></span>)
+            </template>
+            <template #right-icon>
+              <van-radio :name="ElementalReaction.Aggravate" checked-color="#766461" />
+            </template>
+          </van-cell>
+          <van-cell clickable @click="atkType = ElementalReaction.Spread">
+            <template #title>
+              蔓激化(<span class="dendro"></span>→<span class="dendro"></span><span class="electro"></span>)
+            </template>
+            <template #right-icon>
+              <van-radio :name="ElementalReaction.Spread" checked-color="#766461" />
+            </template>
+          </van-cell>
         </van-radio-group>
       </van-cell-group>
     </div>
+    <van-cell
+      v-show="atkType === 'evaporation' || atkType === 'evaporation2'"
+      class="eva-cell"
+      center
+      title="炽烈的炎之魔女，增幅反应伤害提升15%"
+    >
+      <template #right-icon>
+        <van-switch
+          v-model="witch"
+          active-color="#766461"
+          inactive-color="#b7a19e"
+          size="16"
+        />
+      </template>
+    </van-cell>
+    <van-cell
+      v-show="atkType === ElementalReaction.Aggravate"
+      class="eva-cell"
+      center
+      title="如雷的盛怒，超激化[伤害提升]提高20%"
+    >
+      <template #right-icon>
+        <van-switch
+          v-model="thunder"
+          active-color="#766461"
+          inactive-color="#b7a19e"
+          size="16"
+        />
+      </template>
+    </van-cell>
   </div>
   <div :class="['result-grid', floatChecked && 'increase-result__top']">
     <div class="grid-item">
@@ -414,6 +442,7 @@ import {
   EnhancedDemageCalculationMode,
   AdditionalDemageMode,
   DefCutAdditionMode,
+  ElementalReaction,
 } from "../constant";
 
 export default defineComponent({
@@ -438,8 +467,6 @@ export default defineComponent({
   },
 
   setup() {
-    /** 炽烈的炎之魔女开关 */
-    const checked = ref(false);
     /** 滑块辅助调整开关 */
     const sliderChecked = ref(false);
     /** 防御抗性乘区开关 */
@@ -450,20 +477,6 @@ export default defineComponent({
     const showPopoverExtraRate = ref(false);
     const showPopoverExtraATK = ref(false);
     const store = useStore();
-
-    const changeSwitch = (val) => {
-      if (val) {
-        store.commit(
-          "setEvaporationDemage",
-          +store.state.demageModule.evaporationDemage + 15
-        );
-      } else {
-        store.commit(
-          "setEvaporationDemage",
-          +store.state.demageModule.evaporationDemage - 15
-        );
-      }
-    };
 
     const increaseResult = computed(() => {
       return computationalFormula(store.state.demageModule);
@@ -525,8 +538,6 @@ export default defineComponent({
       ...toRefs(store.getters),
       ...toRefs(store.state.demageModule),
       ...toRefs(store.state.saveDataModule),
-      checked,
-      changeSwitch,
       sliderChecked,
       basicInputPanelSelect,
       otherChecked,
@@ -539,6 +550,7 @@ export default defineComponent({
       elementDemageNotesConfig,
       extraPercentATKNotesConfig,
       extraFixedATKNotesConfig,
+      ElementalReaction,
     };
   },
 });
@@ -567,7 +579,9 @@ export default defineComponent({
 
 .water,
 .fire,
-.ice {
+.ice,
+.dendro,
+.electro {
   background-size: 20px;
   width: 20px;
   height: 20px;
@@ -585,6 +599,14 @@ export default defineComponent({
 
 .ice {
   background-image: url("../../cryo.png");
+}
+
+.dendro {
+  background-image: url("../../dendro.png");
+}
+
+.electro {
+  background-image: url("../../electro.png");
 }
 
 .van-slider__button-wrapper .van-slider__button {

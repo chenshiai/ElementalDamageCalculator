@@ -77,13 +77,18 @@
     </div>
   </div>
   <detail-block keep>
-    增幅反应伤害提升{{ Rate }}%<span class="more-rate">{{ moreRate }}</span>
+    蒸发、融化反应的伤害提升{{ Rate }}%<span class="more-rate">{{ moreRate }}</span>;
     <br />
-    剧变反应伤害提升{{ servitude }}%
-    <span class="more-rate">{{ servitudeMoreRate }}</span>
+    超载、超导、感电、燃烧、碎冰、扩散、绽放、超绽放、烈绽放的伤害提升{{ servitude }}%;
+    <span v-if="servitudeMoreRate" class="more-rate"><br />{{ servitudeMoreRate }};</span>
     <br />
-    结晶反应护盾提升{{ crystallization }}%
+    超激化、蔓激化带来的[伤害提升]提高{{ jihua }}%;
+    <br />
+    结晶反应护盾提供的[伤害吸收量]提升{{ crystallization }}%;
   </detail-block>
+  <div class="tips">
+    烈绽放、超绽放伤害一致，下面简称“烈超”。
+  </div>
   <div class="result">
     <div class="damage-tag" v-for="(item, index) in demageResult" :key="index">
       <span :class="['damage-tag__title', item.class]">{{ item.name }}</span
@@ -155,7 +160,7 @@
 <script>
 import { computed, defineComponent, reactive, toRefs } from "vue";
 import { base as Base, WITCH, THUNDER, EMERALD } from "../constant";
-import { calculate, calculate2, calculate3 } from "../utils";
+import { calculate, calculate2, calculate3, calculate4 } from "../utils";
 import TabTitle from "../component/TabTitle.vue";
 import DetailBlock from "../component/Detail.vue";
 import { CellGroup, Cell, Slider, Stepper, RadioGroup, Radio } from "vant";
@@ -188,7 +193,6 @@ export default defineComponent({
     const data = reactive({
       elementalMystery: 786,
       level: 80,
-      base: Base,
       check: "",
 
       shieldType: "common",
@@ -210,6 +214,11 @@ export default defineComponent({
       return calculate3(data.elementalMystery).toFixed(1);
     });
 
+    // 激化倍率
+    const jihua = computed(() => {
+      return calculate4(data.elementalMystery).toFixed(1);
+    });
+
     const moreRate = computed(() => {
       if (data.check === WITCH) {
         return " +15%";
@@ -219,10 +228,10 @@ export default defineComponent({
 
     const servitudeMoreRate = computed(() => {
       if (data.check === THUNDER) {
-        return " 超载/超导/感电+40%";
+        return " 超载/超导/感电/超绽放+40%;超激化+20%";
       }
       if (data.check === WITCH) {
-        return " 超载+40%";
+        return " 超载/燃烧/烈绽放+40%";
       }
       if (data.check === EMERALD) {
         return " 扩散+60%";
@@ -230,13 +239,14 @@ export default defineComponent({
       return "";
     });
 
-    // 聚变反应伤害公式
+    // 剧变反应伤害公式
     const calculateDamage = (baseDamage) => {
       return Math.round(
         baseDamage * (1 + calculate2(data.elementalMystery) / 100)
       );
     };
 
+    // 不直接乘以 1.4 的原因：分段取整，减少误差
     // 感电伤害值
     const electroChargedDamage = computed(() => {
       const basenumber = Base.electroCharged[data.level];
@@ -254,14 +264,37 @@ export default defineComponent({
       return r;
     });
 
+    // 绽放伤害值
+    const bloomDamage = computed(() => {
+      return calculateDamage(Base.bloom[data.level]);
+    });
+
+    // 超烈绽放伤害值
+    const hyperbloomDamage = computed(() => {
+      const basenumber = Base.hyperbloom[data.level];
+      const r = calculateDamage(basenumber);
+      if (data.check === THUNDER || data.check === WITCH)
+        return Math.round(basenumber * 0.4) + r;
+      return r;
+    });
+
     // 碎冰伤害值
-    const crushedIceDamage = computed(() => {
-      return calculateDamage(Base.crushedIce[data.level]);
+    const shatterDamage = computed(() => {
+      return calculateDamage(Base.shatter[data.level]);
+    });
+
+    // 燃烧伤害值
+    const burningDamage = computed(() => {
+      const basenumber = Base.burning[data.level];
+      const r = calculateDamage(basenumber);
+      if (data.check === WITCH)
+        return Math.round(basenumber * 0.4) + r;
+      return r;
     });
 
     // 扩散伤害值
-    const diffuseDamage = computed(() => {
-      const basenumber = Base.diffuse[data.level];
+    const swirlDamage = computed(() => {
+      const basenumber = Base.swirl[data.level];
       if (data.check === EMERALD)
         return Math.round(basenumber * 0.6) + calculateDamage(basenumber);
       return calculateDamage(basenumber);
@@ -318,29 +351,44 @@ export default defineComponent({
     const demageResult = computed(() => {
       return [
         {
-          name: "感电",
-          class: "elector",
-          detail: electroChargedDamage.value,
-        },
-        {
           name: "超载",
           class: "overload",
           detail: overloadDamage.value,
         },
         {
-          name: "碎冰",
-          class: "crushe-ice",
-          detail: crushedIceDamage.value,
-        },
-        {
-          name: "扩散",
-          class: "diffuse",
-          detail: diffuseDamage.value,
-        },
-        {
           name: "超导",
           class: "superconduct",
           detail: superconductDamage.value,
+        },
+        {
+          name: "感电",
+          class: "elector",
+          detail: electroChargedDamage.value,
+        },
+        {
+          name: "燃烧",
+          class: "overload",
+          detail: burningDamage.value,
+        },
+        {
+          name: "碎冰",
+          class: "shatter",
+          detail: shatterDamage.value,
+        },
+        {
+          name: "扩散",
+          class: "swirl",
+          detail: swirlDamage.value,
+        },
+        {
+          name: "绽放",
+          class: "bloom",
+          detail: bloomDamage.value,
+        },
+        {
+          name: "烈超",
+          class: "bloom",
+          detail: hyperbloomDamage.value,
         },
         {
           name: "结晶",
@@ -355,6 +403,7 @@ export default defineComponent({
       ...toRefs(data),
       Rate,
       servitude,
+      jihua,
       crystallization,
       demageResult,
       crystallizeValue,
@@ -464,11 +513,11 @@ export default defineComponent({
   color: #c9295e;
 }
 
-.crushed-ice {
+.shatter {
   color: #86898b;
 }
 
-.diffuse {
+.swirl {
   color: #7ef1b2;
 }
 
@@ -478,6 +527,10 @@ export default defineComponent({
 
 .crystallize {
   color: #b48f14;
+}
+
+.bloom {
+  color: #00e851;
 }
 
 .witch {

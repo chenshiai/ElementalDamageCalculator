@@ -36,7 +36,9 @@ const demageModule = {
       additionalDemageList: [], // 附加伤害列表
       critDemage: 50.0, // 暴击伤害
       elementDemage: 0, // 伤害倍率
-      evaporationDemage: 0.0, // 增幅提升
+      thunder: false, // 如雷套启用状态
+      witch: false, // 魔女套启用状态
+      elementalMystery: 0, // 元素精通
       atkRate: 100, // 攻击力倍率
       extraRate: 0, // 倍率增幅
       atkType: "none", // 反应类型
@@ -50,9 +52,6 @@ const demageModule = {
     };
   },
   mutations: {
-    setEvaporationDemage(state, value) {
-      state.evaporationDemage = value;
-    },
     setBasicPanelSelect(state, value) {
       state.basicPanelSelect = value;
     },
@@ -78,7 +77,9 @@ const demageModule = {
         additionalDemageList = [],
         critDemage,
         elementDemage,
-        evaporationDemage,
+        thunder = false,
+        witch = false,
+        elementalMystery = 0,
         atkRate,
         extraRate = 0,
         atkType,
@@ -109,7 +110,9 @@ const demageModule = {
       state.additionalDemageList = additionalDemageList;
       state.critDemage = critDemage;
       state.elementDemage = elementDemage;
-      state.evaporationDemage = evaporationDemage;
+      state.elementalMystery = elementalMystery;
+      state.witch = witch;
+      state.thunder = thunder;
       state.atkRate = atkRate;
       state.extraRate = extraRate;
       state.atkType = atkType;

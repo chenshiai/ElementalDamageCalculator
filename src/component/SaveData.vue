@@ -81,6 +81,7 @@ import { defineComponent, ref, computed } from "vue";
 import { useStore } from "vuex";
 import { Popup, Field, Toast, Collapse, CollapseItem, Icon } from "vant";
 import {
+  getAtkTypeText,
   getLocalStorage,
   deepCopyObject,
   computationalFormula,
@@ -131,6 +132,7 @@ export default defineComponent({
         critDemage,
         elementDemage,
         evaporationDemage,
+        elementalMystery = 0,
         atkRate,
         extraRate = 0,
         atkType,
@@ -194,17 +196,12 @@ export default defineComponent({
           value: critDemage,
         },
         {
-          label: "精通加成%",
-          value: evaporationDemage,
+          label: "元素精通",
+          value: elementalMystery,
         },
         {
-          label: "增幅反应",
-          value:
-            atkType === "none"
-              ? "无"
-              : atkType === "evaporation"
-              ? "2.0倍增幅"
-              : "1.5倍增幅",
+          label: "元素反应",
+          value: getAtkTypeText(atkType),
         },
         {
           label: "角色等级",
