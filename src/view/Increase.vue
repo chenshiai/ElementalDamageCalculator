@@ -384,19 +384,22 @@
       </template>
     </van-cell>
   </div>
-  <div :class="['result-grid', floatChecked && 'increase-result__top']">
-    <div class="grid-item">
-      伤害数值
-      <div class="normal-demage">
-        {{ increaseResult.common }}
+  <div :class="['dmg-result', floatChecked && 'increase-result__top']">
+    <div class="result-grid">
+      <div class="grid-item">
+        伤害数值
+        <div class="normal-demage">
+          {{ increaseResult.common }}
+        </div>
+      </div>
+      <div class="grid-item">
+        暴击伤害
+        <div class="crit-demage">
+          {{ increaseResult.crit }}
+        </div>
       </div>
     </div>
-    <div class="grid-item">
-      暴击伤害
-      <div class="crit-demage">
-        {{ increaseResult.crit }}
-      </div>
-    </div>
+    <composition-analysis />
   </div>
   <van-cell class="eva-cell" center title="置顶展示">
     <template #right-icon>
@@ -432,6 +435,7 @@ import NoteGroup from "../component/NoteGroup.vue";
 import DetailBlock from "../component/Detail.vue";
 import SaveData from "../component/SaveData.vue";
 import AdditionalDemage from "../component/AdditionalDemage.vue";
+import CompositionAnalysis from "../component/CompositionAnalysis.vue";
 import { useStore } from "vuex";
 import {
   EnhancedDamageNotes,
@@ -464,6 +468,7 @@ export default defineComponent({
     [RadioGroup.name]: RadioGroup,
     [DetailBlock.name]: DetailBlock,
     [AdditionalDemage.name]: AdditionalDemage,
+    [CompositionAnalysis.name]: CompositionAnalysis,
   },
 
   setup() {
@@ -612,9 +617,7 @@ export default defineComponent({
 .van-slider__button-wrapper .van-slider__button {
   box-shadow: 0 2px 2px var(--button-bg);
 }
-
-.result-grid {
-  display: flex;
+.dmg-result {
   width: 100%;
   top: 0;
   transition: top 0.3s;
@@ -622,6 +625,10 @@ export default defineComponent({
   border: 1px solid var(--button-bg);
   padding: 6px 0;
   z-index: 1;
+}
+.result-grid {
+  width: 100%;
+  display: flex;
 }
 
 .grid-item {

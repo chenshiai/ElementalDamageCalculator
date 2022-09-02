@@ -27,9 +27,9 @@ export const calculate4 = (elementalMystery) => {
 
 export const getReactionRate = (atkType) => {
   switch (atkType) {
-    case 'evaporation': return 2;
-    case 'evaporation2': return 1.5;
-    default: return 1;
+    case 'evaporation': return 1;
+    case 'evaporation2': return 0.5;
+    default: return 0;
   }
 };
 
@@ -129,56 +129,65 @@ export const computationalFormula = (data) => {
   const atk = baseATK + extraATK + extraFixedATK + baseATK * (extraPercentATK / 100);
   const def = baseDEF + extraDEF + extraFixedDEF + baseDEF * (extraPercentDEF / 100);
   const hp = baseHP + extraHP + extraFixedHP + baseHP * (extraPercentHP / 100);
-
-  // 技能倍率
-  const rate = (atkRate / 100) * (1 + (extraRate / 100));
-  // 伤害倍率
-  const element = Math.max(0, 1 + elementDemage / 100);
-  // 抗性
-  const resistanceRate = getResistanceRate(enemyResistance, weaken);
-  // 防御减伤
-  const defRate = getDefRate(characterLevel, enemyLevel, armour, armourPiercing);
-  // 暴伤
-  const cri = 1 + critDemage / 100;
-  // 增幅反应
-  const reaction = getReactionRate(atkType);
-
-  // 增幅精通加成
-  let eva = 1;
-  if (atkType === "evaporation" || atkType === "evaporation2") {
-    eva += (calculate(elementalMystery) + (witch ? 15 : 0)) / 100
-  }
-  
-  // 激化伤害值
-  let dmgBonus = 0;
-  if (atkType === ElementalReaction.Aggravate) {
-    dmgBonus = Base.aggravate[characterLevel] * (1 + (calculate4(elementalMystery) + (thunder ? 20 : 0)) / 100); 
-  }
-  if (atkType === ElementalReaction.Spread) {
-    dmgBonus = Base.spread[characterLevel] * (1 + calculate4(elementalMystery) / 100); 
-  }
-
-  // 附加伤害值
-  const additionalDmg = sub(additionalDemageList);
-  
-
   let basic = 0;
+
   switch (basicPanelSelect) {
     case '生命值': basic = hp; break;
     case '防御力': basic = def; break;
     case '攻击力': basic = atk; break;
   }
 
-  const result =
-    (basic * rate + additionalDmg + dmgBonus) *
-    element *
-    reaction *
-    eva *
-    defRate *
-    resistanceRate;
+  // 抗性
+  const resistanceRate = getResistanceRate(enemyResistance, weaken);
+  // 防御减伤
+  const defRate = getDefRate(characterLevel, enemyLevel, armour, armourPiercing);
+  const ENEMY_RATE = defRate * resistanceRate;
+
+  // 增幅精通加成
+  let eva = 0;
+  if (atkType === "evaporation" || atkType === "evaporation2") {
+    eva = (calculate(elementalMystery) + (witch ? 15 : 0)) / 100
+  }
+
+  /** 基础伤害值 */
+  const BASE_DMG = basic * (atkRate / 100) * (1 + (extraRate / 100)) * ENEMY_RATE;
+  // 激化伤害值
+  let BONUS_DMG = 0;
+  if (atkType === ElementalReaction.Aggravate) {
+    BONUS_DMG = Base.aggravate[characterLevel] * (1 + (calculate4(elementalMystery) + (thunder ? 20 : 0)) / 100) * ENEMY_RATE;
+  }
+  if (atkType === ElementalReaction.Spread) {
+    BONUS_DMG = Base.spread[characterLevel] * (1 + calculate4(elementalMystery) / 100) * ENEMY_RATE;
+  }
+  // 附加伤害值
+  const ADDITIONAL_DMG = sub(additionalDemageList) * ENEMY_RATE;
+  // 增伤伤害值
+  const MAGNIFICATION_DMG = (BASE_DMG + ADDITIONAL_DMG + BONUS_DMG) * Math.max(0, elementDemage / 100);
+  // 反应伤害值
+  const REACTION_DMG = (BASE_DMG + ADDITIONAL_DMG + MAGNIFICATION_DMG) * getReactionRate(atkType);
+  // 精通提升伤害值
+  const EVA_DMG = (BASE_DMG + ADDITIONAL_DMG + MAGNIFICATION_DMG + REACTION_DMG) * eva;
+
+  const RESULT_DMG = BASE_DMG + ADDITIONAL_DMG + BONUS_DMG + MAGNIFICATION_DMG + REACTION_DMG + EVA_DMG
+  // 暴击提升伤害值
+  const CRITICAL_DMG = RESULT_DMG * (critDemage / 100);
+
+
+  const compositionAnalysis = {
+    BASE_DMG,
+    ADDITIONAL_DMG,
+    BONUS_DMG,
+    MAGNIFICATION_DMG,
+    REACTION_DMG,
+    EVA_DMG,
+    CRITICAL_DMG,
+    RESULT_DMG,
+    CRIT_DMG: RESULT_DMG + CRITICAL_DMG,
+  };
 
   return {
-    common: Math.round(result),
-    crit: Math.round(result * cri),
+    common: Math.round(RESULT_DMG),
+    crit: Math.round(RESULT_DMG + CRITICAL_DMG),
+    compositionAnalysis,
   }
 };

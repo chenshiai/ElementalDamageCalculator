@@ -1,4 +1,4 @@
-import { ProfilePhoto, WeponIcon } from './constants/profilePhoto';
+import { ProfilePhoto, WeponIcon, ArtifactIcon } from './constants/profilePhoto';
 import { Magnification } from './constants/magnification';
 
 // 元素伤害反应基数
@@ -212,6 +212,7 @@ export const EnhancedDemageCalculationMode = [
   },
   {
     title: "风物之诗咏",
+    img: ProfilePhoto.KaedeharaKazuha,
     fields: [
       {
         name: "atromancy",
@@ -224,6 +225,7 @@ export const EnhancedDemageCalculationMode = [
   },
   {
     title: "雷罚恶曜之眼",
+    img: ProfilePhoto.Beelzebul,
     fields: [
       {
         name: "energy",
@@ -242,6 +244,7 @@ export const EnhancedDemageCalculationMode = [
   },
   {
     title: "绝缘之旗印",
+    img: ArtifactIcon.EmblemOfSeveredFate,
     fields: [
       {
         name: "charge",
@@ -253,7 +256,21 @@ export const EnhancedDemageCalculationMode = [
     getResult: ({ charge }) => Math.min(charge * 0.25, 75),
   },
   {
+    title: "诸叶变通",
+    img: ProfilePhoto.Tighnari,
+    fields: [
+      {
+        name: "energy",
+        type: "number",
+        label: "元素精通",
+        placeholder: "输入提纳里的元素精通",
+      },
+    ],
+    getResult: ({ energy }) => Math.min(energy, 1000) * 0.06,
+  },
+  {
     title: "启蛰之祝词",
+    img: ProfilePhoto.YaeMiko,
     fields: [
       {
         name: "energy",
@@ -266,6 +283,7 @@ export const EnhancedDemageCalculationMode = [
   },
   {
     title: "草主角·草缘剑",
+    img: ProfilePhoto.sora,
     fields: [
       {
         name: "energy",
@@ -278,6 +296,7 @@ export const EnhancedDemageCalculationMode = [
   },
   {
     title: "草主角·偃草若化",
+    img: ProfilePhoto.sora,
     fields: [
       {
         name: "energy",
@@ -308,6 +327,7 @@ export const EnhancedDemageCalculationMode = [
   },
   {
     title: "血赤叶红",
+    img: ProfilePhoto.KaedeharaKazuha,
     fields: [
       {
         name: "energy",
@@ -489,14 +509,14 @@ export const AdditionalDemageMode = [
           {
             name: "def",
             label: "基础属性",
-            placeholder: "输入角色的攻击力、防御力或生命值",
+            placeholder: "输入角色的攻击力、防御力、生命值或元素精通",
             type: "number",
             required: true,
           },
           {
             name: "rate",
             label: "转换倍率%",
-            placeholder: "攻击力、防御力、生命值的百分之多少",
+            placeholder: "攻击、防御、生命或精通的百分之多少",
             type: "number",
             required: true,
           },
@@ -510,7 +530,7 @@ export const AdditionalDemageMode = [
           {
             name: "cha1",
             label: "",
-            placeholder: "适用武器：辰砂之纺锤、赤角石溃杵",
+            placeholder: "适用武器：辰砂之纺锤、赤角石溃杵和猎人之径",
             type: "number",
             disabled: true,
           },

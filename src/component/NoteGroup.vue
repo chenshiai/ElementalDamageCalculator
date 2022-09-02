@@ -1,46 +1,97 @@
 <template>
   <div class="note-group">
-    <div v-show="localNotes" :class="['notes-button', isExpand && 'expand']" @click="isExpand = !isExpand">
+    <div
+      v-show="localNotes"
+      :class="['notes-button', isExpand && 'expand']"
+      @click="isExpand = !isExpand"
+    >
       『{{ title }}』便签
       <van-icon size="12" :name="isExpand ? 'arrow-up' : 'arrow-down'" />
     </div>
-    <div v-show="(localNotes) && isExpand" class="data-notes">
+    <div v-show="localNotes && isExpand" class="data-notes">
       <div class="add-note-button" @click="showPopup = true">＋新增便签</div>
-      <div v-for="(item, index) in localNotes" :key="index" :class="['memo', selectedMemos[item.title] && 'selected']">
+      <div
+        v-for="(item, index) in localNotes"
+        :key="index"
+        :class="['memo', selectedMemos[item.title] && 'selected']"
+      >
         <div @click="selectMemo(item)">
           <div class="memo-detail">
             {{
-                floatNum(item.detail, 2) >= 0
-                  ? `+${floatNum(item.detail, 2)}`
-                  : floatNum(item.detail, 2)
+              floatNum(item.detail, 2) >= 0
+                ? `+${floatNum(item.detail, 2)}`
+                : floatNum(item.detail, 2)
             }}
           </div>
           <div class="memo-title">{{ item.title }}</div>
         </div>
-        <van-icon @click="deleteMemo(item)" class="memo-close" name="delete-o" />
+        <van-icon
+          @click="deleteMemo(item)"
+          class="memo-close"
+          name="delete-o"
+        />
       </div>
     </div>
   </div>
-  <van-popup teleport="#app" v-model:show="showPopup" position="top" @close="handleClose">
+  <van-popup
+    teleport="#app"
+    v-model:show="showPopup"
+    position="top"
+    @close="handleClose"
+  >
     <div class="popup-title">新增『{{ title }}』便签</div>
-    <van-tabs v-show="calculationMode.length > 1" class="calculation-mode" v-model:active="active" color="#997874"
-      line-width="60px" swipe-threshold="3">
-      <van-tab v-for="mode in calculationMode" :title="mode.title" :key="mode.title">
+    <van-tabs
+      v-show="calculationMode.length > 1"
+      class="calculation-mode"
+      v-model:active="active"
+      color="#997874"
+      line-width="60px"
+      swipe-threshold="3"
+    >
+      <van-tab
+        v-for="mode in calculationMode"
+        :title="mode.title"
+        :key="mode.title"
+      >
         <template #title>
           <div class="additional-tab-title">
-            <img v-if="!!mode.img" class="additional-tab-title-img" :src="mode.img" alt="" />
+            <img
+              v-if="!!mode.img"
+              class="additional-tab-title-img"
+              :src="mode.img"
+              alt=""
+            />
             <span class="additional-tab-title-span">{{ mode.title }}</span>
           </div>
         </template>
       </van-tab>
     </van-tabs>
     <van-form @submit="onSubmit">
-      <van-field v-for="field in calculationMode[active].fields" v-model="temporaryData[field.label]" :key="field.name"
-        :name="field.name" :type="field.type" :label="field.label" :placeholder="field.placeholder"
-        :rules="[{ required: true, message: '必填项' }]" />
-      <van-field v-model="newMemo.title" type="text" label="标签名称" placeholder="输入备注说明（不要与其他便签重名）"
-        :rules="[{ required: true, message: '必填项' }]" />
-      <van-button class="bottons__add" text="确认添加" size="small" block type="primary" native-type="submit" />
+      <van-field
+        v-for="field in calculationMode[active].fields"
+        v-model="temporaryData[field.label]"
+        :key="field.name"
+        :name="field.name"
+        :type="field.type"
+        :label="field.label"
+        :placeholder="field.placeholder"
+        :rules="[{ required: true, message: '必填项' }]"
+      />
+      <van-field
+        v-model="newMemo.title"
+        type="text"
+        label="标签名称"
+        placeholder="输入备注说明（不要与其他便签重名）"
+        :rules="[{ required: true, message: '必填项' }]"
+      />
+      <van-button
+        class="bottons__add"
+        text="确认添加"
+        size="small"
+        block
+        type="primary"
+        native-type="submit"
+      />
     </van-form>
   </van-popup>
 </template>
@@ -149,7 +200,11 @@ export default defineComponent({
 
     onMounted(() => {
       const { localStorageName, defaultNotes = [] } = props;
-      localNotes.value = getLocalStorage(localStorageName, defaultNotes, `${localStorageName}读取失败`)
+      localNotes.value = getLocalStorage(
+        localStorageName,
+        defaultNotes,
+        `${localStorageName}读取失败`
+      );
     });
 
     watch(
