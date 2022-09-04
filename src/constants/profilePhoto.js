@@ -14,7 +14,10 @@ export const ProfilePhoto = {
   Noelle: 'https://uploadstatic.mihoyo.com/ys-obc/2021/07/01/75276545/f3906dccf271d103fdbe50986230b82c_5688735001611237151.png?x-oss-process=image/quality,q_75/resize,s_40',
   
   Kokomi: 'https://uploadstatic.mihoyo.com/ys-obc/2021/11/02/75379475/9f39bbe75aeda34accf958ecafccb5e8_749944433300006002.png?x-oss-process=image/quality,q_75/resize,s_40',
+  KamisatoAyato: 'https://uploadstatic.mihoyo.com/ys-obc/2022/08/15/75379475/d16fbf95d62771daa65ab5d04f6abbd5_5682396699474055.png?x-oss-process=image/quality,q_75/resize,s_40',
+
   KaedeharaKazuha: 'https://uploadstatic.mihoyo.com/ys-obc/2022/08/15/75379475/36b5afeda1cc299ed0307b14399e6909_6018399472726457376.png?x-oss-process=image/quality,q_75/resize,s_40',
+  Sucrose: 'https://uploadstatic.mihoyo.com/ys-obc/2022/08/15/75379475/8e90e2981d76a103983b2390b321cdc2_8764516744193788167.png?x-oss-process=image/quality,q_75/resize,s_40',
 
   Tighnari: 'https://uploadstatic.mihoyo.com/ys-obc/2022/08/23/75379475/6953568084aaa02bc7a774430f1f3b56_9172357402103659910.png?x-oss-process=image/quality,q_75/resize,s_40',
   sora: 'https://uploadstatic.mihoyo.com/ys-obc/2022/05/24/4328207/cb560b65a2880d2fa03d1d25faa50805_8382943334706958229.png?x-oss-process=image/quality,q_75/resize,s_40'

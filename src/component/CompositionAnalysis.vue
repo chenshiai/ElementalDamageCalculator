@@ -4,9 +4,9 @@
     <div class="analysis-panel">
       <div class="plotting-scale">
         <div v-for="(item, index) in analysisList" class="plotting-item" :style="item.style">
-          <div class="plotting-tip">
-            {{ item.title }}
-            <span>{{ item.number }}</span>
+          <div :class="['plotting-tip top', index % 2 == 0 ? 'left' : 'right']">
+            <span>{{ item.title }}</span>
+            <span class="plotting-detail">{{ item.number }}</span>
           </div>
         </div>
       </div>
@@ -119,13 +119,36 @@ export default defineComponent({
 }
 
 .plotting-scale {
-  margin: 20px;
+  margin: 20px auto;
   height: 520px;
-  width: 50px;
+  width: 24px;
 }
 .plotting-tip {
-  width: 150px;
+  width: 80px;
+  padding: 0 4px;
+  border: 1px solid var(--button-bg);
   position: relative;
-  left: 60px;
+}
+.left {
+  right: 100px;
+}
+.right {
+  left: 34px;
+}
+.top::after{
+  content: "";
+  position: absolute;
+  width: 39px;
+  height: 1px;
+  top: -1px;
+  background-color: var(--button-bg);
+}
+.right.top::after {
+  right: 84px;
+}
+.plotting-detail {
+  display: inline-block;
+  text-align: center;
+  width: 100%;
 }
 </style>

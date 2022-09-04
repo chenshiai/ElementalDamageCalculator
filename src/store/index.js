@@ -159,6 +159,8 @@ const saveDataModule = {
       selectedFixedHPNotes: {}, // 固定生命加成便签
       selectedExtraHPNotes: {}, // 百分比生命加成便签
 
+      selectedFixedEMNotes: {}, // 固定元素精通加成便签
+
       selectedElementDemageNotes: {}, // 伤害倍率加成便签
     }
   },
@@ -182,6 +184,10 @@ const saveDataModule = {
     },
     setSelectedExtraHPNotes(state, value) {
       state.selectedExtraHPNotes = value || {};
+    },
+
+    setSelectedFixedEMNotes(state, value) {
+      state.selectedFixedEMNotes = value || {};
     },
 
     setSelectedElementDemageNotes(state, value) {

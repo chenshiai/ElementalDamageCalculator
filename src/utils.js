@@ -1,5 +1,6 @@
 import { Toast } from "vant";
-import { ElementalReaction, base as Base } from './constant';
+import { ElementalReaction } from './constant';
+import { BaseDMG } from './constants/elementalReaction';
 
 /** 增幅反应 */
 export const calculate = (elementalMystery) => {
@@ -154,10 +155,10 @@ export const computationalFormula = (data) => {
   // 激化伤害值
   let BONUS_DMG = 0;
   if (atkType === ElementalReaction.Aggravate) {
-    BONUS_DMG = Base.aggravate[characterLevel] * (1 + (calculate4(elementalMystery) + (thunder ? 20 : 0)) / 100) * ENEMY_RATE;
+    BONUS_DMG = BaseDMG.aggravate[characterLevel] * (1 + (calculate4(elementalMystery) + (thunder ? 20 : 0)) / 100) * ENEMY_RATE;
   }
   if (atkType === ElementalReaction.Spread) {
-    BONUS_DMG = Base.spread[characterLevel] * (1 + calculate4(elementalMystery) / 100) * ENEMY_RATE;
+    BONUS_DMG = BaseDMG.spread[characterLevel] * (1 + calculate4(elementalMystery) / 100) * ENEMY_RATE;
   }
   // 附加伤害值
   const ADDITIONAL_DMG = sub(additionalDemageList) * ENEMY_RATE;

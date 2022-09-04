@@ -5,8 +5,8 @@
     如果对这个计算器有什么看法或建议，可以在这篇帖子下留言反馈。
     <p>
       帖子链接:
-      <a href="https://bbs.mihoyo.com/ys/article/4763486">
-        https://bbs.mihoyo.com/ys/article/4763486
+      <a href="https://bbs.mihoyo.com/ys/article/4363651">
+        https://bbs.mihoyo.com/ys/article/4363651
       </a>
     </p>
   </div>
