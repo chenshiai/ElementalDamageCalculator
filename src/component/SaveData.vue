@@ -340,6 +340,7 @@ export default defineComponent({
   text-align: center;
   line-height: 40px;
   margin-bottom: 12px;
+  border-radius: 4px;
 }
 .data-detail {
   margin: 0 16px;

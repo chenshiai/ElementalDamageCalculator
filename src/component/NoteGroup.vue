@@ -48,11 +48,7 @@
       line-width="60px"
       swipe-threshold="3"
     >
-      <van-tab
-        v-for="mode in calculationMode"
-        :title="mode.title"
-        :key="mode.title"
-      >
+      <van-tab v-for="mode in calculationMode" :key="mode.title" >
         <template #title>
           <div class="additional-tab-title">
             <img
@@ -254,7 +250,7 @@ export default defineComponent({
   flex-wrap: wrap;
   display: flex;
   padding: 6px 6px 6px 0;
-  max-height: 140px;
+  max-height: 200px;
   overflow: scroll;
 }
 

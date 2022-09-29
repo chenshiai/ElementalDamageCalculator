@@ -26,13 +26,6 @@ export const AdditionalDemageMode = [
             required: true,
           },
           {
-            name: "cha",
-            label: "",
-            placeholder: "适用角色：云堇、申鹤",
-            type: "number",
-            disabled: true,
-          },
-          {
             name: "cha1",
             label: "",
             placeholder: "适用武器：辰砂之纺锤、赤角石溃杵和猎人之径",
@@ -48,6 +41,43 @@ export const AdditionalDemageMode = [
           },
         ],
         getResult: ({ def, rate }) => def * rate / 100,
+      },
+    ]
+  },
+  {
+    title: "云堇·破嶂见旌仪",
+    img: ProfilePhoto.YunJin,
+    children: [
+      {
+        title: "飞云旗阵",
+        fields: [
+          {
+            name: "def",
+            label: "防御力",
+            placeholder: "输入角色的防御力",
+            required: true,
+            type: "number",
+          },
+          {
+            name: "lv",
+            label: "天赋等级",
+            placeholder: "输入角色的天赋等级",
+            required: true,
+            type: "number",
+          },
+          {
+            name: "clas",
+            label: "元素数量",
+            placeholder: "输入队伍元素种类的数量",
+            required: true,
+            type: "number",
+          },
+        ],
+        getResult: ({ def, lv, clas }) => {
+          lv = Math.min(13, lv);
+          lv = Math.max(1, lv);
+          return def * ([0.025, 0.05, 0.075, 0.115][clas - 1] + Magnification.YunJin[lv - 1]);
+        },
       },
     ]
   },
@@ -118,6 +148,82 @@ export const AdditionalDemageMode = [
     ]
   },
   {
+    title: "赛诺·九弓的执命",
+    img: ProfilePhoto.Cyno,
+    children: [
+      {
+        title: "普通攻击",
+        fields: [
+          {
+            name: "ele",
+            label: "元素精通",
+            placeholder: "输入角色的元素精通",
+            required: true,
+            type: "number",
+          },
+          {
+            name: "tips",
+            label: "",
+            placeholder: "伤害提高值：元素精通的150%",
+            type: "number",
+            disabled: true,
+          },
+        ],
+        getResult: ({ ele }) => ele * 1.5,
+      },
+      {
+        title: "渡荒之雷",
+        fields: [
+          {
+            name: "ele",
+            label: "元素精通",
+            placeholder: "输入角色的元素精通",
+            required: true,
+            type: "number",
+          },
+          {
+            name: "tips",
+            label: "",
+            placeholder: "伤害提高值：元素精通的250%",
+            type: "number",
+            disabled: true,
+          },
+        ],
+        getResult: ({ ele }) => ele * 2.5,
+      },
+    ]
+  },
+  {
+    title: "申鹤·仰灵威召将役咒",
+    img: ProfilePhoto.ShenHe,
+    children: [
+      {
+        title: "箓灵",
+        fields: [
+          {
+            name: "atk",
+            label: "攻击力",
+            placeholder: "输入角色的攻击力",
+            required: true,
+            type: "number",
+          },
+          {
+            name: "lv",
+            label: "天赋等级",
+            placeholder: "输入角色的天赋等级",
+            required: true,
+            type: "number",
+          },
+        ],
+        getResult: ({ atk, lv }) => {
+          lv = Math.min(13, lv);
+          lv = Math.max(1, lv);
+          return atk * Magnification.ShenHe[lv - 1];
+        },
+      },
+    ]
+  },
+  {
     title: "荒泷一斗·赤鬼之血",
     img: ProfilePhoto.AratakiItto,
     children: [
@@ -148,7 +254,7 @@ export const AdditionalDemageMode = [
     img: ProfilePhoto.Kokomi,
     children: [
       {
-        title: "普攻·重击",
+        title: "普通攻击",
         fields: [
           {
             name: "hp",
@@ -157,19 +263,20 @@ export const AdditionalDemageMode = [
             required: true,
             placeholder: "输入角色的生命值",
           },
-          {
-            name: "hpRate",
-            label: "提升倍率%",
-            type: "number",
-            required: true,
-            placeholder: "元素爆发描述中，普攻/重击的倍率",
-          },
+          
           {
             name: "healRate",
             label: "治疗加成%",
             type: "number",
             required: true,
             placeholder: "输入角色的治疗加成",
+          },
+          {
+            name: "lv",
+            label: "天赋等级",
+            placeholder: "输入角色的天赋等级",
+            required: true,
+            type: "number",
           },
           {
             name: "tips",
@@ -179,12 +286,53 @@ export const AdditionalDemageMode = [
             disabled: true,
           },
         ],
-        getResult: ({ hp, hpRate, healRate }) => {
-          return hp * (+hpRate + healRate * 0.15) / 100
+        getResult: ({ hp, lv, healRate }) => {
+          lv = Math.min(13, lv);
+          lv = Math.max(1, lv);
+          return hp * (Magnification.Kokomi.NormalAttack[lv - 1] + healRate / 100 * 0.15)
         },
       },
       {
-        title: "技能伤害/化海月",
+        title: "重击",
+        fields: [
+          {
+            name: "hp",
+            label: "生命值",
+            type: "number",
+            required: true,
+            placeholder: "输入角色的生命值",
+          },
+          
+          {
+            name: "healRate",
+            label: "治疗加成%",
+            type: "number",
+            required: true,
+            placeholder: "输入角色的治疗加成",
+          },
+          {
+            name: "lv",
+            label: "天赋等级",
+            placeholder: "输入角色的天赋等级",
+            required: true,
+            type: "number",
+          },
+          {
+            name: "tips",
+            label: "",
+            placeholder: "生命值附加倍率额外提升，基于治疗加成的15%",
+            type: "number",
+            disabled: true,
+          },
+        ],
+        getResult: ({ hp, lv, healRate }) => {
+          lv = Math.min(13, lv);
+          lv = Math.max(1, lv);
+          return hp * (Magnification.Kokomi.ChargedAttack[lv - 1] + healRate / 100 * 0.15)
+        },
+      },
+      {
+        title: "化海月",
         fields: [
           {
             name: "hp",
@@ -194,14 +342,18 @@ export const AdditionalDemageMode = [
             placeholder: "输入角色的生命值",
           },
           {
-            name: "hpRate",
-            label: "提升倍率%",
-            type: "number",
+            name: "lv",
+            label: "天赋等级",
+            placeholder: "输入角色的天赋等级",
             required: true,
-            placeholder: "元素爆发描述中，技能伤害/化海月的倍率",
+            type: "number",
           },
         ],
-        getResult: ({ hp, hpRate }) => hp * hpRate / 100,
+        getResult: ({ hp, lv }) => {
+          lv = Math.min(13, lv);
+          lv = Math.max(1, lv);
+          return hp * Magnification.Kokomi.BakeKurage[lv - 1]
+        },
       },
     ],
   },

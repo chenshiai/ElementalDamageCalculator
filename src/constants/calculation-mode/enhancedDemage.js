@@ -1,4 +1,5 @@
 import { ProfilePhoto, ArtifactIcon } from '../profilePhoto';
+import { Magnification } from '../magnification';
 
 /** 增伤区间计算公式 */
 export const EnhancedDemageCalculationMode = [
@@ -38,13 +39,17 @@ export const EnhancedDemageCalculationMode = [
         placeholder: "输入角色元素爆发的元素能量",
       },
       {
-        name: "units",
-        label: "每点加成%",
+        name: "lv",
+        label: "天赋等级",
         type: "number",
-        placeholder: "雷电将军元素战技的每点元素能量的数值",
+        placeholder: "雷电将军元素战技的等级",
       },
     ],
-    getResult: ({ energy, units }) => energy * units,
+    getResult: ({ energy, lv }) => {
+      lv = Math.max(0, lv);
+      lv = Math.min(9, lv);
+      return energy * Magnification.Beelzebul[lv -1];
+    },
   },
   {
     title: "绝缘之旗印",
@@ -71,6 +76,28 @@ export const EnhancedDemageCalculationMode = [
       },
     ],
     getResult: ({ energy }) => Math.min(energy, 1000) * 0.06,
+  },
+  {
+    title: "漫沙陨穹",
+    img: ProfilePhoto.Candace,
+    fields: [
+      {
+        name: "hp",
+        type: "number",
+        label: "生命值",
+        placeholder: "输入坎蒂丝的生命值",
+      },
+      {
+        name: "cha1",
+        label: "",
+        placeholder: "元素爆发的20%已计算在内",
+        type: "number",
+        disabled: true,
+      },
+    ],
+    getResult: ({ hp }) => {
+      return 20 + Math.floor(hp / 1000) * 0.5;
+    },
   },
   {
     title: "启蛰之祝词",

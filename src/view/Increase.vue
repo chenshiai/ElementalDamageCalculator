@@ -158,53 +158,31 @@
       <data-item v-model="armourPiercing" title="无视防御%" stepperMin="0" stepperMax="100" />
     </div>
 
-    <div class="data-panel__title">
-      反应类型
-      <van-cell-group>
-        <van-radio-group style="margin-top: 12px" v-model="atkType">
-          <van-cell title="无反应" clickable @click="atkType = 'none'">
-            <template #right-icon>
-              <van-radio name="none" checked-color="#766461" />
-            </template>
-          </van-cell>
-          <van-cell clickable @click="atkType = 'evaporation'">
-            <template #title>
-              2.0倍增幅(<span class="water"></span>→<span class="fire"></span>
-              /
-              <span class="fire"></span>→<span class="ice"></span>)
-            </template>
-            <template #right-icon>
-              <van-radio name="evaporation" checked-color="#766461" />
-            </template>
-          </van-cell>
-          <van-cell clickable @click="atkType = 'evaporation2'">
-            <template #title>
-              1.5倍增幅(<span class="fire"></span>→<span class="water"></span>
-              /
-              <span class="ice"></span>→<span class="fire"></span>)
-            </template>
-            <template #right-icon>
-              <van-radio name="evaporation2" checked-color="#766461" />
-            </template>
-          </van-cell>
-          <van-cell clickable @click="atkType = ElementalReaction.Aggravate">
-            <template #title>
-              超激化(<span class="electro"></span>→<span class="dendro"></span><span class="electro"></span>)
-            </template>
-            <template #right-icon>
-              <van-radio :name="ElementalReaction.Aggravate" checked-color="#766461" />
-            </template>
-          </van-cell>
-          <van-cell clickable @click="atkType = ElementalReaction.Spread">
-            <template #title>
-              蔓激化(<span class="dendro"></span>→<span class="dendro"></span><span class="electro"></span>)
-            </template>
-            <template #right-icon>
-              <van-radio :name="ElementalReaction.Spread" checked-color="#766461" />
-            </template>
-          </van-cell>
-        </van-radio-group>
-      </van-cell-group>
+    <div class="data-panel__title">反应类型</div>
+    <div class="atk-type-panel">
+      <van-radio-group style="margin-top: 12px" v-model="atkType">
+        <van-radio name="none" class="atk-type-none">无反应</van-radio>
+        <div class="horizontal">
+          <van-radio name="evaporation" class="atk-type-item">
+            <span class="atk-type-text">水蒸·火融</span>
+            <span class="water bg-left"></span>
+            <span class="fire bg-right"></span>
+          </van-radio>
+          <van-radio name="evaporation2" class="atk-type-item">
+            <span class="atk-type-text">冰融·火蒸</span>
+            <span class="ice bg-left"></span>
+            <span class="fire bg-right"></span>
+          </van-radio>
+          <van-radio :name="ElementalReaction.Aggravate" class="atk-type-item">
+            <span class="atk-type-text">超激化</span>
+            <span class="electro"></span>
+          </van-radio>
+          <van-radio :name="ElementalReaction.Spread"  class="atk-type-item">
+            <span class="atk-type-text">蔓激化</span>
+            <span class="dendro"></span>
+          </van-radio>
+        </div>
+      </van-radio-group>
     </div>
     <van-cell v-show="atkType === 'evaporation' || atkType === 'evaporation2'" class="eva-cell" center
       title="炽烈的炎之魔女，增幅反应伤害提升15%">
@@ -470,11 +448,26 @@ export default defineComponent({
 .ice,
 .dendro,
 .electro {
-  background-size: 20px;
-  width: 20px;
-  height: 20px;
+  position: absolute;
   vertical-align: middle;
-  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100%;
+  height: 54px;
+  opacity: 0.5;
+  bottom: 0;
+  right: 0;
+  /* z-index: -1; */
+}
+
+.bg-left {
+  top: -15px;
+  left: -24px;
+}
+
+.bg-right {
+  bottom: -15px;
+  right: -24px;
 }
 
 .water {
@@ -507,6 +500,7 @@ export default defineComponent({
   transition: top 0.3s;
   background-color: #fff;
   border: 1px solid var(--button-bg);
+  border-radius: 4px;
   padding: 6px 0;
   z-index: 1;
 }
@@ -601,9 +595,44 @@ export default defineComponent({
 .basic-panel-selected .basic-detial {
   display: block;
 }
+.atk-type-panel .van-radio {
+  flex: 1;
+  text-align: center;
+  justify-content: center;
+  font-size: 14px;
+}
+.atk-type-panel .horizontal {
+  display: flex;
+  width: 100%;
+  gap: 8px
+}
+.atk-type-panel .van-radio__label {
+  margin: 0;
+  color: inherit;
 
-.basic-input-panel {
-  /* padding: 0 8px 12px 8px; */
-  /* padding-bottom: 6px; */
+}
+.atk-type-panel .van-radio__icon {
+  display: none;
+}
+.atk-type-item,
+.atk-type-none {
+  height: 34px;
+  border-radius: 4px;
+  border: solid 1px var(--button-bg);
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+.atk-type-item[aria-checked=true],
+.atk-type-none[aria-checked=true] {
+  background-color: var(--button-bg);
+  color: var(--light-text);
+}
+.atk-type-item {
+  height: 54px;
+  position: relative;
+}
+.atk-type-text {
+  position: relative;
+  z-index: 1;
 }
 </style>
