@@ -34,6 +34,19 @@
       :max="2000"
       active-color="#645856"
     />
+    <div class="base-damage__title">
+      妮露生命值
+      <van-stepper
+        v-model="data.nilou"
+        input-width="60px"
+        integer
+        button-size="20"
+        theme="round"
+        min="0"
+        max="80000"
+      />
+      <span class="holy-relic-tips">折旋落英之庭</span>
+    </div>
   </div>
   <div class="holy-relic">
     <div class="holy-relic__title">
@@ -81,6 +94,7 @@
     <br />
     超载、超导、感电、燃烧、碎冰、扩散、绽放、超绽放、烈绽放的伤害提升{{ servitude }}%;
     <span v-if="servitudeMoreRate" class="more-rate"><br />{{ servitudeMoreRate }};</span>
+    <span v-if="niluoDouns" class="more-rate">丰穰之核+{{ niluoDouns.toFixed(1) }}%;</span>
     <br />
     超激化、蔓激化带来的[伤害提升]提高{{ jihua }}%;
     <br />
@@ -191,11 +205,13 @@ export default defineComponent({
   setup() {
     const data = reactive({
       elementalMystery: 786,
-      level: 80,
+      level: 90,
       check: "",
 
       shieldType: "common",
       shieldStrong: 0,
+
+      nilou: 0,
     });
 
     // 增幅倍率
@@ -238,6 +254,13 @@ export default defineComponent({
       return "";
     });
 
+    const niluoDouns = computed(() => {
+      if (data.nilou > 30000) {
+        return Math.min((data.nilou - 30000) / 1000 * 9, 400);
+      }
+      return 0;
+    });
+
     // 剧变反应伤害公式
     const calculateDamage = (baseDamage) => {
       return Math.round(
@@ -272,7 +295,7 @@ export default defineComponent({
 
     // 绽放伤害值
     const bloomDamage = computed(() => {
-      return calculateDamage(BaseDMG.bloom[data.level]);
+      return calculateDamage(BaseDMG.bloom[data.level]) + Math.round(BaseDMG.bloom[data.level] * niluoDouns.value / 100);
     });
 
     // 超烈绽放伤害值
@@ -446,6 +469,7 @@ export default defineComponent({
       changeShield,
       shieldRemission,
       shieldConversion,
+      niluoDouns,
     };
   },
 });

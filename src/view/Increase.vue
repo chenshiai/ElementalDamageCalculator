@@ -97,7 +97,7 @@
           <p><b>最终倍率</b> = 技能倍率 x (1 + 倍率增幅) </p>
           <p>
             <b>倍率增幅：</b>
-            宵宫的元素战技增幅的是普攻的倍数，计算增幅时需要减去100%；<br />
+            宵宫的元素战技增幅的是普攻的倍数，夜兰六命增幅的是破局矢，计算增幅时需要减去100%；<br />
             行秋4命与安柏2命，增幅的都是元素战技的倍率，直接填入即可；<br />
           </p>
           <p><b>基础伤害值：</b>攻击力/防御力/生命值这三个基础属性乘以最终倍率的数值为基础伤害值。</p>
@@ -120,7 +120,7 @@
 
     <data-item v-model="critDemage" title="暴击伤害%" tips="" stepperMin="0" sliderMin="0" sliderMax="600" sliderStep="0.1"
       decimalLength="1" :showSlider="sliderChecked" />
-    <data-item v-model="elementDemage" title="伤害倍率%" tips="各种增伤、易伤" stepperMin="-200" sliderMax="600" sliderMin="-200"
+    <data-item v-model="elementDemage" title="伤害加成%" tips="各种增伤、易伤" stepperMin="-200" sliderMax="600" sliderMin="-200"
       sliderStep="0.1" decimalLength="2" :showSlider="sliderChecked">
       <van-popover class="data-item-popover" v-model:show="showPopover" placement="left-end">
         <div class="data-item-popover__content">
@@ -352,7 +352,7 @@ export default defineComponent({
     };
 
     const elementDemageNotesConfig = {
-      title: "伤害倍率%",
+      title: "伤害加成%",
       localStorageName: "GenShinImpactEDNotes",
       calculationMode: EnhancedDemageCalculationMode,
       defaultNotes: EnhancedDamageNotes,

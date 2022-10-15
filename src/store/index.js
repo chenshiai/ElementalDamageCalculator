@@ -27,7 +27,7 @@ const demageModule = {
       extraPercentDEF: 0, // 百分比防御加成
 
       baseHP: 10000, // 基础生命
-      extraHP: 8000, // 额外生命
+      extraHP: 4780, // 额外生命
       extraFixedHP: 0, // 固定生命值加成
       extraPercentHP: 0, // 百分比生命加成
 
@@ -42,8 +42,8 @@ const demageModule = {
       atkRate: 100, // 攻击力倍率
       extraRate: 0, // 倍率增幅
       atkType: "none", // 反应类型
-      characterLevel: 80, // 人物等级
-      enemyLevel: 80, // 敌人等级
+      characterLevel: 90, // 人物等级
+      enemyLevel: 90, // 敌人等级
       enemyResistance: 10, // 敌人抗性
       weaken: 0, // 敌人减抗
       armourList: [], // 减防穿防列表
