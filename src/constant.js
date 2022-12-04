@@ -2,6 +2,7 @@ export const WITCH = "witch";
 export const THUNDER = "thunder"
 export const EMERALD = "emerald";
 export const PERCENT = "percent";
+export const EDEN = "eden";
 
 export const ElementalReaction = {
   Vaporize: 'Vaporize', // 蒸发

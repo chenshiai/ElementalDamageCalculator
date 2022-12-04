@@ -46,7 +46,7 @@
       v-model:active="active"
       color="#997874"
       line-width="60px"
-      swipe-threshold="3"
+      swipe-threshold="2"
     >
       <van-tab v-for="mode in calculationMode" :key="mode.title" >
         <template #title>
@@ -62,6 +62,21 @@
         </template>
       </van-tab>
     </van-tabs>
+    <!-- <van-grid direction="horizontal" :column-num="4">
+      <van-grid-item v-for="mode in calculationMode" :key="mode.title">
+        <template #icon>
+          <img
+              v-if="!!mode.img"
+              class="additional-tab-title-img"
+              :src="mode.img"
+              alt=""
+            />
+        </template>
+        <template #text>
+          <span class="additional-tab-title-span">{{ mode.title }}</span>
+        </template>
+      </van-grid-item>
+    </van-grid> -->
     <van-form @submit="onSubmit">
       <van-field
         v-for="field in calculationMode[active].fields"
@@ -71,7 +86,7 @@
         :type="field.type"
         :label="field.label"
         :placeholder="field.placeholder"
-        :rules="[{ required: true, message: '必填项' }]"
+        :rules="[{ required: field.required, message: '必填项' }]"
       />
       <van-field
         v-model="newMemo.title"
@@ -94,7 +109,7 @@
 
 <script>
 import { defineComponent, onMounted, reactive, ref, watch } from "vue";
-import { Cell, Icon, Popup, Field, Form, Toast, Button, Tab, Tabs } from "vant";
+import { Cell, Icon, Popup, Field, Form, Toast, Button, Tab, Tabs, Grid, GridItem } from "vant";
 import { deepCopyObject, floatNum, getLocalStorage } from "../utils";
 
 export default defineComponent({
@@ -107,10 +122,12 @@ export default defineComponent({
     [Tabs.name]: Tabs,
     [Cell.name]: Cell,
     [Icon.name]: Icon,
+    [Grid.name]: Grid,
     [Form.name]: Form,
     [Field.name]: Field,
     [Popup.name]: Popup,
     [Button.name]: Button,
+    [GridItem.name]: GridItem,
   },
 
   props: {

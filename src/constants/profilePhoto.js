@@ -24,6 +24,7 @@ export const ProfilePhoto = {
 
   ShenHe: 'https://uploadstatic.mihoyo.com/ys-obc/2022/01/05/16314655/e2dfeee83654c0a6a7436b7c120c105a_6628180966971160404.png?x-oss-process=image/quality,q_75/resize,s_40',
 
+  Nahida: 'https://uploadstatic.mihoyo.com/ys-obc/2022/10/24/4328207/f9f8f331dea3cc4920037df2018437d0_4958876478140111847.png?x-oss-process=image/quality,q_75/resize,s_40',
   Tighnari: 'https://uploadstatic.mihoyo.com/ys-obc/2022/08/23/75379475/6953568084aaa02bc7a774430f1f3b56_9172357402103659910.png?x-oss-process=image/quality,q_75/resize,s_40',
   sora: 'https://uploadstatic.mihoyo.com/ys-obc/2022/05/24/4328207/cb560b65a2880d2fa03d1d25faa50805_8382943334706958229.png?x-oss-process=image/quality,q_75/resize,s_40'
 };

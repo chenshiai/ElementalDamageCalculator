@@ -17,6 +17,10 @@ export const EmFixedNotes = [
     title: "草·超/蔓激化·超/烈绽放",
   },
   {
+    detail: 150,
+    title: "饰金之梦·3层",
+  },
+  {
     detail: 50,
     title: "砂糖·触媒置换术",
   },

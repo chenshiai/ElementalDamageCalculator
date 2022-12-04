@@ -1,11 +1,11 @@
 <template>
   <tab-title>剧变反应查看</tab-title>
   <div class="tips">
-    官方未公开计算公式，存在一定的误差。精通伤害没计算敌人抗性，实际值请以游戏内为准，仅供参考。
+    官方未公开计算公式，存在误差。计算所得为敌人0抗性时的剧变反应伤害，供参考。
   </div>
   <div class="base-data">
-    <div class="base-damage__title">
-      角色等级
+    <div class="base-data-item">
+      <span class="base-damage__title">角色等级</span>
       <van-stepper
         v-model="data.level"
         input-width="46px"
@@ -17,8 +17,8 @@
       />
       <span class="holy-relic-tips">点击数字可以手动输入</span>
     </div>
-    <div class="base-damage__title">
-      元素精通
+    <div class="base-data-item">
+      <span class="base-damage__title">元素精通</span>
       <van-stepper
         v-model="data.elementalMystery"
         integer
@@ -34,8 +34,8 @@
       :max="2000"
       active-color="#645856"
     />
-    <div class="base-damage__title">
-      妮露生命值
+    <div class="base-data-item">
+      <span class="base-damage__title">妮露生命值</span>
       <van-stepper
         v-model="data.nilou"
         input-width="60px"
@@ -49,12 +49,12 @@
     </div>
   </div>
   <div class="holy-relic">
-    <div class="holy-relic__title">
-      圣遗物套装
+    <div>
+      <span class="holy-relic__title">圣遗物套装</span>
       <span class="holy-relic-tips">点击选择，再次点击可以取消选择</span>
     </div>
     <div class="holy-relic__check">
-      <span
+      <div
         :class="[
           'holy-relic-content',
           'witch',
@@ -62,10 +62,10 @@
         ]"
         @click="changeCheck('witch')"
       >
-        <img class="holy-relic__img" src="../assets/witch.png" />
-        炽烈的炎之魔女
-      </span>
-      <span
+        <img class="holy-relic__img" src="../assets/witch2.png" />
+        <div>炽烈的炎之魔女</div>
+      </div>
+      <div
         :class="[
           'holy-relic-content',
           'thunder',
@@ -73,10 +73,10 @@
         ]"
         @click="changeCheck('thunder')"
       >
-        <img class="holy-relic__img" src="../assets/thunder.png" />
-        如雷的盛怒
-      </span>
-      <span
+        <img class="holy-relic__img" src="../assets/thunder2.png" />
+        <div>如雷的盛怒</div>
+      </div>
+      <div
         :class="[
           'holy-relic-content',
           'emerald',
@@ -84,9 +84,20 @@
         ]"
         @click="changeCheck('emerald')"
       >
-        <img class="holy-relic__img" src="../assets/emerald.png" />
-        翠绿之影
-      </span>
+        <img class="holy-relic__img" src="../assets/emerald2.png" />
+        <div>翠绿之影</div>
+      </div>
+      <div
+        :class="[
+          'holy-relic-content',
+          'eden',
+          data.check === 'eden' && 'active',
+        ]"
+        @click="changeCheck('eden')"
+      >
+        <img class="holy-relic__img" src="../assets/eden.png" />
+        <div>乐园遗落之花</div>
+      </div>
     </div>
   </div>
   <detail-block keep>
@@ -94,6 +105,7 @@
     <br />
     超载、超导、感电、燃烧、碎冰、扩散、绽放、超绽放、烈绽放的伤害提升{{ servitude }}%;
     <span v-if="servitudeMoreRate" class="more-rate"><br />{{ servitudeMoreRate }};</span>
+    <span v-else><br /></span>
     <span v-if="niluoDouns" class="more-rate">丰穰之核+{{ niluoDouns.toFixed(1) }}%;</span>
     <br />
     超激化、蔓激化带来的[伤害提升]提高{{ jihua }}%;
@@ -171,7 +183,7 @@
 
 <script>
 import { computed, defineComponent, reactive, toRefs } from "vue";
-import { WITCH, THUNDER, EMERALD } from "../constant";
+import { WITCH, THUNDER, EMERALD, EDEN } from "../constant";
 import { BaseDMG } from '../constants/elementalReaction';
 import { calculate, calculate2, calculate3, calculate4 } from "../utils";
 import TabTitle from "../component/TabTitle.vue";
@@ -242,14 +254,19 @@ export default defineComponent({
     });
 
     const servitudeMoreRate = computed(() => {
-      if (data.check === THUNDER) {
-        return " 超载/超导/感电/超绽放+40%;超激化+20%";
-      }
-      if (data.check === WITCH) {
-        return " 超载/燃烧/烈绽放+40%";
-      }
-      if (data.check === EMERALD) {
-        return " 扩散+60%";
+      switch(data.check) {
+        case THUNDER: {
+          return " 超载/超导/感电/超绽放+40%;超激化+20%";
+        }
+        case WITCH: {
+          return " 超载/燃烧/烈绽放+40%";
+        }
+        case EMERALD: {
+          return " 扩散+60%";
+        }
+        case EDEN: {
+          return " 绽放/超绽放/烈绽放+80%";
+        }
       }
       return "";
     });
@@ -295,7 +312,11 @@ export default defineComponent({
 
     // 绽放伤害值
     const bloomDamage = computed(() => {
-      return calculateDamage(BaseDMG.bloom[data.level]) + Math.round(BaseDMG.bloom[data.level] * niluoDouns.value / 100);
+      const basenumber = BaseDMG.bloom[data.level];
+      const r = calculateDamage(basenumber) + Math.round(basenumber * niluoDouns.value / 100);
+      if (data.check === EDEN) 
+        return Math.round(basenumber * 0.8) + r;
+      return r;
     });
 
     // 超烈绽放伤害值
@@ -304,6 +325,8 @@ export default defineComponent({
       const r = calculateDamage(basenumber);
       if (data.check === THUNDER || data.check === WITCH)
         return Math.round(basenumber * 0.4) + r;
+      else if (data.check === EDEN) 
+        return Math.round(basenumber * 0.8) + r;
       return r;
     });
 
@@ -475,9 +498,13 @@ export default defineComponent({
 });
 </script>
 
-<style>
+<style scpoed>
 .base-data {
   line-height: 24px;
+}
+
+.base-data-item {
+  margin-bottom: 8px;
 }
 
 .base-data .van-stepper--round .van-stepper__minus {
@@ -496,10 +523,11 @@ export default defineComponent({
 
 .van-slider {
   margin-bottom: 22px;
+  margin-top: 12px;
 }
 
 .holy-relic {
-  margin-top: 24px;
+  /* margin-top: 24px; */
   margin-bottom: 16px;
 }
 
@@ -535,15 +563,17 @@ export default defineComponent({
 .holy-relic-content {
   display: inline-block;
   flex: 1;
+  white-space: nowrap;
   text-align: center;
-  padding: 0 6px;
+  padding: 0 2px;
   font-size: 14px;
   opacity: 0.3;
 }
 
 .holy-relic__img {
-  width: 100%;
-  border-radius: 20%;
+  width: 70px;
+  height: 70px;
+  border-radius: 6px;
 }
 
 .damage-tag {
@@ -609,6 +639,10 @@ export default defineComponent({
 
 .emerald {
   color: #2ee27f;
+}
+
+.eden {
+  color: #a75eb9;
 }
 
 .active {

@@ -29,4 +29,19 @@ export const EmFixedCalculationMode = [
       return Math.round(em * 0.2);
     },
   },
+  {
+    title: "纳西达·净善摄受明论",
+    img: ProfilePhoto.Nahida,
+    fields: [
+      {
+        name: "em",
+        label: "元素精通",
+        type: "digit",
+        placeholder: "输入队伍中最高的元素精通",
+      },
+    ],
+    getResult: ({ em }) => {
+      return Math.min(Math.round(em * 0.25), 250);
+    },
+  },
 ];
