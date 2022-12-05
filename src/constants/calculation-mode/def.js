@@ -31,9 +31,16 @@ export const DefFixedCalculationMode = [
     getResult: ({ number }) => number,
   },
   {
-    title: "五郎·犬坂吠吠方圆阵",
+    title: "五郎",
     img: ProfilePhoto.Gorou,
     fields: [
+      {
+        name: "tips",
+        label: "",
+        placeholder: "犬坂吠吠方圆阵：提升场上角色防御力",
+        type: "number",
+        disabled: true,
+      },
       {
         name: "lv",
         label: "天赋等级",

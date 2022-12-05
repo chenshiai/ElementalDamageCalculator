@@ -16,9 +16,16 @@ export const EnhancedDemageCalculationMode = [
     getResult: ({ number }) => number,
   },
   {
-    title: "枫原万叶·风物之诗咏",
+    title: "枫原万叶",
     img: ProfilePhoto.KaedeharaKazuha,
     fields: [
+      {
+        name: "tips",
+        label: "",
+        placeholder: "风物之诗咏：全队元素增伤",
+        type: "number",
+        disabled: true,
+      },
       {
         name: "atromancy",
         type: "number",
@@ -30,9 +37,16 @@ export const EnhancedDemageCalculationMode = [
     getResult: ({ atromancy }) => atromancy * 0.04,
   },
   {
-    title: "纳西达·惠明缘觉智论",
+    title: "纳西达",
     img: ProfilePhoto.Nahida,
     fields: [
+      {
+        name: "tips",
+        label: "",
+        placeholder: "惠明缘觉智论：自身元素战技增伤",
+        type: "number",
+        disabled: true,
+      },
       {
         name: "energy",
         type: "number",
@@ -44,9 +58,16 @@ export const EnhancedDemageCalculationMode = [
     getResult: ({ energy }) => Math.min(energy - 200, 800) * 0.1,
   },
   {
-    title: "雷电将军·雷罚恶曜之眼",
+    title: "雷电将军",
     img: ProfilePhoto.Beelzebul,
     fields: [
+      {
+        name: "tips",
+        label: "",
+        placeholder: "雷罚恶曜之眼：全队元素爆发增伤",
+        type: "number",
+        disabled: true,
+      },
       {
         name: "energy",
         type: "number",
@@ -69,9 +90,16 @@ export const EnhancedDemageCalculationMode = [
     },
   },
   {
-    title: "圣遗物·绝缘之旗印",
+    title: "绝缘之旗印",
     img: ArtifactIcon.EmblemOfSeveredFate,
     fields: [
+      {
+        name: "tips",
+        label: "",
+        placeholder: "元素爆发增伤",
+        type: "number",
+        disabled: true,
+      },
       {
         name: "charge",
         label: "元素充能",
@@ -83,9 +111,16 @@ export const EnhancedDemageCalculationMode = [
     getResult: ({ charge }) => Math.min(charge * 0.25, 75),
   },
   {
-    title: "提纳里·诸叶变通",
+    title: "提纳里",
     img: ProfilePhoto.Tighnari,
     fields: [
+      {
+        name: "tips",
+        label: "",
+        placeholder: "诸叶变通：自身重击、元素爆发增伤",
+        type: "number",
+        disabled: true,
+      },
       {
         name: "energy",
         type: "number",
@@ -97,9 +132,16 @@ export const EnhancedDemageCalculationMode = [
     getResult: ({ energy }) => Math.min(energy, 1000) * 0.06,
   },
   {
-    title: "坎蒂丝·漫沙陨穹",
+    title: "坎蒂丝",
     img: ProfilePhoto.Candace,
     fields: [
+      {
+        name: "tips",
+        label: "",
+        placeholder: "漫沙陨穹：全队普攻增伤",
+        type: "number",
+        disabled: true,
+      },
       {
         name: "hp",
         type: "number",
@@ -107,22 +149,22 @@ export const EnhancedDemageCalculationMode = [
         label: "生命值",
         placeholder: "输入坎蒂丝的生命值",
       },
-      {
-        name: "cha1",
-        label: "",
-        placeholder: "元素爆发的20%已计算在内",
-        type: "number",
-        disabled: true,
-      },
     ],
     getResult: ({ hp }) => {
       return 20 + Math.floor(hp / 1000) * 0.5;
     },
   },
   {
-    title: "八重神子·启蛰之祝词",
+    title: "八重神子",
     img: ProfilePhoto.YaeMiko,
     fields: [
+      {
+        name: "tips",
+        label: "",
+        placeholder: "启蛰之祝词：自身元素战技增伤",
+        type: "number",
+        disabled: true,
+      },
       {
         name: "energy",
         type: "number",
@@ -182,9 +224,16 @@ export const EnhancedDemageCalculationMode = [
     getResult: ({ energy, units }) => energy * units,
   },
   {
-    title: "枫原万叶·血赤叶红",
+    title: "枫原万叶",
     img: ProfilePhoto.KaedeharaKazuha,
     fields: [
+      {
+        name: "tips",
+        label: "",
+        placeholder: "血赤叶红：自身六命增伤",
+        type: "number",
+        disabled: true,
+      },
       {
         name: "energy",
         label: "元素精通",

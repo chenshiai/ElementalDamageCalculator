@@ -62,21 +62,6 @@
         </template>
       </van-tab>
     </van-tabs>
-    <!-- <van-grid direction="horizontal" :column-num="4">
-      <van-grid-item v-for="mode in calculationMode" :key="mode.title">
-        <template #icon>
-          <img
-              v-if="!!mode.img"
-              class="additional-tab-title-img"
-              :src="mode.img"
-              alt=""
-            />
-        </template>
-        <template #text>
-          <span class="additional-tab-title-span">{{ mode.title }}</span>
-        </template>
-      </van-grid-item>
-    </van-grid> -->
     <van-form @submit="onSubmit">
       <van-field
         v-for="field in calculationMode[active].fields"
@@ -86,6 +71,7 @@
         :type="field.type"
         :label="field.label"
         :placeholder="field.placeholder"
+        :disabled="field.disabled"
         :rules="[{ required: field.required, message: '必填项' }]"
       />
       <van-field

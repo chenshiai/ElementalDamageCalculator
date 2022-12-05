@@ -8,7 +8,7 @@
       <span class="base-damage__title">角色等级</span>
       <van-stepper
         v-model="data.level"
-        input-width="46px"
+        input-width="66px"
         integer
         button-size="20"
         theme="round"
@@ -22,7 +22,7 @@
       <van-stepper
         v-model="data.elementalMystery"
         integer
-        input-width="46px"
+        input-width="66px"
         button-size="20"
         theme="round"
         min="0"
@@ -38,7 +38,7 @@
       <span class="base-damage__title">妮露生命值</span>
       <van-stepper
         v-model="data.nilou"
-        input-width="60px"
+        input-width="66px"
         integer
         button-size="20"
         theme="round"
@@ -124,30 +124,49 @@
     护盾吸收效果是护盾自身的属性，护盾强效则是被保护角色给予护盾的属性。
   </div>
   <div class="base-data">
+    <div class="base-data-item">
+      <span class="base-damage__title">基础属性值</span>
+      <van-stepper
+        v-model="data.baseData"
+        input-width="66px"
+        integer
+        button-size="20"
+        theme="round"
+        min="0"
+        max="99999"
+      />
+      <span class="holy-relic-tips">角色的防御力、生命值</span>
+    </div>
+    <div class="base-data-item">
+      <span class="base-damage__title">转化倍率%</span>
+      <van-stepper
+        v-model="data.conversionData"
+        input-width="66px"
+        button-size="20"
+        decimal-length="2"
+        theme="round"
+        min="0"
+      />
+      <span class="holy-relic-tips">对应基础属性的百分比</span>
+    </div>
+    <div class="base-data-item">
+      <span class="base-damage__title">固定附加值</span>
+      <van-stepper
+        v-model="data.fixedData"
+        integer
+        input-width="66px"
+        button-size="20"
+        theme="round"
+        min="0"
+      />
+      <span class="holy-relic-tips">跟在倍率后面的固定值</span>
+    </div>
     <div class="data-panel__title">
-      护盾吸收效果
+      元素盾类型
       <van-cell-group>
         <van-radio-group style="margin-top: 12px" v-model="shieldType">
           <van-cell
-            clickable
-            title="岩元素护盾:150%"
-            @click="changeShield(Shield.earth)"
-          >
-            <template #right-icon>
-              <van-radio :name="Shield.earth" checked-color="#766461" />
-            </template>
-          </van-cell>
-          <van-cell
-            clickable
-            title="对应元素伤害:250%"
-            @click="changeShield(Shield.special)"
-          >
-            <template #right-icon>
-              <van-radio :name="Shield.special" checked-color="#766461" />
-            </template>
-          </van-cell>
-          <van-cell
-            title="无对应元素伤害:100%"
+            title="非同元素伤害有100%吸收效果"
             clickable
             @click="changeShield(Shield.common)"
           >
@@ -155,15 +174,67 @@
               <van-radio :name="Shield.common" checked-color="#766461" />
             </template>
           </van-cell>
+          <van-cell
+            clickable
+            title="对应元素伤害有250%吸收效果"
+            @click="changeShield(Shield.special)"
+          >
+            <template #right-icon>
+              <van-radio :name="Shield.special" checked-color="#766461" />
+            </template>
+          </van-cell>
+          <van-cell
+            clickable
+            title="岩元素护盾有150%吸收效果"
+            @click="changeShield(Shield.earth)"
+          >
+            <template #right-icon>
+              <van-radio :name="Shield.earth" checked-color="#766461" />
+            </template>
+          </van-cell>
         </van-radio-group>
       </van-cell-group>
     </div>
-    <div class="base-damage__title">
-      护盾强效%
+    <van-cell
+      class="eva-cell"
+      @click="otherChecked = !otherChecked"
+      center
+      title="角色天赋、命座提升"
+      is-link
+      :arrow-direction="otherChecked ? 'up' : 'down'"
+    />
+    <div v-show="otherChecked">
+      <div class="base-data-item">
+        <span class="base-damage__title">天赋提高%</span>
+        <van-stepper
+          v-model="data.talentData"
+          integer
+          input-width="66px"
+          button-size="20"
+          theme="round"
+          min="0"
+        />
+        <span class="holy-relic-tips">天赋提高的吸收量</span>
+      </div>
+      <div class="base-data-item">
+        <span class="base-damage__title">命座提高%</span>
+        <van-stepper
+          v-model="data.fateData"
+          integer
+          input-width="66px"
+          button-size="20"
+          theme="round"
+          min="0"
+        />
+        <span class="holy-relic-tips">命之座提高的吸收量</span>
+      </div>
+    </div>
+    <div class="base-data-item">
+      <span class="base-damage__title">护盾强效%</span>
       <van-stepper
         v-model="data.shieldStrong"
         integer
-        input-width="46px"
+        input-width="66px"
         button-size="20"
         theme="round"
         min="0"
@@ -172,17 +243,18 @@
     </div>
     <van-slider v-model="data.shieldStrong" :max="200" active-color="#645856" />
   </div>
+  <div class="shield-data">【{{ shieldData }}】</div>
   <detail-block keep>
-    每1点护盾值可吸收<span class="more-rate">{{ shieldConversion }}</span>点伤害
+    在当前吸收效果与护盾强效的加持下：
     <br />
-    等价于护盾拥有<span class="more-rate">{{ shieldRemission }}%</span>的伤害减免
+    可看做护盾拥有<span class="more-rate">{{ shieldRemission }}%</span>的伤害减免
     <br />
-    护盾受到的伤害是在计算过角色防御力、抗性后的伤害
+    使得每1点护盾值可吸收<span class="more-rate">{{ shieldConversion }}</span>点伤害
   </detail-block>
 </template>
 
 <script>
-import { computed, defineComponent, reactive, toRefs } from "vue";
+import { computed, defineComponent, reactive, toRefs, ref } from "vue";
 import { WITCH, THUNDER, EMERALD, EDEN } from "../constant";
 import { BaseDMG } from '../constants/elementalReaction';
 import { calculate, calculate2, calculate3, calculate4 } from "../utils";
@@ -215,6 +287,7 @@ export default defineComponent({
     [DetailBlock.name]: DetailBlock,
   },
   setup() {
+    const otherChecked = ref(false);
     const data = reactive({
       elementalMystery: 786,
       level: 90,
@@ -224,6 +297,12 @@ export default defineComponent({
       shieldStrong: 0,
 
       nilou: 0,
+
+      baseData: 0,
+      conversionData: 0,
+      fixedData: 0,
+      talentData: 0,
+      fateData: 0,
     });
 
     // 增幅倍率
@@ -256,16 +335,16 @@ export default defineComponent({
     const servitudeMoreRate = computed(() => {
       switch(data.check) {
         case THUNDER: {
-          return " 超载/超导/感电/超绽放+40%;超激化+20%";
+          return " 超载、超导、感电、超绽放+40%//超激化+20%";
         }
         case WITCH: {
-          return " 超载/燃烧/烈绽放+40%";
+          return " 超载、燃烧、烈绽放+40%";
         }
         case EMERALD: {
           return " 扩散+60%";
         }
         case EDEN: {
-          return " 绽放/超绽放/烈绽放+80%";
+          return " 绽放、超绽放、烈绽放+80%";
         }
       }
       return "";
@@ -476,6 +555,15 @@ export default defineComponent({
       ];
     });
 
+    const shieldData = computed(() => {
+      return Math.round(
+          (data.baseData * data.conversionData / 100 + data.fixedData)
+          * (1 + data.talentData / 100)
+          * (1 + data.fateData / 100)
+          * shieldConversion.value
+        );
+    });
+
     return {
       data,
       ...toRefs(data),
@@ -484,6 +572,7 @@ export default defineComponent({
       jihua,
       crystallization,
       demageResult,
+      otherChecked,
       crystallizeValue,
       changeCheck,
       moreRate,
@@ -493,6 +582,7 @@ export default defineComponent({
       shieldRemission,
       shieldConversion,
       niluoDouns,
+      shieldData,
     };
   },
 });
@@ -654,5 +744,9 @@ export default defineComponent({
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+}
+.shield-data {
+  text-align: center;
+  font-size: 20px;
 }
 </style>

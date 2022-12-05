@@ -32,9 +32,16 @@ export const AtkFixedCalculationMode = [
     getResult: ({ number }) => number,
   },
   {
-    title: "班尼特·美妙旅程",
+    title: "班尼特",
     img: ProfilePhoto.Bennett,
     fields: [
+      {
+        name: "tips",
+        label: "",
+        placeholder: "美妙旅程：提升场上角色攻击力",
+        type: "number",
+        disabled: true,
+      },
       {
         name: "lv",
         label: "天赋等级",
@@ -61,9 +68,16 @@ export const AtkFixedCalculationMode = [
     },
   },
   {
-    title: "胡桃·蝶引来生",
+    title: "胡桃",
     img: ProfilePhoto.HuTao,
     fields: [
+      {
+        name: "tips",
+        label: "",
+        placeholder: "蝶引来生：提升自身攻击力",
+        type: "number",
+        disabled: true,
+      },
       {
         name: "lv",
         label: "天赋等级",
@@ -84,9 +98,16 @@ export const AtkFixedCalculationMode = [
     },
   },
   {
-    title: "九条裟罗·天狗咒雷",
+    title: "九条裟罗",
     img: ProfilePhoto.KujoSara,
     fields: [
+      {
+        name: "tips",
+        label: "",
+        placeholder: "天狗咒雷：提升场上角色攻击力",
+        type: "number",
+        disabled: true,
+      },
       {
         name: "lv",
         label: "天赋等级",
@@ -107,9 +128,16 @@ export const AtkFixedCalculationMode = [
     },
   },
   {
-    title: "诺艾尔·大扫除",
+    title: "诺艾尔",
     img: ProfilePhoto.Noelle,
     fields: [
+      {
+        name: "tips",
+        label: "",
+        placeholder: "大扫除：提升自身攻击力",
+        type: "number",
+        disabled: true,
+      },
       {
         name: "lv",
         label: "天赋等级",
@@ -136,9 +164,16 @@ export const AtkFixedCalculationMode = [
     },
   },
   {
-    title: "荒泷一斗·最恶鬼王·一斗轰临！！",
+    title: "荒泷一斗",
     img: ProfilePhoto.AratakiItto,
     fields: [
+      {
+        name: "tips",
+        label: "",
+        placeholder: "最恶鬼王·一斗轰临！！：提升自身攻击力",
+        type: "number",
+        disabled: true,
+      },
       {
         name: "lv",
         label: "天赋等级",

@@ -15,9 +15,16 @@ export const EmFixedCalculationMode = [
     getResult: ({ number }) => number,
   },
   {
-    title: "砂糖·小小的彗风",
+    title: "砂糖",
     img: ProfilePhoto.Sucrose,
     fields: [
+      {
+        name: "tips",
+        label: "",
+        placeholder: "小小的彗风：提升队友元素精通",
+        type: "number",
+        disabled: true,
+      },
       {
         name: "em",
         label: "元素精通",
@@ -30,9 +37,16 @@ export const EmFixedCalculationMode = [
     },
   },
   {
-    title: "纳西达·净善摄受明论",
+    title: "纳西达",
     img: ProfilePhoto.Nahida,
     fields: [
+      {
+        name: "tips",
+        label: "",
+        placeholder: "净善摄受明论：提升场上角色元素精通",
+        type: "number",
+        disabled: true,
+      },
       {
         name: "em",
         label: "元素精通",

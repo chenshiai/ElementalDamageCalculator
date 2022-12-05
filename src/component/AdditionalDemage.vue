@@ -66,7 +66,6 @@
           :type="field.type"
           :placeholder="field.placeholder"
           :disabled="field.disabled"
-          :readonly="field.readonly"
           :rules="[{ required: field.required, message: '必填项' }]"
         />
       </van-cell-group>
