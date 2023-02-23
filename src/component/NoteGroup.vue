@@ -17,11 +17,7 @@
       >
         <div @click="selectMemo(item)">
           <div class="memo-detail">
-            {{
-              floatNum(item.detail, 2) >= 0
-                ? `+${floatNum(item.detail, 2)}`
-                : floatNum(item.detail, 2)
-            }}
+            {{ formatMemoDetail(item.detail) }}
           </div>
           <div class="memo-title">{{ item.title }}</div>
         </div>
@@ -197,6 +193,11 @@ export default defineComponent({
       Toast.success("添加成功");
     };
 
+    const formatMemoDetail = (detail) => {
+      let res = floatNum(detail, 2);
+      return res >= 0 ? `+${res}` : res;
+    };
+
     onMounted(() => {
       const { localStorageName, defaultNotes = [] } = props;
       localNotes.value = getLocalStorage(
@@ -236,7 +237,7 @@ export default defineComponent({
       temporaryData,
       handleClose,
       onSubmit,
-      floatNum,
+      formatMemoDetail,
     };
   },
 });

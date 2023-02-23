@@ -8,6 +8,8 @@
   </van-cell>
   <div class="data-panel">
     <div class="data-panel__title">基础属性</div>
+    <data-item v-model="characterLevel" title="角色等级" stepperMax="90" stepperMin="1" />
+
     <div class="data-panel__basic">
       <div :class="[
         'basic-panel-item',
@@ -20,6 +22,19 @@
         <div class="basic-detial">
           {{ baseATK }} +
           <span style="color: #49ff39">{{ sumExtraATKNumber }}</span>
+        </div>
+      </div>
+      <div :class="[
+        'basic-panel-item',
+        basicPanelSelect === '生命值' && 'basic-panel-selected',
+      ]" @click="basicInputPanelSelect('生命值')">
+        <span class="basic-panel-item-title">生命值</span>
+        <div class="basic-panel-item-total">
+          {{ baseHP + sumExtraHPNumber }}
+        </div>
+        <div class="basic-detial">
+          {{ baseHP }}+
+          <span style="color: #49ff39">{{ sumExtraHPNumber }}</span>
         </div>
       </div>
       <div :class="[
@@ -37,15 +52,14 @@
       </div>
       <div :class="[
         'basic-panel-item',
-        basicPanelSelect === '生命值' && 'basic-panel-selected',
-      ]" @click="basicInputPanelSelect('生命值')">
-        <span class="basic-panel-item-title">生命值</span>
-        <div class="basic-panel-item-total">
-          {{ baseHP + sumExtraHPNumber }}
+        basicPanelSelect === '元素精通' && 'basic-panel-selected',
+      ]" @click="basicInputPanelSelect('元素精通')">
+        <span class="basic-panel-item-title">元素精通</span>
+        <div v-if="basicPanelSelect === '元素精通'" class="basic-detial">
+          {{ elementalMystery }}
         </div>
-        <div class="basic-detial">
-          {{ baseHP }}+
-          <span style="color: #49ff39">{{ sumExtraHPNumber }}</span>
+        <div v-else class="basic-panel-item-total">
+          {{ elementalMystery }}
         </div>
       </div>
     </div>
@@ -56,7 +70,6 @@
         :showSlider="sliderChecked" />
       <note-group v-model="extraPercentHP" v-bind="extraPercentHPNotesConfig" :selectedNotes="selectedExtraHPNotes" />
     </div>
-
     <div v-show="basicPanelSelect === '防御力'">
       <data-item v-model="baseDEF" title="基础防御力" tips="面板防御力白字" stepperInteger stepperMin="0" sliderMax="1200"
         :showSlider="sliderChecked" />
@@ -66,7 +79,7 @@
         :selectedNotes="selectedExtraDEFNotes" />
       <note-group v-model="extraFixedDEF" v-bind="extraFixedDEFNotesConfig" :selectedNotes="selectedFixedDEFNotes" />
     </div>
-    <div class="basic-input-panel" v-show="basicPanelSelect === '攻击力'">
+    <div v-show="basicPanelSelect === '攻击力'">
       <data-item v-model="baseATK" title="基础攻击力" tips="面板攻击力白字" stepperInteger stepperMin="0" sliderMax="1200"
         :showSlider="sliderChecked" />
       <data-item v-model="extraATK" title="额外攻击力" tips="常驻攻击力绿字" stepperInteger stepperMin="0" sliderMax="3000"
@@ -86,8 +99,32 @@
         :selectedNotes="selectedExtraATKNotes" />
       <note-group v-model="extraFixedATK" v-bind="extraFixedATKNotesConfig" :selectedNotes="selectedFixedATKNotes" />
     </div>
-    <data-item v-model="atkRate" title="技能倍率%" :tips="'当前以[' + basicPanelSelect + ']为基础'" stepperMin="0"
-      sliderMax="1500" sliderStep="0.01" decimalLength="2" :showSlider="sliderChecked" />
+    <div v-show="basicPanelSelect === '元素精通'">
+      <data-item v-model="elementalMystery" title="元素精通" tips="" stepperMin="0" sliderMax="2000" sliderStep="1"
+      :showSlider="sliderChecked" />
+      <note-group v-model="elementalMystery" v-bind="extraFixedEMNotesConfig" :selectedNotes="selectedFixedEMNotes" />
+    </div>
+    <div class="data-panel__title">技能倍率</div>
+    <div class="data-panel__basic">
+      <div :class="['basic-panel-item']" @click="">
+        <span class="basic-panel-item-title">攻击倍率%</span>
+        <input class="basic-panel-input" type="number" v-model="atkRate"/>
+      </div>
+      <div :class="['basic-panel-item']" @click="">
+        <span class="basic-panel-item-title">生命倍率%</span>
+        <input class="basic-panel-input" type="number" v-model="hpRate" />
+      </div>
+      <div :class="['basic-panel-item']" @click="">
+        <span class="basic-panel-item-title">防御倍率%</span>
+        <input class="basic-panel-input" type="number" v-model="armRate" />
+      </div>
+      <div :class="['basic-panel-item']" @click="">
+        <span class="basic-panel-item-title">精通倍率%</span>
+        <input class="basic-panel-input" type="number" v-model="emRate" />
+      </div>
+    </div>
+    <!-- <data-item v-model="atkRate" title="技能倍率%" :tips="'当前以[' + basicPanelSelect + ']为基础'" stepperMin="0"
+      sliderMax="1500" sliderStep="0.01" decimalLength="2" :showSlider="sliderChecked" /> -->
 
     <data-item v-model="extraRate" title="倍率增幅%" stepperMin="0" sliderMax="100" sliderStep="0.1" decimalLength="1"
       :showSlider="sliderChecked">
@@ -142,10 +179,6 @@
       </van-popover>
     </data-item>
     <note-group v-model="elementDemage" v-bind="elementDemageNotesConfig" :selectedNotes="selectedElementDemageNotes" />
-    <data-item v-model="characterLevel" title="角色等级" stepperMax="90" stepperMin="1" />
-    <data-item v-model="elementalMystery" title="元素精通" tips="" stepperMin="0" sliderMax="2000" sliderStep="1"
-      :showSlider="sliderChecked" />
-    <note-group v-model="elementalMystery" v-bind="extraFixedEMNotesConfig" :selectedNotes="selectedFixedEMNotes" />
     <van-cell class="eva-cell" @click="otherChecked = !otherChecked" center title="敌人防御力、抗性调整" is-link
       :arrow-direction="otherChecked ? 'up' : 'down'" />
     <div v-show="otherChecked" class="data-panel">
@@ -154,7 +187,7 @@
         <div class="extra-btn" @click="handleImagePreview">查看抗性表</div>
       </data-item>
       <data-item v-model="weaken" title="减少抗性%" stepperMin="0" stepperMax="300" />
-      <data-item v-model="armour" title="减少防御%" stepperMin="0" stepperMax="100" />
+      <data-item v-model="armour" title="减少防御%" stepperMin="0" stepperMax="90" />
       <data-item v-model="armourPiercing" title="无视防御%" stepperMin="0" stepperMax="100" />
     </div>
 
@@ -302,7 +335,7 @@ export default defineComponent({
     };
 
     const extraPercentATKNotesConfig = {
-      title: "攻击力加成%",
+      title: "攻击力%加成",
       localStorageName: "GenShinImpactATKNotes",
       calculationMode: AtkPercentCalculationMode,
       defaultNotes: AtkPercentNotes,
@@ -322,7 +355,7 @@ export default defineComponent({
     };
 
     const extraPercentHPNotesConfig = {
-      title: "生命值加成%",
+      title: "生命值%加成",
       localStorageName: "GenShinImpactHPNotes",
       calculationMode: HpPercentCalculationMode,
       defaultNotes: HpPercentNotes,
@@ -332,7 +365,7 @@ export default defineComponent({
     };
 
     const extraPercentDEFNotesConfig = {
-      title: "防御力加成%",
+      title: "防御力%加成",
       localStorageName: "GenShinImpactDEFNotes",
       calculationMode: DefPercentCalculationMode,
       defaultNotes: DefPercentNotes,
@@ -387,7 +420,7 @@ export default defineComponent({
       store.commit("setSelectedExtraHPNotes", selectedExtraHPNotes); // 回填生命值便签
       store.commit("setSelectedExtraDEFNotes", selectedExtraDEFNotes); // 回填防御值便签
       store.commit("setSelectedFixedDEFNotes", selectedFixedDEFNotes);
-      store.commit("setSelectedFixedEMNotes", selectedFixedEMNotes);
+      store.commit("setSelectedFixedEMNotes", selectedFixedEMNotes); // 回填元素精通便签
       store.commit("setSelectedElementDemageNotes", selectedElementDemageNotes); // 回填增伤便签选择
     };
 
@@ -595,6 +628,15 @@ export default defineComponent({
 .basic-panel-selected .basic-detial {
   display: block;
 }
+
+.basic-panel-input {
+  background: none;
+  outline: none;
+  border: none;
+  width: 100%;
+  text-align: center;
+}
+
 .atk-type-panel .van-radio {
   flex: 1;
   text-align: center;

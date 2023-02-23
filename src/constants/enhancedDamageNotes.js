@@ -2,15 +2,15 @@
 export const EnhancedDamageNotes = [
   {
     detail: 15,
-    title: "2件套·元素伤害",
+    title: "2件套·元素",
   },
   {
     detail: 46.6,
-    title: "空之杯·元素伤害",
+    title: "空之杯·元素",
   },
   {
     detail: 58.3,
-    title: "空之杯·物理伤害",
+    title: "空之杯·物理",
   },
   {
     detail: 20,
@@ -21,48 +21,48 @@ export const EnhancedDamageNotes = [
     title: "魔女4·一层",
   },
   {
-    detail: 7.5,
+    detail: 15,
     title: "魔女4·二层",
   },
   {
-    detail: 7.5,
+    detail: 22.5,
     title: "魔女4·三层",
   },
   {
     detail: 35,
-    title: "角斗4·普攻伤害",
+    title: "角斗4·普攻",
   },
   {
     detail: 35,
-    title: "平雷渡火·全伤害",
+    title: "平雷·渡火",
   },
   {
     detail: 35,
-    title: "乐团4·重击伤害",
+    title: "乐团4·重击",
   },
   {
     detail: 50,
-    title: "追忆4·普/重/下落伤害",
+    title: "追忆4·普/重/下落",
   },
   {
     detail: 25,
-    title: "染血2·物理伤害",
+    title: "染血2·物理",
   },
   {
     detail: 50,
-    title: "染血4·重击伤害",
+    title: "染血4·重击",
   },
   {
     detail: 40,
-    title: "逆飞4·普攻/重击伤害",
+    title: "逆飞4·普攻·重击",
   },
   {
     detail: 25,
-    title: "苍白2·物理伤害",
+    title: "苍白2·物理",
   },
   {
     detail: 50,
-    title: "苍白4·物理伤害",
+    title: "苍白4·物理",
   },
   {
     detail: 24,

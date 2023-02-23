@@ -31,7 +31,8 @@ const demageModule = {
       extraFixedHP: 0, // 固定生命值加成
       extraPercentHP: 0, // 百分比生命加成
 
-      basicPanelSelect: '攻击力', // 所选伤害结算的基础数值，‘攻击力’‘防御力’‘生命值’
+      basicPanelSelect: '攻击力', // 所选基础数值细节，‘攻击力’‘防御力’‘生命值’‘元素精通’
+      rateSelect: [], // 所选伤害结算基础属性
 
       additionalDemageList: [], // 附加伤害列表
       critDemage: 50.0, // 暴击伤害
@@ -39,7 +40,12 @@ const demageModule = {
       thunder: false, // 如雷套启用状态
       witch: false, // 魔女套启用状态
       elementalMystery: 0, // 元素精通
+
       atkRate: 100, // 攻击力倍率
+      armRate: 0, // 防御力倍率
+      hpRate: 0, // 生命倍率
+      emRate: 0, // 精通倍率
+
       extraRate: 0, // 倍率增幅
       atkType: "none", // 反应类型
       characterLevel: 90, // 人物等级
@@ -55,7 +61,10 @@ const demageModule = {
     setBasicPanelSelect(state, value) {
       state.basicPanelSelect = value;
     },
-    setUnifiedState(state, value) {
+    setRateSelect(state, value) {
+      state.rateSelect = value;
+    },
+    setUnifiedState(state, value) { // 回填计算器内容
       const {
         baseATK,
         extraATK,
@@ -73,6 +82,7 @@ const demageModule = {
         extraPercentHP = 0,
 
         basicPanelSelect = '攻击力',
+        rateSelect = ['攻击力'],
 
         additionalDemageList = [],
         critDemage,
@@ -80,7 +90,12 @@ const demageModule = {
         thunder = false,
         witch = false,
         elementalMystery = 0,
+
         atkRate,
+        armRate,
+        hpRate,
+        emRate,
+
         extraRate = 0,
         atkType,
         characterLevel,
@@ -106,6 +121,7 @@ const demageModule = {
       state.extraPercentHP = extraPercentHP;
 
       state.basicPanelSelect = basicPanelSelect;
+      state.rateSelect = rateSelect;
 
       state.additionalDemageList = additionalDemageList;
       state.critDemage = critDemage;
@@ -113,7 +129,12 @@ const demageModule = {
       state.elementalMystery = elementalMystery;
       state.witch = witch;
       state.thunder = thunder;
+
       state.atkRate = atkRate;
+      state.armRate = armRate;
+      state.hpRate = hpRate;
+      state.emRate = emRate;
+
       state.extraRate = extraRate;
       state.atkType = atkType;
       state.characterLevel = characterLevel;

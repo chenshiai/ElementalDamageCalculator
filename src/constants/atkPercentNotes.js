@@ -17,7 +17,7 @@ export const AtkPercentNotes = [
     title: "苍白之火·一层",
   },
   {
-    detail: 9,
+    detail: 18,
     title: "苍白之火·二层",
   },
   {
