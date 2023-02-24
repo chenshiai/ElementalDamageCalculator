@@ -114,6 +114,9 @@ export const computationalFormula = (data) => {
     elementDemage,
     elementalMystery = 0,
     atkRate,
+    armRate,
+    hpRate,
+    emRate,
     atkType,
     extraRate = 0,
     characterLevel,
@@ -127,16 +130,10 @@ export const computationalFormula = (data) => {
   } = data;
 
   // 攻击力、防御力、生命值
-  const atk = baseATK + extraATK + extraFixedATK + baseATK * (extraPercentATK / 100);
-  const def = baseDEF + extraDEF + extraFixedDEF + baseDEF * (extraPercentDEF / 100);
-  const hp = baseHP + extraHP + extraFixedHP + baseHP * (extraPercentHP / 100);
-  let basic = 0;
-
-  switch (basicPanelSelect) {
-    case '生命值': basic = hp; break;
-    case '防御力': basic = def; break;
-    case '攻击力': basic = atk; break;
-  }
+  const atk = extraATK + extraFixedATK + baseATK * (1 + extraPercentATK / 100);
+  const def = extraDEF + extraFixedDEF + baseDEF * (1 + extraPercentDEF / 100);
+  const hp = extraHP + extraFixedHP + baseHP * (1 + extraPercentHP / 100);
+  let basic = atk * (atkRate / 100) + def * (armRate / 100) + hp * (hpRate / 100) + elementalMystery * (emRate / 100);
 
   // 抗性
   const resistanceRate = getResistanceRate(enemyResistance, weaken);
@@ -151,7 +148,7 @@ export const computationalFormula = (data) => {
   }
 
   /** 基础伤害值 */
-  const BASE_DMG = basic * (atkRate / 100) * (1 + (extraRate / 100)) * ENEMY_RATE;
+  const BASE_DMG = basic * (1 + (extraRate / 100)) * ENEMY_RATE;
   // 激化伤害值
   let BONUS_DMG = 0;
   if (atkType === ElementalReaction.Aggravate) {

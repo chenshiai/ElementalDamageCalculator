@@ -131,9 +131,11 @@ export default defineComponent({
         additionalDemageList = [],
         critDemage,
         elementDemage,
-        evaporationDemage,
         elementalMystery = 0,
         atkRate,
+        armRate,
+        hpRate,
+        emRate,
         extraRate = 0,
         atkType,
         characterLevel,
@@ -172,20 +174,32 @@ export default defineComponent({
           value: Math.round(extraATK + extraFixedATK + baseATK * (extraPercentATK / 100)),
         },
         {
-          label: "技能倍率%",
-          value: atkRate,
-        },
-        {
-          label: "结算基础",
-          value: basicPanelSelect,
-        },
-        {
-          label: "倍率增幅%",
-          value: extraRate,
+          label: "元素精通",
+          value: elementalMystery,
         },
         {
           label: "伤害值提升",
           value: Math.round(sub(additionalDemageList)),
+        },
+        {
+          label: "攻击倍率%",
+          value: atkRate,
+        },
+        {
+          label: "生命倍率%",
+          value: hpRate,
+        },
+        {
+          label: "防御倍率%",
+          value: armRate,
+        },
+        {
+          label: "精通倍率%",
+          value: emRate,
+        },
+        {
+          label: "倍率增幅%",
+          value: extraRate,
         },
         {
           label: "伤害倍率%",
@@ -194,10 +208,6 @@ export default defineComponent({
         {
           label: "暴击伤害%",
           value: critDemage,
-        },
-        {
-          label: "元素精通",
-          value: elementalMystery,
         },
         {
           label: "元素反应",

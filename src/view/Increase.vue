@@ -8,8 +8,6 @@
   </van-cell>
   <div class="data-panel">
     <div class="data-panel__title">基础属性</div>
-    <data-item v-model="characterLevel" title="角色等级" stepperMax="90" stepperMin="1" />
-
     <div class="data-panel__basic">
       <div :class="[
         'basic-panel-item',
@@ -106,26 +104,23 @@
     </div>
     <div class="data-panel__title">技能倍率</div>
     <div class="data-panel__basic">
-      <div :class="['basic-panel-item']" @click="">
+      <div class="basic-panel-item">
         <span class="basic-panel-item-title">攻击倍率%</span>
         <input class="basic-panel-input" type="number" v-model="atkRate"/>
       </div>
-      <div :class="['basic-panel-item']" @click="">
+      <div class="basic-panel-item">
         <span class="basic-panel-item-title">生命倍率%</span>
         <input class="basic-panel-input" type="number" v-model="hpRate" />
       </div>
-      <div :class="['basic-panel-item']" @click="">
+      <div class="basic-panel-item">
         <span class="basic-panel-item-title">防御倍率%</span>
         <input class="basic-panel-input" type="number" v-model="armRate" />
       </div>
-      <div :class="['basic-panel-item']" @click="">
+      <div class="basic-panel-item">
         <span class="basic-panel-item-title">精通倍率%</span>
         <input class="basic-panel-input" type="number" v-model="emRate" />
       </div>
     </div>
-    <!-- <data-item v-model="atkRate" title="技能倍率%" :tips="'当前以[' + basicPanelSelect + ']为基础'" stepperMin="0"
-      sliderMax="1500" sliderStep="0.01" decimalLength="2" :showSlider="sliderChecked" /> -->
-
     <data-item v-model="extraRate" title="倍率增幅%" stepperMin="0" sliderMax="100" sliderStep="0.1" decimalLength="1"
       :showSlider="sliderChecked">
       <van-popover class="data-item-popover" v-model:show="showPopoverExtraRate" placement="left-end">
@@ -179,6 +174,8 @@
       </van-popover>
     </data-item>
     <note-group v-model="elementDemage" v-bind="elementDemageNotesConfig" :selectedNotes="selectedElementDemageNotes" />
+    <data-item v-model="characterLevel" title="角色等级" stepperMax="90" stepperMin="1" />
+    
     <van-cell class="eva-cell" @click="otherChecked = !otherChecked" center title="敌人防御力、抗性调整" is-link
       :arrow-direction="otherChecked ? 'up' : 'down'" />
     <div v-show="otherChecked" class="data-panel">
