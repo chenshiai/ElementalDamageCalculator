@@ -132,7 +132,7 @@
         </template>
       </van-popover>
     </data-item>
-    <data-item v-model="additionalDemage" title="伤害提高值" tips="" stepperMin="0" decimalLength="1" />
+    <data-item v-model="additionalDemage" title="伤害提高值" tips="" stepperMin="0" decimalLength="2" />
     <note-group v-model="additionalDemage" v-bind="additionalDemageNotesConfig" :selectedNotes="selectedAdditionalDemageNotes" />
 
     <data-item v-model="critDemage" title="暴击伤害%" tips="" stepperMin="0" decimalLength="1" />
