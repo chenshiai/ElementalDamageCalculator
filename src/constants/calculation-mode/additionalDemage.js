@@ -6,7 +6,6 @@ import { Magnification } from '../magnification';
 export const AdditionalDemageMode = [
   {
     title: "通用伤害值提高",
-    // img: 'https://uploadstatic.mihoyo.com/ys-obc/2021/12/14/75379475/260442fca96f0e65701ff5067b13bb60_6053712857932776206.png?x-oss-process=image/quality,q_75/resize,s_40',
     children: [
       {
         title: "根据基础属性的百分比来计算",
@@ -16,14 +15,12 @@ export const AdditionalDemageMode = [
             label: "基础属性",
             placeholder: "输入攻击力、防御力、生命值或元素精通",
             type: "number",
-            required: true,
           },
           {
             name: "rate",
             label: "转换倍率%",
             placeholder: "基于攻击、防御、生命或精通的百分之多少",
             type: "number",
-            required: true,
           },
           {
             name: "cha1",
@@ -55,21 +52,18 @@ export const AdditionalDemageMode = [
             name: "def",
             label: "防御力",
             placeholder: "输入角色的防御力",
-            required: true,
             type: "number",
           },
           {
             name: "lv",
             label: "天赋等级",
             placeholder: "输入角色的天赋等级",
-            required: true,
             type: "number",
           },
           {
             name: "clas",
             label: "元素数量",
             placeholder: "输入队伍元素种类的数量",
-            required: true,
             type: "number",
           },
         ],
@@ -92,7 +86,6 @@ export const AdditionalDemageMode = [
             name: "hp",
             label: "生命值",
             placeholder: "输入角色的生命值",
-            required: true,
             type: "number",
           },
           {
@@ -112,7 +105,6 @@ export const AdditionalDemageMode = [
             name: "hp",
             label: "生命值",
             type: "number",
-            required: true,
             placeholder: "输入角色的生命值",
           },
           {
@@ -132,7 +124,6 @@ export const AdditionalDemageMode = [
             name: "hp",
             label: "生命值",
             type: "number",
-            required: true,
             placeholder: "输入角色的生命值",
           },
           {
@@ -158,7 +149,6 @@ export const AdditionalDemageMode = [
             name: "ele",
             label: "元素精通",
             placeholder: "输入角色的元素精通",
-            required: true,
             type: "number",
           },
           {
@@ -178,7 +168,6 @@ export const AdditionalDemageMode = [
             name: "ele",
             label: "元素精通",
             placeholder: "输入角色的元素精通",
-            required: true,
             type: "number",
           },
           {
@@ -204,14 +193,12 @@ export const AdditionalDemageMode = [
             name: "atk",
             label: "攻击力",
             placeholder: "输入角色的攻击力",
-            required: true,
             type: "number",
           },
           {
             name: "lv",
             label: "天赋等级",
             placeholder: "输入角色的天赋等级",
-            required: true,
             type: "number",
           },
         ],
@@ -234,7 +221,6 @@ export const AdditionalDemageMode = [
             name: "def",
             label: "防御力",
             placeholder: "输入角色的防御力",
-            required: true,
             type: "number",
           },
           {
@@ -260,7 +246,6 @@ export const AdditionalDemageMode = [
             name: "hp",
             label: "生命值",
             type: "number",
-            required: true,
             placeholder: "输入角色的生命值",
           },
           
@@ -268,14 +253,12 @@ export const AdditionalDemageMode = [
             name: "healRate",
             label: "治疗加成%",
             type: "number",
-            required: true,
             placeholder: "输入角色的治疗加成",
           },
           {
             name: "lv",
             label: "天赋等级",
             placeholder: "输入角色的天赋等级",
-            required: true,
             type: "number",
           },
           {
@@ -299,7 +282,6 @@ export const AdditionalDemageMode = [
             name: "hp",
             label: "生命值",
             type: "number",
-            required: true,
             placeholder: "输入角色的生命值",
           },
           
@@ -307,14 +289,12 @@ export const AdditionalDemageMode = [
             name: "healRate",
             label: "治疗加成%",
             type: "number",
-            required: true,
             placeholder: "输入角色的治疗加成",
           },
           {
             name: "lv",
             label: "天赋等级",
             placeholder: "输入角色的天赋等级",
-            required: true,
             type: "number",
           },
           {
@@ -338,14 +318,12 @@ export const AdditionalDemageMode = [
             name: "hp",
             label: "生命值",
             type: "number",
-            required: true,
             placeholder: "输入角色的生命值",
           },
           {
             name: "lv",
             label: "天赋等级",
             placeholder: "输入角色的天赋等级",
-            required: true,
             type: "number",
           },
         ],
@@ -368,14 +346,12 @@ export const AdditionalDemageMode = [
             name: "hp",
             label: "生命值",
             placeholder: "输入角色的生命值",
-            required: true,
             type: "number",
           },
           {
             name: "lv",
             label: "天赋等级",
             placeholder: "输入角色的天赋等级",
-            required: true,
             type: "number",
           },
           {
@@ -405,7 +381,6 @@ export const AdditionalDemageMode = [
             name: "hp",
             label: "生命值",
             placeholder: "输入角色的生命值",
-            required: true,
             type: "number",
           },
           {
@@ -431,7 +406,6 @@ export const AdditionalDemageMode = [
             name: "def",
             label: "防御力",
             placeholder: "输入角色的防御力",
-            required: true,
             type: "number",
           },
           {
@@ -439,7 +413,6 @@ export const AdditionalDemageMode = [
             label: "生灭计数",
             placeholder: "输入生灭计数的层数",
             type: "number",
-            required: true,
           },
           {
             name: "tips",
@@ -464,7 +437,6 @@ export const AdditionalDemageMode = [
             name: "def",
             label: "防御力",
             placeholder: "输入角色的防御力",
-            required: true,
             type: "number",
           },
           {
@@ -484,7 +456,6 @@ export const AdditionalDemageMode = [
             name: "def",
             label: "防御力",
             placeholder: "输入角色的防御力",
-            required: true,
             type: "number",
           },
           {
@@ -510,7 +481,6 @@ export const AdditionalDemageMode = [
             name: "hp",
             label: "生命值",
             placeholder: "输入角色的生命值",
-            required: true,
             type: "number",
           },
           {

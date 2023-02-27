@@ -34,7 +34,7 @@ const demageModule = {
       basicPanelSelect: '攻击力', // 所选基础数值细节，‘攻击力’‘防御力’‘生命值’‘元素精通’
       rateSelect: [], // 所选伤害结算基础属性
 
-      additionalDemageList: [], // 附加伤害列表
+      additionalDemage: 0, // 附加伤害
       critDemage: 50.0, // 暴击伤害
       elementDemage: 0, // 伤害倍率
       thunder: false, // 如雷套启用状态
@@ -84,7 +84,7 @@ const demageModule = {
         basicPanelSelect = '攻击力',
         rateSelect = ['攻击力'],
 
-        additionalDemageList = [],
+        additionalDemage = 0,
         critDemage,
         elementDemage,
         thunder = false,
@@ -123,7 +123,7 @@ const demageModule = {
       state.basicPanelSelect = basicPanelSelect;
       state.rateSelect = rateSelect;
 
-      state.additionalDemageList = additionalDemageList;
+      state.additionalDemage = additionalDemage;
       state.critDemage = critDemage;
       state.elementDemage = elementDemage;
       state.elementalMystery = elementalMystery;
@@ -183,6 +183,7 @@ const saveDataModule = {
       selectedFixedEMNotes: {}, // 固定元素精通加成便签
 
       selectedElementDemageNotes: {}, // 伤害倍率加成便签
+      selectedAdditionalDemageNotes: {}, // 伤害提升值便签
     }
   },
   mutations: {
@@ -213,6 +214,9 @@ const saveDataModule = {
 
     setSelectedElementDemageNotes(state, value) {
       state.selectedElementDemageNotes = value || {};
+    },
+    setSelectedAdditionalDemageNotes(state, value) {
+      state.selectedAdditionalDemageNotes = value || {};
     }
   }
 }

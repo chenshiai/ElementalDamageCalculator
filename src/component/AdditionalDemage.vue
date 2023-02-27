@@ -1,8 +1,8 @@
+<!-- 废弃组件，留作纪念？ -->
 <template>
   <div class="additional-demage-list">
     <span
       class="additional-demage-list__title"
-      v-if="additionalList.length > 0"
     >
       {{ label }}
     </span>

@@ -1,15 +1,20 @@
 /** HP%buff计算公式 */
 export const HpPercentCalculationMode = [
   {
-    title: "直接加血%",
-    fields: [
+    title: "通用加生命%",
+    children: [
       {
-        name: "number",
-        label: "具体数值",
-        type: "number",
-        placeholder: "输入数值（支持一位小数）",
-      },
+        title: "自定义加生命",
+        fields: [
+          {
+            name: "number",
+            label: "具体数值",
+            type: "number",
+            placeholder: "输入数值（支持一位小数）",
+          },
+        ],
+        getResult: ({ number }) => number,
+      }
     ],
-    getResult: ({ number }) => number,
   }
 ];

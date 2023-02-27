@@ -13,7 +13,7 @@
       <div
         v-for="(item, index) in localNotes"
         :key="index"
-        :class="['memo', selectedMemos[item.title] && 'selected']"
+        :class="['memo', (selectedMemos[item.title] >= 0) && 'selected']"
       >
         <div @click="selectMemo(item)">
           <div class="memo-detail">
@@ -42,7 +42,8 @@
       v-model:active="active"
       color="#997874"
       line-width="60px"
-      swipe-threshold="2"
+      @change="handleChange"
+      swipe-threshold="3"
     >
       <van-tab v-for="mode in calculationMode" :key="mode.title" >
         <template #title>
@@ -58,9 +59,16 @@
         </template>
       </van-tab>
     </van-tabs>
+    <van-tabs color="#997874" line-width="60px" v-model:active="childrenActive">
+      <van-tab
+        v-for="item in calculationModeChildren"
+        :title="item.title"
+        :key="item.title"
+      />
+    </van-tabs>
     <van-form @submit="onSubmit">
       <van-field
-        v-for="field in calculationMode[active].fields"
+        v-for="field in calculationModeChildren[childrenActive].fields"
         v-model="temporaryData[field.label]"
         :key="field.name"
         :name="field.name"
@@ -90,7 +98,7 @@
 </template>
 
 <script>
-import { defineComponent, onMounted, reactive, ref, watch } from "vue";
+import { defineComponent, onMounted, reactive, ref, watch, computed } from "vue";
 import { Cell, Icon, Popup, Field, Form, Toast, Button, Tab, Tabs, Grid, GridItem } from "vant";
 import { deepCopyObject, floatNum, getLocalStorage } from "../utils";
 
@@ -127,14 +135,24 @@ export default defineComponent({
     const selectedMemos = ref({});
     const isExpand = ref(false);
     const showPopup = ref(false);
+
     const active = ref(0);
+    const childrenActive = ref(0);
+
     const temporaryData = ref({});
     const newMemo = reactive({
       title: "",
     });
 
+    const calculationModeChildren = computed(() => {
+      return props.calculationMode[active.value].children || [];
+    });
+
     const handleClose = () => {
       temporaryData.value = {};
+    };
+    const handleChange = () => {
+      childrenActive.value = 0;
     };
     const changeValue = (value) => {
       emit("update:modelValue", value);
@@ -150,7 +168,7 @@ export default defineComponent({
     const selectMemo = (item) => {
       const key = item.title;
       const detail = +item.detail;
-      if (selectedMemos.value[key]) {
+      if (selectedMemos.value[key] >= 0) {
         const res = floatNum(+props.modelValue - +selectedMemos.value[key], 2);
         if (res >= 0) {
           changeValue(res);
@@ -175,7 +193,7 @@ export default defineComponent({
     };
 
     const onSubmit = (value) => {
-      const { getResult } = props.calculationMode[active.value];
+      const { getResult } = calculationModeChildren.value[childrenActive.value];
       const noteValue = {
         detail: getResult(value),
         title: newMemo.title,
@@ -227,8 +245,10 @@ export default defineComponent({
 
     return {
       active,
+      childrenActive,
       localNotes,
       isExpand,
+      calculationModeChildren,
       newMemo,
       selectMemo,
       showPopup,
@@ -236,6 +256,7 @@ export default defineComponent({
       selectedMemos,
       temporaryData,
       handleClose,
+      handleChange,
       onSubmit,
       formatMemoDetail,
     };

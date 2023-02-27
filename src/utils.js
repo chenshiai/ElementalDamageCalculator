@@ -109,7 +109,7 @@ export const computationalFormula = (data) => {
     extraFixedHP = 0,
     extraPercentHP = 0,
     basicPanelSelect = '攻击力',
-    additionalDemageList = [],
+    additionalDemage = 0,
     critDemage,
     elementDemage,
     elementalMystery = 0,
@@ -133,7 +133,6 @@ export const computationalFormula = (data) => {
   const atk = extraATK + extraFixedATK + baseATK * (1 + extraPercentATK / 100);
   const def = extraDEF + extraFixedDEF + baseDEF * (1 + extraPercentDEF / 100);
   const hp = extraHP + extraFixedHP + baseHP * (1 + extraPercentHP / 100);
-  let basic = atk * (atkRate / 100) + def * (armRate / 100) + hp * (hpRate / 100) + elementalMystery * (emRate / 100);
 
   // 抗性
   const resistanceRate = getResistanceRate(enemyResistance, weaken);
@@ -148,6 +147,7 @@ export const computationalFormula = (data) => {
   }
 
   /** 基础伤害值 */
+  let basic = atk * (atkRate / 100) + def * (armRate / 100) + hp * (hpRate / 100) + elementalMystery * (emRate / 100);
   const BASE_DMG = basic * (1 + (extraRate / 100)) * ENEMY_RATE;
   // 激化伤害值
   let BONUS_DMG = 0;
@@ -158,7 +158,7 @@ export const computationalFormula = (data) => {
     BONUS_DMG = BaseDMG.spread[characterLevel] * (1 + calculate4(elementalMystery) / 100) * ENEMY_RATE;
   }
   // 附加伤害值
-  const ADDITIONAL_DMG = sub(additionalDemageList) * ENEMY_RATE;
+  const ADDITIONAL_DMG = additionalDemage * ENEMY_RATE;
   // 增伤伤害值
   const MAGNIFICATION_DMG = (BASE_DMG + ADDITIONAL_DMG + BONUS_DMG) * Math.max(0, elementDemage / 100);
   // 反应伤害值

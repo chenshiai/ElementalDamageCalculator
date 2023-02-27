@@ -128,7 +128,7 @@ export default defineComponent({
         extraFixedHP = 0,
         extraPercentHP = 0,
         basicPanelSelect = '攻击力',
-        additionalDemageList = [],
+        additionalDemage = 0,
         critDemage,
         elementDemage,
         elementalMystery = 0,
@@ -179,7 +179,7 @@ export default defineComponent({
         },
         {
           label: "伤害值提升",
-          value: Math.round(sub(additionalDemageList)),
+          value: additionalDemage,
         },
         {
           label: "攻击倍率%",

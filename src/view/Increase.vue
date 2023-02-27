@@ -129,7 +129,7 @@
           <p><b>最终倍率</b> = 技能倍率 x (1 + 倍率增幅) </p>
           <p>
             <b>倍率增幅：</b>
-            宵宫的元素战技增幅的是普攻的倍数，夜兰六命增幅的是破局矢，计算增幅时需要减去100%；<br />
+            例如宵宫释放元素战技后的普通攻击“造成152%普通攻击伤害”，即是“普通攻击<b>倍率增幅</b>为52%(152%-100%)”；<br />
             行秋4命与安柏2命，增幅的都是元素战技的倍率，直接填入即可；<br />
           </p>
           <p><b>基础伤害值：</b>攻击力/防御力/生命值这三个基础属性乘以最终倍率的数值为基础伤害值。</p>
@@ -139,16 +139,16 @@
           <p>
             <b>伤害提高值：</b>部分角色或武器技能带有“xx伤害值提升(高)”的描述，例如：钟离·炊金馔玉、云堇·元素爆发、申鹤·元素战技、一斗·荒泷逆袈裟和圣遗物来歆余响等。
           </p>
-          <b>可以点击下方【伤害提高值】进行计算</b>
+          <b>可以点击下方【伤害提高值】便签进行添加</b>
         </div>
         <template #reference>
           <van-icon size="26" name="question" />
         </template>
       </van-popover>
     </data-item>
-
-    <additional-demage label="伤害提高值" buttonText="伤害提高值·计算" :additionalMode="AdditionalDemageMode"
-      :additionalList="additionalDemageList" />
+    <data-item v-model="additionalDemage" title="伤害提高值" tips="" stepperMin="0" sliderMin="0" sliderMax="600" sliderStep="0.1"
+      decimalLength="1" :showSlider="sliderChecked" />
+    <note-group v-model="additionalDemage" v-bind="additionalDemageNotesConfig" :selectedNotes="selectedAdditionalDemageNotes" />
 
     <data-item v-model="critDemage" title="暴击伤害%" tips="" stepperMin="0" sliderMin="0" sliderMax="600" sliderStep="0.1"
       decimalLength="1" :showSlider="sliderChecked" />
@@ -381,6 +381,16 @@ export default defineComponent({
       },
     };
 
+    const additionalDemageNotesConfig = {
+      title: "伤害提高值",
+      localStorageName: "GenShinImpactADNotes",
+      calculationMode: AdditionalDemageMode,
+      defaultNotes: [],
+      setSelectedNotes: (value) => {
+        store.commit("setSelectedAdditionalDemageNotes", value);
+      },
+    };
+
     const elementDemageNotesConfig = {
       title: "伤害加成%",
       localStorageName: "GenShinImpactEDNotes",
@@ -410,6 +420,7 @@ export default defineComponent({
         selectedFixedDEFNotes,
         selectedFixedEMNotes,
         selectedElementDemageNotes,
+        selectedAdditionalDemageNotes,
       } = value;
       store.commit("setUnifiedState", value); // 回填计算器内容
       store.commit("setSelectedFixedATKNotes", selectedFixedATKNotes); // 回填攻击力便签选择
@@ -419,6 +430,7 @@ export default defineComponent({
       store.commit("setSelectedFixedDEFNotes", selectedFixedDEFNotes);
       store.commit("setSelectedFixedEMNotes", selectedFixedEMNotes); // 回填元素精通便签
       store.commit("setSelectedElementDemageNotes", selectedElementDemageNotes); // 回填增伤便签选择
+      store.commit("setSelectedAdditionalDemageNotes", selectedAdditionalDemageNotes); // 回填伤害高便签选择
     };
 
     const handleImagePreview = () => {
@@ -446,6 +458,7 @@ export default defineComponent({
       extraPercentDEFNotesConfig,
       extraFixedDEFNotesConfig,
       extraFixedEMNotesConfig,
+      additionalDemageNotesConfig,
       ElementalReaction,
     };
   },
