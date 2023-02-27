@@ -17,20 +17,11 @@
       <slot />
     </div>
   </div>
-  <van-slider
-    v-show="showSlider"
-    v-model="value"
-    :max="sliderMax"
-    :min="sliderMin"
-    :step="sliderStep"
-    active-color="#645856"
-    @change="onChange"
-  />
 </template>
 
 <script>
 import { defineComponent, ref, watch } from "vue";
-import { Slider, Stepper } from "vant";
+import { Stepper } from "vant";
 
 export default defineComponent({
   name: "data-item",
@@ -46,15 +37,9 @@ export default defineComponent({
     stepperMin: Number | String,
     stepperMax: Number | String,
     decimalLength: Number | String,
-
-    showSlider: Boolean,
-    sliderMax: Number | String,
-    sliderMin: Number | String,
-    sliderStep: Number | String,
   },
 
   components: {
-    [Slider.name]: Slider,
     [Stepper.name]: Stepper,
   },
 

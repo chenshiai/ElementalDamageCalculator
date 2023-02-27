@@ -2,10 +2,13 @@
   <div class="top-overhang">
     <div class="top-tabs">
       <router-link to="/" class="top-tabs__item">
-        剧变&护盾
+        剧变伤害
       </router-link>
       <router-link to="/increasing-range" class="top-tabs__item">
         伤害计算
+      </router-link>
+      <router-link to="/shield" class="top-tabs__item">
+        护盾承伤
       </router-link>
       <!-- <router-link to="/cloud-team" class="top-tabs__item">
         云上辉星

@@ -1,11 +1,5 @@
 <template>
   <tab-title>单次伤害计算</tab-title>
-  <div class="tips">滑块不够用，可以点击数字进行手动输入。</div>
-  <van-cell class="eva-cell" center title="开启滑块辅助调整数值">
-    <template #right-icon>
-      <van-switch v-model="sliderChecked" active-color="#766461" inactive-color="#b7a19e" size="16" />
-    </template>
-  </van-cell>
   <div class="data-panel">
     <div class="data-panel__title">基础属性</div>
     <div class="data-panel__basic">
@@ -62,26 +56,20 @@
       </div>
     </div>
     <div v-show="basicPanelSelect === '生命值'">
-      <data-item v-model="baseHP" title="基础生命值" tips="面板生命值白字" stepperInteger stepperMin="0" sliderMax="16000"
-        :showSlider="sliderChecked" />
-      <data-item v-model="extraHP" title="额外生命值" tips="常驻生命值绿字" stepperInteger stepperMin="0" sliderMax="99999"
-        :showSlider="sliderChecked" />
+      <data-item v-model="baseHP" title="基础生命值" tips="面板生命值白字" stepperInteger stepperMin="0" />
+      <data-item v-model="extraHP" title="额外生命值" tips="常驻生命值绿字" stepperInteger stepperMin="0" />
       <note-group v-model="extraPercentHP" v-bind="extraPercentHPNotesConfig" :selectedNotes="selectedExtraHPNotes" />
     </div>
     <div v-show="basicPanelSelect === '防御力'">
-      <data-item v-model="baseDEF" title="基础防御力" tips="面板防御力白字" stepperInteger stepperMin="0" sliderMax="1200"
-        :showSlider="sliderChecked" />
-      <data-item v-model="extraDEF" title="额外防御力" tips="常驻防御力绿字" stepperInteger stepperMin="0" sliderMax="3000"
-        :showSlider="sliderChecked" />
+      <data-item v-model="baseDEF" title="基础防御力" tips="面板防御力白字" stepperInteger stepperMin="0" />
+      <data-item v-model="extraDEF" title="额外防御力" tips="常驻防御力绿字" stepperInteger stepperMin="0" />
       <note-group v-model="extraPercentDEF" v-bind="extraPercentDEFNotesConfig"
         :selectedNotes="selectedExtraDEFNotes" />
       <note-group v-model="extraFixedDEF" v-bind="extraFixedDEFNotesConfig" :selectedNotes="selectedFixedDEFNotes" />
     </div>
     <div v-show="basicPanelSelect === '攻击力'">
-      <data-item v-model="baseATK" title="基础攻击力" tips="面板攻击力白字" stepperInteger stepperMin="0" sliderMax="1200"
-        :showSlider="sliderChecked" />
-      <data-item v-model="extraATK" title="额外攻击力" tips="常驻攻击力绿字" stepperInteger stepperMin="0" sliderMax="3000"
-        :showSlider="sliderChecked">
+      <data-item v-model="baseATK" title="基础攻击力" tips="面板攻击力白字" stepperInteger stepperMin="0" />
+      <data-item v-model="extraATK" title="额外攻击力" tips="常驻攻击力绿字" stepperInteger stepperMin="0">
         <van-popover class="data-item-popover" v-model:show="showPopoverExtraATK" placement="left-end">
           <div class="data-item-popover__content">
             攻击力加成%会以『基础攻击力』的百分比来算，会直接加在最上方『攻击力总计』的
@@ -98,8 +86,7 @@
       <note-group v-model="extraFixedATK" v-bind="extraFixedATKNotesConfig" :selectedNotes="selectedFixedATKNotes" />
     </div>
     <div v-show="basicPanelSelect === '元素精通'">
-      <data-item v-model="elementalMystery" title="元素精通" tips="" stepperMin="0" sliderMax="2000" sliderStep="1"
-      :showSlider="sliderChecked" />
+      <data-item v-model="elementalMystery" title="元素精通" tips="" stepperMin="0" />
       <note-group v-model="elementalMystery" v-bind="extraFixedEMNotesConfig" :selectedNotes="selectedFixedEMNotes" />
     </div>
     <div class="data-panel__title">技能倍率</div>
@@ -121,8 +108,7 @@
         <input class="basic-panel-input" type="number" v-model="emRate" />
       </div>
     </div>
-    <data-item v-model="extraRate" title="倍率增幅%" stepperMin="0" sliderMax="100" sliderStep="0.1" decimalLength="1"
-      :showSlider="sliderChecked">
+    <data-item v-model="extraRate" title="倍率增幅%" stepperMin="0" decimalLength="1">
       <van-popover class="data-item-popover" v-model:show="showPopoverExtraRate" placement="left-end">
         <div class="data-item-popover__content">
           <b>攻击伤害值 = 基础属性 x 最终倍率 + 伤害提高值 + 激化提高值</b><br />
@@ -146,14 +132,11 @@
         </template>
       </van-popover>
     </data-item>
-    <data-item v-model="additionalDemage" title="伤害提高值" tips="" stepperMin="0" sliderMin="0" sliderMax="600" sliderStep="0.1"
-      decimalLength="1" :showSlider="sliderChecked" />
+    <data-item v-model="additionalDemage" title="伤害提高值" tips="" stepperMin="0" decimalLength="1" />
     <note-group v-model="additionalDemage" v-bind="additionalDemageNotesConfig" :selectedNotes="selectedAdditionalDemageNotes" />
 
-    <data-item v-model="critDemage" title="暴击伤害%" tips="" stepperMin="0" sliderMin="0" sliderMax="600" sliderStep="0.1"
-      decimalLength="1" :showSlider="sliderChecked" />
-    <data-item v-model="elementDemage" title="伤害加成%" tips="各种增伤、易伤" stepperMin="-200" sliderMax="600" sliderMin="-200"
-      sliderStep="0.1" decimalLength="2" :showSlider="sliderChecked">
+    <data-item v-model="critDemage" title="暴击伤害%" tips="" stepperMin="0" decimalLength="1" />
+    <data-item v-model="elementDemage" title="伤害加成%" tips="各种增伤、易伤" stepperMin="-200" decimalLength="2">
       <van-popover class="data-item-popover" v-model:show="showPopover" placement="left-end">
         <div class="data-item-popover__content">
           <b>攻击伤害值以一定比例改变：</b>
@@ -175,11 +158,11 @@
     </data-item>
     <note-group v-model="elementDemage" v-bind="elementDemageNotesConfig" :selectedNotes="selectedElementDemageNotes" />
     <data-item v-model="characterLevel" title="角色等级" stepperMax="90" stepperMin="1" />
+    <data-item v-model="enemyLevel" title="敌人等级" stepperMin="1" />
     
     <van-cell class="eva-cell" @click="otherChecked = !otherChecked" center title="敌人防御力、抗性调整" is-link
       :arrow-direction="otherChecked ? 'up' : 'down'" />
     <div v-show="otherChecked" class="data-panel">
-      <data-item v-model="enemyLevel" title="敌人的等级" stepperMin="1" />
       <data-item v-model="enemyResistance" title="敌人抗性%" stepperMin="-999">
         <div class="extra-btn" @click="handleImagePreview">查看抗性表</div>
       </data-item>
@@ -312,8 +295,6 @@ export default defineComponent({
   },
 
   setup() {
-    /** 滑块辅助调整开关 */
-    const sliderChecked = ref(false);
     /** 防御抗性乘区开关 */
     const otherChecked = ref(false);
     /** 置顶展示开关 */
@@ -443,7 +424,6 @@ export default defineComponent({
       ...toRefs(store.getters),
       ...toRefs(store.state.demageModule),
       ...toRefs(store.state.saveDataModule),
-      sliderChecked,
       basicInputPanelSelect,
       otherChecked,
       floatChecked,
