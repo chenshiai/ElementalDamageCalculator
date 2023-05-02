@@ -47,6 +47,19 @@
       />
       <span class="holy-relic-tips">折旋落英之庭</span>
     </div>
+    <div class="base-data-item">
+      <span class="base-damage__title">白术生命值</span>
+      <van-stepper
+        v-model="data.baizhu"
+        input-width="66px"
+        integer
+        button-size="20"
+        theme="round"
+        min="0"
+        max="80000"
+      />
+      <span class="holy-relic-tips">在地为化</span>
+    </div>
   </div>
   <div class="holy-relic">
     <div>
@@ -105,8 +118,9 @@
     <br />
     超载、超导、感电、燃烧、碎冰、扩散、绽放、超绽放、烈绽放的伤害提升{{ servitude }}%;
     <span v-if="servitudeMoreRate" class="more-rate"><br />{{ servitudeMoreRate }};</span>
-    <span v-else><br /></span>
-    <span v-if="niluoDouns" class="more-rate">丰穰之核+{{ niluoDouns.toFixed(1) }}%;</span>
+    <span v-if="niluoDouns" class="more-rate"><br />丰穰之核+{{ niluoDouns.toFixed(1) }}%;</span>
+    <span v-if="baizhuDouns1" class="more-rate"><br />燃烧、绽放、超绽放、烈绽放+{{ baizhuDouns1.toFixed(1) }}%</span>
+    <span v-if="baizhuDouns2" class="more-rate"><br />超激化、蔓激化+{{ baizhuDouns2.toFixed(1) }}%</span>
     <br />
     超激化、蔓激化带来的[伤害提升]提高{{ jihua }}%;
     <br />
@@ -153,6 +167,7 @@ export default defineComponent({
       shieldStrong: 0,
 
       nilou: 0,
+      baizhu: 0,
 
       baseData: 0,
       conversionData: 0,
@@ -213,6 +228,14 @@ export default defineComponent({
       return 0;
     });
 
+    const baizhuDouns1 = computed(() => {
+      return Math.min(data.baizhu, 50000) / 1000 * 2;
+    });
+
+    const baizhuDouns2 = computed(() => {
+      return Math.min(data.baizhu, 50000) / 1000 * 0.8;
+    });
+
     // 剧变反应伤害公式
     const calculateDamage = (baseDamage) => {
       return Math.round(
@@ -248,7 +271,7 @@ export default defineComponent({
     // 绽放伤害值
     const bloomDamage = computed(() => {
       const basenumber = BaseDMG.bloom[data.level];
-      const r = calculateDamage(basenumber) + Math.round(basenumber * niluoDouns.value / 100);
+      const r = calculateDamage(basenumber) + Math.round(basenumber * (niluoDouns.value + baizhuDouns1.value) / 100);
       if (data.check === EDEN) 
         return Math.round(basenumber * 0.8) + r;
       return r;
@@ -257,7 +280,7 @@ export default defineComponent({
     // 超烈绽放伤害值
     const hyperbloomDamage = computed(() => {
       const basenumber = BaseDMG.hyperbloom[data.level];
-      const r = calculateDamage(basenumber);
+      const r = calculateDamage(basenumber) + Math.round(basenumber * baizhuDouns1.value / 100);
       if (data.check === THUNDER || data.check === WITCH)
         return Math.round(basenumber * 0.4) + r;
       else if (data.check === EDEN) 
@@ -273,7 +296,7 @@ export default defineComponent({
     // 燃烧伤害值
     const burningDamage = computed(() => {
       const basenumber = BaseDMG.burning[data.level];
-      const r = calculateDamage(basenumber);
+      const r = calculateDamage(basenumber) + Math.round(basenumber * baizhuDouns1.value / 100);
       if (data.check === WITCH)
         return Math.round(basenumber * 0.4) + r;
       return r;
@@ -298,7 +321,7 @@ export default defineComponent({
     // 超激化提升值
     const aggravateDamage = computed(() => {
       const basenumber = BaseDMG.aggravate[data.level];
-      const r = calculate4Damage(basenumber);
+      const r = calculate4Damage(basenumber) + Math.round(basenumber * baizhuDouns2.value / 100);
       if (data.check === THUNDER) return Math.round(basenumber * 0.2) + r;
       return r;
     });
@@ -306,7 +329,7 @@ export default defineComponent({
     // 蔓激化提升值
     const spreadDamage = computed(() => {
       const basenumber = BaseDMG.spread[data.level];
-      return calculate4Damage(basenumber);
+      return calculate4Damage(basenumber) + Math.round(basenumber * baizhuDouns2.value / 100);
     });
 
     // 结晶数值
@@ -404,6 +427,8 @@ export default defineComponent({
       moreRate,
       servitudeMoreRate,
       niluoDouns,
+      baizhuDouns1,
+      baizhuDouns2,
     };
   },
 });

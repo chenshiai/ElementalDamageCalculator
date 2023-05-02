@@ -127,6 +127,7 @@ export const computationalFormula = (data) => {
     armourPiercing = 0,
     witch = false,
     thunder = false,
+    baizhuHP = 0,
   } = data;
 
   // 攻击力、防御力、生命值
@@ -152,10 +153,10 @@ export const computationalFormula = (data) => {
   // 激化伤害值
   let BONUS_DMG = 0;
   if (atkType === ElementalReaction.Aggravate) {
-    BONUS_DMG = BaseDMG.aggravate[characterLevel] * (1 + (calculate4(elementalMystery) + (thunder ? 20 : 0)) / 100) * ENEMY_RATE;
+    BONUS_DMG = BaseDMG.aggravate[characterLevel] * (1 + (calculate4(elementalMystery) + (thunder ? 20 : 0)) / 100 + baizhuHP / 1000 * 0.8 /100) * ENEMY_RATE;
   }
   if (atkType === ElementalReaction.Spread) {
-    BONUS_DMG = BaseDMG.spread[characterLevel] * (1 + calculate4(elementalMystery) / 100) * ENEMY_RATE;
+    BONUS_DMG = BaseDMG.spread[characterLevel] * (1 + calculate4(elementalMystery) / 100 + baizhuHP / 1000 * 0.8 /100) * ENEMY_RATE;
   }
   // 附加伤害值
   const ADDITIONAL_DMG = additionalDemage * ENEMY_RATE;

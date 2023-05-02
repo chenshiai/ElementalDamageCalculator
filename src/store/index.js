@@ -40,6 +40,7 @@ const demageModule = {
       thunder: false, // 如雷套启用状态
       witch: false, // 魔女套启用状态
       elementalMystery: 0, // 元素精通
+      baizhuHP: 0, // 白术生命值
 
       atkRate: 100, // 攻击力倍率
       armRate: 0, // 防御力倍率
@@ -90,6 +91,7 @@ const demageModule = {
         thunder = false,
         witch = false,
         elementalMystery = 0,
+        baizhuHP = 0,
 
         atkRate,
         armRate,
@@ -129,6 +131,7 @@ const demageModule = {
       state.elementalMystery = elementalMystery;
       state.witch = witch;
       state.thunder = thunder;
+      state.baizhuHP = baizhuHP;
 
       state.atkRate = atkRate;
       state.armRate = armRate;

@@ -208,6 +208,12 @@
         <van-switch v-model="thunder" active-color="#766461" inactive-color="#b7a19e" size="16" />
       </template>
     </van-cell>
+    <van-cell v-show="atkType === ElementalReaction.Aggravate || atkType === ElementalReaction.Spread" class="eva-cell" title="白术天赋·在地为化 输入生命值" center>
+      <template #right-icon>
+        <input class="ex-input" type="number" v-model="baizhuHP"/>
+      </template>
+    </van-cell>
+
   </div>
   <div :class="['dmg-result', floatChecked && 'increase-result__top']">
     <div class="result-grid">
@@ -624,6 +630,15 @@ export default defineComponent({
   outline: none;
   border: none;
   width: 100%;
+  text-align: center;
+}
+
+.ex-input {
+  padding: 0;
+  max-width: 60px;
+  background: none;
+  outline: none;
+  border: none;
   text-align: center;
 }
 

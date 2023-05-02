@@ -6,6 +6,7 @@
     "build": "vite build"
   },
   "dependencies": {
+    "@jridgewell/source-map": "^0.3.2",
     "default-passive-events": "^2.0.0",
     "vant": "^3.0.6",
     "vue": "^3.0.4",
