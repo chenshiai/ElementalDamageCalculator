@@ -2,13 +2,11 @@ import { createStore } from "vuex";
 
 const characterModule = {
   state: () => {
-    return { characterSelect: [{}, {}, {}, {}] };
+    return { characterSelect: {}};
   },
   mutations: {
     setCharacterSelect(state, value) {
-      state.characterSelect = new Array(4).fill({}).map((_item, index) => {
-        return value[index] || {};
-      });
+      state.characterSelect = value;
     },
   },
 };

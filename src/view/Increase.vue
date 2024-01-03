@@ -1,5 +1,8 @@
 <template>
   <tab-title>单次伤害计算</tab-title>
+  <div class="tips">
+    可以自由填入属性值查看相应的伤害，适合对游戏伤害计算方式比较熟悉的人使用。
+  </div>
   <div class="data-panel">
     <div class="data-panel__title">基础属性</div>
     <div class="data-panel__basic">
@@ -108,17 +111,16 @@
         <input class="basic-panel-input" type="number" v-model="emRate" />
       </div>
     </div>
-    <data-item v-model="extraRate" title="倍率增幅%" stepperMin="0" decimalLength="1">
+    <data-item v-model="extraRate" title="倍率增幅%" stepperMin="0" decimalLength="1" />
+    <data-item v-model="additionalDemage" title="伤害提高值" tips="" stepperMin="0" decimalLength="2">
       <van-popover class="data-item-popover" v-model:show="showPopoverExtraRate" placement="left-end">
         <div class="data-item-popover__content">
-          <b>攻击伤害值 = 基础属性 x 最终倍率 + 伤害提高值 + 激化提高值</b><br />
+          <b>攻击伤害值 = (基础属性x技能最终倍率) + 伤害提高值 + 激化提高值</b><br />
           <p><b>最终倍率</b> = 技能倍率 x (1 + 倍率增幅) </p>
-          <p>
-            <b>倍率增幅：</b>
-            例如宵宫释放元素战技后的普通攻击“造成152%普通攻击伤害”，即是“普通攻击<b>倍率增幅</b>为52%(152%-100%)”；<br />
-            行秋4命与安柏2命，增幅的都是元素战技的倍率，直接填入即可；<br />
+          <p><b>倍率增幅：</b>
+            例：宵宫释放元素战技后的普通攻击“造成152%普通攻击伤害”，即“普通攻击<b>倍率增幅</b>为(152%-100%)=<b>52%</b>”；还有行秋4命、安柏2命、流浪者普攻、莱欧斯利普攻、那维莱特重击160%和芙宁娜战技140%。<br />
           </p>
-          <p><b>基础伤害值：</b>攻击力/防御力/生命值这三个基础属性乘以最终倍率的数值为基础伤害值。</p>
+          <p><b>基础伤害值：</b>基础属性乘以最终倍率的数值为基础伤害值。</p>
           <p>
             <b>激化提高值：</b>雷元素和草元素的激化反应带来的提升值，受角色等级和元素精通影响。
           </p>
@@ -132,22 +134,21 @@
         </template>
       </van-popover>
     </data-item>
-    <data-item v-model="additionalDemage" title="伤害提高值" tips="" stepperMin="0" decimalLength="2" />
     <note-group v-model="additionalDemage" v-bind="additionalDemageNotesConfig" :selectedNotes="selectedAdditionalDemageNotes" />
 
     <data-item v-model="critDemage" title="暴击伤害%" tips="" stepperMin="0" decimalLength="1" />
-    <data-item v-model="elementDemage" title="伤害加成%" tips="各种增伤、易伤" stepperMin="-200" decimalLength="2">
+    <data-item v-model="elementDemage" title="伤害加成%" tips="各种增伤、减伤" stepperMin="-200" decimalLength="2">
       <van-popover class="data-item-popover" v-model:show="showPopover" placement="left-end">
         <div class="data-item-popover__content">
           <b>攻击伤害值以一定比例改变：</b>
           <br />
-          基础100% + 技能加伤% + 元素加伤% + 造成伤害% + 受到伤害%。
+          基础100% + 特定技能加伤% + 元素加伤% + 造成伤害提高% + 受到伤害提高%。
           <br />
           <p>
             <b>技能加伤：</b>满足条件时的加伤，例如角色天赋/命座、圣遗物套装、武器技能等<br />
             <b>元素加伤：</b>面板上的对应元素(物理)伤害加成<br />
-            <b>造成伤害：</b>造成的伤害提高(加伤)、造成的伤害降低(降伤)<br />
-            <b>受到伤害：</b>受到的伤害提高(易伤)、受到的伤害降低(减伤)<br />
+            <b>造成伤害：</b>角色造成的伤害提高(加伤)、造成的伤害降低(降伤)<br />
+            <b>受到伤害：</b>敌人受到的伤害提高(易伤)、受到的伤害降低(减伤)<br />
           </p>
           <b>可以在下方标签组中快捷添加各种加成。</b>
         </div>

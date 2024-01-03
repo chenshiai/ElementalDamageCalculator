@@ -1,11 +1,6 @@
 <template>
   <div>
-    <div class="pop-title">
-      <span class="pop-title__click">已选择({{ result.length }}/{{ maxSelect }})</span>
-      选择伙伴
-      <span class="pop-title__close" @click="$emit('close')">返回</span>
-      <span class="pop-title__clear" @click="resultChange([])">清空</span>
-    </div>
+    <div class="pop-title" @click="$emit('close')">返回</div>
     <div class="selector-area">
       <van-search
         class="selector-input"
@@ -37,8 +32,26 @@
           <van-checkbox class="element-selece__item" name="LonGarm">长柄武器</van-checkbox>
         </van-checkbox-group>
       </div>
-      选择伙伴<span class="holy-relic-tips">（可多选）</span>
-      <van-checkbox-group class="selector" v-model="result" :max="maxSelect"  @change="resultChange">
+      选择伙伴
+      <div class="selector">
+        <div class="selector-items"
+          v-for="(item, index) in configFilter"
+          :name="item.name"
+          :key="index"
+          @click="selectedChange(item)"
+        >
+          <div class="selector-item__avatar">
+            <img :src="item.avatar" />
+          </div>
+          <div :class="['logo', 'logo-' + item.element]" />
+          <span class="selector-item__name">{{ item.name }}</span>
+        </div>
+        <div class="selector-items placeholder"></div>
+        <div class="selector-items placeholder"></div>
+        <div class="selector-items placeholder"></div>
+        <div class="selector-items placeholder"></div>
+      </div>
+      <!-- <van-checkbox-group class="selector" v-model="result" max="1"  @change="resultChange">
         <van-checkbox
           class="selector-items"
           v-for="(item, index) in configFilter"
@@ -55,7 +68,7 @@
         <div class="selector-items placeholder"></div>
         <div class="selector-items placeholder"></div>
         <div class="selector-items placeholder"></div>
-      </van-checkbox-group>
+      </van-checkbox-group> -->
     </div>
   </div>
 </template>
@@ -69,6 +82,8 @@ import { Search, Checkbox, CheckboxGroup } from "vant";
 export default defineComponent({
   name: "selector",
 
+  emits: ["close"],
+
   components: {
     [Search.name]: Search,
     [Checkbox.name]: Checkbox,
@@ -78,17 +93,10 @@ export default defineComponent({
 
   props: {
     handleChange: Function,
-    maxSelect: {
-      type: Number,
-      default() {
-        return 4;
-      }
-    },
   },
 
-  setup(props) {
+  setup(props, { emit }) {
     const keyword = ref("");
-    const result = ref([]);
     const element = ref([]);
     const weapon= ref([]);
 
@@ -109,11 +117,9 @@ export default defineComponent({
       return res;
     });
 
-    const resultChange = (value) => {
-      result.value = value;
-      props.handleChange(CloudTeamConfig.filter((item) => {
-        return value.includes(item.name);
-      }))
+    const selectedChange = (item) => {
+      props.handleChange(item);
+      emit('close')
     };
 
     const onInput = () => {
@@ -124,11 +130,10 @@ export default defineComponent({
     return {
       onInput,
       keyword,
-      result,
       weapon,
       element,
       configFilter,
-      resultChange,
+      selectedChange,
     };
   },
 });
@@ -145,16 +150,10 @@ export default defineComponent({
   width: 100%;
   z-index: 1;
 }
-.pop-title__click {
-  float: left;
-}
 .pop-title__close {
-  float: right;
+  float: left;
   margin-left: 12px;
   color: rgb(255, 82, 82);
-}
-.pop-title__clear {
-  float: right;
 }
 .selector-area {
   background-color: var(--light-text);
@@ -171,6 +170,8 @@ export default defineComponent({
 .selector-area .selector-input {
   padding: 0;
   width: 100%;
+}
+.selector-area .van-search {
   margin-bottom: 26px;
 }
 .van-search__content.van-search__content--round {

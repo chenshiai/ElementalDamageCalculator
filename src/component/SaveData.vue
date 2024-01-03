@@ -246,7 +246,7 @@ export default defineComponent({
 
     const saveData = () => {
       if (!remark.value) {
-        Toast.fail("请输入备注");
+        Toast.fail("数据命名为空");
         return;
       }
       const { demageModule, saveDataModule } = store.state;

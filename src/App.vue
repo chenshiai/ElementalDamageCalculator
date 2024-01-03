@@ -1,6 +1,9 @@
 <template>
   <div class="top-overhang">
     <div class="top-tabs">
+      <!-- <router-link to="/cloud-team" class="top-tabs__item">
+        云上辉星
+      </router-link> -->
       <router-link to="/" class="top-tabs__item">
         剧变伤害
       </router-link>
@@ -10,9 +13,6 @@
       <router-link to="/shield" class="top-tabs__item">
         护盾承伤
       </router-link>
-      <!-- <router-link to="/cloud-team" class="top-tabs__item">
-        云上辉星
-      </router-link> -->
       <router-link to="/question-answer" class="top-tabs__item">
         常见问题
       </router-link>
@@ -125,26 +125,10 @@ export default defineComponent({
 .data-panel__title,
 .holy-relic__title,
 .base-damage__title,
-.cloud-team__title,
-.additional-demage-list__title {
+.cloud-team__title {
   font-size: 18px;
   font-weight: 600;
   margin-bottom: 12px;
-  line-height: 26px;
-}
-
-.additional-tab-title {
-  display: flex;
-  align-content: center;
-  justify-content: center;
-}
-.additional-tab-title-img {
-  border-radius: 50%;
-  width: 26px;
-  height: 26px;
-  margin-right: 4px;
-}
-.additional-tab-title-span {
   line-height: 26px;
 }
 </style>

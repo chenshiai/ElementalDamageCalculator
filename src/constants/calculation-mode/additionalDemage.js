@@ -5,10 +5,10 @@ import { Magnification } from '../magnification';
 /** 附加伤害计算公式 */
 export const AdditionalDemageMode = [
   {
-    title: "通用伤害值提高",
+    title: "伤害值提高",
     children: [
       {
-        title: "根据基础属性的百分比来计算",
+        title: "自定义",
         fields: [
           {
             name: "def",
@@ -23,17 +23,17 @@ export const AdditionalDemageMode = [
             type: "number",
           },
           {
-            name: "cha1",
+            name: "text",
             label: "",
             placeholder: "适用武器：辰砂之纺锤、赤角石溃杵和猎人之径",
-            type: "number",
+            type: "text",
             disabled: true,
           },
           {
-            name: "cha1",
+            name: "text2",
             label: "",
-            placeholder: "适用圣遗物：来歆余响",
-            type: "number",
+            placeholder: "适用圣遗物：来歆余响、昔时之歌",
+            type: "text",
             disabled: true,
           },
         ],
@@ -42,7 +42,7 @@ export const AdditionalDemageMode = [
     ]
   },
   {
-    title: "云堇·破嶂见旌仪",
+    title: "云堇",
     img: ProfilePhoto.YunJin,
     children: [
       {
@@ -76,7 +76,7 @@ export const AdditionalDemageMode = [
     ]
   },
   {
-    title: "钟离·炊金馔玉",
+    title: "钟离",
     img: ProfilePhoto.ZhongLi,
     children: [
       {
@@ -139,7 +139,7 @@ export const AdditionalDemageMode = [
     ]
   },
   {
-    title: "赛诺·九弓的执命",
+    title: "赛诺",
     img: ProfilePhoto.Cyno,
     children: [
       {
@@ -183,7 +183,7 @@ export const AdditionalDemageMode = [
     ]
   },
   {
-    title: "申鹤·仰灵威召将役咒",
+    title: "申鹤",
     img: ProfilePhoto.ShenHe,
     children: [
       {
@@ -211,7 +211,7 @@ export const AdditionalDemageMode = [
     ]
   },
   {
-    title: "荒泷一斗·赤鬼之血",
+    title: "荒泷一斗",
     img: ProfilePhoto.AratakiItto,
     children: [
       {
@@ -236,7 +236,7 @@ export const AdditionalDemageMode = [
     ]
   },
   {
-    title: "心海·仪来雨衣",
+    title: "心海",
     img: ProfilePhoto.Kokomi,
     children: [
       {
@@ -336,7 +336,7 @@ export const AdditionalDemageMode = [
     ],
   },
   {
-    title: "神里绫人·神里流·镜花",
+    title: "神里绫人",
     img: ProfilePhoto.KamisatoAyato,
     children: [
       {
@@ -371,7 +371,7 @@ export const AdditionalDemageMode = [
     ]
   },
   {
-    title: "托马·烈火攻燔",
+    title: "托马",
     img: ProfilePhoto.Thoma,
     children: [
       {
@@ -396,7 +396,7 @@ export const AdditionalDemageMode = [
     ]
   },
   {
-    title: "阿贝多·显生之宙",
+    title: "阿贝多",
     img: ProfilePhoto.Albedo,
     children: [
       {
@@ -427,7 +427,7 @@ export const AdditionalDemageMode = [
     ]
   },
   {
-    title: "五郎·报恩之守",
+    title: "五郎",
     img: ProfilePhoto.Gorou,
     children: [
       {
@@ -471,7 +471,7 @@ export const AdditionalDemageMode = [
     ]
   },
   {
-    title: "胡桃·最不安神晴又复雨",
+    title: "胡桃",
     img: ProfilePhoto.HuTao,
     children: [
       {

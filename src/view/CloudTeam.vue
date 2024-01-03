@@ -1,22 +1,15 @@
 <template>
-  <div class="tips">
-    考虑到泛用性，本页展示的均为0命角色的能力，未计入圣遗物以及武器的影响，仅供参考。
-  </div>
-  <tab-title>标签化云配队</tab-title>
+  <tab-title>角色伤害计算</tab-title>
   <div class="team-list">
-    <div
-      class="team-list__item"
-      v-for="(item, index) in characterSelect"
-      :key="index"
-    >
+    <div class="team-list__item">
       <div class="team-list__item-avatar" @click="show = true">
-        <template v-if="item.avatar">
-          <img :src="item.avatar" />
-          <div class="team-list__item-name">{{ item.name }}</div>
+        <template v-if="characterSelect.avatar">
+          <img :src="characterSelect.avatar" />
+          <div class="team-list__item-name">{{ characterSelect.name }}</div>
         </template>
         <div class="empty" v-else></div>
       </div>
-      <div class="team-list__tags">
+      <!-- <div class="team-list__tags">
         <div
           class="tag"
           v-for="(tag, index) in item.battle"
@@ -43,10 +36,10 @@
           {{ TEAM_TYPE_TEXT[tag.type] }}
           <span v-show="tag.astro" class="tag-astro">({{ tag.astro }})</span>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
-  <div class="scaleplate">
+  <!-- <div class="scaleplate">
     <span class="scaleplate-item not-recommend">C·不推荐</span>
     <span class="scaleplate-item effective">B·有效果</span>
     <span class="scaleplate-item general">A·通用</span>
@@ -103,7 +96,7 @@
       <b>元素附着</b
       >：角色可以给敌人或者队友持续带来元素附着，受持续时间、影响范围和冷却时间等因素影响
     </p>
-  </span>
+  </span> -->
   <van-popup
     teleport="#app"
     v-model:show="show"
@@ -138,13 +131,11 @@ export default defineComponent({
 
   setup() {
     const show = ref(false);
-    const characterSelect = ref([{}, {}, {}, {}]);
+    const characterSelect = ref({});
 
     const handleCharacterChange = (result) => {
-      if (result.length < 4) {
-        result = result.concat(new Array(4 - result.length).fill({}));
-      }
       characterSelect.value = result;
+      console.log(result);
     };
 
     return {

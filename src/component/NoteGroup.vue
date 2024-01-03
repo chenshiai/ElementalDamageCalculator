@@ -36,30 +36,23 @@
     @close="handleClose"
   >
     <div class="popup-title">新增『{{ title }}』便签</div>
-    <van-tabs
-      v-show="calculationMode.length > 1"
-      class="calculation-mode"
-      v-model:active="active"
-      color="#997874"
-      line-width="60px"
-      @change="handleChange"
-      swipe-threshold="3"
-    >
-      <van-tab v-for="mode in calculationMode" :key="mode.title" >
-        <template #title>
-          <div class="additional-tab-title">
-            <img
-              v-if="!!mode.img"
-              class="additional-tab-title-img"
-              :src="mode.img"
-              alt=""
-            />
-            <span class="additional-tab-title-span">{{ mode.title }}</span>
-          </div>
-        </template>
-      </van-tab>
-    </van-tabs>
-    <van-tabs color="#997874" line-width="60px" v-model:active="childrenActive">
+    <div class="calculation-modes" v-show="calculationMode.length > 1">
+      <div
+        :class="['additional-tab-title', index == active && 'additional-tab-active']"
+        v-for="(mode, index) in calculationMode"
+        :key="mode.title"
+        @click="handleClick(index)"
+      >
+        <img
+          v-if="!!mode.img"
+          class="additional-tab-title-img"
+          :src="mode.img"
+          alt=""
+        />
+        <span class="additional-tab-title-span">{{ mode.title }}</span>
+      </div>
+    </div>
+    <van-tabs color="#997874" line-width="60px" v-model:active="childrenActive" @change="defaultTitleSetting">
       <van-tab
         v-for="item in calculationModeChildren"
         :title="item.title"
@@ -151,8 +144,14 @@ export default defineComponent({
     const handleClose = () => {
       temporaryData.value = {};
     };
-    const handleChange = () => {
+    const defaultTitleSetting = () => {
+      const mode = props.calculationMode[active.value];
+      newMemo.title = mode.title + "·" + mode.children[childrenActive.value].title;
+    };
+    const handleClick = (index) => {
+      active.value = index;
       childrenActive.value = 0;
+      defaultTitleSetting();
     };
     const changeValue = (value) => {
       emit("update:modelValue", value);
@@ -256,9 +255,10 @@ export default defineComponent({
       selectedMemos,
       temporaryData,
       handleClose,
-      handleChange,
+      handleClick,
       onSubmit,
       formatMemoDetail,
+      defaultTitleSetting,
     };
   },
 });
@@ -376,5 +376,38 @@ export default defineComponent({
   border: none;
   font-size: 18px;
   border-radius: 0;
+}
+
+.calculation-modes {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 16px 0 16px;
+}
+
+.additional-tab-active {
+  background-color: var(--button-bg);
+  color: var(--light-text);
+}
+
+.additional-tab-title {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  
+  width: 25%;
+  margin: 2px 0 2px 0;
+}
+
+.additional-tab-title-img {
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  margin-right: 4px;
+}
+
+.additional-tab-title-span {
+  line-height: 26px;
+  font-size: 12px;
 }
 </style>

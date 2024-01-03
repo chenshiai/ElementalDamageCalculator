@@ -36,6 +36,19 @@ export const EnhancedDemageCalculationMode = [
           },
         ],
         getResult: ({ atromancy }) => atromancy * 0.04,
+      },
+      {
+        title: "血赤叶红",
+        fields: [
+          {
+            name: "energy",
+            label: "元素精通",
+            type: "number",
+            required: true,
+            placeholder: "输入六命枫原万叶的元素精通",
+          },
+        ],
+        getResult: ({ energy }) => energy * 0.2,
       }
     ],
   },
@@ -89,7 +102,7 @@ export const EnhancedDemageCalculationMode = [
     ],
   },
   {
-    title: "绝缘之旗印",
+    title: "绝缘套",
     img: ArtifactIcon.EmblemOfSeveredFate,
     children: [
       {
@@ -200,7 +213,7 @@ export const EnhancedDemageCalculationMode = [
     ],
   },
   {
-    title: "稻妻限定四星武器",
+    title: "海祇系列武器",
     children: [
       {
         title: "驭浪的海祇民",
@@ -223,24 +236,5 @@ export const EnhancedDemageCalculationMode = [
         getResult: ({ energy, units }) => energy * units,
       }
     ],
-  },
-  {
-    title: "枫原万叶·六命",
-    img: ProfilePhoto.KaedeharaKazuha,
-    children: [
-      {
-        title: "血赤叶红",
-        fields: [
-          {
-            name: "energy",
-            label: "元素精通",
-            type: "number",
-            required: true,
-            placeholder: "输入六命枫原万叶的元素精通",
-          },
-        ],
-        getResult: ({ energy }) => energy * 0.2,
-      }
-    ],
-  },
+  }
 ];

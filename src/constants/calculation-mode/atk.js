@@ -19,7 +19,27 @@ export const AtkPercentCalculationMode = [
         getResult: ({ number }) => number,
       }
     ],
-  }
+  },
+  {
+    title: "夏沃蕾",
+    img: '',
+    children: [
+      {
+        title: "纵阵武力统筹",
+        fields: [
+          {
+            name: "hp",
+            label: "生命值",
+            type: "digit",
+            placeholder: "输入夏沃蕾的生命值",
+          },
+        ],
+        getResult: ({ hp }) => {
+          return Math.round(Math.min(40, hp / 1000));
+        },
+      }
+    ],
+  },
 ];
 
 /** 固定攻击力buff计算公式 */

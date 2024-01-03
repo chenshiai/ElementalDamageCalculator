@@ -18,7 +18,7 @@
       <span class="holy-relic-tips">角色的防御力、生命值</span>
     </div>
     <div class="base-data-item">
-      <span class="base-damage__title">转化倍率%</span>
+      <span class="base-damage__title">技能倍率%</span>
       <van-stepper
         v-model="data.conversionData"
         input-width="66px"
@@ -27,7 +27,6 @@
         theme="round"
         min="0"
       />
-      <span class="holy-relic-tips">对应基础属性的百分比</span>
     </div>
     <div class="base-data-item">
       <span class="base-damage__title">固定附加值</span>
@@ -39,8 +38,9 @@
         theme="round"
         min="0"
       />
-      <span class="holy-relic-tips">跟在倍率后面的固定值</span>
+      <span class="holy-relic-tips">技能倍率后面的固定值</span>
     </div>
+    
     <div class="data-panel__title">
       元素盾类型
       <van-cell-group>
@@ -137,7 +137,7 @@
 import { computed, defineComponent, reactive, toRefs, ref } from "vue";
 import TabTitle from "../component/TabTitle.vue";
 import DetailBlock from "../component/Detail.vue";
-import { CellGroup, Cell, Slider, Stepper, RadioGroup, Radio } from "vant";
+import { CellGroup, Cell, Slider, Stepper, RadioGroup, Radio, Popover } from "vant";
 
 const Shield = {
   common: "common",
@@ -160,6 +160,7 @@ export default defineComponent({
     [TabTitle.name]: TabTitle,
     [RadioGroup.name]: RadioGroup,
     [Radio.name]: Radio,
+    [Popover.name]: Popover,
     [CellGroup.name]: CellGroup,
     [DetailBlock.name]: DetailBlock,
   },
