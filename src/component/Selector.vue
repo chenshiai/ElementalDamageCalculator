@@ -76,7 +76,7 @@
 <script>
 import { defineComponent, ref, computed } from "vue";
 import TabTitle from "./TabTitle.vue";
-import { CloudTeamConfig } from "../../public/CloudTeamConfig";
+import { CloudTeamConfig } from "../CloudTeamConfig";
 import { Search, Checkbox, CheckboxGroup } from "vant";
 
 export default defineComponent({

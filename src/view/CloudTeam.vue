@@ -116,7 +116,7 @@ import {
   WEIGHT2,
   ENEMY_TYPE_TEXT,
   TEAM_TYPE_TEXT,
-} from "../../public/CloudTeamConfig";
+} from "../CloudTeamConfig";
 import { Icon, Popup } from "vant";
 
 export default defineComponent({
