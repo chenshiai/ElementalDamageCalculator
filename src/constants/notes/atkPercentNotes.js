@@ -1,5 +1,5 @@
 /** 攻击力百分比标签 */
-export const AtkPercentNotes = [
+const AtkPercentNotes = [
   {
     detail: 48,
     title: "精炼5阶·讨龙英杰谭",
@@ -25,3 +25,5 @@ export const AtkPercentNotes = [
     title: "元素共鸣·热诚之火",
   },
 ];
+
+export default AtkPercentNotes;

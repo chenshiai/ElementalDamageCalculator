@@ -11,9 +11,9 @@
     <div v-show="localNotes && isExpand" class="data-notes">
       <div class="add-note-button" @click="showPopup = true">＋新增便签</div>
       <div
-        v-for="(item, index) in localNotes"
-        :key="index"
-        :class="['memo', (selectedMemos[item.title] >= 0) && 'selected']"
+        v-for="item in localNotes"
+        :key="item.title"
+        :class="['memo', (selectedNotes[item.title] >= 0) && 'selected']"
       >
         <div @click="selectMemo(item)">
           <div class="memo-detail">
@@ -38,8 +38,8 @@
     <div class="popup-title">新增『{{ title }}』便签</div>
     <div class="calculation-modes" v-show="calculationMode.length > 1">
       <div
-        :class="['additional-tab-title', index == active && 'additional-tab-active']"
         v-for="(mode, index) in calculationMode"
+        :class="['additional-tab-title', index === active && 'additional-tab-active']"
         :key="mode.title"
         @click="handleClick(index)"
       >
@@ -91,9 +91,10 @@
 </template>
 
 <script>
-import { defineComponent, onMounted, reactive, ref, watch, computed } from "vue";
+import { defineComponent, onMounted, reactive, ref, computed } from "vue";
 import { Cell, Icon, Popup, Field, Form, Toast, Button, Tab, Tabs, Grid, GridItem } from "vant";
 import { deepCopyObject, floatNum, getLocalStorage } from "../utils";
+import { EventBus } from "../utils";
 
 export default defineComponent({
   name: "note-group",
@@ -125,7 +126,6 @@ export default defineComponent({
 
   setup(props, { emit }) {
     const localNotes = ref([]);
-    const selectedMemos = ref({});
     const isExpand = ref(false);
     const showPopup = ref(false);
 
@@ -156,6 +156,8 @@ export default defineComponent({
     const changeValue = (value) => {
       emit("update:modelValue", value);
     };
+
+    /** 更新本地localstorage便签组 */
     const updateNoteGroup = (value) => {
       localNotes.value = value;
       window.localStorage.setItem(
@@ -164,49 +166,58 @@ export default defineComponent({
       );
     };
 
+    /** 点击便签事件 */
     const selectMemo = (item) => {
       const key = item.title;
       const detail = +item.detail;
-      if (selectedMemos.value[key] >= 0) {
-        const res = floatNum(+props.modelValue - +selectedMemos.value[key], 2);
+      const selectedMemos = deepCopyObject(props.selectedNotes);
+      if (selectedMemos[key]) {
+        // 如果该便签在【已选择便签】中，则减去该便签的值，再从【已选择便签】里移除
+        const res = floatNum(+props.modelValue - +selectedMemos[key], 2);
         if (res >= 0) {
           changeValue(res);
         }
-        delete selectedMemos.value[key];
+        delete selectedMemos[key];
       } else {
-        selectedMemos.value[key] = detail;
-        changeValue(floatNum(+props.modelValue + +selectedMemos.value[key], 2));
+        // 若不在【已选择便签】中，则在【已选择便签】里新增。并加上该便签的值。
+        selectedMemos[key] = detail;
+        changeValue(floatNum(+props.modelValue + +selectedMemos[key], 2));
       }
-      props.setSelectedNotes(deepCopyObject(selectedMemos.value));
+      // 最后将变更后的【已选择便签】写入store
+      props.setSelectedNotes(selectedMemos);
     };
 
     const deleteMemo = (item) => {
       const key = item.title;
+      // 筛选被删除的便签后更新本地便签组
       const notesFilter = localNotes.value.filter((item) => item.title !== key);
       updateNoteGroup(notesFilter);
 
-      if (selectedMemos.value[key]) {
-        changeValue(floatNum(+props.modelValue - +selectedMemos.value[key], 2));
-        delete selectedMemos.value[key];
+      // 如果被删除的便签在【已选择便签】中，则减去该便签的值，并从【已选择便签】中移除
+      const selectedMemos = deepCopyObject(props.selectedNotes);
+      if (selectedMemos[key]) {
+        changeValue(floatNum(+props.modelValue - +selectedMemos[key], 2));
+        delete selectedMemos[key];
+        props.setSelectedNotes(selectedMemos);
       }
     };
 
+    // 新增便签
     const onSubmit = (value) => {
       const { getResult } = calculationModeChildren.value[childrenActive.value];
       const noteValue = {
         detail: getResult(value),
         title: newMemo.title,
       };
-      const newNotes = [noteValue];
       // 自动选中新建的标签
       selectMemo(noteValue);
 
-      // 将表单值设为空
+      // 将表单值设为初始值
       newMemo.title = "";
       temporaryData.value = {};
 
       // 拼接新的标签组并更新到localstorage
-      updateNoteGroup(newNotes.concat(localNotes.value));
+      updateNoteGroup([noteValue].concat(localNotes.value));
       Toast.success("添加成功");
     };
 
@@ -215,32 +226,21 @@ export default defineComponent({
       return res >= 0 ? `+${res}` : res;
     };
 
-    onMounted(() => {
+    const getLocalNotes = () => {
       const { localStorageName, defaultNotes = [] } = props;
+      // 根据名称读取本地便签组
       localNotes.value = getLocalStorage(
         localStorageName,
         defaultNotes,
         `${localStorageName}读取失败`
       );
-    });
+      console.log('读取本地：', localStorageName);
+    }
 
-    watch(
-      () => props.selectedNotes,
-      (newVal) => {
-        selectedMemos.value = deepCopyObject(newVal);
-        const supplementNotes = [];
-        for (let key in selectedMemos.value) {
-          if (!localNotes.value.find((item) => item.title === key)) {
-            supplementNotes.push({
-              title: key,
-              detail: selectedMemos.value[key],
-            });
-          }
-        }
-        if (supplementNotes.length > 0)
-          updateNoteGroup(supplementNotes.concat(localNotes.value));
-      }
-    );
+    onMounted(() => {
+      getLocalNotes();
+      EventBus.$on(`${props.localStorageName}Changed`, getLocalNotes);
+    });
 
     return {
       active,
@@ -252,7 +252,6 @@ export default defineComponent({
       selectMemo,
       showPopup,
       deleteMemo,
-      selectedMemos,
       temporaryData,
       handleClose,
       handleClick,

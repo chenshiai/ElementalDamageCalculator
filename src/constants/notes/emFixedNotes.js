@@ -1,5 +1,5 @@
 /** 固定元素精通加成标签 */
-export const EmFixedNotes = [
+const EmFixedNotes = [
   {
     detail: 120,
     title: "教官",
@@ -37,3 +37,5 @@ export const EmFixedNotes = [
     title: "枫原万叶·二命/迪奥娜·六命",
   },
 ];
+
+export default EmFixedNotes;

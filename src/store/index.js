@@ -1,15 +1,5 @@
 import { createStore } from "vuex";
-
-const characterModule = {
-  state: () => {
-    return { characterSelect: {}};
-  },
-  mutations: {
-    setCharacterSelect(state, value) {
-      state.characterSelect = value;
-    },
-  },
-};
+import { basicPanelSelectType } from "../constant";
 
 const demageModule = {
   state: () => {
@@ -29,8 +19,7 @@ const demageModule = {
       extraFixedHP: 0, // 固定生命值加成
       extraPercentHP: 0, // 百分比生命加成
 
-      basicPanelSelect: '攻击力', // 所选基础数值细节，‘攻击力’‘防御力’‘生命值’‘元素精通’
-      rateSelect: [], // 所选伤害结算基础属性
+      basicPanelSelect: basicPanelSelectType.ATK, // 所选基础数值细节，‘攻击力’‘防御力’‘生命值’‘元素精通’
 
       additionalDemage: 0, // 附加伤害
       critDemage: 50.0, // 暴击伤害
@@ -51,7 +40,6 @@ const demageModule = {
       enemyLevel: 90, // 敌人等级
       enemyResistance: 10, // 敌人抗性
       weaken: 0, // 敌人减抗
-      armourList: [], // 减防穿防列表
       armour: 0, // 敌人减防
       armourPiercing: 0, // 角色穿甲
     };
@@ -60,9 +48,7 @@ const demageModule = {
     setBasicPanelSelect(state, value) {
       state.basicPanelSelect = value;
     },
-    setRateSelect(state, value) {
-      state.rateSelect = value;
-    },
+
     setUnifiedState(state, value) { // 回填计算器内容
       const {
         baseATK,
@@ -80,8 +66,7 @@ const demageModule = {
         extraFixedHP = 0,
         extraPercentHP = 0,
 
-        basicPanelSelect = '攻击力',
-        rateSelect = ['攻击力'],
+        basicPanelSelect = basicPanelSelectType.ATK,
 
         additionalDemage = 0,
         critDemage,
@@ -121,7 +106,6 @@ const demageModule = {
       state.extraPercentHP = extraPercentHP;
 
       state.basicPanelSelect = basicPanelSelect;
-      state.rateSelect = rateSelect;
 
       state.additionalDemage = additionalDemage;
       state.critDemage = critDemage;
@@ -222,9 +206,9 @@ const saveDataModule = {
   }
 }
 
+
 const store = createStore({
   modules: {
-    characterModule,
     demageModule,
     saveDataModule,
   },

@@ -1,5 +1,5 @@
 /** 防御力百分比标签 */
-export const DefPercentNotes = [
+const DefPercentNotes = [
   {
     detail: 25,
     title: "五郎·天赋4",
@@ -9,3 +9,5 @@ export const DefPercentNotes = [
     title: "云堇4命",
   },
 ];
+
+export default DefPercentNotes;

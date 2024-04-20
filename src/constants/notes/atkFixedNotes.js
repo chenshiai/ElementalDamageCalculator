@@ -1,5 +1,5 @@
 /** 固定攻击力加成标签 */
-export const AtkFixedNotes = [
+const AtkFixedNotes = [
   {
     detail: 66,
     title: "二星食物",
@@ -33,3 +33,5 @@ export const AtkFixedNotes = [
     title: "五星食物·美味",
   },
 ];
+
+export default AtkFixedNotes;

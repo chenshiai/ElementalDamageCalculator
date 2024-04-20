@@ -1,5 +1,5 @@
 /** 增伤区标签 */
-export const EnhancedDamageNotes = [
+const EnhancedDamageNotes = [
   {
     detail: 15,
     title: "2件套·元素",
@@ -69,3 +69,5 @@ export const EnhancedDamageNotes = [
     title: "华馆4·岩伤",
   }
 ];
+
+export default EnhancedDamageNotes;

@@ -2,6 +2,12 @@
 import { ProfilePhoto, WeponIcon } from '../profilePhoto';
 import { Magnification } from '../magnification';
 
+function LVLimit(lv) {
+  lv = Math.min(13, lv);
+  lv = Math.max(1, lv);
+  return lv;
+}
+
 /** 附加伤害计算公式 */
 export const AdditionalDemageMode = [
   {
@@ -41,6 +47,39 @@ export const AdditionalDemageMode = [
       },
     ]
   },
+  // {
+  //   title: "阿蕾奇诺",
+  //   img: "",
+  //   children: [
+  //     {
+  //       title: "死红之宴",
+  //       fields: [
+  //         {
+  //           name: "con",
+  //           label: "生命之契",
+  //           placeholder: "输入角色的生命之契%(20~200)",
+  //           type: "number",
+  //         },
+  //         {
+  //           name: "lv",
+  //           label: "天赋等级",
+  //           placeholder: "输入角色的天赋等级",
+  //           type: "number",
+  //         },
+  //         {
+  //           name: "atk",
+  //           label: "攻击力",
+  //           placeholder: "输入角色的攻击力",
+  //           type: "number",
+  //         }
+  //       ],
+  //       getResult: ({con, lv, atk}) => {
+  //         lv = LVLimit(lv);
+  //         return atk * con / 100 * Magnification.Arlecchino[lv - 1]; 
+  //       },
+  //     }
+  //   ],
+  // },
   {
     title: "云堇",
     img: ProfilePhoto.YunJin,
@@ -68,8 +107,7 @@ export const AdditionalDemageMode = [
           },
         ],
         getResult: ({ def, lv, clas }) => {
-          lv = Math.min(13, lv);
-          lv = Math.max(1, lv);
+          lv = LVLimit(lv);
           return def * ([0.025, 0.05, 0.075, 0.115][clas - 1] + Magnification.YunJin[lv - 1]);
         },
       },
@@ -203,8 +241,7 @@ export const AdditionalDemageMode = [
           },
         ],
         getResult: ({ atk, lv }) => {
-          lv = Math.min(13, lv);
-          lv = Math.max(1, lv);
+          lv = LVLimit(lv);
           return atk * Magnification.ShenHe[lv - 1];
         },
       },
@@ -270,9 +307,8 @@ export const AdditionalDemageMode = [
           },
         ],
         getResult: ({ hp, lv, healRate }) => {
-          lv = Math.min(13, lv);
-          lv = Math.max(1, lv);
-          return hp * (Magnification.Kokomi.NormalAttack[lv - 1] + healRate / 100 * 0.15)
+          lv = LVLimit(lv);
+          return hp * (Magnification.Kokomi.NormalAttack[lv - 1] + healRate / 100 * 0.15);
         },
       },
       {
@@ -306,9 +342,8 @@ export const AdditionalDemageMode = [
           },
         ],
         getResult: ({ hp, lv, healRate }) => {
-          lv = Math.min(13, lv);
-          lv = Math.max(1, lv);
-          return hp * (Magnification.Kokomi.ChargedAttack[lv - 1] + healRate / 100 * 0.15)
+          lv = LVLimit(lv);
+          return hp * (Magnification.Kokomi.ChargedAttack[lv - 1] + healRate / 100 * 0.15);
         },
       },
       {
@@ -328,9 +363,8 @@ export const AdditionalDemageMode = [
           },
         ],
         getResult: ({ hp, lv }) => {
-          lv = Math.min(13, lv);
-          lv = Math.max(1, lv);
-          return hp * Magnification.Kokomi.BakeKurage[lv - 1]
+          lv = LVLimit(lv);
+          return hp * Magnification.Kokomi.BakeKurage[lv - 1];
         },
       },
     ],
@@ -363,8 +397,7 @@ export const AdditionalDemageMode = [
           },
         ],
         getResult: ({ hp, lv }) => {
-          lv = Math.min(13, lv);
-          lv = Math.max(1, lv);
+          lv = LVLimit(lv);
           return hp * Magnification.KamisatoAyato[lv - 1];
         },
       },
@@ -495,30 +528,30 @@ export const AdditionalDemageMode = [
       },
     ]
   },
-  // {
-  //   title: "不灭月华·白夜皓月",
-  //   img: WeponIcon.EverlastingMoonglow,
-  //   children: [
-  //     {
-  //       title: "普通攻击",
-  //       fields: [
-  //         {
-  //           name: "hp",
-  //           label: "生命值",
-  //           placeholder: "输入角色的生命值",
-  //           required: true,
-  //           type: "number",
-  //         },
-  //         {
-  //           name: "rate",
-  //           label: "提升倍率%",
-  //           placeholder: "输入武器特效的倍率",
-  //           required: true,
-  //           type: "number",
-  //         }
-  //       ],
-  //       getResult: ({ hp, rate }) => hp * rate / 100,
-  //     },
-  //   ]
-  // },
+  {
+    title: "不灭月华",
+    img: WeponIcon.EverlastingMoonglow,
+    children: [
+      {
+        title: "普通攻击",
+        fields: [
+          {
+            name: "hp",
+            label: "生命值",
+            placeholder: "输入角色的生命值",
+            required: true,
+            type: "number",
+          },
+          {
+            name: "rate",
+            label: "提升倍率%",
+            placeholder: "输入武器特效的倍率",
+            required: true,
+            type: "number",
+          }
+        ],
+        getResult: ({ hp, rate }) => hp * rate / 100,
+      },
+    ]
+  },
 ];

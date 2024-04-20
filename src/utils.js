@@ -1,51 +1,30 @@
 import { Toast } from "vant";
-import { ElementalReaction } from './constant';
+import { ElementalReaction, ReactionRate } from './constant';
 import { BaseDMG } from './constants/elementalReaction';
 
-/** 增幅反应 */
-export const calculate = (elementalMystery) => {
-  if (+elementalMystery <= 0) return 0;
-  return ((2.78 * elementalMystery) / (elementalMystery + 1400)) * 100;
-};
+/** 获取增幅反应比例 */
+export const getAmplifiedRate = (em) => {
+  return ((2.78 * em) / (em + 1400)) * 100;
+}
 
-/** 剧变反应 */
-export const calculate2 = (elementalMystery) => {
-  if (+elementalMystery <= 0) return 0;
-  return 16 * elementalMystery / (elementalMystery + 2000) * 100;
+/** 获取剧变反应比例 */
+export const getServitudeRate = (em) => {
+  return 16 * em / (em + 2000) * 100;
 }
 
 /** 结晶反应 */
-export const calculate3 = (elementalMystery) => {
-  if (+elementalMystery <= 0) return 0;
-  return 4.44 * elementalMystery / (elementalMystery + 1400) * 100;
+export const getCrystallizeRate = (em) => {
+  return 4.44 * em / (em + 1400) * 100;
 }
 
 /** 激化反应 */
-export const calculate4 = (elementalMystery) => {
-  if (+elementalMystery <= 0) return 0;
-  return 5 * elementalMystery / (elementalMystery + 1200) * 100;
+export const getCatalyzeRate = (em) => {
+  return 5 * em / (em + 1200) * 100;
 }
 
-export const getReactionRate = (atkType) => {
-  switch (atkType) {
-    case 'evaporation': return 1;
-    case 'evaporation2': return 0.5;
-    default: return 0;
-  }
-};
-
-export const getAtkTypeText = (atkType) => {
-  switch (atkType) {
-    case 'evaporation': return '2.0倍增幅';
-    case 'evaporation2': return '1.5倍增幅';
-    case ElementalReaction.Aggravate: return '超激化';
-    case ElementalReaction.Spread: return '蔓激化';
-    default: return '无';
-  }
-};
-
+// 抗性承伤
 export const getResistanceRate = (enemyResistance, weaken) => {
-  const resistance = enemyResistance - weaken;
+  const resistance = enemyResistance - weaken; // 敌人自身抗性 减去 减抗数值
   let resistanceRate = 1 - resistance / 100;
   if (resistance < 0) {
     resistanceRate = 1 - resistance / 2 / 100;
@@ -108,7 +87,6 @@ export const computationalFormula = (data) => {
     extraHP = 0,
     extraFixedHP = 0,
     extraPercentHP = 0,
-    basicPanelSelect = '攻击力',
     additionalDemage = 0,
     critDemage,
     elementDemage,
@@ -135,16 +113,17 @@ export const computationalFormula = (data) => {
   const def = extraDEF + extraFixedDEF + baseDEF * (1 + extraPercentDEF / 100);
   const hp = extraHP + extraFixedHP + baseHP * (1 + extraPercentHP / 100);
 
-  // 抗性
+  // 抗性承伤
   const resistanceRate = getResistanceRate(enemyResistance, weaken);
-  // 防御减伤
+  // 防御承伤
   const defRate = getDefRate(characterLevel, enemyLevel, armour, armourPiercing);
+  // 敌人最终承伤
   const ENEMY_RATE = defRate * resistanceRate;
 
   // 增幅精通加成
   let eva = 0;
-  if (atkType === "evaporation" || atkType === "evaporation2") {
-    eva = (calculate(elementalMystery) + (witch ? 15 : 0)) / 100
+  if (atkType === ElementalReaction.Rate || atkType === ElementalReaction.Rate2) {
+    eva = (getAmplifiedRate(elementalMystery) + (witch ? 15 : 0)) / 100
   }
 
   /** 基础伤害值 */
@@ -153,17 +132,17 @@ export const computationalFormula = (data) => {
   // 激化伤害值
   let BONUS_DMG = 0;
   if (atkType === ElementalReaction.Aggravate) {
-    BONUS_DMG = BaseDMG.aggravate[characterLevel] * (1 + (calculate4(elementalMystery) + (thunder ? 20 : 0)) / 100 + baizhuHP / 1000 * 0.8 /100) * ENEMY_RATE;
+    BONUS_DMG = BaseDMG.aggravate[characterLevel] * (1 + (getCatalyzeRate(elementalMystery) + (thunder ? 20 : 0)) / 100 + baizhuHP / 1000 * 0.8 /100) * ENEMY_RATE;
   }
   if (atkType === ElementalReaction.Spread) {
-    BONUS_DMG = BaseDMG.spread[characterLevel] * (1 + calculate4(elementalMystery) / 100 + baizhuHP / 1000 * 0.8 /100) * ENEMY_RATE;
+    BONUS_DMG = BaseDMG.spread[characterLevel] * (1 + getCatalyzeRate(elementalMystery) / 100 + baizhuHP / 1000 * 0.8 /100) * ENEMY_RATE;
   }
   // 附加伤害值
   const ADDITIONAL_DMG = additionalDemage * ENEMY_RATE;
   // 增伤伤害值
   const MAGNIFICATION_DMG = (BASE_DMG + ADDITIONAL_DMG + BONUS_DMG) * Math.max(0, elementDemage / 100);
   // 反应伤害值
-  const REACTION_DMG = (BASE_DMG + ADDITIONAL_DMG + MAGNIFICATION_DMG) * getReactionRate(atkType);
+  const REACTION_DMG = (BASE_DMG + ADDITIONAL_DMG + MAGNIFICATION_DMG) * ReactionRate[atkType];
   // 精通提升伤害值
   const EVA_DMG = (BASE_DMG + ADDITIONAL_DMG + MAGNIFICATION_DMG + REACTION_DMG) * eva;
 
@@ -190,3 +169,23 @@ export const computationalFormula = (data) => {
     compositionAnalysis,
   }
 };
+
+
+class Event {
+  eventList = {};
+
+  $on = function (key, fn) {
+    if (!this.eventList[key]) {
+      this.eventList[key] = [];
+    }
+    this.eventList[key].push(fn);
+  }
+
+  $emit = function (key, val) {
+    if (this.eventList.hasOwnProperty(key)) {
+      this.eventList[key].forEach((fn) => { fn(val) });
+    }
+  }
+}
+
+export const EventBus = new Event();

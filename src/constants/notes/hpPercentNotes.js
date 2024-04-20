@@ -1,5 +1,5 @@
 /** 生命值百分比标签 */
-export const HpPercentNotes = [
+const HpPercentNotes = [
   {
     detail: 25,
     title: "元素共鸣·愈疗之水",
@@ -21,3 +21,5 @@ export const HpPercentNotes = [
     title: "理之冠·生命",
   },
 ];
+
+export default HpPercentNotes;

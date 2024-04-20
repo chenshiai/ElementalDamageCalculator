@@ -13,7 +13,7 @@
       数据将会存储在本地浏览器的缓存中。若清空浏览器缓存，则数据也一会同清空。重复命名的新数据会替换旧数据。
     </div>
     <ul class="data-detail">
-      <li class="data-detail-item" v-for="(item, index) in config" :key="index">
+      <li class="data-detail-item" v-for="item in config" :key="item.label">
         <span>{{ item.label }}</span>
         <span>{{ item.value }}</span>
       </li>
@@ -39,8 +39,8 @@
       v-model="opened"
     >
       <van-collapse-item
-        v-for="(val, name, index) in localData"
-        :key="index"
+        v-for="(val, name) in localData"
+        :key="name"
         :is-link="false"
         title-class="data-title"
         :label="getLabel(val)"
@@ -81,12 +81,11 @@ import { defineComponent, ref, computed } from "vue";
 import { useStore } from "vuex";
 import { Popup, Field, Toast, Collapse, CollapseItem, Icon } from "vant";
 import {
-  getAtkTypeText,
   getLocalStorage,
   deepCopyObject,
   computationalFormula,
-  sub,
 } from "../utils";
+import { AtkTypeText } from "../constant";
 
 export default defineComponent({
   name: "save-data",
@@ -127,7 +126,6 @@ export default defineComponent({
         extraHP = 0,
         extraFixedHP = 0,
         extraPercentHP = 0,
-        basicPanelSelect = '攻击力',
         additionalDemage = 0,
         critDemage,
         elementDemage,
@@ -145,8 +143,6 @@ export default defineComponent({
         armour = 0,
         armourPiercing = 0,
       } = value;
-
-      console.log(basicPanelSelect);
 
       return [
         {
@@ -202,7 +198,7 @@ export default defineComponent({
           value: extraRate,
         },
         {
-          label: "伤害倍率%",
+          label: "伤害加成%",
           value: elementDemage,
         },
         {
@@ -211,7 +207,7 @@ export default defineComponent({
         },
         {
           label: "元素反应",
-          value: getAtkTypeText(atkType),
+          value: AtkTypeText[atkType],
         },
         {
           label: "角色等级",

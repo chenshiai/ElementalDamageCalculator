@@ -2,7 +2,8 @@ export const ProfilePhoto = {
   Bennett: 'https://uploadstatic.mihoyo.com/ys-obc/2021/06/10/75276545/40983321f9ddffbbf8755982f7ba9837_7665543532618873826.png?x-oss-process=image/quality,q_75/resize,s_40',
   Thoma: 'https://uploadstatic.mihoyo.com/ys-obc/2021/11/02/75379475/35536a7c0817ed2d30931bca5b4ad625_8868436370119472993.png?x-oss-process=image/quality,q_75/resize,s_40',
   HuTao: 'https://uploadstatic.mihoyo.com/ys-obc/2021/06/10/75276545/2ba444aec8dbddf1e2314f2c523e1e31_244848669304650705.png?x-oss-process=image/quality,q_75/resize,s_40',
-  
+  Chevreuse: 'https://act-upload.mihoyo.com/wiki-user-upload/2024/01/04/4328207/e77bf4b2d49e3cc50545b83dc071d3a6_7850725164094643458.png?x-oss-process=image/quality,q_75/resize,s_40',
+
   Cyno: 'https://uploadstatic.mihoyo.com/ys-obc/2022/09/20/4328207/b3847d2416145eb8bb6343302e2b4dca_6997837798254516316.png?x-oss-process=image/quality,q_75/resize,s_40',
   KujoSara: 'https://uploadstatic.mihoyo.com/ys-obc/2021/11/02/75379475/6aca9977c55c6ca83ade6d5593173b25_5748245248319174043.png?x-oss-process=image/quality,q_75/resize,s_40',
   Beelzebul: 'https://uploadstatic.mihoyo.com/ys-obc/2022/08/15/75379475/4f2125e44d2b9e15611877eda1794ec7_971228898754945838.png?x-oss-process=image/quality,q_75/resize,s_40',

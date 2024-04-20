@@ -71,9 +71,9 @@
         :class="[
           'holy-relic-content',
           'witch',
-          data.check === 'witch' && 'active',
+          data.check === WITCH && 'active',
         ]"
-        @click="changeCheck('witch')"
+        @click="holyRelicChangeCheck(WITCH)"
       >
         <img class="holy-relic__img" src="../assets/witch2.png" />
         <div>炽烈的炎之魔女</div>
@@ -82,9 +82,9 @@
         :class="[
           'holy-relic-content',
           'thunder',
-          data.check === 'thunder' && 'active',
+          data.check === THUNDER && 'active',
         ]"
-        @click="changeCheck('thunder')"
+        @click="holyRelicChangeCheck(THUNDER)"
       >
         <img class="holy-relic__img" src="../assets/thunder2.png" />
         <div>如雷的盛怒</div>
@@ -93,9 +93,9 @@
         :class="[
           'holy-relic-content',
           'emerald',
-          data.check === 'emerald' && 'active',
+          data.check === EMERALD && 'active',
         ]"
-        @click="changeCheck('emerald')"
+        @click="holyRelicChangeCheck(EMERALD)"
       >
         <img class="holy-relic__img" src="../assets/emerald2.png" />
         <div>翠绿之影</div>
@@ -104,42 +104,38 @@
         :class="[
           'holy-relic-content',
           'eden',
-          data.check === 'eden' && 'active',
+          data.check === EDEN && 'active',
         ]"
-        @click="changeCheck('eden')"
+        @click="holyRelicChangeCheck(EDEN)"
       >
         <img class="holy-relic__img" src="../assets/eden.png" />
         <div>乐园遗落之花</div>
       </div>
     </div>
   </div>
-  <detail-block keep>
-    蒸发、融化反应的伤害提升{{ Rate }}%<span class="more-rate">{{ moreRate }}</span>;
-    <br />
-    超载、超导、感电、燃烧、碎冰、扩散、绽放、超绽放、烈绽放的伤害提升{{ servitude }}%;
-    <span v-if="servitudeMoreRate" class="more-rate"><br />{{ servitudeMoreRate }};</span>
-    <span v-if="niluoDouns" class="more-rate"><br />丰穰之核+{{ niluoDouns.toFixed(1) }}%;</span>
-    <span v-if="baizhuDouns1" class="more-rate"><br />燃烧、绽放、超绽放、烈绽放+{{ baizhuDouns1.toFixed(1) }}%</span>
-    <span v-if="baizhuDouns2" class="more-rate"><br />超激化、蔓激化+{{ baizhuDouns2.toFixed(1) }}%</span>
-    <br />
-    超激化、蔓激化带来的[伤害提升]提高{{ jihua }}%;
-    <br />
-    结晶反应护盾提供的[伤害吸收量]提升{{ crystallization }}%;
+  <detail-block :elementalMystery="data.elementalMystery" :check="data.check">
+    <template v-slot:servitude>
+      <span v-show="niluoDouns" class="more-rate"><br />妮露：丰穰之核+{{ niluoDouns.toFixed(1) }}%;</span>
+      <span v-show="baizhuDouns1" class="more-rate"><br />白术：燃烧、绽放、超绽放、烈绽放+{{ baizhuDouns1.toFixed(1) }}%</span>
+    </template>
+    <template v-slot:catalyze >
+      <span v-show="baizhuDouns2" class="more-rate"><br />白术：超激化、蔓激化+{{ baizhuDouns2.toFixed(1) }}%</span>
+    </template>
   </detail-block>
   <div class="result">
-    <div class="damage-tag" v-for="(item, index) in demageResult" :key="index">
+    <div class="damage-tag" v-for="item in demageResult" :key="item.name">
       <span :class="['damage-tag__title', item.class]">{{ item.name }}</span>
-      <span v-if="item.name2" :class="['damage-tag__title', item.class2]">{{ item.name2 }}</span>
+      <span v-show="item.name2" :class="['damage-tag__title', item.class2]">{{ item.name2 }}</span>
       <span class="damage-tag__detail">{{ item.detail }}</span>
     </div>
   </div>
 </template>
 
 <script>
-import { computed, defineComponent, reactive, toRefs, ref } from "vue";
+import { computed, defineComponent, reactive, ref } from "vue";
 import { WITCH, THUNDER, EMERALD, EDEN } from "../constant";
 import { BaseDMG } from '../constants/elementalReaction';
-import { calculate, calculate2, calculate3, calculate4 } from "../utils";
+import { getAmplifiedRate, getServitudeRate, getCrystallizeRate, getCatalyzeRate } from "../utils";
 import TabTitle from "../component/TabTitle.vue";
 import DetailBlock from "../component/Detail.vue";
 import { CellGroup, Cell, Slider, Stepper, RadioGroup, Radio } from "vant";
@@ -157,70 +153,16 @@ export default defineComponent({
     [DetailBlock.name]: DetailBlock,
   },
   setup() {
-    const otherChecked = ref(false);
     const data = reactive({
       elementalMystery: 786,
       level: 90,
       check: "",
 
-      shieldType: "common",
-      shieldStrong: 0,
-
       nilou: 0,
       baizhu: 0,
-
-      baseData: 0,
-      conversionData: 0,
-      fixedData: 0,
-      talentData: 0,
-      fateData: 0,
     });
 
-    // 增幅倍率
-    const Rate = computed(() => {
-      return calculate(data.elementalMystery).toFixed(1);
-    });
-
-    // 聚变倍率
-    const servitude = computed(() => {
-      return calculate2(data.elementalMystery).toFixed(1);
-    });
-
-    // 结晶倍率
-    const crystallization = computed(() => {
-      return calculate3(data.elementalMystery).toFixed(1);
-    });
-
-    // 激化倍率
-    const jihua = computed(() => {
-      return calculate4(data.elementalMystery).toFixed(1);
-    });
-
-    const moreRate = computed(() => {
-      if (data.check === WITCH) {
-        return " +15%";
-      }
-      return "";
-    });
-
-    const servitudeMoreRate = computed(() => {
-      switch(data.check) {
-        case THUNDER: {
-          return " 超载、超导、感电、超绽放+40%//超激化+20%";
-        }
-        case WITCH: {
-          return " 超载、燃烧、烈绽放+40%";
-        }
-        case EMERALD: {
-          return " 扩散+60%";
-        }
-        case EDEN: {
-          return " 绽放、超绽放、烈绽放+80%";
-        }
-      }
-      return "";
-    });
-
+    // 妮露天赋提升比例-丰壤之核
     const niluoDouns = computed(() => {
       if (data.nilou > 30000) {
         return Math.min((data.nilou - 30000) / 1000 * 9, 400);
@@ -228,25 +170,27 @@ export default defineComponent({
       return 0;
     });
 
+    // 白术天赋提升比例-绽放、燃烧
     const baizhuDouns1 = computed(() => {
       return Math.min(data.baizhu, 50000) / 1000 * 2;
     });
 
+    // 白术天赋提升比例-激化
     const baizhuDouns2 = computed(() => {
       return Math.min(data.baizhu, 50000) / 1000 * 0.8;
     });
 
-    // 剧变反应伤害公式
-    const calculateDamage = (baseDamage) => {
+    // 剧变反应伤害提升数值
+    const servitudeDamage = (baseDamage) => {
       return Math.round(
-        baseDamage * (1 + calculate2(data.elementalMystery) / 100)
+        baseDamage * (1 + getServitudeRate(data.elementalMystery) / 100)
       );
     };
 
-    // 激化反应伤害公式
-    const calculate4Damage = (baseDamage) => {
+    // 激化反应伤害提升数值
+    const catalyzeDamage = (baseDamage) => {
       return Math.round(
-        baseDamage * (1 + calculate4(data.elementalMystery) / 100)
+        baseDamage * (1 + getCatalyzeRate(data.elementalMystery) / 100)
       );
     };
 
@@ -254,15 +198,14 @@ export default defineComponent({
     // 感电伤害值
     const electroChargedDamage = computed(() => {
       const basenumber = BaseDMG.electroCharged[data.level];
-      const r = calculateDamage(basenumber);
-      if (data.check === THUNDER) return Math.round(basenumber * 0.4) + r;
-      return r;
+      const r = servitudeDamage(basenumber);
+      return data.check === THUNDER ? Math.round(basenumber * 0.4) + r : r;
     });
 
     // 超载伤害值
     const overloadDamage = computed(() => {
       const basenumber = BaseDMG.overload[data.level];
-      const r = calculateDamage(basenumber);
+      const r = servitudeDamage(basenumber);
       if (data.check === THUNDER || data.check === WITCH)
         return Math.round(basenumber * 0.4) + r;
       return r;
@@ -271,16 +214,14 @@ export default defineComponent({
     // 绽放伤害值
     const bloomDamage = computed(() => {
       const basenumber = BaseDMG.bloom[data.level];
-      const r = calculateDamage(basenumber) + Math.round(basenumber * (niluoDouns.value + baizhuDouns1.value) / 100);
-      if (data.check === EDEN) 
-        return Math.round(basenumber * 0.8) + r;
-      return r;
+      const r = servitudeDamage(basenumber) + Math.round(basenumber * (niluoDouns.value + baizhuDouns1.value) / 100);
+      return data.check === EDEN ? Math.round(basenumber * 0.8) + r : r;
     });
 
     // 超烈绽放伤害值
     const hyperbloomDamage = computed(() => {
       const basenumber = BaseDMG.hyperbloom[data.level];
-      const r = calculateDamage(basenumber) + Math.round(basenumber * baizhuDouns1.value / 100);
+      const r = servitudeDamage(basenumber) + Math.round(basenumber * baizhuDouns1.value / 100);
       if (data.check === THUNDER || data.check === WITCH)
         return Math.round(basenumber * 0.4) + r;
       else if (data.check === EDEN) 
@@ -290,60 +231,51 @@ export default defineComponent({
 
     // 碎冰伤害值
     const shatterDamage = computed(() => {
-      return calculateDamage(BaseDMG.shatter[data.level]);
+      return servitudeDamage(BaseDMG.shatter[data.level]);
     });
 
     // 燃烧伤害值
     const burningDamage = computed(() => {
       const basenumber = BaseDMG.burning[data.level];
-      const r = calculateDamage(basenumber) + Math.round(basenumber * baizhuDouns1.value / 100);
-      if (data.check === WITCH)
-        return Math.round(basenumber * 0.4) + r;
-      return r;
+      const r = servitudeDamage(basenumber) + Math.round(basenumber * baizhuDouns1.value / 100);
+      return data.check === WITCH ? Math.round(basenumber * 0.4) + r : r;
     });
 
     // 扩散伤害值
     const swirlDamage = computed(() => {
       const basenumber = BaseDMG.swirl[data.level];
       if (data.check === EMERALD)
-        return Math.round(basenumber * 0.6) + calculateDamage(basenumber);
-      return calculateDamage(basenumber);
+        return Math.round(basenumber * 0.6) + servitudeDamage(basenumber);
+      return servitudeDamage(basenumber);
     });
 
     // 超导伤害值
     const superconductDamage = computed(() => {
       const basenumber = BaseDMG.superconduct[data.level];
-      const r = calculateDamage(basenumber);
-      if (data.check === THUNDER) return Math.round(basenumber * 0.4) + r;
-      return r;
+      const r = servitudeDamage(basenumber);
+      return data.check === THUNDER ? Math.round(basenumber * 0.4) + r : r;
     });
 
-    // 超激化提升值
+    // 超激化数值
     const aggravateDamage = computed(() => {
       const basenumber = BaseDMG.aggravate[data.level];
-      const r = calculate4Damage(basenumber) + Math.round(basenumber * baizhuDouns2.value / 100);
-      if (data.check === THUNDER) return Math.round(basenumber * 0.2) + r;
-      return r;
+      const r = catalyzeDamage(basenumber) + Math.round(basenumber * baizhuDouns2.value / 100);
+      return data.check === THUNDER ? Math.round(basenumber * 0.2) + r : r;
     });
 
-    // 蔓激化提升值
+    // 蔓激化数值
     const spreadDamage = computed(() => {
       const basenumber = BaseDMG.spread[data.level];
-      return calculate4Damage(basenumber) + Math.round(basenumber * baizhuDouns2.value / 100);
+      return catalyzeDamage(basenumber) + Math.round(basenumber * baizhuDouns2.value / 100);
     });
 
-    // 结晶数值
+    // 结晶盾数值
     const crystallizeValue = computed(() => {
-      if (BaseDMG.crystallize[data.level]) {
-        return Math.round(
-          BaseDMG.crystallize[data.level] *
-            (1 + ((calculate(data.elementalMystery) / 5) * 8) / 100)
-        );
-      }
-      return "无数据";
+      const basenumber = BaseDMG.crystallize[data.level];
+      return Math.round(basenumber * (1 + getCrystallizeRate(data.elementalMystery) / 100));
     });
 
-    const changeCheck = (relic) => {
+    const holyRelicChangeCheck = (relic, event) => {
       if (data.check === relic) {
         data.check = "";
       } else {
@@ -415,20 +347,16 @@ export default defineComponent({
 
     return {
       data,
-      ...toRefs(data),
-      Rate,
-      servitude,
-      jihua,
-      crystallization,
       demageResult,
-      otherChecked,
       crystallizeValue,
-      changeCheck,
-      moreRate,
-      servitudeMoreRate,
+      holyRelicChangeCheck,
       niluoDouns,
       baizhuDouns1,
       baizhuDouns2,
+      WITCH,
+      THUNDER,
+      EMERALD,
+      EDEN
     };
   },
 });
@@ -523,10 +451,6 @@ export default defineComponent({
 .damage-tag__title {
   margin-right: 6px;
   font-size: 20px;
-}
-
-.more-rate {
-  color: #2ee27f;
 }
 
 .elector {

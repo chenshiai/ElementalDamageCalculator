@@ -6,10 +6,9 @@
   <div class="data-panel">
     <div class="data-panel__title">基础属性</div>
     <div class="data-panel__basic">
-      <div :class="[
-        'basic-panel-item',
-        basicPanelSelect === '攻击力' && 'basic-panel-selected',
-      ]" @click="basicInputPanelSelect('攻击力')">
+      <div :class="['basic-panel-item', basicPanelSelect === basicPanelSelectType.ATK && 'basic-panel-selected']"
+        @click="basicInputPanelSelect(basicPanelSelectType.ATK)"
+      >
         <span class="basic-panel-item-title">攻击力</span>
         <div class="basic-panel-item-total">
           {{ baseATK + sumExtraATKNumber }}
@@ -19,10 +18,9 @@
           <span style="color: #49ff39">{{ sumExtraATKNumber }}</span>
         </div>
       </div>
-      <div :class="[
-        'basic-panel-item',
-        basicPanelSelect === '生命值' && 'basic-panel-selected',
-      ]" @click="basicInputPanelSelect('生命值')">
+      <div :class="['basic-panel-item', basicPanelSelect === basicPanelSelectType.HP && 'basic-panel-selected']"
+        @click="basicInputPanelSelect(basicPanelSelectType.HP)"
+      >
         <span class="basic-panel-item-title">生命值</span>
         <div class="basic-panel-item-total">
           {{ baseHP + sumExtraHPNumber }}
@@ -32,10 +30,9 @@
           <span style="color: #49ff39">{{ sumExtraHPNumber }}</span>
         </div>
       </div>
-      <div :class="[
-        'basic-panel-item',
-        basicPanelSelect === '防御力' && 'basic-panel-selected',
-      ]" @click="basicInputPanelSelect('防御力')">
+      <div :class="['basic-panel-item', basicPanelSelect === basicPanelSelectType.DEF && 'basic-panel-selected']"
+        @click="basicInputPanelSelect(basicPanelSelectType.DEF)"
+      >
         <span class="basic-panel-item-title">防御力</span>
         <div class="basic-panel-item-total">
           {{ baseDEF + sumExtraDEFNumber }}
@@ -45,32 +42,28 @@
           <span style="color: #49ff39">{{ sumExtraDEFNumber }}</span>
         </div>
       </div>
-      <div :class="[
-        'basic-panel-item',
-        basicPanelSelect === '元素精通' && 'basic-panel-selected',
-      ]" @click="basicInputPanelSelect('元素精通')">
+      <div :class="['basic-panel-item', basicPanelSelect === basicPanelSelectType.EM && 'basic-panel-selected']"
+        @click="basicInputPanelSelect(basicPanelSelectType.EM)"
+      >
         <span class="basic-panel-item-title">元素精通</span>
-        <div v-if="basicPanelSelect === '元素精通'" class="basic-detial">
-          {{ elementalMystery }}
-        </div>
-        <div v-else class="basic-panel-item-total">
+        <div :class="basicPanelSelect === basicPanelSelectType.EM ? 'basic-detial' : 'basic-panel-item-total'">
           {{ elementalMystery }}
         </div>
       </div>
     </div>
-    <div v-show="basicPanelSelect === '生命值'">
+    <div v-show="basicPanelSelect === basicPanelSelectType.HP">
       <data-item v-model="baseHP" title="基础生命值" tips="面板生命值白字" stepperInteger stepperMin="0" />
       <data-item v-model="extraHP" title="额外生命值" tips="常驻生命值绿字" stepperInteger stepperMin="0" />
-      <note-group v-model="extraPercentHP" v-bind="extraPercentHPNotesConfig" :selectedNotes="selectedExtraHPNotes" />
+      <note-group v-model="extraPercentHP" v-bind="NotesConfig.percentHP" :selectedNotes="selectedExtraHPNotes" />
     </div>
-    <div v-show="basicPanelSelect === '防御力'">
+    <div v-show="basicPanelSelect === basicPanelSelectType.DEF">
       <data-item v-model="baseDEF" title="基础防御力" tips="面板防御力白字" stepperInteger stepperMin="0" />
       <data-item v-model="extraDEF" title="额外防御力" tips="常驻防御力绿字" stepperInteger stepperMin="0" />
-      <note-group v-model="extraPercentDEF" v-bind="extraPercentDEFNotesConfig"
+      <note-group v-model="extraPercentDEF" v-bind="NotesConfig.percentDEF"
         :selectedNotes="selectedExtraDEFNotes" />
-      <note-group v-model="extraFixedDEF" v-bind="extraFixedDEFNotesConfig" :selectedNotes="selectedFixedDEFNotes" />
+      <note-group v-model="extraFixedDEF" v-bind="NotesConfig.fixedDEF" :selectedNotes="selectedFixedDEFNotes" />
     </div>
-    <div v-show="basicPanelSelect === '攻击力'">
+    <div v-show="basicPanelSelect === basicPanelSelectType.ATK">
       <data-item v-model="baseATK" title="基础攻击力" tips="面板攻击力白字" stepperInteger stepperMin="0" />
       <data-item v-model="extraATK" title="额外攻击力" tips="常驻攻击力绿字" stepperInteger stepperMin="0">
         <van-popover class="data-item-popover" v-model:show="showPopoverExtraATK" placement="left-end">
@@ -84,13 +77,12 @@
           </template>
         </van-popover>
       </data-item>
-      <note-group v-model="extraPercentATK" v-bind="extraPercentATKNotesConfig"
-        :selectedNotes="selectedExtraATKNotes" />
-      <note-group v-model="extraFixedATK" v-bind="extraFixedATKNotesConfig" :selectedNotes="selectedFixedATKNotes" />
+      <note-group v-model="extraPercentATK" v-bind="NotesConfig.percentATK" :selectedNotes="selectedExtraATKNotes" />
+      <note-group v-model="extraFixedATK" v-bind="NotesConfig.fixedATK" :selectedNotes="selectedFixedATKNotes" />
     </div>
-    <div v-show="basicPanelSelect === '元素精通'">
+    <div v-show="basicPanelSelect === basicPanelSelectType.EM">
       <data-item v-model="elementalMystery" title="元素精通" tips="" stepperMin="0" />
-      <note-group v-model="elementalMystery" v-bind="extraFixedEMNotesConfig" :selectedNotes="selectedFixedEMNotes" />
+      <note-group v-model="elementalMystery" v-bind="NotesConfig.fixedEM" :selectedNotes="selectedFixedEMNotes" />
     </div>
     <div class="data-panel__title">技能倍率</div>
     <div class="data-panel__basic">
@@ -115,8 +107,8 @@
     <data-item v-model="additionalDemage" title="伤害提高值" tips="" stepperMin="0" decimalLength="2">
       <van-popover class="data-item-popover" v-model:show="showPopoverExtraRate" placement="left-end">
         <div class="data-item-popover__content">
-          <b>攻击伤害值 = (基础属性x技能最终倍率) + 伤害提高值 + 激化提高值</b><br />
-          <p><b>最终倍率</b> = 技能倍率 x (1 + 倍率增幅) </p>
+          <b>攻击伤害值 = (基础属性x最终倍率) + 伤害提高值 + 激化提高值</b><br />
+          <p><b>最终倍率</b> = 攻击倍率 x (1 + 倍率增幅) </p>
           <p><b>倍率增幅：</b>
             例：宵宫释放元素战技后的普通攻击“造成152%普通攻击伤害”，即“普通攻击<b>倍率增幅</b>为(152%-100%)=<b>52%</b>”；还有行秋4命、安柏2命、流浪者普攻、莱欧斯利普攻、那维莱特重击160%和芙宁娜战技140%。<br />
           </p>
@@ -134,7 +126,7 @@
         </template>
       </van-popover>
     </data-item>
-    <note-group v-model="additionalDemage" v-bind="additionalDemageNotesConfig" :selectedNotes="selectedAdditionalDemageNotes" />
+    <note-group v-model="additionalDemage" v-bind="NotesConfig.additionalDemage" :selectedNotes="selectedAdditionalDemageNotes" />
 
     <data-item v-model="critDemage" title="暴击伤害%" tips="" stepperMin="0" decimalLength="1" />
     <data-item v-model="elementDemage" title="伤害加成%" tips="各种增伤、减伤" stepperMin="-200" decimalLength="2">
@@ -157,12 +149,18 @@
         </template>
       </van-popover>
     </data-item>
-    <note-group v-model="elementDemage" v-bind="elementDemageNotesConfig" :selectedNotes="selectedElementDemageNotes" />
+    <note-group v-model="elementDemage" v-bind="NotesConfig.elementDemage" :selectedNotes="selectedElementDemageNotes" />
     <data-item v-model="characterLevel" title="角色等级" stepperMax="90" stepperMin="1" />
     <data-item v-model="enemyLevel" title="敌人等级" stepperMin="1" />
     
-    <van-cell class="eva-cell" @click="otherChecked = !otherChecked" center title="敌人防御力、抗性调整" is-link
-      :arrow-direction="otherChecked ? 'up' : 'down'" />
+    <van-cell
+      class="eva-cell"
+      @click="otherChecked = !otherChecked"
+      center
+      title="敌人防御力、抗性调整"
+      is-link
+      :arrow-direction="otherChecked ? 'up' : 'down'"
+    />
     <div v-show="otherChecked" class="data-panel">
       <data-item v-model="enemyResistance" title="敌人抗性%" stepperMin="-999">
         <div class="extra-btn" @click="handleImagePreview">查看抗性表</div>
@@ -177,12 +175,12 @@
       <van-radio-group style="margin-top: 12px" v-model="atkType">
         <van-radio name="none" class="atk-type-none">无反应</van-radio>
         <div class="horizontal">
-          <van-radio name="evaporation" class="atk-type-item">
+          <van-radio :name="ElementalReaction.Rate" class="atk-type-item">
             <span class="atk-type-text">水蒸·火融</span>
             <span class="water bg-left"></span>
             <span class="fire bg-right"></span>
           </van-radio>
-          <van-radio name="evaporation2" class="atk-type-item">
+          <van-radio :name="ElementalReaction.Rate2" class="atk-type-item">
             <span class="atk-type-text">冰融·火蒸</span>
             <span class="ice bg-left"></span>
             <span class="fire bg-right"></span>
@@ -198,8 +196,12 @@
         </div>
       </van-radio-group>
     </div>
-    <van-cell v-show="atkType === 'evaporation' || atkType === 'evaporation2'" class="eva-cell" center
-      title="炽烈的炎之魔女，增幅反应伤害提升15%">
+    <van-cell
+      v-show="atkType === ElementalReaction.Rate || atkType === ElementalReaction.Rate2"
+      class="eva-cell"
+      center
+      title="炽烈的炎之魔女，增幅反应伤害提升15%"
+    >
       <template #right-icon>
         <van-switch v-model="witch" active-color="#766461" inactive-color="#b7a19e" size="16" />
       </template>
@@ -256,7 +258,7 @@ import {
   Popover,
 } from "vant";
 import TabTitle from "../component/TabTitle.vue";
-import { computationalFormula } from "../utils";
+import { computationalFormula, getLocalStorage } from "../utils";
 import DataItem from "../component/DataItem.vue";
 import NoteGroup from "../component/NoteGroup.vue";
 import DetailBlock from "../component/Detail.vue";
@@ -264,20 +266,23 @@ import SaveData from "../component/SaveData.vue";
 import AdditionalDemage from "../component/AdditionalDemage.vue";
 import CompositionAnalysis from "../component/CompositionAnalysis.vue";
 import { useStore } from "vuex";
-import { ElementalReaction } from "../constant";
-import { EnhancedDamageNotes } from '../constants/enhancedDamageNotes';
-import { AtkPercentNotes } from '../constants/atkPercentNotes';
-import { AtkFixedNotes } from '../constants/atkFixedNotes';
-import { HpPercentNotes } from '../constants/hpPercentNotes';
-import { DefPercentNotes } from '../constants/defPercentNotes';
-import { DefFixedNotes } from '../constants/defFixedNotes';
-import { EmFixedNotes } from '../constants/emFixedNotes';
+import { ElementalReaction, basicPanelSelectType } from "../constant";
+import {
+  AtkFixedNotes,
+  EnhancedDamageNotes,
+  AtkPercentNotes,
+  HpPercentNotes,
+  DefPercentNotes,
+  DefFixedNotes,
+  EmFixedNotes
+} from '../constants/notes';
 import { EnhancedDemageCalculationMode } from '../constants/calculation-mode/enhancedDemage';
 import { AtkPercentCalculationMode, AtkFixedCalculationMode } from '../constants/calculation-mode/atk';
 import { HpPercentCalculationMode } from '../constants/calculation-mode/hp';
 import { DefPercentCalculationMode, DefFixedCalculationMode } from '../constants/calculation-mode/def';
 import { EmFixedCalculationMode } from '../constants/calculation-mode/em';
 import { AdditionalDemageMode } from '../constants/calculation-mode/additionalDemage';
+import { EventBus } from "../utils";
 
 export default defineComponent({
   name: "increase",
@@ -319,106 +324,114 @@ export default defineComponent({
       store.commit('setBasicPanelSelect', value);
     };
 
-    const extraPercentATKNotesConfig = {
-      title: "攻击力%加成",
-      localStorageName: "GenShinImpactATKNotes",
-      calculationMode: AtkPercentCalculationMode,
-      defaultNotes: AtkPercentNotes,
-      setSelectedNotes: (value) => {
-        store.commit("setSelectedExtraATKNotes", value);
+    const NotesConfig = {
+      percentATK: {
+        title: "攻击力%加成", // 便签组名称
+        localStorageName: "GenShinImpactATKNotes", // 存在本地storage的便签组名称
+        calculationMode: AtkPercentCalculationMode, // 便签组中的快捷计算方式
+        defaultNotes: AtkPercentNotes, // 本地没有保存便签组，则使用该默认便签组
+        setSelectedNotes: (value) => { // 修改便签组方法
+          store.commit("setSelectedExtraATKNotes", value);
+        },
+      },
+      fixedATK: {
+        title: "固定攻击力加成",
+        localStorageName: "GenShinImpactFixedATKNotes",
+        calculationMode: AtkFixedCalculationMode,
+        defaultNotes: AtkFixedNotes,
+        setSelectedNotes: (value) => {
+          store.commit("setSelectedFixedATKNotes", value);
+        },
+      },
+      percentHP: {
+        title: "生命值%加成",
+        localStorageName: "GenShinImpactHPNotes",
+        calculationMode: HpPercentCalculationMode,
+        defaultNotes: HpPercentNotes,
+        setSelectedNotes: (value) => {
+          store.commit("setSelectedExtraHPNotes", value);
+        },
+      },
+      percentDEF: {
+        title: "防御力%加成",
+        localStorageName: "GenShinImpactDEFNotes",
+        calculationMode: DefPercentCalculationMode,
+        defaultNotes: DefPercentNotes,
+        setSelectedNotes: (value) => {
+          store.commit("setSelectedExtraDEFNotes", value);
+        },
+      },
+      fixedDEF: {
+        title: "固定防御力加成",
+        localStorageName: "GenShinImpactFixedDEFNotes",
+        calculationMode: DefFixedCalculationMode,
+        defaultNotes: DefFixedNotes,
+        setSelectedNotes: (value) => {
+          store.commit("setSelectedFixedDEFNotes", value);
+        },
+      },
+      additionalDemage: {
+        title: "伤害提高值",
+        localStorageName: "GenShinImpactADNotes",
+        calculationMode: AdditionalDemageMode,
+        defaultNotes: [],
+        setSelectedNotes: (value) => {
+          store.commit("setSelectedAdditionalDemageNotes", value);
+        },
+      },
+      elementDemage: {
+        title: "伤害加成%",
+        localStorageName: "GenShinImpactEDNotes",
+        calculationMode: EnhancedDemageCalculationMode,
+        defaultNotes: EnhancedDamageNotes,
+        setSelectedNotes: (value) => {
+          store.commit("setSelectedElementDemageNotes", value);
+        },
+      },
+      fixedEM: {
+        title: "元素精通加成",
+        localStorageName: "GenShinImpactFixedEMNotes",
+        calculationMode: EmFixedCalculationMode,
+        defaultNotes: EmFixedNotes,
+        setSelectedNotes: (value) => {
+          store.commit("setSelectedFixedEMNotes", value);
+        },
       },
     };
 
-    const extraFixedATKNotesConfig = {
-      title: "固定攻击力加成",
-      localStorageName: "GenShinImpactFixedATKNotes",
-      calculationMode: AtkFixedCalculationMode,
-      defaultNotes: AtkFixedNotes,
-      setSelectedNotes: (value) => {
-        store.commit("setSelectedFixedATKNotes", value);
-      },
-    };
-
-    const extraPercentHPNotesConfig = {
-      title: "生命值%加成",
-      localStorageName: "GenShinImpactHPNotes",
-      calculationMode: HpPercentCalculationMode,
-      defaultNotes: HpPercentNotes,
-      setSelectedNotes: (value) => {
-        store.commit("setSelectedExtraHPNotes", value);
-      },
-    };
-
-    const extraPercentDEFNotesConfig = {
-      title: "防御力%加成",
-      localStorageName: "GenShinImpactDEFNotes",
-      calculationMode: DefPercentCalculationMode,
-      defaultNotes: DefPercentNotes,
-      setSelectedNotes: (value) => {
-        store.commit("setSelectedExtraDEFNotes", value);
-      },
-    };
-
-    const extraFixedDEFNotesConfig = {
-      title: "固定防御力加成",
-      localStorageName: "GenShinImpactFixedDEFNotes",
-      calculationMode: DefFixedCalculationMode,
-      defaultNotes: DefFixedNotes,
-      setSelectedNotes: (value) => {
-        store.commit("setSelectedFixedDEFNotes", value);
-      },
-    };
-
-    const additionalDemageNotesConfig = {
-      title: "伤害提高值",
-      localStorageName: "GenShinImpactADNotes",
-      calculationMode: AdditionalDemageMode,
-      defaultNotes: [],
-      setSelectedNotes: (value) => {
-        store.commit("setSelectedAdditionalDemageNotes", value);
-      },
-    };
-
-    const elementDemageNotesConfig = {
-      title: "伤害加成%",
-      localStorageName: "GenShinImpactEDNotes",
-      calculationMode: EnhancedDemageCalculationMode,
-      defaultNotes: EnhancedDamageNotes,
-      setSelectedNotes: (value) => {
-        store.commit("setSelectedElementDemageNotes", value);
-      },
-    };
-
-    const extraFixedEMNotesConfig = {
-      title: "元素精通加成",
-      localStorageName: "GenShinImpactFixedEMNotes",
-      calculationMode: EmFixedCalculationMode,
-      defaultNotes: EmFixedNotes,
-      setSelectedNotes: (value) => {
-        store.commit("setSelectedFixedEMNotes", value);
-      },
+    const updateNoteGroup = ({ setSelectedNotes, localStorageName, defaultNotes }, selectedNotes) => {
+      const supplementNotes = []; // 临时组
+      const localNotes = getLocalStorage(localStorageName, defaultNotes); // 获取存储在本地的便签组
+      for (let key in selectedNotes) {
+        // 遍历已选择的便签组，若存在和本地不同的便签，则加入临时组
+        if (!localNotes.find((item) => item.title === key)) {
+          supplementNotes.push({
+            title: key,
+            detail: selectedNotes[key],
+          });
+        }
+      }
+      // 若临时组的长度大于零，则更新本地便签组，并通知对应组件更新便签
+      if (supplementNotes.length > 0) {
+        window.localStorage.setItem(
+          localStorageName,
+          JSON.stringify(supplementNotes.concat(localNotes))
+        );
+        EventBus.$emit(`${localStorageName}Changed`);
+      }
+      setSelectedNotes(selectedNotes);
     };
 
     const recalculationData = (value) => {
-      const {
-        selectedFixedATKNotes,
-        selectedExtraATKNotes,
-        selectedExtraHPNotes,
-        selectedExtraDEFNotes,
-        selectedFixedDEFNotes,
-        selectedFixedEMNotes,
-        selectedElementDemageNotes,
-        selectedAdditionalDemageNotes,
-      } = value;
       store.commit("setUnifiedState", value); // 回填计算器内容
-      store.commit("setSelectedFixedATKNotes", selectedFixedATKNotes); // 回填攻击力便签选择
-      store.commit("setSelectedExtraATKNotes", selectedExtraATKNotes);
-      store.commit("setSelectedExtraHPNotes", selectedExtraHPNotes); // 回填生命值便签
-      store.commit("setSelectedExtraDEFNotes", selectedExtraDEFNotes); // 回填防御值便签
-      store.commit("setSelectedFixedDEFNotes", selectedFixedDEFNotes);
-      store.commit("setSelectedFixedEMNotes", selectedFixedEMNotes); // 回填元素精通便签
-      store.commit("setSelectedElementDemageNotes", selectedElementDemageNotes); // 回填增伤便签选择
-      store.commit("setSelectedAdditionalDemageNotes", selectedAdditionalDemageNotes); // 回填伤害高便签选择
+      updateNoteGroup(NotesConfig.fixedATK, value.selectedFixedATKNotes);
+      updateNoteGroup(NotesConfig.percentATK, value.selectedExtraATKNotes);
+      updateNoteGroup(NotesConfig.fixedDEF, value.selectedFixedDEFNotes);
+      updateNoteGroup(NotesConfig.percentDEF, value.selectedExtraDEFNotes);
+      updateNoteGroup(NotesConfig.percentHP, value.selectedExtraHPNotes);
+      updateNoteGroup(NotesConfig.fixedEM, value.selectedFixedEMNotes);
+      updateNoteGroup(NotesConfig.additionalDemage, value.selectedAdditionalDemageNotes);
+      updateNoteGroup(NotesConfig.elementDemage, value.selectedElementDemageNotes);
     };
 
     const handleImagePreview = () => {
@@ -432,25 +445,19 @@ export default defineComponent({
       ...toRefs(store.state.demageModule),
       ...toRefs(store.state.saveDataModule),
       basicInputPanelSelect,
+      basicPanelSelectType,
       otherChecked,
       floatChecked,
       increaseResult,
       recalculationData,
       handleImagePreview,
       AdditionalDemageMode,
-      elementDemageNotesConfig,
-      extraPercentATKNotesConfig,
-      extraFixedATKNotesConfig,
-      extraPercentHPNotesConfig,
-      extraPercentDEFNotesConfig,
-      extraFixedDEFNotesConfig,
-      extraFixedEMNotesConfig,
-      additionalDemageNotesConfig,
+      NotesConfig,
       ElementalReaction,
     };
   },
 });
-</script>basic-detial
+</script>
 
 <style>
 .data-panel {
@@ -684,3 +691,7 @@ export default defineComponent({
   z-index: 1;
 }
 </style>
+
+
+
+

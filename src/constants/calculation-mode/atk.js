@@ -22,7 +22,7 @@ export const AtkPercentCalculationMode = [
   },
   {
     title: "夏沃蕾",
-    img: '',
+    img: ProfilePhoto.Chevreuse,
     children: [
       {
         title: "纵阵武力统筹",
