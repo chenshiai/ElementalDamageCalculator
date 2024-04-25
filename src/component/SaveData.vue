@@ -35,11 +35,11 @@
     <div class="tips">点击对应数据，可以展开查看详情。支持「重算」「删除」</div>
     <van-collapse
       class="data-popup__collapse"
-      v-if="Object.keys(localData).length > 0"
+      v-if="localData.length > 0"
       v-model="opened"
     >
       <van-collapse-item
-        v-for="(val, name) in localData"
+        v-for="[name, val] in localData"
         :key="name"
         :is-link="false"
         title-class="data-title"
@@ -63,8 +63,8 @@
         <ul class="data-detail">
           <li
             class="data-detail-item"
-            v-for="(item, index) in formatData(val)"
-            :key="index"
+            v-for="item in formatData(val)"
+            :key="item.label"
           >
             <span>{{ item.label }}</span>
             <span>{{ item.value }}</span>
@@ -84,6 +84,7 @@ import {
   getLocalStorage,
   deepCopyObject,
   computationalFormula,
+  EventBus,
 } from "../utils";
 import { AtkTypeText } from "../constant";
 
@@ -100,12 +101,16 @@ export default defineComponent({
     [CollapseItem.name]: CollapseItem,
   },
 
-  setup(props, { emit }) {
+  props: {
+    notesConfig: Object,
+  },
+
+  setup(props) {
     const showPopup = ref(false);
     const showDataPopup = ref(false);
     const remark = ref("");
     const store = useStore();
-    const localData = ref(getLocalStorage("GenShinImpactCustomData", {}));
+    const localData = ref(getLocalStorage("GenShinImpactCustomData", []));
     const opened = ref([]);
 
     const config = computed(() => {
@@ -174,7 +179,7 @@ export default defineComponent({
           value: elementalMystery,
         },
         {
-          label: "伤害值提升",
+          label: "伤害提高值",
           value: additionalDemage,
         },
         {
@@ -247,15 +252,18 @@ export default defineComponent({
       }
       const { demageModule, saveDataModule } = store.state;
       try {
-        const sourceData = getLocalStorage("GenShinImpactCustomData", {});
-        sourceData[remark.value] = deepCopyObject({
-          ...demageModule,
-          ...saveDataModule,
-        });
+        const sourceData = new Map(getLocalStorage("GenShinImpactCustomData", []));
+        sourceData.set(
+          remark.value,
+          deepCopyObject({
+            ...demageModule,
+            ...saveDataModule,
+          })
+        );
 
         window.localStorage.setItem(
           "GenShinImpactCustomData",
-          JSON.stringify(sourceData)
+          JSON.stringify([...sourceData])
         );
         Toast.success("保存成功");
         remark.value = "";
@@ -267,7 +275,7 @@ export default defineComponent({
 
     const lookDataPop = () => {
       showDataPopup.value = true;
-      localData.value = getLocalStorage("GenShinImpactCustomData", {});
+      localData.value = getLocalStorage("GenShinImpactCustomData", []);
     };
 
     const getLabel = (val) => {
@@ -278,23 +286,53 @@ export default defineComponent({
 
     const deleteLocalData = (name) => {
       try {
-        const sourceData = getLocalStorage("GenShinImpactCustomData", {});
-        delete sourceData[name];
+        const sourceData = new Map(getLocalStorage("GenShinImpactCustomData", []));
+        sourceData.delete(name);
 
         window.localStorage.setItem(
           "GenShinImpactCustomData",
-          JSON.stringify(sourceData)
+          JSON.stringify([...sourceData])
         );
-        localData.value = sourceData;
+        localData.value = [...sourceData];
         Toast.success("删除成功");
       } catch {
         Toast.fail("删除失败");
       }
     };
 
+    const updateNoteGroup = ({ setSelectedNotes, localStorageName, defaultNotes }, selectedNotes) => {
+      const supplementNotes = []; // 临时组
+      const localNotes = new Map(getLocalStorage(localStorageName, defaultNotes)); // 获取存储在本地的便签组
+      for (let [key, value] of selectedNotes) {
+        // 遍历已选择的便签组，若存在和本地不同的便签，则加入临时组
+        if (!localNotes.get(key)) {
+          supplementNotes.push([key, value]);
+        }
+      }
+      // 若临时组的长度大于零，则更新本地便签组，并通知对应组件更新便签
+      if (supplementNotes.length > 0) {
+        window.localStorage.setItem(
+          localStorageName,
+          JSON.stringify(supplementNotes.concat(Array.from(localNotes)))
+        );
+        EventBus.$emit(`${localStorageName}Changed`);
+      }
+      setSelectedNotes(selectedNotes);
+    };
+
     const recalculation = (value) => {
-      showPopup.value = false;
-      emit("recalculationData", value);
+      showDataPopup.value = false;
+      // let value = deepCopyObject(val);
+      store.commit("setUnifiedState", value); // 回填计算器内容
+      const NotesConfig = props.notesConfig;
+      updateNoteGroup(NotesConfig.fixedATK, value.selectedFixedATKNotes);
+      updateNoteGroup(NotesConfig.percentATK, value.selectedExtraATKNotes);
+      updateNoteGroup(NotesConfig.fixedDEF, value.selectedFixedDEFNotes);
+      updateNoteGroup(NotesConfig.percentDEF, value.selectedExtraDEFNotes);
+      updateNoteGroup(NotesConfig.percentHP, value.selectedExtraHPNotes);
+      updateNoteGroup(NotesConfig.fixedEM, value.selectedFixedEMNotes);
+      updateNoteGroup(NotesConfig.additionalDemage, value.selectedAdditionalDemageNotes);
+      updateNoteGroup(NotesConfig.elementDemage, value.selectedElementDemageNotes);
     };
 
     return {

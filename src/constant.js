@@ -20,6 +20,7 @@ export const AtkTypeText = {
   [ElementalReaction.Rate2]: '1.5倍增幅',
   [ElementalReaction.Aggravate]: '超激化',
   [ElementalReaction.Spread]: '蔓激化',
+  'none': "无反应",
 }
 
 export const ReactionRate = {

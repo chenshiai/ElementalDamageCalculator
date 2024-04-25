@@ -156,52 +156,52 @@ const demageModule = {
 const saveDataModule = {
   state: () => {
     return {
-      selectedFixedATKNotes: {}, // 固定攻击加成便签
-      selectedExtraATKNotes: {}, // 百分比攻击加成便签
+      selectedFixedATKNotes: [], // 固定攻击加成便签
+      selectedExtraATKNotes: [], // 百分比攻击加成便签
 
-      selectedFixedDEFNotes: {}, // 固定防御加成便签
-      selectedExtraDEFNotes: {}, // 百分比防御加成便签
+      selectedFixedDEFNotes: [], // 固定防御加成便签
+      selectedExtraDEFNotes: [], // 百分比防御加成便签
 
-      selectedFixedHPNotes: {}, // 固定生命加成便签
-      selectedExtraHPNotes: {}, // 百分比生命加成便签
+      selectedFixedHPNotes: [], // 固定生命加成便签
+      selectedExtraHPNotes: [], // 百分比生命加成便签
 
-      selectedFixedEMNotes: {}, // 固定元素精通加成便签
+      selectedFixedEMNotes: [], // 固定元素精通加成便签
 
-      selectedElementDemageNotes: {}, // 伤害倍率加成便签
-      selectedAdditionalDemageNotes: {}, // 伤害提升值便签
+      selectedElementDemageNotes: [], // 伤害倍率加成便签
+      selectedAdditionalDemageNotes: [], // 伤害提升值便签
     }
   },
   mutations: {
     setSelectedFixedATKNotes(state, value) {
-      state.selectedFixedATKNotes = value || {};
+      state.selectedFixedATKNotes = value || [];
     },
     setSelectedExtraATKNotes(state, value) {
-      state.selectedExtraATKNotes = value || {};
+      state.selectedExtraATKNotes = value || [];
     },
 
     setSelectedFixedDEFNotes(state, value) {
-      state.selectedFixedDEFNotes = value || {};
+      state.selectedFixedDEFNotes = value || [];
     },
     setSelectedExtraDEFNotes(state, value) {
-      state.selectedExtraDEFNotes = value || {};
+      state.selectedExtraDEFNotes = value || [];
     },
 
     setSelectedFixedHPNotes(state, value) {
-      state.selectedFixedHPNotes = value || {};
+      state.selectedFixedHPNotes = value || [];
     },
     setSelectedExtraHPNotes(state, value) {
-      state.selectedExtraHPNotes = value || {};
+      state.selectedExtraHPNotes = value || [];
     },
 
     setSelectedFixedEMNotes(state, value) {
-      state.selectedFixedEMNotes = value || {};
+      state.selectedFixedEMNotes = value || [];
     },
 
     setSelectedElementDemageNotes(state, value) {
-      state.selectedElementDemageNotes = value || {};
+      state.selectedElementDemageNotes = value || [];
     },
     setSelectedAdditionalDemageNotes(state, value) {
-      state.selectedAdditionalDemageNotes = value || {};
+      state.selectedAdditionalDemageNotes = value || [];
     }
   }
 }

@@ -11,18 +11,18 @@
     <div v-show="localNotes && isExpand" class="data-notes">
       <div class="add-note-button" @click="showPopup = true">＋新增便签</div>
       <div
-        v-for="item in localNotes"
-        :key="item.title"
-        :class="['memo', (selectedNotes[item.title] >= 0) && 'selected']"
+        v-for="[name, value] of localNotes"
+        :key="name"
+        :class="['memo', (showSelectedNotes.get(name) >= 0) && 'selected']"
       >
-        <div @click="selectMemo(item)">
+        <div @click="selectMemo(name, value)">
           <div class="memo-detail">
-            {{ formatMemoDetail(item.detail) }}
+            {{ formatMemoDetail(value) }}
           </div>
-          <div class="memo-title">{{ item.title }}</div>
+          <div class="memo-title">{{ name }}</div>
         </div>
         <van-icon
-          @click="deleteMemo(item)"
+          @click="deleteMemo(name, value)"
           class="memo-close"
           name="delete-o"
         />
@@ -93,7 +93,7 @@
 <script>
 import { defineComponent, onMounted, reactive, ref, computed } from "vue";
 import { Cell, Icon, Popup, Field, Form, Toast, Button, Tab, Tabs, Grid, GridItem } from "vant";
-import { deepCopyObject, floatNum, getLocalStorage } from "../utils";
+import { floatNum, getLocalStorage } from "../utils";
 import { EventBus } from "../utils";
 
 export default defineComponent({
@@ -118,16 +118,17 @@ export default defineComponent({
     modelValue: String | Number, // 关联数据
     title: String, // 便签组名称
     defaultNotes: Array, // 默认便签列表
-    selectedNotes: Object, // store中已选择的便签
+    selectedNotes: Array, // store中已选择的便签
     setSelectedNotes: Function, // store中更新选择便签的方法
     calculationMode: Array, // 便签表单计算公式
     localStorageName: String, // 本地便签列表名称
   },
 
   setup(props, { emit }) {
-    const localNotes = ref([]);
+    const localNotes = ref(new Map());
     const isExpand = ref(false);
     const showPopup = ref(false);
+    let selectedMemos = new Map([]);
 
     const active = ref(0);
     const childrenActive = ref(0);
@@ -139,6 +140,11 @@ export default defineComponent({
 
     const calculationModeChildren = computed(() => {
       return props.calculationMode[active.value].children || [];
+    });
+
+    const showSelectedNotes = computed(() => {
+      selectedMemos = new Map(props.selectedNotes);
+      return selectedMemos;
     });
 
     const handleClose = () => {
@@ -159,7 +165,6 @@ export default defineComponent({
 
     /** 更新本地localstorage便签组 */
     const updateNoteGroup = (value) => {
-      localNotes.value = value;
       window.localStorage.setItem(
         props.localStorageName,
         JSON.stringify(value)
@@ -167,57 +172,52 @@ export default defineComponent({
     };
 
     /** 点击便签事件 */
-    const selectMemo = (item) => {
-      const key = item.title;
-      const detail = +item.detail;
-      const selectedMemos = deepCopyObject(props.selectedNotes);
-      if (selectedMemos[key]) {
+    const selectMemo = (name, value) => {
+      if (selectedMemos.get(name)) {
         // 如果该便签在【已选择便签】中，则减去该便签的值，再从【已选择便签】里移除
-        const res = floatNum(+props.modelValue - +selectedMemos[key], 2);
+        const res = floatNum(+props.modelValue - +value, 2);
         if (res >= 0) {
           changeValue(res);
         }
-        delete selectedMemos[key];
+        selectedMemos.delete(name);
       } else {
         // 若不在【已选择便签】中，则在【已选择便签】里新增。并加上该便签的值。
-        selectedMemos[key] = detail;
-        changeValue(floatNum(+props.modelValue + +selectedMemos[key], 2));
+        selectedMemos.set(name, value);
+        changeValue(floatNum(+props.modelValue + +value, 2));
       }
       // 最后将变更后的【已选择便签】写入store
-      props.setSelectedNotes(selectedMemos);
+      props.setSelectedNotes([...selectedMemos]);
     };
 
-    const deleteMemo = (item) => {
-      const key = item.title;
+    const deleteMemo = (name, value) => {
       // 筛选被删除的便签后更新本地便签组
-      const notesFilter = localNotes.value.filter((item) => item.title !== key);
-      updateNoteGroup(notesFilter);
+      localNotes.value.delete(name);
+      updateNoteGroup([...localNotes.value]);
 
       // 如果被删除的便签在【已选择便签】中，则减去该便签的值，并从【已选择便签】中移除
-      const selectedMemos = deepCopyObject(props.selectedNotes);
-      if (selectedMemos[key]) {
-        changeValue(floatNum(+props.modelValue - +selectedMemos[key], 2));
-        delete selectedMemos[key];
-        props.setSelectedNotes(selectedMemos);
+      if (selectedMemos.get(name)) {
+        changeValue(floatNum(+props.modelValue - +value, 2));
+        selectedMemos.delete(name);
+        props.setSelectedNotes([...selectedMemos]);
       }
     };
 
     // 新增便签
     const onSubmit = (value) => {
       const { getResult } = calculationModeChildren.value[childrenActive.value];
-      const noteValue = {
-        detail: getResult(value),
-        title: newMemo.title,
-      };
-      // 自动选中新建的标签
-      selectMemo(noteValue);
+      const name = newMemo.title;
+      const val = getResult(value);
 
+      // 自动选中新建的标签
+      selectMemo(name, val);
+      localNotes.value = new Map([[name, val]].concat([...localNotes.value]));
+      
       // 将表单值设为初始值
       newMemo.title = "";
       temporaryData.value = {};
 
       // 拼接新的标签组并更新到localstorage
-      updateNoteGroup([noteValue].concat(localNotes.value));
+      updateNoteGroup([...localNotes.value]);
       Toast.success("添加成功");
     };
 
@@ -228,12 +228,13 @@ export default defineComponent({
 
     const getLocalNotes = () => {
       const { localStorageName, defaultNotes = [] } = props;
-      // 根据名称读取本地便签组
-      localNotes.value = getLocalStorage(
+      // 根据名称读取本地便签组，并将其转为Map，方便后续操作
+      localNotes.value = new Map(getLocalStorage(
         localStorageName,
         defaultNotes,
         `${localStorageName}读取失败`
-      );
+      ));
+       console.log(localNotes.value);
       console.log('读取本地：', localStorageName);
     }
 
@@ -246,6 +247,7 @@ export default defineComponent({
       active,
       childrenActive,
       localNotes,
+      selectedMemos,
       isExpand,
       calculationModeChildren,
       newMemo,
@@ -258,6 +260,7 @@ export default defineComponent({
       onSubmit,
       formatMemoDetail,
       defaultTitleSetting,
+      showSelectedNotes,
     };
   },
 });

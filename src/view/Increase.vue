@@ -59,8 +59,7 @@
     <div v-show="basicPanelSelect === basicPanelSelectType.DEF">
       <data-item v-model="baseDEF" title="基础防御力" tips="面板防御力白字" stepperInteger stepperMin="0" />
       <data-item v-model="extraDEF" title="额外防御力" tips="常驻防御力绿字" stepperInteger stepperMin="0" />
-      <note-group v-model="extraPercentDEF" v-bind="NotesConfig.percentDEF"
-        :selectedNotes="selectedExtraDEFNotes" />
+      <note-group v-model="extraPercentDEF" v-bind="NotesConfig.percentDEF" :selectedNotes="selectedExtraDEFNotes" />
       <note-group v-model="extraFixedDEF" v-bind="NotesConfig.fixedDEF" :selectedNotes="selectedFixedDEFNotes" />
     </div>
     <div v-show="basicPanelSelect === basicPanelSelectType.ATK">
@@ -240,7 +239,7 @@
       <van-switch v-model="floatChecked" active-color="#766461" inactive-color="#b7a19e" size="16" />
     </template>
   </van-cell>
-  <save-data @recalculationData="recalculationData" />
+  <save-data :notesConfig="NotesConfig" />
 </template>
 
 <script>
@@ -399,41 +398,6 @@ export default defineComponent({
       },
     };
 
-    const updateNoteGroup = ({ setSelectedNotes, localStorageName, defaultNotes }, selectedNotes) => {
-      const supplementNotes = []; // 临时组
-      const localNotes = getLocalStorage(localStorageName, defaultNotes); // 获取存储在本地的便签组
-      for (let key in selectedNotes) {
-        // 遍历已选择的便签组，若存在和本地不同的便签，则加入临时组
-        if (!localNotes.find((item) => item.title === key)) {
-          supplementNotes.push({
-            title: key,
-            detail: selectedNotes[key],
-          });
-        }
-      }
-      // 若临时组的长度大于零，则更新本地便签组，并通知对应组件更新便签
-      if (supplementNotes.length > 0) {
-        window.localStorage.setItem(
-          localStorageName,
-          JSON.stringify(supplementNotes.concat(localNotes))
-        );
-        EventBus.$emit(`${localStorageName}Changed`);
-      }
-      setSelectedNotes(selectedNotes);
-    };
-
-    const recalculationData = (value) => {
-      store.commit("setUnifiedState", value); // 回填计算器内容
-      updateNoteGroup(NotesConfig.fixedATK, value.selectedFixedATKNotes);
-      updateNoteGroup(NotesConfig.percentATK, value.selectedExtraATKNotes);
-      updateNoteGroup(NotesConfig.fixedDEF, value.selectedFixedDEFNotes);
-      updateNoteGroup(NotesConfig.percentDEF, value.selectedExtraDEFNotes);
-      updateNoteGroup(NotesConfig.percentHP, value.selectedExtraHPNotes);
-      updateNoteGroup(NotesConfig.fixedEM, value.selectedFixedEMNotes);
-      updateNoteGroup(NotesConfig.additionalDemage, value.selectedAdditionalDemageNotes);
-      updateNoteGroup(NotesConfig.elementDemage, value.selectedElementDemageNotes);
-    };
-
     const handleImagePreview = () => {
       ImagePreview(["http://saomdpb.com/IMG_1457.PNG"]);
     };
@@ -449,7 +413,6 @@ export default defineComponent({
       otherChecked,
       floatChecked,
       increaseResult,
-      recalculationData,
       handleImagePreview,
       AdditionalDemageMode,
       NotesConfig,
