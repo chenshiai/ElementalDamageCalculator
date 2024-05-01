@@ -47,39 +47,39 @@ export const AdditionalDemageMode = [
       },
     ]
   },
-  // {
-  //   title: "阿蕾奇诺",
-  //   img: "",
-  //   children: [
-  //     {
-  //       title: "死红之宴",
-  //       fields: [
-  //         {
-  //           name: "con",
-  //           label: "生命之契",
-  //           placeholder: "输入角色的生命之契%(20~200)",
-  //           type: "number",
-  //         },
-  //         {
-  //           name: "lv",
-  //           label: "天赋等级",
-  //           placeholder: "输入角色的天赋等级",
-  //           type: "number",
-  //         },
-  //         {
-  //           name: "atk",
-  //           label: "攻击力",
-  //           placeholder: "输入角色的攻击力",
-  //           type: "number",
-  //         }
-  //       ],
-  //       getResult: ({con, lv, atk}) => {
-  //         lv = LVLimit(lv);
-  //         return atk * con / 100 * Magnification.Arlecchino[lv - 1]; 
-  //       },
-  //     }
-  //   ],
-  // },
+  {
+    title: "阿蕾奇诺",
+    img: ProfilePhoto.Arlecchino,
+    children: [
+      {
+        title: "死红之宴",
+        fields: [
+          {
+            name: "con",
+            label: "生命之契",
+            placeholder: "输入角色的生命之契%(30~200)",
+            type: "number",
+          },
+          {
+            name: "lv",
+            label: "天赋等级",
+            placeholder: "输入角色的天赋等级",
+            type: "number",
+          },
+          {
+            name: "atk",
+            label: "攻击力",
+            placeholder: "输入角色的攻击力",
+            type: "number",
+          }
+        ],
+        getResult: ({con, lv, atk}) => {
+          lv = LVLimit(lv);
+          return atk * con / 100 * Magnification.Arlecchino[lv - 1]; 
+        },
+      }
+    ],
+  },
   {
     title: "云堇",
     img: ProfilePhoto.YunJin,

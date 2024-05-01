@@ -326,7 +326,7 @@ export default defineComponent({
     const NotesConfig = {
       percentATK: {
         title: "攻击力%加成", // 便签组名称
-        localStorageName: "GenShinImpactATKNotes", // 存在本地storage的便签组名称
+        localStorageName: "GenShinImpactATKNotesV2", // 存在本地storage的便签组名称
         calculationMode: AtkPercentCalculationMode, // 便签组中的快捷计算方式
         defaultNotes: AtkPercentNotes, // 本地没有保存便签组，则使用该默认便签组
         setSelectedNotes: (value) => { // 修改便签组方法
@@ -335,7 +335,7 @@ export default defineComponent({
       },
       fixedATK: {
         title: "固定攻击力加成",
-        localStorageName: "GenShinImpactFixedATKNotes",
+        localStorageName: "GenShinImpactFixedATKNotesV2",
         calculationMode: AtkFixedCalculationMode,
         defaultNotes: AtkFixedNotes,
         setSelectedNotes: (value) => {
@@ -344,7 +344,7 @@ export default defineComponent({
       },
       percentHP: {
         title: "生命值%加成",
-        localStorageName: "GenShinImpactHPNotes",
+        localStorageName: "GenShinImpactHPNotesV2",
         calculationMode: HpPercentCalculationMode,
         defaultNotes: HpPercentNotes,
         setSelectedNotes: (value) => {
@@ -353,7 +353,7 @@ export default defineComponent({
       },
       percentDEF: {
         title: "防御力%加成",
-        localStorageName: "GenShinImpactDEFNotes",
+        localStorageName: "GenShinImpactDEFNotesV2",
         calculationMode: DefPercentCalculationMode,
         defaultNotes: DefPercentNotes,
         setSelectedNotes: (value) => {
@@ -362,7 +362,7 @@ export default defineComponent({
       },
       fixedDEF: {
         title: "固定防御力加成",
-        localStorageName: "GenShinImpactFixedDEFNotes",
+        localStorageName: "GenShinImpactFixedDEFNotesV2",
         calculationMode: DefFixedCalculationMode,
         defaultNotes: DefFixedNotes,
         setSelectedNotes: (value) => {
@@ -371,7 +371,7 @@ export default defineComponent({
       },
       additionalDemage: {
         title: "伤害提高值",
-        localStorageName: "GenShinImpactADNotes",
+        localStorageName: "GenShinImpactADNotesV2",
         calculationMode: AdditionalDemageMode,
         defaultNotes: [],
         setSelectedNotes: (value) => {
@@ -380,7 +380,7 @@ export default defineComponent({
       },
       elementDemage: {
         title: "伤害加成%",
-        localStorageName: "GenShinImpactEDNotes",
+        localStorageName: "GenShinImpactEDNotesV2",
         calculationMode: EnhancedDemageCalculationMode,
         defaultNotes: EnhancedDamageNotes,
         setSelectedNotes: (value) => {
@@ -389,7 +389,7 @@ export default defineComponent({
       },
       fixedEM: {
         title: "元素精通加成",
-        localStorageName: "GenShinImpactFixedEMNotes",
+        localStorageName: "GenShinImpactFixedEMNotesV2",
         calculationMode: EmFixedCalculationMode,
         defaultNotes: EmFixedNotes,
         setSelectedNotes: (value) => {

@@ -110,7 +110,7 @@ export default defineComponent({
     const showDataPopup = ref(false);
     const remark = ref("");
     const store = useStore();
-    const localData = ref(getLocalStorage("GenShinImpactCustomData", []));
+    const localData = ref(getLocalStorage("GenShinImpactCustomDataV2", []));
     const opened = ref([]);
 
     const config = computed(() => {
@@ -252,7 +252,7 @@ export default defineComponent({
       }
       const { demageModule, saveDataModule } = store.state;
       try {
-        const sourceData = new Map(getLocalStorage("GenShinImpactCustomData", []));
+        const sourceData = new Map(getLocalStorage("GenShinImpactCustomDataV2", []));
         sourceData.set(
           remark.value,
           deepCopyObject({
@@ -262,7 +262,7 @@ export default defineComponent({
         );
 
         window.localStorage.setItem(
-          "GenShinImpactCustomData",
+          "GenShinImpactCustomDataV2",
           JSON.stringify([...sourceData])
         );
         Toast.success("保存成功");
@@ -275,7 +275,7 @@ export default defineComponent({
 
     const lookDataPop = () => {
       showDataPopup.value = true;
-      localData.value = getLocalStorage("GenShinImpactCustomData", []);
+      localData.value = getLocalStorage("GenShinImpactCustomDataV2", []);
     };
 
     const getLabel = (val) => {
@@ -286,11 +286,11 @@ export default defineComponent({
 
     const deleteLocalData = (name) => {
       try {
-        const sourceData = new Map(getLocalStorage("GenShinImpactCustomData", []));
+        const sourceData = new Map(getLocalStorage("GenShinImpactCustomDataV2", []));
         sourceData.delete(name);
 
         window.localStorage.setItem(
-          "GenShinImpactCustomData",
+          "GenShinImpactCustomDataV2",
           JSON.stringify([...sourceData])
         );
         localData.value = [...sourceData];

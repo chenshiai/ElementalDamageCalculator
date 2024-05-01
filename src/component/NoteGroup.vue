@@ -234,7 +234,6 @@ export default defineComponent({
         defaultNotes,
         `${localStorageName}读取失败`
       ));
-       console.log(localNotes.value);
       console.log('读取本地：', localStorageName);
     }
 
