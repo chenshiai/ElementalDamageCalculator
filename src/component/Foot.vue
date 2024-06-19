@@ -1,7 +1,8 @@
 <template>
   <div class="foot">
-    <div class="foot-title" @click="show = true">更新日志</div>
-    <van-popup
+    <div class="foot-title" @click="show = !show">更新日志</div>
+    
+    <VantPopup
       teleport="#app"
       position="bottom"
       v-model:show="show"
@@ -162,26 +163,15 @@
         2021-02-26:
         角色等级初始值设置为80级，元素精通初始值设置为786，增幅反应加成刚好是100整。
       </p>
-    </van-popup>
+    </VantPopup>
   </div>
 </template>
 
-<script>
-import { Popup } from "vant";
-import { defineComponent, ref } from "vue";
+<script setup>
+import { Popup as VantPopup } from "vant";
+import { ref } from "vue";
 
-export default defineComponent({
-  name: "foot",
-
-  components: {
-    [Popup.name]: Popup,
-  },
-
-  setup() {
-    const show = ref(false);
-    return { show };
-  },
-});
+const show = ref(false);
 </script>
 
 <style>

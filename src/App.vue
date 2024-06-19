@@ -25,20 +25,11 @@
       </keep-alive>
     </router-view>
   </div>
-  <foot />
+  <Foot />
 </template>
 
-<script>
-import { defineComponent } from "vue";
+<script setup>
 import Foot from "./component/Foot.vue";
-
-export default defineComponent({
-  name: "DamageCalculator",
-
-  components: {
-    [Foot.name]: Foot,
-  },
-});
 </script>
 
 <style>

@@ -239,7 +239,7 @@
       <van-switch v-model="floatChecked" active-color="#766461" inactive-color="#b7a19e" size="16" />
     </template>
   </van-cell>
-  <save-data :notesConfig="NotesConfig" />
+  <SaveData :notes-config="NotesConfig" />
 </template>
 
 <script>
@@ -287,13 +287,13 @@ export default defineComponent({
   name: "increase",
 
   components: {
+    SaveData,
     [Icon.name]: Icon,
     [Cell.name]: Cell,
     [Radio.name]: Radio,
     [Switch.name]: Switch,
     [Slider.name]: Slider,
     [Stepper.name]: Stepper,
-    [SaveData.name]: SaveData,
     [DataItem.name]: DataItem,
     [TabTitle.name]: TabTitle,
     [Popover.name]: Popover,
