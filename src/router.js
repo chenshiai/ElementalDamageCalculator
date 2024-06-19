@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import Elemental from "./view/Elemental.vue";
-import Increase from "./view/Increase.vue";
+import SingleCalculation from "./view/single-calculation/index.vue";
 import Question from "./view/Question.vue";
 import CloudTeam from "./view/CloudTeam.vue";
 import Shield from "./view/shield.vue";
@@ -11,7 +11,7 @@ const route = createRouter({
   routes: [
     { path: "/", component: Elemental },
     { path: "/shield", component: Shield },
-    { path: "/increasing-range", component: Increase },
+    { path: "/increasing-range", component: SingleCalculation },
     { path: "/question-answer", component: Question },
     {
       path: "/cloud-team",
