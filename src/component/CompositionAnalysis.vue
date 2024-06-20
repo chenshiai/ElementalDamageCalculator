@@ -29,7 +29,7 @@ export default defineComponent({
   setup() {
     const store = useStore();
     const showPopup = ref(false);
-    const compositionAnalysis = computed(() => computationalFormula(store.state.demageModule).compositionAnalysis);
+    const compositionAnalysis = computed(() => computationalFormula(store.state.damageModule).compositionAnalysis);
     const calculateHeight = (target) => {
       return target / compositionAnalysis.value.CRIT_DMG * 520 + 'px';
     };

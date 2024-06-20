@@ -1,0 +1,156 @@
+.base-data {
+    line-height: 24px;
+  }
+  
+  .base-data-item {
+    margin-bottom: 8px;
+  }
+  
+  .base-data .van-stepper--round .van-stepper__minus {
+    color: var(--button-bg);
+    border-color: var(--button-bg);
+  }
+  .base-data .van-stepper--round .van-stepper__plus {
+    border: none;
+    color: #fff;
+    background-color: var(--button-bg);
+  }
+  
+  .base-data .van-stepper.van-stepper--round {
+    margin-left: 18px;
+  }
+  
+  .van-slider {
+    margin-bottom: 22px;
+    margin-top: 12px;
+  }
+  
+  .holy-relic {
+    /* margin-top: 24px; */
+    margin-bottom: 16px;
+  }
+  
+  .holy-relic-tips {
+    font-size: 12px;
+    margin-left: 4px;
+    color: var(--tip-text);
+  }
+  
+  .elemental-slider-button {
+    background-color: #766461;
+    color: #fff;
+    padding: 2px 4px;
+    border-radius: 4px;
+  }
+  
+  .holy-relic__title {
+    margin-bottom: 12px;
+  }
+  
+  .base-damage__input {
+    line-height: 24px;
+    width: 80px;
+    font-size: 16px;
+    font-weight: bold;
+    box-sizing: border-box;
+  }
+  
+  .holy-relic__check {
+    display: flex;
+  }
+  
+  .holy-relic-content {
+    display: inline-block;
+    flex: 1;
+    white-space: nowrap;
+    text-align: center;
+    padding: 0 2px;
+    font-size: 14px;
+    opacity: 0.3;
+  }
+  
+  .holy-relic__img {
+    width: 70px;
+    height: 70px;
+    border-radius: 6px;
+  }
+  
+  .damage-tag {
+    line-height: 20px;
+    border-bottom: 2px solid var(--button-bg);
+    font-weight: bold;
+    margin-bottom: 12px;
+    min-width: 30%;
+  }
+  
+  .damage-tag__title {
+    margin-right: 6px;
+    font-size: 20px;
+  }
+  
+  .elector {
+    color: #bd00bd;
+  }
+  
+  .overload {
+    color: #c9295e;
+  }
+  
+  .shatter {
+    color: #86898b;
+  }
+  
+  .swirl {
+    color: #7ef1b2;
+  }
+  
+  .superconduct {
+    color: #7ee9f1;
+  }
+  
+  .crystallize {
+    color: #ffce2d;
+  }
+  
+  .bloom {
+    color: #00e851;
+  }
+  
+  .aggravate {
+    color: #D28CFB;
+  }
+  
+  .burning {
+    color: #FC980A;
+  }
+  
+  .witch {
+    color: #f51e1e;
+  }
+  
+  .thunder {
+    color: #ce1dfa;
+  }
+  
+  .emerald {
+    color: #2ee27f;
+  }
+  
+  .eden {
+    color: #a75eb9;
+  }
+  
+  .active {
+    opacity: 1;
+  }
+  
+  .result {
+    margin-bottom: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .shield-data {
+    text-align: center;
+    font-size: 20px;
+  }

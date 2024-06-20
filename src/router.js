@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory } from "vue-router";
-import Elemental from "./view/Elemental.vue";
-import SingleCalculation from "./view/single-calculation/index.vue";
+import Elemental from "./view/elemental/elemental.vue";
+import SingleCalculation from "./view/single-calculation/single-calculation.vue";
 import Question from "./view/Question.vue";
 import CloudTeam from "./view/CloudTeam.vue";
 import Shield from "./view/shield.vue";

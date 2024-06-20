@@ -90,16 +90,16 @@
   text-align: center;
 }
 
-.normal-demage {
+.normal-damage {
   font-size: 20px;
 }
 
-.crit-demage {
+.crit-damage {
   font-size: 26px;
 }
 
-.normal-demage,
-.crit-demage {
+.normal-damage,
+.crit-damage {
   font-weight: bold;
   line-height: 26px;
 }

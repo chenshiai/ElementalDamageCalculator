@@ -99,7 +99,7 @@ const props = defineProps({
 
 
 const config = computed(() => {
-  return formatData(store.state.demageModule);
+  return formatData(store.state.damageModule);
 });
 const formatData = (value) => {
   const {
@@ -235,13 +235,13 @@ const saveData = () => {
     Toast.fail("数据命名为空");
     return;
   }
-  const { demageModule, saveDataModule } = store.state;
+  const { damageModule, saveDataModule } = store.state;
   try {
     const sourceData = new Map(getLocalStorage("GenShinImpactCustomDataV2", []));
     sourceData.set(
       remark.value,
       deepCopyObject({
-        ...demageModule,
+        ...damageModule,
         ...saveDataModule,
       })
     );

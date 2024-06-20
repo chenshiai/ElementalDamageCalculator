@@ -1,7 +1,7 @@
 import { createStore } from "vuex";
 import { basicPanelSelectType } from "../constant";
 
-const demageModule = {
+const damageModule = {
   state: () => {
     return {
       baseATK: 900, // 基础攻击
@@ -209,7 +209,7 @@ const saveDataModule = {
 
 const store = createStore({
   modules: {
-    demageModule,
+    damageModule,
     saveDataModule,
   },
 });

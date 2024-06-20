@@ -221,13 +221,13 @@
     <div class="result-grid">
       <div class="grid-item">
         伤害数值
-        <div class="normal-demage">
+        <div class="normal-damage">
           {{ increaseResult.common }}
         </div>
       </div>
       <div class="grid-item">
         暴击伤害
-        <div class="crit-demage">
+        <div class="crit-damage">
           {{ increaseResult.crit }}
         </div>
       </div>
@@ -305,7 +305,7 @@ export default {
     const store = useStore();
 
     const increaseResult = computed(() => {
-      return computationalFormula(store.state.demageModule);
+      return computationalFormula(store.state.damageModule);
     });
 
     const basicInputPanelSelect = (value) => {
@@ -395,7 +395,7 @@ export default {
       showPopoverExtraRate,
       showPopoverExtraATK,
       ...toRefs(store.getters),
-      ...toRefs(store.state.demageModule),
+      ...toRefs(store.state.damageModule),
       ...toRefs(store.state.saveDataModule),
       basicInputPanelSelect,
       basicPanelSelectType,

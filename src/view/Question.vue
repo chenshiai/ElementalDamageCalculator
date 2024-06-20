@@ -1,5 +1,5 @@
 <template>
-  <tab-title>一些常见问题</tab-title>
+  <TabTitle>一些常见问题</TabTitle>
   <span class="question-title">【反馈渠道】</span>
   <div>
     如果对这个计算器有什么看法或建议，可以在这篇帖子下留言反馈。
@@ -45,28 +45,7 @@
   </div>
 </template>
 
-<script>
-import { defineComponent } from "vue";
-import TabTitle from "../component/TabTitle.vue";
-import { ImagePreview } from "vant";
-
-export default defineComponent({
-  name: "question",
-
-  components: {
-    [TabTitle.name]: TabTitle,
-  },
-
-  methods: {
-    imagePreview() {
-      ImagePreview(['http://saomdpb.com/IMG_1457.PNG']);
-    },
-  },
-});
+<script setup>
+import TabTitle from "@/component/TabTitle.vue";
 </script>
 
-<style>
-.question-img {
-  width: 100%;
-}
-</style>
