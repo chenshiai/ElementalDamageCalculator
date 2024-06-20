@@ -65,8 +65,8 @@
     <div v-show="basicPanelSelect === basicPanelSelectType.ATK">
       <DataItem v-model="baseATK" title="基础攻击力" tips="面板攻击力白字" stepperInteger stepperMin="0" />
       <DataItem v-model="extraATK" title="额外攻击力" tips="常驻攻击力绿字" stepperInteger stepperMin="0">
-        <Popover class="DataItem-popover" v-model:show="showPopoverExtraATK" placement="left-end">
-          <div class="DataItem-popover__content">
+        <Popover class="data-item-popover" v-model:show="showPopoverExtraATK" placement="left-end">
+          <div class="data-item-popover__content">
             攻击力加成%会以『基础攻击力』的百分比来算，会直接加在最上方『攻击力总计』的
             <span style="color: #49ff39">绿字</span>里。 <br /><br />
             一些无法常驻的攻击力加成%可以在下方的标签组里保存，方便切换。
@@ -104,8 +104,8 @@
     </div>
     <DataItem v-model="extraRate" title="倍率增幅%" stepperMin="0" decimalLength="1" />
     <DataItem v-model="additionalDemage" title="伤害提高值" tips="" stepperMin="0" decimalLength="2">
-      <Popover class="DataItem-popover" v-model:show="showPopoverExtraRate" placement="left-end">
-        <div class="DataItem-popover__content">
+      <Popover class="data-item-popover" v-model:show="showPopoverExtraRate" placement="left-end">
+        <div class="data-item-popover__content">
           <b>攻击伤害值 = (基础属性x最终倍率) + 伤害提高值 + 激化提高值</b><br />
           <p><b>最终倍率</b> = 攻击倍率 x (1 + 倍率增幅) </p>
           <p><b>倍率增幅：</b>
@@ -129,8 +129,8 @@
 
     <DataItem v-model="critDemage" title="暴击伤害%" tips="" stepperMin="0" decimalLength="1" />
     <DataItem v-model="elementDemage" title="伤害加成%" tips="各种增伤、减伤" stepperMin="-200" decimalLength="2">
-      <Popover class="DataItem-popover" v-model:show="showPopover" placement="left-end">
-        <div class="DataItem-popover__content">
+      <Popover class="data-item-popover" v-model:show="showPopover" placement="left-end">
+        <div class="data-item-popover__content">
           <b>攻击伤害值以一定比例改变：</b>
           <br />
           基础100% + 特定技能加伤% + 元素加伤% + 造成伤害提高% + 受到伤害提高%。

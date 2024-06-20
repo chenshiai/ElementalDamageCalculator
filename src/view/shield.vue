@@ -51,7 +51,7 @@
               @click="changeShield(Shield.common)"
           >
             <template #right-icon>
-              <van-radio :name="Shield.common" checked-color="#766461"/>
+              <Radio :name="Shield.common" checked-color="#766461"/>
             </template>
           </Cell>
           <Cell
@@ -60,7 +60,7 @@
               @click="changeShield(Shield.special)"
           >
             <template #right-icon>
-              <van-radio :name="Shield.special" checked-color="#766461"/>
+              <Radio :name="Shield.special" checked-color="#766461"/>
             </template>
           </Cell>
           <Cell
@@ -69,7 +69,7 @@
               @click="changeShield(Shield.earth)"
           >
             <template #right-icon>
-              <van-radio :name="Shield.earth" checked-color="#766461"/>
+              <Radio :name="Shield.earth" checked-color="#766461"/>
             </template>
           </Cell>
         </RadioGroup>
@@ -136,7 +136,7 @@
 <script setup>
 import {computed, reactive, ref} from "vue";
 import TabTitle from "../component/TabTitle.vue";
-import {CellGroup, Cell, Slider, Stepper, RadioGroup} from "vant";
+import {CellGroup, Cell, Slider, Stepper, Radio, RadioGroup} from "vant";
 
 const otherChecked = ref(false);
 const data = reactive({
