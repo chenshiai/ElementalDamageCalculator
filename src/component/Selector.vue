@@ -1,9 +1,13 @@
 <template>
   <div>
-    <div class="pop-title" @click="$emit('close')">返回</div>
+    <div class="pop-title">
+      <span class="pop-title__click">已选择({{ result.length }}/{{ maxSelect }})</span>
+      选择伙伴
+      <span class="pop-title__close" @click="$emit('close')">返回</span>
+      <span class="pop-title__clear" @click="resultChange([])">清空</span>
+    </div>
     <div class="selector-area">
-      <van-search
-        class="selector-input"
+      <Search
         background="#f7f1e6"
         shape="round"
         v-model="keyword"
@@ -12,47 +16,29 @@
       />
       <div class="selector-block">
         元素属性<span class="holy-relic-tips">（可多选）</span>
-        <van-checkbox-group class="check-area element-select" v-model="element">
-          <van-checkbox class="element-selece__item" name="Pyro">火</van-checkbox>
-          <van-checkbox class="element-selece__item" name="Anemo">风</van-checkbox>
-          <van-checkbox class="element-selece__item" name="Geo">岩</van-checkbox>
-          <van-checkbox class="element-selece__item" name="Electro">雷</van-checkbox>
-          <van-checkbox class="element-selece__item" name="Hydro">水</van-checkbox>
-          <van-checkbox class="element-selece__item" name="Cryo">冰</van-checkbox>
-          <van-checkbox class="element-selece__item" name="Dendro">草</van-checkbox>
-        </van-checkbox-group>
+        <CheckboxGroup class="check-area element-select" v-model="element">
+          <Checkbox class="element-selece__item" name="Pyro">火</Checkbox>
+          <Checkbox class="element-selece__item" name="Anemo">风</Checkbox>
+          <Checkbox class="element-selece__item" name="Geo">岩</Checkbox>
+          <Checkbox class="element-selece__item" name="Electro">雷</Checkbox>
+          <Checkbox class="element-selece__item" name="Hydro">水</Checkbox>
+          <Checkbox class="element-selece__item" name="Cryo">冰</Checkbox>
+          <Checkbox class="element-selece__item" name="Dendro">草</Checkbox>
+        </CheckboxGroup>
       </div>
       <div class="selector-block">
         使用武器<span class="holy-relic-tips">（可多选）</span>
-        <van-checkbox-group class="check-area element-select" v-model="weapon">
-          <van-checkbox class="element-selece__item" name="Sword">单手剑</van-checkbox>
-          <van-checkbox class="element-selece__item" name="GreatSword">双手剑</van-checkbox>
-          <van-checkbox class="element-selece__item" name="Bow">弓</van-checkbox>
-          <van-checkbox class="element-selece__item" name="Magic">法器</van-checkbox>
-          <van-checkbox class="element-selece__item" name="LonGarm">长柄武器</van-checkbox>
-        </van-checkbox-group>
+        <CheckboxGroup class="check-area element-select" v-model="weapon">
+          <Checkbox class="element-selece__item" name="Sword">单手剑</Checkbox>
+          <Checkbox class="element-selece__item" name="GreatSword">双手剑</Checkbox>
+          <Checkbox class="element-selece__item" name="Bow">弓</Checkbox>
+          <Checkbox class="element-selece__item" name="Magic">法器</Checkbox>
+          <Checkbox class="element-selece__item" name="LonGarm">长柄武器</Checkbox>
+        </CheckboxGroup>
       </div>
-      选择伙伴
-      <div class="selector">
-        <div class="selector-items"
-          v-for="(item, index) in configFilter"
-          :name="item.name"
-          :key="index"
-          @click="selectedChange(item)"
-        >
-          <div class="selector-item__avatar">
-            <img :src="item.avatar" />
-          </div>
-          <div :class="['logo', 'logo-' + item.element]" />
-          <span class="selector-item__name">{{ item.name }}</span>
-        </div>
-        <div class="selector-items placeholder"></div>
-        <div class="selector-items placeholder"></div>
-        <div class="selector-items placeholder"></div>
-        <div class="selector-items placeholder"></div>
-      </div>
-      <!-- <van-checkbox-group class="selector" v-model="result" max="1"  @change="resultChange">
-        <van-checkbox
+      选择伙伴<span class="holy-relic-tips">（可多选）</span>
+      <CheckboxGroup class="selector" v-model="result" :max="maxSelect"  @change="resultChange">
+        <Checkbox
           class="selector-items"
           v-for="(item, index) in configFilter"
           :name="item.name"
@@ -63,80 +49,64 @@
           </div>
           <div :class="['logo', 'logo-' + item.element]" />
           <span class="selector-item__name">{{ item.name }}</span>
-        </van-checkbox>
+        </Checkbox>
         <div class="selector-items placeholder"></div>
         <div class="selector-items placeholder"></div>
         <div class="selector-items placeholder"></div>
         <div class="selector-items placeholder"></div>
-      </van-checkbox-group> -->
+      </CheckboxGroup>
     </div>
   </div>
 </template>
 
-<script>
-import { defineComponent, ref, computed } from "vue";
-import TabTitle from "./TabTitle.vue";
-import { CloudTeamConfig } from "../CloudTeamConfig";
+<script setup>
+import { defineProps, ref, computed } from "vue";
+import { CloudTeamConfig } from "@/CloudTeamConfig";
 import { Search, Checkbox, CheckboxGroup } from "vant";
 
-export default defineComponent({
-  name: "selector",
+const keyword = ref("");
+const result = ref([]);
+const element = ref([]);
+const weapon= ref([]);
 
-  emits: ["close"],
-
-  components: {
-    [Search.name]: Search,
-    [Checkbox.name]: Checkbox,
-    [TabTitle.name]: TabTitle,
-    [CheckboxGroup.name]: CheckboxGroup,
-  },
-
-  props: {
-    handleChange: Function,
-  },
-
-  setup(props, { emit }) {
-    const keyword = ref("");
-    const element = ref([]);
-    const weapon= ref([]);
-
-    const configFilter = computed(() => {
-      let res = CloudTeamConfig;
-      // 筛选元素
-      if (element.value.length > 0) {
-        res = res.filter((item) => element.value.indexOf(item.element) >= 0);
-      }
-      // 筛选武器类型
-      if (weapon.value.length > 0) {
-        res = res.filter((item) => weapon.value.indexOf(item.weapon) >= 0);
-      }
-      // 搜索关键字
-      if (keyword.value) {
-        res = CloudTeamConfig.filter((item) => item.name.indexOf(keyword.value) >= 0);
-      }
-      return res;
-    });
-
-    const selectedChange = (item) => {
-      props.handleChange(item);
-      emit('close')
-    };
-
-    const onInput = () => {
-      element.value = [];
-      weapon.value = [];
-    };
-
-    return {
-      onInput,
-      keyword,
-      weapon,
-      element,
-      configFilter,
-      selectedChange,
-    };
-  },
+const configFilter = computed(() => {
+  let res = CloudTeamConfig;
+  // 筛选元素
+  if (element.value.length > 0) {
+    res = res.filter((item) => element.value.indexOf(item.element) >= 0);
+  }
+  // 筛选武器类型
+  if (weapon.value.length > 0) {
+    res = res.filter((item) => weapon.value.indexOf(item.weapon) >= 0);
+  }
+  // 搜索关键字
+  if (keyword.value) {
+    res = CloudTeamConfig.filter((item) => item.name.indexOf(keyword.value) >= 0);
+  }
+  return res;
 });
+
+const resultChange = (value) => {
+  result.value = value;
+  props.handleChange(CloudTeamConfig.filter((item) => {
+    return value.includes(item.name);
+  }))
+};
+
+const onInput = () => {
+  element.value = [];
+  weapon.value = [];
+};
+
+const props = defineProps({
+  handleChange: Function,
+  maxSelect: {
+      type: Number,
+      default() {
+        return 4;
+      }
+    },
+})
 </script>
 
 <style>
@@ -150,10 +120,16 @@ export default defineComponent({
   width: 100%;
   z-index: 1;
 }
-.pop-title__close {
+.pop-title__click {
   float: left;
+}
+.pop-title__close {
+  float: right;
   margin-left: 12px;
   color: rgb(255, 82, 82);
+}
+.pop-title__clear {
+  float: right;
 }
 .selector-area {
   background-color: var(--light-text);
@@ -166,13 +142,6 @@ export default defineComponent({
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-}
-.selector-area .selector-input {
-  padding: 0;
-  width: 100%;
-}
-.selector-area .van-search {
-  margin-bottom: 26px;
 }
 .van-search__content.van-search__content--round {
   background-color: #eee7db;

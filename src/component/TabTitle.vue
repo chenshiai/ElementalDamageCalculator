@@ -4,12 +4,7 @@
   </div>
 </template>
 
-<script>
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  name: "tab-title",
-})
+<script setup>
 </script>
 
 <style>

@@ -18,6 +18,19 @@ const WEAPON_TYPE = {
   LonGarm: "LonGarm",
 };
 
+// 攻击方式
+const ATTACK_METHODS = {
+  Normal: "Normal",
+  Combat: "Combat",
+  Burst: "Burst",
+}
+
+const ATTACK_METHODS_TEXT = {
+  [ATTACK_METHODS.Normal]: "普通攻击·重击·下落攻击",
+  [ATTACK_METHODS]: "元素战技",
+  [ATTACK_METHODS.Burst]: "元素爆发"
+}
+
 // 输出类型
 const BATTLE_TYPE = {
   /** 驻场输出 */
@@ -30,10 +43,11 @@ const BATTLE_TYPE = {
 
 // 输出类型标签文本
 const BATTLE_TYPE_TEXT = {
-  [BATTLE_TYPE.Resident]: "驻场输出",
-  [BATTLE_TYPE.BackGround]: "后台输出",
+  [BATTLE_TYPE.Resident]: "前台能力",
+  [BATTLE_TYPE.BackGround]: "后台能力",
   [BATTLE_TYPE.QuickSwitch]: "速切爆发",
 };
+
 
 // 对敌影响
 const ENEMY_TYPE = {
@@ -42,8 +56,6 @@ const ENEMY_TYPE = {
   /** 减防&减抗 */
   Reduce: "Reduce",
   ReduceDEF: "ReduceDEF",
-  /** 破盾 */
-  Break: "Break",
   /** 敌方削弱 */
   Weaken: "Weaken",
 };
@@ -52,8 +64,7 @@ const ENEMY_TYPE_TEXT = {
   [ENEMY_TYPE.Control]: "控制效果",
   [ENEMY_TYPE.Reduce]: "抗性削减",
   [ENEMY_TYPE.ReduceDEF]: "防御减少",
-  [ENEMY_TYPE.Break]: "破盾效率",
-  [ENEMY_TYPE.Weaken]: "敌方虚弱",
+  [ENEMY_TYPE.Weaken]: "敌方削弱",
 };
 
 // 友方影响
@@ -75,14 +86,71 @@ const TEAM_TYPE = {
 };
 
 const TEAM_TYPE_TEXT = {
-  [TEAM_TYPE.Treatment]: "治疗能力",
-  [TEAM_TYPE.Shield]: "护盾产生",
-  [TEAM_TYPE.DMGreduction]: "减伤强度",
+  [TEAM_TYPE.Treatment]: "治疗",
+  [TEAM_TYPE.Shield]: "护盾",
+  [TEAM_TYPE.DMGreduction]: "减伤减免",
   [TEAM_TYPE.Mobility]: "机动性",
-  [TEAM_TYPE.Berserk]: "增伤效果",
-  [TEAM_TYPE.Charged]: "充能效果",
+  [TEAM_TYPE.Berserk]: "增伤",
+  [TEAM_TYPE.Charged]: "充能",
   [TEAM_TYPE.Adhere]: "元素附着",
 };
+
+const BERSERK_TYPE = {
+  Atk: "Atk",
+  Def: "Def",
+  Ele: "Ele",
+  Hp: "Hp",
+  Cri: "Cri",
+  CriDmg: "CroDmg",
+}
+
+// 效能频次
+const FREQUENCY = {
+  // 单次
+  Single: "Single",
+  // 低频
+  Few: "Few",
+  // 持续
+  Continued: "Continued",
+  // 高频
+  Large: "Large"
+};
+const FREQUENCY_TEXT = {
+  [FREQUENCY.Single]: "单次",
+  [FREQUENCY.Few]: "低频",
+  [FREQUENCY.Continued]: "持续",
+  [FREQUENCY.Large]: "高频",
+};
+
+// 程度占比
+const DEGREE = {
+  // 少量
+  Few: "Few",
+  // 一般
+  Com: "Com",
+  // 较多
+  Large: "Large",
+}
+const DEGREE_TEXT = {
+  [DEGREE.Few]: "少量",
+  [DEGREE.Com]: "一般",
+  [DEGREE.Large]: "较多",
+}
+
+const RANGE = {
+  Single: "Single",
+  Small: "Small",
+  Middle: "Middle",
+  Large: "Large",
+  Extralarge: "Extralarge",
+}
+const RANGE_TEXT = {
+  [RANGE.Single]: "对单",
+  [RANGE.Small]: "小范围",
+  [RANGE.Middle]: "中范围",
+  [RANGE.Large]: "大范围",
+  [RANGE.Extralarge]: "特大范围",
+}
 
 const WEIGHT2 = {
   1: "C-",
@@ -1210,6 +1278,8 @@ export {
   BATTLE_TYPE_TEXT,
   ENEMY_TYPE_TEXT,
   TEAM_TYPE_TEXT,
+  ATTACK_METHODS,
+  ATTACK_METHODS_TEXT,
 };
 
 /** 旧案
