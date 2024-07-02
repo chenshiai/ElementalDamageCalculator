@@ -9,7 +9,7 @@ function LVLimit(lv) {
 }
 
 /** 附加伤害计算公式 */
-export const AdditionalDemageMode = [
+export const AdditionalDamageMode = [
   {
     title: "伤害值提高",
     children: [

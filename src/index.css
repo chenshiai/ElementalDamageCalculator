@@ -25,7 +25,7 @@ body {
 
 @font-face {
   font-family: 'eng';
-  src: url('./assets/_-webfont.woff');
+  src: url('../_-webfont.woff');
 }
 
 @font-face {

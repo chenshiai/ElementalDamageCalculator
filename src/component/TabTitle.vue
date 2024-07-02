@@ -4,9 +4,6 @@
   </div>
 </template>
 
-<script setup>
-</script>
-
 <style>
 .tab-title {
   border-radius: 4px;
@@ -34,5 +31,4 @@
   font-size: 12px;
   color: #B59C96;
 }
-
 </style>

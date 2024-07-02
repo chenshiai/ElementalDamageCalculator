@@ -6,7 +6,7 @@
       @click="isExpand = !isExpand"
     >
       『{{ title }}』便签
-      <van-icon size="12" :name="isExpand ? 'arrow-up' : 'arrow-down'" />
+      <Icon size="12" :name="isExpand ? 'arrow-up' : 'arrow-down'" />
     </div>
     <div v-show="localNotes && isExpand" class="data-notes">
       <div class="add-note-button" @click="showPopup = true">＋新增便签</div>
@@ -21,7 +21,7 @@
           </div>
           <div class="memo-title">{{ name }}</div>
         </div>
-        <van-icon
+        <Icon
           @click="deleteMemo(name, value)"
           class="memo-close"
           name="delete-o"
@@ -29,7 +29,7 @@
       </div>
     </div>
   </div>
-  <van-popup
+  <Popup
     teleport="#app"
     v-model:show="showPopup"
     position="top"
@@ -52,15 +52,15 @@
         <span class="additional-tab-title-span">{{ mode.title }}</span>
       </div>
     </div>
-    <van-tabs color="#997874" line-width="60px" v-model:active="childrenActive" @change="defaultTitleSetting">
-      <van-tab
+    <Tabs color="#997874" line-width="60px" v-model:active="childrenActive" @change="defaultTitleSetting">
+      <Tab
         v-for="item in calculationModeChildren"
         :title="item.title"
         :key="item.title"
       />
-    </van-tabs>
-    <van-form @submit="onSubmit">
-      <van-field
+    </Tabs>
+    <Form @submit="onSubmit">
+      <Field
         v-for="field in calculationModeChildren[childrenActive].fields"
         v-model="temporaryData[field.label]"
         :key="field.name"
@@ -71,14 +71,14 @@
         :disabled="field.disabled"
         :rules="[{ required: field.required, message: '必填项' }]"
       />
-      <van-field
+      <Field
         v-model="newMemo.title"
         type="text"
         label="标签名称"
         placeholder="输入备注说明（不要与其他便签重名）"
         :rules="[{ required: true, message: '必填项' }]"
       />
-      <van-button
+      <Button
         class="bottons__add"
         text="确认添加"
         size="small"
@@ -86,182 +86,151 @@
         type="primary"
         native-type="submit"
       />
-    </van-form>
-  </van-popup>
+    </Form>
+  </Popup>
 </template>
 
-<script>
-import { defineComponent, onMounted, reactive, ref, computed } from "vue";
-import { Cell, Icon, Popup, Field, Form, Toast, Button, Tab, Tabs, Grid, GridItem } from "vant";
-import { floatNum, getLocalStorage } from "../utils";
-import { EventBus } from "../utils";
+<script setup>
+import { onMounted, reactive, ref, computed } from "vue";
+import { Icon, Popup, Field, Form, Toast, Button, Tab, Tabs } from "vant";
+import { floatNum, getLocalStorage, EventBus } from "@/utils";
 
-export default defineComponent({
-  name: "note-group",
+const props = defineProps({
+  title: String,
+  defaultNotes: Array,
+  selectedNotes: Array,
+  setSelectedNotes: Function,
+  calculationMode: Array,
+  localStorageName: String,
+});
 
-  emits: ["update:modelValue"],
+/** 面板开关 */
+const isExpand = ref(false);
+const showPopup = ref(false);
+/** 本地展示用便签组 */
+const localNotes = ref(new Map());
+/** 双向绑定model */
+const modelValue = defineModel();
+function changeValue(value) {
+  modelValue.value = value;
+}
+/** 格式化便签数据 */
+function formatMemoDetail(detail) {
+  let res = floatNum(detail, 2);
+  return res >= 0 ? `+${res}` : res;
+}
 
-  components: {
-    [Tab.name]: Tab,
-    [Tabs.name]: Tabs,
-    [Cell.name]: Cell,
-    [Icon.name]: Icon,
-    [Grid.name]: Grid,
-    [Form.name]: Form,
-    [Field.name]: Field,
-    [Popup.name]: Popup,
-    [Button.name]: Button,
-    [GridItem.name]: GridItem,
-  },
-
-  props: {
-    modelValue: String | Number, // 关联数据
-    title: String, // 便签组名称
-    defaultNotes: Array, // 默认便签列表
-    selectedNotes: Array, // store中已选择的便签
-    setSelectedNotes: Function, // store中更新选择便签的方法
-    calculationMode: Array, // 便签表单计算公式
-    localStorageName: String, // 本地便签列表名称
-  },
-
-  setup(props, { emit }) {
-    const localNotes = ref(new Map());
-    const isExpand = ref(false);
-    const showPopup = ref(false);
-    let selectedMemos = new Map([]);
-
-    const active = ref(0);
-    const childrenActive = ref(0);
-
-    const temporaryData = ref({});
-    const newMemo = reactive({
-      title: "",
-    });
-
-    const calculationModeChildren = computed(() => {
-      return props.calculationMode[active.value].children || [];
-    });
-
-    const showSelectedNotes = computed(() => {
-      selectedMemos = new Map(props.selectedNotes);
-      return selectedMemos;
-    });
-
-    const handleClose = () => {
-      temporaryData.value = {};
-    };
-    const defaultTitleSetting = () => {
-      const mode = props.calculationMode[active.value];
-      newMemo.title = mode.title + "·" + mode.children[childrenActive.value].title;
-    };
-    const handleClick = (index) => {
-      active.value = index;
-      childrenActive.value = 0;
-      defaultTitleSetting();
-    };
-    const changeValue = (value) => {
-      emit("update:modelValue", value);
-    };
-
-    /** 更新本地localstorage便签组 */
-    const updateNoteGroup = (value) => {
-      window.localStorage.setItem(
-        props.localStorageName,
-        JSON.stringify(value)
-      );
-    };
-
-    /** 点击便签事件 */
-    const selectMemo = (name, value) => {
-      if (selectedMemos.get(name)) {
-        // 如果该便签在【已选择便签】中，则减去该便签的值，再从【已选择便签】里移除
-        const res = floatNum(+props.modelValue - +value, 2);
-        if (res >= 0) {
-          changeValue(res);
-        }
-        selectedMemos.delete(name);
-      } else {
-        // 若不在【已选择便签】中，则在【已选择便签】里新增。并加上该便签的值。
-        selectedMemos.set(name, value);
-        changeValue(floatNum(+props.modelValue + +value, 2));
-      }
-      // 最后将变更后的【已选择便签】写入store
-      props.setSelectedNotes([...selectedMemos]);
-    };
-
-    const deleteMemo = (name, value) => {
-      // 筛选被删除的便签后更新本地便签组
-      localNotes.value.delete(name);
-      updateNoteGroup([...localNotes.value]);
-
-      // 如果被删除的便签在【已选择便签】中，则减去该便签的值，并从【已选择便签】中移除
-      if (selectedMemos.get(name)) {
-        changeValue(floatNum(+props.modelValue - +value, 2));
-        selectedMemos.delete(name);
-        props.setSelectedNotes([...selectedMemos]);
-      }
-    };
-
-    // 新增便签
-    const onSubmit = (value) => {
-      const { getResult } = calculationModeChildren.value[childrenActive.value];
-      const name = newMemo.title;
-      const val = getResult(value);
-
-      // 自动选中新建的标签
-      selectMemo(name, val);
-      localNotes.value = new Map([[name, val]].concat([...localNotes.value]));
-      
-      // 将表单值设为初始值
-      newMemo.title = "";
-      temporaryData.value = {};
-
-      // 拼接新的标签组并更新到localstorage
-      updateNoteGroup([...localNotes.value]);
-      Toast.success("添加成功");
-    };
-
-    const formatMemoDetail = (detail) => {
-      let res = floatNum(detail, 2);
-      return res >= 0 ? `+${res}` : res;
-    };
-
-    const getLocalNotes = () => {
-      const { localStorageName, defaultNotes = [] } = props;
-      // 根据名称读取本地便签组，并将其转为Map，方便后续操作
-      localNotes.value = new Map(getLocalStorage(
-        localStorageName,
-        defaultNotes,
-        `${localStorageName}读取失败`
-      ));
-      console.log('读取本地：', localStorageName);
+/** 选择便签模块 */
+let selectedMemos = new Map([]);
+const showSelectedNotes = computed(() => {
+  selectedMemos = new Map(props.selectedNotes);
+  return selectedMemos;
+});
+// 点击便签事件
+function selectMemo(name, value) {
+  if (selectedMemos.get(name)) {
+    // 如果该便签在【已选择便签】中，则减去该便签的值，再从【已选择便签】里移除
+    const res = floatNum(+modelValue.value - +value, 2);
+    if (res >= 0) {
+      changeValue(res);
     }
+    selectedMemos.delete(name);
+  } else {
+    // 若不在【已选择便签】中，则在【已选择便签】里新增。并加上该便签的值。
+    selectedMemos.set(name, value);
+    changeValue(floatNum(+modelValue.value + +value, 2));
+  }
+  // 最后将变更后的【已选择便签】写入store
+  props.setSelectedNotes([...selectedMemos]);
+}
 
-    onMounted(() => {
-      getLocalNotes();
-      EventBus.$on(`${props.localStorageName}Changed`, getLocalNotes);
-    });
+/** 表单弹窗模块 */
+const active = ref(0);
+const childrenActive = ref(0);
+// 临时表单数据
+const temporaryData = ref({});
+const newMemo = reactive({
+  title: "",
+});
+// 展示所选计算模式的表单项
+const calculationModeChildren = computed(() => {
+  return props.calculationMode[active.value].children || [];
+});
 
-    return {
-      active,
-      childrenActive,
-      localNotes,
-      selectedMemos,
-      isExpand,
-      calculationModeChildren,
-      newMemo,
-      selectMemo,
-      showPopup,
-      deleteMemo,
-      temporaryData,
-      handleClose,
-      handleClick,
-      onSubmit,
-      formatMemoDetail,
-      defaultTitleSetting,
-      showSelectedNotes,
-    };
-  },
+// 设置默认标题
+function defaultTitleSetting() {
+  const mode = props.calculationMode[active.value];
+  newMemo.title = mode.title + "·" + mode.children[childrenActive.value].title;
+}
+
+// 点击切换计算模式
+function handleClick(index) {
+  active.value = index;
+  childrenActive.value = 0;
+  defaultTitleSetting();
+}
+
+// 清空表单数据
+function handleClose() {
+  temporaryData.value = {};
+}
+
+/** 更新便签模块 */
+// 更新本地localstorage便签组
+function updateNoteGroup(value) {
+  window.localStorage.setItem(
+      props.localStorageName,
+      JSON.stringify(value)
+  );
+}
+// 删除便签
+function deleteMemo(name, value) {
+  // 筛选被删除的便签后更新本地便签组
+  localNotes.value.delete(name);
+  updateNoteGroup([...localNotes.value]);
+
+  // 如果被删除的便签在【已选择便签】中，则减去该便签的值，并从【已选择便签】中移除
+  if (selectedMemos.get(name)) {
+    changeValue(floatNum(+modelValue.value - +value, 2));
+    selectedMemos.delete(name);
+    props.setSelectedNotes([...selectedMemos]);
+  }
+}
+
+// 新增便签
+function onSubmit(value) {
+  const { getResult } = calculationModeChildren.value[childrenActive.value];
+  const name = newMemo.title;
+  const val = getResult(value);
+
+  // 自动选中新建的标签
+  selectMemo(name, val);
+  localNotes.value = new Map([[name, val]].concat([...localNotes.value]));
+
+  // 将表单值设为初始值
+  newMemo.title = "";
+  temporaryData.value = {};
+
+  // 拼接新的标签组并更新到localstorage
+  updateNoteGroup([...localNotes.value]);
+  Toast.success("添加成功");
+}
+
+/** 生命周期 mounted */
+function getLocalNotes() {
+  const { localStorageName, defaultNotes = [] } = props;
+  // 根据名称读取本地便签组，并将其转为Map，方便后续操作
+  localNotes.value = new Map(getLocalStorage(
+      localStorageName,
+      defaultNotes,
+      `${localStorageName}读取失败`
+  ));
+  console.log('读取本地：', localStorageName);
+}
+
+onMounted(() => {
+  getLocalNotes();
+  EventBus.$on(`${props.localStorageName}Changed`, getLocalNotes);
 });
 </script>
 

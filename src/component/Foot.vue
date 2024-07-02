@@ -27,9 +27,9 @@
   >
     你可以通过以下平台联系作者
     <div class="foot-popup-name">
-      <img src="@/assets/mhy.jpg" />
-      <img src="@/assets/OIP-C.jpg" />
-      <img src="@/assets/git.png">
+      <img src="../../public/mhy.jpg" />
+      <img src="../../public/OIP-C.jpg" />
+      <img src="../../public/git.png">
       @ChenShiAi
     </div>
   </Popup>

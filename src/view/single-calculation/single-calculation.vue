@@ -275,7 +275,7 @@ import { AtkPercentCalculationMode, AtkFixedCalculationMode } from '@/constants/
 import { HpPercentCalculationMode } from '@/constants/calculation-mode/hp';
 import { DefPercentCalculationMode, DefFixedCalculationMode } from '@/constants/calculation-mode/def';
 import { EmFixedCalculationMode } from '@/constants/calculation-mode/em';
-import { AdditionalDemageMode } from '@/constants/calculation-mode/additionalDemage';
+import { AdditionalDamageMode } from '@/constants/calculation-mode/additionalDemage';
 
 export default {
   name: "increase",
@@ -361,7 +361,7 @@ export default {
       additionalDemage: {
         title: "伤害提高值",
         localStorageName: "GenShinImpactADNotesV2",
-        calculationMode: AdditionalDemageMode,
+        calculationMode: AdditionalDamageMode,
         defaultNotes: [],
         setSelectedNotes: (value) => {
           store.commit("setSelectedAdditionalDemageNotes", value);
@@ -388,7 +388,7 @@ export default {
     };
 
     const handleImagePreview = () => {
-      ImagePreview(["http://saomdpb.com/IMG_1457.PNG"]);
+      ImagePreview(["https://saomdpb.com/IMG_1457.PNG"]);
     };
     return {
       showPopover,
@@ -403,7 +403,7 @@ export default {
       floatChecked,
       increaseResult,
       handleImagePreview,
-      AdditionalDemageMode,
+      AdditionalDamageMode,
       NotesConfig,
       ElementalReaction,
     };

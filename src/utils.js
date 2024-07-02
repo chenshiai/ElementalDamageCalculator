@@ -174,14 +174,14 @@ export const computationalFormula = (data) => {
 class Event {
   eventList = {};
 
-  $on = function (key, fn) {
+  $on(key, fn) {
     if (!this.eventList[key]) {
       this.eventList[key] = [];
     }
     this.eventList[key].push(fn);
   }
 
-  $emit = function (key, val) {
+  $emit(key, val) {
     if (this.eventList.hasOwnProperty(key)) {
       this.eventList[key].forEach((fn) => { fn(val) });
     }

@@ -1,8 +1,8 @@
 <template>
   <div class="data-item">
     <span class="data-item__title">{{ title }}</span>
-    <van-stepper
-      v-model="value"
+    <Stepper
+      v-model="modelValue"
       :integer="stepperInteger"
       theme="round"
       button-size="20"
@@ -19,51 +19,21 @@
   </div>
 </template>
 
-<script>
-import { defineComponent, ref, watch } from "vue";
+<script setup>
 import { Stepper } from "vant";
 
-export default defineComponent({
-  name: "data-item",
-
-  emits: ["update:modelValue"],
-
-  props: {
-    modelValue: Number | String,
-    title: String,
-    tips: String,
-
-    stepperInteger: Boolean,
-    stepperMin: Number | String,
-    stepperMax: Number | String,
-    decimalLength: Number | String,
-  },
-
-  components: {
-    [Stepper.name]: Stepper,
-  },
-
-  methods: {
-    onChange(value) {
-      this.$emit("update:modelValue", value);
-    },
-  },
-
-  setup(props) {
-    const value = ref(+props.modelValue);
-
-    watch(
-      () => props.modelValue,
-      (newVal) => {
-        value.value = newVal;
-      }
-    );
-
-    return {
-      value,
-    };
-  },
+const modelValue = defineModel();
+const props = defineProps({
+  title: String,
+  tips: String,
+  stepperInteger: Boolean,
+  stepperMin: Number || String,
+  stepperMax: Number || String,
+  decimalLength: Number || String,
 });
+function onChange(value) {
+  modelValue.value = value;
+}
 </script>
 
 <style scoped>
