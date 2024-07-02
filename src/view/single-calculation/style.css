@@ -46,23 +46,23 @@
 }
 
 .water {
-  background-image: url("../../../public/hydro.png");
+  background-image: url("/hydro.png");
 }
 
 .fire {
-  background-image: url("../../../public/pyro.png");
+  background-image: url("/pyro.png");
 }
 
 .ice {
-  background-image: url("../../../public/cryo.png");
+  background-image: url("/cryo.png");
 }
 
 .dendro {
-  background-image: url("../../../public/dendro.png");
+  background-image: url("/dendro.png");
 }
 
 .electro {
-  background-image: url("../../../public/electro.png");
+  background-image: url("/electro.png");
 }
 
 .van-slider__button-wrapper .van-slider__button {

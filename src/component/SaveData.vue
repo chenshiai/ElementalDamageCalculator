@@ -85,8 +85,8 @@ import {
   deepCopyObject,
   computationalFormula,
   EventBus,
-} from "../utils";
-import { AtkTypeText } from "../constant";
+} from "@/utils";
+import { AtkTypeText } from "@/constant";
 
 const store = useStore();
 const remark = ref("");

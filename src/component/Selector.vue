@@ -273,49 +273,49 @@ const props = defineProps({
 }
 .logo-Pyro {
   position: relative;
-  background-image: url("../../pyro.png");
+  background-image: url("/pyro.png");
   background-size: 22px;
 }
 .logo-Pyro::after {
   content: "Pyro";
 }
 .logo-Hydro {
-  background-image: url("../../hydro.png");
+  background-image: url("/hydro.png");
   background-size: 22px;
 }
 .logo-Hydro::after {
   content: "Hydro";
 }
 .logo-Cryo {
-  background-image: url("../../cryo.png");
+  background-image: url("/cryo.png");
   background-size: 22px;
 }
 .logo-Cryo::after {
   content: "Cryo";
 }
 .logo-Electro {
-  background-image: url("../../electro.png");
+  background-image: url("/electro.png");
   background-size: 22px;
 }
 .logo-Electro::after {
   content: "Electro";
 }
 .logo-Geo {
-  background-image: url("../../geo.png");
+  background-image: url("/geo.png");
   background-size: 22px;
 }
 .logo-Geo::after {
   content: "Geo";
 }
 .logo-Anemo {
-  background-image: url("../../anemo.png");
+  background-image: url("/anemo.png");
   background-size: 22px;
 }
 .logo-Anemo::after {
   content: "Anemo";
 }
 .logo-Dendro {
-  background-image: url("../../dendro.png");
+  background-image: url("/dendro.png");
   background-size: 22px;
 }
 .logo-Dendro::after {
