@@ -89,7 +89,7 @@ import {
   WEIGHT2,
   ENEMY_TYPE_TEXT,
   TEAM_TYPE_TEXT,
-} from "@/CloudTeamConfig";
+} from "@/assets/CloudTeamConfig";
 import { Popup } from "vant";
 
 const show = ref(false);

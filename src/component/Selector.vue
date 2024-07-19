@@ -61,7 +61,7 @@
 
 <script setup>
 import { defineProps, ref, computed } from "vue";
-import { CloudTeamConfig } from "@/CloudTeamConfig";
+import { CloudTeamConfig } from "@/assets/CloudTeamConfig";
 import { Search, Checkbox, CheckboxGroup } from "vant";
 
 const keyword = ref("");

@@ -31,23 +31,22 @@ const ATTACK_METHODS_TEXT = {
   [ATTACK_METHODS.Burst]: "元素爆发"
 }
 
-// 输出类型
+// 主玩类型
 const BATTLE_TYPE = {
-  /** 驻场输出 */
+  /** 驻场 */
   Resident: "Resident",
-  /** 后台输出 */
+  /** 后台 */
   BackGround: "BackGround",
-  /** 速切输出 */
+  /** 速切 */
   QuickSwitch: "QuickSwitch"
 };
 
 // 输出类型标签文本
 const BATTLE_TYPE_TEXT = {
-  [BATTLE_TYPE.Resident]: "前台能力",
-  [BATTLE_TYPE.BackGround]: "后台能力",
-  [BATTLE_TYPE.QuickSwitch]: "速切爆发",
+  [BATTLE_TYPE.Resident]: "前台",
+  [BATTLE_TYPE.BackGround]: "后台",
+  [BATTLE_TYPE.QuickSwitch]: "速切",
 };
-
 
 // 对敌影响
 const ENEMY_TYPE = {
@@ -58,6 +57,8 @@ const ENEMY_TYPE = {
   ReduceDEF: "ReduceDEF",
   /** 敌方削弱 */
   Weaken: "Weaken",
+  /** 嘲讽 */
+  Taunt: "Taunt",
 };
 
 const ENEMY_TYPE_TEXT = {
@@ -65,6 +66,7 @@ const ENEMY_TYPE_TEXT = {
   [ENEMY_TYPE.Reduce]: "抗性削减",
   [ENEMY_TYPE.ReduceDEF]: "防御减少",
   [ENEMY_TYPE.Weaken]: "敌方削弱",
+  [ENEMY_TYPE.Taunt]: "敌方嘲讽",
 };
 
 // 友方影响
@@ -83,6 +85,18 @@ const TEAM_TYPE = {
   Charged: "Charged",
   /** 附着 */
   Adhere: "Adhere",
+  /** 抗打断 */
+  InterruptResistance: "InterruptResistance",
+  /** 攻击速度 */
+  AttackSpeed: "AttackSpeed",
+  /** 攻击力 */
+  IncreaseAttack: "IncreaseAttack",
+  /** 防御力 */
+  IncreaseDefense: "IncreaseDefense",
+  /** 元素精通 */
+  IncreaseMastery: "IncreaseMastery",
+  /** 生命值 */
+  IncreaseHP: "IncreaseHP",
 };
 
 const TEAM_TYPE_TEXT = {
@@ -93,6 +107,12 @@ const TEAM_TYPE_TEXT = {
   [TEAM_TYPE.Berserk]: "增伤",
   [TEAM_TYPE.Charged]: "充能",
   [TEAM_TYPE.Adhere]: "元素附着",
+  [TEAM_TYPE.InterruptResistance]: "抗打断",
+  [TEAM_TYPE.AttackSpeed]: "攻击速度",
+  [TEAM_TYPE.IncreaseAttack]: "攻击力提升",
+  [TEAM_TYPE.IncreaseDefense]: "防御力提升",
+  [TEAM_TYPE.IncreaseMastery]: "元素精通提升",
+  [TEAM_TYPE.IncreaseHP]: "生命值提升",
 };
 
 const BERSERK_TYPE = {
@@ -142,14 +162,14 @@ const RANGE = {
   Small: "Small",
   Middle: "Middle",
   Large: "Large",
-  Extralarge: "Extralarge",
+  ExtraLarge: "ExtraLarge",
 }
 const RANGE_TEXT = {
   [RANGE.Single]: "对单",
   [RANGE.Small]: "小范围",
   [RANGE.Middle]: "中范围",
   [RANGE.Large]: "大范围",
-  [RANGE.Extralarge]: "特大范围",
+  [RANGE.ExtraLarge]: "特大范围",
 }
 
 const WEIGHT2 = {

@@ -273,6 +273,36 @@ export const AdditionalDamageMode = [
     ]
   },
   {
+    title: "希格雯",
+    img: ProfilePhoto.Kokomi,
+    children: [
+      {
+        title: "应有适当的休憩",
+        fields: [
+          {
+            name: "hp",
+            label: "生命值",
+            placeholder: "输入角色的生命值",
+            type: "number",
+          },
+          {
+            name: "fate",
+            label: "命之座",
+            type: "digit",
+            placeholder: "输入已解锁的命之座数量",
+          },
+        ],
+        getResult: ({ hp, fate}) => {
+          if (hp <= 30000) return 0;
+          if (fate >= 1) {
+            return Math.min(3500, (hp - 30000) / 1000 * 100);
+          }
+          return Math.min(2800, (hp - 30000) / 1000 * 80);
+        }
+      }
+    ]
+  },
+  {
     title: "心海",
     img: ProfilePhoto.Kokomi,
     children: [
