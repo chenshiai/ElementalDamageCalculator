@@ -1,6 +1,8 @@
 
-import { ProfilePhoto, WeponIcon } from '../profilePhoto';
+import { WeponIcon } from '../profilePhoto';
 import { Magnification } from '../magnification';
+
+const ProfilePhoto = __global__.ProfilePhoto;
 
 function LVLimit(lv) {
   lv = Math.min(13, lv);
@@ -46,6 +48,39 @@ export const AdditionalDamageMode = [
         getResult: ({ def, rate }) => def * rate / 100,
       },
     ]
+  },
+  {
+    title: "玛拉妮",
+    img: ProfilePhoto.Mualani,
+    children: [
+      {
+        title: "踏鲨破浪",
+        fields: [
+          {
+            name: "con",
+            label: "浪势充能",
+            placeholder: "输入的浪势充能(0~3)",
+            type: "number",
+          },
+          {
+            name: "lv",
+            label: "天赋等级",
+            placeholder: "输入角色的天赋等级",
+            type: "number",
+          },
+          {
+            name: "hp",
+            label: "生命值",
+            placeholder: "输入角色的生命值",
+            type: "number",
+          }
+        ],
+        getResult: ({con, lv, hp}) => {
+          lv = LVLimit(lv);
+          return hp * (Magnification.Mualani.en[lv - 1] * con + Magnification.Mualani.big[lv - 1]); 
+        },
+      }
+    ],
   },
   {
     title: "阿蕾奇诺",
