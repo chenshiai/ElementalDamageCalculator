@@ -75,9 +75,10 @@ export const AdditionalDamageMode = [
             type: "number",
           }
         ],
-        getResult: ({con, lv, hp}) => {
+        getResult: ({ con, lv, hp }) => {
           lv = LVLimit(lv);
-          return hp * (Magnification.Mualani.en[lv - 1] * con + Magnification.Mualani.big[lv - 1]); 
+          con = Math.min(3, con);
+          return hp * (Magnification.Mualani.en[lv - 1] * con + con === 3 ? Magnification.Mualani.big[lv - 1] : 0);
         },
       }
     ],
@@ -108,9 +109,9 @@ export const AdditionalDamageMode = [
             type: "number",
           }
         ],
-        getResult: ({con, lv, atk}) => {
+        getResult: ({ con, lv, atk }) => {
           lv = LVLimit(lv);
-          return atk * con / 100 * Magnification.Arlecchino[lv - 1]; 
+          return atk * con / 100 * Magnification.Arlecchino[lv - 1];
         },
       }
     ],
@@ -327,7 +328,7 @@ export const AdditionalDamageMode = [
             placeholder: "输入已解锁的命之座数量",
           },
         ],
-        getResult: ({ hp, fate}) => {
+        getResult: ({ hp, fate }) => {
           if (hp <= 30000) return 0;
           if (fate >= 1) {
             return Math.min(3500, (hp - 30000) / 1000 * 100);
@@ -350,7 +351,7 @@ export const AdditionalDamageMode = [
             type: "number",
             placeholder: "输入角色的生命值",
           },
-          
+
           {
             name: "healRate",
             label: "治疗加成%",
@@ -385,7 +386,7 @@ export const AdditionalDamageMode = [
             type: "number",
             placeholder: "输入角色的生命值",
           },
-          
+
           {
             name: "healRate",
             label: "治疗加成%",
