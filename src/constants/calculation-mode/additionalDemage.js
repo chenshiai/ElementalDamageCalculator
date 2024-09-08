@@ -78,7 +78,7 @@ export const AdditionalDamageMode = [
         getResult: ({ con, lv, hp }) => {
           lv = LVLimit(lv);
           con = Math.min(3, con);
-          return hp * (Magnification.Mualani.en[lv - 1] * con + con === 3 ? Magnification.Mualani.big[lv - 1] : 0);
+          return hp * (Magnification.Mualani.en[lv - 1] * con + (con === 3 ? Magnification.Mualani.big[lv - 1] : 0));
         },
       }
     ],

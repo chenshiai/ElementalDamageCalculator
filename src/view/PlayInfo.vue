@@ -1,19 +1,19 @@
 <template>
   <div>{{ playinfo }}</div>
+  <div id="a"></div>
 </template>
 
-<script>
-import { defineComponent, ref } from 'vue';
+<script setup>
+import { ref, onMounted } from 'vue';
 
-export default defineComponent({
-  name: "play-info",
+const playinfo = ref({});
 
-  setup() {
-    const playinfo = ref({});
-
-    return {
-      playinfo,
-    }
-  }
-});
+onMounted(() => {
+  const src = document.createElement('a');
+  src.innerHTML = 'kjjj';
+  src.target = '_blank';
+  src.href = 'https://enka.network/api/uid/101793652/';
+  // src.src = 'http://localhost:8080/test.json'
+  document.getElementById('a').appendChild(src);
+})
 </script>

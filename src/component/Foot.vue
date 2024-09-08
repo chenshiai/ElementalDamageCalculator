@@ -2,54 +2,40 @@
   <div class="foot">
     <div class="foot-title" @click="show = !show">更新日志</div>
     <div class="foot-title" @click="showAuthor = !showAuthor">联系作者</div>
-<!--    <div class="foot-title" @click="showGithub = !showGithub">源码地址</div>-->
   </div>
-  <Popup
-      teleport="#app"
-      position="bottom"
-      v-model:show="show"
-      class="foot-popup"
-  >
+  <Popup teleport="#app" position="bottom" v-model:show="show" class="foot-popup">
     <p v-for="item in updateLog">
       <span>{{ item.data }}</span><br />
       <span v-for="(msg, index) in item.msg">
-        {{ `${index+1}、${msg}` }}
+        {{ `${index + 1}、${msg}` }}
         <br />
       </span>
     </p>
   </Popup>
-  <Popup
-      teleport="#app"
-      position="bottom"
-      v-model:show="showAuthor"
-      class="foot-popup"
-      style="height: 20%"
-  >
+  <Popup teleport="#app" position="bottom" v-model:show="showAuthor" class="foot-popup" style="height: 20%">
     你可以通过以下平台联系作者
     <div class="foot-popup-name">
-      <img src="/mhy.jpg" />
-      <img src="/OIP-C.jpg" />
-      <img src="/git.png">
+      <a href="https://www.miyoushe.com/ys/accountCenter/postList?id=139610391" target="_blank">
+        <img src="/mhy.jpg" />
+      </a>
+      <a href="https://space.bilibili.com/76824065" target="_blank">
+        <img src="/OIP-C.jpg" />
+      </a>
+      <a href="https://github.com/chenshiai/ElementalDamageCalculator" target="_blank">
+        <img src="/git.png">
+      </a>
       @ChenShiAi
     </div>
   </Popup>
-  <Popup
-      teleport="#app"
-      position="bottom"
-      v-model:show="showGithub"
-      class="foot-popup"
-      style="height: 20%"
-  ></Popup>
 </template>
 
 <script setup>
-import {Popup} from "vant";
-import {ref} from "vue";
+import { Popup } from "vant";
+import { ref } from "vue";
 import updateLog from "@/constants/update-log";
 
 const show = ref(false);
 const showAuthor = ref(false);
-const showGithub = ref(false);
 </script>
 
 <style>
@@ -80,6 +66,7 @@ const showGithub = ref(false);
   box-sizing: border-box;
   height: 55%;
 }
+
 .foot-popup-name {
   line-height: 48px;
 }
