@@ -5,6 +5,7 @@ import Question from "./view/Question.vue";
 import CloudTeam from "./view/cloud-team/cloud-team.vue";
 import Shield from "./view/shield.vue";
 import PlayInfo from "./view/PlayInfo.vue";
+import CharacterCalculation from "./view/character-calculation/character-calculation.vue";
 
 const route = createRouter({
   history: createWebHashHistory(),
@@ -20,7 +21,11 @@ const route = createRouter({
     {
       path: "/play-info",
       component: PlayInfo,
-    }
+    },
+    {
+      path: "/character",
+      component: CharacterCalculation,
+    },
   ],
 });
 
