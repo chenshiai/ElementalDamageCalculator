@@ -23,18 +23,8 @@ body {
   --main-text: var(--stroke-3, #645856);
 }
 
-@font-face {
-  font-family: 'eng';
-  src: url('_-webfont.woff');
-}
-
-@font-face {
-  font-family: 'zhn';
-  src: url('HYWenHei-85W.ttf');
-}
-
 #app {
-  font-family: 'eng', 'zhn', Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'eng', HYWenHei-85W, Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;

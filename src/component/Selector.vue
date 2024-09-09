@@ -7,13 +7,7 @@
       <span class="pop-title__clear" @click="resultChange([])">清空</span>
     </div>
     <div class="selector-area">
-      <Search
-        background="#f7f1e6"
-        shape="round"
-        v-model="keyword"
-        @input="onInput"
-        placeholder="请输入伙伴名称"
-      />
+      <Search background="#f7f1e6" shape="round" v-model="keyword" @input="onInput" placeholder="请输入伙伴名称" />
       <div class="selector-block">
         元素属性<span class="holy-relic-tips">（可多选）</span>
         <CheckboxGroup class="check-area element-select" v-model="element">
@@ -37,13 +31,8 @@
         </CheckboxGroup>
       </div>
       选择伙伴<span class="holy-relic-tips">（可多选）</span>
-      <CheckboxGroup class="selector" v-model="result" :max="maxSelect"  @change="resultChange">
-        <Checkbox
-          class="selector-items"
-          v-for="(item, index) in configFilter"
-          :name="item.name"
-          :key="index"
-        >
+      <CheckboxGroup class="selector" v-model="result" :max="maxSelect" @change="resultChange">
+        <Checkbox class="selector-items" v-for="(item, index) in configFilter" :name="item.name" :key="index">
           <div class="selector-item__avatar">
             <img :src="item.avatar" />
           </div>
@@ -60,14 +49,14 @@
 </template>
 
 <script setup>
-import { defineProps, ref, computed } from "vue";
-import { CloudTeamConfig } from "@/assets/CloudTeamConfig";
-import { Search, Checkbox, CheckboxGroup } from "vant";
+import { ref, computed } from 'vue';
+import { CloudTeamConfig } from '@/assets/CloudTeamConfig';
+import { Search, Checkbox, CheckboxGroup } from 'vant';
 
-const keyword = ref("");
+const keyword = ref('');
 const result = ref([]);
 const element = ref([]);
-const weapon= ref([]);
+const weapon = ref([]);
 
 const configFilter = computed(() => {
   let res = CloudTeamConfig;
@@ -88,9 +77,11 @@ const configFilter = computed(() => {
 
 const resultChange = (value) => {
   result.value = value;
-  props.handleChange(CloudTeamConfig.filter((item) => {
-    return value.includes(item.name);
-  }))
+  props.handleChange(
+    CloudTeamConfig.filter((item) => {
+      return value.includes(item.name);
+    })
+  );
 };
 
 const onInput = () => {
@@ -101,12 +92,12 @@ const onInput = () => {
 const props = defineProps({
   handleChange: Function,
   maxSelect: {
-      type: Number,
-      default() {
-        return 4;
-      }
+    type: Number,
+    default() {
+      return 4;
     },
-})
+  },
+});
 </script>
 
 <style>
@@ -162,10 +153,10 @@ const props = defineProps({
   margin-bottom: 8px;
   border-radius: 4px;
 }
-.element-selece__item[aria-checked="true"] {
+.element-selece__item[aria-checked='true'] {
   background-color: var(--main-text);
 }
-.element-selece__item[aria-checked="true"] .van-checkbox__label {
+.element-selece__item[aria-checked='true'] .van-checkbox__label {
   color: #fff;
 }
 .element-selece__item .van-checkbox__label {
@@ -194,11 +185,11 @@ const props = defineProps({
 .selector-items.van-checkbox {
   overflow: visible !important;
 }
-.selector-items[aria-checked="true"] {
+.selector-items[aria-checked='true'] {
   box-shadow: 0 0 10px #818181;
 }
-.selector-items[aria-checked="true"]::after {
-  content: "";
+.selector-items[aria-checked='true']::after {
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
@@ -209,8 +200,8 @@ const props = defineProps({
   border-radius: inherit;
   border: 2px solid #998974;
 }
-.selector-items[aria-checked="true"]::before {
-  content: "";
+.selector-items[aria-checked='true']::before {
+  content: '';
   position: absolute;
   right: -8px;
   top: -8px;
@@ -266,59 +257,59 @@ const props = defineProps({
   left: 50%;
   font-size: 14px;
 }
-.selector-items[aria-checked="true"] .selector-item__name {
+.selector-items[aria-checked='true'] .selector-item__name {
   background-color: #998974;
   color: #ffffff;
   border-radius: 4px;
 }
 .logo-Pyro {
   position: relative;
-  background-image: url("/pyro.png");
+  background-image: url('/pyro.png');
   background-size: 22px;
 }
 .logo-Pyro::after {
-  content: "Pyro";
+  content: 'Pyro';
 }
 .logo-Hydro {
-  background-image: url("/hydro.png");
+  background-image: url('/hydro.png');
   background-size: 22px;
 }
 .logo-Hydro::after {
-  content: "Hydro";
+  content: 'Hydro';
 }
 .logo-Cryo {
-  background-image: url("/cryo.png");
+  background-image: url('/cryo.png');
   background-size: 22px;
 }
 .logo-Cryo::after {
-  content: "Cryo";
+  content: 'Cryo';
 }
 .logo-Electro {
-  background-image: url("/electro.png");
+  background-image: url('/electro.png');
   background-size: 22px;
 }
 .logo-Electro::after {
-  content: "Electro";
+  content: 'Electro';
 }
 .logo-Geo {
-  background-image: url("/geo.png");
+  background-image: url('/geo.png');
   background-size: 22px;
 }
 .logo-Geo::after {
-  content: "Geo";
+  content: 'Geo';
 }
 .logo-Anemo {
-  background-image: url("/anemo.png");
+  background-image: url('/anemo.png');
   background-size: 22px;
 }
 .logo-Anemo::after {
-  content: "Anemo";
+  content: 'Anemo';
 }
 .logo-Dendro {
-  background-image: url("/dendro.png");
+  background-image: url('/dendro.png');
   background-size: 22px;
 }
 .logo-Dendro::after {
-  content: "Dendro";
+  content: 'Dendro';
 }
 </style>

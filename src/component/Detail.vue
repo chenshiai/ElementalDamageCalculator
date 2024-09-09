@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-import {computed, defineProps} from "vue";
+import {computed} from "vue";
 import {WITCH, THUNDER, EMERALD, EDEN} from "@/constant";
 import {getAmplifiedRate, getServitudeRate, getCrystallizeRate, getCatalyzeRate} from "@/utils";
 
