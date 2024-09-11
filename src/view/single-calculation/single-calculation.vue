@@ -260,7 +260,7 @@ import NoteGroup from "@/component/NoteGroup.vue";
 import SaveData from "@/component/SaveData.vue";
 import CompositionAnalysis from "@/component/CompositionAnalysis.vue";
 import { useStore } from "vuex";
-import { ElementalReaction, basicPanelSelectType } from "@/constant";
+import { ElementalReaction, basicPanelSelectType } from "@/constants";
 import {
   AtkFixedNotes,
   EnhancedDamageNotes,

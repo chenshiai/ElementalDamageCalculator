@@ -21,6 +21,32 @@ body {
   --tip-text: var(--stroke-1, #928986);
   --button-bg: var(--stroke-2, #997874);
   --main-text: var(--stroke-3, #645856);
+
+  --one-rarity: #606368;
+  --two-rarity: #577C6C;
+  --three-rarity: #55859F;
+  --four-rarity: #A17CC2;
+  --five-rarity: #B07430;
+}
+
+.bg-one-rarity {
+  background-color: var(--one-rarity);
+}
+
+.bg-two-rarity {
+  background-color: var(--two-rarity);
+}
+
+.bg-three-rarity {
+  background-color: var(--three-rarity);
+}
+
+.bg-four-rarity {
+  background-color: var(--four-rarity);
+}
+
+.bg-five-rarity {
+  background-color: var(--five-rarity);
 }
 
 #app {

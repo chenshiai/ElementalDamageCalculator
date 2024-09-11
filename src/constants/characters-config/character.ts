@@ -1,4 +1,5 @@
-import { AttackType, ElementType } from "./info";
+import { AttackType, ElementType, BuffType, WeaponType, Rarity, ICharacterInfo } from "./interface.d";
+import { A_80_ATK_24P } from "./buffs";
 function getEnkaUI(name: string): string {
   return `https://enka.network/ui/${name}.png`;
 }
@@ -6,11 +7,13 @@ function getEnkaUIs(name: string[]): string[] {
   return name.map(getEnkaUI);
 }
 
-export const Character = {
-  Gaming: {
-    text: "嘉明",
+export const Character: (ICharacterInfo & Record<any, any>)[] = [
+  {
+    name: "嘉明",
     enkaId: 10000092,
+    weapon: WeaponType.GreatSword,
     element: ElementType.Pyro,
+    rarity: Rarity.Four,
     level: 90,
     baseHP: 11419,
     baseATK: 302,
@@ -128,6 +131,35 @@ export const Character = {
       }
     ],
 
-    buffs: []
+    buffs: [
+      A_80_ATK_24P,
+      {
+        label: "祥烟瑞气",
+        describe: "嘉明的生命值高于或等于50%时，下落攻击·踏云献瑞造成的伤害提升20%",
+        type: BuffType.FallingPrcent,
+        value: 20,
+      },
+      {
+        label: "二命·步踏梅花",
+        describe: "嘉明受到治疗时，若此次治疗回复量溢出，嘉明的攻击力将提升20%",
+        type: BuffType.ATKPrcent,
+        value: 20,
+        condition: (data) => data.conts >= 2
+      },
+      {
+        label: "六命·百兽俱驯1",
+        describe: "下落攻击·踏云献瑞的暴击率提升20%",
+        type: BuffType.Critcal,
+        value: 20,
+        condition: (data) => data.conts === 6
+      },
+      {
+        label: "六命·百兽俱驯2",
+        describe: "下落攻击·踏云献瑞的暴击伤害提升40%",
+        type: BuffType.CritcalHurt,
+        value: 40,
+        condition: (data) => data.conts === 6
+      },
+    ]
   },
-};
+];

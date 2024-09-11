@@ -16,7 +16,7 @@
 
 <script setup>
 import {computed} from "vue";
-import {WITCH, THUNDER, EMERALD, EDEN} from "@/constant";
+import {WITCH, THUNDER, EMERALD, EDEN} from "@/constants";
 import {getAmplifiedRate, getServitudeRate, getCrystallizeRate, getCatalyzeRate} from "@/utils";
 
 const props = defineProps({

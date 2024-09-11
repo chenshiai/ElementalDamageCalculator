@@ -1,7 +1,11 @@
-import { Toast } from "vant";
-import { ElementalReaction, ReactionRate } from './constant';
-import { BaseDMG } from './constants/elementalReaction';
 
+import { Toast } from "vant";
+import { ElementalReaction, ReactionRate } from '@/constants';
+import { BaseDMG } from '@/constants/elementalReaction';
+
+export function getBackGroundByRarity() {
+  
+}
 /** 获取增幅反应比例 */
 export const getAmplifiedRate = (em) => {
   return ((2.78 * em) / (em + 1400)) * 100;

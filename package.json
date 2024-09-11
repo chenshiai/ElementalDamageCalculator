@@ -15,6 +15,7 @@
     "vuex": "^4.0.0"
   },
   "devDependencies": {
+    "@types/node": "^22.5.4",
     "@vue/compiler-sfc": "^3.0.4",
     "babel-plugin-import": "^1.13.3",
     "vite": "^5.0.0"

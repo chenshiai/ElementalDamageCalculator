@@ -86,7 +86,7 @@ import {
   computationalFormula,
   EventBus,
 } from "@/utils";
-import { AtkTypeText } from "@/constant";
+import { AtkTypeText } from "@/constants";
 
 const store = useStore();
 const remark = ref("");

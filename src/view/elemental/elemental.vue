@@ -137,7 +137,7 @@
 
 <script setup>
 import {computed, ref} from "vue";
-import {WITCH, THUNDER, EMERALD, EDEN} from "@/constant";
+import {WITCH, THUNDER, EMERALD, EDEN} from "@/constants";
 import {BaseDMG} from '@/constants/elementalReaction';
 import {getServitudeRate, getCrystallizeRate, getCatalyzeRate} from "@/utils";
 import TabTitle from "@/component/TabTitle.vue";

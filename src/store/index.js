@@ -1,5 +1,5 @@
 import { createStore } from "vuex";
-import { basicPanelSelectType } from "../constant";
+import { basicPanelSelectType } from "@/constants";
 
 const damageModule = {
   state: () => {
