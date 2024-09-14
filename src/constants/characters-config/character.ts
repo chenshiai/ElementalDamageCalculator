@@ -7,6 +7,7 @@ function getEnkaUIs(name: string[]): string[] {
   return name.map(getEnkaUI);
 }
 
+// @TODO ICharacterInfo 定义待完善，暂时先用any绕过检测
 export const Character: (ICharacterInfo & Record<any, any>)[] = [
   {
     name: "嘉明",

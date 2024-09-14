@@ -6,7 +6,6 @@ import { ICharacterInfo } from "@/constants/characters-config/interface";
 import getBackGroundByRarity from "@/utils/getBackGroundClassByRarity";
 
 const show = ref(false);
-const constellation = ref(0);
 const setConsts = (value: number) => {
   if (constellation.value === value) {
     constellation.value = 0;
@@ -14,11 +13,14 @@ const setConsts = (value: number) => {
     constellation.value = value;
   }
 };
-
-const character = ref<null | ICharacterInfo>(null);
+const character = defineModel<null | ICharacterInfo>();
 const handleCharacterChange = (characters: ICharacterInfo) => {
   character.value = characters[0];
 };
+
+const constellation = defineModel("constellation", {
+  default: 0
+});
 </script>
 
 <template>
@@ -34,12 +36,12 @@ const handleCharacterChange = (characters: ICharacterInfo) => {
       <template v-if="character">
         <span>等级：{{ character.level }}</span>
         <div>
-          <span>命之座：{{  constellation }}</span>
+          <span>命之座：{{ constellation }}</span>
           <div class="constellations">
             <img
               v-for="(src, index) in character?.icons.constsIcon"
               :src="src"
-              :class="['consts-icon', (index + 1) === constellation ? 'consts-active' : '']"
+              :class="['consts-icon', index + 1 === constellation ? 'consts-active' : '']"
               @click="setConsts(index + 1)"
             />
           </div>
@@ -81,12 +83,16 @@ const handleCharacterChange = (characters: ICharacterInfo) => {
   justify-content: space-between;
 }
 .consts-icon {
-  width: 15%;
+  width: 14%;
   border-radius: 50%;
   border: var(--button-bg) 2px solid;
   background-color: var(--tip-text);
 }
 .consts-active {
+  background-color: var(--light-text);
+}
+
+.consts-icon:has(~ .consts-icon.consts-active) {
   background-color: var(--light-text);
 }
 .name {
