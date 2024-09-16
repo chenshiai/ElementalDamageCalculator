@@ -45,6 +45,7 @@ const constellation = defineModel("constellation", {
               @click="setConsts(index + 1)"
             />
           </div>
+          <span style="font-size: 12px;">点击图标开启/关闭命座</span>
         </div>
       </template>
       <div v-else>点击左侧 + 号选择角色</div>
@@ -58,6 +59,7 @@ const constellation = defineModel("constellation", {
 <style scoped>
 .character-info {
   display: flex;
+  margin-bottom: 16px;
 }
 
 .avatar {

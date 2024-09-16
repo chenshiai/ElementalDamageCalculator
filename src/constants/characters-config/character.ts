@@ -27,7 +27,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Gaming_01",
         "UI_Talent_S_Gaming_03",
         "UI_Talent_U_Gaming_02",
-        "UI_Talent_S_Gaming_04"
+        "UI_Talent_S_Gaming_04",
       ]),
       skillsIcon: getEnkaUIs(["Skill_A_04", "Skill_S_Gaming_01", "Skill_E_Gaming_01"]),
     },
@@ -45,7 +45,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       {
         label: "二段",
         rate: {
-          atk: [0.79, 0.855, 0.919, 1.011, 1.075, 1.149, 1.250, 1.351, 1.452, 1.563, 1.673],
+          atk: [0.79, 0.855, 0.919, 1.011, 1.075, 1.149, 1.25, 1.351, 1.452, 1.563, 1.673],
         },
         attackType: AttackType.Normal,
         elementType: ElementType.Physical,
@@ -53,7 +53,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       {
         label: "三段",
         rate: {
-          atk: [1.066, 1.153, 1.240, 1.364, 1.451, 1.550, 1.686, 1.823, 1.959, 2.108, 2.257],
+          atk: [1.066, 1.153, 1.24, 1.364, 1.451, 1.55, 1.686, 1.823, 1.959, 2.108, 2.257],
         },
         attackType: AttackType.Normal,
         elementType: ElementType.Physical,
@@ -61,7 +61,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       {
         label: "四段",
         rate: {
-          atk: [1.279, 1.384, 1.488, 1.637, 1.741, 1.860, 2.023, 2.187, 2.351, 2.529, 2.708],
+          atk: [1.279, 1.384, 1.488, 1.637, 1.741, 1.86, 2.023, 2.187, 2.351, 2.529, 2.708],
         },
         attackType: AttackType.Normal,
         elementType: ElementType.Physical,
@@ -115,11 +115,11 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       {
         label: "下落攻击·踏云献瑞",
         rate: {
-          atk: [2.304, 2.477, 2.65, 2.88, 3.053, 3.226, 3.456, 3.686, 3.917, 4.147, 4.378, 4.608, 4.896]
+          atk: [2.304, 2.477, 2.65, 2.88, 3.053, 3.226, 3.456, 3.686, 3.917, 4.147, 4.378, 4.608, 4.896],
         },
         attackType: AttackType.Falling,
         elementType: ElementType.Pyro,
-      }
+      },
     ],
     burstSkill: [
       {
@@ -129,7 +129,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         },
         attacktType: AttackType.Burst,
         elementType: ElementType.Pyro,
-      }
+      },
     ],
 
     buffs: [
@@ -137,30 +137,23 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       {
         label: "祥烟瑞气",
         describe: "嘉明的生命值高于或等于50%时，下落攻击·踏云献瑞造成的伤害提升20%",
-        type: BuffType.FallingPrcent,
-        value: 20,
+        effect: [{ type: BuffType.FallingPrcent, value: 20 }],
       },
       {
         label: "二命·步踏梅花",
         describe: "嘉明受到治疗时，若此次治疗回复量溢出，嘉明的攻击力将提升20%",
-        type: BuffType.ATKPrcent,
-        value: 20,
-        condition: (data) => data.conts >= 2
+        effect: [{ type: BuffType.ATKPrcent, value: 20 }],
+        condition: (data) => data.conts >= 2,
       },
       {
-        label: "六命·百兽俱驯1",
-        describe: "下落攻击·踏云献瑞的暴击率提升20%",
-        type: BuffType.Critcal,
-        value: 20,
-        condition: (data) => data.conts === 6
+        label: "六命·百兽俱驯",
+        describe: "下落攻击·踏云献瑞的暴击率提升20%、暴击伤害提升40%",
+        effect: [
+          { type: BuffType.Critcal, value: 20 },
+          { type: BuffType.CritcalHurt, value: 40 },
+        ],
+        condition: (data) => data.conts === 6,
       },
-      {
-        label: "六命·百兽俱驯2",
-        describe: "下落攻击·踏云献瑞的暴击伤害提升40%",
-        type: BuffType.CritcalHurt,
-        value: 40,
-        condition: (data) => data.conts === 6
-      },
-    ]
+    ],
   },
 ];

@@ -1,27 +1,13 @@
 <template>
   <div>
     <div class="pop-title">
-      <span v-if="maxSelect > 1" class="pop-title__click">已选择({{ result.length }}/{{ maxSelect }})</span>
-      选择伙伴
+      选择武器
       <span class="pop-title__close" @click="$emit('close')">返回</span>
-      <span v-if="maxSelect > 1" class="pop-title__clear" @click="resultChange([])">清空</span>
     </div>
     <div class="selector-area">
-      <Search background="#f7f1e6" shape="round" v-model="keyword" @input="onInput" placeholder="请输入伙伴名称" />
+      <Search background="#f7f1e6" shape="round" v-model="keyword" @input="onInput" placeholder="请输入武器名称" />
       <div class="selector-block">
-        元素属性<span class="holy-relic-tips">（可多选）</span>
-        <CheckboxGroup class="check-area element-select" v-model="element">
-          <Checkbox class="element-selece__item" name="Pyro">火</Checkbox>
-          <Checkbox class="element-selece__item" name="Anemo">风</Checkbox>
-          <Checkbox class="element-selece__item" name="Geo">岩</Checkbox>
-          <Checkbox class="element-selece__item" name="Electro">雷</Checkbox>
-          <Checkbox class="element-selece__item" name="Hydro">水</Checkbox>
-          <Checkbox class="element-selece__item" name="Cryo">冰</Checkbox>
-          <Checkbox class="element-selece__item" name="Dendro">草</Checkbox>
-        </CheckboxGroup>
-      </div>
-      <div class="selector-block">
-        使用武器<span class="holy-relic-tips">（可多选）</span>
+        武器类型<span class="holy-relic-tips">（可多选）</span>
         <CheckboxGroup class="check-area element-select" v-model="weapon">
           <Checkbox class="element-selece__item" name="Sword">单手剑</Checkbox>
           <Checkbox class="element-selece__item" name="GreatSword">双手剑</Checkbox>
@@ -30,13 +16,23 @@
           <Checkbox class="element-selece__item" name="Polearms">长柄武器</Checkbox>
         </CheckboxGroup>
       </div>
-      选择伙伴
+      <div class="selector-block">
+        武器稀有度<span class="holy-relic-tips">（可多选）</span>
+        <CheckboxGroup class="check-area element-select" v-model="rarity">
+          <Checkbox class="element-selece__item" :name="0">一星</Checkbox>
+          <Checkbox class="element-selece__item" :name="1">二星</Checkbox>
+          <Checkbox class="element-selece__item" :name="2">三星</Checkbox>
+          <Checkbox class="element-selece__item" :name="3">四星</Checkbox>
+          <Checkbox class="element-selece__item" :name="4">五星</Checkbox>
+        </CheckboxGroup>
+      </div>
+      选择武器
       <CheckboxGroup class="selector" v-model="result" :max="maxSelect" @change="resultChange">
         <Checkbox class="selector-items" v-for="(item, index) in configFilter" :name="item.name" :key="index">
           <div :class="['selector-item__avatar', getBackGroundByRarity(item.rarity)]">
-            <img :src="item.icons.avatarIcon" />
+            <img :src="item.icon" />
           </div>
-          <div :class="['logo', 'logo-' + item.element]" />
+          <div :class="['logo', 'logo-' + item.weaponType]"></div>
           <span class="selector-item__name">{{ item.name }}</span>
         </Checkbox>
         <div class="selector-items placeholder"></div>
@@ -50,8 +46,8 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue';
-import { Character } from '@/constants/characters-config/character';
-import { ICharacterInfo } from '@/constants/characters-config/interface';
+import { Weapons } from "@/constants/characters-config/weapon";
+import { IWeaponInfo } from '@/constants/characters-config/interface';
 import { Search, Checkbox, CheckboxGroup } from 'vant';
 import getBackGroundByRarity from '@/utils/getBackGroundClassByRarity';
 
@@ -66,23 +62,23 @@ const props = defineProps({
 });
 const keyword = ref('');
 const result = ref([]);
-const element = ref([]);
+const rarity = ref([]);
 const weapon = ref([]);
 const emit = defineEmits(['close']);
 
 const configFilter = computed(() => {
-  let res = Character;
+  let res = Weapons;
   // 筛选元素
-  if (element.value.length > 0) {
-    res = res.filter((item) => element.value.indexOf(item.element) >= 0);
+  if (rarity.value.length > 0) {
+    res = res.filter((item) => rarity.value.indexOf(item.rarity) >= 0);
   }
   // 筛选武器类型
   if (weapon.value.length > 0) {
-    res = res.filter((item) => weapon.value.indexOf(item.weapon) >= 0);
+    res = res.filter((item) => weapon.value.indexOf(item.weaponType) >= 0);
   }
   // 搜索关键字
   if (keyword.value) {
-    res = Character.filter((item) => item.name.indexOf(keyword.value) >= 0);
+    res = Weapons.filter((item) => item.name.indexOf(keyword.value) >= 0);
   }
   return res;
 });
@@ -90,7 +86,7 @@ const configFilter = computed(() => {
 const resultChange = (value) => {
   result.value = value;
   props.handleChange(
-    Character.filter((item: ICharacterInfo) => {
+    Weapons.filter((item: IWeaponInfo) => {
       return value.includes(item.name);
     })
   );
@@ -100,13 +96,13 @@ const resultChange = (value) => {
 };
 
 const onInput = () => {
-  element.value = [];
+  rarity.value = [];
   weapon.value = [];
 };
 
 </script>
 
-<style scoped>
+<style>
 .pop-title {
   position: relative;
   text-align: center;
@@ -293,68 +289,59 @@ const onInput = () => {
   color: #ffffff;
   border-radius: 4px;
 }
+.selector-items .logo {
+  width: 100%;
+  height: 26px;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
 
-.logo-Pyro {
+.selector-items .logo::after {
+  position: absolute;
+  display: block;
+  width: 100%;
+  opacity: 0.5;
+  color: #ffffff;
+  font-size: 12px;
+}
+.logo-Sword {
   position: relative;
-  background-image: url('/pyro.png');
   background-size: 22px;
 }
 
-.logo-Pyro::after {
-  content: 'Pyro';
+.logo-Sword::after {
+  content: 'Sword';
 }
 
-.logo-Hydro {
-  background-image: url('/hydro.png');
+.logo-GreatSword {
   background-size: 22px;
 }
 
-.logo-Hydro::after {
-  content: 'Hydro';
+.logo-GreatSword::after {
+  content: 'GreatSword';
 }
 
-.logo-Cryo {
-  background-image: url('/cryo.png');
+.logo-Bow {
   background-size: 22px;
 }
 
-.logo-Cryo::after {
-  content: 'Cryo';
+.logo-Bow::after {
+  content: 'Bow';
 }
 
-.logo-Electro {
-  background-image: url('/electro.png');
+.logo-Magic {
   background-size: 22px;
 }
 
-.logo-Electro::after {
-  content: 'Electro';
+.logo-Magic::after {
+  content: 'Magic';
 }
 
-.logo-Geo {
-  background-image: url('/geo.png');
+.logo-Polearms {
   background-size: 22px;
 }
 
-.logo-Geo::after {
-  content: 'Geo';
-}
-
-.logo-Anemo {
-  background-image: url('/anemo.png');
-  background-size: 22px;
-}
-
-.logo-Anemo::after {
-  content: 'Anemo';
-}
-
-.logo-Dendro {
-  background-image: url('/dendro.png');
-  background-size: 22px;
-}
-
-.logo-Dendro::after {
-  content: 'Dendro';
+.logo-Polearms::after {
+  content: 'Polearms';
 }
 </style>

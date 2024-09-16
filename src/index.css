@@ -57,6 +57,10 @@ body {
   color: var(--main-text);
 }
 
+.highlight {
+  color: #0097E1;
+}
+
 @media screen and (min-width: 1025px) {
   #app {
     width: 375px;
