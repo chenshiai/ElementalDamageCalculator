@@ -1,3 +1,5 @@
+import RelicInfo from "./index.vue";
+export { RelicInfo };
 const useRelicInfo = () => {
   
 }

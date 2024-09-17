@@ -36,7 +36,7 @@ const weaponStats = computed(() => {
 </script>
 
 <template>
-  <div class="character-info">
+  <div class="weapon-info">
     <div class="avatar" @click="show = true">
       <template v-if="weapon">
         <img :class="getBackGroundByRarity(weapon.rarity)" :src="weapon?.icon" />
@@ -67,8 +67,9 @@ const weaponStats = computed(() => {
 </template>
 
 <style scoped>
-.character-info {
+.weapon-info {
   display: flex;
+  margin-bottom: 16px;
 }
 
 .avatar {
