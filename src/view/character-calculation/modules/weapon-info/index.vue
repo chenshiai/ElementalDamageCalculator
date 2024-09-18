@@ -76,10 +76,10 @@ const weaponStats = computed(() => {
   height: 110px;
   width: 86px;
   box-sizing: border-box;
-  border: 2px solid #766461;
+  border: 2px solid var(--border);
   border-radius: 4px;
   overflow: hidden;
-  background-color: #b7a19e;
+  background-color: var(--bg);
   margin-right: 16px;
 }
 

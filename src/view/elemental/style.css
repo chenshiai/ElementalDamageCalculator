@@ -37,7 +37,7 @@
   }
   
   .elemental-slider-button {
-    background-color: #766461;
+    background-color: var(--border);
     color: #fff;
     padding: 2px 4px;
     border-radius: 4px;
