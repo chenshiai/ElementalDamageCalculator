@@ -5,7 +5,7 @@
       <span class="pop-title__close" @click="$emit('close')">返回</span>
     </div>
     <div class="selector-area">
-      <Search background="#f7f1e6" shape="round" v-model="keyword" @input="onInput" placeholder="请输入武器名称" />
+      <Search background="#f7f1e6" shape="round" v-model="keyword" @input="onInput" placeholder="输入武器名称进行检索" />
       <div class="selector-block">
         武器类型<span class="holy-relic-tips">（可多选）</span>
         <CheckboxGroup class="check-area element-select" v-model="weapon">
@@ -19,11 +19,11 @@
       <div class="selector-block">
         武器稀有度<span class="holy-relic-tips">（可多选）</span>
         <CheckboxGroup class="check-area element-select" v-model="rarity">
-          <Checkbox class="element-selece__item" :name="0">一星</Checkbox>
-          <Checkbox class="element-selece__item" :name="1">二星</Checkbox>
-          <Checkbox class="element-selece__item" :name="2">三星</Checkbox>
-          <Checkbox class="element-selece__item" :name="3">四星</Checkbox>
           <Checkbox class="element-selece__item" :name="4">五星</Checkbox>
+          <Checkbox class="element-selece__item" :name="3">四星</Checkbox>
+          <Checkbox class="element-selece__item" :name="2">三星</Checkbox>
+          <Checkbox class="element-selece__item" :name="1">二星</Checkbox>
+          <Checkbox class="element-selece__item" :name="0">一星</Checkbox>
         </CheckboxGroup>
       </div>
       选择武器

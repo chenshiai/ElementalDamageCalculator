@@ -2,7 +2,7 @@
   <TabTitle>角色伤害计算</TabTitle>
   <CharacterInfo v-model="characterInfo" v-model:constellation="constellation" />
   <WeaponInfo v-model="weapon" v-model:affix="affix" />
-  <RelicInfo />
+  <RelicInfo v-model="relics" />
 </template>
 
 <script setup lang="ts">
@@ -13,4 +13,5 @@ import useRelicInfo, { RelicInfo } from "./modules/relic-info";
 
 const { characterInfo, setCharacterInfo, constellation, setConstellation } = useCharacterInfo();
 const { weapon, affix, setWeapon, setAffix } = useWeaponInfo();
+const { relics } = useRelicInfo();
 </script>

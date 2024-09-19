@@ -225,3 +225,10 @@ export interface IWeaponInfo {
   };
   getBuffs: (affix: number) => IBuffBase[];
 }
+
+export interface IRelicBase {
+  setNameTextMapHash: number;
+  equipType: EquipType;
+  name: string;
+  icon: string;
+}

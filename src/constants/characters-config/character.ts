@@ -1,8 +1,7 @@
 import { AttackType, ElementType, BuffType, WeaponType, Rarity, ICharacterInfo } from "./interface.d";
+import { getEnkaUI } from "./append-prop";
 import { A_80_ATK_24P } from "./buffs";
-function getEnkaUI(name: string): string {
-  return `https://enka.network/ui/${name}.png`;
-}
+
 function getEnkaUIs(name: string[]): string[] {
   return name.map(getEnkaUI);
 }

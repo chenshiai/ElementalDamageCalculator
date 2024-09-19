@@ -7,7 +7,7 @@
       <span v-if="maxSelect > 1" class="pop-title__clear" @click="resultChange([])">清空</span>
     </div>
     <div class="selector-area">
-      <Search background="#f7f1e6" shape="round" v-model="keyword" @input="onInput" placeholder="请输入伙伴名称" />
+      <Search background="#f7f1e6" shape="round" v-model="keyword" @input="onInput" placeholder="输入伙伴名称进行检索" />
       <div class="selector-block">
         元素属性<span class="holy-relic-tips">（可多选）</span>
         <CheckboxGroup class="check-area element-select" v-model="element">
