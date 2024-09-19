@@ -1,25 +1,67 @@
-import { EquipType, ItemType, BuffType, IBuffBase } from "./interface.d";
+import { EquipType, ItemType, BuffType, IBuffBase, AppendProp } from "./interface.d";
 import { getEnkaUI } from "./append-prop";
 
-function setReliquartStat(setNameTextMapHash: number, name: string, iconUrl: string, equipType: EquipType) {
+export type MainstatType = {
+  mainPropId: AppendProp;
+  statValue: number;
+};
+
+export type SubstatType = {
+  appendPropId: AppendProp;
+  statValue: number;
+};
+
+export interface IRelicBase {
+  setNameTextMapHash: number;
+  equipType: EquipType;
+  name: string;
+  icon: string;
+}
+
+export interface IRelicItem extends IRelicBase {
+  rankLevel: number;
+  level: number;
+  reliquaryMainstat: MainstatType;
+  reliquarySubstats: SubstatType[];
+}
+
+export class RelicItem {
+  public name: string;
+  public icon: string;
+  public rankLevel: number;
+  public setNameTextMapHash: number;
+  public equipType: EquipType;
+  public level: number;
+  public reliquaryMainstat: MainstatType;
+  public reliquarySubstats: SubstatType[];
+
+  constructor(data: IRelicItem) {
+    this.name = data.name;
+    this.icon = data.icon;
+    this.rankLevel = data.rankLevel;
+    this.setNameTextMapHash = data.setNameTextMapHash;
+    this.equipType = data.equipType;
+    this.level = data.level;
+    this.reliquaryMainstat = data.reliquaryMainstat;
+    this.reliquarySubstats = data.reliquarySubstats;
+  }
+
+  public setMainstat(data: MainstatType) {
+    this.reliquaryMainstat = data;
+  }
+
+  public setSubstat(data: SubstatType[]) {
+    this.reliquarySubstats = data;
+  }
+}
+
+function setReliquartStat(setNameTextMapHash: number, name: string, iconUrl: string, equipType: EquipType): IRelicBase {
   return {
     name,
     icon: getEnkaUI(iconUrl),
-    rankLevel: 5,
     // enka数据中用来映射套装名字的id，这里用来映射套装效果
     setNameTextMapHash,
     equipType,
-    level: 20,
-    reliquaryMainstat: {
-      mainPropId: "",
-      statValue: 0,
-    },
-    reliquarySubstats: [
-      {
-        appendPropId: "",
-        statValue: 0,
-      },
-    ],
   };
 }
 

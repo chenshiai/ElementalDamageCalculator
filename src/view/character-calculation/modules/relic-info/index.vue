@@ -1,38 +1,40 @@
-<script setup>
+<script setup lang="ts">
+import { ref } from "vue";
+import { IRelicItem, MainstatType, SubstatType } from "@/constants/characters-config/relic";
+import { getAppendPropName, percentProps } from "@/constants/characters-config/append-prop";
+
+const relics = ref<IRelicItem[]>(new Array(5).fill(null));
+
+const getStatValueText = (stat): string => {
+  const statValue = stat.statValue;
+  const shouldAppendPercent = percentProps.includes(stat.mainPropId || stat.appendPropId);
+  return `+${statValue}${shouldAppendPercent ? "%" : ""}`;
+};
 </script>
 
 <template>
   <div class="relic-info">
-    <div class="relic-detail" v-for="i in 5">
-      <img class="relic-icon" src="https://enka.network/ui/UI_RelicIcon_15021_4.png" alt="">
-      <div class="relic-detail__hearder">
-        <div>水仙的时时刻刻</div>
-        <div class="relic-main-stats">
-          <span>name</span>
-          <span>+4780</span>
+    <div class="relic-detail" v-for="item in relics" :key="item.name">
+      <template v-if="item">
+        <img class="relic-icon" :src="item.icon" />
+        <div class="relic-detail__hearder">
+          <div>{{ item.name }}</div>
+          <div class="relic-main-stats">
+            <span>{{ getAppendPropName(item.reliquaryMainstat.mainPropId) }}</span>
+            <span>{{ getStatValueText(item.reliquaryMainstat) }}</span>
+          </div>
         </div>
-      </div>
-      <div class="relic-detail__stats">
-        <label>name</label>
-        <span>+30</span>
-      </div>
-      <div class="relic-detail__stats">
-        <label>name</label>
-        <span>+30</span>
-      </div>
-      <div class="relic-detail__stats">
-        <label>name</label>
-        <span>+30</span>
-      </div>
-      <div class="relic-detail__stats">
-        <label>name</label>
-        <span>+30</span>
-      </div>
+        <div
+          class="relic-detail__stats"
+          v-for="(subitem, index) in item.reliquarySubstats"
+          :key="subitem.appendPropId + index"
+        >
+          <label>{{ getAppendPropName(subitem.appendPropId) }}</label>
+          <span>{{ getStatValueText(subitem) }}</span>
+        </div>
+      </template>
+      <div v-else>空</div>
     </div>
-    <!-- <div class="relic-detail">羽</div>
-    <div class="relic-detail">沙</div>
-    <div class="relic-detail">杯</div>
-    <div class="relic-detail">头</div> -->
     <div class="relic-detail">套</div>
   </div>
 </template>

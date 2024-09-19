@@ -23,6 +23,24 @@ export const appendPropMap = {
   [AppendProp.GRASS_ADD_HURT]: '草元素伤害加成'
 };
 
+export const percentProps = [
+  AppendProp.HP_PERCENT,
+  AppendProp.ATTACK_PERCENT,
+  AppendProp.DEFENSE_PERCENT,
+  AppendProp.CRITICAL,
+  AppendProp.CRITICAL_HURT,
+  AppendProp.CHARGE_EFFICIENCY,
+  AppendProp.HEAL_ADD,
+  AppendProp.PHYSICAL_ADD_HURT,
+  AppendProp.FIRE_ADD_HURT,
+  AppendProp.ELEC_ADD_HURT,
+  AppendProp.WATER_ADD_HURT,
+  AppendProp.WIND_ADD_HURT,
+  AppendProp.ICE_ADD_HURT,
+  AppendProp.ROCK_ADD_HURT,
+  AppendProp.GRASS_ADD_HURT
+];
+
 export function getAppendPropName(appendProp: AppendProp) {
   return appendPropMap[appendProp];
 }
