@@ -11,11 +11,14 @@ export type SubstatType = {
   statValue: number;
 };
 
-export interface IRelicItem extends IRelicBase {
-  rankLevel: number;
-  level: number;
+export type RelicStatType = {
   reliquaryMainstat: MainstatType;
   reliquarySubstats: SubstatType[];
+}
+
+export interface IRelicItem extends IRelicBase, RelicStatType {
+  rankLevel: number;
+  level: number;
 }
 
 export class RelicItem {

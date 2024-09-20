@@ -2,12 +2,12 @@ import { AppendProp, EquipType } from "./interface.d";
 
 export const appendPropMap = {
   [AppendProp.BASE_ATTACK]: "基础攻击力",
-  [AppendProp.HP]: "生命值",
-  [AppendProp.ATTACK]: "攻击力",
-  [AppendProp.DEFENSE]: "防御力",
-  [AppendProp.HP_PERCENT]: "生命值",
-  [AppendProp.ATTACK_PERCENT]: "攻击力",
-  [AppendProp.DEFENSE_PERCENT]: "防御力",
+  [AppendProp.HP]: "小生命",
+  [AppendProp.ATTACK]: "小攻击",
+  [AppendProp.DEFENSE]: "小防御",
+  [AppendProp.HP_PERCENT]: "大生命",
+  [AppendProp.ATTACK_PERCENT]: "大攻击",
+  [AppendProp.DEFENSE_PERCENT]: "大防御",
   [AppendProp.CRITICAL]: "暴击率",
   [AppendProp.CRITICAL_HURT]: "暴击伤害",
   [AppendProp.CHARGE_EFFICIENCY]: "元素充能效率",
@@ -40,7 +40,7 @@ export const percentProps = [
   AppendProp.ROCK_ADD_HURT,
   AppendProp.GRASS_ADD_HURT,
 ];
-
+export const RelicText = ["生之花", "死之羽", "时之沙", "空之杯", "理之冠"];
 export const EquipTypeText = {
   [EquipType.EQUIP_BRACER]: "生之花",
   [EquipType.EQUIP_NECKLACE]: "死之羽",
@@ -49,7 +49,53 @@ export const EquipTypeText = {
   [EquipType.EQUIP_DRESS]: "理之冠",
 };
 
-export const RelicText = ["生之花", "死之羽", "时之沙", "空之杯", "理之冠"];
+/** 主属性列表 */
+export const EquipTypeMainstats = {
+  [EquipType.EQUIP_BRACER]: [AppendProp.HP],
+  [EquipType.EQUIP_NECKLACE]: [AppendProp.ATTACK],
+  [EquipType.EQUIP_SHOES]: [
+    AppendProp.HP_PERCENT,
+    AppendProp.ATTACK_PERCENT,
+    AppendProp.DEFENSE_PERCENT,
+    AppendProp.ELEMENT_MASTERY,
+    AppendProp.CHARGE_EFFICIENCY,
+  ],
+  [EquipType.EQUIP_RING]: [
+    AppendProp.HP_PERCENT,
+    AppendProp.ATTACK_PERCENT,
+    AppendProp.DEFENSE_PERCENT,
+    AppendProp.ELEMENT_MASTERY,
+    AppendProp.PHYSICAL_ADD_HURT,
+    AppendProp.FIRE_ADD_HURT,
+    AppendProp.WATER_ADD_HURT,
+    AppendProp.WIND_ADD_HURT,
+    AppendProp.ELEC_ADD_HURT,
+    AppendProp.GRASS_ADD_HURT,
+    AppendProp.ROCK_ADD_HURT,
+    AppendProp.ICE_ADD_HURT,
+  ],
+  [EquipType.EQUIP_DRESS]: [
+    AppendProp.HP_PERCENT,
+    AppendProp.ATTACK_PERCENT,
+    AppendProp.DEFENSE_PERCENT,
+    AppendProp.ELEMENT_MASTERY,
+    AppendProp.CRITICAL,
+    AppendProp.CRITICAL_HURT,
+  ],
+};
+
+export const EquipTypeSubstats = [
+  AppendProp.HP,
+  AppendProp.ATTACK,
+  AppendProp.DEFENSE,
+  AppendProp.ATTACK_PERCENT,
+  AppendProp.HP_PERCENT,
+  AppendProp.DEFENSE_PERCENT,
+  AppendProp.ELEMENT_MASTERY,
+  AppendProp.CHARGE_EFFICIENCY,
+  AppendProp.CRITICAL,
+  AppendProp.CRITICAL_HURT
+];
 
 export function getAppendPropName(appendProp: AppendProp) {
   return appendPropMap[appendProp];
