@@ -43,16 +43,22 @@ export const Weapons: IWeaponInfo[] = [
     getBuffs: (affix: number) => {
       return [
         {
-          label: "攻击力提升1",
+          label: "攻击力提升·一",
           effect: [{ type: BuffType.ATKPrcent, value: 20 + (affix - 1) * 5 }],
+          describe: `元素战技命中敌人后，攻击力提升${20 + (affix - 1) * 5}%`,
+          enable: false,
         },
         {
-          label: "攻击力提升2",
+          label: "攻击力提升·二",
           effect: [{ type: BuffType.ATKPrcent, value: 20 + (affix - 1) * 5 }],
+          describe: `受到伤害后，攻击力提升${20 + (affix - 1) * 5}%`,
+          enable: false,
         },
         {
           label: "生命值提升",
           effect: [{ type: BuffType.HPPrcent, value: 32 + (affix - 1) * 8 }],
+          describe: `不处于护盾庇护下，生命值提升${32 + (affix - 1) * 8}%`,
+          enable: false,
         },
       ];
     },

@@ -88,7 +88,7 @@ const catalyzeMoreRate = computed(() => {
 }
 
 .more-rate {
-  color: #2ee27f;
+  color: var(--extra-text);
 }
 
 </style>

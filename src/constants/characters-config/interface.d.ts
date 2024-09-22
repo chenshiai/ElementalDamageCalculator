@@ -40,6 +40,7 @@ export enum Rarity {
 
 /** Buff的类型 */
 export enum BuffType {
+  // ================= 在面板上的buff =============
   /** 基础生命值百分比提升 */
   HPPrcent = "hpPrcent",
   /** 基础攻击力百分比提升 */
@@ -62,7 +63,25 @@ export enum BuffType {
   Critcal = "critcal",
   /** 暴击伤害提升 单位%*/
   CritcalHurt = "critcalHurt",
-
+  
+  /** 物理伤害提升 单位% */
+  PhysicalPrcent = "physicalPrcent",
+  /** 火元素伤害提升 单位% */
+  PyroPrcent = "pyroPrcent",
+  /** 雷元素伤害提升 单位% */
+  ElectroPrcent = "electroPrcent",
+  /** 水元素伤害提升 单位% */
+  HydroPrcent = "hydroPrcent",
+  /** 风元素伤害提升 单位% */
+  AnemoPrcent = "anemoPrcent",
+  /** 冰元素伤害提升 单位% */
+  CryoPrcent = "cryoPrcent",
+  /** 岩元素伤害提升 单位% */
+  GeoPrcent = "geoPrcent",
+  /** 草元素伤害提升 单位% */
+  DendroPrcent = "dendroPrcent",
+  
+  // ================= 不在面板上的buff =============
   /** 普攻伤害百分比提升 */
   NormalPrcent = "normalAttackPrcent",
   /** 重击伤害百分比提升 */
@@ -85,23 +104,6 @@ export enum BuffType {
   /** 元素爆发伤害提高 */
   BurstFixed = "burstAttackFixed",
 
-  /** 物理伤害提升 单位% */
-  PhysicalPrcent = "physicalPrcent",
-  /** 火元素伤害提升 单位% */
-  PyroPrcent = "pyroPrcent",
-  /** 雷元素伤害提升 单位% */
-  ElectroPrcent = "electroPrcent",
-  /** 水元素伤害提升 单位% */
-  HydroPrcent = "hydroPrcent",
-  /** 风元素伤害提升 单位% */
-  AnemoPrcent = "anemoPrcent",
-  /** 冰元素伤害提升 单位% */
-  CryoPrcent = "cryoPrcent",
-  /** 岩元素伤害提升 单位% */
-  GeoPrcent = "geoPrcent",
-  /** 草元素伤害提升 单位% */
-  DendroPrcent = "dendroPrcent",
-
   /** 物理伤害提高 */
   PhysicalFixed = "physicalFixed",
   /** 火元素伤害提高 */
@@ -123,11 +125,67 @@ export enum BuffType {
   GlobalPrcent = "globalPrcent",
   /** 全局伤害提高 */
   GlobalFixed = "globalFixed",
+
+  /** 普攻暴击率提升 */
+  NormalCritcal = "normalCritical",
+  /** 重击暴击率提升 */
+  StrongCritcal = "strongCritical",
+  /** 下落攻击暴击率提升 */
+  FallingCritcal = "fallingCritical",
+  /** 元素战技暴击率提升 */
+  SkillCritcal = "skillCritical",
+  /** 元素爆发暴击率提升 */
+  BurstCritcal = "burstCritical",
+
+  /** 物理伤害暴击率提升% */
+  PhysicalCritcal = "physicalCritical",
+  /** 火元素暴击率提升% */
+  PyroCritcal = "pyroCritical",
+  /** 雷元素暴击率提升% */
+  ElectroCritcal = "electroCritical",
+  /** 水元素暴击率提升% */
+  HydroCritcal = "hydroCritical",
+  /** 冰元素暴击率提升% */
+  CryoCritcal = "cryoCritical",
+  /** 岩元素暴击率提升% */
+  GeoCritcal = "geoCritical",
+  /** 草元素暴击率提升% */
+  DendroCritcal = "dendroCritical",
+  /** 风元素暴击率提升% */
+  AnemoCritcal = "anemoCritical",
+
+  /** 普攻暴击伤害提升%*/
+  NormalCritcalHurt = "normalCriticalHurt",
+  /** 重击暴击伤害提升%*/
+  StrongCritcalHurt = "strongCriticalHurt",
+  /** 下落攻击暴击伤害提升%*/
+  FallingCritcalHurt = "fallingCriticalHurt",
+  /** 元素战技暴击伤害提升%*/
+  SkillCritcalHurt = "skillCriticalHurt",
+  /** 元素爆发暴击伤害提升%*/
+  BurstCritcalHurt = "burstCriticalHurt",
+
+  /** 物理伤害暴击伤害提升%*/
+  PhysicalCritcalHurt = "physicalCriticalHurt",
+  /** 火伤暴击伤害提升%*/
+  PyroCritcalHurt = "pyroCriticalHurt",
+  /** 雷伤暴击伤害提升%*/
+  ElectroCritcalHurt = "electroCriticalHurt",
+  /** 水伤暴击伤害提升%*/
+  HydroCritcalHurt = "hydroCriticalHurt",
+  /** 冰伤暴击伤害提升%*/
+  CryoCritcalHurt = "cryoCriticalHurt",
+  /** 岩伤暴击伤害提升%*/
+  GeoCritcalHurt = "geoCriticalHurt",
+  /** 草伤暴击伤害提升%*/
+  DendroCritcalHurt = "dendroCriticalHurt",
+  /** 风伤暴击伤害提升%*/
+  AnemoCritcalHurt = "anemoCriticalHurt",
 }
 
 /** 最终计算用的数据 */
 export interface CalculatorData {
-  conts: number;
+  constellation: number;
 }
 
 /** Buff显示条件 */
@@ -135,6 +193,8 @@ export type BuffCondition = (data: CalculatorData) => boolean;
 export type BuffEffect = {
   type: BuffType;
   value: number;
+  // 是否基于基础属性转化而来，若为真，则该buff提供的属性不会被二次转化
+  transform?: boolean;
 };
 
 export interface IBuffBase {
@@ -144,12 +204,16 @@ export interface IBuffBase {
   describe?: string;
   /** Buff的具体效果 */
   effect: BuffEffect[],
+  /** Buff是否启用 */
+  enable: boolean;
   /** Buff显示条件 */
   condition?: BuffCondition;
   /** Buff数值是否可叠加 */
   stackable?: boolean;
   /** 最大叠加层数 */
   limit?: number;
+  /** 当前层数 */
+  stack?: number;
 }
 
 export interface ICharacterInfo {

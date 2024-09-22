@@ -1,8 +1,8 @@
 import CharacterInfo from "./index.vue";
 export { CharacterInfo };
 
-import { ref } from "vue";
-import { ICharacterInfo } from "@/constants/characters-config/interface";
+import { ref, watchEffect } from "vue";
+import { ICharacterInfo, IBuffBase } from "@/constants/characters-config/interface.d";
 
 const useCharacterInfo = () => {
   const characterInfo = ref<null | ICharacterInfo>(null);
@@ -14,8 +14,22 @@ const useCharacterInfo = () => {
     constellation.value = value;
   };
 
+  const characterBuffs = ref<IBuffBase[]>();
+  watchEffect(() => {
+    characterBuffs.value = characterInfo.value?.buffs
+      .filter((buff) => {
+        if (buff.condition) {
+          return buff.condition({ constellation: constellation.value });
+        } else {
+          return true;
+        }
+      })
+      .map((b) => Object.create(b));
+  });
+
   return {
     characterInfo,
+    characterBuffs,
     setCharacterInfo,
     constellation,
     setConstellation,

@@ -80,6 +80,7 @@ export const EquipTypeMainstats = {
     AppendProp.DEFENSE_PERCENT,
     AppendProp.ELEMENT_MASTERY,
     AppendProp.CRITICAL,
+    AppendProp.HEAL_ADD,
     AppendProp.CRITICAL_HURT,
   ],
 };

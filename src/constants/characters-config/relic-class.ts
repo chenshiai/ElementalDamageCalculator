@@ -1,4 +1,3 @@
-import { stat } from "fs";
 import { EquipType, IRelicBase, AppendProp } from "./interface.d";
 
 export type MainstatType = {

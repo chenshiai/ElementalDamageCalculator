@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Popup, Search, Icon, Toast } from "vant";
+import { Popup, Search, Icon, Toast, Button } from "vant";
 import { ref, computed } from "vue";
 
 import relics from "@/constants/characters-config/relic";
@@ -8,7 +8,6 @@ import {
   MainstatType,
   ReliceMainStats,
   RelicItem,
-  SubstatType,
   RelicStatType,
 } from "@/constants/characters-config/relic-class";
 import { AppendProp, IRelicBase } from "@/constants/characters-config/interface.d";
@@ -19,9 +18,15 @@ import {
   EquipTypeMainstats,
   EquipTypeSubstats,
 } from "@/constants/characters-config/append-prop";
+import { IRelicSuitText } from "./index";
+
+interface IProps {
+  relicSuitTexts: IRelicSuitText[];
+}
 
 /** 圣遗物信息展示 */
 const relicList = defineModel<IRelicItem[]>();
+const { relicSuitTexts } = defineProps<IProps>();
 const getStatValueText = (stat): string => {
   const statValue = stat.statValue;
   const shouldAppendPercent = percentProps.includes(stat.mainPropId || stat.appendPropId);
@@ -30,27 +35,29 @@ const getStatValueText = (stat): string => {
 
 /** 圣遗物搜索 */
 const searchRelic = ref("");
-const relicsFilter = computed(() => {
+const filteredRelics = computed(() => {
   return relics.filter((item) => item.name.indexOf(searchRelic.value) >= 0);
 });
 
 /** 选择指定部位的圣遗物 */
-const show = ref(false);
+const showPopup = ref(false);
 const relicTitle = ref("");
-const selectedRelic = ref(0);
+const selectedPartIndex = ref(0);
 const selectRelic = (index: number) => {
-  show.value = true;
+  showPopup.value = true;
   // 暂存选择部位的下标
-  selectedRelic.value = index;
+  selectedPartIndex.value = index;
   // 根据选择部位的下标来显示部位名称
   relicTitle.value = RelicText[index];
 
+  // 若选择部位已有圣遗物，则填充数据
   if (relicList.value[index]) {
-    setStatBase.value = relicList.value[index];
+    const data = JSON.parse(JSON.stringify(relicList.value[index]));
+    setStatBase.value = data;
     setStatForm.value = {
-      reliquaryMainstat: relicList.value[index].reliquaryMainstat,
-      reliquarySubstats: relicList.value[index].reliquarySubstats,
-    }
+      reliquaryMainstat: data.reliquaryMainstat,
+      reliquarySubstats: data.reliquarySubstats,
+    };
   }
 };
 
@@ -66,29 +73,36 @@ const addRelic = () => {
     return;
   }
 
-  const relicIns = new RelicItem({
+  const relicItem = new RelicItem({
     ...setStatBase.value,
     ...setStatForm.value,
     rankLevel: 5,
     level: 20,
   });
 
-  relicList.value.splice(selectedRelic.value, 1, relicIns);
-  onPopupClose();
+  relicList.value.splice(selectedPartIndex.value, 1, relicItem);
+  closePopup();
   Toast.success("修改成功");
 };
-const onPopupClose = () => {
-  show.value = false;
+const removeRelic = () => {
+  if (!relicList.value[selectedPartIndex.value]) return;
+  const name = relicList.value[selectedPartIndex.value].name;
+  relicList.value.splice(selectedPartIndex.value, 1, null);
+  closePopup();
+  Toast.success(`已卸下\n[${name}]`);
+};
+const closePopup = () => {
+  showPopup.value = false;
   setStatBase.value = null;
   setStatForm.value = {
     reliquaryMainstat: {} as MainstatType,
     reliquarySubstats: [],
   };
-}
+};
 /** 设置圣遗物属性弹窗 */
 const showSetRelicStatPop = (equip: IRelicBase[]) => {
   // 根据部位下标来获取部位的具体类型和图标
-  setStatBase.value = equip[selectedRelic.value];
+  setStatBase.value = equip[selectedPartIndex.value];
 };
 
 // 主词条变化后，删除相同的副词条
@@ -129,7 +143,6 @@ const subStatFilter = (selectedId: AppendProp) => {
     (appendPropId) => appendPropId !== mainPropId && !appendPropIds.includes(appendPropId)
   ).concat([selectedId]);
 };
-
 </script>
 
 <template>
@@ -139,7 +152,10 @@ const subStatFilter = (selectedId: AppendProp) => {
       <template v-if="item">
         <img class="relic-icon" :src="item.icon" />
         <div class="relic-detail__hearder">
-          <div>{{ item.name }}<span>+{{ item.level }}</span></div>
+          <div class="relic-name">
+            {{ item.name }}
+            <span class="relic-level">+{{ item.level }}</span>
+          </div>
           <div class="relic-main-stats">
             <span>{{ getAppendPropName(item.reliquaryMainstat.mainPropId) }}</span>
             <span>{{ getStatValueText(item.reliquaryMainstat) }}</span>
@@ -156,17 +172,24 @@ const subStatFilter = (selectedId: AppendProp) => {
       </template>
       <div class="empty" v-else>+ 添加圣遗物</div>
     </div>
-    <div class="relic-detail">替换整套圣遗物</div>
+    <div class="relic-detail">
+      <div class="relic-suit-text" v-for="relicSuitText in relicSuitTexts">
+        <div class="relic-suit-text__title">{{ relicSuitText.name }}</div>
+        <div class="relic-suit-text__texts">
+          <div v-for="text in relicSuitText.texts" :key="text">{{ text }}</div>
+        </div>
+      </div>
+    </div>
   </div>
   <!-- 圣遗物搜索 -->
-  <Popup class="relic-popup" v-model:show="show" position="top" style="height: 40%" @close="onPopupClose">
+  <Popup class="relic-popup" v-model:show="showPopup" position="top" style="height: 40%" @close="closePopup">
     <template v-if="!setStatBase">
       <div class="relic-search">
         <span>~ {{ relicTitle }} ~</span>
         <Search v-model="searchRelic" placeholder="搜索圣遗物" />
       </div>
       <div class="relic-select">
-        <div v-for="item in relicsFilter" class="relic-select__item" @click="showSetRelicStatPop(item.equip)">
+        <div v-for="item in filteredRelics" class="relic-select__item" @click="showSetRelicStatPop(item.equip)">
           <img :src="item.equip[0].icon" />{{ item.name }}
         </div>
       </div>
@@ -175,9 +198,9 @@ const subStatFilter = (selectedId: AppendProp) => {
       <div class="set-relice-title">
         <span @click="setStatBase = null">切换套装</span>
         <span><img :src="setStatBase.icon" />{{ setStatBase.name }}</span>
-        <span @click="addRelic">确认修改</span>
+        <span style="color: rgb(255, 82, 82)" @click="removeRelic">卸下装备</span>
       </div>
-      <form class="set-relice-form">
+      <form class="set-relice-form" @submit.prevent="addRelic">
         <div class="set-relice-filed">
           <span>主词条：</span>
           <select v-model="setStatForm.reliquaryMainstat" required @change="mainStatChanged">
@@ -185,10 +208,10 @@ const subStatFilter = (selectedId: AppendProp) => {
               {{ getAppendPropName(stat.mainPropId) }}
             </option>
           </select>
-          <input type="number" v-model="setStatForm.reliquaryMainstat.statValue" />
+          <input type="number" v-model="setStatForm.reliquaryMainstat.statValue" step="0.01" />
         </div>
         <div class="set-relice-filed" v-for="(subStat, index) in setStatForm.reliquarySubstats">
-          <span><Icon @click="deleteSubStat(index)" class="memo-close" name="delete-o" />副词条：</span>
+          <span><Icon @click="deleteSubStat(index)" class="memo-close" name="clear" />副词条：</span>
           <select v-model="subStat.appendPropId" required>
             <option
               v-for="appendPropId in subStatFilter(subStat.appendPropId)"
@@ -198,9 +221,10 @@ const subStatFilter = (selectedId: AppendProp) => {
               {{ getAppendPropName(appendPropId) }}
             </option>
           </select>
-          <input type="number" v-model="subStat.statValue" />
+          <input type="number" v-model="subStat.statValue" step="0.01" />
         </div>
         <div class="add-sub-stat" v-show="setStatForm.reliquarySubstats.length < 4" @click="addSubstat">添加副词条</div>
+        <Button class="bottons__add" text="确认修改" size="small" block type="primary" native-type="submit" />
       </form>
     </template>
   </Popup>
@@ -211,7 +235,7 @@ const subStatFilter = (selectedId: AppendProp) => {
   margin-bottom: 16px;
   display: grid;
   grid-gap: 2px;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
 }
 
 .relic-detail {
@@ -219,8 +243,9 @@ const subStatFilter = (selectedId: AppendProp) => {
   border: 2px solid var(--border);
   border-radius: 4px;
   font-size: 14px;
-  padding: 2px;
-  height: 102px;
+  padding: 6px;
+  height: 112px;
+  overflow: scroll;
 }
 
 .relic-main-stats {
@@ -229,13 +254,25 @@ const subStatFilter = (selectedId: AppendProp) => {
 }
 
 .relic-icon {
-  width: 100%;
+  width: 40%;
   z-index: -1;
-  opacity: 0.2;
   top: -10%;
+  right: 0;
   position: absolute;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 80%);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 80%); /* Safari 和 Chrome */
 }
-
+.relic-level {
+  background-color: var(--bg);
+  color: var(--light-text);
+  border-radius: 6px;
+  padding: 0 2px;
+  font-size: 12px;
+}
+.relic-name {
+  font-size: 16px;
+  line-height: 32px;
+}
 .relic-detail__stats {
   display: flex;
   justify-content: space-between;
@@ -245,6 +282,7 @@ const subStatFilter = (selectedId: AppendProp) => {
 
 .empty {
   text-align: center;
+  line-height: 102px;
 }
 
 .relic-popup {
@@ -312,8 +350,20 @@ const subStatFilter = (selectedId: AppendProp) => {
   height: 32px;
   margin: 0;
   padding: 0 8px;
+  border-radius: 4px;
   border: solid 1px var(--border);
   box-sizing: border-box;
+}
+.bottons__add {
+  background-color: var(--button-bg);
+  color: #fff;
+  border: none;
+  font-size: 18px;
+  border-radius: 0;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
 }
 
 select {
@@ -325,13 +375,21 @@ select {
   flex-grow: 1;
   color: var(--main-text);
   font-size: 16px;
+  padding: 0 8px;
   height: 32px;
   display: inline-block;
   font-family: "eng", HYWenHei-85W, Avenir, Helvetica, Arial, sans-serif;
+  margin-right: 8px;
 }
 .add-sub-stat {
   width: 100%;
   text-align: center;
   border: 1px solid var(--border);
+}
+.relic-suit-text {
+  color: var(--extra-text);
+}
+.relic-suit-text__texts {
+  font-size: 12px;
 }
 </style>
