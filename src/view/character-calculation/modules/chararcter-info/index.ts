@@ -14,7 +14,7 @@ const useCharacterInfo = () => {
     constellation.value = value;
   };
 
-  const characterBuffs = ref<IBuffBase[]>();
+  const characterBuffs = ref<IBuffBase[]>([]);
   watchEffect(() => {
     characterBuffs.value = characterInfo.value?.buffs
       .filter((buff) => {
@@ -24,7 +24,7 @@ const useCharacterInfo = () => {
           return true;
         }
       })
-      .map((b) => Object.create(b));
+      .map((b) => Object.create(b)) || [];
   });
 
   return {

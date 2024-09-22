@@ -1,39 +1,29 @@
 <script setup lang="ts">
-import { ref, watchEffect } from "vue";
 import { Checkbox, Icon } from "vant";
-import { ICharacterInfo, IWeaponInfo, IBuffBase } from "@/constants/characters-config/interface.d";
-import BuffItem from "./buff-item.vue";
-
+import { IBuffBase } from "@/constants/characters-config/interface.d";
 interface IProps {
-  characterBuffs: IBuffBase[];
-  weaponBuffs: IBuffBase[];
-  relicBuffs: IBuffBase[];
+  showDelete?: boolean;
+  buff: IBuffBase;
 }
-const { characterBuffs, weaponBuffs, relicBuffs } = defineProps<IProps>();
-const buffs = defineModel<IBuffBase[]>();
-
+const { showDelete, buff } = defineProps<IProps>();
+const enable = defineModel<boolean>()
 </script>
 
 <template>
-  <!-- buff信息 -->
-  <div class="buffs-container">
-    <div v-if="characterBuffs.length > 0">角色自身增益</div>
-    <div v-for="(buff, index) in characterBuffs" :key="buff.label + index" class="buff-item">
-      <BuffItem v-model="buff.enable" :buff="buff" :show-delete="false" />
-    </div>
-    <div v-if="weaponBuffs?.length > 0">武器技能增益</div>
-    <div v-for="(buff, index) in weaponBuffs" :key="buff.label + index" class="buff-item">
-      <BuffItem v-model="buff.enable" :buff="buff" :show-delete="false" />
-    </div>
-    <div v-if="relicBuffs?.length > 0">圣遗物套装增益</div>
-    <div v-for="(buff, index) in relicBuffs" :key="buff.label + index" class="buff-item">
-      <BuffItem v-model="buff.enable" :buff="buff" :show-delete="false" />
-    </div>
-    <div>其它增益</div>
+  <Checkbox class="buff-label" v-model="enable" checked-color="#766461">
+    <div class="buff-label-text">{{ buff.label }}</div>
+  </Checkbox>
+  <div class="buff-detail-check">
+    <Icon v-if="showDelete" class="memo-close" name="delete-o" />
+    <input type="checkbox" />
+  </div>
+  <div class="buff-description">
+    {{ buff.describe }}
   </div>
 </template>
 
 <style scoped>
+
 .buffs-container {
   display: flex;
   flex-direction: column;

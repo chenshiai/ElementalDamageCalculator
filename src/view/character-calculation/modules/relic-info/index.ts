@@ -29,7 +29,7 @@ const useRelicInfo = () => {
         name: targetRelic.name,
         texts: [targetRelic.suit2],
       });
-
+      
       const suit2 = Object.create(targetRelic.buffs.suit2);
       relicBuffs.value.push(suit2);
     }

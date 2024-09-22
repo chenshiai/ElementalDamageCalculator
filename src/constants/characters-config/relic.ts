@@ -60,5 +60,36 @@ const relicLibrary: IRelicLibraryItem[] = [
       },
     },
   },
+  {
+    name: "逐影猎人",
+    itemType: ItemType.ITEM_RELIQUARY,
+    setNameTextMapHash: 1249831867,
+    equip: [
+      setReliquartStat(1249831867, "猎人的胸花", "UI_RelicIcon_15031_4", EquipType.EQUIP_BRACER),
+      setReliquartStat(1249831867, "杰作的序曲", "UI_RelicIcon_15031_2", EquipType.EQUIP_NECKLACE),
+      setReliquartStat(1249831867, "裁判的时刻", "UI_RelicIcon_15031_5", EquipType.EQUIP_SHOES),
+      setReliquartStat(1249831867, "遗忘的容器", "UI_RelicIcon_15031_1", EquipType.EQUIP_RING),
+      setReliquartStat(1249831867, "老兵的容颜", "UI_RelicIcon_15031_3", EquipType.EQUIP_DRESS),
+    ],
+    suit2: "二件套：普通攻击与重击的伤害提高15%。",
+    suit4: "四件套：当生命值提升或降低时，暴击率提升12%，该效果持续5秒，至多叠加3次。",
+    buffs: {
+      suit2: {
+        label: "二件套·普攻&重击伤害提高15%",
+        describe: "逐影猎人2件套，普攻&重击伤害提升15%。",
+        effect: [{ type: BuffType.NormalPrcent, value: 15 }, { type: BuffType.StrongPrcent, value: 15 }],
+        enable: true,
+      },
+      suit4: {
+        label: "四件套·暴击率提高36%",
+        describe: "逐影猎人4件套，暴击率提升12%，最多叠加3层。",
+        effect: [{ type: BuffType.Critcal, value: 12 }],
+        enable: true,
+        stackable: true,
+        limit: 3,
+        stack: 1
+      }
+    }
+  }
 ];
 export default relicLibrary;
