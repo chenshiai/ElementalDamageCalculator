@@ -23,19 +23,6 @@ const enable = defineModel<boolean>()
 </template>
 
 <style scoped>
-
-.buffs-container {
-  display: flex;
-  flex-direction: column;
-}
-
-.buff-item {
-  position: relative;
-  border: 1px solid var(--border);
-  padding: 8px;
-  border-radius: 4px;
-  margin-bottom: 4px;
-}
 .buff-detail-check {
   position: absolute;
   right: 0;
@@ -59,10 +46,6 @@ const enable = defineModel<boolean>()
   font-size: 14px;
 }
 
-.buff-effects {
-  color: #333;
-  font-size: 14px;
-}
 .buff-detail-check:has(input:checked) + .buff-description {
   display: block;
 }

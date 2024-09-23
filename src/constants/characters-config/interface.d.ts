@@ -94,7 +94,7 @@ export enum BuffType {
   BurstPrcent = "burstAttackPrcent",
 
   /** 普攻伤害提高 */
-  NoramlFixed = "normalAttackFixed",
+  NormalFixed = "normalAttackFixed",
   /** 重击伤害提高 */
   StrongFixed = "strongAttackFixed",
   /** 下落攻击伤害提高 */
@@ -181,6 +181,18 @@ export enum BuffType {
   DendroCritcalHurt = "dendroCriticalHurt",
   /** 风伤暴击伤害提升%*/
   AnemoCritcalHurt = "anemoCriticalHurt",
+
+  /** 生命之契 */
+  LifeContract = "lifeContract",
+  NormalRate = "normalRate",
+  StrongRate = "strongRate",
+  FallingRateAdd = "fallingRate",
+  SkillRate = "skillRate",
+  BurstRate = "burstRate",
+  CoolDown= "coolDown",
+  HealAdd = "healAdd",
+  BeHealAdd = "beHealAdd",
+  ShieldStrong = "shieldStrong"
 }
 
 /** 最终计算用的数据 */

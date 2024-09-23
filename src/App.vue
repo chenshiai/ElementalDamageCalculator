@@ -105,13 +105,6 @@ import Foot from "./component/Foot.vue";
   padding: 0 16px 0 16px;
 }
 
-
-.van-cell.van-cell--clickable,
-.van-cell.van-cell--center,
-.van-cell.van-collapse-item__title.van-collapse-item__title--expanded {
-  background-color: var(--light-text);
-}
-
 .question-title,
 .data-panel__title,
 .holy-relic__title,

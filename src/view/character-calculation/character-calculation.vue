@@ -26,5 +26,5 @@ const { characterInfo, constellation, characterBuffs } = useCharacterInfo();
 const { weapon, affix, weaponBuffs } = useWeaponInfo();
 const { relicList, relicBuffs, relicSuitTexts } = useRelicInfo();
 
-const { buffs, setBuffs } = useBuffInfo();
+const { buffs } = useBuffInfo();
 </script>

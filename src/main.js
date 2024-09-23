@@ -1,9 +1,9 @@
 import { createApp } from "vue";
 import App from "./App.vue";
+import "vant/lib/index.css";
 import "./font.css";
 import "./index.css";
 import route from "./router";
-import "vant/lib/index.css";
 import store from "./store";
 import "default-passive-events";
 

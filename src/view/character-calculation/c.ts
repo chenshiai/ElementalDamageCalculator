@@ -15,6 +15,11 @@ interface ICalculatorValue {
   extraATK: number;
   extraDEF: number;
 
+  healAdd: number;
+  beHealAdd: number;
+  shieldStrong: number;
+  coolDown: number;
+
   // 由面板属性转化而来的属性，不可用于二次面板转化。统一用 _NT 结尾
   extraHP_NT: number;
   extraATK_NT: number;
@@ -87,6 +92,15 @@ interface ICalculatorValue {
   cryoIncreaseHunt: number;
   geoIncreaseHunt: number;
   dendroIncreaseHunt: number;
+
+  // 生命之契
+  lifeContract: number;
+  // 倍率提升
+  normalRateAdd: number;
+  strongRateAdd: number;
+  fallingRateAdd: number;
+  skillRateAdd: number;
+  burstRateAdd: number;
 }
 
 class BaseValue {

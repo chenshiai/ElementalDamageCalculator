@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ref, watchEffect } from "vue";
-import { Checkbox, Icon } from "vant";
-import { ICharacterInfo, IWeaponInfo, IBuffBase } from "@/constants/characters-config/interface.d";
+import { ref } from "vue";
+import { IBuffBase } from "@/constants/characters-config/interface.d";
 import BuffItem from "./buff-item.vue";
+import { Collapse, CollapseItem } from "vant";
 
 interface IProps {
   characterBuffs: IBuffBase[];
@@ -12,24 +12,34 @@ interface IProps {
 const { characterBuffs, weaponBuffs, relicBuffs } = defineProps<IProps>();
 const buffs = defineModel<IBuffBase[]>();
 
+const activeNames = ref<string[]>([]);
 </script>
 
 <template>
   <!-- buff信息 -->
   <div class="buffs-container">
-    <div v-if="characterBuffs.length > 0">角色自身增益</div>
-    <div v-for="(buff, index) in characterBuffs" :key="buff.label + index" class="buff-item">
-      <BuffItem v-model="buff.enable" :buff="buff" :show-delete="false" />
-    </div>
-    <div v-if="weaponBuffs?.length > 0">武器技能增益</div>
-    <div v-for="(buff, index) in weaponBuffs" :key="buff.label + index" class="buff-item">
-      <BuffItem v-model="buff.enable" :buff="buff" :show-delete="false" />
-    </div>
-    <div v-if="relicBuffs?.length > 0">圣遗物套装增益</div>
-    <div v-for="(buff, index) in relicBuffs" :key="buff.label + index" class="buff-item">
-      <BuffItem v-model="buff.enable" :buff="buff" :show-delete="false" />
-    </div>
-    <div>其它增益</div>
+    <Collapse v-model="activeNames" :border="false">
+      <CollapseItem v-if="characterBuffs.length > 0" title="角色自身增益" name="character">
+        <div v-for="(buff, index) in characterBuffs" :key="buff.label + index" class="buff-item">
+          <BuffItem v-model="buff.enable" :buff="buff" :show-delete="false" />
+        </div>
+      </CollapseItem>
+      <CollapseItem v-if="weaponBuffs?.length > 0" title="武器技能增益" name="weapon">
+        <div v-for="(buff, index) in weaponBuffs" :key="buff.label + index" class="buff-item">
+          <BuffItem v-model="buff.enable" :buff="buff" :show-delete="false" />
+        </div>
+      </CollapseItem>
+      <CollapseItem v-if="relicBuffs?.length > 0" title="圣遗物套装增益" name="relic">
+        <div v-for="(buff, index) in relicBuffs" :key="buff.label + index" class="buff-item">
+          <BuffItem v-model="buff.enable" :buff="buff" :show-delete="false" />
+        </div>
+      </CollapseItem>
+      <CollapseItem title="其它增益" name="other">
+        <div v-for="(buff, index) in buffs" :key="buff.label + index" class="buff-item">
+          <BuffItem v-model="buff.enable" :buff="buff" :show-delete="false" />
+        </div>
+      </CollapseItem>
+    </Collapse>
   </div>
 </template>
 
@@ -44,96 +54,6 @@ const buffs = defineModel<IBuffBase[]>();
   border: 1px solid var(--border);
   padding: 8px;
   border-radius: 4px;
-  margin-bottom: 4px;
-}
-.buff-detail-check {
-  position: absolute;
-  right: 0;
-  top: 0;
-  font-size: 12px;
-  height: 38px;
-  display: flex;
-  align-items: center;
-}
-.buff-label {
-  display: flex;
-  width: 100%;
-}
-.buff-label-text {
-  color: var(--main-text);
-}
-
-.buff-description {
-  display: none;
-  color: #666;
-  font-size: 14px;
-}
-
-.buff-effects {
-  color: #333;
-  font-size: 14px;
-}
-.buff-detail-check:has(input:checked) + .buff-description {
-  display: block;
-}
-
-input[type="checkbox"] {
-  width: 20px;
-  height: 20px;
-  appearance: none; /* 移除默认外观 */
-  outline: none; /* 移除焦点轮廓 */
-  border: 1px solid var(--border);
-  position: relative;
-  border-radius: 4px;
-}
-
-input[type="checkbox"]::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 60%;
-  height: 2px;
-  background-color: var(--bg);
-}
-
-input[type="checkbox"]::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) rotate(90deg);
-  width: 60%;
-  height: 2px;
-  background-color: var(--bg);
-}
-
-input[type="checkbox"]:checked {
-  background-color: var(--bg);
-}
-
-/* 创建一个勾选标记 */
-input[type="checkbox"]:checked::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 60%;
-  height: 2px;
-  background-color: var(--light-text);
-}
-input[type="checkbox"]:checked::after {
-  display: none;
-}
-.memo-close {
-  font-size: 20px;
-  color: red;
-  display: none;
-  margin-right: 10px;
-}
-.buff-detail-check:has(input:checked) .memo-close {
-  display: block;
+  margin-top: 4px;
 }
 </style>
