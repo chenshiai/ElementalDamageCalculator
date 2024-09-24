@@ -63,7 +63,7 @@ export enum BuffType {
   Critcal = "critcal",
   /** 暴击伤害提升 单位%*/
   CritcalHurt = "critcalHurt",
-  
+
   /** 物理伤害提升 单位% */
   PhysicalPrcent = "physicalPrcent",
   /** 火元素伤害提升 单位% */
@@ -80,7 +80,7 @@ export enum BuffType {
   GeoPrcent = "geoPrcent",
   /** 草元素伤害提升 单位% */
   DendroPrcent = "dendroPrcent",
-  
+
   // ================= 不在面板上的buff =============
   /** 普攻伤害百分比提升 */
   NormalPrcent = "normalAttackPrcent",
@@ -189,57 +189,10 @@ export enum BuffType {
   FallingRateAdd = "fallingRate",
   SkillRate = "skillRate",
   BurstRate = "burstRate",
-  CoolDown= "coolDown",
+  CoolDown = "coolDown",
   HealAdd = "healAdd",
   BeHealAdd = "beHealAdd",
-  ShieldStrong = "shieldStrong"
-}
-
-/** 最终计算用的数据 */
-export interface CalculatorData {
-  constellation: number;
-}
-
-/** Buff显示条件 */
-export type BuffCondition = (data: CalculatorData) => boolean;
-export type BuffEffect = {
-  type: BuffType;
-  value: number;
-  // 是否基于基础属性转化而来，若为真，则该buff提供的属性不会被二次转化
-  transform?: boolean;
-};
-
-export interface IBuffBase {
-  /** Buff展示名称 */
-  label: string;
-  /** Buff细节描述 */
-  describe?: string;
-  /** Buff的具体效果 */
-  effect: BuffEffect[],
-  /** Buff是否启用 */
-  enable: boolean;
-  /** Buff显示条件 */
-  condition?: BuffCondition;
-  /** Buff数值是否可叠加 */
-  stackable?: boolean;
-  /** 最大叠加层数 */
-  limit?: number;
-  /** 当前层数 */
-  stack?: number;
-}
-
-export interface ICharacterInfo {
-  name: string;
-  rarity: Rarity;
-  element: ElementType;
-  weapon: WeaponType;
-  level: number;
-  icons: {
-    avatarIcon: string;
-    constsIcon: string[];
-    skillsIcon: string[];
-  };
-  buffs?: IBuffBase[];
+  ShieldStrong = "shieldStrong",
 }
 
 export enum AppendProp {
@@ -265,14 +218,6 @@ export enum AppendProp {
   GRASS_ADD_HURT = "FIGHT_PROP_GRASS_ADD_HURT",
 }
 
-export type WeaponStats = {
-  appendPropId: AppendProp;
-  statValue: number;
-};
-export enum ItemType {
-  ITEM_WEAPON = "ITEM_WEAPON",
-  ITEM_RELIQUARY = "ITEM_RELIQUARY",
-}
 export enum EquipType {
   /** 生之花 */
   EQUIP_BRACER = "EQUIP_BRACER",
@@ -286,25 +231,7 @@ export enum EquipType {
   EQUIP_DRESS = "EQUIP_DRESS",
 }
 
-export interface IWeaponInfo {
-  level: number;
-  name: string;
-  enkaId: number;
-  weaponType: WeaponType;
-  rarity: Rarity;
-  affix: number;
-  weaponStats: WeaponStats[];
-  icon: string;
-  getSkillDescribe: (affix: number) => {
-    title: string;
-    text: string;
-  };
-  getBuffs: (affix: number) => IBuffBase[];
-}
-
-export interface IRelicBase {
-  setNameTextMapHash: number;
-  equipType: EquipType;
-  name: string;
-  icon: string;
+export enum ItemType {
+  ITEM_WEAPON = "ITEM_WEAPON",
+  ITEM_RELIQUARY = "ITEM_RELIQUARY",
 }

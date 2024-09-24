@@ -10,7 +10,8 @@ import {
   RelicItem,
   RelicStatType,
 } from "@/constants/characters-config/relic-class";
-import { AppendProp, IRelicBase } from "@/constants/characters-config/interface.d";
+import { IRelicBase } from "@/types/interface";
+import { AppendProp } from "@/types/enum";
 import {
   getAppendPropName,
   percentProps,

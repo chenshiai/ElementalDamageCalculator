@@ -1,7 +1,7 @@
 import { ref, watchEffect } from "vue";
 import RelicInfo from "./index.vue";
 export { RelicInfo };
-import { IBuffBase } from "@/constants/characters-config/interface.d";
+import { IBuffBase } from "@/types/interface";
 import relicLibrary from "@/constants/characters-config/relic";
 import { IRelicItem } from "@/constants/characters-config/relic-class";
 

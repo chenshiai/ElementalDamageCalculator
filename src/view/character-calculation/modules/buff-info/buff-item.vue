@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Checkbox, Icon } from "vant";
-import { IBuffBase } from "@/constants/characters-config/interface.d";
+import { IBuffBase } from "@/types/interface";
 interface IProps {
   showDelete?: boolean;
   buff: IBuffBase;

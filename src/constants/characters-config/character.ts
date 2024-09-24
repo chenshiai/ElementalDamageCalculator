@@ -1,4 +1,5 @@
-import { AttackType, ElementType, BuffType, WeaponType, Rarity, ICharacterInfo } from "./interface.d";
+import { AttackType, ElementType, BuffType, WeaponType, Rarity } from "@/types/enum";
+import { ICharacterInfo } from "@/types/interface";
 import { getEnkaUI } from "./append-prop";
 import { A_80_ATK_24P } from "./buffs";
 
@@ -6,7 +7,6 @@ function getEnkaUIs(name: string[]): string[] {
   return name.map(getEnkaUI);
 }
 
-// @TODO ICharacterInfo 定义待完善，暂时先用any绕过检测
 export const Character: (ICharacterInfo & Record<any, any>)[] = [
   {
     name: "嘉明",
@@ -126,7 +126,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         rate: {
           atk: [3.704, 3.982, 4.26, 4.63, 4.908, 5.186, 5.556, 5.926, 6.297, 6.667, 7.038, 7.408, 7.871],
         },
-        attacktType: AttackType.Burst,
+        attackType: AttackType.Burst,
         elementType: ElementType.Pyro,
       },
     ],

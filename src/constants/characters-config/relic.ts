@@ -1,4 +1,5 @@
-import { EquipType, ItemType, BuffType, IRelicBase, IBuffBase } from "./interface.d";
+import { EquipType, BuffType, ItemType } from "@/types/enum";
+import { IRelicBase, IBuffBase } from "@/types/interface";
 import { getEnkaUI } from "./append-prop";
 
 function setReliquartStat(setNameTextMapHash: number, name: string, iconUrl: string, equipType: EquipType): IRelicBase {
@@ -77,7 +78,10 @@ const relicLibrary: IRelicLibraryItem[] = [
       suit2: {
         label: "二件套·普攻&重击伤害提高15%",
         describe: "逐影猎人2件套，普攻&重击伤害提升15%。",
-        effect: [{ type: BuffType.NormalPrcent, value: 15 }, { type: BuffType.StrongPrcent, value: 15 }],
+        effect: [
+          { type: BuffType.NormalPrcent, value: 15 },
+          { type: BuffType.StrongPrcent, value: 15 },
+        ],
         enable: true,
       },
       suit4: {
@@ -87,9 +91,9 @@ const relicLibrary: IRelicLibraryItem[] = [
         enable: true,
         stackable: true,
         limit: 3,
-        stack: 1
-      }
-    }
-  }
+        stack: 1,
+      },
+    },
+  },
 ];
 export default relicLibrary;

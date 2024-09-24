@@ -2,7 +2,7 @@ import CharacterInfo from "./index.vue";
 export { CharacterInfo };
 
 import { ref, watchEffect } from "vue";
-import { ICharacterInfo, IBuffBase } from "@/constants/characters-config/interface.d";
+import { ICharacterInfo, IBuffBase } from "@/types/interface";
 
 const useCharacterInfo = () => {
   const characterInfo = ref<null | ICharacterInfo>(null);

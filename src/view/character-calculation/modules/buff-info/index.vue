@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { IBuffBase } from "@/constants/characters-config/interface.d";
+import { IBuffBase } from "@/types/interface";
 import BuffItem from "./buff-item.vue";
 import { Collapse, CollapseItem } from "vant";
 

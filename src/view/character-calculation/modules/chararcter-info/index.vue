@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import { Popup } from "vant";
 import Selector from "@/component/Selector.vue";
-import { ICharacterInfo } from "@/constants/characters-config/interface";
+import { ICharacterInfo } from "@/types/interface";
 import getBackGroundByRarity from "@/utils/getBackGroundClassByRarity";
 
 const show = ref(false);

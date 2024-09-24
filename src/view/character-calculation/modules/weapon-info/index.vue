@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import WeaponSelector from "@/component/WeaponSelector.vue";
-import { IWeaponInfo, AppendProp } from "@/constants/characters-config/interface.d";
+import { IWeaponInfo } from "@/types/interface";
+import { AppendProp } from "@/types/enum";
 import getBackGroundByRarity from "@/utils/getBackGroundClassByRarity";
 import { getAppendPropName } from "@/constants/characters-config/append-prop";
 import { ref, computed } from "vue";

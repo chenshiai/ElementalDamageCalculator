@@ -51,7 +51,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import { Character } from '@/constants/characters-config/character';
-import { ICharacterInfo } from '@/constants/characters-config/interface';
+import { ICharacterInfo } from '@/types/interface';
 import { Search, Checkbox, CheckboxGroup } from 'vant';
 import getBackGroundByRarity from '@/utils/getBackGroundClassByRarity';
 

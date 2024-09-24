@@ -1,4 +1,4 @@
-import { AppendProp, EquipType } from "./interface.d";
+import { AppendProp, EquipType } from "@/types/enum";
 
 export const appendPropMap = {
   [AppendProp.BASE_ATTACK]: "基础攻击力",

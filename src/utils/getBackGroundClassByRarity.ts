@@ -1,4 +1,4 @@
-import { Rarity } from "@/constants/characters-config/interface.d";
+import { Rarity } from "@/types/enum";
 
 export default (rarity: Rarity) => {
   switch (rarity) {

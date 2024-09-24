@@ -1,4 +1,4 @@
-import { IWeaponInfo, IBuffBase } from "@/constants/characters-config/interface";
+import { IWeaponInfo, IBuffBase } from "@/types/interface";
 import WeaponInfo from "./index.vue";
 export { WeaponInfo };
 

@@ -1,4 +1,5 @@
-import { EquipType, IRelicBase, AppendProp } from "./interface.d";
+import { EquipType, AppendProp } from "@/types/enum";
+import { IRelicBase } from "@/types/interface";
 
 export type MainstatType = {
   mainPropId: AppendProp;

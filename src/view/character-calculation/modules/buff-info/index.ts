@@ -1,6 +1,6 @@
 import { ref } from "vue";
 import BuffInfo from "./index.vue";
-import { IBuffBase, ICharacterInfo, IWeaponInfo } from "@/constants/characters-config/interface";
+import { IBuffBase, ICharacterInfo, IWeaponInfo } from "@/types/interface";
 export { BuffInfo };
 
 const useRelicInfo = () => {

@@ -1,5 +1,5 @@
-import { WeaponType, Rarity, AppendProp, BuffType, IBuffBase, IWeaponInfo } from "./interface.d";
-
+import { WeaponType, Rarity, AppendProp, BuffType } from "@/types/enum";
+import { IBuffBase, IWeaponInfo } from "@/types/interface";
 function highlight(strings, ...values) {
   let result = "";
   strings.forEach((string, index) => {

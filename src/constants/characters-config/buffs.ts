@@ -1,4 +1,5 @@
-import { BuffType, IBuffBase } from "./interface.d";
+import { BuffType } from "@/types/enum";
+import { IBuffBase } from "@/types/interface";
 
 /**
  * 一些重复的buff对象

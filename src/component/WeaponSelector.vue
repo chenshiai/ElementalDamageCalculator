@@ -47,7 +47,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import { Weapons } from "@/constants/characters-config/weapon";
-import { IWeaponInfo } from '@/constants/characters-config/interface';
+import { IWeaponInfo } from '@/types/interface';
 import { Search, Checkbox, CheckboxGroup } from 'vant';
 import getBackGroundByRarity from '@/utils/getBackGroundClassByRarity';
 
