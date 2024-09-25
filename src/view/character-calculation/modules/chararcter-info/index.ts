@@ -2,19 +2,14 @@ import CharacterInfo from "./index.vue";
 export { CharacterInfo };
 
 import { ref, watchEffect } from "vue";
-import { ICharacterInfo, IBuffBase } from "@/types/interface";
+import { ICharacterInfo, IBuffBase, ICalculatorValue } from "@/types/interface";
+import calculateBuffs from "@/utils/calculate/calculate-buffs";
 
 const useCharacterInfo = () => {
   const characterInfo = ref<null | ICharacterInfo>(null);
-  const setCharacterInfo = (value: ICharacterInfo) => {
-    characterInfo.value = value;
-  };
   const constellation = ref<number>(0);
-  const setConstellation = (value: number) => {
-    constellation.value = value;
-  };
-
   const characterBuffs = ref<IBuffBase[]>([]);
+
   watchEffect(() => {
     characterBuffs.value = characterInfo.value?.buffs
       .filter((buff) => {
@@ -27,12 +22,26 @@ const useCharacterInfo = () => {
       .map((b) => Object.create(b)) || [];
   });
 
+  const calculateCharacterModules = (data: ICalculatorValue): Partial<ICalculatorValue> => {
+    if (characterInfo.value) {
+      return {
+        level: characterInfo.value.level,
+        constellation: constellation.value,
+        baseHP: characterInfo.value.baseHP,
+        baseATK: data.baseATK + characterInfo.value.baseATK,
+        baseDEF: characterInfo.value.baseDEF,
+        ...calculateBuffs(data, characterBuffs.value)
+      };
+    } else {
+      return {};
+    }
+  }
+
   return {
     characterInfo,
     characterBuffs,
-    setCharacterInfo,
     constellation,
-    setConstellation,
+    calculateCharacterModules,
   };
 };
 

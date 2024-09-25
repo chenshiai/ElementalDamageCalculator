@@ -2,7 +2,9 @@
 </script>
 
 <template>
-  
+  <div class="skill-info">
+    
+  </div>
 </template>
 
 <style scoped>

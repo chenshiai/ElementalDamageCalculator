@@ -1,17 +1,26 @@
 <script setup lang="ts">
-import { Checkbox, Icon } from "vant";
+import { Checkbox, Icon, Slider } from "vant";
 import { IBuffBase } from "@/types/interface";
+import { computed } from "vue";
 interface IProps {
   showDelete?: boolean;
   buff: IBuffBase;
 }
 const { showDelete, buff } = defineProps<IProps>();
-const enable = defineModel<boolean>()
+const enable = defineModel<boolean>();
+const stack = defineModel<number>("stack", { default: 0 });
+
+const stackText = computed(() => {
+  return `${stack.value}/${buff.limit}`;
+});
 </script>
 
 <template>
   <Checkbox class="buff-label" v-model="enable" checked-color="#766461">
-    <div class="buff-label-text">{{ buff.label }}</div>
+    <div class="buff-label-text">
+      {{ buff.label }}
+      <span v-if="buff.stackable">（{{ stackText }}）</span>
+    </div>
   </Checkbox>
   <div class="buff-detail-check">
     <Icon v-if="showDelete" class="memo-close" name="delete-o" />
@@ -19,6 +28,9 @@ const enable = defineModel<boolean>()
   </div>
   <div class="buff-description">
     {{ buff.describe }}
+    <div class="buff-stack" v-if="buff.stackable">
+      <span>层数：</span><Slider v-model="stack" :max="buff.limit" :min="0" />
+    </div>
   </div>
 </template>
 
@@ -108,5 +120,13 @@ input[type="checkbox"]:checked::after {
 }
 .buff-detail-check:has(input:checked) .memo-close {
   display: block;
+}
+.buff-stack {
+  display: flex;
+  padding-right: 16px;
+}
+.buff-stack span {
+  margin-right: 12px;
+  flex-shrink: 0;
 }
 </style>

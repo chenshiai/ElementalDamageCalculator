@@ -40,23 +40,23 @@ export const Weapons: IWeaponInfo[] = [
         text: highlight`元素战技命中敌人后，攻击力提升${atk}，持续8秒；受到伤害后，攻击力提升${atk}，持续8秒。上述2种效果角色处于后台时也能触发。此外，不处在护盾庇护下时，生命值上限提高${hp}。`,
       };
     },
-    getBuffs: (affix: number) => {
+    getBuffs: (affix = 1) => {
       return [
         {
           label: "攻击力提升·一",
-          effect: [{ type: BuffType.ATKPrcent, value: 20 + (affix - 1) * 5 }],
+          effect: [{ type: BuffType.ATKPrcent, getValue: () => 20 + (affix - 1) * 5 }],
           describe: `元素战技命中敌人后，攻击力提升${20 + (affix - 1) * 5}%`,
           enable: false,
         },
         {
           label: "攻击力提升·二",
-          effect: [{ type: BuffType.ATKPrcent, value: 20 + (affix - 1) * 5 }],
+          effect: [{ type: BuffType.ATKPrcent, getValue: () => 20 + (affix - 1) * 5 }],
           describe: `受到伤害后，攻击力提升${20 + (affix - 1) * 5}%`,
           enable: false,
         },
         {
           label: "生命值提升",
-          effect: [{ type: BuffType.HPPrcent, value: 32 + (affix - 1) * 8 }],
+          effect: [{ type: BuffType.HPPrcent, getValue: () => 32 + (affix - 1) * 8 }],
           describe: `不处于护盾庇护下，生命值提升${32 + (affix - 1) * 8}%`,
           enable: false,
         },

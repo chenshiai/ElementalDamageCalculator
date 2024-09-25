@@ -136,13 +136,13 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       {
         label: "祥烟瑞气",
         describe: "嘉明的生命值高于或等于50%时，下落攻击·踏云献瑞造成的伤害提升20%（在本计算器中，该buff会作用于普通的下落攻击，注意区分）",
-        effect: [{ type: BuffType.FallingPrcent, value: 20 }],
+        effect: [{ type: BuffType.FallingPrcent, getValue: () => 20 }],
         enable: true,
       },
       {
         label: "二命·步踏梅花",
         describe: "嘉明受到治疗时，若此次治疗回复量溢出，嘉明的攻击力将提升20%",
-        effect: [{ type: BuffType.ATKPrcent, value: 20 }],
+        effect: [{ type: BuffType.ATKPrcent, getValue: () => 20 }],
         condition: (data) => data.constellation >= 2,
         enable: true,
       },
@@ -150,8 +150,8 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         label: "六命·百兽俱驯",
         describe: "下落攻击·踏云献瑞的暴击率提升20%、暴击伤害提升40%（在本计算器中，该buff会作用于普通的下落攻击，注意区分）",
         effect: [
-          { type: BuffType.FallingCritcal, value: 20 },
-          { type: BuffType.FallingCritcalHurt, value: 40 },
+          { type: BuffType.FallingCritcal, getValue: () => 20 },
+          { type: BuffType.FallingCritcalHurt, getValue: () => 40 },
         ],
         condition: (data) => data.constellation === 6,
         enable: true,

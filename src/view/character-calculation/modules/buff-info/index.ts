@@ -4,7 +4,7 @@ import { IBuffBase, ICharacterInfo, IWeaponInfo } from "@/types/interface";
 export { BuffInfo };
 
 const useRelicInfo = () => {
-  const buffs = ref<IBuffBase[]>();
+  const buffs = ref<IBuffBase[]>([]);
   const setBuffs = (value: IBuffBase[]) => {
     buffs.value = value;
   };

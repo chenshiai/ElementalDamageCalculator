@@ -1,11 +1,6 @@
 import { BuffEffect, BuffCondition, WeaponStats } from "../index";
 import { ElementType, AttackType, Rarity, WeaponType, EquipType } from "../enum";
 
-/** 最终计算用的数据 */
-export interface CalculatorData {
-  constellation: number;
-}
-
 export interface IBuffBase {
   /** Buff展示名称 */
   label: string;
@@ -41,6 +36,9 @@ export interface ICharacterInfo {
   rarity: Rarity;
   element: ElementType;
   weapon: WeaponType;
+  baseATK: number;
+  baseHP: number;
+  baseDEF: number;
   level: number;
   icons: {
     avatarIcon: string;

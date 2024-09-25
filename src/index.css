@@ -28,6 +28,7 @@
   --van-collapse-item-content-padding: 0;
   --van-collapse-item-content-background-color: var(--page-bg);
   --van-collapse-item-transition-duration: var(--van-animation-duration-fast);
+  --van-slider-active-background-color: var(--main-text);
 }
 
 body {
