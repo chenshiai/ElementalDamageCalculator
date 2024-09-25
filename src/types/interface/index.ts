@@ -1,5 +1,5 @@
 import { BuffEffect, BuffCondition, WeaponStats } from "../index";
-import { ElementType, AttackType, Rarity, WeaponType, EquipType } from "../enum";
+import { ElementType, AttackType, Rarity, WeaponType, EquipType, BuffType } from "../enum";
 
 export interface IBuffBase {
   /** Buff展示名称 */
@@ -85,100 +85,100 @@ export interface ICalculatorValue {
   baseHP: number;
   baseATK: number;
   baseDEF: number;
-  elementalMystery: number;
-  critcal: number;
-  critcalHurt: number;
-  chargeEfficiency: number;
 
   // 额外面板属性
   extraHP: number;
   extraATK: number;
   extraDEF: number;
-
-  healAdd: number;
-  beHealAdd: number;
-  shieldStrong: number;
-  coolDown: number;
-
+  elementalMystery: number;
+  chargeEfficiency: number;
+  
   // 由面板属性转化而来的属性，不可用于二次面板转化。统一用 _NT 结尾
   extraHP_NT: number;
   extraATK_NT: number;
   extraDEF_NT: number;
   elementalMystery_NT: number;
-  chargeEfficiency_NT: number; 
+  chargeEfficiency_NT: number;
+  
+  // 进阶属性
+  [BuffType.Critcal]: number;
+  [BuffType.CritcalHurt]: number;
+  [BuffType.HealAdd]: number;
+  [BuffType.BeHealAdd]: number;
+  [BuffType.ShieldStrong]: number;
+  [BuffType.CoolDown]: number;
+  // 元素增伤
+  [BuffType.PhysicalPrcent]: number;
+  [BuffType.PyroPrcent]: number;
+  [BuffType.ElectroPrcent]: number;
+  [BuffType.HydroPrcent]: number;
+  [BuffType.AnemoPrcent]: number;
+  [BuffType.CryoPrcent]: number;
+  [BuffType.GeoPrcent]: number;
+  [BuffType.DendroPrcent]: number;
   
   // 各种隐式暴击率
-  normalAttackCritcal: number;
-  strongAttackCritcal: number;
-  fallingAttackCritcal: number;
-  elementalSkillCritcal: number;
-  elementalBurstCritcal: number;
-  physicalCritcal: number;
-  pyroCritcal: number;
-  electroCritcal: number;
-  hydroCritcal: number;
-  anemoCritcal: number;
-  cryoCritcal: number;
-  geoCritcal: number;
-  dendroCritcal: number;
+  [BuffType.NormalCritcal]: number;
+  [BuffType.StrongCritcal]: number;
+  [BuffType.FallingCritcal]: number;
+  [BuffType.SkillCritcal]: number;
+  [BuffType.BurstCritcal]: number;
+  [BuffType.PhysicalCritcal]: number;
+  [BuffType.PyroCritcal]: number;
+  [BuffType.ElectroCritcal]: number;
+  [BuffType.HydroCritcal]: number;
+  [BuffType.AnemoCritcal]: number;
+  [BuffType.CryoCritcal]: number;
+  [BuffType.GeoCritcal]: number;
+  [BuffType.DendroCritcal]: number;
 
   // 各种隐式爆伤
-  normalAttackCritcalHurt: number;
-  strongAttackCritcalHurt: number;
-  fallingAttackCritcalHurt: number;
-  elementalSkillCritcalHurt: number;
-  elementalBurstCritcalHurt: number;
-  physicalCritcalHurt: number;
-  pyroCritcalHurt: number;
-  electroCritcalHurt: number;
-  hydroCritcalHurt: number;
-  anemoCritcalHurt: number;
-  cryoCritcalHurt: number;
-  geoCritcalHurt: number;
-  dendroCritcalHurt: number;
+  [BuffType.NormalCritcalHurt]: number;
+  [BuffType.StrongCritcalHurt]: number;
+  [BuffType.FallingCritcalHurt]: number;
+  [BuffType.SkillCritcalHurt]: number;
+  [BuffType.BurstCritcalHurt]: number;
+  [BuffType.PhysicalCritcalHurt]: number;
+  [BuffType.PyroCritcalHurt]: number;
+  [BuffType.ElectroCritcalHurt]: number;
+  [BuffType.HydroCritcalHurt]: number;
+  [BuffType.AnemoCritcalHurt]: number;
+  [BuffType.CryoCritcalHurt]: number;
+  [BuffType.GeoCritcalHurt]: number;
+  [BuffType.DendroCritcalHurt]: number;
 
   // 攻击增伤
-  normalAttackAddHunt: number;
-  strongAttackAddHunt: number;
-  fallingAttackAddHunt: number;
-  elementalSkillAddHunt: number;
-  elementalBurstAddHunt: number;
-  globalAddHunt: number;
+  [BuffType.NormalPrcent]: number;
+  [BuffType.StrongPrcent]: number;
+  [BuffType.FallingPrcent]: number;
+  [BuffType.SkillPrcent]: number;
+  [BuffType.BurstPrcent]: number;
+  [BuffType.GlobalPrcent]: number;
 
   // 攻击伤害提高
-  normalIncreaseHurt: number;
-  strongIncreaseHurt: number;
-  fallingIncreaseHurt: number;
-  elementalSkillIncreaseHurt: number;
-  elementalBurstIncreaseHurt: number;
-  globalIncreaseHunt: number;
-
-  // 元素增伤
-  physicalAddHunt: number;
-  pyroAddHunt: number;
-  electroAddHunt: number;
-  hydroAddHunt: number;
-  anemoAddHunt: number;
-  cryoAddHunt: number;
-  geoAddHunt: number;
-  dendroAddHunt: number;
+  [BuffType.NormalFixed]: number;
+  [BuffType.StrongFixed]: number;
+  [BuffType.FallingFixed]: number;
+  [BuffType.SkillFixed]: number;
+  [BuffType.BurstFixed]: number;
+  [BuffType.GlobalFixed]: number;
 
   // 元素伤害提高
-  phycalIncreaseHunt: number;
-  pyroIncreaseHunt: number;
-  electroIncreaseHunt: number;
-  hydroIncreaseHunt: number;
-  anemoIncreaseHunt: number;
-  cryoIncreaseHunt: number;
-  geoIncreaseHunt: number;
-  dendroIncreaseHunt: number;
+  [BuffType.PhysicalFixed]: number;
+  [BuffType.PyroFixed]: number;
+  [BuffType.ElectroFixed]: number;
+  [BuffType.HydroFixed]: number;
+  [BuffType.AnemoFixed]: number;
+  [BuffType.CryoFixed]: number;
+  [BuffType.GeoFixed]: number;
+  [BuffType.DendroFixed]: number;
 
   // 生命之契
-  lifeContract: number;
+  [BuffType.LifeContract]: number;
   // 倍率提升
-  normalRateAdd: number;
-  strongRateAdd: number;
-  fallingRateAdd: number;
-  skillRateAdd: number;
-  burstRateAdd: number;
+  [BuffType.NormalRate]: number;
+  [BuffType.StrongRate]: number;
+  [BuffType.FallingRateAdd]: number;
+  [BuffType.SkillRate]: number;
+  [BuffType.BurstRate]: number;
 }

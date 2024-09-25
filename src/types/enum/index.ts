@@ -38,6 +38,7 @@ export enum Rarity {
   Five,
 }
 
+
 /** Buff的类型 */
 export enum BuffType {
   // ================= 在面板上的buff =============
@@ -65,136 +66,135 @@ export enum BuffType {
   CritcalHurt = "critcalHurt",
 
   /** 物理伤害提升 单位% */
-  PhysicalPrcent = "physicalPrcent",
+  PhysicalPrcent = "physicalAddHunt",
   /** 火元素伤害提升 单位% */
-  PyroPrcent = "pyroPrcent",
+  PyroPrcent = "pyroAddHunt",
   /** 雷元素伤害提升 单位% */
-  ElectroPrcent = "electroPrcent",
+  ElectroPrcent = "electroAddHunt",
   /** 水元素伤害提升 单位% */
-  HydroPrcent = "hydroPrcent",
+  HydroPrcent = "hydroAddHunt",
   /** 风元素伤害提升 单位% */
-  AnemoPrcent = "anemoPrcent",
+  AnemoPrcent = "anemoAddHunt",
   /** 冰元素伤害提升 单位% */
-  CryoPrcent = "cryoPrcent",
+  CryoPrcent = "cryoAddHunt",
   /** 岩元素伤害提升 单位% */
-  GeoPrcent = "geoPrcent",
+  GeoPrcent = "geoAddHunt",
   /** 草元素伤害提升 单位% */
-  DendroPrcent = "dendroPrcent",
+  DendroPrcent = "dendroAddHunt",
 
   // ================= 不在面板上的buff =============
   /** 普攻伤害百分比提升 */
-  NormalPrcent = "normalAttackPrcent",
+  NormalPrcent = "normalAttackAddHunt",
   /** 重击伤害百分比提升 */
-  StrongPrcent = "strongAttackPrcent",
+  StrongPrcent = "strongAttackAddHunt",
   /** 下落攻击伤害百分比提升 */
-  FallingPrcent = "fallingAttackPrcent",
+  FallingPrcent = "fallingAttackAddHunt",
   /** 元素战技百分比提升 */
-  SkillPrcent = "skillAttackPrcent",
+  SkillPrcent = "elementalSkillAddHunt",
   /** 元素爆发百分比提升 */
-  BurstPrcent = "burstAttackPrcent",
+  BurstPrcent = "elementalBurstAddHunt",
 
   /** 普攻伤害提高 */
-  NormalFixed = "normalAttackFixed",
+  NormalFixed = "normalIncreaseHurt",
   /** 重击伤害提高 */
-  StrongFixed = "strongAttackFixed",
+  StrongFixed = "strongIncreaseHurt",
   /** 下落攻击伤害提高 */
-  FallingFixed = "fallingAttackFixed",
+  FallingFixed = "fallingIncreaseHurt",
   /** 元素战技伤害提高 */
-  SkillFixed = "skillAttackFixed",
+  SkillFixed = "elementalSkillIncreaseHurt",
   /** 元素爆发伤害提高 */
-  BurstFixed = "burstAttackFixed",
+  BurstFixed = "elementalBurstIncreaseHurt",
 
   /** 物理伤害提高 */
-  PhysicalFixed = "physicalFixed",
+  PhysicalFixed = "phycalIncreaseHunt",
   /** 火元素伤害提高 */
-  PyroFixed = "pyroFixed",
+  PyroFixed = "pyroIncreaseHunt",
   /** 雷元素伤害提高 */
-  ElectroFixed = "electroFixed",
+  ElectroFixed = "electroIncreaseHunt",
   /** 水元素伤害提高 */
-  HydroFixed = "hydroFixed",
+  HydroFixed = "hydroIncreaseHunt",
   /** 风元素伤害提高 */
-  AnemoFixed = "anemoFixed",
+  AnemoFixed = "anemoIncreaseHunt",
   /** 冰元素伤害提高 */
-  CryoFixed = "cryoFixed",
+  CryoFixed = "cryoIncreaseHunt",
   /** 岩元素伤害提高 */
-  GeoFixed = "geoFixed",
+  GeoFixed = "geoIncreaseHunt",
   /** 草元素伤害提高 */
-  DendroFixed = "dendroFixed",
+  DendroFixed = "dendroIncreaseHunt",
 
   /** 全局伤害提升 单位%*/
-  GlobalPrcent = "globalPrcent",
+  GlobalPrcent = "globalAddHunt",
   /** 全局伤害提高 */
-  GlobalFixed = "globalFixed",
+  GlobalFixed = "globalIncreaseHunt",
 
   /** 普攻暴击率提升 */
-  NormalCritcal = "normalCritical",
+  NormalCritcal = "normalAttackCritcal",
   /** 重击暴击率提升 */
-  StrongCritcal = "strongCritical",
+  StrongCritcal = "strongAttackCritcal",
   /** 下落攻击暴击率提升 */
-  FallingCritcal = "fallingCritical",
+  FallingCritcal = "fallingAttackCritcal",
   /** 元素战技暴击率提升 */
-  SkillCritcal = "skillCritical",
+  SkillCritcal = "elementalSkillCritcal",
   /** 元素爆发暴击率提升 */
-  BurstCritcal = "burstCritical",
+  BurstCritcal = "elementalBurstCritcal",
 
   /** 物理伤害暴击率提升% */
-  PhysicalCritcal = "physicalCritical",
+  PhysicalCritcal = "physicalCritcal",
   /** 火元素暴击率提升% */
-  PyroCritcal = "pyroCritical",
+  PyroCritcal = "pyroCritcal",
   /** 雷元素暴击率提升% */
-  ElectroCritcal = "electroCritical",
+  ElectroCritcal = "electroCritcal",
   /** 水元素暴击率提升% */
-  HydroCritcal = "hydroCritical",
+  HydroCritcal = "hydroCritcal",
   /** 冰元素暴击率提升% */
-  CryoCritcal = "cryoCritical",
+  CryoCritcal = "cryoCritcal",
   /** 岩元素暴击率提升% */
-  GeoCritcal = "geoCritical",
+  GeoCritcal = "geoCritcal",
   /** 草元素暴击率提升% */
-  DendroCritcal = "dendroCritical",
+  DendroCritcal = "dendroCritcal",
   /** 风元素暴击率提升% */
-  AnemoCritcal = "anemoCritical",
+  AnemoCritcal = "anemoCritcal",
 
   /** 普攻暴击伤害提升%*/
-  NormalCritcalHurt = "normalCriticalHurt",
+  NormalCritcalHurt = "normalAttackCritcalHurt",
   /** 重击暴击伤害提升%*/
-  StrongCritcalHurt = "strongCriticalHurt",
+  StrongCritcalHurt = "strongAttackCritcalHurt",
   /** 下落攻击暴击伤害提升%*/
-  FallingCritcalHurt = "fallingCriticalHurt",
+  FallingCritcalHurt = "fallingAttackCritcalHurt",
   /** 元素战技暴击伤害提升%*/
-  SkillCritcalHurt = "skillCriticalHurt",
+  SkillCritcalHurt = "elementalSkillCritcalHurt",
   /** 元素爆发暴击伤害提升%*/
-  BurstCritcalHurt = "burstCriticalHurt",
+  BurstCritcalHurt = "elementalBurstCritcalHurt",
 
   /** 物理伤害暴击伤害提升%*/
-  PhysicalCritcalHurt = "physicalCriticalHurt",
+  PhysicalCritcalHurt = "physicalCritcalHurt",
   /** 火伤暴击伤害提升%*/
-  PyroCritcalHurt = "pyroCriticalHurt",
+  PyroCritcalHurt = "pyroCritcalHurt",
   /** 雷伤暴击伤害提升%*/
-  ElectroCritcalHurt = "electroCriticalHurt",
+  ElectroCritcalHurt = "electroCritcalHurt",
   /** 水伤暴击伤害提升%*/
-  HydroCritcalHurt = "hydroCriticalHurt",
+  HydroCritcalHurt = "hydroCritcalHurt",
   /** 冰伤暴击伤害提升%*/
-  CryoCritcalHurt = "cryoCriticalHurt",
+  CryoCritcalHurt = "cryoCritcalHurt",
   /** 岩伤暴击伤害提升%*/
-  GeoCritcalHurt = "geoCriticalHurt",
+  GeoCritcalHurt = "geoCritcalHurt",
   /** 草伤暴击伤害提升%*/
-  DendroCritcalHurt = "dendroCriticalHurt",
+  DendroCritcalHurt = "dendroCritcalHurt",
   /** 风伤暴击伤害提升%*/
-  AnemoCritcalHurt = "anemoCriticalHurt",
+  AnemoCritcalHurt = "anemoCritcalHurt",
 
   /** 生命之契 */
   LifeContract = "lifeContract",
-  NormalRate = "normalRate",
-  StrongRate = "strongRate",
-  FallingRateAdd = "fallingRate",
-  SkillRate = "skillRate",
-  BurstRate = "burstRate",
+  NormalRate = "normalRateAdd",
+  StrongRate = "strongRateAdd",
+  FallingRateAdd = "fallingRateAdd",
+  SkillRate = "skillRateAdd",
+  BurstRate = "burstRateAdd",
   CoolDown = "coolDown",
   HealAdd = "healAdd",
   BeHealAdd = "beHealAdd",
   ShieldStrong = "shieldStrong",
 }
-
 export enum AppendProp {
   BASE_ATTACK = "FIGHT_PROP_BASE_ATTACK",
   HP = "FIGHT_PROP_HP",
@@ -234,4 +234,10 @@ export enum EquipType {
 export enum ItemType {
   ITEM_WEAPON = "ITEM_WEAPON",
   ITEM_RELIQUARY = "ITEM_RELIQUARY",
+}
+
+export enum ActionOn {
+  Direct = "Direct",
+  Indirect = "indirect",
+  External = "external",
 }

@@ -1,4 +1,4 @@
-import { EquipType, BuffType, ItemType } from "@/types/enum";
+import { EquipType, BuffType, ItemType, ActionOn } from "@/types/enum";
 import { IRelicBase, IBuffBase } from "@/types/interface";
 import { getEnkaUI } from "./append-prop";
 
@@ -79,8 +79,8 @@ const relicLibrary: IRelicLibraryItem[] = [
         label: "二件套·普攻&重击伤害提升",
         describe: "逐影猎人2件套，普攻&重击伤害提升15%。",
         effect: [
-          { type: BuffType.NormalPrcent, getValue: () => 15 },
-          { type: BuffType.StrongPrcent, getValue: () => 15 },
+          { type: BuffType.NormalPrcent, getValue: () => 15, actionOn: ActionOn.External },
+          { type: BuffType.StrongPrcent, getValue: () => 15, actionOn: ActionOn.External },
         ],
         enable: true,
       },

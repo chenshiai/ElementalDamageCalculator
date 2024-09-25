@@ -12,9 +12,6 @@ export interface IRelicSuitText {
 const useRelicInfo = () => {
   /** 圣遗物列表 */
   const relicList = ref<IRelicItem[]>(new Array(5).fill(null));
-  const setRelics = (value: IRelicItem[]) => {
-    relicList.value = value;
-  };
 
   /** 套装buff */
   const relicBuffs = ref<IBuffBase[]>([]);
@@ -67,7 +64,6 @@ const useRelicInfo = () => {
     relicList,
     relicBuffs,
     relicSuitTexts,
-    setRelics,
   };
 };
 

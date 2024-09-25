@@ -5,10 +5,7 @@ export { BuffInfo };
 
 const useRelicInfo = () => {
   const buffs = ref<IBuffBase[]>([]);
-  const setBuffs = (value: IBuffBase[]) => {
-    buffs.value = value;
-  };
-  return { buffs, setBuffs };
+  return { buffs };
 };
 
 export default useRelicInfo;

@@ -2,15 +2,15 @@ import { ICalculatorValue } from "@/types/interface";
 
 class CalculatorValue implements ICalculatorValue {
   // 角色面板属性
-  level: number = 1;
+  level: number = 90;
   constellation: number = 0;
   baseHP: number = 0;
   baseATK: number = 0;
   baseDEF: number = 0;
   elementalMystery: number = 0;
-  critcal: number = 0;
-  critcalHurt: number = 0;
-  chargeEfficiency: number = 0;
+  critcal: number = 5;
+  critcalHurt: number = 50;
+  chargeEfficiency: number = 100;
 
   // 额外面板属性
   extraHP: number = 0;
