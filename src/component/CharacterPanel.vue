@@ -3,7 +3,7 @@ import { computed, ref, toRefs } from "vue";
 import { Popup, Icon } from "vant";
 
 import { ICalculatorValue } from "@/types/interface";
-import { ElementType } from "@/types/enum";
+import { ElementType, elementTypeToLabel } from "@/types/enum";
 
 interface IProps {
   characterPanelData: ICalculatorValue;
@@ -97,16 +97,6 @@ const extraValue = computed<IPanelValue[]>(() => {
   ];
 });
 
-const elementTypeToLabel = {
-  [ElementType.Physical]: "物理伤害加成",
-  [ElementType.Pyro]: "火元素伤害加成",
-  [ElementType.Electro]: "雷元素伤害加成",
-  [ElementType.Hydro]: "水元素伤害加成",
-  [ElementType.Anemo]: "风元素伤害加成",
-  [ElementType.Cryo]: "冰元素伤害加成",
-  [ElementType.Geo]: "岩元素伤害加成",
-  [ElementType.Dendro]: "草元素伤害加成",
-};
 const elementValue = computed<IPanelValue[]>(() => {
   const {
     pyroAddHunt,
@@ -210,12 +200,17 @@ function round(a: number, precision: number = 0): number {
       <div class="data-panel__title">进阶属性</div>
       <div class="panel-item" v-for="val in extraValue">
         <span>{{ val.label }}</span>
-        <span>{{ round(val.baseValue + val.extraValue, 1) }}%</span>
+        <span>{{ round(val.baseValue + val.extraValue, 1) }}%
+          <span class="extra-text"></span>
+        </span>
       </div>
       <div class="data-panel__title">元素属性</div>
       <div class="panel-item" v-for="val in elementValue">
         <span>{{ val.label }}</span>
-        <span>{{ round(val.baseValue + val.extraValue, 1) }}%</span>
+        <span>
+          {{ round(val.baseValue + val.extraValue, 1) }}%
+          <span class="extra-text"></span>
+        </span>
       </div>
     </div>
   </Popup>
@@ -230,15 +225,16 @@ function round(a: number, precision: number = 0): number {
   font-size: 12px;
   border-radius: 4px;
 }
-.left,
-.right {
-  padding: 0 8px;
-}
 .panel-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 28px;
+  padding: 0 20px;
+}
+/* 设置偶数行的背景颜色 */
+.panel-item:nth-child(even) {
+  background-color: var(--light-text); /* 可以根据需求调整颜色 */
 }
 .panel-detail {
   font-size: 12px;
@@ -249,7 +245,13 @@ function round(a: number, precision: number = 0): number {
   color: var(--extra-text);
 }
 .character-panel-popup {
-  padding: 40px 16px;
+  padding: 40px 0;
+  text-align: center;
+}
+.character-panel-popup .extra-text {
+  display: inline-block;
+  width: 60px;
+  text-align: left;
 }
 .show-detail {
   width: 100%;

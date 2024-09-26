@@ -1,7 +1,7 @@
 import { AttackType, ElementType, BuffType, WeaponType, Rarity } from "@/types/enum";
 import { ICharacterInfo } from "@/types/interface";
 import { getEnkaUI } from "./append-prop";
-import { A_80_ATK_24P } from "./buffs";
+import { A_80_ATK_24P, Constellation_E_3, Constellation_Q_3, Constellation_Q_5 } from "./buffs";
 
 function getEnkaUIs(name: string[]): string[] {
   return name.map(getEnkaUI);
@@ -144,14 +144,16 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         enable: true,
       },
       {
-        label: "二命·步踏梅花",
+        label: "2命·步踏梅花",
         describe: "嘉明受到治疗时，若此次治疗回复量溢出，嘉明的攻击力将提升20%",
         effect: [{ type: BuffType.ATKPrcent, getValue: () => 20 }],
         condition: (data) => data.constellation >= 2,
         enable: true,
       },
+      Constellation_E_3,
+      Constellation_Q_5,
       {
-        label: "六命·百兽俱驯",
+        label: "6命·百兽俱驯",
         describe: "下落攻击·踏云献瑞的暴击率提升20%、暴击伤害提升40%（在本计算器中，该buff会作用于普通的下落攻击，注意区分）",
         effect: [
           { type: BuffType.FallingCritcal, getValue: () => 20 },

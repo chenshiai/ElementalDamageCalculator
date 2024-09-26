@@ -245,3 +245,14 @@ export enum ActionOn {
   Indirect = "indirect",
   External = "external",
 }
+
+export const elementTypeToLabel = {
+  [ElementType.Physical]: "物理伤害加成",
+  [ElementType.Pyro]: "火元素伤害加成",
+  [ElementType.Electro]: "雷元素伤害加成",
+  [ElementType.Hydro]: "水元素伤害加成",
+  [ElementType.Anemo]: "风元素伤害加成",
+  [ElementType.Cryo]: "冰元素伤害加成",
+  [ElementType.Geo]: "岩元素伤害加成",
+  [ElementType.Dendro]: "草元素伤害加成",
+};
