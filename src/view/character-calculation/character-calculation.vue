@@ -13,21 +13,23 @@
     v-model:weapon-buffs="weaponBuffs"
     v-model:relic-buffs="relicBuffs"
   />
-  <div v-for="key in Object.keys(CalculationPanel)">{{ key }}: {{ CalculationPanel[key] }}</div>
+  <CharacterPanel v-if="characterInfo && weapon" :character-panel-data="CalculationPanel" :element-type="characterInfo?.element" />
 </template>
 
 <script setup lang="ts">
 import { computed } from "vue";
 import TabTitle from "@/component/TabTitle.vue";
-import useCharacterInfo, { CharacterInfo } from "./modules/chararcter-info";
-import useWeaponInfo, { WeaponInfo } from "./modules/weapon-info";
-import useRelicInfo, { RelicInfo } from "./modules/relic-info";
-import useBuffInfo, { BuffInfo } from "./modules/buff-info";
+import CharacterPanel from "@/component/CharacterPanel.vue";
 import CalculatorValueClass from "@/constants/characters-config/calculator-value-class";
 import { ICalculatorValue } from "@/types/interface";
 import { ActionOn, AppendProp } from "@/types/enum";
 import calculateBuffs from "@/utils/calculate/calculate-buffs";
 import { calculateRelicStat, calculateWeaponSubStat } from "@/utils/calculate/calculate-equip";
+
+import useCharacterInfo, { CharacterInfo } from "./modules/chararcter-info";
+import useWeaponInfo, { WeaponInfo } from "./modules/weapon-info";
+import useRelicInfo, { RelicInfo } from "./modules/relic-info";
+import useBuffInfo, { BuffInfo } from "./modules/buff-info";
 
 const { characterInfo, constellation, characterBuffs } = useCharacterInfo();
 const { weapon, affix, weaponBuffs } = useWeaponInfo();
@@ -48,8 +50,8 @@ function getBaseData(data: ICalculatorValue) {
   };
 }
 
-const CalculationPanel = computed(() => {
-  if (!characterInfo.value || !weapon.value) return {};
+const CalculationPanel = computed<ICalculatorValue>(() => {
+  if (!characterInfo.value || !weapon.value) return new CalculatorValueClass();
   const allBuffs = [...relicBuffs.value, ...characterBuffs.value, ...weaponBuffs.value, ...buffs.value];
 
   return [
