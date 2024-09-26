@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { computed, ref, toRefs } from "vue";
-import { Popover } from "vant";
+import { Popup, Icon } from "vant";
 
 import { ICalculatorValue } from "@/types/interface";
 import { ElementType } from "@/types/enum";
@@ -184,9 +184,7 @@ function round(a: number, precision: number = 0): number {
           <div>{{ round(val.baseValue) }}</div>
           <div class="extra-text">+{{ round(val.extraValue) }}</div>
         </span>
-        <span v-if="index === leftValue.length - 1">
-          {{ round(val.baseValue + val.extraValue, 1) }}%
-        </span>
+        <span v-if="index === leftValue.length - 1"> {{ round(val.baseValue + val.extraValue, 1) }}% </span>
         <span v-else>{{ round(val.baseValue + val.extraValue) }}</span>
       </div>
     </div>
@@ -197,7 +195,30 @@ function round(a: number, precision: number = 0): number {
       </div>
     </div>
   </div>
-  <!-- <Popover> </Popover> -->
+  <div class="show-detail" @click="show = true">
+    <Icon name="description" />详细属性
+  </div>
+  <Popup v-model:show="show" teleport="#app" position="bottom" round style="height: 80%" closeable>
+    <div class="character-panel-popup">
+      <div class="data-panel__title">基础属性</div>
+      <div class="panel-item" v-for="(val, index) in baseValue">
+        <span>{{ val.label }}</span>
+        <span>{{ round(val.baseValue) }}
+          <span class="extra-text">+{{ round(val.extraValue) }}</span>
+        </span>
+      </div>
+      <div class="data-panel__title">进阶属性</div>
+      <div class="panel-item" v-for="val in extraValue">
+        <span>{{ val.label }}</span>
+        <span>{{ round(val.baseValue + val.extraValue, 1) }}%</span>
+      </div>
+      <div class="data-panel__title">元素属性</div>
+      <div class="panel-item" v-for="val in elementValue">
+        <span>{{ val.label }}</span>
+        <span>{{ round(val.baseValue + val.extraValue, 1) }}%</span>
+      </div>
+    </div>
+  </Popup>
 </template>
 
 <style scoped>
@@ -226,5 +247,16 @@ function round(a: number, precision: number = 0): number {
 }
 .extra-text {
   color: var(--extra-text);
+}
+.character-panel-popup {
+  padding: 40px 16px;
+}
+.show-detail {
+  width: 100%;
+  text-align: center;
+  line-height: 18px;
+}
+.panel-item + .data-panel__title {
+  margin-top: 20px;
 }
 </style>

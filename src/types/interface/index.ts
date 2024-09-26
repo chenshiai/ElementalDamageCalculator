@@ -47,10 +47,16 @@ export interface ICharacterInfo {
   };
   buffs?: IBuffBase[];
   talentNames: string[];
+
+  normalLevel: number;
   normalAttack: ISkillRate[];
   strongAttack?: ISkillRate[];
   fallingAttack?: ISkillRate[];
+
+  skillLevel: number;
   elementSkill?: ISkillRate[];
+
+  burstLevel: number;
   burstSkill?: ISkillRate[];
   otherSkill?: ISkillRate[];
 }
@@ -69,6 +75,7 @@ export interface IWeaponInfo {
     text: string;
   };
   getBuffs: (affix: number) => IBuffBase[];
+  otherSkill?: ISkillRate[];
 }
 
 export interface IRelicBase {

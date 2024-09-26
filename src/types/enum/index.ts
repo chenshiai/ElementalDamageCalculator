@@ -194,6 +194,10 @@ export enum BuffType {
   HealAdd = "healAdd",
   BeHealAdd = "beHealAdd",
   ShieldStrong = "shieldStrong",
+
+  NormalLevel = "normalLevel",
+  SkillLevel = "skillLevel",
+  BurstLevel = "burstLevel",
 }
 export enum AppendProp {
   BASE_ATTACK = "FIGHT_PROP_BASE_ATTACK",

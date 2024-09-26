@@ -32,6 +32,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     },
     talentNames: ["普通攻击·刃爪悬星", "瑞兽登高楼", "璨焰金猊舞"],
 
+    normalLevel: 1,
     normalAttack: [
       {
         label: "一段",
@@ -110,6 +111,8 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         elementType: ElementType.Physical,
       },
     ],
+
+    skillLevel: 1,
     elementSkill: [
       {
         label: "下落攻击·踏云献瑞",
@@ -120,6 +123,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         elementType: ElementType.Pyro,
       },
     ],
+    burstLevel: 1,
     burstSkill: [
       {
         label: "猊兽·文仔砸击",
