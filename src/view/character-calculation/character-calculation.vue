@@ -13,7 +13,17 @@
     v-model:weapon-buffs="weaponBuffs"
     v-model:relic-buffs="relicBuffs"
   />
-  <CharacterPanel v-if="characterInfo && weapon" :character-panel-data="CalculationPanel" :element-type="characterInfo?.element" />
+  <CharacterPanel
+    v-if="characterInfo && weapon"
+    :character-panel-data="CalculationPanel"
+    :element-type="characterInfo?.element"
+  />
+  <SkillInfo
+    v-if="characterInfo && weapon"
+    :calculator-value="CalculationPanel"
+    :character-info="characterInfo"
+    :weapon="weapon"
+  />
 </template>
 
 <script setup lang="ts">
@@ -30,6 +40,7 @@ import useCharacterInfo, { CharacterInfo } from "./modules/chararcter-info";
 import useWeaponInfo, { WeaponInfo } from "./modules/weapon-info";
 import useRelicInfo, { RelicInfo } from "./modules/relic-info";
 import useBuffInfo, { BuffInfo } from "./modules/buff-info";
+import { SkillInfo } from "./modules/skill-info";
 
 const { characterInfo, constellation, characterBuffs } = useCharacterInfo();
 const { weapon, affix, weaponBuffs } = useWeaponInfo();
@@ -64,11 +75,8 @@ const CalculationPanel = computed<ICalculatorValue>(() => {
     (data: ICalculatorValue) => calculateBuffs(data, allBuffs, ActionOn.Indirect),
     // 计算不作用于面板的buff
     (data: ICalculatorValue) => calculateBuffs(data, allBuffs, ActionOn.External),
-  ].reduce(
-    (accumulator, currentFunction) => {
-      return { ...accumulator, ...currentFunction(accumulator) };
-    },
-    new CalculatorValueClass()
-  );
+  ].reduce((accumulator, currentFunction) => {
+    return { ...accumulator, ...currentFunction(accumulator) };
+  }, new CalculatorValueClass());
 });
 </script>

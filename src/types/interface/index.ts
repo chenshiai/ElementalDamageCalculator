@@ -50,8 +50,6 @@ export interface ICharacterInfo {
 
   normalLevel: number;
   normalAttack: ISkillRate[];
-  strongAttack?: ISkillRate[];
-  fallingAttack?: ISkillRate[];
 
   skillLevel: number;
   elementSkill?: ISkillRate[];
@@ -75,7 +73,7 @@ export interface IWeaponInfo {
     text: string;
   };
   getBuffs: (affix: number) => IBuffBase[];
-  otherSkill?: ISkillRate[];
+  getSkill?: (affix: number) => ISkillRate[];
 }
 
 export interface IRelicBase {
@@ -265,10 +263,12 @@ export interface ICalculatorValue {
   [BuffType.SkillRate]: number;
   /** 元素爆发倍率提升 */
   [BuffType.BurstRate]: number;
-  /** 普攻天赋等级 */
+  /** 普攻天赋等级加成 */
   [BuffType.NormalLevel]: number;
-  /** 元素战技天赋等级 */
+  /** 元素战技天赋等级加成 */
   [BuffType.SkillLevel]: number;
-  /** 元素爆发天赋等级 */
+  /** 元素爆发天赋等级加成 */
   [BuffType.BurstLevel]: number;
+  /** 增幅反应系数提升 */
+  [BuffType.AmplifiedRate]: number;
 }

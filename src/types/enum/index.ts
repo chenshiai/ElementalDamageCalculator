@@ -198,6 +198,7 @@ export enum BuffType {
   NormalLevel = "normalLevel",
   SkillLevel = "skillLevel",
   BurstLevel = "burstLevel",
+  AmplifiedRate = "amplifiedRate",
 }
 export enum AppendProp {
   BASE_ATTACK = "FIGHT_PROP_BASE_ATTACK",
@@ -256,3 +257,7 @@ export const elementTypeToLabel = {
   [ElementType.Geo]: "岩元素伤害加成",
   [ElementType.Dendro]: "草元素伤害加成",
 };
+
+export const normalAttackUseData = {
+  [AttackType.Normal]: []
+}

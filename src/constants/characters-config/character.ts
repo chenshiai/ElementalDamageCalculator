@@ -32,10 +32,10 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     },
     talentNames: ["普通攻击·刃爪悬星", "瑞兽登高楼", "璨焰金猊舞"],
 
-    normalLevel: 1,
+    normalLevel: 0,
     normalAttack: [
       {
-        label: "一段",
+        label: "一段伤害",
         rate: {
           atk: [0.839, 0.907, 0.975, 1.073, 1.141, 1.219, 1.326, 1.433, 1.541, 1.658, 1.775],
         },
@@ -43,7 +43,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         elementType: ElementType.Physical,
       },
       {
-        label: "二段",
+        label: "二段伤害",
         rate: {
           atk: [0.79, 0.855, 0.919, 1.011, 1.075, 1.149, 1.25, 1.351, 1.452, 1.563, 1.673],
         },
@@ -51,7 +51,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         elementType: ElementType.Physical,
       },
       {
-        label: "三段",
+        label: "三段伤害",
         rate: {
           atk: [1.066, 1.153, 1.24, 1.364, 1.451, 1.55, 1.686, 1.823, 1.959, 2.108, 2.257],
         },
@@ -59,17 +59,15 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         elementType: ElementType.Physical,
       },
       {
-        label: "四段",
+        label: "四段伤害",
         rate: {
           atk: [1.279, 1.384, 1.488, 1.637, 1.741, 1.86, 2.023, 2.187, 2.351, 2.529, 2.708],
         },
         attackType: AttackType.Normal,
         elementType: ElementType.Physical,
       },
-    ],
-    strongAttack: [
       {
-        label: "循环",
+        label: "重击循环伤害",
         rate: {
           atk: [0.625, 0.676, 0.727, 0.8, 0.851, 0.909, 0.989, 1.069, 1.149, 123.6, 1.323],
         },
@@ -77,17 +75,15 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         elementType: ElementType.Physical,
       },
       {
-        label: "终结",
+        label: "重击终结伤害",
         rate: {
           atk: [1.13, 1.22, 1.32, 1.45, 1.54, 1.64, 1.79, 1.93, 2.08, 2.24, 2.39],
         },
         attackType: AttackType.Strong,
         elementType: ElementType.Physical,
       },
-    ],
-    fallingAttack: [
       {
-        label: "下落期间",
+        label: "下落期间伤害",
         rate: {
           atk: [0.641, 0.694, 0.746, 0.82, 0.873, 0.932, 1.014, 1.096, 1.178, 1.268, 1.358],
         },
@@ -95,7 +91,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         elementType: ElementType.Physical,
       },
       {
-        label: "低空下落",
+        label: "低空坠地冲击伤害",
         rate: {
           atk: [1.28, 1.39, 1.49, 1.64, 1.74, 1.86, 2.03, 2.19, 2.36, 2.54, 2.71],
         },
@@ -103,7 +99,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         elementType: ElementType.Physical,
       },
       {
-        label: "高空下落",
+        label: "高空坠地冲击伤害",
         rate: {
           atk: [1.6, 1.73, 1.86, 2.05, 2.18, 2.33, 2.53, 2.74, 2.94, 3.17, 3.39],
         },
@@ -112,7 +108,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       },
     ],
 
-    skillLevel: 1,
+    skillLevel: 0,
     elementSkill: [
       {
         label: "下落攻击·踏云献瑞",
@@ -123,7 +119,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         elementType: ElementType.Pyro,
       },
     ],
-    burstLevel: 1,
+    burstLevel: 0,
     burstSkill: [
       {
         label: "猊兽·文仔砸击",

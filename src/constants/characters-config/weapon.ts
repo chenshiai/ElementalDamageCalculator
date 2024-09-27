@@ -1,5 +1,6 @@
-import { WeaponType, Rarity, AppendProp, BuffType } from "@/types/enum";
+import { WeaponType, Rarity, AppendProp, BuffType, AttackType, ElementType } from "@/types/enum";
 import { IBuffBase, IWeaponInfo } from "@/types/interface";
+import { getEnkaUI } from "./append-prop";
 function highlight(strings, ...values) {
   let result = "";
   strings.forEach((string, index) => {
@@ -21,7 +22,7 @@ export const Weapons: IWeaponInfo[] = [
     rarity: Rarity.Five,
     // 精炼等级 1~5 此处仅声明，不参与实际计算
     affix: 1,
-    icon: `https://enka.network/ui/UI_EquipIcon_Claymore_Deshret_Awaken.png`,
+    icon: getEnkaUI("UI_EquipIcon_Claymore_Deshret_Awaken"),
     weaponStats: [
       {
         appendPropId: AppendProp.BASE_ATTACK,
@@ -63,4 +64,55 @@ export const Weapons: IWeaponInfo[] = [
       ];
     },
   },
+  {
+    name: "天空之脊",
+    enkaId: 13502,
+    weaponType: WeaponType.Polearms,
+    level: 90,
+    rarity: Rarity.Five,
+    affix: 1,
+    icon: getEnkaUI("UI_EquipIcon_Pole_Dvalin_Awaken"),
+    weaponStats: [
+      {
+        appendPropId: AppendProp.BASE_ATTACK,
+        statValue: 674,
+      },
+      {
+        appendPropId: AppendProp.CHARGE_EFFICIENCY,
+        statValue: 36.8,
+      }
+    ],
+    getSkillDescribe(affix: number) {
+      const cri = 8 + (affix - 1) * 2 + "%";
+      const rate = 40 + (affix - 1) * 15 + "%";
+      return {
+        title: "斫断黑翼的利齿",
+        text: highlight`暴击率提升${cri}，普通攻击速度提升12%。此外，普通攻击与重击命中敌人时，有50%概率触发真空刃，在小范围内造成额外${rate}攻击力的伤害。该效果每2秒至多触发一次。`
+      }
+    },
+    getBuffs(affix = 1) {
+      return [
+        {
+          label: "暴击率提升",
+          describe: `暴击率提升${8 + 2 * (affix - 1)}%`,
+          effect: [{ type: BuffType.Critcal, getValue: () => 8 + 2 * (affix - 1)}],
+          enable: true
+        }
+      ]
+    },
+    getSkill(affix = 1) {
+      const rate = 40 + (affix - 1) * 15;
+
+      return [
+        {
+          label: "天空之脊·真空刃",
+          rate: {
+            atk: [rate]
+          },
+          attackType: AttackType.Other,
+          elementType: ElementType.Physical,
+        }
+      ]
+    }
+  }
 ];

@@ -105,6 +105,11 @@ class CalculatorValue implements ICalculatorValue {
   skillRateAdd: number = 0;
   burstRateAdd: number = 0;
 
+  normalLevel: number = 0;
+  skillLevel: number = 0;
+  burstLevel: number = 0;
+  amplifiedRate: number = 0;
+  
   constructor(initialValues?: Partial<CalculatorValue>) {
     if (initialValues) {
       Object.assign(this, initialValues);
