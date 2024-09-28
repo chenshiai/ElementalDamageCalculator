@@ -72,7 +72,7 @@ export interface IWeaponInfo {
     title: string;
     text: string;
   };
-  getBuffs: (affix: number) => IBuffBase[];
+  getBuffs?: (affix: number) => IBuffBase[];
   getSkill?: (affix: number) => ISkillRate[];
 }
 

@@ -10,7 +10,7 @@ const useWeanponInfo = () => {
   const weaponBuffs = ref<IBuffBase[]>([]);
 
   watchEffect(() => {
-    weaponBuffs.value = weapon.value?.getBuffs(affix.value).map((b) => Object.create(b)) || [];
+    weaponBuffs.value = weapon.value?.getBuffs?.(affix.value).map((b) => Object.create(b)) || [];
   });
 
   return {

@@ -1,5 +1,8 @@
 <template>
   <TabTitle>角色伤害计算</TabTitle>
+  <div class="tips">
+    角色和武器的成长数据暂无，均以满级数据计算。
+  </div>
   <CharacterInfo v-model="characterInfo" v-model:constellation="constellation" />
   <WeaponInfo v-model="weapon" v-model:affix="affix" />
   <RelicInfo v-model="relicList" :relic-suit-texts="relicSuitTexts" />

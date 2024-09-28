@@ -156,7 +156,7 @@ const subStatFilter = (selectedId: AppendProp) => {
         <div class="relic-detail__hearder">
           <div class="relic-name">
             {{ item.name }}
-            <span class="relic-level">+{{ item.level }}</span>
+            <!-- <span class="relic-level">+{{ item.level }}</span> -->
           </div>
           <div class="relic-main-stats">
             <span>{{ getAppendPropName(item.reliquaryMainstat.mainPropId) }}</span>
