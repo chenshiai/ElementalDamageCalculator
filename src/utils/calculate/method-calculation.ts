@@ -20,7 +20,10 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
   let critical = calculatorValue.critcal;
 
   // 附魔
-  if (attackType === AttackType.Normal || attackType === AttackType.Strong || attackType === AttackType.Falling) {
+  if (
+    (attackType === AttackType.Normal || attackType === AttackType.Strong || attackType === AttackType.Falling) &&
+    calculatorValue.enchanting !== EnchantingType.Physical
+  ) {
     elementType = NumberToElementType[calculatorValue.enchanting];
   }
 
@@ -162,7 +165,12 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
   // 抗性承伤
   const resistanceRate = getResistanceRate(calculatorValue.enemyResistance, calculatorValue.enemyWeaken);
   // 防御承伤
-  const defRate = getDefRate(calculatorValue.level, calculatorValue.enemyLevel, calculatorValue.reduceArmour, calculatorValue.defensePenetration);
+  const defRate = getDefRate(
+    calculatorValue.level,
+    calculatorValue.enemyLevel,
+    calculatorValue.reduceArmour,
+    calculatorValue.defensePenetration
+  );
   // 敌人最终承伤
   const ENEMY_RATE = defRate * resistanceRate;
 
@@ -176,5 +184,7 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
     CRITICAL_DMG: CRITICAL_DMG * ENEMY_RATE,
     DEISTE_DMG: DEISTE_DMG * ENEMY_RATE,
     RESULT_DMG: RESULT_DMG * ENEMY_RATE,
-};
+    criticalHunt,
+    addHunt,
+  };
 }
