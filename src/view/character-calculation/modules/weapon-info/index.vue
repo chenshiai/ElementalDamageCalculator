@@ -8,8 +8,8 @@ import { ref, computed } from "vue";
 import { Popup, Rate } from "vant";
 
 const show = ref(false);
-const handleWeaponChange = (weapons: IWeaponInfo[]) => {
-  weapon.value = weapons[0];
+const handleWeaponChange = (weapons: IWeaponInfo) => {
+  weapon.value = weapons;
 };
 
 const weapon = defineModel<null | IWeaponInfo>();
@@ -37,6 +37,7 @@ const weaponStats = computed(() => {
 </script>
 
 <template>
+  <div class="data-panel__title">武器</div>
   <div class="weapon-info">
     <div class="avatar" @click="show = true">
       <template v-if="weapon">
@@ -63,7 +64,7 @@ const weaponStats = computed(() => {
     </div>
   </div>
   <Popup teleport="#app" v-model:show="show" position="right" :style="{ width: '100%', height: '100vh' }">
-    <WeaponSelector @close="show = false" :handleChange="handleWeaponChange" :maxSelect="1" />
+    <WeaponSelector @close="show = false" :handleChange="handleWeaponChange" />
   </Popup>
 </template>
 

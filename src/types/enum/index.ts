@@ -20,6 +20,28 @@ export enum ElementType {
   Dendro = "Dendro",
 }
 
+export const EnchantingType = {
+  [ElementType.Physical]: 0,
+  [ElementType.Pyro]: 1,
+  [ElementType.Electro]: 2,
+  [ElementType.Hydro]: 3,
+  [ElementType.Anemo]: 4,
+  [ElementType.Cryo]: 5,
+  [ElementType.Geo]: 6,
+  [ElementType.Dendro]: 7,
+};
+
+// 数字映射到 ElementType 的对象
+export const NumberToElementType = {
+  [EnchantingType[ElementType.Physical]]: ElementType.Physical,
+  [EnchantingType[ElementType.Pyro]]: ElementType.Pyro,
+  [EnchantingType[ElementType.Electro]]: ElementType.Electro,
+  [EnchantingType[ElementType.Hydro]]: ElementType.Hydro,
+  [EnchantingType[ElementType.Anemo]]: ElementType.Anemo,
+  [EnchantingType[ElementType.Cryo]]: ElementType.Cryo,
+  [EnchantingType[ElementType.Geo]]: ElementType.Geo,
+  [EnchantingType[ElementType.Dendro]]: ElementType.Dendro,
+};
 /** 武器类型 */
 export enum WeaponType {
   Sword = "Sword",
@@ -198,7 +220,11 @@ export enum BuffType {
   NormalLevel = "normalLevel",
   SkillLevel = "skillLevel",
   BurstLevel = "burstLevel",
+  Enchanting = "enchanting",
+
   AmplifiedRate = "amplifiedRate",
+  CatalyzeRate = "catalyzeRate",
+  DefensePenetration = "defensePenetration"
 }
 export enum AppendProp {
   BASE_ATTACK = "FIGHT_PROP_BASE_ATTACK",

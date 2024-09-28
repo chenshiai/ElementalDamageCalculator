@@ -34,7 +34,7 @@ const baseValue = computed<IPanelValue[]>(() => {
   } = characterPanelData.value;
   return [
     {
-      label: "生命值上限",
+      label: "生命值",
       baseValue: baseHP,
       extraValue: extraHP + extraHP_NT,
     },
@@ -223,7 +223,7 @@ function round(a: number, precision: number = 0): number {
   grid-template-columns: 1fr 1fr;
   border: 1px solid var(--border);
   font-size: 12px;
-  border-radius: 4px;
+  border-radius: 4px 4px 0 0;
 }
 .panel-item {
   display: flex;
@@ -254,9 +254,13 @@ function round(a: number, precision: number = 0): number {
   text-align: left;
 }
 .show-detail {
-  width: 100%;
   text-align: center;
-  line-height: 18px;
+  line-height: 24px;
+  border: 1px solid var(--border);
+  border-top: none;
+  margin-bottom: 16px;
+  font-size: 12px;
+  border-radius: 0 0 4px 4px;
 }
 .panel-item + .data-panel__title {
   margin-top: 20px;

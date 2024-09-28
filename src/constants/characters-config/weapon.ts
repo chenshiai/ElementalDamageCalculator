@@ -101,7 +101,7 @@ export const Weapons: IWeaponInfo[] = [
       ]
     },
     getSkill(affix = 1) {
-      const rate = 40 + (affix - 1) * 15;
+      const rate = 0.4 + (affix - 1) * 0.15;
 
       return [
         {

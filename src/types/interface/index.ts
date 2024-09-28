@@ -52,11 +52,11 @@ export interface ICharacterInfo {
   normalAttack: ISkillRate[];
 
   skillLevel: number;
-  elementSkill?: ISkillRate[];
+  elementSkill: ISkillRate[];
 
   burstLevel: number;
-  burstSkill?: ISkillRate[];
-  otherSkill?: ISkillRate[];
+  burstSkill: ISkillRate[];
+  otherSkill: ISkillRate[];
 }
 
 export interface IWeaponInfo {
@@ -271,4 +271,19 @@ export interface ICalculatorValue {
   [BuffType.BurstLevel]: number;
   /** 增幅反应系数提升 */
   [BuffType.AmplifiedRate]: number;
+  /** 普攻附魔属性 */
+  [BuffType.Enchanting]: number;
+  /** 激化反应系数提升 */
+  [BuffType.CatalyzeRate]: number;
+  /** 无视防御 */
+  [BuffType.DefensePenetration]: number;
+
+  /** 敌人等级 */
+  enemyLevel: number;
+  /** 敌人抗性 */
+  enemyResistance: number;
+  /** 减少抗性 */
+  enemyWeaken: number;
+  /** 减少防御 */
+  reduceArmour: number;
 }

@@ -14,6 +14,7 @@ const activeNames = ref<string[]>([]);
 
 <template>
   <!-- buff信息 -->
+  <div class="data-panel__title">增益情况</div>
   <div class="buffs-container">
     <Collapse v-model="activeNames" :border="false">
       <CollapseItem v-if="characterBuffs?.length > 0" title="角色自身增益" name="character">

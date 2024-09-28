@@ -15,7 +15,7 @@ const setConsts = (value: number) => {
 };
 const character = defineModel<null | ICharacterInfo>();
 const handleCharacterChange = (characters: ICharacterInfo) => {
-  character.value = characters[0];
+  character.value = characters;
 };
 
 const constellation = defineModel("constellation", {
@@ -24,6 +24,7 @@ const constellation = defineModel("constellation", {
 </script>
 
 <template>
+  <div class="data-panel__title">角色</div>
   <div class="character-info">
     <div class="avatar" @click="show = true">
       <template v-if="character">

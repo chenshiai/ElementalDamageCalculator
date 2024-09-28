@@ -170,31 +170,7 @@
     </div>
 
     <div class="data-panel__title">反应类型</div>
-    <div class="atk-type-panel">
-      <RadioGroup style="margin-top: 12px" v-model="atkType">
-        <Radio name="none" class="atk-type-none">无反应</Radio>
-        <div class="horizontal">
-          <Radio :name="ElementalReaction.Rate" class="atk-type-item">
-            <span class="atk-type-text">水蒸·火融</span>
-            <span class="water bg-left"></span>
-            <span class="fire bg-right"></span>
-          </Radio>
-          <Radio :name="ElementalReaction.Rate2" class="atk-type-item">
-            <span class="atk-type-text">冰融·火蒸</span>
-            <span class="ice bg-left"></span>
-            <span class="fire bg-right"></span>
-          </Radio>
-          <Radio :name="ElementalReaction.Aggravate" class="atk-type-item">
-            <span class="atk-type-text">超激化</span>
-            <span class="electro"></span>
-          </Radio>
-          <Radio :name="ElementalReaction.Spread"  class="atk-type-item">
-            <span class="atk-type-text">蔓激化</span>
-            <span class="dendro"></span>
-          </Radio>
-        </div>
-      </RadioGroup>
-    </div>
+    <AtkTypeSelector v-model="atkType" />
     <Cell
       v-show="atkType === ElementalReaction.Rate || atkType === ElementalReaction.Rate2"
       class="eva-cell"
@@ -276,6 +252,7 @@ import { HpPercentCalculationMode } from '@/constants/calculation-mode/hp';
 import { DefPercentCalculationMode, DefFixedCalculationMode } from '@/constants/calculation-mode/def';
 import { EmFixedCalculationMode } from '@/constants/calculation-mode/em';
 import { AdditionalDamageMode } from '@/constants/calculation-mode/additionalDemage';
+import AtkTypeSelector from "@/component/AtkTypeSelector.vue";
 
 export default {
   name: "increase",
@@ -292,6 +269,7 @@ export default {
     NoteGroup,
     RadioGroup,
     CompositionAnalysis,
+    AtkTypeSelector,
   },
 
   setup() {

@@ -1,13 +1,10 @@
 <template>
   <TabTitle>角色伤害计算</TabTitle>
-  <div class="data-panel__title">角色</div>
   <CharacterInfo v-model="characterInfo" v-model:constellation="constellation" />
-  <div class="data-panel__title">武器</div>
   <WeaponInfo v-model="weapon" v-model:affix="affix" />
-  <div class="data-panel__title">圣遗物</div>
   <RelicInfo v-model="relicList" :relic-suit-texts="relicSuitTexts" />
-  <div class="data-panel__title">增益情况</div>
   <BuffInfo
+    v-if="characterInfo && weapon"
     v-model="buffs"
     v-model:character-buffs="characterBuffs"
     v-model:weapon-buffs="weaponBuffs"
@@ -23,12 +20,32 @@
     :calculator-value="CalculationPanel"
     :character-info="characterInfo"
     :weapon="weapon"
+    :affix="affix"
   />
+  <Cell
+    v-if="characterInfo && weapon"
+    class="eva-cell"
+    @click="otherChecked = !otherChecked"
+    center
+    title="敌人等级、防御力、抗性调整"
+    is-link
+    :arrow-direction="otherChecked ? 'up' : 'down'"
+  />
+  <div v-show="otherChecked" class="data-panel">
+    <DataItem v-model="enemyLevel" title="敌人的等级" :stepperMin="1" />
+    <DataItem v-model="enemyResistance" title="敌人抗性%" :stepperMin="-999">
+      <div class="extra-btn" @click="handleImagePreview">查看抗性表</div>
+    </DataItem>
+    <DataItem v-model="enemyWeaken" title="减少抗性%" :stepperMin="0" :stepperMax="300" />
+    <DataItem v-model="reduceArmour" title="减少防御%" :stepperMin="0" :stepperMax="90" />
+  </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, ref } from "vue";
+import { ImagePreview, Cell } from "vant";
 import TabTitle from "@/component/TabTitle.vue";
+import DataItem from "@/component/DataItem.vue";
 import CharacterPanel from "@/component/CharacterPanel.vue";
 import CalculatorValueClass from "@/constants/characters-config/calculator-value-class";
 import { ICalculatorValue } from "@/types/interface";
@@ -46,6 +63,16 @@ const { characterInfo, constellation, characterBuffs } = useCharacterInfo();
 const { weapon, affix, weaponBuffs } = useWeaponInfo();
 const { relicList, relicBuffs, relicSuitTexts } = useRelicInfo();
 const { buffs } = useBuffInfo();
+
+const otherChecked = ref(false);
+const enemyLevel = ref(90);
+const enemyResistance = ref(10);
+const enemyWeaken = ref(0);
+const reduceArmour = ref(0);
+
+const handleImagePreview = () => {
+  ImagePreview(["https://saomdpb.com/IMG_1457.PNG"]);
+};
 
 function getBaseData(data: ICalculatorValue) {
   const characterBaseAtk = characterInfo.value.baseATK;
@@ -76,7 +103,14 @@ const CalculationPanel = computed<ICalculatorValue>(() => {
     // 计算不作用于面板的buff
     (data: ICalculatorValue) => calculateBuffs(data, allBuffs, ActionOn.External),
   ].reduce((accumulator, currentFunction) => {
-    return { ...accumulator, ...currentFunction(accumulator) };
+    return {
+      ...accumulator,
+      ...currentFunction(accumulator),
+      enemyLevel: enemyLevel.value,
+      enemyResistance: enemyResistance.value,
+      enemyWeaken: enemyWeaken.value,
+      reduceArmour: reduceArmour.value,
+    };
   }, new CalculatorValueClass());
 });
 </script>

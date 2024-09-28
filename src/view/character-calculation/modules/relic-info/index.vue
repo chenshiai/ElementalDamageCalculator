@@ -148,6 +148,7 @@ const subStatFilter = (selectedId: AppendProp) => {
 
 <template>
   <!-- 圣遗物信息 -->
+  <div class="data-panel__title">圣遗物</div>
   <div class="relic-info">
     <div class="relic-detail" v-for="(item, index) in relicList" :key="index" @click="selectRelic(index)">
       <template v-if="item">

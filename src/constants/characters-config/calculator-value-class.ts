@@ -1,3 +1,4 @@
+import { ElementType, EnchantingType } from "@/types/enum";
 import { ICalculatorValue } from "@/types/interface";
 
 class CalculatorValue implements ICalculatorValue {
@@ -109,7 +110,15 @@ class CalculatorValue implements ICalculatorValue {
   skillLevel: number = 0;
   burstLevel: number = 0;
   amplifiedRate: number = 0;
+  catalyzeRate: number = 0;
+  enchanting: number = EnchantingType[ElementType.Physical];
+  defensePenetration: number = 0;
   
+  enemyLevel = 90;
+  enemyResistance = 10;
+  enemyWeaken = 0;
+  reduceArmour = 0;
+
   constructor(initialValues?: Partial<CalculatorValue>) {
     if (initialValues) {
       Object.assign(this, initialValues);

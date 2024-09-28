@@ -1,4 +1,4 @@
-import { AttackType, ElementType, BuffType, WeaponType, Rarity } from "@/types/enum";
+import { AttackType, ElementType, BuffType, WeaponType, Rarity, EnchantingType } from "@/types/enum";
 import { ICharacterInfo } from "@/types/interface";
 import { getEnkaUI } from "./append-prop";
 import { A_80_ATK_24P, Constellation_E_3, Constellation_Q_3, Constellation_Q_5 } from "./buffs";
@@ -69,7 +69,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       {
         label: "重击循环伤害",
         rate: {
-          atk: [0.625, 0.676, 0.727, 0.8, 0.851, 0.909, 0.989, 1.069, 1.149, 123.6, 1.323],
+          atk: [0.625, 0.676, 0.727, 0.8, 0.851, 0.909, 0.989, 1.069, 1.149, 1.236, 1.323],
         },
         attackType: AttackType.Strong,
         elementType: ElementType.Physical,
@@ -130,6 +130,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         elementType: ElementType.Pyro,
       },
     ],
+    otherSkill: [],
 
     buffs: [
       A_80_ATK_24P,
