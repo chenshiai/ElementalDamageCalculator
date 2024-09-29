@@ -1,5 +1,5 @@
 import { WeaponType, Rarity, AppendProp, BuffType, AttackType, ElementType, ActionOn } from "@/types/enum";
-import { IBuffBase, IWeaponInfo } from "@/types/interface";
+import { IBuffBase, ICalculatorValue, IWeaponInfo } from "@/types/interface";
 import { getEnkaUI } from "./append-prop";
 function highlight(strings, ...values) {
   let result = "";
@@ -1261,6 +1261,1001 @@ export const Weapons: IWeaponInfo[] = [
           },
           attackType: AttackType.Other,
           elementType: ElementType.Physical,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "金流监督",
+      enkaId: 14513,
+      weaponType: WeaponType.Magic,
+      icon: getEnkaUI("UI_EquipIcon_Catalyst_Wheatley_Awaken"),
+      baseAtk: 674,
+      rarity: Rarity.Five,
+      appendPropId: AppendProp.CRITICAL,
+      statValue: 22.1,
+    },
+    (affix = 1) => {
+      let atk = 16 + (affix - 1) * 4 + "%";
+      let add = 16 + (affix - 1) * 4 + "%";
+      let add2 = 14 + (affix - 1) * 3.5 + "%";
+      let sp = 8 + (affix - 1) * 2 + "%";
+      return {
+        title: "黄金的血潮",
+        text: highlight`攻击力提升${atk}。当前生命值提升或降低时，普通攻击造成的伤害提升${add}，重击造成的伤害提升${add2}。该效果持续4秒，至多叠加3层，每0.3秒至多触发一次；处于叠加3层的状态下时，攻击速度提升${sp}。`,
+      };
+    },
+    (affix = 1) => {
+      let atk = 16 + (affix - 1) * 4;
+      let add = 16 + (affix - 1) * 4;
+      let add2 = 14 + (affix - 1) * 3.5;
+      return [
+        {
+          label: "攻击力提升",
+          describe: `攻击力提升${atk}%`,
+          effect: [{ type: BuffType.ATKPrcent, getValue: () => atk }],
+          enable: true,
+        },
+        {
+          label: "普通攻击伤害，重击伤害提升",
+          describe: `普通攻击造成的伤害提升${add}%，重击造成的伤害提升${add2}%。至多叠加3层`,
+          effect: [
+            { type: BuffType.NormalPrcent, getValue: (_, stack) => add * stack },
+            { type: BuffType.StrongPrcent, getValue: (_, stack) => add2 * stack },
+          ],
+          enable: false,
+          stackable: true,
+          stack: 3,
+          limit: 3,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "勘探钻机",
+      enkaId: 13427,
+      weaponType: WeaponType.Polearms,
+      icon: getEnkaUI("UI_EquipIcon_Pole_Mechanic_Awaken"),
+      baseAtk: 565,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.ATTACK_PERCENT,
+      statValue: 27.6,
+    },
+    (affix = 1) => {
+      let atk = 3 + (affix - 1) + "%";
+      let add = 7 + (affix - 1) * 1.5 + "%";
+      return {
+        title: "石匠号子",
+        text: highlight`受到治疗或进行治疗时，将赋予一枚团结标记，持续30秒，至多拥有三枚团结标记。施放元素战技或元素爆发时，将消耗所有的团结标记，产生持续10秒的「抗争」效果：每枚消耗的团结标记提高${atk}攻击力与${add}所有元素伤害加成。每15秒至多触发一次抗争效果；角色处于队伍后台时也能获得团结标记。`,
+      };
+    },
+    (affix = 1) => {
+      let atk = 3 + (affix - 1);
+      let add = 7 + (affix - 1) * 1.5;
+      return [
+        {
+          label: "攻击力提升、元素伤害提升",
+          describe: `提高${atk}%攻击力与${add}%所有元素伤害加成，至多叠加3层`,
+          effect: [
+            { type: BuffType.ATKPrcent, getValue: (_, stack) => atk * stack },
+            { type: BuffType.PyroPrcent, getValue: (_, stack) => add * stack },
+            { type: BuffType.HydroPrcent, getValue: (_, stack) => add * stack },
+            { type: BuffType.ElectroPrcent, getValue: (_, stack) => add * stack },
+            { type: BuffType.AnemoPrcent, getValue: (_, stack) => add * stack },
+            { type: BuffType.DendroPrcent, getValue: (_, stack) => add * stack },
+            { type: BuffType.CryoPrcent, getValue: (_, stack) => add * stack },
+            { type: BuffType.GeoPrcent, getValue: (_, stack) => add * stack },
+          ],
+          stackable: true,
+          limit: 3,
+          stack: 3,
+          enable: false,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "测距规",
+      enkaId: 15427,
+      weaponType: WeaponType.Bow,
+      icon: getEnkaUI("UI_EquipIcon_Bow_Mechanic_Awaken"),
+      baseAtk: 565,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.ATTACK_PERCENT,
+      statValue: 27.6,
+    },
+    (affix = 1) => {
+      let atk = 3 + (affix - 1) + "%";
+      let add = 7 + (affix - 1) * 1.5 + "%";
+      return {
+        title: "石匠号子",
+        text: highlight`受到治疗或进行治疗时，将赋予一枚团结标记，持续30秒，至多拥有三枚团结标记。施放元素战技或元素爆发时，将消耗所有的团结标记，产生持续10秒的「抗争」效果：每枚消耗的团结标记提高${atk}攻击力与${add}所有元素伤害加成。每15秒至多触发一次抗争效果；角色处于队伍后台时也能获得团结标记。`,
+      };
+    },
+    (affix = 1) => {
+      let atk = 3 + (affix - 1);
+      let add = 7 + (affix - 1) * 1.5;
+      return [
+        {
+          label: "攻击力提升、元素伤害提升",
+          describe: `提高${atk}%攻击力与${add}%所有元素伤害加成，至多叠加3层`,
+          effect: [
+            { type: BuffType.ATKPrcent, getValue: (_, stack) => atk * stack },
+            { type: BuffType.PyroPrcent, getValue: (_, stack) => add * stack },
+            { type: BuffType.HydroPrcent, getValue: (_, stack) => add * stack },
+            { type: BuffType.ElectroPrcent, getValue: (_, stack) => add * stack },
+            { type: BuffType.AnemoPrcent, getValue: (_, stack) => add * stack },
+            { type: BuffType.DendroPrcent, getValue: (_, stack) => add * stack },
+            { type: BuffType.CryoPrcent, getValue: (_, stack) => add * stack },
+            { type: BuffType.GeoPrcent, getValue: (_, stack) => add * stack },
+          ],
+          stackable: true,
+          limit: 3,
+          stack: 3,
+          enable: false,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "无垠蔚蓝之歌",
+      enkaId: 14426,
+      weaponType: WeaponType.Magic,
+      icon: getEnkaUI("UI_EquipIcon_Catalyst_DandelionPoem_Awaken"),
+      baseAtk: 565,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.CHARGE_EFFICIENCY,
+      statValue: 30.6,
+    },
+    (affix = 1) => {
+      let atk = 8 + (affix - 1) * 2 + "%";
+      let add = 6 + (affix - 1) * 1.5 + "%";
+      return {
+        title: "蔚蓝深空",
+        text: highlight` · 普通攻击或重击命中敌人后的6秒内，普通攻击造成的伤害提升${atk}，重击造成的伤害提升${add}。该效果至多叠加3次，每0.3秒至多触发一次。`,
+      };
+    },
+    (affix = 1) => {
+      let atk = 8 + (affix - 1) * 2;
+      let add = 6 + (affix - 1) * 1.5;
+      return [
+        {
+          label: "普通攻击、重击伤害提升",
+          describe: `普通攻击造成的伤害提升${atk}%、重击造成的伤害提升${add}%，至多叠加3层`,
+          effect: [
+            { type: BuffType.NormalPrcent, getValue: (_, stack) => atk * stack },
+            { type: BuffType.StrongPrcent, getValue: (_, stack) => add * stack },
+          ],
+          stackable: true,
+          limit: 3,
+          stack: 3,
+          enable: false,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "船坞长剑",
+      enkaId: 11427,
+      weaponType: WeaponType.Sword,
+      icon: getEnkaUI("UI_EquipIcon_Sword_Mechanic_Awaken"),
+      baseAtk: 510,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.HP_PERCENT,
+      statValue: 41.3,
+    },
+    (affix = 1) => {
+      let em = 40 + (affix - 1) * 10;
+      let c = 2 + (affix - 1) * 0.5;
+      return {
+        title: "船工号子",
+        text: highlight`受到治疗或进行治疗时，将赋予一枚坚忍标记，持续30秒，至多拥有三枚坚忍标记。施放元素战技或元素爆发时，将消耗所有的坚忍标记，产生持续10秒的「奋起」效果：每枚消耗的坚忍标记提高${em}点元素精通，并在效果产生2秒后，每枚消耗的坚忍标记为装备者恢复${c}点元素能量。每15秒至多触发一次奋起效果；角色处于队伍后台时也能获得坚忍标记。`,
+      };
+    },
+    (affix = 1) => {
+      let em = 40 + (affix - 1) * 10;
+      return [
+        {
+          label: "元素精通提升",
+          describe: `每枚消耗的坚忍标记提高${em}点元素精通，至多叠加3层`,
+          effect: [{ type: BuffType.MysteryFixed, getValue: (_, stack) => em * stack }],
+          stackable: true,
+          limit: 3,
+          stack: 3,
+          enable: false,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "便携动力锯",
+      enkaId: 12427,
+      weaponType: WeaponType.GreatSword,
+      icon: getEnkaUI("UI_EquipIcon_Claymore_Mechanic_Awaken"),
+      baseAtk: 454,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.HP_PERCENT,
+      statValue: 55.1,
+    },
+    (affix = 1) => {
+      let em = 40 + (affix - 1) * 10;
+      let c = 2 + (affix - 1) * 0.5;
+      return {
+        title: "船工号子",
+        text: highlight`受到治疗或进行治疗时，将赋予一枚坚忍标记，持续30秒，至多拥有三枚坚忍标记。施放元素战技或元素爆发时，将消耗所有的坚忍标记，产生持续10秒的「奋起」效果：每枚消耗的坚忍标记提高${em}点元素精通，并在效果产生2秒后，每枚消耗的坚忍标记为装备者恢复${c}点元素能量。每15秒至多触发一次奋起效果；角色处于队伍后台时也能获得坚忍标记。`,
+      };
+    },
+    (affix = 1) => {
+      let em = 40 + (affix - 1) * 10;
+      return [
+        {
+          label: "元素精通提升",
+          describe: `每枚消耗的坚忍标记提高${em}点元素精通，至多叠加3层`,
+          effect: [{ type: BuffType.MysteryFixed, getValue: (_, stack) => em * stack }],
+          stackable: true,
+          limit: 3,
+          stack: 3,
+          enable: false,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "万世流涌大典",
+      enkaId: 14514,
+      rarity: Rarity.Five,
+      icon: getEnkaUI("UI_EquipIcon_Catalyst_Iudex_Awaken"),
+      weaponType: WeaponType.Magic,
+      baseAtk: 542,
+      appendPropId: AppendProp.CRITICAL_HURT,
+      statValue: 88.2,
+    },
+    (affix: number) => {
+      let hp = 16 + (affix - 1) * 4 + "%";
+      let add = 14 + (affix - 1) * 4 + "%";
+      let c = 8 + (affix - 1);
+      return {
+        title: "万世的浪涛",
+        text: highlight`生命值提升${hp}。当前生命值提升或降低时，重击造成的伤害提升${add}。该效果持续4秒，至多叠加3次，每0.3秒至多触发一次；叠加至3层或3层的持续时间刷新时，恢复${c}点元素能量，每12秒至多通过这种方式恢复一次元素能量。`,
+      };
+    },
+    (affix = 1) => {
+      let hp = 16 + (affix - 1) * 4;
+      let add = 14 + (affix - 1) * 4;
+      return [
+        {
+          label: "生命值提升",
+          describe: `生命值提升${hp}%`,
+          effect: [{ type: BuffType.HPPrcent, getValue: () => hp }],
+          enable: true,
+        },
+        {
+          label: "重击造成的伤害提升",
+          describe: `重击造成的伤害提升${add}%，至多叠加3层`,
+          effect: [{ type: BuffType.StrongPrcent, getValue: (_, stack) => add * stack }],
+          enable: false,
+          stackable: true,
+          stack: 3,
+          limit: 3,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "灰河渡手",
+      enkaId: 11426,
+      weaponType: WeaponType.Sword,
+      icon: getEnkaUI("UI_EquipIcon_Sword_Machination_Awaken"),
+      baseAtk: 510,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.CHARGE_EFFICIENCY,
+      statValue: 45.9,
+    },
+    (affix = 1) => {
+      let cr = 8 + (affix - 1) * 2 + "%";
+      let c = 16 + (affix - 1) * 4 + "%";
+      return {
+        title: "铁骨",
+        text: highlight`元素战技暴击率提升${cr}；此外，施放元素战技后的5秒内，元素充能效率提升${c}。`,
+      };
+    },
+    (affix = 1) => {
+      let cr = 8 + (affix - 1) * 2;
+      let c = 16 + (affix - 1) * 4;
+      return [
+        {
+          label: "元素战技暴击率提升",
+          describe: `元素战技暴击率提升${cr}%`,
+          effect: [{ type: BuffType.SkillCritcal, getValue: () => cr }],
+          enable: true,
+        },
+        {
+          label: "元素充能效率提升",
+          describe: `施放元素战技后的5秒内，元素充能效率提升${c}%`,
+          effect: [{ type: BuffType.ChargeFixed, getValue: () => c }],
+          enable: false,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "纯水流华",
+      enkaId: 14425,
+      weaponType: WeaponType.Magic,
+      icon: getEnkaUI("UI_EquipIcon_Catalyst_Vorpal_Awaken"),
+      baseAtk: 565,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.ATTACK_PERCENT,
+      statValue: 27.6,
+    },
+    (affix = 1) => {
+      let add = 8 + (affix - 1) * 2 + "%";
+      let hp = 2 + (affix - 1) * 0.5 + "%";
+      let add2 = 12 + (affix - 1) * 3 + "%";
+      return {
+        title: "未完的杰作",
+        text: highlight`施放元素战技时，所有元素伤害加成提升${add}，持续15秒，并赋予生命值上限24%的生命之契，该效果每10秒至多触发一次。生命之契清除时，每清除1000点将会提供${hp}所有元素伤害加成，至多通过这种方式获得${add2}所有元素伤害加成，持续15秒。`,
+      };
+    },
+    (affix = 1) => {
+      let add = 8 + (affix - 1) * 2;
+      let hp = 2 + (affix - 1) * 0.5;
+      let add2 = 12 + (affix - 1) * 3;
+      const getValue = (data: ICalculatorValue) => {
+        // 虽然游戏里不存这种场景，但感觉生命之契应该能吃二次转化
+        let allhp = data.baseHP + data.extraHP + data.extraHP_NT;
+        return Math.min(((allhp * 0.24) / 1000) * hp, add2);
+      };
+      return [
+        {
+          label: "元素伤害加成提升",
+          describe: `所有元素伤害加成提升${add}%`,
+          effect: [
+            { type: BuffType.PyroPrcent, getValue: () => add },
+            { type: BuffType.HydroPrcent, getValue: () => add },
+            { type: BuffType.AnemoPrcent, getValue: () => add },
+            { type: BuffType.ElectroPrcent, getValue: () => add },
+            { type: BuffType.GeoPrcent, getValue: () => add },
+            { type: BuffType.CryoPrcent, getValue: () => add },
+            { type: BuffType.DendroPrcent, getValue: () => add },
+          ],
+          enable: false,
+        },
+        {
+          label: "消除生命之契获得元素伤害加成提升",
+          describe: `每清除1000点将会提供${hp}%所有元素伤害加成，至多获得${add2}%所有元素伤害加成。（由于获取生命之契的手段过少，该增益效果只以最大生命值的24%生命之契来计算）`,
+          effect: [
+            { type: BuffType.PyroPrcent, getValue },
+            { type: BuffType.HydroPrcent, getValue },
+            { type: BuffType.AnemoPrcent, getValue },
+            { type: BuffType.ElectroPrcent, getValue },
+            { type: BuffType.GeoPrcent, getValue },
+            { type: BuffType.CryoPrcent, getValue },
+            { type: BuffType.DendroPrcent, getValue },
+          ],
+          enable: false,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "公义的酬报",
+      enkaId: 13425,
+      weaponType: WeaponType.Polearms,
+      icon: getEnkaUI("UI_EquipIcon_Pole_Vorpal_Awaken"),
+      baseAtk: 565,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.HP_PERCENT,
+      statValue: 27.6,
+    },
+    (affix = 1) => {
+      return {
+        title: "枪尖一点",
+        text: highlight`受到治疗时，恢复${
+          8 + (affix - 1) * 2
+        }点能量，该效果每10秒至多触发一次，角色处于队伍后台时也能触发。`,
+      };
+    }
+  ),
+  createWeapon(
+    {
+      name: "浪影阔剑",
+      enkaId: 12425,
+      weaponType: WeaponType.GreatSword,
+      icon: getEnkaUI("UI_EquipIcon_Claymore_Vorpal_Awaken"),
+      baseAtk: 510,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.ATTACK_PERCENT,
+      statValue: 41.3,
+    },
+    (affix = 1) => {
+      let a = 24 + (affix - 1) * 6 + "%";
+      return {
+        title: "巡航的白浪",
+        text: highlight`受到治疗后，攻击力提升${a}，持续8秒。角色处于队伍后台也能触发。`,
+      };
+    },
+    (affix = 1) => {
+      let a = 24 + (affix - 1) * 6;
+      return [
+        {
+          label: "攻击力提升",
+          describe: `受到治疗后，攻击力提升${a}%，持续8秒`,
+          effect: [{ type: BuffType.ATKPrcent, getValue: () => a }],
+          enable: false,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "海渊终曲",
+      enkaId: 11425,
+      weaponType: WeaponType.Sword,
+      icon: getEnkaUI("UI_EquipIcon_Sword_Vorpal_Awaken"),
+      baseAtk: 565,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.ATTACK_PERCENT,
+      statValue: 27.6,
+    },
+    (affix = 1) => {
+      let atk = 12 + (affix - 1) * 3 + "%";
+      let hp = 2.4 + (affix - 1) * 0.6 + "%";
+      let atk2 = 150 + (affix - 1) * 37.5;
+      return {
+        title: "最终的崇高",
+        text: highlight`施放元素战技时，攻击力提升${atk}，持续15秒，并赋予生命值上限25%的生命之契，该效果每10秒至多触发一次。生命之契清除时，基于清除值的${hp}提升至多${atk2}点攻击力，持续15秒。`,
+      };
+    },
+    (affix = 1) => {
+      let atk = 12 + (affix - 1) * 3;
+      let hp = 2.4 + (affix - 1) * 0.6;
+      let atk2 = 150 + (affix - 1) * 37.5;
+      const getValue = (data: ICalculatorValue) => {
+        // 虽然游戏里不存这种场景，但感觉生命之契应该能吃二次转化
+        let allhp = data.baseHP + data.extraHP + data.extraHP_NT;
+        return Math.min((allhp * 0.25 * hp) / 100, atk2);
+      };
+      return [
+        {
+          label: "攻击力提升",
+          describe: `施放元素战技时，攻击力提升${atk}%`,
+          effect: [{ type: BuffType.ATKPrcent, getValue: () => atk }],
+          enable: false,
+        },
+        {
+          label: "消除生命之契获得攻击力提升",
+          describe: `生命之契清除时，基于清除值的${hp}%提升至多${atk2}点攻击力。（由于获取生命之契的手段过少，该增益效果只以最大生命值的25%生命之契来计算）`,
+          effect: [{ type: BuffType.ATKFixed, getValue }],
+          enable: false,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "静谧之曲",
+      enkaId: 15425,
+      weaponType: WeaponType.Bow,
+      icon: getEnkaUI("UI_EquipIcon_Bow_Vorpal_Awaken"),
+      baseAtk: 510,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.ATTACK_PERCENT,
+      statValue: 41.3,
+    },
+    (affix = 1) => {
+      let a = 16 + (affix - 1) * 4 + "%";
+      return {
+        title: "深海弦振",
+        text: highlight`受到治疗后，造成的伤害提升${a}，持续8秒。角色处于队伍后台也能触发。`,
+      };
+    },
+    (affix = 1) => {
+      let a = 16 + (affix - 1) * 4;
+      return [
+        {
+          label: "造成的伤害提升",
+          describe: `受到治疗后，造成的伤害提升${a}%，持续8秒`,
+          effect: [{ type: BuffType.GlobalPrcent, getValue: () => a }],
+          enable: false,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "狼牙",
+      enkaId: 11424,
+      weaponType: WeaponType.Sword,
+      icon: getEnkaUI("UI_EquipIcon_Sword_Boreas_Awaken"),
+      baseAtk: 510,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.CRITICAL,
+      statValue: 27.6,
+    },
+    (affix = 1) => {
+      let ad = 16 + (affix - 1) * 4 + "%";
+      let cr = 2 + (affix - 1) * 0.5 + "%";
+      return {
+        title: "苍狼北风",
+        text: highlight`元素战技与元素爆发造成的伤害提升${ad}。元素战技命中敌人时，元素战技的暴击率提升${cr}；元素爆发命中敌人时，元素爆发的暴击率提升${cr}。上述两种效果各自持续10秒，至多叠加4次，每0.1秒至多触发一次。`,
+      };
+    },
+    (affix = 1) => {
+      let ad = 16 + (affix - 1) * 4;
+      let cr = 2 + (affix - 1) * 0.5;
+      return [
+        {
+          label: "元素战技与元素爆发造成的伤害提升",
+          describe: `元素战技与元素爆发造成的伤害提升${ad}%`,
+          effect: [
+            { type: BuffType.SkillPrcent, getValue: () => ad },
+            { type: BuffType.BurstPrcent, getValue: () => ad },
+          ],
+          enable: true,
+        },
+        {
+          label: "元素战技暴击率提升",
+          describe: `元素战技命中敌人时，元素战技的暴击率提升${cr}%，至多叠加4层`,
+          effect: [{ type: BuffType.SkillCritcal, getValue: (_, stack) => cr * stack }],
+          enable: false,
+          stackable: true,
+          stack: 4,
+          limit: 4,
+        },
+        {
+          label: "元素爆发暴击率提升",
+          describe: `元素爆发命中敌人时，元素爆发的暴击率提升${cr}%，至多叠加4层`,
+          effect: [{ type: BuffType.BurstCritcal, getValue: (_, stack) => cr * stack }],
+          enable: false,
+          stackable: true,
+          stack: 4,
+          limit: 4,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "遗祀玉珑",
+      enkaId: 14424,
+      weaponType: WeaponType.Magic,
+      icon: getEnkaUI("UI_EquipIcon_Catalyst_Yue_Awaken"),
+      baseAtk: 454,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.CRITICAL,
+      statValue: 36.8,
+    },
+    (affix = 1) => {
+      let hp = 32 + (affix - 1) * 8 + "%";
+      let em = 40 + (affix - 1) * 10;
+      return {
+        title: "碧玉流转",
+        text: highlight`处于队伍后台超过5秒后，生命值上限提升${hp}，元素精通提升${em}点。装备者登场并留在场上10秒后，该效果将失效。`,
+      };
+    },
+    (affix = 1) => {
+      let hp = 32 + (affix - 1) * 8;
+      let em = 40 + (affix - 1) * 10;
+      return [
+        {
+          label: "生命值上限、元素精通提升",
+          describe: `处于队伍后台超过5秒后，生命值上限提升${hp}%，元素精通提升${em}点`,
+          effect: [
+            { type: BuffType.HPPrcent, getValue: () => hp },
+            { type: BuffType.MysteryFixed, getValue: () => em },
+          ],
+          enable: false,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "烈阳之嗣",
+      enkaId: 15424,
+      weaponType: WeaponType.Bow,
+      icon: getEnkaUI("UI_EquipIcon_Bow_Gurabad_Awaken"),
+      baseAtk: 565,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.CRITICAL,
+      statValue: 18.4,
+    },
+    (affix = 1) => {
+      let atk = 60 + (affix - 1) * 15 + "%";
+      let add = 28 + (affix - 1) * 7 + "%";
+      return {
+        title: "阳炎古道",
+        text: highlight`重击命中敌人后，会向命中的敌人降下阳炎矢，造成攻击力${atk}的伤害，并为受到阳炎矢伤害的敌人施加持续10秒的灼心效果。装备者的重击对处于灼心状态下的敌人造成的伤害提升${add}。阳炎矢每10秒至多触发一次。`,
+      };
+    },
+    (affix = 1) => {
+      let add = 28 + (affix - 1) * 7;
+      return [
+        {
+          label: "重击伤害提升",
+          describe: `重击对处于灼心状态下的敌人造成的伤害提升${add}%`,
+          effect: [{ type: BuffType.StrongPrcent, getValue: () => add }],
+          enable: false,
+        },
+      ];
+    },
+    (affix = 1) => {
+      let atk = (60 + (affix - 1) * 15) / 100;
+      return [
+        {
+          label: "阳炎古道·阳炎矢",
+          rate: {
+            atk: [atk],
+          },
+          attackType: AttackType.Other,
+          elementType: ElementType.Physical,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "聊聊棒",
+      enkaId: 12424,
+      weaponType: WeaponType.GreatSword,
+      icon: getEnkaUI("UI_EquipIcon_Claymore_BeastTamer_Awaken"),
+      baseAtk: 565,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.CRITICAL,
+      statValue: 18.4,
+    },
+    (affix = 1) => {
+      let atk = 16 + (affix - 1) * 4 + "%";
+      let add = 12 + (affix - 1) * 3 + "%";
+      return {
+        title: "「伶牙俐齿」",
+        text: highlight`承受火元素附着后的15秒内，攻击力提升${atk}，每12秒至多触发一次；承受水元素、冰元素、雷元素或草元素附着后的15秒内，所有元素伤害加成提升${add}，每12秒至多触发一次。`,
+      };
+    },
+    (affix = 1) => {
+      let atk = 16 + (affix - 1) * 4;
+      let add = 12 + (affix - 1) * 3;
+      return [
+        {
+          label: "攻击力提升",
+          describe: `承受火元素附着后的15秒内，攻击力提升${atk}%`,
+          effect: [{ type: BuffType.ATKPrcent, getValue: () => atk }],
+          enable: false,
+        },
+        {
+          label: "元素伤害提升",
+          describe: `承受水元素、冰元素、雷元素或草元素附着后，所有元素伤害加成提升${add}%`,
+          effect: [
+            { type: BuffType.PyroPrcent, getValue: () => add },
+            { type: BuffType.HydroPrcent, getValue: () => add },
+            { type: BuffType.AnemoPrcent, getValue: () => add },
+            { type: BuffType.ElectroPrcent, getValue: () => add },
+            { type: BuffType.CryoPrcent, getValue: () => add },
+            { type: BuffType.GeoPrcent, getValue: () => add },
+            { type: BuffType.DendroPrcent, getValue: () => add },
+          ],
+          enable: false,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "峡湾长歌",
+      enkaId: 13424,
+      weaponType: WeaponType.Polearms,
+      icon: getEnkaUI("UI_EquipIcon_Pole_Shanty_Awaken"),
+      baseAtk: 510,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.CRITICAL,
+      statValue: 27.6,
+    },
+    (affix = 1) => {
+      return {
+        title: "冰原的诸多故事",
+        text: highlight`队伍中存在至少三种不同元素类型的角色时，元素精通提升${120 + (affix - 1) * 30}点。`,
+      };
+    },
+    (affix = 1) => {
+      return [
+        {
+          label: "元素精通提升",
+          describe: `队伍中存在至少三种不同元素类型的角色时，元素精通提升${120 + (affix - 1) * 30}点`,
+          effect: [{ type: BuffType.MysteryFixed, getValue: () => 120 + (affix - 1) * 30 }],
+          enable: false,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "最初的大魔术",
+      enkaId: 15512,
+      weaponType: WeaponType.Bow,
+      icon: getEnkaUI("UI_EquipIcon_Bow_Pledge_Awaken"),
+      baseAtk: 608,
+      rarity: Rarity.Five,
+      appendPropId: AppendProp.CRITICAL_HURT,
+      statValue: 66.2,
+    },
+    (affix = 1) => {
+      let st = 16 + (affix - 1) * 4 + "%";
+      let atk1 = 16 + (affix - 1) * 4;
+      let atk2 = 32 + (affix - 1) * 8;
+      let atk3 = 48 + (affix - 1) * 12;
+      let atk = `${atk1}/${atk2}/${atk3}%`;
+      let sp1 = 4 + (affix - 1) * 2;
+      let sp2 = 7 + (affix - 1) * 2;
+      let sp3 = 10 + (affix - 1) * 2;
+      let sp = `${sp1}/${sp2}/${sp3}%`;
+
+      return {
+        title: "伟大者帕西法尔",
+        text: highlight`重击造成的伤害提升${st}；队伍中每存在一位与装备者元素类型相同的角色（包括装备者自身），将获得1层「手法」效果；每存在一位元素类型不同的角色，将获得1层「演技」效果。处于1/2/3层及以上「手法」效果下时，攻击力提升${atk}；处于1/2/3层及以上「演技」效果下时移动速度提升${sp}。 `,
+      };
+    },
+    (affix = 1) => {
+      let st = 16 + (affix - 1) * 4;
+      let atk1 = 16 + (affix - 1) * 4;
+      let atk2 = 32 + (affix - 1) * 8;
+      let atk3 = 48 + (affix - 1) * 12;
+      let atk = [atk1, atk2, atk3];
+      return [
+        {
+          label: "重击伤害提升",
+          describe: `重击造成的伤害提升${st}%`,
+          effect: [{ type: BuffType.StrongPrcent, getValue: () => st }],
+          enable: true,
+        },
+        {
+          label: "攻击力提升",
+          describe: `处于1/2/3层及以上「手法」效果下时，攻击力提升${atk.join("/")}%`,
+          effect: [{ type: BuffType.ATKPrcent, getValue: (_, stack) => atk[stack - 1] || 0 }],
+          enable: false,
+          stackable: true,
+          stack: 3,
+          limit: 3,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "鹮穿之喙",
+      enkaId: 15419,
+      weaponType: WeaponType.Bow,
+      icon: getEnkaUI("UI_EquipIcon_Bow_Ibis_Awaken"),
+      baseAtk: 565,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.ATTACK_PERCENT,
+      statValue: 27.6,
+    },
+    (affix = 1) => {
+      let em = 40 + (affix - 1) * 10;
+      return {
+        title: "秘智之眸的青睐",
+        text: highlight`重击命中敌人后的6秒内，角色元素精通提升${em}点。该效果至多叠加2层，每0.5秒至多触发一次。`,
+      };
+    },
+    (affix = 1) => {
+      let em = 40 + (affix - 1) * 10;
+      return [
+        {
+          label: "元素精通提升",
+          describe: `重击命中敌人后，角色元素精通提升${em}点。该效果至多叠加2层`,
+          effect: [{ type: BuffType.MysteryFixed, getValue: (_, stack) => em * stack }],
+          stackable: true,
+          limit: 2,
+          stack: 2,
+          enable: false,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "碧落之珑",
+      enkaId: 14505,
+      weaponType: WeaponType.Magic,
+      icon: getEnkaUI("UI_EquipIcon_Catalyst_Morax_Awaken"),
+      baseAtk: 608,
+      rarity: Rarity.Five,
+      appendPropId: AppendProp.HP_PERCENT,
+      statValue: 49.6,
+    },
+    (affix = 1) => {
+      let c = 4.5 + (affix - 1) * 0.5;
+      let add = 0.3 + (affix - 1) * 0.2 + "%";
+      let limit = 12 + (affix - 1) * 8 + "%";
+      return {
+        title: "定土玉圭",
+        text: highlight`施放元素爆发或创造护盾后的3秒内，将产生「定土玉圭」效果：每2.5秒恢复${c}点元素能量，并基于装备者的生命值上限，每1000点使其对应元素类型的元素伤害加成提高${add}，至多提高${limit}。装备该武器的角色处于队伍后台时，依然能产生「定土玉圭」效果。`,
+      };
+    },
+    (affix = 1) => {
+      let add = 0.3 + (affix - 1) * 0.2;
+      let limit = 12 + (affix - 1) * 8;
+      let getValue = (data) => {
+        let hp = data.baseHP + data.extraHP;
+        return Math.min(limit, (hp / 1000) * add);
+      };
+      return [
+        {
+          label: "元素伤害加成提高",
+          describe: `每1000点生命值使元素伤害加成提高${add}%，至多提高${limit}%`,
+          effect: [
+            { type: BuffType.PyroPrcent, getValue },
+            { type: BuffType.HydroPrcent, getValue },
+            { type: BuffType.AnemoPrcent, getValue },
+            { type: BuffType.ElectroPrcent, getValue },
+            { type: BuffType.CryoPrcent, getValue },
+            { type: BuffType.GeoPrcent, getValue },
+          ],
+          enable: false,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "饰铁之花",
+      enkaId: 12418,
+      weaponType: WeaponType.GreatSword,
+      icon: getEnkaUI("UI_EquipIcon_Claymore_Fleurfair_Awaken"),
+      baseAtk: 565,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.ELEMENT_MASTERY,
+      statValue: 110,
+    },
+    (affix = 1) => {
+      let atk = 12 + (affix - 1) * 3 + "%";
+      let em = 48 + (affix - 1) * 12;
+      return {
+        title: "风与花的密语",
+        text: highlight` · 元素战技命中敌人或触发元素反应后的8秒内，攻击力提升${atk}，元素精通提升${em}点。`,
+      };
+    },
+    (affix = 1) => {
+      let atk = 12 + (affix - 1) * 3;
+      let em = 48 + (affix - 1) * 12;
+      return [
+        {
+          label: "攻击力、元素精通提升",
+          describe: `元素战技命中敌人或触发元素反应后，攻击力提升${atk}%，元素精通提升${em}点`,
+          effect: [
+            { type: BuffType.ATKPrcent, getValue: () => atk },
+            { type: BuffType.MysteryFixed, getValue: () => em },
+          ],
+          enable: false,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "东花坊时雨",
+      enkaId: 11422,
+      weaponType: WeaponType.Sword,
+      icon: getEnkaUI("UI_EquipIcon_Sword_Kasabouzu_Awaken"),
+      baseAtk: 510,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.ELEMENT_MASTERY,
+      statValue: 165,
+    },
+    (affix = 1) => {
+      let add = 16 + (affix - 1) * 4 + "%";
+      return {
+        title: "怪谭·时雨心地一本足",
+        text: highlight`攻击命中敌人后，会为命中的一名敌人施加「纸伞作祟」状态，持续10秒。该效果每15秒至多触发一次；持续期间该敌人被击败时，将清除该效果的冷却时间。装备者对处于「纸伞作祟」状态下的敌人造成的伤害提升${add}。`,
+      };
+    },
+    (affix = 1) => {
+      let add = 16 + (affix - 1) * 4;
+      return [
+        {
+          label: "伤害提升",
+          describe: `装备者对处于「纸伞作祟」状态下的敌人造成的伤害提升${add}%`,
+          effect: [{ type: BuffType.GlobalPrcent, getValue: () => add }],
+          enable: false,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "图莱杜拉的回忆",
+      enkaId: 14512,
+      weaponType: WeaponType.Magic,
+      icon: getEnkaUI("UI_EquipIcon_Catalyst_Alaya_Awaken"),
+      baseAtk: 674,
+      rarity: Rarity.Five,
+      appendPropId: AppendProp.CRITICAL_HURT,
+      statValue: 44.1,
+    },
+    (affix = 1) => {
+      let sp = 10 + (affix - 1) * 2.5 + "%";
+      let add = 4.8 + (affix - 1) * 1.2 + "%";
+      let add2 = 9.6 + (affix - 1) * 2.4 + "%";
+      let lim = 48 + (affix - 1) * 12 + "%";
+      return {
+        title: "堙没的蓝宝石泪滴",
+        text: highlight`普通攻击速度提升${sp}；施放元素战技后的14秒内：普通攻击造成的伤害每1秒提升${add}；普通攻击命中敌人后，普通攻击造成的伤害提升${add2}，该效果每0.3秒至多触发1次。持续期间内，普通攻击造成的伤害至多通过上述效果提升至${lim}。角色退场时将移除效果，再次施放元素战技时会先移除原有的效果。`,
+      };
+    },
+    (affix = 1) => {
+      let lim = 48 + (affix - 1) * 12;
+      return [
+        {
+          label: "普通攻击伤害提升",
+          describe: `普通攻击伤害提升${lim}%`,
+          effect: [{ type: BuffType.NormalPrcent, getValue: () => lim }],
+          enable: false,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "千夜浮梦",
+      enkaId: 14511,
+      weaponType: WeaponType.Magic,
+      icon: getEnkaUI("UI_EquipIcon_Catalyst_Ayus_Awaken"),
+      baseAtk: 542,
+      rarity: Rarity.Five,
+      appendPropId: AppendProp.ELEMENT_MASTERY,
+      statValue: 265,
+    },
+    (affix = 1) => {
+      let em = 32 + (affix - 1) * 8;
+      let add = 10 + (affix - 1) * 4 + "%";
+      let enm = 40 + (affix - 1) * 2;
+      return {
+        title: "千夜的曙歌",
+        text: highlight`队伍中每个其他角色，都会依据元素类型与装备者相同与否，为装备者提供提升效果。相同：元素精通提升${em}点；不同：装备者元素类型的元素伤害加成提升${add}。上述提升效果每种至多叠加3层。此外，队伍中装备者以外的附近角色的元素精通提升${enm}点，多件同名武器产生的此效果可以叠加。`,
+      };
+    },
+    (affix = 1) => {
+      let em = 32 + (affix - 1) * 8;
+      let add = 10 + (affix - 1) * 4;
+      let enm = 40 + (affix - 1) * 2;
+      let getValue = (_, stack) => {
+        return add * (3 - stack);
+      };
+      return [
+        {
+          label: "全队元素精通提升",
+          describe: `全队元素精通提升${enm}`,
+          effect: [{ type: BuffType.MysteryFixed, getValue: () => enm }],
+          enable: true,
+        },
+        {
+          label: `元素精通提升或元素伤害加成提升`,
+          describe: `该增益用【层数】代表【相同元素类型】的数量。3层代表3个相同元素类型角色的数量，0层代表3个不同元素类型角色的数量。元素精通提升${em}或元素伤害加成提升${add}%`,
+          effect: [
+            { type: BuffType.MysteryFixed, getValue: (_, stack) => em * stack },
+            { type: BuffType.PyroPrcent, getValue },
+            { type: BuffType.HydroPrcent, getValue },
+            { type: BuffType.ElectroPrcent, getValue },
+            { type: BuffType.AnemoPrcent, getValue },
+            { type: BuffType.CryoPrcent, getValue },
+            { type: BuffType.GeoPrcent, getValue },
+            { type: BuffType.DendroPrcent, getValue },
+          ],
+          stackable: true,
+          limit: 3,
+          stack: 3,
+          enable: false,
         },
       ];
     }
