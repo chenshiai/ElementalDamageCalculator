@@ -929,6 +929,344 @@ export const Weapons: IWeaponInfo[] = [
   ),
   createWeapon(
     {
+      name: "筑云",
+      enkaId: 15426,
+      weaponType: WeaponType.Bow,
+      icon: getEnkaUI("UI_EquipIcon_Bow_Ultimatum_Awaken"),
+      baseAtk: 510,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.ELEMENT_MASTERY,
+      statValue: 165,
+    },
+    (affix = 1) => {
+      const em = 40 + (affix - 1) * 10;
+      return {
+        title: "镌岩为坊",
+        text: highlight`元素能量减少后，装备者的元素精通提升${em}点。该效果持续18秒，至多叠加2层。`,
+      };
+    },
+    (affix = 1) => {
+      const em = 40 + (affix - 1) * 10;
+      return [
+        {
+          label: "元素精通提升",
+          describe: `元素能量减少后，装备者的元素精通提升${em}点，至多叠加2层`,
+          effect: [{ type: BuffType.MysteryFixed, getValue: (_, stack) => em * stack }],
+          stackable: true,
+          limit: 2,
+          stack: 2,
+          enable: false,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "赦罪",
+      enkaId: 11515,
+      weaponType: WeaponType.Sword,
+      icon: getEnkaUI("UI_EquipIcon_Sword_Estoc_Awaken"),
+      baseAtk: 674,
+      rarity: Rarity.Five,
+      appendPropId: AppendProp.CRITICAL_HURT,
+      statValue: 44.1,
+    },
+    (affix = 1) => {
+      const crt = 20 + 5 * (affix - 1) + "%";
+      const add = 16 + 4 * (affix - 1) + "%";
+      return {
+        title: "死之契",
+        text: highlight`暴击伤害提升${crt}；生命之契的数值增加时，装备者造成的伤害提升${add}。该效果持续6秒，至多叠加3次。`,
+      };
+    },
+    (affix = 1) => {
+      const add = 16 + 4 * (affix - 1);
+      const crt = 20 + 5 * (affix - 1);
+      return [
+        {
+          label: "暴击伤害提升",
+          describe: `暴击伤害提升${crt}%`,
+          effect: [{ type: BuffType.CritcalHurt, getValue: () => crt }],
+          enable: true,
+        },
+        {
+          label: "伤害提高",
+          describe: `生命之契的数值增加时，装备者造成的伤害提升${add}%`,
+          effect: [{ type: BuffType.GlobalPrcent, getValue: (_, stack) => add * stack }],
+          enable: false,
+          stackable: true,
+          stack: 3,
+          limit: 3,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "裁叶萃光",
+      enkaId: 11512,
+      weaponType: WeaponType.Sword,
+      icon: getEnkaUI("UI_EquipIcon_Sword_Ayus_Awaken"),
+      baseAtk: 542,
+      rarity: Rarity.Five,
+      appendPropId: AppendProp.CRITICAL_HURT,
+      statValue: 88.2,
+    },
+    (affix = 1) => {
+      const crt = 4 + (affix - 1) + "%";
+      const add = 120 + 30 * (affix - 1) + "%";
+      return {
+        title: "白月枝芒",
+        text: highlight`暴击率提升${crt}；普通攻击造成元素伤害后，获得「裁叶」效果：普通攻击和元素战技造成的伤害提高，提高值相当于元素精通的${add}。该效果在生效28次或12秒后消失，每12秒至多获得一次「裁叶」效果。`,
+      };
+    },
+    (affix = 1) => {
+      const crt = 4 + (affix - 1);
+      const add = 120 + 30 * (affix - 1);
+      return [
+        {
+          label: "暴击率提升",
+          describe: `暴击率提升${crt}%`,
+          effect: [{ type: BuffType.Critcal, getValue: () => crt }],
+          enable: true,
+        },
+        {
+          label: "普通攻击和元素战技造成的伤害提高",
+          describe: `普通攻击和元素战技造成的伤害提高，提高值相当于元素精通的${add}%`,
+          effect: [
+            {
+              type: BuffType.NormalFixed,
+              getValue: (data) => {
+                return ((data.elementalMystery + data.elementalMystery_NT) * add) / 100;
+              },
+              actionOn: ActionOn.Indirect,
+            },
+            {
+              type: BuffType.SkillFixed,
+              getValue: (data) => {
+                return ((data.elementalMystery + data.elementalMystery_NT) * add) / 100;
+              },
+              actionOn: ActionOn.Indirect,
+            },
+          ],
+          enable: false,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "赤月之形",
+      enkaId: 13512,
+      weaponType: WeaponType.Polearms,
+      icon: getEnkaUI("UI_EquipIcon_Pole_BloodMoon_Awaken"),
+      baseAtk: 674,
+      rarity: Rarity.Five,
+      appendPropId: AppendProp.CRITICAL,
+      statValue: 22.1,
+    },
+    (affix = 1) => {
+      const add = 12 + (affix - 1) * 4 + "%";
+      const add2 = 24 + (affix - 1) * 8 + "%";
+
+      return {
+        title: "烬日之影",
+        text: highlight`重击命中敌人时，赋予生命值上限25%的生命之契，该效果每14秒至多触发一次。此外，装备者具有生命之契时，造成的伤害提升${add}；若生命之契的数值大于等于生命值上限的30%，造成的伤害将进一步提升${add2}。`,
+      };
+    },
+    (affix = 1) => {
+      const add = 12 + (affix - 1) * 4;
+      const add2 = 24 + (affix - 1) * 8;
+      return [
+        {
+          label: "伤害提升",
+          describe: `装备者具有生命之契时，造成的伤害提升${add}%`,
+          effect: [{ type: BuffType.GlobalPrcent, getValue: () => add }],
+          enable: false,
+        },
+        {
+          label: "伤害进一步提升",
+          describe: `若生命之契的数值大于等于生命值上限的30%，造成的伤害将进一步提升${add2}%`,
+          effect: [{ type: BuffType.GlobalPrcent, getValue: () => add2 }],
+          enable: false,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "沙中伟贤的对答",
+      enkaId: 13426,
+      weaponType: WeaponType.Polearms,
+      icon: getEnkaUI("UI_EquipIcon_Pole_Caduceus_Awaken"),
+      baseAtk: 510,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.HP_PERCENT,
+      statValue: 41.3,
+    },
+    (affix = 1) => {
+      return {
+        title: "均衡的原理",
+        text: highlight` · 进行治疗时，恢复${
+          8 + (affix - 1) * 2
+        }点能量，该效果每10秒至多触发一次，角色处于队伍后台时也能触发。`,
+      };
+    }
+  ),
+  createWeapon(
+    {
+      name: "有乐御簾切",
+      enkaId: 11514,
+      weaponType: WeaponType.Sword,
+      icon: getEnkaUI("UI_EquipIcon_Sword_Needle_Awaken"),
+      baseAtk: 542,
+      rarity: Rarity.Five,
+      appendPropId: AppendProp.CRITICAL_HURT,
+      statValue: 88.2,
+    },
+    (affix = 1) => {
+      let add = 16 + 4 * (affix - 1) + "%";
+      let add2 = 24 + 6 * (affix - 1) + "%";
+      let def = 20 + 5 * (affix - 1) + "%";
+      return {
+        title: "锦之花与龛中剑",
+        text: highlight`普通攻击造成的伤害提升${add}，元素战技造成的伤害提升${add2}；队伍中附近的角色在场上造成岩元素伤害后，上述效果进一步提升100%，持续15秒。此外，装备者的防御力提升${def}。`,
+      };
+    },
+    (affix = 1) => {
+      let add = 16 + 4 * (affix - 1);
+      let add2 = 24 + 6 * (affix - 1);
+      let def = 20 + 5 * (affix - 1);
+      return [
+        {
+          label: "普攻伤害、元素战技伤害提升",
+          describe: `普通攻击造成的伤害提升${add}%，元素战技造成的伤害提升${add2}%`,
+          effect: [
+            { type: BuffType.NormalPrcent, getValue: () => add },
+            { type: BuffType.SkillPrcent, getValue: () => add2 },
+          ],
+          enable: true,
+        },
+        {
+          label: "上述效果提升100%",
+          describe: `普通攻击造成的伤害提升${add}%，元素战技造成的伤害提升${add2}%`,
+          effect: [
+            { type: BuffType.NormalPrcent, getValue: () => add },
+            { type: BuffType.SkillPrcent, getValue: () => add2 },
+          ],
+          enable: false,
+        },
+        {
+          label: "防御力提升",
+          describe: `装备者的防御力提升${def}%`,
+          effect: [{ type: BuffType.DEFPrcent, getValue: () => def }],
+          enable: false,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "鹤鸣余音",
+      enkaId: 14515,
+      weaponType: WeaponType.Magic,
+      icon: getEnkaUI("UI_EquipIcon_Catalyst_MountainGale_Awaken"),
+      baseAtk: 741,
+      rarity: Rarity.Five,
+      appendPropId: AppendProp.ATTACK_PERCENT,
+      statValue: 16.5,
+    },
+    (affix = 1) => {
+      let add = 28 + (affix - 1) * 13 + "%";
+      let c = 2.5 + (affix - 1) * 0.25;
+      return {
+        title: "云笈降真要诀",
+        text: highlight`装备者下落攻击命中敌人后，队伍中附近的所有角色下落攻击造成的伤害提高${add}，持续20秒；队伍中附近的角色的下落攻击命中敌人时，为装备者恢复${c}点元素能量，每0.7秒至多通过这种方式恢复一次元素能量，装备者处于队伍后台时依然能通过这种方式恢复元素能量。`,
+      };
+    },
+    (affix = 1) => {
+      let add = 28 + (affix - 1) * 13;
+      return [
+        {
+          label: "全队下落攻击伤害提升",
+          describe: `装备者下落攻击命中敌人后，队伍中附近的所有角色下落攻击造成的伤害提高${add}%`,
+          effect: [{ type: BuffType.FallingPrcent, getValue: () => add }],
+          enable: false,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "「究极霸王超级魔剑」",
+      enkaId: 12426,
+      weaponType: WeaponType.GreatSword,
+      icon: getEnkaUI("UI_EquipIcon_Claymore_Champion_Awaken"),
+      baseAtk: 565,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.CHARGE_EFFICIENCY,
+      statValue: 30.6,
+    },
+    (affix = 1) => {
+      let atk = 12 + (affix - 1) * 3 + "%";
+      return {
+        title: "加油！",
+        text: highlight`攻击力提升${atk}。不仅如此！海沫村中曾蒙你帮助的美露莘们的声援心意充满了力量，依照她们的数目，攻击力至多进一步提升${atk}。`,
+      };
+    },
+    (affix = 1) => {
+      let atk = 12 + (affix - 1) * 3;
+      return [
+        {
+          label: "攻击力提升",
+          describe: `攻击力提升${atk}%`,
+          effect: [{ type: BuffType.ATKPrcent, getValue: () => atk }],
+          enable: true,
+        },
+        {
+          label: "攻击力进一步提升",
+          describe: `攻击力提升${atk}%`,
+          effect: [{ type: BuffType.ATKPrcent, getValue: () => atk }],
+          enable: false,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "水仙十字之剑",
+      enkaId: 11428,
+      weaponType: WeaponType.Sword,
+      icon: getEnkaUI("UI_EquipIcon_Sword_Purewill"),
+      baseAtk: 510,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.ATTACK_PERCENT,
+      statValue: 41.3,
+    },
+    (affix = 1) => {
+      let rat = 160 + (affix - 1) * 40 + "%";
+      return {
+        title: "勇者之剑",
+        text: highlight`装备者不具备「始基力」时：普通攻击、重击、下落攻击命中时，会释放芒性或荒性的能量冲击，造成${rat}攻击力的伤害。该效果每12秒至多触发一次，能量冲击的类型由水仙十字之剑当前的属性决定。`,
+      };
+    },
+    () => [],
+    (affix = 1) => {
+      let rat = (160 + (affix - 1) * 40) / 100;
+      return [
+        {
+          label: "勇者之剑·能量冲击",
+          rate: {
+            atk: [rat],
+          },
+          attackType: AttackType.Other,
+          elementType: ElementType.Physical,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
       name: "天空之脊",
       enkaId: 13502,
       rarity: Rarity.Five,

@@ -161,9 +161,9 @@
   display: inline-block;
   width: 100%;
   transform: translateX(-50%);
-  bottom: -26px;
   left: 50%;
   font-size: 14px;
+  margin-top: 6px;
 }
 
 .selector-items[aria-checked='true'] .selector-item__name {
