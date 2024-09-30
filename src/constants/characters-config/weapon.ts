@@ -2303,4 +2303,318 @@ export const Weapons: IWeaponInfo[] = [
       ];
     }
   ),
+  createWeapon(
+    {
+      name: "西福斯的月光",
+      enkaId: 11418,
+      weaponType: WeaponType.Sword,
+      icon: getEnkaUI("UI_EquipIcon_Sword_Pleroma_Awaken"),
+      baseAtk: 510,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.ELEMENT_MASTERY,
+      statValue: 165,
+    },
+    (affix = 1) => {
+      let a = 0.036 + (affix - 1) * 0.009 + "%";
+      return {
+        title: "镇灵的低语",
+        text: highlight`每10秒，产生如下效果：装备者的每点元素精通，都会为该角色提升${a}元素充能效率，并基于该提升的30%为队伍中附近的其他角色提升元素充能效率，持续12秒，多件同名武器产生的此效果可以叠加。角色处于队伍后台时也能触发效果。`,
+      };
+    },
+    (affix = 1) => {
+      let a = 0.036 + (affix - 1) * 0.009;
+      return [
+        {
+          label: "充能效率提升",
+          describe: `每点元素精通，都会为角色提升${a}%元素充能效率`,
+          effect: [
+            {
+              type: BuffType.ChargeFixed,
+              getValue: (data) => data.elementalMystery * a,
+              actionOn: ActionOn.Indirect,
+              transform: true,
+            },
+          ],
+          enable: true,
+        },
+        {
+          label: "全队充能效率提升",
+          describe: `基于上述效果的30%为队伍中附近的其他角色提升元素充能效率`,
+          effect: [
+            {
+              type: BuffType.ChargeFixed,
+              getValue: (data) => data.elementalMystery * a * 0.3,
+              actionOn: ActionOn.Indirect,
+              transform: true,
+            },
+          ],
+          enable: true,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "流浪的晚星",
+      enkaId: 14416,
+      weaponType: WeaponType.Magic,
+      icon: getEnkaUI("UI_EquipIcon_Catalyst_Pleroma_Awaken"),
+      baseAtk: 510,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.ELEMENT_MASTERY,
+      statValue: 165,
+    },
+    (affix = 1) => {
+      let a = 24 + (affix - 1) * 6 + "%";
+      return {
+        title: "林野晚星",
+        text: highlight`每10秒，产生如下效果：基于装备者的元素精通的${a}，提升该角色的攻击力，并基于该提升的30%为队伍中附近的其他角色提升攻击力，持续12秒，多件同名武器产生的此效果可以叠加。角色处于队伍后台时也能触发效果。`,
+      };
+    },
+    (affix = 1) => {
+      let a = 24 + (affix - 1) * 6;
+      return [
+        {
+          label: "攻击力提升",
+          describe: `基于装备者的元素精通的${a}%，提升角色的攻击力`,
+          effect: [
+            {
+              type: BuffType.ATKFixed,
+              getValue: (data) => (data.elementalMystery * a) / 100,
+              actionOn: ActionOn.Indirect,
+              transform: true,
+            },
+          ],
+          enable: true,
+        },
+        {
+          label: "全队攻击力提升",
+          describe: `基于上述效果的30%为队伍中附近的其他角色提升攻击力`,
+          effect: [
+            {
+              type: BuffType.ATKFixed,
+              getValue: (data) => (data.elementalMystery * a * 0.3) / 100,
+              actionOn: ActionOn.Indirect,
+              transform: true,
+            },
+          ],
+          enable: true,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "风信之锋",
+      enkaId: 13419,
+      weaponType: WeaponType.Polearms,
+      icon: getEnkaUI("UI_EquipIcon_Pole_Windvane_Awaken"),
+      baseAtk: 510,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.ATTACK_PERCENT,
+      statValue: 41.3,
+    },
+    (affix = 1) => {
+      let a = 12 + (affix - 1) * 3 + "%";
+      let e = 48 + (affix - 1) * 12;
+      return {
+        title: "不至之风",
+        text: highlight`触发元素反应后的10秒内，攻击力提升${a}，元素精通提升${e}点。`,
+      };
+    },
+    (affix = 1) => {
+      let a = 12 + (affix - 1) * 3;
+      let e = 48 + (affix - 1) * 12;
+      return [
+        {
+          label: "攻击力、元素精通提升",
+          describe: `触发元素反应后的10秒内，攻击力提升${a}%，元素精通提升${e}点`,
+          effect: [
+            { type: BuffType.ATKPrcent, getValue: () => a },
+            { type: BuffType.MysteryFixed, getValue: () => e },
+          ],
+          enable: false,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "赤沙之杖",
+      enkaId: 13511,
+      weaponType: WeaponType.Polearms,
+      icon: getEnkaUI("UI_EquipIcon_Pole_Deshret_Awaken"),
+      baseAtk: 542,
+      rarity: Rarity.Five,
+      appendPropId: AppendProp.CRITICAL,
+      statValue: 44.1,
+    },
+    (affix = 1) => {
+      let a = 28 + (affix - 1) * 7 + "%";
+      let e = 52 + (affix - 1) * 13 + "%";
+      return {
+        title: "蜃气尽头的热梦",
+        text: highlight`基于装备者元素精通的${e}，获得攻击力加成。元素战技命中敌人时，将产生持续10秒的「赤沙之梦」效果：基于装备者元素精通的${a}，获得攻击力加成，该效果至多叠加3层。`,
+      };
+    },
+    (affix = 1) => {
+      let a = 28 + (affix - 1) * 7;
+      let e = 52 + (affix - 1) * 13;
+      return [
+        {
+          label: "攻击力加成",
+          describe: `基于装备者元素精通的${e}%，获得攻击力加成`,
+          effect: [
+            {
+              type: BuffType.ATKFixed,
+              getValue: (data) => (data.elementalMystery * e) / 100,
+              transform: true,
+              actionOn: ActionOn.Indirect,
+            },
+          ],
+          enable: true,
+        },
+        {
+          label: "攻击力进一步加成",
+          describe: `元素战技命中敌人时，基于装备者元素精通的${a}%，获得攻击力加成，该效果至多叠加3层`,
+          effect: [
+            {
+              type: BuffType.ATKFixed,
+              getValue: (data, stack) => (data.elementalMystery * a * stack) / 100,
+              transform: true,
+              actionOn: ActionOn.Indirect,
+            },
+          ],
+          enable: false,
+          stack: 3,
+          stackable: true,
+          limit: 3,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "玛海菈的水色",
+      enkaId: 12415,
+      weaponType: WeaponType.GreatSword,
+      icon: getEnkaUI("UI_EquipIcon_Claymore_Pleroma_Awaken"),
+      baseAtk: 510,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.ELEMENT_MASTERY,
+      statValue: 165,
+    },
+    (affix = 1) => {
+      let a = 24 + (affix - 1) * 6 + "%";
+      return {
+        title: "沙上楼阁",
+        text: highlight`每10秒，产生如下效果：基于装备者的元素精通的${a}，提升该角色的攻击力，并基于该提升的30%为队伍中附近的其他角色提升攻击力，持续12秒，多件同名武器产生的此效果可以叠加。角色处于队伍后台时也能触发效果。`,
+      };
+    },
+    (affix = 1) => {
+      let a = 24 + (affix - 1) * 6;
+      return [
+        {
+          label: "攻击力提升",
+          describe: `基于装备者的元素精通的${a}%，提升角色的攻击力`,
+          effect: [
+            {
+              type: BuffType.ATKFixed,
+              getValue: (data) => (data.elementalMystery * a) / 100,
+              actionOn: ActionOn.Indirect,
+              transform: true,
+            },
+          ],
+          enable: true,
+        },
+        {
+          label: "全队攻击力提升",
+          describe: `基于上述效果的30%为队伍中附近的其他角色提升攻击力`,
+          effect: [
+            {
+              type: BuffType.ATKFixed,
+              getValue: (data) => (data.elementalMystery * a * 0.3) / 100,
+              actionOn: ActionOn.Indirect,
+              transform: true,
+            },
+          ],
+          enable: true,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "王下近侍",
+      enkaId: 15417,
+      weaponType: WeaponType.Bow,
+      icon: getEnkaUI("UI_EquipIcon_Bow_Arakalari_Awaken"),
+      baseAtk: 454,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.ATTACK_PERCENT,
+      statValue: 55.1,
+    },
+    (affix = 1) => {
+      let a = 100 + (affix - 1) * 20 + "%";
+      let e = 60 + (affix - 1) * 20;
+      return {
+        title: "迷宫之王的教导",
+        text: highlight`施放元素战技或元素爆发时，将获得「森林教诲」的效果，元素精通提升${e}点，持续12秒。该效果将在切换角色时移除。森林教诲的持续时间结束或被移除时，将对附近一名敌人造成${a}攻击力的伤害。森林教诲每20秒至多触发一次。`,
+      };
+    },
+    (affix = 1) => {
+      let e = 60 + (affix - 1) * 20;
+      return [
+        {
+          label: "元素精通提升",
+          describe: `施放元素战技或元素爆发时，将获得「森林教诲」的效果，元素精通提升${e}点`,
+          effect: [{ type: BuffType.MysteryFixed, getValue: () => e }],
+          enable: false,
+        },
+      ];
+    },
+    (affix = 1) => {
+      let a = (100 + (affix - 1) * 20) / 100;
+      return [
+        {
+          label: "王下近侍·森林教诲",
+          rate: {
+            atk: [a],
+          },
+          attackType: AttackType.Other,
+          elementType: ElementType.Physical,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "森林王器",
+      enkaId: 12417,
+      weaponType: WeaponType.GreatSword,
+      icon: getEnkaUI("UI_EquipIcon_Claymore_Arakalari_Awaken"),
+      baseAtk: 565,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.CHARGE_EFFICIENCY,
+      statValue: 30.6,
+    },
+    (affix = 1) => {
+      let e = 60 + (affix - 1) * 15;
+      return {
+        title: "森林的瑞佑",
+        text: highlight` · 触发燃烧、原激化、超激化、蔓激化、绽放、超绽放或烈绽放后，将在角色周围产生至多存在10秒的「种识之叶」。拾取种识之叶的角色元素精通提升${e}点，持续12秒。每20秒至多通过这种方式产生一枚种识之叶。角色处于队伍后台时也能触发。种识之叶的效果无法叠加。`,
+      };
+    },
+    (affix = 1) => {
+      let e = 60 + (affix - 1) * 15;
+      return [
+        {
+          label: "种识之叶，元素精通提升",
+          describe: `拾取种识之叶的角色元素精通提升${e}点`,
+          effect: [{ type: BuffType.MysteryFixed, getValue: () => e }],
+          enable: false,
+        },
+      ];
+    },
+  ),
 ];
