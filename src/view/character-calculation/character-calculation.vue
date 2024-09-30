@@ -12,6 +12,7 @@
     v-model:character-buffs="characterBuffs"
     v-model:weapon-buffs="weaponBuffs"
     v-model:relic-buffs="relicBuffs"
+    :character-info="characterInfo"
   />
   <CharacterPanel
     v-if="characterInfo && weapon"
@@ -88,6 +89,7 @@ function getBaseData(data: ICalculatorValue) {
     baseDEF: characterInfo.value.baseDEF,
     baseHP: characterInfo.value.baseHP,
     level: characterInfo.value.level,
+    element: characterInfo.value.element,
   };
 }
 
@@ -97,6 +99,8 @@ const CalculationPanel = computed<ICalculatorValue>(() => {
 
   return [
     getBaseData,
+    (data: ICalculatorValue) => calculateBuffs(data, allBuffs, ActionOn.Front),
+    
     (data: ICalculatorValue) => calculateWeaponSubStat(data, weapon.value),
     (data: ICalculatorValue) => calculateRelicStat(data, relicList.value),
     // 计算直接提升面板的buff

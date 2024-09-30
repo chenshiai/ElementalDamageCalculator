@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import { IBuffBase } from "@/types/interface";
+import { ref, computed } from "vue";
+import { IBuffBase, ICharacterInfo } from "@/types/interface";
 import BuffItem from "./buff-item.vue";
 import { Collapse, CollapseItem } from "vant";
 
@@ -8,6 +8,17 @@ const buffs = defineModel<IBuffBase[]>({ default: [] });
 const characterBuffs = defineModel<IBuffBase[]>("characterBuffs");
 const weaponBuffs = defineModel<IBuffBase[]>("weaponBuffs");
 const relicBuffs = defineModel<IBuffBase[]>("relicBuffs");
+
+interface IProps {
+  characterInfo: ICharacterInfo;
+}
+const { characterInfo } = defineProps<IProps>();
+
+const weaponBuffsFilter = computed(() => {
+  return weaponBuffs.value.filter((buff) => {
+    return !buff.condition || buff.condition(characterInfo);
+  });
+});
 
 const activeNames = ref<string[]>([]);
 </script>
@@ -23,7 +34,7 @@ const activeNames = ref<string[]>([]);
         </div>
       </CollapseItem>
       <CollapseItem v-if="weaponBuffs?.length > 0" title="武器技能增益" name="weapon">
-        <div v-for="(buff, index) in weaponBuffs" :key="buff.label + index" class="buff-item">
+        <div v-for="(buff, index) in weaponBuffsFilter" :key="buff.label + index" class="buff-item">
           <BuffItem v-model="buff.enable" v-model:stack="buff.stack" :buff="buff" :show-delete="false" />
         </div>
       </CollapseItem>

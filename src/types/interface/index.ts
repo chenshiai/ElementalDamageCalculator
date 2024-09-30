@@ -94,6 +94,8 @@ export interface ICalculatorValue {
   baseATK: number;
   /** 基础防御力 */
   baseDEF: number;
+  /** 角色元素类型 */
+  element: ElementType;
 
   // 额外面板属性
   /** 额外生命值 */

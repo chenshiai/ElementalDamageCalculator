@@ -12,6 +12,7 @@ class CalculatorValue implements ICalculatorValue {
   critcal: number = 5;
   critcalHurt: number = 50;
   chargeEfficiency: number = 100;
+  element: ElementType = ElementType.Physical;
 
   // 额外面板属性
   extraHP: number = 0;

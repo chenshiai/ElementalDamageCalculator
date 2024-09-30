@@ -63,6 +63,7 @@ export enum Rarity {
 
 /** Buff的类型 */
 export enum BuffType {
+  ATKBase = "baseATK",
   // ================= 在面板上的buff =============
   /** 基础生命值百分比提升 */
   HPPrcent = "hpPrcent",
@@ -207,14 +208,23 @@ export enum BuffType {
 
   /** 生命之契 */
   LifeContract = "lifeContract",
+  /** 普攻倍率提升 */
   NormalRate = "normalRateAdd",
+  /** 重击倍率提升 */
   StrongRate = "strongRateAdd",
+  /** 下落攻击倍率提升 */
   FallingRateAdd = "fallingRateAdd",
+  /** 元素战技倍率提升 */
   SkillRate = "skillRateAdd",
+  /** 元素爆发倍率提升 */
   BurstRate = "burstRateAdd",
+  /** 冷却缩减 */
   CoolDown = "coolDown",
+  /** 治疗加成 */
   HealAdd = "healAdd",
+  /** 受治疗加成 */
   BeHealAdd = "beHealAdd",
+  /** 护盾强效加成 */
   ShieldStrong = "shieldStrong",
 
   NormalLevel = "normalLevel",
@@ -267,9 +277,15 @@ export enum ItemType {
   ITEM_RELIQUARY = "ITEM_RELIQUARY",
 }
 
+/** BUFF计算的生效时机 */
 export enum ActionOn {
+  /** 前置生效，在计算武器副词条之前计算 */
+  Front = "Front",
+  /** 直接生效，在计算完武器副词条、圣遗物词条之后计算 */
   Direct = "Direct",
+  /** 间接生效，在计算完所有面板属性后再计算 */
   Indirect = "indirect",
+  /** 额外生效，在计算完所有的属性后再计算 */
   External = "external",
 }
 
