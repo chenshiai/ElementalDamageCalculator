@@ -29,7 +29,7 @@ function createWeapon(
     name,
     enkaId,
     weaponType,
-    level: 90,
+    level: rarity === Rarity.Two ? 70 : 90,
     rarity,
     affix: 1,
     icon,
@@ -4635,6 +4635,2531 @@ export const Weapons: IWeaponInfo[] = [
           enable: true,
         },
       ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "试作古华",
+      enkaId: 12406,
+      weaponType: WeaponType.GreatSword,
+      icon: getEnkaUI("UI_EquipIcon_Claymore_Proto_Awaken"),
+      baseAtk: 565,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.ATTACK_PERCENT,
+      statValue: 27.6,
+    },
+    (affix = 1) => {
+      let a = [240, 300, 360, 420, 480][affix - 1] + "%";
+      return {
+        title: "粉碎",
+        text: highlight`普通攻击和重击命中时，有50%的概率对小范围内的敌人造成${a}攻击力的额外伤害。该效果每15秒只能触发一次。`,
+      };
+    },
+    () => [],
+    (affix = 1) => {
+      let a = [240, 300, 360, 420, 480][affix - 1] / 100;
+      return [
+        {
+          label: "试作古华·粉碎",
+          rate: {
+            atk: [a],
+          },
+          attackType: AttackType.Other,
+          elementType: ElementType.Physical,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "匣里灭辰",
+      enkaId: 13401,
+      weaponType: WeaponType.Polearms,
+      icon: getEnkaUI("UI_EquipIcon_Pole_Stardust_Awaken"),
+      baseAtk: 454,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.ELEMENT_MASTERY,
+      statValue: 221,
+    },
+    (affix = 1) => {
+      let a = [20, 24, 28, 32, 36][affix - 1] + "%";
+      return {
+        title: "踏火止水",
+        text: highlight`对处于水元素或火元素影响下的敌人，造成的伤害提高${a}。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [20, 24, 28, 32, 36][affix - 1];
+      return [
+        {
+          label: "造成的伤害提高",
+          describe: `对处于水元素或火元素影响下的敌人，造成的伤害提高${a}%`,
+          effect: [{ type: BuffType.GlobalPrcent, getValue: () => a }],
+          enable: true,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "黑岩刺枪",
+      enkaId: 13404,
+      weaponType: WeaponType.Polearms,
+      icon: getEnkaUI("UI_EquipIcon_Pole_Blackrock_Awaken"),
+      baseAtk: 510,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.CRITICAL_HURT,
+      statValue: 55.1,
+    },
+    (affix = 1) => {
+      let a = [12, 15, 18, 21, 24][affix - 1] + "%";
+      return {
+        title: "乘胜追击",
+        text: highlight`击败敌人后，攻击力提升${a}，持续30秒。该效果至多叠加三层，每层持续时间独立。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [12, 15, 18, 21, 24][affix - 1];
+      return [
+        {
+          label: "攻击力提升",
+          describe: `击败敌人后，攻击力提升${a}%，持续30秒。该效果至多叠加三层`,
+          effect: [{ type: BuffType.ATKPrcent, getValue: (_, s) => s * a }],
+          enable: false,
+          stackable: true,
+          stack: 3,
+          limit: 3,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "西风大剑",
+      enkaId: 12401,
+      weaponType: WeaponType.GreatSword,
+      icon: getEnkaUI("UI_EquipIcon_Claymore_Zephyrus_Awaken"),
+      baseAtk: 454,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.CHARGE_EFFICIENCY,
+      statValue: 61.3,
+    },
+    (affix = 1) => {
+      let a = [60, 70, 80, 90, 100][affix - 1] + "%";
+      let b = [12, 10.5, 9, 7.5, 6][affix - 1];
+      return {
+        title: "顺风而行",
+        text: highlight`攻击造成暴击时，有${a}的几率产生少量元素微粒，能为角色恢复6点元素能量。该效果每${b}秒只能触发一次。`,
+      };
+    }
+  ),
+  createWeapon(
+    {
+      name: "铁蜂刺",
+      enkaId: 11407,
+      weaponType: WeaponType.Sword,
+      icon: getEnkaUI("UI_EquipIcon_Sword_Exotic_Awaken"),
+      baseAtk: 510,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.ELEMENT_MASTERY,
+      statValue: 165,
+    },
+    (affix = 1) => {
+      let a = [6, 7.5, 9, 10.5, 12][affix - 1] + "%";
+      return {
+        title: "注能之刺",
+        text: highlight`造成元素伤害后的6秒内，角色造成的伤害提高${a}，该效果最多叠加2层。该效果每1秒可以触发一次。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [6, 7.5, 9, 10.5, 12][affix - 1];
+      return [
+        {
+          label: "伤害提升",
+          describe: `造成元素伤害后，角色造成的伤害提高${a}%，该效果最多叠加2层`,
+          effect: [{ type: BuffType.GlobalPrcent, getValue: (_, s) => s * a }],
+          enable: false,
+          stackable: true,
+          stack: 2,
+          limit: 2,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "绝弦",
+      enkaId: 15402,
+      weaponType: WeaponType.Bow,
+      icon: getEnkaUI("UI_EquipIcon_Bow_Troupe_Awaken"),
+      baseAtk: 510,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.ELEMENT_MASTERY,
+      statValue: 165,
+    },
+    (affix = 1) => {
+      let a = [24, 30, 36, 42, 48][affix - 1] + "%";
+      return {
+        title: "无矢之歌",
+        text: highlight`元素战技与元素爆发的伤害提高${a}。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [24, 30, 36, 42, 48][affix - 1];
+      return [
+        {
+          label: "元素战技与元素爆发的伤害提高",
+          describe: `元素战技与元素爆发的伤害提高${a}%`,
+          effect: [
+            { type: BuffType.SkillPrcent, getValue: () => a },
+            { type: BuffType.BurstPrcent, getValue: () => a },
+          ],
+          enable: true,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "宗室长弓",
+      enkaId: 15404,
+      weaponType: WeaponType.Bow,
+      icon: getEnkaUI("UI_EquipIcon_Bow_Theocrat_Awaken"),
+      baseAtk: 510,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.ATTACK_PERCENT,
+      statValue: 41.3,
+    },
+    (affix = 1) => {
+      let a = [8, 10, 12, 14, 16][affix - 1] + "%";
+      return {
+        title: "专注",
+        text: highlight`攻击造成伤害时，暴击率提升${a}，最多堆叠5次。攻击造成暴击后，移除已有的专注效果。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [8, 10, 12, 14, 16][affix - 1];
+      return [
+        {
+          label: "暴击率提升",
+          describe: `攻击造成伤害时，暴击率提升${a}%，最多堆叠5次。攻击造成暴击后，移除已有的专注效果`,
+          effect: [{ type: BuffType.Critcal, getValue: (_, s) => a * s }],
+          enable: true,
+          stackable: true,
+          stack: 0,
+          limit: 5,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "雨裁",
+      enkaId: 12405,
+      weaponType: WeaponType.GreatSword,
+      icon: getEnkaUI("UI_EquipIcon_Claymore_Perdue_Awaken"),
+      baseAtk: 510,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.ELEMENT_MASTERY,
+      statValue: 165,
+    },
+    (affix = 1) => {
+      let a = [20, 24, 28, 32, 36][affix - 1] + "%";
+      return {
+        title: "止水息雷",
+        text: highlight`对处于水元素或雷元素影响下的敌人，造成的伤害提高${a}。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [20, 24, 28, 32, 36][affix - 1];
+      return [
+        {
+          label: "造成的伤害提高",
+          describe: `对处于水元素或雷元素影响下的敌人，造成的伤害提高${a}%`,
+          effect: [{ type: BuffType.GlobalPrcent, getValue: () => a }],
+          enable: true,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "弓藏",
+      enkaId: 15405,
+      weaponType: WeaponType.Bow,
+      icon: getEnkaUI("UI_EquipIcon_Bow_Recluse_Awaken"),
+      baseAtk: 510,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.ATTACK_PERCENT,
+      statValue: 41.3,
+    },
+    (affix = 1) => {
+      let a = [40, 50, 60, 70, 80][affix - 1] + "%";
+      return {
+        title: "速射弓斗",
+        text: highlight`普通攻击造成的伤害提升${a}，重击造成的伤害下降10%。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [40, 50, 60, 70, 80][affix - 1];
+      return [
+        {
+          label: "普通攻击伤害提升，重击伤害下降",
+          describe: `普通攻击造成的伤害提升${a}%，重击造成的伤害下降10%`,
+          effect: [
+            { type: BuffType.NormalPrcent, getValue: () => a },
+            { type: BuffType.StrongPrcent, getValue: () => -10 },
+          ],
+          enable: true,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "流浪乐章",
+      enkaId: 14402,
+      weaponType: WeaponType.Magic,
+      icon: getEnkaUI("UI_EquipIcon_Catalyst_Troupe_Awaken"),
+      baseAtk: 510,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.CRITICAL_HURT,
+      statValue: 55.1,
+    },
+    (affix = 1) => {
+      let a = [60, 75, 90, 105, 120][affix - 1] + "%";
+      let b = [48, 60, 72, 84, 96][affix - 1] + "%";
+      let c = [240, 300, 360, 420, 480][affix - 1];
+      return {
+        title: "登场乐",
+        text: highlight`角色登场时，随机获得一个主题曲，持续10秒。每30秒只能触发一次。
+        宣叙调：攻击力提升${a}；
+        咏叹调：全元素伤害提升${b}。
+        间奏曲：元素精通提升${c}；
+        `,
+      };
+    },
+    (affix = 1) => {
+      let a = [60, 75, 90, 105, 120][affix - 1];
+      let b = [48, 60, 72, 84, 96][affix - 1];
+      let c = [240, 300, 360, 420, 480][affix - 1];
+      return [
+        {
+          label: "宣叙调：攻击力提升",
+          describe: `宣叙调：攻击力提升${a}%`,
+          effect: [{ type: BuffType.ATKPrcent, getValue: () => a }],
+          enable: false,
+        },
+        {
+          label: "咏叹调：全元素伤害提升",
+          describe: `咏叹调：全元素伤害提升${b}%`,
+          effect: [
+            { type: BuffType.HydroPrcent, getValue: () => b },
+            { type: BuffType.PyroPrcent, getValue: () => b },
+            { type: BuffType.ElectroPrcent, getValue: () => b },
+            { type: BuffType.AnemoPrcent, getValue: () => b },
+            { type: BuffType.CryoPrcent, getValue: () => b },
+            { type: BuffType.DendroPrcent, getValue: () => b },
+            { type: BuffType.GeoPrcent, getValue: () => b },
+          ],
+          enable: false,
+        },
+        {
+          label: "间奏曲：元素精通提升",
+          describe: `间奏曲：元素精通提升${c}点`,
+          effect: [{ type: BuffType.MysteryFixed, getValue: () => c }],
+          enable: false,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "黑岩绯玉",
+      enkaId: 14408,
+      weaponType: WeaponType.Magic,
+      icon: getEnkaUI("UI_EquipIcon_Catalyst_Blackrock_Awaken"),
+      baseAtk: 510,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.CRITICAL_HURT,
+      statValue: 55.1,
+    },
+    (affix = 1) => {
+      let a = [12, 15, 18, 21, 24][affix - 1] + "%";
+      return {
+        title: "乘胜追击",
+        text: highlight`击败敌人后，攻击力提升${a}，持续30秒。该效果至多叠加三层，每层持续时间独立。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [12, 15, 18, 21, 24][affix - 1];
+      return [
+        {
+          label: "攻击力提升",
+          describe: `击败敌人后，攻击力提升${a}%，持续30秒。该效果至多叠加三层`,
+          effect: [{ type: BuffType.ATKPrcent, getValue: (_, s) => s * a }],
+          enable: false,
+          stackable: true,
+          stack: 3,
+          limit: 3,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "宗室秘法录",
+      enkaId: 14404,
+      weaponType: WeaponType.Magic,
+      icon: getEnkaUI("UI_EquipIcon_Catalyst_Theocrat_Awaken"),
+      baseAtk: 565,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.ATTACK_PERCENT,
+      statValue: 27.6,
+    },
+    (affix = 1) => {
+      let a = [8, 10, 12, 14, 16][affix - 1] + "%";
+      return {
+        title: "专注",
+        text: highlight`攻击造成伤害时，暴击率提升${a}，最多堆叠5次。攻击造成暴击后，移除已有的专注效果。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [8, 10, 12, 14, 16][affix - 1];
+      return [
+        {
+          label: "暴击率提升",
+          describe: `攻击造成伤害时，暴击率提升${a}%，最多堆叠5次。攻击造成暴击后，移除已有的专注效果`,
+          effect: [{ type: BuffType.Critcal, getValue: (_, s) => a * s }],
+          enable: true,
+          stackable: true,
+          stack: 0,
+          limit: 5,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "西风猎弓",
+      enkaId: 15401,
+      weaponType: WeaponType.Bow,
+      icon: getEnkaUI("UI_EquipIcon_Bow_Zephyrus_Awaken"),
+      baseAtk: 454,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.CHARGE_EFFICIENCY,
+      statValue: 61.3,
+    },
+    (affix = 1) => {
+      let a = [60, 70, 80, 90, 100][affix - 1] + "%";
+      let b = [12, 10.5, 9, 7.5, 6][affix - 1];
+      return {
+        title: "顺风而行",
+        text: highlight`攻击造成暴击时，有${a}的几率产生少量元素微粒，能为角色恢复6点元素能量。该效果每${b}秒只能触发一次。`,
+      };
+    }
+  ),
+  createWeapon(
+    {
+      name: "祭礼残章",
+      enkaId: 14403,
+      weaponType: WeaponType.Magic,
+      icon: getEnkaUI("UI_EquipIcon_Catalyst_Fossil_Awaken"),
+      baseAtk: 454,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.ELEMENT_MASTERY,
+      statValue: 221,
+    },
+    (affix = 1) => {
+      let a = [40, 50, 60, 70, 80][affix - 1] + "%";
+      let b = [30, 26, 22, 19, 16][affix - 1];
+      return {
+        title: "气定神闲",
+        text: highlight`元素战技造成伤害时，有${a}的概率重置该技能的冷却时间，该效果每${b}秒只能触发一次。`,
+      };
+    }
+  ),
+  createWeapon(
+    {
+      name: "万国诸海图谱",
+      enkaId: 14407,
+      weaponType: WeaponType.Magic,
+      icon: getEnkaUI("UI_EquipIcon_Catalyst_Exotic_Awaken"),
+      baseAtk: 565,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.ELEMENT_MASTERY,
+      statValue: 110,
+    },
+    (affix = 1) => {
+      let a = [8, 10, 12, 14, 16][affix - 1] + "%";
+      return {
+        title: "注能之卷",
+        text: highlight`触发元素反应后的10秒内，获得${a}元素伤害加成，该效果最多可以叠加2层。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [8, 10, 12, 14, 16][affix - 1];
+      return [
+        {
+          label: "元素伤害加成",
+          describe: `触发元素反应后，获得${a}%所有元素伤害加成，最多可以叠加2层`,
+          effect: [
+            { type: BuffType.HydroPrcent, getValue: (_, s) => a * s },
+            { type: BuffType.PyroPrcent, getValue: (_, s) => a * s },
+            { type: BuffType.ElectroPrcent, getValue: (_, s) => a * s },
+            { type: BuffType.AnemoPrcent, getValue: (_, s) => a * s },
+            { type: BuffType.CryoPrcent, getValue: (_, s) => a * s },
+            { type: BuffType.DendroPrcent, getValue: (_, s) => a * s },
+            { type: BuffType.GeoPrcent, getValue: (_, s) => a * s },
+          ],
+          enable: false,
+          stackable: true,
+          stack: 2,
+          limit: 2,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "宗室长剑",
+      enkaId: 11404,
+      weaponType: WeaponType.Sword,
+      icon: getEnkaUI("UI_EquipIcon_Sword_Theocrat_Awaken"),
+      baseAtk: 510,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.ATTACK_PERCENT,
+      statValue: 41.3,
+    },
+    (affix = 1) => {
+      let a = [8, 10, 12, 14, 16][affix - 1] + "%";
+      return {
+        title: "专注",
+        text: highlight`攻击造成伤害时，暴击率提升${a}，最多堆叠5次。攻击造成暴击后，移除已有的专注效果。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [8, 10, 12, 14, 16][affix - 1];
+      return [
+        {
+          label: "暴击率提升",
+          describe: `攻击造成伤害时，暴击率提升${a}%，最多堆叠5次。攻击造成暴击后，移除已有的专注效果`,
+          effect: [{ type: BuffType.Critcal, getValue: (_, s) => a * s }],
+          enable: true,
+          stackable: true,
+          stack: 0,
+          limit: 5,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "宗室大剑",
+      enkaId: 12404,
+      weaponType: WeaponType.GreatSword,
+      icon: getEnkaUI("UI_EquipIcon_Claymore_Theocrat_Awaken"),
+      baseAtk: 565,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.ATTACK_PERCENT,
+      statValue: 27.6,
+    },
+    (affix = 1) => {
+      let a = [8, 10, 12, 14, 16][affix - 1] + "%";
+      return {
+        title: "专注",
+        text: highlight`攻击造成伤害时，暴击率提升${a}，最多堆叠5次。攻击造成暴击后，移除已有的专注效果。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [8, 10, 12, 14, 16][affix - 1];
+      return [
+        {
+          label: "暴击率提升",
+          describe: `攻击造成伤害时，暴击率提升${a}%，最多堆叠5次。攻击造成暴击后，移除已有的专注效果`,
+          effect: [{ type: BuffType.Critcal, getValue: (_, s) => a * s }],
+          enable: true,
+          stackable: true,
+          stack: 0,
+          limit: 5,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "笛剑",
+      enkaId: 11402,
+      weaponType: WeaponType.Sword,
+      icon: getEnkaUI("UI_EquipIcon_Sword_Troupe_Awaken"),
+      baseAtk: 510,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.ATTACK_PERCENT,
+      statValue: 41.3,
+    },
+    (affix = 1) => {
+      let a = [100, 125, 150, 175, 200][affix - 1] + "%";
+      return {
+        title: "和弦",
+        text: highlight`普通攻击或重击命中时，会获得一个和音。积攒了5个和音后，释放音律的力量，对周围的敌人造成${a}攻击力的伤害。和音最多存在30秒，每0.5秒至多获得1个和音。`,
+      };
+    },
+    (affix) => [],
+    (affix = 1) => {
+      let a = [100, 125, 150, 175, 200][affix - 1] / 100;
+      return [
+        {
+          label: "笛剑·和弦",
+          rate: {
+            atk: [a],
+          },
+          attackType: AttackType.Other,
+          elementType: ElementType.Physical,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "西风剑",
+      enkaId: 11401,
+      weaponType: WeaponType.Sword,
+      icon: getEnkaUI("UI_EquipIcon_Sword_Zephyrus_Awaken"),
+      baseAtk: 454,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.CHARGE_EFFICIENCY,
+      statValue: 61.3,
+    },
+    (affix = 1) => {
+      let a = [60, 70, 80, 90, 100][affix - 1] + "%";
+      let b = [12, 10.5, 9, 7.5, 6][affix - 1];
+      return {
+        title: "顺风而行",
+        text: highlight`攻击造成暴击时，有${a}的几率产生少量元素微粒，能为角色恢复6点元素能量。该效果每${b}秒只能触发一次。`,
+      };
+    }
+  ),
+  createWeapon(
+    {
+      name: "钟剑",
+      enkaId: 12402,
+      weaponType: WeaponType.GreatSword,
+      icon: getEnkaUI("UI_EquipIcon_Claymore_Troupe_Awaken"),
+      baseAtk: 510,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.HP_PERCENT,
+      statValue: 41.3,
+    },
+    (affix = 1) => {
+      let a = [20, 23, 26, 29, 32][affix - 1] + "%";
+      let b = [12, 15, 18, 21, 24][affix - 1] + "%";
+      return {
+        title: "叛逆的守护者",
+        text: highlight`受到伤害时，生成一个伤害吸收量等同于生命值上限${a}的护盾，持续10秒或直到护盾失效,每45秒只能触发一次。角色处于护盾庇护下时，造成的伤害提升${b}`,
+      };
+    },
+    (affix = 1) => {
+      let b = [12, 15, 18, 21, 24][affix - 1];
+      return [
+        {
+          label: "造成的伤害提升",
+          describe: `角色处于护盾庇护下时，造成的伤害提升${b}%`,
+          effect: [{ type: BuffType.GlobalPrcent, getValue: () => b }],
+          enable: false,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "匣里日月",
+      enkaId: 14405,
+      weaponType: WeaponType.Magic,
+      icon: getEnkaUI("UI_EquipIcon_Catalyst_Resurrection_Awaken"),
+      baseAtk: 510,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.CRITICAL,
+      statValue: 27.6,
+    },
+    (affix = 1) => {
+      let a = [20, 25, 30, 35, 40][affix - 1] + "%";
+      return {
+        title: "日月辉",
+        text: highlight`普通攻击命中后的6秒内，元素战技与元素爆发的伤害提高${a}；元素战技与元素爆发命中后的6秒内，普通攻击的伤害提高${a}。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [20, 25, 30, 35, 40][affix - 1];
+      return [
+        {
+          label: "元素战技与元素爆发的伤害提高",
+          describe: `普通攻击命中后，元素战技与元素爆发的伤害提高${a}%`,
+          effect: [
+            { type: BuffType.SkillPrcent, getValue: () => a },
+            { type: BuffType.BurstPrcent, getValue: () => a },
+          ],
+          enable: false,
+        },
+        {
+          label: "普通攻击的伤害提高",
+          describe: `元素战技与元素爆发命中后，普通攻击的伤害提高${a}%`,
+          effect: [{ type: BuffType.NormalPrcent, getValue: () => a }],
+          enable: false,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "试作斩岩",
+      enkaId: 11406,
+      weaponType: WeaponType.Sword,
+      icon: getEnkaUI("UI_EquipIcon_Sword_Proto_Awaken"),
+      baseAtk: 565,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.PHYSICAL_ADD_HURT,
+      statValue: 34.5,
+    },
+    (affix = 1) => {
+      let a = [4, 5, 6, 7, 8][affix - 1] + "%";
+      return {
+        title: "碎石",
+        text: highlight`普通攻击或重击命中时，攻击力和防御力提高${a}，持续6秒，最多叠加4层。该效果每0.3秒只能触发一次。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [4, 5, 6, 7, 8][affix - 1];
+      return [
+        {
+          label: "攻击力和防御力提高",
+          describe: `普通攻击或重击命中时，攻击力和防御力提高${a}%，最多叠加4层`,
+          effect: [
+            { type: BuffType.ATKPrcent, getValue: (_, s) => a * s },
+            { type: BuffType.DEFPrcent, getValue: (_, s) => a * s },
+          ],
+          enable: false,
+          stackable: true,
+          stack: 4,
+          limit: 4,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "祭礼剑",
+      enkaId: 11403,
+      weaponType: WeaponType.Sword,
+      icon: getEnkaUI("UI_EquipIcon_Sword_Fossil_Awaken"),
+      baseAtk: 454,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.CHARGE_EFFICIENCY,
+      statValue: 61.3,
+    },
+    (affix = 1) => {
+      const rat = 40 + (affix - 1) * 10 + "%";
+      const sec = Math.round(30 - (affix - 1) * 3.6);
+      return {
+        title: "气定神闲",
+        text: highlight`元素战技造成伤害时，有${rat}的概率重置该技能的冷却时间，该效果每${sec}秒只能触发一次。`,
+      };
+    }
+  ),
+  createWeapon(
+    {
+      name: "试作澹月",
+      enkaId: 15406,
+      weaponType: WeaponType.Bow,
+      icon: getEnkaUI("UI_EquipIcon_Bow_Proto_Awaken"),
+      baseAtk: 510,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.ATTACK_PERCENT,
+      statValue: 41.3,
+    },
+    (affix = 1) => {
+      let a = [36, 45, 54, 63, 72][affix - 1] + "%";
+      return {
+        title: "离簇不归",
+        text: highlight`重击若命中要害，则提升10%移动速度与${a}攻击力，持续10秒。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [36, 45, 54, 63, 72][affix - 1];
+      return [
+        {
+          label: "攻击力提高",
+          describe: `重击若命中要害，则提升10%移动速度与${a}%攻击力`,
+          effect: [{ type: BuffType.ATKPrcent, getValue: () => a }],
+          enable: false,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "黑岩长剑",
+      enkaId: 11408,
+      weaponType: WeaponType.Sword,
+      icon: getEnkaUI("UI_EquipIcon_Sword_Blackrock_Awaken"),
+      baseAtk: 565,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.CRITICAL_HURT,
+      statValue: 36.8,
+    },
+    (affix = 1) => {
+      let a = [12, 15, 18, 21, 24][affix - 1] + "%";
+      return {
+        title: "乘胜追击",
+        text: highlight`击败敌人后，攻击力提升${a}，持续30秒。该效果至多叠加三层，每层持续时间独立。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [12, 15, 18, 21, 24][affix - 1];
+      return [
+        {
+          label: "攻击力提升",
+          describe: `击败敌人后，攻击力提升${a}%，持续30秒。该效果至多叠加三层`,
+          effect: [{ type: BuffType.ATKPrcent, getValue: (_, s) => s * a }],
+          enable: false,
+          stackable: true,
+          stack: 3,
+          limit: 3,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "白影剑",
+      enkaId: 12407,
+      weaponType: WeaponType.GreatSword,
+      icon: getEnkaUI("UI_EquipIcon_Claymore_Exotic_Awaken"),
+      baseAtk: 510,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.DEFENSE_PERCENT,
+      statValue: 51.7,
+    },
+    (affix = 1) => {
+      let a = [6, 7.5, 9, 10.5, 12][affix - 1] + "%";
+      return {
+        title: "注能之锋",
+        text: highlight`普通攻击或重击命中时，攻击力和防御力提高${a}，持续6秒，最多叠加4层。该效果每0.3秒只能触发一次。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [6, 7.5, 9, 10.5, 12][affix - 1];
+      return [
+        {
+          label: "攻击力和防御力提高",
+          describe: `普通攻击或重击命中时，攻击力和防御力提高${a}%，最多叠加4层`,
+          effect: [
+            { type: BuffType.ATKPrcent, getValue: (_, s) => a * s },
+            { type: BuffType.DEFPrcent, getValue: (_, s) => a * s },
+          ],
+          enable: false,
+          stackable: true,
+          stack: 4,
+          limit: 4,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "试作金珀",
+      enkaId: 14406,
+      weaponType: WeaponType.Magic,
+      icon: getEnkaUI("UI_EquipIcon_Catalyst_Proto_Awaken"),
+      baseAtk: 510,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.HP_PERCENT,
+      statValue: 41.3,
+    },
+    (affix = 1) => {
+      let a = [4, 4.5, 5, 5.5, 6][affix - 1];
+      return {
+        title: "炊金",
+        text: highlight`施放元素爆发后6秒内，每2秒恢复${a}点元素能量；此外，队伍中的所有角色每2秒恢复${a}%生命值。`,
+      };
+    }
+  ),
+  createWeapon(
+    {
+      name: "昭心",
+      enkaId: 14409,
+      weaponType: WeaponType.Magic,
+      icon: getEnkaUI("UI_EquipIcon_Catalyst_Truelens_Awaken"),
+      baseAtk: 454,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.ATTACK_PERCENT,
+      statValue: 55.1,
+    },
+    (affix = 1) => {
+      let a = [240, 270, 300, 330, 360][affix - 1] + "%";
+      let b = [12, 11, 10, 9, 8][affix - 1];
+      return {
+        title: "回响",
+        text: highlight`普通攻击与重击命中时，有50%几率发射一枚昭心法球，造成${a}攻击力伤害，至多在敌人之间弹射4次。该效果每${b}秒至多触发一次。`,
+      };
+    },
+    () => [],
+    (affix = 1) => {
+      let a = [240, 270, 300, 330, 360][affix - 1] / 100;
+      return [
+        {
+          label: "昭心·回响",
+          rate: {
+            atk: [a],
+          },
+          attackType: AttackType.Other,
+          elementType: ElementType.Physical,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "黑岩战弓",
+      enkaId: 15408,
+      weaponType: WeaponType.Bow,
+      icon: getEnkaUI("UI_EquipIcon_Bow_Blackrock_Awaken"),
+      baseAtk: 565,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.CRITICAL_HURT,
+      statValue: 36.8,
+    },
+    (affix = 1) => {
+      let a = [12, 15, 18, 21, 24][affix - 1] + "%";
+      return {
+        title: "乘胜追击",
+        text: highlight`击败敌人后，攻击力提升${a}，持续30秒。该效果至多叠加三层，每层持续时间独立。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [12, 15, 18, 21, 24][affix - 1];
+      return [
+        {
+          label: "攻击力提升",
+          describe: `击败敌人后，攻击力提升${a}%，持续30秒。该效果至多叠加三层`,
+          effect: [{ type: BuffType.ATKPrcent, getValue: (_, s) => s * a }],
+          enable: false,
+          stackable: true,
+          stack: 3,
+          limit: 3,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "黑岩斩刀",
+      enkaId: 12408,
+      weaponType: WeaponType.GreatSword,
+      icon: getEnkaUI("UI_EquipIcon_Claymore_Blackrock_Awaken"),
+      baseAtk: 510,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.CRITICAL_HURT,
+      statValue: 55.1,
+    },
+    (affix = 1) => {
+      let a = [12, 15, 18, 21, 24][affix - 1] + "%";
+      return {
+        title: "乘胜追击",
+        text: highlight`击败敌人后，攻击力提升${a}，持续30秒。该效果至多叠加三层，每层持续时间独立。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [12, 15, 18, 21, 24][affix - 1];
+      return [
+        {
+          label: "攻击力提升",
+          describe: `击败敌人后，攻击力提升${a}%，持续30秒。该效果至多叠加三层`,
+          effect: [{ type: BuffType.ATKPrcent, getValue: (_, s) => s * a }],
+          enable: false,
+          stackable: true,
+          stack: 3,
+          limit: 3,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "黑剑",
+      enkaId: 11409,
+      weaponType: WeaponType.Sword,
+      icon: getEnkaUI("UI_EquipIcon_Sword_Bloodstained_Awaken"),
+      baseAtk: 510,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.CRITICAL,
+      statValue: 27.6,
+    },
+    (affix = 1) => {
+      let a = [20, 25, 30, 35, 40][affix - 1] + "%";
+      let b = [60, 70, 80, 90, 100][affix - 1] + "%";
+      return {
+        title: "正义",
+        text: highlight`普通攻击与重击的造成的伤害提升${a}；此外，普通攻击与重击暴击时，回复等同于攻击力${b}的生命值。该效果每5秒至多发动一次。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [20, 25, 30, 35, 40][affix - 1];
+      return [
+        {
+          label: "普通攻击与重击的造成的伤害提升",
+          describe: `普通攻击与重击的造成的伤害提升${a}%`,
+          effect: [
+            { type: BuffType.NormalPrcent, getValue: () => a },
+            { type: BuffType.StrongPrcent, getValue: () => a },
+          ],
+          enable: true,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "流月针",
+      enkaId: 13403,
+      weaponType: WeaponType.Polearms,
+      icon: getEnkaUI("UI_EquipIcon_Pole_Exotic_Awaken"),
+      baseAtk: 565,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.PHYSICAL_ADD_HURT,
+      statValue: 34.5,
+    },
+    (affix = 1) => {
+      let a = [20, 25, 30, 35, 40][affix - 1] + "%";
+      return {
+        title: "注能之针",
+        text: highlight`获得元素微粒或者元素晶球后的5秒内，普通攻击和重击额外造成${a}攻击力伤害 。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [20, 25, 30, 35, 40][affix - 1];
+      return [
+        {
+          label: "普通攻击与重击的造成的伤害提升",
+          describe: `普通攻击与重击的造成的伤害提升${a}%`,
+          effect: [
+            { type: BuffType.NormalPrcent, getValue: () => a },
+            { type: BuffType.StrongPrcent, getValue: () => a },
+          ],
+          enable: true,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "钢轮弓",
+      enkaId: 15407,
+      weaponType: WeaponType.Bow,
+      icon: getEnkaUI("UI_EquipIcon_Bow_Exotic_Awaken"),
+      baseAtk: 454,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.PHYSICAL_ADD_HURT,
+      statValue: 69,
+    },
+    (affix = 1) => {
+      let a = [4, 5, 6, 7, 8][affix - 1] + "%";
+      let b = [1.2, 1.5, 1.8, 2.1, 2.4][affix - 1] + "%";
+      return {
+        title: "注能之矢",
+        text: highlight`普通攻击与重击命中时，提升${a}攻击力与${b}普通攻击速度。该效果持续6秒，最多可以叠加4层，每0.3秒只能触发一次。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [4, 5, 6, 7, 8][affix - 1];
+      return [
+        {
+          label: "攻击力提升",
+          describe: `普通攻击与重击命中时，提升${a}%攻击力，最多可以叠加4层`,
+          effect: [{ type: BuffType.ATKPrcent, getValue: (_, s) => s * a }],
+          enable: false,
+          stackable: true,
+          stack: 4,
+          limit: 4,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "试作星镰",
+      enkaId: 13402,
+      weaponType: WeaponType.Polearms,
+      icon: getEnkaUI("UI_EquipIcon_Pole_Proto_Awaken"),
+      baseAtk: 510,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.CHARGE_EFFICIENCY,
+      statValue: 45.9,
+    },
+    (affix = 1) => {
+      let a = [8, 10, 12, 14, 16][affix - 1] + "%";
+      return {
+        title: "嗜魔",
+        text: highlight`施放元素战技后，普通攻击和重击造成的伤害提高${a}。持续12秒，最多叠加2层。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [8, 10, 12, 14, 16][affix - 1];
+      return [
+        {
+          label: "普通攻击和重击造成的伤害提高",
+          describe: `普通攻击和重击造成的伤害提高${a}%，最多可以叠加2层`,
+          effect: [{ type: BuffType.ATKPrcent, getValue: (_, s) => s * a }],
+          enable: false,
+          stackable: true,
+          stack: 2,
+          limit: 2,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "祭礼大剑",
+      enkaId: 12403,
+      weaponType: WeaponType.GreatSword,
+      icon: getEnkaUI("UI_EquipIcon_Claymore_Fossil_Awaken"),
+      baseAtk: 565,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.CHARGE_EFFICIENCY,
+      statValue: 30.6,
+    },
+    (affix = 1) => {
+      const rat = 40 + (affix - 1) * 10 + "%";
+      const sec = Math.round(30 - (affix - 1) * 3.6);
+      return {
+        title: "气定神闲",
+        text: highlight`元素战技造成伤害时，有${rat}的概率重置该技能的冷却时间，该效果每${sec}秒只能触发一次。`,
+      };
+    }
+  ),
+  createWeapon(
+    {
+      name: "决斗之枪",
+      enkaId: 13405,
+      weaponType: WeaponType.Polearms,
+      icon: getEnkaUI("UI_EquipIcon_Pole_Gladiator_Awaken"),
+      baseAtk: 454,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.CRITICAL,
+      statValue: 36.8,
+    },
+    (affix = 1) => {
+      let a = [16, 20, 24, 28, 32][affix - 1] + "%";
+      let b = [24, 30, 36, 42, 48][affix - 1] + "%";
+      return {
+        title: "角斗士",
+        text: highlight`身边至少有2个敌人时，获得${a}攻击力提升与${a}防御力提升；身边的敌人少于2个时，获得${b}攻击力提升。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [16, 20, 24, 28, 32][affix - 1];
+      let b = [24, 30, 36, 42, 48][affix - 1];
+      return [
+        {
+          label: "攻击力提升与防御力提升",
+          describe: `至少有2个敌人时，获得${a}%攻击力提升与${a}%防御力提升`,
+          effect: [
+            { type: BuffType.ATKPrcent, getValue: () => a },
+            { type: BuffType.DEFPrcent, getValue: () => a },
+          ],
+          enable: false,
+        },
+        {
+          label: "攻击力提升",
+          describe: `少于2个敌人时，获得${b}%攻击力提升`,
+          effect: [{ type: BuffType.ATKPrcent, getValue: () => b }],
+          enable: true,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "苍翠猎弓",
+      enkaId: 15409,
+      weaponType: WeaponType.Bow,
+      icon: getEnkaUI("UI_EquipIcon_Bow_Viridescent_Awaken"),
+      baseAtk: 510,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.CRITICAL,
+      statValue: 27.6,
+    },
+    (affix = 1) => {
+      let a = [40, 50, 60, 70, 80][affix - 1] + "%";
+      let b = [14, 13, 12, 11, 10][affix - 1];
+      return {
+        title: "苍翠之风",
+        text: highlight`普通攻击与重击命中时，有50%几率生成一个风之眼，持续吸引周围敌人，并对其中的敌人每0.5秒造成${a}攻击的伤害。该效果持续4秒，每${b}秒至多触发一次。`,
+      };
+    },
+    (affix = 1) => [],
+    (affix = 1) => {
+      let a = [40, 50, 60, 70, 80][affix - 1] / 100;
+      return [
+        {
+          label: "苍翠猎弓·风之眼",
+          rate: {
+            atk: [a],
+          },
+          attackType: AttackType.Other,
+          elementType: ElementType.Physical,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "螭骨剑",
+      enkaId: 12409,
+      weaponType: WeaponType.GreatSword,
+      icon: getEnkaUI("UI_EquipIcon_Claymore_Kione_Awaken"),
+      baseAtk: 510,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.CRITICAL,
+      statValue: 27.6,
+    },
+    (affix = 1) => {
+      let a = [6, 7, 8, 9, 10][affix - 1] + "%";
+      let b = [3, 2.7, 2.4, 2.2, 2][affix - 1] + "%";
+      return {
+        title: "破浪",
+        text: highlight`角色在场上时，每4秒提升${a}造成的伤害，${b}受到的伤害。该效果最多叠加5层，不随角色退场重置，受到伤害后会减少1层效果。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [6, 7, 8, 9, 10][affix - 1];
+      return [
+        {
+          label: "伤害提高",
+          describe: `每4秒提升${a}%造成的伤害，最多可以叠加5层`,
+          effect: [{ type: BuffType.GlobalPrcent, getValue: (_, s) => s * a }],
+          enable: false,
+          stackable: true,
+          stack: 5,
+          limit: 5,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "宗室猎枪",
+      enkaId: 13408,
+      weaponType: WeaponType.Polearms,
+      icon: getEnkaUI("UI_EquipIcon_Pole_Theocrat_Awaken"),
+      baseAtk: 565,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.ATTACK_PERCENT,
+      statValue: 27.6,
+    },
+    (affix = 1) => {
+      let a = [8, 10, 12, 14, 16][affix - 1] + "%";
+      return {
+        title: "专注",
+        text: highlight`攻击造成伤害时，暴击率提升${a}，最多堆叠5次。攻击造成暴击后，移除已有的专注效果。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [8, 10, 12, 14, 16][affix - 1];
+      return [
+        {
+          label: "暴击率提升",
+          describe: `攻击造成伤害时，暴击率提升${a}%，最多堆叠5次。攻击造成暴击后，移除已有的专注效果`,
+          effect: [{ type: BuffType.Critcal, getValue: (_, s) => a * s }],
+          enable: true,
+          stackable: true,
+          stack: 0,
+          limit: 5,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "腐殖之剑",
+      enkaId: 11413,
+      weaponType: WeaponType.Sword,
+      icon: getEnkaUI("UI_EquipIcon_Sword_Magnum_Awaken"),
+      baseAtk: 510,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.CHARGE_EFFICIENCY,
+      statValue: 45.9,
+    },
+    (affix = 1) => {
+      let a = [16, 20, 24, 28, 32][affix - 1] + "%";
+      let b = [6, 7.5, 9, 10.5, 12][affix - 1] + "%";
+      return {
+        title: "无尽的渴慕",
+        text: highlight`元素战技造成的伤害增加${a}，元素战技的暴击率提升${b}。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [16, 20, 24, 28, 32][affix - 1];
+      let b = [6, 7.5, 9, 10.5, 12][affix - 1];
+      return [
+        {
+          label: "元素战技伤害增加、暴击率提升",
+          describe: `元素战技造成的伤害增加${a}%，元素战技的暴击率提升${b}%`,
+          effect: [
+            { type: BuffType.SkillPrcent, getValue: () => a },
+            { type: BuffType.SkillCritcal, getValue: () => b },
+          ],
+          enable: true,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "雪葬的星银",
+      enkaId: 12411,
+      weaponType: WeaponType.GreatSword,
+      icon: getEnkaUI("UI_EquipIcon_Claymore_Dragonfell_Awaken"),
+      baseAtk: 565,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.PHYSICAL_ADD_HURT,
+      statValue: 34.5,
+    },
+    (affix = 1) => {
+      let a = [60, 70, 80, 90, 100][affix - 1] + "%";
+      let b = [80, 95, 110, 125, 140][affix - 1] + "%";
+      let c = [200, 240, 280, 320, 360][affix - 1] + "%";
+      return {
+        title: "霜葬",
+        text: highlight`普通攻击与重击命中敌人时，有${a}概率在敌人上方生成恒冰晶核并坠落，造成${b}攻击力的范围伤害。若敌人处于冰元素影响下，则造成${c}攻击力的伤害。该效果每10秒至多触发一次。`,
+      };
+    },
+    (affix = 1) => [],
+    (affix = 1) => {
+      let b = [80, 95, 110, 125, 140][affix - 1] / 100;
+      let c = [200, 240, 280, 320, 360][affix - 1] / 100;
+      return [
+        {
+          label: "雪葬的星银·恒冰晶核",
+          rate: {
+            atk: [b],
+          },
+          attackType: AttackType.Other,
+          elementType: ElementType.Physical,
+        },
+        {
+          label: "冰元素影响·恒冰晶核",
+          rate: {
+            atk: [c],
+          },
+          attackType: AttackType.Other,
+          elementType: ElementType.Physical,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "龙脊长枪",
+      enkaId: 13409,
+      weaponType: WeaponType.Polearms,
+      icon: getEnkaUI("UI_EquipIcon_Pole_Everfrost_Awaken"),
+      baseAtk: 454,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.PHYSICAL_ADD_HURT,
+      statValue: 69,
+    },
+    (affix = 1) => {
+      let a = [60, 70, 80, 90, 100][affix - 1] + "%";
+      let b = [80, 95, 110, 125, 140][affix - 1] + "%";
+      let c = [200, 240, 280, 320, 360][affix - 1] + "%";
+      return {
+        title: "霜葬",
+        text: highlight`普通攻击与重击命中敌人时，有${a}概率在敌人上方生成恒冰晶核并坠落，造成${b}攻击力的范围伤害。若敌人处于冰元素影响下，则造成${c}攻击力的伤害。该效果每10秒至多触发一次。`,
+      };
+    },
+    (affix = 1) => [],
+    (affix = 1) => {
+      let b = [80, 95, 110, 125, 140][affix - 1] / 100;
+      let c = [200, 240, 280, 320, 360][affix - 1] / 100;
+      return [
+        {
+          label: "龙脊长枪·恒冰晶核",
+          rate: {
+            atk: [b],
+          },
+          attackType: AttackType.Other,
+          elementType: ElementType.Physical,
+        },
+        {
+          label: "冰元素影响·恒冰晶核",
+          rate: {
+            atk: [c],
+          },
+          attackType: AttackType.Other,
+          elementType: ElementType.Physical,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "忍冬之果",
+      enkaId: 14412,
+      weaponType: WeaponType.Magic,
+      icon: getEnkaUI("UI_EquipIcon_Catalyst_Everfrost_Awaken"),
+      baseAtk: 510,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.ATTACK_PERCENT,
+      statValue: 41.3,
+    },
+    (affix = 1) => {
+      let a = [60, 70, 80, 90, 100][affix - 1] + "%";
+      let b = [80, 95, 110, 125, 140][affix - 1] + "%";
+      let c = [200, 240, 280, 320, 360][affix - 1] + "%";
+      return {
+        title: "霜葬",
+        text: highlight`普通攻击与重击命中敌人时，有${a}概率在敌人上方生成恒冰晶核并坠落，造成${b}攻击力的范围伤害。若敌人处于冰元素影响下，则造成${c}攻击力的伤害。该效果每10秒至多触发一次。`,
+      };
+    },
+    (affix = 1) => [],
+    (affix = 1) => {
+      let b = [80, 95, 110, 125, 140][affix - 1] / 100;
+      let c = [200, 240, 280, 320, 360][affix - 1] / 100;
+      return [
+        {
+          label: "忍冬之果·恒冰晶核",
+          rate: {
+            atk: [b],
+          },
+          attackType: AttackType.Other,
+          elementType: ElementType.Physical,
+        },
+        {
+          label: "冰元素影响·恒冰晶核",
+          rate: {
+            atk: [c],
+          },
+          attackType: AttackType.Other,
+          elementType: ElementType.Physical,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "千岩长枪",
+      enkaId: 13406,
+      weaponType: WeaponType.Polearms,
+      icon: getEnkaUI("UI_EquipIcon_Pole_Lapis_Awaken"),
+      baseAtk: 565,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.ATTACK_PERCENT,
+      statValue: 27.6,
+    },
+    (affix = 1) => {
+      const atk = 7 + (affix - 1) + "%";
+      const cri = 3 + (affix - 1) + "%";
+      return {
+        title: "千岩诀·同心",
+        text: highlight`队伍中每有一位璃月角色，装备该武器的角色便获得${atk}攻击力提升与${cri}暴击率提升。至多获得4层提升效果。`,
+      };
+    },
+    (affix = 1) => {
+      const atk = 7 + (affix - 1);
+      const cri = 3 + (affix - 1);
+      return [
+        {
+          label: "攻击力与暴击率提升",
+          describe: `角色获得${atk}%攻击力提升与${cri}%暴击率提升。至多获得4层提升效果`,
+          effect: [
+            { type: BuffType.ATKPrcent, getValue: (_, stack) => atk * stack },
+            { type: BuffType.Critcal, getValue: (_, stack) => cri * stack },
+          ],
+          stackable: true,
+          limit: 4,
+          stack: 4,
+          enable: false,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "暗巷闪光",
+      enkaId: 11410,
+      weaponType: WeaponType.Sword,
+      icon: getEnkaUI("UI_EquipIcon_Sword_Outlaw_Awaken"),
+      baseAtk: 620,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.ELEMENT_MASTERY,
+      statValue: 55,
+    },
+    (affix = 1) => {
+      let a = [12, 15, 18, 21, 24][affix - 1] + "%";
+      return {
+        title: "街巷游侠",
+        text: highlight`角色造成的伤害提升${a}。受到伤害后，该伤害提升效果会失效5秒。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [12, 15, 18, 21, 24][affix - 1];
+
+      return [
+        {
+          label: "伤害提升",
+          describe: `角色造成的伤害提升${a}%`,
+          effect: [{ type: BuffType.GlobalPrcent, getValue: () => a }],
+          enable: true,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "暗巷猎手",
+      enkaId: 15410,
+      weaponType: WeaponType.Bow,
+      icon: getEnkaUI("UI_EquipIcon_Bow_Outlaw_Awaken"),
+      baseAtk: 565,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.ATTACK_PERCENT,
+      statValue: 27.6,
+    },
+    (affix = 1) => {
+      let a = [2, 2.5, 3, 3.5, 4][affix - 1] + "%";
+      let b = [20, 25, 30, 35, 40][affix - 1] + "%";
+      let c = [4, 5, 6, 7, 8][affix - 1] + "%";
+      return {
+        title: "街巷伏击",
+        text: highlight`装备该武器的角色处于队伍后台时，每1秒角色造成的伤害提升${a}，最多通过这种方式获得${b}的伤害提升；在场上超过4秒后，上述伤害提升效果每1秒会流失${c}，直到降低至0%。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [2, 2.5, 3, 3.5, 4][affix - 1];
+      let b = [20, 25, 30, 35, 40][affix - 1];
+      return [
+        {
+          label: "造成的伤害提升",
+          describe: `处于队伍后台时，每1秒角色造成的伤害提升${a}%，最多通过这种方式获得${b}%的伤害提升`,
+          effect: [{ type: BuffType.GlobalPrcent, getValue: (_, s) => a * 2 * s }],
+          enable: true,
+          stackable: true,
+          stack: 5,
+          limit: 5,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "暗巷的酒与诗",
+      enkaId: 14410,
+      weaponType: WeaponType.Magic,
+      icon: getEnkaUI("UI_EquipIcon_Catalyst_Outlaw_Awaken"),
+      baseAtk: 565,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.CHARGE_EFFICIENCY,
+      statValue: 30.6,
+    },
+    (affix = 1) => {
+      let a = [14, 16, 18, 20, 22][affix - 1] + "%";
+      let b = [20, 25, 30, 35, 40][affix - 1] + "%";
+      return {
+        title: "变化万端",
+        text: highlight`普通攻击命中敌人后，冲刺或替代冲刺的能力消耗的体力降低${a}，持续5秒。此外，使用冲刺或替代冲刺的能力后，攻击力提升${b}，持续5秒。`,
+      };
+    },
+    (affix = 1) => {
+      let b = [20, 25, 30, 35, 40][affix - 1];
+      return [
+        {
+          label: "攻击力提升",
+          describe: `使用冲刺或替代冲刺的能力后，攻击力提升${b}%`,
+          effect: [{ type: BuffType.ATKPrcent, getValue: () => b }],
+          enable: false,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "风花之颂",
+      enkaId: 15413,
+      weaponType: WeaponType.Bow,
+      icon: getEnkaUI("UI_EquipIcon_Bow_Fleurfair_Awaken"),
+      baseAtk: 510,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.ELEMENT_MASTERY,
+      statValue: 165,
+    },
+    (affix = 1) => {
+      let a = [16, 20, 24, 28, 32][affix - 1] + "%";
+      return {
+        title: "风花之愿",
+        text: highlight`施放元素战技时，获得风之花的悠古愿望加持，攻击力提升${a}，持续6秒。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [16, 20, 24, 28, 32][affix - 1];
+      return [
+        {
+          label: "攻击力提升",
+          describe: `施放元素战技时，攻击力提升${a}%`,
+          effect: [{ type: BuffType.ATKPrcent, getValue: () => a }],
+          enable: false,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "幽夜华尔兹",
+      enkaId: 15412,
+      weaponType: WeaponType.Bow,
+      icon: getEnkaUI("UI_EquipIcon_Bow_Nachtblind_Awaken"),
+      baseAtk: 510,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.PHYSICAL_ADD_HURT,
+      statValue: 51.7,
+    },
+    (affix = 1) => {
+      let a = [20, 25, 30, 35, 40][affix - 1] + "%";
+      return {
+        title: "极夜二重奏",
+        text: highlight`普通攻击命中敌人后的5秒内，元素战技造成的伤害提升${a}；元素战技命中敌人后的5秒内，普通攻击造成的伤害提升${a}。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [20, 25, 30, 35, 40][affix - 1];
+      return [
+        {
+          label: "元素战技造成的伤害提升",
+          describe: `普通攻击命中敌人后，元素战技造成的伤害提升${a}%`,
+          effect: [{ type: BuffType.SkillPrcent, getValue: () => a }],
+          enable: false,
+        },
+        {
+          label: "普通攻击造成的伤害提升",
+          describe: `元素战技命中敌人后，普通攻击造成的伤害提升${a}%`,
+          effect: [{ type: BuffType.NormalPrcent, getValue: () => a }],
+          enable: false,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "嘟嘟可故事集",
+      enkaId: 14413,
+      weaponType: WeaponType.Magic,
+      icon: getEnkaUI("UI_EquipIcon_Catalyst_Ludiharpastum_Awaken"),
+      baseAtk: 454,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.ATTACK_PERCENT,
+      statValue: 55.1,
+    },
+    (affix = 1) => {
+      let a = [16, 20, 24, 28, 32][affix - 1] + "%";
+      let b = [8, 10, 12, 14, 16][affix - 1] + "%";
+      return {
+        title: "嘟嘟！大冒险",
+        text: highlight`普通攻击命中敌人后的6秒内，重击造成的伤害提升${a}；重击命中敌人后的6秒内，攻击力提升${b}。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [16, 20, 24, 28, 32][affix - 1];
+      let b = [8, 10, 12, 14, 16][affix - 1];
+      return [
+        {
+          label: "重击造成的伤害提升",
+          describe: `普通攻击命中敌人后的6秒内，重击造成的伤害提升${a}%`,
+          effect: [{ type: BuffType.StrongPrcent, getValue: () => a }],
+          enable: false,
+        },
+        {
+          label: "攻击力提升",
+          describe: `重击命中敌人后，攻击力提升${b}%`,
+          effect: [{ type: BuffType.ATKPrcent, getValue: () => b }],
+          enable: false,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "飞天御剑",
+      enkaId: 11306,
+      weaponType: WeaponType.Sword,
+      icon: getEnkaUI("UI_EquipIcon_Sword_Mitsurugi_Awaken"),
+      baseAtk: 354,
+      rarity: Rarity.Three,
+      appendPropId: AppendProp.CHARGE_EFFICIENCY,
+      statValue: 52.1,
+    },
+    (affix = 1) => {
+      let a = [12, 15, 18, 21, 24][affix - 1] + "%";
+      return {
+        title: "决心",
+        text: highlight`施放元素爆发后，提高${a}攻击力和移动速度，持续15秒。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [12, 15, 18, 21, 24][affix - 1];
+      return [
+        {
+          label: "攻击力提升",
+          describe: `施放元素爆发后，提高${a}%攻击力`,
+          effect: [{ type: BuffType.ATKPrcent, getValue: () => a }],
+          enable: false,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "铁影阔剑",
+      enkaId: 12301,
+      weaponType: WeaponType.GreatSword,
+      icon: getEnkaUI("UI_EquipIcon_Claymore_Glaive_Awaken"),
+      baseAtk: 401,
+      rarity: Rarity.Three,
+      appendPropId: AppendProp.HP_PERCENT,
+      statValue: 35.2,
+    },
+    (affix = 1) => {
+      let a = [70, 75, 80, 85, 90][affix - 1] + "%";
+      let n = [30, 35, 40, 45, 50][affix - 1] + "%";
+      return {
+        title: "不屈",
+        text: highlight`生命值低于${a}时，重击不会轻易被打断，并提高${n}重击伤害。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [70, 75, 80, 85, 90][affix - 1];
+      let n = [30, 35, 40, 45, 50][affix - 1];
+      return [
+        {
+          label: "重击伤害提升",
+          describe: `生命值低于${a}%时，提高${n}%重击伤害`,
+          effect: [{ type: BuffType.StrongPrcent, getValue: () => n }],
+          enable: false,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "沐浴龙血的剑",
+      enkaId: 12302,
+      weaponType: WeaponType.GreatSword,
+      icon: getEnkaUI("UI_EquipIcon_Claymore_Siegfry_Awaken"),
+      baseAtk: 354,
+      rarity: Rarity.Three,
+      appendPropId: AppendProp.ELEMENT_MASTERY,
+      statValue: 187,
+    },
+    (affix = 1) => {
+      let a = [12, 15, 18, 21, 24][affix - 1] + "%";
+      return {
+        title: "踏火息雷",
+        text: highlight`对处于火元素或雷元素影响下的敌人，造成的伤害提高${a}。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [12, 15, 18, 21, 24][affix - 1];
+      return [
+        {
+          label: "造成的伤害提高",
+          describe: `对处于火元素或雷元素影响下的敌人，造成的伤害提高${a}%`,
+          effect: [{ type: BuffType.GlobalPrcent, getValue: () => a }],
+          enable: false,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "以理服人",
+      enkaId: 12305,
+      weaponType: WeaponType.GreatSword,
+      icon: getEnkaUI("UI_EquipIcon_Claymore_Reasoning_Awaken"),
+      baseAtk: 401,
+      rarity: Rarity.Three,
+      appendPropId: AppendProp.ATTACK_PERCENT,
+      statValue: 35.2,
+    },
+    (affix = 1) => {
+      let a = [60, 75, 90, 105, 120][affix - 1] + "%";
+      return {
+        title: "有话直说",
+        text: highlight`施放元素战技后，普通攻击和重击命中时会在小范围内额外造成${a}攻击力的伤害。该效果持续15秒，伤害每3秒只能触发一次。`,
+      };
+    },
+    (affix = 1) => [],
+    (affix = 1) => {
+      let a = [60, 75, 90, 105, 120][affix - 1] / 100;
+      return [
+        {
+          label: "以理服人·有话直说",
+          rate: {
+            atk: [a],
+          },
+          attackType: AttackType.Other,
+          elementType: ElementType.Physical,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "黑缨枪",
+      enkaId: 13303,
+      weaponType: WeaponType.Polearms,
+      icon: getEnkaUI("UI_EquipIcon_Pole_Noire_Awaken"),
+      baseAtk: 354,
+      rarity: Rarity.Three,
+      appendPropId: AppendProp.HP_PERCENT,
+      statValue: 46.9,
+    },
+    (affix = 1) => {
+      let a = [40, 50, 60, 70, 80][affix - 1] + "%";
+      return {
+        title: "克柔",
+        text: highlight`对史莱姆类敌人造成的伤害增加${a}。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [40, 50, 60, 70, 80][affix - 1];
+      return [
+        {
+          label: "对史莱姆类敌人造成的伤害增加",
+          describe: `对史莱姆类敌人造成的伤害增加${a}%`,
+          effect: [{ type: BuffType.GlobalPrcent, getValue: () => a }],
+          enable: false,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "讨龙英杰谭",
+      enkaId: 14302,
+      weaponType: WeaponType.Magic,
+      icon: getEnkaUI("UI_EquipIcon_Catalyst_Pulpfic_Awaken"),
+      baseAtk: 401,
+      rarity: Rarity.Three,
+      appendPropId: AppendProp.HP_PERCENT,
+      statValue: 35.2,
+    },
+    (affix = 1) => {
+      let a = [24, 30, 36, 42, 48][affix - 1] + "%";
+      return {
+        title: "传承",
+        text: highlight`主动切换角色时，新登场的角色攻击力提升${a}，持续10秒。该效果每20秒只能触发一次。`,
+      };
+    }
+  ),
+  createWeapon(
+    {
+      name: "弹弓",
+      enkaId: 15304,
+      weaponType: WeaponType.Bow,
+      icon: getEnkaUI("UI_EquipIcon_Bow_Sling_Awaken"),
+      baseAtk: 354,
+      rarity: Rarity.Three,
+      appendPropId: AppendProp.CRITICAL,
+      statValue: 31.2,
+    },
+    (affix = 1) => {
+      let a = [36, 42, 48, 54, 60][affix - 1] + "%";
+      return {
+        title: "弹弓",
+        text: highlight`普通攻击与重击的箭矢若在发射后的0.3秒内击中敌人，则造成的伤害增加${a}；否则，造成的伤害下降10%。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [36, 42, 48, 54, 60][affix - 1];
+      return [
+        {
+          label: "普通攻击与重击的箭矢的伤害增加",
+          describe: `箭矢若在发射后的0.3秒内击中敌人，则造成的伤害增加${a}%`,
+          effect: [
+            { type: BuffType.NormalPrcent, getValue: () => a },
+            { type: BuffType.StrongPrcent, getValue: () => a },
+          ],
+          enable: true,
+        },
+        {
+          label: "普通攻击与重击的箭矢的伤害降低",
+          describe: `箭矢若在发射后的0.3秒内没有击中敌人，则造成的伤害减少10%`,
+          effect: [
+            { type: BuffType.NormalPrcent, getValue: () => -10 },
+            { type: BuffType.StrongPrcent, getValue: () => -10 },
+          ],
+          enable: false,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "鸦羽弓",
+      enkaId: 15301,
+      weaponType: WeaponType.Bow,
+      icon: getEnkaUI("UI_EquipIcon_Bow_Crowfeather_Awaken"),
+      baseAtk: 448,
+      rarity: Rarity.Three,
+      appendPropId: AppendProp.ELEMENT_MASTERY,
+      statValue: 94,
+    },
+    (affix = 1) => {
+      let a = [12, 15, 18, 21, 24][affix - 1] + "%";
+      return {
+        title: "踏火止水",
+        text: highlight`对处于水元素或火元素影响下的敌人，造成的伤害提高${a}。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [12, 15, 18, 21, 24][affix - 1];
+      return [
+        {
+          label: "造成的伤害提高",
+          describe: `对处于水元素或火元素影响下的敌人，造成的伤害提高${a}%`,
+          effect: [{ type: BuffType.GlobalPrcent, getValue: () => a }],
+          enable: true,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "冷刃",
+      enkaId: 11301,
+      weaponType: WeaponType.Sword,
+      icon: getEnkaUI("UI_EquipIcon_Sword_Steel_Awaken"),
+      baseAtk: 401,
+      rarity: Rarity.Three,
+      appendPropId: AppendProp.ATTACK_PERCENT,
+      statValue: 35.2,
+    },
+    (affix = 1) => {
+      let a = [12, 15, 18, 21, 24][affix - 1] + "%";
+      return {
+        title: "止水融冰",
+        text: highlight`对处于水元素或冰元素影响下的敌人，造成的伤害提高${a}。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [12, 15, 18, 21, 24][affix - 1];
+      return [
+        {
+          label: "造成的伤害提高",
+          describe: `对处于水元素或冰元素影响下的敌人，造成的伤害提高${a}%`,
+          effect: [{ type: BuffType.GlobalPrcent, getValue: () => a }],
+          enable: true,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "魔导绪论",
+      enkaId: 14301,
+      weaponType: WeaponType.Magic,
+      icon: getEnkaUI("UI_EquipIcon_Catalyst_Intro_Awaken"),
+      baseAtk: 354,
+      rarity: Rarity.Three,
+      appendPropId: AppendProp.ELEMENT_MASTERY,
+      statValue: 187,
+    },
+    (affix = 1) => {
+      let a = [12, 15, 18, 21, 24][affix - 1] + "%";
+      return {
+        title: "止水息雷",
+        text: highlight`对处于水元素或雷元素影响下的敌人，造成的伤害提高${a}。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [12, 15, 18, 21, 24][affix - 1];
+      return [
+        {
+          label: "造成的伤害提高",
+          describe: `对处于水元素或雷元素影响下的敌人，造成的伤害提高${a}%`,
+          effect: [{ type: BuffType.GlobalPrcent, getValue: () => a }],
+          enable: true,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "黎明神剑",
+      enkaId: 11302,
+      weaponType: WeaponType.Sword,
+      icon: getEnkaUI("UI_EquipIcon_Sword_Dawn_Awaken"),
+      baseAtk: 401,
+      rarity: Rarity.Three,
+      appendPropId: AppendProp.CRITICAL_HURT,
+      statValue: 46.9,
+    },
+    (affix = 1) => {
+      let a = [14, 17.5, 21, 24.5, 28][affix - 1] + "%";
+      return {
+        title: "激励",
+        text: highlight`生命值高于90%时，暴击率提升${a}。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [14, 17.5, 21, 24.5, 28][affix - 1];
+      return [
+        {
+          label: "造成的伤害提高",
+          describe: `生命值高于90%时，暴击率提升${a}%`,
+          effect: [{ type: BuffType.Critcal, getValue: () => a }],
+          enable: true,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "暗铁剑",
+      enkaId: 11304,
+      weaponType: WeaponType.Sword,
+      icon: getEnkaUI("UI_EquipIcon_Sword_Darker_Awaken"),
+      baseAtk: 401,
+      rarity: Rarity.Three,
+      appendPropId: AppendProp.ELEMENT_MASTERY,
+      statValue: 141,
+    },
+    (affix = 1) => {
+      let a = [20, 25, 30, 35, 40][affix - 1] + "%";
+      return {
+        title: "过载",
+        text: highlight`触发超载、超导、感电、原激化、超激化、超绽放或雷元素扩散反应后的12秒内，攻击力提高${a}。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [20, 25, 30, 35, 40][affix - 1];
+      return [
+        {
+          label: "攻击力提高",
+          describe: `触发超载、超导、感电、原激化、超激化、超绽放或雷元素扩散反应后，攻击力提高${a}%`,
+          effect: [{ type: BuffType.ATKPrcent, getValue: () => a }],
+          enable: false,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "神射手之誓",
+      enkaId: 15302,
+      weaponType: WeaponType.Bow,
+      icon: getEnkaUI("UI_EquipIcon_Bow_Arjuna_Awaken"),
+      baseAtk: 401,
+      rarity: Rarity.Three,
+      appendPropId: AppendProp.CRITICAL_HURT,
+      statValue: 46.9,
+    },
+    (affix = 1) => {
+      let a = [24, 30, 36, 42, 48][affix - 1] + "%";
+      return {
+        title: "精准",
+        text: highlight`针对要害造成的伤害提升${a}。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [24, 30, 36, 42, 48][affix - 1];
+      return [
+        {
+          label: "针对要害造成的伤害提升",
+          describe: `针对要害造成的伤害提升${a}%（本计算器中，该增益启用时视为全增伤）`,
+          effect: [{ type: BuffType.GlobalPrcent, getValue: () => a }],
+          enable: false,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "飞天大御剑",
+      enkaId: 12306,
+      weaponType: WeaponType.GreatSword,
+      icon: getEnkaUI("UI_EquipIcon_Claymore_Mitsurugi_Awaken"),
+      baseAtk: 401,
+      rarity: Rarity.Three,
+      appendPropId: AppendProp.PHYSICAL_ADD_HURT,
+      statValue: 43.9,
+    },
+    (affix = 1) => {
+      let a = [6, 7, 8, 9, 10][affix - 1] + "%";
+      return {
+        title: "勇气",
+        text: highlight`普通攻击和重击命中时，攻击力提高${a}，持续6秒，最多叠加4层。该效果每0.5秒只能触发一次。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [6, 7, 8, 9, 10][affix - 1];
+      return [
+        {
+          label: "攻击力提高",
+          describe: `普通攻击和重击命中时，攻击力提高${a}%，最多叠加4层`,
+          effect: [{ type: BuffType.ATKPrcent, getValue: (_, s) => s * a }],
+          enable: false,
+          stackable: true,
+          stack: 4,
+          limit: 4,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "白缨枪",
+      enkaId: 13301,
+      weaponType: WeaponType.Polearms,
+      icon: getEnkaUI("UI_EquipIcon_Pole_Ruby_Awaken"),
+      baseAtk: 401,
+      rarity: Rarity.Three,
+      appendPropId: AppendProp.CRITICAL,
+      statValue: 23.4,
+    },
+    (affix = 1) => {
+      let a = [24, 30, 36, 42, 48][affix - 1] + "%";
+      return {
+        title: "锐利",
+        text: highlight`普通攻击造成的伤害提升${a}。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [24, 30, 36, 42, 48][affix - 1];
+      return [
+        {
+          label: "普通攻击造成的伤害提升",
+          describe: `普通攻击造成的伤害提升${a}%`,
+          effect: [{ type: BuffType.NormalPrcent, getValue: () => a }],
+          enable: true,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "甲级宝珏",
+      enkaId: 14305,
+      weaponType: WeaponType.Magic,
+      icon: getEnkaUI("UI_EquipIcon_Catalyst_Phoney_Awaken"),
+      baseAtk: 448,
+      rarity: Rarity.Three,
+      appendPropId: AppendProp.CRITICAL,
+      statValue: 15.6,
+    },
+    (affix = 1) => {
+      let a = [12, 14, 16, 18, 20][affix - 1] + "%";
+      return {
+        title: "奔袭战术",
+        text: highlight`击败敌人后的15秒内，移动速度和攻击力提升${a}。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [12, 14, 16, 18, 20][affix - 1];
+      return [
+        {
+          label: "攻击力提升",
+          describe: `击败敌人后攻击力提升${a}%`,
+          effect: [{ type: BuffType.ATKPrcent, getValue: () => a }],
+          enable: false,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "异世界行记",
+      enkaId: 14303,
+      weaponType: WeaponType.Magic,
+      icon: getEnkaUI("UI_EquipIcon_Catalyst_Lightnov_Awaken"),
+      baseAtk: 401,
+      rarity: Rarity.Three,
+      appendPropId: AppendProp.CHARGE_EFFICIENCY,
+      statValue: 39,
+    },
+    (affix = 1) => {
+      let a = [1, 1.25, 1.5, 1.75, 2][affix - 1] + "%";
+      return {
+        title: "能量沐浴",
+        text: highlight`获得元素微粒或者元素晶球时，恢复${a}生命值。`,
+      };
+    }
+  ),
+  createWeapon(
+    {
+      name: "信使",
+      enkaId: 15305,
+      weaponType: WeaponType.Bow,
+      icon: getEnkaUI("UI_EquipIcon_Bow_Msg_Awaken"),
+      baseAtk: 448,
+      rarity: Rarity.Three,
+      appendPropId: AppendProp.CRITICAL_HURT,
+      statValue: 31.2,
+    },
+    (affix = 1) => {
+      let a = [100, 125, 150, 175, 200][affix - 1] + "%";
+      return {
+        title: "飞矢传书",
+        text: highlight`重击若命中要害，则额外造成${a}攻击力的伤害，该伤害必定暴击。此效果每10秒只能触发一次。`,
+      };
+    },
+    () => [],
+    (affix) => {
+      let a = [100, 125, 150, 175, 200][affix - 1] / 100;
+      return [
+        {
+          label: "信使·飞矢传书",
+          rate: {
+            atk: [a],
+          },
+          attackType: AttackType.Other,
+          elementType: ElementType.Physical,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "反曲弓",
+      enkaId: 15303,
+      weaponType: WeaponType.Bow,
+      icon: getEnkaUI("UI_EquipIcon_Bow_Curve_Awaken"),
+      baseAtk: 354,
+      rarity: Rarity.Three,
+      appendPropId: AppendProp.HP_PERCENT,
+      statValue: 46.9,
+    },
+    (affix = 1) => {
+      let a = [8, 10, 12, 14, 16][affix - 1] + "%";
+      return {
+        title: "收割",
+        text: highlight`击败敌人时，恢复${a}生命值。`,
+      };
+    }
+  ),
+  createWeapon(
+    {
+      name: "吃虎鱼刀",
+      enkaId: 11305,
+      weaponType: WeaponType.Sword,
+      icon: getEnkaUI("UI_EquipIcon_Sword_Sashimi_Awaken"),
+      baseAtk: 401,
+      rarity: Rarity.Three,
+      appendPropId: AppendProp.ATTACK_PERCENT,
+      statValue: 35.2,
+    },
+    (affix = 1) => {
+      let a = [240, 280, 320, 360, 400][affix - 1] + "%";
+      let b = [15, 14, 13, 12, 11][affix - 1];
+      return {
+        title: "决",
+        text: highlight`攻击命中时，有50%的概率对单个敌人造成${a}攻击力的伤害。该效果每${b}秒只能触发一次。`,
+      };
+    },
+    () => [],
+    (affix) => {
+      let a = [240, 280, 320, 360, 400][affix - 1] / 100;
+      return [
+        {
+          label: "吃虎鱼刀·决",
+          rate: {
+            atk: [a],
+          },
+          attackType: AttackType.Other,
+          elementType: ElementType.Physical,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "旅行剑",
+      enkaId: 11303,
+      weaponType: WeaponType.Sword,
+      icon: getEnkaUI("UI_EquipIcon_Sword_Traveler_Awaken"),
+      baseAtk: 448,
+      rarity: Rarity.Three,
+      appendPropId: AppendProp.DEFENSE_PERCENT,
+      statValue: 29.3,
+    },
+    (affix = 1) => {
+      let a = [1, 1.25, 1.5, 1.75, 2][affix - 1] + "%";
+      return {
+        title: "旅程",
+        text: highlight`获得元素晶球或元素微粒时，恢复${a}生命值。`,
+      };
+    }
+  ),
+  createWeapon(
+    {
+      name: "翡玉法球",
+      enkaId: 14304,
+      weaponType: WeaponType.Magic,
+      icon: getEnkaUI("UI_EquipIcon_Catalyst_Jade_Awaken"),
+      baseAtk: 448,
+      rarity: Rarity.Three,
+      appendPropId: AppendProp.ELEMENT_MASTERY,
+      statValue: 94,
+    },
+    (affix = 1) => {
+      let a = [20, 25, 30, 35, 40][affix - 1] + "%";
+      return {
+        title: "激流",
+        text: highlight`触发蒸发、感电、冰冻、绽放或水元素扩散反应后的12秒内，攻击力提高${a}。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [20, 25, 30, 35, 40][affix - 1];
+      return [
+        {
+          label: "攻击力提高",
+          describe: `触发蒸发、感电、冰冻、绽放或水元素扩散反应后的12秒内，攻击力提高${a}%`,
+          effect: [{ type: BuffType.ATKPrcent, getValue: () => a }],
+          enable: false,
+        },
+      ];
+    }
+  ),
+
+  createWeapon(
+    {
+      name: "钺矛",
+      enkaId: 13302,
+      weaponType: WeaponType.Polearms,
+      icon: getEnkaUI("UI_EquipIcon_Pole_Halberd_Awaken"),
+      baseAtk: 448,
+      rarity: Rarity.Three,
+      appendPropId: AppendProp.ATTACK_PERCENT,
+      statValue: 23.5,
+    },
+    (affix = 1) => {
+      let a = [160, 200, 240, 280, 320][affix - 1] + "%";
+      return {
+        title: "沉重",
+        text: highlight`对普通攻击命中的敌人造成${a}攻击力的额外伤害。该效果每10秒只能触发一次。`,
+      };
+    },
+    () => [],
+    (affix) => {
+      let a = [160, 200, 240, 280, 320][affix - 1] / 100;
+      return [
+        {
+          label: "钺矛·沉重",
+          rate: {
+            atk: [a],
+          },
+          attackType: AttackType.Other,
+          elementType: ElementType.Physical,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "白铁大剑",
+      enkaId: 12303,
+      weaponType: WeaponType.GreatSword,
+      icon: getEnkaUI("UI_EquipIcon_Claymore_Tin_Awaken"),
+      baseAtk: 401,
+      rarity: Rarity.Three,
+      appendPropId: AppendProp.DEFENSE_PERCENT,
+      statValue: 43.9,
+    },
+    (affix = 1) => {
+      let a = [8, 10, 12, 14, 16][affix - 1] + "%";
+      return {
+        title: "收割",
+        text: highlight`击败敌人时，恢复${a}生命值。`,
+      };
+    }
+  ),
+  createWeapon(
+    {
+      name: "银剑",
+      enkaId: 11201,
+      weaponType: WeaponType.Sword,
+      icon: getEnkaUI("UI_EquipIcon_Sword_Silver_Awaken"),
+      baseAtk: 243,
+      rarity: Rarity.Two,
+      appendPropId: AppendProp.ATTACK_PERCENT,
+      statValue: 0,
+    },
+    () => {
+      return {
+        title: "",
+        text: highlight``,
+      };
+    }
+  ),
+  createWeapon(
+    {
+      name: "佣兵重剑",
+      enkaId: 12201,
+      weaponType: WeaponType.GreatSword,
+      icon: getEnkaUI("UI_EquipIcon_Claymore_Oyaji_Awaken"),
+      baseAtk: 243,
+      rarity: Rarity.Two,
+      appendPropId: AppendProp.ATTACK_PERCENT,
+      statValue: 0,
+    },
+    () => {
+      return {
+        title: "",
+        text: highlight``,
+      };
+    }
+  ),
+  createWeapon(
+    {
+      name: "口袋魔导书",
+      enkaId: 14201,
+      weaponType: WeaponType.Magic,
+      icon: getEnkaUI("UI_EquipIcon_Catalyst_Pocket_Awaken"),
+      baseAtk: 243,
+      rarity: Rarity.Two,
+      appendPropId: AppendProp.ATTACK_PERCENT,
+      statValue: 0,
+    },
+    () => {
+      return {
+        title: "",
+        text: highlight``,
+      };
+    }
+  ),
+  createWeapon(
+    {
+      name: "历练的猎弓",
+      enkaId: 15201,
+      weaponType: WeaponType.Bow,
+      icon: getEnkaUI("UI_EquipIcon_Bow_Old_Awaken"),
+      baseAtk: 243,
+      rarity: Rarity.Two,
+      appendPropId: AppendProp.ATTACK_PERCENT,
+      statValue: 0,
+    },
+    () => {
+      return {
+        title: "",
+        text: highlight``,
+      };
+    }
+  ),
+  createWeapon(
+    {
+      name: "铁尖枪",
+      enkaId: 13201,
+      weaponType: WeaponType.Polearms,
+      icon: getEnkaUI("UI_EquipIcon_Pole_Rod_Awaken"),
+      baseAtk: 243,
+      rarity: Rarity.Two,
+      appendPropId: AppendProp.ATTACK_PERCENT,
+      statValue: 0,
+    },
+    () => {
+      return {
+        title: "",
+        text: highlight``,
+      };
+    }
+  ),
+  createWeapon(
+    {
+      name: "新手长枪",
+      enkaId: 13101,
+      weaponType: WeaponType.Polearms,
+      icon: getEnkaUI("UI_EquipIcon_Pole_Gewalt_Awaken"),
+      baseAtk: 185,
+      rarity: Rarity.One,
+      appendPropId: AppendProp.ATTACK_PERCENT,
+      statValue: 0,
+    },
+    () => {
+      return {
+        title: "",
+        text: highlight``,
+      };
+    }
+  ),
+  createWeapon(
+    {
+      name: "训练大剑",
+      enkaId: 12101,
+      weaponType: WeaponType.GreatSword,
+      icon: getEnkaUI("UI_EquipIcon_Claymore_Aniki_Awaken"),
+      baseAtk: 185,
+      rarity: Rarity.One,
+      appendPropId: AppendProp.ATTACK_PERCENT,
+      statValue: 0,
+    },
+    () => {
+      return {
+        title: "",
+        text: highlight``,
+      };
+    }
+  ),
+  createWeapon(
+    {
+      name: "学徒笔记",
+      enkaId: 14101,
+      weaponType: WeaponType.Magic,
+      icon: getEnkaUI("UI_EquipIcon_Catalyst_Apprentice_Awaken"),
+      baseAtk: 185,
+      rarity: Rarity.One,
+      appendPropId: AppendProp.ATTACK_PERCENT,
+      statValue: 0,
+    },
+    () => {
+      return {
+        title: "",
+        text: highlight``,
+      };
+    }
+  ),
+  createWeapon(
+    {
+      name: "猎弓",
+      enkaId: 15101,
+      weaponType: WeaponType.Bow,
+      icon: getEnkaUI("UI_EquipIcon_Bow_Hunters_Awaken"),
+      baseAtk: 185,
+      rarity: Rarity.One,
+      appendPropId: AppendProp.ATTACK_PERCENT,
+      statValue: 0,
+    },
+    () => {
+      return {
+        title: "",
+        text: highlight``,
+      };
+    }
+  ),
+  createWeapon(
+    {
+      name: "无锋剑",
+      enkaId: 11101,
+      weaponType: WeaponType.Sword,
+      icon: getEnkaUI("UI_EquipIcon_Sword_Blunt_Awaken"),
+      baseAtk: 185,
+      rarity: Rarity.One,
+      appendPropId: AppendProp.ATTACK_PERCENT,
+      statValue: 0,
+    },
+    () => {
+      return {
+        title: "",
+        text: highlight``,
+      };
     }
   ),
 ];
