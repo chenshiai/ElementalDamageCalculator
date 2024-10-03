@@ -52,7 +52,7 @@
         <span class="additional-tab-title-span">{{ mode.title }}</span>
       </div>
     </div>
-    <Tabs color="#997874" line-width="60px" v-model:active="childrenActive" @change="defaultTitleSetting">
+    <Tabs color="#997874" type="card" v-model:active="childrenActive" @change="defaultTitleSetting">
       <Tab
         v-for="item in calculationModeChildren"
         :title="item.title"
@@ -91,8 +91,8 @@
 </template>
 
 <script setup>
-import { onMounted, reactive, ref, computed } from "vue";
-import { Icon, Popup, Field, Form, Toast, Button, Tab, Tabs } from "vant";
+import { onMounted, reactive, ref, computed, nextTick  } from "vue";
+import { Icon, Popup, Field, Form, showSuccessToast, Button, Tab, Tabs } from "vant";
 import { floatNum, getLocalStorage, EventBus } from "@/utils";
 
 const props = defineProps({
@@ -164,7 +164,7 @@ function defaultTitleSetting() {
 }
 
 // 点击切换计算模式
-function handleClick(index) {
+async function handleClick(index) {
   active.value = index;
   childrenActive.value = 0;
   defaultTitleSetting();
@@ -213,7 +213,7 @@ function onSubmit(value) {
 
   // 拼接新的标签组并更新到localstorage
   updateNoteGroup([...localNotes.value]);
-  Toast.success("添加成功");
+  showSuccessToast("添加成功");
 }
 
 /** 生命周期 mounted */
@@ -353,6 +353,7 @@ onMounted(() => {
   display: flex;
   flex-wrap: wrap;
   padding: 0 16px 0 16px;
+  margin-bottom: 16px;
 }
 
 .additional-tab-active {

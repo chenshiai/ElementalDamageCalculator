@@ -153,6 +153,7 @@ export const Weapons: IWeaponInfo[] = [
     (affix = 1) => {
       const limit = 80 + (affix - 1) * 10 + "%";
       const atk = 28 + (affix - 1) * 7 + "%";
+      const car = 30 + (affix - 1) * 5
       return [
         {
           label: "攻击力提升",
@@ -169,12 +170,13 @@ export const Weapons: IWeaponInfo[] = [
             },
           ],
           describe: `攻击力获得提升，提升程度相当于元素充能效率超出100%部分的${atk}，至多通过这种方式提升${limit}。`,
-          enable: false,
+          enable: true,
         },
         {
           label: "元素充能效率提升",
+          describe: `施放元素爆发后，元素充能效率提升${car}%`,
           effect: [{ type: BuffType.ChargeFixed, getValue: () => 30 + (affix - 1) * 5 }],
-          enable: true,
+          enable: false,
         },
       ];
     }
@@ -361,7 +363,7 @@ export const Weapons: IWeaponInfo[] = [
       const skill = 8 + (affix - 1) * 2 + "%";
       return {
         title: "湖光的朝与暮",
-        text: highlight` · 装备者的当前生命值提升或降低时，元素战技造成的伤害提升${skill}，该效果持续6秒，至多叠加3次，每0.2秒至多触发一次；队伍中其他角色的当前生命值提升或降低时，装备者的生命值上限提升${hp}，该效果持续6秒，至多叠加2次，每0.2秒至多触发一次。装备者处于队伍后台时，依然能触发上述效果。`,
+        text: highlight`装备者的当前生命值提升或降低时，元素战技造成的伤害提升${skill}，该效果持续6秒，至多叠加3次，每0.2秒至多触发一次；队伍中其他角色的当前生命值提升或降低时，装备者的生命值上限提升${hp}，该效果持续6秒，至多叠加2次，每0.2秒至多触发一次。装备者处于队伍后台时，依然能触发上述效果。`,
       };
     },
     (affix = 1) => {
@@ -404,7 +406,7 @@ export const Weapons: IWeaponInfo[] = [
       const add = 16 + (affix - 1) * 4 + "%";
       return {
         title: "苍翠之路的誓言",
-        text: highlight` · 队伍中的角色触发火元素相关反应后，装备者元素战技造成的伤害提升${add}，持续8秒。该效果队伍中的角色处于队伍后台时也能触发。`,
+        text: highlight`队伍中的角色触发火元素相关反应后，装备者元素战技造成的伤害提升${add}，持续8秒。该效果队伍中的角色处于队伍后台时也能触发。`,
       };
     },
     (affix = 1) => {
@@ -1107,7 +1109,7 @@ export const Weapons: IWeaponInfo[] = [
     (affix = 1) => {
       return {
         title: "均衡的原理",
-        text: highlight` · 进行治疗时，恢复${
+        text: highlight`进行治疗时，恢复${
           8 + (affix - 1) * 2
         }点能量，该效果每10秒至多触发一次，角色处于队伍后台时也能触发。`,
       };
@@ -1416,7 +1418,7 @@ export const Weapons: IWeaponInfo[] = [
       let add = 6 + (affix - 1) * 1.5 + "%";
       return {
         title: "蔚蓝深空",
-        text: highlight` · 普通攻击或重击命中敌人后的6秒内，普通攻击造成的伤害提升${atk}，重击造成的伤害提升${add}。该效果至多叠加3次，每0.3秒至多触发一次。`,
+        text: highlight`普通攻击或重击命中敌人后的6秒内，普通攻击造成的伤害提升${atk}，重击造成的伤害提升${add}。该效果至多叠加3次，每0.3秒至多触发一次。`,
       };
     },
     (affix = 1) => {
@@ -2133,7 +2135,7 @@ export const Weapons: IWeaponInfo[] = [
       let em = 48 + (affix - 1) * 12;
       return {
         title: "风与花的密语",
-        text: highlight` · 元素战技命中敌人或触发元素反应后的8秒内，攻击力提升${atk}，元素精通提升${em}点。`,
+        text: highlight`元素战技命中敌人或触发元素反应后的8秒内，攻击力提升${atk}，元素精通提升${em}点。`,
       };
     },
     (affix = 1) => {
@@ -2612,7 +2614,7 @@ export const Weapons: IWeaponInfo[] = [
       let e = 60 + (affix - 1) * 15;
       return {
         title: "森林的瑞佑",
-        text: highlight` · 触发燃烧、原激化、超激化、蔓激化、绽放、超绽放或烈绽放后，将在角色周围产生至多存在10秒的「种识之叶」。拾取种识之叶的角色元素精通提升${e}点，持续12秒。每20秒至多通过这种方式产生一枚种识之叶。角色处于队伍后台时也能触发。种识之叶的效果无法叠加。`,
+        text: highlight`触发燃烧、原激化、超激化、蔓激化、绽放、超绽放或烈绽放后，将在角色周围产生至多存在10秒的「种识之叶」。拾取种识之叶的角色元素精通提升${e}点，持续12秒。每20秒至多通过这种方式产生一枚种识之叶。角色处于队伍后台时也能触发。种识之叶的效果无法叠加。`,
       };
     },
     (affix = 1) => {

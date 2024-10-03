@@ -83,4 +83,7 @@ const getOtherSkill = computed(() => {
 .skill-info .van-collapse-item__content {
   color: var(--main-text);
 }
+.skill-info .van-cell {
+  background-color: var(--light-text);
+}
 </style>

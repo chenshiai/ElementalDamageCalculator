@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Popup, Search, Icon, Toast, Button } from "vant";
+import { Popup, Search, Icon, showSuccessToast, showFailToast, Button } from "vant";
 import { ref, computed } from "vue";
 
 import relics from "@/constants/characters-config/relic";
@@ -70,7 +70,7 @@ const setStatForm = ref<RelicStatType>({
 });
 const addRelic = () => {
   if (!setStatForm.value.reliquaryMainstat.mainPropId) {
-    Toast.fail("主词条未选择");
+    showFailToast("主词条未选择");
     return;
   }
 
@@ -83,14 +83,14 @@ const addRelic = () => {
 
   relicList.value.splice(selectedPartIndex.value, 1, relicItem);
   closePopup();
-  Toast.success("修改成功");
+  showSuccessToast("修改成功");
 };
 const removeRelic = () => {
   if (!relicList.value[selectedPartIndex.value]) return;
   const name = relicList.value[selectedPartIndex.value].name;
   relicList.value.splice(selectedPartIndex.value, 1, null);
   closePopup();
-  Toast.success(`已卸下\n[${name}]`);
+  showSuccessToast(`已卸下\n[${name}]`);
 };
 const closePopup = () => {
   showPopup.value = false;
@@ -174,7 +174,7 @@ const subStatFilter = (selectedId: AppendProp) => {
       </template>
       <div class="empty" v-else>+ 添加圣遗物</div>
     </div>
-    <div class="relic-detail">
+    <div class="relic-detail relic-suit-detail">
       <div class="relic-suit-text" v-for="relicSuitText in relicSuitTexts">
         <div class="relic-suit-text__title">{{ relicSuitText.name }}</div>
         <div class="relic-suit-text__texts">
@@ -236,33 +236,38 @@ const subStatFilter = (selectedId: AppendProp) => {
 .relic-info {
   margin-bottom: 16px;
   display: grid;
-  grid-gap: 2px;
+  gap: 8px;
   grid-template-columns: repeat(2, 1fr);
 }
 
 .relic-detail {
   position: relative;
-  border: 2px solid var(--border);
-  border-radius: 4px;
   font-size: 14px;
-  padding: 6px;
   height: 112px;
-  overflow: scroll;
+  border-radius: 4px;
+  margin-bottom: 12px;
+  box-shadow: 2px 2px 1px var(--bg);
 }
-
+.relic-suit-detail {
+  overflow: scroll;
+  box-shadow: none;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 90%, rgba(0, 0, 0, 0) 100%);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 90%, rgba(0, 0, 0, 0) 100%); /* Safari 和 Chrome */
+}
 .relic-main-stats {
   display: flex;
   justify-content: space-between;
+  padding: 0 8px;
 }
 
 .relic-icon {
   width: 40%;
-  z-index: -1;
-  top: -10%;
-  right: 0;
+  z-index: 1;
+  top: -20%;
+  right: -4%;
   position: absolute;
-  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 80%);
-  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 80%); /* Safari 和 Chrome */
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 90%);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 90%); /* Safari 和 Chrome */
 }
 .relic-level {
   background-color: var(--bg);
@@ -274,21 +279,23 @@ const subStatFilter = (selectedId: AppendProp) => {
 .relic-name {
   font-size: 16px;
   line-height: 32px;
+  background-image: linear-gradient(to right, var(--five-rarity) 0%, rgba(0, 0, 0, 0) 70%);
+  color: var(--light-text);
+  text-shadow: 2px 2px 4px var(--button-bg);
+  border-radius: 4px 0 0;
+  padding: 0 8px;
 }
 .relic-detail__stats {
   display: flex;
   justify-content: space-between;
   font-size: 12px;
   line-height: 14px;
+  padding: 0 8px;
 }
 
 .empty {
   text-align: center;
   line-height: 102px;
-}
-
-.relic-popup {
-  position: relative;
 }
 
 .relic-search {
@@ -389,7 +396,9 @@ select {
   border: 1px solid var(--border);
 }
 .relic-suit-text {
+  overflow: scroll;
   color: var(--extra-text);
+  padding: 0 8px;
 }
 .relic-suit-text__texts {
   font-size: 12px;

@@ -5,6 +5,7 @@
 
 .eva-cell {
   margin-bottom: 12px;
+  background-color: var(--light-text);
 }
 
 .data-panel .van-stepper--round .van-stepper__minus {

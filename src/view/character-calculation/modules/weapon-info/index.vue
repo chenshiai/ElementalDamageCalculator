@@ -5,7 +5,7 @@ import { AppendProp } from "@/types/enum";
 import getBackGroundByRarity from "@/utils/getBackGroundClassByRarity";
 import { getAppendPropName } from "@/constants/characters-config/append-prop";
 import { ref, computed } from "vue";
-import { Popup, Rate } from "vant";
+import { Popup, Rate, Icon } from "vant";
 
 const show = ref(false);
 const handleWeaponChange = (weapons: IWeaponInfo) => {
@@ -37,32 +37,22 @@ const weaponStats = computed(() => {
 </script>
 
 <template>
-  <div class="data-panel__title">武器</div>
-  <div class="weapon-info">
-    <div class="avatar" @click="show = true">
-      <template v-if="weapon">
-        <img :class="getBackGroundByRarity(weapon.rarity)" :src="weapon?.icon" />
-        <div class="name">{{ weapon?.name }}</div>
-      </template>
-      <div class="empty" v-else></div>
+  <!-- <div class="data-panel__title">武器</div> -->
+  <div v-if="!weapon" class="show-click" @click="show = true">选择武器</div>
+  <template v-else>
+    <div class="weapon-info">
+      <div class="avatar-info">
+        <div :class="['name', getBackGroundByRarity(weapon.rarity)]">{{ weapon?.name }}（Lv.{{ weapon.level }}）</div>
+        <div v-for="item in weaponStats">{{ item.title }}: {{ item.value }}{{ item.suffix }}</div>
+        <div class="affix">精炼：<Rate v-model="affix" color="#997874" icon="fire" void-icon="fire-o" /></div>
+      </div>
+      <div class="avatar" @click="show = true">
+        <img :src="weapon?.icon" />
+        <Icon name="exchange" />
+      </div>
     </div>
-    <div class="avatar-info">
-      <template v-if="weapon">
-        <span>等级：{{ weapon.level }}</span>
-        <span class="affix">
-          精炼
-          <Rate v-model="affix" color="#997874" />
-        </span>
-        <div class="weapon-stats">
-          <span v-for="item in weaponStats">{{ item.title }}: {{ item.value }}{{ item.suffix }}</span>
-        </div>
-        <div class="weapon-describe">
-          {{ describe.title }}：<span v-html="describe.text"></span>
-        </div>
-      </template>
-      <div v-else>点击左侧 + 号选择武器</div>
-    </div>
-  </div>
+    <div class="weapon-describe">{{ describe.title }}：<span v-html="describe.text"></span></div>
+  </template>
   <Popup teleport="#app" v-model:show="show" position="right" :style="{ width: '100%', height: '100vh' }">
     <WeaponSelector @close="show = false" :handleChange="handleWeaponChange" />
   </Popup>
@@ -70,25 +60,35 @@ const weaponStats = computed(() => {
 
 <style scoped>
 .weapon-info {
-  display: flex;
   margin-bottom: 16px;
+  position: relative;
 }
-
+.weapon-info:has(+ .weapon-describe) {
+  margin-bottom: 8px;
+}
 .avatar {
-  height: 110px;
-  width: 86px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 130px;
   box-sizing: border-box;
-  border: 2px solid var(--border);
-  border-radius: 4px;
-  overflow: hidden;
-  background-color: var(--bg);
-  margin-right: 16px;
 }
 
 .avatar img {
   display: inline-block;
   vertical-align: middle;
-  max-height: 86px;
+  width: 100%;
+
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0) 100%);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0) 100%); /* Safari 和 Chrome */
+}
+.avatar i {
+  position: absolute;
+  right: 0px;
+  top: 30px;
+  border: 1px solid var(--border);
+  color: var(--light-text);
+  background-color: var(--bg);
 }
 
 .avatar-info {
@@ -96,10 +96,11 @@ const weaponStats = computed(() => {
 }
 
 .name {
-  line-height: 20px;
-  font-size: 14px;
+  line-height: 24px;
+  font-size: 16px;
   text-align: center;
-  background-color: var(--light-text);
+  color: var(--light-text);
+  border-radius: 4px;
 }
 
 .empty {
@@ -136,9 +137,16 @@ const weaponStats = computed(() => {
 }
 
 .weapon-describe {
+  margin-bottom: 16px;
   font-size: 12px;
 }
+.show-click {
+  text-align: center;
+  border: 1px solid var(--border);
+  margin-bottom: 16px;
+  border-radius: 4px;
+}
 .affix {
-  margin-left: 16px;
+  margin-top: 20px;
 }
 </style>

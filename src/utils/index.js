@@ -1,5 +1,5 @@
 
-import { Toast } from "vant";
+import { showFailToast } from "vant";
 import { ElementalReaction, ReactionRate } from '@/constants';
 import { BaseDMG } from '@/constants/elementalReaction';
 
@@ -61,7 +61,7 @@ export const getLocalStorage = (
   try {
     return JSON.parse(value) || defaultValue;
   } catch {
-    Toast.fail(description);
+    showFailToast(description);
     return defaultValue;
   }
 };

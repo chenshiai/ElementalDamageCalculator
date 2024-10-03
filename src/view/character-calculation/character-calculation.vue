@@ -6,6 +6,11 @@
   <CharacterInfo v-model="characterInfo" v-model:constellation="constellation" />
   <WeaponInfo v-model="weapon" v-model:affix="affix" />
   <RelicInfo v-model="relicList" :relic-suit-texts="relicSuitTexts" />
+  <CharacterPanel
+    v-if="characterInfo && weapon"
+    :character-panel-data="CalculationPanel"
+    :element-type="characterInfo?.element"
+  />
   <BuffInfo
     v-if="characterInfo && weapon"
     v-model="buffs"
@@ -13,11 +18,6 @@
     v-model:weapon-buffs="weaponBuffs"
     v-model:relic-buffs="relicBuffs"
     :character-info="characterInfo"
-  />
-  <CharacterPanel
-    v-if="characterInfo && weapon"
-    :character-panel-data="CalculationPanel"
-    :element-type="characterInfo?.element"
   />
   <SkillInfo
     v-if="characterInfo && weapon"

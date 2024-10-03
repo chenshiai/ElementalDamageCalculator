@@ -79,7 +79,7 @@
 <script setup>
 import { ref, computed } from "vue";
 import { useStore } from "vuex";
-import { Popup, Field, Toast, Collapse, CollapseItem, Icon } from "vant";
+import { Popup, Field, showSuccessToast, showFailToast, Collapse, CollapseItem, Icon } from "vant";
 import {
   getLocalStorage,
   deepCopyObject,
@@ -232,7 +232,7 @@ const saveDataPop = () => {
 
 const saveData = () => {
   if (!remark.value) {
-    Toast.fail("数据命名为空");
+    showFailToast("数据命名为空");
     return;
   }
   const { damageModule, saveDataModule } = store.state;
@@ -250,11 +250,11 @@ const saveData = () => {
       "GenShinImpactCustomDataV2",
       JSON.stringify([...sourceData])
     );
-    Toast.success("保存成功");
+    showSuccessToast("保存成功");
     remark.value = "";
     showPopup.value = false;
   } catch {
-    Toast.fail("保存失败");
+    showFailToast("保存失败");
   }
 };
 
@@ -280,9 +280,9 @@ const deleteLocalData = (name) => {
       JSON.stringify([...sourceData])
     );
     localData.value = [...sourceData];
-    Toast.success("删除成功");
+    showSuccessToast("删除成功");
   } catch {
-    Toast.fail("删除失败");
+    showFailToast("删除失败");
   }
 };
 

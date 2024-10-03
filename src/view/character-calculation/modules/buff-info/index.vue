@@ -66,3 +66,9 @@ const activeNames = ref<string[]>([]);
   margin-top: 4px;
 }
 </style>
+
+<style>
+.buffs-container .van-cell {
+  background-color: var(--light-text);
+}
+</style>

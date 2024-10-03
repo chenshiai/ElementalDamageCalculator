@@ -267,21 +267,21 @@
 }
 
 .logo-Sword::after {
-  content: 'Sword';
+  content: '单手剑';
 }
 
 .logo-GreatSword::after {
-  content: 'GreatSword';
+  content: '双手剑';
 }
 
 .logo-Bow::after {
-  content: 'Bow';
+  content: '弓箭';
 }
 
 .logo-Magic::after {
-  content: 'Magic';
+  content: '法器';
 }
 
 .logo-Polearms::after {
-  content: 'Polearms';
+  content: '长柄武器';
 }

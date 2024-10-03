@@ -30,7 +30,7 @@
       <RadioGroup class="selector" v-model="result" @change="resultChange">
         <Radio class="selector-items" v-for="(item, index) in configFilter" :name="item.name" :key="index">
           <div :class="['selector-item__avatar', getBackGroundByRarity(item.rarity)]">
-            <img :src="item.icon" />
+            <img v-lazy="item.icon" />
           </div>
           <div :class="['logo', 'logo-' + item.weaponType]"></div>
           <span class="selector-item__name">{{ item.name }}</span>

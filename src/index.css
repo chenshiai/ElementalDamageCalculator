@@ -22,14 +22,14 @@
   --two-rarity: #577C6C;
   --three-rarity: #55859F;
   --four-rarity: #A17CC2;
-  --five-rarity: #B07430;
+  --five-rarity: #cc8d41;
 
-  --van-cell-background-color: var(--light-text);
+  /* --van-cell-background: var(--light-text); */
   --van-collapse-item-content-padding: 0;
-  --van-collapse-item-content-background-color: var(--page-bg);
-  --van-collapse-item-transition-duration: var(--van-animation-duration-fast);
-  --van-slider-active-background-color: var(--main-text);
-  --van-stepper-button-round-theme-color: var(--button-bg)
+  --van-collapse-item-content-background: var(--page-bg);
+  --van-collapse-item-duration: 0.2s;
+  --van-slider-active-background: var(--main-text);
+  --van-stepper-button-round-theme: var(--button-bg)
 }
 
 body {
