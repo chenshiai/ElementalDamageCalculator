@@ -64,6 +64,26 @@ body {
   background-color: var(--five-rarity);
 }
 
+.linear-bg-0-rarity {
+  background-image: linear-gradient(to right, var(--one-rarity) 0%, rgba(0, 0, 0, 0) 70%);
+}
+
+.linear-bg-1-rarity {
+  background-image: linear-gradient(to right, var(--two-rarity) 0%, rgba(0, 0, 0, 0) 70%);
+}
+
+.linear-bg-2-rarity {
+  background-image: linear-gradient(to right, var(--three-rarity) 0%, rgba(0, 0, 0, 0) 70%);
+}
+
+.linear-bg-3-rarity {
+  background-image: linear-gradient(to right, var(--four-rarity) 0%, rgba(0, 0, 0, 0) 70%);
+}
+
+.linear-bg-4-rarity {
+  background-image: linear-gradient(to right, var(--five-rarity) 0%, rgba(0, 0, 0, 0) 70%);
+}
+
 #app {
   font-family: 'eng', HYWenHei-85W, Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

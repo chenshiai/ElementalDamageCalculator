@@ -282,7 +282,8 @@ function round(a: number, precision: number = 0): number {
   justify-content: space-between;
   align-items: center;
   height: 28px;
-  padding: 0 20px;
+  text-wrap: nowrap;
+  padding-left: 12px;
 }
 /* 设置偶数行的背景颜色 */
 .panel-item:nth-child(even) {

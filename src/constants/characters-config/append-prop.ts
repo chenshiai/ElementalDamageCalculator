@@ -49,7 +49,7 @@ export const EquipTypeText = {
   [EquipType.EQUIP_DRESS]: "理之冠",
 };
 
-/** 主属性列表 */
+/** 各个部位对应的主属性列表 */
 export const EquipTypeMainstats = {
   [EquipType.EQUIP_BRACER]: [AppendProp.HP],
   [EquipType.EQUIP_NECKLACE]: [AppendProp.ATTACK],

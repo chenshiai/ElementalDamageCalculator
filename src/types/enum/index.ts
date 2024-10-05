@@ -230,10 +230,13 @@ export enum BuffType {
   NormalLevel = "normalLevel",
   SkillLevel = "skillLevel",
   BurstLevel = "burstLevel",
+  /** 普攻附魔属性 */
   Enchanting = "enchanting",
-
+  /** 增幅反应系数提升 */
   AmplifiedRate = "amplifiedRate",
+  /** 激化反应系数提升 */
   CatalyzeRate = "catalyzeRate",
+  /** 无视防御 */
   DefensePenetration = "defensePenetration"
 }
 export enum AppendProp {
@@ -259,6 +262,7 @@ export enum AppendProp {
   GRASS_ADD_HURT = "FIGHT_PROP_GRASS_ADD_HURT",
 }
 
+/** 圣遗物的部位类型 */
 export enum EquipType {
   /** 生之花 */
   EQUIP_BRACER = "EQUIP_BRACER",

@@ -7,6 +7,7 @@ import {
   IRelicItem,
   MainstatType,
   ReliceMainStats,
+  ReliceMainStats_Four,
   RelicItem,
   RelicStatType,
 } from "@/constants/characters-config/relic-class";
@@ -19,6 +20,7 @@ import {
   EquipTypeMainstats,
   EquipTypeSubstats,
 } from "@/constants/characters-config/append-prop";
+import { getlinearBackGroundClassByRarity } from "@/utils/getBackGroundClassByRarity";
 import { IRelicSuitText } from "./index";
 
 interface IProps {
@@ -77,8 +79,6 @@ const addRelic = () => {
   const relicItem = new RelicItem({
     ...setStatBase.value,
     ...setStatForm.value,
-    rankLevel: 5,
-    level: 20,
   });
 
   relicList.value.splice(selectedPartIndex.value, 1, relicItem);
@@ -128,8 +128,14 @@ const deleteSubStat = (index) => {
 
 // 根据部位类型来获取主词条列表
 const mainStatFilter = computed(() => {
-  if (setStatBase.value) {
+  if (!setStatBase.value) return [];
+  if (setStatBase.value.rankLevel === 5) {
     return ReliceMainStats.filter((item) => {
+      return EquipTypeMainstats[setStatBase.value.equipType].includes(item.mainPropId);
+    });
+  }
+  if (setStatBase.value.rankLevel === 4) {
+    return ReliceMainStats_Four.filter((item) => {
       return EquipTypeMainstats[setStatBase.value.equipType].includes(item.mainPropId);
     });
   }
@@ -154,7 +160,7 @@ const subStatFilter = (selectedId: AppendProp) => {
       <template v-if="item">
         <img class="relic-icon" :src="item.icon" />
         <div class="relic-detail__hearder">
-          <div class="relic-name">
+          <div :class="['relic-name', getlinearBackGroundClassByRarity(item.rankLevel - 1)]">
             {{ item.name }}
             <!-- <span class="relic-level">+{{ item.level }}</span> -->
           </div>
@@ -279,7 +285,7 @@ const subStatFilter = (selectedId: AppendProp) => {
 .relic-name {
   font-size: 16px;
   line-height: 32px;
-  background-image: linear-gradient(to right, var(--five-rarity) 0%, rgba(0, 0, 0, 0) 70%);
+  /* background-image: linear-gradient(to right, var(--five-rarity) 0%, rgba(0, 0, 0, 0) 70%); */
   color: var(--light-text);
   text-shadow: 2px 2px 4px var(--button-bg);
   border-radius: 4px 0 0;
@@ -301,6 +307,7 @@ const subStatFilter = (selectedId: AppendProp) => {
 .relic-search {
   position: fixed;
   width: 100%;
+  background: #fff;
 }
 
 .relic-search span {

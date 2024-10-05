@@ -14,3 +14,7 @@ export default (rarity: Rarity) => {
       return "bg-one-rarity";
   }
 }
+
+export function getlinearBackGroundClassByRarity(rarity: Rarity) {
+  return `linear-bg-${rarity}-rarity`;
+}

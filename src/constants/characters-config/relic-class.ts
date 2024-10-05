@@ -2,6 +2,7 @@ import { EquipType, AppendProp } from "@/types/enum";
 import { IRelicBase } from "@/types/interface";
 
 export type MainstatType = {
+  /** 圣遗物主属性类型 */
   mainPropId: AppendProp;
   statValue: number;
 };
@@ -14,7 +15,7 @@ export type SubstatType = {
 export type RelicStatType = {
   reliquaryMainstat: MainstatType;
   reliquarySubstats: SubstatType[];
-}
+};
 
 export interface IRelicItem extends IRelicBase, RelicStatType {
   rankLevel: number;
@@ -50,7 +51,7 @@ export class RelicItem {
     this.reliquarySubstats = data;
   }
 }
-/** 圣遗物主词条 */
+/** 5星圣遗物主词条列表 */
 export const ReliceMainStats: MainstatType[] = [
   {
     mainPropId: AppendProp.ATTACK,
@@ -124,4 +125,80 @@ export const ReliceMainStats: MainstatType[] = [
     mainPropId: AppendProp.CRITICAL_HURT,
     statValue: 62.2,
   },
-]
+];
+
+/** 4星圣遗物主词条列表 */
+export const ReliceMainStats_Four: MainstatType[] = [
+  {
+    mainPropId: AppendProp.ATTACK,
+    statValue: 232,
+  },
+  {
+    mainPropId: AppendProp.HP,
+    statValue: 3571,
+  },
+  {
+    mainPropId: AppendProp.DEFENSE_PERCENT,
+    statValue: 43.5,
+  },
+  {
+    mainPropId: AppendProp.ATTACK_PERCENT,
+    statValue: 34.8,
+  },
+  {
+    mainPropId: AppendProp.HP_PERCENT,
+    statValue: 34.8,
+  },
+  {
+    mainPropId: AppendProp.ELEMENT_MASTERY,
+    statValue: 139,
+  },
+  {
+    mainPropId: AppendProp.CHARGE_EFFICIENCY,
+    statValue: 38.7,
+  },
+  {
+    mainPropId: AppendProp.HEAL_ADD,
+    statValue: 26.8,
+  },
+  {
+    mainPropId: AppendProp.PHYSICAL_ADD_HURT,
+    statValue: 43.5,
+  },
+  {
+    mainPropId: AppendProp.FIRE_ADD_HURT,
+    statValue: 34.8,
+  },
+  {
+    mainPropId: AppendProp.WATER_ADD_HURT,
+    statValue: 34.8,
+  },
+  {
+    mainPropId: AppendProp.WIND_ADD_HURT,
+    statValue: 34.8,
+  },
+  {
+    mainPropId: AppendProp.ICE_ADD_HURT,
+    statValue: 34.8,
+  },
+  {
+    mainPropId: AppendProp.GRASS_ADD_HURT,
+    statValue: 34.8,
+  },
+  {
+    mainPropId: AppendProp.ELEC_ADD_HURT,
+    statValue: 34.8,
+  },
+  {
+    mainPropId: AppendProp.ROCK_ADD_HURT,
+    statValue: 34.8,
+  },
+  {
+    mainPropId: AppendProp.CRITICAL,
+    statValue: 23.2,
+  },
+  {
+    mainPropId: AppendProp.CRITICAL_HURT,
+    statValue: 46.4,
+  },
+];

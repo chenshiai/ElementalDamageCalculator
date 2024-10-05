@@ -78,9 +78,12 @@ export interface IWeaponInfo {
 
 export interface IRelicBase {
   setNameTextMapHash: number;
+/** 圣遗物的部位类型 */
   equipType: EquipType;
   name: string;
   icon: string;
+  rankLevel: number;
+  level: number;
 }
 
 export interface ICalculatorValue {

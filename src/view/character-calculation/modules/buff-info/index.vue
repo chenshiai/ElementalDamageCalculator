@@ -20,6 +20,12 @@ const weaponBuffsFilter = computed(() => {
   });
 });
 
+const relicBuffsFilter = computed(() => {
+  return relicBuffs.value.filter((buff) => {
+    return !buff.condition || buff.condition(characterInfo);
+  });
+});
+
 const activeNames = ref<string[]>([]);
 </script>
 
@@ -39,7 +45,7 @@ const activeNames = ref<string[]>([]);
         </div>
       </CollapseItem>
       <CollapseItem v-if="relicBuffs?.length > 0" title="圣遗物套装增益" name="relic">
-        <div v-for="(buff, index) in relicBuffs" :key="buff.label + index" class="buff-item">
+        <div v-for="(buff, index) in relicBuffsFilter" :key="buff.label + index" class="buff-item">
           <BuffItem v-model="buff.enable" v-model:stack="buff.stack" :buff="buff" :show-delete="false" />
         </div>
       </CollapseItem>

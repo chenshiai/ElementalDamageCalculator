@@ -27,18 +27,22 @@ const useRelicInfo = () => {
         texts: [targetRelic.suit2],
       });
       
-      const suit2 = Object.create(targetRelic.buffs.suit2);
-      relicBuffs.value.push(suit2);
+      targetRelic.buffs.suit2.forEach((element) => {
+        const suit2 = Object.create(element);
+        relicBuffs.value.push(suit2);
+      });
     }
     if (num === 4) {
-      const suit4 = Object.create(targetRelic.buffs.suit4);
-      relicBuffs.value.push(suit4);
-
       relicSuitTexts.value
         .find((item) => {
           return item.name === targetRelic.name;
         })
         .texts.push(targetRelic.suit4);
+
+      targetRelic.buffs.suit4.forEach((element) => {
+        const suit4 = Object.create(element);
+        relicBuffs.value.push(suit4);
+      });
     }
   };
 
