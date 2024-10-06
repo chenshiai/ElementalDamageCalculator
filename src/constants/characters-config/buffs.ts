@@ -31,6 +31,8 @@ export const S_80_ATK_28P = createBuff(BuffType.ATKPrcent, 28.8, 'S', '攻击力
 export const S_80_DEF_28P = createBuff(BuffType.DEFPrcent, 28.8, 'S', '防御力');
 export const S_80_CHARGE_32P = createBuff(BuffType.ChargeFixed, 32, 'S', '元素充能效率');
 export const S_80_MYSTERY_115 = createBuff(BuffType.MysteryFixed, 115, 'S', '元素精通');
+export const S_80_CRITAL_38P = createBuff(BuffType.Critcal, 19.2, 'S', '暴击率');
+export const S_80_CRITALHUNT_38P = createBuff(BuffType.CritcalHurt, 38.4, 'S', '暴击伤害');
 
 export const S_80_GEO_28P = createBuff(BuffType.GeoPrcent, 28.8, 'S', '岩元素伤害加成');
 export const S_80_CRYO_28P = createBuff(BuffType.CryoPrcent, 28.8, 'S', '冰元素伤害加成');

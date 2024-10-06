@@ -23,7 +23,7 @@ watch(
   }
 );
 
-function calculator({ rate, attackType, elementType }: ISkillRate, level: number = 1) {
+function calculator({ rate, attackType, elementType, special }: ISkillRate, level: number = 1) {
   let { RESULT_DMG, CRITICAL_DMG, DEISTE_DMG } = calculateDamage({
     calculatorValue: valueRef.value,
     attackType,
@@ -31,6 +31,7 @@ function calculator({ rate, attackType, elementType }: ISkillRate, level: number
     rate,
     level,
     atkType: atkType.value,
+    special,
   });
 
   return {

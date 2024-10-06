@@ -1,116 +1,150 @@
 import { ElementalReaction, ReactionRate } from "@/constants";
-import { AttackType, ElementType, EnchantingType, NumberToElementType } from "@/types/enum";
+import { AttackType, BuffType, ElementType, EnchantingType, NumberToElementType, WeaponType } from "@/types/enum";
 import { ICalculatorValue, IRate } from "@/types/interface";
 import { BaseDMG } from "@/constants/elementalReaction";
 import { getCatalyzeRate, getAmplifiedRate, getResistanceRate, getDefRate } from "@/utils";
 
-interface args {
-  calculatorValue: ICalculatorValue;
-  attackType: AttackType;
-  elementType: ElementType;
-  rate: IRate;
-  level: number;
-  atkType: string;
-}
-export function calculateDamage({ calculatorValue, attackType, elementType, rate, level, atkType }: args) {
-  // 伤害提高值
-  let ADDITIONAL_DMG = calculatorValue.globalIncreaseHunt;
-  let addHunt = calculatorValue.globalAddHunt;
-  let criticalHunt = calculatorValue.critcalHurt;
-  let critical = calculatorValue.critcal;
-
-  // 附魔
-  if (
-    (attackType === AttackType.Normal || attackType === AttackType.Strong || attackType === AttackType.Falling) &&
-    calculatorValue.enchanting !== EnchantingType.Physical
-  ) {
-    elementType = NumberToElementType[calculatorValue.enchanting];
-  }
+function getMoreDataBySwitch(calculatorValue: Partial<ICalculatorValue>, attackType, elementType) {
+  let ADDITIONAL_DMG = calculatorValue[BuffType.GlobalFixed] || 0;
+  let addHunt = calculatorValue[BuffType.GlobalPrcent] || 0;
+  let criticalHunt = calculatorValue[BuffType.CritcalHurt] || 0;
+  let critical = calculatorValue[BuffType.Critcal] || 0;
 
   // 处理攻击类型的加成
   switch (attackType) {
     case AttackType.Normal:
-      ADDITIONAL_DMG += calculatorValue.normalIncreaseHurt;
-      addHunt += calculatorValue.normalAttackAddHunt;
-      criticalHunt += calculatorValue.normalAttackCritcalHurt;
-      critical += calculatorValue.normalAttackCritcal;
+      ADDITIONAL_DMG += calculatorValue[BuffType.NormalFixed] || 0;
+      addHunt += calculatorValue[BuffType.NormalPrcent] || 0;
+      criticalHunt += calculatorValue[BuffType.NormalCritcalHurt] || 0;
+      critical += calculatorValue[BuffType.NormalCritcal] || 0;
       break;
     case AttackType.Strong:
-      ADDITIONAL_DMG += calculatorValue.strongIncreaseHurt;
-      addHunt += calculatorValue.strongAttackAddHunt;
-      criticalHunt += calculatorValue.strongAttackCritcalHurt;
-      critical += calculatorValue.strongAttackCritcal;
+      ADDITIONAL_DMG += calculatorValue[BuffType.StrongFixed] || 0;
+      addHunt += calculatorValue[BuffType.StrongPrcent] || 0;
+      criticalHunt += calculatorValue[BuffType.StrongCritcalHurt] || 0;
+      critical += calculatorValue[BuffType.StrongCritcal] || 0;
       break;
     case AttackType.Falling:
-      ADDITIONAL_DMG += calculatorValue.fallingIncreaseHurt;
-      addHunt += calculatorValue.fallingAttackAddHunt;
-      criticalHunt += calculatorValue.fallingAttackCritcalHurt;
-      critical += calculatorValue.fallingAttackCritcal;
+      ADDITIONAL_DMG += calculatorValue[BuffType.FallingFixed] || 0;
+      addHunt += calculatorValue[BuffType.FallingPrcent] || 0;
+      criticalHunt += calculatorValue[BuffType.FallingCritcalHurt] || 0;
+      critical += calculatorValue[BuffType.FallingCritcal] || 0;
       break;
     case AttackType.Skill:
-      ADDITIONAL_DMG += calculatorValue.elementalSkillIncreaseHurt;
-      addHunt += calculatorValue.elementalSkillAddHunt;
-      criticalHunt += calculatorValue.elementalSkillCritcalHurt;
-      critical += calculatorValue.elementalSkillCritcal;
+      ADDITIONAL_DMG += calculatorValue[BuffType.SkillFixed] || 0;
+      addHunt += calculatorValue[BuffType.SkillPrcent] || 0;
+      criticalHunt += calculatorValue[BuffType.SkillCritcalHurt] || 0;
+      critical += calculatorValue[BuffType.SkillCritcal] || 0;
       break;
     case AttackType.Burst:
-      ADDITIONAL_DMG += calculatorValue.elementalBurstIncreaseHurt;
-      addHunt += calculatorValue.elementalBurstAddHunt;
-      criticalHunt += calculatorValue.elementalBurstCritcalHurt;
-      critical += calculatorValue.elementalBurstCritcal;
+      ADDITIONAL_DMG += calculatorValue[BuffType.BurstFixed] || 0;
+      addHunt += calculatorValue[BuffType.BurstPrcent] || 0;
+      criticalHunt += calculatorValue[BuffType.BurstCritcalHurt] || 0;
+      critical += calculatorValue[BuffType.BurstCritcal] || 0;
       break;
   }
 
   // 处理元素类型的加成
   switch (elementType) {
     case ElementType.Physical:
-      ADDITIONAL_DMG += calculatorValue.phycalIncreaseHunt;
-      addHunt += calculatorValue.physicalAddHunt;
-      criticalHunt += calculatorValue.physicalCritcalHurt;
-      critical += calculatorValue.physicalCritcal;
+      ADDITIONAL_DMG += calculatorValue[BuffType.PhysicalFixed] || 0;
+      addHunt += calculatorValue[BuffType.PhysicalPrcent] || 0;
+      criticalHunt += calculatorValue[BuffType.PhysicalCritcalHurt] || 0;
+      critical += calculatorValue[BuffType.PhysicalCritcal] || 0;
       break;
     case ElementType.Pyro:
-      ADDITIONAL_DMG += calculatorValue.pyroIncreaseHunt;
-      addHunt += calculatorValue.pyroAddHunt;
-      criticalHunt += calculatorValue.pyroCritcalHurt;
-      critical += calculatorValue.pyroCritcal;
+      ADDITIONAL_DMG += calculatorValue[BuffType.PyroFixed] || 0;
+      addHunt += calculatorValue[BuffType.PyroPrcent] || 0;
+      criticalHunt += calculatorValue[BuffType.PyroCritcalHurt] || 0;
+      critical += calculatorValue[BuffType.PyroCritcal] || 0;
       break;
     case ElementType.Hydro:
-      ADDITIONAL_DMG += calculatorValue.hydroIncreaseHunt;
-      addHunt += calculatorValue.hydroAddHunt;
-      criticalHunt += calculatorValue.hydroCritcalHurt;
-      critical += calculatorValue.hydroCritcal;
+      ADDITIONAL_DMG += calculatorValue[BuffType.HydroFixed] || 0;
+      addHunt += calculatorValue[BuffType.HydroPrcent] || 0;
+      criticalHunt += calculatorValue[BuffType.HydroCritcalHurt] || 0;
+      critical += calculatorValue[BuffType.HydroCritcal] || 0;
       break;
     case ElementType.Anemo:
-      ADDITIONAL_DMG += calculatorValue.anemoIncreaseHunt;
-      addHunt += calculatorValue.anemoAddHunt;
-      criticalHunt += calculatorValue.anemoCritcalHurt;
-      critical += calculatorValue.anemoCritcal;
+      ADDITIONAL_DMG += calculatorValue[BuffType.AnemoFixed] || 0;
+      addHunt += calculatorValue[BuffType.AnemoPrcent] || 0;
+      criticalHunt += calculatorValue[BuffType.AnemoCritcalHurt] || 0;
+      critical += calculatorValue[BuffType.AnemoCritcal] || 0;
       break;
     case ElementType.Electro:
-      ADDITIONAL_DMG += calculatorValue.electroIncreaseHunt;
-      addHunt += calculatorValue.electroAddHunt;
-      criticalHunt += calculatorValue.electroCritcalHurt;
-      critical += calculatorValue.electroCritcal;
+      ADDITIONAL_DMG += calculatorValue[BuffType.ElectroFixed] || 0;
+      addHunt += calculatorValue[BuffType.ElectroPrcent] || 0;
+      criticalHunt += calculatorValue[BuffType.ElectroCritcalHurt] || 0;
+      critical += calculatorValue[BuffType.ElectroCritcal] || 0;
       break;
     case ElementType.Geo:
-      ADDITIONAL_DMG += calculatorValue.geoIncreaseHunt;
-      addHunt += calculatorValue.geoAddHunt;
-      criticalHunt += calculatorValue.geoCritcalHurt;
-      critical += calculatorValue.geoCritcal;
+      ADDITIONAL_DMG += calculatorValue[BuffType.GeoFixed] || 0;
+      addHunt += calculatorValue[BuffType.GeoPrcent] || 0;
+      criticalHunt += calculatorValue[BuffType.GeoCritcalHurt] || 0;
+      critical += calculatorValue[BuffType.GeoCritcal] || 0;
       break;
     case ElementType.Dendro:
-      ADDITIONAL_DMG += calculatorValue.dendroIncreaseHunt;
-      addHunt += calculatorValue.dendroAddHunt;
-      criticalHunt += calculatorValue.dendroCritcalHurt;
-      critical += calculatorValue.dendroCritcal;
+      ADDITIONAL_DMG += calculatorValue[BuffType.DendroFixed] || 0;
+      addHunt += calculatorValue[BuffType.DendroPrcent] || 0;
+      criticalHunt += calculatorValue[BuffType.DendroCritcalHurt] || 0;
+      critical += calculatorValue[BuffType.DendroCritcal] || 0;
       break;
     case ElementType.Cryo:
-      ADDITIONAL_DMG += calculatorValue.cryoIncreaseHunt;
-      addHunt += calculatorValue.cryoAddHunt;
-      criticalHunt += calculatorValue.cryoCritcalHurt;
-      critical += calculatorValue.cryoCritcal;
+      ADDITIONAL_DMG += calculatorValue[BuffType.CryoFixed] || 0;
+      addHunt += calculatorValue[BuffType.CryoPrcent] || 0;
+      criticalHunt += calculatorValue[BuffType.CryoCritcalHurt] || 0;
+      critical += calculatorValue[BuffType.CryoCritcal] || 0;
       break;
+  }
+
+  return {
+    ADDITIONAL_DMG,
+    addHunt,
+    criticalHunt,
+    critical,
+  };
+}
+
+interface IArgs {
+  calculatorValue: ICalculatorValue;
+  attackType: AttackType;
+  elementType: ElementType;
+  rate: IRate;
+  level: number;
+  atkType: string;
+  /** 本次伤害的独特标识 */
+  special?: string;
+}
+
+export function calculateDamage({ calculatorValue, attackType, elementType, rate, level, atkType, special }: IArgs) {
+  // 元素附魔
+  if (
+    calculatorValue.enchanting !== EnchantingType.Physical &&
+    (attackType === AttackType.Normal || attackType === AttackType.Strong || attackType === AttackType.Falling) &&
+    (calculatorValue.weapon === WeaponType.Sword ||
+      calculatorValue.weapon === WeaponType.GreatSword ||
+      calculatorValue.weapon === WeaponType.Polearms)
+  ) {
+    elementType = NumberToElementType[calculatorValue.enchanting];
+  }
+
+  // 元素转化
+  if (calculatorValue.transform !== EnchantingType.Physical) {
+    elementType = NumberToElementType[calculatorValue.transform];
+  }
+
+  let { ADDITIONAL_DMG, addHunt, criticalHunt, critical } = getMoreDataBySwitch(
+    calculatorValue,
+    attackType,
+    elementType
+  );
+
+  /** 计算独特buff的加成 */
+  if (special && calculatorValue.specialValue && calculatorValue.specialValue[special]) {
+    const specialData = getMoreDataBySwitch(calculatorValue.specialValue[special], attackType, elementType);
+    ADDITIONAL_DMG += specialData.ADDITIONAL_DMG;
+    addHunt += specialData.addHunt;
+    criticalHunt += specialData.criticalHunt;
+    critical += specialData.critical;
   }
 
   // 基础伤害
@@ -150,8 +184,9 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
   let EVA_DMG = 0;
   if (atkType === ElementalReaction.Rate || atkType === ElementalReaction.Rate2) {
     let eva =
-      getAmplifiedRate(calculatorValue.elementalMystery + calculatorValue.elementalMystery_NT) +
-      calculatorValue.amplifiedRate / 100;
+      (getAmplifiedRate(calculatorValue.elementalMystery + calculatorValue.elementalMystery_NT) +
+        calculatorValue.amplifiedRate) /
+      100;
     REACTION_DMG = (BASE_DMG + ADDITIONAL_DMG + MAGNIFICATION_DMG) * ReactionRate[atkType];
     EVA_DMG = (BASE_DMG + ADDITIONAL_DMG + MAGNIFICATION_DMG + REACTION_DMG) * eva;
   }

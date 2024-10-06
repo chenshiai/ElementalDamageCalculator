@@ -24,6 +24,8 @@ export interface ISkillRate {
   rate: IRate;
   attackType: AttackType;
   elementType: ElementType;
+  /** 独特技能标识，设置该字段后，拥有相同独特标识的buff可以作用在这个技能上 */
+  special?: string;
 }
 export interface IRate {
   atk?: number[];
@@ -43,7 +45,7 @@ export interface ICharacterInfo {
   icons: {
     avatarIcon: string;
     constsIcon: string[];
-    skillsIcon: string[];
+    skillsIcon?: string[];
   };
   buffs?: IBuffBase[];
   talentNames: string[];
@@ -78,7 +80,7 @@ export interface IWeaponInfo {
 
 export interface IRelicBase {
   setNameTextMapHash: number;
-/** 圣遗物的部位类型 */
+  /** 圣遗物的部位类型 */
   equipType: EquipType;
   name: string;
   icon: string;
@@ -86,6 +88,7 @@ export interface IRelicBase {
   level: number;
 }
 
+/** 用于计算的所有属性 */
 export interface ICalculatorValue {
   /** 角色等级 */
   level: number;
@@ -99,6 +102,8 @@ export interface ICalculatorValue {
   baseDEF: number;
   /** 角色元素类型 */
   element: ElementType;
+  /** 角色武器类型 */
+  weapon: WeaponType;
 
   // 额外面板属性
   /** 额外生命值 */
@@ -111,7 +116,7 @@ export interface ICalculatorValue {
   elementalMystery: number;
   /** 元素充能效率 */
   chargeEfficiency: number;
-  
+
   // 由面板属性转化而来的属性，不可用于二次面板转化。统一用 _NT 结尾
   /** 额外生命值，不可二次转化 */
   extraHP_NT: number;
@@ -153,7 +158,7 @@ export interface ICalculatorValue {
   [BuffType.GeoPrcent]: number;
   /** 草元素伤害加成 */
   [BuffType.DendroPrcent]: number;
-  
+
   // 各种隐式暴击率
   /** 普通攻击暴击率加成 */
   [BuffType.NormalCritcal]: number;
@@ -278,6 +283,8 @@ export interface ICalculatorValue {
   [BuffType.AmplifiedRate]: number;
   /** 普攻附魔属性 */
   [BuffType.Enchanting]: number;
+  /** 元素转化属性 */
+  [BuffType.Transform]: number;
   /** 激化反应系数提升 */
   [BuffType.CatalyzeRate]: number;
   /** 无视防御 */
@@ -291,4 +298,8 @@ export interface ICalculatorValue {
   enemyWeaken: number;
   /** 减少防御 */
   reduceArmour: number;
+
+  specialValue?: {
+    [key: string]: Partial<ICalculatorValue>;
+  };
 }

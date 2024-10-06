@@ -1,4 +1,4 @@
-import { ElementType, EnchantingType } from "@/types/enum";
+import { ElementType, EnchantingType, WeaponType } from "@/types/enum";
 import { ICalculatorValue } from "@/types/interface";
 
 class CalculatorValue implements ICalculatorValue {
@@ -13,6 +13,7 @@ class CalculatorValue implements ICalculatorValue {
   critcalHurt: number = 50;
   chargeEfficiency: number = 100;
   element: ElementType = ElementType.Physical;
+  weapon: WeaponType = WeaponType.Sword;
 
   // 额外面板属性
   extraHP: number = 0;
@@ -113,6 +114,7 @@ class CalculatorValue implements ICalculatorValue {
   amplifiedRate: number = 0;
   catalyzeRate: number = 0;
   enchanting: number = EnchantingType[ElementType.Physical];
+  transform: number = EnchantingType[ElementType.Physical];
   defensePenetration: number = 0;
   
   enemyLevel = 90;

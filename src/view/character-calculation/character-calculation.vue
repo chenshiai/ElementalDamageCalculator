@@ -90,6 +90,7 @@ function getBaseData(data: ICalculatorValue) {
     baseHP: characterInfo.value.baseHP,
     level: characterInfo.value.level,
     element: characterInfo.value.element,
+    weapon: characterInfo.value.weapon,
   };
 }
 

@@ -33,14 +33,14 @@ export const EnchantingType = {
 
 // 数字映射到 ElementType 的对象
 export const NumberToElementType = {
-  [EnchantingType[ElementType.Physical]]: ElementType.Physical,
-  [EnchantingType[ElementType.Pyro]]: ElementType.Pyro,
-  [EnchantingType[ElementType.Electro]]: ElementType.Electro,
-  [EnchantingType[ElementType.Hydro]]: ElementType.Hydro,
-  [EnchantingType[ElementType.Anemo]]: ElementType.Anemo,
-  [EnchantingType[ElementType.Cryo]]: ElementType.Cryo,
-  [EnchantingType[ElementType.Geo]]: ElementType.Geo,
-  [EnchantingType[ElementType.Dendro]]: ElementType.Dendro,
+  0: ElementType.Physical,
+  1: ElementType.Pyro,
+  2: ElementType.Electro,
+  3: ElementType.Hydro,
+  4: ElementType.Anemo,
+  5: ElementType.Cryo,
+  6: ElementType.Geo,
+  7: ElementType.Dendro,
 };
 /** 武器类型 */
 export enum WeaponType {
@@ -232,6 +232,8 @@ export enum BuffType {
   BurstLevel = "burstLevel",
   /** 普攻附魔属性 */
   Enchanting = "enchanting",
+  /** 元素转化 */
+  Transform = "transform",
   /** 增幅反应系数提升 */
   AmplifiedRate = "amplifiedRate",
   /** 激化反应系数提升 */

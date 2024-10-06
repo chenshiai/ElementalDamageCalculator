@@ -11,6 +11,8 @@ export type BuffEffect = {
    * 若未设置actionOn，则默认为Direct
    */
   actionOn?: ActionOn;
+  /** 独特buff标识，设置该字段后，该buff效果只会作用在相同独特标识的技能上 */
+  special?: string;
 };
 export type WeaponStats = {
   appendPropId: AppendProp;
