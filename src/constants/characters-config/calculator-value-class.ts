@@ -111,15 +111,26 @@ class CalculatorValue implements ICalculatorValue {
   normalLevel: number = 0;
   skillLevel: number = 0;
   burstLevel: number = 0;
+  
+  normalLevelAdd: number = 0;
+  skillLevelAdd: number = 0;
+  burstLevelAdd: number = 0;
+  
   amplifiedRate: number = 0;
   catalyzeRate: number = 0;
   enchanting: number = EnchantingType[ElementType.Physical];
   transform: number = EnchantingType[ElementType.Physical];
   defensePenetration: number = 0;
-  
+
   enemyLevel = 90;
-  enemyResistance = 10;
-  enemyWeaken = 0;
+  enemyPhysicalResistance = 10;
+  enemyPyroResistance = 10;
+  enemyElectroResistance = 10;
+  enemyHydroResistance = 10;
+  enemyAnemoResistance = 10;
+  enemyCryoResistance = 10;
+  enemyGeoResistance = 10;
+  enemyDendroResistance = 10;
   reduceArmour = 0;
 
   constructor(initialValues?: Partial<CalculatorValue>) {

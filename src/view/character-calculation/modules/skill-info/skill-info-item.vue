@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { computed, ref, watch } from "vue";
-import { ICalculatorValue, IRate, ISkillRate } from "@/types/interface";
+import { ICalculatorValue, ISkillRate } from "@/types/interface";
 import { calculateDamage } from "@/utils/calculate/method-calculation";
 import AtkTypeSelector from "@/component/AtkTypeSelector.vue";
+import { getColorByElement } from "@/utils/getBackGroundClassByRarity";
 
 interface IProps {
   skill: ISkillRate[];
@@ -24,7 +25,12 @@ watch(
 );
 
 function calculator({ rate, attackType, elementType, special }: ISkillRate, level: number = 1) {
-  let { RESULT_DMG, CRITICAL_DMG, DEISTE_DMG } = calculateDamage({
+  let {
+    RESULT_DMG,
+    CRITICAL_DMG,
+    DEISTE_DMG,
+    elementType: newElementType,
+  } = calculateDamage({
     calculatorValue: valueRef.value,
     attackType,
     elementType,
@@ -38,17 +44,19 @@ function calculator({ rate, attackType, elementType, special }: ISkillRate, leve
     common: Math.round(RESULT_DMG),
     crit: Math.round(RESULT_DMG + CRITICAL_DMG),
     desire: Math.round(RESULT_DMG + DEISTE_DMG),
+    newElementType,
   };
 }
 
 const calculatedResults = computed(() => {
   return skill.map((item: ISkillRate) => {
-    const { common, crit, desire } = calculator(item, level);
+    const { common, crit, desire, newElementType } = calculator(item, level);
     return {
       label: item.label,
       common,
       crit,
       desire,
+      elementType: newElementType,
     };
   });
 });
@@ -63,23 +71,33 @@ const calculatedResults = computed(() => {
       <span>暴击伤害</span>
       <span>期望伤害</span>
     </div>
-    <div class="skill-info-item" v-for="item of calculatedResults" :key="item.label">
+    <div
+      :class="['skill-info-item', getColorByElement(item.elementType)]"
+      v-for="item of calculatedResults"
+      :key="item.label"
+    >
       <span class="skill-info-item-label">{{ item.label }}</span>
       <span>{{ item.common }}</span>
       <span>{{ item.crit }}</span>
       <span>{{ item.desire }}</span>
     </div>
   </template>
-  <template v-else>该技能无法造成伤害。</template>
+  <template v-else>
+    <div class="skill-info-empty">该技能无法造成伤害。</div>
+  </template>
 </template>
 
 <style scoped>
 .skill-info-item {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
+  grid-template-columns: 3fr 2fr 2fr 2fr;
   text-align: center;
 }
 .skill-info-item-label {
   text-align: right;
+  color: var(--main-text);
+}
+.skill-info-empty {
+  text-align: center;
 }
 </style>

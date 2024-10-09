@@ -13,9 +13,9 @@ interface IProps {
 }
 const { characterInfo, weapon, calculatorValue, affix } = defineProps<IProps>();
 
-const normalLevel = ref(1);
-const skillLevel = ref(1);
-const burstLevel = ref(1);
+const normalLevel = defineModel<number>('normalLevel');
+const skillLevel = defineModel<number>('skillLevel');
+const burstLevel = defineModel<number>('burstLevel');
 const activeNames = ref([]);
 
 const getOtherSkill = computed(() => {
@@ -29,7 +29,7 @@ const getOtherSkill = computed(() => {
   <div class="skill-info">
     <div class="data-panel__title">伤害计算</div>
     <Collapse v-model="activeNames">
-      <CollapseItem :title="`${characterInfo.talentNames[0]}（Lv.${normalLevel + calculatorValue.normalLevel}）`">
+      <CollapseItem :title="`${characterInfo.talentNames[0]}（Lv.${normalLevel + calculatorValue.normalLevelAdd}）`">
         <span class="slider-wrap">
           <span>技能等级：</span>
           <Slider v-model="normalLevel" max="10" min="1" />
@@ -37,10 +37,10 @@ const getOtherSkill = computed(() => {
         <SkillInfoItem
           :skill="characterInfo.normalAttack"
           :calculator-value="calculatorValue"
-          :level="normalLevel + calculatorValue.normalLevel"
+          :level="normalLevel + calculatorValue.normalLevelAdd"
         />
       </CollapseItem>
-      <CollapseItem :title="`${characterInfo.talentNames[1]}（Lv.${skillLevel + calculatorValue.skillLevel}）`">
+      <CollapseItem :title="`${characterInfo.talentNames[1]}（Lv.${skillLevel + calculatorValue.skillLevelAdd}）`">
         <span class="slider-wrap">
           <span>技能等级：</span>
           <Slider v-model="skillLevel" max="10" min="1" />
@@ -48,10 +48,10 @@ const getOtherSkill = computed(() => {
         <SkillInfoItem
           :skill="characterInfo.elementSkill"
           :calculator-value="calculatorValue"
-          :level="skillLevel + calculatorValue.skillLevel"
+          :level="skillLevel + calculatorValue.skillLevelAdd"
         />
       </CollapseItem>
-      <CollapseItem :title="`${characterInfo.talentNames[2]}（Lv.${burstLevel + calculatorValue.burstLevel}）`">
+      <CollapseItem :title="`${characterInfo.talentNames[2]}（Lv.${burstLevel + calculatorValue.burstLevelAdd}）`">
         <span class="slider-wrap">
           <span>技能等级：</span>
           <Slider v-model="burstLevel" max="10" min="1" />
@@ -59,7 +59,7 @@ const getOtherSkill = computed(() => {
         <SkillInfoItem
           :skill="characterInfo.burstSkill"
           :calculator-value="calculatorValue"
-          :level="burstLevel + calculatorValue.burstLevel"
+          :level="burstLevel + calculatorValue.burstLevelAdd"
         />
       </CollapseItem>
       <CollapseItem v-if="getOtherSkill.length > 0" name="other" title="其他">

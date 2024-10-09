@@ -227,9 +227,9 @@ export enum BuffType {
   /** 护盾强效加成 */
   ShieldStrong = "shieldStrong",
 
-  NormalLevel = "normalLevel",
-  SkillLevel = "skillLevel",
-  BurstLevel = "burstLevel",
+  NormalLevel = "normalLevelAdd",
+  SkillLevel = "skillLevelAdd",
+  BurstLevel = "burstLevelAdd",
   /** 普攻附魔属性 */
   Enchanting = "enchanting",
   /** 元素转化 */
@@ -239,8 +239,27 @@ export enum BuffType {
   /** 激化反应系数提升 */
   CatalyzeRate = "catalyzeRate",
   /** 无视防御 */
-  DefensePenetration = "defensePenetration"
+  DefensePenetration = "defensePenetration",
+  /** 减少敌人防御 */
+  ReduceArmour = "reduceArmour",
+  /** 敌人物理抗性 */
+  EnemyPhysicalResistance = "enemyPhysicalResistance",
+  /** 敌人火抗性 */
+  EnemyPyroResistance = "enemyPyroResistance",
+  /** 敌人雷抗性 */
+  EnemyElectroResistance = "enemyElectroResistance",
+  /** 敌人水抗性 */
+  EnemyHydroResistance = "enemyHydroResistance",
+  /** 敌人风抗性 */
+  EnemyAnemoResistance = "enemyAnemoResistance",
+  /** 敌人冰抗性 */
+  EnemyCryoResistance = "enemyCryoResistance",
+  /** 敌人岩抗性 */
+  EnemyGeoResistance = "enemyGeoResistance",
+  /** 敌人草抗性 */
+  EnemyDendroResistance = "enemyDendroResistance",
 }
+
 export enum AppendProp {
   BASE_ATTACK = "FIGHT_PROP_BASE_ATTACK",
   HP = "FIGHT_PROP_HP",

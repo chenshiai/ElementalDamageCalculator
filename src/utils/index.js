@@ -3,9 +3,6 @@ import { showFailToast } from "vant";
 import { ElementalReaction, ReactionRate } from '@/constants';
 import { BaseDMG } from '@/constants/elementalReaction';
 
-export function getBackGroundByRarity() {
-  
-}
 /** 获取增幅反应比例 */
 export const getAmplifiedRate = (em) => {
   return ((2.78 * em) / (em + 1400)) * 100;
@@ -27,7 +24,7 @@ export const getCatalyzeRate = (em) => {
 }
 
 // 抗性承伤
-export const getResistanceRate = (enemyResistance, weaken) => {
+export const getResistanceRate = (enemyResistance, weaken = 0) => {
   const resistance = enemyResistance - weaken; // 敌人自身抗性 减去 减抗数值
   let resistanceRate = 1 - resistance / 100;
   if (resistance < 0) {

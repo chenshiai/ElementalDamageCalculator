@@ -33,9 +33,6 @@ function createCharacter(enkaId: number, name: string, element: ElementType, wea
           constsIcon: getEnkaUIs(constsIcon),
         },
         talentNames,
-        normalLevel: 1,
-        skillLevel: 1,
-        burstLevel: 1,
       };
     };
   };
@@ -382,6 +379,13 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         effect: [{ type: BuffType.GlobalPrcent, getValue: () => 20, special: "Emilie" }],
         enable: true,
         condition: ({ constellation }) => constellation >= 1,
+      },
+      {
+        label: "2命·湖光顶调",
+        describe: "撷萃调香与固有天赋「余薰」的清露香氛命中敌人时，降低敌人草元素抗性30%",
+        effect: [{ type: BuffType.EnemyDendroResistance, getValue: () => -30 }],
+        enable: true,
+        condition: ({ constellation }) => constellation >= 2,
       },
       Constellation_E_3,
       Constellation_Q_5,

@@ -29,7 +29,14 @@
   --van-collapse-item-content-background: var(--page-bg);
   --van-collapse-item-duration: 0.2s;
   --van-slider-active-background: var(--main-text);
-  --van-stepper-button-round-theme: var(--button-bg)
+  --van-stepper-button-round-theme: var(--button-bg);
+  --text-electro: #b380ff;
+  --text-hydro: #6495ED;
+  --text-anemo: #80ffe6;
+  --text-cryo: #5df;
+  --text-geo: #fc0;
+  --text-dendro: #779718;
+  --text-pyro: #ff6666;
 }
 
 body {
@@ -105,4 +112,26 @@ body {
 
 .van-collapse-item {
   margin-bottom: 4px;
+}
+
+.text-electro {
+  color: var(--text-electro);
+}
+.text-hydro {
+  color: var(--text-hydro);
+}
+.text-anemo {
+  color: var(--text-anemo);
+}
+.text-cryo {
+  color: var(--text-cryo);
+}
+.text-geo {
+  color: var(--text-geo);
+}
+.text-dendro {
+  color: var(--text-dendro);
+}
+.text-pyro {
+  color: var(--text-pyro);
 }

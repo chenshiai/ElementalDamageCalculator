@@ -1,4 +1,4 @@
-import { Rarity } from "@/types/enum";
+import { ElementType, Rarity } from "@/types/enum";
 
 export default (rarity: Rarity) => {
   switch (rarity) {
@@ -17,4 +17,25 @@ export default (rarity: Rarity) => {
 
 export function getlinearBackGroundClassByRarity(rarity: Rarity) {
   return `linear-bg-${rarity}-rarity`;
+}
+
+export function getColorByElement(elementType) {
+  switch (elementType) {
+    case ElementType.Physical:
+      return "text-physical";
+    case ElementType.Electro:
+      return "text-electro";
+    case ElementType.Hydro:
+      return "text-hydro";
+    case ElementType.Anemo:
+      return "text-anemo";
+    case ElementType.Cryo:
+      return "text-cryo";
+    case ElementType.Geo:
+      return "text-geo";
+    case ElementType.Dendro:
+      return "text-dendro";
+    case ElementType.Pyro:
+      return "text-pyro";
+}
 }

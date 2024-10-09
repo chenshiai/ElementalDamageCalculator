@@ -50,13 +50,10 @@ export interface ICharacterInfo {
   buffs?: IBuffBase[];
   talentNames: string[];
 
-  normalLevel: number;
   normalAttack: ISkillRate[];
 
-  skillLevel: number;
   elementSkill: ISkillRate[];
 
-  burstLevel: number;
   burstSkill: ISkillRate[];
   otherSkill: ISkillRate[];
 }
@@ -104,6 +101,9 @@ export interface ICalculatorValue {
   element: ElementType;
   /** 角色武器类型 */
   weapon: WeaponType;
+  normalLevel: number;
+  skillLevel: number;
+  burstLevel: number;
 
   // 额外面板属性
   /** 额外生命值 */
@@ -263,6 +263,7 @@ export interface ICalculatorValue {
 
   /** 生命之契 */
   [BuffType.LifeContract]: number;
+
   /** 普攻倍率提升 */
   [BuffType.NormalRate]: number;
   /** 重击倍率提升 */
@@ -273,12 +274,14 @@ export interface ICalculatorValue {
   [BuffType.SkillRate]: number;
   /** 元素爆发倍率提升 */
   [BuffType.BurstRate]: number;
+
   /** 普攻天赋等级加成 */
   [BuffType.NormalLevel]: number;
   /** 元素战技天赋等级加成 */
   [BuffType.SkillLevel]: number;
   /** 元素爆发天赋等级加成 */
   [BuffType.BurstLevel]: number;
+
   /** 增幅反应系数提升 */
   [BuffType.AmplifiedRate]: number;
   /** 普攻附魔属性 */
@@ -287,17 +290,22 @@ export interface ICalculatorValue {
   [BuffType.Transform]: number;
   /** 激化反应系数提升 */
   [BuffType.CatalyzeRate]: number;
-  /** 无视防御 */
-  [BuffType.DefensePenetration]: number;
 
   /** 敌人等级 */
   enemyLevel: number;
   /** 敌人抗性 */
-  enemyResistance: number;
-  /** 减少抗性 */
-  enemyWeaken: number;
+  [BuffType.EnemyPhysicalResistance]: number;
+  [BuffType.EnemyPyroResistance]: number;
+  [BuffType.EnemyElectroResistance]: number;
+  [BuffType.EnemyHydroResistance]: number;
+  [BuffType.EnemyCryoResistance]: number;
+  [BuffType.EnemyAnemoResistance]: number;
+  [BuffType.EnemyGeoResistance]: number;
+  [BuffType.EnemyDendroResistance]: number;
   /** 减少防御 */
-  reduceArmour: number;
+  [BuffType.ReduceArmour]: number;
+  /** 无视防御 */
+  [BuffType.DefensePenetration]: number;
 
   specialValue?: {
     [key: string]: Partial<ICalculatorValue>;

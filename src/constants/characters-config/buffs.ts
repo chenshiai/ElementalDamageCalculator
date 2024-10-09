@@ -1,4 +1,4 @@
-import { BuffType } from "@/types/enum";
+import { ActionOn, BuffType } from "@/types/enum";
 import { IBuffBase } from "@/types/interface";
 
 function createBuff(type: BuffType, value: number, star: 'A' | 'S', descSuffix: string): IBuffBase {
@@ -60,7 +60,7 @@ function createConstellationBuff(
     condition({ constellation: currentConstellation }) {
       return currentConstellation >= constellation;
     },
-    effect: [{ type: skillType, getValue: () => 3 }],
+    effect: [{ type: skillType, getValue: () => 3, actionOn: ActionOn.Front }],
     enable: true,
   };
 }

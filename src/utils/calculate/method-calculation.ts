@@ -9,6 +9,7 @@ function getMoreDataBySwitch(calculatorValue: Partial<ICalculatorValue>, attackT
   let addHunt = calculatorValue[BuffType.GlobalPrcent] || 0;
   let criticalHunt = calculatorValue[BuffType.CritcalHurt] || 0;
   let critical = calculatorValue[BuffType.Critcal] || 0;
+  let resistance = 0;
 
   // 处理攻击类型的加成
   switch (attackType) {
@@ -51,48 +52,56 @@ function getMoreDataBySwitch(calculatorValue: Partial<ICalculatorValue>, attackT
       addHunt += calculatorValue[BuffType.PhysicalPrcent] || 0;
       criticalHunt += calculatorValue[BuffType.PhysicalCritcalHurt] || 0;
       critical += calculatorValue[BuffType.PhysicalCritcal] || 0;
+      resistance += calculatorValue[BuffType.EnemyPhysicalResistance] || 0;
       break;
     case ElementType.Pyro:
       ADDITIONAL_DMG += calculatorValue[BuffType.PyroFixed] || 0;
       addHunt += calculatorValue[BuffType.PyroPrcent] || 0;
       criticalHunt += calculatorValue[BuffType.PyroCritcalHurt] || 0;
       critical += calculatorValue[BuffType.PyroCritcal] || 0;
+      resistance += calculatorValue[BuffType.EnemyPyroResistance] || 0;
       break;
     case ElementType.Hydro:
       ADDITIONAL_DMG += calculatorValue[BuffType.HydroFixed] || 0;
       addHunt += calculatorValue[BuffType.HydroPrcent] || 0;
       criticalHunt += calculatorValue[BuffType.HydroCritcalHurt] || 0;
       critical += calculatorValue[BuffType.HydroCritcal] || 0;
+      resistance += calculatorValue[BuffType.EnemyHydroResistance] || 0;
       break;
     case ElementType.Anemo:
       ADDITIONAL_DMG += calculatorValue[BuffType.AnemoFixed] || 0;
       addHunt += calculatorValue[BuffType.AnemoPrcent] || 0;
       criticalHunt += calculatorValue[BuffType.AnemoCritcalHurt] || 0;
       critical += calculatorValue[BuffType.AnemoCritcal] || 0;
+      resistance += calculatorValue[BuffType.EnemyAnemoResistance] || 0;
       break;
     case ElementType.Electro:
       ADDITIONAL_DMG += calculatorValue[BuffType.ElectroFixed] || 0;
       addHunt += calculatorValue[BuffType.ElectroPrcent] || 0;
       criticalHunt += calculatorValue[BuffType.ElectroCritcalHurt] || 0;
       critical += calculatorValue[BuffType.ElectroCritcal] || 0;
+      resistance += calculatorValue[BuffType.EnemyElectroResistance] || 0;
       break;
     case ElementType.Geo:
       ADDITIONAL_DMG += calculatorValue[BuffType.GeoFixed] || 0;
       addHunt += calculatorValue[BuffType.GeoPrcent] || 0;
       criticalHunt += calculatorValue[BuffType.GeoCritcalHurt] || 0;
       critical += calculatorValue[BuffType.GeoCritcal] || 0;
+      resistance += calculatorValue[BuffType.EnemyGeoResistance] || 0;
       break;
     case ElementType.Dendro:
       ADDITIONAL_DMG += calculatorValue[BuffType.DendroFixed] || 0;
       addHunt += calculatorValue[BuffType.DendroPrcent] || 0;
       criticalHunt += calculatorValue[BuffType.DendroCritcalHurt] || 0;
       critical += calculatorValue[BuffType.DendroCritcal] || 0;
+      resistance += calculatorValue[BuffType.EnemyDendroResistance] || 0;
       break;
     case ElementType.Cryo:
       ADDITIONAL_DMG += calculatorValue[BuffType.CryoFixed] || 0;
       addHunt += calculatorValue[BuffType.CryoPrcent] || 0;
       criticalHunt += calculatorValue[BuffType.CryoCritcalHurt] || 0;
       critical += calculatorValue[BuffType.CryoCritcal] || 0;
+      resistance += calculatorValue[BuffType.EnemyCryoResistance] || 0;
       break;
   }
 
@@ -101,6 +110,7 @@ function getMoreDataBySwitch(calculatorValue: Partial<ICalculatorValue>, attackT
     addHunt,
     criticalHunt,
     critical,
+    resistance,
   };
 }
 
@@ -132,7 +142,7 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
     elementType = NumberToElementType[calculatorValue.transform];
   }
 
-  let { ADDITIONAL_DMG, addHunt, criticalHunt, critical } = getMoreDataBySwitch(
+  let { ADDITIONAL_DMG, addHunt, criticalHunt, critical, resistance } = getMoreDataBySwitch(
     calculatorValue,
     attackType,
     elementType
@@ -198,7 +208,7 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
   let DEISTE_DMG = CRITICAL_DMG * Math.min(1, critical / 100);
 
   // 抗性承伤
-  const resistanceRate = getResistanceRate(calculatorValue.enemyResistance, calculatorValue.enemyWeaken);
+  const resistanceRate = getResistanceRate(resistance);
   // 防御承伤
   const defRate = getDefRate(
     calculatorValue.level,
@@ -221,5 +231,6 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
     RESULT_DMG: RESULT_DMG * ENEMY_RATE,
     criticalHunt,
     addHunt,
+    elementType,
   };
 }
