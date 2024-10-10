@@ -213,7 +213,7 @@ export const Weapons: IWeaponInfo[] = [
         {
           label: "普通攻击伤害提升",
           describe: `每层普通攻击伤害提升${add}%， 至多叠加四层`,
-          effect: [{ type: BuffType.ATKPrcent, getValue: (_, stack) => add * stack }],
+          effect: [{ type: BuffType.NormalPrcent, getValue: (_, stack) => add * stack }],
           stackable: true,
           limit: 4,
           stack: 4,

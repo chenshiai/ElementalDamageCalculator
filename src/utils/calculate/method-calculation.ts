@@ -7,6 +7,7 @@ import { getCatalyzeRate, getAmplifiedRate, getResistanceRate, getDefRate } from
 function getMoreDataBySwitch(calculatorValue: Partial<ICalculatorValue>, attackType, elementType) {
   let ADDITIONAL_DMG = calculatorValue[BuffType.GlobalFixed] || 0;
   let addHunt = calculatorValue[BuffType.GlobalPrcent] || 0;
+  let addRate = 0;
   let criticalHunt = calculatorValue[BuffType.CritcalHurt] || 0;
   let critical = calculatorValue[BuffType.Critcal] || 0;
   let resistance = 0;
@@ -18,30 +19,35 @@ function getMoreDataBySwitch(calculatorValue: Partial<ICalculatorValue>, attackT
       addHunt += calculatorValue[BuffType.NormalPrcent] || 0;
       criticalHunt += calculatorValue[BuffType.NormalCritcalHurt] || 0;
       critical += calculatorValue[BuffType.NormalCritcal] || 0;
+      addRate += calculatorValue[BuffType.NormalRate] || 0;
       break;
     case AttackType.Strong:
       ADDITIONAL_DMG += calculatorValue[BuffType.StrongFixed] || 0;
       addHunt += calculatorValue[BuffType.StrongPrcent] || 0;
       criticalHunt += calculatorValue[BuffType.StrongCritcalHurt] || 0;
       critical += calculatorValue[BuffType.StrongCritcal] || 0;
+      addRate += calculatorValue[BuffType.StrongRate] || 0;
       break;
     case AttackType.Falling:
       ADDITIONAL_DMG += calculatorValue[BuffType.FallingFixed] || 0;
       addHunt += calculatorValue[BuffType.FallingPrcent] || 0;
       criticalHunt += calculatorValue[BuffType.FallingCritcalHurt] || 0;
       critical += calculatorValue[BuffType.FallingCritcal] || 0;
+      addRate += calculatorValue[BuffType.FallingRateAdd] || 0;
       break;
     case AttackType.Skill:
       ADDITIONAL_DMG += calculatorValue[BuffType.SkillFixed] || 0;
       addHunt += calculatorValue[BuffType.SkillPrcent] || 0;
       criticalHunt += calculatorValue[BuffType.SkillCritcalHurt] || 0;
       critical += calculatorValue[BuffType.SkillCritcal] || 0;
+      addRate += calculatorValue[BuffType.SkillRate] || 0;
       break;
     case AttackType.Burst:
       ADDITIONAL_DMG += calculatorValue[BuffType.BurstFixed] || 0;
       addHunt += calculatorValue[BuffType.BurstPrcent] || 0;
       criticalHunt += calculatorValue[BuffType.BurstCritcalHurt] || 0;
       critical += calculatorValue[BuffType.BurstCritcal] || 0;
+      addRate += calculatorValue[BuffType.BurstRate] || 0;
       break;
   }
 
@@ -111,6 +117,7 @@ function getMoreDataBySwitch(calculatorValue: Partial<ICalculatorValue>, attackT
     criticalHunt,
     critical,
     resistance,
+    addRate,
   };
 }
 
@@ -142,7 +149,7 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
     elementType = NumberToElementType[calculatorValue.transform];
   }
 
-  let { ADDITIONAL_DMG, addHunt, criticalHunt, critical, resistance } = getMoreDataBySwitch(
+  let { ADDITIONAL_DMG, addHunt, criticalHunt, critical, resistance, addRate } = getMoreDataBySwitch(
     calculatorValue,
     attackType,
     elementType
@@ -161,19 +168,19 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
   let BASE_DMG = 0;
   if (rate.atk) {
     const atk = calculatorValue.baseATK + calculatorValue.extraATK + calculatorValue.extraATK_NT;
-    BASE_DMG += atk * rate.atk[level - 1];
+    BASE_DMG += atk * rate.atk[level - 1] * (1 + addRate / 100);
   }
   if (rate.def) {
     const def = calculatorValue.baseDEF + calculatorValue.extraDEF + calculatorValue.extraDEF_NT;
-    BASE_DMG += def * rate.def[level - 1];
+    BASE_DMG += def * rate.def[level - 1] * (1 + addRate / 100);
   }
   if (rate.hp) {
     const hp = calculatorValue.baseHP + calculatorValue.extraHP + calculatorValue.extraHP_NT;
-    BASE_DMG += hp * rate.hp[level - 1];
+    BASE_DMG += hp * rate.hp[level - 1] * (1 + addRate / 100);
   }
   const em = calculatorValue.elementalMystery + calculatorValue.elementalMystery_NT;
   if (rate.em) {
-    BASE_DMG += em * rate.em[level - 1];
+    BASE_DMG += em * rate.em[level - 1] * (1 + addRate / 100);
   }
 
   // 激化伤害
