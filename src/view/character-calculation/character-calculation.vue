@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
-import { ImagePreview, Cell } from "vant";
+import { ImagePreview } from "vant";
 import TabTitle from "@/component/TabTitle.vue";
 import DataItem from "@/component/DataItem.vue";
 import CharacterPanel from "@/component/CharacterPanel.vue";
@@ -25,55 +25,57 @@ const { buffs } = useBuffInfo();
 const { normalLevel, skillLevel, burstLevel } = useSkillInfo();
 
 const enemyLevel = ref(90);
-const reduceArmour = ref(0);
+const baseResistance = ref(10);
 
 const handleImagePreview = () => {
   ImagePreview(["https://saomdpb.com/IMG_1457.PNG"]);
 };
 
-function getBaseData(data: ICalculatorValue) {
-  const characterBaseAtk = characterInfo.value.baseATK;
-  const weaponBaseAtk = weapon.value.weaponStats.find((i) => i.appendPropId === AppendProp.BASE_ATTACK).statValue;
-  const baseATK = characterBaseAtk + weaponBaseAtk;
-
-  return {
-    constellation: constellation.value,
-    baseATK,
-    baseDEF: characterInfo.value.baseDEF,
-    baseHP: characterInfo.value.baseHP,
-    level: characterInfo.value.level,
-    element: characterInfo.value.element,
-    weapon: characterInfo.value.weapon,
-    normalLevel: normalLevel.value,
-    skillLevel: skillLevel.value,
-    burstLevel: burstLevel.value,
-  };
-}
-
 const CalculationPanel = computed<ICalculatorValue>(() => {
   if (!characterInfo.value || !weapon.value) return new CalculatorValueClass();
   const allBuffs = [...relicBuffs.value, ...characterBuffs.value, ...weaponBuffs.value, ...buffs.value];
+  const characterBaseAtk = characterInfo.value.baseATK;
+  const weaponBaseAtk = weapon.value.weaponStats.find((i) => i.appendPropId === AppendProp.BASE_ATTACK).statValue;
 
   return [
-    getBaseData,
     (data: ICalculatorValue) => calculateBuffs(data, allBuffs, ActionOn.Front),
-
     (data: ICalculatorValue) => calculateWeaponSubStat(data, weapon.value),
     (data: ICalculatorValue) => calculateRelicStat(data, relicList.value),
-    // 计算直接提升面板的buff
-    (data: ICalculatorValue) => calculateBuffs(data, allBuffs, ActionOn.Direct),
-    // 计算间接提升面板的buff
-    (data: ICalculatorValue) => calculateBuffs(data, allBuffs, ActionOn.Indirect),
-    // 计算不作用于面板的buff
-    (data: ICalculatorValue) => calculateBuffs(data, allBuffs, ActionOn.External),
-  ].reduce((accumulator, currentFunction) => {
-    return {
-      ...accumulator,
-      ...currentFunction(accumulator),
+    (data: ICalculatorValue) => calculateBuffs(data, allBuffs, ActionOn.Direct), // 计算直接提升面板的buff
+    (data: ICalculatorValue) => calculateBuffs(data, allBuffs, ActionOn.Indirect), // 计算间接提升面板的buff
+    (data: ICalculatorValue) => calculateBuffs(data, allBuffs, ActionOn.External), // 计算不作用于面板的buff
+  ].reduce(
+    (accumulator, currentFunction) => {
+      return {
+        ...accumulator,
+        ...currentFunction(accumulator),
+      };
+    },
+    new CalculatorValueClass({
+      level: characterInfo.value.level,
+      element: characterInfo.value.element,
+      weapon: characterInfo.value.weapon,
+      constellation: constellation.value,
+
+      baseATK: characterBaseAtk + weaponBaseAtk,
+      baseDEF: characterInfo.value.baseDEF,
+      baseHP: characterInfo.value.baseHP,
+
+      normalLevel: normalLevel.value,
+      skillLevel: skillLevel.value,
+      burstLevel: burstLevel.value,
+      
       enemyLevel: enemyLevel.value,
-      reduceArmour: reduceArmour.value,
-    };
-  }, new CalculatorValueClass());
+      enemyPhysicalResistance: baseResistance.value,
+      enemyPyroResistance: baseResistance.value,
+      enemyElectroResistance: baseResistance.value,
+      enemyHydroResistance: baseResistance.value,
+      enemyAnemoResistance: baseResistance.value,
+      enemyCryoResistance: baseResistance.value,
+      enemyGeoResistance: baseResistance.value,
+      enemyDendroResistance: baseResistance.value,
+    })
+  );
 });
 </script>
 
@@ -108,5 +110,8 @@ const CalculationPanel = computed<ICalculatorValue>(() => {
   />
   <div class="data-panel">
     <DataItem v-model="enemyLevel" title="敌人的等级" :stepperMin="1" />
+    <DataItem v-model="baseResistance" title="敌人抗性%" stepperMin="-999">
+      <div class="extra-btn" @click="handleImagePreview">查看抗性表</div>
+    </DataItem>
   </div>
 </template>

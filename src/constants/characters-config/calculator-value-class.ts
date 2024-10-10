@@ -123,14 +123,14 @@ class CalculatorValue implements ICalculatorValue {
   defensePenetration: number = 0;
 
   enemyLevel = 90;
-  enemyPhysicalResistance = 10;
-  enemyPyroResistance = 10;
-  enemyElectroResistance = 10;
-  enemyHydroResistance = 10;
-  enemyAnemoResistance = 10;
-  enemyCryoResistance = 10;
-  enemyGeoResistance = 10;
-  enemyDendroResistance = 10;
+  enemyPhysicalResistance = 0;
+  enemyPyroResistance = 0;
+  enemyElectroResistance = 0;
+  enemyHydroResistance = 0;
+  enemyAnemoResistance = 0;
+  enemyCryoResistance = 0;
+  enemyGeoResistance = 0;
+  enemyDendroResistance = 0;
   reduceArmour = 0;
 
   constructor(initialValues?: Partial<CalculatorValue>) {

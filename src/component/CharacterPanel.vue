@@ -287,7 +287,7 @@ function round(a: number, precision: number = 0): number {
 }
 /* 设置偶数行的背景颜色 */
 .panel-item:nth-child(even) {
-  background-color: var(--light-text); /* 可以根据需求调整颜色 */
+  background-color: var(--light-text);
 }
 .panel-detail {
   font-size: 12px;

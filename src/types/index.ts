@@ -8,7 +8,7 @@ export type BuffEffect = {
   /** 是否基于基础属性转化而来，提供的属性不会被二次转化 */
   transform?: boolean;
   /** buff作用域，分别直接作用在面板上、间接作用在面板上、作用在面板之外  
-   * 若未设置actionOn，则默认为Direct
+   * 若未设置actionOn，则在计算时应该默认视为Direct
    */
   actionOn?: ActionOn;
   /** 独特buff标识，设置该字段后，该buff效果只会作用在相同独特标识的技能上 */

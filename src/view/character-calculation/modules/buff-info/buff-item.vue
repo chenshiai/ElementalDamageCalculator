@@ -29,7 +29,7 @@ const stackText = computed(() => {
   <div class="buff-description">
     {{ buff.describe }}
     <div class="buff-stack" v-if="buff.stackable">
-      <span>层数：</span><Slider v-model="stack" :max="buff.limit" :min="0" />
+      <span>{{ buff.stackText || "层数" }}：</span><Slider v-model="stack" :max="buff.limit" :min="0" />
     </div>
   </div>
 </template>

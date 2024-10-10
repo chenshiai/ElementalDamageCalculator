@@ -10,10 +10,12 @@ export interface IBuffBase {
   effect: BuffEffect[];
   /** Buff是否启用 */
   enable: boolean;
-  /** Buff显示条件 */
+  /** Buff显示条件判断 */
   condition?: BuffCondition;
   /** Buff数值是否可叠加 */
   stackable?: boolean;
+  /** BUff层数别名 */
+  stackText?: string;
   /** 最大叠加层数 */
   limit?: number;
   /** 当前层数 */
