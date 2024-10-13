@@ -127,8 +127,33 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("爆发伤害", AttackType.Burst, ElementType.Electro, {
         atk: [1.6, 1.72, 1.84, 2, 2.12, 2.24, 2.4, 2.56, 2.72, 2.88, 3.04, 3.2, 3.4, 3.6],
       }),
-      createAttack("狼魂伤害", AttackType.Normal, ElementType.Electro, {
-        atk: [0.24, 0.258, 0.276, 0.3, 0.318, 0.336, 0.36, 0.384, 0.408, 0.432, 0.456, 0.48, 0.51, 0.54],
+      createAttack("狼魂·一段伤害", AttackType.Burst, ElementType.Electro, {
+        atk: [0.959, 1.024, 1.09, 1.177, 1.24, 1.32, 1.42, 1.52, 1.61, 1.71, 1.81].map((item, index) => {
+          return (
+            item * [0.24, 0.258, 0.276, 0.3, 0.318, 0.336, 0.36, 0.384, 0.408, 0.432, 0.456, 0.48, 0.51, 0.54][index]
+          );
+        }),
+      }),
+      createAttack("狼魂·二段伤害", AttackType.Burst, ElementType.Electro, {
+        atk: [0.826, 0.883, 0.939, 1.01, 1.07, 1.14, 1.22, 1.31, 1.39, 1.47, 1.56].map((item, index) => {
+          return (
+            item * [0.24, 0.258, 0.276, 0.3, 0.318, 0.336, 0.36, 0.384, 0.408, 0.432, 0.456, 0.48, 0.51, 0.54][index]
+          );
+        }),
+      }),
+      createAttack("狼魂·三段伤害", AttackType.Burst, ElementType.Electro, {
+        atk: [1.033, 1.103, 1.174, 1.27, 1.34, 1.42, 1.53, 1.63, 1.74, 1.84, 1.95].map((item, index) => {
+          return (
+            item * [0.24, 0.258, 0.276, 0.3, 0.318, 0.336, 0.36, 0.384, 0.408, 0.432, 0.456, 0.48, 0.51, 0.54][index]
+          );
+        }),
+      }),
+      createAttack("狼魂·四段伤害", AttackType.Burst, ElementType.Electro, {
+        atk: [1.36, 1.45, 1.546, 1.67, 1.76, 1.87, 2.01, 2.15, 2.29, 2.43, 2.57].map((item, index) => {
+          return (
+            item * [0.24, 0.258, 0.276, 0.3, 0.318, 0.336, 0.36, 0.384, 0.408, 0.432, 0.456, 0.48, 0.51, 0.54][index]
+          );
+        }),
       }),
     ],
     otherSkill: [
@@ -146,7 +171,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       },
       {
         label: "雷之印充能",
-        describe: "每吸收一个雷之印，元素充能效率提高20%",
+        describe: "每有一个雷之印，元素充能效率提高20%",
         effect: [{ type: BuffType.ChargeFixed, getValue: (_, s) => 20 * s }],
         enable: true,
         stackable: true,
