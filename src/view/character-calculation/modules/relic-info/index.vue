@@ -158,7 +158,7 @@ const subStatFilter = (selectedId: AppendProp) => {
   <div class="relic-info">
     <div class="relic-detail" v-for="(item, index) in relicList" :key="index" @click="selectRelic(index)">
       <template v-if="item">
-        <img class="relic-icon" :src="item.icon" />
+        <img class="relic-icon" v-lazy="item.icon"/>
         <div class="relic-detail__hearder">
           <div :class="['relic-name', getlinearBackGroundClassByRarity(item.rankLevel - 1)]">
             {{ item.name }}
@@ -198,14 +198,14 @@ const subStatFilter = (selectedId: AppendProp) => {
       </div>
       <div class="relic-select">
         <div v-for="item in filteredRelics" class="relic-select__item" @click="showSetRelicStatPop(item.equip)">
-          <img :src="item.equip[0].icon" />{{ item.name }}
+          <img v-lazy="item.equip[0].icon"/>{{ item.name }}
         </div>
       </div>
     </template>
     <template v-else>
       <div class="set-relice-title">
         <span @click="setStatBase = null">切换套装</span>
-        <span><img :src="setStatBase.icon" />{{ setStatBase.name }}</span>
+        <span><img v-lazy="setStatBase.icon" />{{ setStatBase.name }}</span>
         <span style="color: rgb(255, 82, 82)" @click="removeRelic">卸下装备</span>
       </div>
       <form class="set-relice-form" @submit.prevent="addRelic">

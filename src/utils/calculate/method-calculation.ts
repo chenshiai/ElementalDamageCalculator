@@ -187,10 +187,11 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
   let BONUS_DMG = 0;
   if (atkType === ElementalReaction.Aggravate) {
     BONUS_DMG =
-      BaseDMG.aggravate[calculatorValue.level] * (1 + getCatalyzeRate(em) + calculatorValue.catalyzeRate / 100);
+      BaseDMG.aggravate[calculatorValue.level] * (1 + (getCatalyzeRate(em) + calculatorValue.catalyzeRate) / 100);
   }
   if (atkType === ElementalReaction.Spread) {
-    BONUS_DMG = BaseDMG.spread[calculatorValue.level] * (1 + getCatalyzeRate(em) + calculatorValue.catalyzeRate / 100);
+    BONUS_DMG =
+      BaseDMG.spread[calculatorValue.level] * (1 + (getCatalyzeRate(em) + calculatorValue.catalyzeRate) / 100);
   }
   // 加成伤害
   let MAGNIFICATION_DMG = ((BASE_DMG + ADDITIONAL_DMG + BONUS_DMG) * addHunt) / 100;
