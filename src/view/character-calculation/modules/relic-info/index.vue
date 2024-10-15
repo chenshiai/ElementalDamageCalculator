@@ -232,7 +232,7 @@ const subStatFilter = (selectedId: AppendProp) => {
           <input type="number" v-model="subStat.statValue" step="0.01" />
         </div>
         <div class="add-sub-stat" v-show="setStatForm.reliquarySubstats.length < 4" @click="addSubstat">添加副词条</div>
-        <Button class="bottons__add" text="确认修改" size="small" block type="primary" native-type="submit" />
+        <Button class="bottons__add" text="确认修改" block type="primary" native-type="submit" />
       </form>
     </template>
   </Popup>
@@ -264,6 +264,7 @@ const subStatFilter = (selectedId: AppendProp) => {
   display: flex;
   justify-content: space-between;
   padding: 0 8px;
+  font-weight: bold;
 }
 
 .relic-icon {
@@ -373,8 +374,9 @@ const subStatFilter = (selectedId: AppendProp) => {
 .bottons__add {
   background-color: var(--button-bg);
   color: #fff;
+  line-height: 40px;
+  font-size: 20px;
   border: none;
-  font-size: 18px;
   border-radius: 0;
   position: absolute;
   bottom: 0;

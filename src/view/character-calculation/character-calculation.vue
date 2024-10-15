@@ -4,7 +4,7 @@ import { ImagePreview } from "vant";
 import TabTitle from "@/component/TabTitle.vue";
 import DataItem from "@/component/DataItem.vue";
 import CharacterPanel from "@/component/CharacterPanel.vue";
-import db from '@/utils/db';
+import db from "@/utils/db";
 
 import { ICalculatorValue } from "@/types/interface";
 import { ActionOn, AppendProp } from "@/types/enum";
@@ -66,7 +66,7 @@ const CalculationPanel = computed<ICalculatorValue>(() => {
       normalLevel: normalLevel.value,
       skillLevel: skillLevel.value,
       burstLevel: burstLevel.value,
-      
+
       enemyLevel: enemyLevel.value,
       enemyPhysicalResistance: baseResistance.value,
       enemyPyroResistance: baseResistance.value,
@@ -81,21 +81,36 @@ const CalculationPanel = computed<ICalculatorValue>(() => {
 });
 
 // 数据保存
-const saveCalculationResult = () => {
-  const data = {
+import { IUesrSavedCalculations, calDB } from "@/constants/db";
+import SaveData from "./modules/save-info/index.vue";
+import { Character } from "@/constants/characters-config/character";
+import { Weapons } from "@/constants/characters-config/weapon";
+const saveCalculationResult = (title: string) => {
+  const data: IUesrSavedCalculations = {
+    title,
     characterEnkaId: characterInfo.value?.enkaId,
     constellation: constellation.value,
     weaponEnkaId: weapon.value?.enkaId,
     affix: affix.value,
-    relicList: relicList.value,
+    relicList: JSON.stringify(relicList.value),
     normalLevel: normalLevel.value,
     skillLevel: skillLevel.value,
     burstLevel: burstLevel.value,
-    enemyLevel: enemyLevel.value,
-    baseResistance: baseResistance.value,
-  }
-  db
-}
+  };
+  db.add(calDB.storeName, data);
+};
+
+// 数据重算
+const recalculation = (data: IUesrSavedCalculations) => {
+  characterInfo.value = Character.find(c => c.enkaId === data.characterEnkaId);
+  weapon.value = Weapons.find(w => w.enkaId === data.weaponEnkaId);
+  constellation.value = data.constellation;
+  affix.value = data.affix;
+  relicList.value = JSON.parse(data.relicList);
+  normalLevel.value = data.normalLevel;
+  skillLevel.value = data.skillLevel;
+  burstLevel.value = data.burstLevel;
+};
 </script>
 
 <template>
@@ -129,8 +144,9 @@ const saveCalculationResult = () => {
   />
   <div class="data-panel">
     <DataItem v-model="enemyLevel" title="敌人的等级" :stepperMin="1" />
-    <DataItem v-model="baseResistance" title="敌人抗性%" stepperMin="-999">
+    <DataItem v-model="baseResistance" title="敌人抗性%" :stepperMin="-999">
       <div class="extra-btn" @click="handleImagePreview">查看抗性表</div>
     </DataItem>
   </div>
+  <SaveData  @save-data="saveCalculationResult" @recalculation="recalculation"/>
 </template>

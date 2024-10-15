@@ -8,7 +8,8 @@ import route from "./router";
 import store from "./store";
 import "default-passive-events";
 import db from './utils/db';
+import { calDB } from './constants/db';
 
-db.createStore("uesrSavedCalculations", "characterEnkaId");
+db.createStore(calDB.storeName, calDB.keyPath);
 
 createApp(App).use(route).use(store).use(Lazyload).mount("#app");

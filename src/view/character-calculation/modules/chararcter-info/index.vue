@@ -24,12 +24,14 @@ const constellation = defineModel("constellation", {
 </script>
 
 <template>
-  <!-- <div class="data-panel__title">角色</div> -->
   <div v-if="!character" class="show-click" @click="show = true">选择角色</div>
   <template v-else>
     <div class="character-info">
       <div class="avatar-info">
-        <div :class="['name', getBackGroundByRarity(character.rarity)]">{{ character?.name }}（Lv.{{ character.level }}）</div>
+        <div :class="['name', getBackGroundByRarity(character.rarity)]">
+          {{ character?.name }}
+          <!-- （Lv.{{ character.level }}） -->
+        </div>
         <div>生命值：{{ character.baseHP }}</div>
         <div>攻击力：{{ character.baseATK }}</div>
         <div>防御力：{{ character.baseDEF }}</div>

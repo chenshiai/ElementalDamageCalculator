@@ -37,12 +37,14 @@ const weaponStats = computed(() => {
 </script>
 
 <template>
-  <!-- <div class="data-panel__title">武器</div> -->
   <div v-if="!weapon" class="show-click" @click="show = true">选择武器</div>
   <template v-else>
     <div class="weapon-info">
       <div class="avatar-info">
-        <div :class="['name', getBackGroundByRarity(weapon.rarity)]">{{ weapon?.name }}（Lv.{{ weapon.level }}）</div>
+        <div :class="['name', getBackGroundByRarity(weapon.rarity)]">
+          {{ weapon?.name }}
+          <!-- （Lv.{{ weapon.level }}） -->
+        </div>
         <div v-for="item in weaponStats">{{ item.title }}: {{ item.value }}{{ item.suffix }}</div>
         <div class="affix">精炼：<Rate v-model="affix" color="#997874" icon="fire" void-icon="fire-o" /></div>
       </div>
