@@ -36,6 +36,7 @@ export interface IRate {
   em?: number[];
 }
 export interface ICharacterInfo {
+  enkaId: number;
   name: string;
   rarity: Rarity;
   element: ElementType;

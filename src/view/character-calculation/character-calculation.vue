@@ -4,6 +4,7 @@ import { ImagePreview } from "vant";
 import TabTitle from "@/component/TabTitle.vue";
 import DataItem from "@/component/DataItem.vue";
 import CharacterPanel from "@/component/CharacterPanel.vue";
+import db from '@/utils/db';
 
 import { ICalculatorValue } from "@/types/interface";
 import { ActionOn, AppendProp } from "@/types/enum";
@@ -18,6 +19,7 @@ import useRelicInfo, { RelicInfo } from "./modules/relic-info";
 import useBuffInfo, { BuffInfo } from "./modules/buff-info";
 import useSkillInfo, { SkillInfo } from "./modules/skill-info";
 
+// 数据展示
 const { characterInfo, constellation, characterBuffs } = useCharacterInfo();
 const { weapon, affix, weaponBuffs } = useWeaponInfo();
 const { relicList, relicBuffs, relicSuitTexts } = useRelicInfo();
@@ -77,6 +79,23 @@ const CalculationPanel = computed<ICalculatorValue>(() => {
     })
   );
 });
+
+// 数据保存
+const saveCalculationResult = () => {
+  const data = {
+    characterEnkaId: characterInfo.value?.enkaId,
+    constellation: constellation.value,
+    weaponEnkaId: weapon.value?.enkaId,
+    affix: affix.value,
+    relicList: relicList.value,
+    normalLevel: normalLevel.value,
+    skillLevel: skillLevel.value,
+    burstLevel: burstLevel.value,
+    enemyLevel: enemyLevel.value,
+    baseResistance: baseResistance.value,
+  }
+  db
+}
 </script>
 
 <template>

@@ -7,5 +7,8 @@ import "./index.css";
 import route from "./router";
 import store from "./store";
 import "default-passive-events";
+import db from './utils/db';
+
+db.createStore("uesrSavedCalculations", "characterEnkaId");
 
 createApp(App).use(route).use(store).use(Lazyload).mount("#app");
