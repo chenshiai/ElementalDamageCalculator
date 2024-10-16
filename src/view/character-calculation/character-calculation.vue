@@ -82,7 +82,7 @@ const CalculationPanel = computed<ICalculatorValue>(() => {
 
 // 数据保存
 import { IUesrSavedCalculations, calDB } from "@/constants/db";
-import SaveData from "./modules/save-info/index.vue";
+import SaveCalculation from '@/component/SaveCalculation.vue'
 import { Character } from "@/constants/characters-config/character";
 import { Weapons } from "@/constants/characters-config/weapon";
 const saveCalculationResult = (title: string) => {
@@ -148,5 +148,5 @@ const recalculation = (data: IUesrSavedCalculations) => {
       <div class="extra-btn" @click="handleImagePreview">查看抗性表</div>
     </DataItem>
   </div>
-  <SaveData  @save-data="saveCalculationResult" @recalculation="recalculation"/>
+  <SaveCalculation  @save-data="saveCalculationResult" @recalculation="recalculation"/>
 </template>

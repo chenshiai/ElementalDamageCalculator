@@ -4,6 +4,9 @@
       <router-link to="/character" class="top-tabs__item">
         云上辉星
       </router-link>
+      <router-link to="/cloud-team" class="top-tabs__item">
+        云
+      </router-link>
       <router-link to="/" class="top-tabs__item">
         剧变伤害
       </router-link>

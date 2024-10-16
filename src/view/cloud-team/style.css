@@ -1,16 +1,12 @@
-.team-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
 .team-list__item {
   display: flex;
-  background-color: var(--bg);
   width: 100%;
+  border-radius: 4px;
   margin-bottom: 6px;
 }
 .team-list__item-avatar {
   height: 100px;
+  background-color: var(--bg);
   width: 76px;
   box-sizing: border-box;
   border: 2px solid var(--border);
@@ -24,56 +20,35 @@
   background-color: var(--light-text);
 }
 .team-list__item img {
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
   display: inline-block;
   vertical-align: middle;
   max-height: 76px;
 }
-.team-list__tags {
+.team-list__item-detail {
   border: 2px solid var(--border);
   box-sizing: border-box;
-  border-radius: 0 4px 4px 0;
-  padding: 2px;
   flex-grow: 1;
-  color: #fff;
-  overflow-y: scroll;
-  height: 100px;
-  background-color: var(--main-text);
+  padding: 0 10px 0 10px;
+  border-radius: 0 4px 4px 0;
 }
-.tag {
-  line-height: 12px;
-  font-size: 12px;
-  border-radius: 6px;
-  margin-bottom: 6px;
+.team-list__item-imgs {
+  display: flex;
+  justify-content: space-between;
 }
-.tag-weight {
+.team-list__item-imgs img {
+  border-radius: 4px;
+  height: 38px;
+  border: 2px solid var(--border);
+}
+.team-list__item-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.team-list__item-options span {
   display: inline-block;
-  width: 14px;
-}
-.tag-astro {
-  float: right;
-}
-.tag-level1,
-.tag-level2,
-.tag-level3 {
-  color: #8cffbc;
-}
-.tag-level4,
-.tag-level5,
-.tag-level6 {
-  color: #6596ff;
-}
-.tag-level7,
-.tag-level8,
-.tag-level9 {
-  color: #c875ff;
-}
-.tag-level10,
-.tag-level11,
-.tag-level12 {
-  color: #ffff2d;
+  width: 50%;
+  text-align: center;
 }
 .team-list .empty {
   text-align: center;
@@ -98,38 +73,4 @@
 .team-list .empty::before {
   width: 28px;
   height: 4px;
-}
-.cloud-team__tips {
-  font-size: 14px;
-  color: var(--tip-text);
-  margin-bottom: 16px;
-  display: inline-block;
-}
-.cloud-team__tips b {
-  color: var(--main-text);
-}
-.scaleplate {
-  border: 1px solid var(--main-text);
-  font-size: 12px;
-  border-radius: 4px;
-  display: flex;
-  overflow: hidden;
-}
-.scaleplate-item {
-  flex: 1;
-  text-align: center;
-  text-shadow: 1px 0 0 var(--light-text), 0 1px 0 var(--light-text), -1px 0 0 var(--light-text),
-    0 -1px 0 var(--light-text);
-}
-.not-recommend {
-  background-color: #8cffbc;
-}
-.effective {
-  background-color: #6596ff;
-}
-.general {
-  background-color: #c875ff;
-}
-.recommend {
-  background-color: #ffff2d;
 }

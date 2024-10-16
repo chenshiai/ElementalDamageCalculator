@@ -5,7 +5,13 @@
       <span class="pop-title__close" @click="$emit('close')">返回</span>
     </div>
     <div class="selector-area">
-      <Search background="#f7f1e6" shape="round" v-model="keyword" @input="onInput" placeholder="输入伙伴名称进行检索" />
+      <Search
+        background="#f7f1e6"
+        shape="round"
+        v-model="keyword"
+        @input="onInput"
+        placeholder="输入伙伴名称进行检索"
+      />
       <div class="selector-block">
         元素属性<span class="holy-relic-tips">（可多选）</span>
         <CheckboxGroup class="check-area element-select" v-model="element">
@@ -47,20 +53,33 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
-import { Character } from '@/constants/characters-config/character';
-import { ICharacterInfo } from '@/types/interface';
-import { Search, Checkbox, CheckboxGroup, RadioGroup, Radio } from 'vant';
-import getBackGroundByRarity from '@/utils/getBackGroundClassByRarity';
+import { ref, computed, watch } from "vue";
+import { Character } from "@/constants/characters-config/character";
+import { ICharacterInfo } from "@/types/interface";
+import { Search, Checkbox, CheckboxGroup, RadioGroup, Radio } from "vant";
+import getBackGroundByRarity from "@/utils/getBackGroundClassByRarity";
 
 const props = defineProps({
   handleChange: Function,
+  defaultName: String,
 });
-const keyword = ref('');
-const result = ref();
+const keyword = ref<string>("");
+const result = ref<string>("");
 const element = ref([]);
 const weapon = ref([]);
-const emit = defineEmits(['close']);
+const emit = defineEmits(["close"]);
+
+watch(
+  () => props.defaultName,
+  () => {
+    if (props.defaultName !== result.value) {
+      console.log("props.defaultName", props.defaultName);
+      console.log("result.value", result.value);
+      
+      result.value = props.defaultName;
+    }
+  }
+);
 
 const configFilter = computed(() => {
   let res = Character;
@@ -80,19 +99,19 @@ const configFilter = computed(() => {
 });
 
 const resultChange = (value) => {
+  if (!value || value === props.defaultName) return;
   props.handleChange(
     Character.find((item: ICharacterInfo) => {
       return value.includes(item.name);
     })
   );
-  emit('close');
+  emit("close");
 };
 
 const onInput = () => {
   element.value = [];
   weapon.value = [];
 };
-
 </script>
 
 <style src="@/assets/selector.css"></style>
