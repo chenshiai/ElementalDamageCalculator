@@ -7,10 +7,12 @@ import { IUesrSavedCalculations } from "@/constants/db";
 import { Character } from "@/constants/characters-config/character";
 import { Weapons } from "@/constants/characters-config/weapon";
 import { IRelicItem } from "@/constants/characters-config/relic-class";
+import { useRouter } from "vue-router";
 
 const show = ref(false);
 const characterSelect = ref<IUesrSavedCalculations[]>([null, null, null, null]);
 const selectedIndex = ref(0);
+const router = useRouter();
 
 const setSlotByIndex = (index) => {
   show.value = true;
@@ -19,6 +21,25 @@ const setSlotByIndex = (index) => {
 const handleCharacterChange = (result: IUesrSavedCalculations) => {
   characterSelect.value[selectedIndex.value] = result;
   show.value = false;
+};
+
+const edit = (index) => {
+  router.push({
+    name: "character",
+    params: {
+      data: JSON.stringify(characterSelect.value[index]),
+    },
+  });
+};
+
+const clear = (index) => {
+  characterSelect.value[index] = null;
+};
+
+const toCreateData = () => {
+  router.push({
+    name: "character",
+  });
 };
 
 const getAvatarIcon = (enkaId: number) => {
@@ -41,6 +62,7 @@ const getRelics = (relicList: string) => {
   <TabTitle>云配队</TabTitle>
   <div class="tips">从本地保存数据中，选择角色数据填入</div>
   <div class="team-list">
+    <div class="show-click" @click="toCreateData">+创建角色数据</div>
     <div class="team-list__item" v-for="(item, index) in characterSelect" :key="index">
       <div class="team-list__item-avatar" @click="setSlotByIndex(index)">
         <template v-if="item">
@@ -60,9 +82,9 @@ const getRelics = (relicList: string) => {
             v-lazy="relic?.icon || ''"
           />
         </div>
-        <div class="team-list__item-options">
-          <span>编辑<Icon name="edit" /></span>
-          <span v-if="item">清除<Icon name="close" /></span>
+        <div v-if="item" class="team-list__item-options">
+          <span @click="edit(index)">编辑<Icon name="edit" /></span>
+          <span @click="clear(index)">清除<Icon name="close" /></span>
         </div>
       </div>
     </div>
@@ -72,4 +94,4 @@ const getRelics = (relicList: string) => {
   </Popup>
 </template>
 
-<style src="./style.css" />
+<style scoped src="./style.css" />

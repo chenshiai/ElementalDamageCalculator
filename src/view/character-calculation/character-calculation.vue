@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, ref, watchEffect } from "vue";
 import { ImagePreview } from "vant";
 import TabTitle from "@/component/TabTitle.vue";
 import DataItem from "@/component/DataItem.vue";
@@ -101,6 +101,14 @@ const saveCalculationResult = (title: string) => {
 };
 
 // 数据重算
+import { useRoute } from "vue-router";
+const route = useRoute();
+console.log(route.params.data);
+
+watchEffect(() => {
+  if (route.params.data) {
+  }
+})
 const recalculation = (data: IUesrSavedCalculations) => {
   characterInfo.value = Character.find(c => c.enkaId === data.characterEnkaId);
   weapon.value = Weapons.find(w => w.enkaId === data.weaponEnkaId);

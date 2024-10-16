@@ -1,11 +1,11 @@
 <template>
   <div class="top-overhang">
     <div class="top-tabs">
-      <router-link to="/character" class="top-tabs__item">
+      <!-- <router-link to="/character" class="top-tabs__item">
         云上辉星
-      </router-link>
+      </router-link> -->
       <router-link to="/cloud-team" class="top-tabs__item">
-        云
+        云上辉星
       </router-link>
       <router-link to="/" class="top-tabs__item">
         剧变伤害

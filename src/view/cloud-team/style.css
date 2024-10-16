@@ -74,3 +74,9 @@
   width: 28px;
   height: 4px;
 }
+.show-click {
+  text-align: center;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  margin-bottom: 16px;
+}

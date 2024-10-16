@@ -24,7 +24,9 @@ const route = createRouter({
     },
     {
       path: "/character",
+      name: "character",
       component: CharacterCalculation,
+      props: true
     },
   ],
 });
