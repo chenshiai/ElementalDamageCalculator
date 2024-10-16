@@ -1,4 +1,13 @@
-import { AttackType, ElementType, BuffType, WeaponType, Rarity, EnchantingType, ActionOn } from "@/types/enum";
+import {
+  AttackType,
+  ElementType,
+  BuffType,
+  WeaponType,
+  Rarity,
+  EnchantingType,
+  ActionOn,
+  BuffTarget,
+} from "@/types/enum";
 import { IBuffBase, ICharacterInfo, IRate, ISkillRate } from "@/types/interface";
 import { getEnkaUI } from "./append-prop";
 import {
@@ -586,21 +595,82 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("技能伤害", AttackType.Burst, ElementType.Anemo, {
         atk: [1.48, 1.59, 1.7, 1.85, 1.96, 2.07, 2.22, 2.37, 2.52, 2.66, 2.81, 2.96, 3.15, 3.33],
       }),
-      createAttack("附加元素伤害", AttackType.Burst, ElementType.Hydro, {
+      createAttack("附加元素伤害·水", AttackType.Burst, ElementType.Hydro, {
         atk: [0.44, 0.473, 0.506, 0.55, 0.583, 0.616, 0.66, 0.7, 0.748, 0.792, 0.836, 0.88, 0.935, 0.99],
       }),
-      createAttack("附加元素伤害", AttackType.Burst, ElementType.Pyro, {
+      createAttack("附加元素伤害·火", AttackType.Burst, ElementType.Pyro, {
         atk: [0.44, 0.473, 0.506, 0.55, 0.583, 0.616, 0.66, 0.7, 0.748, 0.792, 0.836, 0.88, 0.935, 0.99],
       }),
-      createAttack("附加元素伤害", AttackType.Burst, ElementType.Cryo, {
+      createAttack("附加元素伤害·冰", AttackType.Burst, ElementType.Cryo, {
         atk: [0.44, 0.473, 0.506, 0.55, 0.583, 0.616, 0.66, 0.7, 0.748, 0.792, 0.836, 0.88, 0.935, 0.99],
       }),
-      createAttack("附加元素伤害", AttackType.Burst, ElementType.Electro, {
+      createAttack("附加元素伤害·雷", AttackType.Burst, ElementType.Electro, {
         atk: [0.44, 0.473, 0.506, 0.55, 0.583, 0.616, 0.66, 0.7, 0.748, 0.792, 0.836, 0.88, 0.935, 0.99],
       }),
     ],
     otherSkill: [],
-    buffs: [A_80_ANEMO_24P],
+    buffs: [
+      A_80_ANEMO_24P,
+      {
+        label: "触媒置换术",
+        describe: "砂糖触发扩散反应时，使队伍中所有对应元素类型的角色（不包括砂糖自己）基础元素精通提升50点",
+        effect: [{ type: BuffType.MysteryFixed, getValue: () => 50 }],
+        enable: false,
+        shareable: true,
+        target: BuffTarget.Other,
+      },
+      {
+        label: "小小的慧风",
+        describe:
+          "风灵作成·陆叁零捌或禁·风灵作成·染伍同构贰型命中敌人时，基于砂糖基础元素精通的20%，为队伍中所有角色（不包括砂糖自己）提供非基础元素精通加成",
+        effect: [{ type: BuffType.MysteryFixed, getValue: (data) => data.elementalMystery * 0.2, transform: true }],
+        enable: false,
+        shareable: true,
+        target: BuffTarget.Other,
+      },
+      Constellation_E_3,
+      Constellation_Q_5,
+      {
+        label: "6命·混元熵增论·火增伤",
+        describe:
+          "禁·风灵作成·柒伍同构贰型如果发生了元素转化，则使队伍中所有角色在技能持续时间内获得20%的对应元素伤害加成",
+        effect: [{ type: BuffType.PyroPrcent, getValue: () => 20 }],
+        condition: ({ element }) => element === ElementType.Pyro,
+        enable: false,
+        shareable: true,
+        target: BuffTarget.All,
+      },
+      {
+        label: "6命·混元熵增论·冰增伤",
+        describe:
+          "禁·风灵作成·柒伍同构贰型如果发生了元素转化，则使队伍中所有角色在技能持续时间内获得20%的对应元素伤害加成",
+        effect: [{ type: BuffType.CryoPrcent, getValue: () => 20 }],
+        enable: false,
+        condition: ({ element }) => element === ElementType.Cryo,
+        shareable: true,
+        target: BuffTarget.All,
+      },
+      {
+        label: "6命·混元熵增论·水增伤",
+        describe:
+          "禁·风灵作成·柒伍同构贰型如果发生了元素转化，则使队伍中所有角色在技能持续时间内获得20%的对应元素伤害加成",
+        effect: [{ type: BuffType.HydroPrcent, getValue: () => 20 }],
+        condition: ({ element }) => element === ElementType.Hydro,
+        enable: false,
+        shareable: true,
+        target: BuffTarget.All,
+      },
+      {
+        label: "6命·混元熵增论·雷增伤",
+        describe:
+          "禁·风灵作成·柒伍同构贰型如果发生了元素转化，则使队伍中所有角色在技能持续时间内获得20%的对应元素伤害加成",
+        effect: [{ type: BuffType.ElectroPrcent, getValue: () => 20 }],
+        enable: false,
+        condition: ({ element }) => element === ElementType.Electro,
+        shareable: true,
+        target: BuffTarget.All,
+      },
+    ],
   },
   {
     ...createCharacter(10000031, "菲谢尔", ElementType.Electro, WeaponType.Bow)(Rarity.Four, 9189, 244, 594)(
@@ -1287,9 +1357,12 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
               }
               return data.baseATK * a;
             },
+            transform: true,
           },
         ],
         enable: false,
+        shareable: true,
+        target: BuffTarget.All,
       },
       {
         label: "2命·踏破绝境",
@@ -1312,6 +1385,8 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         ],
         enable: true,
         condition: ({ constellation }) => constellation >= 6,
+        shareable: true,
+        target: BuffTarget.All,
       },
     ],
   },

@@ -23,10 +23,9 @@ const route = createRouter({
       component: PlayInfo,
     },
     {
-      path: "/character",
+      path: "/character/:mode",
       name: "character",
       component: CharacterCalculation,
-      props: true
     },
   ],
 });

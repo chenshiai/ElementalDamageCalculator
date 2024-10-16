@@ -314,6 +314,16 @@ export enum ActionOn {
   External = "external",
 }
 
+/** BUFF计算时生效目标 */
+export enum BuffTarget {
+  /** 仅对自己生效 */
+  Self = "Self",
+  /** 仅对他人生效 */
+  Other = "Other",
+  /** 无限制 */
+  All = "All",
+}
+
 export const elementTypeToLabel = {
   [ElementType.Physical]: "物理伤害加成",
   [ElementType.Pyro]: "火元素伤害加成",

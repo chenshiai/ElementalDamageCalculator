@@ -9,9 +9,9 @@ export interface IRelicSuitText {
   name: string;
   texts: string[];
 }
-const useRelicInfo = () => {
+const useRelicInfo = (initData: IRelicItem[] = new Array(5).fill(null)) => {
   /** 圣遗物列表 */
-  const relicList = ref<IRelicItem[]>(new Array(5).fill(null));
+  const relicList = ref<IRelicItem[]>(initData);
 
   /** 套装buff */
   const relicBuffs = ref<IBuffBase[]>([]);
@@ -64,10 +64,17 @@ const useRelicInfo = () => {
     });
   });
 
+  function initRelicInfo() {
+    relicList.value = new Array(5).fill(null);
+    relicBuffs.value = [];
+    relicSuitTexts.value = [];
+  }
+
   return {
     relicList,
     relicBuffs,
     relicSuitTexts,
+    initRelicInfo,
   };
 };
 

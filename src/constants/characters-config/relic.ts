@@ -70,6 +70,18 @@ const getBuffByElement3 = (element: ElementType, type: BuffType) => {
   };
 };
 
+/** 翠绿之影 */
+const getBuffByElement4 = (element: ElementType, type: BuffType) => {
+  return {
+    enable: false,
+    label: "四件套·降低敌人的元素抗性",
+    effect: [{ type, getValue: () => -40 }],
+    describe: "根据扩散的元素类型，降低受到影响的敌人40%的对应元素抗性",
+    condition: (data) => data.element === element,
+    shareable: true,
+  };
+};
+
 const relicLibrary: IRelicLibraryItem[] = [
   {
     name: "黑曜秘典",
@@ -1263,6 +1275,7 @@ const relicLibrary: IRelicLibraryItem[] = [
           effect: [{ type: BuffType.ATKPrcent, getValue: () => 20 }],
           describe: "释放元素爆发后，队伍中所有角色攻击力提升20％",
           enable: false,
+          shareable: true,
         },
       ],
     },
@@ -1321,7 +1334,12 @@ const relicLibrary: IRelicLibraryItem[] = [
           enable: true,
         },
       ],
-      suit4: [],
+      suit4: [
+        getBuffByElement4(ElementType.Pyro, BuffType.EnemyPyroResistance),
+        getBuffByElement4(ElementType.Electro, BuffType.EnemyElectroResistance),
+        getBuffByElement4(ElementType.Cryo, BuffType.EnemyCryoResistance),
+        getBuffByElement4(ElementType.Hydro, BuffType.EnemyHydroResistance),
+      ],
     },
   },
   {
@@ -1384,6 +1402,7 @@ const relicLibrary: IRelicLibraryItem[] = [
           effect: [{ type: BuffType.MysteryFixed, getValue: () => 120 }],
           describe: "触发元素反应后，队伍中所有角色的元素精通提高120点",
           enable: false,
+          shareable: true,
         },
       ],
     },

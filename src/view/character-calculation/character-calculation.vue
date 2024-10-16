@@ -20,11 +20,11 @@ import useBuffInfo, { BuffInfo } from "./modules/buff-info";
 import useSkillInfo, { SkillInfo } from "./modules/skill-info";
 
 // 数据展示
-const { characterInfo, constellation, characterBuffs } = useCharacterInfo();
-const { weapon, affix, weaponBuffs } = useWeaponInfo();
-const { relicList, relicBuffs, relicSuitTexts } = useRelicInfo();
+const { characterInfo, constellation, characterBuffs, initCharacterInfo } = useCharacterInfo();
+const { weapon, affix, weaponBuffs, initWeaponInfo } = useWeaponInfo();
+const { relicList, relicBuffs, relicSuitTexts, initRelicInfo } = useRelicInfo();
 const { buffs } = useBuffInfo();
-const { normalLevel, skillLevel, burstLevel } = useSkillInfo();
+const { normalLevel, skillLevel, burstLevel, initSkillInfo } = useSkillInfo();
 
 const enemyLevel = ref(90);
 const baseResistance = ref(10);
@@ -82,47 +82,55 @@ const CalculationPanel = computed<ICalculatorValue>(() => {
 
 // 数据保存
 import { IUesrSavedCalculations, calDB } from "@/constants/db";
-import SaveCalculation from '@/component/SaveCalculation.vue'
+import SaveCalculation from "@/component/SaveCalculation.vue";
 import { Character } from "@/constants/characters-config/character";
 import { Weapons } from "@/constants/characters-config/weapon";
 const saveCalculationResult = (title: string) => {
   const data: IUesrSavedCalculations = {
     title,
     characterEnkaId: characterInfo.value?.enkaId,
-    constellation: constellation.value,
     weaponEnkaId: weapon.value?.enkaId,
     affix: affix.value,
     relicList: JSON.stringify(relicList.value),
-    normalLevel: normalLevel.value,
-    skillLevel: skillLevel.value,
-    burstLevel: burstLevel.value,
+    panel: CalculationPanel.value,
   };
   db.add(calDB.storeName, data);
 };
 
 // 数据重算
-import { useRoute } from "vue-router";
-const route = useRoute();
-console.log(route.params.data);
-
-watchEffect(() => {
-  if (route.params.data) {
-  }
-})
 const recalculation = (data: IUesrSavedCalculations) => {
-  characterInfo.value = Character.find(c => c.enkaId === data.characterEnkaId);
-  weapon.value = Weapons.find(w => w.enkaId === data.weaponEnkaId);
-  constellation.value = data.constellation;
+  characterInfo.value = Character.find((c) => c.enkaId === data.characterEnkaId);
+  weapon.value = Weapons.find((w) => w.enkaId === data.weaponEnkaId);
+  constellation.value = data.panel.constellation;
   affix.value = data.affix;
   relicList.value = JSON.parse(data.relicList);
-  normalLevel.value = data.normalLevel;
-  skillLevel.value = data.skillLevel;
-  burstLevel.value = data.burstLevel;
+  normalLevel.value = data.panel.normalLevel;
+  skillLevel.value = data.panel.skillLevel;
+  burstLevel.value = data.panel.burstLevel;
 };
+
+import { useRoute } from "vue-router";
+const route = useRoute();
+watchEffect(() => {
+  if (route.params.mode === 'edit') {
+    const data = sessionStorage.getItem('editCharacter');
+    if (data) {
+      recalculation(JSON.parse(data));
+    }
+  } else {
+    initCharacterInfo();
+    initRelicInfo();
+    initSkillInfo();
+    initWeaponInfo();
+  }
+});
+const pageTitle= computed(() => {
+  return route.params.mode === 'edit' ? '编辑角色数据' : '角色数据创建'
+})
 </script>
 
 <template>
-  <TabTitle>角色伤害计算</TabTitle>
+  <TabTitle>{{ pageTitle }}</TabTitle>
   <div class="tips">角色和武器的成长数据暂无，均以满级数据计算。</div>
   <CharacterInfo v-model="characterInfo" v-model:constellation="constellation" />
   <WeaponInfo v-model="weapon" v-model:affix="affix" />
@@ -132,6 +140,8 @@ const recalculation = (data: IUesrSavedCalculations) => {
     :character-panel-data="CalculationPanel"
     :element-type="characterInfo?.element"
   />
+  <SaveCalculation @save-data="saveCalculationResult" @recalculation="recalculation" />
+  <TabTitle>伤害计算</TabTitle>
   <BuffInfo
     v-if="characterInfo && weapon"
     v-model="buffs"
@@ -156,5 +166,4 @@ const recalculation = (data: IUesrSavedCalculations) => {
       <div class="extra-btn" @click="handleImagePreview">查看抗性表</div>
     </DataItem>
   </div>
-  <SaveCalculation  @save-data="saveCalculationResult" @recalculation="recalculation"/>
 </template>

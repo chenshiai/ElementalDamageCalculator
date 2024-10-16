@@ -30,10 +30,15 @@
   flex-grow: 1;
   padding: 0 10px 0 10px;
   border-radius: 0 4px 4px 0;
+  position: relative;
 }
 .team-list__item-imgs {
   display: flex;
   justify-content: space-between;
+}
+.dataname {
+  width: 80%;
+  overflow: hidden;
 }
 .team-list__item-imgs img {
   border-radius: 4px;
@@ -41,9 +46,11 @@
   border: 2px solid var(--border);
 }
 .team-list__item-options {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  text-align: center;
+  width: 60px;
 }
 .team-list__item-options span {
   display: inline-block;

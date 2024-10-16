@@ -206,11 +206,29 @@ const saveDataModule = {
   }
 }
 
+// 团队增益
+const teamBuffs = {
+  state: () => {
+    return {
+      buffs: [],
+      teamList: [],
+    }
+  },
+  mutations: {
+    setBuffs(state, value) {
+      state.buffs = value || [];
+    },
+    setTeamList(state, value) {
+      state.teamList = value || [];
+    }
+  }
+}
 
 const store = createStore({
   modules: {
     damageModule,
     saveDataModule,
+    teamBuffs,
   },
 });
 

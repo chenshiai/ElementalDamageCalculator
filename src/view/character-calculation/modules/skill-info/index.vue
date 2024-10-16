@@ -27,7 +27,7 @@ const getOtherSkill = computed(() => {
 
 <template>
   <div class="skill-info">
-    <div class="data-panel__title">伤害计算</div>
+    <div class="data-panel__title">具体数值</div>
     <Collapse v-model="activeNames">
       <CollapseItem :title="`${characterInfo.talentNames[0]}（Lv.${normalLevel + calculatorValue.normalLevelAdd}）`">
         <span class="slider-wrap">

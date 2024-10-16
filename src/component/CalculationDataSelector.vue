@@ -72,7 +72,7 @@ const getStatValueText = (stat): string => {
           <img :src="getAvatarIcon(item.characterEnkaId)" />
           <div class="info">
             <div class="name">{{ getCharacterName(item.characterEnkaId) }}</div>
-            <div class="conts">命之座：{{ item.constellation }}</div>
+            <div class="conts">命之座：{{ item.panel.constellation }}</div>
           </div>
           <img :src="getWeaponIcon(item.weaponEnkaId)" />
           <div class="info">
@@ -112,7 +112,7 @@ const getStatValueText = (stat): string => {
       </div>
     </CollapseItem>
   </Collapse>
-  <div class="empty" v-else>暂无数据</div>
+  <div class="empty" v-else>无</div>
 </template>
 
 <style scoped>

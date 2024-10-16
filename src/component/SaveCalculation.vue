@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Popup, showFailToast, Field, Collapse, CollapseItem, Icon } from "vant";
+import { Popup, showFailToast, Field } from "vant";
 import { ref } from "vue";
 import CalculationDataSelector from "./CalculationDataSelector.vue";
 const emit = defineEmits(["save-data", "look-data", "recalculation"]);

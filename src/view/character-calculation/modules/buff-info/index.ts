@@ -1,11 +1,32 @@
-import { ref } from "vue";
+import { ref, watchEffect } from "vue";
+import { IBuffBase } from "@/types/interface";
+
 import BuffInfo from "./index.vue";
-import { IBuffBase, ICharacterInfo, IWeaponInfo } from "@/types/interface";
 export { BuffInfo };
 
-const useRelicInfo = () => {
+import { useStore } from "vuex";
+
+const useBuffInfo = () => {
   const buffs = ref<IBuffBase[]>([]);
+  const store = useStore();
+
+  const teamList = store.state.teamBuffs.teamList;
+  watchEffect(() => {
+    buffs.value = [];
+    teamList.forEach((item) => {
+      if (item) {
+        item.buffMap.forEach((buffList, name) => {
+          buffList.forEach((buff) => {
+            const b = Object.create(buff);
+            b.label = `【${name}】${buff.label}`;
+            buffs.value.push(b);
+          });
+        });
+      }
+    });
+  });
+
   return { buffs };
 };
 
-export default useRelicInfo;
+export default useBuffInfo;

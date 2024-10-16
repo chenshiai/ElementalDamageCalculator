@@ -1,5 +1,5 @@
 import { BuffEffect, BuffCondition, WeaponStats } from "../index";
-import { ElementType, AttackType, Rarity, WeaponType, EquipType, BuffType } from "../enum";
+import { ElementType, AttackType, Rarity, WeaponType, EquipType, BuffType, BuffTarget } from "../enum";
 
 export interface IBuffBase {
   /** Buff展示名称 */
@@ -10,7 +10,7 @@ export interface IBuffBase {
   effect: BuffEffect[];
   /** Buff是否启用 */
   enable: boolean;
-  /** Buff显示条件判断 */
+  /** Buff显示条件判断 设置该字段后，返回为true就显示，false不显示，不设置条件，默认为true */
   condition?: BuffCondition;
   /** Buff数值是否可叠加 */
   stackable?: boolean;
@@ -20,6 +20,10 @@ export interface IBuffBase {
   limit?: number;
   /** 当前层数 */
   stack?: number;
+  /** Buff是否可共享 */
+  shareable?: boolean;
+  /** Buff作用对象 */
+  target?: BuffTarget;
 }
 export interface ISkillRate {
   label: string;

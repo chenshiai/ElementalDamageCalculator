@@ -187,3 +187,9 @@ const shieldData = computed(() => {
   );
 });
 </script>
+
+<style>
+.data-panel__title .van-cell {
+  background: var(--light-text) !important;
+}
+</style>

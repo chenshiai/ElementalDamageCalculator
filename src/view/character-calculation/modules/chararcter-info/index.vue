@@ -55,7 +55,12 @@ const constellation = defineModel("constellation", {
     </div>
   </template>
   <Popup teleport="#app" v-model:show="show" position="right" :style="{ width: '100%', height: '100vh' }">
-    <Selector @close="show = false" :handleChange="handleCharacterChange" :maxSelect="1" />
+    <Selector
+      @close="show = false"
+      :defaultName="character?.name || ''"
+      :handleChange="handleCharacterChange"
+      :maxSelect="1"
+    />
   </Popup>
 </template>
 
