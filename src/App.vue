@@ -1,24 +1,21 @@
 <template>
   <div class="top-overhang">
     <div class="top-tabs">
-      <!-- <router-link to="/character" class="top-tabs__item">
-        云上辉星
-      </router-link> -->
-      <router-link to="/cloud-team" class="top-tabs__item">
-        云上辉星
-      </router-link>
       <router-link to="/" class="top-tabs__item">
         剧变伤害
       </router-link>
       <router-link to="/increasing-range" class="top-tabs__item">
         伤害计算
       </router-link>
+      <router-link to="/cloud-team" class="top-tabs__item">
+        云上辉星
+      </router-link>
       <router-link to="/shield" class="top-tabs__item">
         护盾承伤
       </router-link>
-      <!-- <router-link to="/question-answer" class="top-tabs__item">
+      <router-link to="/question-answer" class="top-tabs__item">
         常见问题
-      </router-link> -->
+      </router-link>
     </div>
   </div>
   <div class="content">
@@ -79,6 +76,7 @@ import Foot from "./component/Foot.vue";
   justify-content: space-between;
   bottom: -38px;
   padding: 16px;
+  gap: 4px;
 }
 
 .top-tabs__item {
@@ -91,7 +89,6 @@ import Foot from "./component/Foot.vue";
   color: #fff;
   border-radius: 10px;
   flex: 1;
-  margin-right: 8px;
 }
 
 .router-link-active {

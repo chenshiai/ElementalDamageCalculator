@@ -6,12 +6,6 @@ export interface IBuffBase {
   label: string;
   /** Buff细节描述 */
   describe?: string;
-  /** Buff的具体效果 */
-  effect: BuffEffect[];
-  /** Buff是否启用 */
-  enable: boolean;
-  /** Buff显示条件判断 设置该字段后，返回为true就显示，false不显示，不设置条件，默认为true */
-  condition?: BuffCondition;
   /** Buff数值是否可叠加 */
   stackable?: boolean;
   /** BUff层数别名 */
@@ -20,10 +14,20 @@ export interface IBuffBase {
   limit?: number;
   /** 当前层数 */
   stack?: number;
-  /** Buff是否可共享 */
-  shareable?: boolean;
-  /** Buff作用对象 */
+  /** 个人增益展示条件判断函数，返回为true即可以展示，false不可展示。不设置则默认展示 */
+  condition?: BuffCondition;
+
+  /** Buff的具体效果 */
+  effect: BuffEffect[];
+  /** Buff作用对象，大多数情况用不上，用来处理部分特殊情况 */
   target?: BuffTarget;
+  /** Buff是否启用 */
+  enable: boolean;
+  
+  /** Buff是否可共享，为true表示该增益可以给其他人使用 */
+  shareable?: boolean;
+  /** 团队增益展示条件判断函数，返回为true即可以展示，false不可展示。不设置则默认展示 */
+  shareCondition?: BuffCondition;
 }
 export interface ISkillRate {
   label: string;

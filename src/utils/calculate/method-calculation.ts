@@ -136,7 +136,10 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
   // 元素附魔
   if (
     calculatorValue.enchanting !== EnchantingType.Physical &&
-    (attackType === AttackType.Normal || attackType === AttackType.Strong || attackType === AttackType.Falling) &&
+    (attackType === AttackType.Normal ||
+      attackType === AttackType.Strong ||
+      attackType === AttackType.Falling ||
+      attackType === AttackType.FallPeriod) &&
     (calculatorValue.weapon === WeaponType.Sword ||
       calculatorValue.weapon === WeaponType.GreatSword ||
       calculatorValue.weapon === WeaponType.Polearms)

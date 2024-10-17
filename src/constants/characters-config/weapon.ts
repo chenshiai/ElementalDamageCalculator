@@ -1,4 +1,4 @@
-import { WeaponType, Rarity, AppendProp, BuffType, AttackType, ElementType, ActionOn } from "@/types/enum";
+import { WeaponType, Rarity, AppendProp, BuffType, AttackType, ElementType, ActionOn, BuffTarget } from "@/types/enum";
 import { IBuffBase, ICalculatorValue, IWeaponInfo } from "@/types/interface";
 import { getEnkaUI } from "./append-prop";
 function highlight(strings, ...values) {
@@ -123,6 +123,7 @@ export const Weapons: IWeaponInfo[] = [
             { type: BuffType.BurstPrcent, getValue: (_, stack) => add * stack },
           ],
           stackable: true,
+          stackText: "悬木祝赐",
           limit: 6,
           stack: 6,
           enable: false,
@@ -153,7 +154,7 @@ export const Weapons: IWeaponInfo[] = [
     (affix = 1) => {
       const limit = 80 + (affix - 1) * 10 + "%";
       const atk = 28 + (affix - 1) * 7 + "%";
-      const car = 30 + (affix - 1) * 5
+      const car = 30 + (affix - 1) * 5;
       return [
         {
           label: "攻击力提升",
@@ -166,6 +167,7 @@ export const Weapons: IWeaponInfo[] = [
                 const res = Math.min(limit, ec);
                 return res;
               },
+              transform: true,
               actionOn: ActionOn.Indirect,
             },
           ],
@@ -212,9 +214,10 @@ export const Weapons: IWeaponInfo[] = [
         },
         {
           label: "普通攻击伤害提升",
-          describe: `每层普通攻击伤害提升${add}%， 至多叠加四层`,
+          describe: `每层「炽夏」使普通攻击伤害提升${add}%， 至多叠加四层`,
           effect: [{ type: BuffType.NormalPrcent, getValue: (_, stack) => add * stack }],
           stackable: true,
+          stackText: "炽夏",
           limit: 4,
           stack: 4,
           enable: true,
@@ -254,13 +257,15 @@ export const Weapons: IWeaponInfo[] = [
           enable: true,
         },
         {
-          label: "攻击力提升",
+          label: "抗争之歌·攻击力提升",
           describe: `攻击力提升${atk}%`,
           effect: [{ type: BuffType.ATKPrcent, getValue: () => atk }],
           enable: false,
+          shareable: true,
+          target: BuffTarget.All,
         },
         {
-          label: "普通攻击、重击、下落攻击伤害提升",
+          label: "抗争之歌·普攻、重击、下落",
           describe: `普通攻击、重击、下落攻击伤害提升${num}%`,
           effect: [
             { type: BuffType.NormalPrcent, getValue: () => num },
@@ -268,6 +273,8 @@ export const Weapons: IWeaponInfo[] = [
             { type: BuffType.FallingPrcent, getValue: () => num },
           ],
           enable: false,
+          shareable: true,
+          target: BuffTarget.All,
         },
       ];
     }
@@ -412,8 +419,8 @@ export const Weapons: IWeaponInfo[] = [
     (affix = 1) => {
       return [
         {
-          label: "元素战技伤害提升",
-          describe: `元素战技伤害提升${16 + (affix - 1) * 4}%`,
+          label: "苍翠之路的誓言",
+          describe: `队伍中的角色触发火元素相关反应后，装备者元素战技伤害提升${16 + (affix - 1) * 4}%`,
           effect: [{ type: BuffType.SkillPrcent, getValue: () => 16 + (affix - 1) * 4 }],
           enable: false,
         },
@@ -441,7 +448,7 @@ export const Weapons: IWeaponInfo[] = [
     (affix = 1) => {
       return [
         {
-          label: "防御力提升",
+          label: "流水与泉的约定",
           describe: `施放元素战技时，防御力提升${16 + (affix - 1) * 4}`,
           effect: [{ type: BuffType.DEFPrcent, getValue: () => 16 + (affix - 1) * 4 }],
           enable: false,
@@ -473,7 +480,7 @@ export const Weapons: IWeaponInfo[] = [
       const limit = 16 + (affix - 1) * 4;
       return [
         {
-          label: "普通攻击伤害提升",
+          label: "丰沃之陆的回声",
           describe: `每1000点生命值上限都会使普通攻击造成的伤害提升${add}%，至多${limit}%`,
           effect: [
             {
@@ -552,7 +559,7 @@ export const Weapons: IWeaponInfo[] = [
       const def = 16 + (affix - 1) * 4;
       return [
         {
-          label: "防御力提升",
+          label: "镜与烟色的隐谜",
           describe: `施放元素战技时，防御力提升${def}%`,
           effect: [{ type: BuffType.DEFPrcent, getValue: () => def }],
           enable: false,
@@ -583,7 +590,6 @@ export const Weapons: IWeaponInfo[] = [
     (affix = 1) => {
       const atk = 15 + (affix - 1) * 4;
       const add = 18 + (affix - 1) * 5;
-      const ch = 12 + (affix - 1);
       return [
         {
           label: "攻击力提升",
@@ -675,6 +681,7 @@ export const Weapons: IWeaponInfo[] = [
           describe: `元素战技造成的伤害提升${add}%，约印持续15秒，至多同时持有2枚`,
           effect: [{ type: BuffType.SkillPrcent, getValue: (_, stack) => add * stack }],
           stackable: true,
+          stackText: "约印",
           limit: 2,
           enable: false,
           stack: 2,
@@ -721,6 +728,7 @@ export const Weapons: IWeaponInfo[] = [
           describe: `持有1/2/3层疗护时，生命值上限提升${res}`,
           effect: [{ type: BuffType.HPPrcent, getValue: (_, stack) => [hp1, hp2, hp3][stack - 1] || 0 }],
           stackable: true,
+          stackText: "疗护",
           limit: 3,
           stack: 0,
           enable: false,
@@ -816,7 +824,7 @@ export const Weapons: IWeaponInfo[] = [
       const add = 20 + (affix - 1) * 4;
       return [
         {
-          label: "敌人火雷附着后，伤害提升",
+          label: "踏火息雷",
           describe: `对处于火元素或雷元素影响下的敌人，造成的伤害提高${add}`,
           effect: [{ type: BuffType.GlobalPrcent, getValue: () => add }],
           enable: false,
@@ -870,6 +878,7 @@ export const Weapons: IWeaponInfo[] = [
           ],
           enable: false,
           stackable: true,
+          stackText: "宏大诗篇",
           stack: 3,
           limit: 3,
         },
@@ -887,6 +896,7 @@ export const Weapons: IWeaponInfo[] = [
             },
           ],
           enable: false,
+          shareable: true,
         },
       ];
     }
@@ -915,15 +925,16 @@ export const Weapons: IWeaponInfo[] = [
       const cri = 3 + (affix - 1);
       return [
         {
-          label: "攻击力与暴击率提升",
+          label: "千岩诀·同心",
           describe: `角色获得${atk}%攻击力提升与${cri}%暴击率提升。至多获得4层提升效果`,
           effect: [
             { type: BuffType.ATKPrcent, getValue: (_, stack) => atk * stack },
             { type: BuffType.Critcal, getValue: (_, stack) => cri * stack },
           ],
           stackable: true,
+          stackText:"璃月角色数量",
           limit: 4,
-          stack: 4,
+          stack: 0,
           enable: false,
         },
       ];
@@ -951,7 +962,7 @@ export const Weapons: IWeaponInfo[] = [
       const em = 40 + (affix - 1) * 10;
       return [
         {
-          label: "元素精通提升",
+          label: "镌岩为坊",
           describe: `元素能量减少后，装备者的元素精通提升${em}点，至多叠加2层`,
           effect: [{ type: BuffType.MysteryFixed, getValue: (_, stack) => em * stack }],
           stackable: true,
@@ -1162,7 +1173,7 @@ export const Weapons: IWeaponInfo[] = [
           label: "防御力提升",
           describe: `装备者的防御力提升${def}%`,
           effect: [{ type: BuffType.DEFPrcent, getValue: () => def }],
-          enable: false,
+          enable: true,
         },
       ];
     }
@@ -1190,10 +1201,12 @@ export const Weapons: IWeaponInfo[] = [
       let add = 28 + (affix - 1) * 13;
       return [
         {
-          label: "全队下落攻击伤害提升",
+          label: "云笈降真要诀",
           describe: `装备者下落攻击命中敌人后，队伍中附近的所有角色下落攻击造成的伤害提高${add}%`,
           effect: [{ type: BuffType.FallingPrcent, getValue: () => add }],
           enable: false,
+          shareable: true,
+          target: BuffTarget.All,
         },
       ];
     }
@@ -1220,13 +1233,13 @@ export const Weapons: IWeaponInfo[] = [
       let atk = 12 + (affix - 1) * 3;
       return [
         {
-          label: "攻击力提升",
+          label: "加油！",
           describe: `攻击力提升${atk}%`,
           effect: [{ type: BuffType.ATKPrcent, getValue: () => atk }],
           enable: true,
         },
         {
-          label: "攻击力进一步提升",
+          label: "加油！！！",
           describe: `攻击力提升${atk}%`,
           effect: [{ type: BuffType.ATKPrcent, getValue: () => atk }],
           enable: false,
@@ -1338,7 +1351,7 @@ export const Weapons: IWeaponInfo[] = [
       let add = 7 + (affix - 1) * 1.5;
       return [
         {
-          label: "攻击力提升、元素伤害提升",
+          label: "石匠号子",
           describe: `提高${atk}%攻击力与${add}%所有元素伤害加成，至多叠加3层`,
           effect: [
             { type: BuffType.ATKPrcent, getValue: (_, stack) => atk * stack },
@@ -1351,6 +1364,7 @@ export const Weapons: IWeaponInfo[] = [
             { type: BuffType.GeoPrcent, getValue: (_, stack) => add * stack },
           ],
           stackable: true,
+          stackText: "团结标记",
           limit: 3,
           stack: 3,
           enable: false,
@@ -1382,7 +1396,7 @@ export const Weapons: IWeaponInfo[] = [
       let add = 7 + (affix - 1) * 1.5;
       return [
         {
-          label: "攻击力提升、元素伤害提升",
+          label: "石匠号子",
           describe: `提高${atk}%攻击力与${add}%所有元素伤害加成，至多叠加3层`,
           effect: [
             { type: BuffType.ATKPrcent, getValue: (_, stack) => atk * stack },
@@ -1395,6 +1409,7 @@ export const Weapons: IWeaponInfo[] = [
             { type: BuffType.GeoPrcent, getValue: (_, stack) => add * stack },
           ],
           stackable: true,
+          stackText: "团结标记",
           limit: 3,
           stack: 3,
           enable: false,
@@ -1426,7 +1441,7 @@ export const Weapons: IWeaponInfo[] = [
       let add = 6 + (affix - 1) * 1.5;
       return [
         {
-          label: "普通攻击、重击伤害提升",
+          label: "蔚蓝深空",
           describe: `普通攻击造成的伤害提升${atk}%、重击造成的伤害提升${add}%，至多叠加3层`,
           effect: [
             { type: BuffType.NormalPrcent, getValue: (_, stack) => atk * stack },
@@ -1466,6 +1481,7 @@ export const Weapons: IWeaponInfo[] = [
           label: "元素精通提升",
           describe: `每枚消耗的坚忍标记提高${em}点元素精通，至多叠加3层`,
           effect: [{ type: BuffType.MysteryFixed, getValue: (_, stack) => em * stack }],
+          stackText: "坚忍标记",
           stackable: true,
           limit: 3,
           stack: 3,
@@ -1497,10 +1513,11 @@ export const Weapons: IWeaponInfo[] = [
       let em = 40 + (affix - 1) * 10;
       return [
         {
-          label: "元素精通提升",
+          label: "船工号子",
           describe: `每枚消耗的坚忍标记提高${em}点元素精通，至多叠加3层`,
           effect: [{ type: BuffType.MysteryFixed, getValue: (_, stack) => em * stack }],
           stackable: true,
+          stackText: "坚忍标记",
           limit: 3,
           stack: 3,
           enable: false,
@@ -1612,10 +1629,10 @@ export const Weapons: IWeaponInfo[] = [
       let add = 8 + (affix - 1) * 2;
       let hp = 2 + (affix - 1) * 0.5;
       let add2 = 12 + (affix - 1) * 3;
-      const getValue = (data: ICalculatorValue) => {
+      const getValue = (data: ICalculatorValue, stack) => {
         // 虽然游戏里不存这种场景，但感觉生命之契应该能吃二次转化
         let allhp = data.baseHP + data.extraHP + data.extraHP_NT;
-        return Math.min(((allhp * 0.24) / 1000) * hp, add2);
+        return Math.min(allhp * stack * hp / 10000, add2);
       };
       return [
         {
@@ -1634,7 +1651,7 @@ export const Weapons: IWeaponInfo[] = [
         },
         {
           label: "消除生命之契获得元素伤害加成提升",
-          describe: `每清除1000点将会提供${hp}%所有元素伤害加成，至多获得${add2}%所有元素伤害加成。（由于获取生命之契的手段过少，该增益效果只以最大生命值的24%生命之契来计算）`,
+          describe: `每清除1000点将会提供${hp}%所有元素伤害加成，至多获得${add2}%所有元素伤害加成`,
           effect: [
             { type: BuffType.PyroPrcent, getValue },
             { type: BuffType.HydroPrcent, getValue },
@@ -1644,6 +1661,10 @@ export const Weapons: IWeaponInfo[] = [
             { type: BuffType.CryoPrcent, getValue },
             { type: BuffType.DendroPrcent, getValue },
           ],
+          stackable: true,
+          stack: 24,
+          limit: 200,
+          stackText: "生命之契",
           enable: false,
         },
       ];
@@ -1691,7 +1712,7 @@ export const Weapons: IWeaponInfo[] = [
       let a = 24 + (affix - 1) * 6;
       return [
         {
-          label: "攻击力提升",
+          label: "巡航的白浪",
           describe: `受到治疗后，攻击力提升${a}%，持续8秒`,
           effect: [{ type: BuffType.ATKPrcent, getValue: () => a }],
           enable: false,
@@ -1723,11 +1744,6 @@ export const Weapons: IWeaponInfo[] = [
       let atk = 12 + (affix - 1) * 3;
       let hp = 2.4 + (affix - 1) * 0.6;
       let atk2 = 150 + (affix - 1) * 37.5;
-      const getValue = (data: ICalculatorValue) => {
-        // 虽然游戏里不存这种场景，但感觉生命之契应该能吃二次转化
-        let allhp = data.baseHP + data.extraHP + data.extraHP_NT;
-        return Math.min((allhp * 0.25 * hp) / 100, atk2);
-      };
       return [
         {
           label: "攻击力提升",
@@ -1737,8 +1753,21 @@ export const Weapons: IWeaponInfo[] = [
         },
         {
           label: "消除生命之契获得攻击力提升",
-          describe: `生命之契清除时，基于清除值的${hp}%提升至多${atk2}点攻击力。（由于获取生命之契的手段过少，该增益效果只以最大生命值的25%生命之契来计算）`,
-          effect: [{ type: BuffType.ATKFixed, getValue }],
+          describe: `生命之契清除时，基于清除值的${hp}%提升至多${atk2}点攻击力`,
+          effect: [
+            {
+              type: BuffType.ATKFixed,
+              getValue: (data, stack) => {
+                // 虽然游戏里不存这种场景，但感觉生命之契应该能吃二次转化
+                let allhp = data.baseHP + data.extraHP + data.extraHP_NT;
+                return Math.min(allhp * stack  * hp / 10000, atk2);
+              },
+            },
+          ],
+          stackable: true,
+          stack: 25,
+          limit: 200,
+          stackText: "生命之契",
           enable: false,
         },
       ];
@@ -1766,7 +1795,7 @@ export const Weapons: IWeaponInfo[] = [
       let a = 16 + (affix - 1) * 4;
       return [
         {
-          label: "造成的伤害提升",
+          label: "深海弦振",
           describe: `受到治疗后，造成的伤害提升${a}%，持续8秒`,
           effect: [{ type: BuffType.GlobalPrcent, getValue: () => a }],
           enable: false,
@@ -1851,7 +1880,7 @@ export const Weapons: IWeaponInfo[] = [
       let em = 40 + (affix - 1) * 10;
       return [
         {
-          label: "生命值上限、元素精通提升",
+          label: "碧玉流转",
           describe: `处于队伍后台超过5秒后，生命值上限提升${hp}%，元素精通提升${em}点`,
           effect: [
             { type: BuffType.HPPrcent, getValue: () => hp },
@@ -1885,7 +1914,7 @@ export const Weapons: IWeaponInfo[] = [
       let add = 28 + (affix - 1) * 7;
       return [
         {
-          label: "重击伤害提升",
+          label: "阳炎古道",
           describe: `重击对处于灼心状态下的敌人造成的伤害提升${add}%`,
           effect: [{ type: BuffType.StrongPrcent, getValue: () => add }],
           enable: false,
@@ -2025,6 +2054,7 @@ export const Weapons: IWeaponInfo[] = [
           describe: `处于1/2/3层及以上「手法」效果下时，攻击力提升${atk.join("/")}%`,
           effect: [{ type: BuffType.ATKPrcent, getValue: (_, stack) => atk[stack - 1] || 0 }],
           enable: false,
+          stackText: "手法",
           stackable: true,
           stack: 3,
           limit: 3,
@@ -2054,7 +2084,7 @@ export const Weapons: IWeaponInfo[] = [
       let em = 40 + (affix - 1) * 10;
       return [
         {
-          label: "元素精通提升",
+          label: "秘智之眸的青睐",
           describe: `重击命中敌人后，角色元素精通提升${em}点。该效果至多叠加2层`,
           effect: [{ type: BuffType.MysteryFixed, getValue: (_, stack) => em * stack }],
           stackable: true,
@@ -2104,7 +2134,7 @@ export const Weapons: IWeaponInfo[] = [
           condition: (data) => data.element === element,
           stack: 3,
           limit: 3,
-          label: "元素伤害加成提高",
+          label: "定土玉圭",
           describe: `每1000点生命值使元素伤害加成提高${add}%，至多提高${limit}%`,
         };
       };
@@ -2176,7 +2206,7 @@ export const Weapons: IWeaponInfo[] = [
       let add = 16 + (affix - 1) * 4;
       return [
         {
-          label: "伤害提升",
+          label: "纸伞作祟",
           describe: `装备者对处于「纸伞作祟」状态下的敌人造成的伤害提升${add}%`,
           effect: [{ type: BuffType.GlobalPrcent, getValue: () => add }],
           enable: false,
@@ -2209,8 +2239,8 @@ export const Weapons: IWeaponInfo[] = [
       let lim = 48 + (affix - 1) * 12;
       return [
         {
-          label: "普通攻击伤害提升",
-          describe: `普通攻击伤害提升${lim}%`,
+          label: "堙没的蓝宝石泪滴",
+          describe: `普通攻击造成的伤害至多提升至${lim}%`,
           effect: [{ type: BuffType.NormalPrcent, getValue: () => lim }],
           enable: false,
         },
@@ -2244,31 +2274,38 @@ export const Weapons: IWeaponInfo[] = [
       let getValue = (_, stack) => {
         return add * (3 - stack);
       };
+      let getWeaponEffect = (element: ElementType, type: BuffType) => {
+        return {
+          label: `千夜的曙歌`,
+          describe: `元素精通提升${em}或元素伤害加成提升${add}%`,
+          condition: (data) => data.element === element,
+          effect: [
+            { type: BuffType.MysteryFixed, getValue: (_, stack) => em * stack },
+            { type, getValue },
+          ],
+          stackText: "同元素数量",
+          stackable: true,
+          limit: 3,
+          stack: 3,
+          enable: false,
+        };
+      };
       return [
         {
           label: "全队元素精通提升",
           describe: `全队元素精通提升${enm}`,
           effect: [{ type: BuffType.MysteryFixed, getValue: () => enm }],
           enable: true,
+          shareable: true,
+          target: BuffTarget.All,
         },
-        {
-          label: `元素精通提升或元素伤害加成提升`,
-          describe: `该增益用【层数】代表【相同元素类型】的数量。3层代表3个相同元素类型角色的数量，0层代表3个不同元素类型角色的数量。元素精通提升${em}或元素伤害加成提升${add}%`,
-          effect: [
-            { type: BuffType.MysteryFixed, getValue: (_, stack) => em * stack },
-            { type: BuffType.PyroPrcent, getValue },
-            { type: BuffType.HydroPrcent, getValue },
-            { type: BuffType.ElectroPrcent, getValue },
-            { type: BuffType.AnemoPrcent, getValue },
-            { type: BuffType.CryoPrcent, getValue },
-            { type: BuffType.GeoPrcent, getValue },
-            { type: BuffType.DendroPrcent, getValue },
-          ],
-          stackable: true,
-          limit: 3,
-          stack: 3,
-          enable: false,
-        },
+        getWeaponEffect(ElementType.Anemo, BuffType.AnemoPrcent),
+        getWeaponEffect(ElementType.Hydro, BuffType.HydroPrcent),
+        getWeaponEffect(ElementType.Electro, BuffType.ElectroPrcent),
+        getWeaponEffect(ElementType.Pyro, BuffType.PyroPrcent),
+        getWeaponEffect(ElementType.Cryo, BuffType.CryoPrcent),
+        getWeaponEffect(ElementType.Dendro, BuffType.DendroPrcent),
+        getWeaponEffect(ElementType.Geo, BuffType.GeoPrcent),
       ];
     }
   ),
@@ -2351,7 +2388,7 @@ export const Weapons: IWeaponInfo[] = [
         },
         {
           label: "全队充能效率提升",
-          describe: `基于上述效果的30%为队伍中附近的其他角色提升元素充能效率`,
+          describe: `装备者的每点元素精通，都会为该角色提升${a}元素充能效率，并基于该提升的30%为队伍中附近的其他角色提升元素充能效率`,
           effect: [
             {
               type: BuffType.ChargeFixed,
@@ -2361,6 +2398,8 @@ export const Weapons: IWeaponInfo[] = [
             },
           ],
           enable: true,
+          shareable: true,
+          target: BuffTarget.All,
         },
       ];
     }
@@ -2401,7 +2440,7 @@ export const Weapons: IWeaponInfo[] = [
         },
         {
           label: "全队攻击力提升",
-          describe: `基于上述效果的30%为队伍中附近的其他角色提升攻击力`,
+          describe: `基于装备者的元素精通的${a}，提升该角色的攻击力，并基于该提升的30%为队伍中附近的其他角色提升攻击力`,
           effect: [
             {
               type: BuffType.ATKFixed,
@@ -2411,6 +2450,8 @@ export const Weapons: IWeaponInfo[] = [
             },
           ],
           enable: true,
+          shareable: true,
+          target: BuffTarget.All,
         },
       ];
     }
@@ -2500,6 +2541,7 @@ export const Weapons: IWeaponInfo[] = [
           enable: false,
           stack: 3,
           stackable: true,
+          stackText: "赤沙之梦",
           limit: 3,
         },
       ];
@@ -2541,7 +2583,7 @@ export const Weapons: IWeaponInfo[] = [
         },
         {
           label: "全队攻击力提升",
-          describe: `基于上述效果的30%为队伍中附近的其他角色提升攻击力`,
+          describe: `基于装备者的元素精通的${a}，提升攻击力，并基于该提升的30%为队伍中附近的其他角色提升攻击力`,
           effect: [
             {
               type: BuffType.ATKFixed,
@@ -2551,6 +2593,8 @@ export const Weapons: IWeaponInfo[] = [
             },
           ],
           enable: true,
+          shareable: true,
+          target: BuffTarget.All,
         },
       ];
     }
@@ -2578,8 +2622,8 @@ export const Weapons: IWeaponInfo[] = [
       let e = 60 + (affix - 1) * 20;
       return [
         {
-          label: "元素精通提升",
-          describe: `施放元素战技或元素爆发时，将获得「森林教诲」的效果，元素精通提升${e}点`,
+          label: "森林教诲",
+          describe: `施放元素战技或元素爆发时，元素精通提升${e}点`,
           effect: [{ type: BuffType.MysteryFixed, getValue: () => e }],
           enable: false,
         },
@@ -2621,10 +2665,12 @@ export const Weapons: IWeaponInfo[] = [
       let e = 60 + (affix - 1) * 15;
       return [
         {
-          label: "种识之叶，元素精通提升",
+          label: "种识之叶",
           describe: `拾取种识之叶的角色元素精通提升${e}点`,
           effect: [{ type: BuffType.MysteryFixed, getValue: () => e }],
           enable: false,
+          shareable: true,
+          target: BuffTarget.All,
         },
       ];
     }
@@ -2659,6 +2705,7 @@ export const Weapons: IWeaponInfo[] = [
           ],
           enable: false,
           stackable: true,
+          stackText: "盈缺",
           stack: 5,
           limit: 5,
         },
@@ -2687,10 +2734,12 @@ export const Weapons: IWeaponInfo[] = [
       let e = 16 + (affix - 1) * 4;
       return [
         {
-          label: "攻击力提升",
+          label: "苏生之叶",
           describe: `拾取苏生之叶的角色攻击力提升${e}%`,
           effect: [{ type: BuffType.ATKPrcent, getValue: () => e }],
           enable: false,
+          shareable: true,
+          target: BuffTarget.All,
         },
       ];
     }
@@ -2717,10 +2766,12 @@ export const Weapons: IWeaponInfo[] = [
       let e = 60 + (affix - 1) * 15;
       return [
         {
-          label: "元素精通提升",
+          label: "种识之叶",
           describe: `拾取种识之叶的角色元素精通提升${e}点`,
           effect: [{ type: BuffType.MysteryFixed, getValue: () => e }],
           enable: false,
+          shareable: true,
+          target: BuffTarget.All,
         },
       ];
     }
@@ -2798,7 +2849,7 @@ export const Weapons: IWeaponInfo[] = [
           enable: true,
         },
         {
-          label: "重击伤害提高",
+          label: "无休止的狩猎",
           describe: `重击造成的伤害值提高，提高值相当于元素精通数值的${e}%`,
           effect: [
             {
@@ -2807,18 +2858,6 @@ export const Weapons: IWeaponInfo[] = [
             },
           ],
           enable: true,
-        },
-      ];
-    },
-    (affix = 1) => {
-      return [
-        {
-          label: "",
-          rate: {
-            atk: [],
-          },
-          attackType: AttackType.Other,
-          elementType: ElementType.Physical,
         },
       ];
     }
@@ -2893,7 +2932,7 @@ export const Weapons: IWeaponInfo[] = [
       return [
         {
           label: "造成伤害提升",
-          describe: `夕暮、流霞、朝晖三种状态，分别能使造成的伤害提升${a}（分别用0~2层表示）`,
+          describe: `夕暮(0)、流霞(1)、朝晖(2)三种状态，分别能使造成的伤害提升${a}（分别用0~2层表示）`,
           effect: [
             {
               type: BuffType.GlobalPrcent,
@@ -2903,6 +2942,7 @@ export const Weapons: IWeaponInfo[] = [
             },
           ],
           stackable: true,
+          stackText: "状态",
           stack: 0,
           limit: 2,
           enable: true,
@@ -2953,6 +2993,7 @@ export const Weapons: IWeaponInfo[] = [
           effect: [{ type: BuffType.NormalPrcent, getValue: (_, stack) => v * stack }],
           enable: false,
           stackable: true,
+          stackText: "波穗",
           stack: 2,
           limit: 2,
         },
@@ -3015,6 +3056,7 @@ export const Weapons: IWeaponInfo[] = [
           describe: `使装备该武器的角色的元素战技造成的伤害提高${a}%，至多叠加3层`,
           effect: [{ type: BuffType.SkillPrcent, getValue: (_, stack) => a * stack }],
           stackable: true,
+          stackText: "神乐舞",
           limit: 3,
           stack: 3,
           enable: false,
@@ -3074,18 +3116,20 @@ export const Weapons: IWeaponInfo[] = [
           enable: true,
         },
         {
-          label: "攻击力提升",
+          label: "前台·攻击力提升",
           describe: `施放元素战技后，攻击力每1秒提升${as}%，该攻击力提升效果至多叠加6次`,
           effect: [{ type: BuffType.ATKPrcent, getValue: (_, stack) => as * stack }],
           stackable: true,
+          stackText: "圆顿",
           limit: 6,
           stack: 6,
           enable: false,
         },
         {
-          label: "攻击力提升效果翻倍",
-          describe: `上述效果在角色处于后台时翻倍（注意使层数保持一致）`,
-          effect: [{ type: BuffType.ATKPrcent, getValue: (_, stack) => as * stack }],
+          label: "后台·攻击力提升",
+          describe: `施放元素战技后，攻击力每1秒提升${as}%，至多叠加6次，处于后台时攻击力提升效果翻倍`,
+          effect: [{ type: BuffType.ATKPrcent, getValue: (_, stack) => as * stack * 2 }],
+          stackText: "圆顿",
           stackable: true,
           limit: 6,
           stack: 6,
@@ -3216,10 +3260,12 @@ export const Weapons: IWeaponInfo[] = [
           enable: true,
         },
         {
-          label: "全队攻击力提升",
+          label: "揭旗之歌",
           describe: `全队攻击力提升${x}%`,
           effect: [{ type: BuffType.ATKPrcent, getValue: () => x }],
           enable: false,
+          shareable: true,
+          target: BuffTarget.All,
         },
       ];
     }
@@ -3259,16 +3305,20 @@ export const Weapons: IWeaponInfo[] = [
           enable: true,
         },
         {
-          label: "全队元素精通提升",
-          describe: `元素精通提高${x}点`,
+          label: "别离之歌·精通",
+          describe: `全队元素精通提高${x}点`,
           effect: [{ type: BuffType.MysteryFixed, getValue: () => x }],
           enable: false,
+          shareable: true,
+          target: BuffTarget.All,
         },
         {
-          label: "全队攻击力提升",
+          label: "别离之歌·攻击力",
           describe: `全队攻击力提升${c}%`,
           effect: [{ type: BuffType.ATKPrcent, getValue: () => c }],
           enable: false,
+          shareable: true,
+          target: BuffTarget.All,
         },
       ];
     }
@@ -3362,7 +3412,7 @@ export const Weapons: IWeaponInfo[] = [
       return [
         {
           label: "元素爆发造成的伤害提高",
-          describe: `所有角色的元素能量上限的总和，每1点能使装备此武器的角色的元素爆发造成的伤害提高${a}%，至多提高${b}%（层数代表能量总和）`,
+          describe: `所有角色的元素能量上限的总和，每1点能使装备此武器的角色的元素爆发造成的伤害提高${a}%，至多提高${b}%`,
           effect: [
             {
               type: BuffType.BurstPrcent,
@@ -3372,6 +3422,7 @@ export const Weapons: IWeaponInfo[] = [
             },
           ],
           stackable: true,
+          stackText: "能量上限总和",
           limit: 340,
           stack: 0,
           enable: false,
@@ -3404,7 +3455,7 @@ export const Weapons: IWeaponInfo[] = [
       return [
         {
           label: "元素爆发造成的伤害提高",
-          describe: `所有角色的元素能量上限的总和，每1点能使装备此武器的角色的元素爆发造成的伤害提高${a}%，至多提高${b}%（层数代表能量总和）`,
+          describe: `所有角色的元素能量上限的总和，每1点能使装备此武器的角色的元素爆发造成的伤害提高${a}%，至多提高${b}%`,
           effect: [
             {
               type: BuffType.BurstPrcent,
@@ -3414,6 +3465,7 @@ export const Weapons: IWeaponInfo[] = [
             },
           ],
           stackable: true,
+          stackText: "能量上限总和",
           limit: 340,
           stack: 0,
           enable: false,
@@ -3465,6 +3517,7 @@ export const Weapons: IWeaponInfo[] = [
           effect: [{ type: BuffType.ATKPrcent, getValue: (_, stack) => at[stack - 1] || 0 }],
           enable: false,
           stackable: true,
+          stackText: "白夜极星",
           limit: 4,
           stack: 4,
         },
@@ -3496,7 +3549,7 @@ export const Weapons: IWeaponInfo[] = [
       return [
         {
           label: "元素爆发造成的伤害提高",
-          describe: `所有角色的元素能量上限的总和，每1点能使装备此武器的角色的元素爆发造成的伤害提高${a}%，至多提高${b}%（层数代表能量总和）`,
+          describe: `所有角色的元素能量上限的总和，每1点能使装备此武器的角色的元素爆发造成的伤害提高${a}%，至多提高${b}%`,
           effect: [
             {
               type: BuffType.BurstPrcent,
@@ -3507,6 +3560,7 @@ export const Weapons: IWeaponInfo[] = [
           ],
           stackable: true,
           limit: 340,
+          stackText: "能量上限总和",
           stack: 0,
           enable: false,
         },
@@ -3701,6 +3755,7 @@ export const Weapons: IWeaponInfo[] = [
           ],
           enable: false,
           stackable: true,
+          stackText: "飞雷之巴印",
           stack: 3,
           limit: 3,
         },
@@ -3767,6 +3822,7 @@ export const Weapons: IWeaponInfo[] = [
           limit: 3,
           label: "元素伤害进一步加成",
           describe: `持有1/2/3层雾切之巴印时,获得${b}%自己的元素类型的元素伤害加成`,
+          stackText: "雾切之巴印",
         };
       };
       return [
@@ -3847,18 +3903,48 @@ export const Weapons: IWeaponInfo[] = [
       let a = [10, 12.5, 15, 17.5, 20][affix - 1];
       return [
         {
-          label: "元素伤害加成",
-          describe: `触发雷元素相关反应后，获得${a}%相关反应元素的伤害加成（在本计算器中，该增益视为全元素增伤，注意区分）`,
+          label: "激化，草雷增伤",
+          describe: `触发雷元素相关反应后，获得${a}%相关反应元素的伤害加成`,
           effect: [
-            { type: BuffType.HydroPrcent, getValue: () => a },
+            { type: BuffType.DendroPrcent, getValue: () => a },
+            { type: BuffType.ElectroPrcent, getValue: () => a },
+          ],
+          enable: false,
+          shareable: true,
+          target: BuffTarget.All,
+        },
+        {
+          label: "扩散，风雷增伤",
+          describe: `触发雷元素相关反应后，获得${a}%相关反应元素的伤害加成`,
+          effect: [
+            { type: BuffType.AnemoPrcent, getValue: () => a },
+            { type: BuffType.ElectroPrcent, getValue: () => a },
+          ],
+          enable: false,
+          shareable: true,
+          target: BuffTarget.All,
+        },
+        {
+          label: "超载，火雷增伤",
+          describe: `触发雷元素相关反应后，获得${a}%相关反应元素的伤害加成`,
+          effect: [
             { type: BuffType.PyroPrcent, getValue: () => a },
             { type: BuffType.ElectroPrcent, getValue: () => a },
-            { type: BuffType.AnemoPrcent, getValue: () => a },
-            { type: BuffType.CryoPrcent, getValue: () => a },
-            { type: BuffType.DendroPrcent, getValue: () => a },
-            { type: BuffType.GeoPrcent, getValue: () => a },
           ],
-          enable: true,
+          enable: false,
+          shareable: true,
+          target: BuffTarget.All,
+        },
+        {
+          label: "感电，水雷增伤",
+          describe: `触发雷元素相关反应后，获得${a}%相关反应元素的伤害加成`,
+          effect: [
+            { type: BuffType.HydroPrcent, getValue: () => a },
+            { type: BuffType.ElectroPrcent, getValue: () => a },
+          ],
+          enable: false,
+          shareable: true,
+          target: BuffTarget.All,
         },
       ];
     }
@@ -4075,6 +4161,8 @@ export const Weapons: IWeaponInfo[] = [
           describe: `攻击命中生命值低于30%的敌人时队伍中所有成员的攻击力提高${b}%`,
           effect: [{ type: BuffType.ATKPrcent, getValue: () => b }],
           enable: false,
+          shareable: true,
+          target: BuffTarget.All,
         },
       ];
     }

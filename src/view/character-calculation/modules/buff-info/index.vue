@@ -31,7 +31,7 @@ const relicBuffsFilter = computed(() => {
 
 const teamBuffsFilter = computed(() => {
   return buffs.value.filter((buff) => {
-    return (!buff.condition || buff.condition(characterInfo)) && !buff.label.includes(characterInfo.name);
+    return (!buff.shareCondition || buff.shareCondition(characterInfo)) && !buff.label.includes(characterInfo.name);
   });
 });
 

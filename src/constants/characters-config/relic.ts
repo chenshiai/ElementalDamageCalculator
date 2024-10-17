@@ -1,4 +1,4 @@
-import { EquipType, BuffType, ItemType, ActionOn, ElementType } from "@/types/enum";
+import { EquipType, BuffType, ItemType, ActionOn, ElementType, BuffTarget } from "@/types/enum";
 import { IRelicBase, IBuffBase } from "@/types/interface";
 import { getEnkaUI } from "./append-prop";
 
@@ -44,6 +44,8 @@ const getBuffByElement = (element: ElementType, type: BuffType) => {
     describe:
       "触发其对应元素类型的相关反应后，队伍中附近的所有角色的该元素反应相关的元素伤害加成提升12%（这里只显示符合角色元素类型的元素伤害加成）",
     condition: (data) => data.element === element,
+    shareable: true,
+    target: BuffTarget.All
   };
 };
 
@@ -51,11 +53,13 @@ const getBuffByElement = (element: ElementType, type: BuffType) => {
 const getBuffByElement2 = (element: ElementType, type: BuffType) => {
   return {
     enable: false,
-    label: "四件套·元素伤害加成进一步提升",
+    label: "四件套·夜魂加持状态，进一步提升",
     effect: [{ type, getValue: () => 28 }],
     describe:
       "装备者处于夜魂加持状态下，还将使队伍中附近的所有角色的与该元素反应相关的元素伤害加成提升28%（这里只显示符合角色元素类型的元素伤害加成）",
     condition: (data) => data.element === element,
+    shareable: true,
+    target: BuffTarget.All
   };
 };
 /** 悠古的磐岩 */
@@ -67,18 +71,20 @@ const getBuffByElement3 = (element: ElementType, type: BuffType) => {
     describe:
       "获得结晶反应形成的晶片时，队伍中所有角色获得35%对应元素伤害加成（这里只显示符合角色元素类型的元素伤害加成）",
     condition: (data) => data.element === element,
+    shareable: true,
+    target: BuffTarget.All
   };
 };
 
 /** 翠绿之影 */
-const getBuffByElement4 = (element: ElementType, type: BuffType) => {
+const getBuffByElement4 = (label: string, type: BuffType) => {
   return {
     enable: false,
-    label: "四件套·降低敌人的元素抗性",
+    label,
     effect: [{ type, getValue: () => -40 }],
     describe: "根据扩散的元素类型，降低受到影响的敌人40%的对应元素抗性",
-    condition: (data) => data.element === element,
     shareable: true,
+    target: BuffTarget.Enemy
   };
 };
 
@@ -252,7 +258,7 @@ const relicLibrary: IRelicLibraryItem[] = [
           enable: false,
         },
         {
-          label: "四件套·岩元素伤害加成进一步提升",
+          label: "四件套·结晶盾庇护下进一步提升",
           effect: [{ type: BuffType.GeoPrcent, getValue: () => 30 }],
           describe: "若处于结晶反应产生的护盾庇护下，岩元素伤害加成提升30%",
           enable: false,
@@ -295,6 +301,8 @@ const relicLibrary: IRelicLibraryItem[] = [
           ],
           describe: "基于渴盼效果所记录的回复量的8%提高造成的伤害(1200)",
           enable: false,
+          shareable: true,
+          target: BuffTarget.All,
         },
       ],
     },
@@ -458,6 +466,7 @@ const relicLibrary: IRelicLibraryItem[] = [
           describe: "处于1/2/3层及以上「镜中水仙」效果下时，攻击力将提高7%/16%/25%，水元素伤害加成提升4%/9%/15%",
           enable: false,
           stackable: true,
+          stackText: "镜中水仙",
           limit: 3,
           stack: 3,
         },
@@ -557,10 +566,11 @@ const relicLibrary: IRelicLibraryItem[] = [
             { type: BuffType.ATKPrcent, getValue: (_, s) => 14 * s },
           ],
           describe:
-            "存在1个和装备者同类元素的角色，攻击力提升14%；每存在1个和装备者不同元素类型的角色，元素精通提升50点。（层数代表元素类型相同的角色数量）",
+            "存在1个和装备者同类元素的角色，攻击力提升14%；每存在1个和装备者不同元素类型的角色，元素精通提升50点。",
           enable: false,
           stack: 0,
           stackable: true,
+          stackText: "同元素角色数量",
           limit: 3,
         },
       ],
@@ -589,7 +599,16 @@ const relicLibrary: IRelicLibraryItem[] = [
           enable: true,
         },
       ],
-      suit4: [],
+      suit4: [
+        {
+          label: "四件套·敌人草元素抗性降低",
+          describe: "元素战技或元素爆发命中敌人后，使命中目标的草元素抗性降低30%",
+          effect: [{ type: BuffType.EnemyDendroResistance, getValue: () => -30}],
+          enable: false,
+          shareable: true,
+          target: BuffTarget.Enemy
+        }
+      ],
     },
   },
   {
@@ -886,6 +905,8 @@ const relicLibrary: IRelicLibraryItem[] = [
           ],
           describe: "元素战技命中敌人后，使队伍中附近的所有角色攻击力提升20%，护盾强效提升30%",
           enable: false,
+          shareable: true,
+          target: BuffTarget.All
         },
       ],
     },
@@ -1276,6 +1297,7 @@ const relicLibrary: IRelicLibraryItem[] = [
           describe: "释放元素爆发后，队伍中所有角色攻击力提升20％",
           enable: false,
           shareable: true,
+          target: BuffTarget.All
         },
       ],
     },
@@ -1308,6 +1330,8 @@ const relicLibrary: IRelicLibraryItem[] = [
           effect: [{ type: BuffType.BeHealAdd, getValue: () => 20 }],
           describe: "施放元素战技或元素爆发后的10秒内，队伍中所有角色受治疗效果加成提高20%",
           enable: false,
+          shareable: true,
+          target: BuffTarget.All
         },
       ],
     },
@@ -1335,10 +1359,10 @@ const relicLibrary: IRelicLibraryItem[] = [
         },
       ],
       suit4: [
-        getBuffByElement4(ElementType.Pyro, BuffType.EnemyPyroResistance),
-        getBuffByElement4(ElementType.Electro, BuffType.EnemyElectroResistance),
-        getBuffByElement4(ElementType.Cryo, BuffType.EnemyCryoResistance),
-        getBuffByElement4(ElementType.Hydro, BuffType.EnemyHydroResistance),
+        getBuffByElement4("四件套·降低敌人的[火元素抗性]", BuffType.EnemyPyroResistance),
+        getBuffByElement4("四件套·降低敌人的[雷元素抗性]", BuffType.EnemyElectroResistance),
+        getBuffByElement4("四件套·降低敌人的[冰元素抗性]", BuffType.EnemyCryoResistance),
+        getBuffByElement4("四件套·降低敌人的[水元素抗性]", BuffType.EnemyHydroResistance),
       ],
     },
   },
@@ -1403,6 +1427,7 @@ const relicLibrary: IRelicLibraryItem[] = [
           describe: "触发元素反应后，队伍中所有角色的元素精通提高120点",
           enable: false,
           shareable: true,
+          target: BuffTarget.All
         },
       ],
     },

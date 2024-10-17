@@ -127,7 +127,7 @@ const getRelics = (relicList: string) => {
 </script>
 
 <template>
-  <TabTitle>云配队</TabTitle>
+  <TabTitle>云上辉星</TabTitle>
   <div class="tips">从本地保存数据中，选择角色数据填入</div>
   <div class="team-list">
     <div class="show-click" @click="toCreateData">+创建角色数据</div>
@@ -153,7 +153,7 @@ const getRelics = (relicList: string) => {
             />
           </div>
           <div class="team-list__item-options">
-            <div @click="edit(index)">编辑<Icon name="edit" /></div>
+            <div @click="edit(index)">查看<Icon name="eye-o" /></div>
             <div @click="clear(index)">离队<Icon name="close" /></div>
           </div>
         </template>

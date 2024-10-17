@@ -120,7 +120,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("重击终结伤害", AttackType.Strong, ElementType.Physical, {
         atk: [1.13, 1.22, 1.32, 1.45, 1.54, 1.64, 1.79, 1.93, 2.08, 2.24, 2.39],
       }),
-      createAttack("下坠期间伤害", AttackType.Other, ElementType.Physical, {
+      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
         atk: [0.746, 0.807, 0.867, 0.954, 1.015, 1.084, 1.18, 1.275, 1.37, 1.474, 1.579],
       }),
       createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
@@ -207,7 +207,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("重击·4层", AttackType.Strong, ElementType.Pyro, {
         atk: [1.6757, 1.776, 1.8764, 2.0068, 2.1071, 2.2075, 2.3379, 2.4684, 2.5988, 2.7292, 2.8597],
       }),
-      createAttack("下坠期间伤害", AttackType.Other, ElementType.Pyro, {
+      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Pyro, {
         atk: [0.568, 0.615, 0.661, 0.727, 0.773, 0.826, 0.899, 0.971, 1.04, 1.12, 1.203],
       }),
       createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Pyro, {
@@ -293,7 +293,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("重击伤害", AttackType.Strong, ElementType.Physical, {
         atk: [1.37, 1.48, 1.59, 1.75, 1.86, 1.99, 2.16, 2.34, 2.51, 2.7, 2.89],
       }),
-      createAttack("下坠期间伤害", AttackType.Other, ElementType.Physical, {
+      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
         atk: [0.639, 0.691, 0.743, 0.818, 0.87, 0.929, 1.011, 1.093, 1.175, 1.264, 1.353],
       }),
       createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
@@ -395,7 +395,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("重击终结伤害", AttackType.Strong, ElementType.Physical, {
         atk: [1.13, 1.22, 1.32, 1.45, 1.54, 1.64, 1.79, 1.93, 2.08, 2.24, 2.39],
       }),
-      createAttack("下坠期间伤害", AttackType.Other, ElementType.Physical, {
+      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
         atk: [0.746, 0.807, 0.867, 0.954, 1.015, 1.084, 1.18, 1.275, 1.37, 1.474, 1.579],
       }),
       createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
@@ -503,7 +503,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("满蓄力瞄准射击", AttackType.Strong, ElementType.Cryo, {
         atk: [1.24, 1.33, 1.43, 1.55, 1.64, 1.74, 1.86, 1.98, 2.11, 2.23, 2.36],
       }),
-      createAttack("下坠期间伤害", AttackType.Other, ElementType.Physical, {
+      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
         atk: [0.568, 0.615, 0.661, 0.727, 0.773, 0.826, 0.899, 0.971, 1.04, 1.123, 1.203],
       }),
       createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
@@ -576,7 +576,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("重击伤害", AttackType.Strong, ElementType.Anemo, {
         atk: [1.2, 1.29, 1.38, 1.5, 1.59, 1.68, 1.8, 1.92, 2.04, 2.16, 2.28],
       }),
-      createAttack("下坠期间伤害", AttackType.Other, ElementType.Anemo, {
+      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Anemo, {
         atk: [0.568, 0.615, 0.661, 0.727, 0.773, 0.826, 0.899, 0.971, 1.04, 1.123, 1.203],
       }),
       createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Anemo, {
@@ -635,7 +635,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         describe:
           "禁·风灵作成·柒伍同构贰型如果发生了元素转化，则使队伍中所有角色在技能持续时间内获得20%的对应元素伤害加成",
         effect: [{ type: BuffType.PyroPrcent, getValue: () => 20 }],
-        condition: ({ element }) => element === ElementType.Pyro,
+        condition: ({ constellation }) => constellation >= 6,
         enable: false,
         shareable: true,
         target: BuffTarget.All,
@@ -646,7 +646,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
           "禁·风灵作成·柒伍同构贰型如果发生了元素转化，则使队伍中所有角色在技能持续时间内获得20%的对应元素伤害加成",
         effect: [{ type: BuffType.CryoPrcent, getValue: () => 20 }],
         enable: false,
-        condition: ({ element }) => element === ElementType.Cryo,
+        condition: ({ constellation }) => constellation >= 6,
         shareable: true,
         target: BuffTarget.All,
       },
@@ -655,7 +655,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         describe:
           "禁·风灵作成·柒伍同构贰型如果发生了元素转化，则使队伍中所有角色在技能持续时间内获得20%的对应元素伤害加成",
         effect: [{ type: BuffType.HydroPrcent, getValue: () => 20 }],
-        condition: ({ element }) => element === ElementType.Hydro,
+        condition: ({ constellation }) => constellation >= 6,
         enable: false,
         shareable: true,
         target: BuffTarget.All,
@@ -666,7 +666,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
           "禁·风灵作成·柒伍同构贰型如果发生了元素转化，则使队伍中所有角色在技能持续时间内获得20%的对应元素伤害加成",
         effect: [{ type: BuffType.ElectroPrcent, getValue: () => 20 }],
         enable: false,
-        condition: ({ element }) => element === ElementType.Electro,
+        condition: ({ constellation }) => constellation >= 6,
         shareable: true,
         target: BuffTarget.All,
       },
@@ -710,7 +710,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("噬星魔鸦", AttackType.Strong, ElementType.Electro, {
         atk: [1.24, 1.33, 1.43, 1.55, 1.64, 1.74, 1.86, 1.98, 2.11, 2.23, 2.36].map((i) => i * 1.527),
       }),
-      createAttack("下坠期间伤害", AttackType.Other, ElementType.Physical, {
+      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
         atk: [0.568, 0.615, 0.661, 0.727, 0.773, 0.826, 0.899, 0.971, 1.04, 1.123, 1.203],
       }),
       createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
@@ -791,7 +791,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("重击伤害", AttackType.Strong, ElementType.Electro, {
         atk: [1.77, 1.9, 2.04, 2.21, 2.35, 2.48, 2.66, 2.83, 3.01, 3.19, 3.37],
       }),
-      createAttack("下坠期间伤害", AttackType.Other, ElementType.Electro, {
+      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Electro, {
         atk: [0.568, 0.615, 0.661, 0.727, 0.773, 0.826, 0.899, 0.971, 1.04, 1.12, 1.203],
       }),
       createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Electro, {
@@ -868,7 +868,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("重击终结伤害", AttackType.Strong, ElementType.Physical, {
         atk: [1.13, 1.22, 1.32, 1.45, 1.54, 1.64, 1.79, 1.93, 2.08, 2.24, 2.39],
       }),
-      createAttack("下坠期间伤害", AttackType.Other, ElementType.Physical, {
+      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
         atk: [0.82, 0.887, 0.954, 1.05, 1.12, 1.19, 1.3, 1.4, 1.51, 1.62, 1.74],
       }),
       createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
@@ -1002,7 +1002,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("重击终结伤害", AttackType.Strong, ElementType.Physical, {
         atk: [1.02, 1.1, 1.18, 1.3, 1.39, 1.48, 1.61, 1.74, 1.87, 2.01, 2.18],
       }),
-      createAttack("下坠期间伤害", AttackType.Other, ElementType.Physical, {
+      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
         atk: [0.746, 0.807, 0.867, 0.954, 1.01, 1.08, 1.18, 1.27, 1.37, 1.47, 1.58],
       }),
       createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
@@ -1108,7 +1108,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("重击伤害", AttackType.Strong, ElementType.Physical, {
         atk: [1.22, 1.32, 1.42, 1.56, 1.66, 1.77, 1.92, 2.08, 2.24, 2.41, 2.6],
       }),
-      createAttack("下坠期间伤害", AttackType.Other, ElementType.Physical, {
+      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
         atk: [0.639, 0.691, 0.743, 0.818, 0.87, 0.929, 1.011, 1.093, 1.175, 1.264, 1.353],
       }),
       createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
@@ -1203,7 +1203,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("满蓄力瞄准射击", AttackType.Strong, ElementType.Pyro, {
         atk: [1.24, 1.33, 1.43, 1.55, 1.64, 1.74, 1.86, 1.98, 2.11, 2.23, 2.36],
       }),
-      createAttack("下坠期间伤害", AttackType.Other, ElementType.Physical, {
+      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
         atk: [0.568, 0.615, 0.661, 0.727, 0.773, 0.826, 0.899, 0.971, 1.04, 1.12, 1.2],
       }),
       createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
@@ -1304,7 +1304,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("重击伤害·二段", AttackType.Strong, ElementType.Physical, {
         atk: [0.607, 0.657, 0.706, 0.777, 0.826, 0.883, 0.96, 1.038, 1.116, 1.2, 1.285],
       }),
-      createAttack("下坠期间伤害", AttackType.Other, ElementType.Physical, {
+      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
         atk: [0.639, 0.691, 0.743, 0.818, 0.87, 0.929, 1.011, 1.093, 1.175, 1.264, 1.353],
       }),
       createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
@@ -1359,6 +1359,18 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
             },
             transform: true,
           },
+          {
+            type: BuffType.PyroPrcent,
+            getValue: ({ constellation }) => {
+              return constellation >= 6 ? 15 : 0;
+            },
+          },
+          {
+            type: BuffType.Enchanting,
+            getValue: ({ constellation }) => {
+              return constellation >= 6 ? EnchantingType[ElementType.Pyro] : EnchantingType[ElementType.Physical];
+            },
+          },
         ],
         enable: false,
         shareable: true,
@@ -1373,21 +1385,21 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       },
       Constellation_E_3,
       Constellation_Q_5,
-      {
-        label: "6命·烈火与勇气",
-        describe: "处在美妙旅程领域内的单手剑、双手剑、长柄武器角色获得15%火元素伤害加成，并获得火元素附魔",
-        effect: [
-          { type: BuffType.PyroPrcent, getValue: () => 15 },
-          {
-            type: BuffType.Enchanting,
-            getValue: () => EnchantingType[ElementType.Pyro],
-          },
-        ],
-        enable: true,
-        condition: ({ constellation }) => constellation >= 6,
-        shareable: true,
-        target: BuffTarget.All,
-      },
+      // {
+      //   label: "6命·烈火与勇气",
+      //   describe: "处在美妙旅程领域内的单手剑、双手剑、长柄武器角色获得15%火元素伤害加成，并获得火元素附魔",
+      //   effect: [
+      //     { type: BuffType.PyroPrcent, getValue: () => 15 },
+      //     {
+      //       type: BuffType.Enchanting,
+      //       getValue: () => EnchantingType[ElementType.Pyro],
+      //     },
+      //   ],
+      //   enable: false,
+      //   condition: ({ constellation }) => constellation >= 6,
+      //   shareable: true,
+      //   target: BuffTarget.All,
+      // },
     ],
   },
   {
@@ -1431,7 +1443,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("重击伤害·后段", AttackType.Strong, ElementType.Physical, {
         atk: [0.562, 0.607, 0.653, 0.718, 0.764, 0.816, 0.888, 0.96, 1.032, 1.11, 1.2],
       }),
-      createAttack("下坠期间伤害", AttackType.Other, ElementType.Physical, {
+      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
         atk: [0.639, 0.691, 0.743, 0.818, 0.87, 0.929, 1.011, 1.093, 1.175, 1.264, 1.353],
       }),
       createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
@@ -1510,7 +1522,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("重击伤害", AttackType.Strong, ElementType.Hydro, {
         atk: [1.66, 1.79, 1.91, 2.08, 2.2, 2.33, 2.49, 2.66, 2.83, 2.99, 3.17],
       }),
-      createAttack("下坠期间伤害", AttackType.Other, ElementType.Hydro, {
+      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Hydro, {
         atk: [0.568, 0.615, 0.661, 0.727, 0.773, 0.826, 0.899, 0.971, 1.04, 1.12, 1.2],
       }),
       createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Hydro, {
@@ -1563,7 +1575,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("星璇伤害", AttackType.Strong, ElementType.Geo, {
         atk: [0.496, 0.533, 0.57, 0.62, 0.657, 0.694, 0.744, 0.794, 0.843, 0.893, 0.944],
       }),
-      createAttack("下坠期间伤害", AttackType.Other, ElementType.Geo, {
+      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Geo, {
         atk: [0.568, 0.615, 0.661, 0.727, 0.773, 0.826, 0.899, 0.971, 1.04, 1.12, 1.2],
       }),
       createAttack("低空坠地冲击伤害", AttackType.Normal, ElementType.Geo, {
@@ -1622,19 +1634,19 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("四段伤害", AttackType.Normal, ElementType.Physical, {
         atk: [1.13, 1.23, 1.32, 1.45, 1.54, 1.65, 1.79, 1.94, 2.08, 2.24, 2.4],
       }),
-      createAttack("重击循环伤害", AttackType.Normal, ElementType.Physical, {
+      createAttack("重击循环伤害", AttackType.Strong, ElementType.Physical, {
         atk: [0.507, 0.549, 0.59, 0.649, 0.69, 0.738, 0.802, 0.867, 0.932, 1.003, 1.074],
       }),
-      createAttack("重击终结伤害", AttackType.Normal, ElementType.Physical, {
+      createAttack("重击终结伤害", AttackType.Strong, ElementType.Physical, {
         atk: [0.905, 0.978, 1.05, 1.16, 1.23, 1.32, 1.43, 1.55, 1.66, 1.79, 1.92],
       }),
-      createAttack("下坠期间伤害", AttackType.Normal, ElementType.Physical, {
+      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
         atk: [0.746, 0.807, 0.867, 0.954, 1.01, 1.08, 1.18, 1.27, 1.37, 1.47, 1.58],
       }),
-      createAttack("低空坠地冲击伤害", AttackType.Normal, ElementType.Physical, {
+      createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
         atk: [1.49, 1.61, 1.73, 1.91, 2.03, 2.17, 2.36, 2.55, 2.74, 2.95, 3.16],
       }),
-      createAttack("高空坠地冲击伤害", AttackType.Normal, ElementType.Physical, {
+      createAttack("高空坠地冲击伤害", AttackType.FallPeriod, ElementType.Physical, {
         atk: [1.86, 2.01, 2.17, 2.38, 2.53, 2.71, 2.95, 3.18, 3.42, 3.68, 3.94],
       }),
     ],
@@ -1720,19 +1732,19 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("五段伤害", AttackType.Normal, ElementType.Physical, {
         atk: [0.882, 0.954, 1.025, 1.129, 1.2, 1.283, 1.395, 1.508, 1.621, 1.744, 1.885],
       }),
-      createAttack("重击伤害·一段", AttackType.Normal, ElementType.Physical, {
+      createAttack("重击伤害·一段", AttackType.Strong, ElementType.Physical, {
         atk: [0.55, 0.595, 0.64, 0.85, 0.704, 0.749, 0.8, 0.87, 0.941, 1.011, 1.088, 1.176],
       }),
-      createAttack("重击伤害·二段", AttackType.Normal, ElementType.Physical, {
+      createAttack("重击伤害·二段", AttackType.Strong, ElementType.Physical, {
         atk: [0.731, 0.791, 0.85, 0.935, 0.995, 1.063, 1.156, 1.25, 1.343, 1.445, 1.562],
       }),
-      createAttack("下坠期间伤害", AttackType.Normal, ElementType.Physical, {
+      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
         atk: [0.639, 0.691, 0.743, 0.818, 0.87, 0.929, 1.011, 1.093, 1.175, 1.264, 1.353],
       }),
-      createAttack("低空坠地冲击伤害", AttackType.Normal, ElementType.Physical, {
+      createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
         atk: [1.28, 1.38, 1.49, 1.64, 1.74, 1.86, 2.02, 2.19, 2.35, 2.53, 2.71],
       }),
-      createAttack("高空坠地冲击伤害", AttackType.Normal, ElementType.Physical, {
+      createAttack("高空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
         atk: [1.6, 1.73, 1.86, 2.04, 2.17, 2.32, 2.53, 2.73, 2.93, 3.16, 3.38],
       }),
     ],
@@ -1789,19 +1801,19 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("四段伤害", AttackType.Normal, ElementType.Physical, {
         atk: [1.012, 1.095, 1.177, 1.295, 1.377, 1.471, 1.601, 1.73, 1.86, 2.001, 2.142],
       }),
-      createAttack("重击循环伤害", AttackType.Normal, ElementType.Physical, {
+      createAttack("重击循环伤害", AttackType.Strong, ElementType.Physical, {
         atk: [0.563, 0.609, 0.654, 0.72, 0.766, 0.818, 0.89, 0.962, 1.034, 1.113, 1.192],
       }),
-      createAttack("重击终结伤害", AttackType.Normal, ElementType.Physical, {
+      createAttack("重击终结伤害", AttackType.Strong, ElementType.Physical, {
         atk: [1.012, 1.095, 1.177, 1.295, 1.377, 1.471, 1.601, 1.73, 1.86, 2.001, 2.142],
       }),
-      createAttack("下坠期间伤害", AttackType.Normal, ElementType.Physical, {
+      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
         atk: [1.02, 1.1, 1.18, 1.3, 1.38, 1.48, 1.61, 1.74, 1.87, 2.01, 2.15],
       }),
-      createAttack("低空坠地冲击伤害", AttackType.Normal, ElementType.Physical, {
+      createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
         atk: [1.49, 1.61, 1.73, 1.91, 2.03, 2.17, 2.36, 2.55, 2.74, 2.95, 3.16],
       }),
-      createAttack("高空坠地冲击伤害", AttackType.Normal, ElementType.Physical, {
+      createAttack("高空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
         atk: [1.86, 2.01, 2.17, 2.38, 2.53, 2.71, 2.95, 3.18, 3.42, 3.68, 3.94],
       }),
     ],
@@ -1872,7 +1884,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("重击伤害", AttackType.Strong, ElementType.Physical, {
         atk: [0.484, 0.524, 0.563, 0.619, 0.659, 0.704, 0.766, 0.828, 0.89, 0.957, 1.025].map((i) => i * 3),
       }),
-      createAttack("下坠期间伤害", AttackType.Other, ElementType.Physical, {
+      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
         atk: [0.746, 0.807, 0.867, 0.954, 1.015, 1.084, 1.18, 1.275, 1.37, 1.474, 1.579],
       }),
       createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
@@ -1980,7 +1992,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("重击伤害", AttackType.Strong, ElementType.Hydro, {
         atk: [1.43, 1.54, 1.64, 1.79, 1.89, 2, 2.14, 2.29, 2.43, 2.57, 3.39],
       }),
-      createAttack("下坠期间伤害", AttackType.Other, ElementType.Hydro, {
+      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Hydro, {
         atk: [0.568, 0.615, 0.661, 0.727, 0.773, 0.826, 0.899, 0.971, 1.044, 1.123, 1.203],
       }),
       createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Hydro, {
@@ -2076,7 +2088,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("重击伤害", AttackType.Strong, ElementType.Physical, {
         atk: [0.913, 0.988, 1.062, 1.168, 1.243, 1.328, 1.444, 1.561, 1.678, 1.805, 1.933],
       }),
-      createAttack("下坠期间伤害", AttackType.Other, ElementType.Physical, {
+      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
         atk: [0.639, 0.691, 0.743, 0.818, 0.87, 0.929, 1.011, 1.093, 1.175, 1.264, 1.353],
       }),
       createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {

@@ -140,8 +140,6 @@ const pageTitle= computed(() => {
     :character-panel-data="CalculationPanel"
     :element-type="characterInfo?.element"
   />
-  <SaveCalculation @save-data="saveCalculationResult" @recalculation="recalculation" />
-  <TabTitle>伤害计算</TabTitle>
   <BuffInfo
     v-if="characterInfo && weapon"
     v-model="buffs"
@@ -166,4 +164,5 @@ const pageTitle= computed(() => {
       <div class="extra-btn" @click="handleImagePreview">查看抗性表</div>
     </DataItem>
   </div>
+  <SaveCalculation v-if="characterInfo && weapon" @save-data="saveCalculationResult" @recalculation="recalculation" />
 </template>

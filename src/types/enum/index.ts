@@ -3,6 +3,7 @@ export enum AttackType {
   Normal = "NormalAttack",
   Strong = "StrongAttack",
   Falling = "FallingAttack",
+  FallPeriod = "FallPeriod",
   Skill = "SkillAttack",
   Burst = "BurstAttack",
   Other = "OtherAttack",
@@ -318,8 +319,10 @@ export enum ActionOn {
 export enum BuffTarget {
   /** 仅对自己生效 */
   Self = "Self",
-  /** 仅对他人生效 */
+  /** 仅对队友生效 */
   Other = "Other",
+  /** 仅对敌人生效 */
+  Enemy = "Enemy",
   /** 无限制 */
   All = "All",
 }

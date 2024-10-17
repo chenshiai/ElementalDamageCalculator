@@ -34,15 +34,18 @@ const recalculation = (data: IUesrSavedCalculations) => {
 
 <template>
   <div class="save-data">
-    <div class="save-btn" @click="saveDataPop">保存数据</div>
+    <div class="save-btn" @click="saveDataPop">保存当前角色面板</div>
     <div class="save-btn" @click="lookDataPop">查看数据</div>
   </div>
   <Popup class="data-popup" teleport="#app" v-model:show="showPopup" position="top">
     <div class="tips">
-      数据将会存储在本地浏览器的缓存中。若清空浏览器缓存，则数据也一会同清空。重复命名的新数据会替换旧数据。
+      面板数据会存储在本地浏览器的缓存中。若清空浏览器缓存，则数据也一会同清空。重复命名的新数据会替换旧数据。
+    </div>
+    <div class="tips">
+      保存的是角色计算所有增益后的面板快照，即锁面板。增益的开启情况不会保存
     </div>
     <Field v-model="remark" type="text" label="数据命名" placeholder="给这条数据取个名字吧" />
-    <div class="popup-buttons" @click="saveData">保存数据</div>
+    <div class="popup-buttons" @click="saveData">保存面板数据</div>
   </Popup>
 
   <Popup class="data-popup" teleport="#app" v-model:show="showDataPopup" style="max-height: 80%" position="top">
