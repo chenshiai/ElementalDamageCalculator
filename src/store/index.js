@@ -210,14 +210,12 @@ const saveDataModule = {
 const teamBuffs = {
   state: () => {
     return {
-      buffs: [],
+      enemyLevel: 90,
+      baseResistance: 10,
       teamList: [],
     }
   },
   mutations: {
-    setBuffs(state, value) {
-      state.buffs = value || [];
-    },
     setTeamList(state, value) {
       state.teamList = value || [];
     }

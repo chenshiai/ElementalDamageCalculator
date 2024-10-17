@@ -2,7 +2,7 @@
 import { ref, toRaw } from "vue";
 import TabTitle from "@/component/TabTitle.vue";
 import CalculationDataSelector from "@/component/CalculationDataSelector.vue";
-import { Popup, Icon } from "vant";
+import { Popup, Icon, showImagePreview } from "vant";
 import { IUesrSavedCalculations } from "@/constants/db";
 import { Character } from "@/constants/characters-config/character";
 import { Weapons } from "@/constants/characters-config/weapon";
@@ -12,6 +12,7 @@ import { IBuffBase, ICalculatorValue } from "@/types/interface";
 import useRelicInfo from "../character-calculation/modules/relic-info";
 import useCharacterInfo from "../character-calculation/modules/chararcter-info";
 import useWeanponInfo from "../character-calculation/modules/weapon-info";
+import DataItem from "@/component/DataItem.vue";
 import { useStore } from "vuex";
 
 interface ITeamItem {
@@ -124,6 +125,10 @@ const getWeaponIcon = (enkaId: number) => {
 const getRelics = (relicList: string) => {
   return JSON.parse(relicList) as IRelicItem[];
 };
+
+const handleImagePreview = () => {
+  showImagePreview(["https://saomdpb.com/IMG_1457.PNG"]);
+};
 </script>
 
 <template>
@@ -135,7 +140,9 @@ const getRelics = (relicList: string) => {
       <div class="team-list__item-avatar" @click="setSlotByIndex(index)">
         <template v-if="item">
           <img :src="getAvatarIcon(item.calculation.characterEnkaId)" />
-          <div class="team-list__item-name">{{ getCharacterName(item.calculation.characterEnkaId) }}</div>
+          <div class="team-list__item-name">
+            {{ getCharacterName(item.calculation.characterEnkaId) }}
+          </div>
         </template>
         <div class="empty" v-else></div>
       </div>
@@ -159,6 +166,12 @@ const getRelics = (relicList: string) => {
         </template>
       </div>
     </div>
+  </div>
+  <div class="data-panel">
+    <DataItem v-model="store.state.teamBuffs.enemyLevel" title="敌人的等级" :stepperMin="1" />
+    <DataItem v-model="store.state.teamBuffs.baseResistance" title="敌人抗性%" :stepperMin="-999">
+      <div class="extra-btn" @click="handleImagePreview">查看抗性表</div>
+    </DataItem>
   </div>
   <Popup class="data-popup" teleport="#app" v-model:show="show" style="max-height: 80%" position="top">
     <CalculationDataSelector :show-data-popup="show" @recalculation="handleCharacterChange" />

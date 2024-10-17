@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { computed, ref, watchEffect } from "vue";
-import { ImagePreview } from "vant";
+import { computed, watchEffect } from "vue";
 import TabTitle from "@/component/TabTitle.vue";
-import DataItem from "@/component/DataItem.vue";
 import CharacterPanel from "@/component/CharacterPanel.vue";
 import db from "@/utils/db";
+import { useStore } from "vuex";
 
 import { ICalculatorValue } from "@/types/interface";
 import { ActionOn, AppendProp } from "@/types/enum";
@@ -25,13 +24,8 @@ const { weapon, affix, weaponBuffs, initWeaponInfo } = useWeaponInfo();
 const { relicList, relicBuffs, relicSuitTexts, initRelicInfo } = useRelicInfo();
 const { buffs } = useBuffInfo();
 const { normalLevel, skillLevel, burstLevel, initSkillInfo } = useSkillInfo();
+const store = useStore();
 
-const enemyLevel = ref(90);
-const baseResistance = ref(10);
-
-const handleImagePreview = () => {
-  ImagePreview(["https://saomdpb.com/IMG_1457.PNG"]);
-};
 
 const CalculationPanel = computed<ICalculatorValue>(() => {
   if (!characterInfo.value || !weapon.value) return new CalculatorValueClass();
@@ -67,15 +61,15 @@ const CalculationPanel = computed<ICalculatorValue>(() => {
       skillLevel: skillLevel.value,
       burstLevel: burstLevel.value,
 
-      enemyLevel: enemyLevel.value,
-      enemyPhysicalResistance: baseResistance.value,
-      enemyPyroResistance: baseResistance.value,
-      enemyElectroResistance: baseResistance.value,
-      enemyHydroResistance: baseResistance.value,
-      enemyAnemoResistance: baseResistance.value,
-      enemyCryoResistance: baseResistance.value,
-      enemyGeoResistance: baseResistance.value,
-      enemyDendroResistance: baseResistance.value,
+      enemyLevel: store.state.teamBuffs.enemyLevel,
+      enemyPhysicalResistance: store.state.teamBuffs.baseResistance,
+      enemyPyroResistance: store.state.teamBuffs.baseResistance,
+      enemyElectroResistance: store.state.teamBuffs.baseResistance,
+      enemyHydroResistance: store.state.teamBuffs.baseResistance,
+      enemyAnemoResistance: store.state.teamBuffs.baseResistance,
+      enemyCryoResistance: store.state.teamBuffs.baseResistance,
+      enemyGeoResistance: store.state.teamBuffs.baseResistance,
+      enemyDendroResistance: store.state.teamBuffs.baseResistance,
     })
   );
 });
@@ -158,11 +152,5 @@ const pageTitle= computed(() => {
     v-model:skillLevel="skillLevel"
     v-model:burstLevel="burstLevel"
   />
-  <div class="data-panel">
-    <DataItem v-model="enemyLevel" title="敌人的等级" :stepperMin="1" />
-    <DataItem v-model="baseResistance" title="敌人抗性%" :stepperMin="-999">
-      <div class="extra-btn" @click="handleImagePreview">查看抗性表</div>
-    </DataItem>
-  </div>
   <SaveCalculation v-if="characterInfo && weapon" @save-data="saveCalculationResult" @recalculation="recalculation" />
 </template>
