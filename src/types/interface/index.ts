@@ -7,14 +7,12 @@ export interface IBuffBase {
   label: string;
   /** Buff细节描述 */
   describe?: string;
-  /** Buff数值是否可叠加 */
+  /** Buff数值是否可叠层 */
   stackable?: boolean;
   /** BUff层数别名 */
   stackText?: string;
   /** 最大叠加层数 */
   limit?: number;
-  /** 当前层数 */
-  stack?: number;
   /** 个人增益展示条件判断函数，返回为true即可以展示，false不可展示。不设置则默认展示 */
   condition?: BuffCondition;
 
@@ -24,6 +22,8 @@ export interface IBuffBase {
   target?: BuffTarget;
   /** Buff是否启用 */
   enable: boolean;
+  /** 当前叠加层数 */
+  stack?: number;
   
   /** Buff是否可共享，为true表示该增益可以给其他人使用 */
   shareable?: boolean;
