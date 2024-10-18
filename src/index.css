@@ -4,10 +4,6 @@
   --stroke-1: #928986;
   --stroke-2: #997874;
   --stroke-3: #645856;
-  /* --stroke-0: red;
-  --stroke-1: blue;
-  --stroke-2: yellow;
-  --stroke-3: green; */
 
   --light-text: var(--stroke-0, #F7F1E6);
   --tip-text: var(--stroke-1, #928986);
@@ -30,6 +26,9 @@
   --van-collapse-item-duration: 0.2s;
   --van-slider-active-background: var(--main-text);
   --van-stepper-button-round-theme: var(--button-bg);
+  --van-back-top-background: var(--button-bg);
+  --van-floating-bubble-background: var(--button-bg);
+  
   --text-electro: #b380ff;
   --text-hydro: #6495ED;
   --text-anemo: #5ddac1;
@@ -49,6 +48,10 @@ body {
   user-select: none;
   height: 100vh;
 
+  font-family: 'eng', HYWenHei-85W, Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--main-text);
 }
 
 .bg-one-rarity {
@@ -91,14 +94,6 @@ body {
   background-image: linear-gradient(to right, var(--five-rarity) 0%, rgba(0, 0, 0, 0) 70%);
 }
 
-#app {
-  font-family: 'eng', HYWenHei-85W, Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overflow: hidden;
-  color: var(--main-text);
-}
-
 .highlight {
   color: #0097E1;
 }
@@ -112,6 +107,11 @@ body {
 
 .van-collapse-item {
   margin-bottom: 4px;
+}
+
+.van-floating-bubble {
+  overflow: auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .12);
 }
 
 .text-electro {

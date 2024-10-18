@@ -63,7 +63,7 @@ function createConstellationBuff(constellation: number, skillType: BuffType): IB
   };
 }
 
-// 使用函数创建不同的 Constellation 对象
+// 使用函数创建不同的 命座buff 对象
 export const Constellation_A_3 = createConstellationBuff(3, BuffType.NormalLevel);
 export const Constellation_E_3 = createConstellationBuff(3, BuffType.SkillLevel);
 export const Constellation_Q_3 = createConstellationBuff(3, BuffType.BurstLevel);
@@ -71,3 +71,17 @@ export const Constellation_Q_3 = createConstellationBuff(3, BuffType.BurstLevel)
 export const Constellation_A_5 = createConstellationBuff(5, BuffType.NormalLevel);
 export const Constellation_E_5 = createConstellationBuff(5, BuffType.SkillLevel);
 export const Constellation_Q_5 = createConstellationBuff(5, BuffType.BurstLevel);
+
+export const PyroResonance = {
+  label: "双火共鸣，攻击力提升25%",
+  describe: "全队攻击力提升25%",
+  effect: [{ type: BuffType.ATKPrcent, getValue: () => 25 }],
+  enable: true,
+}
+
+export const CryoResonance = {
+  label: "双冰共鸣，对冰附着敌人暴击率提升15%",
+  describe: "全队对冰附着敌人暴击率提升15%",
+  effect: [{ type: BuffType.Critcal, getValue: () => 25 }],
+  enable: true,
+}

@@ -2,7 +2,7 @@ import { ActionOn, BuffType } from "@/types/enum";
 import { IBuffBase, ICalculatorValue } from "@/types/interface";
 
 const calculateBuffs = (data: Partial<ICalculatorValue>, buffs: IBuffBase[], actionOn: ActionOn) => {
-  const tempData = Object.assign({}, data);
+  // const data = Object.assign({}, data);
 
   buffs.forEach((buff: IBuffBase) => {
     if (!buff.enable) return;
@@ -16,60 +16,60 @@ const calculateBuffs = (data: Partial<ICalculatorValue>, buffs: IBuffBase[], act
 
       // 若buff存在独特标识，则单独处理
       if (eff.special) {
-        if (!tempData.specialValue) tempData.specialValue = {};
-        tempData.specialValue[eff.special] = {
-          ...(tempData.specialValue[eff.special] || {}),
+        if (!data.specialValue) data.specialValue = {};
+        data.specialValue[eff.special] = {
+          ...(data.specialValue[eff.special] || {}),
           [eff.type]: value,
         };
       } else {
         switch (eff.type) {
           case BuffType.ATKPrcent:
             eff.transform
-              ? (tempData.extraATK_NT += (tempData.baseATK * value) / 100)
-              : (tempData.extraATK += (tempData.baseATK * value) / 100);
+              ? (data.extraATK_NT += (data.baseATK * value) / 100)
+              : (data.extraATK += (data.baseATK * value) / 100);
             break;
           case BuffType.ATKFixed:
-            eff.transform ? (tempData.extraATK_NT += value) : (tempData.extraATK += value);
+            eff.transform ? (data.extraATK_NT += value) : (data.extraATK += value);
             break;
           // 其他类型的处理
           case BuffType.HPPrcent:
             eff.transform
-              ? (tempData.extraHP_NT += (tempData.baseHP * value) / 100)
-              : (tempData.extraHP += (tempData.baseHP * value) / 100);
+              ? (data.extraHP_NT += (data.baseHP * value) / 100)
+              : (data.extraHP += (data.baseHP * value) / 100);
             break;
           case BuffType.HPFixed:
-            eff.transform ? (tempData.extraHP_NT += value) : (tempData.extraHP += value);
+            eff.transform ? (data.extraHP_NT += value) : (data.extraHP += value);
             break;
           case BuffType.DEFPrcent:
             eff.transform
-              ? (tempData.extraDEF_NT += (tempData.baseDEF * value) / 100)
-              : (tempData.extraDEF += (tempData.baseDEF * value) / 100);
+              ? (data.extraDEF_NT += (data.baseDEF * value) / 100)
+              : (data.extraDEF += (data.baseDEF * value) / 100);
             break;
           case BuffType.DEFFixed:
-            eff.transform ? (tempData.extraDEF_NT += value) : (tempData.extraDEF += value);
+            eff.transform ? (data.extraDEF_NT += value) : (data.extraDEF += value);
             break;
           case BuffType.MysteryFixed:
-            eff.transform ? (tempData.elementalMystery_NT += value) : (tempData.elementalMystery += value);
+            eff.transform ? (data.elementalMystery_NT += value) : (data.elementalMystery += value);
             break;
           case BuffType.ChargeFixed:
-            eff.transform ? (tempData.chargeEfficiency_NT += value) : (tempData.chargeEfficiency += value);
+            eff.transform ? (data.chargeEfficiency_NT += value) : (data.chargeEfficiency += value);
             break;
             // @TODO 各类元素附魔的优先级顺序待定
           case BuffType.Enchanting:
-            tempData.enchanting = value;
+            data.enchanting = value;
             break;
           case BuffType.Transform:
-            tempData.transform = value;
+            data.transform = value;
             break;
           default:
-            tempData[eff.type] += value;
+            data[eff.type] += value;
             break;
         }
       }
     });
   });
 
-  return tempData;
+  return data;
 };
 
 export default calculateBuffs;

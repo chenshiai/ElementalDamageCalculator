@@ -33,6 +33,7 @@ class CalculatorValue implements ICalculatorValue {
   chargeEfficiency_NT: number = 0;
 
   // 各种隐式暴击率
+  globalCritcal: number = 0;
   normalAttackCritcal: number = 0;
   strongAttackCritcal: number = 0;
   fallingAttackCritcal: number = 0;
@@ -48,6 +49,7 @@ class CalculatorValue implements ICalculatorValue {
   dendroCritcal: number = 0;
 
   // 各种隐式爆伤
+  globalCritcalHunt: number = 0;
   normalAttackCritcalHurt: number = 0;
   strongAttackCritcalHurt: number = 0;
   fallingAttackCritcalHurt: number = 0;

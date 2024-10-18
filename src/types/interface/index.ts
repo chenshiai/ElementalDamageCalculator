@@ -1,5 +1,6 @@
 import { BuffEffect, BuffCondition, WeaponStats } from "../index";
 import { ElementType, AttackType, Rarity, WeaponType, EquipType, BuffType, BuffTarget } from "../enum";
+import { IUesrSavedCalculations } from "@/constants/db";
 
 export interface IBuffBase {
   /** Buff展示名称 */
@@ -171,6 +172,8 @@ export interface ICalculatorValue {
   [BuffType.DendroPrcent]: number;
 
   // 各种隐式暴击率
+  /** 全局暴击率提升 */
+  [BuffType.GlobalCritcal]: number;
   /** 普通攻击暴击率加成 */
   [BuffType.NormalCritcal]: number;
   /** 重击暴击率加成 */
@@ -199,6 +202,8 @@ export interface ICalculatorValue {
   [BuffType.DendroCritcal]: number;
 
   // 各种隐式爆伤
+  /** 全局暴击伤害提升 */
+  [BuffType.GlobalCritcalHunt]: number;
   /** 普攻暴击伤害加成 */
   [BuffType.NormalCritcalHurt]: number;
   /** 重击暴击伤害加成 */
@@ -321,4 +326,9 @@ export interface ICalculatorValue {
   specialValue?: {
     [key: string]: Partial<ICalculatorValue>;
   };
+}
+
+export interface ITeamItem {
+  calculation: IUesrSavedCalculations;
+  buffMap: Map<string, IBuffBase[]>;
 }

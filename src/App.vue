@@ -25,6 +25,7 @@
       </keep-alive>
     </router-view>
   </div>
+  <van-back-top />
   <Foot />
 </template>
 

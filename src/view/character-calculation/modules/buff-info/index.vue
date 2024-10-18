@@ -58,7 +58,7 @@ const activeNames = ref<string[]>([]);
           <BuffItem v-model="buff.enable" v-model:stack="buff.stack" :buff="buff" :show-delete="false" />
         </div>
       </CollapseItem>
-      <CollapseItem title="队伍增益" name="other">
+      <CollapseItem v-if="teamBuffsFilter.length > 0" title="队伍增益" name="other">
         <div v-for="(buff, index) in teamBuffsFilter" :key="buff.label + index" class="buff-item">
           <BuffItem v-model="buff.enable" v-model:stack="buff.stack" :buff="buff" :show-delete="false" />
         </div>

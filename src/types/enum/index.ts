@@ -146,6 +146,10 @@ export enum BuffType {
   /** 草元素伤害提高 */
   DendroFixed = "dendroIncreaseHunt",
 
+  /** 全局暴击率提升 */
+  GlobalCritcal = "globalCritcal",
+  /** 全局暴击伤害提升 */
+  GlobalCritcalHunt = "globalCritcalHunt",
   /** 全局伤害提升 单位%*/
   GlobalPrcent = "globalAddHunt",
   /** 全局伤害提高 */

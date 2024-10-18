@@ -2,64 +2,64 @@ import { IRelicItem, MainstatType, SubstatType } from "@/constants/characters-co
 import { AppendProp } from "@/types/enum";
 import { ICalculatorValue, IWeaponInfo } from "@/types/interface";
 
-function handleProp(stat: Partial<MainstatType & SubstatType>, tempData: ICalculatorValue): void {
+function handleProp(stat: Partial<MainstatType & SubstatType>, data: ICalculatorValue): void {
   switch (stat.mainPropId || stat.appendPropId) {
     case AppendProp.HP:
-      tempData.extraHP += stat.statValue;
+      data.extraHP += stat.statValue;
       break;
     case AppendProp.ATTACK:
-      tempData.extraATK += stat.statValue;
+      data.extraATK += stat.statValue;
       break;
     case AppendProp.DEFENSE:
-      tempData.extraDEF += stat.statValue;
+      data.extraDEF += stat.statValue;
       break;
     case AppendProp.HP_PERCENT:
-      tempData.extraHP += stat.statValue * tempData.baseHP / 100;
+      data.extraHP += stat.statValue * data.baseHP / 100;
       break;
     case AppendProp.ATTACK_PERCENT:
-      tempData.extraATK += stat.statValue * tempData.baseATK / 100;
+      data.extraATK += stat.statValue * data.baseATK / 100;
       break;
     case AppendProp.DEFENSE_PERCENT:
-      tempData.extraDEF += stat.statValue * tempData.baseDEF / 100;
+      data.extraDEF += stat.statValue * data.baseDEF / 100;
       break;
     case AppendProp.CRITICAL:
-      tempData.critcal += stat.statValue;
+      data.critcal += stat.statValue;
       break;
     case AppendProp.CRITICAL_HURT:
-      tempData.critcalHurt += stat.statValue;
+      data.critcalHurt += stat.statValue;
       break;
     case AppendProp.CHARGE_EFFICIENCY:
-      tempData.chargeEfficiency += stat.statValue;
+      data.chargeEfficiency += stat.statValue;
       break;
     case AppendProp.HEAL_ADD:
-      tempData.healAdd += stat.statValue;
+      data.healAdd += stat.statValue;
       break;
     case AppendProp.ELEMENT_MASTERY:
-      tempData.elementalMystery += stat.statValue;
+      data.elementalMystery += stat.statValue;
       break;
     case AppendProp.PHYSICAL_ADD_HURT:
-      tempData.physicalAddHunt += stat.statValue;
+      data.physicalAddHunt += stat.statValue;
       break;
     case AppendProp.FIRE_ADD_HURT:
-      tempData.pyroAddHunt += stat.statValue;
+      data.pyroAddHunt += stat.statValue;
       break;
     case AppendProp.ELEC_ADD_HURT:
-      tempData.electroAddHunt += stat.statValue;
+      data.electroAddHunt += stat.statValue;
       break;
     case AppendProp.WATER_ADD_HURT:
-      tempData.hydroAddHunt += stat.statValue;
+      data.hydroAddHunt += stat.statValue;
       break;
     case AppendProp.WIND_ADD_HURT:
-      tempData.anemoAddHunt += stat.statValue;
+      data.anemoAddHunt += stat.statValue;
       break;
     case AppendProp.ICE_ADD_HURT:
-      tempData.cryoAddHunt += stat.statValue;
+      data.cryoAddHunt += stat.statValue;
       break;
     case AppendProp.ROCK_ADD_HURT:
-      tempData.geoAddHunt += stat.statValue;
+      data.geoAddHunt += stat.statValue;
       break;
     case AppendProp.GRASS_ADD_HURT:
-      tempData.dendroAddHunt += stat.statValue;
+      data.dendroAddHunt += stat.statValue;
       break;
     default:
       break;
@@ -67,25 +67,25 @@ function handleProp(stat: Partial<MainstatType & SubstatType>, tempData: ICalcul
 }
 
 export function calculateRelicStat(data: ICalculatorValue, relics: IRelicItem[]): Partial<ICalculatorValue> {
-  const tempData = Object.assign({}, data);
+  // const data = Object.assign({}, data);
 
   relics.forEach((relic) => {
     if (!relic) return;
-    handleProp(relic.reliquaryMainstat, tempData);
+    handleProp(relic.reliquaryMainstat, data);
 
     if (relic.reliquarySubstats.length <= 0) return;
     relic.reliquarySubstats.forEach((substat) => {
-      handleProp(substat, tempData);
+      handleProp(substat, data);
     });
   });
 
-  return tempData;
+  return data;
 }
 
 export function calculateWeaponSubStat(data: ICalculatorValue, weapon: IWeaponInfo): Partial<ICalculatorValue> {
-  const tempData = Object.assign({}, data);
+  // const data = Object.assign({}, data);
   const substat = weapon.weaponStats.filter((i) => i.appendPropId !== AppendProp.BASE_ATTACK)[0];
 
-  handleProp(substat, tempData);
-  return tempData;
+  handleProp(substat, data);
+  return data;
 }

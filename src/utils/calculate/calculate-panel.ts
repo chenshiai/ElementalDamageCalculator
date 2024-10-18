@@ -5,13 +5,11 @@ import { IBuffBase, ICalculatorValue, ICharacterInfo, IWeaponInfo } from "@/type
 import CalculatorValueClass from "@/constants/characters-config/calculator-value-class";
 import { IRelicItem } from "@/constants/characters-config/relic-class";
 
-
 interface ICalculatorPanelArgs {
   characterInfo: ICharacterInfo;
   constellation: number;
   characterBuffs: IBuffBase[];
   weapon: IWeaponInfo;
-  affix: number;
   weaponBuffs: IBuffBase[];
   buffs: IBuffBase[];
   relicBuffs: IBuffBase[];

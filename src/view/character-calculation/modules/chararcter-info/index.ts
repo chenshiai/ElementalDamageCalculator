@@ -18,7 +18,7 @@ const useCharacterInfo = (initData: ICharacterInfo | null = null, cons: number =
           } else {
             return true;
           }
-        })
+        })// 对buff进行拷贝，防止后续修改buff影响到原数据
         .map((b) => Object.create(b)) || [];
   });
 

@@ -1,5 +1,5 @@
 import { createApp } from "vue";
-import { Lazyload } from "vant";
+import { Lazyload, BackTop } from "vant";
 import App from "./App.vue";
 import "vant/lib/index.css";
 import "./font.css";
@@ -14,4 +14,4 @@ const vConsole = new VConsole();
 
 db.createStore(calDB.storeName, calDB.keyPath);
 
-createApp(App).use(route).use(store).use(Lazyload).use(vConsole).mount("#app");
+createApp(App).use(BackTop).use(route).use(store).use(Lazyload).use(vConsole).mount("#app");

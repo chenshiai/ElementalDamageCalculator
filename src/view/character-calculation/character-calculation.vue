@@ -2,15 +2,9 @@
 import { computed, watchEffect } from "vue";
 import TabTitle from "@/component/TabTitle.vue";
 import CharacterPanel from "@/component/CharacterPanel.vue";
-import db from "@/utils/db";
-import { useStore } from "vuex";
 
 import { ICalculatorValue } from "@/types/interface";
-import { ActionOn, AppendProp } from "@/types/enum";
 import CalculatorValueClass from "@/constants/characters-config/calculator-value-class";
-
-import calculateBuffs from "@/utils/calculate/calculate-buffs";
-import { calculateRelicStat, calculateWeaponSubStat } from "@/utils/calculate/calculate-equip";
 
 import useCharacterInfo, { CharacterInfo } from "./modules/chararcter-info";
 import useWeaponInfo, { WeaponInfo } from "./modules/weapon-info";
@@ -18,80 +12,56 @@ import useRelicInfo, { RelicInfo } from "./modules/relic-info";
 import useBuffInfo, { BuffInfo } from "./modules/buff-info";
 import useSkillInfo, { SkillInfo } from "./modules/skill-info";
 
-// 数据展示
+/** @module 页面展示用数据 */
 const { characterInfo, constellation, characterBuffs, initCharacterInfo } = useCharacterInfo();
 const { weapon, affix, weaponBuffs, initWeaponInfo } = useWeaponInfo();
 const { relicList, relicBuffs, relicSuitTexts, initRelicInfo } = useRelicInfo();
 const { buffs } = useBuffInfo();
 const { normalLevel, skillLevel, burstLevel, initSkillInfo } = useSkillInfo();
+
+/** @module 面板计算 */
+import calculationPanel from "@/utils/calculate/calculate-panel";
+import { useStore } from "vuex";
 const store = useStore();
-
-
-const CalculationPanel = computed<ICalculatorValue>(() => {
+const CalculatorValue = computed<ICalculatorValue>(() => {
   if (!characterInfo.value || !weapon.value) return new CalculatorValueClass();
-  const allBuffs = [...relicBuffs.value, ...characterBuffs.value, ...weaponBuffs.value, ...buffs.value];
-  const characterBaseAtk = characterInfo.value.baseATK;
-  const weaponBaseAtk = weapon.value.weaponStats.find((i) => i.appendPropId === AppendProp.BASE_ATTACK).statValue;
-
-  return [
-    (data: ICalculatorValue) => calculateBuffs(data, allBuffs, ActionOn.Front),
-    (data: ICalculatorValue) => calculateWeaponSubStat(data, weapon.value),
-    (data: ICalculatorValue) => calculateRelicStat(data, relicList.value),
-    (data: ICalculatorValue) => calculateBuffs(data, allBuffs, ActionOn.Direct), // 计算直接提升面板的buff
-    (data: ICalculatorValue) => calculateBuffs(data, allBuffs, ActionOn.Indirect), // 计算间接提升面板的buff
-    (data: ICalculatorValue) => calculateBuffs(data, allBuffs, ActionOn.External), // 计算不作用于面板的buff
-  ].reduce(
-    (accumulator, currentFunction) => {
-      return {
-        ...accumulator,
-        ...currentFunction(accumulator),
-      };
-    },
-    new CalculatorValueClass({
-      level: characterInfo.value.level,
-      element: characterInfo.value.element,
-      weapon: characterInfo.value.weapon,
-      constellation: constellation.value,
-
-      baseATK: characterBaseAtk + weaponBaseAtk,
-      baseDEF: characterInfo.value.baseDEF,
-      baseHP: characterInfo.value.baseHP,
-
-      normalLevel: normalLevel.value,
-      skillLevel: skillLevel.value,
-      burstLevel: burstLevel.value,
-
-      enemyLevel: store.state.teamBuffs.enemyLevel,
-      enemyPhysicalResistance: store.state.teamBuffs.baseResistance,
-      enemyPyroResistance: store.state.teamBuffs.baseResistance,
-      enemyElectroResistance: store.state.teamBuffs.baseResistance,
-      enemyHydroResistance: store.state.teamBuffs.baseResistance,
-      enemyAnemoResistance: store.state.teamBuffs.baseResistance,
-      enemyCryoResistance: store.state.teamBuffs.baseResistance,
-      enemyGeoResistance: store.state.teamBuffs.baseResistance,
-      enemyDendroResistance: store.state.teamBuffs.baseResistance,
-    })
-  );
+  return calculationPanel({
+    characterInfo: characterInfo.value,
+    weapon: weapon.value,
+    relicList: relicList.value,
+    characterBuffs: characterBuffs.value,
+    weaponBuffs: weaponBuffs.value,
+    relicBuffs: relicBuffs.value,
+    buffs: buffs.value,
+    constellation: constellation.value,
+    baseResistance: store.state.teamBuffs.baseResistance,
+    enemyLevel: store.state.teamBuffs.enemyLevel,
+    normalLevel: normalLevel.value,
+    skillLevel: skillLevel.value,
+    burstLevel: burstLevel.value,
+  });
 });
 
-// 数据保存
+/** @module 数据保存 */
 import { IUesrSavedCalculations, calDB } from "@/constants/db";
 import SaveCalculation from "@/component/SaveCalculation.vue";
-import { Character } from "@/constants/characters-config/character";
-import { Weapons } from "@/constants/characters-config/weapon";
+import db from "@/utils/db";
 const saveCalculationResult = (title: string) => {
   const data: IUesrSavedCalculations = {
     title,
     characterEnkaId: characterInfo.value?.enkaId,
+    characterElement: characterInfo.value?.element,
     weaponEnkaId: weapon.value?.enkaId,
     affix: affix.value,
     relicList: JSON.stringify(relicList.value),
-    panel: CalculationPanel.value,
+    panel: CalculatorValue.value,
   };
   db.add(calDB.storeName, data);
 };
 
-// 数据重算
+/** @module 数据重算（再次编辑） */
+import { Character } from "@/constants/characters-config/character";
+import { Weapons } from "@/constants/characters-config/weapon";
 const recalculation = (data: IUesrSavedCalculations) => {
   characterInfo.value = Character.find((c) => c.enkaId === data.characterEnkaId);
   weapon.value = Weapons.find((w) => w.enkaId === data.weaponEnkaId);
@@ -103,11 +73,12 @@ const recalculation = (data: IUesrSavedCalculations) => {
   burstLevel.value = data.panel.burstLevel;
 };
 
+/** @module 路由判断 */
 import { useRoute } from "vue-router";
 const route = useRoute();
 watchEffect(() => {
-  if (route.params.mode === 'edit') {
-    const data = sessionStorage.getItem('editCharacter');
+  if (route.params.mode === "edit") {
+    const data = sessionStorage.getItem("editCharacter");
     if (data) {
       recalculation(JSON.parse(data));
     }
@@ -118,9 +89,9 @@ watchEffect(() => {
     initWeaponInfo();
   }
 });
-const pageTitle= computed(() => {
-  return route.params.mode === 'edit' ? '编辑角色数据' : '角色数据创建'
-})
+const pageTitle = computed(() => {
+  return route.params.mode === "edit" ? "编辑角色数据" : "创建角色数据";
+});
 </script>
 
 <template>
@@ -131,7 +102,7 @@ const pageTitle= computed(() => {
   <RelicInfo v-model="relicList" :relic-suit-texts="relicSuitTexts" />
   <CharacterPanel
     v-if="characterInfo && weapon"
-    :character-panel-data="CalculationPanel"
+    :character-panel-data="CalculatorValue"
     :element-type="characterInfo?.element"
   />
   <BuffInfo
@@ -144,7 +115,7 @@ const pageTitle= computed(() => {
   />
   <SkillInfo
     v-if="characterInfo && weapon"
-    :calculator-value="CalculationPanel"
+    :calculator-value="CalculatorValue"
     :character-info="characterInfo"
     :weapon="weapon"
     :affix="affix"

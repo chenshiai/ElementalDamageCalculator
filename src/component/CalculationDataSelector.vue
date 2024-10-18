@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Collapse, CollapseItem, Icon } from "vant";
+import { Button, Collapse, CollapseItem, SwipeCell } from "vant";
 import db from "@/utils/db";
 import { IUesrSavedCalculations, calDB } from "@/constants/db";
 import { ref, watchEffect } from "vue";
@@ -62,55 +62,73 @@ const getStatValueText = (stat): string => {
 </script>
 
 <template>
-  <div class="tips">点击展开查看圣遗物详情。支持「填入」「删除」</div>
+  <div class="tips">点击展开查看圣遗物详情。支持「填入」，左滑「删除」</div>
   <div class="data-selector-title">本地保存数据</div>
   <Collapse class="data-popup__collapse" v-if="localData.length > 0" v-model="opened">
-    <CollapseItem v-for="item in localData" :key="item.title" :is-link="false" title-class="data-title">
-      <template #title>
-        <span>{{ item.title }}</span>
-        <div class="first-row">
-          <img :src="getAvatarIcon(item.characterEnkaId)" />
-          <div class="info">
-            <div class="name">{{ getCharacterName(item.characterEnkaId) }}</div>
-            <div class="conts">命之座：{{ item.panel.constellation }}</div>
+    <SwipeCell v-for="item in localData" :key="item.title">
+      <CollapseItem :is-link="false" title-class="data-title">
+        <template #title>
+          <span>{{ item.title }}</span>
+          <div class="first-row">
+            <img :src="getAvatarIcon(item.characterEnkaId)" />
+            <div class="info">
+              <div class="name">{{ getCharacterName(item.characterEnkaId) }}</div>
+              <div class="conts">命之座：{{ item.panel.constellation }}</div>
+            </div>
+            <img :src="getWeaponIcon(item.weaponEnkaId)" />
+            <div class="info">
+              <div class="name">{{ getWeaponName(item.weaponEnkaId) }}</div>
+              <div class="conts">精炼：{{ item.affix }}</div>
+            </div>
           </div>
-          <img :src="getWeaponIcon(item.weaponEnkaId)" />
-          <div class="info">
-            <div class="name">{{ getWeaponName(item.weaponEnkaId) }}</div>
-            <div class="conts">精炼：{{ item.affix }}</div>
+          <Button
+            class="swipecell-right-button replay-icon"
+            square
+            type="primary"
+            color="#997874"
+            @click.stop="recalculation(item)"
+          >
+            填入
+          </Button>
+        </template>
+        <div class="container">
+          <div class="second-row">
+            <div class="relic-detail" v-for="(relic, index) in getRelics(item.relicList)" :key="index">
+              <template v-if="relic">
+                <img class="relic-icon" v-lazy="relic.icon" />
+                <div class="relic-detail__hearder">
+                  <div class="relic-name">
+                    {{ relic.name }}
+                  </div>
+                  <div class="relic-main-stats">
+                    <span>{{ getAppendPropName(relic.reliquaryMainstat.mainPropId) }}</span>
+                    <span>{{ getStatValueText(relic.reliquaryMainstat) }}</span>
+                  </div>
+                </div>
+                <div
+                  class="relic-detail__stats"
+                  v-for="(subitem, index) in relic.reliquarySubstats"
+                  :key="subitem.appendPropId + index"
+                >
+                  <label>{{ getAppendPropName(subitem.appendPropId) }}</label>
+                  <span>{{ getStatValueText(subitem) }}</span>
+                </div>
+              </template>
+              <div class="empty" v-else>该部位未佩戴圣遗物</div>
+            </div>
           </div>
         </div>
-        <Icon name="records-o" @click.stop="recalculation(item)" size="26" class="replay-icon" />
-        <Icon size="26" @click.stop="deleteLocalData(item.title)" class="delete-icon" name="delete-o" />
+      </CollapseItem>
+      <template #right>
+        <Button
+          class="swipecell-right-button"
+          square
+          type="danger"
+          @click.stop="deleteLocalData(item.title)"
+          text="删除"
+        />
       </template>
-      <div class="container">
-        <div class="second-row">
-          <div class="relic-detail" v-for="(relic, index) in getRelics(item.relicList)" :key="index">
-            <template v-if="relic">
-              <img class="relic-icon" v-lazy="relic.icon" />
-              <div class="relic-detail__hearder">
-                <div class="relic-name">
-                  {{ relic.name }}
-                </div>
-                <div class="relic-main-stats">
-                  <span>{{ getAppendPropName(relic.reliquaryMainstat.mainPropId) }}</span>
-                  <span>{{ getStatValueText(relic.reliquaryMainstat) }}</span>
-                </div>
-              </div>
-              <div
-                class="relic-detail__stats"
-                v-for="(subitem, index) in relic.reliquarySubstats"
-                :key="subitem.appendPropId + index"
-              >
-                <label>{{ getAppendPropName(subitem.appendPropId) }}</label>
-                <span>{{ getStatValueText(subitem) }}</span>
-              </div>
-            </template>
-            <div class="empty" v-else>该部位未佩戴圣遗物</div>
-          </div>
-        </div>
-      </div>
-    </CollapseItem>
+    </SwipeCell>
   </Collapse>
   <div class="empty" v-else>无</div>
 </template>
@@ -128,10 +146,9 @@ const getStatValueText = (stat): string => {
 }
 .replay-icon {
   position: absolute;
-  right: 66px;
-  top: 50%;
-  color: #2ee27f;
-  transform: translateY(-50%);
+  right: 0;
+  top: 0;
+  color: var(--ligth-text);
 }
 
 .container {
@@ -185,5 +202,8 @@ const getStatValueText = (stat): string => {
 }
 .empty {
   text-align: center;
+}
+.swipecell-right-button {
+  height: 100%;
 }
 </style>

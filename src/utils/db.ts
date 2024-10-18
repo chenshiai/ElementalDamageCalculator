@@ -56,7 +56,7 @@ class calculateDatabase implements Database {
     const request: IDBRequest = objectStore.add(data);
 
     request.onsuccess = () => {
-      showSuccessToast("数据添加成功");
+      showSuccessToast("新增数据已添加");
     };
 
     request.onerror = () => {
@@ -73,7 +73,7 @@ class calculateDatabase implements Database {
     const objectStore: IDBObjectStore = transaction.objectStore(storeName);
     const request: IDBRequest = objectStore.put(data);
     request.onsuccess = () => {
-      showSuccessToast("数据更新成功");
+      showSuccessToast("重名数据已更新");
     };
     request.onerror = (event) => {
       showFailToast("数据更新失败");

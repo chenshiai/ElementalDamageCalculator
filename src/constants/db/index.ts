@@ -1,3 +1,4 @@
+import { ElementType } from "@/types/enum";
 import { IBuffBase, ICalculatorValue } from "@/types/interface";
 
 export const calDB = {
@@ -8,6 +9,7 @@ export const calDB = {
 export interface IUesrSavedCalculations {
   title: string;
   characterEnkaId: number;
+  characterElement: ElementType;
   weaponEnkaId: number;
   affix: number;
   relicList: string;

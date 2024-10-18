@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Popup, showFailToast, Field } from "vant";
+import { Popup, showFailToast, Field, FloatingBubble, Popover, Icon } from "vant";
 import { ref } from "vue";
 import CalculationDataSelector from "./CalculationDataSelector.vue";
 const emit = defineEmits(["save-data", "look-data", "recalculation"]);
@@ -30,9 +30,31 @@ const recalculation = (data: IUesrSavedCalculations) => {
   remark.value = data.title;
   emit("recalculation", data);
 };
+
+// 悬浮球
+const showPopover = ref(false);
+const offset = ref({ x: 20, y: 560 });
+const popoberActions = [
+  { text: "保存当前角色面板", click: saveDataPop },
+  { text: "查看数据", click: lookDataPop },
+];
+const onSelect = (action) => {
+  action.click();
+};
 </script>
 
 <template>
+  <FloatingBubble v-model:offset="offset" axis="y">
+    <Popover
+      v-model:show="showPopover"
+      :actions="popoberActions"
+      actions-direction="horizontal"
+      placement="right"
+      @select="onSelect"
+    >
+      <template #reference> 更多 </template>
+    </Popover>
+  </FloatingBubble>
   <div class="save-data">
     <div class="save-btn" @click="saveDataPop">保存当前角色面板</div>
     <div class="save-btn" @click="lookDataPop">查看数据</div>
@@ -41,8 +63,11 @@ const recalculation = (data: IUesrSavedCalculations) => {
     <div class="tips">
       面板数据会存储在本地浏览器的缓存中。若清空浏览器缓存，则数据也一会同清空。重复命名的新数据会替换旧数据。
     </div>
+    <div class="tips">各项增益的开启情况不会被保存，读取数据后需要重新开启。</div>
     <div class="tips">
-      保存的是角色计算所有增益后的面板快照，即锁面板。增益的开启情况不会保存
+      保存的内容分为两个部分，分别是：
+      <br />【面板数据】：各项增益开启后的角色面板快照，即锁面板，用于计算队伍增益。
+      <br />【角色、武器和圣遗物数据】：角色、武器和圣遗物的配置数据，用于重新编辑数据。
     </div>
     <Field v-model="remark" type="text" label="数据命名" placeholder="给这条数据取个名字吧" />
     <div class="popup-buttons" @click="saveData">保存面板数据</div>

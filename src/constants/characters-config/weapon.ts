@@ -6548,6 +6548,19 @@ export const Weapons: IWeaponInfo[] = [
         title: "传承",
         text: highlight`主动切换角色时，新登场的角色攻击力提升${a}，持续10秒。该效果每20秒只能触发一次。`,
       };
+    },
+    (affix = 1) => {
+      let a = [24, 30, 36, 42, 48][affix - 1];
+      return [
+        {
+          label: "传承",
+          describe: `新登场的角色攻击力提升${a}%`,
+          effect: [{ type: BuffType.ATKPrcent, getValue: () => a}],
+          enable: false,
+          shareable: true,
+          target: BuffTarget.Other,
+        }
+      ]
     }
   ),
   createWeapon(

@@ -20,6 +20,7 @@ interface ITeamItem {
   buffMap: Map<string, IBuffBase[]>;
 }
 
+/** @module 面板数据选择 */
 const show = ref(false);
 const selectedIndex = ref(0);
 const setSlotByIndex = (index) => {
@@ -51,9 +52,10 @@ const deconstructionBuff = (buff: IBuffBase, panel: ICalculatorValue) => {
     effect,
   };
 };
-// 更新队伍数据
+
+/** @module 队伍数据 */
 const store = useStore();
-const teamList = ref<ITeamItem[]>([null, null, null, null]);
+const teamList = ref<ITeamItem[]>([null]);
 const handleCharacterChange = (result: IUesrSavedCalculations) => {
   show.value = false;
 
@@ -88,14 +90,16 @@ const handleCharacterChange = (result: IUesrSavedCalculations) => {
     calculation: result,
     buffMap: map,
   };
+  teamList.value.push(null);
   store.commit("setTeamList", teamList.value);
 };
 
+/** 清除数据 */
 const clear = (index) => {
-  teamList.value[index] = null;
+  teamList.value.splice(index, 1);
 };
 
-// 路由处理
+/** @module 编辑页面跳转 */
 const router = useRouter();
 const edit = (index) => {
   router.push({
@@ -110,7 +114,7 @@ const toCreateData = () => {
   sessionStorage.removeItem("editCharacter");
 };
 
-// 数据信息获取
+/** @module 展示信息获取 */
 const getAvatarIcon = (enkaId: number) => {
   return Character.find((c) => c.enkaId === enkaId).icons.avatarIcon;
 };
@@ -133,9 +137,10 @@ const handleImagePreview = () => {
 
 <template>
   <TabTitle>云上辉星</TabTitle>
-  <div class="tips">从本地保存数据中，选择角色数据填入</div>
+  <div class="tips">从本地保存数据中，选择角色数据填入。更新数据后需要先离队再重新入队。</div>
   <div class="team-list">
-    <div class="show-click" @click="toCreateData">+创建角色数据</div>
+    <div class="show-click" @click="toCreateData">创建角色数据</div>
+    <div class="data-panel__title">队伍编辑</div>
     <div class="team-list__item" v-for="(item, index) in teamList" :key="index">
       <div class="team-list__item-avatar" @click="setSlotByIndex(index)">
         <template v-if="item">
