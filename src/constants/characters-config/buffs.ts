@@ -72,16 +72,54 @@ export const Constellation_A_5 = createConstellationBuff(5, BuffType.NormalLevel
 export const Constellation_E_5 = createConstellationBuff(5, BuffType.SkillLevel);
 export const Constellation_Q_5 = createConstellationBuff(5, BuffType.BurstLevel);
 
+// 元素共鸣的增益
 export const PyroResonance = {
-  label: "双火共鸣，攻击力提升25%",
-  describe: "全队攻击力提升25%",
+  label: "元素共鸣·热诚之火",
+  describe: "攻击力提高25%",
   effect: [{ type: BuffType.ATKPrcent, getValue: () => 25 }],
   enable: true,
-}
+};
 
 export const CryoResonance = {
-  label: "双冰共鸣，对冰附着敌人暴击率提升15%",
-  describe: "全队对冰附着敌人暴击率提升15%",
-  effect: [{ type: BuffType.Critcal, getValue: () => 25 }],
+  label: "元素共鸣·粉碎之冰",
+  describe: "攻击冰元素附着或冻结状态下的敌人时，暴击率提高15%",
+  effect: [{ type: BuffType.GlobalCritcal, getValue: () => 15 }],
+  enable: false,
+};
+
+export const HydroResonance = {
+  label: "元素共鸣·愈疗之水",
+  describe: "生命值上限提高25%",
+  effect: [{ type: BuffType.HPPrcent, getValue: () => 25 }],
   enable: true,
-}
+};
+
+export const DendroResonance = {
+  label: "元素共鸣·蔓生之草1",
+  describe: "元素精通提升50点",
+  effect: [{ type: BuffType.MysteryFixed, getValue: () => 50 }],
+  enable: true,
+};
+export const DendroResonance1 = {
+  label: "元素共鸣·蔓生之草2",
+  describe: "触发燃烧、原激化、绽放反应后，元素精通提升30点",
+  effect: [{ type: BuffType.MysteryFixed, getValue: () => 30 }],
+  enable: false,
+};
+export const DendroResonance2 = {
+  label: "元素共鸣·蔓生之草3",
+  describe: "触发超激化、蔓激化、超绽放、烈绽放反应后，元素精通提升20",
+  effect: [{ type: BuffType.MysteryFixed, getValue: () => 20 }],
+  enable: false,
+};
+
+export const GeoResonance = {
+  label: "元素共鸣·坚定之岩",
+  describe:
+    "护盾强效提高15%。角色处于护盾庇护下时：造成的伤害提升15%；角色对敌人造成伤害时，会使敌人的岩元素抗性降低20%",
+  effect: [
+    { type: BuffType.ShieldStrong, getValue: () => 15 },
+    { type: BuffType.EnemyGeoResistance, getValue: () => -20 },
+  ],
+  enable: true,
+};

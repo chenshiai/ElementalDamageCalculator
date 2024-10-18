@@ -8,8 +8,8 @@ function getMoreDataBySwitch(calculatorValue: Partial<ICalculatorValue>, attackT
   let ADDITIONAL_DMG = calculatorValue[BuffType.GlobalFixed] || 0;
   let addHunt = calculatorValue[BuffType.GlobalPrcent] || 0;
   let addRate = 0;
-  let criticalHunt = calculatorValue[BuffType.CritcalHurt] || 0;
-  let critical = calculatorValue[BuffType.Critcal] || 0;
+  let criticalHunt = calculatorValue[BuffType.CritcalHurt] + calculatorValue[BuffType.GlobalCritcalHunt] || 0;
+  let critical = calculatorValue[BuffType.Critcal] + calculatorValue[BuffType.GlobalCritcal] || 0;
   let resistance = 0;
 
   // 处理攻击类型的加成
