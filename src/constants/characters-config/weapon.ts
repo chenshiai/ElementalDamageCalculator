@@ -1,53 +1,7 @@
 import { WeaponType, Rarity, AppendProp, BuffType, AttackType, ElementType, ActionOn, BuffTarget } from "@/types/enum";
-import { IBuffBase, ICalculatorValue, IWeaponInfo } from "@/types/interface";
+import { ICalculatorValue, IWeaponInfo } from "@/types/interface";
 import { getEnkaUI } from "./append-prop";
-function highlight(strings, ...values) {
-  let result = "";
-  strings.forEach((string, index) => {
-    result += string;
-    if (index < values.length) {
-      result += `<span class="highlight">${values[index]}</span>`;
-    }
-  });
-  return result;
-}
-
-interface WeaponStats {
-  baseAtk: number;
-  appendPropId: AppendProp;
-  statValue: number;
-}
-type WeaponConfig = Pick<IWeaponInfo, "name" | "enkaId" | "weaponType" | "icon" | "rarity"> & WeaponStats;
-
-function createWeapon(
-  { name, enkaId, weaponType, rarity, icon, baseAtk, appendPropId, statValue }: WeaponConfig,
-  getSkillDescribe: IWeaponInfo["getSkillDescribe"],
-  getBuffs?: IWeaponInfo["getBuffs"],
-  getSkill?: IWeaponInfo["getSkill"]
-): IWeaponInfo {
-  return {
-    name,
-    enkaId,
-    weaponType,
-    level: rarity === Rarity.Two ? 70 : 90,
-    rarity,
-    affix: 1,
-    icon,
-    weaponStats: [
-      {
-        appendPropId: AppendProp.BASE_ATTACK,
-        statValue: baseAtk,
-      },
-      {
-        appendPropId,
-        statValue,
-      },
-    ],
-    getSkillDescribe,
-    getBuffs,
-    getSkill,
-  };
-}
+import {  highlight, createWeapon} from "@/utils/calculate/create-data-methods"
 
 createWeapon(
   {
