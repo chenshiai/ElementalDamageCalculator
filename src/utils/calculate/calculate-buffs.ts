@@ -1,6 +1,7 @@
 import { ActionOn, BuffType } from "@/types/enum";
 import { IBuffBase, ICalculatorValue } from "@/types/interface";
 
+/** 计算buff的数值，累加在面板数据上 */
 const calculateBuffs = (data: Partial<ICalculatorValue>, buffs: IBuffBase[], actionOn: ActionOn) => {
   // const data = Object.assign({}, data);
 
@@ -31,7 +32,6 @@ const calculateBuffs = (data: Partial<ICalculatorValue>, buffs: IBuffBase[], act
           case BuffType.ATKFixed:
             eff.transform ? (data.extraATK_NT += value) : (data.extraATK += value);
             break;
-          // 其他类型的处理
           case BuffType.HPPrcent:
             eff.transform
               ? (data.extraHP_NT += (data.baseHP * value) / 100)

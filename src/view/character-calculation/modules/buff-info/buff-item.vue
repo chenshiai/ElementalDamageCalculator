@@ -27,10 +27,10 @@ const stackText = computed(() => {
     <input type="checkbox" />
   </div>
   <div class="buff-description">
-    {{ buff.describe }}
     <div class="buff-stack" v-if="buff.stackable">
       <span>{{ buff.stackText || "层数" }}：</span><Slider v-model="stack" :max="buff.limit" :min="0" />
     </div>
+    {{ buff.describe }}
   </div>
 </template>
 

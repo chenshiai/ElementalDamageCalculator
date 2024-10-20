@@ -520,19 +520,17 @@ export const Weapons: IWeaponInfo[] = [
       const el = 24 + (affix - 1) * 6;
       return [
         {
-          label: "攻击力提升",
-          describe: `队伍中每有一名纳塔角色或与装备者元素类型不同的角色，装备者获得${atk}攻击力提升`,
-          effect: [{ type: BuffType.ATKPrcent, getValue: (_, stack) => atk * stack }],
+          label: "花与落羽的长歌",
+          describe: `队伍中每有一名纳塔角色或与装备者元素类型不同的角色，装备者获得${atk}%攻击力提升；上述角色不少于3名时，装备者的元素精通提升${el}点`,
+          effect: [
+            { type: BuffType.ATKPrcent, getValue: (_, stack) => atk * stack },
+            { type: BuffType.MysteryFixed, getValue: (_, stack) => (stack >= 3 ? el : 0) },
+          ],
           stackable: true,
           limit: 4,
           stack: 0,
           enable: true,
-        },
-        {
-          label: "元素精通提升",
-          describe: `装备者的元素精通提升${el}点`,
-          effect: [{ type: BuffType.MysteryFixed, getValue: () => el }],
-          enable: false,
+          stackText: "符合条件的角色数量",
         },
       ];
     }
@@ -932,7 +930,7 @@ export const Weapons: IWeaponInfo[] = [
             { type: BuffType.Critcal, getValue: (_, stack) => cri * stack },
           ],
           stackable: true,
-          stackText:"璃月角色数量",
+          stackText: "璃月角色数量",
           limit: 4,
           stack: 0,
           enable: false,
@@ -1632,7 +1630,7 @@ export const Weapons: IWeaponInfo[] = [
       const getValue = (data: ICalculatorValue, stack) => {
         // 虽然游戏里不存这种场景，但感觉生命之契应该能吃二次转化
         let allhp = data.baseHP + data.extraHP + data.extraHP_NT;
-        return Math.min(allhp * stack * hp / 10000, add2);
+        return Math.min((allhp * stack * hp) / 10000, add2);
       };
       return [
         {
@@ -1760,7 +1758,7 @@ export const Weapons: IWeaponInfo[] = [
               getValue: (data, stack) => {
                 // 虽然游戏里不存这种场景，但感觉生命之契应该能吃二次转化
                 let allhp = data.baseHP + data.extraHP + data.extraHP_NT;
-                return Math.min(allhp * stack  * hp / 10000, atk2);
+                return Math.min((allhp * stack * hp) / 10000, atk2);
               },
             },
           ],
@@ -6555,12 +6553,12 @@ export const Weapons: IWeaponInfo[] = [
         {
           label: "传承",
           describe: `新登场的角色攻击力提升${a}%`,
-          effect: [{ type: BuffType.ATKPrcent, getValue: () => a}],
+          effect: [{ type: BuffType.ATKPrcent, getValue: () => a }],
           enable: false,
           shareable: true,
           target: BuffTarget.Other,
-        }
-      ]
+        },
+      ];
     }
   ),
   createWeapon(
