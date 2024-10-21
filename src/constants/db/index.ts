@@ -9,7 +9,6 @@ export const calDB = {
 export interface IUesrSavedCalculations {
   title: string;
   characterEnkaId: number;
-  characterElement: ElementType;
   weaponEnkaId: number;
   affix: number;
   relicList: string;

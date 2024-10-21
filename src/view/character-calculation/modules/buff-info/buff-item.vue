@@ -56,6 +56,7 @@ const stackText = computed(() => {
   display: none;
   color: #666;
   font-size: 14px;
+  margin-top: 10px;
 }
 
 .buff-detail-check:has(input:checked) + .buff-description {

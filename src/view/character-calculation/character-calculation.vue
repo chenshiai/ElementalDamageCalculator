@@ -50,7 +50,6 @@ const saveCalculationResult = (title: string) => {
   const data: IUesrSavedCalculations = {
     title,
     characterEnkaId: characterInfo.value?.enkaId,
-    characterElement: characterInfo.value?.element,
     weaponEnkaId: weapon.value?.enkaId,
     affix: affix.value,
     relicList: JSON.stringify(relicList.value),

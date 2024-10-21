@@ -13,11 +13,12 @@ function countCharacterElements(teamList: ITeamItem[]): Map<ElementType, number>
 
   for (const item of teamList) {
     if (item) {
-      const element = item.calculation.characterElement;
+      const element = item.calculation.panel.element;
       const currentCount = elementCount.get(element) || 0;
       elementCount.set(element, currentCount + 1);
     }
   }
+  
 
   return elementCount;
 }

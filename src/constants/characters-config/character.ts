@@ -237,7 +237,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     elementSkill: [
-      createAttack("高空坠地冲击伤害", AttackType.Skill, ElementType.Anemo, {
+      createAttack("技能伤害", AttackType.Skill, ElementType.Anemo, {
         atk: [2.92, 3.14, 3.36, 3.65, 3.87, 4.09, 4.38, 4.67, 4.96, 5.26, 5.55, 5.84, 6.2],
       }),
     ],

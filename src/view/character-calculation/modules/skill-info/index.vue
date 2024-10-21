@@ -72,7 +72,7 @@ const getOtherSkill = computed(() => {
 <style>
 .slider-wrap {
   display: flex;
-  padding: 0 16px;
+  padding-right: 16px;
   margin-top: 12px;
   margin-bottom: -12px;
 }

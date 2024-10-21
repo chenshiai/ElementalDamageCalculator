@@ -35,9 +35,6 @@ const atkType = defineModel();
   </div>
 </template>
 <style scoped>
-.small {
-  padding: 0 16px;
-}
 .atk-type-panel .van-radio {
   flex: 1;
   text-align: center;

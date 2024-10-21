@@ -21,7 +21,7 @@ const calculatedResults = computed(() => {
       attackType: item.attackType,
       elementType: item.elementType,
       rate: item.rate,
-      level,
+      level: level ?? 1,
       atkType: atkType.value,
       special: item.special,
     });
@@ -38,7 +38,6 @@ const calculatedResults = computed(() => {
 
 <template>
   <template v-if="skill.length > 0">
-    <AtkTypeSelector v-model="atkType" size="small" />
     <div class="detail">
       <div class="skill-info-item">
         <span><Icon name="circle" /></span>
@@ -57,6 +56,7 @@ const calculatedResults = computed(() => {
         <span>{{ item.common }}</span>
       </div>
     </div>
+    <AtkTypeSelector v-model="atkType" size="small" />
   </template>
   <template v-else>
     <div class="skill-info-empty">该技能无法造成伤害。</div>

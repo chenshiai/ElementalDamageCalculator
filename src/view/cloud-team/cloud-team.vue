@@ -137,10 +137,10 @@ const handleImagePreview = () => {
 
 <template>
   <TabTitle>云上辉星</TabTitle>
-  <div class="tips">从本地保存数据中，选择角色数据填入。更新数据后需要先离队再重新入队。</div>
+  <div class="tips">创建、更新角色数据后需要重新入队。</div>
   <div class="team-list">
-    <div class="show-click" @click="toCreateData">创建角色数据</div>
     <div class="data-panel__title">队伍编辑</div>
+    <span class="holy-relic-tips">点击+号，选择角色数据填入队伍，队伍人数不设上限</span>
     <div class="team-list__item" v-for="(item, index) in teamList" :key="index">
       <div class="team-list__item-avatar" @click="setSlotByIndex(index)">
         <template v-if="item">
@@ -170,6 +170,8 @@ const handleImagePreview = () => {
       </div>
     </div>
   </div>
+  <div class="show-click" @click="toCreateData">创建角色数据</div>
+
   <div class="data-panel">
     <DataItem v-model="store.state.teamBuffs.enemyLevel" title="敌人的等级" :stepperMin="1" />
     <DataItem v-model="store.state.teamBuffs.baseResistance" title="敌人抗性%" :stepperMin="-999">
