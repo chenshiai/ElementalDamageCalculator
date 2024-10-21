@@ -4,6 +4,7 @@ import { ICalculatorValue, ISkillRate } from "@/types/interface";
 import { calculateDamage } from "@/utils/calculate/method-calculation";
 import AtkTypeSelector from "@/component/AtkTypeSelector.vue";
 import { getColorByElement } from "@/utils/getBackGroundClassByRarity";
+import { Icon } from "vant";
 
 interface IProps {
   skill: ISkillRate[];
@@ -38,21 +39,23 @@ const calculatedResults = computed(() => {
 <template>
   <template v-if="skill.length > 0">
     <AtkTypeSelector v-model="atkType" size="small" />
-    <div class="skill-info-item">
-      <span></span>
-      <span>暴击伤害</span>
-      <span>期望伤害</span>
-      <span>一般伤害</span>
-    </div>
-    <div
-      :class="['skill-info-item', getColorByElement(item.elementType)]"
-      v-for="item of calculatedResults"
-      :key="item.label"
-    >
-      <span class="skill-info-item-label">{{ item.label }}</span>
-      <span>{{ item.crit }}</span>
-      <span>{{ item.desire }}</span>
-      <span>{{ item.common }}</span>
+    <div class="detail">
+      <div class="skill-info-item">
+        <span><Icon name="circle" /></span>
+        <span>暴击伤害</span>
+        <span>期望伤害</span>
+        <span>一般伤害</span>
+      </div>
+      <div
+        :class="['skill-info-item', getColorByElement(item.elementType)]"
+        v-for="item of calculatedResults"
+        :key="item.label"
+      >
+        <span class="skill-info-item-label">{{ item.label }}</span>
+        <span>{{ item.crit }}</span>
+        <span>{{ item.desire }}</span>
+        <span>{{ item.common }}</span>
+      </div>
     </div>
   </template>
   <template v-else>
@@ -65,10 +68,11 @@ const calculatedResults = computed(() => {
   display: grid;
   grid-template-columns: 4fr 2fr 2fr 2fr;
   text-align: left;
+  text-shadow: #000 0 0 2px;
 }
 .skill-info-item-label {
   text-align: center;
-  color: var(--main-text);
+  color:#fff;
 }
 .skill-info-empty {
   text-align: center;
