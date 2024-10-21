@@ -14,4 +14,10 @@ const vConsole = new VConsole();
 
 db.createStore(calDB.storeName, calDB.keyPath);
 
-createApp(App).use(BackTop).use(route).use(store).use(Lazyload).use(vConsole).mount("#app");
+createApp(App)
+.use(BackTop)
+.use(route)
+.use(store)
+.use(Lazyload)
+.use(vConsole)
+.mount("#app");

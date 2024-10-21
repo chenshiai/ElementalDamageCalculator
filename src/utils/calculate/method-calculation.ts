@@ -32,6 +32,13 @@ function getMoreDataBySwitch(
       critical += calculatorValue[BuffType.StrongCritcal] || 0;
       addRate += calculatorValue[BuffType.StrongRate] || 0;
       break;
+    case AttackType.FallPeriod:
+      // 应该不会有提高下坠期间伤害的技能吧
+      addHunt += calculatorValue[BuffType.FallingPrcent] || 0;
+      criticalHunt += calculatorValue[BuffType.FallingCritcalHurt] || 0;
+      critical += calculatorValue[BuffType.FallingCritcal] || 0;
+      addRate += calculatorValue[BuffType.FallingRateAdd] || 0;
+      break;
     case AttackType.Falling:
       ADDITIONAL_DMG += calculatorValue[BuffType.FallingFixed] || 0;
       addHunt += calculatorValue[BuffType.FallingPrcent] || 0;
