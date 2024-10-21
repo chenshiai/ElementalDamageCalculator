@@ -153,21 +153,19 @@ const handleImagePreview = () => {
       </div>
       <div class="team-list__item-detail">
         <template v-if="item">
-          <div class="dataname">数据名：{{ item.calculation?.title || "" }}</div>
-          <div>装备缩略图</div>
+          <div class="dataname"><Icon name="notes-o" />{{ item.calculation?.title || "" }}</div>
           <div class="team-list__item-imgs">
-            <img :src="getWeaponIcon(item.calculation.weaponEnkaId)" />
+            <img class="weapon-icon" :src="getWeaponIcon(item.calculation.weaponEnkaId)" />
             <img
               v-for="(relic, index) in getRelics(item.calculation.relicList)"
               :key="index"
               class="relic-icon"
               v-lazy="relic?.icon || ''"
+              :alt="relic ? relic.name : null"
             />
           </div>
-          <div class="team-list__item-options">
-            <div @click="edit(index)">查看<Icon name="eye-o" /></div>
-            <div @click="clear(index)">离队<Icon name="close" /></div>
-          </div>
+          <div class="team-list__item-options" @click="clear(index)">离队<Icon name="revoke" /></div>
+          <div class="team-list__item-look" @click="edit(index)">查看更多<Icon name="description" /></div>
         </template>
       </div>
     </div>

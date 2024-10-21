@@ -158,7 +158,7 @@ const subStatFilter = (selectedId: AppendProp) => {
   <div class="relic-info">
     <div class="relic-detail" v-for="(item, index) in relicList" :key="index" @click="selectRelic(index)">
       <template v-if="item">
-        <img class="relic-icon" v-lazy="item.icon"/>
+        <img class="relic-icon" v-lazy="item.icon" />
         <div class="relic-detail__hearder">
           <div :class="['relic-name', getlinearBackGroundClassByRarity(item.rankLevel - 1)]">
             {{ item.name }}
@@ -190,7 +190,7 @@ const subStatFilter = (selectedId: AppendProp) => {
     </div>
   </div>
   <!-- 圣遗物搜索 -->
-  <Popup class="relic-popup" v-model:show="showPopup" position="top" style="height: 40%" @close="closePopup">
+  <Popup class="relic-popup" v-model:show="showPopup" position="top" style="height: 46%" @close="closePopup">
     <template v-if="!setStatBase">
       <div class="relic-search">
         <span>~ {{ relicTitle }} ~</span>
@@ -198,7 +198,7 @@ const subStatFilter = (selectedId: AppendProp) => {
       </div>
       <div class="relic-select">
         <div v-for="item in filteredRelics" class="relic-select__item" @click="showSetRelicStatPop(item.equip)">
-          <img v-lazy="item.equip[0].icon"/>{{ item.name }}
+          <img v-lazy="item.equip[0].icon" />{{ item.name }}
         </div>
       </div>
     </template>

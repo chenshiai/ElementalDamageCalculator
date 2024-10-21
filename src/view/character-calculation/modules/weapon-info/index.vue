@@ -56,7 +56,7 @@ const weaponStats = computed(() => {
     <div class="weapon-describe">{{ describe.title }}：<span v-html="describe.text"></span></div>
   </template>
   <Popup teleport="#app" v-model:show="show" position="right" :style="{ width: '100%', height: '100vh' }">
-    <WeaponSelector @close="show = false" :handleChange="handleWeaponChange" />
+    <WeaponSelector @close="show = false" :defaultName="weapon?.name || ''" :handleChange="handleWeaponChange" />
   </Popup>
 </template>
 

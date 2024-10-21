@@ -35,16 +35,25 @@
 .team-list__item-imgs {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 4px;
 }
 .dataname {
   width: 80%;
   overflow: hidden;
 }
-.team-list__item-imgs img {
+.weapon-icon {
   border-radius: 4px;
-  height: 38px;
+  height: 36px;
   border: 2px solid var(--border);
 }
+.relic-icon {
+  border-radius: 100%;
+  height: 34px;
+  padding: 2px;
+  box-shadow: inset 0 0 0 2px var(--light-text);
+  border: 1px solid var(--border);
+}
+
 .team-list__item-options {
   position: absolute;
   top: 0;
@@ -52,10 +61,10 @@
   text-align: center;
   width: 60px;
 }
-.team-list__item-options span {
-  display: inline-block;
-  width: 50%;
+.team-list__item-look {
+  border-top: solid 1px var(--border);
   text-align: center;
+  width: 100%;
 }
 .team-list .empty {
   text-align: center;

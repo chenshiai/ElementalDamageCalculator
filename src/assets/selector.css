@@ -14,7 +14,8 @@
 }
 
 .pop-title__close {
-  float: right;
+  position: absolute;
+  right: 12px;
   margin-left: 12px;
   color: rgb(255, 82, 82);
 }

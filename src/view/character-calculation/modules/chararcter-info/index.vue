@@ -59,7 +59,6 @@ const constellation = defineModel("constellation", {
       @close="show = false"
       :defaultName="character?.name || ''"
       :handleChange="handleCharacterChange"
-      :maxSelect="1"
     />
   </Popup>
 </template>

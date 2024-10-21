@@ -73,9 +73,6 @@ watch(
   () => props.defaultName,
   () => {
     if (props.defaultName !== result.value) {
-      console.log("props.defaultName", props.defaultName);
-      console.log("result.value", result.value);
-      
       result.value = props.defaultName;
     }
   }
