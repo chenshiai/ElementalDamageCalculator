@@ -4,12 +4,16 @@ import { ICalculatorValue, IRate } from "@/types/interface";
 import { BaseDMG } from "@/constants/elementalReaction";
 import { getCatalyzeRate, getAmplifiedRate, getResistanceRate, getDefRate } from "@/utils";
 
-function getMoreDataBySwitch(calculatorValue: Partial<ICalculatorValue>, attackType, elementType) {
+function getMoreDataBySwitch(
+  calculatorValue: Partial<ICalculatorValue>,
+  attackType: AttackType,
+  elementType: ElementType
+) {
   let ADDITIONAL_DMG = calculatorValue[BuffType.GlobalFixed] || 0;
   let addHunt = calculatorValue[BuffType.GlobalPrcent] || 0;
   let addRate = 0;
-  let criticalHunt = calculatorValue[BuffType.CritcalHurt] + calculatorValue[BuffType.GlobalCritcalHunt] || 0;
-  let critical = calculatorValue[BuffType.Critcal] + calculatorValue[BuffType.GlobalCritcal] || 0;
+  let criticalHunt = (calculatorValue[BuffType.CritcalHurt] || 0) + (calculatorValue[BuffType.GlobalCritcalHunt] || 0);
+  let critical = (calculatorValue[BuffType.Critcal] || 0) + (calculatorValue[BuffType.GlobalCritcal] || 0);
   let resistance = 0;
 
   // 处理攻击类型的加成
@@ -188,11 +192,11 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
 
   // 激化伤害
   let BONUS_DMG = 0;
-  if (atkType === ElementalReaction.Aggravate) {
+  if (atkType === ElementalReaction.Aggravate && elementType === ElementType.Electro) {
     BONUS_DMG =
       BaseDMG.aggravate[calculatorValue.level] * (1 + (getCatalyzeRate(em) + calculatorValue.catalyzeRate) / 100);
   }
-  if (atkType === ElementalReaction.Spread) {
+  if (atkType === ElementalReaction.Spread && elementType === ElementType.Dendro) {
     BONUS_DMG =
       BaseDMG.spread[calculatorValue.level] * (1 + (getCatalyzeRate(em) + calculatorValue.catalyzeRate) / 100);
   }
@@ -203,7 +207,10 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
   let REACTION_DMG = 0;
   // 精通提升伤害
   let EVA_DMG = 0;
-  if (atkType === ElementalReaction.Rate || atkType === ElementalReaction.Rate2) {
+  if (
+    (atkType === ElementalReaction.Rate && (elementType === ElementType.Pyro || elementType === ElementType.Hydro)) ||
+    (atkType === ElementalReaction.Rate2 && (elementType === ElementType.Pyro || elementType === ElementType.Cryo))
+  ) {
     let eva =
       (getAmplifiedRate(calculatorValue.elementalMystery + calculatorValue.elementalMystery_NT) +
         calculatorValue.amplifiedRate) /
@@ -211,6 +218,7 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
     REACTION_DMG = (BASE_DMG + ADDITIONAL_DMG + MAGNIFICATION_DMG) * ReactionRate[atkType];
     EVA_DMG = (BASE_DMG + ADDITIONAL_DMG + MAGNIFICATION_DMG + REACTION_DMG) * eva;
   }
+
   // 最终伤害
   let RESULT_DMG = BASE_DMG + ADDITIONAL_DMG + BONUS_DMG + MAGNIFICATION_DMG + REACTION_DMG + EVA_DMG;
   // 暴击伤害

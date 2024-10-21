@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, watch } from "vue";
+import { computed, ref } from "vue";
 import { ICalculatorValue, ISkillRate } from "@/types/interface";
 import { calculateDamage } from "@/utils/calculate/method-calculation";
 import AtkTypeSelector from "@/component/AtkTypeSelector.vue";
@@ -11,52 +11,25 @@ interface IProps {
   level?: number;
 }
 const { skill, calculatorValue, level } = defineProps<IProps>();
-const valueRef = ref(calculatorValue);
 const atkType = ref("none");
-watch(
-  () => calculatorValue,
-  (value) => {
-    valueRef.value = value;
-  },
-  {
-    deep: true,
-    immediate: true,
-  }
-);
-
-function calculator({ rate, attackType, elementType, special }: ISkillRate, level: number = 1) {
-  let {
-    RESULT_DMG,
-    CRITICAL_DMG,
-    DEISTE_DMG,
-    elementType: newElementType,
-  } = calculateDamage({
-    calculatorValue: valueRef.value,
-    attackType,
-    elementType,
-    rate,
-    level,
-    atkType: atkType.value,
-    special,
-  });
-
-  return {
-    common: Math.round(RESULT_DMG),
-    crit: Math.round(RESULT_DMG + CRITICAL_DMG),
-    desire: Math.round(RESULT_DMG + DEISTE_DMG),
-    newElementType,
-  };
-}
 
 const calculatedResults = computed(() => {
   return skill.map((item: ISkillRate) => {
-    const { common, crit, desire, newElementType } = calculator(item, level);
+    let { RESULT_DMG, CRITICAL_DMG, DEISTE_DMG, elementType } = calculateDamage({
+      calculatorValue,
+      attackType: item.attackType,
+      elementType: item.elementType,
+      rate: item.rate,
+      level,
+      atkType: atkType.value,
+      special: item.special,
+    });
     return {
       label: item.label,
-      common,
-      crit,
-      desire,
-      elementType: newElementType,
+      common: Math.round(RESULT_DMG),
+      crit: Math.round(RESULT_DMG + CRITICAL_DMG),
+      desire: Math.round(RESULT_DMG + DEISTE_DMG),
+      elementType,
     };
   });
 });
@@ -67,9 +40,9 @@ const calculatedResults = computed(() => {
     <AtkTypeSelector v-model="atkType" size="small" />
     <div class="skill-info-item">
       <span></span>
-      <span>伤害</span>
       <span>暴击伤害</span>
       <span>期望伤害</span>
+      <span>一般伤害</span>
     </div>
     <div
       :class="['skill-info-item', getColorByElement(item.elementType)]"
@@ -77,9 +50,9 @@ const calculatedResults = computed(() => {
       :key="item.label"
     >
       <span class="skill-info-item-label">{{ item.label }}</span>
-      <span>{{ item.common }}</span>
       <span>{{ item.crit }}</span>
       <span>{{ item.desire }}</span>
+      <span>{{ item.common }}</span>
     </div>
   </template>
   <template v-else>
@@ -90,11 +63,11 @@ const calculatedResults = computed(() => {
 <style scoped>
 .skill-info-item {
   display: grid;
-  grid-template-columns: 3fr 2fr 2fr 2fr;
-  text-align: center;
+  grid-template-columns: 4fr 2fr 2fr 2fr;
+  text-align: left;
 }
 .skill-info-item-label {
-  text-align: right;
+  text-align: center;
   color: var(--main-text);
 }
 .skill-info-empty {

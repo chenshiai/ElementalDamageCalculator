@@ -33,7 +33,7 @@ export const EnchantingType = {
 };
 
 // 数字映射到 ElementType 的对象
-export const NumberToElementType = {
+export const NumberToElementType: Record<number, ElementType> = {
   0: ElementType.Physical,
   1: ElementType.Pyro,
   2: ElementType.Electro,

@@ -33,7 +33,7 @@ const recalculation = (data: IUesrSavedCalculations) => {
 
 // 悬浮球
 const showPopover = ref(false);
-const offset = ref({ x: 20, y: 560 });
+const offset = ref({ x: 20, y: 700 });
 const popoberActions = [
   { text: "保存当前角色面板", click: saveDataPop },
   { text: "查看数据", click: lookDataPop },
@@ -52,7 +52,7 @@ const onSelect = (action) => {
       placement="right"
       @select="onSelect"
     >
-      <template #reference> 更多 </template>
+      <template #reference>更多</template>
     </Popover>
   </FloatingBubble>
   <div class="save-data">

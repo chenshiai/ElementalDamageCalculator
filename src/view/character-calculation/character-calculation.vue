@@ -96,7 +96,7 @@ const pageTitle = computed(() => {
 
 <template>
   <TabTitle>{{ pageTitle }}</TabTitle>
-  <div class="tips">角色和武器的成长数据暂无，均以满级数据计算。</div>
+  <div class="tips">角色和武器的成长数据暂无，均以满级数据计算。角色、武器和圣遗物可以自由搭配，可以实现在游戏里无法达成的搭配。</div>
   <CharacterInfo v-model="characterInfo" v-model:constellation="constellation" />
   <WeaponInfo v-model="weapon" v-model:affix="affix" />
   <RelicInfo v-model="relicList" :relic-suit-texts="relicSuitTexts" />

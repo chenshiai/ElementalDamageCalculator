@@ -46,7 +46,7 @@ const deconstructionBuff = (buff: IBuffBase, panel: ICalculatorValue) => {
     stackable: buff.stackable,
     limit: buff.limit,
     target: buff.target,
-    condition: buff.condition,
+    shareCondition: buff.shareCondition,
     stackText: buff.stackText,
     shareable: buff.shareable,
     effect,
