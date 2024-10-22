@@ -83,7 +83,7 @@ export const ReliceMainStats: MainstatType[] = [
   },
   {
     mainPropId: AppendProp.HEAL_ADD,
-    statValue: 35.6,
+    statValue: 35.9,
   },
   {
     mainPropId: AppendProp.PHYSICAL_ADD_HURT,

@@ -182,7 +182,7 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
     const specialData = getMoreDataBySwitch(
       calculatorValue.specialValue[special],
       attackType,
-      elementType,
+      newElementType,
       calculatorValue.weapon
     );
     ADDITIONAL_DMG += specialData.ADDITIONAL_DMG;
@@ -194,8 +194,6 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
     newElementType = specialData.newElementType;
     defensePenetration += specialData.defensePenetration;
   }
-  console.log(calculatorValue);
-  
 
   // 基础伤害
   let BASE_DMG = 0;
@@ -249,10 +247,10 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
 
   // 最终伤害
   let RESULT_DMG = BASE_DMG + ADDITIONAL_DMG + BONUS_DMG + MAGNIFICATION_DMG + REACTION_DMG + EVA_DMG;
-  // 暴击伤害
+  // 暴击提升伤害
   let CRITICAL_DMG = RESULT_DMG * (criticalHunt / 100);
-  // 期望伤害
-  let DEISTE_DMG = CRITICAL_DMG * Math.min(1, critical / 100);
+  // 提升伤害期望
+  let DEISTE_DMG = Math.max(CRITICAL_DMG * Math.min(1, critical / 100), 0);
 
   // 抗性承伤
   const resistanceRate = getResistanceRate(resistance);
