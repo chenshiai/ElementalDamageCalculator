@@ -122,6 +122,32 @@ function getMoreDataBySwitch(
       break;
   }
 
+  // 元素附魔
+  let newElementType = elementType;
+  if (calculatorValue.enchanting !== EnchantingType.Physical) {
+    console.log(calculatorValue, attackType, elementType, calculatorValue.weapon);
+    
+  }
+  
+  if (
+    calculatorValue.enchanting !== EnchantingType.Physical &&
+    (attackType === AttackType.Normal ||
+      attackType === AttackType.Strong ||
+      attackType === AttackType.Falling ||
+      attackType === AttackType.FallPeriod) &&
+    (calculatorValue.weapon === WeaponType.Sword ||
+      calculatorValue.weapon === WeaponType.GreatSword ||
+      calculatorValue.weapon === WeaponType.Polearms)
+  ) {
+    
+    newElementType = NumberToElementType[calculatorValue.enchanting];
+  }
+
+  // 元素转化
+  if (calculatorValue.transform !== EnchantingType.Physical) {
+    newElementType = NumberToElementType[calculatorValue.transform];
+  }
+
   return {
     ADDITIONAL_DMG,
     addHunt,
@@ -129,6 +155,7 @@ function getMoreDataBySwitch(
     critical,
     resistance,
     addRate,
+    newElementType,
   };
 }
 
@@ -144,26 +171,7 @@ interface IArgs {
 }
 
 export function calculateDamage({ calculatorValue, attackType, elementType, rate, level, atkType, special }: IArgs) {
-  // 元素附魔
-  if (
-    calculatorValue.enchanting !== EnchantingType.Physical &&
-    (attackType === AttackType.Normal ||
-      attackType === AttackType.Strong ||
-      attackType === AttackType.Falling ||
-      attackType === AttackType.FallPeriod) &&
-    (calculatorValue.weapon === WeaponType.Sword ||
-      calculatorValue.weapon === WeaponType.GreatSword ||
-      calculatorValue.weapon === WeaponType.Polearms)
-  ) {
-    elementType = NumberToElementType[calculatorValue.enchanting];
-  }
-
-  // 元素转化
-  if (calculatorValue.transform !== EnchantingType.Physical) {
-    elementType = NumberToElementType[calculatorValue.transform];
-  }
-
-  let { ADDITIONAL_DMG, addHunt, criticalHunt, critical, resistance, addRate } = getMoreDataBySwitch(
+  let { ADDITIONAL_DMG, addHunt, criticalHunt, critical, resistance, addRate, newElementType } = getMoreDataBySwitch(
     calculatorValue,
     attackType,
     elementType
@@ -176,6 +184,7 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
     addHunt += specialData.addHunt;
     criticalHunt += specialData.criticalHunt;
     critical += specialData.critical;
+    newElementType = specialData.newElementType;
   }
 
   // 基础伤害
@@ -199,11 +208,11 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
 
   // 激化伤害
   let BONUS_DMG = 0;
-  if (atkType === ElementalReaction.Aggravate && elementType === ElementType.Electro) {
+  if (atkType === ElementalReaction.Aggravate && newElementType === ElementType.Electro) {
     BONUS_DMG =
       BaseDMG.aggravate[calculatorValue.level] * (1 + (getCatalyzeRate(em) + calculatorValue.catalyzeRate) / 100);
   }
-  if (atkType === ElementalReaction.Spread && elementType === ElementType.Dendro) {
+  if (atkType === ElementalReaction.Spread && newElementType === ElementType.Dendro) {
     BONUS_DMG =
       BaseDMG.spread[calculatorValue.level] * (1 + (getCatalyzeRate(em) + calculatorValue.catalyzeRate) / 100);
   }
@@ -215,8 +224,8 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
   // 精通提升伤害
   let EVA_DMG = 0;
   if (
-    (atkType === ElementalReaction.Rate && (elementType === ElementType.Pyro || elementType === ElementType.Hydro)) ||
-    (atkType === ElementalReaction.Rate2 && (elementType === ElementType.Pyro || elementType === ElementType.Cryo))
+    (atkType === ElementalReaction.Rate && (newElementType === ElementType.Pyro || newElementType === ElementType.Hydro)) ||
+    (atkType === ElementalReaction.Rate2 && (newElementType === ElementType.Pyro || newElementType === ElementType.Cryo))
   ) {
     let eva =
       (getAmplifiedRate(calculatorValue.elementalMystery + calculatorValue.elementalMystery_NT) +
@@ -257,6 +266,6 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
     RESULT_DMG: RESULT_DMG * ENEMY_RATE,
     criticalHunt,
     addHunt,
-    elementType,
+    elementType: newElementType,
   };
 }

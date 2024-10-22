@@ -136,7 +136,7 @@ const handleImagePreview = () => {
 </script>
 
 <template>
-  <TabTitle>云上辉星</TabTitle>
+  <TabTitle>云上辉星（测试版）</TabTitle>
   <div class="tips">创建、更新角色数据后需要重新入队。</div>
   <div class="team-list">
     <div class="data-panel__title">队伍编辑</div>
