@@ -61,10 +61,35 @@ function getMoreDataBySwitch(
       critical += calculatorValue[BuffType.BurstCritcal] || 0;
       addRate += calculatorValue[BuffType.BurstRate] || 0;
       break;
+    case AttackType.FallingOther:
+      // 不吃闲云天赋加成的坠地攻击
+      addHunt += calculatorValue[BuffType.FallingPrcent] || 0;
+      criticalHunt += calculatorValue[BuffType.FallingCritcalHurt] || 0;
+      critical += calculatorValue[BuffType.FallingCritcal] || 0;
+      addRate += calculatorValue[BuffType.FallingRateAdd] || 0;
+      break;
+  }
+
+  // 元素附魔
+  let newElementType = elementType;
+  if (
+    calculatorValue.enchanting !== EnchantingType.Physical &&
+    (attackType === AttackType.Normal ||
+      attackType === AttackType.Strong ||
+      attackType === AttackType.Falling ||
+      attackType === AttackType.FallPeriod) &&
+    (weapon === WeaponType.Sword || weapon === WeaponType.GreatSword || weapon === WeaponType.Polearms)
+  ) {
+    newElementType = NumberToElementType[calculatorValue.enchanting];
+  }
+
+  // 元素转化
+  if (calculatorValue.transform !== EnchantingType.Physical) {
+    newElementType = NumberToElementType[calculatorValue.transform];
   }
 
   // 处理元素类型的加成
-  switch (elementType) {
+  switch (newElementType) {
     case ElementType.Physical:
       ADDITIONAL_DMG += calculatorValue[BuffType.PhysicalFixed] || 0;
       addHunt += calculatorValue[BuffType.PhysicalPrcent] || 0;
@@ -121,28 +146,6 @@ function getMoreDataBySwitch(
       critical += calculatorValue[BuffType.CryoCritcal] || 0;
       resistance += calculatorValue[BuffType.EnemyCryoResistance] || 0;
       break;
-  }
-
-  // 元素附魔
-  let newElementType = elementType;
-  if (calculatorValue.enchanting !== EnchantingType.Physical) {
-    console.log(calculatorValue, attackType, elementType, weapon);
-  }
-
-  if (
-    calculatorValue.enchanting !== EnchantingType.Physical &&
-    (attackType === AttackType.Normal ||
-      attackType === AttackType.Strong ||
-      attackType === AttackType.Falling ||
-      attackType === AttackType.FallPeriod) &&
-    (weapon === WeaponType.Sword || weapon === WeaponType.GreatSword || weapon === WeaponType.Polearms)
-  ) {
-    newElementType = NumberToElementType[calculatorValue.enchanting];
-  }
-
-  // 元素转化
-  if (calculatorValue.transform !== EnchantingType.Physical) {
-    newElementType = NumberToElementType[calculatorValue.transform];
   }
 
   return {

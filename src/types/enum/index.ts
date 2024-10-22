@@ -1,12 +1,21 @@
 /** 攻击方式 */
 export enum AttackType {
+  /** 普通攻击类型 */
   Normal = "NormalAttack",
+  /** 重击类型 */
   Strong = "StrongAttack",
+  /** 坠地冲击类型 */
   Falling = "FallingAttack",
+  /** 下落期间类型 */
   FallPeriod = "FallPeriod",
+  /** 元素战技类型 */
   Skill = "SkillAttack",
+  /** 元素爆发类型 */
   Burst = "BurstAttack",
+  /** 其他类型 */
   Other = "OtherAttack",
+  /** 下落攻击兼其他类型 */
+  FallingOther = "FallingOther"
 }
 
 /** 元素类型 */

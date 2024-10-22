@@ -37,7 +37,6 @@ import {
 } from "./buffs";
 
 import { createCharacter, createAttack } from "@/utils/calculate/create-data-methods";
-import { buffer } from "stream/consumers";
 
 /// 用来复制粘贴的模板
 const a = {
@@ -66,37 +65,37 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     normalAttack: [
       createAttack("一段伤害", AttackType.Normal, ElementType.Physical, {
         atk: [0.45, 0.486, 0.523, 0.575, 0.612, 0.654, 0.711, 0.769, 0.826, 0.889, 0.961],
-      }, "Kazuha"),
+      }),
       createAttack("二段伤害", AttackType.Normal, ElementType.Physical, {
         atk: [0.452, 0.489, 0.526, 0.579, 0.615, 0.657, 0.715, 0.773, 0.831, 0.894, 0.966],
-      }, "Kazuha"),
+      }),
       createAttack("三段伤害·1", AttackType.Normal, ElementType.Physical, {
         atk: [0.258, 0.279, 0.3, 0.33, 0.351, 0.375, 0.408, 0.441, 0.474, 0.51, 0.551],
-      }, "Kazuha"),
+      }),
       createAttack("三段伤害·2", AttackType.Normal, ElementType.Physical, {
         atk: [0.31, 0.335, 0.36, 0.396, 0.421, 0.45, 0.49, 0.529, 0.569, 0.612, 0.661],
-      }, "Kazuha"),
+      }),
       createAttack("四段伤害", AttackType.Normal, ElementType.Physical, {
         atk: [0.607, 0.657, 0.706, 0.777, 0.826, 0.882, 0.96, 1.038, 1.116, 1.2, 1.3],
-      }, "Kazuha"),
+      }),
       createAttack("五段伤害·单段", AttackType.Normal, ElementType.Physical, {
         atk: [0.254, 0.274, 0.295, 0.325, 0.345, 0.369, 0.401, 0.433, 0.466, 0.501, 0.542],
-      }, "Kazuha"),
+      }),
       createAttack("重击伤害·1", AttackType.Strong, ElementType.Physical, {
         atk: [0.43, 0.465, 0.5, 0.55, 0.585, 0.625, 0.68, 0.735, 0.79, 0.85, 0.919],
-      }, "Kazuha"),
+      }),
       createAttack("重击伤害·2", AttackType.Strong, ElementType.Physical, {
         atk: [0.746, 0.807, 0.868, 0.955, 1.016, 1.085, 1.18, 1.276, 1.371, 1.475, 1.595],
-      }, "Kazuha"),
+      }),
       createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
         atk: [0.818, 0.885, 0.951, 1.046, 1.113, 1.189, 1.294, 1.399, 1.503, 1.618, 1.731],
-      }, "Kazuha"),
+      }),
       createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
         atk: [1.64, 1.77, 1.9, 2.09, 2.23, 2.38, 2.59, 2.8, 3.01, 3.23, 3.46],
-      }, "Kazuha"),
+      }),
       createAttack("高空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
         atk: [2.04, 2.21, 2.38, 2.61, 2.78, 2.97, 3.23, 3.49, 3.75, 4.04, 4.33],
-      }, "Kazuha"),
+      }),
     ],
     elementSkill: [
       createAttack("点按技能伤害", AttackType.Skill, ElementType.Anemo, {
@@ -127,16 +126,16 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     otherSkill: [
-      createAttack("下落攻击·乱岚拨止·水", AttackType.Falling, ElementType.Hydro, {
+      createAttack("下落攻击·乱岚拨止·水", AttackType.FallingOther, ElementType.Hydro, {
         atk: [2],
       }),
-      createAttack("下落攻击·乱岚拨止·火", AttackType.Falling, ElementType.Pyro, {
+      createAttack("下落攻击·乱岚拨止·火", AttackType.FallingOther, ElementType.Pyro, {
         atk: [2],
       }),
-      createAttack("下落攻击·乱岚拨止·冰", AttackType.Falling, ElementType.Cryo, {
+      createAttack("下落攻击·乱岚拨止·冰", AttackType.FallingOther, ElementType.Cryo, {
         atk: [2],
       }),
-      createAttack("下落攻击·乱岚拨止·雷", AttackType.Falling, ElementType.Electro, {
+      createAttack("下落攻击·乱岚拨止·雷", AttackType.FallingOther, ElementType.Electro, {
         atk: [2],
       }),
     ],
@@ -241,7 +240,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
             getValue: (data) => (data.elementalMystery + data.elementalMystery_NT) * 0.2,
             actionOn: ActionOn.Indirect,
           },
-          { type: BuffType.Enchanting, getValue: () => EnchantingType[ElementType.Anemo], special: "Kazuha" },
+          { type: BuffType.Enchanting, getValue: () => EnchantingType[ElementType.Anemo]},
         ],
         enable: false,
         condition: ({ constellation }) => constellation >= 6,
@@ -1638,7 +1637,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         describe: "黎明提供的火元素附魔持续时间延长4秒；此外，在效果持续期间，迪卢克获得20%火元素伤害加成",
         effect: [
           { type: BuffType.PyroPrcent, getValue: () => 20 },
-          { type: BuffType.Enchanting, getValue: () => EnchantingType[ElementType.Pyro] },
+          { type: BuffType.Enchanting, getValue: () => EnchantingType[ElementType.Pyro], actionOn:ActionOn.Front },
         ],
         enable: false,
       },
