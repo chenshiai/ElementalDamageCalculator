@@ -288,7 +288,7 @@ const subStatFilter = (selectedId: AppendProp) => {
   line-height: 32px;
   /* background-image: linear-gradient(to right, var(--five-rarity) 0%, rgba(0, 0, 0, 0) 70%); */
   color: var(--light-text);
-  text-shadow: 2px 2px 4px var(--button-bg);
+  text-shadow: 2px 2px 4px var(--stroke-2);
   border-radius: 4px 0 0;
   padding: 0 8px;
 }

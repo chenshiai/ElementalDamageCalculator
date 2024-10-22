@@ -347,7 +347,7 @@ const recalculation = (value) => {
 .save-btn {
   width: 45%;
   background-color: #fff;
-  border: 1px solid var(--button-bg);
+  border: 1px solid var(--stroke-2);
   text-align: center;
   line-height: 40px;
   margin-bottom: 12px;
@@ -373,7 +373,7 @@ const recalculation = (value) => {
   text-align: center;
   flex: 1;
   font-size: 20px;
-  background-color: var(--button-bg);
+  background-color: var(--stroke-2);
   color: #fff;
 }
 .empty {

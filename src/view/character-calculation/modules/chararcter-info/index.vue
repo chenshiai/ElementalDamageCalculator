@@ -103,7 +103,7 @@ const constellation = defineModel("constellation", {
 .consts-icon {
   width: 14%;
   border-radius: 50%;
-  border: var(--button-bg) 2px solid;
+  border: var(--stroke-2) 2px solid;
   background-color: var(--light-text);
   position: relative;
 }
@@ -119,11 +119,11 @@ const constellation = defineModel("constellation", {
   vertical-align: middle;
 }
 .consts-active {
-  background-color: var(--tip-text);
+  background-color: var(--stroke-1);
 }
 
 .consts-icon:has(~ .consts-icon.consts-active) {
-  background-color: var(--tip-text);
+  background-color: var(--stroke-1);
 }
 .consts-active i,
 .consts-icon:has(~ .consts-icon.consts-active) i {

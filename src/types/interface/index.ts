@@ -323,6 +323,7 @@ export interface ICalculatorValue {
   /** 无视防御 */
   [BuffType.DefensePenetration]: number;
 
+  /** 独特数据面板 */
   specialValue?: {
     [key: string]: Partial<ICalculatorValue>;
   };

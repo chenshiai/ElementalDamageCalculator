@@ -4,6 +4,7 @@
   --stroke-1: #928986;
   --stroke-2: #997874;
   --stroke-3: #645856;
+  --stroke-4: #14100f;
 
   --light-text: var(--stroke-0, #F7F1E6);
   --tip-text: var(--stroke-1, #928986);
@@ -20,14 +21,13 @@
   --four-rarity: #A17CC2;
   --five-rarity: #cc8d41;
 
-  /* --van-cell-background: var(--light-text); */
   --van-collapse-item-content-padding: 0;
   --van-collapse-item-content-background: var(--page-bg);
   --van-collapse-item-duration: 0.2s;
-  --van-slider-active-background: var(--main-text);
+  --van-slider-active-background: var(--stroke-3);
   --van-stepper-button-round-theme: var(--button-bg);
-  --van-back-top-background: var(--button-bg);
-  --van-floating-bubble-background: var(--button-bg);
+  --van-back-top-background: var(--stroke-2);
+  --van-floating-bubble-background: var(--stroke-2);
   
   --text-electro: #b380ff;
   --text-hydro: #6495ED;

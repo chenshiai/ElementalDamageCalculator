@@ -68,7 +68,7 @@ const calculatedResults = computed(() => {
   display: grid;
   grid-template-columns: 4fr 2fr 2fr 2fr;
   text-align: left;
-  text-shadow: #000 0 0 2px;
+  text-shadow: var(--stroke-4) 0 0 2px;
 }
 .skill-info-item-label {
   text-align: center;

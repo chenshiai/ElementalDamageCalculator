@@ -61,7 +61,7 @@ import Foot from "./component/Foot.vue";
 }
 
 .top-overhang {
-  background-color: var(--main-text);
+  background-color: var(--stroke-3);
   height: 40px;
   width: 100%;
   border-radius: 0 0 30px 30px;
@@ -83,7 +83,7 @@ import Foot from "./component/Foot.vue";
 .top-tabs__item {
   box-sizing: border-box;
   background-color: var(--button-bg);
-  border: 2px solid var(--tip-text);
+  border: 2px solid var(--stroke-1);
   text-align: center;
   line-height: 36px;
   height: 40px;
@@ -94,7 +94,7 @@ import Foot from "./component/Foot.vue";
 
 .router-link-active {
   background-color: #fff;
-  border-color: var(--button-bg);
+  border-color: var(--stroke-2);
   color: var(--main-text);
 }
 

@@ -240,7 +240,7 @@ onMounted(() => {
 }
 
 .data-notes {
-  border: 1px solid var(--button-bg);
+  border: 1px solid var(--stroke-2);
   border-top: none;
   flex-wrap: wrap;
   display: flex;

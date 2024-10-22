@@ -88,7 +88,7 @@ const onSelect = (action) => {
 .save-btn {
   width: 45%;
   background-color: #fff;
-  border: 1px solid var(--button-bg);
+  border: 1px solid var(--stroke-2);
   text-align: center;
   line-height: 40px;
   margin-bottom: 12px;

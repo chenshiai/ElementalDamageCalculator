@@ -100,7 +100,7 @@ const analysisList = computed(() => {
   height: 560px;
   width: 300px;
   background: #FDFBF6;
-  border: 4px solid var(--button-bg);
+  border: 4px solid var(--stroke-2);
   box-sizing: border-box;
   overflow: hidden;
 }
@@ -113,7 +113,7 @@ const analysisList = computed(() => {
 .plotting-tip {
   width: 80px;
   padding: 0 4px;
-  border: 1px solid var(--button-bg);
+  border: 1px solid var(--stroke-2);
   position: relative;
 }
 .left {
@@ -128,7 +128,7 @@ const analysisList = computed(() => {
   width: 39px;
   height: 1px;
   top: -1px;
-  background-color: var(--button-bg);
+  background-color: var(--stroke-2);
 }
 .right.top::after {
   right: 84px;

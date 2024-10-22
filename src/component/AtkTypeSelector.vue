@@ -50,7 +50,7 @@ const atkType = defineModel();
 .atk-type-none {
   height: 34px;
   border-radius: 4px;
-  border: solid 1px var(--button-bg);
+  border: solid 1px var(--stroke-2);
   font-weight: bold;
   margin-bottom: 12px;
 }

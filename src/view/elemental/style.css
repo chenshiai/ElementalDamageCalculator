@@ -7,8 +7,8 @@
   }
   
   .base-data .van-stepper--round .van-stepper__minus {
-    color: var(--button-bg);
-    border-color: var(--button-bg);
+    color: var(--stroke-2);
+    border-color: var(--stroke-2);
   }
   .base-data .van-stepper--round .van-stepper__plus {
     border: none;

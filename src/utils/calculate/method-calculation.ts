@@ -7,7 +7,8 @@ import { getCatalyzeRate, getAmplifiedRate, getResistanceRate, getDefRate } from
 function getMoreDataBySwitch(
   calculatorValue: Partial<ICalculatorValue>,
   attackType: AttackType,
-  elementType: ElementType
+  elementType: ElementType,
+  weapon: WeaponType
 ) {
   let ADDITIONAL_DMG = calculatorValue[BuffType.GlobalFixed] || 0;
   let addHunt = calculatorValue[BuffType.GlobalPrcent] || 0;
@@ -125,21 +126,17 @@ function getMoreDataBySwitch(
   // 元素附魔
   let newElementType = elementType;
   if (calculatorValue.enchanting !== EnchantingType.Physical) {
-    console.log(calculatorValue, attackType, elementType, calculatorValue.weapon);
-    
+    console.log(calculatorValue, attackType, elementType, weapon);
   }
-  
+
   if (
     calculatorValue.enchanting !== EnchantingType.Physical &&
     (attackType === AttackType.Normal ||
       attackType === AttackType.Strong ||
       attackType === AttackType.Falling ||
       attackType === AttackType.FallPeriod) &&
-    (calculatorValue.weapon === WeaponType.Sword ||
-      calculatorValue.weapon === WeaponType.GreatSword ||
-      calculatorValue.weapon === WeaponType.Polearms)
+    (weapon === WeaponType.Sword || weapon === WeaponType.GreatSword || weapon === WeaponType.Polearms)
   ) {
-    
     newElementType = NumberToElementType[calculatorValue.enchanting];
   }
 
@@ -174,16 +171,24 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
   let { ADDITIONAL_DMG, addHunt, criticalHunt, critical, resistance, addRate, newElementType } = getMoreDataBySwitch(
     calculatorValue,
     attackType,
-    elementType
+    elementType,
+    calculatorValue.weapon
   );
 
   /** 计算独特buff的加成 */
   if (special && calculatorValue.specialValue && calculatorValue.specialValue[special]) {
-    const specialData = getMoreDataBySwitch(calculatorValue.specialValue[special], attackType, elementType);
+    const specialData = getMoreDataBySwitch(
+      calculatorValue.specialValue[special],
+      attackType,
+      elementType,
+      calculatorValue.weapon
+    );
     ADDITIONAL_DMG += specialData.ADDITIONAL_DMG;
     addHunt += specialData.addHunt;
     criticalHunt += specialData.criticalHunt;
     critical += specialData.critical;
+    resistance += specialData.resistance;
+    addRate += specialData.addRate;
     newElementType = specialData.newElementType;
   }
 
@@ -224,8 +229,10 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
   // 精通提升伤害
   let EVA_DMG = 0;
   if (
-    (atkType === ElementalReaction.Rate && (newElementType === ElementType.Pyro || newElementType === ElementType.Hydro)) ||
-    (atkType === ElementalReaction.Rate2 && (newElementType === ElementType.Pyro || newElementType === ElementType.Cryo))
+    (atkType === ElementalReaction.Rate &&
+      (newElementType === ElementType.Pyro || newElementType === ElementType.Hydro)) ||
+    (atkType === ElementalReaction.Rate2 &&
+      (newElementType === ElementType.Pyro || newElementType === ElementType.Cryo))
   ) {
     let eva =
       (getAmplifiedRate(calculatorValue.elementalMystery + calculatorValue.elementalMystery_NT) +
