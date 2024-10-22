@@ -33,15 +33,17 @@ const deconstructionBuff = (buff: IBuffBase, panel: ICalculatorValue) => {
   const effect = toRaw(buff.effect).map((eff) => {
     return {
       ...eff,
-      getValue: (_, stack) => {
-        return eff.getValue(panel, stack);
+      getValue: (data, stack) => {
+        // 使用闭包，将buff提供者的面板保存下来
+        return eff.getValue(panel, stack, data);
       },
     };
   });
   return {
     label: buff.label,
     describe: buff.describe,
-    enable: buff.enable,
+    // 共享的buff默认关闭状态，以免被重复计算
+    enable: false,
     stack: buff.stack,
     stackable: buff.stackable,
     limit: buff.limit,

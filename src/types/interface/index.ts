@@ -54,6 +54,7 @@ export interface ICharacterInfo {
   baseHP: number;
   baseDEF: number;
   level: number;
+  burstCharge: number;
   icons: {
     avatarIcon: string;
     constsIcon: string[];
@@ -113,6 +114,8 @@ export interface ICalculatorValue {
   element: ElementType;
   /** 角色武器类型 */
   weapon: WeaponType;
+  /** 元素爆发能量 */
+  burstCharge: number;
   normalLevel: number;
   skillLevel: number;
   burstLevel: number;

@@ -36,11 +36,11 @@ import {
   S_80_MYSTERY_115,
 } from "./buffs";
 
-import { createCharacter, createAttack } from "@/utils/calculate/create-data-methods";
+import { cha, createAttack } from "@/utils/calculate/create-data-methods";
 
 /// 用来复制粘贴的模板
 const a = {
-  ...createCharacter(1000000, "", ElementType.Dendro, WeaponType.Polearms)(Rarity.Five, 15552, 106, 876)("", [], []),
+  ...cha(1000000, "", ElementType.Dendro, WeaponType.Polearms)(Rarity.Five, 15552, 106, 876, 40)("", [], []),
   normalAttack: [],
   elementSkill: [],
   burstSkill: [],
@@ -50,7 +50,491 @@ const a = {
 // .replaceAll("%", '').replaceAll(/[\u4e00-\u9fff]+/g, "").replaceAll("\t",",").split(",").map(i=>Math.round(i*100)/10000)
 export const Character: (ICharacterInfo & Record<any, any>)[] = [
   {
-    ...createCharacter(10000047, "枫原万叶", ElementType.Anemo, WeaponType.Sword)(Rarity.Five, 13348, 297, 807)(
+    ...cha(10000052, "雷电将军", ElementType.Electro, WeaponType.Polearms)(Rarity.Five, 12907, 337, 789, 90)(
+      "UI_AvatarIcon_Shougun",
+      [
+        "UI_Talent_S_Shougun_01",
+        "UI_Talent_S_Shougun_03",
+        "UI_Talent_U_Shougun_02",
+        "UI_Talent_S_Shougun_02",
+        "UI_Talent_U_Shougun_01",
+        "UI_Talent_S_Shougun_04",
+      ],
+      ["普通攻击·源流", "神变·恶曜开眼", "奥义·梦想真说"]
+    ),
+    normalAttack: [
+      createAttack("一段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.397, 0.429, 0.461, 0.507, 0.539, 0.576, 0.627, 0.678, 0.728, 0.784, 0.847],
+      }),
+      createAttack("二段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.397, 0.43, 0.462, 0.508, 0.541, 0.578, 0.628, 0.679, 0.73, 0.785, 0.849],
+      }),
+      createAttack("三段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.499, 0.539, 0.58, 0.638, 0.679, 0.725, 0.789, 0.853, 0.916, 0.986, 1.066],
+      }),
+      createAttack("四段伤害·1", AttackType.Normal, ElementType.Physical, {
+        atk: [0.29, 0.313, 0.337, 0.371, 0.394, 0.421, 0.458, 0.495, 0.533, 0.573, 0.619],
+      }),
+      createAttack("四段伤害·2", AttackType.Normal, ElementType.Physical, {
+        atk: [0.29, 0.313, 0.337, 0.371, 0.394, 0.421, 0.458, 0.495, 0.533, 0.573, 0.619],
+      }),
+      createAttack("五段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.655, 0.708, 0.761, 0.837, 0.89, 0.951, 1.035, 1.119, 1.202, 1.294, 1.398],
+      }),
+      createAttack("重击伤害", AttackType.Strong, ElementType.Physical, {
+        atk: [0.996, 1.077, 1.158, 1.274, 1.355, 1.448, 1.575, 1.702, 1.83, 1.969, 2.128],
+      }),
+      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
+        atk: [0.639, 0.691, 0.743, 0.818, 0.87, 0.929, 1.011, 1.093, 1.175, 1.264, 1.353],
+      }),
+      createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+        atk: [1.28, 1.38, 1.49, 1.64, 1.74, 1.86, 2.02, 2.19, 2.35, 2.53, 2.71],
+      }),
+      createAttack("高空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+        atk: [1.6, 1.73, 1.86, 2.04, 2.17, 2.32, 2.53, 2.73, 2.93, 3.16, 3.38],
+      }),
+    ],
+    elementSkill: [
+      createAttack("技能伤害", AttackType.Skill, ElementType.Electro, {
+        atk: [1.172, 1.26, 1.348, 1.465, 1.553, 1.641, 1.758, 1.875, 1.992, 2.11, 2.227, 2.344, 2.491],
+      }),
+      createAttack("协同攻击伤害", AttackType.Skill, ElementType.Electro, {
+        atk: [0.42, 0.452, 0.483, 0.525, 0.557, 0.588, 0.63, 0.672, 0.714, 0.756, 0.798, 0.84, 0.893],
+      }),
+    ],
+    burstSkill: [
+      createAttack(
+        "梦想一刀基础伤害",
+        AttackType.Burst,
+        ElementType.Electro,
+        {
+          atk: [4.01, 4.31, 4.61, 5.01, 5.31, 5.61, 6.01, 6.41, 6.81, 7.21, 7.62, 8.02, 8.52, 9.02],
+        },
+        "Shougun"
+      ),
+      createAttack(
+        "一段伤害",
+        AttackType.Burst,
+        ElementType.Electro,
+        {
+          atk: [0.447, 0.478, 0.508, 0.549, 0.58, 0.615, 0.661, 0.707, 0.752, 0.798, 0.844, 0.89, 0.935, 0.981],
+        },
+        "Shougun2"
+      ),
+      createAttack(
+        "二段伤害",
+        AttackType.Burst,
+        ElementType.Electro,
+        {
+          atk: [0.44, 0.47, 0.5, 0.54, 0.569, 0.604, 0.649, 0.694, 0.739, 0.784, 0.829, 0.874, 0.919, 0.964],
+        },
+        "Shougun2"
+      ),
+      createAttack(
+        "三段伤害",
+        AttackType.Burst,
+        ElementType.Electro,
+        {
+          atk: [0.538, 0.575, 0.612, 0.661, 0.697, 0.74, 0.795, 0.85, 0.905, 0.96, 1.015, 1.07, 1.125, 1.18],
+        },
+        "Shougun2"
+      ),
+      createAttack(
+        "四段伤害·1",
+        AttackType.Burst,
+        ElementType.Electro,
+        {
+          atk: [0.309, 0.33, 0.351, 0.379, 0.4, 0.425, 0.456, 0.488, 0.519, 0.551, 0.583, 0.614, 0.646, 0.677],
+        },
+        "Shougun2"
+      ),
+      createAttack(
+        "四段伤害·2",
+        AttackType.Burst,
+        ElementType.Electro,
+        {
+          atk: [0.31, 0.331, 0.352, 0.38, 0.401, 0.426, 0.458, 0.489, 0.521, 0.553, 0.584, 0.616, 0.648, 0.679],
+        },
+        "Shougun2"
+      ),
+      createAttack(
+        "五段伤害",
+        AttackType.Burst,
+        ElementType.Electro,
+        {
+          atk: [0.739, 0.79, 0.84, 0.908, 0.958, 1.017, 1.092, 1.168, 1.244, 1.319, 1.395, 1.471, 1.546, 1.622],
+        },
+        "Shougun2"
+      ),
+      createAttack(
+        "重击伤害·1",
+        AttackType.Burst,
+        ElementType.Electro,
+        {
+          atk: [0.616, 0.658, 0.7, 0.756, 0.798, 0.847, 0.91, 0.973, 1.036, 1.099, 1.162, 1.225, 1.288, 1.351],
+        },
+        "Shougun2"
+      ),
+      createAttack(
+        "重击伤害·2",
+        AttackType.Burst,
+        ElementType.Electro,
+        {
+          atk: [0.744, 0.794, 0.845, 0.913, 0.963, 1.023, 1.099, 1.175, 1.251, 1.327, 1.403, 1.479, 1.555, 1.631],
+        },
+        "Shougun2"
+      ),
+      createAttack(
+        "下坠期间伤害",
+        AttackType.Burst,
+        ElementType.Electro,
+        {
+          atk: [0.639, 0.691, 0.743, 0.818, 0.87, 0.929, 1.011, 1.093, 1.175, 1.264, 1.353, 1.442, 1.531, 1.621],
+        },
+        "Shougun2"
+      ),
+      createAttack(
+        "低空坠地冲击伤害",
+        AttackType.Burst,
+        ElementType.Electro,
+        {
+          atk: [1.28, 1.38, 1.49, 1.64, 1.74, 1.86, 2.02, 2.19, 2.35, 2.53, 2.71, 2.88, 3.06, 3.24],
+        },
+        "Shougun2"
+      ),
+      createAttack(
+        "高空坠地冲击伤害",
+        AttackType.Burst,
+        ElementType.Electro,
+        {
+          atk: [1.6, 1.73, 1.86, 2.04, 2.17, 2.32, 2.53, 2.73, 2.93, 3.16, 3.38, 3.6, 3.82, 4.05],
+        },
+        "Shougun2"
+      ),
+    ],
+    otherSkill: [],
+    buffs: [
+      S_80_CHARGE_32P,
+      {
+        label: "元素战技·雷罚恶曜之眼",
+        describe: "雷罚恶曜之眼的角色在持续期间内，元素爆发造成的伤害获得提升，提升程度基于元素爆发的元素能量",
+        effect: [
+          {
+            type: BuffType.BurstPrcent,
+            getValue: (data, _, receiverData) => {
+              return (
+                [0.22, 0.23, 0.24, 0.25, 0.26, 0.27, 0.28, 0.29, 0.3, 0.3, 0.3, 0.3, 0.3][
+                  data.skillLevel + data.skillLevelAdd - 1
+                ] * (receiverData?.burstCharge ? receiverData.burstCharge : data.burstCharge)
+              );
+            },
+            actionOn: ActionOn.Indirect,
+          },
+        ],
+        shareable: true,
+        target: BuffTarget.All,
+        enable: true,
+      },
+      {
+        label: "殊胜之御体",
+        describe: "基于元素充能效率超过100%的部分，每1%使雷电将军雷元素伤害加成提升0.4%",
+        effect: [
+          {
+            type: BuffType.ElectroPrcent,
+            getValue: (data) => Math.max(0, data.chargeEfficiency - 100) * 0.4,
+            actionOn: ActionOn.Indirect,
+          },
+        ],
+        enable: true,
+      },
+      {
+        label: "诸愿百眼之轮",
+        describe: "依据消耗的愿力层数，增加梦想一刀与梦想一心的攻击造成的伤害",
+        effect: [
+          {
+            type: BuffType.BurstFixed,
+            getValue: (data, s) => {
+              return (
+                [
+                  0.0389, 0.0418, 0.0447, 0.0486, 0.0515, 0.0544, 0.0583, 0.0622, 0.0661, 0.07, 0.0739, 0.0778, 0.0826,
+                  0.0875,
+                ][data.burstLevel + data.burstLevelAdd - 1] *
+                s *
+                (data.baseATK + data.extraATK + data.extraATK_NT)
+              );
+            },
+            actionOn: ActionOn.Indirect,
+            special: "Shougun",
+          },
+          {
+            type: BuffType.BurstFixed,
+            getValue: (data, s) => {
+              return (
+                [
+                  0.0073, 0.0078, 0.0084, 0.0091, 0.0096, 0.0102, 0.0109, 0.0116, 0.0123, 0.0131, 0.0138, 0.0145,
+                  0.0154, 0.0163,
+                ][data.burstLevel + data.burstLevelAdd - 1] *
+                s *
+                (data.baseATK + data.extraATK + data.extraATK_NT)
+              );
+            },
+            actionOn: ActionOn.Indirect,
+            special: "Shougun2",
+          },
+        ],
+        enable: true,
+        stack: 60,
+        limit: 60,
+        stackable: true,
+        stackText: "愿力层数",
+      },
+      {
+        label: "2命·斩铁断金",
+        describe: "奥义·梦想真说的梦想一刀与梦想一心状态期间的攻击将无视敌人60%的防御力",
+        effect: [
+          { type: BuffType.DefensePenetration, getValue: () => 60 },
+        ],
+        enable: true,
+        condition: ({ constellation }) => constellation >= 2,
+      },
+      Constellation_Q_3,
+      {
+        label: "4命·誓奉常道",
+        describe: "奥义·梦想真说施加的梦想一心状态结束后，附近的队伍中所有角色（不包括雷电将军自己）的攻击力提升30%",
+        effect: [{ type: BuffType.ATKPrcent, getValue: () => 30 }],
+        enable: true,
+        shareable: true,
+        target: BuffTarget.Other,
+        condition: ({ constellation }) => constellation >= 4,
+      },
+      Constellation_E_5,
+    ],
+  },
+  {
+    ...cha(10000049, "宵宫", ElementType.Pyro, WeaponType.Bow)(Rarity.Five, 10164, 323, 615, 60)(
+      "UI_AvatarIcon_Yoimiya",
+      [
+        "UI_Talent_S_Yoimiya_01",
+        "UI_Talent_S_Yoimiya_02",
+        "UI_Talent_U_Yoimiya_01",
+        "UI_Talent_S_Yoimiya_03",
+        "UI_Talent_U_Yoimiya_02",
+        "UI_Talent_S_Yoimiya_04",
+      ],
+      ["普通攻击·烟火打扬", "焰硝庭火舞", "琉金云间草"]
+    ),
+    normalAttack: [
+      createAttack("一段伤害·1", AttackType.Normal, ElementType.Physical, {
+        atk: [0.356, 0.381, 0.405, 0.437, 0.462, 0.49, 0.527, 0.563, 0.599, 0.636, 0.672],
+      }),
+      createAttack("一段伤害·2", AttackType.Normal, ElementType.Physical, {
+        atk: [0.356, 0.381, 0.405, 0.437, 0.462, 0.49, 0.527, 0.563, 0.599, 0.636, 0.672],
+      }),
+      createAttack("二段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.684, 0.73, 0.777, 0.839, 0.886, 0.94, 1.01, 1.08, 1.15, 1.22, 1.29],
+      }),
+      createAttack("三段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.889, 0.95, 1.01, 1.091, 1.154, 1.222, 1.313, 1.404, 1.495, 1.586, 1.677],
+      }),
+      createAttack("四段伤害·1", AttackType.Normal, ElementType.Physical, {
+        atk: [0.464, 0.496, 0.528, 0.57, 0.601, 0.638, 0.686, 0.733, 0.781, 0.828, 0.876],
+      }),
+      createAttack("四段伤害·2", AttackType.Normal, ElementType.Physical, {
+        atk: [0.464, 0.496, 0.528, 0.57, 0.601, 0.638, 0.686, 0.733, 0.781, 0.828, 0.876],
+      }),
+      createAttack("五段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [1.059, 1.131, 1.203, 1.299, 1.371, 1.456, 1.564, 1.672, 1.78, 1.889, 1.997],
+      }),
+      createAttack("瞄准射击", AttackType.Strong, ElementType.Physical, {
+        atk: [0.439, 0.474, 0.51, 0.561, 0.597, 0.638, 0.694, 0.75, 0.806, 0.867, 0.928],
+      }),
+      createAttack("满蓄力瞄准射击", AttackType.Strong, ElementType.Pyro, {
+        atk: [1.24, 1.33, 1.43, 1.55, 1.64, 1.74, 1.86, 1.98, 2.11, 2.23, 2.36],
+      }),
+      createAttack("焰硝矢伤害", AttackType.Strong, ElementType.Pyro, {
+        atk: [0.16, 0.18, 0.19, 0.21, 0.22, 0.23, 0.25, 0.26, 0.28, 0.3, 0.31],
+      }),
+      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
+        atk: [0.568, 0.615, 0.661, 0.727, 0.773, 0.826, 0.899, 0.971, 1.04, 1.12, 1.2],
+      }),
+      createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+        atk: [1.14, 1.23, 1.32, 1.45, 1.55, 1.65, 1.8, 1.94, 2.09, 2.25, 2.4],
+      }),
+      createAttack("高空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+        atk: [1.42, 1.53, 1.65, 1.82, 1.93, 2.06, 2.24, 2.43, 2.61, 2.81, 3],
+      }),
+    ],
+    elementSkill: [],
+    burstSkill: [
+      createAttack("技能伤害", AttackType.Burst, ElementType.Pyro, {
+        atk: [1.27, 1.38, 1.46, 1.59, 1.69, 1.78, 1.91, 2.04, 2.16, 2.29, 2.42, 2.54, 2.7],
+      }),
+      createAttack("琉金火光爆炸伤害", AttackType.Burst, ElementType.Pyro, {
+        atk: [1.22, 1.31, 1.4, 1.53, 1.62, 1.71, 1.83, 1.95, 2.07, 2.2, 2.32, 2.44, 2.59],
+      }),
+    ],
+    otherSkill: [],
+    buffs: [
+      S_80_CRITAL_19P,
+      {
+        label: "元素战技·焰硝庭火舞",
+        describe: "将宵宫的普通攻击发射的箭矢转为炽焰箭，造成的伤害转为火元素伤害，并提高普通攻击造成的伤害",
+        effect: [
+          { type: BuffType.Transform, getValue: () => EnchantingType[ElementType.Pyro] },
+          {
+            type: BuffType.NormalRate,
+            getValue: (data) => {
+              return [37.9, 40.2, 42.5, 45.4, 47.7, 49.9, 52.9, 55.8, 58.8, 61.7, 64.7, 67.7, 70.6][
+                data.skillLevel + data.skillLevelAdd - 1
+              ];
+            },
+          },
+        ],
+        enable: true,
+      },
+      {
+        label: "袖火百景图",
+        describe: "在焰硝庭火舞的持续期间内，宵宫的普通攻击命中后，将为宵宫提供2%火元素伤害加成。至多叠加10次",
+        effect: [{ type: BuffType.PyroPrcent, getValue: (_, s) => s * 2 }],
+        enable: true,
+        stackable: true,
+        stack: 10,
+        limit: 10,
+      },
+      {
+        label: "炎昼风物诗",
+        describe:
+          "施放琉金云间草后，附近的队伍中所有其它角色（不包括宵宫自己）攻击力提高10%。此外，依据宵宫自己施放琉金云间草时固有天赋「袖火百景图」的叠加层数，将额外提升上述的攻击力效果，每层提升1%攻击力",
+        effect: [{ type: BuffType.ATKPrcent, getValue: (_, s) => 10 + s }],
+        enable: false,
+        shareable: true,
+        stackable: true,
+        stack: 10,
+        limit: 10,
+        stackText: "「袖火百景图」",
+        target: BuffTarget.Other,
+      },
+      {
+        label: "1命·赤玉琉金",
+        describe: "琉金火光影响下的敌人在持续期间内被击败时，宵宫的攻击力提高20%",
+        effect: [{ type: BuffType.ATKPrcent, getValue: () => 20 }],
+        enable: false,
+        condition: ({ constellation }) => constellation >= 1,
+      },
+      {
+        label: "2命·万灯送火",
+        describe: "宵宫的火元素伤害造成暴击后的6秒内，宵宫获得25%火元素伤害加成",
+        effect: [{ type: BuffType.PyroPrcent, getValue: () => 25 }],
+        enable: false,
+        condition: ({ constellation }) => constellation >= 2,
+      },
+      Constellation_E_3,
+      Constellation_Q_5,
+    ],
+  },
+  {
+    ...cha(10000002, "神里绫华", ElementType.Cryo, WeaponType.Sword)(Rarity.Five, 12858, 342, 784, 80)(
+      "UI_AvatarIcon_Ayaka",
+      [
+        "UI_Talent_S_Ayaka_01",
+        "UI_Talent_S_Ayaka_02",
+        "UI_Talent_U_Ayaka_02",
+        "UI_Talent_S_Ayaka_03",
+        "UI_Talent_U_Ayaka_01",
+        "UI_Talent_S_Ayaka_04",
+      ],
+      ["普通攻击·神里流·倾", "神里流·冰华", "神里流·霜灭"]
+    ),
+    normalAttack: [
+      createAttack("一段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.457, 0.494, 0.532, 0.585, 0.622, 0.665, 0.723, 0.781, 0.84, 0.904, 0.968],
+      }),
+      createAttack("二段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.487, 0.526, 0.566, 0.623, 0.662, 0.708, 0.77, 0.832, 0.894, 0.962, 1.03],
+      }),
+      createAttack("三段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.626, 0.677, 0.728, 0.801, 0.852, 0.91, 0.99, 1.07, 1.15, 1.238, 1.325],
+      }),
+      createAttack("四段伤害·单次", AttackType.Normal, ElementType.Physical, {
+        atk: [0.226, 0.245, 0.263, 0.29, 0.308, 0.329, 0.358, 0.387, 0.416, 0.448, 0.479],
+      }),
+      createAttack("五段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.782, 0.845, 0.909, 1, 1.064, 1.136, 1.236, 1.336, 1.436, 1.545, 1.655],
+      }),
+      createAttack("重击伤害·单次", AttackType.Strong, ElementType.Physical, {
+        atk: [0.551, 0.596, 0.641, 0.705, 0.75, 0.801, 0.872, 0.942, 1.013, 1.09, 1.167],
+      }),
+      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
+        atk: [0.639, 0.691, 0.743, 0.818, 0.87, 0.929, 1.011, 1.093, 1.175, 1.264, 1.353],
+      }),
+      createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+        atk: [1.28, 1.38, 1.49, 1.64, 1.74, 1.86, 2.02, 2.19, 2.35, 2.53, 2.71],
+      }),
+      createAttack("高空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+        atk: [1.6, 1.73, 1.86, 2.04, 2.17, 2.32, 2.53, 2.73, 2.93, 3.16, 3.38],
+      }),
+    ],
+    elementSkill: [
+      createAttack("技能伤害", AttackType.Skill, ElementType.Cryo, {
+        atk: [2.392, 2.571, 2.751, 2.99, 3.169, 3.349, 3.588, 3.827, 4.066, 4.305, 4.545, 4.784, 5.083],
+      }),
+    ],
+    burstSkill: [
+      createAttack("切割伤害", AttackType.Burst, ElementType.Cryo, {
+        atk: [1.123, 1.207, 1.291, 1.404, 1.488, 1.572, 1.684, 1.797, 1.909, 2.021, 2.134, 2.246, 2.386],
+      }),
+      createAttack("绽放伤害", AttackType.Burst, ElementType.Cryo, {
+        atk: [1.684, 1.81, 1.937, 2.106, 2.232, 2.358, 2.527, 2.695, 2.864, 3.032, 3.2, 3.369, 3.58],
+      }),
+      createAttack("2命·霜见雪关扉", AttackType.Burst, ElementType.Cryo, {
+        atk: [1.123, 1.207, 1.291, 1.404, 1.488, 1.572, 1.684, 1.797, 1.909, 2.021, 2.134, 2.246, 2.386].map(
+          (i) => i * 0.2
+        ),
+      }),
+    ],
+    otherSkill: [],
+    buffs: [
+      S_80_CRITALHUNT_38P,
+      {
+        label: "神里流·霰步",
+        describe: "结束霰步现身时，使神里绫华在短时间内获得冰元素附魔；获得18%冰元素伤害加成",
+        effect: [
+          { type: BuffType.Enchanting, getValue: () => EnchantingType[ElementType.Cryo], actionOn: ActionOn.Front },
+          { type: BuffType.CryoPrcent, getValue: () => 18 },
+        ],
+        enable: true,
+      },
+      {
+        label: "天罪国罪镇词",
+        describe: "施放神里流·冰华后，神里绫华的普通攻击与重击造成的伤害提升30%",
+        effect: [
+          { type: BuffType.NormalPrcent, getValue: () => 30 },
+          { type: BuffType.StrongPrcent, getValue: () => 30 },
+        ],
+        enable: false,
+      },
+      Constellation_Q_3,
+      {
+        label: "4命·盈缺流返",
+        describe: "敌人受到神里流·霜灭的霜见雪关扉造成的伤害后，防御力降低30%",
+        effect: [{ type: BuffType.ReduceArmour, getValue: () => -30 }],
+        enable: true,
+        shareable: true,
+        target: BuffTarget.Enemy,
+        condition: ({ constellation }) => constellation >= 4,
+      },
+      Constellation_E_5,
+      {
+        label: "6命·间水月",
+        describe: "每过10秒，神里绫华会获得「薄冰舞踏」，使重击造成的伤害提高298%",
+        effect: [{ type: BuffType.StrongPrcent, getValue: () => 298 }],
+        enable: true,
+        condition: ({ constellation }) => constellation >= 6,
+      },
+    ],
+  },
+  {
+    ...cha(10000047, "枫原万叶", ElementType.Anemo, WeaponType.Sword)(Rarity.Five, 13348, 297, 807, 60)(
       "UI_AvatarIcon_Kazuha",
       [
         "UI_Talent_S_Kazuha_01",
@@ -240,7 +724,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
             getValue: (data) => (data.elementalMystery + data.elementalMystery_NT) * 0.2,
             actionOn: ActionOn.Indirect,
           },
-          { type: BuffType.Enchanting, getValue: () => EnchantingType[ElementType.Anemo]},
+          { type: BuffType.Enchanting, getValue: () => EnchantingType[ElementType.Anemo] },
         ],
         enable: false,
         condition: ({ constellation }) => constellation >= 6,
@@ -248,7 +732,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000051, "优菈", ElementType.Cryo, WeaponType.GreatSword)(Rarity.Five, 13226, 342, 751)(
+    ...cha(10000051, "优菈", ElementType.Cryo, WeaponType.GreatSword)(Rarity.Five, 13226, 342, 751, 80)(
       "UI_AvatarIcon_Eula",
       [
         "UI_Talent_S_Eula_02",
@@ -405,7 +889,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000046, "胡桃", ElementType.Pyro, WeaponType.Polearms)(Rarity.Five, 15552, 106, 876)(
+    ...cha(10000046, "胡桃", ElementType.Pyro, WeaponType.Polearms)(Rarity.Five, 15552, 106, 876, 60)(
       "UI_AvatarIcon_Hutao",
       [
         "UI_Talent_S_Hutao_03",
@@ -535,7 +1019,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000026, "魈", ElementType.Anemo, WeaponType.Polearms)(Rarity.Five, 12736, 349, 799)(
+    ...cha(10000026, "魈", ElementType.Anemo, WeaponType.Polearms)(Rarity.Five, 12736, 349, 799, 70)(
       "UI_AvatarIcon_Xiao",
       [
         "UI_Talent_S_Xiao_01",
@@ -648,7 +1132,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000037, "甘雨", ElementType.Cryo, WeaponType.Bow)(Rarity.Five, 9797, 335, 630)(
+    ...cha(10000037, "甘雨", ElementType.Cryo, WeaponType.Bow)(Rarity.Five, 9797, 335, 630, 60)(
       "UI_AvatarIcon_Ganyu",
       [
         "UI_Talent_S_Ganyu_01",
@@ -764,7 +1248,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000038, "阿贝多", ElementType.Geo, WeaponType.Sword)(Rarity.Five, 13226, 251, 876)(
+    ...cha(10000038, "阿贝多", ElementType.Geo, WeaponType.Sword)(Rarity.Five, 13226, 251, 876, 40)(
       "UI_AvatarIcon_Albedo",
       [
         "UI_Talent_S_Albedo_01",
@@ -887,7 +1371,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000030, "钟离", ElementType.Geo, WeaponType.Polearms)(Rarity.Five, 14695, 251, 738)(
+    ...cha(10000030, "钟离", ElementType.Geo, WeaponType.Polearms)(Rarity.Five, 14695, 251, 738, 40)(
       "UI_AvatarIcon_Zhongli",
       [
         "UI_Talent_S_Zhongli_01",
@@ -1016,7 +1500,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000033, "达达利亚", ElementType.Hydro, WeaponType.Bow)(Rarity.Five, 13103, 301, 815)(
+    ...cha(10000033, "达达利亚", ElementType.Hydro, WeaponType.Bow)(Rarity.Five, 13103, 301, 815, 60)(
       "UI_AvatarIcon_Tartaglia",
       [
         "UI_Talent_S_Tartaglia_01",
@@ -1130,7 +1614,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000029, "可莉", ElementType.Pyro, WeaponType.Magic)(Rarity.Five, 10287, 311, 615)(
+    ...cha(10000029, "可莉", ElementType.Pyro, WeaponType.Magic)(Rarity.Five, 10287, 311, 615, 60)(
       "UI_AvatarIcon_Klee",
       [
         "UI_Talent_S_Klee_01",
@@ -1213,7 +1697,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000022, "温迪", ElementType.Anemo, WeaponType.Bow)(Rarity.Five, 10531, 263, 669)(
+    ...cha(10000022, "温迪", ElementType.Anemo, WeaponType.Bow)(Rarity.Five, 10531, 263, 669, 60)(
       "UI_AvatarIcon_Venti",
       [
         "UI_Talent_S_Venti_01",
@@ -1362,7 +1846,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000003, "琴", ElementType.Anemo, WeaponType.Sword)(Rarity.Five, 14695, 239, 769)(
+    ...cha(10000003, "琴", ElementType.Anemo, WeaponType.Sword)(Rarity.Five, 14695, 239, 769, 80)(
       "UI_AvatarIcon_Qin",
       [
         "UI_Talent_S_Qin_01",
@@ -1440,7 +1924,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000042, "刻晴", ElementType.Electro, WeaponType.Sword)(Rarity.Five, 13103, 323, 799)(
+    ...cha(10000042, "刻晴", ElementType.Electro, WeaponType.Sword)(Rarity.Five, 13103, 323, 799, 40)(
       "UI_AvatarIcon_Keqing",
       [
         "UI_Talent_S_Keqing_01",
@@ -1554,7 +2038,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000016, "迪卢克", ElementType.Pyro, WeaponType.GreatSword)(Rarity.Five, 12981, 335, 784)(
+    ...cha(10000016, "迪卢克", ElementType.Pyro, WeaponType.GreatSword)(Rarity.Five, 12981, 335, 784, 40)(
       "UI_AvatarIcon_Diluc",
       [
         "UI_Talent_S_Diluc_01",
@@ -1637,7 +2121,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         describe: "黎明提供的火元素附魔持续时间延长4秒；此外，在效果持续期间，迪卢克获得20%火元素伤害加成",
         effect: [
           { type: BuffType.PyroPrcent, getValue: () => 20 },
-          { type: BuffType.Enchanting, getValue: () => EnchantingType[ElementType.Pyro], actionOn:ActionOn.Front },
+          { type: BuffType.Enchanting, getValue: () => EnchantingType[ElementType.Pyro], actionOn: ActionOn.Front },
         ],
         enable: false,
       },
@@ -1677,7 +2161,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000041, "莫娜", ElementType.Hydro, WeaponType.Magic)(Rarity.Five, 10409, 287, 653)(
+    ...cha(10000041, "莫娜", ElementType.Hydro, WeaponType.Magic)(Rarity.Five, 10409, 287, 653, 60)(
       "UI_AvatarIcon_Mona",
       [
         "UI_Talent_S_Mona_01",
@@ -1785,7 +2269,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000035, "七七", ElementType.Cryo, WeaponType.Sword)(Rarity.Five, 12368, 287, 922)(
+    ...cha(10000035, "七七", ElementType.Cryo, WeaponType.Sword)(Rarity.Five, 12368, 287, 922, 80)(
       "UI_AvatarIcon_Qiqi",
       [
         "UI_Talent_S_Qiqi_01",
@@ -1874,7 +2358,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000100, "卡齐娜", ElementType.Geo, WeaponType.Polearms)(Rarity.Four, 11799, 217, 792)(
+    ...cha(10000100, "卡齐娜", ElementType.Geo, WeaponType.Polearms)(Rarity.Four, 11799, 217, 792, 70)(
       "UI_AvatarIcon_Kachina",
       [
         "UI_Talent_S_Kachina_01",
@@ -1971,7 +2455,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000097, "赛索斯", ElementType.Electro, WeaponType.Bow)(Rarity.Four, 9787, 227, 560)(
+    ...cha(10000097, "赛索斯", ElementType.Electro, WeaponType.Bow)(Rarity.Four, 9787, 227, 560, 60)(
       "UI_AvatarIcon_Sethos",
       [
         "UI_Talent_S_Sethos_01",
@@ -2079,7 +2563,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000092, "嘉明", ElementType.Pyro, WeaponType.GreatSword)(Rarity.Four, 11419, 302, 703)(
+    ...cha(10000092, "嘉明", ElementType.Pyro, WeaponType.GreatSword)(Rarity.Four, 11419, 302, 703, 60)(
       "UI_AvatarIcon_Gaming",
       [
         "UI_Talent_S_Gaming_01",
@@ -2167,7 +2651,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000090, "夏沃蕾", ElementType.Pyro, WeaponType.Polearms)(Rarity.Four, 11962, 193, 605)(
+    ...cha(10000090, "夏沃蕾", ElementType.Pyro, WeaponType.Polearms)(Rarity.Four, 11962, 193, 605, 60)(
       "UI_AvatarIcon_Chevreuse",
       [
         "UI_Talent_S_Chevreuse_01",
@@ -2288,7 +2772,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000088, "夏洛蒂", ElementType.Cryo, WeaponType.Magic)(Rarity.Four, 10766, 173, 546)(
+    ...cha(10000088, "夏洛蒂", ElementType.Cryo, WeaponType.Magic)(Rarity.Four, 10766, 173, 546, 80)(
       "UI_AvatarIcon_Charlotte",
       [
         "UI_Talent_S_Charlotte_01",
@@ -2391,7 +2875,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000085, "菲米尼", ElementType.Cryo, WeaponType.GreatSword)(Rarity.Four, 12070, 255, 708)(
+    ...cha(10000085, "菲米尼", ElementType.Cryo, WeaponType.GreatSword)(Rarity.Four, 12070, 255, 708, 60)(
       "UI_AvatarIcon_Freminet",
       [
         "UI_Talent_S_Freminet_01",
@@ -2561,7 +3045,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000083, "琳妮特", ElementType.Anemo, WeaponType.Sword)(Rarity.Four, 12397, 232, 712)(
+    ...cha(10000083, "琳妮特", ElementType.Anemo, WeaponType.Sword)(Rarity.Four, 12397, 232, 712, 70)(
       "UI_AvatarIcon_Linette",
       [
         "UI_Talent_S_Linette_01",
@@ -2670,7 +3154,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000061, "绮良良", ElementType.Dendro, WeaponType.Sword)(Rarity.Four, 12180, 223, 546)(
+    ...cha(10000061, "绮良良", ElementType.Dendro, WeaponType.Sword)(Rarity.Four, 12180, 223, 546, 60)(
       "UI_AvatarIcon_Momoka",
       [
         "UI_Talent_S_Momoka_01",
@@ -2780,7 +3264,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000081, "卡维", ElementType.Dendro, WeaponType.GreatSword)(Rarity.Four, 11962, 234, 751)(
+    ...cha(10000081, "卡维", ElementType.Dendro, WeaponType.GreatSword)(Rarity.Four, 11962, 234, 751, 80)(
       "UI_AvatarIcon_Kaveh",
       [
         "UI_Talent_S_Kaveh_01",
@@ -2858,7 +3342,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000080, "米卡", ElementType.Cryo, WeaponType.Polearms)(Rarity.Four, 12506, 223, 713)(
+    ...cha(10000080, "米卡", ElementType.Cryo, WeaponType.Polearms)(Rarity.Four, 12506, 223, 713, 70)(
       "UI_AvatarIcon_Mika",
       [
         "UI_Talent_S_Mika_01",
@@ -2944,7 +3428,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000077, "瑶瑶", ElementType.Dendro, WeaponType.Polearms)(Rarity.Four, 12289, 212, 751)(
+    ...cha(10000077, "瑶瑶", ElementType.Dendro, WeaponType.Polearms)(Rarity.Four, 12289, 212, 751, 80)(
       "UI_AvatarIcon_Yaoyao",
       [
         "UI_Talent_S_Yaoyao_01",
@@ -3033,7 +3517,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000076, "珐露珊", ElementType.Anemo, WeaponType.Bow)(Rarity.Four, 9570, 196, 628)(
+    ...cha(10000076, "珐露珊", ElementType.Anemo, WeaponType.Bow)(Rarity.Four, 9570, 196, 628, 80)(
       "UI_AvatarIcon_Faruzan",
       [
         "UI_Talent_S_Faruzan_01",
@@ -3131,7 +3615,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000074, "莱依拉", ElementType.Cryo, WeaponType.Sword)(Rarity.Four, 11092, 217, 655)(
+    ...cha(10000074, "莱依拉", ElementType.Cryo, WeaponType.Sword)(Rarity.Four, 11092, 217, 655, 40)(
       "UI_AvatarIcon_Layla",
       [
         "UI_Talent_S_Layla_01",
@@ -3258,7 +3742,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000072, "坎蒂丝", ElementType.Hydro, WeaponType.Polearms)(Rarity.Four, 10875, 212, 683)(
+    ...cha(10000072, "坎蒂丝", ElementType.Hydro, WeaponType.Polearms)(Rarity.Four, 10875, 212, 683, 60)(
       "UI_AvatarIcon_Candace",
       [
         "UI_Talent_S_Candace_01",
@@ -3352,7 +3836,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000068, "多莉", ElementType.Electro, WeaponType.GreatSword)(Rarity.Four, 12397, 223, 723)(
+    ...cha(10000068, "多莉", ElementType.Electro, WeaponType.GreatSword)(Rarity.Four, 12397, 223, 723, 80)(
       "UI_AvatarIcon_Dori",
       [
         "UI_Talent_S_Dori_01",
@@ -3434,7 +3918,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000067, "柯莱", ElementType.Dendro, WeaponType.Bow)(Rarity.Four, 13568, 335, 730)(
+    ...cha(10000067, "柯莱", ElementType.Dendro, WeaponType.Bow)(Rarity.Four, 13568, 335, 730, 60)(
       "UI_AvatarIcon_Collei",
       [
         "UI_Talent_S_Collei_01",
@@ -3510,7 +3994,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000059, "鹿野院平藏", ElementType.Anemo, WeaponType.Magic)(Rarity.Four, 10657, 225, 684)(
+    ...cha(10000059, "鹿野院平藏", ElementType.Anemo, WeaponType.Magic)(Rarity.Four, 10657, 225, 684, 40)(
       "UI_AvatarIcon_Heizo",
       [
         "UI_Talent_S_Heizo_01",
@@ -3678,7 +4162,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000065, "久岐忍", ElementType.Electro, WeaponType.Sword)(Rarity.Four, 12289, 212, 751)(
+    ...cha(10000065, "久岐忍", ElementType.Electro, WeaponType.Sword)(Rarity.Four, 12289, 212, 751, 60)(
       "UI_AvatarIcon_Shinobu",
       [
         "UI_Talent_S_Shinobu_01",
@@ -3756,7 +4240,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000064, "云堇", ElementType.Geo, WeaponType.Polearms)(Rarity.Four, 10657, 191, 734)(
+    ...cha(10000064, "云堇", ElementType.Geo, WeaponType.Polearms)(Rarity.Four, 10657, 191, 734, 60)(
       "UI_AvatarIcon_Yunjin",
       [
         "UI_Talent_S_Yunjin_01",
@@ -3865,7 +4349,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000055, "五郎", ElementType.Geo, WeaponType.Bow)(Rarity.Four, 9570, 183, 648)(
+    ...cha(10000055, "五郎", ElementType.Geo, WeaponType.Bow)(Rarity.Four, 9570, 183, 648, 80)(
       "UI_AvatarIcon_Gorou",
       [
         "UI_Talent_S_Gorou_01",
@@ -4009,7 +4493,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000050, "托马", ElementType.Pyro, WeaponType.Polearms)(Rarity.Four, 10331, 202, 751)(
+    ...cha(10000050, "托马", ElementType.Pyro, WeaponType.Polearms)(Rarity.Four, 10331, 202, 751, 80)(
       "UI_AvatarIcon_Tohma",
       [
         "UI_Talent_S_Tohma_01",
@@ -4113,7 +4597,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000056, "九条裟罗", ElementType.Electro, WeaponType.Bow)(Rarity.Four, 9570, 195, 628)(
+    ...cha(10000056, "九条裟罗", ElementType.Electro, WeaponType.Bow)(Rarity.Four, 9570, 195, 628, 80)(
       "UI_AvatarIcon_Sara",
       [
         "UI_Talent_S_Sara_05",
@@ -4216,7 +4700,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000053, "早柚", ElementType.Anemo, WeaponType.GreatSword)(Rarity.Four, 11854, 244, 745)(
+    ...cha(10000053, "早柚", ElementType.Anemo, WeaponType.GreatSword)(Rarity.Four, 11854, 244, 745, 80)(
       "UI_AvatarIcon_Sayu",
       [
         "UI_Talent_S_Sayu_01",
@@ -4376,7 +4860,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000048, "烟绯", ElementType.Pyro, WeaponType.Magic)(Rarity.Four, 9352, 240, 587)(
+    ...cha(10000048, "烟绯", ElementType.Pyro, WeaponType.Magic)(Rarity.Four, 9352, 240, 587, 80)(
       "UI_AvatarIcon_Feiyan",
       [
         "UI_Talent_S_Feiyan_01",
@@ -4462,7 +4946,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000045, "罗莎莉亚", ElementType.Cryo, WeaponType.Polearms)(Rarity.Four, 12289, 240, 710)(
+    ...cha(10000045, "罗莎莉亚", ElementType.Cryo, WeaponType.Polearms)(Rarity.Four, 12289, 240, 710, 60)(
       "UI_AvatarIcon_Rosaria",
       [
         "UI_Talent_S_Rosaria_01",
@@ -4574,7 +5058,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000044, "辛焱", ElementType.Pyro, WeaponType.GreatSword)(Rarity.Four, 11201, 249, 799)(
+    ...cha(10000044, "辛焱", ElementType.Pyro, WeaponType.GreatSword)(Rarity.Four, 11201, 249, 799, 60)(
       "UI_AvatarIcon_Xinyan",
       [
         "UI_Talent_S_Xinyan_01",
@@ -4683,7 +5167,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000039, "迪奥娜", ElementType.Cryo, WeaponType.Bow)(Rarity.Four, 9570, 212, 601)(
+    ...cha(10000039, "迪奥娜", ElementType.Cryo, WeaponType.Bow)(Rarity.Four, 9570, 212, 601, 80)(
       "UI_AvatarIcon_Diona",
       [
         "UI_Talent_S_Diona_01",
@@ -4764,7 +5248,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000043, "砂糖", ElementType.Anemo, WeaponType.Magic)(Rarity.Four, 9244, 170, 703)(
+    ...cha(10000043, "砂糖", ElementType.Anemo, WeaponType.Magic)(Rarity.Four, 9244, 170, 703, 80)(
       "UI_AvatarIcon_Sucrose",
       [
         "UI_Talent_S_Sucrose_01",
@@ -4889,7 +5373,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000031, "菲谢尔", ElementType.Electro, WeaponType.Bow)(Rarity.Four, 9189, 244, 594)(
+    ...cha(10000031, "菲谢尔", ElementType.Electro, WeaponType.Bow)(Rarity.Four, 9189, 244, 594, 60)(
       "UI_AvatarIcon_Fischl",
       [
         "UI_Talent_S_Fischl_01",
@@ -4979,7 +5463,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000006, "丽莎", ElementType.Electro, WeaponType.Magic)(Rarity.Four, 9570, 232, 573)(
+    ...cha(10000006, "丽莎", ElementType.Electro, WeaponType.Magic)(Rarity.Four, 9570, 232, 573, 80)(
       "UI_AvatarIcon_Lisa",
       [
         "UI_Talent_S_Lisa_01",
@@ -5055,7 +5539,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000020, "雷泽", ElementType.Electro, WeaponType.GreatSword)(Rarity.Four, 11962, 234, 751)(
+    ...cha(10000020, "雷泽", ElementType.Electro, WeaponType.GreatSword)(Rarity.Four, 11962, 234, 751, 80)(
       "UI_AvatarIcon_Razor",
       [
         "UI_Talent_S_Razor_01",
@@ -5188,7 +5672,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000024, "北斗", ElementType.Electro, WeaponType.GreatSword)(Rarity.Four, 13050, 225, 648)(
+    ...cha(10000024, "北斗", ElementType.Electro, WeaponType.GreatSword)(Rarity.Four, 13050, 225, 648, 80)(
       "UI_AvatarIcon_Beidou",
       [
         "UI_Talent_S_Beidou_02",
@@ -5296,7 +5780,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000023, "香菱", ElementType.Pyro, WeaponType.Polearms)(Rarity.Four, 10875, 225, 669)(
+    ...cha(10000023, "香菱", ElementType.Pyro, WeaponType.Polearms)(Rarity.Four, 10875, 225, 669, 80)(
       "UI_AvatarIcon_Xiangling",
       [
         "UI_Talent_S_Xiangling_01",
@@ -5397,7 +5881,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000021, "安柏", ElementType.Pyro, WeaponType.Bow)(Rarity.Four, 9461, 223, 601)(
+    ...cha(10000021, "安柏", ElementType.Pyro, WeaponType.Bow)(Rarity.Four, 9461, 223, 601, 40)(
       "UI_AvatarIcon_Ambor",
       [
         "UI_Talent_S_Ambor_01",
@@ -5500,7 +5984,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000032, "班尼特", ElementType.Pyro, WeaponType.Sword)(Rarity.Four, 12397, 191, 771)(
+    ...cha(10000032, "班尼特", ElementType.Pyro, WeaponType.Sword)(Rarity.Four, 12397, 191, 771, 60)(
       "UI_AvatarIcon_Bennett",
       [
         "UI_Talent_S_Bennett_01",
@@ -5618,7 +6102,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000025, "行秋", ElementType.Hydro, WeaponType.Sword)(Rarity.Four, 10222, 202, 758)(
+    ...cha(10000025, "行秋", ElementType.Hydro, WeaponType.Sword)(Rarity.Four, 10222, 202, 758, 80)(
       "UI_AvatarIcon_Xingqiu",
       [
         "UI_Talent_S_Xingqiu_01",
@@ -5711,7 +6195,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000014, "芭芭拉", ElementType.Hydro, WeaponType.Magic)(Rarity.Four, 9787, 159, 669)(
+    ...cha(10000014, "芭芭拉", ElementType.Hydro, WeaponType.Magic)(Rarity.Four, 9787, 159, 669, 80)(
       "UI_AvatarIcon_Barbara",
       [
         "UI_Talent_S_Barbara_01",
@@ -5770,7 +6254,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000027, "凝光", ElementType.Geo, WeaponType.Magic)(Rarity.Four, 9787, 212, 573)(
+    ...cha(10000027, "凝光", ElementType.Geo, WeaponType.Magic)(Rarity.Four, 9787, 212, 573, 40)(
       "UI_AvatarIcon_Ningguang",
       [
         "UI_Talent_S_Ningguang_01",
@@ -5826,7 +6310,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000034, "诺艾尔", ElementType.Geo, WeaponType.GreatSword)(Rarity.Four, 12071, 191, 799)(
+    ...cha(10000034, "诺艾尔", ElementType.Geo, WeaponType.GreatSword)(Rarity.Four, 12071, 191, 799, 60)(
       "UI_AvatarIcon_Noel",
       [
         "UI_Talent_S_Noel_01",
@@ -5921,7 +6405,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000015, "凯亚", ElementType.Cryo, WeaponType.Sword)(Rarity.Four, 11636, 223, 792)(
+    ...cha(10000015, "凯亚", ElementType.Cryo, WeaponType.Sword)(Rarity.Four, 11636, 223, 792, 60)(
       "UI_AvatarIcon_Kaeya",
       [
         "UI_Talent_S_Kaeya_01",
@@ -5993,7 +6477,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000036, "重云", ElementType.Cryo, WeaponType.GreatSword)(Rarity.Four, 10984, 223, 648)(
+    ...cha(10000036, "重云", ElementType.Cryo, WeaponType.GreatSword)(Rarity.Four, 10984, 223, 648, 40)(
       "UI_AvatarIcon_Chongyun",
       [
         "UI_Talent_S_Chongyun_01",
@@ -6075,7 +6559,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
   },
   //==================================
   {
-    ...createCharacter(10000101, "基尼奇", ElementType.Dendro, WeaponType.GreatSword)(Rarity.Five, 12858, 332, 802)(
+    ...cha(10000101, "基尼奇", ElementType.Dendro, WeaponType.GreatSword)(Rarity.Five, 12858, 332, 802, 70)(
       "UI_AvatarIcon_Kinich",
       [
         "UI_Talent_S_Kinich_01",
@@ -6187,7 +6671,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000102, "玛拉妮", ElementType.Hydro, WeaponType.Magic)(Rarity.Five, 15185, 182, 570)(
+    ...cha(10000102, "玛拉妮", ElementType.Hydro, WeaponType.Magic)(Rarity.Five, 15185, 182, 570, 60)(
       "UI_AvatarIcon_Mualani",
       [
         "UI_Talent_S_Mualani_01",
@@ -6280,7 +6764,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...createCharacter(10000099, "艾梅莉埃", ElementType.Dendro, WeaponType.Polearms)(Rarity.Five, 13568, 335, 730)(
+    ...cha(10000099, "艾梅莉埃", ElementType.Dendro, WeaponType.Polearms)(Rarity.Five, 13568, 335, 730, 50)(
       "UI_AvatarIcon_Emilie",
       [
         "UI_Talent_S_Emilie_01",

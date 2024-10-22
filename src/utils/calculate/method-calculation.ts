@@ -16,6 +16,7 @@ function getMoreDataBySwitch(
   let criticalHunt = (calculatorValue[BuffType.CritcalHurt] || 0) + (calculatorValue[BuffType.GlobalCritcalHunt] || 0);
   let critical = (calculatorValue[BuffType.Critcal] || 0) + (calculatorValue[BuffType.GlobalCritcal] || 0);
   let resistance = 0;
+  let defensePenetration = calculatorValue[BuffType.DefensePenetration] || 0;
 
   // 处理攻击类型的加成
   switch (attackType) {
@@ -73,6 +74,7 @@ function getMoreDataBySwitch(
   // 元素附魔
   let newElementType = elementType;
   if (
+    calculatorValue.enchanting &&
     calculatorValue.enchanting !== EnchantingType.Physical &&
     (attackType === AttackType.Normal ||
       attackType === AttackType.Strong ||
@@ -84,7 +86,7 @@ function getMoreDataBySwitch(
   }
 
   // 元素转化
-  if (calculatorValue.transform !== EnchantingType.Physical) {
+  if (calculatorValue.transform && calculatorValue.transform !== EnchantingType.Physical) {
     newElementType = NumberToElementType[calculatorValue.transform];
   }
 
@@ -155,6 +157,7 @@ function getMoreDataBySwitch(
     critical,
     resistance,
     addRate,
+    defensePenetration,
     newElementType,
   };
 }
@@ -171,12 +174,8 @@ interface IArgs {
 }
 
 export function calculateDamage({ calculatorValue, attackType, elementType, rate, level, atkType, special }: IArgs) {
-  let { ADDITIONAL_DMG, addHunt, criticalHunt, critical, resistance, addRate, newElementType } = getMoreDataBySwitch(
-    calculatorValue,
-    attackType,
-    elementType,
-    calculatorValue.weapon
-  );
+  let { ADDITIONAL_DMG, addHunt, criticalHunt, critical, resistance, addRate, newElementType, defensePenetration } =
+    getMoreDataBySwitch(calculatorValue, attackType, elementType, calculatorValue.weapon);
 
   /** 计算独特buff的加成 */
   if (special && calculatorValue.specialValue && calculatorValue.specialValue[special]) {
@@ -193,7 +192,10 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
     resistance += specialData.resistance;
     addRate += specialData.addRate;
     newElementType = specialData.newElementType;
+    defensePenetration += specialData.defensePenetration;
   }
+  console.log(calculatorValue);
+  
 
   // 基础伤害
   let BASE_DMG = 0;
@@ -259,7 +261,7 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
     calculatorValue.level,
     calculatorValue.enemyLevel,
     calculatorValue.reduceArmour,
-    calculatorValue.defensePenetration
+    defensePenetration
   );
   // 敌人最终承伤
   const ENEMY_RATE = defRate * resistanceRate;

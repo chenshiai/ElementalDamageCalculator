@@ -4,7 +4,13 @@ import { BuffType, AppendProp, ActionOn } from "./enum";
 export type BuffCondition = (data: Partial<ICalculatorValue>) => boolean;
 export type BuffEffect = {
   type: BuffType;
-  getValue(data?: Partial<ICalculatorValue>, stack?: number): number;
+  /**
+   * Buff数值效果获取函数
+   * @param data 当前角色的面板数据，主要用于计算数值
+   * @param stack 设置的层数，用于叠层的buff计算数值总和
+   * @param receiverData 在共享Buff时，被共享者的面板数据，作为第三方变量参与数值计算
+   */
+  getValue(data?: Partial<ICalculatorValue>, stack?: number, receiverData?: Partial<ICalculatorValue>): number;
   /** 是否基于基础属性转化而来，提供的属性不会被二次转化 */
   transform?: boolean;
   /** buff作用域，分别直接作用在面板上、间接作用在面板上、作用在面板之外  

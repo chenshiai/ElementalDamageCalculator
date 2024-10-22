@@ -58,6 +58,7 @@ function calculationPanel({
       element: characterInfo.element,
       weapon: characterInfo.weapon,
       constellation: constellation,
+      burstCharge: characterInfo.burstCharge,
 
       baseATK: characterBaseAtk + weaponBaseAtk,
       baseDEF: characterInfo.baseDEF,

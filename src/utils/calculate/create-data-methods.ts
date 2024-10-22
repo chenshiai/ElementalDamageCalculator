@@ -6,8 +6,8 @@ function getEnkaUIs(name: string[]): string[] {
   return name.map(getEnkaUI);
 }
 
-export function createCharacter(enkaId: number, name: string, element: ElementType, weapon: WeaponType) {
-  return (rarity: Rarity, baseHP: number, baseATK: number, baseDEF: number) => {
+export function cha(enkaId: number, name: string, element: ElementType, weapon: WeaponType) {
+  return (rarity: Rarity, baseHP: number, baseATK: number, baseDEF: number, burstCharge: number) => {
     return (avatarIcon: string, constsIcon: string[], talentNames: string[]) => {
       return {
         name,
@@ -19,6 +19,7 @@ export function createCharacter(enkaId: number, name: string, element: ElementTy
         baseATK,
         baseDEF,
         baseHP,
+        burstCharge,
         icons: {
           avatarIcon: getEnkaUI(avatarIcon),
           constsIcon: getEnkaUIs(constsIcon),

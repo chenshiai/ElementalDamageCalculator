@@ -14,6 +14,7 @@ class CalculatorValue implements ICalculatorValue {
   chargeEfficiency: number = 100;
   element: ElementType = ElementType.Physical;
   weapon: WeaponType = WeaponType.Sword;
+  burstCharge: number = 0;
 
   // 额外面板属性
   extraHP: number = 0;
