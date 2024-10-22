@@ -148,7 +148,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
           {
             type: BuffType.EnemyPhysicalResistance,
             getValue: (data) => {
-              return -[16, 17, 18, 19, 2, 21, 22, 23, 24, 25, 25, 25, 25][
+              return -[16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 25, 25, 25][
                 data.skillLevel + data.skillLevelAdd - 1
               ];
             },
@@ -156,7 +156,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
           {
             type: BuffType.EnemyCryoResistance,
             getValue: (data) => {
-              return -[16, 17, 18, 19, 2, 21, 22, 23, 24, 25, 25, 25, 25][
+              return -[16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 25, 25, 25][
                 data.skillLevel + data.skillLevelAdd - 1
               ];
             },
