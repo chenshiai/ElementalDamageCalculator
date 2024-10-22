@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, watchEffect } from "vue";
+import { computed, ref, watchEffect } from "vue";
 import TabTitle from "@/component/TabTitle.vue";
 import CharacterPanel from "@/component/CharacterPanel.vue";
 
@@ -95,32 +95,28 @@ const pageTitle = computed(() => {
 
 <template>
   <TabTitle>{{ pageTitle }}</TabTitle>
-  <div class="tips">角色和武器的成长数据暂无，均以满级数据计算。角色、武器和圣遗物可以自由搭配，可以实现在游戏里无法达成的搭配。</div>
+  <div class="tips">均以满级数据计算。角色、武器和圣遗物可以自由搭配。</div>
   <CharacterInfo v-model="characterInfo" v-model:constellation="constellation" />
   <WeaponInfo v-model="weapon" v-model:affix="affix" />
   <RelicInfo v-model="relicList" :relic-suit-texts="relicSuitTexts" />
-  <CharacterPanel
-    v-if="characterInfo && weapon"
-    :character-panel-data="CalculatorValue"
-    :element-type="characterInfo?.element"
-  />
-  <BuffInfo
-    v-if="characterInfo && weapon"
-    v-model="buffs"
-    v-model:character-buffs="characterBuffs"
-    v-model:weapon-buffs="weaponBuffs"
-    v-model:relic-buffs="relicBuffs"
-    :character-info="characterInfo"
-  />
-  <SkillInfo
-    v-if="characterInfo && weapon"
-    :calculator-value="CalculatorValue"
-    :character-info="characterInfo"
-    :weapon="weapon"
-    :affix="affix"
-    v-model:normalLevel="normalLevel"
-    v-model:skillLevel="skillLevel"
-    v-model:burstLevel="burstLevel"
-  />
-  <SaveCalculation v-if="characterInfo && weapon" @save-data="saveCalculationResult" @recalculation="recalculation" />
+  <template v-if="characterInfo && weapon">
+    <CharacterPanel :character-panel-data="CalculatorValue" :element-type="characterInfo?.element" />
+    <BuffInfo
+      v-model="buffs"
+      v-model:character-buffs="characterBuffs"
+      v-model:weapon-buffs="weaponBuffs"
+      v-model:relic-buffs="relicBuffs"
+      :character-info="characterInfo"
+    />
+    <SkillInfo
+      :calculator-value="CalculatorValue"
+      :character-info="characterInfo"
+      :weapon="weapon"
+      :affix="affix"
+      v-model:normalLevel="normalLevel"
+      v-model:skillLevel="skillLevel"
+      v-model:burstLevel="burstLevel"
+    />
+    <SaveCalculation @save-data="saveCalculationResult" @recalculation="recalculation" />
+  </template>
 </template>

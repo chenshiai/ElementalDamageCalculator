@@ -140,7 +140,7 @@ const handleImagePreview = () => {
   <div class="tips">创建、更新角色数据后需要重新入队。</div>
   <div class="team-list">
     <div class="data-panel__title">队伍编辑</div>
-    <span class="holy-relic-tips">点击+号，选择角色数据填入队伍，队伍人数不设上限</span>
+    <span class="holy-relic-tips">点击+号，选择角色数据填入队伍，人数不设上限、角色也可重复</span>
     <div class="team-list__item" v-for="(item, index) in teamList" :key="index">
       <div class="team-list__item-avatar" @click="setSlotByIndex(index)">
         <template v-if="item">

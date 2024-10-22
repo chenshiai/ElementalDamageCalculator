@@ -56,7 +56,7 @@ const onSelect = (action) => {
     </Popover>
   </FloatingBubble>
   <div class="save-data">
-    <div class="save-btn" @click="saveDataPop">保存当前角色面板</div>
+    <div class="save-btn" @click="saveDataPop">保存角色</div>
     <div class="save-btn" @click="lookDataPop">查看数据</div>
   </div>
   <Popup class="data-popup" teleport="#app" v-model:show="showPopup" position="top">
@@ -64,13 +64,13 @@ const onSelect = (action) => {
       面板数据会存储在本地浏览器的缓存中。若清空浏览器缓存，则数据也一会同清空。重复命名的新数据会替换旧数据。
     </div>
     <div class="tips">各项增益的开启情况不会被保存，读取数据后需要重新开启。</div>
-    <div class="tips">
+    <div class="description">
       保存的内容分为两个部分，分别是：
-      <br />【面板数据】：各项增益开启后的角色面板快照，即锁面板，用于计算队伍增益。
       <br />【角色、武器和圣遗物数据】：角色、武器和圣遗物的配置数据，用于重新编辑数据。
+      <br />【角色面板数据】：各项增益开启后的角色面板快照，即锁面板，用于计算队伍增益。
     </div>
-    <Field v-model="remark" type="text" label="数据命名" placeholder="给这条数据取个名字吧" />
-    <div class="popup-buttons" @click="saveData">保存面板数据</div>
+    <Field v-model="remark" type="text" label="数据命名" placeholder="给这条角色数据取个名字吧" />
+    <div class="popup-buttons" @click="saveData">保存角色</div>
   </Popup>
 
   <Popup class="data-popup" teleport="#app" v-model:show="showDataPopup" style="max-height: 80%" position="top">
@@ -93,6 +93,14 @@ const onSelect = (action) => {
   line-height: 40px;
   margin-bottom: 12px;
   border-radius: 4px;
+}
+.description {
+  margin: 16px 0;
+  font-size: 12px;
+  padding: 0 16px;
+  color: var(--tip-text);
+  /* text-align: center; */
+  position: relative;
 }
 
 .popup-buttons {
