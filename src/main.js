@@ -10,7 +10,10 @@ import "default-passive-events";
 import db from "./utils/db";
 import { calDB } from "./constants/db";
 import VConsole from "vconsole";
-const vConsole = new VConsole();
+
+if (process.env.NODE_ENV !== "production") {
+  new VConsole();
+}
 
 db.createStore(calDB.storeName, calDB.keyPath);
 
@@ -19,5 +22,4 @@ createApp(App)
 .use(route)
 .use(store)
 .use(Lazyload)
-.use(vConsole)
 .mount("#app");
