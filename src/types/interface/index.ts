@@ -11,6 +11,8 @@ export interface IBuffBase {
   stackable?: boolean;
   /** BUff层数别名 */
   stackText?: string;
+  /** BUff层数控件类型 */
+  stackType?: string;
   /** 最大叠加层数 */
   limit?: number;
   /** 个人增益展示条件判断函数，返回为true即可以展示，false不可展示。不设置则默认展示 */

@@ -54,6 +54,312 @@ const a = {
 // .replaceAll("%", '').replaceAll(/[\u4e00-\u9fff]+/g, "").replaceAll("\t",",").split(",").map(i=>Math.round(i*100)/10000)
 export const Character: (ICharacterInfo & Record<any, any>)[] = [
   {
+    ...cha(10000075, "流浪者", ElementType.Anemo, WeaponType.Magic)(Rarity.Five, 10164, 328, 607, 60)(
+      "UI_AvatarIcon_Wanderer",
+      [
+        "UI_Talent_S_Wanderer_01",
+        "UI_Talent_S_Wanderer_02",
+        "UI_Talent_U_Wanderer_02",
+        "UI_Talent_S_Wanderer_03",
+        "UI_Talent_U_Wanderer_01",
+        "UI_Talent_S_Wanderer_04",
+      ],
+      ["普通攻击·行幡鸣弦", "羽画·风姿华歌", "狂言·式乐五番"]
+    ),
+    normalAttack: [
+      createAttack("一段伤害", AttackType.Normal, ElementType.Anemo, {
+        atk: [0.687, 0.743, 0.799, 0.879, 0.935, 0.999, 1.087, 1.175, 1.262, 1.358, 1.454],
+      }),
+      createAttack("二段伤害", AttackType.Normal, ElementType.Anemo, {
+        atk: [0.65, 0.703, 0.756, 0.832, 0.885, 0.945, 1.028, 1.111, 1.195, 1.285, 1.376],
+      }),
+      createAttack("三段伤害·1", AttackType.Normal, ElementType.Anemo, {
+        atk: [0.476, 0.515, 0.554, 0.609, 0.648, 0.693, 0.753, 0.814, 0.875, 0.942, 1.008],
+      }),
+      createAttack("三段伤害·2", AttackType.Normal, ElementType.Anemo, {
+        atk: [0.476, 0.515, 0.554, 0.609, 0.648, 0.693, 0.753, 0.814, 0.875, 0.942, 1.008],
+      }),
+      createAttack("重击", AttackType.Strong, ElementType.Anemo, {
+        atk: [1.321, 1.42, 1.519, 1.651, 1.75, 1.849, 1.981, 2.113, 2.245, 2.377, 2.51],
+      }),
+      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Anemo, {
+        atk: [0.568, 0.615, 0.661, 0.727, 0.773, 0.826, 0.899, 0.971, 1.04, 1.12, 1.2],
+      }),
+      createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Anemo, {
+        atk: [1.14, 1.23, 1.32, 1.45, 1.55, 1.65, 1.8, 1.94, 2.09, 2.25, 2.4],
+      }),
+      createAttack("高空坠地冲击伤害", AttackType.Falling, ElementType.Anemo, {
+        atk: [1.42, 1.53, 1.65, 1.82, 1.93, 2.06, 2.24, 2.43, 2.61, 2.81, 3],
+      }),
+      null,
+      createAttack("6命·一段伤害", AttackType.Normal, ElementType.Anemo, {
+        atk: [0.687, 0.743, 0.799, 0.879, 0.935, 0.999, 1.087, 1.175, 1.262, 1.358, 1.454].map(i=>i*0.4),
+      }),
+      createAttack("6命·二段伤害", AttackType.Normal, ElementType.Anemo, {
+        atk: [0.65, 0.703, 0.756, 0.832, 0.885, 0.945, 1.028, 1.111, 1.195, 1.285, 1.376].map(i=>i*0.4),
+      }),
+      createAttack("6命·三段伤害", AttackType.Normal, ElementType.Anemo, {
+        atk: [0.476, 0.515, 0.554, 0.609, 0.648, 0.693, 0.753, 0.814, 0.875, 0.942, 1.008].map(i=>i*0.4),
+      }),
+    ],
+    elementSkill: [
+      createAttack("技能伤害", AttackType.Skill, ElementType.Anemo, {
+        atk: [0.952, 1.023, 1.095, 1.19, 1.261, 1.333, 1.428, 1.523, 1.618, 1.714, 1.809, 1.904, 2.023],
+      }),
+    ],
+    burstSkill: [
+      createAttack("技能伤害·单次", AttackType.Burst, ElementType.Anemo, {
+        atk: [1.472, 1.582, 1.693, 1.84, 1.95, 2.061, 2.208, 2.355, 2.502, 2.65, 2.797, 2.944, 3.128],
+      }),
+    ],
+    otherSkill: [
+      createAttack("梦迹一风·风矢", AttackType.Other, ElementType.Anemo, {
+        atk: [0.35],
+      }),
+      createAttack("1命·梦迹一风·风矢", AttackType.Other, ElementType.Anemo, {
+        atk: [0.6],
+      }),
+    ],
+    buffs: [
+      S_80_CRITAL_19P,
+      {
+        label: "拾玉得花·火",
+        describe: "施放羽画·风姿华歌时，若接触了火元素，攻击力提升30%",
+        effect: [{ type: BuffType.ATKPrcent, getValue: () => 30 }],
+        enable: false,
+      },
+      {
+        label: "拾玉得花·冰",
+        describe: "施放羽画·风姿华歌时，若接触了冰元素，暴击率提升20%",
+        effect: [{ type: BuffType.Critcal, getValue: () => 20 }],
+        enable: false,
+      },
+      {
+        label: "元素战技·优风倾姿",
+        describe: "普通攻击与重击时，将转为进行空居·不生断与空居·刀风界，造成的伤害与影响范围提高",
+        effect: [
+          {
+            type: BuffType.NormalRate,
+            getValue: (data) =>
+              [33, 35, 37, 39.5, 41.5, 43.5, 46, 48.6, 51.2, 53.7, 56.3, 58.9, 61.4][
+                data.skillLevel + data.skillLevelAdd - 1
+              ],
+              actionOn: ActionOn.Indirect
+          },
+          {
+            type: BuffType.StrongRate,
+            getValue: (data) =>
+              [26.4, 28, 29.6, 31.6, 33.2, 34.8, 36.8, 38.9, 40.9, 43, 45, 47.1, 49.1][
+                data.skillLevel + data.skillLevelAdd - 1
+              ],
+              actionOn: ActionOn.Indirect
+          },
+        ],
+        enable: false,
+      },
+      {
+        label: "2命·二番·箙岛廓白浪",
+        describe: "在优风倾姿状态下，狂言·式乐五番将依据空居力上限与当前的空居力的差值，每1点使此次狂言·式乐五番造成的伤害提升4%。通过这种方式，至多使狂言·式乐五番造成的伤害提升200%",
+        effect: [
+          {
+            type: BuffType.BurstPrcent,
+            getValue: (_,s) => 4*s,
+          },
+        ],
+        enable: false,
+        stack: 50,
+        limit: 50,
+        stackable: true,
+        stackText: "空居力差值",
+        condition: ({ constellation }) => constellation >= 2,
+      },
+      Constellation_Q_3,
+      Constellation_E_5,
+    ],
+  },
+  {
+    ...cha(10000073, "纳西妲", ElementType.Dendro, WeaponType.Magic)(Rarity.Five, 10360, 299, 630, 50)(
+      "UI_AvatarIcon_Nahida",
+      [
+        "UI_Talent_S_Nahida_01",
+        "UI_Talent_S_Nahida_02",
+        "UI_Talent_U_Nahida_01",
+        "UI_Talent_S_Nahida_03",
+        "UI_Talent_U_Nahida_02",
+        "UI_Talent_S_Nahida_04",
+      ],
+      ["普通攻击·行相", "所闻遍计", "心景幻成"]
+    ),
+    normalAttack: [
+      createAttack("一段伤害", AttackType.Normal, ElementType.Dendro, {
+        atk: [0.403, 0.433, 0.464, 0.504, 0.534, 0.564, 0.605, 0.645, 0.685, 0.726, 0.766],
+      }),
+      createAttack("二段伤害", AttackType.Normal, ElementType.Dendro, {
+        atk: [0.37, 0.398, 0.425, 0.462, 0.49, 0.518, 0.555, 0.592, 0.629, 0.666, 0.703],
+      }),
+      createAttack("三段伤害", AttackType.Normal, ElementType.Dendro, {
+        atk: [0.459, 0.493, 0.528, 0.573, 0.608, 0.642, 0.688, 0.734, 0.78, 0.826, 0.872],
+      }),
+      createAttack("四段伤害", AttackType.Normal, ElementType.Dendro, {
+        atk: [0.584, 0.628, 0.672, 0.73, 0.774, 0.818, 0.876, 0.935, 0.993, 1.051, 1.11],
+      }),
+      createAttack("重击", AttackType.Strong, ElementType.Dendro, {
+        atk: [1.32, 1.419, 1.518, 1.65, 1.749, 1.848, 1.98, 2.112, 2.244, 2.376, 2.508],
+      }),
+      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Dendro, {
+        atk: [0.568, 0.615, 0.661, 0.727, 0.773, 0.826, 0.899, 0.971, 1.04, 1.12, 1.2],
+      }),
+      createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Dendro, {
+        atk: [1.14, 1.23, 1.32, 1.45, 1.55, 1.65, 1.8, 1.94, 2.09, 2.25, 2.4],
+      }),
+      createAttack("高空坠地冲击伤害", AttackType.Falling, ElementType.Dendro, {
+        atk: [1.42, 1.53, 1.65, 1.82, 1.93, 2.06, 2.24, 2.43, 2.61, 2.81, 3],
+      }),
+    ],
+    elementSkill: [
+      createAttack("点按伤害", AttackType.Skill, ElementType.Dendro, {
+        atk: [0.984, 1.058, 1.132, 1.23, 1.304, 1.378, 1.476, 1.574, 1.673, 1.771, 1.87, 1.968, 2.091],
+      }),
+      createAttack("长按伤害", AttackType.Skill, ElementType.Dendro, {
+        atk: [1.304, 1.402, 1.5, 1.63, 1.728, 1.826, 1.956, 2.086, 2.217, 2.347, 2.478, 2.608, 2.771],
+      }),
+      createAttack(
+        "灭净三业伤害",
+        AttackType.Skill,
+        ElementType.Dendro,
+        {
+          atk: [1.032, 1.109, 1.187, 1.29, 1.367, 1.445, 1.548, 1.651, 1.754, 1.858, 1.961, 2.064, 2.193],
+          em: [2.064, 2.219, 2.374, 2.58, 2.735, 2.89, 3.096, 3.302, 3.509, 3.715, 3.922, 4.128, 4.386],
+        },
+        "nahida"
+      ),
+    ],
+    burstSkill: [],
+    otherSkill: [
+      createAttack(
+        "6命·灭净三业·业障除",
+        AttackType.Skill,
+        ElementType.Dendro,
+        {
+          atk: [2],
+          em: [4],
+        },
+        "nahida"
+      ),
+    ],
+    buffs: [
+      S_80_MYSTERY_115,
+      {
+        label: "元素爆发·心景幻成",
+        describe: "根据队伍中火元素角色的数量，提升纳西妲元素战技「所闻遍计」的灭净三业造成的伤害；",
+        effect: [
+          {
+            type: BuffType.SkillPrcent,
+            getValue: (data, s) => {
+              return [
+                [14.9, 22.3],
+                [16, 24],
+                [17.1, 25.7],
+                [18.6, 27.9],
+                [19.7, 29.6],
+                [20.8, 31.3],
+                [22.3, 33.5],
+                [23.8, 35.7],
+                [25.3, 37.9],
+                [26.8, 40.2],
+                [28.3, 42.4],
+                [29.8, 44.6],
+                [31.6, 47.4],
+              ][data.burstLevel + data.burstLevelAdd - 1][s - 1];
+            },
+          },
+        ],
+        enable: true,
+        stack: 0,
+        stackable: true,
+        limit: 2,
+        stackText: "火元素角色数量",
+      },
+      {
+        label: "净善摄受明论",
+        describe:
+          "依据队伍中元素精通最高的角色的元素精通数值的25%，提高领域内当前场上角色的元素精通。通过这种方式，至多提升250点元素精通",
+        effect: [
+          {
+            type: BuffType.MysteryFixed,
+            getValue: (_, s) => {
+              return Math.min(250, s * 0.25);
+            },
+            actionOn: ActionOn.Indirect,
+            transform: true,
+          },
+        ],
+        enable: true,
+        stack: 0,
+        stackable: true,
+        limit: 1000,
+        shareable: true,
+        target: BuffTarget.All,
+        stackText: "队伍中元素精通最高值",
+      },
+      {
+        label: "慧明缘觉智论",
+        describe:
+          "基于纳西妲总元素精通超过200点的部分，每1点元素精通能使所闻遍计的灭净三业造成的伤害提升0.1%，暴击率提升0.03%。通过这种方式，至多使灭净三业造成的伤害提升80%，暴击率提升24%",
+        effect: [
+          {
+            type: BuffType.SkillPrcent,
+            getValue: (data) => {
+              return Math.min(80, Math.max(0, data.elementalMystery + data.elementalMystery_NT - 200) * 0.1);
+            },
+            actionOn: ActionOn.Indirect,
+            special: "nahida",
+          },
+          {
+            type: BuffType.SkillCritcal,
+            getValue: (data) => {
+              return Math.min(24, Math.max(0, data.elementalMystery + data.elementalMystery_NT - 200) * 0.03);
+            },
+            special: "nahida",
+            actionOn: ActionOn.Indirect,
+          },
+        ],
+        enable: true,
+      },
+      {
+        label: "2命·正等善见之根",
+        describe: "处于纳西妲自身施加的蕴种印状态下的敌人受到原激化、超激化、蔓激化反应影响后的8秒内，防御力降低30%",
+        effect: [
+          {
+            type: BuffType.ReduceArmour,
+            getValue: () => 30,
+          },
+        ],
+        enable: false,
+        shareable: true,
+        condition: ({ constellation }) => constellation >= 2,
+        target: BuffTarget.Enemy,
+      },
+      Constellation_E_3,
+      {
+        label: "4命·比量现行之茎",
+        describe: "附近处于所闻遍计的蕴种印状态下的敌人数量为1/2/3/4或更多时，纳西妲的元素精通提升100/120/140/160点",
+        effect: [
+          {
+            type: BuffType.MysteryFixed,
+            getValue: (_, s) => [0, 100, 120, 140, 160][s],
+          },
+        ],
+        enable: true,
+        stack: 0,
+        limit: 4,
+        condition: ({ constellation }) => constellation >= 4,
+        stackable: true,
+      },
+      Constellation_Q_5,
+    ],
+  },
+  {
     ...cha(10000070, "妮露", ElementType.Hydro, WeaponType.Sword)(Rarity.Five, 15185, 230, 729, 70)(
       "UI_AvatarIcon_Nilou",
       [
@@ -193,15 +499,16 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       Constellation_E_5,
       {
         label: "6命·断霜的弦歌",
-        describe: "每1000点生命值上限，将使妮露的暴击率提升0.6%，暴击伤害提升1.2%。通过这种方式，妮露的暴击率至多提升30%，暴击伤害至多提升60%",
+        describe:
+          "每1000点生命值上限，将使妮露的暴击率提升0.6%，暴击伤害提升1.2%。通过这种方式，妮露的暴击率至多提升30%，暴击伤害至多提升60%",
         effect: [
           {
             type: BuffType.Critcal,
-            getValue: (data) => Math.min(30, (data.baseHP+data.extraHP)*0.6),
+            getValue: (data) => Math.min(30, (data.baseHP + data.extraHP) * 0.6),
           },
           {
             type: BuffType.CritcalHurt,
-            getValue: (data) => Math.min(60, (data.baseHP+data.extraHP)*1.2),
+            getValue: (data) => Math.min(60, (data.baseHP + data.extraHP) * 1.2),
           },
         ],
         enable: true,

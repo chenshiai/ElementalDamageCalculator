@@ -16,6 +16,15 @@ const atkType = ref("none");
 
 const calculatedResults = computed(() => {
   return skill.map((item: ISkillRate) => {
+    if (!item) {
+      return {
+        label: '-',
+        common: '-',
+        crit: '-',
+        desire: '-',
+        elementType: '',
+      }
+    }
     let { RESULT_DMG, CRITICAL_DMG, DEISTE_DMG, elementType } = calculateDamage({
       calculatorValue,
       attackType: item.attackType,

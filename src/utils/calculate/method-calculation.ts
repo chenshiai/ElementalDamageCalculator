@@ -237,10 +237,7 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
     (atkType === ElementalReaction.Rate2 &&
       (newElementType === ElementType.Pyro || newElementType === ElementType.Cryo))
   ) {
-    let eva =
-      (getAmplifiedRate(calculatorValue.elementalMystery + calculatorValue.elementalMystery_NT) +
-        calculatorValue.amplifiedRate) /
-      100;
+    let eva = (getAmplifiedRate(em) + calculatorValue.amplifiedRate) / 100;
     REACTION_DMG = (BASE_DMG + ADDITIONAL_DMG + MAGNIFICATION_DMG) * ReactionRate[atkType];
     EVA_DMG = (BASE_DMG + ADDITIONAL_DMG + MAGNIFICATION_DMG + REACTION_DMG) * eva;
   }

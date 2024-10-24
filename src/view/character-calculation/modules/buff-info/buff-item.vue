@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Checkbox, Icon, Slider } from "vant";
+import { Checkbox, Icon, Slider, Stepper } from "vant";
 import { IBuffBase } from "@/types/interface";
 import { computed } from "vue";
 interface IProps {
@@ -28,7 +28,18 @@ const stackText = computed(() => {
   </div>
   <div class="buff-description">
     <div class="buff-stack" v-if="buff.stackable">
-      <span>{{ buff.stackText || "层数" }}：</span><Slider v-model="stack" :max="buff.limit" :min="0" />
+      <span>{{ buff.stackText || "层数" }}：</span>
+      <Slider v-if="buff.stackType === 'slider'" v-model="stack" :max="buff.limit" :min="0" />
+      <Stepper
+        v-else
+        v-model="stack"
+        :max="buff.limit"
+        :min="0"
+        input-width="66px"
+        button-size="24"
+        theme="round"
+        integer
+      />
     </div>
     {{ buff.describe }}
   </div>
@@ -56,7 +67,6 @@ const stackText = computed(() => {
   display: none;
   color: #666;
   font-size: 14px;
-  margin-top: 10px;
 }
 
 .buff-detail-check:has(input:checked) + .buff-description {
@@ -125,9 +135,29 @@ input[type="checkbox"]:checked::after {
 .buff-stack {
   display: flex;
   padding-right: 16px;
+  height: 24px;
+  line-height: 24px;
+  align-items: center;
+  margin: 8px 0;
 }
 .buff-stack span {
   margin-right: 12px;
   flex-shrink: 0;
+}
+
+.van-slider__button-wrapper .van-slider__button {
+  box-shadow: 0 2px 2px var(--button-bg);
+}
+</style>
+<style>
+.buff-stack .van-stepper--round .van-stepper__minus {
+  color: var(--button-bg);
+  border-color: var(--button-bg);
+}
+
+.buff-stack .van-stepper--round .van-stepper__plus {
+  border: none;
+  color: #fff;
+  background-color: var(--button-bg);
 }
 </style>
