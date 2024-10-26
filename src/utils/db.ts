@@ -56,7 +56,7 @@ class calculateDatabase implements Database {
     const request: IDBRequest = objectStore.add(data);
 
     request.onsuccess = () => {
-      showSuccessToast("新增数据已添加");
+      showSuccessToast("面板数据已保存");
     };
 
     request.onerror = () => {

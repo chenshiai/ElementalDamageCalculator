@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Popup, showFailToast, Field, FloatingBubble, Popover, Icon } from "vant";
 import { ref } from "vue";
+import {useRouter} from "vue-router";
 import CalculationDataSelector from "./CalculationDataSelector.vue";
 const emit = defineEmits(["save-data", "look-data", "recalculation"]);
 
@@ -31,12 +32,20 @@ const recalculation = (data: IUesrSavedCalculations) => {
   emit("recalculation", data);
 };
 
+const router = useRouter();
+const createCha = () => {
+  router.push({
+    path: "/character/create",
+  });
+}
+
 // 悬浮球
 const showPopover = ref(false);
-const offset = ref({ x: 20, y: 700 });
+const offset = ref({ x: 20, y: 200 });
 const popoberActions = [
   { text: "保存当前角色面板", click: saveDataPop },
   { text: "查看数据", click: lookDataPop },
+  { text: "创建新角色", click: createCha },
 ];
 const onSelect = (action) => {
   action.click();

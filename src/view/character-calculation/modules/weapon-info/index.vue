@@ -147,6 +147,8 @@ const weaponStats = computed(() => {
   border: 1px solid var(--border);
   margin-bottom: 16px;
   border-radius: 4px;
+  height: 120px;
+  line-height: 120px;
 }
 .affix {
   margin-top: 20px;

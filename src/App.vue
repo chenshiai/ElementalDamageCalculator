@@ -13,9 +13,9 @@
       <router-link to="/shield" class="top-tabs__item">
         护盾承伤
       </router-link>
-      <router-link to="/question-answer" class="top-tabs__item">
+      <!-- <router-link to="/question-answer" class="top-tabs__item">
         常见问题
-      </router-link>
+      </router-link> -->
     </div>
   </div>
   <div class="content">

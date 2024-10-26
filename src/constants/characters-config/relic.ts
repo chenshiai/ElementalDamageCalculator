@@ -36,13 +36,13 @@ export interface IRelicLibraryItem {
   };
 }
 /** 烬城勇者绘卷 */
-const getBuffByElement = (element: ElementType, type: BuffType) => {
+const getBuffByElement = (element: ElementType, type: BuffType, text: string) => {
   return {
     enable: false,
-    label: "四件套·元素伤害加成提升",
+    label: `四件套·${text}元素伤害加成提升12%`,
     effect: [{ type, getValue: () => 12 }],
     describe:
-      "触发其对应元素类型的相关反应后，队伍中附近的所有角色的该元素反应相关的元素伤害加成提升12%（这里只显示符合角色元素类型的元素伤害加成）",
+      "触发其对应元素类型的相关反应后，队伍中附近的所有角色的该元素反应相关的元素伤害加成提升12%",
     condition: (data) => data.element === element,
     shareable: true,
     target: BuffTarget.All
@@ -50,13 +50,13 @@ const getBuffByElement = (element: ElementType, type: BuffType) => {
 };
 
 /** 烬城勇者绘卷2 */
-const getBuffByElement2 = (element: ElementType, type: BuffType) => {
+const getBuffByElement2 = (element: ElementType, type: BuffType, text: string) => {
   return {
     enable: false,
-    label: "四件套·夜魂加持状态，进一步提升",
+    label: `四件套·${text}元素伤害加成提升28%`,
     effect: [{ type, getValue: () => 28 }],
     describe:
-      "装备者处于夜魂加持状态下，还将使队伍中附近的所有角色的与该元素反应相关的元素伤害加成提升28%（这里只显示符合角色元素类型的元素伤害加成）",
+      "装备者处于夜魂加持状态下，还将使队伍中附近的所有角色的与该元素反应相关的元素伤害加成提升28%",
     condition: (data) => data.element === element,
     shareable: true,
     target: BuffTarget.All
@@ -69,7 +69,7 @@ const getBuffByElement3 = (element: ElementType, type: BuffType) => {
     label: "四件套·全队元素伤害加成提升",
     effect: [{ type, getValue: () => 35 }],
     describe:
-      "获得结晶反应形成的晶片时，队伍中所有角色获得35%对应元素伤害加成（这里只显示符合角色元素类型的元素伤害加成）",
+      "获得结晶反应形成的晶片时，队伍中所有角色获得35%对应元素伤害加成",
     condition: (data) => data.element === element,
     shareable: true,
     target: BuffTarget.All
@@ -139,20 +139,20 @@ const relicLibrary: IRelicLibraryItem[] = [
       suit2: [],
 
       suit4: [
-        getBuffByElement(ElementType.Anemo, BuffType.AnemoPrcent),
-        getBuffByElement(ElementType.Hydro, BuffType.HydroPrcent),
-        getBuffByElement(ElementType.Pyro, BuffType.PyroPrcent),
-        getBuffByElement(ElementType.Cryo, BuffType.CryoPrcent),
-        getBuffByElement(ElementType.Electro, BuffType.ElectroPrcent),
-        getBuffByElement(ElementType.Geo, BuffType.GeoPrcent),
-        getBuffByElement(ElementType.Dendro, BuffType.DendroPrcent),
-        getBuffByElement2(ElementType.Anemo, BuffType.AnemoPrcent),
-        getBuffByElement2(ElementType.Hydro, BuffType.HydroPrcent),
-        getBuffByElement2(ElementType.Pyro, BuffType.PyroPrcent),
-        getBuffByElement2(ElementType.Cryo, BuffType.CryoPrcent),
-        getBuffByElement2(ElementType.Electro, BuffType.ElectroPrcent),
-        getBuffByElement2(ElementType.Geo, BuffType.GeoPrcent),
-        getBuffByElement2(ElementType.Dendro, BuffType.DendroPrcent),
+        getBuffByElement(ElementType.Anemo, BuffType.AnemoPrcent, "风"),
+        getBuffByElement(ElementType.Hydro, BuffType.HydroPrcent, '水'),
+        getBuffByElement(ElementType.Pyro, BuffType.PyroPrcent, '火'),
+        getBuffByElement(ElementType.Cryo, BuffType.CryoPrcent, '冰'),
+        getBuffByElement(ElementType.Electro, BuffType.ElectroPrcent, '雷'),
+        getBuffByElement(ElementType.Geo, BuffType.GeoPrcent, '岩'),
+        getBuffByElement(ElementType.Dendro, BuffType.DendroPrcent, '草'),
+        getBuffByElement2(ElementType.Anemo, BuffType.AnemoPrcent, '风'),
+        getBuffByElement2(ElementType.Hydro, BuffType.HydroPrcent, '水'),
+        getBuffByElement2(ElementType.Pyro, BuffType.PyroPrcent, '火'),
+        getBuffByElement2(ElementType.Cryo, BuffType.CryoPrcent, '冰'),
+        getBuffByElement2(ElementType.Electro, BuffType.ElectroPrcent, '雷'),
+        getBuffByElement2(ElementType.Geo, BuffType.GeoPrcent, '岩'),
+        getBuffByElement2(ElementType.Dendro, BuffType.DendroPrcent, '草'),
       ],
     },
   },
@@ -1220,7 +1220,7 @@ const relicLibrary: IRelicLibraryItem[] = [
     buffs: {
       suit2: [
         {
-          label: "二件件套·雷元素伤害加成",
+          label: "二件套·雷元素伤害加成",
           effect: [{ type: BuffType.ElectroPrcent, getValue: () => 15 }],
           describe: "获得15%雷元素伤害加成",
           enable: true,

@@ -170,5 +170,7 @@ const constellation = defineModel("constellation", {
   border: 1px solid var(--border);
   border-radius: 4px;
   margin-bottom: 16px;
+  height: 120px;
+  line-height: 120px;
 }
 </style>

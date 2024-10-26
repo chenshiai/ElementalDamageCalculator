@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, toRaw } from "vue";
+import { onMounted, ref, toRaw } from "vue";
 import TabTitle from "@/component/TabTitle.vue";
 import CalculationDataSelector from "@/component/CalculationDataSelector.vue";
 import { Popup, Icon, showImagePreview } from "vant";
@@ -58,6 +58,12 @@ const deconstructionBuff = (buff: IBuffBase, panel: ICalculatorValue) => {
 /** @module 队伍数据 */
 const store = useStore();
 const teamList = ref<ITeamItem[]>([null]);
+onMounted(()=>{
+  const a = sessionStorage.getItem('teamList')
+  if (a) {
+    teamList.value = JSON.parse(a);
+  }
+})
 const handleCharacterChange = (result: IUesrSavedCalculations) => {
   show.value = false;
 
@@ -99,6 +105,7 @@ const handleCharacterChange = (result: IUesrSavedCalculations) => {
 /** 清除数据 */
 const clear = (index) => {
   teamList.value.splice(index, 1);
+  store.commit("setTeamList", teamList.value);
 };
 
 /** @module 编辑页面跳转 */
@@ -113,7 +120,6 @@ const toCreateData = () => {
   router.push({
     path: "/character/create",
   });
-  sessionStorage.removeItem("editCharacter");
 };
 
 /** @module 展示信息获取 */
@@ -140,6 +146,12 @@ const handleImagePreview = () => {
 <template>
   <TabTitle>云上辉星（测试版）</TabTitle>
   <div class="tips">创建、更新角色数据后需要重新入队。</div>
+  <div class="data-panel">
+    <DataItem v-model="store.state.teamBuffs.enemyLevel" title="敌人的等级" :stepperMin="1" />
+    <DataItem v-model="store.state.teamBuffs.baseResistance" title="敌人抗性%" :stepperMin="-999">
+      <div class="extra-btn" @click="handleImagePreview">查看抗性表</div>
+    </DataItem>
+  </div>
   <div class="team-list">
     <div class="data-panel__title">队伍编辑</div>
     <span class="holy-relic-tips">点击+号，选择角色数据填入队伍，人数不设上限、角色也可重复</span>
@@ -173,13 +185,39 @@ const handleImagePreview = () => {
     </div>
   </div>
   <div class="show-click" @click="toCreateData">创建角色数据</div>
-
-  <div class="data-panel">
-    <DataItem v-model="store.state.teamBuffs.enemyLevel" title="敌人的等级" :stepperMin="1" />
-    <DataItem v-model="store.state.teamBuffs.baseResistance" title="敌人抗性%" :stepperMin="-999">
-      <div class="extra-btn" @click="handleImagePreview">查看抗性表</div>
-    </DataItem>
+  <div>
+  使用Q&A：
+  <p>
+  问：最上面的【敌人的等级】是做什么的？<br />
+  答：是被角色造成伤害的目标等级，敌人的等级影响到防御力减伤，计算伤害前，请先设置好被攻击目标的等级。
+  </p>
+  <p>
+    问：输入键盘没有负号，敌人基础抗性是负数应该怎么设置？<br />
+    答：可以先设置为0，然后点击一下减号变成【-1】，这样就有负号了。
+  </p>
+  <p>
+  【队伍编辑】：<br />
+  问：没有角色数据怎么办？<br />
+  答：可以点击【创建角色数据】前往编辑页面，编辑完成后，[在编辑页面的最下方]可以保存角色面板。</p>
+  <p>
+  问：更新了辅助角色的面板数据、武器或者圣遗物，但是TA提供的队伍增益却没有变化？<br/>
+  答：角色面板数据更新后，需要先离队再重新入队，手动更新队伍数据。角色数据更新只会出现在【重复命名】的情况下，如果是想对比同一个角色带不同装备的效果，建议不要重复命名。在保存时会有提示。
+  </p>
+  <p>
+  【角色配置】：<br />
+  问：为什么法器角色可以使用双手剑武器？<br />
+  答：武器和圣遗物均未做严格限制，角色可以无视武器类型使用任何武器、圣遗物效果，你可以让那维莱特拿上暗影阔剑、可以让迪卢克拿上神乐之真意。旨在提高自由度更高的体验以及满足一些幻想（不是因为偷懒没做嗷），使用时请注意是否符合实际情况。
+  </p>
+  <p>
+  问：为什么计算器得出的数据和游戏内的数值不一样？<br />
+  答：因为官方尚未公开精准数据（游戏里的数据不是精准数据），本计算器使用的数据没有官方数据那么精准，会存在细微误差，通常误差不会超过0.5%。
+  </p>
+  <p>
+  问：得到了较大误差（0.5%以上），怎么办？<br />
+  答：因为本计算器没做太多限制，先检查一下是否存在不符合实际情况的设置。若确定设置基本正确，仍出现了较大误差，可以联系作者反馈。
+  </p>
   </div>
+
   <Popup class="data-popup" teleport="#app" v-model:show="show" style="max-height: 80%" position="top">
     <CalculationDataSelector :show-data-popup="show" @recalculation="handleCharacterChange" />
   </Popup>

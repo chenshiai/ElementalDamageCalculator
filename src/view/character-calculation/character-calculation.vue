@@ -95,7 +95,7 @@ const pageTitle = computed(() => {
 
 <template>
   <TabTitle>{{ pageTitle }}</TabTitle>
-  <div class="tips">均以满级数据计算。角色、武器和圣遗物可以自由搭配。</div>
+  <div class="tips">角色、武器和圣遗物均以满级数据计算。可以自由搭配。</div>
   <CharacterInfo v-model="characterInfo" v-model:constellation="constellation" />
   <WeaponInfo v-model="weapon" v-model:affix="affix" />
   <RelicInfo v-model="relicList" :relic-suit-texts="relicSuitTexts" />

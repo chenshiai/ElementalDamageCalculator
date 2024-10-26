@@ -218,6 +218,7 @@ const teamBuffs = {
   mutations: {
     setTeamList(state, value) {
       state.teamList = value || [];
+      sessionStorage.setItem('teamList', JSON.stringify(value));
     }
   }
 }
