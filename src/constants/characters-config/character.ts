@@ -38,6 +38,7 @@ import {
   S_80_ATK_28P,
   S_80_DENDRO_28P,
   S_80_HP_28P,
+  S_80_DEF_28P,
 } from "./buffs";
 
 import { cha, createAttack } from "@/utils/calculate/create-data-methods";
@@ -53,6 +54,1393 @@ const a = {
 };
 // .replaceAll("%", '').replaceAll(/[\u4e00-\u9fff]+/g, "").replaceAll("\t",",").split(",").map(i=>Math.round(i*100)/10000)
 export const Character: (ICharacterInfo & Record<any, any>)[] = [
+  {
+    ...cha(10000103, "希诺宁", ElementType.Geo, WeaponType.Sword)(Rarity.Five, 12405, 275, 930, 60)(
+      "UI_AvatarIcon_Xilonen",
+      [
+        "UI_Talent_S_Xilonen_01",
+        "UI_Talent_S_Xilonen_02",
+        "UI_Talent_U_Xilonen_01",
+        "UI_Talent_S_Xilonen_03",
+        "UI_Talent_U_Xilonen_02",
+        "UI_Talent_S_Xilonen_04",
+      ],
+      ["普通攻击·锐锋攫猎", "音火锻淬", "豹烈律动！"]
+    ),
+    normalAttack: [
+      createAttack("一段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.518, 0.56, 0.602, 0.662, 0.705, 0.753, 0.819, 0.885, 0.952, 1.024, 1.096],
+      }),
+      createAttack("二段伤害·1", AttackType.Normal, ElementType.Physical, {
+        atk: [0.274, 0.296, 0.318, 0.35, 0.372, 0.398, 0.433, 0.468, 0.503, 0.541, 0.579],
+      }),
+      createAttack("二段伤害·2", AttackType.Normal, ElementType.Physical, {
+        atk: [0.274, 0.296, 0.318, 0.35, 0.372, 0.398, 0.433, 0.468, 0.503, 0.541, 0.579],
+      }),
+      createAttack("三段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.729, 0.789, 0.848, 0.933, 0.992, 1.06, 1.154, 1.247, 1.34, 1.442, 1.544],
+      }),
+      createAttack("重击伤害", AttackType.Strong, ElementType.Physical, {
+        atk: [0.913, 0.988, 1.062, 1.168, 1.243, 1.328, 1.444, 1.561, 1.678, 1.805, 1.933],
+      }),
+      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
+        def: [0.639, 0.691, 0.743, 0.818, 0.87, 0.929, 1.011, 1.093, 1.175, 1.264, 1.353],
+      }),
+      createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+        def: [1.28, 1.38, 1.49, 1.64, 1.74, 1.86, 2.02, 2.19, 2.35, 2.53, 2.71],
+      }),
+      createAttack("高空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+        def: [1.6, 1.73, 1.86, 2.04, 2.17, 2.32, 2.53, 2.73, 2.93, 3.16, 3.38],
+      }),
+      createAttack("刃轮巡猎一段伤害", AttackType.Normal, ElementType.Geo, {
+        def: [0.56, 0.606, 0.651, 0.717, 0.762, 0.814, 0.886, 0.958, 1.029, 1.107, 1.186],
+      }),
+      createAttack("刃轮巡猎二段伤害", AttackType.Normal, ElementType.Geo, {
+        def: [0.55, 0.595, 0.64, 0.704, 0.749, 0.8, 0.871, 0.941, 1.011, 1.088, 1.165],
+      }),
+      createAttack("刃轮巡猎三段伤害", AttackType.Normal, ElementType.Geo, {
+        def: [0.658, 0.712, 0.765, 0.842, 0.895, 0.957, 1.041, 1.125, 1.209, 1.301, 1.393],
+      }),
+      createAttack("刃轮巡猎四段伤害", AttackType.Normal, ElementType.Geo, {
+        def: [0.86, 0.93, 1, 1.1, 1.17, 1.25, 1.36, 1.47, 1.581, 1.701, 1.821],
+      }),
+    ],
+    elementSkill: [
+      createAttack("突进伤害", AttackType.Skill, ElementType.Geo, {
+        def: [1.792, 1.926, 2.061, 2.24, 2.374, 2.509, 2.688, 2.867, 3.046, 3.226, 3.405, 3.584, 3.808],
+      }),
+    ],
+    burstSkill: [
+      createAttack("技能伤害", AttackType.Burst, ElementType.Geo, {
+        def: [2.813, 3.024, 3.235, 3.516, 3.727, 3.938, 4.219, 4.5, 4.782, 5.063, 5.344, 5.626, 5.977],
+      }),
+      createAttack("追加节拍伤害", AttackType.Burst, ElementType.Geo, {
+        def: [2.813, 3.024, 3.235, 3.516, 3.727, 3.938, 4.219, 4.5, 4.782, 5.063, 5.344, 5.626, 5.977],
+      }),
+    ],
+    otherSkill: [],
+    buffs: [
+      S_80_DEF_28P,
+      {
+        label: "四境四象回声",
+        describe: "若希诺宁拥有少于两枚经过元素转化的「源音采样」，普通攻击与下落攻击造成的伤害提升30%",
+        effect: [
+          { type: BuffType.NormalPrcent, getValue: () => 30 },
+          { type: BuffType.FallingPrcent, getValue: () => 30 },
+        ],
+        enable: false,
+      },
+      {
+        label: "便携铠装护层",
+        describe: "队伍中的附近的角色触发「夜魂迸发」时，希诺宁的防御力提升20%",
+        effect: [{ type: BuffType.DEFPrcent, getValue: () => 20 }],
+        enable: false,
+      },
+      {
+        label: "元素战技·「源音采样」·火",
+        describe: "「源音采样」激活时，附近的敌人的对应元素抗性降低，同元素类型「源音采样」的效果不能叠加",
+        effect: [
+          {
+            type: BuffType.EnemyPyroResistance,
+            getValue: (data) => {
+              return -[9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45][data.skillLevel + data.skillLevelAdd - 1];
+            },
+          },
+        ],
+        enable: false,
+        shareable: true,
+        target: BuffTarget.Enemy,
+      },
+      {
+        label: "元素战技·「源音采样」·水",
+        describe: "「源音采样」激活时，附近的敌人的对应元素抗性降低，同元素类型「源音采样」的效果不能叠加",
+        effect: [
+          {
+            type: BuffType.EnemyHydroResistance,
+            getValue: (data) => {
+              return -[9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45][data.skillLevel + data.skillLevelAdd - 1];
+            },
+          },
+        ],
+        enable: false,
+        shareable: true,
+        target: BuffTarget.Enemy,
+      },
+      {
+        label: "元素战技·「源音采样」·冰",
+        describe: "「源音采样」激活时，附近的敌人的对应元素抗性降低，同元素类型「源音采样」的效果不能叠加",
+        effect: [
+          {
+            type: BuffType.EnemyCryoResistance,
+            getValue: (data) => {
+              return -[9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45][data.skillLevel + data.skillLevelAdd - 1];
+            },
+          },
+        ],
+        enable: false,
+        shareable: true,
+        target: BuffTarget.Enemy,
+      },
+      {
+        label: "元素战技·「源音采样」·雷",
+        describe: "「源音采样」激活时，附近的敌人的对应元素抗性降低，同元素类型「源音采样」的效果不能叠加",
+        effect: [
+          {
+            type: BuffType.EnemyElectroResistance,
+            getValue: (data) => {
+              return -[9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45][data.skillLevel + data.skillLevelAdd - 1];
+            },
+          },
+        ],
+        enable: false,
+        shareable: true,
+        target: BuffTarget.Enemy,
+      },
+      {
+        label: "元素战技·「源音采样」·岩",
+        describe: "「源音采样」激活时，附近的敌人的对应元素抗性降低，同元素类型「源音采样」的效果不能叠加",
+        effect: [
+          {
+            type: BuffType.EnemyGeoResistance,
+            getValue: (data) => {
+              return -[9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45][data.skillLevel + data.skillLevelAdd - 1];
+            },
+          },
+        ],
+        enable: false,
+        shareable: true,
+        target: BuffTarget.Enemy,
+      },
+      {
+        label: "2命·献予灼原的五重奏",
+        describe: `希诺宁的「源音采样」激活时，将根据「源音采样」的元素类型，使队伍中附近所有元素类型相同的角色获得对应效果：
+        岩元素：造成的伤害提升50%；
+        火元素：攻击力提升45%；
+        水元素：生命值上限提升45%；
+        冰元素：暴击伤害提升60%；
+        雷元素：恢复25点元素能量，且元素爆发的冷却时间缩短6秒；`,
+        effect: [{ type: BuffType.GlobalPrcent, getValue: () => 50 }],
+        enable: false,
+        condition: ({constellation})=>constellation>=2
+      },
+      {
+        label: "2命·献予灼原的五重奏",
+        describe: `希诺宁的「源音采样」激活时，将根据「源音采样」的元素类型，使队伍中附近所有元素类型相同的角色获得对应效果：
+        岩元素：造成的伤害提升50%；
+        火元素：攻击力提升45%；
+        水元素：生命值上限提升45%；
+        冰元素：暴击伤害提升60%；
+        雷元素：恢复25点元素能量，且元素爆发的冷却时间缩短6秒；`,
+        effect: [{ type: BuffType.GlobalPrcent, getValue: () => 50 }],
+        enable: false,
+        shareable: true,
+        target: BuffTarget.Other,
+        shareCondition: ({ element }) => element === ElementType.Geo,
+        condition: ({constellation})=>constellation>=2
+      },
+      {
+        label: "2命·献予灼原的五重奏",
+        describe: `希诺宁的「源音采样」激活时，将根据「源音采样」的元素类型，使队伍中附近所有元素类型相同的角色获得对应效果：
+        岩元素：造成的伤害提升50%；
+        火元素：攻击力提升45%；
+        水元素：生命值上限提升45%；
+        冰元素：暴击伤害提升60%；
+        雷元素：恢复25点元素能量，且元素爆发的冷却时间缩短6秒；`,
+        effect: [{ type: BuffType.ATKPrcent, getValue: () => 45 }],
+        enable: false,
+        shareable: true,
+        target: BuffTarget.Other,
+        shareCondition: ({ element }) => element === ElementType.Pyro,
+        condition: ({constellation})=>constellation>=2
+      },
+      {
+        label: "2命·献予灼原的五重奏",
+        describe: `希诺宁的「源音采样」激活时，将根据「源音采样」的元素类型，使队伍中附近所有元素类型相同的角色获得对应效果：
+        岩元素：造成的伤害提升50%；
+        火元素：攻击力提升45%；
+        水元素：生命值上限提升45%；
+        冰元素：暴击伤害提升60%；
+        雷元素：恢复25点元素能量，且元素爆发的冷却时间缩短6秒；`,
+        effect: [{ type: BuffType.HPPrcent, getValue: () => 45 }],
+        enable: false,
+        shareable: true,
+        target: BuffTarget.Other,
+        shareCondition: ({ element }) => element === ElementType.Hydro,
+        condition: ({constellation})=>constellation>=2
+      },
+      {
+        label: "2命·献予灼原的五重奏",
+        describe: `希诺宁的「源音采样」激活时，将根据「源音采样」的元素类型，使队伍中附近所有元素类型相同的角色获得对应效果：
+        岩元素：造成的伤害提升50%；
+        火元素：攻击力提升45%；
+        水元素：生命值上限提升45%；
+        冰元素：暴击伤害提升60%；
+        雷元素：恢复25点元素能量，且元素爆发的冷却时间缩短6秒；`,
+        effect: [{ type: BuffType.CryoCritcalHurt, getValue: () => 60 }],
+        enable: false,
+        shareable: true,
+        target: BuffTarget.Other,
+        shareCondition: ({ element }) => element === ElementType.Cryo,
+        condition: ({constellation})=>constellation>=2
+      },
+      Constellation_E_3,
+      {
+        label: "4命·献予灼原的五重奏",
+        describe: `希诺宁施放音火锻淬后，将为队伍中附近的所有角色施加「荣花之赐」效果。
+        拥有「荣花之赐」的角色的普通攻击、重击与下落攻击造成的伤害提升，提升值相当于希诺宁的防御力的65%`,
+        effect: [{ type: BuffType.NormalFixed, getValue: (data) => (data.baseDEF+data.extraDEF+data.extraDEF_NT)*0.65, actionOn: ActionOn.External },
+          { type: BuffType.StrongFixed, getValue: (data) => (data.baseDEF+data.extraDEF+data.extraDEF_NT)*0.65, actionOn: ActionOn.External },
+          { type: BuffType.FallingFixed, getValue: (data) => (data.baseDEF+data.extraDEF+data.extraDEF_NT)*0.65, actionOn: ActionOn.External }
+        ],
+        enable: false,
+        shareable: true,
+        target: BuffTarget.All,
+        condition: ({constellation})=>constellation>=4
+      },
+      Constellation_Q_5,
+      {
+        label: "6命·献予永夜的狂欢舞",
+        describe: `希诺宁在夜魂加持状态下的普通攻击与下落攻击造成的伤害提升，提升值相当于希诺宁的防御力的300%`,
+        effect: [{ type: BuffType.NormalFixed, getValue: (data) => (data.baseDEF+data.extraDEF+data.extraDEF_NT)*3, actionOn: ActionOn.External },
+          { type: BuffType.FallingFixed, getValue: (data) => (data.baseDEF+data.extraDEF+data.extraDEF_NT)*3, actionOn: ActionOn.External }
+        ],
+        enable: false,
+        condition: ({constellation})=>constellation>=6
+      },
+    ],
+  },
+  {
+    ...cha(10000101, "基尼奇", ElementType.Dendro, WeaponType.GreatSword)(Rarity.Five, 12858, 332, 802, 70)(
+      "UI_AvatarIcon_Kinich",
+      [
+        "UI_Talent_S_Kinich_01",
+        "UI_Talent_S_Kinich_02",
+        "UI_Talent_U_Kinich_01",
+        "UI_Talent_S_Kinich_03",
+        "UI_Talent_U_Kinich_02",
+        "UI_Talent_S_Kinich_04",
+      ],
+      ["普通攻击·夜阳斗技", "悬猎·游骋高狩", "向伟大圣龙致意"]
+    ),
+    normalAttack: [
+      createAttack("一段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.99, 1.07, 1.151, 1.266, 1.347, 1.439, 1.565, 1.692, 1.819, 1.957, 2.095],
+      }),
+      createAttack("二段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.829, 0.897, 0.964, 1.06, 1.128, 1.205, 1.311, 1.417, 1.523, 1.639, 1.755],
+      }),
+      createAttack("三段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [1.235, 1.336, 1.436, 1.58, 1.68, 1.795, 1.953, 2.111, 2.269, 2.441, 2.614],
+      }),
+      createAttack("空中普通攻击伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [1.677, 1.814, 1.95, 2.145, 2.282, 2.438, 2.652, 2.867, 3.081, 3.315, 3.549],
+      }),
+      createAttack("重击伤害", AttackType.Strong, ElementType.Physical, {
+        atk: [0.484, 0.524, 0.563, 0.619, 0.659, 0.704, 0.766, 0.828, 0.89, 0.957, 1.025].map((i) => i * 3),
+      }),
+      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
+        atk: [0.746, 0.807, 0.867, 0.954, 1.015, 1.084, 1.18, 1.275, 1.37, 1.474, 1.579],
+      }),
+      createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+        atk: [1.49, 1.61, 1.73, 1.91, 2.03, 2.17, 2.36, 2.55, 2.74, 2.95, 3.16],
+      }),
+      createAttack("高空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+        atk: [1.86, 2.01, 2.17, 2.38, 2.53, 2.71, 2.95, 3.18, 3.42, 3.68, 3.94],
+      }),
+    ],
+    elementSkill: [
+      createAttack("环绕射击伤害", AttackType.Skill, ElementType.Dendro, {
+        atk: [0.573, 0.616, 0.659, 0.716, 0.759, 0.802, 0.859, 0.916, 0.974, 1.031, 1.088, 1.146, 1.217],
+      }),
+      createAttack(
+        "迴猎贯鳞炮伤害",
+        AttackType.Skill,
+        ElementType.Dendro,
+        {
+          atk: [6.874, 7.39, 7.906, 8.593, 9.109, 9.624, 10.312, 10.999, 11.686, 12.374, 13.061, 13.749, 14.607],
+        },
+        "Kinich"
+      ),
+    ],
+    burstSkill: [
+      createAttack("技能伤害", AttackType.Burst, ElementType.Dendro, {
+        atk: [1.34, 1.441, 1.541, 1.675, 1.776, 1.876, 2.01, 2.144, 2.278, 2.412, 2.546, 2.68, 2.848],
+      }),
+      createAttack("龙息伤害", AttackType.Burst, ElementType.Dendro, {
+        atk: [1.207, 1.298, 1.388, 1.509, 1.6, 1.69, 1.811, 1.932, 2.053, 2.173, 2.294, 2.415, 2.566],
+      }),
+    ],
+    otherSkill: [
+      createAttack(
+        "基尼奇·6命弹射",
+        AttackType.Skill,
+        ElementType.Dendro,
+        {
+          atk: [7],
+        },
+        "Kinich"
+      ),
+    ],
+    buffs: [
+      S_80_CRITALHUNT_38P,
+      {
+        label: "焰灵的契约",
+        describe:
+          "队伍中的附近的角色触发「夜魂迸发」后，赋予一层「猎人心得」，至多叠加2层。每层「猎人心得」使迴猎贯鳞炮伤害提高，基于基尼奇攻击力的320%",
+        effect: [
+          {
+            type: BuffType.SkillFixed,
+            getValue(data, s) {
+              return (data.baseATK + data.extraATK + data.extraATK_NT) * 3.2 * s;
+            },
+            actionOn: ActionOn.External,
+            special: "Kinich",
+          },
+        ],
+        enable: false,
+        stackText: "猎人心得",
+        limit: 2,
+        stack: 2,
+        stackable: true,
+      },
+      {
+        label: "1命·七鹦之喙",
+        describe: "迴猎贯鳞炮的暴击伤害提升100%",
+        effect: [{ type: BuffType.SkillCritcalHurt, getValue: () => 100, special: "Kinich" }],
+        condition: ({ constellation }) => constellation >= 1,
+        enable: true,
+      },
+      {
+        label: "2命·星虎之掌",
+        describe: "迴猎贯鳞炮首次造成的伤害提升100%",
+        effect: [{ type: BuffType.SkillPrcent, getValue: () => 100, special: "Kinich" }],
+        condition: ({ constellation }) => constellation >= 2,
+        enable: true,
+      },
+      Constellation_E_3,
+      Constellation_Q_5,
+    ],
+  },
+  {
+    ...cha(10000102, "玛拉妮", ElementType.Hydro, WeaponType.Magic)(Rarity.Five, 15185, 182, 570, 60)(
+      "UI_AvatarIcon_Mualani",
+      [
+        "UI_Talent_S_Mualani_01",
+        "UI_Talent_S_Mualani_02",
+        "UI_Talent_U_Mualani_01",
+        "UI_Talent_S_Mualani_03",
+        "UI_Talent_U_Mualani_02",
+        "UI_Talent_S_Mualani_04",
+      ],
+      ["普通攻击·降温处理", "踏鲨破浪", "爆瀑飞弹"]
+    ),
+    normalAttack: [
+      createAttack("一段伤害", AttackType.Normal, ElementType.Hydro, {
+        atk: [0.514, 0.553, 0.591, 0.642, 0.681, 0.72, 0.771, 0.822, 0.874, 0.925, 1.221],
+      }),
+      createAttack("二段伤害", AttackType.Normal, ElementType.Hydro, {
+        atk: [0.446, 0.48, 0.513, 0.558, 0.591, 0.625, 0.669, 0.714, 0.759, 0.803, 1.06],
+      }),
+      createAttack("三段伤害", AttackType.Normal, ElementType.Hydro, {
+        atk: [0.7, 0.753, 0.805, 0.875, 0.928, 0.98, 1.051, 1.121, 1.191, 1.261, 1.663],
+      }),
+      createAttack("重击伤害", AttackType.Strong, ElementType.Hydro, {
+        atk: [1.43, 1.54, 1.64, 1.79, 1.89, 2, 2.14, 2.29, 2.43, 2.57, 3.39],
+      }),
+      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Hydro, {
+        atk: [0.568, 0.615, 0.661, 0.727, 0.773, 0.826, 0.899, 0.971, 1.044, 1.123, 1.203],
+      }),
+      createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Hydro, {
+        atk: [1.14, 1.23, 1.32, 1.45, 1.55, 1.65, 1.8, 1.94, 2.09, 2.25, 2.4],
+      }),
+      createAttack("高空坠地冲击伤害", AttackType.Falling, ElementType.Hydro, {
+        atk: [1.42, 1.53, 1.65, 1.82, 1.93, 2.06, 2.24, 2.43, 2.61, 2.81, 3],
+      }),
+    ],
+    elementSkill: [
+      createAttack("鲨鲨撕咬基础伤害", AttackType.Normal, ElementType.Hydro, {
+        hp: [0.0868, 0.0933, 0.0998, 0.1085, 0.115, 0.1215, 0.1302, 0.1389, 0.1476, 0.1562, 0.1649, 0.1736, 0.1845],
+      }),
+      createAttack(
+        "巨浪鲨鲨撕咬伤害",
+        AttackType.Normal,
+        ElementType.Hydro,
+        {
+          hp: [0.434, 0.4667, 0.4991, 0.5427, 0.575, 0.6077, 0.651, 0.6953, 0.7379, 0.7811, 0.8247, 0.868, 0.9222],
+        },
+        "Mualani"
+      ),
+    ],
+    burstSkill: [
+      createAttack("爆瀑飞弹", AttackType.Burst, ElementType.Hydro, {
+        hp: [0.584, 0.628, 0.672, 0.73, 0.774, 0.818, 0.877, 0.935, 0.993, 1.05, 1.11, 1.169, 1.242],
+      }),
+    ],
+    otherSkill: [],
+    buffs: [
+      S_80_CRITAL_19P,
+      {
+        label: "1命·悠闲的「梅兹特利」",
+        describe:
+          "进入夜魂加持状态后的第一次巨浪鲨鲨撕咬及它所触发的鲨鲨飞弹造成的伤害提升，提升值相当于玛拉妮生命值上限的66%",
+        effect: [
+          {
+            type: BuffType.NormalFixed,
+            getValue: (data) => {
+              return (data.baseHP + data.extraHP + data.extraHP_NT) * 0.66;
+            },
+            special: "Mualani",
+            actionOn: ActionOn.External,
+          },
+        ],
+        enable: true,
+        condition: ({ constellation }) => constellation >= 1,
+      },
+      Constellation_E_3,
+      {
+        label: "4命·鲨鲨主食是豚豚。",
+        describe: "爆瀑飞弹造成的伤害提升75%",
+        effect: [{ type: BuffType.BurstPrcent, getValue: () => 75 }],
+        enable: true,
+        condition: ({ constellation }) => constellation >= 4,
+      },
+      Constellation_Q_5,
+      {
+        label: "6命·「流泉之众」的精神",
+        describe: "1命效果没有次数限制",
+        effect: [],
+        enable: true,
+        condition: ({ constellation }) => constellation >= 6,
+      },
+    ],
+  },
+  {
+    ...cha(10000099, "艾梅莉埃", ElementType.Dendro, WeaponType.Polearms)(Rarity.Five, 13568, 335, 730, 50)(
+      "UI_AvatarIcon_Emilie",
+      [
+        "UI_Talent_S_Emilie_01",
+        "UI_Talent_S_Emilie_02",
+        "UI_Talent_U_Emilie_01",
+        "UI_Talent_S_Emilie_03",
+        "UI_Talent_U_Emilie_02",
+        "UI_Talent_S_Emilie_04",
+      ],
+      ["普通攻击·逐影枪术·改", "撷萃调香", "香氛演绎"]
+    ),
+    normalAttack: [
+      createAttack("一段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.486, 0.525, 0.565, 0.621, 0.661, 0.706, 0.768, 0.83, 0.892, 0.96, 1.028],
+      }),
+      createAttack("二段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.449, 0.486, 0.522, 0.574, 0.611, 0.653, 0.71, 0.767, 0.825, 0.887, 0.95],
+      }),
+      createAttack("三段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.593, 0.641, 0.69, 0.758, 0.807, 0.862, 0.938, 1.014, 1.089, 1.172, 1.255],
+      }),
+      createAttack("四段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.751, 0.812, 0.873, 0.961, 1.022, 1.092, 1.188, 1.284, 1.38, 1.485, 1.589],
+      }),
+      createAttack("重击伤害", AttackType.Strong, ElementType.Physical, {
+        atk: [0.913, 0.988, 1.062, 1.168, 1.243, 1.328, 1.444, 1.561, 1.678, 1.805, 1.933],
+      }),
+      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
+        atk: [0.639, 0.691, 0.743, 0.818, 0.87, 0.929, 1.011, 1.093, 1.175, 1.264, 1.353],
+      }),
+      createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+        atk: [1.28, 1.38, 1.48, 1.64, 1.74, 1.86, 2.02, 2.19, 2.35, 2.53, 2.71],
+      }),
+      createAttack("高空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+        atk: [1.6, 1.73, 1.86, 2.04, 2.17, 2.32, 2.53, 2.73, 2.93, 3.16, 3.38],
+      }),
+    ],
+    elementSkill: [
+      createAttack(
+        "技能伤害",
+        AttackType.Skill,
+        ElementType.Dendro,
+        {
+          atk: [0.471, 0.506, 0.541, 0.589, 0.624, 0.659, 0.706, 0.753, 0.8, 0.847, 0.895, 0.942, 1],
+        },
+        "Emilie"
+      ),
+      createAttack(
+        "柔灯之匣·一阶伤害",
+        AttackType.Skill,
+        ElementType.Dendro,
+        {
+          atk: [0.396, 0.426, 0.455, 0.495, 0.525, 0.554, 0.594, 0.634, 0.673, 0.713, 0.752, 0.792, 0.842],
+        },
+        "Emilie"
+      ),
+      createAttack(
+        "柔灯之匣·二阶伤害·单段",
+        AttackType.Skill,
+        ElementType.Dendro,
+        {
+          atk: [0.84, 0.903, 0.966, 1.05, 1.113, 1.176, 1.26, 1.344, 1.428, 1.512, 1.596, 1.68, 1.785],
+        },
+        "Emilie"
+      ),
+      createAttack("灵息之刺伤害", AttackType.Skill, ElementType.Dendro, {
+        atk: [0.385, 0.414, 0.443, 0.482, 0.51, 0.539, 0.578, 0.616, 0.655, 0.693, 0.732, 0.77, 0.819],
+      }),
+    ],
+    burstSkill: [
+      createAttack("柔灯之匣·三阶伤害", AttackType.Burst, ElementType.Dendro, {
+        atk: [2.172, 2.335, 2.498, 2.715, 2.878, 3.041, 3.258, 3.475, 3.692, 3.91, 4.127, 4.344, 4.616],
+      }),
+    ],
+    otherSkill: [
+      createAttack(
+        "固有天赋·余薰",
+        AttackType.Other,
+        ElementType.Dendro,
+        {
+          atk: [6],
+        },
+        "Emilie"
+      ),
+    ],
+    buffs: [
+      S_80_CRITALHUNT_38P,
+      {
+        label: "精馏",
+        describe:
+          "艾梅莉埃对处于燃烧状态下的敌人造成的伤害：每1000点攻击力都将提升15%伤害，至多通过这种方式提升36%伤害",
+        effect: [
+          {
+            type: BuffType.GlobalPrcent,
+            getValue: (data) => {
+              return Math.min(36, ((data.baseATK + data.extraATK + data.extraATK_NT) / 1000) * 15);
+            },
+            actionOn: ActionOn.External,
+          },
+        ],
+        enable: true,
+      },
+      {
+        label: "1命·淡香浸析",
+        describe: "撷萃调香与固有天赋「余薰」的清露香氛造成的伤害提升20%",
+        effect: [{ type: BuffType.GlobalPrcent, getValue: () => 20, special: "Emilie" }],
+        enable: true,
+        condition: ({ constellation }) => constellation >= 1,
+      },
+      {
+        label: "2命·湖光顶调",
+        describe: "撷萃调香与固有天赋「余薰」的清露香氛命中敌人时，降低敌人草元素抗性30%",
+        effect: [{ type: BuffType.EnemyDendroResistance, getValue: () => -30 }],
+        enable: true,
+        condition: ({ constellation }) => constellation >= 2,
+        shareable: true,
+        target: BuffTarget.Enemy,
+      },
+      Constellation_E_3,
+      Constellation_Q_5,
+      {
+        label: "6命·茉洁香迹",
+        describe: "普通攻击与重击转为无法被附魔覆盖的草元素伤害，并提升造成的伤害，提升值相当于艾梅莉埃攻击力的300%",
+        effect: [
+          { type: BuffType.Transform, getValue: () => EnchantingType[ElementType.Dendro] },
+          {
+            type: BuffType.NormalFixed,
+            getValue: (data) => {
+              return (data.baseATK + data.extraATK + data.extraATK_NT) * 3;
+            },
+            actionOn: ActionOn.External,
+          },
+          {
+            type: BuffType.StrongFixed,
+            getValue: (data) => {
+              return (data.baseATK + data.extraATK + data.extraATK_NT) * 3;
+            },
+            actionOn: ActionOn.External,
+          },
+        ],
+        enable: true,
+        condition: ({ constellation }) => constellation >= 6,
+      },
+    ],
+  },
+  {
+    ...cha(10000095, "希格雯", ElementType.Hydro, WeaponType.Bow)(Rarity.Five, 13348, 193, 500, 70)(
+      "UI_AvatarIcon_Sigewinne",
+      [
+        "UI_Talent_S_Sigewinne_01",
+        "UI_Talent_S_Sigewinne_02",
+        "UI_Talent_U_Sigewinne_01",
+        "UI_Talent_S_Sigewinne_03",
+        "UI_Talent_U_Sigewinne_02",
+        "UI_Talent_S_Sigewinne_04",
+      ],
+      ["普通攻击·靶向治疗", "弹跳水疗法", "过饱和心意注射"]
+    ),
+    normalAttack: [
+      createAttack("一段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.526, 0.569, 0.612, 0.673, 0.716, 0.765, 0.832, 0.899, 0.967, 1.04, 1.114],
+      }),
+      createAttack("二段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.511, 0.552, 0.594, 0.653, 0.695, 0.742, 0.808, 0.873, 0.938, 1.01, 1.081],
+      }),
+      createAttack("三段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.783, 0.847, 0.91, 1.001, 1.065, 1.138, 1.238, 1.338, 1.438, 1.548, 1.657],
+      }),
+      createAttack("瞄准射击", AttackType.Strong, ElementType.Physical, {
+        atk: [0.439, 0.474, 0.51, 0.561, 0.597, 0.638, 0.694, 0.75, 0.806, 0.867, 0.928],
+      }),
+      createAttack("满蓄力瞄准射击", AttackType.Strong, ElementType.Hydro, {
+        atk: [1.24, 1.33, 1.43, 1.55, 1.64, 1.74, 1.86, 1.98, 2.11, 2.23, 2.36],
+      }),
+      createAttack("小小关心气泡伤害", AttackType.Strong, ElementType.Hydro, {
+        atk: [0.248, 0.267, 0.285, 0.31, 0.329, 0.347, 0.372, 0.397, 0.422, 0.446, 0.471],
+      }),
+      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
+        atk: [0.568, 0.615, 0.661, 0.727, 0.773, 0.826, 0.899, 0.971, 1.04, 1.12, 1.2],
+      }),
+      createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+        atk: [1.14, 1.23, 1.32, 1.45, 1.55, 1.65, 1.8, 1.94, 2.09, 2.25, 2.4],
+      }),
+      createAttack("高空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+        atk: [1.42, 1.53, 1.65, 1.82, 1.93, 2.06, 2.24, 2.43, 2.61, 2.81, 3],
+      }),
+    ],
+    elementSkill: [
+      createAttack("高空坠地冲击伤害", AttackType.Skill, ElementType.Hydro, {
+        hp: [0.0228, 0.0245, 0.0262, 0.0285, 0.0302, 0.0319, 0.0342, 0.0365, 0.0388, 0.041, 0.0433, 0.0456, 0.0485],
+      }),
+      createAttack("高空坠地冲击伤害", AttackType.Other, ElementType.Hydro, {
+        hp: [0.0068, 0.0074, 0.0079, 0.0086, 0.0091, 0.0096, 0.0103, 0.0109, 0.0116, 0.0123, 0.013, 0.0137, 0.0145],
+      }),
+    ],
+    burstSkill: [
+      createAttack("技能伤害", AttackType.Burst, ElementType.Hydro, {
+        hp: [0.118, 0.127, 0.135, 0.147, 0.156, 0.165, 0.177, 0.188, 0.2, 0.212, 0.224, 0.235, 0.25],
+      }),
+    ],
+    otherSkill: [],
+    buffs: [
+      S_80_HP_28P,
+      {
+        label: "应有适当的休憩",
+        describe:
+          "施放弹跳水疗法时，希格雯将为自己施加持续18秒的「半强制静养」效果：持续期间，希格雯获得8%水元素伤害加成",
+        effect: [{ type: BuffType.HydroPrcent, getValue: () => 8 }],
+        enable: true,
+      },
+      {
+        label: "应有适当的休憩",
+        describe:
+          "除希格雯外附近队伍中处于后台的角色的元素战技造成伤害时，将消耗1层静养计数，提升此次元素战技造成的伤害值：希格雯的生命值上限超过30000的部分，每1000点生命值上限将提升80点伤害，通过这种方式，至多使本次元素战技造成的伤害提升2800点；解锁1命后效果提升25%",
+        effect: [
+          {
+            type: BuffType.SkillFixed,
+            getValue: (data) =>
+              data.constellation >= 1
+                ? Math.min(3500, (Math.max(0, data.baseHP + data.extraHP + data.extraHP_NT - 30000) / 1000) * 100)
+                : Math.min(2800, (Math.max(0, data.baseHP + data.extraHP + data.extraHP_NT - 30000) / 1000) * 80),
+            actionOn: ActionOn.External,
+          },
+        ],
+        enable: false,
+        shareable: true,
+        target: BuffTarget.Other,
+      },
+      {
+        label: "2命·「最仁慈的精灵，可否化解仇敌」",
+        describe: "弹跳水疗法抛出的激愈水球或过饱和心意注射命中敌人后，该敌人的水元素抗性降低35%",
+        effect: [{ type: BuffType.EnemyHydroResistance, getValue: () => -35 }],
+        enable: false,
+        shareable: true,
+        target: BuffTarget.Enemy,
+        condition: ({ constellation }) => constellation >= 2,
+      },
+      Constellation_E_3,
+      Constellation_Q_5,
+      {
+        label: "6命·「最光辉的精灵，可否为我祷告」",
+        describe:
+          "希格雯进行治疗时，将基于生命值上限，提升自己的过饱和心意注射的暴击率和暴击伤害：每1000点生命值上限都将提升0.4%暴击率与2.2%暴击伤害。至多通过这种方式提升20%暴击率与110%暴击伤害%",
+        effect: [
+          {
+            type: BuffType.BurstCritcal,
+            getValue: (data) => Math.min(20, ((data.baseHP + data.extraHP + data.extraHP_NT) / 1000) * 0.4),
+            actionOn: ActionOn.External,
+          },
+          {
+            type: BuffType.BurstCritcalHurt,
+            getValue: (data) => Math.min(110, ((data.baseHP + data.extraHP + data.extraHP_NT) / 1000) * 2.2),
+            actionOn: ActionOn.External,
+          },
+        ],
+        enable: true,
+        condition: ({ constellation }) => constellation >= 6,
+      },
+    ],
+  },
+  {
+    ...cha(10000098, "克洛琳德", ElementType.Electro, WeaponType.Sword)(Rarity.Five, 12956, 337, 784, 60)(
+      "UI_AvatarIcon_Clorinde",
+      [
+        "UI_Talent_S_Clorinde_01",
+        "UI_Talent_S_Clorinde_02",
+        "UI_Talent_U_Clorinde_02",
+        "UI_Talent_S_Clorinde_03",
+        "UI_Talent_U_Clorinde_01",
+        "UI_Talent_S_Clorinde_04",
+      ],
+      ["普通攻击·逐影之誓", "狩夜之巡", "残光将终"]
+    ),
+    normalAttack: [
+      createAttack("一段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.541, 0.585, 0.629, 0.691, 0.735, 0.786, 0.855, 0.924, 0.993, 1.069, 1.144],
+      }),
+      createAttack("二段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.516, 0.558, 0.6, 0.66, 0.702, 0.75, 0.816, 0.882, 0.949, 1.021, 1.093],
+      }),
+      createAttack("三段伤害·1", AttackType.Normal, ElementType.Physical, {
+        atk: [0.342, 0.37, 0.398, 0.437, 0.465, 0.497, 0.541, 0.584, 0.628, 0.676, 0.723],
+      }),
+      createAttack("三段伤害·2", AttackType.Normal, ElementType.Physical, {
+        atk: [0.342, 0.37, 0.398, 0.437, 0.465, 0.497, 0.541, 0.584, 0.628, 0.676, 0.723],
+      }),
+      createAttack("四段伤害·单次", AttackType.Normal, ElementType.Physical, {
+        atk: [0.231, 0.25, 0.269, 0.296, 0.315, 0.336, 0.366, 0.395, 0.425, 0.457, 0.49],
+      }),
+      createAttack("五段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0, 0.9, 0.973, 1.047, 1.151, 1.225, 1.308, 1.423, 1.539, 1.654],
+      }),
+      createAttack("重击伤害", AttackType.Strong, ElementType.Physical, {
+        atk: [1.281, 1.386, 1.49, 1.639, 1.743, 1.863, 2.026, 2.19, 2.354, 2.533, 2.712],
+      }),
+      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
+        atk: [0.639, 0.691, 0.743, 0.818, 0.87, 0.929, 1.011, 1.093, 1.175, 1.264, 1.353],
+      }),
+      createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+        atk: [1.28, 1.38, 1.49, 1.64, 1.74, 1.86, 2.02, 2.19, 2.35, 2.53, 2.71],
+      }),
+      createAttack("高空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+        atk: [1.6, 1.73, 1.86, 2.04, 2.17, 2.32, 2.53, 2.73, 2.93, 3.16, 3.38],
+      }),
+    ],
+    elementSkill: [
+      createAttack("驰猎伤害", AttackType.Normal, ElementType.Electro, {
+        atk: [0.268, 0.289, 0.311, 0.342, 0.364, 0.389, 0.423, 0.457, 0.492, 0.529, 0.566, 0.604, 0.641],
+      }),
+      createAttack("驰猎伤害·强化", AttackType.Normal, ElementType.Electro, {
+        atk: [0.388, 0.419, 0.451, 0.496, 0.528, 0.564, 0.613, 0.663, 0.713, 0.767, 0.821, 0.875, 0.929],
+      }),
+      createAttack("贯夜伤害·基础", AttackType.Skill, ElementType.Electro, {
+        atk: [0.33, 0.357, 0.383, 0.422, 0.449, 0.479, 0.521, 0.564, 0.606, 0.652, 0.698, 0.744, 0.79],
+      }),
+      createAttack("贯夜伤害·普通", AttackType.Skill, ElementType.Electro, {
+        atk: [0.44, 0.475, 0.511, 0.562, 0.598, 0.639, 0.695, 0.751, 0.808, 0.869, 0.93, 0.992, 1.053],
+      }),
+      createAttack("贯夜伤害·强化", AttackType.Skill, ElementType.Electro, {
+        atk: [0.272, 0.292, 0.321, 0.342, 0.365, 0.397, 0.429, 0.461, 0.496, 0.531, 0.566, 0.602],
+      }),
+      createAttack("流涌之刃伤害", AttackType.Other, ElementType.Electro, {
+        atk: [0.432, 0.464, 0.497, 0.54, 0.572, 0.605, 0.648, 0.691, 0.734, 0.778, 0.821, 0.864, 0.918],
+      }),
+    ],
+    burstSkill: [
+      createAttack("技能伤害·单次", AttackType.Burst, ElementType.Electro, {
+        atk: [1.269, 1.364, 1.459, 1.586, 1.681, 1.776, 1.903, 2.03, 2.157, 2.284, 2.411, 2.538, 2.696],
+      }),
+    ],
+    otherSkill: [
+      createAttack("1命·夜巡之影伤害", AttackType.Normal, ElementType.Electro, {
+        atk: [0.3],
+      }),
+      createAttack("6命·夜巡之影伤害", AttackType.Normal, ElementType.Electro, {
+        atk: [2],
+      }),
+    ],
+    buffs: [
+      S_80_CRITALHUNT_38P,
+      {
+        label: "破夜的明焰",
+        describe:
+          "队伍中附近的角色对敌人触发雷元素相关反应后，将基于克洛琳德攻击力的20%，提升克洛琳德的普通攻击与残光将终造成的雷元素伤害。至多叠加3层，每层独立计时。通过这种方式至多使克洛琳德的上述攻击造成的伤害提升1800；解锁2命后效果提升50%",
+        effect: [
+          {
+            type: BuffType.NormalFixed,
+            getValue: (data, s) =>
+              data.constellation >= 2
+                ? Math.min(2700, (data.baseATK + data.extraATK + data.extraATK_NT) * 0.3 * s)
+                : Math.min(1800, (data.baseATK + data.extraATK + data.extraATK_NT) * 0.2 * s),
+            actionOn: ActionOn.External,
+          },
+          {
+            type: BuffType.BurstFixed,
+            getValue: (data, s) =>
+              data.constellation >= 2
+                ? Math.min(2700, (data.baseATK + data.extraATK + data.extraATK_NT) * 0.3 * s)
+                : Math.min(1800, (data.baseATK + data.extraATK + data.extraATK_NT) * 0.2 * s),
+            actionOn: ActionOn.External,
+          },
+        ],
+        enable: true,
+        stackable: true,
+        stack: 3,
+        limit: 3,
+      },
+      {
+        label: "契令的酬偿",
+        describe:
+          "如果克洛琳德的生命之契大于或等于生命值上限的100%，生命之契的数值提升或降低时，克洛琳德的暴击率提升10%，至多叠加2层",
+        effect: [{ type: BuffType.Critcal, getValue: (_, s) => 10 * s }],
+        enable: true,
+        stackable: true,
+        stack: 2,
+        limit: 2,
+      },
+      Constellation_E_3,
+      {
+        label: "4命·「铭记泪，生命与仁爱」",
+        describe:
+          "残光将终对敌人造成伤害时，将根据克洛琳德的当前生命之契百分比提升此次伤害，每1%生命之契都将使此次残光将终造成的伤害提升2%；通过这种方式，至多使残光将终造成的伤害提升200%",
+        effect: [{ type: BuffType.BurstPrcent, getValue: (_, s) => 2 * s }],
+        enable: true,
+        stackable: true,
+        stack: 100,
+        limit: 100,
+        condition: ({ constellation }) => constellation >= 4,
+        stackText: "生命之契%",
+      },
+      Constellation_Q_5,
+      {
+        label: "6命·「为此，勿将希望弃扬」",
+        describe: "施放狩夜之巡后的12秒内，克洛琳德的暴击率提升10%，暴击伤害提升70%",
+        effect: [
+          { type: BuffType.Critcal, getValue: () => 10 },
+          { type: BuffType.CritcalHurt, getValue: () => 70 },
+        ],
+        condition: ({ constellation }) => constellation >= 6,
+        enable: true,
+      },
+    ],
+  },
+  {
+    ...cha(10000096, "阿蕾奇诺", ElementType.Pyro, WeaponType.Polearms)(Rarity.Five, 13103, 342, 765, 60)(
+      "UI_AvatarIcon_Arlecchino",
+      [
+        "UI_Talent_S_Arlecchino_01",
+        "UI_Talent_S_Arlecchino_02",
+        "UI_Talent_U_Arlecchino_01",
+        "UI_Talent_S_Arlecchino_03",
+        "UI_Talent_U_Arlecchino_02",
+        "UI_Talent_S_Arlecchino_04",
+      ],
+      ["普通攻击·斩首之邀", "万相化灰", "厄月将升"]
+    ),
+    normalAttack: [
+      createAttack("一段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.475, 0.514, 0.552, 0.608, 0.646, 0.69, 0.751, 0.812, 0.873, 0.939, 1.005, 1.072, 1.138, 1.204],
+      }),
+      createAttack("二段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.521, 0.563, 0.606, 0.666, 0.709, 0.757, 0.824, 0.891, 0.957, 1.03, 1.103, 1.175, 1.248, 1.321],
+      }),
+      createAttack("三段伤害·1", AttackType.Normal, ElementType.Physical, {
+        atk: [0.654, 0.707, 0.76, 0.836, 0.89, 0.95, 1.034, 1.118, 1.201, 1.293, 1.384, 1.475, 1.566, 1.657],
+      }),
+      createAttack("三段伤害·2", AttackType.Normal, ElementType.Physical, {
+        atk: [0.371, 0.402, 0.432, 0.475, 0.505, 0.54, 0.587, 0.635, 0.682, 0.734, 0.786, 0.838, 0.89, 0.942],
+      }),
+      createAttack("四段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.371, 0.402, 0.432, 0.475, 0.505, 0.54, 0.587, 0.635, 0.682, 0.734, 0.786, 0.838, 0.89, 0.942],
+      }),
+      createAttack("五段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.7, 0.757, 0.814, 0.895, 0.952, 1.017, 1.107, 1.196, 1.286, 1.383, 1.481, 1.579, 1.676, 1.774],
+      }),
+      createAttack("重击伤害", AttackType.Strong, ElementType.Physical, {
+        atk: [0.908, 0.982, 1.056, 1.162, 1.236, 1.32, 1.436, 1.552, 1.668, 1.795, 1.922, 2.049, 2.175, 2.302],
+      }),
+      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
+        atk: [0.639, 0.691, 0.743, 0.818, 0.87, 0.929, 1.011, 1.093, 1.175, 1.264, 1.353, 1.442, 1.531, 1.621],
+      }),
+      createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+        atk: [1.28, 1.38, 1.49, 1.64, 1.74, 1.86, 2.02, 2.19, 2.35, 2.53, 2.71, 2.884, 3.062, 3.241],
+      }),
+      createAttack("高空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+        atk: [1.6, 1.73, 1.86, 2.04, 2.17, 2.32, 2.53, 2.73, 2.93, 3.16, 3.38, 3.602, 3.825, 4.048],
+      }),
+    ],
+    elementSkill: [
+      createAttack("尖刺伤害", AttackType.Skill, ElementType.Pyro, {
+        atk: [0.148, 0.16, 0.171, 0.186, 0.197, 0.208, 0.223, 0.237, 0.252, 0.267],
+      }),
+      createAttack("切斩伤害", AttackType.Skill, ElementType.Pyro, {
+        atk: [1.336, 1.436, 1.536, 1.67, 1.77, 1.87, 2.003, 2.137, 2.271, 2.404],
+      }),
+      createAttack("血偿勒令伤害", AttackType.Skill, ElementType.Pyro, {
+        atk: [0.318, 0.342, 0.366, 0.398, 0.421, 0.445, 0.477, 0.509, 0.541, 0.572],
+      }),
+    ],
+    burstSkill: [
+      createAttack("技能伤害", AttackType.Burst, ElementType.Pyro, {
+        atk: [3.704, 3.982, 4.26, 4.63, 4.908, 5.186, 5.556, 5.926, 6.297, 6.667, 7.038, 7.408, 7.871],
+      }),
+    ],
+    otherSkill: [
+      createAttack("2命·厄月血火", AttackType.Other, ElementType.Pyro, {
+        atk: [9],
+      }),
+    ],
+    buffs: [
+      S_80_CRITALHUNT_38P,
+      {
+        label: "普通攻击·红死之宴",
+        describe:
+          "阿蕾奇诺具有的生命之契大于或等于生命值上限的30%时，将进入红死之宴状态：普通攻击、重击与下落攻击造成的伤害将转为无法被附魔覆盖的火元素伤害；普通攻击命中敌人时，将提升本次攻击造成的伤害，提升值相当于阿蕾奇诺的攻击力乘以当前生命之契百分比的一定比例；解锁1命后进一步提升",
+        effect: [
+          {
+            type: BuffType.Transform,
+            getValue: (_, s) => (s >= 30 ? EnchantingType[ElementType.Pyro] : EnchantingType[ElementType.Physical]),
+          },
+          {
+            type: BuffType.NormalFixed,
+            getValue: (data, s) => {
+              let a =
+                ([1.204, 1.302, 1.4, 1.54, 1.638, 1.75, 1.904, 2.058, 2.212, 2.38, 2.548, 2.716, 2.884, 3.052].map(
+                  (i) => (data.constellation >= 1 ? i + 1 : i)
+                )[data.normalLevel + data.normalLevelAdd - 1] *
+                  s) /
+                100;
+              return s >= 30 ? (data.baseATK + data.extraATK + data.extraATK_NT) * a : 0;
+            },
+            actionOn: ActionOn.External,
+          },
+        ],
+        enable: true,
+        stackable: true,
+        stack: 145,
+        limit: 200,
+        stackText: "生命之契%",
+      },
+      {
+        label: "唯厄月可知晓",
+        describe: "在战斗状态下，阿蕾奇诺获得40%火元素伤害加成",
+        effect: [{ type: BuffType.PyroPrcent, getValue: () => 40 }],
+        enable: true,
+      },
+      Constellation_A_3,
+      Constellation_Q_5,
+      {
+        label: "6命·「自此以后，我们将共飨新生。」",
+        describe:
+          "厄月将升造成的伤害提高，提升值相当于阿蕾奇诺的攻击力乘以当前生命之契百分比的700%。施放万相化灰后的20秒内，阿蕾奇诺的普通攻击与元素爆发的暴击率提升10%、暴击伤害提升70%",
+        effect: [
+          {
+            type: BuffType.BurstFixed,
+            getValue: (data, s) => {
+              return ((data.baseATK + data.extraATK + data.extraATK_NT) * 7 * s) / 100;
+            },
+            actionOn: ActionOn.External,
+          },
+          { type: BuffType.NormalCritcal, getValue: () => 10 },
+          { type: BuffType.NormalCritcalHurt, getValue: () => 70 },
+          { type: BuffType.BurstCritcal, getValue: () => 10 },
+          { type: BuffType.BurstCritcalHurt, getValue: () => 70 },
+        ],
+        enable: true,
+        stackable: true,
+        stack: 145,
+        limit: 200,
+        stackText: "生命之契%",
+        condition: ({ constellation }) => constellation >= 6,
+      },
+    ],
+  },
+  {
+    ...cha(10000094, "千织", ElementType.Geo, WeaponType.Sword)(Rarity.Five, 11439, 323, 953, 60)(
+      "UI_AvatarIcon_Chiori",
+      [
+        "UI_Talent_S_Chiori_01",
+        "UI_Talent_S_Chiori_03",
+        "UI_Talent_U_Chiori_01",
+        "UI_Talent_S_Chiori_02",
+        "UI_Talent_U_Chiori_02",
+        "UI_Talent_S_Chiori_04",
+      ],
+      ["普通攻击·心织刀流", "羽袖一触", "二刀之形·比翼"]
+    ),
+    normalAttack: [
+      createAttack("一段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.494, 0.534, 0.575, 0.632, 0.672, 0.718, 0.781, 0.845, 0.908, 0.977, 1.046],
+      }),
+      createAttack("二段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.468, 0.506, 0.545, 0.599, 0.637, 0.681, 0.741, 0.801, 0.86, 0.926, 0.991],
+      }),
+      createAttack("三段伤害·1", AttackType.Normal, ElementType.Physical, {
+        atk: [0.304, 0.329, 0.354, 0.389, 0.414, 0.442, 0.481, 0.52, 0.559, 0.601, 0.644],
+      }),
+      createAttack("三段伤害·2", AttackType.Normal, ElementType.Physical, {
+        atk: [0.304, 0.329, 0.354, 0.389, 0.414, 0.442, 0.481, 0.52, 0.559, 0.601, 0.644],
+      }),
+      createAttack("四段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.751, 0.812, 0.874, 0.961, 1.022, 1.092, 1.188, 1.284, 1.38, 1.485, 1.59],
+      }),
+      createAttack("重击伤害·1", AttackType.Strong, ElementType.Physical, {
+        atk: [0.543, 0.587, 0.631, 0.695, 0.739, 0.789, 0.859, 0.928, 0.998, 1.074, 1.149],
+      }),
+      createAttack("重击伤害·2", AttackType.Strong, ElementType.Physical, {
+        atk: [0.543, 0.587, 0.631, 0.695, 0.739, 0.789, 0.859, 0.928, 0.998, 1.074, 1.149],
+      }),
+      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
+        atk: [0.639, 0.691, 0.743, 0.818, 0.87, 0.929, 1.011, 1.093, 1.175, 1.264, 1.353],
+      }),
+      createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+        atk: [1.28, 1.38, 1.49, 1.64, 1.74, 1.86, 2.02, 2.19, 2.35, 2.53, 2.71],
+      }),
+      createAttack("高空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+        atk: [1.6, 1.73, 1.86, 2.04, 2.17, 2.32, 2.53, 2.73, 2.93, 3.16, 3.38],
+      }),
+      createAttack("灵息之刺/流涌之刃伤害", AttackType.Other, ElementType.Hydro, {
+        atk: [0.095, 0.102, 0.11, 0.121, 0.129, 0.138, 0.15, 0.162, 0.174, 0.187, 0.2],
+      }),
+    ],
+    elementSkill: [
+      createAttack("袖伤害", AttackType.Skill, ElementType.Geo, {
+        atk: [0.82, 0.88, 0.94, 1.03, 1.09, 1.15, 1.23, 1.31, 1.4, 1.48, 1.56, 1.64, 1.74],
+        def: [1.03, 1.1, 1.18, 1.28, 1.36, 1.44, 1.54, 1.64, 1.74, 1.85, 1.95, 2.05, 2.18],
+      }),
+      createAttack("2命·绢伤害", AttackType.Skill, ElementType.Geo, {
+        atk: [0.82, 0.88, 0.94, 1.03, 1.09, 1.15, 1.23, 1.31, 1.4, 1.48, 1.56, 1.64, 1.74].map((i) => i * 1.7),
+        def: [1.03, 1.1, 1.18, 1.28, 1.36, 1.44, 1.54, 1.64, 1.74, 1.85, 1.95, 2.05, 2.18].map((i) => i * 1.7),
+      }),
+      createAttack("上挑攻击伤害", AttackType.Skill, ElementType.Geo, {
+        atk: [1.49, 1.6, 1.72, 1.87, 1.98, 2.09, 2.24, 2.39, 2.54, 2.69, 2.84, 2.99, 3.17],
+        def: [1.87, 2.01, 2.15, 2.33, 2.47, 2.61, 2.8, 2.99, 3.17, 3.36, 3.55, 3.73, 3.97],
+      }),
+    ],
+    burstSkill: [
+      createAttack("技能伤害", AttackType.Burst, ElementType.Geo, {
+        atk: [2.56, 2.76, 2.95, 3.2, 3.4, 3.59, 3.84, 4.1, 4.36, 4.61, 4.87, 5.13, 5.45],
+        def: [3.2, 3.44, 3.68, 4.01, 4.25, 4.49, 4.81, 5.13, 5.45, 5.77, 6.09, 6.41, 6.81],
+      }),
+    ],
+    otherSkill: [],
+    buffs: [
+      S_80_CRITAL_19P,
+      {
+        label: "量体裁衣",
+        describe: "施放羽袖一触的上挑攻击后点按普通攻击则触发「裁锦」，千织获得岩元素附魔",
+        effect: [{ type: BuffType.Enchanting, getValue: () => EnchantingType[ElementType.Geo] }],
+        enable: false,
+      },
+      {
+        label: "锦上添花",
+        describe: "队伍中附近的角色创造岩元素创造物时，千织获得20%岩元素伤害加成",
+        effect: [{ type: BuffType.GeoPrcent, getValue: () => 20 }],
+        enable: false,
+      },
+      Constellation_E_3,
+      Constellation_Q_5,
+      {
+        label: "6命·万理一空",
+        describe: "千织自己的普通攻击造成的伤害提升，提升值相当于千织自己的防御力的235%",
+        effect: [
+          {
+            type: BuffType.NormalFixed,
+            getValue: (data) => (data.baseDEF + data.extraDEF + data.extraDEF_NT) * 2.35,
+            actionOn: ActionOn.External,
+          },
+        ],
+        enable: false,
+      },
+    ],
+  },
+  {
+    ...cha(10000093, "闲云", ElementType.Anemo, WeaponType.Magic)(Rarity.Five, 10409, 335, 573, 70)(
+      "UI_AvatarIcon_Liuyun",
+      [
+        "UI_Talent_S_Liuyun_01",
+        "UI_Talent_S_Liuyun_02",
+        "UI_Talent_U_Liuyun_02",
+        "UI_Talent_S_Liuyun_03",
+        "UI_Talent_U_Liuyun_01",
+        "UI_Talent_S_Liuyun_04",
+      ],
+      ["普通攻击·清风散花词", "朝起鹤云", "暮集竹星"]
+    ),
+    normalAttack: [
+      createAttack("一段伤害", AttackType.Normal, ElementType.Anemo, {
+        atk: [0.403, 0.433, 0.463, 0.504, 0.534, 0.564, 0.605, 0.645, 0.685, 0.725, 0.766],
+      }),
+      createAttack("二段伤害", AttackType.Normal, ElementType.Anemo, {
+        atk: [0.389, 0.418, 0.447, 0.486, 0.515, 0.544, 0.583, 0.622, 0.661, 0.699, 0.738],
+      }),
+      createAttack("三段伤害", AttackType.Normal, ElementType.Anemo, {
+        atk: [0.489, 0.525, 0.562, 0.611, 0.648, 0.684, 0.733, 0.782, 0.831, 0.88, 0.929],
+      }),
+      createAttack("四段伤害", AttackType.Normal, ElementType.Anemo, {
+        atk: [0.649, 0.698, 0.747, 0.811, 0.86, 0.909, 0.974, 1.039, 1.104, 1.169, 1.233],
+      }),
+      createAttack("重击", AttackType.Strong, ElementType.Anemo, {
+        atk: [1.231, 1.324, 1.416, 1.539, 1.631, 1.724, 1.847, 1.97, 2.093, 2.216, 2.339],
+      }),
+      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Anemo, {
+        atk: [0.568, 0.615, 0.661, 0.727, 0.773, 0.826, 0.899, 0.971, 1.04, 1.12, 1.2],
+      }),
+      createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Anemo, {
+        atk: [1.14, 1.23, 1.32, 1.45, 1.55, 1.65, 1.8, 1.94, 2.09, 2.25, 2.4],
+      }),
+      createAttack("高空坠地冲击伤害", AttackType.Falling, ElementType.Anemo, {
+        atk: [1.42, 1.53, 1.65, 1.82, 1.93, 2.06, 2.24, 2.43, 2.61, 2.81, 3],
+      }),
+    ],
+    elementSkill: [
+      createAttack("技能伤害", AttackType.Skill, ElementType.Anemo, {
+        atk: [0.248, 0.2666, 0.2852, 0.31, 0.3286, 0.3472, 0.372, 0.3968, 0.4216, 0.4464, 0.4712, 0.496, 0.527],
+      }),
+      createAttack(
+        "闲云冲击波伤害·一阶",
+        AttackType.Falling,
+        ElementType.Anemo,
+        {
+          atk: [1.16, 1.249, 1.334, 1.45, 1.537, 1.624, 1.74, 1.856, 1.972, 2.088, 2.204, 2.32, 2.465],
+        },
+        "Liuyun"
+      ),
+      createAttack(
+        "闲云冲击波伤害·二阶",
+        AttackType.Falling,
+        ElementType.Anemo,
+        {
+          atk: [1.48, 1.591, 1.702, 1.85, 1.961, 2.072, 2.22, 2.368, 2.516, 2.664, 2.812, 2.96, 3.145],
+        },
+        "Liuyun"
+      ),
+      createAttack(
+        "闲云冲击波伤害·三阶",
+        AttackType.Falling,
+        ElementType.Anemo,
+        {
+          atk: [3.376, 3.629, 3.882, 4.22, 4.473, 4.726, 5.064, 5.402, 5.739, 6.077, 6.414, 6.752, 7.174],
+        },
+        "Liuyun"
+      ),
+    ],
+    burstSkill: [
+      createAttack("技能伤害", AttackType.Burst, ElementType.Anemo, {
+        atk: [1.08, 1.161, 1.242, 1.35, 1.431, 1.512, 1.62, 1.728, 1.836, 1.944, 2.052, 2.16, 2.295],
+      }),
+    ],
+    otherSkill: [],
+    buffs: [
+      S_80_ATK_28P,
+      {
+        label: "霜翎高逐祥风势",
+        describe:
+          "闲云冲击波每命中一个敌人，都将为队伍中附近的所有角色产生一层持续20秒，至多叠加4层的「风翎」效果，使角色的下落攻击的暴击率提升4%/6%/8%/10%",
+        effect: [{ type: BuffType.FallingCritcal, getValue: (_, s) => [0, 4, 6, 8, 10][s] }],
+        enable: true,
+        stack: 4,
+        limit: 4,
+        stackable: true,
+        shareable: true,
+        target: BuffTarget.All,
+        stackText: "命中敌人数",
+      },
+      {
+        label: "细想应是洞中仙",
+        describe:
+          "暮集竹星的竹星拥有仙力助推时，附近的当前场上角色的下落攻击坠地冲击造成的伤害提升，提升值相当于闲云的攻击力的200%。通过这种方式，至多使附近的当前场上角色的下落攻击坠地冲击伤害提升9000",
+        effect: [
+          {
+            type: BuffType.FallingFixed,
+            getValue: (data) => Math.min(9000, (data.baseATK + data.extraATK + data.extraATK_NT) * 2),
+            actionOn: ActionOn.External,
+          },
+        ],
+        enable: false,
+        shareable: true,
+        target: BuffTarget.All,
+      },
+      {
+        label: "2命·鹤唳远人间",
+        describe: "施放朝起鹤云的步天梯后，闲云的攻击力提升20%；「细想应是洞中仙」的效果翻倍",
+        effect: [
+          { type: BuffType.ATKPrcent, getValue: () => 20 },
+          {
+            type: BuffType.FallingFixed,
+            getValue: (data) => Math.min(9000, (data.baseATK + data.extraATK + data.extraATK_NT) * 2),
+            actionOn: ActionOn.External,
+          },
+        ],
+        enable: false,
+        shareable: true,
+        target: BuffTarget.All,
+        condition: ({ constellation }) => constellation >= 2,
+      },
+      Constellation_Q_3,
+      Constellation_E_5,
+      {
+        label: "6命·知是留云僊",
+        describe:
+          "在一次朝起鹤云的鹤云幻化期间施放了1/2/3次步天梯后，该次鹤云幻化期间的闲云冲击波的暴击伤害提升15%/35%/70%",
+        effect: [
+          {
+            type: BuffType.FallingCritcalHurt,
+            getValue: (_, s) => [0, 15, 35, 70][s],
+            special: "Liuyun",
+          },
+        ],
+        enable: false,
+        stack: 3,
+        limit: 3,
+        stackable: true,
+        stackText: "步天梯次数",
+        condition: ({ constellation }) => constellation >= 6,
+      },
+    ],
+  },
+  {
+    ...cha(10000091, "娜维娅", ElementType.Geo, WeaponType.GreatSword)(Rarity.Five, 12650, 352, 793, 60)(
+      "UI_AvatarIcon_Navia",
+      [
+        "UI_Talent_S_Navia_01",
+        "UI_Talent_S_Navia_02",
+        "UI_Talent_U_Navia_01",
+        "UI_Talent_S_Navia_03",
+        "UI_Talent_U_Navia_02",
+        "UI_Talent_S_Navia_04",
+      ],
+      ["普通攻击·直率的辞绝", "典仪式晶火", "如霰澄天的鸣礼"]
+    ),
+    normalAttack: [
+      createAttack("一段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.935, 1.011, 1.087, 1.196, 1.272, 1.359, 1.479, 1.599, 1.718, 1.849, 1.979],
+      }),
+      createAttack("二段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.865, 0.936, 1.006, 1.107, 1.177, 1.257, 1.368, 1.479, 1.589, 1.71, 1.831],
+      }),
+      createAttack("三段伤害·单次", AttackType.Normal, ElementType.Physical, {
+        atk: [0.349, 0.377, 0.406, 0.446, 0.475, 0.507, 0.552, 0.596, 0.641, 0.69, 0.738],
+      }),
+      createAttack("四段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [1.334, 1.443, 1.552, 1.707, 1.815, 1.939, 2.11, 2.281, 2.451, 2.638, 2.824],
+      }),
+      createAttack("重击循环伤害", AttackType.Strong, ElementType.Physical, {
+        atk: [0.625, 0.676, 0.727, 0.8, 0.851, 0.909, 0.989, 1.069, 1.149, 1.236, 1.323],
+      }),
+      createAttack("重击终结伤害", AttackType.Strong, ElementType.Physical, {
+        atk: [1.131, 1.223, 1.315, 1.447, 1.539, 1.644, 1.788, 1.933, 2.078, 2.236, 2.393],
+      }),
+      createAttack("下落期间伤害", AttackType.FallPeriod, ElementType.Physical, {
+        atk: [0.7459, 0.8066, 0.8673, 0.954, 1.0147, 1.0841, 1.1795, 1.2749, 1.3703, 1.4744, 1.5937],
+      }),
+      createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+        atk: [1.491, 1.613, 1.734, 1.908, 2.029, 2.168, 2.359, 2.549, 2.74, 2.948, 3.156],
+      }),
+      createAttack("高空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+        atk: [1.863, 2.014, 2.166, 2.383, 2.534, 2.708, 2.946, 3.184, 3.422, 3.683, 3.942],
+      }),
+    ],
+    elementSkill: [
+      createAttack("玫瑰晶弹伤害·5枚", AttackType.Skill, ElementType.Geo, {
+        atk: [3.948, 4.244, 4.54, 4.935, 5.231, 5.527, 5.922, 6.317, 6.712, 7.106, 7.501, 7.896, 8.39].map(
+          (i) => i * 1.2
+        ),
+      }),
+      createAttack("玫瑰晶弹伤害·7枚", AttackType.Skill, ElementType.Geo, {
+        atk: [3.948, 4.244, 4.54, 4.935, 5.231, 5.527, 5.922, 6.317, 6.712, 7.106, 7.501, 7.896, 8.39].map(
+          (i) => i * 1.4
+        ),
+      }),
+      createAttack("玫瑰晶弹伤害·9枚", AttackType.Skill, ElementType.Geo, {
+        atk: [3.948, 4.244, 4.54, 4.935, 5.231, 5.527, 5.922, 6.317, 6.712, 7.106, 7.501, 7.896, 8.39].map(
+          (i) => i * 1.66
+        ),
+      }),
+      createAttack("玫瑰晶弹伤害·11枚", AttackType.Skill, ElementType.Geo, {
+        atk: [3.948, 4.244, 4.54, 4.935, 5.231, 5.527, 5.922, 6.317, 6.712, 7.106, 7.501, 7.896, 8.39].map(
+          (i) => i * 2
+        ),
+      }),
+      createAttack("流涌之刃伤害", AttackType.Other, ElementType.Geo, {
+        atk: [0.36, 0.387, 0.414, 0.45, 0.477, 0.504, 0.54, 0.576, 0.612, 0.648, 0.684, 0.72, 0.765],
+      }),
+    ],
+    burstSkill: [
+      createAttack("技能伤害", AttackType.Burst, ElementType.Geo, {
+        atk: [0.752, 0.808, 0.865, 0.94, 0.996, 1.053, 1.128, 1.203, 1.278, 1.354, 1.429, 1.504, 1.598],
+      }),
+      createAttack("支援炮击伤害", AttackType.Burst, ElementType.Geo, {
+        atk: [0.432, 0.464, 0.496, 0.539, 0.572, 0.604, 0.647, 0.69, 0.734, 0.777, 0.82, 0.863, 0.917],
+      }),
+    ],
+    otherSkill: [],
+    buffs: [
+      S_80_CRITALHUNT_38P,
+      {
+        label: "元素战技·「裂晶弹片」",
+        describe: "消耗的「裂晶弹片」超过3枚时，超过3枚的每枚「裂晶弹片」都将使本次射击造成的伤害额外提升15%",
+        effect: [{ type: BuffType.SkillPrcent, getValue: (_, s) => s * 15 }],
+        enable: true,
+        stack: 3,
+        limit: 3,
+        stackable: true,
+        stackText: "超3枚的弹片数量",
+      },
+      {
+        label: "不明流通渠道",
+        describe:
+          "施放典仪式晶火后，娜维娅的普通攻击、重击与下落攻击造成的伤害转为无法被附魔覆盖的岩元素伤害，且娜维娅的普通攻击、重击与下落攻击造成的伤害提升40%",
+        effect: [
+          { type: BuffType.Transform, getValue: () => EnchantingType[ElementType.Geo] },
+          { type: BuffType.NormalPrcent, getValue: () => 40 },
+          { type: BuffType.StrongPrcent, getValue: () => 40 },
+          { type: BuffType.FallingPrcent, getValue: () => 40 },
+        ],
+        enable: true,
+      },
+      {
+        label: "互助关系网",
+        describe: "队伍中每存在一位火元素/雷元素/冰元素/水元素角色，娜维娅的攻击力提升20%，此效果至多叠加2层",
+        effect: [{ type: BuffType.ATKPrcent, getValue: (_, s) => 20 * s }],
+        enable: true,
+        stack: 2,
+        limit: 2,
+        stackable: true,
+        stackText: "符合条件的角色数量",
+      },
+      {
+        label: "2命·总指挥的乘胜追击",
+        describe:
+          "施放典仪式晶火时，每消耗1枚「裂晶弹片」，都将使本次典仪式晶火的暴击率提升12%，至多通过这种方式使其暴击率提高36%",
+        effect: [{ type: BuffType.SkillCritcal, getValue: (_, s) => 12 * s }],
+        enable: true,
+        stack: 3,
+        limit: 3,
+        stackable: true,
+        stackText: "「裂晶弹片」消耗量",
+        condition: ({ constellation }) => constellation >= 2,
+      },
+      Constellation_E_3,
+      {
+        label: "4命·铭誓者的绝不姑息",
+        describe: "如霰澄天的鸣礼命中敌人时，将使该敌人的岩元素抗性降低20%",
+        effect: [{ type: BuffType.EnemyGeoResistance, getValue: () => -20 }],
+        enable: true,
+        shareable: true,
+        target: BuffTarget.Enemy,
+        condition: ({ constellation }) => constellation >= 4,
+      },
+      Constellation_Q_5,
+      {
+        label: "6命·刺玫会长的灵活手腕",
+        describe:
+          "施放典仪式晶火时，若消耗的「裂晶弹片」超过3枚，超过3枚的每枚「裂晶弹片」都将使本次典仪式晶火的暴击伤害提升45%",
+        effect: [{ type: BuffType.SkillCritcalHurt, getValue: (_, s) => 45 * s }],
+        enable: true,
+        stack: 3,
+        limit: 3,
+        stackable: true,
+        stackText: "超3枚的弹片数量",
+        condition: ({ constellation }) => constellation >= 6,
+      },
+    ],
+  },
   {
     ...cha(10000089, "芙宁娜", ElementType.Hydro, WeaponType.Sword)(Rarity.Five, 15307, 244, 696, 60)(
       "UI_AvatarIcon_Furina",
@@ -153,7 +1541,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         effect: [
           {
             type: BuffType.SkillPrcent,
-            getValue: (data) => Math.min(28, (data.baseHP + data.extraHP + data.extraHP_NT) / 1000 * 0.7),
+            getValue: (data) => Math.min(28, ((data.baseHP + data.extraHP + data.extraHP_NT) / 1000) * 0.7),
             special: "Furina",
             actionOn: ActionOn.Indirect,
           },
@@ -222,6 +1610,128 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
             actionOn: ActionOn.Indirect,
           },
           { type: BuffType.Transform, getValue: () => EnchantingType[ElementType.Hydro] },
+        ],
+        enable: true,
+        condition: ({ constellation }) => constellation >= 6,
+      },
+    ],
+  },
+  {
+    ...cha(10000086, "莱欧斯利", ElementType.Cryo, WeaponType.Magic)(Rarity.Five, 13593, 311, 763, 60)(
+      "UI_AvatarIcon_Wriothesley",
+      [
+        "UI_Talent_S_Wriothesley_01",
+        "UI_Talent_S_Wriothesley_02",
+        "UI_Talent_U_Wriothesley_01",
+        "UI_Talent_S_Wriothesley_03",
+        "UI_Talent_U_Wriothesley_02",
+        "UI_Talent_S_Wriothesley_04",
+      ],
+      ["普通攻击·迅烈倾霜拳", "冰牙突驰", "黑金狼噬"]
+    ),
+    normalAttack: [
+      createAttack("一段伤害", AttackType.Normal, ElementType.Cryo, {
+        atk: [0.518, 0.56, 0.602, 0.663, 0.705, 0.753, 0.819, 0.885, 0.952, 1.024, 1.096, 1.168, 1.241, 1.313],
+      }),
+      createAttack("二段伤害", AttackType.Normal, ElementType.Cryo, {
+        atk: [0.463, 0.497, 0.532, 0.578, 0.613, 0.647, 0.694, 0.74, 0.786, 0.832, 0.879, 0.925, 0.983, 1.041],
+      }),
+      createAttack("三段伤害", AttackType.Normal, ElementType.Cryo, {
+        atk: [0.672, 0.727, 0.782, 0.86, 0.915, 0.977, 1.063, 1.149, 1.235, 1.329, 1.423, 1.516, 1.61, 1.704],
+      }),
+      createAttack("四段伤害·1", AttackType.Normal, ElementType.Cryo, {
+        atk: [
+          0.379, 0.4099, 0.4407, 0.4848, 0.5157, 0.5509, 0.5994, 0.6479, 0.6964, 0.7493, 0.802, 0.855, 0.908, 0.961,
+        ],
+      }),
+      createAttack("四段伤害·2", AttackType.Normal, ElementType.Cryo, {
+        atk: [
+          0.379, 0.4099, 0.4407, 0.4848, 0.5157, 0.5509, 0.5994, 0.6479, 0.6964, 0.7493, 0.802, 0.855, 0.908, 0.961,
+        ],
+      }),
+      createAttack("五段伤害", AttackType.Normal, ElementType.Cryo, {
+        atk: [0.907, 0.981, 1.055, 1.161, 1.235, 1.319, 1.435, 1.551, 1.667, 1.794, 1.92, 2.047, 2.174, 2.3],
+      }),
+      createAttack("重击", AttackType.Strong, ElementType.Cryo, {
+        atk: [1.53, 1.644, 1.759, 1.912, 2.027, 2.147, 2.294, 2.447, 2.6, 2.753, 2.906, 3.059, 3.25, 3.442],
+      }),
+      createAttack("6命·冰锥", AttackType.Strong, ElementType.Cryo, {
+        atk: [1.53, 1.644, 1.759, 1.912, 2.027, 2.147, 2.294, 2.447, 2.6, 2.753, 2.906, 3.059, 3.25, 3.442],
+      }),
+      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Cryo, {
+        atk: [0.568, 0.615, 0.661, 0.727, 0.773, 0.826, 0.899, 0.971, 1.04, 1.12, 1.2, 1.282, 1.361, 1.441],
+      }),
+      createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Cryo, {
+        atk: [1.14, 1.23, 1.32, 1.45, 1.55, 1.65, 1.8, 1.94, 2.09, 2.25, 2.4, 2.56, 2.72, 2.88],
+      }),
+      createAttack("高空坠地冲击伤害", AttackType.Falling, ElementType.Cryo, {
+        atk: [1.42, 1.53, 1.65, 1.82, 1.93, 2.06, 2.24, 2.43, 2.61, 2.81, 3, 3.2, 3.4, 3.6],
+      }),
+    ],
+    elementSkill: [],
+    burstSkill: [
+      createAttack("技能伤害·单次", AttackType.Burst, ElementType.Cryo, {
+        atk: [1.272, 1.3674, 1.4628, 1.59, 1.6854, 1.7808, 1.908, 2.0352, 2.1624, 2.2896, 2.4168, 2.544, 2.703],
+      }),
+      createAttack("流涌之刃伤害", AttackType.Other, ElementType.Cryo, {
+        atk: [0.424, 0.4558, 0.4876, 0.53, 0.5618, 0.5936, 0.636, 0.6784, 0.7208, 0.7632, 0.8056, 0.848, 0.901],
+      }),
+    ],
+    otherSkill: [],
+    buffs: [
+      S_80_CRITALHUNT_38P,
+      {
+        label: "元素战技·寒烈的惩裁",
+        describe: "生命值高于50%时，强化「普通攻击·迅烈倾霜拳」的斥逐拳，使其造成的伤害提",
+        effect: [
+          {
+            type: BuffType.NormalRate,
+            getValue: (data) => {
+              return [43.2, 45.8, 48.3, 51.7, 54.3, 56.9, 60.2, 63.6, 67, 70.3][
+                data.skillLevel + data.skillLevelAdd - 1
+              ];
+            },
+          },
+        ],
+        enable: true,
+      },
+      {
+        label: "公理终有辩诉之日",
+        describe:
+          "莱欧斯利的生命值低于60%时，将获得「恩典之诫」，使下次普通攻击·迅烈倾霜拳的重击强化为惩戒·凌跃拳：不消耗体力，造成的伤害提升50%，解锁1命后提升200%",
+        effect: [{ type: BuffType.StrongPrcent, getValue: (data) => (data.constellation >= 1 ? 200 : 50) }],
+        enable: true,
+      },
+      {
+        label: "罪业终有报偿之时",
+        describe:
+          "莱欧斯利的当前生命值提升或降低时，若莱欧斯利处于冰牙突驰的寒烈的惩裁状态下，寒烈的惩裁将获得一层「检偿之敕」效果，该效果至多叠加至5层，每层使莱欧斯利的攻击力提升6%",
+        effect: [{ type: BuffType.ATKPrcent, getValue: (_, s) => 6 * s }],
+        enable: true,
+        stackable: true,
+        stack: 5,
+        limit: 5,
+        stackText: "「检偿之敕」",
+      },
+      {
+        label: "2命·予骄暴者以镣锁",
+        describe: "施放黑金狼噬时，固有天赋「罪业终有报偿之时」的每层「检偿之敕」效果都将使造成的伤害提升40%",
+        effect: [{ type: BuffType.BurstPrcent, getValue: (_, s) => 40 * s }],
+        enable: true,
+        stackable: true,
+        stack: 5,
+        limit: 5,
+        stackText: "「检偿之敕」",
+        condition: ({ constellation }) => constellation >= 2,
+      },
+      Constellation_A_3,
+      Constellation_Q_5,
+      {
+        label: "6命·予无罪者以念抚",
+        describe: "惩戒·凌跃拳的暴击率提升10%，暴击伤害提升80%",
+        effect: [
+          { type: BuffType.StrongCritcal, getValue: () => 10 },
+          { type: BuffType.StrongCritcalHurt, getValue: () => 80 },
         ],
         enable: true,
         condition: ({ constellation }) => constellation >= 6,
@@ -2334,7 +3844,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       {
         label: "元素爆发·「怒目鬼王」",
         describe: `普通攻击、重击与下落攻击造成的伤害转为无法被附魔覆盖的岩元素伤害；
-        \n提高荒泷一斗普通攻击的攻击速度，并基于其防御力，提高攻击力； `,
+        提高荒泷一斗普通攻击的攻击速度，并基于其防御力，提高攻击力； `,
         effect: [
           {
             type: BuffType.ATKFixed,
@@ -2448,7 +3958,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       {
         label: "元素爆发·「仪来羽衣」",
         describe: `增加珊瑚宫心海的普通攻击、重击以及元素战技的「化海月」造成的伤害，增加值基于珊瑚宫心海的生命值上限
-        \n普通攻击和重击命中敌人时，为队伍中附近的所有角色恢复生命值，回复量受益于珊瑚宫心海的生命值上限
+        普通攻击和重击命中敌人时，为队伍中附近的所有角色恢复生命值，回复量受益于珊瑚宫心海的生命值上限
         `,
         effect: [
           {
@@ -3735,7 +5245,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       Constellation_E_3,
       {
         label: "4命·神通·诸苦灭尽",
-        describe: "魈的生命值低于50%时，获得100％的防御力提升",
+        describe: "魈的生命值低于50%时，获得100%的防御力提升",
         effect: [{ type: BuffType.DEFPrcent, getValue: () => 100 }],
         enable: false,
         condition: ({ constellation }) => constellation >= 4,
@@ -4409,7 +5919,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       Constellation_Q_3,
       {
         label: "4命·自由的凛风",
-        describe: `温迪获取元素晶球或元素微粒后，获得25％的风元素伤害加成`,
+        describe: `温迪获取元素晶球或元素微粒后，获得25%的风元素伤害加成`,
         effect: [{ type: BuffType.AnemoPrcent, getValue: () => 25 }],
         enable: false,
         condition: ({ constellation }) => constellation >= 4,
@@ -4417,7 +5927,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       Constellation_E_5,
       {
         label: "6命·抗争的暴风",
-        describe: `受风神之诗伤害的敌人，风元素抗性降低20％； 若产生了元素转化，则使转换的元素抗性也降低20％`,
+        describe: `受风神之诗伤害的敌人，风元素抗性降低20%； 若产生了元素转化，则使转换的元素抗性也降低20%`,
         effect: [{ type: BuffType.EnemyAnemoResistance, getValue: () => -20 }],
         enable: false,
         shareable: true,
@@ -4425,7 +5935,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       },
       {
         label: "6命·抗争的暴风·水",
-        describe: `受风神之诗伤害的敌人，风元素抗性降低20％； 若产生了元素转化，则使转换的元素抗性也降低20％`,
+        describe: `受风神之诗伤害的敌人，风元素抗性降低20%； 若产生了元素转化，则使转换的元素抗性也降低20%`,
         effect: [{ type: BuffType.EnemyHydroResistance, getValue: () => -20 }],
         enable: false,
         shareable: true,
@@ -4433,7 +5943,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       },
       {
         label: "6命·抗争的暴风·火",
-        describe: `受风神之诗伤害的敌人，风元素抗性降低20％； 若产生了元素转化，则使转换的元素抗性也降低20％`,
+        describe: `受风神之诗伤害的敌人，风元素抗性降低20%； 若产生了元素转化，则使转换的元素抗性也降低20%`,
         effect: [{ type: BuffType.EnemyPyroResistance, getValue: () => -20 }],
         enable: false,
         shareable: true,
@@ -4441,7 +5951,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       },
       {
         label: "6命·抗争的暴风·冰",
-        describe: `受风神之诗伤害的敌人，风元素抗性降低20％； 若产生了元素转化，则使转换的元素抗性也降低20％`,
+        describe: `受风神之诗伤害的敌人，风元素抗性降低20%； 若产生了元素转化，则使转换的元素抗性也降低20%`,
         effect: [{ type: BuffType.EnemyCryoResistance, getValue: () => -20 }],
         enable: false,
         shareable: true,
@@ -4449,7 +5959,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       },
       {
         label: "6命·抗争的暴风·雷",
-        describe: `受风神之诗伤害的敌人，风元素抗性降低20％； 若产生了元素转化，则使转换的元素抗性也降低20％`,
+        describe: `受风神之诗伤害的敌人，风元素抗性降低20%； 若产生了元素转化，则使转换的元素抗性也降低20%`,
         effect: [{ type: BuffType.EnemyElectroResistance, getValue: () => -20 }],
         enable: false,
         shareable: true,
@@ -4525,7 +6035,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       Constellation_Q_3,
       {
         label: "4命·蒲公英的国土",
-        describe: "在蒲公英之风的领域内，所有敌人的风元素抗性下降40％",
+        describe: "在蒲公英之风的领域内，所有敌人的风元素抗性下降40%",
         effect: [{ type: BuffType.EnemyAnemoResistance, getValue: () => -40 }],
         enable: false,
         shareable: true,
@@ -4739,7 +6249,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       },
       {
         label: "1命·罪罚裁断",
-        describe: "对生命值高于50％的敌人，迪卢克造成的伤害提高15%",
+        describe: "对生命值高于50%的敌人，迪卢克造成的伤害提高15%",
         effect: [{ type: BuffType.GlobalPrcent, getValue: () => 15 }],
         enable: true,
         condition: ({ constellation }) => constellation >= 1,
@@ -8265,7 +9775,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       },
       {
         label: "2命·压制",
-        describe: "雷泽攻击生命值低于30％的敌人时，暴击率提高10%",
+        describe: "雷泽攻击生命值低于30%的敌人时，暴击率提高10%",
         effect: [{ type: BuffType.Critcal, getValue: () => 10 }],
         enable: false,
         condition: ({ constellation }) => constellation >= 2,
@@ -9007,7 +10517,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       },
       {
         label: "2命·旋风女仆",
-        describe: "诺艾尔的重击体力消耗降低20%，造成的伤害提升15％",
+        describe: "诺艾尔的重击体力消耗降低20%，造成的伤害提升15%",
         effect: [{ type: BuffType.StrongPrcent, getValue: () => 15 }],
         enable: true,
         condition: ({ constellation }) => constellation >= 2,
@@ -9164,358 +10674,6 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         label: "6命·四灵捧圣",
         describe: "灵刃·云开星落对生命值百分比低于重云的敌人造成伤害时，伤害提升15%",
         effect: [{ type: BuffType.BurstPrcent, getValue: () => 15 }],
-        enable: true,
-        condition: ({ constellation }) => constellation >= 6,
-      },
-    ],
-  },
-  //==================================
-  {
-    ...cha(10000101, "基尼奇", ElementType.Dendro, WeaponType.GreatSword)(Rarity.Five, 12858, 332, 802, 70)(
-      "UI_AvatarIcon_Kinich",
-      [
-        "UI_Talent_S_Kinich_01",
-        "UI_Talent_S_Kinich_02",
-        "UI_Talent_U_Kinich_01",
-        "UI_Talent_S_Kinich_03",
-        "UI_Talent_U_Kinich_02",
-        "UI_Talent_S_Kinich_04",
-      ],
-      ["普通攻击·夜阳斗技", "悬猎·游骋高狩", "向伟大圣龙致意"]
-    ),
-    normalAttack: [
-      createAttack("一段伤害", AttackType.Normal, ElementType.Physical, {
-        atk: [0.99, 1.07, 1.151, 1.266, 1.347, 1.439, 1.565, 1.692, 1.819, 1.957, 2.095],
-      }),
-      createAttack("二段伤害", AttackType.Normal, ElementType.Physical, {
-        atk: [0.829, 0.897, 0.964, 1.06, 1.128, 1.205, 1.311, 1.417, 1.523, 1.639, 1.755],
-      }),
-      createAttack("三段伤害", AttackType.Normal, ElementType.Physical, {
-        atk: [1.235, 1.336, 1.436, 1.58, 1.68, 1.795, 1.953, 2.111, 2.269, 2.441, 2.614],
-      }),
-      createAttack("空中普通攻击伤害", AttackType.Normal, ElementType.Physical, {
-        atk: [1.677, 1.814, 1.95, 2.145, 2.282, 2.438, 2.652, 2.867, 3.081, 3.315, 3.549],
-      }),
-      createAttack("重击伤害", AttackType.Strong, ElementType.Physical, {
-        atk: [0.484, 0.524, 0.563, 0.619, 0.659, 0.704, 0.766, 0.828, 0.89, 0.957, 1.025].map((i) => i * 3),
-      }),
-      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
-        atk: [0.746, 0.807, 0.867, 0.954, 1.015, 1.084, 1.18, 1.275, 1.37, 1.474, 1.579],
-      }),
-      createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
-        atk: [1.49, 1.61, 1.73, 1.91, 2.03, 2.17, 2.36, 2.55, 2.74, 2.95, 3.16],
-      }),
-      createAttack("高空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
-        atk: [1.86, 2.01, 2.17, 2.38, 2.53, 2.71, 2.95, 3.18, 3.42, 3.68, 3.94],
-      }),
-    ],
-    elementSkill: [
-      createAttack("环绕射击伤害", AttackType.Skill, ElementType.Dendro, {
-        atk: [0.573, 0.616, 0.659, 0.716, 0.759, 0.802, 0.859, 0.916, 0.974, 1.031, 1.088, 1.146, 1.217],
-      }),
-      createAttack(
-        "迴猎贯鳞炮伤害",
-        AttackType.Skill,
-        ElementType.Dendro,
-        {
-          atk: [6.874, 7.39, 7.906, 8.593, 9.109, 9.624, 10.312, 10.999, 11.686, 12.374, 13.061, 13.749, 14.607],
-        },
-        "Kinich"
-      ),
-    ],
-    burstSkill: [
-      createAttack("技能伤害", AttackType.Burst, ElementType.Dendro, {
-        atk: [1.34, 1.441, 1.541, 1.675, 1.776, 1.876, 2.01, 2.144, 2.278, 2.412, 2.546, 2.68, 2.848],
-      }),
-      createAttack("龙息伤害", AttackType.Burst, ElementType.Dendro, {
-        atk: [1.207, 1.298, 1.388, 1.509, 1.6, 1.69, 1.811, 1.932, 2.053, 2.173, 2.294, 2.415, 2.566],
-      }),
-    ],
-    otherSkill: [
-      createAttack(
-        "基尼奇·6命弹射",
-        AttackType.Skill,
-        ElementType.Dendro,
-        {
-          atk: [7],
-        },
-        "Kinich"
-      ),
-    ],
-    buffs: [
-      S_80_CRITALHUNT_38P,
-      {
-        label: "焰灵的契约",
-        describe:
-          "队伍中的附近的角色触发「夜魂迸发」后，赋予一层「猎人心得」，至多叠加2层。每层「猎人心得」使迴猎贯鳞炮伤害提高，基于基尼奇攻击力的320%",
-        effect: [
-          {
-            type: BuffType.SkillFixed,
-            getValue(data, s) {
-              return (data.baseATK + data.extraATK + data.extraATK_NT) * 3.2 * s;
-            },
-            actionOn: ActionOn.Indirect,
-            special: "Kinich",
-          },
-        ],
-        enable: false,
-        stackText: "猎人心得",
-        limit: 2,
-        stack: 1,
-        stackable: true,
-      },
-      {
-        label: "1命·七鹦之喙",
-        describe: "迴猎贯鳞炮的暴击伤害提升100%",
-        effect: [{ type: BuffType.SkillCritcalHurt, getValue: () => 100, special: "Kinich" }],
-        condition: ({ constellation }) => constellation >= 1,
-        enable: true,
-      },
-      {
-        label: "2命·星虎之掌",
-        describe: "迴猎贯鳞炮首次造成的伤害提升100%",
-        effect: [{ type: BuffType.SkillPrcent, getValue: () => 100, special: "Kinich" }],
-        condition: ({ constellation }) => constellation >= 2,
-        enable: true,
-      },
-      Constellation_E_3,
-      Constellation_Q_5,
-    ],
-  },
-  {
-    ...cha(10000102, "玛拉妮", ElementType.Hydro, WeaponType.Magic)(Rarity.Five, 15185, 182, 570, 60)(
-      "UI_AvatarIcon_Mualani",
-      [
-        "UI_Talent_S_Mualani_01",
-        "UI_Talent_S_Mualani_02",
-        "UI_Talent_U_Mualani_01",
-        "UI_Talent_S_Mualani_03",
-        "UI_Talent_U_Mualani_02",
-        "UI_Talent_S_Mualani_04",
-      ],
-      ["普通攻击·降温处理", "踏鲨破浪", "爆瀑飞弹"]
-    ),
-    normalAttack: [
-      createAttack("一段伤害", AttackType.Normal, ElementType.Hydro, {
-        atk: [0.514, 0.553, 0.591, 0.642, 0.681, 0.72, 0.771, 0.822, 0.874, 0.925, 1.221],
-      }),
-      createAttack("二段伤害", AttackType.Normal, ElementType.Hydro, {
-        atk: [0.446, 0.48, 0.513, 0.558, 0.591, 0.625, 0.669, 0.714, 0.759, 0.803, 1.06],
-      }),
-      createAttack("三段伤害", AttackType.Normal, ElementType.Hydro, {
-        atk: [0.7, 0.753, 0.805, 0.875, 0.928, 0.98, 1.051, 1.121, 1.191, 1.261, 1.663],
-      }),
-      createAttack("重击伤害", AttackType.Strong, ElementType.Hydro, {
-        atk: [1.43, 1.54, 1.64, 1.79, 1.89, 2, 2.14, 2.29, 2.43, 2.57, 3.39],
-      }),
-      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Hydro, {
-        atk: [0.568, 0.615, 0.661, 0.727, 0.773, 0.826, 0.899, 0.971, 1.044, 1.123, 1.203],
-      }),
-      createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Hydro, {
-        atk: [1.14, 1.23, 1.32, 1.45, 1.55, 1.65, 1.8, 1.94, 2.09, 2.25, 2.4],
-      }),
-      createAttack("高空坠地冲击伤害", AttackType.Falling, ElementType.Hydro, {
-        atk: [1.42, 1.53, 1.65, 1.82, 1.93, 2.06, 2.24, 2.43, 2.61, 2.81, 3],
-      }),
-    ],
-    elementSkill: [
-      createAttack("鲨鲨撕咬基础伤害", AttackType.Normal, ElementType.Hydro, {
-        hp: [0.0868, 0.0933, 0.0998, 0.1085, 0.115, 0.1215, 0.1302, 0.1389, 0.1476, 0.1562, 0.1649, 0.1736, 0.1845],
-      }),
-      createAttack(
-        "巨浪鲨鲨撕咬伤害",
-        AttackType.Normal,
-        ElementType.Hydro,
-        {
-          hp: [0.434, 0.4667, 0.4991, 0.5427, 0.575, 0.6077, 0.651, 0.6953, 0.7379, 0.7811, 0.8247, 0.868, 0.9222],
-        },
-        "Mualani"
-      ),
-    ],
-    burstSkill: [
-      createAttack("爆瀑飞弹", AttackType.Burst, ElementType.Hydro, {
-        hp: [0.584, 0.628, 0.672, 0.73, 0.774, 0.818, 0.877, 0.935, 0.993, 1.05, 1.11, 1.169, 1.242],
-      }),
-    ],
-    otherSkill: [],
-    buffs: [
-      S_80_CRITAL_19P,
-      {
-        label: "1命·悠闲的「梅兹特利」",
-        describe:
-          "进入夜魂加持状态后的第一次巨浪鲨鲨撕咬及它所触发的鲨鲨飞弹造成的伤害提升，提升值相当于玛拉妮生命值上限的66%",
-        effect: [
-          {
-            type: BuffType.NormalFixed,
-            getValue: (data) => {
-              return (data.baseHP + data.extraHP + data.extraHP_NT) * 0.66;
-            },
-            special: "Mualani",
-            actionOn: ActionOn.Indirect,
-          },
-        ],
-        enable: true,
-        condition: ({ constellation }) => constellation >= 1,
-      },
-      Constellation_E_3,
-      {
-        label: "4命·鲨鲨主食是豚豚。",
-        describe: "爆瀑飞弹造成的伤害提升75%",
-        effect: [{ type: BuffType.BurstPrcent, getValue: () => 75 }],
-        enable: true,
-        condition: ({ constellation }) => constellation >= 4,
-      },
-      Constellation_Q_5,
-      {
-        label: "6命·「流泉之众」的精神",
-        describe: "1命效果没有次数限制",
-        effect: [],
-        enable: true,
-        condition: ({ constellation }) => constellation >= 6,
-      },
-    ],
-  },
-  {
-    ...cha(10000099, "艾梅莉埃", ElementType.Dendro, WeaponType.Polearms)(Rarity.Five, 13568, 335, 730, 50)(
-      "UI_AvatarIcon_Emilie",
-      [
-        "UI_Talent_S_Emilie_01",
-        "UI_Talent_S_Emilie_02",
-        "UI_Talent_U_Emilie_01",
-        "UI_Talent_S_Emilie_03",
-        "UI_Talent_U_Emilie_02",
-        "UI_Talent_S_Emilie_04",
-      ],
-      ["普通攻击·逐影枪术·改", "撷萃调香", "香氛演绎"]
-    ),
-    normalAttack: [
-      createAttack("一段伤害", AttackType.Normal, ElementType.Physical, {
-        atk: [0.486, 0.525, 0.565, 0.621, 0.661, 0.706, 0.768, 0.83, 0.892, 0.96, 1.028],
-      }),
-      createAttack("二段伤害", AttackType.Normal, ElementType.Physical, {
-        atk: [0.449, 0.486, 0.522, 0.574, 0.611, 0.653, 0.71, 0.767, 0.825, 0.887, 0.95],
-      }),
-      createAttack("三段伤害", AttackType.Normal, ElementType.Physical, {
-        atk: [0.593, 0.641, 0.69, 0.758, 0.807, 0.862, 0.938, 1.014, 1.089, 1.172, 1.255],
-      }),
-      createAttack("四段伤害", AttackType.Normal, ElementType.Physical, {
-        atk: [0.751, 0.812, 0.873, 0.961, 1.022, 1.092, 1.188, 1.284, 1.38, 1.485, 1.589],
-      }),
-      createAttack("重击伤害", AttackType.Strong, ElementType.Physical, {
-        atk: [0.913, 0.988, 1.062, 1.168, 1.243, 1.328, 1.444, 1.561, 1.678, 1.805, 1.933],
-      }),
-      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
-        atk: [0.639, 0.691, 0.743, 0.818, 0.87, 0.929, 1.011, 1.093, 1.175, 1.264, 1.353],
-      }),
-      createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
-        atk: [1.28, 1.38, 1.48, 1.64, 1.74, 1.86, 2.02, 2.19, 2.35, 2.53, 2.71],
-      }),
-      createAttack("高空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
-        atk: [1.6, 1.73, 1.86, 2.04, 2.17, 2.32, 2.53, 2.73, 2.93, 3.16, 3.38],
-      }),
-    ],
-    elementSkill: [
-      createAttack(
-        "技能伤害",
-        AttackType.Skill,
-        ElementType.Dendro,
-        {
-          atk: [0.471, 0.506, 0.541, 0.589, 0.624, 0.659, 0.706, 0.753, 0.8, 0.847, 0.895, 0.942, 1],
-        },
-        "Emilie"
-      ),
-      createAttack(
-        "柔灯之匣·一阶伤害",
-        AttackType.Skill,
-        ElementType.Dendro,
-        {
-          atk: [0.396, 0.426, 0.455, 0.495, 0.525, 0.554, 0.594, 0.634, 0.673, 0.713, 0.752, 0.792, 0.842],
-        },
-        "Emilie"
-      ),
-      createAttack(
-        "柔灯之匣·二阶伤害（单段）",
-        AttackType.Skill,
-        ElementType.Dendro,
-        {
-          atk: [0.84, 0.903, 0.966, 1.05, 1.113, 1.176, 1.26, 1.344, 1.428, 1.512, 1.596, 1.68, 1.785],
-        },
-        "Emilie"
-      ),
-      createAttack("灵息之刺伤害", AttackType.Skill, ElementType.Dendro, {
-        atk: [0.385, 0.414, 0.443, 0.482, 0.51, 0.539, 0.578, 0.616, 0.655, 0.693, 0.732, 0.77, 0.819],
-      }),
-    ],
-    burstSkill: [
-      createAttack("柔灯之匣·三阶伤害", AttackType.Burst, ElementType.Dendro, {
-        atk: [2.172, 2.335, 2.498, 2.715, 2.878, 3.041, 3.258, 3.475, 3.692, 3.91, 4.127, 4.344, 4.616],
-      }),
-    ],
-    otherSkill: [
-      createAttack(
-        "固有天赋·余薰",
-        AttackType.Other,
-        ElementType.Dendro,
-        {
-          atk: [6],
-        },
-        "Emilie"
-      ),
-    ],
-    buffs: [
-      S_80_CRITALHUNT_38P,
-      {
-        label: "精馏",
-        describe:
-          "艾梅莉埃对处于燃烧状态下的敌人造成的伤害：每1000点攻击力都将提升15%伤害，至多通过这种方式提升36%伤害",
-        effect: [
-          {
-            type: BuffType.GlobalPrcent,
-            getValue: (data) => {
-              return Math.min(36, ((data.baseATK + data.extraATK + data.extraATK_NT) / 1000) * 15);
-            },
-          },
-        ],
-        enable: true,
-      },
-      {
-        label: "1命·淡香浸析",
-        describe: "撷萃调香与固有天赋「余薰」的清露香氛造成的伤害提升20%",
-        effect: [{ type: BuffType.GlobalPrcent, getValue: () => 20, special: "Emilie" }],
-        enable: true,
-        condition: ({ constellation }) => constellation >= 1,
-      },
-      {
-        label: "2命·湖光顶调",
-        describe: "撷萃调香与固有天赋「余薰」的清露香氛命中敌人时，降低敌人草元素抗性30%",
-        effect: [{ type: BuffType.EnemyDendroResistance, getValue: () => -30 }],
-        enable: true,
-        condition: ({ constellation }) => constellation >= 2,
-        shareable: true,
-        target: BuffTarget.Enemy,
-      },
-      Constellation_E_3,
-      Constellation_Q_5,
-      {
-        label: "6命·茉洁香迹",
-        describe: "普通攻击与重击转为无法被附魔覆盖的草元素伤害，并提升造成的伤害，提升值相当于艾梅莉埃攻击力的300%",
-        effect: [
-          { type: BuffType.Transform, getValue: () => EnchantingType[ElementType.Dendro] },
-          {
-            type: BuffType.NormalFixed,
-            getValue: (data) => {
-              return (data.baseATK + data.extraATK + data.extraATK_NT) * 3;
-            },
-            actionOn: ActionOn.Indirect,
-          },
-          {
-            type: BuffType.StrongFixed,
-            getValue: (data) => {
-              return (data.baseATK + data.extraATK + data.extraATK_NT) * 3;
-            },
-            actionOn: ActionOn.Indirect,
-          },
-        ],
         enable: true,
         condition: ({ constellation }) => constellation >= 6,
       },

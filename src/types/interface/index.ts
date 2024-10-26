@@ -29,7 +29,7 @@ export interface IBuffBase {
   
   /** Buff是否可共享，为true表示该增益可以给其他人使用 */
   shareable?: boolean;
-  /** 团队增益展示条件判断函数，返回为true即可以展示，false不可展示。不设置则默认展示 */
+  /** 给队友使用的团队增益条件判断函数，入参为队友的面板属性，返回为true即可以展示，false不可展示。不设置则默认展示 */
   shareCondition?: BuffCondition;
 }
 export interface ISkillRate {
