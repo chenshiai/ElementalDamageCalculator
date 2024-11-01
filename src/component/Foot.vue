@@ -32,8 +32,8 @@
 <script setup>
 import { Popup } from "vant";
 import { ref } from "vue";
-import updateLog from "../../public/update-log";
 
+const updateLog = window.updateLog;
 const show = ref(false);
 const showAuthor = ref(false);
 </script>

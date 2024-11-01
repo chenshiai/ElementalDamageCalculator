@@ -1,7 +1,7 @@
 const updateLog = [
   {
     data: "2024-11-01",
-    msg: ["新增纳塔的四星武器数据。"]
+    msg: ["新增纳塔的四星武器【硕果钩】【弥坚骨】【镇山之钉】数据。"]
   },
   {
     data: "2024-10-26",
@@ -132,4 +132,5 @@ const updateLog = [
     msg: [" 角色等级初始值设置为80级，元素精通初始值设置为786，增幅反应加成刚好是100整。"],
   },
 ]
-export default updateLog;
+
+window.updateLog = updateLog
