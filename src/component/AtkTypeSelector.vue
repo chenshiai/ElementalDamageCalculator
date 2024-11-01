@@ -108,23 +108,23 @@ const atkType = defineModel();
 }
 
 .water {
-  background-image: url("/hydro.png");
+  background-image: url("/img/hydro.png");
 }
 
 .fire {
-  background-image: url("/pyro.png");
+  background-image: url("/img/pyro.png");
 }
 
 .ice {
-  background-image: url("/cryo.png");
+  background-image: url("/img/cryo.png");
 }
 
 .dendro {
-  background-image: url("/dendro.png");
+  background-image: url("/img/dendro.png");
 }
 
 .electro {
-  background-image: url("/electro.png");
+  background-image: url("/img/electro.png");
 }
 </style>
 <style>

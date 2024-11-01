@@ -75,7 +75,7 @@
           ]"
           @click="setCurrentRelic(WITCH)"
       >
-        <img class="holy-relic__img" src="/witch2.png"/>
+        <img class="holy-relic__img" src="/img/witch2.png"/>
         <div>炽烈的炎之魔女</div>
       </div>
       <div
@@ -86,7 +86,7 @@
           ]"
           @click="setCurrentRelic(THUNDER)"
       >
-        <img class="holy-relic__img" src="/thunder2.png"/>
+        <img class="holy-relic__img" src="/img/thunder2.png"/>
         <div>如雷的盛怒</div>
       </div>
       <div
@@ -97,7 +97,7 @@
           ]"
           @click="setCurrentRelic(EMERALD)"
       >
-        <img class="holy-relic__img" src="/emerald2.png"/>
+        <img class="holy-relic__img" src="/img/emerald2.png"/>
         <div>翠绿之影</div>
       </div>
       <div
@@ -108,7 +108,7 @@
           ]"
           @click="setCurrentRelic(EDEN)"
       >
-        <img class="holy-relic__img" src="/eden.png"/>
+        <img class="holy-relic__img" src="/img/eden.png"/>
         <div>乐园遗落之花</div>
       </div>
     </div>

@@ -184,7 +184,7 @@
 }
 .logo-Pyro {
   position: relative;
-  background-image: url('/pyro.png');
+  background-image: url('/img/pyro.png');
 }
 
 .logo-Pyro::after {
@@ -192,7 +192,7 @@
 }
 
 .logo-Hydro {
-  background-image: url('/hydro.png');
+  background-image: url('/img/hydro.png');
 }
 
 .logo-Hydro::after {
@@ -200,7 +200,7 @@
 }
 
 .logo-Cryo {
-  background-image: url('/cryo.png');
+  background-image: url('/img/cryo.png');
 }
 
 .logo-Cryo::after {
@@ -208,7 +208,7 @@
 }
 
 .logo-Electro {
-  background-image: url('/electro.png');
+  background-image: url('/img/electro.png');
 }
 
 .logo-Electro::after {
@@ -216,7 +216,7 @@
 }
 
 .logo-Geo {
-  background-image: url('/geo.png');
+  background-image: url('/img/geo.png');
 }
 
 .logo-Geo::after {
@@ -224,7 +224,7 @@
 }
 
 .logo-Anemo {
-  background-image: url('/anemo.png');
+  background-image: url('/img/anemo.png');
 }
 
 .logo-Anemo::after {
@@ -232,7 +232,7 @@
 }
 
 .logo-Dendro {
-  background-image: url('/dendro.png');
+  background-image: url('/img/dendro.png');
 }
 
 .logo-Dendro::after {

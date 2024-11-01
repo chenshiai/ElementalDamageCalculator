@@ -16,13 +16,13 @@
     你可以通过以下平台联系作者
     <div class="foot-popup-name">
       <a href="https://www.miyoushe.com/ys/accountCenter/postList?id=139610391" target="_blank">
-        <img src="/mhy.jpg" />
+        <img src="/img/mhy.jpg" />
       </a>
       <a href="https://space.bilibili.com/76824065" target="_blank">
-        <img src="/OIP-C.jpg" />
+        <img src="/img/OIP-C.jpg" />
       </a>
       <a href="https://github.com/chenshiai/ElementalDamageCalculator" target="_blank">
-        <img src="/git.png">
+        <img src="/img/git.png">
       </a>
       @ChenShiAi
     </div>
@@ -32,7 +32,7 @@
 <script setup>
 import { Popup } from "vant";
 import { ref } from "vue";
-import updateLog from "@/constants/update-log";
+import updateLog from "../../public/update-log";
 
 const show = ref(false);
 const showAuthor = ref(false);

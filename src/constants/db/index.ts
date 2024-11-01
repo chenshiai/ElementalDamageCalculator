@@ -1,5 +1,4 @@
-import { ElementType } from "@/types/enum";
-import { IBuffBase, ICalculatorValue } from "@/types/interface";
+import { ICalculatorValue } from "@/types/interface";
 
 export const calDB = {
   storeName: "uesrSavedCalculations",
