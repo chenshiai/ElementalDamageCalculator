@@ -50,6 +50,114 @@ createWeapon(
 export const Weapons: IWeaponInfo[] = [
   createWeapon(
     {
+      name: "硕果钩",
+      enkaId: 12430,
+      weaponType: WeaponType.GreatSword,
+      icon: getEnkaUI("UI_EquipIcon_Claymore_Umpakati_Awaken"),
+      baseAtk: 565,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.ATTACK_PERCENT,
+      statValue: 27.6,
+    },
+    (affix = 1) => {
+      let c = [0, 16, 20, 24, 28, 32][affix] + "%";
+      return {
+        title: "坠枝之重",
+        text: highlight`下落攻击的暴击率提升${c}，下落攻击命中敌人后，普通攻击、重击、下落攻击造成的伤害提升${c}，持续10秒。`,
+      };
+    },
+    (affix = 1) => {
+      let c = [0, 16, 20, 24, 28, 32][affix];
+      return [
+        {
+          label: "下落攻击的暴击率提升",
+          describe: `下落攻击的暴击率提升${c}%`,
+          effect: [{ type: BuffType.FallingCritcal, getValue: () => c }],
+          enable: true,
+        },
+        {
+          label: "普攻、重击、下落攻击伤害提升",
+          describe: `普通攻击、重击、下落攻击造成的伤害提升${c}%`,
+          effect: [
+            { type: BuffType.NormalPrcent, getValue: () => c },
+            { type: BuffType.StrongPrcent, getValue: () => c },
+            { type: BuffType.FallingPrcent, getValue: () => c },
+          ],
+          enable: false,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "弥坚骨",
+      enkaId: 11430,
+      weaponType: WeaponType.Sword,
+      icon: getEnkaUI("UI_EquipIcon_Sword_Umpakati_Awaken"),
+      baseAtk: 565,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.ATTACK_PERCENT,
+      statValue: 27.6,
+    },
+    (affix = 1) => {
+      let c = [0, 16, 20, 24, 28, 32][affix] + "%";
+      return {
+        title: "陷阵者的自矜",
+        text: highlight`冲刺或代替冲刺的能力消耗的体力降低15%；此外，使用冲刺或代替冲刺的能力后，普通攻击造成的伤害提高，提高值数值相当于攻击力的${c}，该效果在生效18次或7s后消失。`,
+
+      };
+    },
+    (affix = 1) => {
+      let c = [0, 16, 20, 24, 28, 32][affix];
+      return [
+        {
+          label: "普通攻击造成的伤害提高",
+          describe: `普通攻击造成的伤害提高，提高值数值相当于攻击力的${c}%`,
+          effect: [{ type: BuffType.NormalFixed, getValue: (data) => (data.baseATK+data.extraATK+data.extraATK_NT) * c, actionOn: ActionOn.External }],
+          enable: true,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "镇山之钉",
+      enkaId: 13430,
+      weaponType: WeaponType.Polearms,
+      icon: getEnkaUI("UI_EquipIcon_Pole_Umpakati_Awaken"),
+      baseAtk: 565,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.CHARGE_EFFICIENCY,
+      statValue: 30.6,
+    },
+    (affix = 1) => {
+      let c = [0, 12,15,18,21,24][affix] + "%";
+      return {
+        title: "越峰之望",
+        text: highlight`攀爬消耗的体力降低15%，元素战技造成的伤害提升${c}；此外，队伍中附件的其他角色施放元素战技后，装备者的元素战技造成的伤害还会提升${c}，持续8秒。`,
+
+      };
+    },
+    (affix = 1) => {
+      let c = [0,12,15,18,21,24][affix];
+      return [
+        {
+          label: "元素战技造成的伤害提升",
+          describe: `元素战技造成的伤害提升${c}%`,
+          effect: [{ type: BuffType.SkillPrcent, getValue: () => c}],
+          enable: true,
+        },
+        {
+          label: "元素战技造成的伤害进一步提升",
+          describe: `队伍中附件的其他角色施放元素战技后，装备者的元素战技造成的伤害还会提升${c}%`,
+          effect: [{ type: BuffType.SkillPrcent, getValue: () => c}],
+          enable: false,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
       name: "岩峰巡歌",
       enkaId: 11516,
       weaponType: WeaponType.Sword,
@@ -80,13 +188,13 @@ export const Weapons: IWeaponInfo[] = [
           describe: `普通攻击或下落攻击命中敌人后，将获得「荣花之歌」：防御力提高${def}%，并获得${add}%所有元素伤害加成，至多叠加2层`,
           effect: [
             { type: BuffType.DEFPrcent, getValue: (_, s) => def * s },
-            { type: BuffType.HydroPrcent, getValue: (_, s) => add* s },
-            { type: BuffType.PyroPrcent, getValue:  (_, s) => add* s },
-            { type: BuffType.ElectroPrcent, getValue:  (_, s) => add* s },
-            { type: BuffType.AnemoPrcent, getValue: (_, s) => add* s },
-            { type: BuffType.CryoPrcent, getValue:  (_, s) => add* s },
-            { type: BuffType.DendroPrcent, getValue:  (_, s) => add* s},
-            { type: BuffType.GeoPrcent, getValue:  (_, s) => add* s },
+            { type: BuffType.HydroPrcent, getValue: (_, s) => add * s },
+            { type: BuffType.PyroPrcent, getValue: (_, s) => add * s },
+            { type: BuffType.ElectroPrcent, getValue: (_, s) => add * s },
+            { type: BuffType.AnemoPrcent, getValue: (_, s) => add * s },
+            { type: BuffType.CryoPrcent, getValue: (_, s) => add * s },
+            { type: BuffType.DendroPrcent, getValue: (_, s) => add * s },
+            { type: BuffType.GeoPrcent, getValue: (_, s) => add * s },
           ],
           stackable: true,
           limit: 2,
