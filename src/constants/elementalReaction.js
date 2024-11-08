@@ -1,5 +1,5 @@
 // 元素伤害反应基数
-// 0.25（燃烧）:0.5（超导）:0.6（扩散）:1.15（超激化）:1.2（感电）:1.25（蔓激化）:1.5（碎冰）:2（超载）:2（绽放）:3（x绽放）
+// 0.25（燃烧）:1.5（超导）:0.6（扩散）:1.15（超激化）:2（感电）:1.25（蔓激化）:3（碎冰）:2.75（超载）:2（绽放）:3（x绽放）
 const ElementalReactionBaseDMG = [0,
   17.166, 18.535, 19.905, 21.275, 22.645, 24.650, 26.641, 28.869, 31.368, 34.143,
   37.201, 40.660, 44.447, 48.564, 53.749, 59.082, 64.420, 69.725, 75.123, 80.585,
@@ -15,15 +15,15 @@ const ElementalReactionBaseDMG = [0,
 /** 元素反应基础伤害值 */
 export const BaseDMG = {
   // 感电
-  electroCharged: ElementalReactionBaseDMG.map(i => i * 1.2),
+  electroCharged: ElementalReactionBaseDMG.map(i => i * 2),
   // 超载
-  overload: ElementalReactionBaseDMG.map(i => i * 2),
+  overload: ElementalReactionBaseDMG.map(i => i * 2.75),
   // 超导
-  superconduct: ElementalReactionBaseDMG.map(i => i * 0.5),
+  superconduct: ElementalReactionBaseDMG.map(i => i * 1.5),
   // 扩散
   swirl: ElementalReactionBaseDMG.map(i => i * 0.6),
   // 碎冰
-  shatter: ElementalReactionBaseDMG.map(i => i * 1.5),
+  shatter: ElementalReactionBaseDMG.map(i => i * 3),
   // 超激化基础数值
   aggravate: ElementalReactionBaseDMG.map(i => i * 1.15),
   // 蔓激化基础数值
