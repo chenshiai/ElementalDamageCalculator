@@ -50,35 +50,141 @@ createWeapon(
 export const Weapons: IWeaponInfo[] = [
   createWeapon(
     {
-      name: "星鹫赤羽",
-      enkaId: 12513,
+      name: "厄水之祸",
+      enkaId: 11432,
+      weaponType: WeaponType.Sword,
+      icon: getEnkaUI("UI_EquipIcon_Sword_SacrificialNgombe_Awaken"),
+      baseAtk: 565,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.ATTACK_PERCENT,
+      statValue: 27.6,
+    },
+    (affix = 1) => {
+      let a = [20,25,30,35,40][affix - 1] + "%";
+      let c = [8,10,12,14,16][affix - 1] + "%";
+      return {
+        title: "弥漫的边界",
+        text: highlight`角色处于护盾庇护下时，普通攻击和重击造成的伤害提升${a}，普通攻击和重击的暴击率提升${c}。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [20,25,30,35,40][affix - 1]
+      let c = [8,10,12,14,16][affix - 1]
+      return [
+        {
+          label: "护盾庇护下普通、重击的伤害&暴击率提升",
+          describe: `角色处于护盾庇护下时，普通攻击和重击造成的伤害提升${a}%，普通攻击和重击的暴击率提升${c}%。`,
+          effect: [
+            { type: BuffType.NormalPrcent, getValue: () => a },
+            { type: BuffType.StrongPrcent, getValue: () => a },
+            { type: BuffType.NormalCritcal, getValue: () => c },
+            { type: BuffType.StrongCritcal, getValue: () => c }],
+          enable: false,
+        },
+      ];
+    },
+  ),
+  createWeapon(
+    {
+      name: "缀花之翎",
+      enkaId: 15430,
       weaponType: WeaponType.Bow,
-      icon: getEnkaUI("UI_EquipIcon_Claymore_Umpakati_Awaken"),
+      icon: getEnkaUI("UI_EquipIcon_Bow_Umpakati_Awaken"),
+      baseAtk: 510,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.ATTACK_PERCENT,
+      statValue: 41.3,
+    },
+    (affix = 1) => {
+      let a = [6, 7.5, 9, 10.5, 12][affix - 1] + "%";
+      return {
+        title: "未至的花序",
+        text: highlight`滑翔消耗的体力降低15%。进行瞄准射击时，每0.5秒提升重击造成的伤害${a}，该效果最多叠加6层，并将在不处于瞄准状态下10秒后移除。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [6, 7.5, 9, 10.5, 12][affix - 1];
+      return [
+        {
+          label: "重击造成的伤害提升",
+          describe: `进行瞄准射击时，每0.5秒提升重击造成的伤害${a}%，该效果最多叠加6层`,
+          effect: [{ type: BuffType.StrongPrcent, getValue: (_, s) => a * s }],
+          stackable: true,
+          limit: 6,
+          stack: 6,
+          enable: true,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "乘浪的回旋",
+      enkaId: 14430,
+      weaponType: WeaponType.Magic,
+      icon: getEnkaUI("UI_EquipIcon_Catalyst_Umpakati_Awaken"),
+      baseAtk: 454,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.CHARGE_EFFICIENCY,
+      statValue: 61.3,
+    },
+    (affix = 1) => {
+      let a = [20, 25, 30, 35, 40][affix - 1] + "%";
+      let b = [12, 15, 18, 21, 24][affix - 1] + "%";
+      let c = [24, 30, 36, 42, 48][affix - 1] + "%";
+      return {
+        title: "长牙飞去来",
+        text: highlight`游泳消耗的体力降低15%。此外，施放元素战技后的10秒内，生命值上限提升${a}，队伍中每存在一位水元素类型的角色，生命值上限将进一步提升${b}，至多通过这种方式提升${c}，该效果每15秒至多触发一次。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [20, 25, 30, 35, 40][affix - 1];
+      let b = [12, 15, 18, 21, 24][affix - 1];
+      return [
+        {
+          label: `生命值上限提升${a}%`,
+          describe: `施放元素战技后的10秒内，生命值上限提升${a}%`,
+          effect: [{ type: BuffType.HPPrcent, getValue: (_, s) => a + b * s }],
+          enable: false,
+          stackable: true,
+          limit: 2,
+          stack: 2,
+          stackText: "队伍中水元素类型的角色数量",
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
+      name: "星鹫赤羽",
+      enkaId: 15514,
+      weaponType: WeaponType.Bow,
+      icon: getEnkaUI("UI_EquipIcon_Bow_Qoyllorsnova_Awaken"),
       baseAtk: 608,
       rarity: Rarity.Five,
       appendPropId: AppendProp.CRITICAL_HURT,
       statValue: 66.2,
     },
     (affix = 1) => {
-      const a = [24, 30, 36, 42, 48][affix - 1] + '%'
-      const b = [20, 25, 30, 35, 40][affix - 1] + '%'
-      const c = [48, 60, 72, 84, 96][affix - 1] + '%'
-      const d = [10, 12.5, 15, 17.5, 20][affix - 1] + '%'
-      const e = [24, 30, 36, 42, 48][affix - 1] + '%'
+      const a = [24, 30, 36, 42, 48][affix - 1] + "%";
+      const b = [20, 25, 30, 35, 40][affix - 1] + "%";
+      const c = [48, 60, 72, 84, 96][affix - 1] + "%";
+      const d = [10, 12.5, 15, 17.5, 20][affix - 1] + "%";
+      const e = [24, 30, 36, 42, 48][affix - 1] + "%";
       return {
         title: "眸中的月珥",
         text: highlight`触发扩散反应后的12秒内，攻击力提高${a}。此外，队伍中存在至少1/2名与装备者元素类型不同的角色时，装备者重击造成的伤害提高(${b}/${c})，元素爆发造成的伤害提高(${d}/${e})。`,
       };
     },
     (affix = 1) => {
-      const a = [24, 30, 36, 42, 48][affix - 1]
-      const b = [20, 25, 30, 35, 40][affix - 1]
-      const c = [48, 60, 72, 84, 96][affix - 1]
-      const d = [10, 12.5, 15, 17.5, 20][affix - 1]
-      const e = [24, 30, 36, 42, 48][affix - 1]
+      const a = [24, 30, 36, 42, 48][affix - 1];
+      const b = [20, 25, 30, 35, 40][affix - 1];
+      const c = [48, 60, 72, 84, 96][affix - 1];
+      const d = [10, 12.5, 15, 17.5, 20][affix - 1];
+      const e = [24, 30, 36, 42, 48][affix - 1];
       return [
         {
-          label: "攻击力提升",
+          label: `攻击力提升${a}%`,
           describe: `触发扩散反应后的12秒内，攻击力提高${a}%`,
           effect: [{ type: BuffType.ATKPrcent, getValue: () => a }],
           enable: false,
@@ -97,7 +203,7 @@ export const Weapons: IWeaponInfo[] = [
           stackText: "不同元素的角色数量",
         },
       ];
-    },
+    }
   ),
   createWeapon(
     {
@@ -155,7 +261,6 @@ export const Weapons: IWeaponInfo[] = [
       return {
         title: "陷阵者的自矜",
         text: highlight`冲刺或代替冲刺的能力消耗的体力降低15%；此外，使用冲刺或代替冲刺的能力后，普通攻击造成的伤害提高，提高值数值相当于攻击力的${c}，该效果在生效18次或7s后消失。`,
-
       };
     },
     (affix = 1) => {
@@ -164,7 +269,13 @@ export const Weapons: IWeaponInfo[] = [
         {
           label: "普通攻击造成的伤害提高",
           describe: `普通攻击造成的伤害提高，提高值数值相当于攻击力的${c}%`,
-          effect: [{ type: BuffType.NormalFixed, getValue: (data) => (data.baseATK+data.extraATK+data.extraATK_NT) * c, actionOn: ActionOn.External }],
+          effect: [
+            {
+              type: BuffType.NormalFixed,
+              getValue: (data) => (data.baseATK + data.extraATK + data.extraATK_NT) * c,
+              actionOn: ActionOn.External,
+            },
+          ],
           enable: true,
         },
       ];
@@ -182,26 +293,25 @@ export const Weapons: IWeaponInfo[] = [
       statValue: 30.6,
     },
     (affix = 1) => {
-      let c = [0, 12,15,18,21,24][affix] + "%";
+      let c = [0, 12, 15, 18, 21, 24][affix] + "%";
       return {
         title: "越峰之望",
         text: highlight`攀爬消耗的体力降低15%，元素战技造成的伤害提升${c}；此外，队伍中附件的其他角色施放元素战技后，装备者的元素战技造成的伤害还会提升${c}，持续8秒。`,
-
       };
     },
     (affix = 1) => {
-      let c = [0,12,15,18,21,24][affix];
+      let c = [0, 12, 15, 18, 21, 24][affix];
       return [
         {
           label: "元素战技造成的伤害提升",
           describe: `元素战技造成的伤害提升${c}%`,
-          effect: [{ type: BuffType.SkillPrcent, getValue: () => c}],
+          effect: [{ type: BuffType.SkillPrcent, getValue: () => c }],
           enable: true,
         },
         {
           label: "元素战技造成的伤害进一步提升",
           describe: `队伍中附件的其他角色施放元素战技后，装备者的元素战技造成的伤害还会提升${c}%`,
-          effect: [{ type: BuffType.SkillPrcent, getValue: () => c}],
+          effect: [{ type: BuffType.SkillPrcent, getValue: () => c }],
           enable: false,
         },
       ];
