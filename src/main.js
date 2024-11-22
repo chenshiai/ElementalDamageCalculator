@@ -8,7 +8,7 @@ import route from "./router";
 import store from "./store";
 import "default-passive-events";
 import db from "./utils/db";
-import { calDB } from "./constants/db";
+import { calDB, relicDB } from "./constants/db";
 import VConsole from "vconsole";
 
 if (process.env.NODE_ENV !== "production") {
@@ -16,6 +16,7 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 db.createStore(calDB.storeName, calDB.keyPath);
+db.createStore(relicDB.storeName, relicDB.keyPath, relicDB.autoIncrement);
 
 createApp(App)
 .use(BackTop)

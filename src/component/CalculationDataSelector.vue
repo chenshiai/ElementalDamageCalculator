@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { Button, Collapse, CollapseItem, SwipeCell } from "vant";
 import db from "@/utils/db";
-import { IUesrSavedCalculations, calDB } from "@/constants/db";
+import { IUserSavedCalculationData, calDB } from "@/constants/db";
 import { ref, watchEffect } from "vue";
 const emit = defineEmits<{
-  recalculation: [value: IUesrSavedCalculations];
+  recalculation: [value: IUserSavedCalculationData];
 }>();
 
 const opened = ref([]);
@@ -13,7 +13,7 @@ const props = defineProps({
     default: false,
   },
 });
-const localData = ref<IUesrSavedCalculations[]>([]);
+const localData = ref<IUserSavedCalculationData[]>([]);
 
 watchEffect(() => {
   if (props.showDataPopup) {
@@ -31,7 +31,7 @@ const deleteLocalData = (title: string) => {
 };
 
 // 重算数据
-const recalculation = (data: IUesrSavedCalculations) => {
+const recalculation = (data: IUserSavedCalculationData) => {
   emit("recalculation", data);
 };
 

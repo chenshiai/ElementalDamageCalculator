@@ -1,5 +1,4 @@
 import { showSuccessToast, showFailToast } from "vant";
-import { s } from "vite/dist/node/types.d-aGj9QkWt";
 
 interface Database {
   version: number;
@@ -8,7 +7,7 @@ interface Database {
 
 class calculateDatabase implements Database {
   private _db?: IDBDatabase;
-  public version = 1;
+  public version = 2;
   public name = "calculationDatabase";
   private _tempCreateStores = [];
 
@@ -23,48 +22,53 @@ class calculateDatabase implements Database {
       console.error("打开数据库失败！", (event.target as IDBOpenDBRequest).error);
     };
 
-    request.onsuccess = () => {
+    request.onsuccess = (event) => {
       this._db = (event.target as IDBOpenDBRequest).result as IDBDatabase;
     };
 
     request.onupgradeneeded = (event) => {
       this._db = (event.target as IDBOpenDBRequest).result as IDBDatabase;
       if (this._tempCreateStores.length > 0) {
-        this._tempCreateStores.forEach(({ storeName, keyPath }) => {
-          this._db.createObjectStore(storeName, { keyPath });
+        this._tempCreateStores.forEach(({ storeName, keyPath, autoIncrement = false }) => {
+          try {
+            this._db.createObjectStore(storeName, { keyPath, autoIncrement });
+          } catch (error) {
+            console.log("表创建失败", storeName, error);
+          }
         });
       }
     };
   }
 
-  public createStore(storeName: string, keyPath: string): void {
+  public createStore(storeName: string, keyPath: string, autoIncrement: boolean = false): void {
     if (!this._db) {
-      this._tempCreateStores.push({ storeName, keyPath });
+      this._tempCreateStores.push({ storeName, keyPath, autoIncrement });
     } else {
-      this._db.createObjectStore(storeName, { keyPath });
+      this._db.createObjectStore(storeName, { keyPath, autoIncrement });
     }
   }
 
-  public add(storeName: string, data: any): void {
+  public add(storeName: string, data: any): Promise<string> {
     if (!this._db) {
       throw new Error("数据库尚未准备好");
     }
 
     const transaction: IDBTransaction = this._db.transaction([storeName], "readwrite");
     const objectStore: IDBObjectStore = transaction.objectStore(storeName);
-    
     const request: IDBRequest = objectStore.add(data);
 
-    request.onsuccess = () => {
-      showSuccessToast("面板数据已保存");
-    };
-
-    request.onerror = () => {
-      this.put(storeName, data);
-    };
+    return new Promise((resolve, reject) => {
+      request.onsuccess = () => {
+        resolve(request.result);
+      };
+  
+      request.onerror = () => {
+        reject(request.result);
+      };
+    });
   }
 
-  public put(storeName: string, data: any) {
+  public put(storeName: string, data: any): Promise<any> {
     if (!this._db) {
       showFailToast("数据更新失败");
       throw new Error("数据库尚未准备好");
@@ -72,13 +76,15 @@ class calculateDatabase implements Database {
     const transaction: IDBTransaction = this._db.transaction([storeName], "readwrite");
     const objectStore: IDBObjectStore = transaction.objectStore(storeName);
     const request: IDBRequest = objectStore.put(data);
-    request.onsuccess = () => {
-      showSuccessToast("重名数据已更新");
-    };
-    request.onerror = (event) => {
-      showFailToast("数据更新失败");
-      console.error("数据更新失败", (event.target as IDBRequest<undefined>).error);
-    };
+
+    return new Promise((resolve, reject) => {
+      request.onsuccess = () => {
+        resolve(request.result);
+      };
+      request.onerror = () => {
+        reject(request.result);
+      };
+    });
   }
 
   public get(storeName: string, key: string): Promise<any> {

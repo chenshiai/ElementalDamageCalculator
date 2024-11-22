@@ -20,14 +20,14 @@ const saveData = () => {
 };
 
 // 查看数据
-import { IUesrSavedCalculations } from "@/constants/db";
+import { IUserSavedCalculationData } from "@/constants/db";
 const showDataPopup = ref(false);
 const lookDataPop = () => {
   showDataPopup.value = true;
 };
 
 // 重算数据
-const recalculation = (data: IUesrSavedCalculations) => {
+const recalculation = (data: IUserSavedCalculationData) => {
   remark.value = data.title;
   emit("recalculation", data);
 };

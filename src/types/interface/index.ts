@@ -1,6 +1,6 @@
 import { BuffEffect, BuffCondition, WeaponStats } from "../index";
 import { ElementType, AttackType, Rarity, WeaponType, EquipType, BuffType, BuffTarget } from "../enum";
-import { IUesrSavedCalculations } from "@/constants/db";
+import { IUserSavedCalculationData } from "@/constants/db";
 
 export interface IBuffBase {
   /** Buff展示名称 */
@@ -335,6 +335,6 @@ export interface ICalculatorValue {
 }
 
 export interface ITeamItem {
-  calculation: IUesrSavedCalculations;
+  calculation: IUserSavedCalculationData;
   buffMap: Map<string, IBuffBase[]>;
 }

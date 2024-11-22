@@ -5,7 +5,13 @@ export const calDB = {
   keyPath: "title"
 };
 
-export interface IUesrSavedCalculations {
+export const relicDB = {
+  storeName: "userSavedRelics",
+  keyPath: null,
+  autoIncrement: true
+}
+
+export interface IUserSavedCalculationData {
   title: string;
   characterEnkaId: number;
   weaponEnkaId: number;

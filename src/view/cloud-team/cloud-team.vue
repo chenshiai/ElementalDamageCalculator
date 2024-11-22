@@ -3,7 +3,7 @@ import { onMounted, ref, toRaw } from "vue";
 import TabTitle from "@/component/TabTitle.vue";
 import CalculationDataSelector from "@/component/CalculationDataSelector.vue";
 import { Popup, Icon, showImagePreview } from "vant";
-import { IUesrSavedCalculations } from "@/constants/db";
+import { IUserSavedCalculationData } from "@/constants/db";
 import { Character } from "@/constants/characters-config/character";
 import { Weapons } from "@/constants/characters-config/weapon";
 import { IRelicItem } from "@/constants/characters-config/relic-class";
@@ -16,7 +16,7 @@ import DataItem from "@/component/DataItem.vue";
 import { useStore } from "vuex";
 
 interface ITeamItem {
-  calculation: IUesrSavedCalculations;
+  calculation: IUserSavedCalculationData;
   buffMap: Map<string, IBuffBase[]>;
 }
 
@@ -64,7 +64,7 @@ onMounted(()=>{
     teamList.value = JSON.parse(a);
   }
 })
-const handleCharacterChange = (result: IUesrSavedCalculations) => {
+const handleCharacterChange = (result: IUserSavedCalculationData) => {
   show.value = false;
 
   const map = new Map();

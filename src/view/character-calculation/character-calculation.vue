@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { computed, ref, watchEffect } from "vue";
+import { computed, watchEffect } from "vue";
+import { showSuccessToast } from "vant";
 import TabTitle from "@/component/TabTitle.vue";
 import CharacterPanel from "@/component/CharacterPanel.vue";
 
@@ -43,11 +44,11 @@ const CalculatorValue = computed<ICalculatorValue>(() => {
 });
 
 /** @module 数据保存 */
-import { IUesrSavedCalculations, calDB } from "@/constants/db";
+import { IUserSavedCalculationData, calDB } from "@/constants/db";
 import SaveCalculation from "@/component/SaveCalculation.vue";
 import db from "@/utils/db";
 const saveCalculationResult = (title: string) => {
-  const data: IUesrSavedCalculations = {
+  const data: IUserSavedCalculationData = {
     title,
     characterEnkaId: characterInfo.value?.enkaId,
     weaponEnkaId: weapon.value?.enkaId,
@@ -55,13 +56,19 @@ const saveCalculationResult = (title: string) => {
     relicList: JSON.stringify(relicList.value),
     panel: CalculatorValue.value,
   };
-  db.add(calDB.storeName, data);
+  db.add(calDB.storeName, data).then(() => {
+    showSuccessToast("面板数据已保存");
+  }).catch(() => {
+    db.put(calDB.storeName, data).then(() => {
+      showSuccessToast("重名数据已更新");
+    });
+  });
 };
 
 /** @module 数据重算（再次编辑） */
 import { Character } from "@/constants/characters-config/character";
 import { Weapons } from "@/constants/characters-config/weapon";
-const recalculation = (data: IUesrSavedCalculations) => {
+const recalculation = (data: IUserSavedCalculationData) => {
   characterInfo.value = Character.find((c) => c.enkaId === data.characterEnkaId);
   weapon.value = Weapons.find((w) => w.enkaId === data.weaponEnkaId);
   constellation.value = data.panel.constellation;
