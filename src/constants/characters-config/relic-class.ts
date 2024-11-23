@@ -20,6 +20,7 @@ export type RelicStatType = {
 export interface IRelicItem extends IRelicBase, RelicStatType {
   rankLevel: number;
   level: number;
+  timetemp: string;
 }
 
 export class RelicItem {
@@ -31,6 +32,7 @@ export class RelicItem {
   public level: number;
   public reliquaryMainstat: MainstatType;
   public reliquarySubstats: SubstatType[];
+  public timetemp: string;
 
   constructor(data: IRelicItem) {
     this.name = data.name;
@@ -41,6 +43,7 @@ export class RelicItem {
     this.level = data.level;
     this.reliquaryMainstat = data.reliquaryMainstat;
     this.reliquarySubstats = data.reliquarySubstats;
+    this.timetemp = data.timetemp;
   }
 
   public setMainstat(data: MainstatType) {

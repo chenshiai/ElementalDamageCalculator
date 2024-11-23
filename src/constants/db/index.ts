@@ -6,9 +6,8 @@ export const calDB = {
 };
 
 export const relicDB = {
-  storeName: "userSavedRelics",
-  keyPath: null,
-  autoIncrement: true
+  storeName: "userSavedRelicsList",
+  keyPath: "timetemp",
 }
 
 export interface IUserSavedCalculationData {

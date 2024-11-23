@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { Popup, Search, Icon, showSuccessToast, showFailToast, Button } from "vant";
+import { Popup, Search, Icon, showSuccessToast, showFailToast, Button, SwipeCell } from "vant";
 import { ref, computed } from "vue";
 
-import relics from "@/constants/characters-config/relic";
+import relics, { IRelicLibraryItemEquip } from "@/constants/characters-config/relic";
 import {
   IRelicItem,
   MainstatType,
@@ -12,7 +12,7 @@ import {
   RelicStatType,
 } from "@/constants/characters-config/relic-class";
 import { IRelicBase } from "@/types/interface";
-import { AppendProp } from "@/types/enum";
+import { AppendProp, EquipIndexToType } from "@/types/enum";
 import {
   getAppendPropName,
   percentProps,
@@ -25,6 +25,7 @@ import db from "@/utils/db";
 import { relicDB } from "@/constants/db";
 
 import { IRelicSuitText } from "./index";
+import Relic from "./relic.vue";
 
 interface IProps {
   relicSuitTexts: IRelicSuitText[];
@@ -33,11 +34,6 @@ interface IProps {
 /** @module 圣遗物列表数据展示 */
 const relicList = defineModel<IRelicItem[]>();
 const { relicSuitTexts } = defineProps<IProps>();
-const getStatValueText = (stat): string => {
-  const statValue = stat.statValue;
-  const shouldAppendPercent = percentProps.includes(stat.mainPropId || stat.appendPropId);
-  return `+${statValue}${shouldAppendPercent ? "%" : ""}`;
-};
 
 /** @module 模糊搜索框 */
 const searchRelic = ref("");
@@ -62,13 +58,17 @@ const addRelic = () => {
   const relicItem = new RelicItem({
     ...setStatBase.value,
     ...setStatForm.value,
+    timetemp: Date.now().toString(),
   });
 
   relicList.value.splice(selectedPartIndex.value, 1, relicItem);
   closePopup();
 
-  db.add(relicDB.storeName, JSON.stringify(relicItem)).then((res) => {
-    showSuccessToast(`添加成功！（#${res}）`);
+  db.add(relicDB.storeName, {
+    timetemp: relicItem.timetemp,
+    relicInfo: JSON.stringify(relicItem),
+  }).then(() => {
+    showSuccessToast(`添加成功！\n已保存至本地。`);
   });
 };
 
@@ -86,6 +86,7 @@ const selectRelic = (index: number) => {
   // 若选择部位已有圣遗物，则填充表单数据
   if (relicList.value[index]) {
     const data = JSON.parse(JSON.stringify(relicList.value[index]));
+
     setStatBase.value = data;
     setStatForm.value = {
       reliquaryMainstat: data.reliquaryMainstat,
@@ -93,9 +94,15 @@ const selectRelic = (index: number) => {
     };
   }
 };
+// 使用本地圣遗物数据
+const selectLocalRelic = (relic: IRelicItem) => {
+  relicList.value.splice(selectedPartIndex.value, 1, relic);
+  closePopup();
+};
 const closePopup = () => {
   showPopup.value = false;
   setStatBase.value = null;
+  showLocalRelics.value = false;
   setStatForm.value = {
     reliquaryMainstat: {} as MainstatType,
     reliquarySubstats: [],
@@ -110,17 +117,22 @@ const removeRelic = () => {
   showSuccessToast(`已卸下\n[${name}]`);
 };
 /** 设置圣遗物基础数据，显示编辑表单 */
-const showSetRelicStatPop = (equip: IRelicBase[]) => {
+const showSetRelicStatPop = (equip: IRelicLibraryItemEquip) => {
   // 根据部位下标来获取部位的具体类型和图标
   setStatBase.value = equip[selectedPartIndex.value];
 };
 
-// 主词条变化后，删除相同的副词条
-const mainStatChanged = () => {
+// 主词条变化后，删除相同的副词条，并设置默认数值
+const mainStatChanged = (event) => {
   const index = setStatForm.value.reliquarySubstats.findIndex((item) => {
-    return item.appendPropId === setStatForm.value.reliquaryMainstat.mainPropId;
+    return item.appendPropId === event.target.value;
   });
-  setStatForm.value.reliquarySubstats.splice(index, 1);
+  if (index >= 0) setStatForm.value.reliquarySubstats.splice(index, 1);
+
+  const stat = ReliceMainStats.find((item) => {
+    return item.mainPropId === event.target.value;
+  });
+  setStatForm.value.reliquaryMainstat.statValue = stat.statValue;
 };
 // 添加一个副词条
 const addSubstat = () => {
@@ -160,13 +172,26 @@ const subStatFilter = (selectedId: AppendProp) => {
   ).concat([selectedId]);
 };
 
-/** 本地圣遗物数据 */
+/** 查询本地圣遗物数据 */
 const localRelics = ref<IRelicItem[]>([]);
 const showLocalRelics = ref(false);
 const getLocalRelics = () => {
-  showLocalRelics.value = true;
-  db.getAll(relicDB.storeName).then((res) => {
-    localRelics.value = res.map((item) => JSON.parse(item));
+  showLocalRelics.value = !showLocalRelics.value;
+  if (showLocalRelics.value) {
+    db.getAll(relicDB.storeName).then((res) => {
+      localRelics.value = res
+        .map((item) => JSON.parse(item.relicInfo))
+        .filter((item: IRelicItem) => {
+          return item.equipType === EquipIndexToType[selectedPartIndex.value];
+        })
+        .sort((a, b) => b.timetemp - a.timetemp);
+    });
+  }
+};
+const deleteLocalData = (item: IRelicItem) => {
+  db.delete(relicDB.storeName, item.timetemp).then(() => {
+    const index = localRelics.value.findIndex((i) => item.timetemp === i.timetemp);
+    localRelics.value.splice(index, 1)
   });
 };
 </script>
@@ -175,31 +200,13 @@ const getLocalRelics = () => {
   <!-- 圣遗物信息 -->
   <div class="data-panel__title">圣遗物</div>
   <div class="relic-info">
-    <div class="relic-detail" v-for="(item, index) in relicList" :key="index" @click="selectRelic(index)">
-      <template v-if="item">
-        <img class="relic-icon" v-lazy="item.icon" />
-        <div class="relic-detail__hearder">
-          <div :class="['relic-name', getlinearBackGroundClassByRarity(item.rankLevel - 1)]">
-            {{ item.name }}
-            <!-- <span class="relic-level">+{{ item.level }}</span> -->
-          </div>
-          <div class="relic-main-stats">
-            <span>{{ getAppendPropName(item.reliquaryMainstat.mainPropId) }}</span>
-            <span>{{ getStatValueText(item.reliquaryMainstat) }}</span>
-          </div>
-        </div>
-        <div
-          class="relic-detail__stats"
-          v-for="(subitem, index) in item.reliquarySubstats"
-          :key="subitem.appendPropId + index"
-        >
-          <label>{{ getAppendPropName(subitem.appendPropId) }}</label>
-          <span>{{ getStatValueText(subitem) }}</span>
-        </div>
-      </template>
-      <div class="empty" v-else>+ 添加圣遗物</div>
-    </div>
-    <div class="relic-detail relic-suit-detail">
+    <Relic
+      v-for="(item, index) in relicList"
+      :relic="item"
+      :key="item?.timetemp || index"
+      @select-relic="selectRelic(index)"
+    />
+    <div class="relic-suit-detail">
       <div class="relic-suit-text" v-for="relicSuitText in relicSuitTexts">
         <div class="relic-suit-text__title">{{ relicSuitText.name }}</div>
         <div class="relic-suit-text__texts">
@@ -213,31 +220,25 @@ const getLocalRelics = () => {
     <template v-if="!setStatBase">
       <div class="relic-search">
         <span>~ {{ relicTitle }} ~</span>
-        <Search v-model="searchRelic" placeholder="搜索圣遗物" />
-        <div v-if="!showLocalRelics" class="add-sub-stat" @click="getLocalRelics">选择已有圣遗物</div>
-        <div v-else class="add-sub-stat" @click="showLocalRelics = false">收起</div>
+        <Search v-model="searchRelic" placeholder="搜索圣遗物套装" />
+        <div class="relic-package" @click="getLocalRelics">
+          <span :class="!showLocalRelics && 'active'">创建新的圣遗物</span>
+          <span :class="showLocalRelics && 'active'">选择历史圣遗物</span>
+        </div>
       </div>
       <div v-if="showLocalRelics" class="relic-select">
-        <div class="relic-detail" v-for="(item, index) in localRelics" :key="index">
-          <img class="relic-icon" v-lazy="item.icon" />
-          <div class="relic-detail__hearder">
-            <div :class="['relic-name', getlinearBackGroundClassByRarity(item.rankLevel - 1)]">
-              {{ item.name }}
-            </div>
-            <div class="relic-main-stats">
-              <span>{{ getAppendPropName(item.reliquaryMainstat.mainPropId) }}</span>
-              <span>{{ getStatValueText(item.reliquaryMainstat) }}</span>
-            </div>
-          </div>
-          <div
-            class="relic-detail__stats"
-            v-for="(subitem, index) in item.reliquarySubstats"
-            :key="subitem.appendPropId + index"
-          >
-            <label>{{ getAppendPropName(subitem.appendPropId) }}</label>
-            <span>{{ getStatValueText(subitem) }}</span>
-          </div>
-        </div>
+        <SwipeCell v-for="item in localRelics">
+          <Relic :relic="item" :key="item.timetemp" @select-relic="selectLocalRelic" />
+          <template #right>
+            <Button
+              class="swipecell-right-button"
+              square
+              type="danger"
+              text="删除"
+              @click="deleteLocalData(item)"
+            />
+          </template>
+        </SwipeCell>
       </div>
       <div v-show="!showLocalRelics" class="relic-select">
         <div v-for="item in filteredRelics" class="relic-select__item" @click="showSetRelicStatPop(item.equip)">
@@ -247,15 +248,15 @@ const getLocalRelics = () => {
     </template>
     <template v-else>
       <div class="set-relice-title">
-        <span @click="setStatBase = null">切换套装</span>
+        <span @click="setStatBase = null">切换圣遗物</span>
         <span><img v-lazy="setStatBase.icon" />{{ setStatBase.name }}</span>
-        <span style="color: rgb(255, 82, 82)" @click="removeRelic">卸下装备</span>
+        <span style="color: rgb(255, 82, 82)" @click="removeRelic">卸下圣遗物</span>
       </div>
       <form class="set-relice-form" @submit.prevent="addRelic">
         <div class="set-relice-filed">
           <span>主词条：</span>
-          <select v-model="setStatForm.reliquaryMainstat" required @change="mainStatChanged">
-            <option v-for="stat in mainStatFilter" :value="stat">
+          <select v-model="setStatForm.reliquaryMainstat.mainPropId" required @change="mainStatChanged">
+            <option v-for="stat in mainStatFilter" :value="stat.mainPropId">
               {{ getAppendPropName(stat.mainPropId) }}
             </option>
           </select>
@@ -289,69 +290,12 @@ const getLocalRelics = () => {
   grid-template-columns: repeat(2, 1fr);
 }
 
-.relic-detail {
-  position: relative;
-  font-size: 14px;
-  height: 112px;
-  border-radius: 4px;
-  margin-bottom: 12px;
-  box-shadow: 2px 2px 1px var(--bg);
-}
-.relic-suit-detail {
-  overflow: scroll;
-  box-shadow: none;
-  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 90%, rgba(0, 0, 0, 0) 100%);
-  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 90%, rgba(0, 0, 0, 0) 100%); /* Safari 和 Chrome */
-}
-.relic-main-stats {
-  display: flex;
-  justify-content: space-between;
-  padding: 0 8px;
-  font-weight: bold;
-}
-
-.relic-icon {
-  width: 40%;
-  z-index: 1;
-  top: -20%;
-  right: -4%;
-  position: absolute;
-  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 90%);
-  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 90%); /* Safari 和 Chrome */
-}
-.relic-level {
-  background-color: var(--bg);
-  color: var(--light-text);
-  border-radius: 6px;
-  padding: 0 2px;
-  font-size: 12px;
-}
-.relic-name {
-  font-size: 16px;
-  line-height: 32px;
-  /* background-image: linear-gradient(to right, var(--five-rarity) 0%, rgba(0, 0, 0, 0) 70%); */
-  color: var(--light-text);
-  text-shadow: 2px 2px 4px var(--stroke-2);
-  border-radius: 4px 0 0;
-  padding: 0 8px;
-}
-.relic-detail__stats {
-  display: flex;
-  justify-content: space-between;
-  font-size: 12px;
-  line-height: 14px;
-  padding: 0 8px;
-}
-
-.empty {
-  text-align: center;
-  line-height: 102px;
-}
-
 .relic-search {
   position: fixed;
   width: 100%;
   background: #fff;
+  z-index: 10;
+  box-shadow: var(--button-bg) 0px 0px 10px;
 }
 
 .relic-search span {
@@ -363,7 +307,7 @@ const getLocalRelics = () => {
 
 .relic-select {
   padding: 12px;
-  padding-top: 114px;
+  padding-top: 120px;
   display: grid;
   grid-gap: 6px;
   grid-template-columns: repeat(2, 1fr);
@@ -447,6 +391,24 @@ select {
   text-align: center;
   border: 1px solid var(--border);
 }
+.relic-package {
+  text-align: center;
+  border: 1px solid var(--button-bg);
+  margin: 0 12px 4px 12px;
+  display: flex;
+  border-radius: 4px;
+}
+.relic-package span.active {
+  background-color: var(--button-bg);
+  color: var(--light-text);
+}
+.relic-suit-detail {
+  font-size: 14px;
+  height: 112px;
+  border-radius: 4px;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 90%, rgba(0, 0, 0, 0) 100%);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 90%, rgba(0, 0, 0, 0) 100%); /* Safari 和 Chrome */
+}
 .relic-suit-text {
   overflow: scroll;
   color: var(--extra-text);
@@ -454,5 +416,8 @@ select {
 }
 .relic-suit-text__texts {
   font-size: 12px;
+}
+.swipecell-right-button {
+  height: 100%;
 }
 </style>

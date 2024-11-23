@@ -311,6 +311,14 @@ export enum EquipType {
   EQUIP_DRESS = "EQUIP_DRESS",
 }
 
+export const EquipIndexToType = {
+  0: EquipType.EQUIP_BRACER,
+  1: EquipType.EQUIP_NECKLACE,
+  2: EquipType.EQUIP_SHOES,
+  3: EquipType.EQUIP_RING,
+  4: EquipType.EQUIP_DRESS,
+}
+
 export enum ItemType {
   ITEM_WEAPON = "ITEM_WEAPON",
   ITEM_RELIQUARY = "ITEM_RELIQUARY",

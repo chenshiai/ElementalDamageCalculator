@@ -7,7 +7,7 @@ interface Database {
 
 class calculateDatabase implements Database {
   private _db?: IDBDatabase;
-  public version = 2;
+  public version = 3;
   public name = "calculationDatabase";
   private _tempCreateStores = [];
 
@@ -126,7 +126,7 @@ class calculateDatabase implements Database {
     });
   }
 
-  public delete(storeName: string, key: string): void {
+  public delete(storeName: string, key: string): Promise<any> {
     if (!this._db) {
       throw new Error("数据库尚未准备好");
     }
@@ -134,13 +134,17 @@ class calculateDatabase implements Database {
     const transaction: IDBTransaction = this._db.transaction([storeName], "readwrite");
     const objectStore: IDBObjectStore = transaction.objectStore(storeName);
     const request: IDBRequest = objectStore.delete(key);
-    request.onsuccess = () => {
-      showSuccessToast("数据已删除");
-    };
-    request.onerror = (event) => {
-      showFailToast("数据删除失败");
-      console.error("数据删除失败", (event.target as IDBRequest<undefined>).error);
-    };
+    return new Promise((resolve, reject) => {
+
+      request.onsuccess = () => {
+        resolve(request.result)
+        showSuccessToast("数据已删除");
+      };
+      request.onerror = (event) => {
+        showFailToast("数据删除失败");
+        reject((event.target as IDBRequest<undefined>).error);
+      };
+    })
   }
 }
 

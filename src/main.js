@@ -16,7 +16,7 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 db.createStore(calDB.storeName, calDB.keyPath);
-db.createStore(relicDB.storeName, relicDB.keyPath, relicDB.autoIncrement);
+db.createStore(relicDB.storeName, relicDB.keyPath);
 
 createApp(App)
 .use(BackTop)

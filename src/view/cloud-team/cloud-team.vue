@@ -98,7 +98,9 @@ const handleCharacterChange = (result: IUserSavedCalculationData) => {
     calculation: result,
     buffMap: map,
   };
-  teamList.value.push(null);
+  if (teamList.value[teamList.value.length - 1]) {
+    teamList.value.push(null);
+  }
   store.commit("setTeamList", teamList.value);
 };
 
