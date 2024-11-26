@@ -15,12 +15,10 @@ import { IRelicBase } from "@/types/interface";
 import { AppendProp, EquipIndexToType } from "@/types/enum";
 import {
   getAppendPropName,
-  percentProps,
   RelicText,
   EquipTypeMainstats,
   EquipTypeSubstats,
 } from "@/constants/characters-config/append-prop";
-import { getlinearBackGroundClassByRarity } from "@/utils/getBackGroundClassByRarity";
 import db from "@/utils/db";
 import { relicDB } from "@/constants/db";
 
@@ -404,6 +402,7 @@ select {
 }
 .relic-suit-detail {
   font-size: 14px;
+  overflow: scroll;
   height: 112px;
   border-radius: 4px;
   mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 90%, rgba(0, 0, 0, 0) 100%);
