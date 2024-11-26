@@ -215,8 +215,7 @@ function round(a: number, precision: number = 0): number {
           <div>{{ round(val.baseValue) }}</div>
           <div class="extra-text">+{{ round(val.extraValue) }}</div>
         </span>
-        <span v-if="index === leftValue.length - 1"> {{ round(val.baseValue + val.extraValue, 1) }}% </span>
-        <span v-else>{{ round(val.baseValue + val.extraValue) }}</span>
+        <span class="panel-number">{{ round(val.baseValue + val.extraValue) }}{{ index === leftValue.length - 1 ? '%' : '' }}</span>
       </div>
     </div>
     <div class="right">
@@ -225,7 +224,7 @@ function round(a: number, precision: number = 0): number {
           <span v-html="val.svg"></span>
           {{ val.label }}
         </div>
-        <span>{{ round(val.baseValue + val.extraValue, 1) }}%</span>
+        <span class="panel-number">{{ round(val.baseValue + val.extraValue, 1) }}%</span>
       </div>
     </div>
   </div>
@@ -276,6 +275,9 @@ function round(a: number, precision: number = 0): number {
   border: 1px solid var(--border);
   font-size: 12px;
   border-radius: 4px 4px 0 0;
+}
+.panel-number {
+  padding-right: 12px;
 }
 .panel-item {
   display: flex;
