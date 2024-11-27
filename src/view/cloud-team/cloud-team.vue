@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { onMounted, ref, toRaw } from "vue";
+import { onMounted, ref } from "vue";
 import { Popup, Icon, showImagePreview } from "vant";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 
-import { IBuffBase, ICalculatorValue } from "@/types/interface";
+import { IBuffBase, IBuffExtra, ITeamItem } from "@/types/interface";
 import { IUserSavedCalculationData } from "@/constants/db";
 import { IRelicItem } from "@/constants/characters-config/relic-class";
 import { Character } from "@/constants/characters-config/character";
@@ -19,11 +19,6 @@ import useCharacterInfo from "../character-calculation/modules/chararcter-info";
 import useWeanponInfo from "../character-calculation/modules/weapon-info";
 import { getBackGroundByElement } from "@/utils/get-color";
 
-interface ITeamItem {
-  calculation: IUserSavedCalculationData;
-  buffMap: Map<string, IBuffBase[]>;
-}
-
 /** @module 面板数据选择 */
 const show = ref(false);
 const selectedIndex = ref(0);
@@ -33,15 +28,13 @@ const setSlotByIndex = (index) => {
 };
 
 // 解构buff
-const deconstructionBuff = (buff: IBuffBase, panel: ICalculatorValue) => {
-  console.log(buff);
-  
+const deconstructionBuff = (buff: IBuffBase, result: IUserSavedCalculationData): IBuffExtra => {
   const effect = buff.effect.map((eff) => {
     return {
       ...eff,
       getValue: (data, stack) => {
         // 使用闭包，将buff提供者的面板保存下来
-        return eff.getValue(panel, stack, data);
+        return eff.getValue(result.panel, stack, data);
       },
     };
   });
@@ -50,6 +43,7 @@ const deconstructionBuff = (buff: IBuffBase, panel: ICalculatorValue) => {
     effect,
     // 共享的buff默认关闭状态，以免被重复计算
     enable: false,
+    source: result.title
   };
 };
 
@@ -65,8 +59,8 @@ onMounted(() => {
   }
 });
 
-const getShareBuff = (buffs: IBuffBase[], result: IUserSavedCalculationData) => {
-  return buffs.filter((buff) => buff.shareable).map((buff) => deconstructionBuff(buff, result.panel));
+const getShareBuff = (buffs: IBuffBase[], result: IUserSavedCalculationData): IBuffExtra[] => {
+  return buffs.filter((buff) => buff.shareable).map((buff) => deconstructionBuff(buff, result));
 };
 const characterJoinTeam = (result: IUserSavedCalculationData, index: number) => {
   const map = new Map();
@@ -114,6 +108,7 @@ const edit = (index) => {
   router.push({
     path: "/character/edit",
   });
+  store.commit("setCurrentEdit", teamList.value[index].calculation.title);
   sessionStorage.setItem("editCharacter", JSON.stringify(teamList.value[index].calculation));
 };
 const toCreateData = () => {

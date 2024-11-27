@@ -6,31 +6,38 @@ export interface IBuffBase {
   /** Buff展示名称 */
   label: string;
   /** Buff细节描述 */
-  describe?: string;
+  describe: string;
+  /** Buff是否启用 */
+  enable: boolean;
+  /** Buff的具体效果 */
+  effect: BuffEffect[];
+
   /** Buff数值是否可叠层 */
   stackable?: boolean;
   /** BUff层数别名 */
   stackText?: string;
-  /** BUff层数控件类型 */
-  stackType?: string;
+  /** BUff层数控件类型, 目前只有slider */
+  stackType?: 'slider';
   /** 最大叠加层数 */
   limit?: number;
+  /** 当前叠加层数 */
+  stack?: number;
   /** 个人增益展示条件判断函数，返回为true即可以展示，false不可展示。不设置则默认展示 */
   condition?: BuffCondition;
 
-  /** Buff的具体效果 */
-  effect: BuffEffect[];
-  /** Buff作用对象，大多数情况用不上，用来处理部分特殊情况 */
+  /** Buff的作用对象 */
   target?: BuffTarget;
-  /** Buff是否启用 */
-  enable: boolean;
-  /** 当前叠加层数 */
-  stack?: number;
   
-  /** Buff是否可共享，为true表示该增益可以给其他人使用 */
+  /** Buff是否可共享，为true则该增益会被纳入团队增益 */
   shareable?: boolean;
   /** 给队友使用的团队增益条件判断函数，入参为队友的面板属性，返回为true即可以展示，false不可展示。不设置则默认展示 */
   shareCondition?: BuffCondition;
+}
+
+/** Buff对象的拓展属性，用于处理部分场景 */
+export interface IBuffExtra extends IBuffBase {
+  /** buff来源 对应用户保存的面板名称 */
+  source: string;
 }
 export interface ISkillRate {
   label: string;
@@ -336,5 +343,5 @@ export interface ICalculatorValue {
 
 export interface ITeamItem {
   calculation: IUserSavedCalculationData;
-  buffMap: Map<string, IBuffBase[]>;
+  buffMap: Map<string, IBuffExtra[]>;
 }

@@ -1,6 +1,6 @@
 import { ref, watchEffect } from "vue";
 import _ from 'lodash';
-import { IBuffBase, ITeamItem } from "@/types/interface";
+import { IBuffExtra, ITeamItem } from "@/types/interface";
 import { ElementType } from "@/types/enum";
 
 import BuffInfo from "./index.vue";
@@ -25,7 +25,7 @@ function countCharacterElements(teamList: ITeamItem[]): Map<ElementType, number>
 }
 
 const useBuffInfo = () => {
-  const buffs = ref<IBuffBase[]>([]);
+  const buffs = ref<IBuffExtra[]>([]);
   const store = useStore();
 
   const stopWatchTeamList = watchEffect(() => {
@@ -63,6 +63,7 @@ const useBuffInfo = () => {
       }
     });
   });
+
 
   return { buffs, stopWatchTeamList };
 };

@@ -11,12 +11,15 @@ const showLeft = ref(false);
     <Icon name="bars" />
   </div>
   <Popup v-model:show="showLeft" teleport="#app" position="left" :style="{ width: '40%', height: '100%' }">
-    <router-link to="/" class="top-tabs__item">剧变反应计算</router-link>
-    <router-link to="/increasing-range" class="top-tabs__item">单次伤害计算</router-link>
-    <router-link to="/cloud-team" class="top-tabs__item">云上辉星（测试版）</router-link>
-    <router-link to="/character/create" class="top-tabs__item">创建角色数据</router-link>
-    <router-link to="/shield" class="top-tabs__item">护盾承伤计算</router-link>
-    <router-link to="/question-answer" class="top-tabs__item">常见问题</router-link>
+    <div class="app-menu">
+      <img src="/img/image.png" />
+    </div>
+    <router-link to="/" class="top-tabs__item" @click="showLeft = false">剧变反应计算</router-link>
+    <router-link to="/increasing-range" class="top-tabs__item" @click="showLeft = false">单次伤害计算</router-link>
+    <router-link to="/cloud-team" class="top-tabs__item" @click="showLeft = false">云上辉星（测试版）</router-link>
+    <router-link to="/character/create" class="top-tabs__item" @click="showLeft = false">创建角色数据</router-link>
+    <router-link to="/shield" class="top-tabs__item" @click="showLeft = false">护盾承伤计算</router-link>
+    <router-link to="/question-answer" class="top-tabs__item" @click="showLeft = false">常见问题</router-link>
   </Popup>
   <div class="content">
     <router-view v-slot="{ Component }">
@@ -37,6 +40,11 @@ const showLeft = ref(false);
   color: var(--tip-text);
   text-align: center;
   position: relative;
+}
+.app-menu {
+  text-align: center;
+  font-size: 20px;
+  margin-bottom: 26px;
 }
 
 .tips::after {
@@ -73,14 +81,12 @@ const showLeft = ref(false);
   background-color: #fff;
   text-align: center;
   line-height: 40px;
-  color: var(--main-text);
-  border-bottom: solid 1px var(--main-text);
+  color: var(--tip-text);
 }
 
 .router-link-active {
-  background-color: var(--button-bg);
-  border-color: var(--stroke-2);
-  color: #fff;
+  color: var(--main-text);
+  border-bottom: 1px solid var(--main-text);
 }
 
 .top-tabs__item:nth-last-child(1) {

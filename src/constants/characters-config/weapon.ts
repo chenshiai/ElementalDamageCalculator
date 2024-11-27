@@ -4385,6 +4385,7 @@ export const Weapons: IWeaponInfo[] = [
       return [
         {
           label: "旅行者基础攻击力提升66点",
+          describe: `旅行者基础攻击力提升66点`,
           effect: [{ type: BuffType.ATKBase, getValue: () => 66, actionOn: ActionOn.Front }],
           enable: false,
         },

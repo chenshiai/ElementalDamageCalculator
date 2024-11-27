@@ -145,18 +145,18 @@ const relicLibrary: IRelicLibraryItem[] = [
 
       suit4: [
         getBuffByElement(ElementType.Anemo, BuffType.AnemoPrcent, "风"),
-        getBuffByElement(ElementType.Hydro, BuffType.HydroPrcent, "水"),
-        getBuffByElement(ElementType.Pyro, BuffType.PyroPrcent, "火"),
-        getBuffByElement(ElementType.Cryo, BuffType.CryoPrcent, "冰"),
-        getBuffByElement(ElementType.Electro, BuffType.ElectroPrcent, "雷"),
-        getBuffByElement(ElementType.Geo, BuffType.GeoPrcent, "岩"),
-        getBuffByElement(ElementType.Dendro, BuffType.DendroPrcent, "草"),
         getBuffByElement2(ElementType.Anemo, BuffType.AnemoPrcent, "风"),
+        getBuffByElement(ElementType.Hydro, BuffType.HydroPrcent, "水"),
         getBuffByElement2(ElementType.Hydro, BuffType.HydroPrcent, "水"),
+        getBuffByElement(ElementType.Pyro, BuffType.PyroPrcent, "火"),
         getBuffByElement2(ElementType.Pyro, BuffType.PyroPrcent, "火"),
+        getBuffByElement(ElementType.Cryo, BuffType.CryoPrcent, "冰"),
         getBuffByElement2(ElementType.Cryo, BuffType.CryoPrcent, "冰"),
+        getBuffByElement(ElementType.Electro, BuffType.ElectroPrcent, "雷"),
         getBuffByElement2(ElementType.Electro, BuffType.ElectroPrcent, "雷"),
+        getBuffByElement(ElementType.Geo, BuffType.GeoPrcent, "岩"),
         getBuffByElement2(ElementType.Geo, BuffType.GeoPrcent, "岩"),
+        getBuffByElement(ElementType.Dendro, BuffType.DendroPrcent, "草"),
         getBuffByElement2(ElementType.Dendro, BuffType.DendroPrcent, "草"),
       ],
     },
@@ -903,7 +903,7 @@ const relicLibrary: IRelicLibraryItem[] = [
       ],
       suit4: [
         {
-          label: "四件套·所有角色攻击力提升，护盾强效提升",
+          label: "四件套·全队攻击力，护盾强效提升",
           effect: [
             { type: BuffType.ATKPrcent, getValue: () => 20 },
             { type: BuffType.ShieldStrong, getValue: () => 30 },

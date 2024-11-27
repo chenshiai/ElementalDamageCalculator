@@ -1,4 +1,4 @@
-import { ActionOn, BuffType } from "@/types/enum";
+import { ActionOn, BuffTarget, BuffType } from "@/types/enum";
 import { IBuffBase } from "@/types/interface";
 
 function createBuff(type: BuffType, value: number, star: "A" | "S", descSuffix: string): IBuffBase {
@@ -79,6 +79,8 @@ export const PyroResonance = {
   describe: "攻击力提高25%",
   effect: [{ type: BuffType.ATKPrcent, getValue: () => 25 }],
   enable: true,
+  target: BuffTarget.All,
+  source: "元素共鸣",
 };
 
 export const CryoResonance = {
@@ -86,6 +88,8 @@ export const CryoResonance = {
   describe: "攻击冰元素附着或冻结状态下的敌人时，暴击率提高15%",
   effect: [{ type: BuffType.GlobalCritcal, getValue: () => 15 }],
   enable: false,
+  target: BuffTarget.All,
+  source: "元素共鸣",
 };
 
 export const HydroResonance = {
@@ -93,6 +97,8 @@ export const HydroResonance = {
   describe: "生命值上限提高25%",
   effect: [{ type: BuffType.HPPrcent, getValue: () => 25 }],
   enable: true,
+  target: BuffTarget.All,
+  source: "元素共鸣",
 };
 
 export const DendroResonance = {
@@ -100,18 +106,24 @@ export const DendroResonance = {
   describe: "元素精通提升50点",
   effect: [{ type: BuffType.MysteryFixed, getValue: () => 50 }],
   enable: true,
+  target: BuffTarget.All,
+  source: "元素共鸣",
 };
 export const DendroResonance1 = {
   label: "元素共鸣·蔓生之草2",
   describe: "触发燃烧、原激化、绽放反应后，元素精通提升30点",
   effect: [{ type: BuffType.MysteryFixed, getValue: () => 30 }],
   enable: false,
+  target: BuffTarget.All,
+  source: "元素共鸣",
 };
 export const DendroResonance2 = {
   label: "元素共鸣·蔓生之草3",
   describe: "触发超激化、蔓激化、超绽放、烈绽放反应后，元素精通提升20",
   effect: [{ type: BuffType.MysteryFixed, getValue: () => 20 }],
   enable: false,
+  target: BuffTarget.All,
+  source: "元素共鸣",
 };
 
 export const GeoResonance = {
@@ -123,4 +135,6 @@ export const GeoResonance = {
     { type: BuffType.EnemyGeoResistance, getValue: () => -20 },
   ],
   enable: true,
+  target: BuffTarget.All,
+  source: "元素共鸣",
 };

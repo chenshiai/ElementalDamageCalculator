@@ -93,6 +93,7 @@ watchEffect(() => {
     initRelicInfo();
     initSkillInfo();
     initWeaponInfo();
+    store.commit('setCurrentEdit', '');
   }
 });
 const pageTitle = computed(() => {

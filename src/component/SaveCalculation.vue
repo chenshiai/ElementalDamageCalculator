@@ -3,11 +3,14 @@ import { Popup, showFailToast, Field, FloatingBubble, Popover, Icon } from "vant
 import { ref } from "vue";
 import {useRouter} from "vue-router";
 import CalculationDataSelector from "./CalculationDataSelector.vue";
+import { useStore } from "vuex";
+
+const store = useStore();
 const emit = defineEmits(["save-data", "look-data", "recalculation"]);
 
 // 保存数据
 const showPopup = ref(false);
-const remark = ref("");
+const remark = ref(store.state.teamBuffs.currentEdit);
 const saveDataPop = () => {
   showPopup.value = true;
 };

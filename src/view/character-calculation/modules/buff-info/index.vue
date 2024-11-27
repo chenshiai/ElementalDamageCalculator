@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
-import { IBuffBase, ICharacterInfo } from "@/types/interface";
+import { IBuffBase, IBuffExtra, ICharacterInfo } from "@/types/interface";
 import BuffItem from "./buff-item.vue";
 import { Collapse, CollapseItem } from "vant";
 import { BuffTarget } from "@/types/enum";
+import { useStore } from "vuex";
+const store = useStore();
 
-const buffs = defineModel<IBuffBase[]>({ default: [] });
+const buffs = defineModel<IBuffExtra[]>({ default: [] });
 const characterBuffs = defineModel<IBuffBase[]>("characterBuffs");
 const weaponBuffs = defineModel<IBuffBase[]>("weaponBuffs");
 const relicBuffs = defineModel<IBuffBase[]>("relicBuffs");
@@ -15,23 +17,30 @@ interface IProps {
 }
 const { characterInfo } = defineProps<IProps>();
 const characterBuffsFilter = computed(() => {
+  /** 过滤掉只对队友生效的buff */
   return characterBuffs.value.filter((buff) => buff.target !== BuffTarget.Other);
 });
 const weaponBuffsFilter = computed(() => {
+  /** 根据当前角色数据，过滤掉不符合条件的buff 同时 过滤掉只对队友生效的buff */
   return weaponBuffs.value.filter((buff) => {
-    return !buff.condition || buff.condition(characterInfo);
+    return (!buff.condition || buff.condition(characterInfo)) && buff.target !== BuffTarget.Other;
   });
 });
 
 const relicBuffsFilter = computed(() => {
   return relicBuffs.value.filter((buff) => {
-    return !buff.condition || buff.condition(characterInfo);
+    return !buff.condition || buff.condition(characterInfo) && buff.target !== BuffTarget.Other;
   });
 });
 
 const teamBuffsFilter = computed(() => {
+  /** 根据当前角色数据，过滤掉不符合条件的外来buff 同时 排除当前角色提供的共享buff 同时 排除来自于同一个面板的buff */
   return buffs.value.filter((buff) => {
-    return (!buff.shareCondition || buff.shareCondition(characterInfo)) && !buff.label.includes(characterInfo.name);
+    return (
+      (!buff.shareCondition || buff.shareCondition(characterInfo)) &&
+      !buff.label.includes(characterInfo.name) &&
+      buff.source !== store.state.teamBuffs.currentEdit
+    );
   });
 });
 

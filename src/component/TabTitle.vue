@@ -9,7 +9,7 @@
   text-align: center;
   line-height: 40px;
   font-weight: 600;
-  background-color: var(--page-bg);
+  background-color: #fff;
   box-shadow: 0 0 5px var(--button-bg);
   position: fixed;
   top: 0;

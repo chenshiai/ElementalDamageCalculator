@@ -79,7 +79,7 @@ const calculatedResults = computed(() => {
   font-size: 14px;
   padding: 4px 8px;
   margin-bottom: 16px;
-  border-radius: 0 0 6px 6px;
+  border-radius: 0 0 4px 4px;
   color: #fff;
   text-shadow: var(--stroke-4) 0 0 2px;
   background-color: var(--main-text);

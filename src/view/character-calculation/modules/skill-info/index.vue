@@ -37,7 +37,7 @@ const onTab = (val) => {
 
 <template>
   <div class="skill-info">
-    <div class="data-panel__title">具体数值</div>
+    <div class="data-panel__title">伤害数值</div>
     <div class="tab-list">
       <div
         v-for="tab in tabList"
@@ -139,31 +139,31 @@ const onTab = (val) => {
 .tab-selected {
   background: var(--main-text);
   color: #fff;
-  border-radius: 6px 6px 0 0;
+  border-radius: 4px 4px 0 0;
   text-shadow: var(--stroke-4) 0 0 2px;
   box-shadow: 16px 30px 0 0 var(--main-text), -16px 30px 0 0 var(--main-text);
-}
+ }
 .tab-selected::before {
   content: "";
   position: absolute;
   left: -6px;
   bottom: 0;
-  width: 12px;
+  width: 10px;
   height: var(--tab-height);
-  border-top-left-radius: 6px;
+  border-top-left-radius: 4px;
   background-color: var(--main-text);
-  transform: skewX(-15deg);
+  transform: skewX(-10deg);
 }
 .tab-selected::after {
   content: "";
   position: absolute;
   right: -6px;
   bottom: 0;
-  width: 12px;
+  width: 10px;
   height: var(--tab-height);
-  border-top-right-radius: 6px;
+  border-top-right-radius: 4px;
   background-color: var(--main-text);
-  transform: skewX(15deg);
+  transform: skewX(10deg);
 }
 
 .not-selected::before {
@@ -171,22 +171,22 @@ const onTab = (val) => {
   position: absolute;
   left: 6px;
   bottom: 0;
-  width: 12px;
+  width: 10px;
   height: var(--tab-height);
   background: var(--light-text);
-  border-bottom-left-radius: 6px;
-  transform: skewX(15deg);
+  border-bottom-left-radius: 4px;
+  transform: skewX(10deg);
 }
 .not-selected::after {
   content: "";
   position: absolute;
   right: 6px;
   bottom: 0;
-  width: 12px;
+  width: 10px;
   height: var(--tab-height);
   background: var(--light-text);
-  border-bottom-right-radius: 6px;
-  transform: skewX(-15deg);
+  border-bottom-right-radius: 4px;
+  transform: skewX(-10deg);
   z-index: 11;
 }
 </style>
