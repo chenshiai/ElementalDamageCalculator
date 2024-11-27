@@ -117,6 +117,7 @@ const onTab = (val) => {
   overflow: hidden;
   --tab-height: 36px;
   z-index: 12;
+  margin-bottom: -1px;
 }
 
 .tab-item {
