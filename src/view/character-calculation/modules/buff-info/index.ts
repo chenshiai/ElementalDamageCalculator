@@ -1,4 +1,5 @@
 import { ref, watchEffect } from "vue";
+import _ from 'lodash';
 import { IBuffBase, ITeamItem } from "@/types/interface";
 import { ElementType } from "@/types/enum";
 
@@ -54,7 +55,7 @@ const useBuffInfo = () => {
       if (item) {
         item.buffMap.forEach((buffList, name) => {
           buffList.forEach((buff) => {
-            const b = Object.create(buff);
+            const b = _.cloneDeep(buff);
             b.label = `[${name}]${buff.label}`;
             buffs.value.push(b);
           });

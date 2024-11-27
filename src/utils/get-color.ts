@@ -13,13 +13,13 @@ export default (rarity: Rarity) => {
     case Rarity.One:
       return "bg-one-rarity";
   }
-}
+};
 
 export function getlinearBackGroundClassByRarity(rarity: Rarity) {
   return `linear-bg-${rarity}-rarity`;
 }
 
-export function getColorByElement(elementType) {
+export function getColorByElement(elementType: ElementType | string) {
   switch (elementType) {
     case ElementType.Physical:
       return "text-physical";
@@ -37,5 +37,28 @@ export function getColorByElement(elementType) {
       return "text-dendro";
     case ElementType.Pyro:
       return "text-pyro";
+    default:
+      return "";
+  }
 }
+
+export function getBackGroundByElement(elementType: ElementType) {
+  switch (elementType) {
+    case ElementType.Anemo:
+      return "bg-anemo";
+    case ElementType.Cryo:
+      return "bg-cryo";
+    case ElementType.Dendro:
+      return "bg-dendro";
+    case ElementType.Electro:
+      return "bg-electro";
+    case ElementType.Geo:
+      return "bg-geo";
+    case ElementType.Hydro:
+      return "bg-hydro";
+    case ElementType.Pyro:
+      return "bg-pyro";
+    default:
+      return "";
+  }
 }

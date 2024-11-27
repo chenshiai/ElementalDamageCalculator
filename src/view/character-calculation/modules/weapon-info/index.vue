@@ -2,7 +2,7 @@
 import WeaponSelector from "@/component/WeaponSelector.vue";
 import { IWeaponInfo } from "@/types/interface";
 import { AppendProp } from "@/types/enum";
-import getBackGroundByRarity from "@/utils/getBackGroundClassByRarity";
+import getBackGroundByRarity from "@/utils/get-color";
 import { getAppendPropName } from "@/constants/characters-config/append-prop";
 import { ref, computed } from "vue";
 import { Popup, Rate, Icon } from "vant";

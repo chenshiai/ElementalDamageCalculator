@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { getlinearBackGroundClassByRarity } from "@/utils/getBackGroundClassByRarity";
+import { getlinearBackGroundClassByRarity } from "@/utils/get-color";
 import { IRelicItem } from "@/constants/characters-config/relic-class";
 import { getAppendPropName, percentProps } from "@/constants/characters-config/append-prop";
 

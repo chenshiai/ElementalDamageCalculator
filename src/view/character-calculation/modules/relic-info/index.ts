@@ -1,4 +1,5 @@
 import { ref, watchEffect } from "vue";
+import _ from 'lodash';
 import RelicInfo from "./index.vue";
 export { RelicInfo };
 import { IBuffBase } from "@/types/interface";
@@ -28,7 +29,7 @@ const useRelicInfo = (initData: IRelicItem[] = new Array(5).fill(null)) => {
       });
       
       targetRelic.buffs.suit2.forEach((element) => {
-        const suit2 = Object.create(element);
+        const suit2 = _.cloneDeep(element);
         relicBuffs.value.push(suit2);
       });
     }
@@ -40,7 +41,7 @@ const useRelicInfo = (initData: IRelicItem[] = new Array(5).fill(null)) => {
         .texts.push(targetRelic.suit4);
 
       targetRelic.buffs.suit4.forEach((element) => {
-        const suit4 = Object.create(element);
+        const suit4 = _.cloneDeep(element);
         relicBuffs.value.push(suit4);
       });
     }

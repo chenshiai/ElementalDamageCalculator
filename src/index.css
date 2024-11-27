@@ -36,6 +36,14 @@
   --text-geo: #fc0;
   --text-dendro: #b1d83d;
   --text-pyro: #ff6666;
+
+  --bg-electro: #9a6edd;
+  --bg-hydro: #5781ce;
+  --bg-anemo: #52bda7;
+  --bg-cryo: rgb(74, 189, 218);
+  --bg-geo: rgb(204, 164, 3);
+  --bg-dendro: #98b934;
+  --bg-pyro: #d35252;
 }
 
 body {
@@ -134,4 +142,26 @@ body {
 }
 .text-pyro {
   color: var(--text-pyro);
+}
+
+.bg-electro {
+  background-color: var(--bg-electro);
+}
+.bg-hydro {
+  background-color: var(--bg-hydro);
+}
+.bg-anemo {
+  background-color: var(--bg-anemo);
+}
+.bg-cryo {
+  background-color: var(--bg-cryo);
+}
+.bg-geo {
+  background-color: var(--bg-geo);
+}
+.bg-dendro {
+  background-color: var(--bg-dendro);
+}
+.bg-pyro {
+  background-color: var(--bg-pyro);
 }

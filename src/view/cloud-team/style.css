@@ -51,6 +51,7 @@
 .relic-icon {
   border-radius: 100%;
   height: 34px;
+  width: 34px;
   padding: 2px;
   box-shadow: inset 0 0 0 2px var(--light-text);
   border: 1px solid var(--border);

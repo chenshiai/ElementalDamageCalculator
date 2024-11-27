@@ -1,23 +1,23 @@
+<script setup>
+import Foot from "./component/Foot.vue";
+import { Popup, Icon } from "vant";
+import { ref } from "vue";
+
+const showLeft = ref(false);
+</script>
+
 <template>
-  <div class="top-overhang">
-    <div class="top-tabs">
-      <router-link to="/" class="top-tabs__item">
-        剧变伤害
-      </router-link>
-      <router-link to="/increasing-range" class="top-tabs__item">
-        伤害计算
-      </router-link>
-      <router-link to="/cloud-team" class="top-tabs__item">
-        云上辉星
-      </router-link>
-      <router-link to="/shield" class="top-tabs__item">
-        护盾承伤
-      </router-link>
-      <!-- <router-link to="/question-answer" class="top-tabs__item">
-        常见问题
-      </router-link> -->
-    </div>
+  <div class="top-overhang" @click="showLeft = true">
+    <Icon name="bars" />
   </div>
+  <Popup v-model:show="showLeft" teleport="#app" position="left" :style="{ width: '40%', height: '100%' }">
+    <router-link to="/" class="top-tabs__item">剧变反应计算</router-link>
+    <router-link to="/increasing-range" class="top-tabs__item">单次伤害计算</router-link>
+    <router-link to="/cloud-team" class="top-tabs__item">云上辉星（测试版）</router-link>
+    <router-link to="/character/create" class="top-tabs__item">创建角色数据</router-link>
+    <router-link to="/shield" class="top-tabs__item">护盾承伤计算</router-link>
+    <router-link to="/question-answer" class="top-tabs__item">常见问题</router-link>
+  </Popup>
   <div class="content">
     <router-view v-slot="{ Component }">
       <keep-alive>
@@ -28,10 +28,6 @@
   <van-back-top />
   <Foot />
 </template>
-
-<script setup>
-import Foot from "./component/Foot.vue";
-</script>
 
 <style>
 .tips {
@@ -61,41 +57,30 @@ import Foot from "./component/Foot.vue";
 }
 
 .top-overhang {
-  background-color: var(--stroke-3);
   height: 40px;
   width: 100%;
-  border-radius: 0 0 30px 30px;
-  position: relative;
-  margin-bottom: 40px;
-}
-
-.top-tabs {
-  position: absolute;
-  display: flex;
-  box-sizing: border-box;
-  width: 100%;
-  justify-content: space-between;
-  bottom: -38px;
-  padding: 16px;
-  gap: 4px;
+  position: fixed;
+  z-index: 100;
+  padding: 0 16px;
+  font-size: 26px;
 }
 
 .top-tabs__item {
-  box-sizing: border-box;
-  background-color: var(--button-bg);
-  border: 2px solid var(--stroke-1);
+  display: block;
+  width: 100%;
   text-align: center;
-  line-height: 36px;
-  height: 40px;
-  color: #fff;
-  border-radius: 10px;
-  flex: 1;
+  box-sizing: border-box;
+  background-color: #fff;
+  text-align: center;
+  line-height: 40px;
+  color: var(--main-text);
+  border-bottom: solid 1px var(--main-text);
 }
 
 .router-link-active {
-  background-color: #fff;
+  background-color: var(--button-bg);
   border-color: var(--stroke-2);
-  color: var(--main-text);
+  color: #fff;
 }
 
 .top-tabs__item:nth-last-child(1) {
@@ -103,7 +88,7 @@ import Foot from "./component/Foot.vue";
 }
 
 .content {
-  padding: 0 16px 0 16px;
+  padding: 40px 16px 0 16px;
 }
 
 .question-title,

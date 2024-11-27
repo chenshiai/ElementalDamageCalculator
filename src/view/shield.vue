@@ -1,5 +1,5 @@
 <template>
-  <TabTitle>护盾能抗多少</TabTitle>
+  <TabTitle>护盾承伤计算</TabTitle>
   <div class="tips">
     护盾吸收效果是护盾自身的属性，护盾强效则是被保护角色给予护盾的属性。
   </div>

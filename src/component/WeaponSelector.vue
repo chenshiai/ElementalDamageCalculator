@@ -55,7 +55,7 @@ import { ref, computed, watch } from "vue";
 import { Weapons } from "@/constants/characters-config/weapon";
 import { IWeaponInfo } from "@/types/interface";
 import { Search, Checkbox, CheckboxGroup, RadioGroup, Radio } from "vant";
-import getBackGroundByRarity from "@/utils/getBackGroundClassByRarity";
+import getBackGroundByRarity from "@/utils/get-color";
 
 const props = defineProps({
   handleChange: Function,

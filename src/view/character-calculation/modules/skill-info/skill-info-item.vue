@@ -3,27 +3,28 @@ import { computed, ref } from "vue";
 import { ICalculatorValue, ISkillRate } from "@/types/interface";
 import { calculateDamage } from "@/utils/calculate/method-calculation";
 import AtkTypeSelector from "@/component/AtkTypeSelector.vue";
-import { getColorByElement } from "@/utils/getBackGroundClassByRarity";
+import { getColorByElement } from "@/utils/get-color";
 import { Icon } from "vant";
 
 interface IProps {
   skill: ISkillRate[];
   calculatorValue: ICalculatorValue;
   level?: number;
+  name: string;
 }
-const { skill, calculatorValue, level } = defineProps<IProps>();
+const { skill, calculatorValue, level, name } = defineProps<IProps>();
 const atkType = ref("none");
 
 const calculatedResults = computed(() => {
   return skill.map((item: ISkillRate) => {
     if (!item) {
       return {
-        label: '-',
-        common: '-',
-        crit: '-',
-        desire: '-',
-        elementType: '',
-      }
+        label: "-",
+        common: "-",
+        crit: "-",
+        desire: "-",
+        elementType: "",
+      };
     }
     let { RESULT_DMG, CRITICAL_DMG, DEISTE_DMG, elementType } = calculateDamage({
       calculatorValue,
@@ -47,9 +48,10 @@ const calculatedResults = computed(() => {
 
 <template>
   <template v-if="skill.length > 0">
-    <div class="detail">
+    <div class="skill-info-detail">
+      <span><Icon name="circle" />{{ name }}</span>
       <div class="skill-info-item">
-        <span><Icon name="circle" /></span>
+        <span></span>
         <span>暴击伤害</span>
         <span>期望伤害</span>
         <span>一般伤害</span>
@@ -68,20 +70,28 @@ const calculatedResults = computed(() => {
     <AtkTypeSelector v-model="atkType" size="small" />
   </template>
   <template v-else>
-    <div class="skill-info-empty">该技能无法造成伤害。</div>
+    <div class="skill-info-empty">无伤害。</div>
   </template>
 </template>
 
 <style scoped>
+.skill-info-detail {
+  font-size: 14px;
+  padding: 4px 8px;
+  margin-bottom: 16px;
+  border-radius: 0 0 6px 6px;
+  color: #fff;
+  text-shadow: var(--stroke-4) 0 0 2px;
+  background-color: var(--main-text);
+}
 .skill-info-item {
   display: grid;
   grid-template-columns: 4fr 2fr 2fr 2fr;
   text-align: left;
-  text-shadow: var(--stroke-4) 0 0 2px;
 }
 .skill-info-item-label {
   text-align: center;
-  color:#fff;
+  color: #fff;
 }
 .skill-info-empty {
   text-align: center;

@@ -3,7 +3,7 @@ import { ref } from "vue";
 import { Popup, Icon } from "vant";
 import Selector from "@/component/Selector.vue";
 import { ICharacterInfo } from "@/types/interface";
-import getBackGroundByRarity from "@/utils/getBackGroundClassByRarity";
+import getBackGroundByRarity from "@/utils/get-color";
 
 const show = ref(false);
 const setConsts = (value: number) => {
