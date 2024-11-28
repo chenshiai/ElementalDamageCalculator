@@ -1178,7 +1178,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     buffs: [
-      S_80_CRITALHUNT_38P,
+      S_80_CRITAL_19P,
       {
         label: "破夜的明焰",
         describe:
