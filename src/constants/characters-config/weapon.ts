@@ -1025,11 +1025,11 @@ export const Weapons: IWeaponInfo[] = [
       statValue: 66.2,
     },
     (affix = 1) => {
-      const hp1 = 12 + (affix - 1) * 3;
-      const hp2 = 24 + (affix - 1) * 6;
-      const hp3 = 40 + (affix - 1) * 10;
+      const hp1 = [12, 15, 18, 21, 24][affix - 1]
+      const hp2 = [24, 30, 36, 42, 48][affix - 1]
+      const hp3 = [40, 50, 60, 70, 80][affix - 1]
       const res = `${hp1}/${hp2}/${hp3}%`;
-      const cri = 28 + (affix - 1) * 7 + "%";
+      const cri = [28, 35, 42, 49, 56][affix - 1] + "%";
       return {
         title: "德吕阿的夜曲",
         text: highlight`装备者能获得「疗护」效果，持有1/2/3层疗护时，生命值上限提升${res}。
@@ -1042,26 +1042,27 @@ export const Weapons: IWeaponInfo[] = [
       };
     },
     (affix = 1) => {
-      const hp1 = 12 + (affix - 1) * 3;
-      const hp2 = 24 + (affix - 1) * 6;
-      const hp3 = 40 + (affix - 1) * 10;
+      const hp1 = [12, 15, 18, 21, 24][affix - 1];
+      const hp2 = [24, 30, 36, 42, 48][affix - 1];
+      const hp3 = [40, 50, 60, 70, 80][affix - 1];
       const res = `${hp1}/${hp2}/${hp3}%`;
+      const cri = [28, 35, 42, 49, 56][affix - 1]
       return [
         {
           label: "生命值上限提升",
           describe: `持有1/2/3层疗护时，生命值上限提升${res}`,
-          effect: [{ type: BuffType.HPPrcent, getValue: (_, stack) => [hp1, hp2, hp3][stack - 1] || 0 }],
+          effect: [{ type: BuffType.HPPrcent, getValue: (_, s) => [hp1, hp2, hp3][s - 1] || 0 }],
           stackable: true,
           stackText: "疗护",
           limit: 3,
-          stack: 0,
-          enable: false,
+          stack: 3,
+          enable: true,
         },
         {
           label: "元素爆发暴击率提升",
-          describe: `处于3层疗护状态下时，元素爆发的暴击率提升${28 + 7 * (affix - 1)}%`,
-          effect: [{ type: BuffType.BurstCritcal, getValue: () => 28 + 7 * (affix - 1) }],
-          enable: false,
+          describe: `处于3层疗护状态下时，元素爆发的暴击率提升${cri}%`,
+          effect: [{ type: BuffType.BurstCritcal, getValue: () => cri }],
+          enable: true,
         },
       ];
     }
@@ -1078,8 +1079,8 @@ export const Weapons: IWeaponInfo[] = [
       statValue: 30.6,
     },
     (affix = 1) => {
-      const rat = 60 + (affix - 1) * 10 + "%";
-      const sec = 12 - (affix - 1) * 1.5;
+      const rat = [60, 70, 80, 90, 100][affix - 1] + "%";
+      const sec = [12, 10.5, 9, 7.5, 6][affix - 1]
       return {
         title: "顺风而行",
         text: highlight`攻击造成暴击时，有${rat}的几率产生少量元素微粒，能为角色恢复6点元素能量。该效果每${sec}秒只能触发一次。`,
@@ -1098,8 +1099,8 @@ export const Weapons: IWeaponInfo[] = [
       statValue: 45.9,
     },
     (affix = 1) => {
-      const rat = 60 + (affix - 1) * 10 + "%";
-      const sec = 12 - (affix - 1) * 1.5;
+      const rat = [60, 70, 80, 90, 100][affix - 1] + "%";
+      const sec = [12, 10.5, 9, 7.5, 6][affix - 1]
       return {
         title: "顺风而行",
         text: highlight`攻击造成暴击时，有${rat}的几率产生少量元素微粒，能为角色恢复6点元素能量。该效果每${sec}秒只能触发一次。`,
@@ -1118,7 +1119,7 @@ export const Weapons: IWeaponInfo[] = [
       statValue: 30.6,
     },
     (affix = 1) => {
-      const rat = 40 + (affix - 1) * 10 + "%";
+      const rat = [40, 50, 60, 70, 80][affix - 1] + "%";
       const sec = Math.round(30 - (affix - 1) * 3.6);
       return {
         title: "气定神闲",
@@ -1138,14 +1139,14 @@ export const Weapons: IWeaponInfo[] = [
       statValue: 41.3,
     },
     (affix = 1) => {
-      const add = 20 + (affix - 1) * 4 + "%";
+      const add = [20, 24, 28, 32, 36][affix - 1] + "%";
       return {
         title: "踏火息雷",
         text: highlight`对处于火元素或雷元素影响下的敌人，造成的伤害提高${add}。`,
       };
     },
     (affix = 1) => {
-      const add = 20 + (affix - 1) * 4;
+      const add = [20, 24, 28, 32, 36][affix - 1];
       return [
         {
           label: "踏火息雷",
@@ -1168,18 +1169,18 @@ export const Weapons: IWeaponInfo[] = [
       statValue: 66.2,
     },
     (affix = 1) => {
-      const hp = 20 + (affix - 1) * 5 + "%";
-      const rate = 0.12 + (affix - 1) * 0.03 + "%";
-      const rate2 = 0.2 + (affix - 1) * 0.05 + "%";
+      const hp = [20, 25, 30, 35, 40][affix - 1] + "%";
+      const rate = [0.12, 0.15, 0.18, 0.21, 0.24][affix - 1] + "%";
+      const rate2 = [0.2, 0.25, 0.3, 0.35, 0.4][affix - 1] + "%";
       return {
         title: "沉入沙海的史诗",
         text: highlight`生命值提升${hp}。元素战技命中敌人时将产生持续20秒的「宏大诗篇」效果：基于装备者生命值上限的${rate}，获得元素精通提升，该效果每0.3秒至多触发一次，至多叠加3层。该效果叠加至3层或3层的持续时间刷新时，将基于装备者生命值上限的${rate2}，为队伍中附近所有角色提供元素精通提升，持续20秒。`,
       };
     },
     (affix = 1) => {
-      const hp = 20 + (affix - 1) * 5;
-      const rate = 0.12 + (affix - 1) * 0.03;
-      const rate2 = 0.2 + (affix - 1) * 0.05;
+      const hp = [20, 25, 30, 35, 40][affix - 1];
+      const rate = [0.12, 0.15, 0.18, 0.21, 0.24][affix - 1];
+      const rate2 = [0.2, 0.25, 0.3, 0.35, 0.4][affix - 1];
       return [
         {
           label: "生命值上限提升",
@@ -1237,23 +1238,23 @@ export const Weapons: IWeaponInfo[] = [
       statValue: 41.3,
     },
     (affix = 1) => {
-      const atk = 7 + (affix - 1) + "%";
-      const cri = 3 + (affix - 1) + "%";
+      const atk = [7, 8, 9, 10, 11][affix - 1] + "%";
+      const cri = [3, 4, 5, 6, 7][affix - 1] + "%";
       return {
         title: "千岩诀·同心",
         text: highlight`队伍中每有一位璃月角色，装备该武器的角色便获得${atk}攻击力提升与${cri}暴击率提升。至多获得4层提升效果。`,
       };
     },
     (affix = 1) => {
-      const atk = 7 + (affix - 1);
-      const cri = 3 + (affix - 1);
+      const atk = [7, 8, 9, 10, 11][affix - 1];
+      const cri = [3, 4, 5, 6, 7][affix - 1];
       return [
         {
           label: "千岩诀·同心",
           describe: `角色获得${atk}%攻击力提升与${cri}%暴击率提升。至多获得4层提升效果`,
           effect: [
-            { type: BuffType.ATKPrcent, getValue: (_, stack) => atk * stack },
-            { type: BuffType.Critcal, getValue: (_, stack) => cri * stack },
+            { type: BuffType.ATKPrcent, getValue: (_, s) => atk * s },
+            { type: BuffType.Critcal, getValue: (_, s) => cri * s },
           ],
           stackable: true,
           stackText: "璃月角色数量",
@@ -1276,14 +1277,14 @@ export const Weapons: IWeaponInfo[] = [
       statValue: 165,
     },
     (affix = 1) => {
-      const em = 40 + (affix - 1) * 10;
+      const em = [40, 50, 60, 70, 80][affix - 1];
       return {
         title: "镌岩为坊",
         text: highlight`元素能量减少后，装备者的元素精通提升${em}点。该效果持续18秒，至多叠加2层。`,
       };
     },
     (affix = 1) => {
-      const em = 40 + (affix - 1) * 10;
+      const em = [40, 50, 60, 70, 80][affix - 1];
       return [
         {
           label: "镌岩为坊",
@@ -1309,16 +1310,16 @@ export const Weapons: IWeaponInfo[] = [
       statValue: 44.1,
     },
     (affix = 1) => {
-      const crt = 20 + 5 * (affix - 1) + "%";
-      const add = 16 + 4 * (affix - 1) + "%";
+      const crt = [20, 25, 30, 35, 40][affix - 1] + "%";
+      const add = [16, 20, 24, 28, 32][affix - 1] + "%";
       return {
         title: "死之契",
         text: highlight`暴击伤害提升${crt}；生命之契的数值增加时，装备者造成的伤害提升${add}。该效果持续6秒，至多叠加3次。`,
       };
     },
     (affix = 1) => {
-      const add = 16 + 4 * (affix - 1);
-      const crt = 20 + 5 * (affix - 1);
+      const crt = [20, 25, 30, 35, 40][affix - 1];
+      const add = [16, 20, 24, 28, 32][affix - 1];
       return [
         {
           label: "暴击伤害提升",
@@ -1329,7 +1330,7 @@ export const Weapons: IWeaponInfo[] = [
         {
           label: "伤害提高",
           describe: `生命之契的数值增加时，装备者造成的伤害提升${add}%`,
-          effect: [{ type: BuffType.GlobalPrcent, getValue: (_, stack) => add * stack }],
+          effect: [{ type: BuffType.GlobalPrcent, getValue: (_, s) => add * s }],
           enable: false,
           stackable: true,
           stack: 3,
@@ -1350,16 +1351,16 @@ export const Weapons: IWeaponInfo[] = [
       statValue: 88.2,
     },
     (affix = 1) => {
-      const crt = 4 + (affix - 1) + "%";
-      const add = 120 + 30 * (affix - 1) + "%";
+      const crt = [4, 5, 6, 7, 8][affix - 1] + "%";
+      const add = [120, 150, 180, 210, 240][affix - 1] + "%";
       return {
         title: "白月枝芒",
         text: highlight`暴击率提升${crt}；普通攻击造成元素伤害后，获得「裁叶」效果：普通攻击和元素战技造成的伤害提高，提高值相当于元素精通的${add}。该效果在生效28次或12秒后消失，每12秒至多获得一次「裁叶」效果。`,
       };
     },
     (affix = 1) => {
-      const crt = 4 + (affix - 1);
-      const add = 120 + 30 * (affix - 1);
+      const crt = [4, 5, 6, 7, 8][affix - 1];
+      const add = [120, 150, 180, 210, 240][affix - 1];
       return [
         {
           label: "暴击率提升",
@@ -1386,7 +1387,7 @@ export const Weapons: IWeaponInfo[] = [
               actionOn: ActionOn.Indirect,
             },
           ],
-          enable: false,
+          enable: true,
         },
       ];
     }
@@ -1403,8 +1404,8 @@ export const Weapons: IWeaponInfo[] = [
       statValue: 22.1,
     },
     (affix = 1) => {
-      const add = 12 + (affix - 1) * 4 + "%";
-      const add2 = 24 + (affix - 1) * 8 + "%";
+      const add = [12, 16, 20, 24, 28][affix - 1] + "%";
+      const add2 = [24, 32, 40, 48, 56][affix - 1] + "%";
 
       return {
         title: "烬日之影",
@@ -1412,20 +1413,20 @@ export const Weapons: IWeaponInfo[] = [
       };
     },
     (affix = 1) => {
-      const add = 12 + (affix - 1) * 4;
-      const add2 = 24 + (affix - 1) * 8;
+      const add = [12, 16, 20, 24, 28][affix - 1];
+      const add2 = [24, 32, 40, 48, 56][affix - 1];
       return [
         {
           label: "伤害提升",
           describe: `装备者具有生命之契时，造成的伤害提升${add}%`,
           effect: [{ type: BuffType.GlobalPrcent, getValue: () => add }],
-          enable: false,
+          enable: true,
         },
         {
           label: "伤害进一步提升",
           describe: `若生命之契的数值大于等于生命值上限的30%，造成的伤害将进一步提升${add2}%`,
           effect: [{ type: BuffType.GlobalPrcent, getValue: () => add2 }],
-          enable: false,
+          enable: true,
         },
       ];
     }
@@ -1442,11 +1443,10 @@ export const Weapons: IWeaponInfo[] = [
       statValue: 41.3,
     },
     (affix = 1) => {
+      const a = [8, 10, 12, 14, 16][affix - 1]
       return {
         title: "均衡的原理",
-        text: highlight`进行治疗时，恢复${
-          8 + (affix - 1) * 2
-        }点能量，该效果每10秒至多触发一次，角色处于队伍后台时也能触发。`,
+        text: highlight`进行治疗时，恢复${a}点能量，该效果每10秒至多触发一次，角色处于队伍后台时也能触发。`,
       };
     }
   ),
@@ -1462,18 +1462,18 @@ export const Weapons: IWeaponInfo[] = [
       statValue: 88.2,
     },
     (affix = 1) => {
-      let add = 16 + 4 * (affix - 1) + "%";
-      let add2 = 24 + 6 * (affix - 1) + "%";
-      let def = 20 + 5 * (affix - 1) + "%";
+      let add = [16, 20, 24, 28, 32][affix - 1] + "%";
+      let add2 = [24, 30, 36, 42, 48][affix - 1] + "%";
+      let def = [20, 25, 30, 35, 40][affix - 1] + "%";
       return {
         title: "锦之花与龛中剑",
         text: highlight`普通攻击造成的伤害提升${add}，元素战技造成的伤害提升${add2}；队伍中附近的角色在场上造成岩元素伤害后，上述效果进一步提升100%，持续15秒。此外，装备者的防御力提升${def}。`,
       };
     },
     (affix = 1) => {
-      let add = 16 + 4 * (affix - 1);
-      let add2 = 24 + 6 * (affix - 1);
-      let def = 20 + 5 * (affix - 1);
+      let add = [16, 20, 24, 28, 32][affix - 1];
+      let add2 = [24, 30, 36, 42, 48][affix - 1];
+      let def = [20, 25, 30, 35, 40][affix - 1];
       return [
         {
           label: "普攻伤害、元素战技伤害提升",
@@ -1491,7 +1491,7 @@ export const Weapons: IWeaponInfo[] = [
             { type: BuffType.NormalPrcent, getValue: () => add },
             { type: BuffType.SkillPrcent, getValue: () => add2 },
           ],
-          enable: false,
+          enable: true,
         },
         {
           label: "防御力提升",
@@ -1514,15 +1514,15 @@ export const Weapons: IWeaponInfo[] = [
       statValue: 16.5,
     },
     (affix = 1) => {
-      let add = 28 + (affix - 1) * 13 + "%";
-      let c = 2.5 + (affix - 1) * 0.25;
+      let add = [28, 41, 54, 67, 80][affix - 1] + "%";
+      let c = [2.5, 2.75, 3, 3.25, 3.5][affix - 1]
       return {
         title: "云笈降真要诀",
         text: highlight`装备者下落攻击命中敌人后，队伍中附近的所有角色下落攻击造成的伤害提高${add}，持续20秒；队伍中附近的角色的下落攻击命中敌人时，为装备者恢复${c}点元素能量，每0.7秒至多通过这种方式恢复一次元素能量，装备者处于队伍后台时依然能通过这种方式恢复元素能量。`,
       };
     },
     (affix = 1) => {
-      let add = 28 + (affix - 1) * 13;
+      let add = [28, 41, 54, 67, 80][affix - 1];
       return [
         {
           label: "云笈降真要诀",
@@ -1547,14 +1547,14 @@ export const Weapons: IWeaponInfo[] = [
       statValue: 30.6,
     },
     (affix = 1) => {
-      let atk = 12 + (affix - 1) * 3 + "%";
+      let atk = [12, 15, 18, 21, 24][affix - 1] + "%";
       return {
         title: "加油！",
         text: highlight`攻击力提升${atk}。不仅如此！海沫村中曾蒙你帮助的美露莘们的声援心意充满了力量，依照她们的数目，攻击力至多进一步提升${atk}。`,
       };
     },
     (affix = 1) => {
-      let atk = 12 + (affix - 1) * 3;
+      let atk = [12, 15, 18, 21, 24][affix - 1];
       return [
         {
           label: "加油！",
@@ -1583,7 +1583,7 @@ export const Weapons: IWeaponInfo[] = [
       statValue: 41.3,
     },
     (affix = 1) => {
-      let rat = 160 + (affix - 1) * 40 + "%";
+      let rat = [160, 200, 240, 280, 320][affix - 1] + "%";
       return {
         title: "勇者之剑",
         text: highlight`装备者不具备「始基力」时：普通攻击、重击、下落攻击命中时，会释放芒性或荒性的能量冲击，造成${rat}攻击力的伤害。该效果每12秒至多触发一次，能量冲击的类型由水仙十字之剑当前的属性决定。`,
@@ -1591,7 +1591,7 @@ export const Weapons: IWeaponInfo[] = [
     },
     () => [],
     (affix = 1) => {
-      let rat = (160 + (affix - 1) * 40) / 100;
+      let rat = [160, 200, 240, 280, 320][affix - 1] / 100;
       return [
         {
           label: "勇者之剑·能量冲击",
@@ -1616,19 +1616,19 @@ export const Weapons: IWeaponInfo[] = [
       statValue: 22.1,
     },
     (affix = 1) => {
-      let atk = 16 + (affix - 1) * 4 + "%";
-      let add = 16 + (affix - 1) * 4 + "%";
-      let add2 = 14 + (affix - 1) * 3.5 + "%";
-      let sp = 8 + (affix - 1) * 2 + "%";
+      let atk = [16, 20, 24, 28, 32][affix - 1] + "%";
+      let add = [16, 20, 24, 28, 32][affix - 1] + "%";
+      let add2 = [14, 17.5, 21, 24.5, 28][affix - 1] + "%";
+      let sp = [8, 10, 12, 14, 16][affix - 1] + "%";
       return {
         title: "黄金的血潮",
         text: highlight`攻击力提升${atk}。当前生命值提升或降低时，普通攻击造成的伤害提升${add}，重击造成的伤害提升${add2}。该效果持续4秒，至多叠加3层，每0.3秒至多触发一次；处于叠加3层的状态下时，攻击速度提升${sp}。`,
       };
     },
     (affix = 1) => {
-      let atk = 16 + (affix - 1) * 4;
-      let add = 16 + (affix - 1) * 4;
-      let add2 = 14 + (affix - 1) * 3.5;
+      let atk = [16, 20, 24, 28, 32][affix - 1];
+      let add = [16, 20, 24, 28, 32][affix - 1];
+      let add2 = [14, 17.5, 21, 24.5, 28][affix - 1];
       return [
         {
           label: "攻击力提升",
@@ -1643,7 +1643,7 @@ export const Weapons: IWeaponInfo[] = [
             { type: BuffType.NormalPrcent, getValue: (_, stack) => add * stack },
             { type: BuffType.StrongPrcent, getValue: (_, stack) => add2 * stack },
           ],
-          enable: false,
+          enable: true,
           stackable: true,
           stack: 3,
           limit: 3,
@@ -1663,16 +1663,16 @@ export const Weapons: IWeaponInfo[] = [
       statValue: 27.6,
     },
     (affix = 1) => {
-      let atk = 3 + (affix - 1) + "%";
-      let add = 7 + (affix - 1) * 1.5 + "%";
+      let atk = [3, 4, 5, 6, 7][affix - 1] + "%";
+      let add = [7, 8.5, 10, 11.5, 13][affix - 1] + "%";
       return {
         title: "石匠号子",
         text: highlight`受到治疗或进行治疗时，将赋予一枚团结标记，持续30秒，至多拥有三枚团结标记。施放元素战技或元素爆发时，将消耗所有的团结标记，产生持续10秒的「抗争」效果：每枚消耗的团结标记提高${atk}攻击力与${add}所有元素伤害加成。每15秒至多触发一次抗争效果；角色处于队伍后台时也能获得团结标记。`,
       };
     },
     (affix = 1) => {
-      let atk = 3 + (affix - 1);
-      let add = 7 + (affix - 1) * 1.5;
+      let atk = [3, 4, 5, 6, 7][affix - 1];
+      let add = [7, 8.5, 10, 11.5, 13][affix - 1];
       return [
         {
           label: "石匠号子",
@@ -2056,18 +2056,18 @@ export const Weapons: IWeaponInfo[] = [
       statValue: 27.6,
     },
     (affix = 1) => {
-      let atk = 12 + (affix - 1) * 3 + "%";
-      let hp = 2.4 + (affix - 1) * 0.6 + "%";
-      let atk2 = 150 + (affix - 1) * 37.5;
+      let atk = [12, 15, 18, 21, 24][affix - 1] + "%";
+      let hp = [2.4, 3, 3.6, 4.2, 4.8][affix - 1] + "%";
+      let atk2 = [150, 187.5, 225, 262.5, 300][affix - 1] + "%";
       return {
         title: "最终的崇高",
         text: highlight`施放元素战技时，攻击力提升${atk}，持续15秒，并赋予生命值上限25%的生命之契，该效果每10秒至多触发一次。生命之契清除时，基于清除值的${hp}提升至多${atk2}点攻击力，持续15秒。`,
       };
     },
     (affix = 1) => {
-      let atk = 12 + (affix - 1) * 3;
-      let hp = 2.4 + (affix - 1) * 0.6;
-      let atk2 = 150 + (affix - 1) * 37.5;
+      let atk = [12, 15, 18, 21, 24][affix - 1];
+      let hp = [2.4, 3, 3.6, 4.2, 4.8][affix - 1];
+      let atk2 = [150, 187.5, 225, 262.5, 300][affix - 1];
       return [
         {
           label: "攻击力提升",
