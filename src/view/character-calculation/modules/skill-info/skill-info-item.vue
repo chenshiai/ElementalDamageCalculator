@@ -95,5 +95,6 @@ const calculatedResults = computed(() => {
 }
 .skill-info-empty {
   text-align: center;
+  margin-top: 12px;
 }
 </style>

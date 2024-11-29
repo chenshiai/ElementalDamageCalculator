@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { ref } from "vue";
-import { Slider } from "vant";
+import { Slider, Switch } from "vant";
 import { ICharacterInfo, IWeaponInfo, ICalculatorValue } from "@/types/interface";
 import SkillInfoItem from "./skill-info-item.vue";
 import { computed } from "vue";
@@ -33,11 +33,18 @@ const activeTab = ref(0);
 const onTab = (val) => {
   activeTab.value = val;
 };
+const floatSwitch = ref(false);
 </script>
 
 <template>
-  <div class="skill-info">
-    <div class="data-panel__title">伤害数值</div>
+  <div :class="['skill-info', floatSwitch ? 'float-panel' : '']">
+    <div class="data-panel__title data-panel__title-extra">
+      <span>伤害数值</span>
+      <span class="extra-float">
+        固定底部-
+        <Switch v-model="floatSwitch" active-color="#766461" inactive-color="#b7a19e" size="16" />
+      </span>
+    </div>
     <div class="tab-list">
       <div
         v-for="tab in tabList"
@@ -89,9 +96,31 @@ const onTab = (val) => {
       <SkillInfoItem :skill="getOtherSkill" :calculator-value="calculatorValue" name="其他攻击手段" />
     </div>
   </div>
+  <div v-if="floatSwitch" class="inner"></div>
 </template>
 
-<style>
+<style scoped>
+.data-panel__title-extra {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.extra-float {
+  display: flex;
+  font-size: 12px;
+  align-items: center;
+}
+.float-panel {
+  width: 100%;
+  padding: 16px;
+  box-sizing: border-box;
+  z-index: 100;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background-color: var(--page-bg);
+  box-shadow: 2px 2px 10px 0px var(--bg);
+}
 .slider-wrap {
   display: flex;
   padding-right: 16px;
@@ -102,11 +131,8 @@ const onTab = (val) => {
   margin-right: 12px;
   flex-shrink: 0;
 }
-.skill-info .van-collapse-item__content {
-  color: var(--main-text);
-}
-.skill-info .van-cell {
-  background-color: var(--light-text);
+.inner {
+  height: 300px;
 }
 
 .tab-list {
@@ -142,7 +168,7 @@ const onTab = (val) => {
   border-radius: 4px 4px 0 0;
   text-shadow: var(--stroke-4) 0 0 2px;
   box-shadow: 16px 30px 0 0 var(--main-text), -16px 30px 0 0 var(--main-text);
- }
+}
 .tab-selected::before {
   content: "";
   position: absolute;
