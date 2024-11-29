@@ -215,7 +215,9 @@ function round(a: number, precision: number = 0): number {
           <div>{{ round(val.baseValue) }}</div>
           <div class="extra-text">+{{ round(val.extraValue) }}</div>
         </span>
-        <span class="panel-number">{{ round(val.baseValue + val.extraValue) }}{{ index === leftValue.length - 1 ? '%' : '' }}</span>
+        <span class="panel-number">
+          {{ round(val.baseValue + val.extraValue, index === 4 ? 1 : 0) }}{{ index === leftValue.length - 1 ? '%' : '' }}
+        </span>
       </div>
     </div>
     <div class="right">

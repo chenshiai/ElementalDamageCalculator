@@ -60,16 +60,16 @@ export const Weapons: IWeaponInfo[] = [
       statValue: 27.6,
     },
     (affix = 1) => {
-      let a = [20,25,30,35,40][affix - 1] + "%";
-      let c = [8,10,12,14,16][affix - 1] + "%";
+      let a = [20, 25, 30, 35, 40][affix - 1] + "%";
+      let c = [8, 10, 12, 14, 16][affix - 1] + "%";
       return {
         title: "弥漫的边界",
         text: highlight`角色处于护盾庇护下时，普通攻击和重击造成的伤害提升${a}，普通攻击和重击的暴击率提升${c}。`,
       };
     },
     (affix = 1) => {
-      let a = [20,25,30,35,40][affix - 1]
-      let c = [8,10,12,14,16][affix - 1]
+      let a = [20, 25, 30, 35, 40][affix - 1];
+      let c = [8, 10, 12, 14, 16][affix - 1];
       return [
         {
           label: "护盾庇护下普通、重击的伤害&暴击率提升",
@@ -78,11 +78,12 @@ export const Weapons: IWeaponInfo[] = [
             { type: BuffType.NormalPrcent, getValue: () => a },
             { type: BuffType.StrongPrcent, getValue: () => a },
             { type: BuffType.NormalCritcal, getValue: () => c },
-            { type: BuffType.StrongCritcal, getValue: () => c }],
-          enable: false,
+            { type: BuffType.StrongCritcal, getValue: () => c },
+          ],
+          enable: true,
         },
       ];
-    },
+    }
   ),
   createWeapon(
     {
@@ -240,7 +241,7 @@ export const Weapons: IWeaponInfo[] = [
             { type: BuffType.StrongPrcent, getValue: () => c },
             { type: BuffType.FallingPrcent, getValue: () => c },
           ],
-          enable: false,
+          enable: true,
         },
       ];
     }
@@ -312,7 +313,7 @@ export const Weapons: IWeaponInfo[] = [
           label: "元素战技造成的伤害进一步提升",
           describe: `队伍中附件的其他角色施放元素战技后，装备者的元素战技造成的伤害还会提升${c}%`,
           effect: [{ type: BuffType.SkillPrcent, getValue: () => c }],
-          enable: false,
+          enable: true,
         },
       ];
     }
@@ -360,7 +361,7 @@ export const Weapons: IWeaponInfo[] = [
           stackable: true,
           limit: 2,
           stack: 2,
-          enable: false,
+          enable: true,
         },
         {
           label: "全队元素伤害提升",
@@ -409,7 +410,7 @@ export const Weapons: IWeaponInfo[] = [
               transform: true,
             },
           ],
-          enable: false,
+          enable: true,
           shareable: true,
           target: BuffTarget.All,
         },
@@ -428,14 +429,14 @@ export const Weapons: IWeaponInfo[] = [
       statValue: 11,
     },
     (affix = 1) => {
-      const add = 10 + (affix - 1) * 2.5 + "%";
+      const add = [10, 12.5, 15, 17.5, 20][affix - 1] + "%";
       return {
         title: "绿松石之狩",
         text: highlight`元素战技命中敌人后，会获得1层「悬木祝赐」，该效果每0.5秒至多触发1次；队伍中附近的角色触发了燃烧或烈绽放反应后，装备者会获得3层悬木祝赐，该效果每2秒至多触发1次，队伍中的角色处于队伍后台时也能触发。悬木祝赐：元素战技伤害和元素爆发伤害提升${add}，持续6秒，至多叠加六层，每层持续时间独立计算。`,
       };
     },
     (affix = 1) => {
-      const add = 10 + (affix - 1) * 2.5;
+      const add = [10, 12.5, 15, 17.5, 20][affix - 1];
       return [
         {
           label: "绿松石之狩",
@@ -448,7 +449,7 @@ export const Weapons: IWeaponInfo[] = [
           stackText: "悬木祝赐",
           limit: 6,
           stack: 6,
-          enable: false,
+          enable: true,
         },
       ];
     }
@@ -465,18 +466,18 @@ export const Weapons: IWeaponInfo[] = [
       statValue: 55.1,
     },
     (affix = 1) => {
-      const limit = 80 + (affix - 1) * 10 + "%";
-      const atk = 28 + (affix - 1) * 7 + "%";
-      const car = 30 + (affix - 1) * 5 + "%";
+      const limit = [80, 90, 100, 110, 120][affix - 1] + "%";
+      const atk = [28, 35, 42, 49, 56][affix - 1] + "%";
+      const car = [30, 35, 40, 45, 50][affix - 1] + "%";
       return {
         title: "非时之梦·常世灶食",
         text: highlight`攻击力获得提升，提升程度相当于元素充能效率超出100%部分的${atk}，至多通过这种方式提升${limit}。施放元素爆发后的12秒内，元素充能效率提升${car}。`,
       };
     },
     (affix = 1) => {
-      const limit = 80 + (affix - 1) * 10 + "%";
-      const atk = 28 + (affix - 1) * 7 + "%";
-      const car = 30 + (affix - 1) * 5;
+      const limit = [80, 90, 100, 110, 120][affix - 1]
+      const atk = [28, 35, 42, 49, 56][affix - 1]
+      const car = [30, 35, 40, 45, 50][affix - 1]
       return [
         {
           label: "攻击力提升",
@@ -484,8 +485,7 @@ export const Weapons: IWeaponInfo[] = [
             {
               type: BuffType.ATKPrcent,
               getValue: ({ chargeEfficiency }) => {
-                const ec = (Math.max(0, chargeEfficiency - 100) * (28 + (affix - 1) * 7)) / 100;
-                const limit = 80 + (affix - 1) * 10;
+                const ec = Math.max(0, chargeEfficiency - 100) * atk / 100;
                 const res = Math.min(limit, ec);
                 return res;
               },
@@ -493,14 +493,14 @@ export const Weapons: IWeaponInfo[] = [
               actionOn: ActionOn.Indirect,
             },
           ],
-          describe: `攻击力获得提升，提升程度相当于元素充能效率超出100%部分的${atk}，至多通过这种方式提升${limit}。`,
+          describe: `攻击力获得提升，提升程度相当于元素充能效率超出100%部分的${atk}%，至多通过这种方式提升${limit}%。`,
           enable: true,
         },
         {
           label: "元素充能效率提升",
           describe: `施放元素爆发后，元素充能效率提升${car}%`,
-          effect: [{ type: BuffType.ChargeFixed, getValue: () => 30 + (affix - 1) * 5 }],
-          enable: false,
+          effect: [{ type: BuffType.ChargeFixed, getValue: () => car }],
+          enable: true,
         },
       ];
     }
@@ -517,16 +517,16 @@ export const Weapons: IWeaponInfo[] = [
       statValue: 88.2,
     },
     (affix = 1) => {
-      const hp = 20 + (affix - 1) * 5 + "%";
-      const add = 12 + (affix - 1) * 3 + "%";
+      const hp = [20, 25, 30, 35, 40][affix - 1] + "%";
+      const add = [12, 15, 18, 21, 24][affix - 1] + "%";
       return {
         title: "水色回忆",
         text: highlight`生命值上限提高${hp}。每15秒一次，施放元素战技后的14秒内，产生如下效果：获得4层「炽夏」，每层使普通攻击造成的伤害提升${add}。持续期间内，每1.5秒一次：普通攻击命中敌人后，移除1层；每1.5秒一次：对敌人触发蒸发反应后，增加1层。「炽夏」效果至多叠加4层。`,
       };
     },
     (affix = 1) => {
-      const hp = 20 + (affix - 1) * 5;
-      const add = 12 + (affix - 1) * 3;
+      const hp = [20, 25, 30, 35, 40][affix - 1]
+      const add = [12, 15, 18, 21, 24][affix - 1]
       return [
         {
           label: "生命值上限提高",
@@ -537,7 +537,7 @@ export const Weapons: IWeaponInfo[] = [
         {
           label: "普通攻击伤害提升",
           describe: `每层「炽夏」使普通攻击伤害提升${add}%， 至多叠加四层`,
-          effect: [{ type: BuffType.NormalPrcent, getValue: (_, stack) => add * stack }],
+          effect: [{ type: BuffType.NormalPrcent, getValue: (_, s) => add * s }],
           stackable: true,
           stackText: "炽夏",
           limit: 4,
@@ -559,18 +559,18 @@ export const Weapons: IWeaponInfo[] = [
       statValue: 198,
     },
     (affix = 1) => {
-      const add = 10 + (affix - 1) * 2.5 + "%";
-      const num = 16 + (affix - 1) * 4 + "%";
-      const atk = 20 + (affix - 1) * 5 + "%";
+      const add = [10, 12.5, 15, 17.5, 20][affix - 1] + "%";
+      const num = [16, 20, 24, 28, 32][affix - 1] + "%";
+      const atk = [20, 25, 30, 35, 40][affix - 1] + "%";
       return {
         title: "抗争的践行之歌",
         text: highlight`飘游风中的「千年的大乐章」的一部分。造成的伤害提高${add}。触发元素反应时，角色获得一枚奋起之符，每0.5秒内至多触发一次，角色处于队伍后台也能触发。拥有2枚奋起之符时，将消耗所有奋起之符，使附近的队伍中所有角色获得持续12秒的「千年的大乐章·抗争之歌」效果：普通攻击、重击、下落攻击造成的伤害提高${num}，攻击力提升${atk}。触发后20秒内，无法再次获得奋起之符。「千年的大乐章」触发的多种数值效果中，同类数值效果不可叠加。`,
       };
     },
     (affix = 1) => {
-      const add = 10 + (affix - 1) * 2.5;
-      const num = 16 + (affix - 1) * 4;
-      const atk = 20 + (affix - 1) * 5;
+      const add = [10, 12.5, 15, 17.5, 20][affix - 1];
+      const num = [16, 20, 24, 28, 32][affix - 1];
+      const atk = [20, 25, 30, 35, 40][affix - 1];
       return [
         {
           label: "伤害提升",
@@ -582,7 +582,7 @@ export const Weapons: IWeaponInfo[] = [
           label: "抗争之歌·攻击力提升",
           describe: `攻击力提升${atk}%`,
           effect: [{ type: BuffType.ATKPrcent, getValue: () => atk }],
-          enable: false,
+          enable: true,
           shareable: true,
           target: BuffTarget.All,
         },
@@ -613,15 +613,15 @@ export const Weapons: IWeaponInfo[] = [
       weaponType: WeaponType.Magic,
     },
     (affix = 1) => {
-      const atk = 40 + (affix - 1) * 10 + "%";
+      const hp = [40, 50, 60, 70, 80][affix - 1] + "%";
       return {
         title: "图帕克之握",
-        text: highlight`攻击命中敌人时，在目标位置基于生命值上限的${atk}，造成范围伤害。该效果每15秒至多触发一次。`,
+        text: highlight`攻击命中敌人时，在目标位置基于生命值上限的${hp}，造成范围伤害。该效果每15秒至多触发一次。`,
       };
     },
     () => [],
     (affix = 1) => {
-      const hp = (40 + (affix - 1) * 10) / 100;
+      const hp = [40, 50, 60, 70, 80][affix - 1] / 100;
       return [
         {
           label: "图帕克之握",
@@ -646,31 +646,33 @@ export const Weapons: IWeaponInfo[] = [
       statValue: 33.1,
     },
     (affix: number) => {
-      const atk = 20 + (affix - 1) * 5 + "%";
-      const hp = 32 + (affix - 1) * 8 + "%";
+      const atk = [20, 25, 30, 35, 40][affix - 1] + "%";
+      const hp = [32, 40, 48, 56, 64][affix - 1] + "%";
       return {
         title: "沙海守望",
         text: highlight`元素战技命中敌人后，攻击力提升${atk}，持续8秒；受到伤害后，攻击力提升${atk}，持续8秒。上述2种效果角色处于后台时也能触发。此外，不处在护盾庇护下时，生命值上限提高${hp}。`,
       };
     },
     (affix = 1) => {
+      const atk = [20, 25, 30, 35, 40][affix - 1]
+      const hp = [32, 40, 48, 56, 64][affix - 1]
       return [
         {
-          label: "攻击力提升·一",
-          effect: [{ type: BuffType.ATKPrcent, getValue: () => 20 + (affix - 1) * 5 }],
-          describe: `元素战技命中敌人后，攻击力提升${20 + (affix - 1) * 5}%`,
-          enable: false,
+          label: "元素战技命中敌人，攻击力提升",
+          effect: [{ type: BuffType.ATKPrcent, getValue: () => atk }],
+          describe: `元素战技命中敌人后，攻击力提升${atk}%`,
+          enable: true,
         },
         {
-          label: "攻击力提升·二",
-          effect: [{ type: BuffType.ATKPrcent, getValue: () => 20 + (affix - 1) * 5 }],
-          describe: `受到伤害后，攻击力提升${20 + (affix - 1) * 5}%`,
-          enable: false,
+          label: "受到伤害，攻击力提升",
+          effect: [{ type: BuffType.ATKPrcent, getValue: () => atk }],
+          describe: `受到伤害后，攻击力提升${atk}%`,
+          enable: true,
         },
         {
-          label: "生命值提升",
-          effect: [{ type: BuffType.HPPrcent, getValue: () => 32 + (affix - 1) * 8 }],
-          describe: `不处于护盾庇护下，生命值提升${32 + (affix - 1) * 8}%`,
+          label: "不处于护盾庇护下，生命值提升",
+          effect: [{ type: BuffType.HPPrcent, getValue: () => hp }],
+          describe: `不处于护盾庇护下，生命值提升${hp}%`,
           enable: false,
         },
       ];
@@ -688,31 +690,31 @@ export const Weapons: IWeaponInfo[] = [
       rarity: Rarity.Five,
     },
     (affix = 1) => {
-      const hp = 14 + (affix - 1) * 3.5 + "%";
-      const skill = 8 + (affix - 1) * 2 + "%";
+      const hp = [14, 17.5, 21, 24.5, 28][affix - 1] + "%";
+      const skill = [8, 10, 12, 14, 16][affix - 1] + "%";
       return {
         title: "湖光的朝与暮",
         text: highlight`装备者的当前生命值提升或降低时，元素战技造成的伤害提升${skill}，该效果持续6秒，至多叠加3次，每0.2秒至多触发一次；队伍中其他角色的当前生命值提升或降低时，装备者的生命值上限提升${hp}，该效果持续6秒，至多叠加2次，每0.2秒至多触发一次。装备者处于队伍后台时，依然能触发上述效果。`,
       };
     },
     (affix = 1) => {
-      const hp = 14 + (affix - 1) * 3.5;
-      const skill = 8 + (affix - 1) * 2;
+      const hp = [14, 17.5, 21, 24.5, 28][affix - 1]
+      const skill = [8, 10, 12, 14, 16][affix - 1]
       return [
         {
-          label: "生命值提升",
+          label: "生命值提升或降低时，生命值提升",
           describe: `生命值提升${hp}%，至多叠加2次`,
-          effect: [{ type: BuffType.HPPrcent, getValue: (_, stack) => hp * stack }],
+          effect: [{ type: BuffType.HPPrcent, getValue: (_, s) => hp * s }],
           stackable: true,
           stack: 2,
           limit: 2,
-          enable: false,
+          enable: true,
         },
         {
           label: "元素战技伤害提升",
           describe: `元素战技造成的伤害提升${skill}%，至多叠加3次`,
-          effect: [{ type: BuffType.SkillPrcent, getValue: (_, stack) => skill * stack }],
-          enable: false,
+          effect: [{ type: BuffType.SkillPrcent, getValue: (_, s) => skill * s }],
+          enable: true,
           stackable: true,
           stack: 3,
           limit: 3,
@@ -732,19 +734,20 @@ export const Weapons: IWeaponInfo[] = [
       statValue: 27.6,
     },
     (affix = 1) => {
-      const add = 16 + (affix - 1) * 4 + "%";
+      const add = [16, 20, 24, 28, 32][affix - 1] + "%";
       return {
         title: "苍翠之路的誓言",
         text: highlight`队伍中的角色触发火元素相关反应后，装备者元素战技造成的伤害提升${add}，持续8秒。该效果队伍中的角色处于队伍后台时也能触发。`,
       };
     },
     (affix = 1) => {
+      const add = [16, 20, 24, 28, 32][affix - 1]
       return [
         {
           label: "苍翠之路的誓言",
-          describe: `队伍中的角色触发火元素相关反应后，装备者元素战技伤害提升${16 + (affix - 1) * 4}%`,
-          effect: [{ type: BuffType.SkillPrcent, getValue: () => 16 + (affix - 1) * 4 }],
-          enable: false,
+          describe: `队伍中的角色触发火元素相关反应后，装备者元素战技伤害提升${add}%`,
+          effect: [{ type: BuffType.SkillPrcent, getValue: () => add }],
+          enable: true,
         },
       ];
     }
@@ -761,19 +764,20 @@ export const Weapons: IWeaponInfo[] = [
       statValue: 51.7,
     },
     (affix = 1) => {
-      const def = 16 + (affix - 1) * 4 + "%";
+      const def = [16, 20, 24, 28, 32][affix - 1] + "%";
       return {
         title: "流水与泉的约定",
         text: highlight`施放元素战技时，防御力提升${def}%，持续15秒。`,
       };
     },
     (affix = 1) => {
+      const def = [16, 20, 24, 28, 32][affix - 1]
       return [
         {
           label: "流水与泉的约定",
-          describe: `施放元素战技时，防御力提升${16 + (affix - 1) * 4}`,
-          effect: [{ type: BuffType.DEFPrcent, getValue: () => 16 + (affix - 1) * 4 }],
-          enable: false,
+          describe: `施放元素战技时，防御力提升${def}%`,
+          effect: [{ type: BuffType.DEFPrcent, getValue: () => def }],
+          enable: true,
         },
       ];
     }
@@ -790,16 +794,16 @@ export const Weapons: IWeaponInfo[] = [
       statValue: 41.3,
     },
     (affix = 1) => {
-      const add = 0.6 + (affix - 1) * 0.1 + "%";
-      const limit = 16 + (affix - 1) * 4 + "%";
+      const add = [0.6, 0.7, 0.8, 0.9, 1][affix - 1] + "%";
+      const limit = [16, 20, 24, 28, 32][affix - 1] + "%";
       return {
         title: "丰沃之陆的回声",
         text: highlight`施放元素战技时，获得「玉锻之冕」效果：每1000点生命值上限都会使普通攻击造成的伤害提升${add}，持续10秒。通过这种方式至多使普通攻击造成的伤害提升${limit}。`,
       };
     },
     (affix = 1) => {
-      const add = 0.6 + (affix - 1) * 0.1;
-      const limit = 16 + (affix - 1) * 4;
+      const add = [0.6, 0.7, 0.8, 0.9, 1][affix - 1]
+      const limit = [16, 20, 24, 28, 32][affix - 1]
       return [
         {
           label: "丰沃之陆的回声",
@@ -830,27 +834,27 @@ export const Weapons: IWeaponInfo[] = [
       statValue: 27.6,
     },
     (affix = 1) => {
-      const atk = 4.8 + (affix - 1) * 1.2 + "%";
-      const el = 24 + (affix - 1) * 6;
+      const atk = [4.8, 6, 7.2, 8.4, 9.6][affix - 1] + "%";
+      const el = [24, 30, 36, 42, 48][affix - 1]
       return {
         title: "花与落羽的长歌",
         text: highlight`队伍中每有一名纳塔角色或与装备者元素类型不同的角色，装备者获得${atk}攻击力提升；上述角色不少于3名时，装备者的元素精通提升${el}点。`,
       };
     },
     (affix = 1) => {
-      const atk = 4.8 + (affix - 1) * 1.2;
-      const el = 24 + (affix - 1) * 6;
+      const atk = [4.8, 6, 7.2, 8.4, 9.6][affix - 1]
+      const el = [24, 30, 36, 42, 48][affix - 1]
       return [
         {
           label: "花与落羽的长歌",
           describe: `队伍中每有一名纳塔角色或与装备者元素类型不同的角色，装备者获得${atk}%攻击力提升；上述角色不少于3名时，装备者的元素精通提升${el}点`,
           effect: [
-            { type: BuffType.ATKPrcent, getValue: (_, stack) => atk * stack },
-            { type: BuffType.MysteryFixed, getValue: (_, stack) => (stack >= 3 ? el : 0) },
+            { type: BuffType.ATKPrcent, getValue: (_, s) => atk * s },
+            { type: BuffType.MysteryFixed, getValue: (_, s) => (s >= 3 ? el : 0) },
           ],
           stackable: true,
           limit: 4,
-          stack: 0,
+          stack: 3,
           enable: true,
           stackText: "符合条件的角色数量",
         },
@@ -869,14 +873,14 @@ export const Weapons: IWeaponInfo[] = [
       statValue: 69,
     },
     (affix = 1) => {
-      const def = 16 + (affix - 1) * 4 + "%";
+      const def = [16, 20, 24, 28, 32][affix - 1] + "%";
       return {
         title: "镜与烟色的隐谜",
         text: highlight`施放元素战技时，防御力提升${def}，持续15秒。`,
       };
     },
     (affix = 1) => {
-      const def = 16 + (affix - 1) * 4;
+      const def = [16, 20, 24, 28, 32][affix - 1];
       return [
         {
           label: "镜与烟色的隐谜",
@@ -899,17 +903,17 @@ export const Weapons: IWeaponInfo[] = [
       statValue: 33.1,
     },
     (affix = 1) => {
-      const atk = 15 + (affix - 1) * 4 + "%";
-      const add = 18 + (affix - 1) * 5 + "%";
-      const ch = 12 + (affix - 1);
+      const atk = [15, 19, 23, 27, 31][affix - 1] + "%";
+      const add = [18, 23, 28, 33, 38][affix - 1] + "%";
+      const ch = [12, 13, 14, 15, 16]
       return {
         title: "白晓的序曲",
         text: highlight`攻击力提升${atk}；装备者对敌人触发燃烧反应或对处于燃烧状态下的敌人造成草元素伤害后，造成的伤害提高${add}。该效果持续8秒，至多叠加2层；叠加至2层或2层的持续时间刷新时，恢复${ch}点元素能量，每12秒至多通过这种方式恢复一次元素能量。上述2种效果角色处于队伍后台时也能触发。`,
       };
     },
     (affix = 1) => {
-      const atk = 15 + (affix - 1) * 4;
-      const add = 18 + (affix - 1) * 5;
+      const atk = [15, 19, 23, 27, 31][affix - 1];
+      const add = [18, 23, 28, 33, 38][affix - 1];
       return [
         {
           label: "攻击力提升",
@@ -923,8 +927,8 @@ export const Weapons: IWeaponInfo[] = [
           stackable: true,
           limit: 2,
           stack: 2,
-          enable: false,
-          effect: [{ type: BuffType.GlobalPrcent, getValue: (_, stack) => add * stack }],
+          enable: true,
+          effect: [{ type: BuffType.GlobalPrcent, getValue: (_, s) => add * s }],
         },
       ];
     }
@@ -941,16 +945,16 @@ export const Weapons: IWeaponInfo[] = [
       statValue: 88.2,
     },
     (affix = 1) => {
-      const hp = 16 + (affix - 1) * 4 + "%";
-      const add = 20 + (affix - 1) * 5 + "%";
+      const hp = [16, 20, 24, 28, 32][affix - 1] + "%";
+      const add = [20, 25, 30, 35, 40][affix - 1] + "%";
       return {
         title: "洗濯诸类之形",
         text: highlight`生命值提升${hp}。周围存在敌人时，装备该武器的角色造成的伤害都会提升${add}，不论该角色处于场上或是处于队伍后台。`,
       };
     },
     (affix = 1) => {
-      const hp = 16 + (affix - 1) * 4;
-      const add = 20 + (affix - 1) * 5;
+      const hp = [16, 20, 24, 28, 32][affix - 1];
+      const add = [20, 25, 30, 35, 40][affix - 1];
       return [
         {
           label: "生命值提升",
@@ -959,7 +963,7 @@ export const Weapons: IWeaponInfo[] = [
           enable: true,
         },
         {
-          label: "伤害提升",
+          label: "造成的伤害提升",
           describe: `角色造成的伤害提升${add}%`,
           effect: [{ type: BuffType.GlobalPrcent, getValue: () => add }],
           enable: true,
@@ -979,16 +983,16 @@ export const Weapons: IWeaponInfo[] = [
       statValue: 22.1,
     },
     (affix = 1) => {
-      const atk = 20 + (affix - 1) * 5 + "%";
-      const add = 18 + (affix - 1) * 4.5 + "%";
+      const atk = [20, 25, 30, 35, 40][affix - 1] + "%";
+      const add = [18, 22.5, 27, 31.5, 36][affix - 1] + "%";
       return {
         title: "诸多朝与暮的誓约",
         text: highlight`攻击力提升${atk}；队伍中的角色获取结晶反应产生的晶片时，会为装备者赋予1枚「约印」，使元素战技造成的伤害提升${add}，约印持续15秒，至多同时持有2枚。所有约印将在装备者的元素战技造成伤害后的0.2秒后移除。`,
       };
     },
     (affix = 1) => {
-      const atk = 20 + (affix - 1) * 5;
-      const add = 18 + (affix - 1) * 4.5;
+      const atk = [20, 25, 30, 35, 40][affix - 1];
+      const add = [18, 22.5, 27, 31.5, 36][affix - 1];
       return [
         {
           label: "攻击力提升",
