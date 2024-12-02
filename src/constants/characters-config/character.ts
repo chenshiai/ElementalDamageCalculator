@@ -1469,6 +1469,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
           },
         ],
         enable: false,
+        condition: ({ constellation }) => constellation >= 6
       },
     ],
   },
@@ -4212,6 +4213,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         enable: true,
         shareable: true,
         target: BuffTarget.All,
+        condition: ({ constellation }) => constellation >= 4,
       },
       Constellation_Q_5,
     ],
@@ -5676,6 +5678,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         enable: false,
         shareable: true,
         target: BuffTarget.Enemy,
+        condition: ({ constellation }) => constellation >= 1
       },
       Constellation_Q_3,
       {
@@ -5688,6 +5691,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         limit: 4,
         stackable: true,
         target: BuffTarget.Enemy,
+        condition: ({ constellation }) => constellation >= 4
       },
       Constellation_E_5,
     ],
@@ -6690,6 +6694,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         enable: false,
         shareable: true,
         target: BuffTarget.All,
+        condition: ({ constellation }) => constellation >= 1
       },
       Constellation_Q_3,
       {
@@ -6699,6 +6704,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         enable: false,
         shareable: true,
         target: BuffTarget.All,
+        condition: ({ constellation }) => constellation >= 4
       },
       Constellation_E_5,
       {
@@ -6710,6 +6716,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         stack: 3,
         limit: 3,
         stackable: true,
+        condition: ({ constellation }) => constellation >= 6
       },
     ],
   },
@@ -6895,6 +6902,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         shareable: true,
         target: BuffTarget.All,
         stackText: "敌人数量",
+        condition: ({ constellation }) => constellation >= 4
       },
       Constellation_Q_5,
     ],
@@ -7213,6 +7221,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         stack: 3,
         limit: 3,
         target: BuffTarget.Enemy,
+        condition: ({ constellation }) => constellation >= 6
       },
     ],
   },
@@ -7308,6 +7317,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         limit: 3,
         stack: 3,
         stackText: "命中敌人数量",
+        condition: ({ constellation }) => constellation >= 2
       },
       Constellation_Q_3,
       {
@@ -7315,6 +7325,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         describe: "定格·全方位确证命中附有「瞬时剪影」或「聚焦印象」印记的敌人时，造成的伤害提升10%",
         effect: [{ type: BuffType.BurstPrcent, getValue: () => 10 }],
         enable: true,
+        condition: ({ constellation }) => constellation >= 4
       },
       Constellation_E_5,
     ],
@@ -8934,6 +8945,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         limit: 3,
         shareable: true,
         target: BuffTarget.All,
+        condition: ({ constellation }) => constellation >= 6
       },
     ],
   },
@@ -9038,6 +9050,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         enable: true,
         shareable: true,
         target: BuffTarget.All,
+        condition: ({ constellation }) => constellation >= 6
       },
     ],
   },
@@ -9141,6 +9154,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         enable: false,
         shareable: true,
         target: BuffTarget.All,
+        condition: ({ constellation }) => constellation >= 6 
       },
     ],
   },

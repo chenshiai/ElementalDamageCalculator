@@ -4,7 +4,7 @@ import { ICalculatorValue, ISkillRate } from "@/types/interface";
 import { calculateDamage } from "@/utils/calculate/method-calculation";
 import AtkTypeSelector from "@/component/AtkTypeSelector.vue";
 import { getColorByElement } from "@/utils/get-color";
-import { Icon, Slider } from "vant";
+import { Slider } from "vant";
 
 interface IProps {
   skill: ISkillRate[];
@@ -47,18 +47,18 @@ const calculatedResults = computed(() => {
 });
 
 const panelName = computed(() => {
-  return name + (skillLevel.value ? `（Lv.${skillLevel.value + levelAdd }）`: "");
-})
+  return name + (skillLevel.value ? `（Lv.${skillLevel.value + levelAdd}）` : "");
+});
 </script>
 
 <template>
-  <template v-if="skill.length > 0">
-    <div class="skill-info-detail">
-      <span>{{ panelName }}</span>
-      <span v-if="skillLevel" class="slider-wrap">
-        <span>天赋等级：</span>
-        <Slider v-model="skillLevel" max="10" min="1" inactive-color="#F7F1E6" active-color="#928986" />
-      </span>
+  <div class="skill-info-detail">
+    <span>{{ panelName }}</span>
+    <span v-if="skillLevel" class="slider-wrap">
+      <span>天赋等级：</span>
+      <Slider v-model="skillLevel" max="10" min="1" inactive-color="#F7F1E6" active-color="#928986" />
+    </span>
+    <template v-if="skill.length > 0">
       <div class="skill-info-item">
         <span></span>
         <span>暴击伤害</span>
@@ -75,12 +75,12 @@ const panelName = computed(() => {
         <span>{{ item.desire }}</span>
         <span>{{ item.common }}</span>
       </div>
-    </div>
-    <AtkTypeSelector v-model="atkType" size="small" />
-  </template>
-  <template v-else>
-    <div class="skill-info-empty">无伤害。</div>
-  </template>
+    </template>
+    <template v-else>
+      <div class="skill-info-empty">无伤害。</div>
+    </template>
+  </div>
+  <AtkTypeSelector v-if="skill.length > 0" v-model="atkType" size="small" />
 </template>
 
 <style scoped>
@@ -99,7 +99,7 @@ const panelName = computed(() => {
   text-align: left;
 }
 .skill-info-item-label {
-  text-align: center;
+  /* text-align: center; */
   color: #fff;
 }
 .skill-info-empty {
