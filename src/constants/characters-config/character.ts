@@ -9043,9 +9043,9 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         label: "6命·炽烧的至心",
         describe: "获取或刷新烈烧佑命护盾时，队伍中所有角色的普通攻击，重击与下落攻击造成的伤害提升15%",
         effect: [
-          { type: BuffType.NormalPrcent, getValue: () => 0.15 },
-          { type: BuffType.StrongPrcent, getValue: () => 0.15 },
-          { type: BuffType.FallingPrcent, getValue: () => 0.15 },
+          { type: BuffType.NormalPrcent, getValue: () => 15 },
+          { type: BuffType.StrongPrcent, getValue: () => 15 },
+          { type: BuffType.FallingPrcent, getValue: () => 15 },
         ],
         enable: true,
         shareable: true,
