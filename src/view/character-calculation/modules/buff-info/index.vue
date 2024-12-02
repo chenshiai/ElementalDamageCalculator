@@ -34,7 +34,14 @@ const relicBuffsFilter = computed(() => {
 });
 
 const teamBuffsFilter = computed(() => {
-  /** 根据当前角色数据，过滤掉不符合条件的外来buff 同时 排除当前角色提供的共享buff 同时 排除来自于同一个面板的buff */
+  buffs.value.forEach((buff) => {
+    /** 同一个面板来源的buff 恢复成关闭状态 */
+    if (buff.source === store.state.teamBuffs.currentEdit) {
+      buff.enable = false;
+    }
+  });
+
+  /** 根据当前角色数据，过滤掉不符合条件的团队buff 同时 排除当前角色提供的共享buff 同时 排除来自于同一个面板的buff */
   return buffs.value.filter((buff) => {
     return (
       (!buff.shareCondition || buff.shareCondition(characterInfo)) &&
