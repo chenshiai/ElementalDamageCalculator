@@ -1129,7 +1129,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         atk: [0.231, 0.25, 0.269, 0.296, 0.315, 0.336, 0.366, 0.395, 0.425, 0.457, 0.49],
       }),
       createAttack("五段伤害", AttackType.Normal, ElementType.Physical, {
-        atk: [0, 0.9, 0.973, 1.047, 1.151, 1.225, 1.308, 1.423, 1.539, 1.654],
+        atk: [0.9, 0.973, 1.047, 1.151, 1.225, 1.308, 1.423, 1.539, 1.654, 1.779, 1.905],
       }),
       createAttack("重击伤害", AttackType.Strong, ElementType.Physical, {
         atk: [1.281, 1.386, 1.49, 1.639, 1.743, 1.863, 2.026, 2.19, 2.354, 2.533, 2.712],
@@ -1157,8 +1157,8 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("贯夜伤害·普通", AttackType.Normal, ElementType.Electro, {
         atk: [0.44, 0.475, 0.511, 0.562, 0.598, 0.639, 0.695, 0.751, 0.808, 0.869, 0.93, 0.992, 1.053],
       }),
-      createAttack("贯夜伤害·强化", AttackType.Normal, ElementType.Electro, {
-        atk: [0.272, 0.292, 0.321, 0.342, 0.365, 0.397, 0.429, 0.461, 0.496, 0.531, 0.566, 0.602],
+      createAttack("贯夜伤害·强化单段", AttackType.Normal, ElementType.Electro, {
+        atk: [0.251, 0.272, 0.292, 0.321, 0.342, 0.365, 0.397, 0.429, 0.461, 0.496, 0.531, 0.566, 0.602],
       }),
       createAttack("流涌之刃伤害", AttackType.Other, ElementType.Electro, {
         atk: [0.432, 0.464, 0.497, 0.54, 0.572, 0.605, 0.648, 0.691, 0.734, 0.778, 0.821, 0.864, 0.918],

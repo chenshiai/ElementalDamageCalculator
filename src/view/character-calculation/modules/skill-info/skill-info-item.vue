@@ -4,15 +4,16 @@ import { ICalculatorValue, ISkillRate } from "@/types/interface";
 import { calculateDamage } from "@/utils/calculate/method-calculation";
 import AtkTypeSelector from "@/component/AtkTypeSelector.vue";
 import { getColorByElement } from "@/utils/get-color";
-import { Icon } from "vant";
+import { Icon, Slider } from "vant";
 
 interface IProps {
   skill: ISkillRate[];
   calculatorValue: ICalculatorValue;
-  level?: number;
+  levelAdd?: number;
   name: string;
 }
-const { skill, calculatorValue, level, name } = defineProps<IProps>();
+const skillLevel = defineModel<number>();
+const { skill, calculatorValue, levelAdd, name } = defineProps<IProps>();
 const atkType = ref("none");
 
 const calculatedResults = computed(() => {
@@ -31,7 +32,7 @@ const calculatedResults = computed(() => {
       attackType: item.attackType,
       elementType: item.elementType,
       rate: item.rate,
-      level: level ?? 1,
+      level: skillLevel.value ?? 1 + levelAdd,
       atkType: atkType.value,
       special: item.special,
     });
@@ -44,12 +45,20 @@ const calculatedResults = computed(() => {
     };
   });
 });
+
+const panelName = computed(() => {
+  return name + (skillLevel.value ? `（Lv.${skillLevel.value + levelAdd }）`: "");
+})
 </script>
 
 <template>
   <template v-if="skill.length > 0">
     <div class="skill-info-detail">
-      <span><Icon name="circle" />{{ name }}</span>
+      <span>{{ panelName }}</span>
+      <span v-if="skillLevel" class="slider-wrap">
+        <span>天赋等级：</span>
+        <Slider v-model="skillLevel" max="10" min="1" inactive-color="#F7F1E6" active-color="#928986" />
+      </span>
       <div class="skill-info-item">
         <span></span>
         <span>暴击伤害</span>
@@ -96,5 +105,16 @@ const calculatedResults = computed(() => {
 .skill-info-empty {
   text-align: center;
   margin-top: 12px;
+}
+
+.slider-wrap {
+  display: flex;
+  padding-right: 16px;
+  margin-top: 12px;
+  margin-bottom: -12px;
+}
+.slider-wrap span {
+  margin-right: 12px;
+  flex-shrink: 0;
 }
 </style>

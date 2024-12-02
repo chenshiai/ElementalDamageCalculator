@@ -33,17 +33,12 @@ const activeTab = ref(0);
 const onTab = (val) => {
   activeTab.value = val;
 };
-const floatSwitch = ref(false);
 </script>
 
 <template>
-  <div :class="['skill-info', floatSwitch ? 'float-panel' : '']">
-    <div class="data-panel__title data-panel__title-extra">
+  <div class="skill-info">
+    <div class="data-panel__title">
       <span>伤害数值</span>
-      <span class="extra-float">
-        固定底部-
-        <Switch v-model="floatSwitch" active-color="#766461" inactive-color="#b7a19e" size="16" />
-      </span>
     </div>
     <div class="tab-list">
       <div
@@ -58,53 +53,38 @@ const floatSwitch = ref(false);
     </div>
     <div v-show="activeTab === 0">
       <SkillInfoItem
-        :name="`（Lv.${normalLevel + calculatorValue.normalLevelAdd}） ${characterInfo.talentNames[0]}`"
+        v-model="normalLevel"
+        :name="characterInfo.talentNames[0]"
         :skill="characterInfo.normalAttack"
         :calculator-value="calculatorValue"
-        :level="normalLevel + calculatorValue.normalLevelAdd"
+        :levelAdd="calculatorValue.normalLevelAdd"
       />
-      <span class="slider-wrap">
-        <span>技能等级：</span>
-        <Slider v-model="normalLevel" max="10" min="1" />
-      </span>
     </div>
     <div v-show="activeTab === 1">
       <SkillInfoItem
-        :name="`（Lv.${skillLevel + calculatorValue.skillLevelAdd}） ${characterInfo.talentNames[1]}`"
+        v-model="skillLevel"
+        :name="characterInfo.talentNames[1]"
         :skill="characterInfo.elementSkill"
         :calculator-value="calculatorValue"
-        :level="skillLevel + calculatorValue.skillLevelAdd"
+        :levelAdd="calculatorValue.skillLevelAdd"
       />
-      <span class="slider-wrap">
-        <span>技能等级：</span>
-        <Slider v-model="skillLevel" max="10" min="1" />
-      </span>
     </div>
     <div v-show="activeTab === 2">
       <SkillInfoItem
-        :name="`（Lv.${burstLevel + calculatorValue.burstLevelAdd}）${characterInfo.talentNames[2]}`"
+        v-model="burstLevel"
+        :name="characterInfo.talentNames[2]"
         :skill="characterInfo.burstSkill"
         :calculator-value="calculatorValue"
-        :level="burstLevel + calculatorValue.burstLevelAdd"
+        :levelAdd="calculatorValue.burstLevelAdd"
       />
-      <span class="slider-wrap">
-        <span>技能等级：</span>
-        <Slider v-model="burstLevel" max="10" min="1" />
-      </span>
     </div>
     <div v-show="activeTab === 3">
-      <SkillInfoItem :skill="getOtherSkill" :calculator-value="calculatorValue" name="其他攻击手段" />
+      <SkillInfoItem :skill="getOtherSkill" :calculator-value="calculatorValue" name="其他攻击手段" :levelAdd="0" />
     </div>
   </div>
-  <div v-if="floatSwitch" class="inner"></div>
 </template>
 
 <style scoped>
-.data-panel__title-extra {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-}
 .extra-float {
   display: flex;
   font-size: 12px;
@@ -120,19 +100,6 @@ const floatSwitch = ref(false);
   left: 0;
   background-color: var(--page-bg);
   box-shadow: 2px 2px 10px 0px var(--bg);
-}
-.slider-wrap {
-  display: flex;
-  padding-right: 16px;
-  margin-top: 12px;
-  margin-bottom: -12px;
-}
-.slider-wrap span {
-  margin-right: 12px;
-  flex-shrink: 0;
-}
-.inner {
-  height: 300px;
 }
 
 .tab-list {
