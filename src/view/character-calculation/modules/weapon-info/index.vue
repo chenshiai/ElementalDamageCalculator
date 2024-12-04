@@ -3,7 +3,7 @@ import WeaponSelector from "@/component/WeaponSelector.vue";
 import { IWeaponInfo } from "@/types/interface";
 import { AppendProp } from "@/types/enum";
 import getBackGroundByRarity from "@/utils/get-color";
-import { getAppendPropName } from "@/constants/characters-config/append-prop";
+import { getAppendPropName2 } from "@/constants/characters-config/append-prop";
 import { ref, computed } from "vue";
 import { Popup, Rate, Icon } from "vant";
 
@@ -28,7 +28,7 @@ const weaponStats = computed(() => {
       suffix: "",
     },
     {
-      title: getAppendPropName(weapon.value.weaponStats[1].appendPropId),
+      title: getAppendPropName2(weapon.value.weaponStats[1].appendPropId),
       value: weapon.value.weaponStats[1].statValue,
       suffix: weapon.value.weaponStats[1].appendPropId === AppendProp.ELEMENT_MASTERY ? "" : "%",
     },

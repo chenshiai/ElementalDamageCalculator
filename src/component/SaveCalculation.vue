@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Popup, showFailToast, Field, FloatingBubble, Popover, Icon } from "vant";
+import { Popup, showNotify, Field, FloatingBubble, Popover } from "vant";
 import { ref } from "vue";
 import {useRouter} from "vue-router";
 import CalculationDataSelector from "./CalculationDataSelector.vue";
@@ -16,7 +16,10 @@ const saveDataPop = () => {
 };
 const saveData = () => {
   if (!remark.value) {
-    showFailToast("数据命名为空");
+    showNotify({
+      type: "danger",
+      message: "数据命名为空",
+    })
     return;
   }
   emit("save-data", remark.value);

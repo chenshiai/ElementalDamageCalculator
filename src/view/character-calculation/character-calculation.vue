@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, watchEffect } from "vue";
-import { showSuccessToast } from "vant";
+import { showNotify } from "vant";
 import TabTitle from "@/component/TabTitle.vue";
 import CharacterPanel from "@/component/CharacterPanel.vue";
 
@@ -57,10 +57,16 @@ const saveCalculationResult = (title: string) => {
     panel: CalculatorValue.value,
   };
   db.add(calDB.storeName, data).then(() => {
-    showSuccessToast("面板数据已保存");
+    showNotify({
+      type: "success",
+      message: "面板数据已保存",
+    })
   }).catch(() => {
     db.put(calDB.storeName, data).then(() => {
-      showSuccessToast("重名数据已更新");
+      showNotify({
+        type: "warning",
+        message: "重名数据已更新",
+      })
     });
   });
 };

@@ -17,7 +17,7 @@
   position: absolute;
   right: 12px;
   margin-left: 12px;
-  color: rgb(255, 82, 82);
+  color: var(--cancel);
 }
 
 .pop-title__clear {

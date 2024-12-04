@@ -1,4 +1,4 @@
-import { showSuccessToast, showFailToast } from "vant";
+import { showNotify } from "vant";
 
 interface Database {
   version: number;
@@ -70,7 +70,10 @@ class calculateDatabase implements Database {
 
   public put(storeName: string, data: any): Promise<any> {
     if (!this._db) {
-      showFailToast("数据更新失败");
+      showNotify({
+        type: "danger",
+        message: "数据更新失败",
+      });
       throw new Error("数据库尚未准备好");
     }
     const transaction: IDBTransaction = this._db.transaction([storeName], "readwrite");
@@ -138,10 +141,16 @@ class calculateDatabase implements Database {
 
       request.onsuccess = () => {
         resolve(request.result)
-        showSuccessToast("数据已删除");
+        showNotify({
+          type: "success",
+          message: "数据删除成功",
+        });
       };
       request.onerror = (event) => {
-        showFailToast("数据删除失败");
+        showNotify({
+          type: "danger",
+          message: "数据删除失败",
+        });
         reject((event.target as IDBRequest<undefined>).error);
       };
     })

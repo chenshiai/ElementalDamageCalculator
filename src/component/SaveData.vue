@@ -3,12 +3,7 @@
     <div class="save-btn" @click="saveDataPop">保存数据</div>
     <div class="save-btn" @click="lookDataPop">查看数据</div>
   </div>
-  <Popup
-    class="data-popup"
-    teleport="#app"
-    v-model:show="showPopup"
-    position="top"
-  >
+  <Popup class="data-popup" teleport="#app" v-model:show="showPopup" position="top">
     <div class="tips">
       数据将会存储在本地浏览器的缓存中。若清空浏览器缓存，则数据也一会同清空。重复命名的新数据会替换旧数据。
     </div>
@@ -18,26 +13,12 @@
         <span>{{ item.value }}</span>
       </li>
     </ul>
-    <Field
-      v-model="remark"
-      type="text"
-      label="数据命名"
-      placeholder="给这条数据取个名字吧"
-    />
+    <Field v-model="remark" type="text" label="数据命名" placeholder="给这条数据取个名字吧" />
     <div class="popup-buttons" @click="saveData">保存数据</div>
   </Popup>
-  <Popup
-    class="data-popup"
-    teleport="#app"
-    v-model:show="showDataPopup"
-    position="top"
-  >
+  <Popup class="data-popup" teleport="#app" v-model:show="showDataPopup" position="top">
     <div class="tips">点击对应数据，可以展开查看详情。支持「重算」「删除」</div>
-    <Collapse
-      class="data-popup__collapse"
-      v-if="localData.length > 0"
-      v-model="opened"
-    >
+    <Collapse class="data-popup__collapse" v-if="localData.length > 0" v-model="opened">
       <CollapseItem
         v-for="[name, val] in localData"
         :key="name"
@@ -47,25 +28,11 @@
       >
         <template #title>
           {{ name }}
-          <Icon
-            name="replay"
-            @click.stop="recalculation(val)"
-            size="26"
-            class="replay-icon"
-          />
-          <Icon
-            size="26"
-            @click.stop="deleteLocalData(name)"
-            class="delete-icon"
-            name="delete-o"
-          />
+          <Icon name="replay" @click.stop="recalculation(val)" size="26" class="replay-icon" />
+          <Icon size="26" @click.stop="deleteLocalData(name)" class="delete-icon" name="delete-o" />
         </template>
         <ul class="data-detail">
-          <li
-            class="data-detail-item"
-            v-for="item in formatData(val)"
-            :key="item.label"
-          >
+          <li class="data-detail-item" v-for="item in formatData(val)" :key="item.label">
             <span>{{ item.label }}</span>
             <span>{{ item.value }}</span>
           </li>
@@ -79,13 +46,8 @@
 <script setup>
 import { ref, computed } from "vue";
 import { useStore } from "vuex";
-import { Popup, Field, showSuccessToast, showFailToast, Collapse, CollapseItem, Icon } from "vant";
-import {
-  getLocalStorage,
-  deepCopyObject,
-  computationalFormula,
-  EventBus,
-} from "@/utils";
+import { Popup, Field, showNotify, Collapse, CollapseItem, Icon } from "vant";
+import { getLocalStorage, deepCopyObject, computationalFormula, EventBus } from "@/utils";
 import { AtkTypeText } from "@/constants";
 
 const store = useStore();
@@ -96,7 +58,6 @@ const opened = ref([]);
 const props = defineProps({
   notesConfig: Object,
 });
-
 
 const config = computed(() => {
   return formatData(store.state.damageModule);
@@ -232,7 +193,10 @@ const saveDataPop = () => {
 
 const saveData = () => {
   if (!remark.value) {
-    showFailToast("数据命名为空");
+    showNotify({
+      type: "danger",
+      message: "数据命名为空",
+    });
     return;
   }
   const { damageModule, saveDataModule } = store.state;
@@ -246,15 +210,18 @@ const saveData = () => {
       })
     );
 
-    window.localStorage.setItem(
-      "GenShinImpactCustomDataV2",
-      JSON.stringify([...sourceData])
-    );
-    showSuccessToast("保存成功");
+    window.localStorage.setItem("GenShinImpactCustomDataV2", JSON.stringify([...sourceData]));
+    showNotify({
+      type: "success",
+      message: "保存成功",
+    });
     remark.value = "";
     showPopup.value = false;
   } catch {
-    showFailToast("保存失败");
+    showNotify({
+      type: "danger",
+      message: "保存失败",
+    });
   }
 };
 
@@ -275,14 +242,17 @@ const deleteLocalData = (name) => {
     const sourceData = new Map(getLocalStorage("GenShinImpactCustomDataV2", []));
     sourceData.delete(name);
 
-    window.localStorage.setItem(
-      "GenShinImpactCustomDataV2",
-      JSON.stringify([...sourceData])
-    );
+    window.localStorage.setItem("GenShinImpactCustomDataV2", JSON.stringify([...sourceData]));
     localData.value = [...sourceData];
-    showSuccessToast("删除成功");
+    showNotify({
+      type: "success",
+      message: "删除成功",
+    });
   } catch {
-    showFailToast("删除失败");
+    showNotify({
+      type: "danger",
+      message: "删除失败",
+    });
   }
 };
 
@@ -297,10 +267,7 @@ const updateNoteGroup = ({ setSelectedNotes, localStorageName, defaultNotes }, s
   }
   // 若临时组的长度大于零，则更新本地便签组，并通知对应组件更新便签
   if (supplementNotes.length > 0) {
-    window.localStorage.setItem(
-      localStorageName,
-      JSON.stringify(supplementNotes.concat(Array.from(localNotes)))
-    );
+    window.localStorage.setItem(localStorageName, JSON.stringify(supplementNotes.concat(Array.from(localNotes))));
     EventBus.$emit(`${localStorageName}Changed`);
   }
   setSelectedNotes(selectedNotes);

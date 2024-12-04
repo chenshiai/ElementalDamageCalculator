@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { Popup, Search, Icon, showSuccessToast, showFailToast, Button, SwipeCell } from "vant";
+import { Popup, Search, Icon, showNotify, Button, SwipeCell } from "vant";
 import { ref, computed } from "vue";
+import _ from "lodash";
 
 import relics, { IRelicLibraryItemEquip } from "@/constants/characters-config/relic";
 import {
@@ -48,11 +49,6 @@ const setStatForm = ref<RelicStatType>({
   reliquarySubstats: [],
 });
 const addRelic = () => {
-  if (!setStatForm.value.reliquaryMainstat.mainPropId) {
-    showFailToast("主词条未选择");
-    return;
-  }
-
   const relicItem = new RelicItem({
     ...setStatBase.value,
     ...setStatForm.value,
@@ -66,7 +62,10 @@ const addRelic = () => {
     timetemp: relicItem.timetemp,
     relicInfo: JSON.stringify(relicItem),
   }).then(() => {
-    showSuccessToast(`添加成功！\n已保存至本地。`);
+    showNotify({
+      type: "success",
+      message: `添加成功！\n已保存至本地。`,
+    });
   });
 };
 
@@ -83,7 +82,7 @@ const selectRelic = (index: number) => {
 
   // 若选择部位已有圣遗物，则填充表单数据
   if (relicList.value[index]) {
-    const data = JSON.parse(JSON.stringify(relicList.value[index]));
+    const data = _.cloneDeep(relicList.value[index]);
 
     setStatBase.value = data;
     setStatForm.value = {
@@ -112,7 +111,10 @@ const removeRelic = () => {
   const name = relicList.value[selectedPartIndex.value].name;
   relicList.value.splice(selectedPartIndex.value, 1, null);
   closePopup();
-  showSuccessToast(`已卸下\n[${name}]`);
+  showNotify({
+    type: "success",
+    message: `已卸下\n[${name}]。`,
+  });
 };
 /** 设置圣遗物基础数据，显示编辑表单 */
 const showSetRelicStatPop = (equip: IRelicLibraryItemEquip) => {
@@ -189,7 +191,7 @@ const getLocalRelics = () => {
 const deleteLocalData = (item: IRelicItem) => {
   db.delete(relicDB.storeName, item.timetemp).then(() => {
     const index = localRelics.value.findIndex((i) => item.timetemp === i.timetemp);
-    localRelics.value.splice(index, 1)
+    localRelics.value.splice(index, 1);
   });
 };
 </script>
@@ -228,13 +230,7 @@ const deleteLocalData = (item: IRelicItem) => {
         <SwipeCell v-for="item in localRelics">
           <Relic :relic="item" :key="item.timetemp" @select-relic="selectLocalRelic" />
           <template #right>
-            <Button
-              class="swipecell-right-button"
-              square
-              type="danger"
-              text="删除"
-              @click="deleteLocalData(item)"
-            />
+            <Button class="swipecell-right-button" square type="danger" text="删除" @click="deleteLocalData(item)" />
           </template>
         </SwipeCell>
       </div>
@@ -248,12 +244,17 @@ const deleteLocalData = (item: IRelicItem) => {
       <div class="set-relice-title">
         <span @click="setStatBase = null">切换圣遗物</span>
         <span><img v-lazy="setStatBase.icon" />{{ setStatBase.name }}</span>
-        <span style="color: rgb(255, 82, 82)" @click="removeRelic">卸下圣遗物</span>
+        <span class="set-relice-title__close" @click="removeRelic">卸下圣遗物</span>
       </div>
       <form class="set-relice-form" @submit.prevent="addRelic">
         <div class="set-relice-filed">
           <span>主词条：</span>
-          <select v-model="setStatForm.reliquaryMainstat.mainPropId" required @change="mainStatChanged">
+          <select
+            v-model="setStatForm.reliquaryMainstat.mainPropId"
+            class="set-relice-filed__select"
+            required
+            @change="mainStatChanged"
+          >
             <option v-for="stat in mainStatFilter" :value="stat.mainPropId">
               {{ getAppendPropName(stat.mainPropId) }}
             </option>
@@ -262,7 +263,7 @@ const deleteLocalData = (item: IRelicItem) => {
         </div>
         <div class="set-relice-filed" v-for="(subStat, index) in setStatForm.reliquarySubstats">
           <span><Icon @click="deleteSubStat(index)" class="memo-close" name="clear" />副词条：</span>
-          <select v-model="subStat.appendPropId" required>
+          <select v-model="subStat.appendPropId" class="set-relice-filed__select" required>
             <option
               v-for="appendPropId in subStatFilter(subStat.appendPropId)"
               :key="appendPropId"
@@ -331,6 +332,9 @@ const deleteLocalData = (item: IRelicItem) => {
   padding: 0 16px;
   box-sizing: border-box;
 }
+.set-relice-title__close {
+  color: var(--cancel);
+}
 .set-relice-title span {
   display: flex;
 }
@@ -346,15 +350,17 @@ const deleteLocalData = (item: IRelicItem) => {
   align-items: center;
   margin-bottom: 12px;
 }
+.set-relice-filed__select,
 .set-relice-filed input {
   display: inline-block;
   width: 20%;
   height: 32px;
-  margin: 0;
   padding: 0 8px;
   border-radius: 4px;
   border: solid 1px var(--border);
   box-sizing: border-box;
+  background-color: #fff;
+  position: relative;
 }
 .bottons__add {
   background-color: var(--button-bg);

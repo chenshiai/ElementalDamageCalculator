@@ -91,8 +91,8 @@
 </template>
 
 <script setup>
-import { onMounted, reactive, ref, computed, nextTick  } from "vue";
-import { Icon, Popup, Field, Form, showSuccessToast, Button, Tab, Tabs } from "vant";
+import { onMounted, reactive, ref, computed } from "vue";
+import { Icon, Popup, Field, Form, showNotify, Button, Tab, Tabs } from "vant";
 import { floatNum, getLocalStorage, EventBus } from "@/utils";
 
 const props = defineProps({
@@ -213,7 +213,10 @@ function onSubmit(value) {
 
   // 拼接新的标签组并更新到localstorage
   updateNoteGroup([...localNotes.value]);
-  showSuccessToast("添加成功");
+  showNotify({
+    type: "success",
+    message: "添加成功",
+  })
 }
 
 /** 生命周期 mounted */
