@@ -475,9 +475,9 @@ export const Weapons: IWeaponInfo[] = [
       };
     },
     (affix = 1) => {
-      const limit = [80, 90, 100, 110, 120][affix - 1]
-      const atk = [28, 35, 42, 49, 56][affix - 1]
-      const car = [30, 35, 40, 45, 50][affix - 1]
+      const limit = [80, 90, 100, 110, 120][affix - 1];
+      const atk = [28, 35, 42, 49, 56][affix - 1];
+      const car = [30, 35, 40, 45, 50][affix - 1];
       return [
         {
           label: "攻击力提升",
@@ -485,7 +485,7 @@ export const Weapons: IWeaponInfo[] = [
             {
               type: BuffType.ATKPrcent,
               getValue: ({ chargeEfficiency }) => {
-                const ec = Math.max(0, chargeEfficiency - 100) * atk / 100;
+                const ec = (Math.max(0, chargeEfficiency - 100) * atk) / 100;
                 const res = Math.min(limit, ec);
                 return res;
               },
@@ -525,8 +525,8 @@ export const Weapons: IWeaponInfo[] = [
       };
     },
     (affix = 1) => {
-      const hp = [20, 25, 30, 35, 40][affix - 1]
-      const add = [12, 15, 18, 21, 24][affix - 1]
+      const hp = [20, 25, 30, 35, 40][affix - 1];
+      const add = [12, 15, 18, 21, 24][affix - 1];
       return [
         {
           label: "生命值上限提高",
@@ -654,8 +654,8 @@ export const Weapons: IWeaponInfo[] = [
       };
     },
     (affix = 1) => {
-      const atk = [20, 25, 30, 35, 40][affix - 1]
-      const hp = [32, 40, 48, 56, 64][affix - 1]
+      const atk = [20, 25, 30, 35, 40][affix - 1];
+      const hp = [32, 40, 48, 56, 64][affix - 1];
       return [
         {
           label: "元素战技命中敌人，攻击力提升",
@@ -698,8 +698,8 @@ export const Weapons: IWeaponInfo[] = [
       };
     },
     (affix = 1) => {
-      const hp = [14, 17.5, 21, 24.5, 28][affix - 1]
-      const skill = [8, 10, 12, 14, 16][affix - 1]
+      const hp = [14, 17.5, 21, 24.5, 28][affix - 1];
+      const skill = [8, 10, 12, 14, 16][affix - 1];
       return [
         {
           label: "生命值提升或降低时，生命值提升",
@@ -741,7 +741,7 @@ export const Weapons: IWeaponInfo[] = [
       };
     },
     (affix = 1) => {
-      const add = [16, 20, 24, 28, 32][affix - 1]
+      const add = [16, 20, 24, 28, 32][affix - 1];
       return [
         {
           label: "苍翠之路的誓言",
@@ -771,7 +771,7 @@ export const Weapons: IWeaponInfo[] = [
       };
     },
     (affix = 1) => {
-      const def = [16, 20, 24, 28, 32][affix - 1]
+      const def = [16, 20, 24, 28, 32][affix - 1];
       return [
         {
           label: "流水与泉的约定",
@@ -802,8 +802,8 @@ export const Weapons: IWeaponInfo[] = [
       };
     },
     (affix = 1) => {
-      const add = [0.6, 0.7, 0.8, 0.9, 1][affix - 1]
-      const limit = [16, 20, 24, 28, 32][affix - 1]
+      const add = [0.6, 0.7, 0.8, 0.9, 1][affix - 1];
+      const limit = [16, 20, 24, 28, 32][affix - 1];
       return [
         {
           label: "丰沃之陆的回声",
@@ -835,15 +835,15 @@ export const Weapons: IWeaponInfo[] = [
     },
     (affix = 1) => {
       const atk = [4.8, 6, 7.2, 8.4, 9.6][affix - 1] + "%";
-      const el = [24, 30, 36, 42, 48][affix - 1]
+      const el = [24, 30, 36, 42, 48][affix - 1];
       return {
         title: "花与落羽的长歌",
         text: highlight`队伍中每有一名纳塔角色或与装备者元素类型不同的角色，装备者获得${atk}攻击力提升；上述角色不少于3名时，装备者的元素精通提升${el}点。`,
       };
     },
     (affix = 1) => {
-      const atk = [4.8, 6, 7.2, 8.4, 9.6][affix - 1]
-      const el = [24, 30, 36, 42, 48][affix - 1]
+      const atk = [4.8, 6, 7.2, 8.4, 9.6][affix - 1];
+      const el = [24, 30, 36, 42, 48][affix - 1];
       return [
         {
           label: "花与落羽的长歌",
@@ -905,7 +905,7 @@ export const Weapons: IWeaponInfo[] = [
     (affix = 1) => {
       const atk = [15, 19, 23, 27, 31][affix - 1] + "%";
       const add = [18, 23, 28, 33, 38][affix - 1] + "%";
-      const ch = [12, 13, 14, 15, 16]
+      const ch = [12, 13, 14, 15, 16];
       return {
         title: "白晓的序曲",
         text: highlight`攻击力提升${atk}；装备者对敌人触发燃烧反应或对处于燃烧状态下的敌人造成草元素伤害后，造成的伤害提高${add}。该效果持续8秒，至多叠加2层；叠加至2层或2层的持续时间刷新时，恢复${ch}点元素能量，每12秒至多通过这种方式恢复一次元素能量。上述2种效果角色处于队伍后台时也能触发。`,
@@ -1025,9 +1025,9 @@ export const Weapons: IWeaponInfo[] = [
       statValue: 66.2,
     },
     (affix = 1) => {
-      const hp1 = [12, 15, 18, 21, 24][affix - 1]
-      const hp2 = [24, 30, 36, 42, 48][affix - 1]
-      const hp3 = [40, 50, 60, 70, 80][affix - 1]
+      const hp1 = [12, 15, 18, 21, 24][affix - 1];
+      const hp2 = [24, 30, 36, 42, 48][affix - 1];
+      const hp3 = [40, 50, 60, 70, 80][affix - 1];
       const res = `${hp1}/${hp2}/${hp3}%`;
       const cri = [28, 35, 42, 49, 56][affix - 1] + "%";
       return {
@@ -1046,7 +1046,7 @@ export const Weapons: IWeaponInfo[] = [
       const hp2 = [24, 30, 36, 42, 48][affix - 1];
       const hp3 = [40, 50, 60, 70, 80][affix - 1];
       const res = `${hp1}/${hp2}/${hp3}%`;
-      const cri = [28, 35, 42, 49, 56][affix - 1]
+      const cri = [28, 35, 42, 49, 56][affix - 1];
       return [
         {
           label: "生命值上限提升",
@@ -1080,7 +1080,7 @@ export const Weapons: IWeaponInfo[] = [
     },
     (affix = 1) => {
       const rat = [60, 70, 80, 90, 100][affix - 1] + "%";
-      const sec = [12, 10.5, 9, 7.5, 6][affix - 1]
+      const sec = [12, 10.5, 9, 7.5, 6][affix - 1];
       return {
         title: "顺风而行",
         text: highlight`攻击造成暴击时，有${rat}的几率产生少量元素微粒，能为角色恢复6点元素能量。该效果每${sec}秒只能触发一次。`,
@@ -1100,7 +1100,7 @@ export const Weapons: IWeaponInfo[] = [
     },
     (affix = 1) => {
       const rat = [60, 70, 80, 90, 100][affix - 1] + "%";
-      const sec = [12, 10.5, 9, 7.5, 6][affix - 1]
+      const sec = [12, 10.5, 9, 7.5, 6][affix - 1];
       return {
         title: "顺风而行",
         text: highlight`攻击造成暴击时，有${rat}的几率产生少量元素微粒，能为角色恢复6点元素能量。该效果每${sec}秒只能触发一次。`,
@@ -1119,8 +1119,8 @@ export const Weapons: IWeaponInfo[] = [
       statValue: 30.6,
     },
     (affix = 1) => {
-      const rat = [40, 50, 60, 70, 80][affix - 1] + "%";
-      const sec = Math.round(30 - (affix - 1) * 3.6);
+      let rat = [40, 50, 60, 70, 80][affix - 1] + "%";
+      let sec = [30, 26, 22, 19, 16][affix - 1];
       return {
         title: "气定神闲",
         text: highlight`元素战技造成伤害时，有${rat}的概率重置该技能的冷却时间，该效果每${sec}秒只能触发一次。`,
@@ -1443,7 +1443,7 @@ export const Weapons: IWeaponInfo[] = [
       statValue: 41.3,
     },
     (affix = 1) => {
-      const a = [8, 10, 12, 14, 16][affix - 1]
+      const a = [8, 10, 12, 14, 16][affix - 1];
       return {
         title: "均衡的原理",
         text: highlight`进行治疗时，恢复${a}点能量，该效果每10秒至多触发一次，角色处于队伍后台时也能触发。`,
@@ -1515,7 +1515,7 @@ export const Weapons: IWeaponInfo[] = [
     },
     (affix = 1) => {
       let add = [28, 41, 54, 67, 80][affix - 1] + "%";
-      let c = [2.5, 2.75, 3, 3.25, 3.5][affix - 1]
+      let c = [2.5, 2.75, 3, 3.25, 3.5][affix - 1];
       return {
         title: "云笈降真要诀",
         text: highlight`装备者下落攻击命中敌人后，队伍中附近的所有角色下落攻击造成的伤害提高${add}，持续20秒；队伍中附近的角色的下落攻击命中敌人时，为装备者恢复${c}点元素能量，每0.7秒至多通过这种方式恢复一次元素能量，装备者处于队伍后台时依然能通过这种方式恢复元素能量。`,
@@ -1708,16 +1708,16 @@ export const Weapons: IWeaponInfo[] = [
       statValue: 27.6,
     },
     (affix = 1) => {
-      let atk = 3 + (affix - 1) + "%";
-      let add = 7 + (affix - 1) * 1.5 + "%";
+      let atk = [3, 4, 5, 6, 7][affix - 1] + "%";
+      let add = [7, 8.5, 10, 11.5, 13][affix - 1] + "%";
       return {
         title: "石匠号子",
         text: highlight`受到治疗或进行治疗时，将赋予一枚团结标记，持续30秒，至多拥有三枚团结标记。施放元素战技或元素爆发时，将消耗所有的团结标记，产生持续10秒的「抗争」效果：每枚消耗的团结标记提高${atk}攻击力与${add}所有元素伤害加成。每15秒至多触发一次抗争效果；角色处于队伍后台时也能获得团结标记。`,
       };
     },
     (affix = 1) => {
-      let atk = 3 + (affix - 1);
-      let add = 7 + (affix - 1) * 1.5;
+      let atk = [3, 4, 5, 6, 7][affix - 1];
+      let add = [7, 8.5, 10, 11.5, 13][affix - 1];
       return [
         {
           label: "石匠号子",
@@ -1753,23 +1753,23 @@ export const Weapons: IWeaponInfo[] = [
       statValue: 30.6,
     },
     (affix = 1) => {
-      let atk = 8 + (affix - 1) * 2 + "%";
-      let add = 6 + (affix - 1) * 1.5 + "%";
+      let atk = [8, 10, 12, 14, 16][affix - 1] + "%";
+      let add = [6, 7.5, 9, 10.5, 12][affix - 1] + "%";
       return {
         title: "蔚蓝深空",
         text: highlight`普通攻击或重击命中敌人后的6秒内，普通攻击造成的伤害提升${atk}，重击造成的伤害提升${add}。该效果至多叠加3次，每0.3秒至多触发一次。`,
       };
     },
     (affix = 1) => {
-      let atk = 8 + (affix - 1) * 2;
-      let add = 6 + (affix - 1) * 1.5;
+      let atk = [8, 10, 12, 14, 16][affix - 1];
+      let add = [6, 7.5, 9, 10.5, 12][affix - 1];
       return [
         {
           label: "蔚蓝深空",
           describe: `普通攻击造成的伤害提升${atk}%、重击造成的伤害提升${add}%，至多叠加3层`,
           effect: [
-            { type: BuffType.NormalPrcent, getValue: (_, stack) => atk * stack },
-            { type: BuffType.StrongPrcent, getValue: (_, stack) => add * stack },
+            { type: BuffType.NormalPrcent, getValue: (_, s) => atk * s },
+            { type: BuffType.StrongPrcent, getValue: (_, s) => add * s },
           ],
           stackable: true,
           limit: 3,
@@ -1791,20 +1791,20 @@ export const Weapons: IWeaponInfo[] = [
       statValue: 41.3,
     },
     (affix = 1) => {
-      let em = 40 + (affix - 1) * 10;
-      let c = 2 + (affix - 1) * 0.5;
+      let em = [40, 50, 60, 70, 80][affix - 1];
+      let c = [2, 2.5, 3, 3.5, 4][affix - 1];
       return {
         title: "船工号子",
         text: highlight`受到治疗或进行治疗时，将赋予一枚坚忍标记，持续30秒，至多拥有三枚坚忍标记。施放元素战技或元素爆发时，将消耗所有的坚忍标记，产生持续10秒的「奋起」效果：每枚消耗的坚忍标记提高${em}点元素精通，并在效果产生2秒后，每枚消耗的坚忍标记为装备者恢复${c}点元素能量。每15秒至多触发一次奋起效果；角色处于队伍后台时也能获得坚忍标记。`,
       };
     },
     (affix = 1) => {
-      let em = 40 + (affix - 1) * 10;
+      let em = [40, 50, 60, 70, 80][affix - 1];
       return [
         {
           label: "元素精通提升",
           describe: `每枚消耗的坚忍标记提高${em}点元素精通，至多叠加3层`,
-          effect: [{ type: BuffType.MysteryFixed, getValue: (_, stack) => em * stack }],
+          effect: [{ type: BuffType.MysteryFixed, getValue: (_, s) => em * s }],
           stackText: "坚忍标记",
           stackable: true,
           limit: 3,
@@ -1826,15 +1826,15 @@ export const Weapons: IWeaponInfo[] = [
       statValue: 55.1,
     },
     (affix = 1) => {
-      let em = 40 + (affix - 1) * 10;
-      let c = 2 + (affix - 1) * 0.5;
+      let em = [40, 50, 60, 70, 80][affix - 1];
+      let c = [2, 2.5, 3, 3.5, 4][affix - 1];
       return {
         title: "船工号子",
         text: highlight`受到治疗或进行治疗时，将赋予一枚坚忍标记，持续30秒，至多拥有三枚坚忍标记。施放元素战技或元素爆发时，将消耗所有的坚忍标记，产生持续10秒的「奋起」效果：每枚消耗的坚忍标记提高${em}点元素精通，并在效果产生2秒后，每枚消耗的坚忍标记为装备者恢复${c}点元素能量。每15秒至多触发一次奋起效果；角色处于队伍后台时也能获得坚忍标记。`,
       };
     },
     (affix = 1) => {
-      let em = 40 + (affix - 1) * 10;
+      let em = [40, 50, 60, 70, 80][affix - 1];
       return [
         {
           label: "船工号子",
@@ -5772,8 +5772,8 @@ export const Weapons: IWeaponInfo[] = [
       statValue: 61.3,
     },
     (affix = 1) => {
-      const rat = 40 + (affix - 1) * 10 + "%";
-      const sec = Math.round(30 - (affix - 1) * 3.6);
+      let rat = [40, 50, 60, 70, 80][affix - 1] + "%";
+      let sec = [30, 26, 22, 19, 16][affix - 1];
       return {
         title: "气定神闲",
         text: highlight`元素战技造成伤害时，有${rat}的概率重置该技能的冷却时间，该效果每${sec}秒只能触发一次。`,
@@ -6144,8 +6144,8 @@ export const Weapons: IWeaponInfo[] = [
       statValue: 30.6,
     },
     (affix = 1) => {
-      const rat = 40 + (affix - 1) * 10 + "%";
-      const sec = Math.round(30 - (affix - 1) * 3.6);
+      let rat = [40, 50, 60, 70, 80][affix - 1] + "%";
+      let sec = [30, 26, 22, 19, 16][affix - 1];
       return {
         title: "气定神闲",
         text: highlight`元素战技造成伤害时，有${rat}的概率重置该技能的冷却时间，该效果每${sec}秒只能触发一次。`,

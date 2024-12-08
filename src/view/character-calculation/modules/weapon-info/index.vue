@@ -37,7 +37,7 @@ const weaponStats = computed(() => {
 </script>
 
 <template>
-  <div v-if="!weapon" class="show-click" @click="show = true">选择武器</div>
+  <div v-if="!weapon" class="show-click" @click="show = true">+添加武器</div>
   <template v-else>
     <div class="weapon-info">
       <div class="avatar-info">

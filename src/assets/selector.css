@@ -55,10 +55,10 @@
 }
 
 .element-selece__item {
-  width: 26%;
   border: 1px solid var(--main-text);
   margin-bottom: 8px;
   border-radius: 4px;
+  padding: 0 12px;
 }
 
 .element-selece__item[aria-checked='true'] {

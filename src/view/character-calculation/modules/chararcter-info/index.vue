@@ -24,7 +24,7 @@ const constellation = defineModel("constellation", {
 </script>
 
 <template>
-  <div v-if="!character" class="show-click" @click="show = true">选择角色</div>
+  <div v-if="!character" class="show-click" @click="show = true">+添加角色</div>
   <template v-else>
     <div class="character-info">
       <div class="avatar-info">
