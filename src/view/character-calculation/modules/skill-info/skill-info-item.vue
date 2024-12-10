@@ -27,12 +27,13 @@ const calculatedResults = computed(() => {
         elementType: "",
       };
     }
+
     let { RESULT_DMG, CRITICAL_DMG, DEISTE_DMG, elementType } = calculateDamage({
       calculatorValue,
       attackType: item.attackType,
       elementType: item.elementType,
       rate: item.rate,
-      level: skillLevel.value ?? 1 + levelAdd,
+      level: skillLevel.value ? skillLevel.value + levelAdd : 1,
       atkType: atkType.value,
       special: item.special,
     });
