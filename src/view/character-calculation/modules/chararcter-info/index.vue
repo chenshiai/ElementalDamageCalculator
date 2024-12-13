@@ -137,34 +137,6 @@ const constellation = defineModel("constellation", {
   border-radius: 4px;
 }
 
-.empty {
-  text-align: center;
-  position: relative;
-  height: 100%;
-}
-
-.empty::after,
-.empty::before {
-  content: "";
-  background-color: var(--light-text);
-  display: block;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate3d(-50%, -50%, 0);
-  border-radius: 4px;
-}
-
-.empty::after {
-  width: 4px;
-  height: 28px;
-}
-
-.empty::before {
-  width: 28px;
-  height: 4px;
-}
-
 .show-click {
   text-align: center;
   border: 1px solid var(--border);

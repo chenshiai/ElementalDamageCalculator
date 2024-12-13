@@ -204,6 +204,7 @@ const deleteLocalData = (item: IRelicItem) => {
       v-for="(item, index) in relicList"
       :relic="item"
       :key="item?.timetemp || index"
+      :emptyText="RelicText[index]"
       @select-relic="selectRelic(index)"
     />
     <div class="relic-suit-detail">

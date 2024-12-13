@@ -38,7 +38,7 @@ const recalculation = (data: IUserSavedCalculationData) => {
 import { Character } from "@/constants/characters-config/character";
 import { Weapons } from "@/constants/characters-config/weapon";
 import { IRelicItem } from "@/constants/characters-config/relic-class";
-import { getAppendPropName, percentProps } from "@/constants/characters-config/append-prop";
+import { getAppendPropName2, percentProps } from "@/constants/characters-config/append-prop";
 const getAvatarIcon = (enkaId: number) => {
   return Character.find((c) => c.enkaId === enkaId).icons.avatarIcon;
 };
@@ -101,7 +101,7 @@ const getStatValueText = (stat): string => {
                     {{ relic.name }}
                   </div>
                   <div class="relic-main-stats">
-                    <span>{{ getAppendPropName(relic.reliquaryMainstat.mainPropId) }}</span>
+                    <span>{{ getAppendPropName2(relic.reliquaryMainstat.mainPropId) }}</span>
                     <span>{{ getStatValueText(relic.reliquaryMainstat) }}</span>
                   </div>
                 </div>
@@ -110,7 +110,7 @@ const getStatValueText = (stat): string => {
                   v-for="(subitem, index) in relic.reliquarySubstats"
                   :key="subitem.appendPropId + index"
                 >
-                  <label>{{ getAppendPropName(subitem.appendPropId) }}</label>
+                  <label>{{ getAppendPropName2(subitem.appendPropId) }}</label>
                   <span>{{ getStatValueText(subitem) }}</span>
                 </div>
               </template>

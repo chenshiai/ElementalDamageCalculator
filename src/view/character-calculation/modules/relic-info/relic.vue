@@ -5,6 +5,7 @@ import { getAppendPropName2, percentProps } from "@/constants/characters-config/
 
 const { relic } = defineProps<{
   relic: IRelicItem | null;
+  emptyText?: string;
 }>();
 const getStatValueText = (stat): string => {
   const statValue = stat.statValue;
@@ -21,7 +22,7 @@ const selectLocalRelic = (item: IRelicItem) => {
 </script>
 
 <template>
-  <div class="relic-detail" @click="selectLocalRelic(relic)">
+  <div :class="[relic ? '' : 'relic__empty', 'relic-detail']" @click="selectLocalRelic(relic)">
     <template v-if="relic">
       <img class="relic-icon" v-lazy="relic.icon" />
       <div class="relic-detail__hearder">
@@ -42,7 +43,7 @@ const selectLocalRelic = (item: IRelicItem) => {
         <span>{{ getStatValueText(subitem) }}</span>
       </div>
     </template>
-    <div class="empty" v-else>+ 添加圣遗物</div>
+    <div v-else>+ 添加{{ emptyText }}</div>
   </div>
 </template>
 
@@ -59,7 +60,7 @@ const selectLocalRelic = (item: IRelicItem) => {
   overflow: scroll;
   box-shadow: none;
   mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 90%, rgba(0, 0, 0, 0) 100%);
-  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 90%, rgba(0, 0, 0, 0) 100%); /* Safari 和 Chrome */
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 90%, rgba(0, 0, 0, 0) 100%);
 }
 .relic-main-stats {
   display: flex;
@@ -75,7 +76,7 @@ const selectLocalRelic = (item: IRelicItem) => {
   right: -4%;
   position: absolute;
   mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 90%);
-  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 90%); /* Safari 和 Chrome */
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 90%);
 }
 .relic-level {
   background-color: var(--bg);
@@ -87,7 +88,6 @@ const selectLocalRelic = (item: IRelicItem) => {
 .relic-name {
   font-size: 16px;
   line-height: 32px;
-  /* background-image: linear-gradient(to right, var(--five-rarity) 0%, rgba(0, 0, 0, 0) 70%); */
   color: var(--light-text);
   text-shadow: 2px 2px 4px var(--stroke-2);
   border-radius: 4px 0 0;
@@ -101,8 +101,11 @@ const selectLocalRelic = (item: IRelicItem) => {
   padding: 0 8px;
 }
 
-.empty {
+.relic__empty {
   text-align: center;
-  line-height: 102px;
+  line-height: 112px;
+  border: solid 1px var(--border);
+  border-radius: 6px;
+  box-shadow: none;
 }
 </style>
