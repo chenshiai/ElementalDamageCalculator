@@ -81,7 +81,7 @@ const selectLocalRelic = (item: IRelicItem) => {
 .relic-level {
   background-color: var(--bg);
   color: var(--light-text);
-  border-radius: 6px;
+  border-radius: 4px;
   padding: 0 2px;
   font-size: 12px;
 }
@@ -105,7 +105,7 @@ const selectLocalRelic = (item: IRelicItem) => {
   text-align: center;
   line-height: 112px;
   border: solid 1px var(--border);
-  border-radius: 6px;
+  border-radius: 4px;
   box-shadow: none;
 }
 </style>

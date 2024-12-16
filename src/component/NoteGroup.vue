@@ -257,7 +257,7 @@ onMounted(() => {
   margin-left: 6px;
   margin-bottom: 4px;
   border: 1px solid var(--main-text);
-  border-radius: 6px;
+  border-radius: 4px;
   box-sizing: border-box;
   padding: 2px 24px 2px 6px;
   color: var(--main-text);
@@ -280,7 +280,7 @@ onMounted(() => {
   height: 36px;
   line-height: 32px;
   margin-bottom: 4px;
-  border-radius: 6px;
+  border-radius: 4px;
   margin-left: 6px;
   font-size: 14px;
 }
@@ -383,5 +383,11 @@ onMounted(() => {
 .additional-tab-title-span {
   line-height: 26px;
   font-size: 12px;
+}
+</style>
+
+<style>
+.van-cell .van-field {
+  background-color: #fff !important;
 }
 </style>

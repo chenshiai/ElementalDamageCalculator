@@ -81,7 +81,7 @@ const catalyzeMoreRate = computed(() => {
   font-size: 14px;
   padding: 4px 8px;
   margin-bottom: 16px;
-  border-radius: 6px;
+  border-radius: 4px;
   color: #fff;
   margin-top: 12px;
   background-color: var(--main-text);
