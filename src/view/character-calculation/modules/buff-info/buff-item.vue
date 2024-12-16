@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import { Checkbox, Icon, Slider, Stepper } from "vant";
+import { Checkbox, Slider, Stepper } from "vant";
 import { IBuffBase } from "@/types/interface";
 import { computed } from "vue";
 interface IProps {
-  showDelete?: boolean;
   buff: IBuffBase;
 }
-const { showDelete, buff } = defineProps<IProps>();
+const { buff } = defineProps<IProps>();
 const enable = defineModel<boolean>();
 const stack = defineModel<number>("stack", { default: 0 });
 
@@ -16,48 +15,48 @@ const stackText = computed(() => {
 </script>
 
 <template>
-  <Checkbox class="buff-label" v-model="enable" checked-color="#766461">
-    <div class="buff-label-text">
-      {{ buff.label }}
-      <span v-if="buff.stackable">（{{ stackText }}）</span>
+  <div class="buff-item">
+    <Checkbox v-model="enable">
+      <div class="buff-label-text">
+        {{ buff.label }}
+        <span v-if="buff.stackable">（{{ stackText }}）</span>
+      </div>
+    </Checkbox>
+    <div class="buff-detail-check">
+      <input type="checkbox" />
     </div>
-  </Checkbox>
-  <div class="buff-detail-check">
-    <Icon v-if="showDelete" class="memo-close" name="delete-o" />
-    <input type="checkbox" />
-  </div>
-  <div class="buff-description">
-    <div class="buff-stack" v-if="buff.stackable">
-      <span>{{ buff.stackText || "层数" }}：</span>
-      <Slider v-if="buff.stackType === 'slider'" v-model="stack" :max="buff.limit" :min="0" />
-      <Stepper
-        v-else
-        v-model="stack"
-        :max="buff.limit"
-        :min="0"
-        input-width="66px"
-        button-size="24"
-        theme="round"
-        integer
-      />
+    <div class="buff-description">
+      <div class="buff-stack" v-if="buff.stackable">
+        <span>{{ buff.stackText || "层数" }}：</span>
+        <Slider v-if="buff.stackType === 'slider'" v-model="stack" :max="buff.limit" :min="0" />
+        <Stepper
+          v-else
+          v-model="stack"
+          :max="buff.limit"
+          :min="0"
+          input-width="66px"
+          button-size="24"
+          theme="round"
+          integer
+        />
+      </div>
+      {{ buff.describe }}
     </div>
-    {{ buff.describe }}
   </div>
 </template>
 
 <style scoped>
+.buff-item {
+  position: relative;
+  border: 1px solid var(--border);
+  padding: 8px;
+  border-radius: 4px;
+  margin-top: 4px;
+}
 .buff-detail-check {
   position: absolute;
-  right: 0;
-  top: 0;
-  font-size: 12px;
-  height: 38px;
-  display: flex;
-  align-items: center;
-}
-.buff-label {
-  display: flex;
-  width: 100%;
+  right: 8px;
+  top: 6px;
 }
 .buff-label-text {
   color: var(--main-text);
@@ -74,8 +73,10 @@ const stackText = computed(() => {
 }
 
 input[type="checkbox"] {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  padding: 0;
   appearance: none; /* 移除默认外观 */
   outline: none; /* 移除焦点轮廓 */
   border: 1px solid var(--border);
@@ -91,7 +92,7 @@ input[type="checkbox"]::before {
   transform: translate(-50%, -50%);
   width: 60%;
   height: 2px;
-  background-color: var(--bg);
+  background-color: var(--border);
 }
 
 input[type="checkbox"]::after {
@@ -102,7 +103,7 @@ input[type="checkbox"]::after {
   transform: translate(-50%, -50%) rotate(90deg);
   width: 60%;
   height: 2px;
-  background-color: var(--bg);
+  background-color: var(--border);
 }
 
 input[type="checkbox"]:checked {
@@ -122,15 +123,6 @@ input[type="checkbox"]:checked::before {
 }
 input[type="checkbox"]:checked::after {
   display: none;
-}
-.memo-close {
-  font-size: 20px;
-  color: red;
-  display: none;
-  margin-right: 10px;
-}
-.buff-detail-check:has(input:checked) .memo-close {
-  display: block;
 }
 .buff-stack {
   display: flex;

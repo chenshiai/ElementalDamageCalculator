@@ -3,11 +3,6 @@
   line-height: 24px;
 }
 
-.eva-cell {
-  margin-bottom: 12px;
-  background-color: var(--light-text);
-}
-
 .data-panel .van-stepper--round .van-stepper__minus {
   color: var(--button-bg);
   border-color: var(--button-bg);

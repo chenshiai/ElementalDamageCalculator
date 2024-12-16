@@ -25,10 +25,13 @@
   --van-collapse-item-content-padding: 0;
   --van-collapse-item-content-background: var(--page-bg);
   --van-collapse-item-duration: 0.2s;
-  --van-slider-active-background: var(--stroke-3);
   --van-stepper-button-round-theme: var(--button-bg);
   --van-back-top-background: var(--stroke-2);
   --van-floating-bubble-background: var(--stroke-2);
+  --van-primary-color: var(--stroke-2);
+  --van-gray-3: var(--stroke-0);
+  --van-cell-background: var(--light-text);
+  --van-cell-text-color: var(--main-text);
   
   --text-electro: #b380ff;
   --text-hydro: #6495ED;

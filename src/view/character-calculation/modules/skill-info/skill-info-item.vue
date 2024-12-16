@@ -57,7 +57,7 @@ const panelName = computed(() => {
     <span>{{ panelName }}</span>
     <span v-if="skillLevel" class="slider-wrap">
       <span>天赋等级：</span>
-      <Slider v-model="skillLevel" max="10" min="1" inactive-color="#F7F1E6" active-color="#928986" />
+      <Slider v-model="skillLevel" max="10" min="1" />
     </span>
     <template v-if="skill.length > 0">
       <div class="skill-info-item">

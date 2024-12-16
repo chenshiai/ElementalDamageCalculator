@@ -1,12 +1,11 @@
 <template>
   <tab-title>单次伤害计算</tab-title>
-  <div class="tips">
-    可以自由填入属性值查看相应的伤害，适合对游戏伤害计算方式比较熟悉的人使用。
-  </div>
+  <div class="tips">可以自由填入属性值查看相应的伤害，适合对游戏伤害计算方式比较熟悉的人使用。</div>
   <div class="data-panel">
     <div class="data-panel__title">基础属性</div>
     <div class="data-panel__basic">
-      <div :class="['basic-panel-item', basicPanelSelect === basicPanelSelectType.ATK && 'basic-panel-selected']"
+      <div
+        :class="['basic-panel-item', basicPanelSelect === basicPanelSelectType.ATK && 'basic-panel-selected']"
         @click="basicInputPanelSelect(basicPanelSelectType.ATK)"
       >
         <span class="basic-panel-item-title">攻击力</span>
@@ -18,7 +17,8 @@
           <span style="color: #49ff39">{{ sumExtraATKNumber }}</span>
         </div>
       </div>
-      <div :class="['basic-panel-item', basicPanelSelect === basicPanelSelectType.HP && 'basic-panel-selected']"
+      <div
+        :class="['basic-panel-item', basicPanelSelect === basicPanelSelectType.HP && 'basic-panel-selected']"
         @click="basicInputPanelSelect(basicPanelSelectType.HP)"
       >
         <span class="basic-panel-item-title">生命值</span>
@@ -30,7 +30,8 @@
           <span style="color: #49ff39">{{ sumExtraHPNumber }}</span>
         </div>
       </div>
-      <div :class="['basic-panel-item', basicPanelSelect === basicPanelSelectType.DEF && 'basic-panel-selected']"
+      <div
+        :class="['basic-panel-item', basicPanelSelect === basicPanelSelectType.DEF && 'basic-panel-selected']"
         @click="basicInputPanelSelect(basicPanelSelectType.DEF)"
       >
         <span class="basic-panel-item-title">防御力</span>
@@ -42,7 +43,8 @@
           <span style="color: #49ff39">{{ sumExtraDEFNumber }}</span>
         </div>
       </div>
-      <div :class="['basic-panel-item', basicPanelSelect === basicPanelSelectType.EM && 'basic-panel-selected']"
+      <div
+        :class="['basic-panel-item', basicPanelSelect === basicPanelSelectType.EM && 'basic-panel-selected']"
         @click="basicInputPanelSelect(basicPanelSelectType.EM)"
       >
         <span class="basic-panel-item-title">元素精通</span>
@@ -87,7 +89,7 @@
     <div class="data-panel__basic">
       <div class="basic-panel-item">
         <span class="basic-panel-item-title">攻击倍率%</span>
-        <input class="basic-panel-input" type="number" v-model="atkRate"/>
+        <input class="basic-panel-input" type="number" v-model="atkRate" />
       </div>
       <div class="basic-panel-item">
         <span class="basic-panel-item-title">生命倍率%</span>
@@ -107,16 +109,16 @@
       <Popover class="data-item-popover" v-model:show="showPopoverExtraRate" placement="left-end">
         <div class="data-item-popover__content">
           <b>攻击伤害值 = (基础属性x最终倍率) + 伤害提高值 + 激化提高值</b><br />
-          <p><b>最终倍率</b> = 攻击倍率 x (1 + 倍率增幅) </p>
-          <p><b>倍率增幅：</b>
+          <p><b>最终倍率</b> = 攻击倍率 x (1 + 倍率增幅)</p>
+          <p>
+            <b>倍率增幅：</b>
             例：宵宫释放元素战技后的普通攻击“造成152%普通攻击伤害”，即“普通攻击<b>倍率增幅</b>为(152%-100%)=<b>52%</b>”；还有行秋4命、流浪者普攻、莱欧斯利普攻、那维莱特重击160%和芙宁娜战技140%。<br />
           </p>
           <p><b>基础伤害值：</b>基础属性乘以最终倍率的数值为基础伤害值。</p>
+          <p><b>激化提高值：</b>雷元素和草元素的激化反应带来的提升值，受角色等级和元素精通影响。</p>
           <p>
-            <b>激化提高值：</b>雷元素和草元素的激化反应带来的提升值，受角色等级和元素精通影响。
-          </p>
-          <p>
-            <b>伤害提高值：</b>部分角色或武器技能带有“xx伤害值提升(高)”的描述，例如：钟离·炊金馔玉、云堇·元素爆发、申鹤·元素战技、一斗·荒泷逆袈裟和圣遗物来歆余响等。
+            <b>伤害提高值：</b
+            >部分角色或武器技能带有“xx伤害值提升(高)”的描述，例如：钟离·炊金馔玉、云堇·元素爆发、申鹤·元素战技、一斗·荒泷逆袈裟和圣遗物来歆余响等。
           </p>
           <b>可以点击下方【伤害提高值】便签进行添加</b>
         </div>
@@ -125,7 +127,11 @@
         </template>
       </Popover>
     </DataItem>
-    <NoteGroup v-model="additionalDemage" v-bind="NotesConfig.additionalDemage" :selectedNotes="selectedAdditionalDemageNotes" />
+    <NoteGroup
+      v-model="additionalDemage"
+      v-bind="NotesConfig.additionalDemage"
+      :selectedNotes="selectedAdditionalDemageNotes"
+    />
 
     <DataItem v-model="critDemage" title="暴击伤害%" tips="" stepperMin="0" decimalLength="1" />
     <DataItem v-model="elementDemage" title="伤害加成%" tips="各种增伤、减伤" stepperMin="-200" decimalLength="2">
@@ -151,9 +157,8 @@
     <NoteGroup v-model="elementDemage" v-bind="NotesConfig.elementDemage" :selectedNotes="selectedElementDemageNotes" />
     <DataItem v-model="characterLevel" title="角色等级" stepperMax="90" stepperMin="1" />
     <DataItem v-model="enemyLevel" title="敌人等级" stepperMin="1" />
-    
+
     <Cell
-      class="eva-cell"
       @click="otherChecked = !otherChecked"
       center
       title="敌人防御力、抗性调整"
@@ -173,7 +178,6 @@
     <AtkTypeSelector v-model="atkType" />
     <Cell
       v-show="atkType === ElementalReaction.Rate || atkType === ElementalReaction.Rate2"
-      class="eva-cell"
       center
       title="炽烈的炎之魔女，增幅反应伤害提升15%"
     >
@@ -181,17 +185,20 @@
         <Switch v-model="witch" active-color="#766461" inactive-color="#b7a19e" size="16" />
       </template>
     </Cell>
-    <Cell v-show="atkType === ElementalReaction.Aggravate" class="eva-cell" center title="如雷的盛怒，超激化[伤害提升]提高20%">
+    <Cell v-show="atkType === ElementalReaction.Aggravate" center title="如雷的盛怒，超激化[伤害提升]提高20%">
       <template #right-icon>
         <Switch v-model="thunder" active-color="#766461" inactive-color="#b7a19e" size="16" />
       </template>
     </Cell>
-    <Cell v-show="atkType === ElementalReaction.Aggravate || atkType === ElementalReaction.Spread" class="eva-cell" title="白术天赋·在地为化 输入生命值" center>
+    <Cell
+      v-show="atkType === ElementalReaction.Aggravate || atkType === ElementalReaction.Spread"
+      title="白术天赋·在地为化 输入生命值"
+      center
+    >
       <template #right-icon>
-        <input class="ex-input" type="number" v-model="baizhuHP"/>
+        <input class="ex-input" type="number" v-model="baizhuHP" />
       </template>
     </Cell>
-
   </div>
   <div :class="['dmg-result', floatChecked && 'increase-result__top']">
     <div class="result-grid">
@@ -210,7 +217,7 @@
     </div>
     <CompositionAnalysis />
   </div>
-  <Cell class="eva-cell" center title="置顶展示">
+  <Cell center title="置顶展示">
     <template #right-icon>
       <Switch v-model="floatChecked" active-color="#766461" inactive-color="#b7a19e" size="16" />
     </template>
@@ -220,15 +227,7 @@
 
 <script>
 import { computed, ref, toRefs } from "vue";
-import {
-  Switch,
-  Cell,
-  RadioGroup,
-  Radio,
-  Icon,
-  ImagePreview,
-  Popover,
-} from "vant";
+import { Switch, Cell, RadioGroup, Radio, Icon, ImagePreview, Popover } from "vant";
 import TabTitle from "@/component/TabTitle.vue";
 import { computationalFormula } from "@/utils";
 import DataItem from "@/component/DataItem.vue";
@@ -244,14 +243,14 @@ import {
   HpPercentNotes,
   DefPercentNotes,
   DefFixedNotes,
-  EmFixedNotes
-} from '@/constants/notes';
-import { EnhancedDemageCalculationMode } from '@/constants/calculation-mode/enhancedDemage';
-import { AtkPercentCalculationMode, AtkFixedCalculationMode } from '@/constants/calculation-mode/atk';
-import { HpPercentCalculationMode } from '@/constants/calculation-mode/hp';
-import { DefPercentCalculationMode, DefFixedCalculationMode } from '@/constants/calculation-mode/def';
-import { EmFixedCalculationMode } from '@/constants/calculation-mode/em';
-import { AdditionalDamageMode } from '@/constants/calculation-mode/additionalDemage';
+  EmFixedNotes,
+} from "@/constants/notes";
+import { EnhancedDemageCalculationMode } from "@/constants/calculation-mode/enhancedDemage";
+import { AtkPercentCalculationMode, AtkFixedCalculationMode } from "@/constants/calculation-mode/atk";
+import { HpPercentCalculationMode } from "@/constants/calculation-mode/hp";
+import { DefPercentCalculationMode, DefFixedCalculationMode } from "@/constants/calculation-mode/def";
+import { EmFixedCalculationMode } from "@/constants/calculation-mode/em";
+import { AdditionalDamageMode } from "@/constants/calculation-mode/additionalDemage";
 import AtkTypeSelector from "@/component/AtkTypeSelector.vue";
 
 export default {
@@ -287,7 +286,7 @@ export default {
     });
 
     const basicInputPanelSelect = (value) => {
-      store.commit('setBasicPanelSelect', value);
+      store.commit("setBasicPanelSelect", value);
     };
 
     const NotesConfig = {
@@ -296,7 +295,8 @@ export default {
         localStorageName: "GenShinImpactATKNotesV2", // 存在本地storage的便签组名称
         calculationMode: AtkPercentCalculationMode, // 便签组中的快捷计算方式
         defaultNotes: AtkPercentNotes, // 本地没有保存便签组，则使用该默认便签组
-        setSelectedNotes: (value) => { // 修改便签组方法
+        setSelectedNotes: (value) => {
+          // 修改便签组方法
           store.commit("setSelectedExtraATKNotes", value);
         },
       },
@@ -386,7 +386,7 @@ export default {
       ElementalReaction,
     };
   },
-}
+};
 </script>
 
 <style src="./style.css" />

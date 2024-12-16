@@ -85,7 +85,6 @@ const getStatValueText = (stat): string => {
             class="swipecell-right-button replay-icon"
             square
             type="primary"
-            color="#997874"
             @click.stop="recalculation(item)"
           >
             填入
@@ -148,7 +147,7 @@ const getStatValueText = (stat): string => {
   position: absolute;
   right: 0;
   top: 0;
-  color: var(--ligth-text);
+  /* color: var(--ligth-text); */
 }
 
 .container {

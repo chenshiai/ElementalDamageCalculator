@@ -32,7 +32,6 @@
     <Slider
         v-model="elementalMystery"
         :max="2000"
-        active-color="#645856"
     />
     <div class="base-data-item">
       <span class="base-damage__title">妮露生命值</span>
