@@ -52,6 +52,7 @@ export interface IRate {
   hp?: number[];
   def?: number[];
   em?: number[];
+  fixed?: number[];
 }
 export interface ICharacterInfo {
   enkaId: number;

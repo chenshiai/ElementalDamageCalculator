@@ -38,7 +38,7 @@ export function getColorByElement(elementType: ElementType | string) {
     case ElementType.Pyro:
       return "text-pyro";
     default:
-      return "";
+      return "text-defalut";
   }
 }
 

@@ -85,8 +85,8 @@ const showLeft = ref(false);
 }
 
 .router-link-active {
-  color: var(--main-text);
-  border-bottom: 1px solid var(--main-text);
+  color: var(--light-text);
+  background-color: var(--main-text);
 }
 
 .top-tabs__item:nth-last-child(1) {

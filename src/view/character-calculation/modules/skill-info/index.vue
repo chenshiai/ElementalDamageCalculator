@@ -38,7 +38,7 @@ const onTab = (val) => {
 <template>
   <div class="skill-info">
     <div class="data-panel__title">
-      <span>伤害数值</span>
+      <span>技能数值</span>
     </div>
     <div class="tab-list">
       <div

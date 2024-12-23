@@ -15,7 +15,11 @@ export enum AttackType {
   /** 其他类型 */
   Other = "OtherAttack",
   /** 下落攻击兼其他类型 */
-  FallingOther = "FallingOther"
+  FallingOther = "FallingOther",
+  /** 治疗类型 */
+  Heal = "Heal",
+  /** 护盾类型 */
+  Shield = "Shield"
 }
 
 /** 元素类型 */
@@ -28,6 +32,7 @@ export enum ElementType {
   Cryo = "Cryo",
   Geo = "Geo",
   Dendro = "Dendro",
+  None = "None"
 }
 
 export const EnchantingType = {

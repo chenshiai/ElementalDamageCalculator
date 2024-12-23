@@ -28,7 +28,7 @@ const calculatedResults = computed(() => {
       };
     }
 
-    let { RESULT_DMG, CRITICAL_DMG, DEISTE_DMG, elementType } = calculateDamage({
+    let { RESULT_DMG, CRITICAL_DMG, DEISTE_DMG, elementType, HEAL_VALUE } = calculateDamage({
       calculatorValue,
       attackType: item.attackType,
       elementType: item.elementType,
@@ -37,6 +37,16 @@ const calculatedResults = computed(() => {
       atkType: atkType.value,
       special: item.special,
     });
+
+    if (HEAL_VALUE > 0) {
+      return {
+        label: item.label,
+        common: Math.round(HEAL_VALUE),
+        crit: "-",
+        desire: "-",
+        elementType,
+      }
+    }
     return {
       label: item.label,
       common: Math.round(RESULT_DMG),
@@ -62,9 +72,9 @@ const panelName = computed(() => {
     <template v-if="skill.length > 0">
       <div class="skill-info-item">
         <span></span>
-        <span>暴击伤害</span>
-        <span>期望伤害</span>
-        <span>一般伤害</span>
+        <span>暴击值</span>
+        <span>期望值</span>
+        <span>一般值</span>
       </div>
       <div
         :class="['skill-info-item', getColorByElement(item.elementType)]"
@@ -78,7 +88,7 @@ const panelName = computed(() => {
       </div>
     </template>
     <template v-else>
-      <div class="skill-info-empty">无伤害。</div>
+      <div class="skill-info-empty">无数值。</div>
     </template>
   </div>
   <AtkTypeSelector v-if="skill.length > 0" v-model="atkType" size="small" />

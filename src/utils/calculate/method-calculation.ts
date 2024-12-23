@@ -17,6 +17,7 @@ function getMoreDataBySwitch(
   let critical = (calculatorValue[BuffType.Critcal] || 0) + (calculatorValue[BuffType.GlobalCritcal] || 0);
   let resistance = 0;
   let defensePenetration = calculatorValue[BuffType.DefensePenetration] || 0;
+  let healAdd = 0
 
   // 处理攻击类型的加成
   switch (attackType) {
@@ -69,6 +70,8 @@ function getMoreDataBySwitch(
       critical += calculatorValue[BuffType.FallingCritcal] || 0;
       addRate += calculatorValue[BuffType.FallingRateAdd] || 0;
       break;
+    case AttackType.Heal:
+      healAdd += calculatorValue[BuffType.HealAdd] || 0;
   }
 
   // 元素附魔
@@ -159,6 +162,7 @@ function getMoreDataBySwitch(
     addRate,
     defensePenetration,
     newElementType,
+    healAdd,
   };
 }
 
@@ -174,7 +178,7 @@ interface IArgs {
 }
 
 export function calculateDamage({ calculatorValue, attackType, elementType, rate, level, atkType, special }: IArgs) {
-  let { ADDITIONAL_DMG, addHunt, criticalHunt, critical, resistance, addRate, newElementType, defensePenetration } =
+  let { ADDITIONAL_DMG, addHunt, criticalHunt, critical, resistance, addRate, newElementType, defensePenetration, healAdd } =
     getMoreDataBySwitch(calculatorValue, attackType, elementType, calculatorValue.weapon);
 
   /** 计算独特buff的加成 */
@@ -193,6 +197,7 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
     addRate += specialData.addRate;
     newElementType = specialData.newElementType;
     defensePenetration += specialData.defensePenetration;
+    healAdd += specialData.healAdd;
   }
 
   // 基础伤害
@@ -212,6 +217,15 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
   const em = calculatorValue.elementalMystery + calculatorValue.elementalMystery_NT;
   if (rate.em) {
     BASE_DMG += em * rate.em[level - 1] * (1 + addRate / 100);
+  }
+  if (rate.fixed) {
+    BASE_DMG += rate.fixed[level - 1];
+  }
+
+  // 治疗量
+  let HEAL_VALUE = 0
+  if (attackType === AttackType.Heal) {
+    HEAL_VALUE = BASE_DMG * (1 + healAdd / 100);
   }
 
   // 激化伤害
@@ -274,5 +288,6 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
     criticalHunt,
     addHunt,
     elementType: newElementType,
+    HEAL_VALUE,
   };
 }
