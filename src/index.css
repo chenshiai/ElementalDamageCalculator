@@ -40,7 +40,7 @@
   --text-geo: #fc0;
   --text-dendro: #b1d83d;
   --text-pyro: #ff6666;
-  --text-defalut: #3cff00;
+  --text-heal: #3cff00;
 
   --bg-electro: #9a6edd;
   --bg-hydro: #5781ce;
@@ -152,8 +152,8 @@ body {
 .text-pyro {
   color: var(--text-pyro);
 }
-.text-defalut {
-  color: var(--text-defalut);
+.text-heal {
+  color: var(--text-heal);
 }
 
 .bg-electro {

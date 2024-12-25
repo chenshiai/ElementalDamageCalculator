@@ -20,6 +20,7 @@
     <div class="tips">点击对应数据，可以展开查看详情。支持「重算」「删除」</div>
     <Collapse class="data-popup__collapse" v-if="localData.length > 0" v-model="opened">
       <CollapseItem
+        class="data-popup__collapse-item"
         v-for="[name, val] in localData"
         :key="name"
         :is-link="false"
@@ -351,5 +352,9 @@ const recalculation = (value) => {
 <style>
 .Popup.data-popup {
   max-height: 90%;
+}
+
+.data-popup__collapse-item .van-cell {
+  background-color: #fff !important;
 }
 </style>

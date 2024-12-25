@@ -387,7 +387,7 @@ onMounted(() => {
 </style>
 
 <style>
-.van-cell .van-field {
+.van-form .van-cell {
   background-color: #fff !important;
 }
 </style>

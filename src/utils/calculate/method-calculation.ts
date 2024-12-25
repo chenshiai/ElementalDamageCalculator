@@ -17,7 +17,7 @@ function getMoreDataBySwitch(
   let critical = (calculatorValue[BuffType.Critcal] || 0) + (calculatorValue[BuffType.GlobalCritcal] || 0);
   let resistance = 0;
   let defensePenetration = calculatorValue[BuffType.DefensePenetration] || 0;
-  let healAdd = 0
+  let healAdd = 0;
 
   // 处理攻击类型的加成
   switch (attackType) {
@@ -178,8 +178,17 @@ interface IArgs {
 }
 
 export function calculateDamage({ calculatorValue, attackType, elementType, rate, level, atkType, special }: IArgs) {
-  let { ADDITIONAL_DMG, addHunt, criticalHunt, critical, resistance, addRate, newElementType, defensePenetration, healAdd } =
-    getMoreDataBySwitch(calculatorValue, attackType, elementType, calculatorValue.weapon);
+  let {
+    ADDITIONAL_DMG,
+    addHunt,
+    criticalHunt,
+    critical,
+    resistance,
+    addRate,
+    newElementType,
+    defensePenetration,
+    healAdd,
+  } = getMoreDataBySwitch(calculatorValue, attackType, elementType, calculatorValue.weapon);
 
   /** 计算独特buff的加成 */
   if (special && calculatorValue.specialValue && calculatorValue.specialValue[special]) {
@@ -223,9 +232,14 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
   }
 
   // 治疗量
-  let HEAL_VALUE = 0
+  let HEAL_VALUE = 0;
   if (attackType === AttackType.Heal) {
     HEAL_VALUE = BASE_DMG * (1 + healAdd / 100);
+  }
+  // 护盾量
+  let SHIELD_VALUE = 0;
+  if (attackType === AttackType.Shield) {
+    SHIELD_VALUE = BASE_DMG;
   }
 
   // 激化伤害
@@ -289,5 +303,6 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
     addHunt,
     elementType: newElementType,
     HEAL_VALUE,
+    SHIELD_VALUE,
   };
 }

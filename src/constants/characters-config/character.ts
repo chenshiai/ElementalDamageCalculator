@@ -9380,6 +9380,9 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("法兽灼眼", AttackType.Strong, ElementType.Pyro, {
         atk: [0.8],
       }),
+      createAttack("4命·丹书金铁券护盾", AttackType.Shield, ElementType.None, {
+        hp: [0.45],
+      }),
     ],
     buffs: [
       A_80_PYRO_24P,
@@ -9564,6 +9567,14 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
       createAttack("持续伤害", AttackType.Skill, ElementType.Pyro, {
         atk: [0.336, 0.361, 0.386, 0.42, 0.445, 0.474, 0.504, 0.538, 0.571, 0.605, 0.638, 0.672, 0.714],
+      }),
+      createAttack("一级护盾吸收量", AttackType.Shield, ElementType.None, {
+        def: [1.04, 1.118, 1.196, 1.301, 1.379, 1.457, 1.561, 1.665, 1.769, 1.873, 1.977, 2.081, 2.211, 2.341],
+        fixed: [501, 551, 605, 663, 726, 793, 864, 939, 1018, 1101, 1189, 1281, 1377, 1477]
+      }),
+      createAttack("二级护盾吸收量", AttackType.Shield, ElementType.None, {
+        def: [1.04, 1.118, 1.196, 1.301, 1.379, 1.457, 1.561, 1.665, 1.769, 1.873, 1.977, 2.081, 2.211, 2.341],
+        fixed: [501, 551, 605, 663, 726, 793, 864, 939, 1018, 1101, 1189, 1281, 1377, 1477]
       }),
     ],
     burstSkill: [
@@ -10176,6 +10187,10 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     elementSkill: [
+      createAttack("护盾吸收量", AttackType.Shield, ElementType.None, {
+        hp: [0.144, 0.155, 0.166, 0.18, 0.191, 0.202, 0.216, 0.23, 0.245, 0.259, 0.274, 0.288, 0.306, 0.324],
+        fixed: [1386, 1525, 1675, 1837, 2010, 2195, 2392, 2600, 2819, 3050, 3293, 3547, 3813, 4090]
+      }),
       createAttack("基础伤害", AttackType.Skill, ElementType.Electro, {
         atk: [1.22, 1.31, 1.4, 1.52, 1.61, 1.7, 1.82, 1.95, 2.07, 2.19, 2.31, 2.43, 2.58],
       }),
@@ -10222,7 +10237,14 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         atk: [0.96, 1.03, 1.1, 1.2, 1.27, 1.34, 1.44, 1.54, 1.63, 1.73, 1.82, 1.92, 2.04, 2.16],
       }),
     ],
-    otherSkill: [],
+    otherSkill: [
+      createAttack("1命·鱼龙沉八方", AttackType.Shield, ElementType.None, {
+        hp: [0.16],
+      }),
+      createAttack("4命·牵星觅乡岸", AttackType.Other, ElementType.Electro, {
+        atk: [0.2],
+      }),
+    ],
     buffs: [
       A_80_ELECTRO_24P,
       Constellation_E_3,
@@ -10931,7 +10953,11 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         atk: [0.776, 0.834, 0.892, 0.97, 1.03, 1.09, 1.16, 1.24, 1.32, 1.4, 1.47, 1.55, 1.65, 1.75],
       }),
     ],
-    otherSkill: [],
+    otherSkill: [
+      createAttack("4命·极寒的轻吻护盾", AttackType.Shield, ElementType.None, {
+        hp: [0.3],
+      }),
+    ],
     buffs: [
       A_80_CHARGE_26P,
       {

@@ -28,7 +28,7 @@ const calculatedResults = computed(() => {
       };
     }
 
-    let { RESULT_DMG, CRITICAL_DMG, DEISTE_DMG, elementType, HEAL_VALUE } = calculateDamage({
+    let { RESULT_DMG, CRITICAL_DMG, DEISTE_DMG, elementType, HEAL_VALUE, SHIELD_VALUE } = calculateDamage({
       calculatorValue,
       attackType: item.attackType,
       elementType: item.elementType,
@@ -42,6 +42,15 @@ const calculatedResults = computed(() => {
       return {
         label: item.label,
         common: Math.round(HEAL_VALUE),
+        crit: "-",
+        desire: "-",
+        elementType,
+      }
+    }
+    if (SHIELD_VALUE > 0) {
+      return {
+        label: item.label,
+        common: Math.round(SHIELD_VALUE),
         crit: "-",
         desire: "-",
         elementType,

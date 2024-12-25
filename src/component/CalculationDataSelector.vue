@@ -66,7 +66,7 @@ const getStatValueText = (stat): string => {
   <div class="data-selector-title">本地保存数据</div>
   <Collapse class="data-popup__collapse" v-if="localData.length > 0" v-model="opened">
     <SwipeCell v-for="item in localData" :key="item.title">
-      <CollapseItem :is-link="false" title-class="data-title">
+      <CollapseItem class="data-popup__collapse-item" :is-link="false" title-class="data-title">
         <template #title>
           <span>{{ item.title }}</span>
           <div class="first-row">
