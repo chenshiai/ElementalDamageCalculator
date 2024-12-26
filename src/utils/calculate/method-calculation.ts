@@ -4,6 +4,14 @@ import { ICalculatorValue, IRate } from "@/types/interface";
 import { BaseDMG } from "@/constants/elementalReaction";
 import { getCatalyzeRate, getAmplifiedRate, getResistanceRate, getDefRate } from "@/utils";
 
+/**
+ * 
+ * @param calculatorValue 角色面板属性
+ * @param attackType 所计算的技能类型
+ * @param elementType 所计算的技能的元素类型
+ * @param weapon 角色的武器类型
+ * @returns 
+ */
 function getMoreDataBySwitch(
   calculatorValue: Partial<ICalculatorValue>,
   attackType: AttackType,
@@ -18,6 +26,7 @@ function getMoreDataBySwitch(
   let resistance = 0;
   let defensePenetration = calculatorValue[BuffType.DefensePenetration] || 0;
   let healAdd = 0;
+  let shieldAdd = 0;
 
   // 处理攻击类型的加成
   switch (attackType) {
@@ -72,6 +81,10 @@ function getMoreDataBySwitch(
       break;
     case AttackType.Heal:
       healAdd += calculatorValue[BuffType.HealAdd] || 0;
+      break;
+    case AttackType.Shield:
+      shieldAdd += calculatorValue[BuffType.ShieldAdd] || 0;
+      break;
   }
 
   // 元素附魔
@@ -163,6 +176,7 @@ function getMoreDataBySwitch(
     defensePenetration,
     newElementType,
     healAdd,
+    shieldAdd,
   };
 }
 
@@ -188,6 +202,7 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
     newElementType,
     defensePenetration,
     healAdd,
+    shieldAdd,
   } = getMoreDataBySwitch(calculatorValue, attackType, elementType, calculatorValue.weapon);
 
   /** 计算独特buff的加成 */
@@ -207,6 +222,7 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
     newElementType = specialData.newElementType;
     defensePenetration += specialData.defensePenetration;
     healAdd += specialData.healAdd;
+    shieldAdd += specialData.shieldAdd;
   }
 
   // 基础伤害
@@ -239,7 +255,7 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
   // 护盾量
   let SHIELD_VALUE = 0;
   if (attackType === AttackType.Shield) {
-    SHIELD_VALUE = BASE_DMG;
+    SHIELD_VALUE = BASE_DMG * (1 + shieldAdd / 100);
   }
 
   // 激化伤害

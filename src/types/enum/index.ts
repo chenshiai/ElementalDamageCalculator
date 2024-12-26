@@ -16,6 +16,7 @@ export enum AttackType {
   Other = "OtherAttack",
   /** 下落攻击兼其他类型 */
   FallingOther = "FallingOther",
+
   /** 治疗类型 */
   Heal = "Heal",
   /** 护盾类型 */
@@ -245,6 +246,8 @@ export enum BuffType {
   BeHealAdd = "beHealAdd",
   /** 护盾强效加成 */
   ShieldStrong = "shieldStrong",
+  /** 护盾构建加成 */
+  ShieldAdd = "shieldAdd",
 
   NormalLevel = "normalLevelAdd",
   SkillLevel = "skillLevelAdd",

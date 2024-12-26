@@ -25,6 +25,7 @@ class CalculatorValue implements ICalculatorValue {
   beHealAdd: number = 0;
   shieldStrong: number = 0;
   coolDown: number = 0;
+  shieldAdd: number = 0;
 
   // 由面板属性转化而来的属性，不可用于二次面板转化。统一用 _NT 结尾
   extraHP_NT: number = 0;

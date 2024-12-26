@@ -164,6 +164,8 @@ export interface ICalculatorValue {
   [BuffType.BeHealAdd]: number;
   /** 护盾强效 */
   [BuffType.ShieldStrong]: number;
+  /** 护盾构建 */
+  [BuffType.ShieldAdd]: number;
   /** 冷却缩减 */
   [BuffType.CoolDown]: number;
   // 元素增伤

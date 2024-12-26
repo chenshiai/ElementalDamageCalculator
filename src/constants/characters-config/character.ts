@@ -1469,7 +1469,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
           },
         ],
         enable: false,
-        condition: ({ constellation }) => constellation >= 6
+        condition: ({ constellation }) => constellation >= 6,
       },
     ],
   },
@@ -5678,7 +5678,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         enable: false,
         shareable: true,
         target: BuffTarget.Enemy,
-        condition: ({ constellation }) => constellation >= 1
+        condition: ({ constellation }) => constellation >= 1,
       },
       Constellation_Q_3,
       {
@@ -5691,7 +5691,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         limit: 4,
         stackable: true,
         target: BuffTarget.Enemy,
-        condition: ({ constellation }) => constellation >= 4
+        condition: ({ constellation }) => constellation >= 4,
       },
       Constellation_E_5,
     ],
@@ -6694,7 +6694,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         enable: false,
         shareable: true,
         target: BuffTarget.All,
-        condition: ({ constellation }) => constellation >= 1
+        condition: ({ constellation }) => constellation >= 1,
       },
       Constellation_Q_3,
       {
@@ -6704,7 +6704,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         enable: false,
         shareable: true,
         target: BuffTarget.All,
-        condition: ({ constellation }) => constellation >= 4
+        condition: ({ constellation }) => constellation >= 4,
       },
       Constellation_E_5,
       {
@@ -6716,7 +6716,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         stack: 3,
         limit: 3,
         stackable: true,
-        condition: ({ constellation }) => constellation >= 6
+        condition: ({ constellation }) => constellation >= 6,
       },
     ],
   },
@@ -6902,7 +6902,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         shareable: true,
         target: BuffTarget.All,
         stackText: "敌人数量",
-        condition: ({ constellation }) => constellation >= 4
+        condition: ({ constellation }) => constellation >= 4,
       },
       Constellation_Q_5,
     ],
@@ -7221,7 +7221,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         stack: 3,
         limit: 3,
         target: BuffTarget.Enemy,
-        condition: ({ constellation }) => constellation >= 6
+        condition: ({ constellation }) => constellation >= 6,
       },
     ],
   },
@@ -7317,7 +7317,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         limit: 3,
         stack: 3,
         stackText: "命中敌人数量",
-        condition: ({ constellation }) => constellation >= 2
+        condition: ({ constellation }) => constellation >= 2,
       },
       Constellation_Q_3,
       {
@@ -7325,7 +7325,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         describe: "定格·全方位确证命中附有「瞬时剪影」或「聚焦印象」印记的敌人时，造成的伤害提升10%",
         effect: [{ type: BuffType.BurstPrcent, getValue: () => 10 }],
         enable: true,
-        condition: ({ constellation }) => constellation >= 4
+        condition: ({ constellation }) => constellation >= 4,
       },
       Constellation_E_5,
     ],
@@ -8753,6 +8753,10 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("二段蓄力伤害", AttackType.Skill, ElementType.Geo, {
         def: [3.728, 4.008, 4.287, 4.66, 4.94, 5.219, 5.592, 5.965, 6.338, 6.71, 7.083, 7.456, 7.922],
       }),
+      createAttack("护盾吸收量", AttackType.Shield, ElementType.None, {
+        hp: [0.12, 0.13, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19, 0.2, 0.22, 0.23, 0.24, 0.26, 0.27],
+        fixed: [1155, 1271, 1396, 1531, 1675, 1830, 1993, 2167, 2350, 2542, 2744, 2956, 3178, 3409]
+      }),
     ],
     burstSkill: [
       createAttack("技能伤害", AttackType.Burst, ElementType.Geo, {
@@ -8877,7 +8881,11 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "Gorou"
       ),
     ],
-    otherSkill: [],
+    otherSkill: [
+      createAttack("4命·犬舐·温如水", AttackType.Heal, ElementType.None, {
+        def: [0.5],
+      }),
+    ],
     buffs: [
       A_80_GEO_24P,
       {
@@ -8945,7 +8953,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         limit: 3,
         shareable: true,
         target: BuffTarget.All,
-        condition: ({ constellation }) => constellation >= 6
+        condition: ({ constellation }) => constellation >= 6,
       },
     ],
   },
@@ -8995,6 +9003,14 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("技能伤害", AttackType.Skill, ElementType.Pyro, {
         atk: [1.46, 1.57, 1.68, 1.83, 1.94, 2.05, 2.2, 2.34, 2.49, 2.64, 2.78, 2.93, 3.11],
       }),
+      createAttack("护盾吸收量", AttackType.Shield, ElementType.None, {
+        hp: [0.072, 0.077, 0.0828, 0.09, 0.095, 0.101, 0.108, 0.115, 0.122, 0.13, 0.137, 0.144, 0.153, 0.162],
+        fixed: [693, 763, 838, 919, 1005, 1098, 1196, 1300, 1410, 1525, 1647, 1774, 1907, 2046],
+      }),
+      createAttack("护盾吸收量上限", AttackType.Shield, ElementType.None, {
+        hp: [0.1969, 0.2107, 0.2254, 0.245, 0.2597, 0.2744, 0.294, 0.3136, 0.3332, 0.3528, 0.3724, 0.392, 0.417, 0.441],
+        fixed: [1887, 2076, 2281, 2501, 2737, 3000, 3256, 3539, 3838, 4153, 4483, 4829, 5191, 5568],
+      }),
     ],
     burstSkill: [
       createAttack("技能伤害", AttackType.Burst, ElementType.Pyro, {
@@ -9009,6 +9025,10 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         },
         "Tohma"
       ),
+      createAttack("护盾吸收量", AttackType.Shield, ElementType.None, {
+        hp: [0.011, 0.012, 0.013, 0.014, 0.015, 0.016, 0.017, 0.018, 0.019, 0.021, 0.022, 0.023, 0.024, 0.0257],
+        fixed: [110, 121, 133, 146, 160, 174, 190, 206, 224, 242, 261, 282, 303, 325],
+      }),
     ],
     otherSkill: [],
     buffs: [
@@ -9050,7 +9070,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         enable: true,
         shareable: true,
         target: BuffTarget.All,
-        condition: ({ constellation }) => constellation >= 6
+        condition: ({ constellation }) => constellation >= 6,
       },
     ],
   },
@@ -9154,7 +9174,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         enable: false,
         shareable: true,
         target: BuffTarget.All,
-        condition: ({ constellation }) => constellation >= 6 
+        condition: ({ constellation }) => constellation >= 6,
       },
     ],
   },
@@ -9281,8 +9301,21 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("不倒貉貉伤害", AttackType.Burst, ElementType.Anemo, {
         atk: [0.52, 0.56, 0.6, 0.65, 0.69, 0.73, 0.78, 0.83, 0.88, 0.94, 0.99, 1.04, 1.11, 1.17],
       }),
+      createAttack("技能发动治疗量", AttackType.Heal, ElementType.None, {
+        atk: [0.922, 0.991, 1.06, 1.152, 1.221, 1.29, 1.382, 1.475, 1.567, 1.659, 1.751, 1.843, 1.958, 2.074],
+        fixed: [577, 635, 698, 765, 837, 914, 996, 1083, 1174, 1270, 1371, 1477, 1588, 1703],
+      }),
+      createAttack("不倒貉貉治疗量", AttackType.Heal, ElementType.None, {
+        atk: [0.799, 0.859, 0.919, 0.998, 1.058, 1.118, 1.198, 1.278, 1.358, 1.438, 1.518, 1.597, 1.697, 1.797],
+        fixed: [500, 550, 605, 663, 726, 792, 863, 938, 1017, 1101, 1188, 1280, 1376, 1476],
+      }),
     ],
-    otherSkill: [],
+    otherSkill: [
+      createAttack("更加合适的人选", AttackType.Heal, ElementType.None, {
+        em: [1.2],
+        fixed: [300],
+      }),
+    ],
     buffs: [
       A_80_MYSTERY_96,
       {
@@ -9570,11 +9603,15 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
       createAttack("一级护盾吸收量", AttackType.Shield, ElementType.None, {
         def: [1.04, 1.118, 1.196, 1.301, 1.379, 1.457, 1.561, 1.665, 1.769, 1.873, 1.977, 2.081, 2.211, 2.341],
-        fixed: [501, 551, 605, 663, 726, 793, 864, 939, 1018, 1101, 1189, 1281, 1377, 1477]
+        fixed: [501, 551, 605, 663, 726, 793, 864, 939, 1018, 1101, 1189, 1281, 1377, 1477],
       }),
       createAttack("二级护盾吸收量", AttackType.Shield, ElementType.None, {
-        def: [1.04, 1.118, 1.196, 1.301, 1.379, 1.457, 1.561, 1.665, 1.769, 1.873, 1.977, 2.081, 2.211, 2.341],
-        fixed: [501, 551, 605, 663, 726, 793, 864, 939, 1018, 1101, 1189, 1281, 1377, 1477]
+        def: [1.224, 1.316, 1.408, 1.53, 1.622, 1.714, 1.836, 1.958, 2.081, 2.203, 2.326, 2.448, 2.601, 2.754],
+        fixed: [589, 648, 712, 780, 854, 932, 116, 1104, 1197, 1296, 1399, 1507, 1620, 1737],
+      }),
+      createAttack("三级护盾吸收量", AttackType.Shield, ElementType.None, {
+        def: [1.44, 1.548, 1.656, 1.8, 1.908, 2.016, 2.16, 2.304, 2.448, 2.592, 2.736, 2.88, 3.06, 3.24],
+        fixed: [693, 762, 837, 918, 1005, 1097, 1195, 1299, 1409, 1524, 1646, 1773, 1905, 2044],
       }),
     ],
     burstSkill: [
@@ -9685,6 +9722,16 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("猫爪伤害", AttackType.Skill, ElementType.Cryo, {
         atk: [0.419, 0.451, 0.482, 0.524, 0.555, 0.587, 0.629, 0.671, 0.713, 0.755, 0.796, 0.838, 0.891],
       }),
+      createAttack("护盾基础吸收量", AttackType.Shield, ElementType.None, {
+        hp: [0.072, 0.077, 0.083, 0.09, 0.095, 0.101, 0.108, 0.115, 0.122, 0.13, 0.137, 0.144, 0.153, 0.162],
+        fixed: [693, 762, 837, 918, 1005, 1097, 1195, 1299, 1409, 1524, 1646, 1773, 1905, 2044],
+      }),
+      createAttack("长按护盾吸收量", AttackType.Shield, ElementType.None, {
+        hp: [0.072, 0.077, 0.083, 0.09, 0.095, 0.101, 0.108, 0.115, 0.122, 0.13, 0.137, 0.144, 0.153, 0.162].map(
+          (i) => i * 1.75
+        ),
+        fixed: [693, 762, 837, 918, 1005, 1097, 1195, 1299, 1409, 1524, 1646, 1773, 1905, 2044].map((i) => i * 1.75),
+      }),
     ],
     burstSkill: [
       createAttack("技能伤害", AttackType.Burst, ElementType.Cryo, {
@@ -9693,14 +9740,23 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("领域持续伤害", AttackType.Burst, ElementType.Cryo, {
         atk: [0.526, 0.566, 0.605, 0.658, 0.697, 0.737, 0.79, 0.842, 0.895, 0.948, 1, 1.053, 1.119, 1.184],
       }),
+      createAttack("持续治疗量", AttackType.Heal, ElementType.None, {
+        hp: [
+          0.0534, 0.0574, 0.0614, 0.0667, 0.0707, 0.0747, 0.08, 0.0854, 0.0907, 0.096, 0.1014, 0.1067, 0.1134, 0.1201,
+        ],
+        fixed: [513, 565, 620, 680, 744, 813, 885, 962, 1044, 1129, 1219, 1313, 1411, 1514],
+      }),
     ],
     otherSkill: [],
     buffs: [
       A_80_CRYO_24P,
       {
         label: "2命·猫爪冰摇",
-        describe: "猫爪冻冻造成的伤害提高15%",
-        effect: [{ type: BuffType.SkillPrcent, getValue: () => 15 }],
+        describe: "猫爪冻冻造成的伤害、护盾吸收量提高15%",
+        effect: [
+          { type: BuffType.SkillPrcent, getValue: () => 15 },
+          { type: BuffType.ShieldAdd, getValue: () => 15 },
+        ],
         enable: true,
         condition: ({ constellation }) => constellation >= 2,
       },
@@ -10189,7 +10245,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     elementSkill: [
       createAttack("护盾吸收量", AttackType.Shield, ElementType.None, {
         hp: [0.144, 0.155, 0.166, 0.18, 0.191, 0.202, 0.216, 0.23, 0.245, 0.259, 0.274, 0.288, 0.306, 0.324],
-        fixed: [1386, 1525, 1675, 1837, 2010, 2195, 2392, 2600, 2819, 3050, 3293, 3547, 3813, 4090]
+        fixed: [1386, 1525, 1675, 1837, 2010, 2195, 2392, 2600, 2819, 3050, 3293, 3547, 3813, 4090],
       }),
       createAttack("基础伤害", AttackType.Skill, ElementType.Electro, {
         atk: [1.22, 1.31, 1.4, 1.52, 1.61, 1.7, 1.82, 1.95, 2.07, 2.19, 2.31, 2.43, 2.58],
@@ -10533,6 +10589,10 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("技能伤害", AttackType.Burst, ElementType.Pyro, {
         atk: [2.33, 2.5, 2.68, 2.91, 3.08, 3.26, 3.49, 3.72, 3.96, 4.19, 4.42, 4.66, 4.95, 5.24],
       }),
+      createAttack("持续治疗", AttackType.Heal, ElementType.None, {
+        hp: [0.06, 0.0645, 0.069, 0.075, 0.0795, 0.084, 0.09, 0.096, 0.102, 0.108, 0.114, 0.12, 0.1275, 0.135],
+        fixed: [577, 635, 698, 765, 837, 914, 996, 1083, 1174, 1270, 1371, 1477, 1588, 1703],
+      }),
     ],
     otherSkill: [],
     buffs: [
@@ -10646,7 +10706,11 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         atk: [0.543, 0.583, 0.624, 0.678, 0.719, 0.76, 0.814, 0.868, 0.923, 0.977, 1.03, 1.09, 1.15, 1.22],
       }),
     ],
-    otherSkill: [],
+    otherSkill: [
+      createAttack("生水要诀", AttackType.Heal, ElementType.None, {
+        hp: [0.06],
+      }),
+    ],
     buffs: [
       A_80_ATK_24P,
       {
@@ -10719,18 +10783,20 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         atk: [0.584, 0.628, 0.672, 0.73, 0.774, 0.818, 0.876, 0.934, 0.993, 1.05, 1.11, 1.17, 1.24],
       }),
       createAttack("命中治疗量", AttackType.Heal, ElementType.None, {
-        hp: [0.0075, 0.0081, 0.0086, 0.0094, 0.0099, 0.0105, 0.0113, 0.012, 0.0128, 0.0135, 0.0143, 0.015, 0.0159, 0.0169],
-        fixed: [72, 79, 87, 96, 105, 114, 125, 135, 147, 159, 172, 185, 199, 213]
+        hp: [
+          0.0075, 0.0081, 0.0086, 0.0094, 0.0099, 0.0105, 0.0113, 0.012, 0.0128, 0.0135, 0.0143, 0.015, 0.0159, 0.0169,
+        ],
+        fixed: [72, 79, 87, 96, 105, 114, 125, 135, 147, 159, 172, 185, 199, 213],
       }),
       createAttack("持续治疗量", AttackType.Heal, ElementType.None, {
         hp: [0.04, 0.043, 0.046, 0.05, 0.053, 0.056, 0.06, 0.064, 0.068, 0.072, 0.076, 0.08, 0.085, 0.09],
-        fixed: [385, 424, 465, 510, 559, 610, 664, 722, 783, 847, 915, 986, 1059, 1136]
+        fixed: [385, 424, 465, 510, 559, 610, 664, 722, 783, 847, 915, 986, 1059, 1136],
       }),
     ],
     burstSkill: [
       createAttack("治疗量", AttackType.Heal, ElementType.None, {
         hp: [0.176, 0.189, 0.202, 0.22, 0.233, 0.246, 0.264, 0.282, 0.299, 0.317, 0.334, 0.352, 0.374, 0.396],
-        fixed: [1694, 1864, 2047, 2245, 2457, 2683, 2923, 3177, 3445, 3728, 4024, 4335, 4660, 4999]
+        fixed: [1694, 1864, 2047, 2245, 2457, 2683, 2923, 3177, 3445, 3728, 4024, 4335, 4660, 4999],
       }),
     ],
     otherSkill: [],
