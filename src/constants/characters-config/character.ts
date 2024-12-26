@@ -8666,6 +8666,10 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("越祓草轮伤害", AttackType.Skill, ElementType.Electro, {
         atk: [0.252, 0.271, 0.29, 0.316, 0.334, 0.353, 0.379, 0.404, 0.429, 0.454, 0.48, 0.505, 0.536],
       }),
+      createAttack("越祓草轮治疗量", AttackType.Heal, ElementType.None, {
+        hp: [0.03, 0.032, 0.035, 0.038, 0.04, 0.042, 0.045, 0.048, 0.051, 0.054, 0.057, 0.06, 0.064],
+        fixed: [289, 318, 349, 383, 419, 457, 498, 842, 587, 636, 686, 739, 795]
+      }),
     ],
     burstSkill: [
       createAttack("单次伤害", AttackType.Burst, ElementType.Electro, {
