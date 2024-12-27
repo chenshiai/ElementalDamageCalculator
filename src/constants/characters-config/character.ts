@@ -7073,7 +7073,14 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         atk: [3.704, 3.982, 4.26, 4.63, 4.908, 5.186, 5.556, 5.926, 6.297, 6.667, 7.038, 7.408, 7.871],
       }),
     ],
-    otherSkill: [],
+    otherSkill: [
+      createAttack("舞起升平治疗量", AttackType.Heal, ElementType.None, {
+        hp: [0.015],
+      }),
+      createAttack("1命·通明庇佑治疗量", AttackType.Heal, ElementType.None, {
+        hp: [0.15],
+      }),
+    ],
     buffs: [
       A_80_ATK_24P,
       {
@@ -7158,6 +7165,10 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("流涌之刃伤害", AttackType.Other, ElementType.Pyro, {
         atk: [0.288, 0.31, 0.331, 0.36, 0.382, 0.403, 0.432, 0.461, 0.49, 0.518, 0.547, 0.576, 0.612],
       }),
+      createAttack("持续治疗量", AttackType.Heal, ElementType.None, {
+        hp: [0.0267, 0.0287, 0.0307, 0.0333, 0.0353, 0.0373, 0.04, 0.0427, 0.0453, 0.048, 0.0507, 0.0533, 0.0567],
+        fixed: [257, 282, 310, 340, 372, 407, 443, 482, 522, 565, 610, 657, 706]
+      }),
     ],
     burstSkill: [
       createAttack("爆轰榴弹伤害", AttackType.Burst, ElementType.Pyro, {
@@ -7170,6 +7181,9 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     otherSkill: [
       createAttack("2命·连锁殉爆", AttackType.Skill, ElementType.Pyro, {
         atk: [1.2],
+      }),
+      createAttack("6命·终结罪恶的追缉治疗量", AttackType.Heal, ElementType.None, {
+        hp: [0.1],
       }),
     ],
     buffs: [
@@ -7284,6 +7298,14 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
       createAttack("相机伤害", AttackType.Burst, ElementType.Cryo, {
         atk: [0.065, 0.07, 0.074, 0.081, 0.086, 0.091, 0.097, 0.104, 0.11, 0.116, 0.123, 0.129, 0.137],
+      }),
+      createAttack("施放治疗量", AttackType.Heal, ElementType.None, {
+        atk: [2.566, 2.758, 2.951, 3.207, 3.4, 3.592, 3.849, 4.105, 4.362, 4.618, 4.875, 5.131, 5.452],
+        fixed: [1608, 1769, 1944, 2131, 2332, 2547, 2775, 3016, 3271, 3539, 3820, 4115, 4424]
+      }),
+      createAttack("相机治疗量", AttackType.Heal, ElementType.None, {
+        atk: [0.092, 0.099, 0.106, 0.115, 0.122, 0.129, 0.138, 0.147, 0.157, 0.166, 0.175, 0.184, 0.196],
+        fixed: [57, 63, 69, 76, 83, 91, 99, 108, 117, 126, 136, 147, 158]
       }),
     ],
     otherSkill: [
@@ -7664,6 +7686,14 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("猫箱急件冲撞伤害", AttackType.Skill, ElementType.Dendro, {
         atk: [0.336, 0.361, 0.386, 0.42, 0.445, 0.47, 0.504, 0.538, 0.571, 0.605, 0.638, 0.672, 0.714],
       }),
+      createAttack("护盾吸收量", AttackType.Shield, ElementType.None, {
+        hp: [0.1, 0.108, 0.115, 0.125, 0.132, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19, 0.2, 0.213],
+        fixed: [962, 1058, 1163, 1275, 1395, 1524, 1660, 1804, 1957, 2117, 2285, 2462, 2646]
+      }),
+      createAttack("护盾吸收量上限", AttackType.Shield, ElementType.None, {
+        hp: [0.16, 0.172, 0.184, 0.2, 0.212, 0.224, 0.24, 0.256, 0.272, 0.288, 0.304, 0.32, 0.34],
+        fixed: [1541, 1695, 1862, 2042, 2235, 2440, 2659, 2890, 3134, 3391, 3660, 3943, 4238]
+      }),
     ],
     burstSkill: [
       createAttack("技能伤害", AttackType.Burst, ElementType.Dendro, {
@@ -7775,6 +7805,9 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("6命·天园之光", AttackType.Other, ElementType.Dendro, {
         atk: [0.618],
       }),
+      createAttack("营造者的担当回复量", AttackType.Heal, ElementType.None, {
+        em: [3],
+      }),
     ],
     buffs: [
       A_80_MYSTERY_96,
@@ -7853,7 +7886,16 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         atk: [0.252, 0.271, 0.29, 0.315, 0.334, 0.353, 0.378, 0.403, 0.428, 0.454, 0.479, 0.504, 0.536],
       }),
     ],
-    burstSkill: [],
+    burstSkill: [
+      createAttack("施放回复量", AttackType.Heal, ElementType.None, {
+        hp: [0.122, 0.131, 0.14, 0.152, 0.161, 0.17, 0.183, 0.195, 0.207, 0.219, 0.231, 0.243, 0.259],
+        fixed: [1172, 1289, 1416, 1553, 1700, 1856, 2022, 2198, 2383, 2579, 2784, 2999, 3223]
+      }),
+      createAttack("鹰翎回复量", AttackType.Heal, ElementType.None, {
+        hp: [0.024, 0.026, 0.028, 0.03, 0.032, 0.034, 0.036, 0.039, 0.041, 0.044, 0.046, 0.049, 0.052],
+        fixed: [234, 257, 283, 310, 339, 370, 404, 439, 476, 515, 556, 599, 643]
+      }),
+    ],
     otherSkill: [],
     buffs: [
       A_80_HP_24P,
@@ -7929,6 +7971,10 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("白玉萝卜伤害", AttackType.Skill, ElementType.Dendro, {
         atk: [0.299, 0.322, 0.344, 0.374, 0.396, 0.419, 0.449, 0.479, 0.509, 0.539, 0.569, 0.598, 0.636],
       }),
+      createAttack("白玉萝卜治疗量", AttackType.Heal, ElementType.None, {
+        hp: [0.017, 0.018, 0.02, 0.021, 0.023, 0.024, 0.026, 0.027, 0.029, 0.031, 0.033, 0.034, 0.036],
+        fixed: [165, 182, 199, 219, 239, 261, 285, 310, 336, 363, 392, 422, 454]
+      }),
     ],
     burstSkill: [
       createAttack("技能伤害", AttackType.Burst, ElementType.Dendro, {
@@ -7937,10 +7983,17 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("桂子仙机白玉萝卜伤害", AttackType.Burst, ElementType.Dendro, {
         atk: [0.722, 0.776, 0.83, 0.902, 0.956, 1.01, 1.082, 1.155, 1.227, 1.3, 1.371, 1.443, 1.533],
       }),
+      createAttack("桂子仙机白玉萝卜治疗量", AttackType.Heal, ElementType.None, {
+        hp: [0.02, 0.022, 0.023, 0.025, 0.027, 0.028, 0.03, 0.032, 0.034, 0.036, 0.038, 0.04, 0.043],
+        fixed: [194, 214, 235, 257, 281, 307, 335, 364, 394, 427, 461, 496, 534]
+      }),
     ],
     otherSkill: [
       createAttack("6命·超厉害·大萝卜", AttackType.Skill, ElementType.Dendro, {
         atk: [0.75],
+      }),
+      createAttack("6命·超厉害·大萝卜治疗量", AttackType.Heal, ElementType.None, {
+        hp: [0.075],
       }),
     ],
     buffs: [
@@ -8122,6 +8175,10 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         },
         "Layla"
       ),
+      createAttack("护盾基础吸收量", AttackType.Shield, ElementType.None, {
+        hp: [0.108, 0.116, 0.124, 0.135, 0.143, 0.151, 0.162, 0.173, 0.184, 0.195, 0.205, 0.216, 0.23],
+        fixed: [1040, 1144, 1257, 1378, 1508, 1647, 1794, 1950, 2115, 2288, 2470, 2661, 2860]
+      }),
     ],
     burstSkill: [
       createAttack(
@@ -8161,6 +8218,13 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
           },
         ],
         enable: true,
+      },
+      {
+        label: "1命·寐领围垣",
+        describe: "垂裳端凝之夜的安眠帷幕护盾的伤害吸收量提高20%",
+        effect: [{ type: BuffType.ShieldAdd, getValue: () => 20 }],
+        enable: true,
+        condition: ({ constellation }) => constellation >= 1,
       },
       Constellation_E_3,
       {
@@ -8240,6 +8304,10 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     elementSkill: [
+      createAttack("护盾吸收量", AttackType.Shield, ElementType.None, {
+        hp: [0.12, 0.129, 0.138, 0.15, 0.159, 0.168, 0.18, 0.192, 0.204, 0.216, 0.228, 0.24, 0.255],
+        fixed: [1156, 1271, 1396, 1531, 1676, 1830, 1993, 2167, 2350, 2542, 2745, 2957, 3178]
+      }),
       createAttack("基础伤害", AttackType.Skill, ElementType.Hydro, {
         hp: [0.12, 0.129, 0.138, 0.15, 0.16, 0.168, 0.18, 0.192, 0.204, 0.216, 0.228, 0.24, 0.255],
       }),
@@ -8344,6 +8412,10 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     burstSkill: [
       createAttack("连接伤害", AttackType.Burst, ElementType.Electro, {
         atk: [0.16, 0.17, 0.18, 0.2, 0.21, 0.22, 0.24, 0.25, 0.27, 0.29, 0.3, 0.32, 0.34],
+      }),
+      createAttack("持续治疗量", AttackType.Heal, ElementType.None, {
+        hp: [0.067, 0.072, 0.077, 0.083, 0.088, 0.093, 0.1, 0.107, 0.113, 0.12, 0.127, 0.133, 0.142],
+        fixed: [642, 706, 776, 851, 931, 1017, 1107, 1204, 1305, 1412, 1525, 1643, 1766]
       }),
     ],
     otherSkill: [
@@ -10918,6 +10990,14 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     elementSkill: [
       createAttack("技能伤害", AttackType.Skill, ElementType.Geo, {
         def: [1.2, 1.29, 1.38, 1.5, 1.59, 1.68, 1.8, 1.92, 2.04, 2.16, 2.28, 2.4, 2.55],
+      }),
+      createAttack("吸收量", AttackType.Shield, ElementType.None, {
+        def: [1.6, 1.72, 1.84, 2, 2.12, 2.24, 2.4, 2.56, 2.72, 2.88, 3.04, 3.2, 3.4, 3.6],
+        fixed: [770, 847, 930, 1020, 1116, 1219, 1328, 1443, 1565, 1694, 1828, 1970, 2117, 2271]
+      }),
+      createAttack("治疗量", AttackType.Heal, ElementType.None, {
+        def: [0.213, 0.229, 0.245, 0.266, 0.282, 0.298, 0.319, 0.34, 0.362, 0.383, 0.404, 0.426, 0.452, 0.479],
+        fixed: [103, 113, 124, 136, 149, 163, 177, 193, 209, 226, 244, 263, 282, 303]
       }),
     ],
     burstSkill: [
