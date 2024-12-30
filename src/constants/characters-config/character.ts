@@ -418,8 +418,16 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("追加节拍伤害", AttackType.Burst, ElementType.Geo, {
         def: [2.813, 3.024, 3.235, 3.516, 3.727, 3.938, 4.219, 4.5, 4.782, 5.063, 5.344, 5.626, 5.977],
       }),
+      createAttack("持续治疗量", AttackType.Heal, ElementType.None, {
+        def: [1.04, 1.118, 1.196, 1.306, 1.378, 1.456, 1.56, 1.664, 1.768, 1.872, 1.976, 2.08, 2.11],
+        fixed: [501, 551, 605, 664, 726, 793, 864, 939, 1018, 1101, 1189, 1281, 1377]
+      }),
     ],
-    otherSkill: [],
+    otherSkill: [
+      createAttack("6命·治疗量", AttackType.Heal, ElementType.None, {
+        def: [1.2],
+      }),
+    ],
     buffs: [
       S_80_DEF_28P,
       {
@@ -513,25 +521,15 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         target: BuffTarget.Enemy,
       },
       {
-        label: "2命·献予灼原的五重奏",
-        describe: `希诺宁的「源音采样」激活时，将根据「源音采样」的元素类型，使队伍中附近所有元素类型相同的角色获得对应效果：
-        岩元素：造成的伤害提升50%；
-        火元素：攻击力提升45%；
-        水元素：生命值上限提升45%；
-        冰元素：暴击伤害提升60%；
-        雷元素：恢复25点元素能量，且元素爆发的冷却时间缩短6秒；`,
+        label: "2命·岩元素角色造成的伤害提升",
+        describe: `希诺宁的「源音采样」激活时，将根据「源音采样」的元素类型，使队伍中附近所有元素类型相同的角色获得对应效果：岩元素：造成的伤害提升50%`,
         effect: [{ type: BuffType.GlobalPrcent, getValue: () => 50 }],
         enable: false,
         condition: ({ constellation }) => constellation >= 2,
       },
       {
-        label: "2命·献予灼原的五重奏",
-        describe: `希诺宁的「源音采样」激活时，将根据「源音采样」的元素类型，使队伍中附近所有元素类型相同的角色获得对应效果：
-        岩元素：造成的伤害提升50%；
-        火元素：攻击力提升45%；
-        水元素：生命值上限提升45%；
-        冰元素：暴击伤害提升60%；
-        雷元素：恢复25点元素能量，且元素爆发的冷却时间缩短6秒；`,
+        label: "2命·岩元素角色造成的伤害提升",
+        describe: `希诺宁的「源音采样」激活时，将根据「源音采样」的元素类型，使队伍中附近所有元素类型相同的角色获得对应效果：岩元素：造成的伤害提升50%`,
         effect: [{ type: BuffType.GlobalPrcent, getValue: () => 50 }],
         enable: false,
         shareable: true,
@@ -540,13 +538,8 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         condition: ({ constellation }) => constellation >= 2,
       },
       {
-        label: "2命·献予灼原的五重奏",
-        describe: `希诺宁的「源音采样」激活时，将根据「源音采样」的元素类型，使队伍中附近所有元素类型相同的角色获得对应效果：
-        岩元素：造成的伤害提升50%；
-        火元素：攻击力提升45%；
-        水元素：生命值上限提升45%；
-        冰元素：暴击伤害提升60%；
-        雷元素：恢复25点元素能量，且元素爆发的冷却时间缩短6秒；`,
+        label: "2命·火元素角色攻击力提升45%",
+        describe: `希诺宁的「源音采样」激活时，将根据「源音采样」的元素类型，使队伍中附近所有元素类型相同的角色获得对应效果：火元素：攻击力提升45%`,
         effect: [{ type: BuffType.ATKPrcent, getValue: () => 45 }],
         enable: false,
         shareable: true,
@@ -555,13 +548,8 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         condition: ({ constellation }) => constellation >= 2,
       },
       {
-        label: "2命·献予灼原的五重奏",
-        describe: `希诺宁的「源音采样」激活时，将根据「源音采样」的元素类型，使队伍中附近所有元素类型相同的角色获得对应效果：
-        岩元素：造成的伤害提升50%；
-        火元素：攻击力提升45%；
-        水元素：生命值上限提升45%；
-        冰元素：暴击伤害提升60%；
-        雷元素：恢复25点元素能量，且元素爆发的冷却时间缩短6秒；`,
+        label: "2命·水元素角色生命值上限提升45%",
+        describe: `希诺宁的「源音采样」激活时，将根据「源音采样」的元素类型，使队伍中附近所有元素类型相同的角色获得对应效果：水元素：生命值上限提升45%`,
         effect: [{ type: BuffType.HPPrcent, getValue: () => 45 }],
         enable: false,
         shareable: true,
@@ -570,13 +558,8 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         condition: ({ constellation }) => constellation >= 2,
       },
       {
-        label: "2命·献予灼原的五重奏",
-        describe: `希诺宁的「源音采样」激活时，将根据「源音采样」的元素类型，使队伍中附近所有元素类型相同的角色获得对应效果：
-        岩元素：造成的伤害提升50%；
-        火元素：攻击力提升45%；
-        水元素：生命值上限提升45%；
-        冰元素：暴击伤害提升60%；
-        雷元素：恢复25点元素能量，且元素爆发的冷却时间缩短6秒；`,
+        label: "2命·冰元素角色暴击伤害提升60%",
+        describe: `希诺宁的「源音采样」激活时，将根据「源音采样」的元素类型，使队伍中附近所有元素类型相同的角色获得对应效果：冰元素：暴击伤害提升60%`,
         effect: [{ type: BuffType.CryoCritcalHurt, getValue: () => 60 }],
         enable: false,
         shareable: true,
@@ -1027,11 +1010,18 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     elementSkill: [
-      createAttack("高空坠地冲击伤害", AttackType.Skill, ElementType.Hydro, {
+      createAttack("激愈水球伤害", AttackType.Skill, ElementType.Hydro, {
         hp: [0.0228, 0.0245, 0.0262, 0.0285, 0.0302, 0.0319, 0.0342, 0.0365, 0.0388, 0.041, 0.0433, 0.0456, 0.0485],
       }),
-      createAttack("高空坠地冲击伤害", AttackType.Other, ElementType.Hydro, {
+      createAttack("流涌之刃伤害", AttackType.Other, ElementType.Hydro, {
         hp: [0.0068, 0.0074, 0.0079, 0.0086, 0.0091, 0.0096, 0.0103, 0.0109, 0.0116, 0.0123, 0.013, 0.0137, 0.0145],
+      }),
+      createAttack("激愈水球治疗量", AttackType.Heal, ElementType.None, {
+        hp: [0.028, 0.0301, 0.0322, 0.035, 0.0371, 0.0392, 0.042, 0.0448, 0.0476, 0.0504, 0.0532, 0.056, 0.0595],
+        fixed: [270, 297, 326, 357, 391, 427, 465, 506, 548, 593, 640, 690, 742]
+      }),
+      createAttack("弹跳结束治疗量", AttackType.Heal, ElementType.None, {
+        hp: new Array(13).fill(0.5),
       }),
     ],
     burstSkill: [
@@ -1039,7 +1029,11 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         hp: [0.118, 0.127, 0.135, 0.147, 0.156, 0.165, 0.177, 0.188, 0.2, 0.212, 0.224, 0.235, 0.25],
       }),
     ],
-    otherSkill: [],
+    otherSkill: [
+      createAttack("2命·护盾吸收量", AttackType.Shield, ElementType.None, {
+        hp: [0.3],
+      }),
+    ],
     buffs: [
       S_80_HP_28P,
       {
@@ -1548,8 +1542,26 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("技能伤害", AttackType.Burst, ElementType.Anemo, {
         atk: [1.08, 1.161, 1.242, 1.35, 1.431, 1.512, 1.62, 1.728, 1.836, 1.944, 2.052, 2.16, 2.295],
       }),
+      createAttack("治疗量", AttackType.Heal, ElementType.None, {
+        atk: [0.922, 0.991, 1.06, 1.152, 1.221, 1.29, 1.382, 1.475, 156.7, 1.659, 1.751, 1.843, 1.958],
+        fixed: [577, 636, 698, 766, 838, 915, 997, 1083, 1175, 1271, 1372, 1478, 1589],
+      }),
+      createAttack("持续治疗量", AttackType.Heal, ElementType.None, {
+        atk: [0.43, 0.462, 0.495, 0.538, 0.57, 0.602, 0.645, 0.688, 0.731, 0.774, 0.817, 0.86, 0.914],
+        fixed: [269, 297, 326, 357, 391, 427, 465, 506, 548, 593, 640, 690, 742],
+      }),
     ],
-    otherSkill: [],
+    otherSkill: [
+      createAttack("4命·1次步天梯治疗量", AttackType.Heal, ElementType.None, {
+        atk: [0.5],
+      }),
+      createAttack("4命·2次步天梯治疗量", AttackType.Heal, ElementType.None, {
+        atk: [0.8],
+      }),
+      createAttack("4命·3次步天梯治疗量", AttackType.Heal, ElementType.None, {
+        atk: [1.5],
+      }),
+    ],
     buffs: [
       S_80_ATK_28P,
       {
@@ -1838,13 +1850,21 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         },
         "Furina"
       ),
+      createAttack("众水的歌者治疗量", AttackType.Heal, ElementType.None, {
+        hp: [0.048, 0.0516, 0.0552, 0.06, 0.0636, 0.0672, 0.072, 0.0768, 0.0816, 0.0864, 0.0912, 0.096, 0.102],
+        fixed: [462, 508, 559, 612, 670, 732, 797, 867, 940, 1017, 1098, 1183, 1271]
+      }),
     ],
     burstSkill: [
       createAttack("技能伤害", AttackType.Burst, ElementType.Hydro, {
         hp: [0.114, 0.123, 0.131, 0.143, 0.151, 0.16, 0.171, 0.183, 0.194, 0.205, 0.217, 0.228, 0.242],
       }),
     ],
-    otherSkill: [],
+    otherSkill: [
+      createAttack("6命·荒性治疗量", AttackType.Heal, ElementType.None, {
+        hp: [0.04],
+      }),
+    ],
     buffs: [
       S_80_CRITAL_19P,
       {
@@ -2380,24 +2400,49 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("技能伤害", AttackType.Skill, ElementType.Dendro, {
         atk: [0.792, 0.851, 0.911, 0.99, 1.049, 1.109, 1.188, 1.267, 1.346, 1.426, 1.505, 1.584, 1.683],
       }),
+      createAttack("治疗量", AttackType.Heal, ElementType.None, {
+        hp: [0.08, 0.086, 0.092, 0.1, 0.106, 0.112, 0.12, 0.128, 0.136, 0.144, 0.152, 0.16, 0.17],
+        fixed: [770, 847, 931, 1021, 1117, 1220, 1329, 1445, 1567, 1695, 1830, 1971, 2119],
+      }),
+      createAttack("2命·游丝徵灵·切治疗量", AttackType.Heal, ElementType.None, {
+        hp: [0.08, 0.086, 0.092, 0.1, 0.106, 0.112, 0.12, 0.128, 0.136, 0.144, 0.152, 0.16, 0.17].map((i) => i * 0.2),
+        fixed: [770, 847, 931, 1021, 1117, 1220, 1329, 1445, 1567, 1695, 1830, 1971, 2119].map((i) => i * 0.2),
+      }),
     ],
     burstSkill: [
       createAttack("灵气脉技能伤害", AttackType.Burst, ElementType.Dendro, {
         atk: [0.971, 1.043, 1.116, 1.213, 1.286, 1.359, 1.456, 1.553, 1.65, 1.747, 1.844, 1.941, 2.063],
       }),
+      createAttack("无郤气护盾吸收量", AttackType.Shield, ElementType.None, {
+        hp: [0.008, 0.0086, 0.0092, 0.01, 0.0106, 0.0112, 0.012, 0.0128, 0.0136, 0.0144, 0.0152, 0.016, 0.017],
+        fixed: [77, 85, 93, 102, 112, 122, 133, 144, 157, 170, 183, 197, 212],
+      }),
+      createAttack("无郤气护盾治疗量", AttackType.Heal, ElementType.None, {
+        hp: [0.052, 0.0559, 0.0598, 0.065, 0.0689, 0.0728, 0.078, 0.0832, 0.0884, 0.0936, 0.0988, 0.104, 0.1105],
+        fixed: [501, 551, 605, 664, 726, 793, 864, 939, 1018, 1102, 1189, 1281, 1377],
+      }),
     ],
     otherSkill: [
-      createAttack("2命·游丝徵灵·切", AttackType.Skill, ElementType.Dendro, {
+      createAttack("味草之滋", AttackType.Heal, ElementType.None, {
+        hp: [0.025],
+      }),
+      createAttack("2命·游丝徵灵·切伤害", AttackType.Skill, ElementType.Dendro, {
         atk: [2.5],
       }),
     ],
     buffs: [
       S_80_HP_28P,
       {
-        label: "五运终天",
+        label: "五运终天·伤害",
         describe: "当前场上角色的生命值高于或等于50%时，白术获得25%草元素伤害加成",
         effect: [{ type: BuffType.DendroPrcent, getValue: () => 25 }],
         enable: true,
+      },
+      {
+        label: "五运终天·治疗",
+        describe: "当前场上角色的生命值低于50%时，白术获得20%治疗量加成",
+        effect: [{ type: BuffType.HealAdd, getValue: () => 20 }],
+        enable: false,
       },
       {
         label: "在地为化",
@@ -4258,15 +4303,32 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("波纹伤害", AttackType.Skill, ElementType.Hydro, {
         atk: [1.092, 1.174, 1.256, 1.365, 1.447, 1.529, 1.638, 1.747, 1.856, 1.965, 2.075, 2.184, 2.32],
       }),
+      createAttack("治疗量", AttackType.Heal, ElementType.None, {
+        hp: [0.044, 0.047, 0.051, 0.055, 0.058, 0.062, 0.066, 0.07, 0.075, 0.079, 0.084, 0.088, 0.094, 0.099],
+        fixed: [424, 466, 512, 561, 614, 671, 731, 795, 862, 932, 1006, 1084, 1165, 1250],
+      }),
     ],
     burstSkill: [
       createAttack("技能伤害", AttackType.Burst, ElementType.Hydro, {
         hp: [0.104, 0.112, 0.12, 0.13, 0.138, 0.146, 0.156, 0.167, 0.177, 0.188, 0.198, 0.208, 0.221],
       }),
+      createAttack("命中治疗量", AttackType.Heal, ElementType.None, {
+        hp: [
+          0.0081, 0.0087, 0.0093, 0.0101, 0.0107, 0.0113, 0.0121, 0.0129, 0.0137, 0.0145, 0.0154, 0.0162, 0.0172,
+          0.0182,
+        ],
+        fixed: [77, 85, 93, 102, 112, 122, 133, 144, 157, 169, 183, 197, 212, 227],
+      }),
     ],
     otherSkill: [
       createAttack("1命·决水于溪", AttackType.Other, ElementType.Hydro, {
         hp: [0.3],
+      }),
+      createAttack("2命·化海月治疗量", AttackType.Heal, ElementType.None, {
+        hp: [0.045],
+      }),
+      createAttack("2命·海人化羽治疗量", AttackType.Heal, ElementType.None, {
+        hp: [0.006],
       }),
     ],
     buffs: [
@@ -5874,6 +5936,10 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("长按伤害", AttackType.Skill, ElementType.Geo, {
         atk: [0.8, 0.86, 0.92, 1, 1.06, 1.12, 1.2, 1.28, 1.36, 1.44, 1.52, 1.6, 1.7],
       }),
+      createAttack("护盾吸收量", AttackType.Shield, ElementType.None, {
+        hp: [0.128, 0.138, 0.147, 0.16, 0.17, 0.179, 0.192, 0.205, 0.218, 0.23, 0.243, 0.256, 0.272, 0.288],
+        fixed: [1232, 1356, 1489, 1633, 1787, 1951, 2126, 2311, 2506, 2712, 2927, 3153, 3389, 3636]
+      }),
     ],
     burstSkill: [
       createAttack("技能伤害", AttackType.Burst, ElementType.Geo, {
@@ -6348,8 +6414,20 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("出入领域伤害", AttackType.Burst, ElementType.Anemo, {
         atk: [0.784, 0.843, 0.902, 0.98, 1.04, 1.1, 1.18, 1.25, 1.33, 1.41, 1.49, 1.57, 1.67, 1.76],
       }),
+      createAttack("领域发动治疗量", AttackType.Heal, ElementType.None, {
+        atk: [2.51, 2.7, 2.89, 3.14, 3.33, 3.52, 3.77, 4.02, 4.27, 4.52, 4.77, 5.02, 5.34, 5.65],
+        fixed: [1540, 1694, 1861, 2041, 2234, 2439, 2657, 2888, 3132, 3389, 3659, 3941, 4236, 4544]
+      }),
+      createAttack("持续治疗量", AttackType.Heal, ElementType.None, {
+        atk: [0.2512, 0.27, 0.2889, 0.314, 0.3328, 0.3517, 0.3768, 0.4019, 0.427, 0.4522, 0.4773, 0.5024, 0.5338, 0.5652],
+        fixed: [154, 169, 186, 204, 223, 244, 266, 289, 313, 339, 366, 394, 424, 454]
+      }),
     ],
-    otherSkill: [],
+    otherSkill: [
+      createAttack("顺风而行治疗量", AttackType.Heal, ElementType.None, {
+        atk: [0.15],
+      }),
+    ],
     buffs: [
       S_80_HEALADD_22P,
       {
@@ -6778,10 +6856,22 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("寒病鬼差伤害", AttackType.Skill, ElementType.Cryo, {
         atk: [0.36, 0.387, 0.414, 0.45, 0.477, 0.504, 0.54, 0.576, 0.612, 0.648, 0.68, 0.72, 0.765],
       }),
+      createAttack("命中治疗量", AttackType.Heal, ElementType.None, {
+        atk: [0.1056, 0.1135, 0.1214, 0.132, 0.1399, 0.1478, 0.1584, 0.169, 0.1795, 0.1901, 0.2006, 0.2112, 0.2244, 0.2376],
+        fixed: [67, 74, 81, 89, 98, 107, 116, 126, 137, 148, 160, 172, 185, 198]
+      }),
+      createAttack("持续治疗量", AttackType.Heal, ElementType.None, {
+        atk: [0.696, 0.7482, 0.8004, 0.87, 0.9222, 0.9744, 1.044, 1.1136, 1.1832, 1.2528, 1.3224, 1.392, 1.479, 1.566],
+        fixed: [451, 496, 544, 597, 653, 713, 777, 845, 916, 991, 1070, 1153, 1239, 1329]
+      }),
     ],
     burstSkill: [
       createAttack("技能伤害", AttackType.Burst, ElementType.Cryo, {
         atk: [2.85, 3.06, 3.28, 3.56, 3.77, 3.99, 4.27, 4.56, 4.84, 5.13, 5.41, 5.7, 6.05, 6.41],
+      }),
+      createAttack("治疗量", AttackType.Heal, ElementType.None, {
+        atk: [0.9, 0.968, 1.04, 1.13, 1.19, 1.26, 1.35, 1.44, 1.53, 1.62, 1.71, 1.8, 1.91, 2.03],
+        fixed: [557, 635, 698, 765, 837, 914, 996, 1083, 1174, 1270, 1371, 1477, 1588, 1703]
       }),
     ],
     otherSkill: [],
@@ -7167,7 +7257,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
       createAttack("持续治疗量", AttackType.Heal, ElementType.None, {
         hp: [0.0267, 0.0287, 0.0307, 0.0333, 0.0353, 0.0373, 0.04, 0.0427, 0.0453, 0.048, 0.0507, 0.0533, 0.0567],
-        fixed: [257, 282, 310, 340, 372, 407, 443, 482, 522, 565, 610, 657, 706]
+        fixed: [257, 282, 310, 340, 372, 407, 443, 482, 522, 565, 610, 657, 706],
       }),
     ],
     burstSkill: [
@@ -7301,11 +7391,11 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
       createAttack("施放治疗量", AttackType.Heal, ElementType.None, {
         atk: [2.566, 2.758, 2.951, 3.207, 3.4, 3.592, 3.849, 4.105, 4.362, 4.618, 4.875, 5.131, 5.452],
-        fixed: [1608, 1769, 1944, 2131, 2332, 2547, 2775, 3016, 3271, 3539, 3820, 4115, 4424]
+        fixed: [1608, 1769, 1944, 2131, 2332, 2547, 2775, 3016, 3271, 3539, 3820, 4115, 4424],
       }),
       createAttack("相机治疗量", AttackType.Heal, ElementType.None, {
         atk: [0.092, 0.099, 0.106, 0.115, 0.122, 0.129, 0.138, 0.147, 0.157, 0.166, 0.175, 0.184, 0.196],
-        fixed: [57, 63, 69, 76, 83, 91, 99, 108, 117, 126, 136, 147, 158]
+        fixed: [57, 63, 69, 76, 83, 91, 99, 108, 117, 126, 136, 147, 158],
       }),
     ],
     otherSkill: [
@@ -7688,11 +7778,11 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
       createAttack("护盾吸收量", AttackType.Shield, ElementType.None, {
         hp: [0.1, 0.108, 0.115, 0.125, 0.132, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19, 0.2, 0.213],
-        fixed: [962, 1058, 1163, 1275, 1395, 1524, 1660, 1804, 1957, 2117, 2285, 2462, 2646]
+        fixed: [962, 1058, 1163, 1275, 1395, 1524, 1660, 1804, 1957, 2117, 2285, 2462, 2646],
       }),
       createAttack("护盾吸收量上限", AttackType.Shield, ElementType.None, {
         hp: [0.16, 0.172, 0.184, 0.2, 0.212, 0.224, 0.24, 0.256, 0.272, 0.288, 0.304, 0.32, 0.34],
-        fixed: [1541, 1695, 1862, 2042, 2235, 2440, 2659, 2890, 3134, 3391, 3660, 3943, 4238]
+        fixed: [1541, 1695, 1862, 2042, 2235, 2440, 2659, 2890, 3134, 3391, 3660, 3943, 4238],
       }),
     ],
     burstSkill: [
@@ -7889,11 +7979,11 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     burstSkill: [
       createAttack("施放回复量", AttackType.Heal, ElementType.None, {
         hp: [0.122, 0.131, 0.14, 0.152, 0.161, 0.17, 0.183, 0.195, 0.207, 0.219, 0.231, 0.243, 0.259],
-        fixed: [1172, 1289, 1416, 1553, 1700, 1856, 2022, 2198, 2383, 2579, 2784, 2999, 3223]
+        fixed: [1172, 1289, 1416, 1553, 1700, 1856, 2022, 2198, 2383, 2579, 2784, 2999, 3223],
       }),
       createAttack("鹰翎回复量", AttackType.Heal, ElementType.None, {
         hp: [0.024, 0.026, 0.028, 0.03, 0.032, 0.034, 0.036, 0.039, 0.041, 0.044, 0.046, 0.049, 0.052],
-        fixed: [234, 257, 283, 310, 339, 370, 404, 439, 476, 515, 556, 599, 643]
+        fixed: [234, 257, 283, 310, 339, 370, 404, 439, 476, 515, 556, 599, 643],
       }),
     ],
     otherSkill: [],
@@ -7973,7 +8063,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
       createAttack("白玉萝卜治疗量", AttackType.Heal, ElementType.None, {
         hp: [0.017, 0.018, 0.02, 0.021, 0.023, 0.024, 0.026, 0.027, 0.029, 0.031, 0.033, 0.034, 0.036],
-        fixed: [165, 182, 199, 219, 239, 261, 285, 310, 336, 363, 392, 422, 454]
+        fixed: [165, 182, 199, 219, 239, 261, 285, 310, 336, 363, 392, 422, 454],
       }),
     ],
     burstSkill: [
@@ -7985,7 +8075,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
       createAttack("桂子仙机白玉萝卜治疗量", AttackType.Heal, ElementType.None, {
         hp: [0.02, 0.022, 0.023, 0.025, 0.027, 0.028, 0.03, 0.032, 0.034, 0.036, 0.038, 0.04, 0.043],
-        fixed: [194, 214, 235, 257, 281, 307, 335, 364, 394, 427, 461, 496, 534]
+        fixed: [194, 214, 235, 257, 281, 307, 335, 364, 394, 427, 461, 496, 534],
       }),
     ],
     otherSkill: [
@@ -8177,7 +8267,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       ),
       createAttack("护盾基础吸收量", AttackType.Shield, ElementType.None, {
         hp: [0.108, 0.116, 0.124, 0.135, 0.143, 0.151, 0.162, 0.173, 0.184, 0.195, 0.205, 0.216, 0.23],
-        fixed: [1040, 1144, 1257, 1378, 1508, 1647, 1794, 1950, 2115, 2288, 2470, 2661, 2860]
+        fixed: [1040, 1144, 1257, 1378, 1508, 1647, 1794, 1950, 2115, 2288, 2470, 2661, 2860],
       }),
     ],
     burstSkill: [
@@ -8306,7 +8396,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     elementSkill: [
       createAttack("护盾吸收量", AttackType.Shield, ElementType.None, {
         hp: [0.12, 0.129, 0.138, 0.15, 0.159, 0.168, 0.18, 0.192, 0.204, 0.216, 0.228, 0.24, 0.255],
-        fixed: [1156, 1271, 1396, 1531, 1676, 1830, 1993, 2167, 2350, 2542, 2745, 2957, 3178]
+        fixed: [1156, 1271, 1396, 1531, 1676, 1830, 1993, 2167, 2350, 2542, 2745, 2957, 3178],
       }),
       createAttack("基础伤害", AttackType.Skill, ElementType.Hydro, {
         hp: [0.12, 0.129, 0.138, 0.15, 0.16, 0.168, 0.18, 0.192, 0.204, 0.216, 0.228, 0.24, 0.255],
@@ -8415,7 +8505,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
       createAttack("持续治疗量", AttackType.Heal, ElementType.None, {
         hp: [0.067, 0.072, 0.077, 0.083, 0.088, 0.093, 0.1, 0.107, 0.113, 0.12, 0.127, 0.133, 0.142],
-        fixed: [642, 706, 776, 851, 931, 1017, 1107, 1204, 1305, 1412, 1525, 1643, 1766]
+        fixed: [642, 706, 776, 851, 931, 1017, 1107, 1204, 1305, 1412, 1525, 1643, 1766],
       }),
     ],
     otherSkill: [
@@ -8740,7 +8830,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
       createAttack("越祓草轮治疗量", AttackType.Heal, ElementType.None, {
         hp: [0.03, 0.032, 0.035, 0.038, 0.04, 0.042, 0.045, 0.048, 0.051, 0.054, 0.057, 0.06, 0.064],
-        fixed: [289, 318, 349, 383, 419, 457, 498, 842, 587, 636, 686, 739, 795]
+        fixed: [289, 318, 349, 383, 419, 457, 498, 842, 587, 636, 686, 739, 795],
       }),
     ],
     burstSkill: [
@@ -8831,7 +8921,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
       createAttack("护盾吸收量", AttackType.Shield, ElementType.None, {
         hp: [0.12, 0.13, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19, 0.2, 0.22, 0.23, 0.24, 0.26, 0.27],
-        fixed: [1155, 1271, 1396, 1531, 1675, 1830, 1993, 2167, 2350, 2542, 2744, 2956, 3178, 3409]
+        fixed: [1155, 1271, 1396, 1531, 1675, 1830, 1993, 2167, 2350, 2542, 2744, 2956, 3178, 3409],
       }),
     ],
     burstSkill: [
@@ -10993,11 +11083,11 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
       createAttack("吸收量", AttackType.Shield, ElementType.None, {
         def: [1.6, 1.72, 1.84, 2, 2.12, 2.24, 2.4, 2.56, 2.72, 2.88, 3.04, 3.2, 3.4, 3.6],
-        fixed: [770, 847, 930, 1020, 1116, 1219, 1328, 1443, 1565, 1694, 1828, 1970, 2117, 2271]
+        fixed: [770, 847, 930, 1020, 1116, 1219, 1328, 1443, 1565, 1694, 1828, 1970, 2117, 2271],
       }),
       createAttack("治疗量", AttackType.Heal, ElementType.None, {
         def: [0.213, 0.229, 0.245, 0.266, 0.282, 0.298, 0.319, 0.34, 0.362, 0.383, 0.404, 0.426, 0.452, 0.479],
-        fixed: [103, 113, 124, 136, 149, 163, 177, 193, 209, 226, 244, 263, 282, 303]
+        fixed: [103, 113, 124, 136, 149, 163, 177, 193, 209, 226, 244, 263, 282, 303],
       }),
     ],
     burstSkill: [
