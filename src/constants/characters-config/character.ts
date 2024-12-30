@@ -55,6 +55,269 @@ const a = {
 // .replaceAll("%", '').replaceAll(/[\u4e00-\u9fff]+/g, "").replaceAll("\t",",").split(",").map(i=>Math.round(i*100)/10000)
 export const Character: (ICharacterInfo & Record<any, any>)[] = [
   {
+    ...cha(1000000, "玛薇卡", ElementType.Pyro, WeaponType.GreatSword)(Rarity.Five, 12552, 359, 792, 0)(
+      "UI_AvatarIcon_Olorun",
+      [
+        "UI_Talent_S_Olorun_01",
+        "UI_Talent_S_Olorun_02",
+        "UI_Talent_U_Olorun_01",
+        "UI_Talent_S_Olorun_03",
+        "UI_Talent_U_Olorun_02",
+        "UI_Talent_S_Olorun_04",
+      ],
+      ["普通攻击·以命织火", "称名之刻", "燔天之时"]
+    ),
+    normalAttack: [
+      createAttack("一段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.8, 0.865, 0.931, 1.024, 1.089, 1.163, 1.266, 1.368, 1.47, 1.582, 1.694],
+      }),
+      createAttack("二段伤害·单次", AttackType.Normal, ElementType.Physical, {
+        atk: [0.365, 0.394, 0.424, 0.467, 0.496, 0.53, 0.577, 0.624, 0.67, 0.721, 0.772],
+      }),
+      createAttack("三段伤害·单次", AttackType.Normal, ElementType.Physical, {
+        atk: [0.332, 0.359, 0.386, 0.425, 0.452, 0.483, 0.525, 0.567, 0.61, 0.657, 0.703],
+      }),
+      createAttack("四段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [1.162, 1.257, 1.351, 1.486, 1.581, 1.689, 1.837, 1.986, 2.135, 2.297, 2.459],
+      }),
+      createAttack("重击伤害", AttackType.Strong, ElementType.Physical, {
+        atk: [1.94, 2.1, 2.25, 2.48, 2.64, 2.82, 3.07, 3.31, 3.56, 3.83, 4.1],
+      }),
+      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
+        atk: [0.746, 0.807, 0.867, 0.954, 1.015, 1.084, 1.18, 1.275, 1.37, 1.474, 1.579],
+      }),
+      createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+        atk: [1.49, 1.61, 1.73, 1.91, 2.03, 2.17, 2.36, 2.55, 2.74, 2.95, 3.16],
+      }),
+      createAttack("高空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+        atk: [1.86, 2.01, 2.17, 2.38, 2.53, 2.71, 2.95, 3.18, 3.42, 3.68, 3.94],
+      }),
+    ],
+    elementSkill: [
+      createAttack("技能伤害", AttackType.Skill, ElementType.Pyro, {
+        atk: [0.744, 0.8, 0.856, 0.93, 0.986, 1.042, 1.116, 1.19, 1.265, 1.339, 1.414, 1.488, 1.581],
+      }),
+      createAttack("焚曜之环伤害", AttackType.Skill, ElementType.Pyro, {
+        atk: [1.28, 1.376, 1.472, 1.6, 1.696, 1.792, 1.92, 2.048, 2.176, 2.304, 2.432, 2.56, 2.72],
+      }),
+      createAttack(
+        "驰轮车普通攻击一段伤害",
+        AttackType.Normal,
+        ElementType.Pyro,
+        {
+          atk: [0.573, 0.619, 0.666, 0.732, 0.779, 0.832, 0.906, 0.979, 1.052, 1.132, 1.212, 1.292, 1.372],
+        },
+        "maweika"
+      ),
+      createAttack(
+        "驰轮车普通攻击二段伤害",
+        AttackType.Normal,
+        ElementType.Pyro,
+        {
+          atk: [0.591, 0.639, 0.688, 0.756, 0.804, 0.859, 0.935, 1.011, 1.086, 1.169, 1.251, 1.334, 1.416],
+        },
+        "maweika"
+      ),
+      createAttack(
+        "驰轮车普通攻击三段伤害",
+        AttackType.Normal,
+        ElementType.Pyro,
+        {
+          atk: [0.7, 0.757, 0.814, 0.895, 0.952, 1.017, 1.107, 1.196, 1.286, 1.383, 1.481, 1.579, 1.676],
+        },
+        "maweika"
+      ),
+      createAttack(
+        "驰轮车普通攻击四段伤害",
+        AttackType.Normal,
+        ElementType.Pyro,
+        {
+          atk: [0.697, 0.754, 0.811, 0.892, 0.948, 1.013, 1.102, 1.191, 1.281, 1.378, 1.475, 1.572, 1.67],
+        },
+        "maweika"
+      ),
+      createAttack(
+        "驰轮车普通攻击五段伤害",
+        AttackType.Normal,
+        ElementType.Pyro,
+        {
+          atk: [0.91, 0.984, 1.058, 1.164, 1.238, 1.323, 1.439, 1.556, 1.672, 1.799, 1.926, 2.053, 2.18],
+        },
+        "maweika"
+      ),
+      createAttack("驰轮车冲刺伤害", AttackType.Skill, ElementType.Pyro, {
+        atk: [0.808, 0.874, 0.94, 1.034, 1.1, 1.175, 1.278, 1.382, 1.485, 1.598, 1.711, 1.824, 1.936],
+      }),
+      createAttack(
+        "驰轮车重击循环伤害",
+        AttackType.Strong,
+        ElementType.Pyro,
+        {
+          atk: [0.989, 1.07, 1.15, 1.265, 1.346, 1.438, 1.564, 1.691, 1.817, 1.955, 2.093, 2.231, 2.369],
+        },
+        "maweika"
+      ),
+      createAttack(
+        "驰轮车重击终结伤害",
+        AttackType.Strong,
+        ElementType.Pyro,
+        {
+          atk: [1.376, 1.488, 1.6, 1.76, 1.872, 2, 2.176, 2.352, 2.528, 2.72, 2.912, 3.104, 3.296],
+        },
+        "maweika"
+      ),
+      createAttack("驰轮车坠地冲击伤害", AttackType.Falling, ElementType.Pyro, {
+        atk: [1.6, 1.73, 1.86, 2.046, 2.176, 2.325, 2.53, 2.734, 2.939, 3.162, 3.385, 3.608, 3.832],
+      }),
+    ],
+    burstSkill: [
+      createAttack("技能伤害", AttackType.Burst, ElementType.Pyro, {
+        atk: [4.448, 4.782, 5.115, 5.56, 5.894, 6.227, 6.672, 7.117, 7.562, 8.006, 8.451, 8.896, 9.452],
+      }),
+    ],
+    otherSkill: [
+      createAttack("6命·驰轮车伤害", AttackType.Skill, ElementType.Pyro, {
+        atk: [2],
+      }),
+      createAttack("6命·焚曜之环·灼象伤害", AttackType.Other, ElementType.Pyro, {
+        atk: [5],
+      }),
+    ],
+    buffs: [
+      S_80_CRITALHUNT_38P,
+      {
+        label: "炎花献礼",
+        describe: "队伍中的附近的角色触发「夜魂迸发」时，玛薇卡的攻击力提升30%。",
+        effect: [{ type: BuffType.ATKPrcent, getValue: () => 30 }],
+        enable: true,
+      },
+      {
+        label: "「基扬戈兹」",
+        describe:
+          "施放元素爆发燔天之时后，依据施放时的战意，每点战意都将使当前场上角色造成的伤害提升0.2%，通过这种方式至多使队伍中的当前场上角色造成的伤害提升40%，该效果持续20秒，并会在持续时间内逐渐降低为0。",
+        effect: [{ type: BuffType.GlobalPrcent, getValue: (_, s) => 0.2 * s }],
+        enable: true,
+        stack: 200,
+        stackable: true,
+        limit: 200,
+        stackText: "战意",
+        shareable: true,
+        target: BuffTarget.All,
+      },
+      {
+        label: "死生之炉",
+        describe: "依据元素爆发施放时的战意，提升坠日斩、「古名解放」时的普通攻击与重击造成的伤害。",
+        effect: [
+          {
+            type: BuffType.BurstFixed,
+            getValue: (data, s) => {
+              let sk = [
+                0.016, 0.0172, 0.0184, 0.02, 0.0212, 0.0224, 0.024, 0.0256, 0.0272, 0.0288, 0.0304, 0.032, 0.034,
+              ][data.burstLevel + data.burstLevelAdd - 1];
+              return sk * (data.baseATK + data.extraATK + data.extraATK_NT) * s;
+            },
+          },
+          {
+            type: BuffType.NormalFixed,
+            getValue: (data, s) => {
+              let sk = [
+                0.0026, 0.0028, 0.003, 0.0033, 0.0035, 0.0038, 0.0041, 0.0044, 0.0047, 0.0051, 0.0055, 0.0058, 0.0062,
+              ][data.burstLevel + data.burstLevelAdd - 1];
+              return sk * (data.baseATK + data.extraATK + data.extraATK_NT) * s;
+            },
+            special: "maweika",
+          },
+          {
+            type: BuffType.StrongFixed,
+            getValue: (data, s) => {
+              let sk =
+                [0.0026, 0.0028, 0.003, 0.0033, 0.0035, 0.0038, 0.0041, 0.0044, 0.0047, 0.0051, 0.0055, 0.0058, 0.0062][
+                  data.burstLevel + data.burstLevelAdd - 1
+                ] * 2;
+              return sk * (data.baseATK + data.extraATK + data.extraATK_NT) * s;
+            },
+            special: "maweika",
+          },
+        ],
+        enable: true,
+        stack: 200,
+        stackable: true,
+        limit: 200,
+        stackText: "战意",
+      },
+      {
+        label: "1命·夜主的授记",
+        describe: "获取战意后，玛薇卡的攻击力提升40%。",
+        effect: [{ type: BuffType.ATKPrcent, getValue: () => 40 }],
+        condition: ({ constellation }) => constellation >= 1,
+        enable: true,
+      },
+      {
+        label: "2命·灰烬的代价",
+        describe: `处于夜魂加持状态下时，玛薇卡的基础攻击力提升200点，并根据诸火武装的形态，获得对应效果：\n
+        ·焚曜之环：附近的敌人的防御力降低20%;
+        ·驰轮车：玛薇卡的普通攻击、重击、元素爆发燔天之时中的坠日斩造成的伤害提升，提升值相当于玛薇卡攻击力的60%/90%/120%`,
+        effect: [
+          { type: BuffType.ATKBase, getValue: () => 200, actionOn: ActionOn.Front },
+          {
+            type: BuffType.ReduceArmour,
+            getValue: (_, s) => {
+              return s === 0 ? 20 : 0;
+            },
+          },
+          {
+            type: BuffType.NormalFixed,
+            getValue: (data, s) => {
+              return s === 1 ? (data.baseATK + data.extraATK + data.extraATK_NT) * 0.6 : 0;
+            },
+            special: "maweika",
+          },
+          {
+            type: BuffType.StrongFixed,
+            getValue: (data, s) => {
+              return s === 1 ? (data.baseATK + data.extraATK + data.extraATK_NT) * 0.9 : 0;
+            },
+            special: "maweika",
+          },
+          {
+            type: BuffType.BurstFixed,
+            getValue: (data, s) => {
+              return s === 1 ? (data.baseATK + data.extraATK + data.extraATK_NT) * 1.2 : 0;
+            },
+          },
+        ],
+        condition: ({ constellation }) => constellation >= 2,
+        enable: true,
+        stackable: true,
+        stackText: '武装形态(环0、车1)',
+        stack: 0,
+        limit: 1,
+        shareable: true,
+        target: BuffTarget.All
+      },
+      Constellation_Q_3,
+      {
+        label: "4命·「领袖」的觉悟",
+        describe:
+          "施放元素爆发燔天之时后的伤害提升效果不再随时间降低，并额外获得10%伤害加成。",
+        effect: [{ type: BuffType.GlobalPrcent, getValue: () => 10 }],
+        enable: true,
+        shareable: true,
+        condition: ({ constellation }) => constellation >= 4,
+        target: BuffTarget.All,
+      },
+      Constellation_E_5,
+      {
+        label: "6命·「人之名」解放",
+        describe:
+          "玛薇卡驾驶驰轮车时，召唤出持续跟随玛薇卡的「焚曜之环·灼象」，使附近的敌人的防御力降低20%。",
+        effect: [{ type: BuffType.ReduceArmour, getValue: () => 20 }],
+        enable: true,
+        condition: ({ constellation }) => constellation >= 6,
+      },
+    ],
+  },
+  {
     ...cha(10000105, "欧洛伦", ElementType.Electro, WeaponType.Bow)(Rarity.Four, 9244, 244, 587, 60)(
       "UI_AvatarIcon_Olorun",
       [
@@ -420,7 +683,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
       createAttack("持续治疗量", AttackType.Heal, ElementType.None, {
         def: [1.04, 1.118, 1.196, 1.306, 1.378, 1.456, 1.56, 1.664, 1.768, 1.872, 1.976, 2.08, 2.11],
-        fixed: [501, 551, 605, 664, 726, 793, 864, 939, 1018, 1101, 1189, 1281, 1377]
+        fixed: [501, 551, 605, 664, 726, 793, 864, 939, 1018, 1101, 1189, 1281, 1377],
       }),
     ],
     otherSkill: [
@@ -1018,7 +1281,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
       createAttack("激愈水球治疗量", AttackType.Heal, ElementType.None, {
         hp: [0.028, 0.0301, 0.0322, 0.035, 0.0371, 0.0392, 0.042, 0.0448, 0.0476, 0.0504, 0.0532, 0.056, 0.0595],
-        fixed: [270, 297, 326, 357, 391, 427, 465, 506, 548, 593, 640, 690, 742]
+        fixed: [270, 297, 326, 357, 391, 427, 465, 506, 548, 593, 640, 690, 742],
       }),
       createAttack("弹跳结束治疗量", AttackType.Heal, ElementType.None, {
         hp: new Array(13).fill(0.5),
@@ -1852,7 +2115,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       ),
       createAttack("众水的歌者治疗量", AttackType.Heal, ElementType.None, {
         hp: [0.048, 0.0516, 0.0552, 0.06, 0.0636, 0.0672, 0.072, 0.0768, 0.0816, 0.0864, 0.0912, 0.096, 0.102],
-        fixed: [462, 508, 559, 612, 670, 732, 797, 867, 940, 1017, 1098, 1183, 1271]
+        fixed: [462, 508, 559, 612, 670, 732, 797, 867, 940, 1017, 1098, 1183, 1271],
       }),
     ],
     burstSkill: [
@@ -5938,7 +6201,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
       createAttack("护盾吸收量", AttackType.Shield, ElementType.None, {
         hp: [0.128, 0.138, 0.147, 0.16, 0.17, 0.179, 0.192, 0.205, 0.218, 0.23, 0.243, 0.256, 0.272, 0.288],
-        fixed: [1232, 1356, 1489, 1633, 1787, 1951, 2126, 2311, 2506, 2712, 2927, 3153, 3389, 3636]
+        fixed: [1232, 1356, 1489, 1633, 1787, 1951, 2126, 2311, 2506, 2712, 2927, 3153, 3389, 3636],
       }),
     ],
     burstSkill: [
@@ -6416,11 +6679,13 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
       createAttack("领域发动治疗量", AttackType.Heal, ElementType.None, {
         atk: [2.51, 2.7, 2.89, 3.14, 3.33, 3.52, 3.77, 4.02, 4.27, 4.52, 4.77, 5.02, 5.34, 5.65],
-        fixed: [1540, 1694, 1861, 2041, 2234, 2439, 2657, 2888, 3132, 3389, 3659, 3941, 4236, 4544]
+        fixed: [1540, 1694, 1861, 2041, 2234, 2439, 2657, 2888, 3132, 3389, 3659, 3941, 4236, 4544],
       }),
       createAttack("持续治疗量", AttackType.Heal, ElementType.None, {
-        atk: [0.2512, 0.27, 0.2889, 0.314, 0.3328, 0.3517, 0.3768, 0.4019, 0.427, 0.4522, 0.4773, 0.5024, 0.5338, 0.5652],
-        fixed: [154, 169, 186, 204, 223, 244, 266, 289, 313, 339, 366, 394, 424, 454]
+        atk: [
+          0.2512, 0.27, 0.2889, 0.314, 0.3328, 0.3517, 0.3768, 0.4019, 0.427, 0.4522, 0.4773, 0.5024, 0.5338, 0.5652,
+        ],
+        fixed: [154, 169, 186, 204, 223, 244, 266, 289, 313, 339, 366, 394, 424, 454],
       }),
     ],
     otherSkill: [
@@ -6857,12 +7122,14 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         atk: [0.36, 0.387, 0.414, 0.45, 0.477, 0.504, 0.54, 0.576, 0.612, 0.648, 0.68, 0.72, 0.765],
       }),
       createAttack("命中治疗量", AttackType.Heal, ElementType.None, {
-        atk: [0.1056, 0.1135, 0.1214, 0.132, 0.1399, 0.1478, 0.1584, 0.169, 0.1795, 0.1901, 0.2006, 0.2112, 0.2244, 0.2376],
-        fixed: [67, 74, 81, 89, 98, 107, 116, 126, 137, 148, 160, 172, 185, 198]
+        atk: [
+          0.1056, 0.1135, 0.1214, 0.132, 0.1399, 0.1478, 0.1584, 0.169, 0.1795, 0.1901, 0.2006, 0.2112, 0.2244, 0.2376,
+        ],
+        fixed: [67, 74, 81, 89, 98, 107, 116, 126, 137, 148, 160, 172, 185, 198],
       }),
       createAttack("持续治疗量", AttackType.Heal, ElementType.None, {
         atk: [0.696, 0.7482, 0.8004, 0.87, 0.9222, 0.9744, 1.044, 1.1136, 1.1832, 1.2528, 1.3224, 1.392, 1.479, 1.566],
-        fixed: [451, 496, 544, 597, 653, 713, 777, 845, 916, 991, 1070, 1153, 1239, 1329]
+        fixed: [451, 496, 544, 597, 653, 713, 777, 845, 916, 991, 1070, 1153, 1239, 1329],
       }),
     ],
     burstSkill: [
@@ -6871,7 +7138,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
       createAttack("治疗量", AttackType.Heal, ElementType.None, {
         atk: [0.9, 0.968, 1.04, 1.13, 1.19, 1.26, 1.35, 1.44, 1.53, 1.62, 1.71, 1.8, 1.91, 2.03],
-        fixed: [557, 635, 698, 765, 837, 914, 996, 1083, 1174, 1270, 1371, 1477, 1588, 1703]
+        fixed: [557, 635, 698, 765, 837, 914, 996, 1083, 1174, 1270, 1371, 1477, 1588, 1703],
       }),
     ],
     otherSkill: [],
