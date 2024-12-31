@@ -4667,15 +4667,24 @@ export const Weapons: IWeaponInfo[] = [
       ];
     },
     (affix = 1) => {
-      let b = [200, 230, 260, 290, 320][affix - 1] / 100;
+      let b = [100, 115, 130, 145, 160][affix - 1] / 100;
+      let c = [200, 230, 260, 290, 320][affix - 1] / 100;
       return [
         {
           label: "西风鹰之魂",
           rate: {
-            atk: [b],
+            atk: [c],
           },
           attackType: AttackType.Other,
           elementType: ElementType.Physical,
+        },
+        {
+          label: "西风鹰之魂·回复量",
+          rate: {
+            atk: [b],
+          },
+          attackType: AttackType.Heal,
+          elementType: ElementType.None,
         },
       ];
     }
@@ -5683,6 +5692,17 @@ export const Weapons: IWeaponInfo[] = [
           enable: false,
         },
       ];
+    },
+    (affix = 1) => {
+      let a = [20, 23, 26, 29, 32][affix - 1] / 100;
+      return [{
+        label: "叛逆的守护者·护盾吸收量",
+        rate: {
+          hp: [a],
+        },
+        attackType: AttackType.Heal,
+        elementType: ElementType.None
+      }]
     }
   ),
   createWeapon(
@@ -5896,6 +5916,18 @@ export const Weapons: IWeaponInfo[] = [
         title: "炊金",
         text: highlight`施放元素爆发后6秒内，每2秒恢复${a}点元素能量；此外，队伍中的所有角色每2秒恢复${a}%生命值。`,
       };
+    },
+    () => [],
+    (affix = 1) => {
+      let a = [4, 4.5, 5, 5.5, 6][affix - 1] / 100;
+      return [{
+        label: "试作金珀·回复量",
+        rate: {
+          hp: [a],
+        },
+        attackType: AttackType.Heal,
+        elementType: ElementType.None
+      }]
     }
   ),
   createWeapon(
@@ -6030,6 +6062,17 @@ export const Weapons: IWeaponInfo[] = [
           enable: true,
         },
       ];
+    },
+    (affix = 1) => {
+      let a = [60, 70, 80, 90, 100][affix - 1] / 100;
+      return [{
+        label: "黑剑·回复量",
+        rate: {
+          atk: [a],
+        },
+        attackType: AttackType.Heal,
+        elementType: ElementType.None
+      }]
     }
   ),
   createWeapon(
@@ -7220,6 +7263,18 @@ export const Weapons: IWeaponInfo[] = [
         title: "能量沐浴",
         text: highlight`获得元素微粒或者元素晶球时，恢复${a}生命值。`,
       };
+    },
+    () => [],
+    (affix = 1) => {
+      let a = [1, 1.25, 1.5, 1.75, 2][affix - 1] / 100;
+      return [{
+        label: "异世界行记·回复量",
+        rate: {
+          hp: [a],
+        },
+        attackType: AttackType.Heal,
+        elementType: ElementType.None
+      }]
     }
   ),
   createWeapon(
@@ -7272,6 +7327,18 @@ export const Weapons: IWeaponInfo[] = [
         title: "收割",
         text: highlight`击败敌人时，恢复${a}生命值。`,
       };
+    },
+    () => [],
+    (affix = 1) => {
+      let a = [8, 10, 12, 14, 16][affix - 1] / 100;
+      return [{
+        label: "反曲弓·回复量",
+        rate: {
+          hp: [a],
+        },
+        attackType: AttackType.Heal,
+        elementType: ElementType.None
+      }]
     }
   ),
   createWeapon(
@@ -7325,6 +7392,18 @@ export const Weapons: IWeaponInfo[] = [
         title: "旅程",
         text: highlight`获得元素晶球或元素微粒时，恢复${a}生命值。`,
       };
+    },
+    () => [],
+    (affix = 1) => {
+      let a = [1, 1.25, 1.5, 1.75, 2][affix - 1] / 100;
+      return [{
+        label: "旅行剑·回复量",
+        rate: {
+          hp: [a],
+        },
+        attackType: AttackType.Heal,
+        elementType: ElementType.None
+      }]
     }
   ),
   createWeapon(
@@ -7408,6 +7487,18 @@ export const Weapons: IWeaponInfo[] = [
         title: "收割",
         text: highlight`击败敌人时，恢复${a}生命值。`,
       };
+    },
+    () => [],
+    (affix = 1) => {
+      let a = [8, 10, 12, 14, 16][affix - 1] / 100;
+      return [{
+        label: "白铁大剑·收割回复量",
+        rate: {
+          hp: [a],
+        },
+        attackType: AttackType.Heal,
+        elementType: ElementType.None
+      }]
     }
   ),
   createWeapon(
