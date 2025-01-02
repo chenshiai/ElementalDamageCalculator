@@ -16,8 +16,8 @@ export interface IBuffBase {
   stackable?: boolean;
   /** BUff层数别名 */
   stackText?: string;
-  /** BUff层数控件类型, 目前只有slider */
-  stackType?: 'slider';
+  /** BUff层数控件类型 */
+  stackType?: 'slider' | 'switch';
   /** 最大叠加层数 */
   limit?: number;
   /** 当前叠加层数 */

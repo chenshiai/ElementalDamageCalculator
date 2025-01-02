@@ -50,6 +50,87 @@ createWeapon(
 export const Weapons: IWeaponInfo[] = [
   createWeapon(
     {
+      name: "祭星者之望",
+      enkaId: 14517,
+      weaponType: WeaponType.Magic,
+      icon: getEnkaUI("UI_EquipIcon_Catalyst_Figurines_Awaken"),
+      baseAtk: 542,
+      rarity: Rarity.Five,
+      appendPropId: AppendProp.ELEMENT_MASTERY,
+      statValue: 265,
+    },
+    (affix = 1) => {
+      let a = [100, 125, 150, 175, 200][affix - 1];
+      let b = [28, 35, 42, 49, 56][affix - 1] + "%";
+      return {
+        title: "奉予风阳的禋祀",
+        text: highlight`元素精通提升${a}点。装备者创造护盾后的15秒内，获得「照夜之镜」效果：队伍中自己的当前场上角色对附近的敌人造成的伤害提升${b}，每14秒至多获得一次「照夜之镜」效果。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [100, 125, 150, 175, 200][affix - 1];
+      let b = [28, 35, 42, 49, 56][affix - 1];
+      return [
+        {
+          label: "「照夜之镜」",
+          describe: `装备者创造护盾后，获得「照夜之镜」效果：队伍中自己的当前场上角色对附近的敌人造成的伤害提升${b}%`,
+          effect: [{ type: BuffType.GlobalPrcent, getValue: () => b }],
+          enable: true,
+          shareable: true
+        },
+        {
+          label: "元素精通提升",
+          describe: `元素精通提升${a}点`,
+          effect: [{ type: BuffType.MysteryFixed, getValue: () => a }],
+          enable: true,
+        },
+      ];
+    },
+  ),
+  createWeapon(
+    {
+      name: "焚曜千阳",
+      enkaId: 12514,
+      weaponType: WeaponType.GreatSword,
+      icon: getEnkaUI("UI_EquipIcon_Claymore_RadianceSword_Awaken"),
+      baseAtk: 741,
+      rarity: Rarity.Five,
+      appendPropId: AppendProp.CRITICAL,
+      statValue: 11,
+    },
+    (affix = 1) => {
+      let a = [20, 25, 30, 35, 40][affix - 1] + "%";
+      let b = [28, 35, 42, 49, 56][affix - 1] + "%";
+      return {
+        title: "落日重燃的黎明",
+        text: highlight`施放元素战技或元素爆发时，获得「焚光」效果：暴击伤害提高${a}，攻击力提升${b}，该效果持续6秒，每10秒至多触发一次。
+        <br />持续期间内，普通攻击或重击造成元素伤害后，将使此次「焚光」效果的持续时间延长2秒，该效果每1秒至多触发一次，至多通过这种方式使持续时间延长6秒。
+        <br />此外，处于夜魂加持状态下时，「焚光」效果提高75%，且「焚光」效果在装备者处于后台时不进行计时。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [20, 25, 30, 35, 40][affix - 1];
+      let b = [28, 35, 42, 49, 56][affix - 1];
+      return [
+        {
+          label: "焚光",
+          describe: `施放元素战技或元素爆发时，获得「焚光」效果：暴击伤害提高${a}%，攻击力提升${b}%。处于夜魂加持状态下时，「焚光」效果提高75%。`,
+          effect: [
+            { type: BuffType.CritcalHurt, getValue: (_, s) => a + a * 0.75 * s },
+            { type: BuffType.ATKPrcent, getValue: (_, s) => b + b * 0.75 * s },
+          ],
+          enable: true,
+          stackable: true,
+          stackText: "夜魂加持",
+          limit: 1,
+          stack: 0,
+          stackType: "switch",
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
       name: "厄水之祸",
       enkaId: 11432,
       weaponType: WeaponType.Sword,
@@ -5695,14 +5776,16 @@ export const Weapons: IWeaponInfo[] = [
     },
     (affix = 1) => {
       let a = [20, 23, 26, 29, 32][affix - 1] / 100;
-      return [{
-        label: "叛逆的守护者·护盾吸收量",
-        rate: {
-          hp: [a],
+      return [
+        {
+          label: "叛逆的守护者·护盾吸收量",
+          rate: {
+            hp: [a],
+          },
+          attackType: AttackType.Heal,
+          elementType: ElementType.None,
         },
-        attackType: AttackType.Heal,
-        elementType: ElementType.None
-      }]
+      ];
     }
   ),
   createWeapon(
@@ -5920,14 +6003,16 @@ export const Weapons: IWeaponInfo[] = [
     () => [],
     (affix = 1) => {
       let a = [4, 4.5, 5, 5.5, 6][affix - 1] / 100;
-      return [{
-        label: "试作金珀·回复量",
-        rate: {
-          hp: [a],
+      return [
+        {
+          label: "试作金珀·回复量",
+          rate: {
+            hp: [a],
+          },
+          attackType: AttackType.Heal,
+          elementType: ElementType.None,
         },
-        attackType: AttackType.Heal,
-        elementType: ElementType.None
-      }]
+      ];
     }
   ),
   createWeapon(
@@ -6065,14 +6150,16 @@ export const Weapons: IWeaponInfo[] = [
     },
     (affix = 1) => {
       let a = [60, 70, 80, 90, 100][affix - 1] / 100;
-      return [{
-        label: "黑剑·回复量",
-        rate: {
-          atk: [a],
+      return [
+        {
+          label: "黑剑·回复量",
+          rate: {
+            atk: [a],
+          },
+          attackType: AttackType.Heal,
+          elementType: ElementType.None,
         },
-        attackType: AttackType.Heal,
-        elementType: ElementType.None
-      }]
+      ];
     }
   ),
   createWeapon(
@@ -7267,14 +7354,16 @@ export const Weapons: IWeaponInfo[] = [
     () => [],
     (affix = 1) => {
       let a = [1, 1.25, 1.5, 1.75, 2][affix - 1] / 100;
-      return [{
-        label: "异世界行记·回复量",
-        rate: {
-          hp: [a],
+      return [
+        {
+          label: "异世界行记·回复量",
+          rate: {
+            hp: [a],
+          },
+          attackType: AttackType.Heal,
+          elementType: ElementType.None,
         },
-        attackType: AttackType.Heal,
-        elementType: ElementType.None
-      }]
+      ];
     }
   ),
   createWeapon(
@@ -7331,14 +7420,16 @@ export const Weapons: IWeaponInfo[] = [
     () => [],
     (affix = 1) => {
       let a = [8, 10, 12, 14, 16][affix - 1] / 100;
-      return [{
-        label: "反曲弓·回复量",
-        rate: {
-          hp: [a],
+      return [
+        {
+          label: "反曲弓·回复量",
+          rate: {
+            hp: [a],
+          },
+          attackType: AttackType.Heal,
+          elementType: ElementType.None,
         },
-        attackType: AttackType.Heal,
-        elementType: ElementType.None
-      }]
+      ];
     }
   ),
   createWeapon(
@@ -7396,14 +7487,16 @@ export const Weapons: IWeaponInfo[] = [
     () => [],
     (affix = 1) => {
       let a = [1, 1.25, 1.5, 1.75, 2][affix - 1] / 100;
-      return [{
-        label: "旅行剑·回复量",
-        rate: {
-          hp: [a],
+      return [
+        {
+          label: "旅行剑·回复量",
+          rate: {
+            hp: [a],
+          },
+          attackType: AttackType.Heal,
+          elementType: ElementType.None,
         },
-        attackType: AttackType.Heal,
-        elementType: ElementType.None
-      }]
+      ];
     }
   ),
   createWeapon(
@@ -7491,14 +7584,16 @@ export const Weapons: IWeaponInfo[] = [
     () => [],
     (affix = 1) => {
       let a = [8, 10, 12, 14, 16][affix - 1] / 100;
-      return [{
-        label: "白铁大剑·收割回复量",
-        rate: {
-          hp: [a],
+      return [
+        {
+          label: "白铁大剑·收割回复量",
+          rate: {
+            hp: [a],
+          },
+          attackType: AttackType.Heal,
+          elementType: ElementType.None,
         },
-        attackType: AttackType.Heal,
-        elementType: ElementType.None
-      }]
+      ];
     }
   ),
   createWeapon(

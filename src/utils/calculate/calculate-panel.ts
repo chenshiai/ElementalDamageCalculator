@@ -64,11 +64,11 @@ function calculationPanel({
       baseDEF: characterInfo.baseDEF,
       baseHP: characterInfo.baseHP,
 
-      normalLevel: normalLevel,
-      skillLevel: skillLevel,
-      burstLevel: burstLevel,
+      normalLevel,
+      skillLevel,
+      burstLevel,
 
-      enemyLevel: enemyLevel,
+      enemyLevel,
       enemyPhysicalResistance: baseResistance,
       enemyPyroResistance: baseResistance,
       enemyElectroResistance: baseResistance,

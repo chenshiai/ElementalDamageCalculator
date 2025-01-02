@@ -55,15 +55,228 @@ const a = {
 // .replaceAll("%", '').replaceAll(/[\u4e00-\u9fff]+/g, "").replaceAll("\t",",").split(",").map(i=>Math.round(i*100)/10000)
 export const Character: (ICharacterInfo & Record<any, any>)[] = [
   {
-    ...cha(1000000, "玛薇卡", ElementType.Pyro, WeaponType.GreatSword)(Rarity.Five, 12552, 359, 792, 0)(
-      "UI_AvatarIcon_Olorun",
+    ...cha(10000107, "茜特菈莉", ElementType.Cryo, WeaponType.Magic)(Rarity.Five, 11634, 127, 763, 60)(
+      "UI_AvatarIcon_Citlali",
       [
-        "UI_Talent_S_Olorun_01",
-        "UI_Talent_S_Olorun_02",
-        "UI_Talent_U_Olorun_01",
-        "UI_Talent_S_Olorun_03",
-        "UI_Talent_U_Olorun_02",
-        "UI_Talent_S_Olorun_04",
+        "UI_Talent_S_Citlali_01",
+        "UI_Talent_S_Citlali_02",
+        "UI_Talent_U_Citlali_01",
+        "UI_Talent_S_Citlali_03",
+        "UI_Talent_U_Citlali_02",
+        "UI_Talent_S_Citlali_04",
+      ],
+      ["普通攻击·宿灵捕影", "霜昼黑星", "诸曜饬令"]
+    ),
+    normalAttack: [
+      createAttack("一段伤害", AttackType.Normal, ElementType.Cryo, {
+        atk: [0.8, 0.866, 0.931, 1.024, 1.089, 1.163, 1.266, 1.368, 1.47, 1.582, 1.694],
+      }),
+      createAttack("二段伤害·单次", AttackType.Normal, ElementType.Cryo, {
+        atk: [0.365, 0.394, 0.424, 0.467, 0.496, 0.53, 0.577, 0.624, 0.67, 0.721, 0.772],
+      }),
+      createAttack("三段伤害·单次", AttackType.Normal, ElementType.Cryo, {
+        atk: [0.332, 0.359, 0.386, 0.425, 0.452, 0.483, 0.525, 0.568, 0.61, 0.657, 0.703],
+      }),
+      createAttack("四段伤害", AttackType.Normal, ElementType.Cryo, {
+        atk: [1.162, 1.256, 1.351, 1.486, 1.581, 1.689, 1.837, 1.986, 2.135, 2.297, 2.459],
+      }),
+      createAttack("重击伤害", AttackType.Strong, ElementType.Cryo, {
+        atk: [1.94, 2.1, 2.25, 2.48, 2.64, 2.82, 3.07, 3.31, 3.56, 3.83, 4.1],
+      }),
+      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Cryo, {
+        atk: [0.746, 0.807, 0.867, 0.954, 1.015, 1.084, 1.18, 1.275, 1.37, 1.474, 1.578],
+      }),
+      createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Cryo, {
+        atk: [1.49, 1.61, 1.73, 1.91, 2.03, 3.17, 2.36, 2.55, 2.74, 2.95, 3.16],
+      }),
+      createAttack("高空坠地冲击伤害", AttackType.Falling, ElementType.Cryo, {
+        atk: [1.86, 2.01, 2.17, 2.38, 2.53, 2.71, 2.95, 3.18, 3.42, 3.68, 3.94],
+      }),
+    ],
+    elementSkill: [
+      createAttack("黑曜星魔伤害", AttackType.Skill, ElementType.Cryo, {
+        atk: [0.73, 0.784, 0.839, 0.912, 0.967, 1.021, 1.094, 1.167, 1.24, 1.313, 1.386, 1.459, 1.55],
+      }),
+      createAttack(
+        "霜陨风暴伤害",
+        AttackType.Skill,
+        ElementType.Cryo,
+        {
+          atk: [0.17, 0.183, 0.196, 0.213, 0.226, 0.238, 0.255, 0.272, 0.289, 0.306, 0.323, 0.34, 0.362],
+        },
+        "Citlali"
+      ),
+      createAttack("护盾吸收量", AttackType.Shield, ElementType.None, {
+        em: [5.76, 6.192, 6.624, 7.2, 7.632, 8.064, 8.64, 9.216, 9.792, 10.368, 10.944, 11.52, 12.24],
+        fixed: [1386, 1525, 1675, 1837, 2010, 2195, 2392, 2600, 2819, 3050, 32293, 3547, 3813],
+      }),
+    ],
+    burstSkill: [
+      createAttack(
+        "冰风暴伤害",
+        AttackType.Burst,
+        ElementType.Cryo,
+        {
+          atk: [5.376, 5.779, 6.182, 6.72, 7.123, 7.526, 8.064, 8.602, 9.139, 9.677, 10.214, 10.752, 11.424],
+        },
+        "Citlali"
+      ),
+      createAttack("宿灵之髑伤害", AttackType.Burst, ElementType.Cryo, {
+        atk: [1.344, 1.445, 1.546, 1.68, 1.781, 1.882, 2.016, 2.15, 2.285, 2.419, 2.554, 2.688, 2.856],
+      }),
+    ],
+    otherSkill: [
+      createAttack("4命·宿灵之髑·黑星伤害", AttackType.Other, ElementType.Cryo, {
+        em: [18],
+      }),
+    ],
+    buffs: [
+      S_80_MYSTERY_115,
+      {
+        label: "五重天的寒雨",
+        describe:
+          "伊兹帕帕存在期间，队伍中附近的角色触发冻结反应或融化反应后，受本次反应影响的敌人的火元素与水元素抗性还会降低20%。",
+        shareable: true,
+        enable: true,
+        target: BuffTarget.Enemy,
+        effect: [
+          { type: BuffType.EnemyHydroResistance, getValue: () => -20 },
+          { type: BuffType.EnemyPyroResistance, getValue: () => -20 },
+        ],
+      },
+      {
+        label: "白燧蝶的星衣",
+        describe:
+          "元素战技霜昼黑星中，伊兹帕帕的霜陨风暴造成的伤害提升，提升值相当于茜特菈莉的元素精通的90%；元素爆发诸曜饬令中，冰风暴造成的伤害提升，提升值相当于茜特菈莉的元素精通的1200%。",
+        enable: true,
+        target: BuffTarget.Self,
+        effect: [
+          {
+            type: BuffType.SkillFixed,
+            getValue: (data) => (data.elementalMystery + data.elementalMystery_NT) * 0.9,
+            actionOn: ActionOn.Indirect,
+            special: "Citlali",
+          },
+          {
+            type: BuffType.BurstFixed,
+            getValue: (data) => (data.elementalMystery + data.elementalMystery_NT) * 12,
+            actionOn: ActionOn.Indirect,
+            special: "Citlali",
+          },
+        ],
+      },
+      {
+        label: "1命·四百星的芒刃",
+        describe:
+          "除茜特菈莉外的附近的当前场上角色的普通攻击、重击、下落攻击、元素战技或元素爆发造成伤害时，将消耗1层「星刃」，提升造成的伤害，提升值相当于茜特菈莉元素精通的200%。",
+        effect: [
+          {
+            type: BuffType.NormalFixed,
+            getValue: (data) => (data.elementalMystery + data.elementalMystery_NT) * 2,
+            actionOn: ActionOn.Indirect,
+          },
+          {
+            type: BuffType.StrongFixed,
+            getValue: (data) => (data.elementalMystery + data.elementalMystery_NT) * 2,
+            actionOn: ActionOn.Indirect,
+          },
+          {
+            type: BuffType.FallingFixed,
+            getValue: (data) => (data.elementalMystery + data.elementalMystery_NT) * 2,
+            actionOn: ActionOn.Indirect,
+          },
+          {
+            type: BuffType.SkillFixed,
+            getValue: (data) => (data.elementalMystery + data.elementalMystery_NT) * 2,
+            actionOn: ActionOn.Indirect,
+          },
+          {
+            type: BuffType.BurstFixed,
+            getValue: (data) => (data.elementalMystery + data.elementalMystery_NT) * 2,
+            actionOn: ActionOn.Indirect,
+          },
+        ],
+        condition: ({ constellation }) => constellation >= 1,
+        enable: false,
+        shareable: true,
+        target: BuffTarget.Other,
+      },
+      {
+        label: "2命·吞心者的巡行",
+        describe: `处于白曜护盾的庇护下或是伊兹帕帕跟随的其他角色的元素精通提升250点。
+        <br />固有天赋「五重天的寒雨」的效果获得提升：伊兹帕帕存在期间，队伍中附近的角色触发冻结反应或融化反应后，受本次反应影响的敌人的火元素与水元素抗性还会额外降低20%`,
+        effect: [
+          { type: BuffType.EnemyHydroResistance, getValue: () => -20 },
+          { type: BuffType.EnemyPyroResistance, getValue: () => -20 },
+          { type: BuffType.MysteryFixed, getValue: () => 250 },
+        ],
+        condition: ({ constellation }) => constellation >= 2,
+        enable: false,
+        shareable: true,
+        target: BuffTarget.Other,
+      },
+      {
+        label: "2命·吞心者的巡行",
+        describe: `茜特菈莉的元素精通提升125点
+        <br />固有天赋「五重天的寒雨」的效果获得提升：伊兹帕帕存在期间，队伍中附近的角色触发冻结反应或融化反应后，受本次反应影响的敌人的火元素与水元素抗性还会额外降低20%。`,
+        effect: [
+          { type: BuffType.MysteryFixed, getValue: () => 125 },
+          { type: BuffType.EnemyHydroResistance, getValue: () => -20 },
+          { type: BuffType.EnemyPyroResistance, getValue: () => -20 },
+        ],
+        condition: ({ constellation }) => constellation >= 2,
+        enable: true,
+        target: BuffTarget.Self,
+      },
+      Constellation_E_3,
+      Constellation_Q_5,
+      {
+        label: "6命·原动天的密契",
+        describe: `施放元素战技霜昼黑星时，伊兹帕帕将消耗所有夜魂值，并在存在期间内持续消耗夜魂值；每通过上述方式消耗1点夜魂值，茜特菈莉就会获得1点「秘律之数」。
+        <br />「秘律之数」上限为40点，基于茜特菈莉持有的「秘律之数」，每1点「秘律之数」会使附近的队伍中所有角色获得1.5%火元素与水元素伤害加成，并使茜特菈莉造成的伤害提升2.5%。`,
+        effect: [
+          { type: BuffType.PyroPrcent, getValue: (_, s) => 1.5 * s },
+          { type: BuffType.HydroPrcent, getValue: (_, s) => 1.5 * s },
+        ],
+        condition: ({ constellation }) => constellation >= 6,
+        enable: false,
+        stackable: true,
+        shareable: true,
+        stackText: "「秘律之数」",
+        stack: 40,
+        limit: 40,
+        target: BuffTarget.Other,
+      },
+      {
+        label: "6命·原动天的密契",
+        describe: `施放元素战技霜昼黑星时，伊兹帕帕将消耗所有夜魂值，并在存在期间内持续消耗夜魂值；每通过上述方式消耗1点夜魂值，茜特菈莉就会获得1点「秘律之数」。
+        <br />「秘律之数」上限为40点，基于茜特菈莉持有的「秘律之数」，每1点「秘律之数」会使附近的队伍中所有角色获得1.5%火元素与水元素伤害加成，并使茜特菈莉造成的伤害提升2.5%。`,
+        effect: [
+          { type: BuffType.PyroPrcent, getValue: (_, s) => 1.5 * s },
+          { type: BuffType.HydroPrcent, getValue: (_, s) => 1.5 * s },
+          { type: BuffType.GlobalPrcent, getValue: (_, s) => 2.5 * s },
+        ],
+        condition: ({ constellation }) => constellation >= 6,
+        enable: true,
+        stackable: true,
+        shareable: true,
+        stackText: "「秘律之数」",
+        stack: 40,
+        limit: 40,
+        target: BuffTarget.Self,
+      },
+    ],
+  },
+  {
+    ...cha(10000106, "玛薇卡", ElementType.Pyro, WeaponType.GreatSword)(Rarity.Five, 12552, 359, 792, 0)(
+      "UI_AvatarIcon_Mavuika",
+      [
+        "UI_Talent_S_Mavuika_01",
+        "UI_Talent_S_Mavuika_02",
+        "UI_Talent_U_Mavuika_01",
+        "UI_Talent_S_Mavuika_03",
+        "UI_Talent_U_Mavuika_02",
+        "UI_Talent_S_Mavuika_04",
       ],
       ["普通攻击·以命织火", "称名之刻", "燔天之时"]
     ),
@@ -101,16 +314,16 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         atk: [1.28, 1.376, 1.472, 1.6, 1.696, 1.792, 1.92, 2.048, 2.176, 2.304, 2.432, 2.56, 2.72],
       }),
       createAttack(
-        "驰轮车普通攻击一段伤害",
+        "驰轮车普攻一段伤害",
         AttackType.Normal,
         ElementType.Pyro,
         {
           atk: [0.573, 0.619, 0.666, 0.732, 0.779, 0.832, 0.906, 0.979, 1.052, 1.132, 1.212, 1.292, 1.372],
         },
-        "maweika"
+        "mavuika"
       ),
       createAttack(
-        "驰轮车普通攻击二段伤害",
+        "驰轮车普攻二段伤害",
         AttackType.Normal,
         ElementType.Pyro,
         {
@@ -119,7 +332,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "maweika"
       ),
       createAttack(
-        "驰轮车普通攻击三段伤害",
+        "驰轮车普攻三段伤害",
         AttackType.Normal,
         ElementType.Pyro,
         {
@@ -128,7 +341,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "maweika"
       ),
       createAttack(
-        "驰轮车普通攻击四段伤害",
+        "驰轮车普攻四段伤害",
         AttackType.Normal,
         ElementType.Pyro,
         {
@@ -137,7 +350,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "maweika"
       ),
       createAttack(
-        "驰轮车普通攻击五段伤害",
+        "驰轮车普攻五段伤害",
         AttackType.Normal,
         ElementType.Pyro,
         {
@@ -179,7 +392,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("6命·驰轮车伤害", AttackType.Skill, ElementType.Pyro, {
         atk: [2],
       }),
-      createAttack("6命·焚曜之环·灼象伤害", AttackType.Other, ElementType.Pyro, {
+      createAttack("6命·焚曜之环·灼象伤害", AttackType.Skill, ElementType.Pyro, {
         atk: [5],
       }),
     ],
@@ -205,7 +418,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         target: BuffTarget.All,
       },
       {
-        label: "死生之炉",
+        label: "元素爆发·死生之炉",
         describe: "依据元素爆发施放时的战意，提升坠日斩、「古名解放」时的普通攻击与重击造成的伤害。",
         effect: [
           {
@@ -254,9 +467,9 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       },
       {
         label: "2命·灰烬的代价",
-        describe: `处于夜魂加持状态下时，玛薇卡的基础攻击力提升200点，并根据诸火武装的形态，获得对应效果：\n
-        ·焚曜之环：附近的敌人的防御力降低20%;
-        ·驰轮车：玛薇卡的普通攻击、重击、元素爆发燔天之时中的坠日斩造成的伤害提升，提升值相当于玛薇卡攻击力的60%/90%/120%`,
+        describe: `处于夜魂加持状态下时，玛薇卡的基础攻击力提升200点，并根据诸火武装的形态，获得对应效果：
+        <br />·焚曜之环：附近的敌人的防御力降低20%;
+        <br />·驰轮车：玛薇卡的普通攻击、重击、元素爆发燔天之时中的坠日斩造成的伤害提升，提升值相当于玛薇卡攻击力的60%/90%/120%`,
         effect: [
           { type: BuffType.ATKBase, getValue: () => 200, actionOn: ActionOn.Front },
           {
@@ -289,17 +502,17 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         condition: ({ constellation }) => constellation >= 2,
         enable: true,
         stackable: true,
-        stackText: '武装形态(环0、车1)',
+        stackText: "驰轮车形态",
         stack: 0,
         limit: 1,
         shareable: true,
-        target: BuffTarget.All
+        stackType: "switch",
+        target: BuffTarget.All,
       },
       Constellation_Q_3,
       {
         label: "4命·「领袖」的觉悟",
-        describe:
-          "施放元素爆发燔天之时后的伤害提升效果不再随时间降低，并额外获得10%伤害加成。",
+        describe: "施放元素爆发燔天之时后的伤害提升效果不再随时间降低，并额外获得10%伤害加成。",
         effect: [{ type: BuffType.GlobalPrcent, getValue: () => 10 }],
         enable: true,
         shareable: true,
@@ -309,8 +522,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       Constellation_E_5,
       {
         label: "6命·「人之名」解放",
-        describe:
-          "玛薇卡驾驶驰轮车时，召唤出持续跟随玛薇卡的「焚曜之环·灼象」，使附近的敌人的防御力降低20%。",
+        describe: "玛薇卡驾驶驰轮车时，召唤出持续跟随玛薇卡的「焚曜之环·灼象」，使附近的敌人的防御力降低20%。",
         effect: [{ type: BuffType.ReduceArmour, getValue: () => 20 }],
         enable: true,
         condition: ({ constellation }) => constellation >= 6,

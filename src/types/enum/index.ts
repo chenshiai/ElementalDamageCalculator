@@ -346,9 +346,9 @@ export enum ActionOn {
 
 /** BUFF计算时生效目标 */
 export enum BuffTarget {
-  /** 仅对自己生效 */
+  /** 仅对自己显示 */
   Self = "Self",
-  /** 仅对队友生效 */
+  /** 仅对队友显示 */
   Other = "Other",
   /** 仅对敌人生效 */
   Enemy = "Enemy",

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { Checkbox, Slider, Stepper } from "vant";
+import { Checkbox, Slider, Stepper, Switch } from "vant";
 import { IBuffBase } from "@/types/interface";
-import { computed } from "vue";
+import { computed, ref, watch } from "vue";
 interface IProps {
   buff: IBuffBase;
 }
@@ -9,7 +9,18 @@ const { buff } = defineProps<IProps>();
 const enable = defineModel<boolean>();
 const stack = defineModel<number>("stack", { default: 0 });
 
+const check = ref(Boolean(stack.value));
+watch(
+  () => check.value,
+  (newValue) => {
+    stack.value = Number(newValue);
+  }
+);
+
 const stackText = computed(() => {
+  if (buff.stackType === 'switch') {
+    return `${buff.stackText}：${check.value ? '开' : '关'}`
+  }
   return `${stack.value}/${buff.limit}`;
 });
 </script>
@@ -30,7 +41,7 @@ const stackText = computed(() => {
         <span>{{ buff.stackText || "层数" }}：</span>
         <Slider v-if="buff.stackType === 'slider'" v-model="stack" :max="buff.limit" :min="0" />
         <Stepper
-          v-else
+          v-if="!buff.stackType"
           v-model="stack"
           :max="buff.limit"
           :min="0"
@@ -39,8 +50,9 @@ const stackText = computed(() => {
           theme="round"
           integer
         />
+        <Switch v-if="buff.stackType === 'switch'" v-model="check" size="20"/>
       </div>
-      {{ buff.describe }}
+      <span v-html="buff.describe"></span>
     </div>
   </div>
 </template>

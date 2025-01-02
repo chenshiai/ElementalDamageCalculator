@@ -4,7 +4,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 1,
     "weaponBaseExp": 600,
-    "skillAffix": [0, 0],
+    "skillAffix": [
+      0,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -23,8 +26,12 @@
     "awakenCosts": [],
     "gachaCardNameHash": 5206550965894458167,
     "destroyRule": "DESTROY_RETURN_MATERIAL",
-    "destroyReturnMaterial": [104011],
-    "destroyReturnMaterialCount": [1],
+    "destroyReturnMaterial": [
+      104011
+    ],
+    "destroyReturnMaterialCount": [
+      1
+    ],
     "id": 11101,
     "nameTextMapHash": 2410593283,
     "descTextMapHash": 3807468957,
@@ -38,7 +45,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 2,
     "weaponBaseExp": 1200,
-    "skillAffix": [0, 0],
+    "skillAffix": [
+      0,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -57,8 +67,12 @@
     "awakenCosts": [],
     "gachaCardNameHash": 15367040888523833939,
     "destroyRule": "DESTROY_RETURN_MATERIAL",
-    "destroyReturnMaterial": [104011],
-    "destroyReturnMaterialCount": [2],
+    "destroyReturnMaterial": [
+      104011
+    ],
+    "destroyReturnMaterialCount": [
+      2
+    ],
     "id": 11201,
     "nameTextMapHash": 2125206395,
     "descTextMapHash": 2342805333,
@@ -72,7 +86,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 3,
     "weaponBaseExp": 1800,
-    "skillAffix": [111301, 0],
+    "skillAffix": [
+      111301,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -90,11 +107,20 @@
     "awakenIcon": "UI_EquipIcon_Sword_Steel_Awaken",
     "weaponPromoteId": 11301,
     "storyId": 191301,
-    "awakenCosts": [500, 1000, 2000, 4000],
+    "awakenCosts": [
+      500,
+      1000,
+      2000,
+      4000
+    ],
     "gachaCardNameHash": 7434030286633341116,
     "destroyRule": "DESTROY_RETURN_MATERIAL",
-    "destroyReturnMaterial": [104011],
-    "destroyReturnMaterialCount": [3],
+    "destroyReturnMaterial": [
+      104011
+    ],
+    "destroyReturnMaterialCount": [
+      3
+    ],
     "id": 11301,
     "nameTextMapHash": 479076483,
     "descTextMapHash": 1214777829,
@@ -108,7 +134,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 3,
     "weaponBaseExp": 1800,
-    "skillAffix": [111302, 0],
+    "skillAffix": [
+      111302,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -126,11 +155,20 @@
     "awakenIcon": "UI_EquipIcon_Sword_Dawn_Awaken",
     "weaponPromoteId": 11302,
     "storyId": 191302,
-    "awakenCosts": [500, 1000, 2000, 4000],
+    "awakenCosts": [
+      500,
+      1000,
+      2000,
+      4000
+    ],
     "gachaCardNameHash": 14913649212262965382,
     "destroyRule": "DESTROY_RETURN_MATERIAL",
-    "destroyReturnMaterial": [104011],
-    "destroyReturnMaterialCount": [3],
+    "destroyReturnMaterial": [
+      104011
+    ],
+    "destroyReturnMaterialCount": [
+      3
+    ],
     "id": 11302,
     "nameTextMapHash": 1608953539,
     "descTextMapHash": 1716657229,
@@ -144,7 +182,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 3,
     "weaponBaseExp": 1800,
-    "skillAffix": [111303, 0],
+    "skillAffix": [
+      111303,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -162,11 +203,20 @@
     "awakenIcon": "UI_EquipIcon_Sword_Traveler_Awaken",
     "weaponPromoteId": 11303,
     "storyId": 191303,
-    "awakenCosts": [500, 1000, 2000, 4000],
+    "awakenCosts": [
+      500,
+      1000,
+      2000,
+      4000
+    ],
     "gachaCardNameHash": 14002953352838533444,
     "destroyRule": "DESTROY_RETURN_MATERIAL",
-    "destroyReturnMaterial": [104011],
-    "destroyReturnMaterialCount": [3],
+    "destroyReturnMaterial": [
+      104011
+    ],
+    "destroyReturnMaterialCount": [
+      3
+    ],
     "id": 11303,
     "nameTextMapHash": 3673792067,
     "descTextMapHash": 2969158189,
@@ -180,7 +230,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 3,
     "weaponBaseExp": 1800,
-    "skillAffix": [111304, 0],
+    "skillAffix": [
+      111304,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -198,11 +251,20 @@
     "awakenIcon": "UI_EquipIcon_Sword_Darker_Awaken",
     "weaponPromoteId": 11304,
     "storyId": 191304,
-    "awakenCosts": [500, 1000, 2000, 4000],
+    "awakenCosts": [
+      500,
+      1000,
+      2000,
+      4000
+    ],
     "gachaCardNameHash": 7682141085973077184,
     "destroyRule": "DESTROY_RETURN_MATERIAL",
-    "destroyReturnMaterial": [104011],
-    "destroyReturnMaterialCount": [3],
+    "destroyReturnMaterial": [
+      104011
+    ],
+    "destroyReturnMaterialCount": [
+      3
+    ],
     "id": 11304,
     "nameTextMapHash": 160493219,
     "descTextMapHash": 4211009349,
@@ -216,7 +278,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 3,
     "weaponBaseExp": 1800,
-    "skillAffix": [111305, 0],
+    "skillAffix": [
+      111305,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -234,11 +299,20 @@
     "awakenIcon": "UI_EquipIcon_Sword_Sashimi_Awaken",
     "weaponPromoteId": 11305,
     "storyId": 191305,
-    "awakenCosts": [500, 1000, 2000, 4000],
+    "awakenCosts": [
+      500,
+      1000,
+      2000,
+      4000
+    ],
     "gachaCardNameHash": 13740424776523756226,
     "destroyRule": "DESTROY_RETURN_MATERIAL",
-    "destroyReturnMaterial": [104011],
-    "destroyReturnMaterialCount": [3],
+    "destroyReturnMaterial": [
+      104011
+    ],
+    "destroyReturnMaterialCount": [
+      3
+    ],
     "id": 11305,
     "nameTextMapHash": 3421967235,
     "descTextMapHash": 2798582285,
@@ -252,7 +326,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 3,
     "weaponBaseExp": 1800,
-    "skillAffix": [111306, 0],
+    "skillAffix": [
+      111306,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -270,11 +347,20 @@
     "awakenIcon": "UI_EquipIcon_Sword_Mitsurugi_Awaken",
     "weaponPromoteId": 11306,
     "storyId": 191306,
-    "awakenCosts": [500, 1000, 2000, 4000],
+    "awakenCosts": [
+      500,
+      1000,
+      2000,
+      4000
+    ],
     "gachaCardNameHash": 16598769865197446404,
     "destroyRule": "DESTROY_RETURN_MATERIAL",
-    "destroyReturnMaterial": [104011],
-    "destroyReturnMaterialCount": [3],
+    "destroyReturnMaterial": [
+      104011
+    ],
+    "destroyReturnMaterialCount": [
+      3
+    ],
     "id": 11306,
     "nameTextMapHash": 1388004931,
     "descTextMapHash": 3086923557,
@@ -288,7 +374,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [111401, 0],
+    "skillAffix": [
+      111401,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -306,10 +395,19 @@
     "awakenIcon": "UI_EquipIcon_Sword_Zephyrus_Awaken",
     "weaponPromoteId": 11401,
     "storyId": 191401,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 2826103670021864828,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 11401,
     "nameTextMapHash": 2474354867,
@@ -324,7 +422,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [111402, 0],
+    "skillAffix": [
+      111402,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -342,10 +443,19 @@
     "awakenIcon": "UI_EquipIcon_Sword_Troupe_Awaken",
     "weaponPromoteId": 11402,
     "storyId": 191402,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 10166166836396051281,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 11402,
     "nameTextMapHash": 3587621259,
@@ -360,7 +470,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [111403, 0],
+    "skillAffix": [
+      111403,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -378,10 +491,19 @@
     "awakenIcon": "UI_EquipIcon_Sword_Fossil_Awaken",
     "weaponPromoteId": 11403,
     "storyId": 191403,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 1883640875723621816,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 11403,
     "nameTextMapHash": 1990641987,
@@ -396,7 +518,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [111404, 0],
+    "skillAffix": [
+      111404,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -414,10 +539,19 @@
     "awakenIcon": "UI_EquipIcon_Sword_Theocrat_Awaken",
     "weaponPromoteId": 11404,
     "storyId": 191404,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 16957077994127257984,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 11404,
     "nameTextMapHash": 2375993851,
@@ -432,7 +566,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [111405, 0],
+    "skillAffix": [
+      111405,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -450,10 +587,19 @@
     "awakenIcon": "UI_EquipIcon_Sword_Rockkiller_Awaken",
     "weaponPromoteId": 11405,
     "storyId": 191405,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 680561736722360180,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 11405,
     "nameTextMapHash": 1321135667,
@@ -468,7 +614,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [111406, 0],
+    "skillAffix": [
+      111406,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -486,10 +635,19 @@
     "awakenIcon": "UI_EquipIcon_Sword_Proto_Awaken",
     "weaponPromoteId": 11406,
     "storyId": 191406,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 13737495456968346520,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 11406,
     "nameTextMapHash": 1991707099,
@@ -504,7 +662,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [111407, 0],
+    "skillAffix": [
+      111407,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -522,10 +683,19 @@
     "awakenIcon": "UI_EquipIcon_Sword_Exotic_Awaken",
     "weaponPromoteId": 11407,
     "storyId": 191407,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 2753762402572902932,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 11407,
     "nameTextMapHash": 4103022435,
@@ -540,7 +710,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [111408, 0],
+    "skillAffix": [
+      111408,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -558,10 +731,19 @@
     "awakenIcon": "UI_EquipIcon_Sword_Blackrock_Awaken",
     "weaponPromoteId": 11408,
     "storyId": 191408,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 14290491619481566844,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 11408,
     "nameTextMapHash": 3378007475,
@@ -576,7 +758,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [111409, 0],
+    "skillAffix": [
+      111409,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -594,10 +779,19 @@
     "awakenIcon": "UI_EquipIcon_Sword_Bloodstained_Awaken",
     "weaponPromoteId": 11409,
     "storyId": 191409,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 14499712438899128672,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 11409,
     "nameTextMapHash": 3796905611,
@@ -612,7 +806,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [111410, 0],
+    "skillAffix": [
+      111410,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -630,10 +827,19 @@
     "awakenIcon": "UI_EquipIcon_Sword_Outlaw_Awaken",
     "weaponPromoteId": 11410,
     "storyId": 191410,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 1856268080963755910,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 11410,
     "nameTextMapHash": 2947140987,
@@ -648,7 +854,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [0, 0],
+    "skillAffix": [
+      0,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -665,8 +874,12 @@
     "weaponPromoteId": 11101,
     "awakenCosts": [],
     "gachaCardNameHash": 5206550965894458167,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 11411,
     "nameTextMapHash": 1135130229,
@@ -681,7 +894,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [111412, 0],
+    "skillAffix": [
+      111412,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -701,8 +917,12 @@
     "storyId": 191412,
     "awakenCosts": [],
     "gachaCardNameHash": 9936634703897671573,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 11412,
     "nameTextMapHash": 1773425155,
@@ -717,7 +937,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [111413, 0],
+    "skillAffix": [
+      111413,
+      0
+    ],
     "awakenMaterial": 200103,
     "weaponProp": [
       {
@@ -736,11 +959,20 @@
     "awakenIcon": "UI_EquipIcon_Sword_Magnum_Awaken",
     "weaponPromoteId": 11413,
     "storyId": 191413,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 17944186735592580849,
     "enhanceRule": 1,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 11413,
     "nameTextMapHash": 2749853923,
@@ -755,7 +987,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [111414, 0],
+    "skillAffix": [
+      111414,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -773,10 +1008,19 @@
     "awakenIcon": "UI_EquipIcon_Sword_Bakufu_Awaken",
     "weaponPromoteId": 11414,
     "storyId": 191414,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 7779124416582334188,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 11414,
     "nameTextMapHash": 1990820123,
@@ -791,7 +1035,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [111415, 0],
+    "skillAffix": [
+      111415,
+      0
+    ],
     "awakenMaterial": 200108,
     "weaponProp": [
       {
@@ -810,11 +1057,20 @@
     "awakenIcon": "UI_EquipIcon_Sword_Opus_Awaken",
     "weaponPromoteId": 11415,
     "storyId": 191415,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 15774853427934277321,
     "enhanceRule": 1,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 11415,
     "nameTextMapHash": 342097547,
@@ -829,7 +1085,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [111416, 0],
+    "skillAffix": [
+      111416,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -850,8 +1109,12 @@
     "awakenCosts": [],
     "gachaCardNameHash": 4980559788864737813,
     "enhanceRule": 1,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 11416,
     "nameTextMapHash": 1012170803,
@@ -866,7 +1129,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [111417, 0],
+    "skillAffix": [
+      111417,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -884,10 +1150,19 @@
     "awakenIcon": "UI_EquipIcon_Sword_Arakalari_Awaken",
     "weaponPromoteId": 11417,
     "storyId": 191417,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 10515321192698031269,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 11417,
     "nameTextMapHash": 313300315,
@@ -902,7 +1177,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [111418, 0],
+    "skillAffix": [
+      111418,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -920,10 +1198,19 @@
     "awakenIcon": "UI_EquipIcon_Sword_Pleroma_Awaken",
     "weaponPromoteId": 11418,
     "storyId": 191418,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 240606053099582135,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 11418,
     "nameTextMapHash": 143051931,
@@ -938,7 +1225,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [111419, 0],
+    "skillAffix": [
+      111419,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -958,8 +1248,12 @@
     "awakenCosts": [],
     "gachaCardNameHash": 7999085186165141066,
     "enhanceRule": 1,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 11419,
     "nameTextMapHash": 1499745907,
@@ -974,7 +1268,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [111420, 0],
+    "skillAffix": [
+      111420,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -993,8 +1290,12 @@
     "awakenCosts": [],
     "gachaCardNameHash": 1293391040647106053,
     "enhanceRule": 1,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 11420,
     "nameTextMapHash": 1538092267,
@@ -1009,7 +1310,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [111421, 0],
+    "skillAffix": [
+      111421,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -1029,8 +1333,12 @@
     "awakenCosts": [],
     "gachaCardNameHash": 7999085186165141066,
     "enhanceRule": 1,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 11421,
     "nameTextMapHash": 3464027035,
@@ -1045,7 +1353,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [111422, 0],
+    "skillAffix": [
+      111422,
+      0
+    ],
     "awakenMaterial": 200113,
     "weaponProp": [
       {
@@ -1064,11 +1375,20 @@
     "awakenIcon": "UI_EquipIcon_Sword_Kasabouzu_Awaken",
     "weaponPromoteId": 11422,
     "storyId": 191422,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 10582637218558451197,
     "enhanceRule": 1,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 11422,
     "nameTextMapHash": 2448629019,
@@ -1083,7 +1403,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [111424, 0],
+    "skillAffix": [
+      111424,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -1101,10 +1424,19 @@
     "awakenIcon": "UI_EquipIcon_Sword_Boreas_Awaken",
     "weaponPromoteId": 11424,
     "storyId": 191424,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 13760221827121135582,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 11424,
     "nameTextMapHash": 2265792579,
@@ -1119,7 +1451,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [111425, 0],
+    "skillAffix": [
+      111425,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -1137,10 +1472,19 @@
     "awakenIcon": "UI_EquipIcon_Sword_Vorpal_Awaken",
     "weaponPromoteId": 11425,
     "storyId": 191425,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 21647293660067926,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 11425,
     "nameTextMapHash": 800766043,
@@ -1155,7 +1499,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [111426, 0],
+    "skillAffix": [
+      111426,
+      0
+    ],
     "awakenMaterial": 200116,
     "weaponProp": [
       {
@@ -1174,11 +1521,20 @@
     "awakenIcon": "UI_EquipIcon_Sword_Machination_Awaken",
     "weaponPromoteId": 11426,
     "storyId": 191426,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 17414968389011054230,
     "enhanceRule": 1,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 11426,
     "nameTextMapHash": 1921306659,
@@ -1193,7 +1549,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [111427, 0],
+    "skillAffix": [
+      111427,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -1211,10 +1570,19 @@
     "awakenIcon": "UI_EquipIcon_Sword_Mechanic_Awaken",
     "weaponPromoteId": 11427,
     "storyId": 191427,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 13468444888890993694,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 11427,
     "nameTextMapHash": 1790067483,
@@ -1229,7 +1597,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [111428, 0],
+    "skillAffix": [
+      111428,
+      0
+    ],
     "awakenMaterial": 200118,
     "weaponProp": [
       {
@@ -1248,11 +1619,20 @@
     "awakenIcon": "UI_EquipIcon_Sword_Purewill",
     "weaponPromoteId": 11428,
     "storyId": 191428,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 14546887146169480021,
     "enhanceRule": 1,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 11428,
     "nameTextMapHash": 3016493955,
@@ -1267,7 +1647,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [111429, 0],
+    "skillAffix": [
+      111429,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -1287,8 +1670,12 @@
     "awakenCosts": [],
     "gachaCardNameHash": 14546887146169480021,
     "enhanceRule": 1,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 11429,
     "nameTextMapHash": 594850707,
@@ -1303,7 +1690,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [111430, 0],
+    "skillAffix": [
+      111430,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -1321,10 +1711,19 @@
     "awakenIcon": "UI_EquipIcon_Sword_Umpakati_Awaken",
     "weaponPromoteId": 11430,
     "storyId": 191430,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 9486727895230944322,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 11430,
     "nameTextMapHash": 495182275,
@@ -1339,7 +1738,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [111431, 0],
+    "skillAffix": [
+      111431,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -1357,10 +1759,19 @@
     "awakenIcon": "UI_EquipIcon_Sword_Isikhulu_Awaken",
     "weaponPromoteId": 11431,
     "storyId": 191431,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 17374191347346932107,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 11431,
     "nameTextMapHash": 3434743027,
@@ -1375,7 +1786,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [111432, 0],
+    "skillAffix": [
+      111432,
+      0
+    ],
     "awakenMaterial": 200123,
     "weaponProp": [
       {
@@ -1394,11 +1808,20 @@
     "awakenIcon": "UI_EquipIcon_Sword_SacrificialNgombe_Awaken",
     "weaponPromoteId": 11432,
     "storyId": 191432,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 10297481667077593414,
     "enhanceRule": 1,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 11432,
     "nameTextMapHash": 590019915,
@@ -1413,7 +1836,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [111501, 0],
+    "skillAffix": [
+      111501,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -1431,10 +1857,19 @@
     "awakenIcon": "UI_EquipIcon_Sword_Falcon_Awaken",
     "weaponPromoteId": 11501,
     "storyId": 191501,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 18355363353325362624,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 11501,
     "nameTextMapHash": 902264035,
@@ -1449,7 +1884,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [111502, 0],
+    "skillAffix": [
+      111502,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -1467,10 +1905,19 @@
     "awakenIcon": "UI_EquipIcon_Sword_Dvalin_Awaken",
     "weaponPromoteId": 11502,
     "storyId": 191502,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 5648527876009382286,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 11502,
     "nameTextMapHash": 4055003299,
@@ -1485,7 +1932,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [111503, 0],
+    "skillAffix": [
+      111503,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -1503,10 +1953,19 @@
     "awakenIcon": "UI_EquipIcon_Sword_Widsith_Awaken",
     "weaponPromoteId": 11503,
     "storyId": 191503,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 3164760239968649509,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 11503,
     "nameTextMapHash": 2949448555,
@@ -1521,7 +1980,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [111504, 0],
+    "skillAffix": [
+      111504,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -1539,10 +2001,19 @@
     "awakenIcon": "UI_EquipIcon_Sword_Kunwu_Awaken",
     "weaponPromoteId": 11504,
     "storyId": 191504,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 4166664540572046472,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 11504,
     "nameTextMapHash": 944332883,
@@ -1557,7 +2028,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [111505, 0],
+    "skillAffix": [
+      111505,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -1575,10 +2049,19 @@
     "awakenIcon": "UI_EquipIcon_Sword_Morax_Awaken",
     "weaponPromoteId": 11505,
     "storyId": 191505,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 14948704767876625565,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 11505,
     "nameTextMapHash": 1345343763,
@@ -1593,7 +2076,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [0, 0],
+    "skillAffix": [
+      0,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -1610,8 +2096,12 @@
     "weaponPromoteId": 11101,
     "awakenCosts": [],
     "gachaCardNameHash": 5206550965894458167,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 11506,
     "nameTextMapHash": 231836963,
@@ -1626,7 +2116,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [0, 0],
+    "skillAffix": [
+      0,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -1643,8 +2136,12 @@
     "weaponPromoteId": 11101,
     "awakenCosts": [],
     "gachaCardNameHash": 5206550965894458167,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 11507,
     "nameTextMapHash": 3780343147,
@@ -1659,7 +2156,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [0, 0],
+    "skillAffix": [
+      0,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -1676,8 +2176,12 @@
     "weaponPromoteId": 11101,
     "awakenCosts": [],
     "gachaCardNameHash": 5206550965894458167,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 11508,
     "nameTextMapHash": 1664039091,
@@ -1692,7 +2196,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [111509, 0],
+    "skillAffix": [
+      111509,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -1710,10 +2217,19 @@
     "awakenIcon": "UI_EquipIcon_Sword_Narukami_Awaken",
     "weaponPromoteId": 11509,
     "storyId": 191509,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 8471582007642535756,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 11509,
     "nameTextMapHash": 4124851547,
@@ -1728,7 +2244,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [111510, 0],
+    "skillAffix": [
+      111510,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -1746,10 +2265,19 @@
     "awakenIcon": "UI_EquipIcon_Sword_Amenoma_Awaken",
     "weaponPromoteId": 11510,
     "storyId": 191510,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 15430308198237933253,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 11510,
     "nameTextMapHash": 1600275315,
@@ -1764,7 +2292,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [111511, 0],
+    "skillAffix": [
+      111511,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -1782,10 +2313,19 @@
     "awakenIcon": "UI_EquipIcon_Sword_Deshret_Awaken",
     "weaponPromoteId": 11511,
     "storyId": 191511,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 11371944837044655913,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 11511,
     "nameTextMapHash": 454086795,
@@ -1800,7 +2340,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [111512, 0],
+    "skillAffix": [
+      111512,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -1818,10 +2361,19 @@
     "awakenIcon": "UI_EquipIcon_Sword_Ayus_Awaken",
     "weaponPromoteId": 11512,
     "storyId": 191512,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 16593168387307432572,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 11512,
     "nameTextMapHash": 275622963,
@@ -1836,7 +2388,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [111513, 0],
+    "skillAffix": [
+      111513,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -1854,10 +2409,19 @@
     "awakenIcon": "UI_EquipIcon_Sword_Regalis_Awaken",
     "weaponPromoteId": 11513,
     "storyId": 191513,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 10425870712656713183,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 11513,
     "nameTextMapHash": 1473399443,
@@ -1872,7 +2436,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [111514, 0],
+    "skillAffix": [
+      111514,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -1890,10 +2457,19 @@
     "awakenIcon": "UI_EquipIcon_Sword_Needle_Awaken",
     "weaponPromoteId": 11514,
     "storyId": 191514,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 12710804142464187256,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 11514,
     "nameTextMapHash": 1818340435,
@@ -1908,7 +2484,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [111515, 0],
+    "skillAffix": [
+      111515,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -1926,10 +2505,19 @@
     "awakenIcon": "UI_EquipIcon_Sword_Estoc_Awaken",
     "weaponPromoteId": 11515,
     "storyId": 191515,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 3468169303065469096,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 11515,
     "nameTextMapHash": 1009471939,
@@ -1944,7 +2532,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [111516, 0],
+    "skillAffix": [
+      111516,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -1962,10 +2553,19 @@
     "awakenIcon": "UI_EquipIcon_Sword_XochitlsTube_Awaken",
     "weaponPromoteId": 11516,
     "storyId": 191516,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 1587254140351851146,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 11516,
     "nameTextMapHash": 3432339555,
@@ -1980,7 +2580,10 @@
     "weaponType": "WEAPON_CLAYMORE",
     "rankLevel": 1,
     "weaponBaseExp": 600,
-    "skillAffix": [0, 0],
+    "skillAffix": [
+      0,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -1999,8 +2602,12 @@
     "awakenCosts": [],
     "gachaCardNameHash": 5752398527715298532,
     "destroyRule": "DESTROY_RETURN_MATERIAL",
-    "destroyReturnMaterial": [104011],
-    "destroyReturnMaterialCount": [1],
+    "destroyReturnMaterial": [
+      104011
+    ],
+    "destroyReturnMaterialCount": [
+      1
+    ],
     "id": 12101,
     "nameTextMapHash": 2666951267,
     "descTextMapHash": 2490958125,
@@ -2014,7 +2621,10 @@
     "weaponType": "WEAPON_CLAYMORE",
     "rankLevel": 2,
     "weaponBaseExp": 1200,
-    "skillAffix": [0, 0],
+    "skillAffix": [
+      0,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -2033,8 +2643,12 @@
     "awakenCosts": [],
     "gachaCardNameHash": 4076400545788413250,
     "destroyRule": "DESTROY_RETURN_MATERIAL",
-    "destroyReturnMaterial": [104011],
-    "destroyReturnMaterialCount": [2],
+    "destroyReturnMaterial": [
+      104011
+    ],
+    "destroyReturnMaterialCount": [
+      2
+    ],
     "id": 12201,
     "nameTextMapHash": 1182966603,
     "descTextMapHash": 169605981,
@@ -2048,7 +2662,10 @@
     "weaponType": "WEAPON_CLAYMORE",
     "rankLevel": 3,
     "weaponBaseExp": 1800,
-    "skillAffix": [112301, 0],
+    "skillAffix": [
+      112301,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -2066,11 +2683,20 @@
     "awakenIcon": "UI_EquipIcon_Claymore_Glaive_Awaken",
     "weaponPromoteId": 12301,
     "storyId": 192301,
-    "awakenCosts": [500, 1000, 2000, 4000],
+    "awakenCosts": [
+      500,
+      1000,
+      2000,
+      4000
+    ],
     "gachaCardNameHash": 18902074258675026,
     "destroyRule": "DESTROY_RETURN_MATERIAL",
-    "destroyReturnMaterial": [104011],
-    "destroyReturnMaterialCount": [3],
+    "destroyReturnMaterial": [
+      104011
+    ],
+    "destroyReturnMaterialCount": [
+      3
+    ],
     "id": 12301,
     "nameTextMapHash": 1479961579,
     "descTextMapHash": 1887050717,
@@ -2084,7 +2710,10 @@
     "weaponType": "WEAPON_CLAYMORE",
     "rankLevel": 3,
     "weaponBaseExp": 1800,
-    "skillAffix": [112302, 0],
+    "skillAffix": [
+      112302,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -2102,11 +2731,20 @@
     "awakenIcon": "UI_EquipIcon_Claymore_Siegfry_Awaken",
     "weaponPromoteId": 12302,
     "storyId": 192302,
-    "awakenCosts": [500, 1000, 2000, 4000],
+    "awakenCosts": [
+      500,
+      1000,
+      2000,
+      4000
+    ],
     "gachaCardNameHash": 15434543970837500330,
     "destroyRule": "DESTROY_RETURN_MATERIAL",
-    "destroyReturnMaterial": [104011],
-    "destroyReturnMaterialCount": [3],
+    "destroyReturnMaterial": [
+      104011
+    ],
+    "destroyReturnMaterialCount": [
+      3
+    ],
     "id": 12302,
     "nameTextMapHash": 4090429643,
     "descTextMapHash": 3230364157,
@@ -2120,7 +2758,10 @@
     "weaponType": "WEAPON_CLAYMORE",
     "rankLevel": 3,
     "weaponBaseExp": 1800,
-    "skillAffix": [112303, 0],
+    "skillAffix": [
+      112303,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -2138,11 +2779,20 @@
     "awakenIcon": "UI_EquipIcon_Claymore_Tin_Awaken",
     "weaponPromoteId": 12303,
     "storyId": 192303,
-    "awakenCosts": [500, 1000, 2000, 4000],
+    "awakenCosts": [
+      500,
+      1000,
+      2000,
+      4000
+    ],
     "gachaCardNameHash": 14209955155780405066,
     "destroyRule": "DESTROY_RETURN_MATERIAL",
-    "destroyReturnMaterial": [104011],
-    "destroyReturnMaterialCount": [3],
+    "destroyReturnMaterial": [
+      104011
+    ],
+    "destroyReturnMaterialCount": [
+      3
+    ],
     "id": 12303,
     "nameTextMapHash": 850802171,
     "descTextMapHash": 2243594437,
@@ -2156,7 +2806,10 @@
     "weaponType": "WEAPON_CLAYMORE",
     "rankLevel": 3,
     "weaponBaseExp": 1800,
-    "skillAffix": [112304, 0],
+    "skillAffix": [
+      112304,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -2174,11 +2827,20 @@
     "awakenIcon": "UI_EquipIcon_Claymore_Quartz_Awaken",
     "weaponPromoteId": 12304,
     "storyId": 192304,
-    "awakenCosts": [500, 1000, 2000, 4000],
+    "awakenCosts": [
+      500,
+      1000,
+      2000,
+      4000
+    ],
     "gachaCardNameHash": 12033475205837916122,
     "destroyRule": "DESTROY_RETURN_MATERIAL",
-    "destroyReturnMaterial": [104011],
-    "destroyReturnMaterialCount": [3],
+    "destroyReturnMaterial": [
+      104011
+    ],
+    "destroyReturnMaterialCount": [
+      3
+    ],
     "id": 12304,
     "nameTextMapHash": 1516554699,
     "descTextMapHash": 3918253109,
@@ -2192,7 +2854,10 @@
     "weaponType": "WEAPON_CLAYMORE",
     "rankLevel": 3,
     "weaponBaseExp": 1800,
-    "skillAffix": [112305, 0],
+    "skillAffix": [
+      112305,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -2210,11 +2875,20 @@
     "awakenIcon": "UI_EquipIcon_Claymore_Reasoning_Awaken",
     "weaponPromoteId": 12305,
     "storyId": 192305,
-    "awakenCosts": [500, 1000, 2000, 4000],
+    "awakenCosts": [
+      500,
+      1000,
+      2000,
+      4000
+    ],
     "gachaCardNameHash": 6577227949849124029,
     "destroyRule": "DESTROY_RETURN_MATERIAL",
-    "destroyReturnMaterial": [104011],
-    "destroyReturnMaterialCount": [3],
+    "destroyReturnMaterial": [
+      104011
+    ],
+    "destroyReturnMaterialCount": [
+      3
+    ],
     "id": 12305,
     "nameTextMapHash": 3097441915,
     "descTextMapHash": 2797040229,
@@ -2228,7 +2902,10 @@
     "weaponType": "WEAPON_CLAYMORE",
     "rankLevel": 3,
     "weaponBaseExp": 1800,
-    "skillAffix": [112306, 0],
+    "skillAffix": [
+      112306,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -2246,11 +2923,20 @@
     "awakenIcon": "UI_EquipIcon_Claymore_Mitsurugi_Awaken",
     "weaponPromoteId": 12306,
     "storyId": 192306,
-    "awakenCosts": [500, 1000, 2000, 4000],
+    "awakenCosts": [
+      500,
+      1000,
+      2000,
+      4000
+    ],
     "gachaCardNameHash": 4524304803153106298,
     "destroyRule": "DESTROY_RETURN_MATERIAL",
-    "destroyReturnMaterial": [104011],
-    "destroyReturnMaterialCount": [3],
+    "destroyReturnMaterial": [
+      104011
+    ],
+    "destroyReturnMaterialCount": [
+      3
+    ],
     "id": 12306,
     "nameTextMapHash": 2614170427,
     "descTextMapHash": 599093453,
@@ -2264,7 +2950,10 @@
     "weaponType": "WEAPON_CLAYMORE",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [112401, 0],
+    "skillAffix": [
+      112401,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -2282,10 +2971,19 @@
     "awakenIcon": "UI_EquipIcon_Claymore_Zephyrus_Awaken",
     "weaponPromoteId": 12401,
     "storyId": 192401,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 17293904821966365728,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 12401,
     "nameTextMapHash": 735056795,
@@ -2300,7 +2998,10 @@
     "weaponType": "WEAPON_CLAYMORE",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [112402, 0],
+    "skillAffix": [
+      112402,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -2318,10 +3019,19 @@
     "awakenIcon": "UI_EquipIcon_Claymore_Troupe_Awaken",
     "weaponPromoteId": 12402,
     "storyId": 192402,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 13452800039440942986,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 12402,
     "nameTextMapHash": 930640955,
@@ -2336,7 +3046,10 @@
     "weaponType": "WEAPON_CLAYMORE",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [112403, 0],
+    "skillAffix": [
+      112403,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -2354,10 +3067,19 @@
     "awakenIcon": "UI_EquipIcon_Claymore_Fossil_Awaken",
     "weaponPromoteId": 12403,
     "storyId": 192403,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 6388782095948280153,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 12403,
     "nameTextMapHash": 1675686363,
@@ -2372,7 +3094,10 @@
     "weaponType": "WEAPON_CLAYMORE",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [112404, 0],
+    "skillAffix": [
+      112404,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -2390,10 +3115,19 @@
     "awakenIcon": "UI_EquipIcon_Claymore_Theocrat_Awaken",
     "weaponPromoteId": 12404,
     "storyId": 192404,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 6529381613679561816,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 12404,
     "nameTextMapHash": 877751435,
@@ -2408,7 +3142,10 @@
     "weaponType": "WEAPON_CLAYMORE",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [112405, 0],
+    "skillAffix": [
+      112405,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -2426,10 +3163,19 @@
     "awakenIcon": "UI_EquipIcon_Claymore_Perdue_Awaken",
     "weaponPromoteId": 12405,
     "storyId": 192405,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 12069194696619521162,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 12405,
     "nameTextMapHash": 3684723963,
@@ -2444,7 +3190,10 @@
     "weaponType": "WEAPON_CLAYMORE",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [112406, 0],
+    "skillAffix": [
+      112406,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -2462,10 +3211,19 @@
     "awakenIcon": "UI_EquipIcon_Claymore_Proto_Awaken",
     "weaponPromoteId": 12406,
     "storyId": 192406,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 2194233792160215854,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 12406,
     "nameTextMapHash": 3722933411,
@@ -2480,7 +3238,10 @@
     "weaponType": "WEAPON_CLAYMORE",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [112407, 0],
+    "skillAffix": [
+      112407,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -2498,10 +3259,19 @@
     "awakenIcon": "UI_EquipIcon_Claymore_Exotic_Awaken",
     "weaponPromoteId": 12407,
     "storyId": 192407,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 11700036165820880646,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 12407,
     "nameTextMapHash": 680510411,
@@ -2516,7 +3286,10 @@
     "weaponType": "WEAPON_CLAYMORE",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [112408, 0],
+    "skillAffix": [
+      112408,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -2534,10 +3307,19 @@
     "awakenIcon": "UI_EquipIcon_Claymore_Blackrock_Awaken",
     "weaponPromoteId": 12408,
     "storyId": 192408,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 14295299804454463012,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 12408,
     "nameTextMapHash": 20848859,
@@ -2552,7 +3334,10 @@
     "weaponType": "WEAPON_CLAYMORE",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [112409, 0],
+    "skillAffix": [
+      112409,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -2570,10 +3355,19 @@
     "awakenIcon": "UI_EquipIcon_Claymore_Kione_Awaken",
     "weaponPromoteId": 12409,
     "storyId": 192409,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 1919083802173727790,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 12409,
     "nameTextMapHash": 1437658243,
@@ -2588,7 +3382,10 @@
     "weaponType": "WEAPON_CLAYMORE",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [112410, 0],
+    "skillAffix": [
+      112410,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -2606,10 +3403,19 @@
     "awakenIcon": "UI_EquipIcon_Claymore_Lapis_Awaken",
     "weaponPromoteId": 12410,
     "storyId": 192410,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 13837462810524748396,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 12410,
     "nameTextMapHash": 2006422931,
@@ -2624,7 +3430,10 @@
     "weaponType": "WEAPON_CLAYMORE",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [112411, 0],
+    "skillAffix": [
+      112411,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -2642,10 +3451,19 @@
     "awakenIcon": "UI_EquipIcon_Claymore_Dragonfell_Awaken",
     "weaponPromoteId": 12411,
     "storyId": 192411,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 12699134380144235913,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 12411,
     "nameTextMapHash": 2753539619,
@@ -2660,7 +3478,10 @@
     "weaponType": "WEAPON_CLAYMORE",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [112412, 0],
+    "skillAffix": [
+      112412,
+      0
+    ],
     "awakenMaterial": 200106,
     "weaponProp": [
       {
@@ -2679,11 +3500,20 @@
     "awakenIcon": "UI_EquipIcon_Claymore_MillenniaTuna_Awaken",
     "weaponPromoteId": 12412,
     "storyId": 192412,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 30620597733313864,
     "enhanceRule": 1,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 12412,
     "nameTextMapHash": 346510395,
@@ -2698,7 +3528,10 @@
     "weaponType": "WEAPON_CLAYMORE",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [112414, 0],
+    "skillAffix": [
+      112414,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -2716,10 +3549,19 @@
     "awakenIcon": "UI_EquipIcon_Claymore_Bakufu_Awaken",
     "weaponPromoteId": 12414,
     "storyId": 192414,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 18195064631241962598,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 12414,
     "nameTextMapHash": 4193089947,
@@ -2734,7 +3576,10 @@
     "weaponType": "WEAPON_CLAYMORE",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [112415, 0],
+    "skillAffix": [
+      112415,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -2752,10 +3597,19 @@
     "awakenIcon": "UI_EquipIcon_Claymore_Pleroma_Awaken",
     "weaponPromoteId": 12415,
     "storyId": 192415,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 9629510738332812465,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 12415,
     "nameTextMapHash": 3073454867,
@@ -2770,7 +3624,10 @@
     "weaponType": "WEAPON_CLAYMORE",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [112416, 0],
+    "skillAffix": [
+      112416,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -2788,10 +3645,19 @@
     "awakenIcon": "UI_EquipIcon_Claymore_Maria_Awaken",
     "weaponPromoteId": 12416,
     "storyId": 192416,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 11861128859912830679,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 12416,
     "nameTextMapHash": 2359799475,
@@ -2806,7 +3672,10 @@
     "weaponType": "WEAPON_CLAYMORE",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [112417, 0],
+    "skillAffix": [
+      112417,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -2824,10 +3693,19 @@
     "awakenIcon": "UI_EquipIcon_Claymore_Arakalari_Awaken",
     "weaponPromoteId": 12417,
     "storyId": 192417,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 395608059073330965,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 12417,
     "nameTextMapHash": 902184579,
@@ -2842,7 +3720,10 @@
     "weaponType": "WEAPON_CLAYMORE",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [112418, 0],
+    "skillAffix": [
+      112418,
+      0
+    ],
     "awakenMaterial": 200114,
     "weaponProp": [
       {
@@ -2861,11 +3742,20 @@
     "awakenIcon": "UI_EquipIcon_Claymore_Fleurfair_Awaken",
     "weaponPromoteId": 12418,
     "storyId": 192418,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 4757987924769494923,
     "enhanceRule": 1,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 12418,
     "nameTextMapHash": 1200948859,
@@ -2880,7 +3770,10 @@
     "weaponType": "WEAPON_CLAYMORE",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [112424, 0],
+    "skillAffix": [
+      112424,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -2898,10 +3791,19 @@
     "awakenIcon": "UI_EquipIcon_Claymore_BeastTamer_Awaken",
     "weaponPromoteId": 12424,
     "storyId": 192424,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 275089000586097656,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 12424,
     "nameTextMapHash": 3459616011,
@@ -2916,7 +3818,10 @@
     "weaponType": "WEAPON_CLAYMORE",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [112425, 0],
+    "skillAffix": [
+      112425,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -2934,10 +3839,19 @@
     "awakenIcon": "UI_EquipIcon_Claymore_Vorpal_Awaken",
     "weaponPromoteId": 12425,
     "storyId": 192425,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 10470720307824573219,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 12425,
     "nameTextMapHash": 2077869763,
@@ -2952,7 +3866,10 @@
     "weaponType": "WEAPON_CLAYMORE",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [112426, 0],
+    "skillAffix": [
+      112426,
+      0
+    ],
     "awakenMaterial": 200119,
     "weaponProp": [
       {
@@ -2971,11 +3888,20 @@
     "awakenIcon": "UI_EquipIcon_Claymore_Champion_Awaken",
     "weaponPromoteId": 12426,
     "storyId": 192426,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 15693819123284972285,
     "enhanceRule": 1,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 12426,
     "nameTextMapHash": 933442195,
@@ -2990,7 +3916,10 @@
     "weaponType": "WEAPON_CLAYMORE",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [112427, 0],
+    "skillAffix": [
+      112427,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -3008,10 +3937,19 @@
     "awakenIcon": "UI_EquipIcon_Claymore_Mechanic_Awaken",
     "weaponPromoteId": 12427,
     "storyId": 192427,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 8671479807227500139,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 12427,
     "nameTextMapHash": 3693117451,
@@ -3026,7 +3964,10 @@
     "weaponType": "WEAPON_CLAYMORE",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [112430, 0],
+    "skillAffix": [
+      112430,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -3044,10 +3985,19 @@
     "awakenIcon": "UI_EquipIcon_Claymore_Umpakati_Awaken",
     "weaponPromoteId": 12430,
     "storyId": 192430,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 17808869565720497375,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 12430,
     "nameTextMapHash": 688237043,
@@ -3062,7 +4012,10 @@
     "weaponType": "WEAPON_CLAYMORE",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [112431, 0],
+    "skillAffix": [
+      112431,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -3080,10 +4033,19 @@
     "awakenIcon": "UI_EquipIcon_Claymore_Isikhulu_Awaken",
     "weaponPromoteId": 12431,
     "storyId": 192431,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 16690501068352319350,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 12431,
     "nameTextMapHash": 2481464075,
@@ -3098,7 +4060,10 @@
     "weaponType": "WEAPON_CLAYMORE",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [112501, 0],
+    "skillAffix": [
+      112501,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -3116,10 +4081,19 @@
     "awakenIcon": "UI_EquipIcon_Claymore_Dvalin_Awaken",
     "weaponPromoteId": 12501,
     "storyId": 192501,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 6603911325503630302,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 12501,
     "nameTextMapHash": 1089950259,
@@ -3134,7 +4108,10 @@
     "weaponType": "WEAPON_CLAYMORE",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [112502, 0],
+    "skillAffix": [
+      112502,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -3152,10 +4129,19 @@
     "awakenIcon": "UI_EquipIcon_Claymore_Wolfmound_Awaken",
     "weaponPromoteId": 12502,
     "storyId": 192502,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 5043970180839010905,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 12502,
     "nameTextMapHash": 3995710363,
@@ -3170,7 +4156,10 @@
     "weaponType": "WEAPON_CLAYMORE",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [112503, 0],
+    "skillAffix": [
+      112503,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -3188,10 +4177,19 @@
     "awakenIcon": "UI_EquipIcon_Claymore_Widsith_Awaken",
     "weaponPromoteId": 12503,
     "storyId": 192503,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 16297328942241737570,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 12503,
     "nameTextMapHash": 1075647299,
@@ -3206,7 +4204,10 @@
     "weaponType": "WEAPON_CLAYMORE",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [112504, 0],
+    "skillAffix": [
+      112504,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -3224,10 +4225,19 @@
     "awakenIcon": "UI_EquipIcon_Claymore_Kunwu_Awaken",
     "weaponPromoteId": 12504,
     "storyId": 192504,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 3433322581820259831,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 12504,
     "nameTextMapHash": 2792766467,
@@ -3242,7 +4252,10 @@
     "weaponType": "WEAPON_CLAYMORE",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [0, 0],
+    "skillAffix": [
+      0,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -3259,8 +4272,12 @@
     "weaponPromoteId": 11101,
     "awakenCosts": [],
     "gachaCardNameHash": 5752398527715298532,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 12505,
     "nameTextMapHash": 977648923,
@@ -3275,7 +4292,10 @@
     "weaponType": "WEAPON_CLAYMORE",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [0, 0],
+    "skillAffix": [
+      0,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -3292,8 +4312,12 @@
     "weaponPromoteId": 11101,
     "awakenCosts": [],
     "gachaCardNameHash": 5752398527715298532,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 12506,
     "nameTextMapHash": 2597527627,
@@ -3308,7 +4332,10 @@
     "weaponType": "WEAPON_CLAYMORE",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [0, 0],
+    "skillAffix": [
+      0,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -3325,8 +4352,12 @@
     "weaponPromoteId": 11101,
     "awakenCosts": [],
     "gachaCardNameHash": 5752398527715298532,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 12508,
     "nameTextMapHash": 759708203,
@@ -3341,7 +4372,10 @@
     "weaponType": "WEAPON_CLAYMORE",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [0, 0],
+    "skillAffix": [
+      0,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -3359,8 +4393,12 @@
     "storyId": 192509,
     "awakenCosts": [],
     "gachaCardNameHash": 5752398527715298532,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 12509,
     "nameTextMapHash": 2507837467,
@@ -3375,7 +4413,10 @@
     "weaponType": "WEAPON_CLAYMORE",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [112510, 0],
+    "skillAffix": [
+      112510,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -3393,10 +4434,19 @@
     "awakenIcon": "UI_EquipIcon_Claymore_Itadorimaru_Awaken",
     "weaponPromoteId": 12510,
     "storyId": 192510,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 17300850195972452228,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 12510,
     "nameTextMapHash": 3914951691,
@@ -3411,7 +4461,10 @@
     "weaponType": "WEAPON_CLAYMORE",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [112511, 0],
+    "skillAffix": [
+      112511,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -3429,10 +4482,19 @@
     "awakenIcon": "UI_EquipIcon_Claymore_Deshret_Awaken",
     "weaponPromoteId": 12511,
     "storyId": 192511,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 16886464146810442136,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 12511,
     "nameTextMapHash": 2834063555,
@@ -3447,7 +4509,10 @@
     "weaponType": "WEAPON_CLAYMORE",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [112512, 0],
+    "skillAffix": [
+      112512,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -3465,10 +4530,19 @@
     "awakenIcon": "UI_EquipIcon_Claymore_GoldenVerdict_Awaken",
     "weaponPromoteId": 12512,
     "storyId": 192512,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 6538077083450401857,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 12512,
     "nameTextMapHash": 3812523339,
@@ -3483,7 +4557,10 @@
     "weaponType": "WEAPON_CLAYMORE",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [112513, 0],
+    "skillAffix": [
+      112513,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -3501,10 +4578,19 @@
     "awakenIcon": "UI_EquipIcon_Claymore_EmeraldSword_Awaken",
     "weaponPromoteId": 12513,
     "storyId": 192513,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 11169874811235166771,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 12513,
     "nameTextMapHash": 1183454019,
@@ -3516,10 +4602,61 @@
     "gadgetId": 50012513
   },
   {
+    "weaponType": "WEAPON_CLAYMORE",
+    "rankLevel": 5,
+    "weaponBaseExp": 300000,
+    "skillAffix": [
+      112514,
+      0
+    ],
+    "weaponProp": [
+      {
+        "propType": "FIGHT_PROP_BASE_ATTACK",
+        "initValue": 49.1377,
+        "type": "GROW_CURVE_ATTACK_303"
+      },
+      {
+        "propType": "FIGHT_PROP_CRITICAL",
+        "initValue": 0.024,
+        "type": "GROW_CURVE_CRITICAL_301"
+      }
+    ],
+    "awakenTexture": "ART/Equip/AvatarEquip/Equip_Claymore_RadianceSword/Equip_Claymore_RadianceSword_OverrideTexture/Equip_Claymore_RadianceSword_02_Tex_Diffuse",
+    "awakenLightMapTexture": "ART/Equip/AvatarEquip/Equip_Claymore_RadianceSword/Equip_Claymore_RadianceSword_OverrideTexture/Equip_Claymore_RadianceSword_02_Tex_Lightmap",
+    "awakenIcon": "UI_EquipIcon_Claymore_RadianceSword_Awaken",
+    "weaponPromoteId": 12514,
+    "storyId": 192514,
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
+    "gachaCardNameHash": 2718489171091900332,
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
+    "initialLockState": 1,
+    "id": 12514,
+    "nameTextMapHash": 1876377995,
+    "descTextMapHash": 980941197,
+    "icon": "UI_EquipIcon_Claymore_RadianceSword",
+    "itemType": "ITEM_WEAPON",
+    "weight": 1,
+    "rank": 10,
+    "gadgetId": 50012514
+  },
+  {
     "weaponType": "WEAPON_POLE",
     "rankLevel": 1,
     "weaponBaseExp": 600,
-    "skillAffix": [0, 0],
+    "skillAffix": [
+      0,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -3538,8 +4675,12 @@
     "awakenCosts": [],
     "gachaCardNameHash": 9617173300685003508,
     "destroyRule": "DESTROY_RETURN_MATERIAL",
-    "destroyReturnMaterial": [104011],
-    "destroyReturnMaterialCount": [1],
+    "destroyReturnMaterial": [
+      104011
+    ],
+    "destroyReturnMaterialCount": [
+      1
+    ],
     "id": 13101,
     "nameTextMapHash": 2796697027,
     "descTextMapHash": 1707406541,
@@ -3553,7 +4694,10 @@
     "weaponType": "WEAPON_POLE",
     "rankLevel": 2,
     "weaponBaseExp": 1200,
-    "skillAffix": [0, 0],
+    "skillAffix": [
+      0,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -3572,8 +4716,12 @@
     "awakenCosts": [],
     "gachaCardNameHash": 5665814366753436258,
     "destroyRule": "DESTROY_RETURN_MATERIAL",
-    "destroyReturnMaterial": [104011],
-    "destroyReturnMaterialCount": [2],
+    "destroyReturnMaterial": [
+      104011
+    ],
+    "destroyReturnMaterialCount": [
+      2
+    ],
     "id": 13201,
     "nameTextMapHash": 3070169307,
     "descTextMapHash": 1460440477,
@@ -3587,7 +4735,10 @@
     "weaponType": "WEAPON_POLE",
     "rankLevel": 3,
     "weaponBaseExp": 1800,
-    "skillAffix": [113301, 0],
+    "skillAffix": [
+      113301,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -3605,11 +4756,20 @@
     "awakenIcon": "UI_EquipIcon_Pole_Ruby_Awaken",
     "weaponPromoteId": 13301,
     "storyId": 193301,
-    "awakenCosts": [500, 1000, 2000, 4000],
+    "awakenCosts": [
+      500,
+      1000,
+      2000,
+      4000
+    ],
     "gachaCardNameHash": 17992976282708699452,
     "destroyRule": "DESTROY_RETURN_MATERIAL",
-    "destroyReturnMaterial": [104011],
-    "destroyReturnMaterialCount": [3],
+    "destroyReturnMaterial": [
+      104011
+    ],
+    "destroyReturnMaterialCount": [
+      3
+    ],
     "id": 13301,
     "nameTextMapHash": 1390797107,
     "descTextMapHash": 3496480741,
@@ -3623,7 +4783,10 @@
     "weaponType": "WEAPON_POLE",
     "rankLevel": 3,
     "weaponBaseExp": 1800,
-    "skillAffix": [113302, 0],
+    "skillAffix": [
+      113302,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -3641,11 +4804,20 @@
     "awakenIcon": "UI_EquipIcon_Pole_Halberd_Awaken",
     "weaponPromoteId": 13302,
     "storyId": 193302,
-    "awakenCosts": [500, 1000, 2000, 4000],
+    "awakenCosts": [
+      500,
+      1000,
+      2000,
+      4000
+    ],
     "gachaCardNameHash": 4334781063589060204,
     "destroyRule": "DESTROY_RETURN_MATERIAL",
-    "destroyReturnMaterial": [104011],
-    "destroyReturnMaterialCount": [3],
+    "destroyReturnMaterial": [
+      104011
+    ],
+    "destroyReturnMaterialCount": [
+      3
+    ],
     "id": 13302,
     "nameTextMapHash": 618786571,
     "descTextMapHash": 4218316925,
@@ -3659,7 +4831,10 @@
     "weaponType": "WEAPON_POLE",
     "rankLevel": 3,
     "weaponBaseExp": 1800,
-    "skillAffix": [113303, 0],
+    "skillAffix": [
+      113303,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -3677,11 +4852,20 @@
     "awakenIcon": "UI_EquipIcon_Pole_Noire_Awaken",
     "weaponPromoteId": 13303,
     "storyId": 193303,
-    "awakenCosts": [500, 1000, 2000, 4000],
+    "awakenCosts": [
+      500,
+      1000,
+      2000,
+      4000
+    ],
     "gachaCardNameHash": 14654924563928579681,
     "destroyRule": "DESTROY_RETURN_MATERIAL",
-    "destroyReturnMaterial": [104011],
-    "destroyReturnMaterialCount": [3],
+    "destroyReturnMaterial": [
+      104011
+    ],
+    "destroyReturnMaterialCount": [
+      3
+    ],
     "id": 13303,
     "nameTextMapHash": 4103766499,
     "descTextMapHash": 2692633181,
@@ -3695,7 +4879,10 @@
     "weaponType": "WEAPON_POLE",
     "rankLevel": 3,
     "weaponBaseExp": 1800,
-    "skillAffix": [113304, 0],
+    "skillAffix": [
+      113304,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -3711,11 +4898,20 @@
     "awakenIcon": "UI_EquipIcon_Pole_Flagpole_Awaken",
     "weaponPromoteId": 13304,
     "storyId": 193304,
-    "awakenCosts": [500, 1000, 2000, 4000],
+    "awakenCosts": [
+      500,
+      1000,
+      2000,
+      4000
+    ],
     "gachaCardNameHash": 12443670722844209327,
     "destroyRule": "DESTROY_RETURN_MATERIAL",
-    "destroyReturnMaterial": [104011],
-    "destroyReturnMaterialCount": [3],
+    "destroyReturnMaterial": [
+      104011
+    ],
+    "destroyReturnMaterialCount": [
+      3
+    ],
     "id": 13304,
     "nameTextMapHash": 500612819,
     "descTextMapHash": 3767447885,
@@ -3729,7 +4925,10 @@
     "weaponType": "WEAPON_POLE",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [113401, 0],
+    "skillAffix": [
+      113401,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -3747,10 +4946,19 @@
     "awakenIcon": "UI_EquipIcon_Pole_Stardust_Awaken",
     "weaponPromoteId": 13401,
     "storyId": 193401,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 14930185889305615728,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 13401,
     "nameTextMapHash": 2664629131,
@@ -3765,7 +4973,10 @@
     "weaponType": "WEAPON_POLE",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [113402, 0],
+    "skillAffix": [
+      113402,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -3783,10 +4994,19 @@
     "awakenIcon": "UI_EquipIcon_Pole_Proto_Awaken",
     "weaponPromoteId": 13402,
     "storyId": 193402,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 976897176702373920,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 13402,
     "nameTextMapHash": 1154009435,
@@ -3801,7 +5021,10 @@
     "weaponType": "WEAPON_POLE",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [113403, 0],
+    "skillAffix": [
+      113403,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -3819,10 +5042,19 @@
     "awakenIcon": "UI_EquipIcon_Pole_Exotic_Awaken",
     "weaponPromoteId": 13403,
     "storyId": 193403,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 5490280544810167750,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 13403,
     "nameTextMapHash": 578575283,
@@ -3837,7 +5069,10 @@
     "weaponType": "WEAPON_POLE",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [113404, 0],
+    "skillAffix": [
+      113404,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -3855,10 +5090,19 @@
     "awakenIcon": "UI_EquipIcon_Pole_Blackrock_Awaken",
     "weaponPromoteId": 13404,
     "storyId": 193404,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 11703211656831782686,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 13404,
     "nameTextMapHash": 481755219,
@@ -3873,7 +5117,10 @@
     "weaponType": "WEAPON_POLE",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [113405, 0],
+    "skillAffix": [
+      113405,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -3891,10 +5138,19 @@
     "awakenIcon": "UI_EquipIcon_Pole_Gladiator_Awaken",
     "weaponPromoteId": 13405,
     "storyId": 193405,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 392956094286511317,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 13405,
     "nameTextMapHash": 4049410651,
@@ -3909,7 +5165,10 @@
     "weaponType": "WEAPON_POLE",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [113406, 0],
+    "skillAffix": [
+      113406,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -3927,10 +5186,19 @@
     "awakenIcon": "UI_EquipIcon_Pole_Lapis_Awaken",
     "weaponPromoteId": 13406,
     "storyId": 193406,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 616650412185472015,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 13406,
     "nameTextMapHash": 716252627,
@@ -3945,7 +5213,10 @@
     "weaponType": "WEAPON_POLE",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [113407, 0],
+    "skillAffix": [
+      113407,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -3963,10 +5234,19 @@
     "awakenIcon": "UI_EquipIcon_Pole_Zephyrus_Awaken",
     "weaponPromoteId": 13407,
     "storyId": 193407,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 12611545857192693580,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 13407,
     "nameTextMapHash": 3755004051,
@@ -3981,7 +5261,10 @@
     "weaponType": "WEAPON_POLE",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [113408, 0],
+    "skillAffix": [
+      113408,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -3999,10 +5282,19 @@
     "awakenIcon": "UI_EquipIcon_Pole_Theocrat_Awaken",
     "weaponPromoteId": 13408,
     "storyId": 193408,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 3245822332709826655,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 13408,
     "nameTextMapHash": 2935286715,
@@ -4017,7 +5309,10 @@
     "weaponType": "WEAPON_POLE",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [113409, 0],
+    "skillAffix": [
+      113409,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -4035,10 +5330,19 @@
     "awakenIcon": "UI_EquipIcon_Pole_Everfrost_Awaken",
     "weaponPromoteId": 13409,
     "storyId": 193409,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 2214946073113655369,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 13409,
     "nameTextMapHash": 3443142923,
@@ -4053,7 +5357,10 @@
     "weaponType": "WEAPON_POLE",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [113414, 0],
+    "skillAffix": [
+      113414,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -4071,10 +5378,19 @@
     "awakenIcon": "UI_EquipIcon_Pole_Bakufu_Awaken",
     "weaponPromoteId": 13414,
     "storyId": 193414,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 13456455907198010801,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 13414,
     "nameTextMapHash": 2491797315,
@@ -4089,7 +5405,10 @@
     "weaponType": "WEAPON_POLE",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [113415, 0],
+    "skillAffix": [
+      113415,
+      0
+    ],
     "awakenMaterial": 200107,
     "weaponProp": [
       {
@@ -4108,11 +5427,20 @@
     "awakenIcon": "UI_EquipIcon_Pole_Mori_Awaken",
     "weaponPromoteId": 13415,
     "storyId": 193415,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 4644589140044765310,
     "enhanceRule": 1,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 13415,
     "nameTextMapHash": 1148024603,
@@ -4127,7 +5455,10 @@
     "weaponType": "WEAPON_POLE",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [113416, 0],
+    "skillAffix": [
+      113416,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -4145,10 +5476,19 @@
     "awakenIcon": "UI_EquipIcon_Pole_Maria_Awaken",
     "weaponPromoteId": 13416,
     "storyId": 193416,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 8052898222639810429,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 13416,
     "nameTextMapHash": 4122509083,
@@ -4163,7 +5503,10 @@
     "weaponType": "WEAPON_POLE",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [113417, 0],
+    "skillAffix": [
+      113417,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -4181,10 +5524,19 @@
     "awakenIcon": "UI_EquipIcon_Pole_Arakalari_Awaken",
     "weaponPromoteId": 13417,
     "storyId": 193417,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 14263227086136913117,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 13417,
     "nameTextMapHash": 452357939,
@@ -4199,7 +5551,10 @@
     "weaponType": "WEAPON_POLE",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [113419, 0],
+    "skillAffix": [
+      113419,
+      0
+    ],
     "awakenMaterial": 200112,
     "weaponProp": [
       {
@@ -4218,11 +5573,20 @@
     "awakenIcon": "UI_EquipIcon_Pole_Windvane_Awaken",
     "weaponPromoteId": 13419,
     "storyId": 193419,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 1048934850750275349,
     "enhanceRule": 1,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 13419,
     "nameTextMapHash": 1470442731,
@@ -4237,7 +5601,10 @@
     "weaponType": "WEAPON_POLE",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [113424, 0],
+    "skillAffix": [
+      113424,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -4255,10 +5622,19 @@
     "awakenIcon": "UI_EquipIcon_Pole_Shanty_Awaken",
     "weaponPromoteId": 13424,
     "storyId": 193424,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 14827579099933703959,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 13424,
     "nameTextMapHash": 449192923,
@@ -4273,7 +5649,10 @@
     "weaponType": "WEAPON_POLE",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [113425, 0],
+    "skillAffix": [
+      113425,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -4291,10 +5670,19 @@
     "awakenIcon": "UI_EquipIcon_Pole_Vorpal_Awaken",
     "weaponPromoteId": 13425,
     "storyId": 193425,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 17345777077312959235,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 13425,
     "nameTextMapHash": 4158971171,
@@ -4309,7 +5697,10 @@
     "weaponType": "WEAPON_POLE",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [113426, 0],
+    "skillAffix": [
+      113426,
+      0
+    ],
     "awakenMaterial": 200120,
     "weaponProp": [
       {
@@ -4328,11 +5719,20 @@
     "awakenIcon": "UI_EquipIcon_Pole_Caduceus_Awaken",
     "weaponPromoteId": 13426,
     "storyId": 193426,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 7431079417004047511,
     "enhanceRule": 1,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 13426,
     "nameTextMapHash": 2847771107,
@@ -4347,7 +5747,10 @@
     "weaponType": "WEAPON_POLE",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [113427, 0],
+    "skillAffix": [
+      113427,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -4365,10 +5768,19 @@
     "awakenIcon": "UI_EquipIcon_Pole_Mechanic_Awaken",
     "weaponPromoteId": 13427,
     "storyId": 193427,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 12637811717359616424,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 13427,
     "nameTextMapHash": 882305891,
@@ -4383,7 +5795,10 @@
     "weaponType": "WEAPON_POLE",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [113430, 0],
+    "skillAffix": [
+      113430,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -4401,10 +5816,19 @@
     "awakenIcon": "UI_EquipIcon_Pole_Umpakati_Awaken",
     "weaponPromoteId": 13430,
     "storyId": 193430,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 3556566767148614607,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 13430,
     "nameTextMapHash": 1965515667,
@@ -4419,7 +5843,10 @@
     "weaponType": "WEAPON_POLE",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [113431, 0],
+    "skillAffix": [
+      113431,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -4437,10 +5864,19 @@
     "awakenIcon": "UI_EquipIcon_Pole_Isikhulu_Awaken",
     "weaponPromoteId": 13431,
     "storyId": 193431,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 11001269255516696729,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 13431,
     "nameTextMapHash": 415520051,
@@ -4455,7 +5891,10 @@
     "weaponType": "WEAPON_POLE",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [113501, 0],
+    "skillAffix": [
+      113501,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -4473,10 +5912,19 @@
     "awakenIcon": "UI_EquipIcon_Pole_Homa_Awaken",
     "weaponPromoteId": 13501,
     "storyId": 193501,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 14565230574402364976,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 13501,
     "nameTextMapHash": 3235324891,
@@ -4491,7 +5939,10 @@
     "weaponType": "WEAPON_POLE",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [113502, 0],
+    "skillAffix": [
+      113502,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -4509,10 +5960,19 @@
     "awakenIcon": "UI_EquipIcon_Pole_Dvalin_Awaken",
     "weaponPromoteId": 13502,
     "storyId": 193502,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 612016346505357440,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 13502,
     "nameTextMapHash": 4158505619,
@@ -4527,7 +5987,10 @@
     "weaponType": "WEAPON_POLE",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [0, 0],
+    "skillAffix": [
+      0,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -4544,8 +6007,12 @@
     "weaponPromoteId": 11101,
     "awakenCosts": [],
     "gachaCardNameHash": 9617173300685003508,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 13503,
     "nameTextMapHash": 469555475,
@@ -4560,7 +6027,10 @@
     "weaponType": "WEAPON_POLE",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [113504, 0],
+    "skillAffix": [
+      113504,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -4578,10 +6048,19 @@
     "awakenIcon": "UI_EquipIcon_Pole_Kunwu_Awaken",
     "weaponPromoteId": 13504,
     "storyId": 193504,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 17642096513428870162,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 13504,
     "nameTextMapHash": 197755235,
@@ -4596,7 +6075,10 @@
     "weaponType": "WEAPON_POLE",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [113505, 0],
+    "skillAffix": [
+      113505,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -4614,10 +6096,19 @@
     "awakenIcon": "UI_EquipIcon_Pole_Morax_Awaken",
     "weaponPromoteId": 13505,
     "storyId": 193505,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 3521327898920020136,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 13505,
     "nameTextMapHash": 1997709467,
@@ -4632,7 +6123,10 @@
     "weaponType": "WEAPON_POLE",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [0, 0],
+    "skillAffix": [
+      0,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -4649,8 +6143,12 @@
     "weaponPromoteId": 11101,
     "awakenCosts": [],
     "gachaCardNameHash": 9617173300685003508,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 13506,
     "nameTextMapHash": 3532343811,
@@ -4665,7 +6163,10 @@
     "weaponType": "WEAPON_POLE",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [113507, 0],
+    "skillAffix": [
+      113507,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -4683,10 +6184,19 @@
     "awakenIcon": "UI_EquipIcon_Pole_Santika_Awaken",
     "weaponPromoteId": 13507,
     "storyId": 193507,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 5302683599911969005,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 13507,
     "nameTextMapHash": 688991243,
@@ -4701,7 +6211,10 @@
     "weaponType": "WEAPON_POLE",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [113509, 0],
+    "skillAffix": [
+      113509,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -4719,10 +6232,19 @@
     "awakenIcon": "UI_EquipIcon_Pole_Narukami_Awaken",
     "weaponPromoteId": 13509,
     "storyId": 193509,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 5878057430568209464,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 13509,
     "nameTextMapHash": 3717849275,
@@ -4737,7 +6259,10 @@
     "weaponType": "WEAPON_POLE",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [113511, 0],
+    "skillAffix": [
+      113511,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -4755,10 +6280,19 @@
     "awakenIcon": "UI_EquipIcon_Pole_Deshret_Awaken",
     "weaponPromoteId": 13511,
     "storyId": 193511,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 5964035598117698518,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 13511,
     "nameTextMapHash": 4238339131,
@@ -4773,7 +6307,10 @@
     "weaponType": "WEAPON_POLE",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [113512, 0],
+    "skillAffix": [
+      113512,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -4791,10 +6328,19 @@
     "awakenIcon": "UI_EquipIcon_Pole_BloodMoon_Awaken",
     "weaponPromoteId": 13512,
     "storyId": 193512,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 6393726993908341012,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 13512,
     "nameTextMapHash": 2944936683,
@@ -4809,7 +6355,10 @@
     "weaponType": "WEAPON_POLE",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [113513, 0],
+    "skillAffix": [
+      113513,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -4827,10 +6376,19 @@
     "awakenIcon": "UI_EquipIcon_Pole_Muguet_Awaken",
     "weaponPromoteId": 13513,
     "storyId": 193513,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 14965739221917873184,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 13513,
     "nameTextMapHash": 1948935171,
@@ -4845,7 +6403,10 @@
     "weaponType": "WEAPON_CATALYST",
     "rankLevel": 1,
     "weaponBaseExp": 600,
-    "skillAffix": [0, 0],
+    "skillAffix": [
+      0,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -4864,8 +6425,12 @@
     "awakenCosts": [],
     "gachaCardNameHash": 10277643394138549720,
     "destroyRule": "DESTROY_RETURN_MATERIAL",
-    "destroyReturnMaterial": [104011],
-    "destroyReturnMaterialCount": [1],
+    "destroyReturnMaterial": [
+      104011
+    ],
+    "destroyReturnMaterialCount": [
+      1
+    ],
     "id": 14101,
     "nameTextMapHash": 3584825427,
     "descTextMapHash": 62211301,
@@ -4879,7 +6444,10 @@
     "weaponType": "WEAPON_CATALYST",
     "rankLevel": 2,
     "weaponBaseExp": 1200,
-    "skillAffix": [0, 0],
+    "skillAffix": [
+      0,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -4898,8 +6466,12 @@
     "awakenCosts": [],
     "gachaCardNameHash": 12812779732730760768,
     "destroyRule": "DESTROY_RETURN_MATERIAL",
-    "destroyReturnMaterial": [104011],
-    "destroyReturnMaterialCount": [2],
+    "destroyReturnMaterial": [
+      104011
+    ],
+    "destroyReturnMaterialCount": [
+      2
+    ],
     "id": 14201,
     "nameTextMapHash": 2705029563,
     "descTextMapHash": 728247149,
@@ -4913,7 +6485,10 @@
     "weaponType": "WEAPON_CATALYST",
     "rankLevel": 3,
     "weaponBaseExp": 1800,
-    "skillAffix": [114301, 0],
+    "skillAffix": [
+      114301,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -4931,11 +6506,20 @@
     "awakenIcon": "UI_EquipIcon_Catalyst_Intro_Awaken",
     "weaponPromoteId": 14301,
     "storyId": 194301,
-    "awakenCosts": [500, 1000, 2000, 4000],
+    "awakenCosts": [
+      500,
+      1000,
+      2000,
+      4000
+    ],
     "gachaCardNameHash": 611719110159309149,
     "destroyRule": "DESTROY_RETURN_MATERIAL",
-    "destroyReturnMaterial": [104011],
-    "destroyReturnMaterialCount": [3],
+    "destroyReturnMaterial": [
+      104011
+    ],
+    "destroyReturnMaterialCount": [
+      3
+    ],
     "id": 14301,
     "nameTextMapHash": 2279290283,
     "descTextMapHash": 1128957,
@@ -4949,7 +6533,10 @@
     "weaponType": "WEAPON_CATALYST",
     "rankLevel": 3,
     "weaponBaseExp": 1800,
-    "skillAffix": [114302, 0],
+    "skillAffix": [
+      114302,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -4967,11 +6554,20 @@
     "awakenIcon": "UI_EquipIcon_Catalyst_Pulpfic_Awaken",
     "weaponPromoteId": 14302,
     "storyId": 194302,
-    "awakenCosts": [500, 1000, 2000, 4000],
+    "awakenCosts": [
+      500,
+      1000,
+      2000,
+      4000
+    ],
     "gachaCardNameHash": 14969824103534932496,
     "destroyRule": "DESTROY_RETURN_MATERIAL",
-    "destroyReturnMaterial": [104011],
-    "destroyReturnMaterialCount": [3],
+    "destroyReturnMaterial": [
+      104011
+    ],
+    "destroyReturnMaterialCount": [
+      3
+    ],
     "id": 14302,
     "nameTextMapHash": 3500935003,
     "descTextMapHash": 4081562589,
@@ -4985,7 +6581,10 @@
     "weaponType": "WEAPON_CATALYST",
     "rankLevel": 3,
     "weaponBaseExp": 1800,
-    "skillAffix": [114303, 0],
+    "skillAffix": [
+      114303,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -5003,11 +6602,20 @@
     "awakenIcon": "UI_EquipIcon_Catalyst_Lightnov_Awaken",
     "weaponPromoteId": 14303,
     "storyId": 194303,
-    "awakenCosts": [500, 1000, 2000, 4000],
+    "awakenCosts": [
+      500,
+      1000,
+      2000,
+      4000
+    ],
     "gachaCardNameHash": 12809585812877031328,
     "destroyRule": "DESTROY_RETURN_MATERIAL",
-    "destroyReturnMaterial": [104011],
-    "destroyReturnMaterialCount": [3],
+    "destroyReturnMaterial": [
+      104011
+    ],
+    "destroyReturnMaterialCount": [
+      3
+    ],
     "id": 14303,
     "nameTextMapHash": 1406746947,
     "descTextMapHash": 201204037,
@@ -5021,7 +6629,10 @@
     "weaponType": "WEAPON_CATALYST",
     "rankLevel": 3,
     "weaponBaseExp": 1800,
-    "skillAffix": [114304, 0],
+    "skillAffix": [
+      114304,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -5040,11 +6651,20 @@
     "unRotate": true,
     "weaponPromoteId": 14304,
     "storyId": 194304,
-    "awakenCosts": [500, 1000, 2000, 4000],
+    "awakenCosts": [
+      500,
+      1000,
+      2000,
+      4000
+    ],
     "gachaCardNameHash": 13701510421890038124,
     "destroyRule": "DESTROY_RETURN_MATERIAL",
-    "destroyReturnMaterial": [104011],
-    "destroyReturnMaterialCount": [3],
+    "destroyReturnMaterial": [
+      104011
+    ],
+    "destroyReturnMaterialCount": [
+      3
+    ],
     "id": 14304,
     "nameTextMapHash": 2963220587,
     "descTextMapHash": 4004013141,
@@ -5058,7 +6678,10 @@
     "weaponType": "WEAPON_CATALYST",
     "rankLevel": 3,
     "weaponBaseExp": 1800,
-    "skillAffix": [114305, 0],
+    "skillAffix": [
+      114305,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -5077,11 +6700,20 @@
     "unRotate": true,
     "weaponPromoteId": 14305,
     "storyId": 194305,
-    "awakenCosts": [500, 1000, 2000, 4000],
+    "awakenCosts": [
+      500,
+      1000,
+      2000,
+      4000
+    ],
     "gachaCardNameHash": 711257877109476036,
     "destroyRule": "DESTROY_RETURN_MATERIAL",
-    "destroyReturnMaterial": [104011],
-    "destroyReturnMaterialCount": [3],
+    "destroyReturnMaterial": [
+      104011
+    ],
+    "destroyReturnMaterialCount": [
+      3
+    ],
     "id": 14305,
     "nameTextMapHash": 3719372715,
     "descTextMapHash": 2737744437,
@@ -5095,7 +6727,10 @@
     "weaponType": "WEAPON_CATALYST",
     "rankLevel": 3,
     "weaponBaseExp": 1800,
-    "skillAffix": [114306, 0],
+    "skillAffix": [
+      114306,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -5114,11 +6749,20 @@
     "unRotate": true,
     "weaponPromoteId": 14306,
     "storyId": 194306,
-    "awakenCosts": [500, 1000, 2000, 4000],
+    "awakenCosts": [
+      500,
+      1000,
+      2000,
+      4000
+    ],
     "gachaCardNameHash": 3518775332131812424,
     "destroyRule": "DESTROY_RETURN_MATERIAL",
-    "destroyReturnMaterial": [104011],
-    "destroyReturnMaterialCount": [3],
+    "destroyReturnMaterial": [
+      104011
+    ],
+    "destroyReturnMaterialCount": [
+      3
+    ],
     "id": 14306,
     "nameTextMapHash": 302691299,
     "descTextMapHash": 3867432845,
@@ -5132,7 +6776,10 @@
     "weaponType": "WEAPON_CATALYST",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [114401, 0],
+    "skillAffix": [
+      114401,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -5150,10 +6797,19 @@
     "awakenIcon": "UI_EquipIcon_Catalyst_Zephyrus_Awaken",
     "weaponPromoteId": 14401,
     "storyId": 194401,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 7494659597366800962,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 14401,
     "nameTextMapHash": 623534363,
@@ -5168,7 +6824,10 @@
     "weaponType": "WEAPON_CATALYST",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [114402, 0],
+    "skillAffix": [
+      114402,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -5186,10 +6845,19 @@
     "awakenIcon": "UI_EquipIcon_Catalyst_Troupe_Awaken",
     "weaponPromoteId": 14402,
     "storyId": 194402,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 10822411501597536187,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 14402,
     "nameTextMapHash": 1163263227,
@@ -5204,7 +6872,10 @@
     "weaponType": "WEAPON_CATALYST",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [114403, 0],
+    "skillAffix": [
+      114403,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -5222,10 +6893,19 @@
     "awakenIcon": "UI_EquipIcon_Catalyst_Fossil_Awaken",
     "weaponPromoteId": 14403,
     "storyId": 194403,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 12771167839134295618,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 14403,
     "nameTextMapHash": 2195665683,
@@ -5240,7 +6920,10 @@
     "weaponType": "WEAPON_CATALYST",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [114404, 0],
+    "skillAffix": [
+      114404,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -5258,10 +6941,19 @@
     "awakenIcon": "UI_EquipIcon_Catalyst_Theocrat_Awaken",
     "weaponPromoteId": 14404,
     "storyId": 194404,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 3615600433559183858,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 14404,
     "nameTextMapHash": 3827789435,
@@ -5276,7 +6968,10 @@
     "weaponType": "WEAPON_CATALYST",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [114405, 0],
+    "skillAffix": [
+      114405,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -5295,10 +6990,19 @@
     "unRotate": true,
     "weaponPromoteId": 14405,
     "storyId": 194405,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 17382006091952807702,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 14405,
     "nameTextMapHash": 37147251,
@@ -5313,7 +7017,10 @@
     "weaponType": "WEAPON_CATALYST",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [114406, 0],
+    "skillAffix": [
+      114406,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -5332,10 +7039,19 @@
     "unRotate": true,
     "weaponPromoteId": 14406,
     "storyId": 194406,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 11130998842250245268,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 14406,
     "nameTextMapHash": 2521338131,
@@ -5350,7 +7066,10 @@
     "weaponType": "WEAPON_CATALYST",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [114407, 0],
+    "skillAffix": [
+      114407,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -5368,10 +7087,19 @@
     "awakenIcon": "UI_EquipIcon_Catalyst_Exotic_Awaken",
     "weaponPromoteId": 14407,
     "storyId": 194407,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 7638363861194296134,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 14407,
     "nameTextMapHash": 1072884907,
@@ -5386,7 +7114,10 @@
     "weaponType": "WEAPON_CATALYST",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [114408, 0],
+    "skillAffix": [
+      114408,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -5405,10 +7136,19 @@
     "unRotate": true,
     "weaponPromoteId": 14408,
     "storyId": 194408,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 8604279428080495934,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 14408,
     "nameTextMapHash": 3273999011,
@@ -5423,7 +7163,10 @@
     "weaponType": "WEAPON_CATALYST",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [114409, 0],
+    "skillAffix": [
+      114409,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -5442,10 +7185,19 @@
     "unRotate": true,
     "weaponPromoteId": 14409,
     "storyId": 194409,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 10433058154529092631,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 14409,
     "nameTextMapHash": 3156385731,
@@ -5460,7 +7212,10 @@
     "weaponType": "WEAPON_CATALYST",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [114410, 0],
+    "skillAffix": [
+      114410,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -5478,10 +7233,19 @@
     "awakenIcon": "UI_EquipIcon_Catalyst_Outlaw_Awaken",
     "weaponPromoteId": 14410,
     "storyId": 194410,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 4860119987493817821,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 14410,
     "nameTextMapHash": 3090373787,
@@ -5496,7 +7260,10 @@
     "weaponType": "WEAPON_CATALYST",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [0, 0],
+    "skillAffix": [
+      0,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -5513,8 +7280,12 @@
     "weaponPromoteId": 11101,
     "awakenCosts": [],
     "gachaCardNameHash": 10277643394138549720,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 14411,
     "nameTextMapHash": 415851979,
@@ -5529,7 +7300,10 @@
     "weaponType": "WEAPON_CATALYST",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [114412, 0],
+    "skillAffix": [
+      114412,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -5548,10 +7322,19 @@
     "unRotate": true,
     "weaponPromoteId": 14412,
     "storyId": 194412,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 6460919179106734058,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 14412,
     "nameTextMapHash": 2587614459,
@@ -5566,7 +7349,10 @@
     "weaponType": "WEAPON_CATALYST",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [114413, 0],
+    "skillAffix": [
+      114413,
+      0
+    ],
     "awakenMaterial": 200105,
     "weaponProp": [
       {
@@ -5585,11 +7371,20 @@
     "awakenIcon": "UI_EquipIcon_Catalyst_Ludiharpastum_Awaken",
     "weaponPromoteId": 14413,
     "storyId": 194413,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 18028688753821689173,
     "enhanceRule": 1,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 14413,
     "nameTextMapHash": 3456986819,
@@ -5604,7 +7399,10 @@
     "weaponType": "WEAPON_CATALYST",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [114414, 0],
+    "skillAffix": [
+      114414,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -5623,10 +7421,19 @@
     "unRotate": true,
     "weaponPromoteId": 14414,
     "storyId": 194414,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 12484859727915047912,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 14414,
     "nameTextMapHash": 2324146259,
@@ -5641,7 +7448,10 @@
     "weaponType": "WEAPON_CATALYST",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [114415, 0],
+    "skillAffix": [
+      114415,
+      0
+    ],
     "awakenMaterial": 200109,
     "weaponProp": [
       {
@@ -5660,11 +7470,20 @@
     "awakenIcon": "UI_EquipIcon_Catalyst_Jyanome_Awaken",
     "weaponPromoteId": 14415,
     "storyId": 194415,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 256398963516104130,
     "enhanceRule": 1,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 14415,
     "nameTextMapHash": 2539208459,
@@ -5679,7 +7498,10 @@
     "weaponType": "WEAPON_CATALYST",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [114416, 0],
+    "skillAffix": [
+      114416,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -5698,10 +7520,19 @@
     "unRotate": true,
     "weaponPromoteId": 14416,
     "storyId": 194416,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 9641777882327664932,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 14416,
     "nameTextMapHash": 426363739,
@@ -5716,7 +7547,10 @@
     "weaponType": "WEAPON_CATALYST",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [114417, 0],
+    "skillAffix": [
+      114417,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -5735,10 +7569,19 @@
     "unRotate": true,
     "weaponPromoteId": 14417,
     "storyId": 194417,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 6758226991670809872,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 14417,
     "nameTextMapHash": 2267978875,
@@ -5753,7 +7596,10 @@
     "weaponType": "WEAPON_CATALYST",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [114424, 0],
+    "skillAffix": [
+      114424,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -5772,10 +7618,19 @@
     "unRotate": true,
     "weaponPromoteId": 14424,
     "storyId": 194424,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 9580263986567767807,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 14424,
     "nameTextMapHash": 2275710883,
@@ -5790,7 +7645,10 @@
     "weaponType": "WEAPON_CATALYST",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [114425, 0],
+    "skillAffix": [
+      114425,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -5808,10 +7666,19 @@
     "awakenIcon": "UI_EquipIcon_Catalyst_Vorpal_Awaken",
     "weaponPromoteId": 14425,
     "storyId": 194425,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 8355170941991190760,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 14425,
     "nameTextMapHash": 2432865507,
@@ -5826,7 +7693,10 @@
     "weaponType": "WEAPON_CATALYST",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [114426, 0],
+    "skillAffix": [
+      114426,
+      0
+    ],
     "awakenMaterial": 200117,
     "weaponProp": [
       {
@@ -5845,11 +7715,20 @@
     "awakenIcon": "UI_EquipIcon_Catalyst_DandelionPoem_Awaken",
     "weaponPromoteId": 14426,
     "storyId": 194426,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 5988787754748744698,
     "enhanceRule": 1,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 14426,
     "nameTextMapHash": 2722902043,
@@ -5864,7 +7743,10 @@
     "weaponType": "WEAPON_CATALYST",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [114427, 0],
+    "skillAffix": [
+      114427,
+      0
+    ],
     "awakenMaterial": 200122,
     "weaponProp": [
       {
@@ -5884,11 +7766,20 @@
     "unRotate": true,
     "weaponPromoteId": 14427,
     "storyId": 194427,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 6361549411833893212,
     "enhanceRule": 1,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 14427,
     "nameTextMapHash": 422144187,
@@ -5903,7 +7794,10 @@
     "weaponType": "WEAPON_CATALYST",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [114430, 0],
+    "skillAffix": [
+      114430,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -5922,10 +7816,19 @@
     "unRotate": true,
     "weaponPromoteId": 14430,
     "storyId": 194430,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 17336701544257900382,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 14430,
     "nameTextMapHash": 1445287979,
@@ -5940,7 +7843,10 @@
     "weaponType": "WEAPON_CATALYST",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [114431, 0],
+    "skillAffix": [
+      114431,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -5959,10 +7865,19 @@
     "unRotate": true,
     "weaponPromoteId": 14431,
     "storyId": 194431,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 18296137814160024652,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 14431,
     "nameTextMapHash": 3092853059,
@@ -5977,7 +7892,10 @@
     "weaponType": "WEAPON_CATALYST",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [114501, 0],
+    "skillAffix": [
+      114501,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -5995,10 +7913,19 @@
     "awakenIcon": "UI_EquipIcon_Catalyst_Dvalin_Awaken",
     "weaponPromoteId": 14501,
     "storyId": 194501,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 14237223976752557339,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 14501,
     "nameTextMapHash": 807607555,
@@ -6013,7 +7940,10 @@
     "weaponType": "WEAPON_CATALYST",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [114502, 0],
+    "skillAffix": [
+      114502,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -6031,10 +7961,19 @@
     "awakenIcon": "UI_EquipIcon_Catalyst_Fourwinds_Awaken",
     "weaponPromoteId": 14502,
     "storyId": 194502,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 16312259155130398344,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 14502,
     "nameTextMapHash": 1455107995,
@@ -6049,7 +7988,10 @@
     "weaponType": "WEAPON_CATALYST",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [0, 0],
+    "skillAffix": [
+      0,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -6066,8 +8008,12 @@
     "weaponPromoteId": 11101,
     "awakenCosts": [],
     "gachaCardNameHash": 10277643394138549720,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 14503,
     "nameTextMapHash": 452043283,
@@ -6082,7 +8028,10 @@
     "weaponType": "WEAPON_CATALYST",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [114504, 0],
+    "skillAffix": [
+      114504,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -6101,10 +8050,19 @@
     "unRotate": true,
     "weaponPromoteId": 14504,
     "storyId": 194504,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 10597691165751538262,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 14504,
     "nameTextMapHash": 693354267,
@@ -6119,7 +8077,10 @@
     "weaponType": "WEAPON_CATALYST",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [114505, 0],
+    "skillAffix": [
+      114505,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -6138,10 +8099,19 @@
     "unRotate": true,
     "weaponPromoteId": 14505,
     "storyId": 194505,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 2827332896714640517,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 14505,
     "nameTextMapHash": 4007372867,
@@ -6156,7 +8126,10 @@
     "weaponType": "WEAPON_CATALYST",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [114506, 0],
+    "skillAffix": [
+      114506,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -6175,10 +8148,19 @@
     "unRotate": true,
     "weaponPromoteId": 14506,
     "storyId": 194506,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 16563796787836516904,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 14506,
     "nameTextMapHash": 1890163363,
@@ -6193,7 +8175,10 @@
     "weaponType": "WEAPON_CATALYST",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [0, 0],
+    "skillAffix": [
+      0,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -6210,8 +8195,12 @@
     "weaponPromoteId": 11101,
     "awakenCosts": [],
     "gachaCardNameHash": 10277643394138549720,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 14508,
     "nameTextMapHash": 4123950051,
@@ -6226,7 +8215,10 @@
     "weaponType": "WEAPON_CATALYST",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [114509, 0],
+    "skillAffix": [
+      114509,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -6245,10 +8237,19 @@
     "unRotate": true,
     "weaponPromoteId": 14509,
     "storyId": 194509,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 12604352657128457006,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 14509,
     "nameTextMapHash": 310247243,
@@ -6263,7 +8264,10 @@
     "weaponType": "WEAPON_CATALYST",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [114511, 0],
+    "skillAffix": [
+      114511,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -6281,10 +8285,19 @@
     "awakenIcon": "UI_EquipIcon_Catalyst_Ayus_Awaken",
     "weaponPromoteId": 14511,
     "storyId": 194511,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 13068041646301633772,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 14511,
     "nameTextMapHash": 1201790667,
@@ -6299,7 +8312,10 @@
     "weaponType": "WEAPON_CATALYST",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [114512, 0],
+    "skillAffix": [
+      114512,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -6318,10 +8334,19 @@
     "unRotate": true,
     "weaponPromoteId": 14512,
     "storyId": 194512,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 12309415331107197236,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 14512,
     "nameTextMapHash": 359484419,
@@ -6336,7 +8361,10 @@
     "weaponType": "WEAPON_CATALYST",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [114513, 0],
+    "skillAffix": [
+      114513,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -6354,10 +8382,19 @@
     "awakenIcon": "UI_EquipIcon_Catalyst_Wheatley_Awaken",
     "weaponPromoteId": 14513,
     "storyId": 194513,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 8548755383974018251,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 14513,
     "nameTextMapHash": 724881171,
@@ -6372,7 +8409,10 @@
     "weaponType": "WEAPON_CATALYST",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [114514, 0],
+    "skillAffix": [
+      114514,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -6390,10 +8430,19 @@
     "awakenIcon": "UI_EquipIcon_Catalyst_Iudex_Awaken",
     "weaponPromoteId": 14514,
     "storyId": 194514,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 15788825974996559591,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 14514,
     "nameTextMapHash": 4176923379,
@@ -6408,7 +8457,10 @@
     "weaponType": "WEAPON_CATALYST",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [114515, 0],
+    "skillAffix": [
+      114515,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -6427,10 +8479,19 @@
     "unRotate": true,
     "weaponPromoteId": 14515,
     "storyId": 194515,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 13622773984337234135,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 14515,
     "nameTextMapHash": 3660626387,
@@ -6445,7 +8506,10 @@
     "weaponType": "WEAPON_CATALYST",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [114516, 0],
+    "skillAffix": [
+      114516,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -6463,10 +8527,19 @@
     "awakenIcon": "UI_EquipIcon_Catalyst_MechaPufferfish_Awaken",
     "weaponPromoteId": 14516,
     "storyId": 194516,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 14938114457528180347,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 14516,
     "nameTextMapHash": 1673987515,
@@ -6478,10 +8551,61 @@
     "gadgetId": 50014516
   },
   {
+    "weaponType": "WEAPON_CATALYST",
+    "rankLevel": 5,
+    "weaponBaseExp": 300000,
+    "skillAffix": [
+      114517,
+      0
+    ],
+    "weaponProp": [
+      {
+        "propType": "FIGHT_PROP_BASE_ATTACK",
+        "initValue": 44.3358,
+        "type": "GROW_CURVE_ATTACK_304"
+      },
+      {
+        "propType": "FIGHT_PROP_ELEMENT_MASTERY",
+        "initValue": 57.6,
+        "type": "GROW_CURVE_CRITICAL_301"
+      }
+    ],
+    "awakenTexture": "ART/Equip/AvatarEquip/Equip_Catalyst_Figurines/Equip_Catalyst_Figurines_OverrideTexture/Equip_Catalyst_Figurines_02_Tex_Diffuse",
+    "awakenLightMapTexture": "ART/Equip/AvatarEquip/Equip_Catalyst_Figurines/Equip_Catalyst_Figurines_OverrideTexture/Equip_Catalyst_Figurines_02_Tex_Lightmap",
+    "awakenIcon": "UI_EquipIcon_Catalyst_Figurines_Awaken",
+    "weaponPromoteId": 14517,
+    "storyId": 194517,
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
+    "gachaCardNameHash": 10866324593120517374,
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
+    "initialLockState": 1,
+    "id": 14517,
+    "nameTextMapHash": 2466897131,
+    "descTextMapHash": 2640796445,
+    "icon": "UI_EquipIcon_Catalyst_Figurines",
+    "itemType": "ITEM_WEAPON",
+    "weight": 1,
+    "rank": 10,
+    "gadgetId": 50014517
+  },
+  {
     "weaponType": "WEAPON_BOW",
     "rankLevel": 1,
     "weaponBaseExp": 600,
-    "skillAffix": [0, 0],
+    "skillAffix": [
+      0,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -6500,8 +8624,12 @@
     "awakenCosts": [],
     "gachaCardNameHash": 13264383033532101184,
     "destroyRule": "DESTROY_RETURN_MATERIAL",
-    "destroyReturnMaterial": [104011],
-    "destroyReturnMaterialCount": [1],
+    "destroyReturnMaterial": [
+      104011
+    ],
+    "destroyReturnMaterialCount": [
+      1
+    ],
     "id": 15101,
     "nameTextMapHash": 3600623979,
     "descTextMapHash": 2408955477,
@@ -6515,7 +8643,10 @@
     "weaponType": "WEAPON_BOW",
     "rankLevel": 2,
     "weaponBaseExp": 1200,
-    "skillAffix": [0, 0],
+    "skillAffix": [
+      0,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -6534,8 +8665,12 @@
     "awakenCosts": [],
     "gachaCardNameHash": 5329764258121862474,
     "destroyRule": "DESTROY_RETURN_MATERIAL",
-    "destroyReturnMaterial": [104011],
-    "destroyReturnMaterialCount": [2],
+    "destroyReturnMaterial": [
+      104011
+    ],
+    "destroyReturnMaterialCount": [
+      2
+    ],
     "id": 15201,
     "nameTextMapHash": 2340970067,
     "descTextMapHash": 905810789,
@@ -6549,7 +8684,10 @@
     "weaponType": "WEAPON_BOW",
     "rankLevel": 3,
     "weaponBaseExp": 1800,
-    "skillAffix": [115301, 0],
+    "skillAffix": [
+      115301,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -6567,11 +8705,20 @@
     "awakenIcon": "UI_EquipIcon_Bow_Crowfeather_Awaken",
     "weaponPromoteId": 15301,
     "storyId": 195301,
-    "awakenCosts": [500, 1000, 2000, 4000],
+    "awakenCosts": [
+      500,
+      1000,
+      2000,
+      4000
+    ],
     "gachaCardNameHash": 5081828837789974582,
     "destroyRule": "DESTROY_RETURN_MATERIAL",
-    "destroyReturnMaterial": [104011],
-    "destroyReturnMaterialCount": [3],
+    "destroyReturnMaterial": [
+      104011
+    ],
+    "destroyReturnMaterialCount": [
+      3
+    ],
     "id": 15301,
     "nameTextMapHash": 3975746731,
     "descTextMapHash": 367902357,
@@ -6585,7 +8732,10 @@
     "weaponType": "WEAPON_BOW",
     "rankLevel": 3,
     "weaponBaseExp": 1800,
-    "skillAffix": [115302, 0],
+    "skillAffix": [
+      115302,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -6603,11 +8753,20 @@
     "awakenIcon": "UI_EquipIcon_Bow_Arjuna_Awaken",
     "weaponPromoteId": 15302,
     "storyId": 195302,
-    "awakenCosts": [500, 1000, 2000, 4000],
+    "awakenCosts": [
+      500,
+      1000,
+      2000,
+      4000
+    ],
     "gachaCardNameHash": 2044081593285585167,
     "destroyRule": "DESTROY_RETURN_MATERIAL",
-    "destroyReturnMaterial": [104011],
-    "destroyReturnMaterialCount": [3],
+    "destroyReturnMaterial": [
+      104011
+    ],
+    "destroyReturnMaterialCount": [
+      3
+    ],
     "id": 15302,
     "nameTextMapHash": 656120259,
     "descTextMapHash": 894007269,
@@ -6621,7 +8780,10 @@
     "weaponType": "WEAPON_BOW",
     "rankLevel": 3,
     "weaponBaseExp": 1800,
-    "skillAffix": [115303, 0],
+    "skillAffix": [
+      115303,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -6639,11 +8801,20 @@
     "awakenIcon": "UI_EquipIcon_Bow_Curve_Awaken",
     "weaponPromoteId": 15303,
     "storyId": 195303,
-    "awakenCosts": [500, 1000, 2000, 4000],
+    "awakenCosts": [
+      500,
+      1000,
+      2000,
+      4000
+    ],
     "gachaCardNameHash": 8480038908049133666,
     "destroyRule": "DESTROY_RETURN_MATERIAL",
-    "destroyReturnMaterial": [104011],
-    "destroyReturnMaterialCount": [3],
+    "destroyReturnMaterial": [
+      104011
+    ],
+    "destroyReturnMaterialCount": [
+      3
+    ],
     "id": 15303,
     "nameTextMapHash": 4267718859,
     "descTextMapHash": 851960253,
@@ -6657,7 +8828,10 @@
     "weaponType": "WEAPON_BOW",
     "rankLevel": 3,
     "weaponBaseExp": 1800,
-    "skillAffix": [115304, 0],
+    "skillAffix": [
+      115304,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -6675,11 +8849,20 @@
     "awakenIcon": "UI_EquipIcon_Bow_Sling_Awaken",
     "weaponPromoteId": 15304,
     "storyId": 195304,
-    "awakenCosts": [500, 1000, 2000, 4000],
+    "awakenCosts": [
+      500,
+      1000,
+      2000,
+      4000
+    ],
     "gachaCardNameHash": 16823257936352887225,
     "destroyRule": "DESTROY_RETURN_MATERIAL",
-    "destroyReturnMaterial": [104011],
-    "destroyReturnMaterialCount": [3],
+    "destroyReturnMaterial": [
+      104011
+    ],
+    "destroyReturnMaterialCount": [
+      3
+    ],
     "id": 15304,
     "nameTextMapHash": 1021898539,
     "descTextMapHash": 2260945613,
@@ -6693,7 +8876,10 @@
     "weaponType": "WEAPON_BOW",
     "rankLevel": 3,
     "weaponBaseExp": 1800,
-    "skillAffix": [115305, 0],
+    "skillAffix": [
+      115305,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -6711,11 +8897,20 @@
     "awakenIcon": "UI_EquipIcon_Bow_Msg_Awaken",
     "weaponPromoteId": 15305,
     "storyId": 195305,
-    "awakenCosts": [500, 1000, 2000, 4000],
+    "awakenCosts": [
+      500,
+      1000,
+      2000,
+      4000
+    ],
     "gachaCardNameHash": 2054246558624217065,
     "destroyRule": "DESTROY_RETURN_MATERIAL",
-    "destroyReturnMaterial": [104011],
-    "destroyReturnMaterialCount": [3],
+    "destroyReturnMaterial": [
+      104011
+    ],
+    "destroyReturnMaterialCount": [
+      3
+    ],
     "id": 15305,
     "nameTextMapHash": 4139294531,
     "descTextMapHash": 2838701821,
@@ -6729,7 +8924,10 @@
     "weaponType": "WEAPON_BOW",
     "rankLevel": 3,
     "weaponBaseExp": 1800,
-    "skillAffix": [115306, 0],
+    "skillAffix": [
+      115306,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -6747,11 +8945,20 @@
     "awakenIcon": "UI_EquipIcon_Bow_Hardwood_Awaken",
     "weaponPromoteId": 15306,
     "storyId": 195306,
-    "awakenCosts": [500, 1000, 2000, 4000],
+    "awakenCosts": [
+      500,
+      1000,
+      2000,
+      4000
+    ],
     "gachaCardNameHash": 276973567952253327,
     "destroyRule": "DESTROY_RETURN_MATERIAL",
-    "destroyReturnMaterial": [104011],
-    "destroyReturnMaterialCount": [3],
+    "destroyReturnMaterial": [
+      104011
+    ],
+    "destroyReturnMaterialCount": [
+      3
+    ],
     "id": 15306,
     "nameTextMapHash": 2242027395,
     "descTextMapHash": 2789017349,
@@ -6765,7 +8972,10 @@
     "weaponType": "WEAPON_BOW",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [115401, 0],
+    "skillAffix": [
+      115401,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -6783,10 +8993,19 @@
     "awakenIcon": "UI_EquipIcon_Bow_Zephyrus_Awaken",
     "weaponPromoteId": 15401,
     "storyId": 195401,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 9054072525423548322,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 15401,
     "nameTextMapHash": 1240067179,
@@ -6801,7 +9020,10 @@
     "weaponType": "WEAPON_BOW",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [115402, 0],
+    "skillAffix": [
+      115402,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -6819,10 +9041,19 @@
     "awakenIcon": "UI_EquipIcon_Bow_Troupe_Awaken",
     "weaponPromoteId": 15402,
     "storyId": 195402,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 7171300797853098508,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 15402,
     "nameTextMapHash": 2556914683,
@@ -6837,7 +9068,10 @@
     "weaponType": "WEAPON_BOW",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [115403, 0],
+    "skillAffix": [
+      115403,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -6855,10 +9089,19 @@
     "awakenIcon": "UI_EquipIcon_Bow_Fossil_Awaken",
     "weaponPromoteId": 15403,
     "storyId": 195403,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 13893015589353111043,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 15403,
     "nameTextMapHash": 2400012995,
@@ -6873,7 +9116,10 @@
     "weaponType": "WEAPON_BOW",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [115404, 0],
+    "skillAffix": [
+      115404,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -6891,10 +9137,19 @@
     "awakenIcon": "UI_EquipIcon_Bow_Theocrat_Awaken",
     "weaponPromoteId": 15404,
     "storyId": 195404,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 256038039860421900,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 15404,
     "nameTextMapHash": 2832648187,
@@ -6909,7 +9164,10 @@
     "weaponType": "WEAPON_BOW",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [115405, 0],
+    "skillAffix": [
+      115405,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -6927,10 +9185,19 @@
     "awakenIcon": "UI_EquipIcon_Bow_Recluse_Awaken",
     "weaponPromoteId": 15405,
     "storyId": 195405,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 14570415418557068389,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 15405,
     "nameTextMapHash": 3169209451,
@@ -6945,7 +9212,10 @@
     "weaponType": "WEAPON_BOW",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [115406, 0],
+    "skillAffix": [
+      115406,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -6963,10 +9233,19 @@
     "awakenIcon": "UI_EquipIcon_Bow_Proto_Awaken",
     "weaponPromoteId": 15406,
     "storyId": 195406,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 5079968287668130497,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 15406,
     "nameTextMapHash": 3625393819,
@@ -6981,7 +9260,10 @@
     "weaponType": "WEAPON_BOW",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [115407, 0],
+    "skillAffix": [
+      115407,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -6999,10 +9281,19 @@
     "awakenIcon": "UI_EquipIcon_Bow_Exotic_Awaken",
     "weaponPromoteId": 15407,
     "storyId": 195407,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 8612881413685285414,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 15407,
     "nameTextMapHash": 411685275,
@@ -7017,7 +9308,10 @@
     "weaponType": "WEAPON_BOW",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [115408, 0],
+    "skillAffix": [
+      115408,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -7035,10 +9329,19 @@
     "awakenIcon": "UI_EquipIcon_Bow_Blackrock_Awaken",
     "weaponPromoteId": 15408,
     "storyId": 195408,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 13097553755422323799,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 15408,
     "nameTextMapHash": 3447737235,
@@ -7053,7 +9356,10 @@
     "weaponType": "WEAPON_BOW",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [115409, 0],
+    "skillAffix": [
+      115409,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -7071,10 +9377,19 @@
     "awakenIcon": "UI_EquipIcon_Bow_Viridescent_Awaken",
     "weaponPromoteId": 15409,
     "storyId": 195409,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 10439566685510464679,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 15409,
     "nameTextMapHash": 3439749859,
@@ -7089,7 +9404,10 @@
     "weaponType": "WEAPON_BOW",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [115410, 0],
+    "skillAffix": [
+      115410,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -7107,10 +9425,19 @@
     "awakenIcon": "UI_EquipIcon_Bow_Outlaw_Awaken",
     "weaponPromoteId": 15410,
     "storyId": 195410,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 208805811638297109,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 15410,
     "nameTextMapHash": 2417717595,
@@ -7125,7 +9452,10 @@
     "weaponType": "WEAPON_BOW",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [115411, 0],
+    "skillAffix": [
+      115411,
+      0
+    ],
     "awakenMaterial": 200110,
     "weaponProp": [
       {
@@ -7144,11 +9474,20 @@
     "awakenIcon": "UI_EquipIcon_Bow_Fallensun_Awaken",
     "weaponPromoteId": 15411,
     "storyId": 195411,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 7234857662360482895,
     "enhanceRule": 1,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 15411,
     "nameTextMapHash": 2425414923,
@@ -7163,7 +9502,10 @@
     "weaponType": "WEAPON_BOW",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [115412, 0],
+    "skillAffix": [
+      115412,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -7181,10 +9523,19 @@
     "awakenIcon": "UI_EquipIcon_Bow_Nachtblind_Awaken",
     "weaponPromoteId": 15412,
     "storyId": 195412,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 3930712425170854878,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 15412,
     "nameTextMapHash": 3949653579,
@@ -7199,7 +9550,10 @@
     "weaponType": "WEAPON_BOW",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [115413, 0],
+    "skillAffix": [
+      115413,
+      0
+    ],
     "awakenMaterial": 200104,
     "weaponProp": [
       {
@@ -7218,11 +9572,20 @@
     "awakenIcon": "UI_EquipIcon_Bow_Fleurfair_Awaken",
     "weaponPromoteId": 15413,
     "storyId": 195413,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 14148316077925122889,
     "enhanceRule": 1,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 15413,
     "nameTextMapHash": 650049651,
@@ -7237,7 +9600,10 @@
     "weaponType": "WEAPON_BOW",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [115414, 0],
+    "skillAffix": [
+      115414,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -7255,10 +9621,19 @@
     "awakenIcon": "UI_EquipIcon_Bow_Bakufu_Awaken",
     "weaponPromoteId": 15414,
     "storyId": 195414,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 14093687350322543057,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 15414,
     "nameTextMapHash": 4186179883,
@@ -7273,7 +9648,10 @@
     "weaponType": "WEAPON_BOW",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [115415, 0],
+    "skillAffix": [
+      115415,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -7294,8 +9672,12 @@
     "awakenCosts": [],
     "gachaCardNameHash": 10388671598529005467,
     "enhanceRule": 1,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 15415,
     "nameTextMapHash": 540938627,
@@ -7310,7 +9692,10 @@
     "weaponType": "WEAPON_BOW",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [115416, 0],
+    "skillAffix": [
+      115416,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -7328,10 +9713,19 @@
     "awakenIcon": "UI_EquipIcon_Bow_Maria_Awaken",
     "weaponPromoteId": 15416,
     "storyId": 195416,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 10617161036777356110,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 15416,
     "nameTextMapHash": 1860795787,
@@ -7346,7 +9740,10 @@
     "weaponType": "WEAPON_BOW",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [115417, 0],
+    "skillAffix": [
+      115417,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -7364,10 +9761,19 @@
     "awakenIcon": "UI_EquipIcon_Bow_Arakalari_Awaken",
     "weaponPromoteId": 15417,
     "storyId": 195417,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 11308237281803693038,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 15417,
     "nameTextMapHash": 3176599083,
@@ -7382,7 +9788,10 @@
     "weaponType": "WEAPON_BOW",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [115418, 0],
+    "skillAffix": [
+      115418,
+      0
+    ],
     "awakenMaterial": 200111,
     "weaponProp": [
       {
@@ -7401,11 +9810,20 @@
     "awakenIcon": "UI_EquipIcon_Bow_Fin_Awaken",
     "weaponPromoteId": 15418,
     "storyId": 195418,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 13796817766899057363,
     "enhanceRule": 1,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 15418,
     "nameTextMapHash": 3063191787,
@@ -7420,7 +9838,10 @@
     "weaponType": "WEAPON_BOW",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [115419, 0],
+    "skillAffix": [
+      115419,
+      0
+    ],
     "awakenMaterial": 200115,
     "weaponProp": [
       {
@@ -7439,11 +9860,20 @@
     "awakenIcon": "UI_EquipIcon_Bow_Ibis_Awaken",
     "weaponPromoteId": 15419,
     "storyId": 195419,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 7465773166199823601,
     "enhanceRule": 1,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 15419,
     "nameTextMapHash": 316078811,
@@ -7458,7 +9888,10 @@
     "weaponType": "WEAPON_BOW",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [115424, 0],
+    "skillAffix": [
+      115424,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -7476,10 +9909,19 @@
     "awakenIcon": "UI_EquipIcon_Bow_Gurabad_Awaken",
     "weaponPromoteId": 15424,
     "storyId": 195424,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 18307727470268793440,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 15424,
     "nameTextMapHash": 2958179435,
@@ -7494,7 +9936,10 @@
     "weaponType": "WEAPON_BOW",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [115425, 0],
+    "skillAffix": [
+      115425,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -7512,10 +9957,19 @@
     "awakenIcon": "UI_EquipIcon_Bow_Vorpal_Awaken",
     "weaponPromoteId": 15425,
     "storyId": 195425,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 16206027580588641310,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 15425,
     "nameTextMapHash": 2600875323,
@@ -7530,7 +9984,10 @@
     "weaponType": "WEAPON_BOW",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [115426, 0],
+    "skillAffix": [
+      115426,
+      0
+    ],
     "awakenMaterial": 200121,
     "weaponProp": [
       {
@@ -7549,11 +10006,20 @@
     "awakenIcon": "UI_EquipIcon_Bow_Ultimatum_Awaken",
     "weaponPromoteId": 15426,
     "storyId": 195426,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 5596732092231672960,
     "enhanceRule": 1,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 15426,
     "nameTextMapHash": 4038676067,
@@ -7568,7 +10034,10 @@
     "weaponType": "WEAPON_BOW",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [115427, 0],
+    "skillAffix": [
+      115427,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -7586,10 +10055,19 @@
     "awakenIcon": "UI_EquipIcon_Bow_Mechanic_Awaken",
     "weaponPromoteId": 15427,
     "storyId": 195427,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 10823427491535622650,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 15427,
     "nameTextMapHash": 1055195035,
@@ -7604,7 +10082,10 @@
     "weaponType": "WEAPON_BOW",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [115430, 0],
+    "skillAffix": [
+      115430,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -7622,10 +10103,19 @@
     "awakenIcon": "UI_EquipIcon_Bow_Umpakati_Awaken",
     "weaponPromoteId": 15430,
     "storyId": 195430,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 5472457945990138946,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 15430,
     "nameTextMapHash": 4019353779,
@@ -7640,7 +10130,10 @@
     "weaponType": "WEAPON_BOW",
     "rankLevel": 4,
     "weaponBaseExp": 50000,
-    "skillAffix": [115431, 0],
+    "skillAffix": [
+      115431,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -7658,10 +10151,19 @@
     "awakenIcon": "UI_EquipIcon_Bow_Isikhulu_Awaken",
     "weaponPromoteId": 15431,
     "storyId": 195431,
-    "awakenCosts": [1000, 2000, 4000, 8000],
+    "awakenCosts": [
+      1000,
+      2000,
+      4000,
+      8000
+    ],
     "gachaCardNameHash": 13432134124250916263,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 2,
     "id": 15431,
     "nameTextMapHash": 565052971,
@@ -7676,7 +10178,10 @@
     "weaponType": "WEAPON_BOW",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [115501, 0],
+    "skillAffix": [
+      115501,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -7694,10 +10199,19 @@
     "awakenIcon": "UI_EquipIcon_Bow_Dvalin_Awaken",
     "weaponPromoteId": 15501,
     "storyId": 195501,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 15710990870925659617,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 15501,
     "nameTextMapHash": 3933622347,
@@ -7712,7 +10226,10 @@
     "weaponType": "WEAPON_BOW",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [115502, 0],
+    "skillAffix": [
+      115502,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -7730,10 +10247,19 @@
     "awakenIcon": "UI_EquipIcon_Bow_Amos_Awaken",
     "weaponPromoteId": 15502,
     "storyId": 195502,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 2398498731804939314,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 15502,
     "nameTextMapHash": 828711395,
@@ -7748,7 +10274,10 @@
     "weaponType": "WEAPON_BOW",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [115503, 0],
+    "skillAffix": [
+      115503,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -7766,10 +10295,19 @@
     "awakenIcon": "UI_EquipIcon_Bow_Widsith_Awaken",
     "weaponPromoteId": 15503,
     "storyId": 195503,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 12337944913694482317,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 15503,
     "nameTextMapHash": 3112679155,
@@ -7784,7 +10322,10 @@
     "weaponType": "WEAPON_BOW",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [0, 0],
+    "skillAffix": [
+      0,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -7801,8 +10342,12 @@
     "weaponPromoteId": 11101,
     "awakenCosts": [],
     "gachaCardNameHash": 13264383033532101184,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 15504,
     "nameTextMapHash": 565329475,
@@ -7817,7 +10362,10 @@
     "weaponType": "WEAPON_BOW",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [0, 0],
+    "skillAffix": [
+      0,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -7834,8 +10382,12 @@
     "weaponPromoteId": 11101,
     "awakenCosts": [],
     "gachaCardNameHash": 13264383033532101184,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 15505,
     "nameTextMapHash": 1994081075,
@@ -7850,7 +10402,10 @@
     "weaponType": "WEAPON_BOW",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [0, 0],
+    "skillAffix": [
+      0,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -7867,8 +10422,12 @@
     "weaponPromoteId": 11101,
     "awakenCosts": [],
     "gachaCardNameHash": 13264383033532101184,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 15506,
     "nameTextMapHash": 2824690859,
@@ -7883,7 +10442,10 @@
     "weaponType": "WEAPON_BOW",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [115507, 0],
+    "skillAffix": [
+      115507,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -7901,10 +10463,19 @@
     "awakenIcon": "UI_EquipIcon_Bow_Worldbane_Awaken",
     "weaponPromoteId": 15507,
     "storyId": 195507,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 4809911376804407484,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 15507,
     "nameTextMapHash": 1901973075,
@@ -7919,7 +10490,10 @@
     "weaponType": "WEAPON_BOW",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [115508, 0],
+    "skillAffix": [
+      115508,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -7937,10 +10511,19 @@
     "awakenIcon": "UI_EquipIcon_Bow_Kirin_Awaken",
     "weaponPromoteId": 15508,
     "storyId": 195508,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 10096424995687626343,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 15508,
     "nameTextMapHash": 4230231107,
@@ -7955,7 +10538,10 @@
     "weaponType": "WEAPON_BOW",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [115509, 0],
+    "skillAffix": [
+      115509,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -7973,10 +10559,19 @@
     "awakenIcon": "UI_EquipIcon_Bow_Narukami_Awaken",
     "weaponPromoteId": 15509,
     "storyId": 195509,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 7693129140993408932,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 15509,
     "nameTextMapHash": 2918525947,
@@ -7991,7 +10586,10 @@
     "weaponType": "WEAPON_BOW",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [115511, 0],
+    "skillAffix": [
+      115511,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -8009,10 +10607,19 @@
     "awakenIcon": "UI_EquipIcon_Bow_Ayus_Awaken",
     "weaponPromoteId": 15511,
     "storyId": 195511,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 10206880096520017604,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 15511,
     "nameTextMapHash": 1348687251,
@@ -8027,7 +10634,10 @@
     "weaponType": "WEAPON_BOW",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [115512, 0],
+    "skillAffix": [
+      115512,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -8045,10 +10655,19 @@
     "awakenIcon": "UI_EquipIcon_Bow_Pledge_Awaken",
     "weaponPromoteId": 15512,
     "storyId": 195512,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 42124400569217934,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 15512,
     "nameTextMapHash": 2988480723,
@@ -8063,7 +10682,10 @@
     "weaponType": "WEAPON_BOW",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [115513, 0],
+    "skillAffix": [
+      115513,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -8081,10 +10703,19 @@
     "awakenIcon": "UI_EquipIcon_Bow_Arcdange_Awaken",
     "weaponPromoteId": 15513,
     "storyId": 195513,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 530705663988986071,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 15513,
     "nameTextMapHash": 1257396043,
@@ -8099,7 +10730,10 @@
     "weaponType": "WEAPON_BOW",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [115514, 0],
+    "skillAffix": [
+      115514,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -8117,10 +10751,19 @@
     "awakenIcon": "UI_EquipIcon_Bow_Qoyllorsnova_Awaken",
     "weaponPromoteId": 15514,
     "storyId": 195514,
-    "awakenCosts": [2000, 4000, 8000, 16000],
+    "awakenCosts": [
+      2000,
+      4000,
+      8000,
+      16000
+    ],
     "gachaCardNameHash": 6018908762915822210,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 15514,
     "nameTextMapHash": 1363661611,
@@ -8135,7 +10778,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 5,
     "weaponBaseExp": 300000,
-    "skillAffix": [0, 0],
+    "skillAffix": [
+      0,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -8153,8 +10799,12 @@
     "storyId": 200001,
     "awakenCosts": [],
     "gachaCardNameHash": 15086471665590343149,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "initialLockState": 1,
     "id": 20001,
     "nameTextMapHash": 4137694339,
@@ -8169,7 +10819,10 @@
     "weaponType": "WEAPON_SWORD_ONE_HAND",
     "rankLevel": 1,
     "weaponBaseExp": 600,
-    "skillAffix": [0, 0],
+    "skillAffix": [
+      0,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -8186,8 +10839,12 @@
     "weaponPromoteId": 11101,
     "awakenCosts": [],
     "gachaCardNameHash": 7036004687122454663,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "id": 10002,
     "nameTextMapHash": 2719832059,
     "descTextMapHash": 108345869,
@@ -8201,7 +10858,10 @@
     "weaponType": "WEAPON_CLAYMORE",
     "rankLevel": 1,
     "weaponBaseExp": 600,
-    "skillAffix": [0, 0],
+    "skillAffix": [
+      0,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -8218,8 +10878,12 @@
     "weaponPromoteId": 11101,
     "awakenCosts": [],
     "gachaCardNameHash": 13158338053514893648,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "id": 10003,
     "nameTextMapHash": 500987603,
     "descTextMapHash": 3659741461,
@@ -8233,7 +10897,10 @@
     "weaponType": "WEAPON_POLE",
     "rankLevel": 1,
     "weaponBaseExp": 600,
-    "skillAffix": [0, 0],
+    "skillAffix": [
+      0,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -8250,8 +10917,12 @@
     "weaponPromoteId": 11101,
     "awakenCosts": [],
     "gachaCardNameHash": 1104665665522609963,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "id": 10004,
     "nameTextMapHash": 1595734083,
     "descTextMapHash": 2196960949,
@@ -8265,7 +10936,10 @@
     "weaponType": "WEAPON_CATALYST",
     "rankLevel": 1,
     "weaponBaseExp": 600,
-    "skillAffix": [0, 0],
+    "skillAffix": [
+      0,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -8282,8 +10956,12 @@
     "weaponPromoteId": 11101,
     "awakenCosts": [],
     "gachaCardNameHash": 5158718358316372846,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "id": 10005,
     "nameTextMapHash": 2009975571,
     "descTextMapHash": 2139398549,
@@ -8297,7 +10975,10 @@
     "weaponType": "WEAPON_CATALYST",
     "rankLevel": 1,
     "weaponBaseExp": 600,
-    "skillAffix": [0, 0],
+    "skillAffix": [
+      0,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -8315,8 +10996,12 @@
     "weaponPromoteId": 11101,
     "awakenCosts": [],
     "gachaCardNameHash": 17136512533674580590,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "id": 10006,
     "nameTextMapHash": 4162981171,
     "descTextMapHash": 2065390101,
@@ -8330,7 +11015,10 @@
     "weaponType": "WEAPON_BOW",
     "rankLevel": 1,
     "weaponBaseExp": 600,
-    "skillAffix": [0, 0],
+    "skillAffix": [
+      0,
+      0
+    ],
     "weaponProp": [
       {
         "propType": "FIGHT_PROP_BASE_ATTACK",
@@ -8347,8 +11035,12 @@
     "weaponPromoteId": 11101,
     "awakenCosts": [],
     "gachaCardNameHash": 3398828888876299936,
-    "destroyReturnMaterial": [0],
-    "destroyReturnMaterialCount": [0],
+    "destroyReturnMaterial": [
+      0
+    ],
+    "destroyReturnMaterialCount": [
+      0
+    ],
     "id": 10008,
     "nameTextMapHash": 3762437019,
     "descTextMapHash": 4148596781,
