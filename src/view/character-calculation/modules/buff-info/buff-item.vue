@@ -19,7 +19,7 @@ watch(
 
 const stackText = computed(() => {
   if (buff.stackType === 'switch') {
-    return `${buff.stackText}：${check.value ? '开' : '关'}`
+    return `${buff.stackText}：${check.value ? '✓' : '×'}`
   }
   return `${stack.value}/${buff.limit}`;
 });

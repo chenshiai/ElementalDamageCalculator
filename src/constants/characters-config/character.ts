@@ -69,28 +69,25 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ),
     normalAttack: [
       createAttack("一段伤害", AttackType.Normal, ElementType.Cryo, {
-        atk: [0.8, 0.866, 0.931, 1.024, 1.089, 1.163, 1.266, 1.368, 1.47, 1.582, 1.694],
+        atk: [0.434, 0.467, 0.499, 0.543, 0.575, 0.608, 0.651, 0.695, 0.738, 0.781, 0.825],
       }),
-      createAttack("二段伤害·单次", AttackType.Normal, ElementType.Cryo, {
-        atk: [0.365, 0.394, 0.424, 0.467, 0.496, 0.53, 0.577, 0.624, 0.67, 0.721, 0.772],
+      createAttack("二段伤害", AttackType.Normal, ElementType.Cryo, {
+        atk: [0.388, 0.417, 0.446, 0.485, 0.514, 0.543, 0.582, 0.621, 0.66, 0.699, 0.737],
       }),
-      createAttack("三段伤害·单次", AttackType.Normal, ElementType.Cryo, {
-        atk: [0.332, 0.359, 0.386, 0.425, 0.452, 0.483, 0.525, 0.568, 0.61, 0.657, 0.703],
-      }),
-      createAttack("四段伤害", AttackType.Normal, ElementType.Cryo, {
-        atk: [1.162, 1.256, 1.351, 1.486, 1.581, 1.689, 1.837, 1.986, 2.135, 2.297, 2.459],
+      createAttack("三段伤害", AttackType.Normal, ElementType.Cryo, {
+        atk: [0.538, 0.578, 0.618, 0.672, 0.712, 0.753, 0.807, 0.86, 0.914, 0.968, 1.022],
       }),
       createAttack("重击伤害", AttackType.Strong, ElementType.Cryo, {
-        atk: [1.94, 2.1, 2.25, 2.48, 2.64, 2.82, 3.07, 3.31, 3.56, 3.83, 4.1],
+        atk: [0.992, 1.066, 1.141, 1.24, 1.314, 1.389, 1.488, 1.587, 1.686, 1.786, 1.885],
       }),
       createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Cryo, {
-        atk: [0.746, 0.807, 0.867, 0.954, 1.015, 1.084, 1.18, 1.275, 1.37, 1.474, 1.578],
+        atk: [0.568, 0.615, 0.661, 0.727, 0.773, 0.826, 0.899, 0.971, 1.044, 1.123, 1.203],
       }),
       createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Cryo, {
-        atk: [1.49, 1.61, 1.73, 1.91, 2.03, 3.17, 2.36, 2.55, 2.74, 2.95, 3.16],
+        atk: [1.14, 1.23, 1.32, 1.45, 1.55, 1.65, 1.8, 1.94, 2.09, 2.25, 2.4],
       }),
       createAttack("高空坠地冲击伤害", AttackType.Falling, ElementType.Cryo, {
-        atk: [1.86, 2.01, 2.17, 2.38, 2.53, 2.71, 2.95, 3.18, 3.42, 3.68, 3.94],
+        atk: [1.42, 1.53, 1.65, 1.82, 1.93, 2.06, 2.24, 2.43, 2.61, 2.81, 3],
       }),
     ],
     elementSkill: [
@@ -108,7 +105,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       ),
       createAttack("护盾吸收量", AttackType.Shield, ElementType.None, {
         em: [5.76, 6.192, 6.624, 7.2, 7.632, 8.064, 8.64, 9.216, 9.792, 10.368, 10.944, 11.52, 12.24],
-        fixed: [1386, 1525, 1675, 1837, 2010, 2195, 2392, 2600, 2819, 3050, 32293, 3547, 3813],
+        fixed: [1386, 1525, 1675, 1837, 2011, 2196, 2392, 2600, 2820, 3051, 3294, 3548, 3814],
       }),
     ],
     burstSkill: [
@@ -329,7 +326,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         {
           atk: [0.591, 0.639, 0.688, 0.756, 0.804, 0.859, 0.935, 1.011, 1.086, 1.169, 1.251, 1.334, 1.416],
         },
-        "maweika"
+        "Mavuika"
       ),
       createAttack(
         "驰轮车普攻三段伤害",
@@ -338,7 +335,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         {
           atk: [0.7, 0.757, 0.814, 0.895, 0.952, 1.017, 1.107, 1.196, 1.286, 1.383, 1.481, 1.579, 1.676],
         },
-        "maweika"
+        "Mavuika"
       ),
       createAttack(
         "驰轮车普攻四段伤害",
@@ -347,7 +344,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         {
           atk: [0.697, 0.754, 0.811, 0.892, 0.948, 1.013, 1.102, 1.191, 1.281, 1.378, 1.475, 1.572, 1.67],
         },
-        "maweika"
+        "Mavuika"
       ),
       createAttack(
         "驰轮车普攻五段伤害",
@@ -356,7 +353,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         {
           atk: [0.91, 0.984, 1.058, 1.164, 1.238, 1.323, 1.439, 1.556, 1.672, 1.799, 1.926, 2.053, 2.18],
         },
-        "maweika"
+        "Mavuika"
       ),
       createAttack("驰轮车冲刺伤害", AttackType.Skill, ElementType.Pyro, {
         atk: [0.808, 0.874, 0.94, 1.034, 1.1, 1.175, 1.278, 1.382, 1.485, 1.598, 1.711, 1.824, 1.936],
@@ -368,7 +365,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         {
           atk: [0.989, 1.07, 1.15, 1.265, 1.346, 1.438, 1.564, 1.691, 1.817, 1.955, 2.093, 2.231, 2.369],
         },
-        "maweika"
+        "Mavuika"
       ),
       createAttack(
         "驰轮车重击终结伤害",
@@ -377,7 +374,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         {
           atk: [1.376, 1.488, 1.6, 1.76, 1.872, 2, 2.176, 2.352, 2.528, 2.72, 2.912, 3.104, 3.296],
         },
-        "maweika"
+        "Mavuika"
       ),
       createAttack("驰轮车坠地冲击伤害", AttackType.Falling, ElementType.Pyro, {
         atk: [1.6, 1.73, 1.86, 2.046, 2.176, 2.325, 2.53, 2.734, 2.939, 3.162, 3.385, 3.608, 3.832],
@@ -438,7 +435,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
               ][data.burstLevel + data.burstLevelAdd - 1];
               return sk * (data.baseATK + data.extraATK + data.extraATK_NT) * s;
             },
-            special: "maweika",
+            special: "Mavuika",
           },
           {
             type: BuffType.StrongFixed,
@@ -449,7 +446,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
                 ] * 2;
               return sk * (data.baseATK + data.extraATK + data.extraATK_NT) * s;
             },
-            special: "maweika",
+            special: "Mavuika",
           },
         ],
         enable: true,
@@ -483,14 +480,14 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
             getValue: (data, s) => {
               return s === 1 ? (data.baseATK + data.extraATK + data.extraATK_NT) * 0.6 : 0;
             },
-            special: "maweika",
+            special: "Mavuika",
           },
           {
             type: BuffType.StrongFixed,
             getValue: (data, s) => {
               return s === 1 ? (data.baseATK + data.extraATK + data.extraATK_NT) * 0.9 : 0;
             },
-            special: "maweika",
+            special: "Mavuika",
           },
           {
             type: BuffType.BurstFixed,
@@ -4018,21 +4015,13 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         label: "4命·由片叶管窥枯荣",
         describe:
           "施放造生缠藤箭时，队伍中附近的所有角色的元素精通提升60点，若造生缠藤箭触发了燃烧、绽放、原激化或蔓激化反应，元素精通将进一步提升60点",
-        effect: [
-          {
-            type: BuffType.MysteryFixed,
-            getValue: () => 60,
-          },
-          {
-            type: BuffType.MysteryFixed,
-            getValue: (_, s) => 60 * s,
-          },
-        ],
+        effect: [{ type: BuffType.MysteryFixed, getValue: (_, s) => 60 + 60 * s }],
         enable: true,
-        stack: 0,
         stackable: true,
+        stack: 0,
         limit: 1,
-        stackText: "触发了燃烧、绽放、原激化或蔓激化反应",
+        stackType: 'switch',
+        stackText: "触发反应",
         shareable: true,
         target: BuffTarget.All,
         condition: ({ constellation }) => constellation >= 4,
@@ -6772,8 +6761,8 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         label: "2命·眷恋的泠风",
         describe: `高天之歌会使敌人的风元素抗性与物理抗性降低12%。 被高天之歌击飞的敌人在落地前，风元素抗性与物理抗性额外降低12%`,
         effect: [
-          { type: BuffType.EnemyAnemoResistance, getValue: (_, s) => [-12, -24][s] || 0 },
-          { type: BuffType.EnemyPhysicalResistance, getValue: (_, s) => [-12, -24][s] || 0 },
+          { type: BuffType.EnemyAnemoResistance, getValue: (_, s) => -12 - (12 * s) },
+          { type: BuffType.EnemyPhysicalResistance, getValue: (_, s) => -12 - (12 * s) },
         ],
         enable: false,
         stackable: true,
@@ -6781,6 +6770,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         limit: 1,
         stackText: "敌人被击飞",
         shareable: true,
+        stackType: 'switch',
         target: BuffTarget.Enemy,
         condition: ({ constellation }) => constellation >= 2,
       },
