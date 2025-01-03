@@ -248,8 +248,12 @@ const deleteLocalData = (item: IRelicItem) => {
         <span class="set-relice-title__close" @click="removeRelic">卸下圣遗物</span>
       </div>
       <form class="set-relice-form" @submit.prevent="addRelic">
+        <div class="set-relice-filed" style="margin-bottom: -4px;">
+          <div style="flex-grow: 1; text-align: center;">选择词条</div>
+          <div style="width: 20%">输入数值</div>
+        </div>
         <div class="set-relice-filed">
-          <span>主词条：</span>
+          <span>○主词条：</span>
           <select
             v-model="setStatForm.reliquaryMainstat.mainPropId"
             class="set-relice-filed__select"
@@ -351,10 +355,9 @@ const deleteLocalData = (item: IRelicItem) => {
   align-items: center;
   margin-bottom: 12px;
 }
-.set-relice-filed__select,
 .set-relice-filed input {
   display: inline-block;
-  width: 20%;
+  width: 26%;
   height: 32px;
   padding: 0 8px;
   border-radius: 4px;

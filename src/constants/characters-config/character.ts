@@ -426,6 +426,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
               ][data.burstLevel + data.burstLevelAdd - 1];
               return sk * (data.baseATK + data.extraATK + data.extraATK_NT) * s;
             },
+            actionOn: ActionOn.Indirect
           },
           {
             type: BuffType.NormalFixed,
@@ -435,6 +436,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
               ][data.burstLevel + data.burstLevelAdd - 1];
               return sk * (data.baseATK + data.extraATK + data.extraATK_NT) * s;
             },
+            actionOn: ActionOn.Indirect,
             special: "Mavuika",
           },
           {
@@ -446,6 +448,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
                 ] * 2;
               return sk * (data.baseATK + data.extraATK + data.extraATK_NT) * s;
             },
+            actionOn: ActionOn.Indirect,
             special: "Mavuika",
           },
         ],
