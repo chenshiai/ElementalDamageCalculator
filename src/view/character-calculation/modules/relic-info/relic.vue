@@ -30,7 +30,7 @@ const selectLocalRelic = (item: IRelicItem) => {
           {{ relic.name }}
         </div>
         <div class="relic-main-stats">
-          <span>{{ getAppendPropName2(relic.reliquaryMainstat.mainPropId) }}</span>
+          <span class="relic-main-stats__text">{{ getAppendPropName2(relic.reliquaryMainstat.mainPropId) }}</span>
           <span>{{ getStatValueText(relic.reliquaryMainstat) }}</span>
         </div>
       </div>
@@ -68,9 +68,14 @@ const selectLocalRelic = (item: IRelicItem) => {
   padding: 0 8px;
   font-weight: bold;
 }
+.relic-main-stats__text {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 
 .relic-icon {
-  width: 40%;
+  width: 70px;
   z-index: 1;
   top: -20%;
   right: -4%;
