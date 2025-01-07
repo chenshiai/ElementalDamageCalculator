@@ -63,7 +63,7 @@ const getStatValueText = (stat): string => {
 
 <template>
   <div class="tips">点击展开查看圣遗物详情。支持「填入」，左滑「删除」</div>
-  <div class="data-selector-title">本地保存数据</div>
+  <div class="data-selector-title">本地数据存档</div>
   <Collapse class="data-popup__collapse" v-if="localData.length > 0" v-model="opened">
     <SwipeCell v-for="item in localData" :key="item.title">
       <CollapseItem class="data-popup__collapse-item" :is-link="false" title-class="data-title">

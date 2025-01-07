@@ -50,7 +50,7 @@ const showPopover = ref(false);
 const offset = ref({ x: 20, y: 250 });
 const popoberActions = [
   { text: "保存当前角色面板", click: saveDataPop },
-  { text: "查看数据", click: lookDataPop },
+  { text: "查看存档", click: lookDataPop },
   { text: "创建新角色", click: createCha },
 ];
 const onSelect = (action) => {
@@ -72,7 +72,7 @@ const onSelect = (action) => {
   </FloatingBubble>
   <div class="save-data">
     <div class="save-btn" @click="saveDataPop">保存角色</div>
-    <div class="save-btn" @click="lookDataPop">查看数据</div>
+    <div class="save-btn" @click="lookDataPop">查看存档</div>
   </div>
   <Popup class="data-popup" teleport="#app" v-model:show="showPopup" position="top">
     <div class="tips">

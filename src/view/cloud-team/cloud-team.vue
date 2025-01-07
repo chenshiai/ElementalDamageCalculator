@@ -141,16 +141,16 @@ const handleImagePreview = () => {
 
 <template>
   <TabTitle>云上辉星（测试版）</TabTitle>
-  <div class="tips">创建、更新角色数据后需要重新入队。</div>
+  <div class="tips">点击+号，选择数据填入队伍，不设上限，可重复添加</div>
   <div class="data-panel">
     <DataItem v-model="store.state.teamBuffs.enemyLevel" title="敌人的等级" :stepperMin="1" />
-    <DataItem v-model="store.state.teamBuffs.baseResistance" title="敌人抗性%" :stepperMin="-999">
+    <DataItem v-model="store.state.teamBuffs.baseResistance" title="基础抗性%" :stepperMin="-999">
       <div class="extra-btn" @click="handleImagePreview">查看抗性表</div>
     </DataItem>
   </div>
   <div class="team-list">
+    <span class="holy-relic-tips">更新角色数据后需要重新入队。</span>
     <div class="data-panel__title">队伍编辑</div>
-    <span class="holy-relic-tips">点击+号，选择角色数据填入队伍，人数不设上限、角色也可重复</span>
     <div class="team-list__item" v-for="(item, index) in teamList" :key="index">
       <div class="team-list__item-avatar" @click="setSlotByIndex(index)">
         <template v-if="item">
@@ -166,7 +166,7 @@ const handleImagePreview = () => {
       </div>
       <div class="team-list__item-detail">
         <template v-if="item">
-          <div class="dataname"><Icon name="notes-o" />{{ item.calculation?.title || "" }}</div>
+          <div class="dataname">数据名：{{ item.calculation?.title || "" }}</div>
           <div class="team-list__item-imgs">
             <img class="weapon-icon" :src="getWeaponIcon(item.calculation.weaponEnkaId)" />
             <img
@@ -178,30 +178,31 @@ const handleImagePreview = () => {
             />
           </div>
           <div class="team-list__item-options" @click="clear(index)">离队<Icon name="revoke" /></div>
-          <div class="team-list__item-look" @click="edit(index)">查看更多<Icon name="description" /></div>
+          <div class="team-list__item-look" @click="edit(index)">查看&编辑详细数据<Icon name="arrow-double-right" /></div>
         </template>
       </div>
     </div>
   </div>
-  <div class="show-click" @click="toCreateData">创建角色数据</div>
+  <div class="show-click" @click="toCreateData">去创建角色数据</div>
   <div>
+    使用说明：
+    <p>
+      敌人的等级：<br />
+      是角色攻击目标的等级，目标等级会影响到防御力减伤。在计算角色的伤害前，请先设置好被攻击目标的等级。
+    </p>
+    <p>
+      基础抗性%：<br />
+      是角色攻击目标的基础抗性，每个敌人都有不同的抗性，可以通过抗性表查看。如果需要输入负抗性，可以先设置为0，然后点击一下减号变成【-1】，这样就有负号了。
+    </p>
+    <p>
+      队伍编辑：<br />
+      可以点击【去创建角色数据】前往编辑页面，在编辑、保存完成后，可以点击“+”号选择角色数据填入队伍。
+    </p>
+    <br />
     使用Q&A：
     <p>
-      问：最上面的【敌人的等级】是做什么的？<br />
-      答：是被角色造成伤害的目标等级，敌人的等级影响到防御力减伤，计算伤害前，请先设置好被攻击目标的等级。
-    </p>
-    <p>
-      问：输入键盘没有负号，敌人基础抗性是负数应该怎么设置？<br />
-      答：可以先设置为0，然后点击一下减号变成【-1】，这样就有负号了。
-    </p>
-    <p>
-      【队伍编辑】：<br />
-      问：没有角色数据怎么办？<br />
-      答：可以点击【创建角色数据】前往编辑页面，编辑完成后，[在编辑页面的最下方]可以保存角色面板。
-    </p>
-    <p>
       问：更新了辅助角色的面板数据、武器或者圣遗物，但是TA提供的队伍增益却没有变化？<br />
-      答：角色面板数据更新后，需要先离队再重新入队，手动更新队伍数据。角色数据更新只会出现在【重复命名】的情况下，如果是想对比同一个角色带不同装备的效果，建议不要重复命名。在保存时会有提示。
+      答：角色面板数据更新后，需要先离队再重新填入来更新队伍数据。[角色数据更新]只会出现在【重复命名】的情况下，如果是想对比同一个角色带不同装备的效果，建议不要重复命名。在保存数据时会有提示。
     </p>
     <p>
       【角色配置】：<br />
@@ -210,7 +211,7 @@ const handleImagePreview = () => {
     </p>
     <p>
       问：为什么计算器得出的数据和游戏内的数值不一样？<br />
-      答：因为官方尚未公开精准数据（游戏里的数据不是精准数据），本计算器使用的数据没有官方数据那么精准，会存在细微误差，通常误差不会超过0.5%。
+      答：因为官方尚未公开精准数据（精确到小数点后四位的那种），所以会存在细微误差，通常误差不会超过0.5%。
     </p>
     <p>
       问：得到了较大误差（0.5%以上），怎么办？<br />
