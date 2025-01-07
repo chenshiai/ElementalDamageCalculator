@@ -1,5 +1,7 @@
-import { ProfilePhoto, ArtifactIcon } from '../profilePhoto';
 import { Magnification } from '../magnification';
+
+const ProfilePhoto = __global__.ProfilePhoto;
+const ArtifactIcon = __global__.ArtifactIcon;
 
 /** 增伤区间计算公式 */
 export const EnhancedDemageCalculationMode = [
@@ -18,6 +20,25 @@ export const EnhancedDemageCalculationMode = [
         ],
         getResult: ({ number }) => number,
       }
+    ],
+  },
+  {
+    title: "玛薇卡",
+    img: ProfilePhoto.Mavuika,
+    children: [
+      {
+        title: "「基扬戈兹」",
+        fields: [
+          {
+            name: "con",
+            type: "number",
+            label: "战意",
+            required: true,
+            placeholder: "输入玛薇卡的战意",
+          },
+        ],
+        getResult: ({ con }) => con * 0.2,
+      },
     ],
   },
   {

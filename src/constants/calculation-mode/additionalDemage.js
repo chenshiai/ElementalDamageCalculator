@@ -5,7 +5,7 @@ import { Magnification } from '../magnification';
 const ProfilePhoto = __global__.ProfilePhoto;
 
 function LVLimit(lv) {
-  lv = Math.min(13, lv);
+  lv = Math.min(14, lv);
   lv = Math.max(1, lv);
   return lv;
 }
@@ -48,6 +48,116 @@ export const AdditionalDamageMode = [
         getResult: ({ def, rate }) => def * rate / 100,
       },
     ]
+  },
+  {
+    title: "玛薇卡",
+    img: ProfilePhoto.Mavuika,
+    children: [
+      {
+        title: "普通攻击",
+        fields: [
+          {
+            name: "con",
+            label: "战意",
+            placeholder: "输入玛薇卡的战意(100~200)",
+            type: "number",
+          },
+          {
+            name: "lv",
+            label: "天赋等级",
+            placeholder: "输入玛薇卡的元素爆发等级",
+            type: "number",
+          },
+          {
+            name: "atk",
+            label: "攻击力",
+            placeholder: "输入玛薇卡的总攻击力",
+            type: "number",
+          },
+          {
+            name: "tips",
+            label: "",
+            placeholder: "依据元素爆发施放时的战意，提升普通攻击的伤害",
+            type: "number",
+            disabled: true,
+          },
+        ],
+        getResult: ({ con, lv, atk }) => {
+          lv = LVLimit(lv);
+          con = Math.max(100, Math.min(200, con));
+          return atk * (Magnification.Mavuika.pg[lv - 1] * con);
+        },
+      },
+      {
+        title: "重击",
+        fields: [
+          {
+            name: "con",
+            label: "战意",
+            placeholder: "输入玛薇卡的战意(100~200)",
+            type: "number",
+          },
+          {
+            name: "lv",
+            label: "天赋等级",
+            placeholder: "输入玛薇卡的元素爆发等级",
+            type: "number",
+          },
+          {
+            name: "atk",
+            label: "攻击力",
+            placeholder: "输入玛薇卡的总攻击力",
+            type: "number",
+          },
+          {
+            name: "tips",
+            label: "",
+            placeholder: "依据元素爆发施放时的战意，提升重击的伤害",
+            type: "number",
+            disabled: true,
+          },
+        ],
+        getResult: ({ con, lv, atk }) => {
+          lv = LVLimit(lv);
+          con = Math.max(100, Math.min(200, con));
+          return atk * (Magnification.Mavuika.pg[lv - 1] * con) * 2;
+        },
+      },{
+        title: "元素爆发",
+        fields: [
+          {
+            name: "con",
+            label: "战意",
+            placeholder: "输入玛薇卡的战意(100~200)",
+            type: "number",
+          },
+          {
+            name: "lv",
+            label: "天赋等级",
+            placeholder: "输入玛薇卡的元素爆发等级",
+            type: "number",
+          },
+          {
+            name: "atk",
+            label: "攻击力",
+            placeholder: "输入玛薇卡的总攻击力",
+            type: "number",
+          },
+          {
+            name: "tips",
+            label: "",
+            placeholder: "依据元素爆发施放时的战意，提升元素爆发的伤害",
+            type: "number",
+            disabled: true,
+          },
+        ],
+        getResult: ({ con, lv, atk }) => {
+          lv = LVLimit(lv);
+          con = Math.max(100, Math.min(200, con));
+          return atk * (Magnification.Mavuika.bf[lv - 1] * con);
+        },
+      }
+    ],
   },
   {
     title: "玛拉妮",

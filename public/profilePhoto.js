@@ -18,6 +18,7 @@ const __global__ = {
     HuTao: 'https://uploadstatic.mihoyo.com/ys-obc/2021/06/10/75276545/2ba444aec8dbddf1e2314f2c523e1e31_244848669304650705.png?x-oss-process=image/quality,q_75/resize,s_40',
     Chevreuse: 'https://act-upload.mihoyo.com/wiki-user-upload/2024/01/04/4328207/e77bf4b2d49e3cc50545b83dc071d3a6_7850725164094643458.png?x-oss-process=image/quality,q_75/resize,s_40',
     Arlecchino: 'https://act-upload.mihoyo.com/wiki-user-upload/2024/04/24/4328207/233036f362e6ac0dfdd297eafa96469a_1487053469241930464.png?x-oss-process=image/quality,q_75/resize,s_40',
+    Mavuika: 'https://act-upload.mihoyo.com/ys-obc/2025/01/01/195563531/dc36c2dc0fc1bcd418a17fe907e7bb33_5304590466368751618.png?x-oss-process=image/quality,q_75/resize,s_40',
 
     /**
      * 雷元素角色
