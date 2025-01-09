@@ -12400,7 +12400,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_S_PlayerGrass_03",
         "UI_Talent_S_PlayerGrass_04",
         "UI_Talent_S_PlayerGrass_05",
-        "UI_Talent_S_PlayerGrass_06"
+        "UI_Talent_S_PlayerGrass_06",
       ],
       ["普通攻击·异邦草翦", "草缘剑", "偃草若化"]
     ),
@@ -12454,14 +12454,15 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       A_80_ATK_24P,
       {
         label: "蔓生的埜草",
-        describe: "草灯莲将在其存在期间每秒获得一层莲光遍照效果，使其领域内的当前场上角色的元素精通提升6点。草灯莲的莲光遍照效果至多叠加10层。",
-        effect: [{ type: BuffType.MysteryFixed, getValue: (_,s) => 6*s }],
+        describe:
+          "草灯莲将在其存在期间每秒获得一层莲光遍照效果，使其领域内的当前场上角色的元素精通提升6点。草灯莲的莲光遍照效果至多叠加10层。",
+        effect: [{ type: BuffType.MysteryFixed, getValue: (_, s) => 6 * s }],
         enable: false,
         shareable: true,
         stackable: true,
         stack: 10,
         limit: 10,
-        stackText: '莲光遍照',
+        stackText: "莲光遍照",
         target: BuffTarget.All,
       },
       {
@@ -12483,7 +12484,8 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       Constellation_Q_5,
       {
         label: "6命·蕴思的霜草",
-        describe: "处于草灯莲的莲光遍照效果影响下的角色获得12%草元素伤害加成；若草灯莲发生过莲光幻变转化，还将获得12%对应元素伤害加成。",
+        describe:
+          "处于草灯莲的莲光遍照效果影响下的角色获得12%草元素伤害加成；若草灯莲发生过莲光幻变转化，还将获得12%对应元素伤害加成。",
         effect: [{ type: BuffType.DendroPrcent, getValue: () => 12 }],
         enable: false,
         target: BuffTarget.All,
@@ -12492,7 +12494,8 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       },
       {
         label: "6命·蕴思的霜草·雷",
-        describe: "处于草灯莲的莲光遍照效果影响下的角色获得12%草元素伤害加成；若草灯莲发生过莲光幻变转化，还将获得12%对应元素伤害加成。",
+        describe:
+          "处于草灯莲的莲光遍照效果影响下的角色获得12%草元素伤害加成；若草灯莲发生过莲光幻变转化，还将获得12%对应元素伤害加成。",
         effect: [{ type: BuffType.ElectroPrcent, getValue: () => 12 }],
         enable: false,
         target: BuffTarget.All,
@@ -12501,7 +12504,8 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       },
       {
         label: "6命·蕴思的霜草·水",
-        describe: "处于草灯莲的莲光遍照效果影响下的角色获得12%草元素伤害加成；若草灯莲发生过莲光幻变转化，还将获得12%对应元素伤害加成。",
+        describe:
+          "处于草灯莲的莲光遍照效果影响下的角色获得12%草元素伤害加成；若草灯莲发生过莲光幻变转化，还将获得12%对应元素伤害加成。",
         effect: [{ type: BuffType.HydroPrcent, getValue: () => 12 }],
         enable: false,
         target: BuffTarget.All,
@@ -12510,7 +12514,8 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       },
       {
         label: "6命·蕴思的霜草·火",
-        describe: "处于草灯莲的莲光遍照效果影响下的角色获得12%草元素伤害加成；若草灯莲发生过莲光幻变转化，还将获得12%对应元素伤害加成。",
+        describe:
+          "处于草灯莲的莲光遍照效果影响下的角色获得12%草元素伤害加成；若草灯莲发生过莲光幻变转化，还将获得12%对应元素伤害加成。",
         effect: [{ type: BuffType.PyroPrcent, getValue: () => 12 }],
         enable: false,
         target: BuffTarget.All,
@@ -12528,7 +12533,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_S_PlayerGrass_03",
         "UI_Talent_S_PlayerGrass_04",
         "UI_Talent_S_PlayerGrass_05",
-        "UI_Talent_S_PlayerGrass_06"
+        "UI_Talent_S_PlayerGrass_06",
       ],
       ["普通攻击·异邦草翦", "草缘剑", "偃草若化"]
     ),
@@ -12582,14 +12587,15 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       A_80_ATK_24P,
       {
         label: "蔓生的埜草",
-        describe: "草灯莲将在其存在期间每秒获得一层莲光遍照效果，使其领域内的当前场上角色的元素精通提升6点。草灯莲的莲光遍照效果至多叠加10层。",
-        effect: [{ type: BuffType.MysteryFixed, getValue: (_,s) => 6*s }],
+        describe:
+          "草灯莲将在其存在期间每秒获得一层莲光遍照效果，使其领域内的当前场上角色的元素精通提升6点。草灯莲的莲光遍照效果至多叠加10层。",
+        effect: [{ type: BuffType.MysteryFixed, getValue: (_, s) => 6 * s }],
         enable: false,
         shareable: true,
         stackable: true,
         stack: 10,
         limit: 10,
-        stackText: '莲光遍照',
+        stackText: "莲光遍照",
         target: BuffTarget.All,
       },
       {
@@ -12611,12 +12617,459 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       Constellation_Q_5,
       {
         label: "6命·蕴思的霜草",
-        describe: "处于草灯莲的莲光遍照效果影响下的角色获得12%草元素伤害加成；若草灯莲发生过莲光幻变转化，还将获得12%对应元素伤害加成。",
+        describe:
+          "处于草灯莲的莲光遍照效果影响下的角色获得12%草元素伤害加成；若草灯莲发生过莲光幻变转化，还将获得12%对应元素伤害加成。",
         effect: [{ type: BuffType.DendroPrcent, getValue: () => 12 }],
         enable: false,
         target: BuffTarget.All,
         shareable: true,
         condition: ({ constellation }) => constellation >= 6,
+      },
+    ],
+  },
+
+  {
+    ...cha(1000000503, "空·水", ElementType.Hydro, WeaponType.Sword)(Rarity.Five, 10875, 213, 683, 80)(
+      "UI_AvatarIcon_PlayerBoy",
+      [
+        "UI_Talent_S_PlayerWater_01",
+        "UI_Talent_S_PlayerWater_02",
+        "UI_Talent_U_PlayerWater_01",
+        "UI_Talent_S_PlayerWater_03",
+        "UI_Talent_U_PlayerWater_02",
+        "UI_Talent_S_PlayerWater_04",
+      ],
+      ["普通攻击·异邦激流", "水纹剑", "扬水制流"]
+    ),
+    normalAttack: [
+      createAttack("一段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.445, 0.481, 0.517, 0.569, 0.605, 0.646, 0.704, 0.76, 0.817, 0.879, 0.941],
+      }),
+      createAttack("二段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.434, 0.47, 0.505, 0.556, 0.591, 0.631, 0.687, 0.742, 0.798, 0.859, 0.919],
+      }),
+      createAttack("三段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.53, 0.573, 0.616, 0.678, 0.721, 0.77, 0.838, 0.906, 0.973, 1.05, 1.12],
+      }),
+      createAttack("四段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.583, 0.631, 0.678, 0.746, 0.793, 0.848, 0.922, 0.997, 1.07, 1.15, 1.23],
+      }),
+      createAttack("五段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.708, 0.765, 0.823, 0.905, 0.963, 1.03, 1.12, 1.21, 1.3, 1.4, 1.5],
+      }),
+      createAttack("重击伤害·1", AttackType.Strong, ElementType.Physical, {
+        atk: [0.559, 0.605, 0.65, 0.715, 0.76, 0.813, 0.884, 0.956, 1.03, 1.1, 1.18],
+      }),
+      createAttack("重击伤害·2", AttackType.Strong, ElementType.Physical, {
+        atk: [0.607, 0.657, 0.706, 0.777, 0.826, 0.883, 0.96, 1.038, 1.116, 1.2, 1.29],
+      }),
+      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
+        atk: [0.639, 0.691, 0.743, 0.818, 0.87, 0.929, 1.01, 1.09, 1.17, 1.26, 1.35],
+      }),
+      createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+        atk: [1.28, 1.38, 1.49, 1.64, 1.74, 1.86, 2.02, 2.19, 2.35, 2.53, 2.71],
+      }),
+      createAttack("高空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+        atk: [1.6, 1.73, 1.86, 2.04, 2.17, 2.32, 2.53, 2.73, 2.93, 3.16, 3.38],
+      }),
+    ],
+    elementSkill: [
+      createAttack(
+        "喷发激流伤害",
+        AttackType.Skill,
+        ElementType.Hydro,
+        {
+          atk: [1.893, 2.035, 2.177, 2.366, 2.508, 2.65, 2.839, 3.028, 3.218, 3.407, 3.596, 3.786, 4.022],
+        },
+        "water"
+      ),
+      createAttack("露滴伤害", AttackType.Skill, ElementType.Hydro, {
+        atk: [0.328, 0.353, 0.377, 0.41, 0.435, 0.459, 0.492, 0.525, 0.558, 0.59, 0.623, 0.656, 0.697],
+      }),
+      createAttack("50%生命以上·露滴伤害", AttackType.Skill, ElementType.Hydro, {
+        atk: [0.328, 0.353, 0.377, 0.41, 0.435, 0.459, 0.492, 0.525, 0.558, 0.59, 0.623, 0.656, 0.697],
+        hp: [0.0064, 0.0069, 0.0074, 0.008, 0.0085, 0.009, 0.0096, 0.0102, 0.0109, 0.0115, 0.0122, 0.0128, 0.0136],
+      }),
+      createAttack("灵息之刺伤害", AttackType.Other, ElementType.Hydro, {
+        atk: [0.328, 0.353, 0.377, 0.41, 0.435, 0.459, 0.492, 0.525, 0.558, 0.59, 0.623, 0.656, 0.697],
+      }),
+    ],
+    burstSkill: [
+      createAttack("技能伤害", AttackType.Burst, ElementType.Hydro, {
+        atk: [1.019, 1.095, 1.171, 1.273, 1.35, 1.426, 1.528, 1.63, 1.732, 1.834, 1.935, 2.037, 2.165],
+      }),
+    ],
+    otherSkill: [
+      createAttack("4命·倾落的迸水护盾", AttackType.Shield, ElementType.None, {
+        hp: [0.1],
+      }),
+    ],
+    buffs: [
+      A_80_ATK_24P,
+      {
+        label: "澄明的净水",
+        describe:
+          "长按施放水纹剑时如果通过充盈消耗了生命值，则在施放结束时的喷发激流造成的伤害提高，提高值为旅行者在此次施放期间通过充盈消耗的生命值总和的45%。通过这种方式，至多使伤害提高5000点。",
+        effect: [
+          {
+            type: BuffType.SkillFixed,
+            getValue: (data) => Math.min(5000, (data.baseHP + data.extraHP + data.extraHP_NT) * 0.225),
+            special: "water",
+            actionOn: ActionOn.External,
+          },
+        ],
+        enable: false,
+      },
+      Constellation_E_3,
+      Constellation_Q_5,
+    ],
+  },
+  {
+    ...cha(1000000703, "荧·水", ElementType.Hydro, WeaponType.Sword)(Rarity.Five, 10875, 213, 683, 80)(
+      "UI_AvatarIcon_PlayerGirl",
+      [
+        "UI_Talent_S_PlayerWater_01",
+        "UI_Talent_S_PlayerWater_02",
+        "UI_Talent_U_PlayerWater_01",
+        "UI_Talent_S_PlayerWater_03",
+        "UI_Talent_U_PlayerWater_02",
+        "UI_Talent_S_PlayerWater_04",
+      ],
+      ["普通攻击·异邦激流", "水纹剑", "扬水制流"]
+    ),
+    normalAttack: [
+      createAttack("一段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.445, 0.481, 0.517, 0.569, 0.605, 0.646, 0.704, 0.76, 0.817, 0.879, 0.941],
+      }),
+      createAttack("二段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.434, 0.47, 0.505, 0.556, 0.591, 0.631, 0.687, 0.742, 0.798, 0.859, 0.919],
+      }),
+      createAttack("三段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.53, 0.573, 0.616, 0.678, 0.721, 0.77, 0.838, 0.906, 0.973, 1.05, 1.12],
+      }),
+      createAttack("四段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.583, 0.631, 0.678, 0.746, 0.793, 0.848, 0.922, 0.997, 1.07, 1.15, 1.23],
+      }),
+      createAttack("五段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.708, 0.765, 0.823, 0.905, 0.963, 1.03, 1.12, 1.21, 1.3, 1.4, 1.5],
+      }),
+      createAttack("重击伤害·1", AttackType.Strong, ElementType.Physical, {
+        atk: [0.559, 0.605, 0.65, 0.715, 0.76, 0.813, 0.884, 0.956, 1.03, 1.1, 1.18],
+      }),
+      createAttack("重击伤害·2", AttackType.Strong, ElementType.Physical, {
+        atk: [0.722, 0.781, 0.84, 0.924, 0.983, 1.05, 1.14, 1.23, 1.33, 1.43, 1.53],
+      }),
+      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
+        atk: [0.639, 0.691, 0.743, 0.818, 0.87, 0.929, 1.01, 1.09, 1.17, 1.26, 1.35],
+      }),
+      createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+        atk: [1.28, 1.38, 1.49, 1.64, 1.74, 1.86, 2.02, 2.19, 2.35, 2.53, 2.71],
+      }),
+      createAttack("高空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+        atk: [1.6, 1.73, 1.86, 2.04, 2.17, 2.32, 2.53, 2.73, 2.93, 3.16, 3.38],
+      }),
+    ],
+    elementSkill: [
+      createAttack(
+        "喷发激流伤害",
+        AttackType.Skill,
+        ElementType.Hydro,
+        {
+          atk: [1.893, 2.035, 2.177, 2.366, 2.508, 2.65, 2.839, 3.028, 3.218, 3.407, 3.596, 3.786, 4.022],
+        },
+        "water"
+      ),
+      createAttack("露滴伤害", AttackType.Skill, ElementType.Hydro, {
+        atk: [0.328, 0.353, 0.377, 0.41, 0.435, 0.459, 0.492, 0.525, 0.558, 0.59, 0.623, 0.656, 0.697],
+      }),
+      createAttack("50%生命以上·露滴伤害", AttackType.Skill, ElementType.Hydro, {
+        atk: [0.328, 0.353, 0.377, 0.41, 0.435, 0.459, 0.492, 0.525, 0.558, 0.59, 0.623, 0.656, 0.697],
+        hp: [0.0064, 0.0069, 0.0074, 0.008, 0.0085, 0.009, 0.0096, 0.0102, 0.0109, 0.0115, 0.0122, 0.0128, 0.0136],
+      }),
+      createAttack("灵息之刺伤害", AttackType.Other, ElementType.Hydro, {
+        atk: [0.328, 0.353, 0.377, 0.41, 0.435, 0.459, 0.492, 0.525, 0.558, 0.59, 0.623, 0.656, 0.697],
+      }),
+    ],
+    burstSkill: [
+      createAttack("技能伤害", AttackType.Burst, ElementType.Hydro, {
+        atk: [1.019, 1.095, 1.171, 1.273, 1.35, 1.426, 1.528, 1.63, 1.732, 1.834, 1.935, 2.037, 2.165],
+      }),
+    ],
+    otherSkill: [
+      createAttack("4命·倾落的迸水护盾", AttackType.Shield, ElementType.None, {
+        hp: [0.1],
+      }),
+    ],
+    buffs: [
+      A_80_ATK_24P,
+      {
+        label: "澄明的净水",
+        describe:
+          "长按施放水纹剑时如果通过充盈消耗了生命值，则在施放结束时的喷发激流造成的伤害提高，提高值为旅行者在此次施放期间通过充盈消耗的生命值总和的45%。通过这种方式，至多使伤害提高5000点。",
+        effect: [
+          {
+            type: BuffType.SkillFixed,
+            getValue: (data) => Math.min(5000, (data.baseHP + data.extraHP + data.extraHP_NT) * 0.225),
+            special: "water",
+            actionOn: ActionOn.External,
+          },
+        ],
+        enable: false,
+      },
+      Constellation_E_3,
+      Constellation_Q_5,
+    ],
+  },
+
+  {
+    ...cha(1000000502, "空·火", ElementType.Pyro, WeaponType.Sword)(Rarity.Five, 10875, 213, 683, 70)(
+      "UI_AvatarIcon_PlayerBoy",
+      [
+        "UI_Talent_S_PlayerFire_01",
+        "UI_Talent_S_PlayerFire_02",
+        "UI_Talent_U_PlayerFire_01",
+        "UI_Talent_S_PlayerFire_03",
+        "UI_Talent_U_PlayerFire_02",
+        "UI_Talent_S_PlayerFire_04",
+      ],
+      ["普通攻击·异邦烈焰", "流火剑", "灼火燎原"]
+    ),
+    normalAttack: [
+      createAttack("一段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.445, 0.481, 0.517, 0.569, 0.605, 0.646, 0.704, 0.76, 0.817, 0.879, 0.941],
+      }),
+      createAttack("二段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.434, 0.47, 0.505, 0.556, 0.591, 0.631, 0.687, 0.742, 0.798, 0.859, 0.919],
+      }),
+      createAttack("三段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.53, 0.573, 0.616, 0.678, 0.721, 0.77, 0.838, 0.906, 0.973, 1.05, 1.12],
+      }),
+      createAttack("四段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.583, 0.631, 0.678, 0.746, 0.793, 0.848, 0.922, 0.997, 1.07, 1.15, 1.23],
+      }),
+      createAttack("五段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.708, 0.765, 0.823, 0.905, 0.963, 1.03, 1.12, 1.21, 1.3, 1.4, 1.5],
+      }),
+      createAttack("重击伤害·1", AttackType.Strong, ElementType.Physical, {
+        atk: [0.559, 0.605, 0.65, 0.715, 0.76, 0.813, 0.884, 0.956, 1.03, 1.1, 1.18],
+      }),
+      createAttack("重击伤害·2", AttackType.Strong, ElementType.Physical, {
+        atk: [0.607, 0.657, 0.706, 0.777, 0.826, 0.883, 0.96, 1.038, 1.116, 1.2, 1.29],
+      }),
+      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
+        atk: [0.639, 0.691, 0.743, 0.818, 0.87, 0.929, 1.01, 1.09, 1.17, 1.26, 1.35],
+      }),
+      createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+        atk: [1.28, 1.38, 1.49, 1.64, 1.74, 1.86, 2.02, 2.19, 2.35, 2.53, 2.71],
+      }),
+      createAttack("高空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+        atk: [1.6, 1.73, 1.86, 2.04, 2.17, 2.32, 2.53, 2.73, 2.93, 3.16, 3.38],
+      }),
+    ],
+    elementSkill: [
+      createAttack("焰烈之槛伤害", AttackType.Skill, ElementType.Pyro, {
+        atk: [0.281, 0.302, 0.323, 0.351, 0.372, 0.393, 0.421, 0.449, 0.477, 0.505, 0.534, 0.562, 0.597],
+      }),
+      createAttack("长按伤害", AttackType.Skill, ElementType.Pyro, {
+        atk: [0.988, 1.062, 1.136, 1.235, 1.309, 1.383, 1.482, 1.581, 1.68, 1.778, 1.877, 1.976, 2.1],
+      }),
+      createAttack("灼火之槛伤害", AttackType.Skill, ElementType.Pyro, {
+        atk: [0.814, 0.875, 0.937, 1.018, 1.079, 1.14, 1.222, 1.303, 1.384, 1.468, 1.547, 1.629, 1.731],
+      }),
+    ],
+    burstSkill: [
+      createAttack("技能伤害", AttackType.Burst, ElementType.Pyro, {
+        atk: [4.272, 4.592, 4.913, 5.34, 5.66, 5.981, 6.408, 6.835, 7.262, 7.69, 8.117, 8.544, 9.078],
+      }),
+    ],
+    otherSkill: [
+      createAttack("永燃的圣火·流火伤害", AttackType.Other, ElementType.Pyro, {
+        atk: [0.96],
+      }),
+    ],
+    buffs: [
+      A_80_ATK_24P,
+      {
+        label: "1命·流光的星火",
+        describe:
+          "焰烈之槛或灼火之槛存在期间，当前场上角色造成的伤害提升6%；若当前场上角色处于夜魂加持状态，造成的伤害还会提升9%。",
+        effect: [{ type: BuffType.GlobalPrcent, getValue: (_, s) => 6 + 9 * s }],
+        enable: false,
+        stackable: true,
+        stack: 0,
+        limit: 1,
+        stackType: "switch",
+        stackText: "夜魂加持",
+        shareable: true,
+        target: BuffTarget.All,
+      },
+      Constellation_E_3,
+      {
+        label: "4命·燎灼的烈火",
+        describe: "施放元素爆发灼火燎原后，旅行者获得20%火元素伤害加成。",
+        effect: [{ type: BuffType.PyroPrcent, getValue: () => 20 }],
+        enable: false,
+      },
+      Constellation_Q_5,
+
+      {
+        label: "对抗「古斯托特」，攻击力提升",
+        describe: "对抗「古斯托特」化形的蚀灭的源焰之主时，焰烈之槛或灼火之槛存在期间，旅行者的攻击力提高40%。",
+        effect: [{ type: BuffType.ATKPrcent, getValue: () => 40 }],
+        enable: false,
+      },
+      {
+        label: "对抗「古斯托特」，敌人火抗性降低",
+        describe:
+          "对抗「古斯托特」化形的蚀灭的源焰之主时，处于夜魂加持状态下时，旅行者的元素类型为火元素的攻击命中敌人后，该敌人的火元素抗性降低20%，持续6秒，此效果至多叠加2层。",
+        effect: [{ type: BuffType.EnemyPyroResistance, getValue: (_, s) => -20 * s }],
+        enable: false,
+        shareable: true,
+        stackable: true,
+        stack: 2,
+        limit: 2,
+        target: BuffTarget.Enemy,
+      },
+      {
+        label: "对抗「古斯托特」，火元素伤害提升",
+        describe: "对抗「古斯托特」化形的蚀灭的源焰之主时，旅行者获得40%火元素伤害加成。",
+        effect: [{ type: BuffType.PyroPrcent, getValue: () => 40 }],
+        enable: false,
+      },
+      {
+        label: "对抗「古斯托特」，双爆提升",
+        describe: "对抗「古斯托特」化形的蚀灭的源焰之主时，旅行者的暴击率提升20%，暴击伤害提升40%。",
+        effect: [
+          { type: BuffType.Critcal, getValue: () => 20 },
+          { type: BuffType.CritcalHurt, getValue: () => 40 },
+        ],
+        enable: false,
+      },
+    ],
+  },
+  {
+    ...cha(1000000702, "荧·火", ElementType.Pyro, WeaponType.Sword)(Rarity.Five, 10875, 213, 683, 80)(
+      "UI_AvatarIcon_PlayerGirl",
+      [
+        "UI_Talent_S_PlayerFire_01",
+        "UI_Talent_S_PlayerFire_02",
+        "UI_Talent_U_PlayerFire_01",
+        "UI_Talent_S_PlayerFire_03",
+        "UI_Talent_U_PlayerFire_02",
+        "UI_Talent_S_PlayerFire_04",
+      ],
+      ["普通攻击·异邦烈焰", "流火剑", "灼火燎原"]
+    ),
+    normalAttack: [
+      createAttack("一段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.445, 0.481, 0.517, 0.569, 0.605, 0.646, 0.704, 0.76, 0.817, 0.879, 0.941],
+      }),
+      createAttack("二段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.434, 0.47, 0.505, 0.556, 0.591, 0.631, 0.687, 0.742, 0.798, 0.859, 0.919],
+      }),
+      createAttack("三段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.53, 0.573, 0.616, 0.678, 0.721, 0.77, 0.838, 0.906, 0.973, 1.05, 1.12],
+      }),
+      createAttack("四段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.583, 0.631, 0.678, 0.746, 0.793, 0.848, 0.922, 0.997, 1.07, 1.15, 1.23],
+      }),
+      createAttack("五段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.708, 0.765, 0.823, 0.905, 0.963, 1.03, 1.12, 1.21, 1.3, 1.4, 1.5],
+      }),
+      createAttack("重击伤害·1", AttackType.Strong, ElementType.Physical, {
+        atk: [0.559, 0.605, 0.65, 0.715, 0.76, 0.813, 0.884, 0.956, 1.03, 1.1, 1.18],
+      }),
+      createAttack("重击伤害·2", AttackType.Strong, ElementType.Physical, {
+        atk: [0.722, 0.781, 0.84, 0.924, 0.983, 1.05, 1.14, 1.23, 1.33, 1.43, 1.53],
+      }),
+      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
+        atk: [0.639, 0.691, 0.743, 0.818, 0.87, 0.929, 1.01, 1.09, 1.17, 1.26, 1.35],
+      }),
+      createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+        atk: [1.28, 1.38, 1.49, 1.64, 1.74, 1.86, 2.02, 2.19, 2.35, 2.53, 2.71],
+      }),
+      createAttack("高空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+        atk: [1.6, 1.73, 1.86, 2.04, 2.17, 2.32, 2.53, 2.73, 2.93, 3.16, 3.38],
+      }),
+    ],
+    elementSkill: [
+      createAttack("焰烈之槛伤害", AttackType.Skill, ElementType.Pyro, {
+        atk: [0.281, 0.302, 0.323, 0.351, 0.372, 0.393, 0.421, 0.449, 0.477, 0.505, 0.534, 0.562, 0.597],
+      }),
+      createAttack("长按伤害", AttackType.Skill, ElementType.Pyro, {
+        atk: [0.988, 1.062, 1.136, 1.235, 1.309, 1.383, 1.482, 1.581, 1.68, 1.778, 1.877, 1.976, 2.1],
+      }),
+      createAttack("灼火之槛伤害", AttackType.Skill, ElementType.Pyro, {
+        atk: [0.814, 0.875, 0.937, 1.018, 1.079, 1.14, 1.222, 1.303, 1.384, 1.468, 1.547, 1.629, 1.731],
+      }),
+    ],
+    burstSkill: [
+      createAttack("技能伤害", AttackType.Burst, ElementType.Pyro, {
+        atk: [4.272, 4.592, 4.913, 5.34, 5.66, 5.981, 6.408, 6.835, 7.262, 7.69, 8.117, 8.544, 9.078],
+      }),
+    ],
+    otherSkill: [
+      createAttack("永燃的圣火·流火伤害", AttackType.Other, ElementType.Pyro, {
+        atk: [0.96],
+      }),
+    ],
+    buffs: [
+      A_80_ATK_24P,
+      {
+        label: "1命·流光的星火",
+        describe:
+          "焰烈之槛或灼火之槛存在期间，当前场上角色造成的伤害提升6%；若当前场上角色处于夜魂加持状态，造成的伤害还会提升9%。",
+        effect: [{ type: BuffType.GlobalPrcent, getValue: (_, s) => 6 + 9 * s }],
+        enable: false,
+        stackable: true,
+        stack: 0,
+        limit: 1,
+        stackType: "switch",
+        stackText: "夜魂加持",
+        shareable: true,
+        target: BuffTarget.All,
+      },
+      Constellation_E_3,
+      {
+        label: "4命·燎灼的烈火",
+        describe: "施放元素爆发灼火燎原后，旅行者获得20%火元素伤害加成。",
+        effect: [{ type: BuffType.PyroPrcent, getValue: () => 20 }],
+        enable: false,
+      },
+      Constellation_Q_5,
+
+      {
+        label: "对抗「古斯托特」，攻击力提升",
+        describe: "对抗「古斯托特」化形的蚀灭的源焰之主时，焰烈之槛或灼火之槛存在期间，旅行者的攻击力提高40%。",
+        effect: [{ type: BuffType.ATKPrcent, getValue: () => 40 }],
+        enable: false,
+      },
+      {
+        label: "对抗「古斯托特」，敌人火抗性降低",
+        describe:
+          "对抗「古斯托特」化形的蚀灭的源焰之主时，处于夜魂加持状态下时，旅行者的元素类型为火元素的攻击命中敌人后，该敌人的火元素抗性降低20%，持续6秒，此效果至多叠加2层。",
+        effect: [{ type: BuffType.EnemyPyroResistance, getValue: (_, s) => -20 * s }],
+        enable: false,
+        shareable: true,
+        stackable: true,
+        stack: 2,
+        limit: 2,
+        target: BuffTarget.Enemy,
+      },
+      {
+        label: "对抗「古斯托特」，火元素伤害提升",
+        describe: "对抗「古斯托特」化形的蚀灭的源焰之主时，旅行者获得40%火元素伤害加成。",
+        effect: [{ type: BuffType.PyroPrcent, getValue: () => 40 }],
+        enable: false,
+      },
+      {
+        label: "对抗「古斯托特」，双爆提升",
+        describe: "对抗「古斯托特」化形的蚀灭的源焰之主时，旅行者的暴击率提升20%，暴击伤害提升40%。",
+        effect: [
+          { type: BuffType.Critcal, getValue: () => 20 },
+          { type: BuffType.CritcalHurt, getValue: () => 40 },
+        ],
+        enable: false,
       },
     ],
   },
