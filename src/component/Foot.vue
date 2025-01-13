@@ -15,13 +15,13 @@
   <Popup teleport="#app" position="bottom" v-model:show="showAuthor" class="foot-popup" style="height: 20%">
     你可以通过以下平台联系作者
     <div class="foot-popup-name">
-      <a href="https://www.miyoushe.com/ys/accountCenter/postList?id=139610391" target="_blank">
+      <a href="https://www.miyoushe.com/ys/accountCenter/postList?id=139610391" target="_preview" referrerpolicy="origin-when-cross-origin">
         <img src="/img/mhy.jpg" />
       </a>
-      <a href="https://space.bilibili.com/76824065" target="_blank">
+      <a href="https://space.bilibili.com/76824065" target="_preview" referrerpolicy="origin-when-cross-origin">
         <img src="/img/OIP-C.jpg" />
       </a>
-      <a href="https://github.com/chenshiai/ElementalDamageCalculator" target="_blank">
+      <a href="https://github.com/chenshiai/ElementalDamageCalculator" target="_preview" referrerpolicy="origin-when-cross-origin">
         <img src="/img/git.png">
       </a>
       @ChenShiAi

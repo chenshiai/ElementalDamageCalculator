@@ -5,7 +5,7 @@
     如果对这个计算器有什么看法或建议，可以在这篇帖子下留言反馈。
     <p>
       帖子链接:
-      <a href="https://bbs.mihoyo.com/ys/article/4363651">
+      <a href="https://bbs.mihoyo.com/ys/article/4363651" referrerpolicy="origin-when-cross-origin">
         https://bbs.mihoyo.com/ys/article/4363651
       </a>
     </p>
@@ -27,7 +27,7 @@
     超载、感电、超导、扩散、碎冰能打多少伤害——鈴@米游社【空荧酒馆】
     <p>
       帖子链接:
-      <a href="https://bbs.mihoyo.com/ys/article/2215872">
+      <a href="https://bbs.mihoyo.com/ys/article/2215872" referrerpolicy="origin-when-cross-origin">
         https://bbs.mihoyo.com/ys/article/2215872
       </a>
     </p>
@@ -38,7 +38,7 @@
     《伤害构成论》原神伤害是怎么算的——白猫大人@米游社
     <p>
       帖子链接:
-      <a href="https://bbs.mihoyo.com/ys/article/4458583">
+      <a href="https://bbs.mihoyo.com/ys/article/4458583" referrerpolicy="origin-when-cross-origin">
         https://bbs.mihoyo.com/ys/article/4458583
       </a>
     </p>
