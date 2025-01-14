@@ -18,8 +18,8 @@ watch(
 );
 
 const stackText = computed(() => {
-  if (buff.stackType === 'switch') {
-    return `${buff.stackText}：${check.value ? '✓' : '×'}`
+  if (buff.stackType === "switch") {
+    return `${buff.stackText}：${check.value ? "✓" : "×"}`;
   }
   return `${stack.value}/${buff.limit}`;
 });
@@ -33,27 +33,27 @@ const stackText = computed(() => {
         <span v-if="buff.stackable">（{{ stackText }}）</span>
       </div>
     </Checkbox>
-    <div class="buff-detail-check">
-      <input type="checkbox" />
-    </div>
-    <div class="buff-description">
-      <div class="buff-stack" v-if="buff.stackable">
-        <span>{{ buff.stackText || "层数" }}：</span>
-        <Slider v-if="buff.stackType === 'slider'" v-model="stack" :max="buff.limit" :min="0" />
-        <Stepper
-          v-if="!buff.stackType"
-          v-model="stack"
-          :max="buff.limit"
-          :min="0"
-          input-width="66px"
-          button-size="24"
-          theme="round"
-          integer
-        />
-        <Switch v-if="buff.stackType === 'switch'" v-model="check" size="20"/>
+    <details>
+      <summary class="buff-details-summary"></summary>
+      <div class="buff-description">
+        <div class="buff-stack" v-if="buff.stackable">
+          <span>{{ buff.stackText || "层数" }}：</span>
+          <Slider v-if="buff.stackType === 'slider'" v-model="stack" :max="buff.limit" :min="0" />
+          <Stepper
+            v-if="!buff.stackType"
+            v-model="stack"
+            :max="buff.limit"
+            :min="0"
+            input-width="66px"
+            button-size="24"
+            theme="round"
+            integer
+          />
+          <Switch v-if="buff.stackType === 'switch'" v-model="check" size="20" />
+        </div>
+        <span v-html="buff.describe"></span>
       </div>
-      <span v-html="buff.describe"></span>
-    </div>
+    </details>
   </div>
 </template>
 
@@ -65,77 +65,15 @@ const stackText = computed(() => {
   border-radius: 4px;
   margin-top: 4px;
 }
-.buff-detail-check {
-  position: absolute;
-  right: 8px;
-  top: 6px;
-}
 .buff-label-text {
   color: var(--main-text);
 }
 
 .buff-description {
-  display: none;
   color: #666;
   font-size: 14px;
 }
 
-.buff-detail-check:has(input:checked) + .buff-description {
-  display: block;
-}
-
-input[type="checkbox"] {
-  width: 24px;
-  height: 24px;
-  margin: 0;
-  padding: 0;
-  appearance: none; /* 移除默认外观 */
-  outline: none; /* 移除焦点轮廓 */
-  border: 1px solid var(--border);
-  position: relative;
-  border-radius: 4px;
-}
-
-input[type="checkbox"]::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 60%;
-  height: 2px;
-  background-color: var(--border);
-}
-
-input[type="checkbox"]::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) rotate(90deg);
-  width: 60%;
-  height: 2px;
-  background-color: var(--border);
-}
-
-input[type="checkbox"]:checked {
-  background-color: var(--bg);
-}
-
-/* 创建一个勾选标记 */
-input[type="checkbox"]:checked::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 60%;
-  height: 2px;
-  background-color: var(--light-text);
-}
-input[type="checkbox"]:checked::after {
-  display: none;
-}
 .buff-stack {
   display: flex;
   padding-right: 16px;
@@ -151,6 +89,59 @@ input[type="checkbox"]:checked::after {
 
 .van-slider__button-wrapper .van-slider__button {
   box-shadow: 0 2px 2px var(--button-bg);
+}
+
+.buff-details-summary::marker {
+  font-size: 0;
+}
+
+.buff-details-summary {
+  position: absolute;
+  right: 8px;
+  top: 6px;
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+.buff-details-summary::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  height: 2px;
+  background-color: var(--border);
+}
+
+.buff-details-summary::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(90deg);
+  width: 60%;
+  height: 2px;
+  background-color: var(--border);
+}
+
+[open] > .buff-details-summary {
+  background-color: var(--bg);
+}
+[open] > .buff-details-summary::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  height: 2px;
+  background-color: var(--light-text);
+}
+[open] > .buff-details-summary::after {
+  display: none;
 }
 </style>
 <style>
