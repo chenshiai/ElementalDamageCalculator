@@ -1,8 +1,9 @@
 import { ProfilePhoto } from '../profilePhoto';
 import { Magnification } from '../magnification';
+import { ICalculationMode } from '@/types/interface/calculation-mode';
 
 /** 防御力%buff计算公式 */
-export const DefPercentCalculationMode = [
+export const DefPercentCalculationMode: ICalculationMode[] = [
   {
     title: "通用加防%",
     children: [
@@ -22,7 +23,7 @@ export const DefPercentCalculationMode = [
   }
 ];
 
-export const DefFixedCalculationMode = [
+export const DefFixedCalculationMode: ICalculationMode[] = [
   {
     title: "直接加防",
     children: [

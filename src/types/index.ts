@@ -24,3 +24,5 @@ export type WeaponStats = {
   appendPropId: AppendProp;
   statValue: number;
 };
+
+export type NodeType = [string, number];

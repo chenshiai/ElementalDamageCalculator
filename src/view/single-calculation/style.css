@@ -87,6 +87,7 @@
   display: flex;
   border-radius: 4px;
   overflow: hidden;
+  text-align: center;
   margin-bottom: 8px;
 }
 
@@ -94,6 +95,14 @@
   flex: 1;
   text-align: center;
   background-color: var(--light-text);
+}
+.basic-panel-item summary::marker {
+  font-size: 0;
+}
+.basic-panel-item[open] {
+  flex: 1.5;
+  background-color: var(--button-bg);
+  color: var(--light-text);
 }
 
 .basic-panel-item-title {
@@ -111,12 +120,12 @@
   flex: 1.5;
 }
 
-.basic-panel-selected .basic-panel-item-total {
+[open] > summary > .basic-panel-item-total {
   display: inline-block;
   margin-left: 4px;
 }
 
-.basic-panel-selected .basic-detial {
+[open] > summary > .basic-detial {
   display: block;
 }
 

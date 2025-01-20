@@ -1,7 +1,9 @@
 
 import { WeponIcon } from '../profilePhoto';
 import { Magnification } from '../magnification';
+import { ICalculationMode } from '@/types/interface/calculation-mode';
 
+// @ts-ignore
 const ProfilePhoto = __global__.ProfilePhoto;
 
 function LVLimit(lv) {
@@ -11,7 +13,7 @@ function LVLimit(lv) {
 }
 
 /** 附加伤害计算公式 */
-export const AdditionalDamageMode = [
+export const AdditionalDamageMode: ICalculationMode[] = [
   {
     title: "伤害值提高",
     children: [

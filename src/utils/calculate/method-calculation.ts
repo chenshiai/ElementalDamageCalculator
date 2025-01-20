@@ -1,4 +1,4 @@
-import { ElementalReaction, ReactionRate } from "@/constants";
+import { ElementalReaction, ElementalReactionType, ReactionRate } from "@/constants";
 import { AttackType, BuffType, ElementType, EnchantingType, NumberToElementType, WeaponType } from "@/types/enum";
 import { ICalculatorValue, IRate } from "@/types/interface";
 import { BaseDMG } from "@/constants/elementalReaction";
@@ -186,7 +186,7 @@ interface IArgs {
   elementType: ElementType;
   rate: IRate;
   level: number;
-  atkType: string;
+  atkType: ElementalReactionType;
   /** 本次伤害的独特标识 */
   special?: string;
 }

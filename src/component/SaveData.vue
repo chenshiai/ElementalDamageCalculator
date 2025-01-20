@@ -44,24 +44,26 @@
   </Popup>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, computed } from "vue";
-import { useStore } from "vuex";
 import { Popup, Field, showNotify, Collapse, CollapseItem, Icon } from "vant";
 import { getLocalStorage, deepCopyObject, computationalFormula, EventBus } from "@/utils";
 import { AtkTypeText } from "@/constants";
 
-const store = useStore();
+const emit = defineEmits(['setUnifiedState'])
 const remark = ref("");
 const localData = ref(getLocalStorage("GenShinImpactCustomDataV2", []));
 const opened = ref([]);
 
 const props = defineProps({
   notesConfig: Object,
+  damageModule: Object,
+  saveDataModule: Object,
+  setUnifiedState: Function
 });
 
 const config = computed(() => {
-  return formatData(store.state.damageModule);
+  return formatData(props.damageModule);
 });
 const formatData = (value) => {
   const {
@@ -200,7 +202,7 @@ const saveData = () => {
     });
     return;
   }
-  const { damageModule, saveDataModule } = store.state;
+  const { damageModule, saveDataModule } = props;
   try {
     const sourceData = new Map(getLocalStorage("GenShinImpactCustomDataV2", []));
     sourceData.set(
@@ -275,9 +277,8 @@ const updateNoteGroup = ({ setSelectedNotes, localStorageName, defaultNotes }, s
 };
 const recalculation = (value) => {
   showDataPopup.value = false;
-  // let value = deepCopyObject(val);
-  store.commit("setUnifiedState", value); // 回填计算器内容
   const NotesConfig = props.notesConfig;
+  emit('setUnifiedState', value)
   updateNoteGroup(NotesConfig.fixedATK, value.selectedFixedATKNotes);
   updateNoteGroup(NotesConfig.percentATK, value.selectedExtraATKNotes);
   updateNoteGroup(NotesConfig.fixedDEF, value.selectedFixedDEFNotes);

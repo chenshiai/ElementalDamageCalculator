@@ -1,7 +1,8 @@
 import { ProfilePhoto } from '../profilePhoto';
+import { ICalculationMode } from '@/types/interface/calculation-mode';
 
 /** 元素精通buff计算公式 */
-export const EmFixedCalculationMode = [
+export const EmFixedCalculationMode: ICalculationMode[] = [
   {
     title: "通用加精通",
     children: [

@@ -1,5 +1,6 @@
+import { ICalculationMode } from '@/types/interface/calculation-mode';
 /** HP%buff计算公式 */
-export const HpPercentCalculationMode = [
+export const HpPercentCalculationMode: ICalculationMode[] = [
   {
     title: "通用加生命%",
     children: [

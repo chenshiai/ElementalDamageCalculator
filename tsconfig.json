@@ -5,6 +5,7 @@
       "@/*": [
         "src/*"
       ]
-    }
+    },
+    "downlevelIteration": true,
   }
 }

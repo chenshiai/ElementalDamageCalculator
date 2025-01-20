@@ -1,10 +1,13 @@
 import { Magnification } from '../magnification';
+import { ICalculationMode } from '@/types/interface/calculation-mode';
 
+// @ts-ignore
 const ProfilePhoto = __global__.ProfilePhoto;
+// @ts-ignore
 const ArtifactIcon = __global__.ArtifactIcon;
 
 /** 增伤区间计算公式 */
-export const EnhancedDemageCalculationMode = [
+export const EnhancedDemageCalculationMode: ICalculationMode[] = [
   {
     title: "通用增伤",
     children: [

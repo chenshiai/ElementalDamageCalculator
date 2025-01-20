@@ -4,69 +4,65 @@
   <div class="data-panel">
     <div class="data-panel__title">基础属性</div>
     <div class="data-panel__basic">
-      <div
-        :class="['basic-panel-item', basicPanelSelect === basicPanelSelectType.ATK && 'basic-panel-selected']"
-        @click="basicInputPanelSelect(basicPanelSelectType.ATK)"
-      >
-        <span class="basic-panel-item-title">攻击力</span>
-        <div class="basic-panel-item-total">
-          {{ baseATK + sumExtraATKNumber }}
-        </div>
-        <div class="basic-detial">
-          {{ baseATK }} +
-          <span style="color: #49ff39">{{ sumExtraATKNumber }}</span>
-        </div>
-      </div>
-      <div
-        :class="['basic-panel-item', basicPanelSelect === basicPanelSelectType.HP && 'basic-panel-selected']"
-        @click="basicInputPanelSelect(basicPanelSelectType.HP)"
-      >
-        <span class="basic-panel-item-title">生命值</span>
-        <div class="basic-panel-item-total">
-          {{ baseHP + sumExtraHPNumber }}
-        </div>
-        <div class="basic-detial">
-          {{ baseHP }}+
-          <span style="color: #49ff39">{{ sumExtraHPNumber }}</span>
-        </div>
-      </div>
-      <div
-        :class="['basic-panel-item', basicPanelSelect === basicPanelSelectType.DEF && 'basic-panel-selected']"
-        @click="basicInputPanelSelect(basicPanelSelectType.DEF)"
-      >
-        <span class="basic-panel-item-title">防御力</span>
-        <div class="basic-panel-item-total">
-          {{ baseDEF + sumExtraDEFNumber }}
-        </div>
-        <div class="basic-detial">
-          {{ baseDEF }}+
-          <span style="color: #49ff39">{{ sumExtraDEFNumber }}</span>
-        </div>
-      </div>
-      <div
-        :class="['basic-panel-item', basicPanelSelect === basicPanelSelectType.EM && 'basic-panel-selected']"
-        @click="basicInputPanelSelect(basicPanelSelectType.EM)"
-      >
-        <span class="basic-panel-item-title">元素精通</span>
-        <div :class="basicPanelSelect === basicPanelSelectType.EM ? 'basic-detial' : 'basic-panel-item-total'">
-          {{ elementalMystery }}
-        </div>
-      </div>
-    </div>
-    <div v-show="basicPanelSelect === basicPanelSelectType.HP">
-      <DataItem v-model="baseHP" title="基础生命值" tips="面板生命值白字" stepperInteger stepperMin="0" />
-      <DataItem v-model="extraHP" title="额外生命值" tips="常驻生命值绿字" stepperInteger stepperMin="0" />
-      <NoteGroup v-model="extraPercentHP" v-bind="NotesConfig.percentHP" :selectedNotes="selectedExtraHPNotes" />
+      <details class="basic-panel-item" name="basic-panel" open>
+        <summary @click="basicPanelSelect = basicPanelSelectType.ATK">
+          <span class="basic-panel-item-title">攻击力</span>
+          <div class="basic-panel-item-total">
+            {{ baseATK + sumExtraATKNumber }}
+          </div>
+          <div class="basic-detial">
+            {{ baseATK }} +
+            <span style="color: #49ff39">{{ sumExtraATKNumber }}</span>
+          </div>
+        </summary>
+      </details>
+      <details class="basic-panel-item" name="basic-panel">
+        <summary @click="basicPanelSelect = basicPanelSelectType.HP">
+          <span class="basic-panel-item-title">生命值</span>
+          <div class="basic-panel-item-total">
+            {{ baseHP + sumExtraHPNumber }}
+          </div>
+          <div class="basic-detial">
+            {{ baseHP }}+
+            <span style="color: #49ff39">{{ sumExtraHPNumber }}</span>
+          </div>
+        </summary>
+      </details>
+      <details class="basic-panel-item" name="basic-panel">
+        <summary @click="basicPanelSelect = basicPanelSelectType.DEF">
+          <span class="basic-panel-item-title">防御力</span>
+          <div class="basic-panel-item-total">
+            {{ baseDEF + sumExtraDEFNumber }}
+          </div>
+          <div class="basic-detial">
+            {{ baseDEF }}+
+            <span style="color: #49ff39">{{ sumExtraDEFNumber }}</span>
+          </div>
+        </summary>
+      </details>
+      <details class="basic-panel-item" name="basic-panel">
+        <summary @click="basicPanelSelect = basicPanelSelectType.EM">
+          <span class="basic-panel-item-title">元素精通</span>
+          <div>
+            {{ elementalMystery }}
+          </div>
+        </summary>
+      </details>
     </div>
     <div v-show="basicPanelSelect === basicPanelSelectType.DEF">
-      <DataItem v-model="baseDEF" title="基础防御力" tips="面板防御力白字" stepperInteger stepperMin="0" />
-      <DataItem v-model="extraDEF" title="额外防御力" tips="常驻防御力绿字" stepperInteger stepperMin="0" />
+      <DataItem v-model="baseDEF" title="基础防御力" tips="面板防御力白字" stepperInteger :stepperMin="0" />
+      <DataItem v-model="extraDEF" title="额外防御力" tips="常驻防御力绿字" stepperInteger :stepperMin="0" />
       <NoteGroup v-model="extraPercentDEF" v-bind="NotesConfig.percentDEF" :selectedNotes="selectedExtraDEFNotes" />
       <NoteGroup v-model="extraFixedDEF" v-bind="NotesConfig.fixedDEF" :selectedNotes="selectedFixedDEFNotes" />
     </div>
+    <div v-show="basicPanelSelect === basicPanelSelectType.HP">
+      <DataItem v-model="baseHP" title="基础生命值" tips="面板生命值白字" stepperInteger :stepperMin="0" />
+      <DataItem v-model="extraHP" title="额外生命值" tips="常驻生命值绿字" stepperInteger :stepperMin="0" />
+      <NoteGroup v-model="extraPercentHP" v-bind="NotesConfig.percentHP" :selectedNotes="selectedExtraHPNotes" />
+    </div>
     <div v-show="basicPanelSelect === basicPanelSelectType.ATK">
-      <DataItem v-model="baseATK" title="基础攻击力" tips="面板攻击力白字" stepperInteger stepperMin="0" />
-      <DataItem v-model="extraATK" title="额外攻击力" tips="常驻攻击力绿字" stepperInteger stepperMin="0">
+      <DataItem v-model="baseATK" title="基础攻击力" tips="面板攻击力白字" stepperInteger :stepperMin="0" />
+      <DataItem v-model="extraATK" title="额外攻击力" tips="常驻攻击力绿字" stepperInteger :stepperMin="0">
         <Popover class="data-item-popover" v-model:show="showPopoverExtraATK" placement="left-end">
           <div class="data-item-popover__content">
             攻击力加成%会以『基础攻击力』的百分比来算，会直接加在最上方『攻击力总计』的
@@ -82,7 +78,7 @@
       <NoteGroup v-model="extraFixedATK" v-bind="NotesConfig.fixedATK" :selectedNotes="selectedFixedATKNotes" />
     </div>
     <div v-show="basicPanelSelect === basicPanelSelectType.EM">
-      <DataItem v-model="elementalMystery" title="元素精通" tips="" stepperMin="0" />
+      <DataItem v-model="elementalMystery" title="元素精通" tips="" :stepperMin="0" />
       <NoteGroup v-model="elementalMystery" v-bind="NotesConfig.fixedEM" :selectedNotes="selectedFixedEMNotes" />
     </div>
     <div class="data-panel__title">技能倍率</div>
@@ -104,8 +100,8 @@
         <input class="basic-panel-input" type="number" v-model="emRate" />
       </div>
     </div>
-    <DataItem v-model="extraRate" title="倍率增幅%" stepperMin="0" decimalLength="1" />
-    <DataItem v-model="additionalDemage" title="伤害提高值" tips="" stepperMin="0" decimalLength="2">
+    <DataItem v-model="extraRate" title="倍率增幅%" :stepperMin="0" :decimalLength="1" />
+    <DataItem v-model="additionalDemage" title="伤害提高值" tips="" :stepperMin="0" :decimalLength="2">
       <Popover class="data-item-popover" v-model:show="showPopoverExtraRate" placement="left-end">
         <div class="data-item-popover__content">
           <b>攻击伤害值 = (基础属性x最终倍率) + 伤害提高值 + 激化提高值</b><br />
@@ -133,8 +129,8 @@
       :selectedNotes="selectedAdditionalDemageNotes"
     />
 
-    <DataItem v-model="critDemage" title="暴击伤害%" tips="" stepperMin="0" decimalLength="1" />
-    <DataItem v-model="elementDemage" title="伤害加成%" tips="各种增伤、减伤" stepperMin="-200" decimalLength="2">
+    <DataItem v-model="critDemage" title="暴击伤害%" tips="" :stepperMin="0" :decimalLength="1" />
+    <DataItem v-model="elementDemage" title="伤害加成%" tips="各种增伤、减伤" :stepperMin="-200" :decimalLength="2">
       <Popover class="data-item-popover" v-model:show="showPopover" placement="left-end">
         <div class="data-item-popover__content">
           <b>攻击伤害值以一定比例改变：</b>
@@ -155,8 +151,8 @@
       </Popover>
     </DataItem>
     <NoteGroup v-model="elementDemage" v-bind="NotesConfig.elementDemage" :selectedNotes="selectedElementDemageNotes" />
-    <DataItem v-model="characterLevel" title="角色等级" stepperMax="90" stepperMin="1" />
-    <DataItem v-model="enemyLevel" title="敌人等级" stepperMin="1" />
+    <DataItem v-model="characterLevel" title="角色等级" :stepperMax="90" :stepperMin="1" />
+    <DataItem v-model="enemyLevel" title="敌人等级" :stepperMin="1" />
 
     <Cell
       @click="otherChecked = !otherChecked"
@@ -166,12 +162,12 @@
       :arrow-direction="otherChecked ? 'up' : 'down'"
     />
     <div v-show="otherChecked" class="data-panel">
-      <DataItem v-model="enemyResistance" title="敌人抗性%" stepperMin="-999">
+      <DataItem v-model="enemyResistance" title="敌人抗性%" :stepperMin="-999">
         <div class="extra-btn" @click="handleImagePreview">查看抗性表</div>
       </DataItem>
-      <DataItem v-model="weaken" title="减少抗性%" stepperMin="0" stepperMax="300" />
-      <DataItem v-model="armour" title="减少防御%" stepperMin="0" stepperMax="90" />
-      <DataItem v-model="armourPiercing" title="无视防御%" stepperMin="0" stepperMax="100" />
+      <DataItem v-model="weaken" title="减少抗性%" :stepperMin="0" :stepperMax="300" />
+      <DataItem v-model="armour" title="减少防御%" :stepperMin="0" :stepperMax="90" />
+      <DataItem v-model="armourPiercing" title="无视防御%" :stepperMin="0" :stepperMax="100" />
     </div>
 
     <div class="data-panel__title">反应类型</div>
@@ -215,27 +211,28 @@
         </div>
       </div>
     </div>
-    <CompositionAnalysis />
+    <CompositionAnalysis :damageModule="reactiveProps" />
   </div>
   <Cell center title="置顶展示">
     <template #right-icon>
       <Switch v-model="floatChecked" active-color="#766461" inactive-color="#b7a19e" size="16" />
     </template>
   </Cell>
-  <SaveData :notes-config="NotesConfig" />
+  <SaveData :damageModule="reactiveProps" :saveDataModule="saveDataModule" :notes-config="NotesConfig" @setUnifiedState="setUnifiedState"/>
 </template>
 
-<script>
-import { computed, ref, toRefs } from "vue";
-import { Switch, Cell, RadioGroup, Radio, Icon, ImagePreview, Popover } from "vant";
+<script setup lang="ts">
+import { computed, ref } from "vue";
+import { Switch, Cell, Icon, ImagePreview, Popover } from "vant";
+
 import TabTitle from "@/component/TabTitle.vue";
-import { computationalFormula } from "@/utils";
 import DataItem from "@/component/DataItem.vue";
 import NoteGroup from "@/component/NoteGroup.vue";
 import SaveData from "@/component/SaveData.vue";
 import CompositionAnalysis from "@/component/CompositionAnalysis.vue";
-import { useStore } from "vuex";
-import { ElementalReaction, basicPanelSelectType } from "@/constants";
+import AtkTypeSelector from "@/component/AtkTypeSelector.vue";
+
+import { basicPanelSelectType, ElementalReaction, ElementalReactionType } from "@/constants";
 import {
   AtkFixedNotes,
   EnhancedDamageNotes,
@@ -246,146 +243,265 @@ import {
   EmFixedNotes,
 } from "@/constants/notes";
 import { EnhancedDemageCalculationMode } from "@/constants/calculation-mode/enhancedDemage";
+import { DefPercentCalculationMode, DefFixedCalculationMode } from "@/constants/calculation-mode/def";
 import { AtkPercentCalculationMode, AtkFixedCalculationMode } from "@/constants/calculation-mode/atk";
 import { HpPercentCalculationMode } from "@/constants/calculation-mode/hp";
-import { DefPercentCalculationMode, DefFixedCalculationMode } from "@/constants/calculation-mode/def";
 import { EmFixedCalculationMode } from "@/constants/calculation-mode/em";
 import { AdditionalDamageMode } from "@/constants/calculation-mode/additionalDemage";
-import AtkTypeSelector from "@/component/AtkTypeSelector.vue";
 
-export default {
-  name: "increase",
+import { computationalFormula } from "@/utils";
+import { NodeType } from "@/types";
 
-  components: {
-    SaveData,
-    Icon,
-    Cell,
-    Radio,
-    Switch,
-    DataItem,
-    TabTitle,
-    Popover,
-    NoteGroup,
-    RadioGroup,
-    CompositionAnalysis,
-    AtkTypeSelector,
+/** 防御抗性乘区开关 */
+const otherChecked = ref(false);
+/** 置顶展示开关 */
+const floatChecked = ref(false);
+const showPopover = ref(false);
+const showPopoverExtraRate = ref(false);
+const showPopoverExtraATK = ref(false);
+
+/** @module 面板数值 */
+const basicPanelSelect = ref("攻击力");
+const baseATK = ref(900);
+const extraATK = ref(1100);
+const extraFixedATK = ref(0);
+const extraPercentATK = ref(0);
+
+const baseDEF = ref(600);
+const extraDEF = ref(400);
+const extraFixedDEF = ref(0);
+const extraPercentDEF = ref(0);
+
+const baseHP = ref(10000);
+const extraHP = ref(4780);
+const extraFixedHP = ref(0);
+const extraPercentHP = ref(0);
+const elementalMystery = ref(0);
+
+const additionalDemage = ref(0.00);
+const critDemage = ref(50);
+const elementDemage = ref(0.00);
+
+const witch = ref(false);
+const thunder = ref(false);
+const baizhuHP = ref(0);
+
+const atkRate = ref(100);
+const armRate = ref(0);
+const hpRate = ref(0);
+const emRate = ref(0);
+
+const extraRate = ref(0);
+const atkType = ref<ElementalReactionType>(ElementalReactionType.None);
+const characterLevel = ref(90);
+const enemyLevel = ref(90);
+const enemyResistance = ref(10);
+const weaken = ref(0);
+const armour = ref(0);
+const armourPiercing = ref(0);
+
+const sumExtraATKNumber = computed(() => {
+  return Math.round(extraATK.value + extraFixedATK.value + baseATK.value * (extraPercentATK.value / 100));
+});
+
+const sumExtraHPNumber = computed(() => {
+  return Math.round(extraHP.value + extraFixedHP.value + baseHP.value * (extraPercentHP.value / 100));
+});
+
+const sumExtraDEFNumber = computed(() => {
+  return Math.round(extraDEF.value + extraFixedDEF.value + baseDEF.value * (extraPercentDEF.value / 100));
+});
+
+const selectedExtraDEFNotes = ref<NodeType[]>([]);
+const selectedFixedDEFNotes = ref<NodeType[]>([]);
+
+const selectedExtraHPNotes = ref<NodeType[]>([]);
+const selectedFixedHPNotes = ref<NodeType[]>([]);
+
+const selectedExtraATKNotes = ref<NodeType[]>([]);
+const selectedFixedATKNotes = ref<NodeType[]>([]);
+
+const selectedFixedEMNotes = ref<NodeType[]>([]);
+const selectedElementDemageNotes = ref<NodeType[]>([]);
+const selectedAdditionalDemageNotes = ref<NodeType[]>([]);
+
+const reactiveProps = computed(() => {
+  const values = {
+    baseATK,
+    extraATK,
+    extraFixedATK,
+    extraPercentATK,
+    baseDEF,
+    extraDEF,
+    extraFixedDEF,
+    extraPercentDEF,
+    baseHP,
+    extraHP,
+    extraFixedHP,
+    extraPercentHP,
+    additionalDemage,
+    critDemage,
+    elementDemage,
+    thunder,
+    witch,
+    elementalMystery,
+    baizhuHP,
+    armRate,
+    atkRate,
+    hpRate,
+    emRate,
+    extraRate,
+    atkType,
+    characterLevel,
+    enemyLevel,
+    enemyResistance,
+    weaken,
+    armour,
+    armourPiercing,
+  };
+  const result = {};
+  for (const key in values) {
+    result[key] = values[key].value;
+  }
+  return result;
+});
+const saveDataModule = computed(() => {
+  return {
+    selectedExtraDEFNotes: selectedExtraDEFNotes.value,
+    selectedFixedDEFNotes: selectedFixedDEFNotes.value,
+    selectedExtraHPNotes: selectedExtraHPNotes.value,
+    selectedFixedHPNotes: selectedFixedHPNotes.value,
+    selectedExtraATKNotes: selectedExtraATKNotes.value,
+    selectedFixedATKNotes: selectedFixedATKNotes.value,
+    selectedFixedEMNotes: selectedFixedEMNotes.value,
+    selectedElementDemageNotes: selectedElementDemageNotes.value,
+    selectedAdditionalDemageNotes: selectedAdditionalDemageNotes.value,
+  };
+});
+const setUnifiedState = (value) => {
+  // 回填计算器内容
+  baseATK.value = value.baseATK;
+  extraATK.value = value.extraATK;
+  extraFixedATK.value = value.extraFixedATK;
+  extraPercentATK.value = value.extraPercentATK;
+
+  baseDEF.value = value.baseDEF;
+  extraDEF.value = value.extraDEF;
+  extraFixedDEF.value = value.extraFixedDEF;
+  extraPercentDEF.value = value.extraPercentDEF;
+
+  baseHP.value = value.baseHP;
+  extraHP.value = value.extraHP;
+  extraFixedHP.value = value.extraFixedHP;
+  extraPercentHP.value = value.extraPercentHP;
+
+  basicPanelSelect.value = value.basicPanelSelect || basicPanelSelectType.ATK;
+
+  additionalDemage.value = value.additionalDemage;
+  critDemage.value = value.critDemage;
+  elementDemage.value = value.elementDemage;
+  elementalMystery.value = value.elementalMystery;
+  witch.value = value.witch;
+  thunder.value = value.thunder;
+  baizhuHP.value = value.baizhuHP;
+
+  atkRate.value = value.atkRate;
+  armRate.value = value.armRate;
+  hpRate.value = value.hpRate;
+  emRate.value = value.emRate;
+
+  extraRate.value = value.extraRate;
+  atkType.value = value.atkType;
+  characterLevel.value = value.characterLevel;
+  enemyLevel.value = value.enemyLevel;
+  enemyResistance.value = value.enemyResistance;
+  weaken.value = value.weaken;
+  armour.value = value.armour;
+  armourPiercing.value = value.armourPiercing;
+};
+/** 面板数值 end */
+
+const increaseResult = computed(() => {
+  return computationalFormula(reactiveProps.value);
+});
+
+const NotesConfig = {
+  percentATK: {
+    title: "攻击力%加成", // 便签组名称
+    localStorageName: "GenShinImpactATKNotesV2", // 存在本地storage的便签组名称
+    calculationMode: AtkPercentCalculationMode, // 便签组中的快捷计算方式
+    defaultNotes: AtkPercentNotes, // 本地没有保存便签组，则使用该默认便签组
+    setSelectedNotes: (value: NodeType[]) => {
+      selectedExtraATKNotes.value = value;
+    },
   },
-
-  setup() {
-    /** 防御抗性乘区开关 */
-    const otherChecked = ref(false);
-    /** 置顶展示开关 */
-    const floatChecked = ref(false);
-    const showPopover = ref(false);
-    const showPopoverExtraRate = ref(false);
-    const showPopoverExtraATK = ref(false);
-    const store = useStore();
-
-    const increaseResult = computed(() => {
-      return computationalFormula(store.state.damageModule);
-    });
-
-    const basicInputPanelSelect = (value) => {
-      store.commit("setBasicPanelSelect", value);
-    };
-
-    const NotesConfig = {
-      percentATK: {
-        title: "攻击力%加成", // 便签组名称
-        localStorageName: "GenShinImpactATKNotesV2", // 存在本地storage的便签组名称
-        calculationMode: AtkPercentCalculationMode, // 便签组中的快捷计算方式
-        defaultNotes: AtkPercentNotes, // 本地没有保存便签组，则使用该默认便签组
-        setSelectedNotes: (value) => {
-          // 修改便签组方法
-          store.commit("setSelectedExtraATKNotes", value);
-        },
-      },
-      fixedATK: {
-        title: "固定攻击力加成",
-        localStorageName: "GenShinImpactFixedATKNotesV2",
-        calculationMode: AtkFixedCalculationMode,
-        defaultNotes: AtkFixedNotes,
-        setSelectedNotes: (value) => {
-          store.commit("setSelectedFixedATKNotes", value);
-        },
-      },
-      percentHP: {
-        title: "生命值%加成",
-        localStorageName: "GenShinImpactHPNotesV2",
-        calculationMode: HpPercentCalculationMode,
-        defaultNotes: HpPercentNotes,
-        setSelectedNotes: (value) => {
-          store.commit("setSelectedExtraHPNotes", value);
-        },
-      },
-      percentDEF: {
-        title: "防御力%加成",
-        localStorageName: "GenShinImpactDEFNotesV2",
-        calculationMode: DefPercentCalculationMode,
-        defaultNotes: DefPercentNotes,
-        setSelectedNotes: (value) => {
-          store.commit("setSelectedExtraDEFNotes", value);
-        },
-      },
-      fixedDEF: {
-        title: "固定防御力加成",
-        localStorageName: "GenShinImpactFixedDEFNotesV2",
-        calculationMode: DefFixedCalculationMode,
-        defaultNotes: DefFixedNotes,
-        setSelectedNotes: (value) => {
-          store.commit("setSelectedFixedDEFNotes", value);
-        },
-      },
-      additionalDemage: {
-        title: "伤害提高值",
-        localStorageName: "GenShinImpactADNotesV2",
-        calculationMode: AdditionalDamageMode,
-        defaultNotes: [],
-        setSelectedNotes: (value) => {
-          store.commit("setSelectedAdditionalDemageNotes", value);
-        },
-      },
-      elementDemage: {
-        title: "伤害加成%",
-        localStorageName: "GenShinImpactEDNotesV2",
-        calculationMode: EnhancedDemageCalculationMode,
-        defaultNotes: EnhancedDamageNotes,
-        setSelectedNotes: (value) => {
-          store.commit("setSelectedElementDemageNotes", value);
-        },
-      },
-      fixedEM: {
-        title: "元素精通加成",
-        localStorageName: "GenShinImpactFixedEMNotesV2",
-        calculationMode: EmFixedCalculationMode,
-        defaultNotes: EmFixedNotes,
-        setSelectedNotes: (value) => {
-          store.commit("setSelectedFixedEMNotes", value);
-        },
-      },
-    };
-
-    const handleImagePreview = () => {
-      ImagePreview(["https://saomdpb.com/IMG_1457.PNG"]);
-    };
-    return {
-      showPopover,
-      showPopoverExtraRate,
-      showPopoverExtraATK,
-      ...toRefs(store.getters),
-      ...toRefs(store.state.damageModule),
-      ...toRefs(store.state.saveDataModule),
-      basicInputPanelSelect,
-      basicPanelSelectType,
-      otherChecked,
-      floatChecked,
-      increaseResult,
-      handleImagePreview,
-      AdditionalDamageMode,
-      NotesConfig,
-      ElementalReaction,
-    };
+  fixedATK: {
+    title: "固定攻击力加成",
+    localStorageName: "GenShinImpactFixedATKNotesV2",
+    calculationMode: AtkFixedCalculationMode,
+    defaultNotes: AtkFixedNotes,
+    setSelectedNotes: (value: NodeType[]) => {
+      selectedFixedATKNotes.value = value;
+    },
   },
+  percentHP: {
+    title: "生命值%加成",
+    localStorageName: "GenShinImpactHPNotesV2",
+    calculationMode: HpPercentCalculationMode,
+    defaultNotes: HpPercentNotes,
+    setSelectedNotes: (value: NodeType[]) => {
+      selectedExtraHPNotes.value = value;
+    },
+  },
+  percentDEF: {
+    title: "防御力%加成",
+    localStorageName: "GenShinImpactDEFNotesV2",
+    calculationMode: DefPercentCalculationMode,
+    defaultNotes: DefPercentNotes,
+    setSelectedNotes: (value: NodeType[]) => {
+      selectedExtraDEFNotes.value = value;
+    },
+  },
+  fixedDEF: {
+    title: "固定防御力加成",
+    localStorageName: "GenShinImpactFixedDEFNotesV2",
+    calculationMode: DefFixedCalculationMode,
+    defaultNotes: DefFixedNotes,
+    setSelectedNotes: (value: NodeType[]) => {
+      selectedFixedDEFNotes.value = value;
+    },
+  },
+  additionalDemage: {
+    title: "伤害提高值",
+    localStorageName: "GenShinImpactADNotesV2",
+    calculationMode: AdditionalDamageMode,
+    defaultNotes: [],
+    setSelectedNotes: (value: NodeType[]) => {
+      selectedAdditionalDemageNotes.value = value;
+    },
+  },
+  elementDemage: {
+    title: "伤害加成%",
+    localStorageName: "GenShinImpactEDNotesV2",
+    calculationMode: EnhancedDemageCalculationMode,
+    defaultNotes: EnhancedDamageNotes,
+    setSelectedNotes: (value: NodeType[]) => {
+      selectedElementDemageNotes.value = value;
+    },
+  },
+  fixedEM: {
+    title: "元素精通加成",
+    localStorageName: "GenShinImpactFixedEMNotesV2",
+    calculationMode: EmFixedCalculationMode,
+    defaultNotes: EmFixedNotes,
+    setSelectedNotes: (value: NodeType[]) => {
+      selectedFixedEMNotes.value = value;
+    },
+  },
+};
+
+const handleImagePreview = () => {
+  ImagePreview(["https://saomdpb.com/IMG_1457.PNG"]);
 };
 </script>
 

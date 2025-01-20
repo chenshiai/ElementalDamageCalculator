@@ -1,8 +1,8 @@
 <template>
-  <div class="foot">
+  <footer class="foot">
     <div class="foot-title" @click="show = !show">更新日志</div>
     <div class="foot-title" @click="showAuthor = !showAuthor">联系作者</div>
-  </div>
+  </footer>
   <Popup teleport="#app" position="bottom" v-model:show="show" class="foot-popup">
     <p v-for="item in updateLog">
       <span>{{ item.data }}</span><br />

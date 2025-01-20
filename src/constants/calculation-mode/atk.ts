@@ -1,8 +1,9 @@
 import { ProfilePhoto } from '../profilePhoto';
 import { Magnification } from '../magnification';
+import { ICalculationMode } from '@/types/interface/calculation-mode';
 
 /** 攻击力%buff计算公式 */
-export const AtkPercentCalculationMode = [
+export const AtkPercentCalculationMode: ICalculationMode[] = [
   {
     title: "通用加攻%",
     children: [
@@ -43,7 +44,7 @@ export const AtkPercentCalculationMode = [
 ];
 
 /** 固定攻击力buff计算公式 */
-export const AtkFixedCalculationMode = [
+export const AtkFixedCalculationMode: ICalculationMode[]  = [
   {
     title: "通用加攻",
     children: [

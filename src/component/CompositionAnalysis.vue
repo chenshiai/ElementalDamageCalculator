@@ -16,17 +16,18 @@
 
 <script setup>
 import { computed, ref } from "vue";
-import { useStore } from "vuex";
 import { computationalFormula } from "@/utils";
 import { Popup } from "vant";
 
-const store = useStore();
+const props = defineProps({
+  damageModule: Object,
+});
 const showPopup = ref(false);
-const compositionAnalysis = computed(() => computationalFormula(store.state.damageModule).compositionAnalysis);
+const compositionAnalysis = computed(() => computationalFormula(props.damageModule).compositionAnalysis);
 
 function calculateHeight(target) {
-  return target / compositionAnalysis.value.CRIT_DMG * 520 + 'px';
-};
+  return (target / compositionAnalysis.value.CRIT_DMG) * 520 + "px";
+}
 const analysisList = computed(() => {
   return [
     {
@@ -76,7 +77,6 @@ const analysisList = computed(() => {
         height: calculateHeight(compositionAnalysis.value.ADDITIONAL_DMG),
         backgroundColor: "#eedeb0",
       },
-
     },
     {
       title: "基础伤害值",
@@ -86,7 +86,7 @@ const analysisList = computed(() => {
         backgroundColor: "#bacac6",
       },
     },
-  ].filter(item => item.number > 0);
+  ].filter((item) => item.number > 0);
 });
 </script>
 
@@ -99,7 +99,7 @@ const analysisList = computed(() => {
 .analysis-panel {
   height: 560px;
   width: 300px;
-  background: #FDFBF6;
+  background: #fdfbf6;
   border: 4px solid var(--stroke-2);
   box-sizing: border-box;
   overflow: hidden;
@@ -122,7 +122,7 @@ const analysisList = computed(() => {
 .right {
   left: 34px;
 }
-.top::after{
+.top::after {
   content: "";
   position: absolute;
   width: 39px;

@@ -1,19 +1,17 @@
 <template>
-  <div class="note-group">
-    <div
-      v-show="localNotes"
-      :class="['notes-button', isExpand && 'expand']"
-      @click="isExpand = !isExpand"
-    >
+
+  <details class="note-group">
+    <summary class="notes-button">
       『{{ title }}』便签
-      <Icon size="12" :name="isExpand ? 'arrow-up' : 'arrow-down'" />
-    </div>
-    <div v-show="localNotes && isExpand" class="data-notes">
+      <Icon size="12" id="up" name="arrow-up" />
+      <Icon size="12" id="down" name="arrow-down" />
+    </summary>
+    <div class="data-notes">
       <div class="add-note-button" @click="showPopup = true">＋新增便签</div>
       <div
         v-for="[name, value] of localNotes"
         :key="name"
-        :class="['memo', (showSelectedNotes.get(name) >= 0) && 'selected']"
+        :class="['memo', showSelectedNotes.get(name) >= 0 && 'selected']"
       >
         <div @click="selectMemo(name, value)">
           <div class="memo-detail">
@@ -21,20 +19,11 @@
           </div>
           <div class="memo-title">{{ name }}</div>
         </div>
-        <Icon
-          @click="deleteMemo(name, value)"
-          class="memo-close"
-          name="delete-o"
-        />
+        <Icon @click="deleteMemo(name, value)" class="memo-close" name="delete-o" />
       </div>
     </div>
-  </div>
-  <Popup
-    teleport="#app"
-    v-model:show="showPopup"
-    position="top"
-    @close="handleClose"
-  >
+  </details>
+  <Popup teleport="#app" v-model:show="showPopup" position="top" @close="handleClose">
     <div class="popup-title">新增『{{ title }}』便签</div>
     <div class="calculation-modes" v-show="calculationMode.length > 1">
       <div
@@ -43,21 +32,12 @@
         :key="mode.title"
         @click="handleClick(index)"
       >
-        <img
-          v-if="!!mode.img"
-          class="additional-tab-title-img"
-          :src="mode.img"
-          alt=""
-        />
+        <img v-if="!!mode.img" class="additional-tab-title-img" :src="mode.img" alt="" />
         <span class="additional-tab-title-span">{{ mode.title }}</span>
       </div>
     </div>
     <Tabs color="#997874" type="card" v-model:active="childrenActive" @change="defaultTitleSetting">
-      <Tab
-        v-for="item in calculationModeChildren"
-        :title="item.title"
-        :key="item.title"
-      />
+      <Tab v-for="item in calculationModeChildren" :title="item.title" :key="item.title" />
     </Tabs>
     <Form @submit="onSubmit">
       <Field
@@ -78,39 +58,34 @@
         placeholder="输入备注说明（不要与其他便签重名）"
         :rules="[{ required: true, message: '必填项' }]"
       />
-      <Button
-        class="bottons__add"
-        text="确认添加"
-        size="small"
-        block
-        type="primary"
-        native-type="submit"
-      />
+      <Button class="bottons__add" text="确认添加" size="small" block type="primary" native-type="submit" />
     </Form>
   </Popup>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { onMounted, reactive, ref, computed } from "vue";
 import { Icon, Popup, Field, Form, showNotify, Button, Tab, Tabs } from "vant";
 import { floatNum, getLocalStorage, EventBus } from "@/utils";
+import { ICalculationMode } from "@/types/interface/calculation-mode";
+import { NodeType } from '@/types'
 
-const props = defineProps({
-  title: String,
-  defaultNotes: Array,
-  selectedNotes: Array,
-  setSelectedNotes: Function,
-  calculationMode: Array,
-  localStorageName: String,
-});
+interface IProps {
+  title: string;
+  defaultNotes: NodeType[];
+  selectedNotes: NodeType[];
+  setSelectedNotes: (data: NodeType[]) => void;
+  calculationMode: ICalculationMode[];
+  localStorageName: string;
+}
 
-/** 面板开关 */
-const isExpand = ref(false);
+const props = defineProps<IProps>();
+
 const showPopup = ref(false);
 /** 本地展示用便签组 */
-const localNotes = ref(new Map());
+const localNotes = ref<Map<string, number>>(new Map());
 /** 双向绑定model */
-const modelValue = defineModel();
+const modelValue = defineModel<number | string>();
 function changeValue(value) {
   modelValue.value = value;
 }
@@ -121,7 +96,7 @@ function formatMemoDetail(detail) {
 }
 
 /** 选择便签模块 */
-let selectedMemos = new Map([]);
+let selectedMemos = new Map<string, number>([]);
 const showSelectedNotes = computed(() => {
   selectedMemos = new Map(props.selectedNotes);
   return selectedMemos;
@@ -140,7 +115,8 @@ function selectMemo(name, value) {
     selectedMemos.set(name, value);
     changeValue(floatNum(+modelValue.value + +value, 2));
   }
-  // 最后将变更后的【已选择便签】写入store
+  
+  // 最后将变更后的【已选择便签】更新
   props.setSelectedNotes([...selectedMemos]);
 }
 
@@ -178,10 +154,7 @@ function handleClose() {
 /** 更新便签模块 */
 // 更新本地localstorage便签组
 function updateNoteGroup(value) {
-  window.localStorage.setItem(
-      props.localStorageName,
-      JSON.stringify(value)
-  );
+  window.localStorage.setItem(props.localStorageName, JSON.stringify(value));
 }
 // 删除便签
 function deleteMemo(name, value) {
@@ -205,7 +178,7 @@ function onSubmit(value) {
 
   // 自动选中新建的标签
   selectMemo(name, val);
-  localNotes.value = new Map([[name, val]].concat([...localNotes.value]));
+  localNotes.value = new Map([[name, val], ...localNotes.value]);
 
   // 将表单值设为初始值
   newMemo.title = "";
@@ -216,19 +189,14 @@ function onSubmit(value) {
   showNotify({
     type: "success",
     message: "添加成功",
-  })
+  });
 }
 
 /** 生命周期 mounted */
 function getLocalNotes() {
   const { localStorageName, defaultNotes = [] } = props;
   // 根据名称读取本地便签组，并将其转为Map，方便后续操作
-  localNotes.value = new Map(getLocalStorage(
-      localStorageName,
-      defaultNotes,
-      `${localStorageName}读取失败`
-  ));
-  console.log('读取本地：', localStorageName);
+  localNotes.value = new Map(getLocalStorage(localStorageName, defaultNotes, `${localStorageName}读取失败`));
 }
 
 onMounted(() => {
@@ -243,13 +211,14 @@ onMounted(() => {
 }
 
 .data-notes {
-  border: 1px solid var(--stroke-2);
+  border: 1px solid var(--main-text);
   border-top: none;
   flex-wrap: wrap;
   display: flex;
   padding: 6px 6px 6px 0;
   max-height: 200px;
   overflow: scroll;
+  border-radius: 0 0 4px 4px;
 }
 
 .data-notes .memo {
@@ -306,12 +275,25 @@ onMounted(() => {
   font-size: 14px;
   line-height: 32px;
   border-radius: 4px;
+  height: 32px;
 }
 
-.notes-button.expand {
+.notes-button::marker {
+  font-size: 0;
+}
+
+[open] > .notes-button {
   border-radius: 4px 4px 0 0;
 }
-
+#up {
+  display: none;
+}
+[open] > .notes-button #down {
+  display: none;
+}
+[open] > .notes-button #up {
+  display: inline-block;
+}
 .data-notes .memo-close {
   position: absolute;
   top: 2px;
@@ -368,7 +350,7 @@ onMounted(() => {
   display: flex;
   align-content: center;
   justify-content: center;
-  
+
   width: 25%;
   margin: 2px 0 2px 0;
 }
