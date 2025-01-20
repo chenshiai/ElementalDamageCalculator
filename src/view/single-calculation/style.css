@@ -99,6 +99,9 @@
 .basic-panel-item summary::marker {
   font-size: 0;
 }
+.basic-panel-item summary::-webkit-details-marker {
+  font-size: 0;
+}
 .basic-panel-item[open] {
   flex: 1.5;
   background-color: var(--button-bg);

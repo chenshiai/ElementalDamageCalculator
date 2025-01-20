@@ -278,6 +278,7 @@ onMounted(() => {
   height: 32px;
 }
 
+.notes-button::-webkit-details-marker,
 .notes-button::marker {
   font-size: 0;
 }
