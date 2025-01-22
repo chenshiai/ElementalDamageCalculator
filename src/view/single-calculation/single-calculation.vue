@@ -223,7 +223,7 @@
 
 <script setup lang="ts">
 import { computed, ref } from "vue";
-import { Switch, Cell, Icon, ImagePreview, Popover } from "vant";
+import { Switch, Cell, Icon, showImagePreview, Popover } from "vant";
 
 import TabTitle from "@/component/TabTitle.vue";
 import DataItem from "@/component/DataItem.vue";
@@ -501,7 +501,7 @@ const NotesConfig = {
 };
 
 const handleImagePreview = () => {
-  ImagePreview(["https://saomdpb.com/IMG_1457.PNG"]);
+  showImagePreview(["https://saomdpb.com/IMG_1457.PNG"]);
 };
 </script>
 
