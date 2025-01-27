@@ -55,6 +55,116 @@ const a = {
 // .replaceAll("%", '').replaceAll(/[\u4e00-\u9fff]+/g, "").replaceAll("\t",",").split(",").map(i=>Math.round(i*100)/10000)
 export const Character: (ICharacterInfo & Record<any, any>)[] = [
   {
+    ...cha(10000108, "蓝砚", ElementType.Anemo, WeaponType.Magic)(Rarity.Four, 9244, 251, 580, 60)(
+      "UI_AvatarIcon_Lanyan",
+      [
+        "UI_Talent_S_Lanyan_01",
+        "UI_Talent_S_Lanyan_02",
+        "UI_Talent_U_Lanyan_01",
+        "UI_Talent_S_Lanyan_03",
+        "UI_Talent_U_Lanyan_02",
+        "UI_Talent_S_Lanyan_04",
+      ],
+      ["普通攻击·玄鸾画水", "凤缕随翦舞", "鹍弦踏月出"]
+    ),
+
+    normalAttack: [
+      createAttack("一段伤害", AttackType.Normal, ElementType.Anemo, {
+        atk: [0.414, 0.445, 0.477, 0.518, 0.549, 0.58, 0.622, 0.663, 0.704, 0.746, 0.787],
+      }),
+      createAttack("二段伤害·1", AttackType.Normal, ElementType.Anemo, {
+        atk: [0.2, 0.219, 0.235, 0.255, 0.27, 0.286, 0.306, 0.327, 0.347, 0.367, 0.387],
+      }),
+      createAttack("二段伤害·2", AttackType.Normal, ElementType.Anemo, {
+        atk: [0.249, 0.268, 0.287, 0.312, 0.33, 0.349, 0.374, 0.399, 0.424, 0.449, 0.474],
+      }),
+      createAttack("三段伤害·单次", AttackType.Normal, ElementType.Anemo, {
+        atk: [0.269, 0.289, 0.31, 0.336, 0.357, 0.377, 0.404, 0.431, 0.458, 0.484, 0.511],
+      }),
+      createAttack("四段伤害", AttackType.Normal, ElementType.Anemo, {
+        atk: [0.64, 0.694, 0.742, 0.807, 0.855, 0.904, 0.968, 1.033, 1.098, 1.162, 1.227],
+      }),
+      createAttack("重击伤害·单次", AttackType.Strong, ElementType.Anemo, {
+        atk: [0.378, 0.407, 0.435, 0.473, 0.501, 0.53, 0.568, 0.605, 0.643, 0.681, 0.719],
+      }),
+      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Anemo, {
+        atk: [0.568, 0.615, 0.661, 0.727, 0.773, 0.826, 0.899, 0.971, 1.044, 1.123, 1.203],
+      }),
+      createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Anemo, {
+        atk: [1.14, 1.23, 1.32, 1.45, 1.55, 1.65, 1.8, 1.94, 2.09, 2.25, 2.4],
+      }),
+      createAttack("高空坠地冲击伤害", AttackType.Falling, ElementType.Anemo, {
+        atk: [1.42, 1.53, 1.65, 1.82, 1.93, 2.06, 2.24, 2.43, 2.61, 2.81, 3],
+      }),
+    ],
+    elementSkill: [
+      createAttack("翦月环伤害", AttackType.Skill, ElementType.Anemo, {
+        atk: [0.96, 1.035, 1.107, 1.203, 1.275, 1.348, 1.444, 1.54, 1.636, 1.733, 1.829, 1.925, 2.045],
+      }),
+      createAttack("护盾吸收量", AttackType.Shield, ElementType.None, {
+        atk: [2.765, 2.972, 3.18, 3.456, 3.663, 3.87, 4.147, 4.424, 4.7, 4.977, 5.253, 5.53, 5.875],
+        fixed: [1156, 1271, 1396, 1531, 1676, 1830, 1993, 2167, 2350, 2542, 2745, 2957, 3178],
+      }),
+      createAttack("附加伤害·火", AttackType.Skill, ElementType.Pyro, {
+        atk: [0.96, 1.035, 1.107, 1.203, 1.275, 1.348, 1.444, 1.54, 1.636, 1.733, 1.829, 1.925, 2.045].map(
+          (i) => i * 0.5
+        ),
+      }),
+      createAttack("附加伤害·水", AttackType.Skill, ElementType.Hydro, {
+        atk: [0.96, 1.035, 1.107, 1.203, 1.275, 1.348, 1.444, 1.54, 1.636, 1.733, 1.829, 1.925, 2.045].map(
+          (i) => i * 0.5
+        ),
+      }),
+      createAttack("附加伤害·雷", AttackType.Skill, ElementType.Electro, {
+        atk: [0.96, 1.035, 1.107, 1.203, 1.275, 1.348, 1.444, 1.54, 1.636, 1.733, 1.829, 1.925, 2.045].map(
+          (i) => i * 0.5
+        ),
+      }),
+      createAttack("附加伤害·冰", AttackType.Skill, ElementType.Cryo, {
+        atk: [0.96, 1.035, 1.107, 1.203, 1.275, 1.348, 1.444, 1.54, 1.636, 1.733, 1.829, 1.925, 2.045].map(
+          (i) => i * 0.5
+        ),
+      }),
+    ],
+    burstSkill: [
+      createAttack("技能伤害·单次", AttackType.Burst, ElementType.Anemo, {
+        atk: [2.411, 2.591, 2.772, 3.013, 3.194, 3.375, 3.616, 3.857, 4.098, 4.339, 4.58, 4.821, 5.123],
+      }),
+    ],
+    otherSkill: [],
+    buffs: [
+      A_80_ATK_24P,
+      {
+        label: "苍翎镇邪敕符",
+        describe: "元素战技凤缕随翦舞与元素爆发鹍弦踏月出造成的伤害值提升，提升值分别相当于蓝砚元素精通的309%和774%。",
+        effect: [
+          {
+            type: BuffType.SkillFixed,
+            getValue: (data) => (data.elementalMystery + data.elementalMystery_NT) * 3.09,
+            actionOn: ActionOn.External,
+          },
+          {
+            type: BuffType.BurstFixed,
+            getValue: (data) => (data.elementalMystery + data.elementalMystery_NT) * 7.74,
+            actionOn: ActionOn.External,
+          },
+        ],
+        enable: true,
+      },
+      Constellation_E_3,
+      {
+        label: "4命·「揽龙鹰兮结血珠」",
+        describe: "施放元素爆发鹍弦踏月出之后的12秒内，队伍中附近所有角色的元素精通提升60点。",
+        effect: [{ type: BuffType.MysteryFixed, getValue: () => 60 }],
+        enable: false,
+        shareable: true,
+        target: BuffTarget.All,
+        condition: ({ constellation }) => constellation >= 4
+      },
+      Constellation_Q_5,
+    ],
+  },
+  {
     ...cha(10000107, "茜特菈莉", ElementType.Cryo, WeaponType.Magic)(Rarity.Five, 11634, 127, 763, 60)(
       "UI_AvatarIcon_Citlali",
       [
@@ -659,10 +769,10 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("二段伤害", AttackType.Normal, ElementType.Physical, {
         atk: [0.446, 0.482, 0.518, 0.57, 0.607, 0.648, 0.705, 0.762, 0.819, 0.881, 0.944],
       }),
-      createAttack("三段伤害·单段", AttackType.Normal, ElementType.Physical, {
+      createAttack("三段伤害·单次", AttackType.Normal, ElementType.Physical, {
         atk: [0.297, 0.321, 0.345, 0.38, 0.404, 0.432, 0.47, 0.508, 0.546, 0.587, 0.628],
       }),
-      createAttack("四段伤害·单段", AttackType.Normal, ElementType.Physical, {
+      createAttack("四段伤害·单次", AttackType.Normal, ElementType.Physical, {
         atk: [0.255, 0.275, 0.296, 0.326, 0.346, 0.37, 0.403, 0.435, 0.468, 0.503, 0.539],
       }),
       createAttack("瞄准射击", AttackType.Strong, ElementType.Physical, {
@@ -1354,7 +1464,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "Emilie"
       ),
       createAttack(
-        "柔灯之匣·二阶伤害·单段",
+        "柔灯之匣·二阶伤害·单次",
         AttackType.Skill,
         ElementType.Dendro,
         {
@@ -1626,7 +1736,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("贯夜伤害·普通", AttackType.Normal, ElementType.Electro, {
         atk: [0.44, 0.475, 0.511, 0.562, 0.598, 0.639, 0.695, 0.751, 0.808, 0.869, 0.93, 0.992, 1.053],
       }),
-      createAttack("贯夜伤害·强化单段", AttackType.Normal, ElementType.Electro, {
+      createAttack("贯夜伤害·强化单次", AttackType.Normal, ElementType.Electro, {
         atk: [0.251, 0.272, 0.292, 0.321, 0.342, 0.365, 0.397, 0.429, 0.461, 0.496, 0.531, 0.566, 0.602],
       }),
       createAttack("流涌之刃伤害", AttackType.Other, ElementType.Electro, {
@@ -5538,7 +5648,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("四段伤害", AttackType.Normal, ElementType.Physical, {
         atk: [0.607, 0.657, 0.706, 0.777, 0.826, 0.882, 0.96, 1.038, 1.116, 1.2, 1.3],
       }),
-      createAttack("五段伤害·单段", AttackType.Normal, ElementType.Physical, {
+      createAttack("五段伤害·单次", AttackType.Normal, ElementType.Physical, {
         atk: [0.254, 0.274, 0.295, 0.325, 0.345, 0.369, 0.401, 0.433, 0.466, 0.501, 0.542],
       }),
       createAttack("重击伤害·1", AttackType.Strong, ElementType.Physical, {
@@ -6374,7 +6484,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("四段伤害", AttackType.Normal, ElementType.Physical, {
         atk: [0.429, 0.464, 0.499, 0.549, 0.584, 0.624, 0.679, 0.734, 0.789, 0.849, 0.917],
       }),
-      createAttack("五段伤害·单段", AttackType.Normal, ElementType.Physical, {
+      createAttack("五段伤害·单次", AttackType.Normal, ElementType.Physical, {
         atk: [0.108, 0.116, 0.125, 0.138, 0.146, 0.156, 0.17, 0.184, 0.198, 0.213, 0.23],
       }),
       createAttack("六段伤害", AttackType.Normal, ElementType.Physical, {
