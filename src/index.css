@@ -177,3 +177,10 @@ body {
 .bg-pyro {
   background-color: var(--bg-pyro);
 }
+
+summary::marker {
+  font-size: 0;
+}
+summary::-webkit-details-marker {
+  font-size: 0;
+}
