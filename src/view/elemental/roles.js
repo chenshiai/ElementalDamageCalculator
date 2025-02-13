@@ -1,4 +1,5 @@
 import { ref, computed } from "vue";
+import { Magnification } from "@/constants/magnification.js";
 
 export function useNiLuo() {
   const niLuo = ref(0);
@@ -31,3 +32,15 @@ export function useBaiZhu() {
   }
 }
 
+export function useMizuki() {
+  const mizukiEm = ref(0);
+  const mizukiSkillLevel = ref(10);
+  const mizukiGain = computed(() => {
+    return mizukiEm.value * Magnification.Mizuki.sk[mizukiSkillLevel.value - 1];
+  })
+  return {
+    mizukiEm,
+    mizukiSkillLevel,
+    mizukiGain
+  }
+}

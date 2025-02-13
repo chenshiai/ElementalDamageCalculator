@@ -1,7 +1,8 @@
-import { ProfilePhoto } from '../profilePhoto';
 import { Magnification } from '../magnification';
 import { ICalculationMode } from '@/types/interface/calculation-mode';
 
+// @ts-ignore
+const ProfilePhoto = __global__.ProfilePhoto;
 /** 攻击力%buff计算公式 */
 export const AtkPercentCalculationMode: ICalculationMode[] = [
   {

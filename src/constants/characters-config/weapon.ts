@@ -50,6 +50,52 @@ createWeapon(
 export const Weapons: IWeaponInfo[] = [
   createWeapon(
     {
+      name: "寝正月初晴",
+      enkaId: 14518,
+      weaponType: WeaponType.Magic,
+      icon: getEnkaUI("UI_EquipIcon_Catalyst_SakuraFan_Awaken"),
+      baseAtk: 542,
+      rarity: Rarity.Five,
+      appendPropId: AppendProp.ELEMENT_MASTERY,
+      statValue: 265,
+    },
+    (affix = 1) => {
+      let a = [120, 150, 180, 210, 240][affix - 1];
+      let b = [96, 120, 144, 168, 192][affix - 1];
+      let c = [32, 40, 48, 56, 64][affix - 1];
+      return {
+        title: "一汤二鹰三鸣神",
+        text: highlight`触发扩散反应后的6秒内，元素精通提升${a}点；元素战技命中敌人后的9秒内，元素精通提升${b}点；元素爆发命中敌人后的30秒内，元素精通提升${c}点。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [120, 150, 180, 210, 240][affix - 1];
+      let b = [96, 120, 144, 168, 192][affix - 1];
+      let c = [32, 40, 48, 56, 64][affix - 1];
+      return [
+        {
+          label: "扩散反应后，元素精通提升",
+          describe: `扩散反应后的6秒内，元素精通提升${a}点`,
+          effect: [{ type: BuffType.MysteryFixed, getValue: () => a }],
+          enable: false,
+        },
+        {
+          label: "元素战技命中后，元素精通提升",
+          describe: `元素战技命中敌人后的9秒内，元素精通提升${b}点`,
+          effect: [{ type: BuffType.MysteryFixed, getValue: () => b }],
+          enable: false,
+        },
+        {
+          label: "元素爆发命中后，元素精通提升",
+          describe: `元素爆发命中敌人后的30秒内，元素精通提升${c}点`,
+          effect: [{ type: BuffType.MysteryFixed, getValue: () => c }],
+          enable: false,
+        },
+      ];
+    },
+  ),
+  createWeapon(
+    {
       name: "祭星者之望",
       enkaId: 14517,
       weaponType: WeaponType.Magic,

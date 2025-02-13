@@ -1,10 +1,11 @@
 
-import { WeponIcon } from '../profilePhoto';
 import { Magnification } from '../magnification';
 import { ICalculationMode } from '@/types/interface/calculation-mode';
 
 // @ts-ignore
 const ProfilePhoto = __global__.ProfilePhoto;
+// @ts-ignore
+const WeponIcon = __global__.WeponIcon;
 
 function LVLimit(lv) {
   lv = Math.min(14, lv);

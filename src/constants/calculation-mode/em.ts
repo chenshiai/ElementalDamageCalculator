@@ -1,6 +1,7 @@
-import { ProfilePhoto } from '../profilePhoto';
 import { ICalculationMode } from '@/types/interface/calculation-mode';
 
+// @ts-ignore
+const ProfilePhoto = __global__.ProfilePhoto;
 /** 元素精通buff计算公式 */
 export const EmFixedCalculationMode: ICalculationMode[] = [
   {
