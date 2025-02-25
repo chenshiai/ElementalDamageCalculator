@@ -1,5 +1,4 @@
 <template>
-
   <details class="note-group">
     <summary class="notes-button">
       『{{ title }}』便签

@@ -211,13 +211,13 @@ function round(a: number, precision: number = 0): number {
           <span v-html="val.svg"></span>
           {{ val.label }}
         </div>
-        <span v-show="val.extraValue" class="panel-detail">
+        <data v-show="val.extraValue" class="panel-detail">
           <div>{{ round(val.baseValue) }}</div>
           <div class="extra-text">+{{ round(val.extraValue) }}</div>
-        </span>
-        <span class="panel-number">
+        </data>
+        <data class="panel-number">
           {{ round(val.baseValue + val.extraValue, index === 4 ? 1 : 0) }}{{ index === leftValue.length - 1 ? '%' : '' }}
-        </span>
+        </data>
       </div>
     </div>
     <div class="right">
@@ -226,7 +226,7 @@ function round(a: number, precision: number = 0): number {
           <span v-html="val.svg"></span>
           {{ val.label }}
         </div>
-        <span class="panel-number">{{ round(val.baseValue + val.extraValue, 1) }}%</span>
+        <data class="panel-number">{{ round(val.baseValue + val.extraValue, 1) }}%</data>
       </div>
     </div>
   </div>
@@ -239,10 +239,9 @@ function round(a: number, precision: number = 0): number {
           <span v-html="val.svg"></span>
           {{ val.label }}
         </div>
-        <span
-          >{{ round(val.baseValue) }}
-          <span class="extra-text">+{{ round(val.extraValue) }}</span>
-        </span>
+        <data>{{ round(val.baseValue) }}
+          <data class="extra-text">+{{ round(val.extraValue) }}</data>
+        </data>
       </div>
       <div class="data-panel__title">进阶属性</div>
       <div class="panel-item" v-for="val in extraValue">
@@ -250,10 +249,10 @@ function round(a: number, precision: number = 0): number {
           <span v-html="val.svg"></span>
           {{ val.label }}
         </div>
-        <span
-          >{{ round(val.baseValue + val.extraValue, 1) }}%
-          <span class="extra-text"></span>
-        </span>
+        <data>
+          {{ round(val.baseValue + val.extraValue, 1) }}%
+          <data class="extra-text"></data>
+        </data>
       </div>
       <div class="data-panel__title">元素属性</div>
       <div class="panel-item" v-for="val in elementValue">
@@ -261,10 +260,10 @@ function round(a: number, precision: number = 0): number {
           <span v-html="val.svg"></span>
           {{ val.label }}
         </div>
-        <span>
+        <data>
           {{ round(val.baseValue + val.extraValue, 1) }}%
           <span class="extra-text"></span>
-        </span>
+        </data>
       </div>
     </div>
   </Popup>

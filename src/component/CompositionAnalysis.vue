@@ -5,8 +5,8 @@
       <div class="plotting-scale">
         <div v-for="(item, index) in analysisList" class="plotting-item" :style="item.style">
           <div :class="['plotting-tip top', index % 2 === 0 ? 'left' : 'right']">
-            <span>{{ item.title }}</span>
-            <span class="plotting-detail">{{ item.number }}</span>
+            <data>{{ item.title }}</data>
+            <data class="plotting-detail">{{ item.number }}</data>
           </div>
         </div>
       </div>

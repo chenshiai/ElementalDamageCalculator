@@ -1,13 +1,13 @@
 <template>
   <div class="detail">
-    蒸发、融化反应的伤害提升{{ Rate }}%<span class="more-rate">{{ moreRate }}</span>;
+    蒸发、融化反应的伤害提升{{ Rate }}%<data class="more-rate">{{ moreRate }}</data>;
     <br/>
     超载、超导、感电、燃烧、碎冰、扩散、绽放、超绽放、烈绽放的伤害提升{{ servitude }}%;
-    <span v-show="servitudeMoreRate" class="more-rate"><br/>{{ servitudeMoreRate }}</span>
+    <data v-show="servitudeMoreRate" class="more-rate"><br/>{{ servitudeMoreRate }}</data>
     <slot name="servitude"></slot>
     <br/>
     超激化、蔓激化带来的[伤害提升]提高{{ catalyze }}%;
-    <span v-show="catalyzeMoreRate" class="more-rate"><br/>{{ catalyzeMoreRate }}</span>
+    <data v-show="catalyzeMoreRate" class="more-rate"><br/>{{ catalyzeMoreRate }}</data>
     <slot name="catalyze"></slot>
     <br/>
     结晶反应护盾提供的[伤害吸收量]提升{{ crystallization }}%;

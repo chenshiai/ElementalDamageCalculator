@@ -5,7 +5,7 @@
   </footer>
   <Popup teleport="#app" position="bottom" v-model:show="show" class="foot-popup">
     <p v-for="item in updateLog">
-      <span>{{ item.data }}</span><br />
+      <time :datetime="item.data">{{ item.data }}</time><br />
       <span v-for="(msg, index) in item.msg">
         {{ `${index + 1}、${msg}` }}
         <br />
