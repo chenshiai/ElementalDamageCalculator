@@ -2717,7 +2717,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       S_80_CRITALHUNT_38P,
       {
         label: "元素战技·寒烈的惩裁",
-        describe: "生命值高于50%时，强化「普通攻击·迅烈倾霜拳」的斥逐拳，使其造成的伤害提",
+        describe: "生命值高于50%时，强化「普通攻击·迅烈倾霜拳」的斥逐拳，使其造成的伤害提升",
         effect: [
           {
             type: BuffType.NormalRate,

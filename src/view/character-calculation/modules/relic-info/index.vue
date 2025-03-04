@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Popup, Search, Icon, showNotify, Button, SwipeCell } from "vant";
+import { Popup, Search, showNotify, Button, SwipeCell, Checkbox, CheckboxGroup } from "vant";
 import { ref, computed } from "vue";
 import _ from "lodash";
 
@@ -18,7 +18,6 @@ import {
   getAppendPropName,
   RelicText,
   EquipTypeMainstats,
-  EquipTypeSubstats,
 } from "@/constants/characters-config/append-prop";
 import db from "@/utils/db";
 import { relicDB } from "@/constants/db";
@@ -48,6 +47,8 @@ const setStatForm = ref<RelicStatType>({
   reliquaryMainstat: {} as MainstatType,
   reliquarySubstats: [],
 });
+// 副词条多选
+const substatsArray = ref<AppendProp[]>([]);
 const addRelic = () => {
   const relicItem = new RelicItem({
     ...setStatBase.value,
@@ -89,6 +90,9 @@ const selectRelic = (index: number) => {
       reliquaryMainstat: data.reliquaryMainstat,
       reliquarySubstats: data.reliquarySubstats,
     };
+    setStatForm.value.reliquarySubstats.forEach((substat) => {
+      substatsArray.value.push(substat.appendPropId);
+    });
   }
 };
 // 使用本地圣遗物数据
@@ -104,6 +108,7 @@ const closePopup = () => {
     reliquaryMainstat: {} as MainstatType,
     reliquarySubstats: [],
   };
+  substatsArray.value = [];
 };
 
 const removeRelic = () => {
@@ -122,29 +127,46 @@ const showSetRelicStatPop = (equip: IRelicLibraryItemEquip) => {
   setStatBase.value = equip[selectedPartIndex.value];
 };
 
-// 主词条变化后，删除相同的副词条，并设置默认数值
+// 主词条变化后设置默认数值，并删除相同的副词条
 const mainStatChanged = (event) => {
-  const index = setStatForm.value.reliquarySubstats.findIndex((item) => {
-    return item.appendPropId === event.target.value;
-  });
-  if (index >= 0) setStatForm.value.reliquarySubstats.splice(index, 1);
-
   const stat = ReliceMainStats.find((item) => {
     return item.mainPropId === event.target.value;
   });
   setStatForm.value.reliquaryMainstat.statValue = stat.statValue;
-};
-// 添加一个副词条
-const addSubstat = () => {
-  setStatForm.value.reliquarySubstats.push({
-    appendPropId: null,
-    statValue: 0,
+
+  const same = substatsArray.value.findIndex((item) => {
+    return item === event.target.value;
   });
+  if (same >= 0) {
+    substatsArray.value.splice(same, 1);
+    substatsChange(substatsArray.value);
+  }
 };
 
-// 删除一个副词条
-const deleteSubStat = (index) => {
-  setStatForm.value.reliquarySubstats.splice(index, 1);
+// 副词条变化
+const substatsChange = (arr: AppendProp[]) => {
+  if (arr.length < setStatForm.value.reliquarySubstats.length) {
+    // 删除
+    let target = 0;
+    setStatForm.value.reliquarySubstats.forEach((current, index) => {
+      if (!arr.includes(current.appendPropId)) target = index;
+    });
+    setStatForm.value.reliquarySubstats.splice(target, 1);
+  } else {
+    // 添加
+    arr.forEach((appendPropId) => {
+      let skip = false;
+      setStatForm.value.reliquarySubstats.forEach((current) => {
+        // 若存在已选择的副词条，则跳过添加
+        if (appendPropId === current.appendPropId) skip = true;
+      });
+      !skip &&
+        setStatForm.value.reliquarySubstats.push({
+          appendPropId,
+          statValue: 0,
+        });
+    });
+  }
 };
 
 // 根据部位类型来获取主词条列表
@@ -161,16 +183,6 @@ const mainStatFilter = computed(() => {
     });
   }
 });
-
-// 副词条列表过滤，排除已出现过的主、副词条，保留本身选择的词条
-const subStatFilter = (selectedId: AppendProp) => {
-  const mainPropId = setStatForm.value.reliquaryMainstat.mainPropId;
-  const appendPropIds = setStatForm.value.reliquarySubstats.map((substat) => substat.appendPropId);
-
-  return EquipTypeSubstats.filter(
-    (appendPropId) => appendPropId !== mainPropId && !appendPropIds.includes(appendPropId)
-  ).concat([selectedId]);
-};
 
 /** 查询本地圣遗物数据 */
 const localRelics = ref<IRelicItem[]>([]);
@@ -248,12 +260,8 @@ const deleteLocalData = (item: IRelicItem) => {
         <span class="set-relice-title__close" @click="removeRelic">卸下圣遗物</span>
       </div>
       <form class="set-relice-form" @submit.prevent="addRelic">
-        <div class="set-relice-filed" style="margin-bottom: -4px;">
-          <div style="flex-grow: 1; text-align: center;">选择词条</div>
-          <div style="width: 20%">输入数值</div>
-        </div>
         <div class="set-relice-filed">
-          <span>○主词条：</span>
+          <span>主属性：</span>
           <select
             v-model="setStatForm.reliquaryMainstat.mainPropId"
             class="set-relice-filed__select"
@@ -266,20 +274,72 @@ const deleteLocalData = (item: IRelicItem) => {
           </select>
           <input type="number" v-model="setStatForm.reliquaryMainstat.statValue" step="0.01" />
         </div>
-        <div class="set-relice-filed" v-for="(subStat, index) in setStatForm.reliquarySubstats">
-          <span><Icon @click="deleteSubStat(index)" class="memo-close" name="clear" />副词条：</span>
-          <select v-model="subStat.appendPropId" class="set-relice-filed__select" required>
-            <option
-              v-for="appendPropId in subStatFilter(subStat.appendPropId)"
-              :key="appendPropId"
-              :value="appendPropId"
-            >
-              {{ getAppendPropName(appendPropId) }}
-            </option>
-          </select>
+        <div class="set-relice-filed" v-for="subStat in setStatForm.reliquarySubstats" :key="subStat.appendPropId">
+          <label>副属性：</label>
+          <span>{{ getAppendPropName(subStat.appendPropId) }}</span>
           <input type="number" v-model="subStat.statValue" step="0.01" />
         </div>
-        <div class="add-sub-stat" v-show="setStatForm.reliquarySubstats.length < 4" @click="addSubstat">添加副词条</div>
+        <CheckboxGroup class="substats-check-group" v-model="substatsArray" max="4" @change="substatsChange">
+          <Checkbox :name="AppendProp.HP" :disabled="setStatForm.reliquaryMainstat.mainPropId === AppendProp.HP">
+            生命值
+          </Checkbox>
+          <Checkbox
+            :name="AppendProp.ATTACK"
+            :disabled="setStatForm.reliquaryMainstat.mainPropId === AppendProp.ATTACK"
+          >
+            攻击力
+          </Checkbox>
+          <Checkbox
+            :name="AppendProp.DEFENSE"
+            :disabled="setStatForm.reliquaryMainstat.mainPropId === AppendProp.DEFENSE"
+          >
+            防御力
+          </Checkbox>
+
+          <Checkbox
+            :name="AppendProp.HP_PERCENT"
+            :disabled="setStatForm.reliquaryMainstat.mainPropId === AppendProp.HP_PERCENT"
+          >
+            生命值%
+          </Checkbox>
+          <Checkbox
+            :name="AppendProp.ATTACK_PERCENT"
+            :disabled="setStatForm.reliquaryMainstat.mainPropId === AppendProp.ATTACK_PERCENT"
+          >
+            攻击力%
+          </Checkbox>
+          <Checkbox
+            :name="AppendProp.DEFENSE_PERCENT"
+            :disabled="setStatForm.reliquaryMainstat.mainPropId === AppendProp.DEFENSE_PERCENT"
+          >
+            防御力%
+          </Checkbox>
+
+          <Checkbox
+            :name="AppendProp.ELEMENT_MASTERY"
+            :disabled="setStatForm.reliquaryMainstat.mainPropId === AppendProp.ELEMENT_MASTERY"
+          >
+            元素精通
+          </Checkbox>
+          <Checkbox
+            :name="AppendProp.CHARGE_EFFICIENCY"
+            :disabled="setStatForm.reliquaryMainstat.mainPropId === AppendProp.CHARGE_EFFICIENCY"
+          >
+            元素充能效率
+          </Checkbox>
+          <Checkbox
+            :name="AppendProp.CRITICAL"
+            :disabled="setStatForm.reliquaryMainstat.mainPropId === AppendProp.CRITICAL"
+          >
+            暴击率
+          </Checkbox>
+          <Checkbox
+            :name="AppendProp.CRITICAL_HURT"
+            :disabled="setStatForm.reliquaryMainstat.mainPropId === AppendProp.CRITICAL_HURT"
+          >
+            暴击伤害
+          </Checkbox>
+        </CheckboxGroup>
         <Button class="bottons__add" text="确认添加" block type="primary" native-type="submit" />
       </form>
     </template>
@@ -354,6 +414,7 @@ const deleteLocalData = (item: IRelicItem) => {
   line-height: 32px;
   align-items: center;
   margin-bottom: 12px;
+  justify-content: space-between;
 }
 .set-relice-filed input {
   display: inline-block;
@@ -379,7 +440,8 @@ const deleteLocalData = (item: IRelicItem) => {
   width: 100%;
 }
 
-select {
+.set-relice-filed__select {
+  text-align: center;
   border: solid 1px var(--border);
   appearance: none;
   -moz-appearance: none;
@@ -428,5 +490,37 @@ select {
 }
 .swipecell-right-button {
   height: 100%;
+}
+</style>
+
+<style>
+.substats-check-group {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  position: absolute;
+  bottom: 50px;
+  left: 0;
+  width: 100%;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.substats-check-group .van-checkbox__icon {
+  display: none;
+}
+.substats-check-group > div {
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+.substats-check-group > div > span {
+  margin: 0;
+  text-align: center;
+  line-height: 28px;
+  width: 100%;
+}
+.substats-check-group > [aria-checked="true"] > span {
+  background-color: var(--button-bg);
+  color: var(--light-text);
 }
 </style>
