@@ -65,16 +65,16 @@ export const ReliceMainStats: MainstatType[] = [
     statValue: 4780,
   },
   {
-    mainPropId: AppendProp.DEFENSE_PERCENT,
-    statValue: 58.3,
-  },
-  {
     mainPropId: AppendProp.ATTACK_PERCENT,
     statValue: 46.6,
   },
   {
     mainPropId: AppendProp.HP_PERCENT,
     statValue: 46.6,
+  },
+  {
+    mainPropId: AppendProp.DEFENSE_PERCENT,
+    statValue: 58.3,
   },
   {
     mainPropId: AppendProp.ELEMENT_MASTERY,

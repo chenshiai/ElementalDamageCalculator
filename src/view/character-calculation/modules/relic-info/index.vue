@@ -1,6 +1,18 @@
 <script setup lang="ts">
-import { Popup, Search, showNotify, Button, SwipeCell, Checkbox, CheckboxGroup } from "vant";
-import { ref, computed } from "vue";
+import {
+  Popup,
+  Search,
+  showNotify,
+  Button,
+  SwipeCell,
+  Checkbox,
+  CheckboxGroup,
+  Tab,
+  Tabs,
+  RadioGroup,
+  Radio,
+} from "vant";
+import { ref, computed, nextTick } from "vue";
 import _ from "lodash";
 
 import relics, { IRelicLibraryItemEquip } from "@/constants/characters-config/relic";
@@ -12,15 +24,17 @@ import {
   RelicItem,
   RelicStatType,
 } from "@/constants/characters-config/relic-class";
-import { IRelicBase } from "@/types/interface";
-import { AppendProp, EquipIndexToType } from "@/types/enum";
 import {
   getAppendPropName,
   RelicText,
   EquipTypeMainstats,
+  EquipTypeSubstats,
 } from "@/constants/characters-config/append-prop";
-import db from "@/utils/db";
 import { relicDB } from "@/constants/db";
+
+import { IRelicBase } from "@/types/interface";
+import { AppendProp, EquipIndexToType } from "@/types/enum";
+import db from "@/utils/db";
 
 import { IRelicSuitText } from "./index";
 import Relic from "./relic.vue";
@@ -40,6 +54,7 @@ const filteredRelics = computed(() => {
 });
 
 /** @module 圣遗物编辑表单 */
+const selectStatus = ref(0);
 // 基础数据
 const setStatBase = ref<IRelicBase>();
 // 主副词条表单
@@ -49,6 +64,7 @@ const setStatForm = ref<RelicStatType>({
 });
 // 副词条多选
 const substatsArray = ref<AppendProp[]>([]);
+
 const addRelic = () => {
   const relicItem = new RelicItem({
     ...setStatBase.value,
@@ -109,6 +125,7 @@ const closePopup = () => {
     reliquarySubstats: [],
   };
   substatsArray.value = [];
+  selectStatus.value = 0;
 };
 
 const removeRelic = () => {
@@ -128,19 +145,20 @@ const showSetRelicStatPop = (equip: IRelicLibraryItemEquip) => {
 };
 
 // 主词条变化后设置默认数值，并删除相同的副词条
-const mainStatChanged = (event) => {
-  const stat = ReliceMainStats.find((item) => {
-    return item.mainPropId === event.target.value;
+const mainStatChanged = (appendPropId: AppendProp) => {
+  nextTick(() => {
+    const stat = ReliceMainStats.find((item) => {
+      return item.mainPropId === appendPropId;
+    });
+    setStatForm.value.reliquaryMainstat.statValue = stat.statValue;
+    const same = substatsArray.value.findIndex((item) => {
+      return item === appendPropId;
+    });
+    if (same >= 0) {
+      substatsArray.value.splice(same, 1);
+      substatsChange(substatsArray.value);
+    }
   });
-  setStatForm.value.reliquaryMainstat.statValue = stat.statValue;
-
-  const same = substatsArray.value.findIndex((item) => {
-    return item === event.target.value;
-  });
-  if (same >= 0) {
-    substatsArray.value.splice(same, 1);
-    substatsChange(substatsArray.value);
-  }
 };
 
 // 副词条变化
@@ -229,7 +247,7 @@ const deleteLocalData = (item: IRelicItem) => {
     </div>
   </div>
   <!-- 圣遗物搜索 -->
-  <Popup class="relic-popup" v-model:show="showPopup" position="top" style="height: 60%" @close="closePopup">
+  <Popup class="relic-popup" v-model:show="showPopup" position="top" @close="closePopup">
     <template v-if="!setStatBase">
       <div class="relic-search">
         <span>~ {{ relicTitle }} ~</span>
@@ -239,7 +257,7 @@ const deleteLocalData = (item: IRelicItem) => {
           <span :class="showLocalRelics && 'active'">选择历史圣遗物</span>
         </div>
       </div>
-      <div v-if="showLocalRelics" class="relic-select">
+      <div v-show="showLocalRelics" class="relic-select">
         <SwipeCell v-for="item in localRelics">
           <Relic :relic="item" :key="item.timetemp" @select-relic="selectLocalRelic" />
           <template #right>
@@ -260,87 +278,41 @@ const deleteLocalData = (item: IRelicItem) => {
         <span class="set-relice-title__close" @click="removeRelic">卸下圣遗物</span>
       </div>
       <form class="set-relice-form" @submit.prevent="addRelic">
-        <div class="set-relice-filed">
-          <span>主属性：</span>
-          <select
-            v-model="setStatForm.reliquaryMainstat.mainPropId"
-            class="set-relice-filed__select"
-            required
-            @change="mainStatChanged"
-          >
-            <option v-for="stat in mainStatFilter" :value="stat.mainPropId">
-              {{ getAppendPropName(stat.mainPropId) }}
-            </option>
-          </select>
+        <div class="set-relice-filed" v-if="setStatForm.reliquaryMainstat.mainPropId">
+          <span>{{ getAppendPropName(setStatForm.reliquaryMainstat.mainPropId) }}<sup>（主属性）</sup></span>
           <input type="number" v-model="setStatForm.reliquaryMainstat.statValue" step="0.01" />
         </div>
         <div class="set-relice-filed" v-for="subStat in setStatForm.reliquarySubstats" :key="subStat.appendPropId">
-          <label>副属性：</label>
           <span>{{ getAppendPropName(subStat.appendPropId) }}</span>
           <input type="number" v-model="subStat.statValue" step="0.01" />
         </div>
-        <CheckboxGroup class="substats-check-group" v-model="substatsArray" max="4" @change="substatsChange">
-          <Checkbox :name="AppendProp.HP" :disabled="setStatForm.reliquaryMainstat.mainPropId === AppendProp.HP">
-            生命值
-          </Checkbox>
-          <Checkbox
-            :name="AppendProp.ATTACK"
-            :disabled="setStatForm.reliquaryMainstat.mainPropId === AppendProp.ATTACK"
-          >
-            攻击力
-          </Checkbox>
-          <Checkbox
-            :name="AppendProp.DEFENSE"
-            :disabled="setStatForm.reliquaryMainstat.mainPropId === AppendProp.DEFENSE"
-          >
-            防御力
-          </Checkbox>
-
-          <Checkbox
-            :name="AppendProp.HP_PERCENT"
-            :disabled="setStatForm.reliquaryMainstat.mainPropId === AppendProp.HP_PERCENT"
-          >
-            生命值%
-          </Checkbox>
-          <Checkbox
-            :name="AppendProp.ATTACK_PERCENT"
-            :disabled="setStatForm.reliquaryMainstat.mainPropId === AppendProp.ATTACK_PERCENT"
-          >
-            攻击力%
-          </Checkbox>
-          <Checkbox
-            :name="AppendProp.DEFENSE_PERCENT"
-            :disabled="setStatForm.reliquaryMainstat.mainPropId === AppendProp.DEFENSE_PERCENT"
-          >
-            防御力%
-          </Checkbox>
-
-          <Checkbox
-            :name="AppendProp.ELEMENT_MASTERY"
-            :disabled="setStatForm.reliquaryMainstat.mainPropId === AppendProp.ELEMENT_MASTERY"
-          >
-            元素精通
-          </Checkbox>
-          <Checkbox
-            :name="AppendProp.CHARGE_EFFICIENCY"
-            :disabled="setStatForm.reliquaryMainstat.mainPropId === AppendProp.CHARGE_EFFICIENCY"
-          >
-            元素充能效率
-          </Checkbox>
-          <Checkbox
-            :name="AppendProp.CRITICAL"
-            :disabled="setStatForm.reliquaryMainstat.mainPropId === AppendProp.CRITICAL"
-          >
-            暴击率
-          </Checkbox>
-          <Checkbox
-            :name="AppendProp.CRITICAL_HURT"
-            :disabled="setStatForm.reliquaryMainstat.mainPropId === AppendProp.CRITICAL_HURT"
-          >
-            暴击伤害
-          </Checkbox>
-        </CheckboxGroup>
-        <Button class="bottons__add" text="确认添加" block type="primary" native-type="submit" />
+        <input class="mainStat-check" type="text" required v-model="setStatForm.reliquaryMainstat.mainPropId" />
+        <Tabs v-model:active="selectStatus" type="card" @click-tab="selectStatus = 1">
+          <Tab title="选择主属性">
+            <RadioGroup
+              class="substats-check-group"
+              v-model="setStatForm.reliquaryMainstat.mainPropId"
+              max="4"
+              @change="mainStatChanged"
+            >
+              <Radio v-for="stat in mainStatFilter" :name="stat.mainPropId">
+                {{ getAppendPropName(stat.mainPropId) }}
+              </Radio>
+            </RadioGroup>
+          </Tab>
+          <Tab title="选择副属性">
+            <CheckboxGroup class="substats-check-group" v-model="substatsArray" max="4" @change="substatsChange">
+              <Checkbox
+                v-for="substat in EquipTypeSubstats"
+                :name="substat"
+                :disabled="setStatForm.reliquaryMainstat.mainPropId === substat"
+              >
+                {{ getAppendPropName(substat) }}
+              </Checkbox>
+            </CheckboxGroup>
+          </Tab>
+        </Tabs>
+        <Button class="bottons__add" text="确认添加" block type="submit" native-type="submit" />
       </form>
     </template>
   </Popup>
@@ -409,16 +381,28 @@ const deleteLocalData = (item: IRelicItem) => {
 .set-relice-form {
   padding: 0 16px;
 }
+.mainStat-check {
+  visibility: hidden;
+}
 .set-relice-filed {
   display: flex;
   line-height: 32px;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: 4px;
   justify-content: space-between;
+}
+.set-relice-filed:nth-child(1) {
+  color: var(--button-bg);
+}
+.set-relice-filed span {
+  text-align: center;
+  padding-right: 8px;
+  flex-grow: 1;
+  display: block;
 }
 .set-relice-filed input {
   display: inline-block;
-  width: 26%;
+  width: 30%;
   height: 32px;
   padding: 0 8px;
   border-radius: 4px;
@@ -498,19 +482,21 @@ const deleteLocalData = (item: IRelicItem) => {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 4px;
-  position: absolute;
-  bottom: 50px;
-  left: 0;
-  width: 100%;
-  padding: 16px;
-  box-sizing: border-box;
+  margin-bottom: 60px;
+  margin-top: 4px;
+  font-size: 12px;
 }
 
-.substats-check-group .van-checkbox__icon {
+.relic-popup {
+  max-height: 80%;
+  min-height: 40%;
+}
+
+.substats-check-group :is(.van-checkbox__icon, .van-radio__icon) {
   display: none;
 }
 .substats-check-group > div {
-  border: 1px solid var(--border);
+  border: 1px solid var(--main-text);
   border-radius: 4px;
 }
 .substats-check-group > div > span {
@@ -520,7 +506,7 @@ const deleteLocalData = (item: IRelicItem) => {
   width: 100%;
 }
 .substats-check-group > [aria-checked="true"] > span {
-  background-color: var(--button-bg);
-  color: var(--light-text);
+  background-color: var(--main-text);
+  color: #fff;
 }
 </style>
