@@ -6,11 +6,13 @@ import CloudTeam from "./view/cloud-team/cloud-team.vue";
 import Shield from "./view/shield.vue";
 import PlayInfo from "./view/PlayInfo.vue";
 import CharacterCalculation from "./view/character-calculation/character-calculation.vue";
+import Home from './view/home/home.vue'
 
 const route = createRouter({
   history: createWebHashHistory(),
   routes: [
-    { path: "/", component: Elemental },
+    { path: "/", component: Home },
+    { path: "/elemental", component: Elemental },
     { path: "/shield", component: Shield },
     { path: "/increasing-range", component: SingleCalculation },
     { path: "/question-answer", component: Question },
