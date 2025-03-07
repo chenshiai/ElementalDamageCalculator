@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, watchEffect } from "vue";
-import { showNotify } from "vant";
+import { showNotify, showConfirmDialog } from "vant";
 import TabTitle from "@/component/TabTitle.vue";
 import CharacterPanel from "@/component/CharacterPanel.vue";
 
@@ -56,19 +56,25 @@ const saveCalculationResult = (title: string) => {
     relicList: JSON.stringify(relicList.value),
     panel: CalculatorValue.value,
   };
-  db.add(calDB.storeName, data).then(() => {
-    showNotify({
-      type: "success",
-      message: "面板数据已保存",
-    })
-  }).catch(() => {
-    db.put(calDB.storeName, data).then(() => {
+  db.add(calDB.storeName, data)
+    .then(() => {
       showNotify({
-        type: "warning",
-        message: "重名数据已更新",
-      })
+        type: "success",
+        message: "面板数据已保存",
+      });
+    })
+    .catch(() => {
+      showConfirmDialog({
+        message: "同名数据已存在，是否覆盖？",
+      }).then(() => {
+        db.put(calDB.storeName, data).then(() => {
+          showNotify({
+            type: "warning",
+            message: "重名数据已更新",
+          });
+        });
+      });
     });
-  });
 };
 
 /** @module 数据重算（再次编辑） */
@@ -99,7 +105,7 @@ watchEffect(() => {
     initRelicInfo();
     initSkillInfo();
     initWeaponInfo();
-    store.commit('setCurrentEdit', '');
+    store.commit("setCurrentEdit", "");
   }
 });
 const pageTitle = computed(() => {

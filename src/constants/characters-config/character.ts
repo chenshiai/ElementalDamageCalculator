@@ -2059,7 +2059,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...cha(10000094, "千织", ElementType.Geo, WeaponType.Sword)(Rarity.Five, 11439, 323, 953, 60)(
+    ...cha(10000094, "千织", ElementType.Geo, WeaponType.Sword)(Rarity.Five, 11439, 323, 953, 50)(
       "UI_AvatarIcon_Chiori",
       [
         "UI_Talent_S_Chiori_01",

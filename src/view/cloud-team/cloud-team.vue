@@ -18,6 +18,7 @@ import useRelicInfo from "../character-calculation/modules/relic-info";
 import useCharacterInfo from "../character-calculation/modules/chararcter-info";
 import useWeanponInfo from "../character-calculation/modules/weapon-info";
 import { getBackGroundByElement } from "@/utils/get-color";
+import importData from '@/utils/enka/import'
 
 /** @module 面板数据选择 */
 const show = ref(false);
@@ -137,10 +138,14 @@ const getRelics = (relicList: string) => {
 const handleImagePreview = () => {
   showImagePreview(["https://saomdpb.com/IMG_1457.PNG"]);
 };
+
+const importGameInfo = () => {
+  
+}
 </script>
 
 <template>
-  <TabTitle>云上辉星（测试版）</TabTitle>
+  <TabTitle>角色组队计算</TabTitle>
   <div class="tips">点击+号，选择数据填入队伍，不设上限，可重复添加</div>
   <div class="data-panel">
     <DataItem v-model="store.state.teamBuffs.enemyLevel" title="敌人的等级" :stepperMin="1" />
@@ -184,6 +189,7 @@ const handleImagePreview = () => {
     </div>
   </div>
   <div class="show-click" @click="toCreateData">去创建角色数据</div>
+  <div class="show-click" @click="importData">导入游戏数据</div>
   <div>
     使用说明：
     <p>

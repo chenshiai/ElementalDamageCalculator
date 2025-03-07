@@ -30,7 +30,7 @@ const constellation = defineModel("constellation", {
       <div class="avatar-info">
         <div :class="['name', getBackGroundByRarity(character.rarity)]">
           {{ character?.name }}
-          <!-- （Lv.{{ character.level }}） -->
+          （Lv.{{ character.level }}）
         </div>
         <div>生命值：{{ character.baseHP }}</div>
         <div>攻击力：{{ character.baseATK }}</div>

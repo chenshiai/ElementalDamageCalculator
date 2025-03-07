@@ -251,10 +251,13 @@ const deleteLocalData = (item: IRelicItem) => {
     <template v-if="!setStatBase">
       <div class="relic-search">
         <span>~ {{ relicTitle }} ~</span>
-        <Search v-model="searchRelic" placeholder="搜索圣遗物套装" />
         <div class="relic-package" @click="getLocalRelics">
           <span :class="!showLocalRelics && 'active'">创建新的圣遗物</span>
           <span :class="showLocalRelics && 'active'">选择历史圣遗物</span>
+        </div>
+        <Search v-if="!showLocalRelics" v-model="searchRelic" placeholder="搜索圣遗物套装" />
+        <div v-else="showLocalRelics" style="text-align: center; line-height: 54px;">
+          {{ localRelics.length === 0 ? '该部位没有圣遗物存档' : 'Tips：点击添加，左滑删除' }}
         </div>
       </div>
       <div v-show="showLocalRelics" class="relic-select">
@@ -272,46 +275,46 @@ const deleteLocalData = (item: IRelicItem) => {
       </div>
     </template>
     <template v-else>
-      <div class="set-relice-title">
+      <div class="set-relic-title">
         <span @click="setStatBase = null">切换圣遗物</span>
         <span><img v-lazy="setStatBase.icon" />{{ setStatBase.name }}</span>
-        <span class="set-relice-title__close" @click="removeRelic">卸下圣遗物</span>
+        <span class="set-relic-title__close" @click="removeRelic">卸下圣遗物</span>
       </div>
-      <form class="set-relice-form" @submit.prevent="addRelic">
-        <div class="set-relice-filed" v-if="setStatForm.reliquaryMainstat.mainPropId">
+      <Tabs class="relic-tabs" v-model:active="selectStatus" type="card" @click-tab="selectStatus = 1">
+        <Tab title="选择主属性">
+          <RadioGroup
+            class="substats-check-group"
+            v-model="setStatForm.reliquaryMainstat.mainPropId"
+            max="4"
+            @change="mainStatChanged"
+          >
+            <Radio v-for="stat in mainStatFilter" :name="stat.mainPropId">
+              {{ getAppendPropName(stat.mainPropId) }}
+            </Radio>
+          </RadioGroup>
+        </Tab>
+        <Tab title="选择副属性">
+          <CheckboxGroup class="substats-check-group" v-model="substatsArray" max="4" @change="substatsChange">
+            <Checkbox
+              v-for="substat in EquipTypeSubstats"
+              :name="substat"
+              :disabled="setStatForm.reliquaryMainstat.mainPropId === substat"
+            >
+              {{ getAppendPropName(substat) }}
+            </Checkbox>
+          </CheckboxGroup>
+        </Tab>
+      </Tabs>
+      <form class="set-relic-form" @submit.prevent="addRelic">
+        <div class="set-relic-filed" v-if="setStatForm.reliquaryMainstat.mainPropId">
           <span>{{ getAppendPropName(setStatForm.reliquaryMainstat.mainPropId) }}<sup>（主属性）</sup></span>
-          <input type="number" v-model="setStatForm.reliquaryMainstat.statValue" step="0.01" />
+          <input type="number" v-model="setStatForm.reliquaryMainstat.statValue" step="0.01" required />
         </div>
-        <div class="set-relice-filed" v-for="subStat in setStatForm.reliquarySubstats" :key="subStat.appendPropId">
+        <div class="set-relic-filed" v-for="subStat in setStatForm.reliquarySubstats" :key="subStat.appendPropId">
           <span>{{ getAppendPropName(subStat.appendPropId) }}</span>
-          <input type="number" v-model="subStat.statValue" step="0.01" />
+          <input type="number" v-model="subStat.statValue" step="0.01" required />
         </div>
         <input class="mainStat-check" type="text" required v-model="setStatForm.reliquaryMainstat.mainPropId" />
-        <Tabs v-model:active="selectStatus" type="card" @click-tab="selectStatus = 1">
-          <Tab title="选择主属性">
-            <RadioGroup
-              class="substats-check-group"
-              v-model="setStatForm.reliquaryMainstat.mainPropId"
-              max="4"
-              @change="mainStatChanged"
-            >
-              <Radio v-for="stat in mainStatFilter" :name="stat.mainPropId">
-                {{ getAppendPropName(stat.mainPropId) }}
-              </Radio>
-            </RadioGroup>
-          </Tab>
-          <Tab title="选择副属性">
-            <CheckboxGroup class="substats-check-group" v-model="substatsArray" max="4" @change="substatsChange">
-              <Checkbox
-                v-for="substat in EquipTypeSubstats"
-                :name="substat"
-                :disabled="setStatForm.reliquaryMainstat.mainPropId === substat"
-              >
-                {{ getAppendPropName(substat) }}
-              </Checkbox>
-            </CheckboxGroup>
-          </Tab>
-        </Tabs>
         <Button class="bottons__add" text="确认添加" block type="submit" native-type="submit" />
       </form>
     </template>
@@ -330,6 +333,7 @@ const deleteLocalData = (item: IRelicItem) => {
   position: fixed;
   width: 100%;
   background: #fff;
+  left: 0;
   z-index: 10;
   box-shadow: var(--button-bg) 0px 0px 10px;
 }
@@ -342,7 +346,6 @@ const deleteLocalData = (item: IRelicItem) => {
 }
 
 .relic-select {
-  padding: 12px;
   padding-top: 120px;
   display: grid;
   grid-gap: 6px;
@@ -360,47 +363,46 @@ const deleteLocalData = (item: IRelicItem) => {
   height: inherit;
 }
 
-.set-relice-title {
+.set-relic-title {
   display: flex;
   width: 100%;
   height: 48px;
   line-height: 48px;
   justify-content: space-between;
-  padding: 0 16px;
   box-sizing: border-box;
 }
-.set-relice-title__close {
+.set-relic-title__close {
   color: var(--cancel);
 }
-.set-relice-title span {
+.set-relic-title span {
   display: flex;
 }
-.set-relice-title img {
+.set-relic-title img {
   height: 48px;
 }
-.set-relice-form {
-  padding: 0 16px;
+.set-relic-form {
+  margin-bottom: 40px;
 }
 .mainStat-check {
   visibility: hidden;
 }
-.set-relice-filed {
+.set-relic-filed {
   display: flex;
   line-height: 32px;
   align-items: center;
   margin-bottom: 4px;
   justify-content: space-between;
 }
-.set-relice-filed:nth-child(1) {
+.set-relic-filed:nth-child(1) {
   color: var(--button-bg);
 }
-.set-relice-filed span {
+.set-relic-filed span {
   text-align: center;
   padding-right: 8px;
   flex-grow: 1;
   display: block;
 }
-.set-relice-filed input {
+.set-relic-filed input {
   display: inline-block;
   width: 30%;
   height: 32px;
@@ -424,7 +426,7 @@ const deleteLocalData = (item: IRelicItem) => {
   width: 100%;
 }
 
-.set-relice-filed__select {
+.set-relic-filed__select {
   text-align: center;
   border: solid 1px var(--border);
   appearance: none;
@@ -481,13 +483,15 @@ const deleteLocalData = (item: IRelicItem) => {
 .substats-check-group {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(4, 28px);
   gap: 4px;
-  margin-bottom: 60px;
+  /* margin-bottom: 60px; */
   margin-top: 4px;
   font-size: 12px;
 }
 
 .relic-popup {
+  padding: 0 16px;
   max-height: 80%;
   min-height: 40%;
 }

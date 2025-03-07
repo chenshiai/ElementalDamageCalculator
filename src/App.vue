@@ -16,8 +16,8 @@ const showLeft = ref(false);
       <router-link to="/" class="top-tabs__item">首页</router-link>
       <router-link to="/elemental" class="top-tabs__item">剧变反应计算</router-link>
       <router-link to="/increasing-range" class="top-tabs__item">单次伤害计算</router-link>
-      <router-link to="/cloud-team" class="top-tabs__item">云上辉星（测试版）</router-link>
       <router-link to="/character/create" class="top-tabs__item">创建角色数据</router-link>
+      <router-link to="/cloud-team" class="top-tabs__item">角色组队计算</router-link>
       <router-link to="/shield" class="top-tabs__item">护盾承伤计算</router-link>
       <router-link to="/question-answer" class="top-tabs__item">常见问题</router-link>
     </nav>

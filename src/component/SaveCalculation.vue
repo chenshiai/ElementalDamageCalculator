@@ -76,13 +76,13 @@ const onSelect = (action) => {
   </div>
   <Popup class="data-popup" teleport="#app" v-model:show="showPopup" position="top">
     <div class="tips">
-      面板数据会存储在本地浏览器的缓存中。若清空浏览器缓存，则数据也一会同清空。重复命名的新数据会替换旧数据。
+      面板数据存储在本地浏览器的缓存中。若清空浏览器缓存，则数据也一会同清空。同名的数据会覆盖。
     </div>
-    <div class="tips">各项增益的开启情况不会被保存，读取数据后需要重新开启。</div>
+    <div class="tips">各项增益的开关情况不会被保存，载入数据后需要重新开启。</div>
     <div class="description">
       保存的内容分为两个部分，分别是：
-      <br />【角色、武器和圣遗物数据】：角色、武器和圣遗物的配置数据，用于重新编辑数据。
-      <br />【角色面板数据】：各项增益开启后的角色面板快照，即锁面板，用于计算队伍增益。
+      <br />【配置数据】：角色、武器和圣遗物的配置情况，用于载入后重新配置。
+      <br />【面板数据】：角色面板快照，即锁面板，用于计算队伍增益。
     </div>
     <Field v-model="remark" type="text" label="数据命名" placeholder="给这条角色数据取个名字吧" />
     <div class="popup-buttons" @click="saveData">保存角色</div>

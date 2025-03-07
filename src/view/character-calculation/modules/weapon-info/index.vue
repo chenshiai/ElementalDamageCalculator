@@ -43,7 +43,7 @@ const weaponStats = computed(() => {
       <div class="avatar-info">
         <div :class="['name', getBackGroundByRarity(weapon.rarity)]">
           {{ weapon?.name }}
-          <!-- （Lv.{{ weapon.level }}） -->
+          （Lv.{{ weapon.level }}）
         </div>
         <div v-for="item in weaponStats">{{ item.title }}: {{ item.value }}{{ item.suffix }}</div>
         <div class="affix">精炼：<Rate v-model="affix" color="#997874" icon="fire" void-icon="fire-o" /></div>
