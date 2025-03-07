@@ -1,32 +1,32 @@
 <script setup lang="ts">
 import { RadioGroup, Radio } from "vant";
-import { ElementalReaction } from "@/constants";
+import { ElementalReactionType } from "@/constants";
 const { size } = defineProps({
   size: { default: "large" },
 });
-const atkType = defineModel();
+const atkType = defineModel<ElementalReactionType>();
 </script>
 
 <template>
   <div :class="['atk-type-panel', size]">
     <RadioGroup style="margin-top: 12px" v-model="atkType">
-      <Radio name="none" class="atk-type-none">无反应</Radio>
+      <Radio :name="ElementalReactionType.None" class="atk-type-none">无反应</Radio>
       <div class="horizontal">
-        <Radio :name="ElementalReaction.Rate" class="atk-type-item">
+        <Radio :name="ElementalReactionType.Rate" class="atk-type-item">
           <span class="atk-type-text">水蒸·火融</span>
           <span class="water bg-left"></span>
           <span class="fire bg-right"></span>
         </Radio>
-        <Radio :name="ElementalReaction.Rate2" class="atk-type-item">
+        <Radio :name="ElementalReactionType.Rate2" class="atk-type-item">
           <span class="atk-type-text">冰融·火蒸</span>
           <span class="ice bg-left"></span>
           <span class="fire bg-right"></span>
         </Radio>
-        <Radio :name="ElementalReaction.Aggravate" class="atk-type-item">
+        <Radio :name="ElementalReactionType.Aggravate" class="atk-type-item">
           <span class="atk-type-text">超激化</span>
           <span class="electro"></span>
         </Radio>
-        <Radio :name="ElementalReaction.Spread" class="atk-type-item">
+        <Radio :name="ElementalReactionType.Spread" class="atk-type-item">
           <span class="atk-type-text">蔓激化</span>
           <span class="dendro"></span>
         </Radio>

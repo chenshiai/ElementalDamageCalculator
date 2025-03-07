@@ -2102,9 +2102,6 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       createAttack("高空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
         atk: [1.6, 1.73, 1.86, 2.04, 2.17, 2.32, 2.53, 2.73, 2.93, 3.16, 3.38],
       }),
-      createAttack("灵息之刺/流涌之刃伤害", AttackType.Other, ElementType.Hydro, {
-        atk: [0.095, 0.102, 0.11, 0.121, 0.129, 0.138, 0.15, 0.162, 0.174, 0.187, 0.2],
-      }),
     ],
     elementSkill: [
       createAttack("袖伤害", AttackType.Skill, ElementType.Geo, {

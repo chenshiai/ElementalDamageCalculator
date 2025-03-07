@@ -53,6 +53,9 @@ const saveCalculationResult = (title: string) => {
     characterEnkaId: characterInfo.value?.enkaId,
     weaponEnkaId: weapon.value?.enkaId,
     affix: affix.value,
+    weaponLevel: weapon.value?.level,
+    weaponMainStats: weapon.value?.weaponStats[0],
+    weaponSubStats: weapon.value?.weaponStats[1],
     relicList: JSON.stringify(relicList.value),
     panel: CalculatorValue.value,
   };
@@ -81,8 +84,29 @@ const saveCalculationResult = (title: string) => {
 import { Character } from "@/constants/characters-config/character";
 import { Weapons } from "@/constants/characters-config/weapon";
 const recalculation = (data: IUserSavedCalculationData) => {
-  characterInfo.value = Character.find((c) => c.enkaId === data.characterEnkaId);
-  weapon.value = Weapons.find((w) => w.enkaId === data.weaponEnkaId);
+  const cha = Character.find((c) => c.enkaId === data.characterEnkaId);
+  characterInfo.value = {
+    ...cha,
+    ...(data.weaponMainStats
+      ? {
+          baseATK: data.panel.baseATK - data.weaponMainStats.statValue,
+        }
+      : {}),
+    baseDEF: data.panel.baseDEF,
+    baseHP: data.panel.baseHP,
+    level: data.panel.level,
+  };
+
+  const wea = Weapons.find((w) => w.enkaId === data.weaponEnkaId);
+  weapon.value = {
+    ...wea,
+    ...(data.weaponMainStats && data.weaponSubStats
+      ? {
+          weaponStats: [data.weaponMainStats, data.weaponSubStats],
+        }
+      : {}),
+    level: data.weaponLevel,
+  };
   constellation.value = data.panel.constellation;
   affix.value = data.affix;
   relicList.value = JSON.parse(data.relicList);

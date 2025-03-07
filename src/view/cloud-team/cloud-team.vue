@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import { Popup, Icon, showImagePreview } from "vant";
+import { Popup, Icon, showImagePreview, Field, showNotify } from "vant";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 
@@ -19,6 +19,7 @@ import useCharacterInfo from "../character-calculation/modules/chararcter-info";
 import useWeanponInfo from "../character-calculation/modules/weapon-info";
 import { getBackGroundByElement } from "@/utils/get-color";
 import importData from '@/utils/enka/import'
+import request from '@/request'
 
 /** @module 面板数据选择 */
 const show = ref(false);
@@ -139,8 +140,29 @@ const handleImagePreview = () => {
   showImagePreview(["https://saomdpb.com/IMG_1457.PNG"]);
 };
 
+/** @module 数据导入 */
+const uid = ref("")
 const importGameInfo = () => {
-  
+  if (!uid.value) return;
+  request.get(`http://localhost:3000/api/uid/${uid.value}`).then((res) => {
+    if (res.data.data) {
+      const avatarInfoList = res.data.data.avatarInfoList
+      showNotify({
+        type: "success",
+        message: "导入成功",
+      })
+      if (avatarInfoList) return importData(res.data.data.avatarInfoList)
+      else showNotify({
+        type: "warning",
+        message: "该玩家关闭了角色展柜",
+      })
+    } else {
+      showNotify({
+        type: "danger",
+        message: "请求过于频繁",
+      })
+    }
+  })
 }
 </script>
 
@@ -189,7 +211,8 @@ const importGameInfo = () => {
     </div>
   </div>
   <div class="show-click" @click="toCreateData">去创建角色数据</div>
-  <div class="show-click" @click="importData">导入游戏数据</div>
+  <Field v-model="uid" label="UID" placeholder="请输入你的UID" />
+  <div class="show-click" @click="importGameInfo">导入游戏数据</div>
   <div>
     使用说明：
     <p>

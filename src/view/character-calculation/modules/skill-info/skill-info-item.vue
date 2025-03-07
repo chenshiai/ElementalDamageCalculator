@@ -5,6 +5,7 @@ import { calculateDamage } from "@/utils/calculate/method-calculation";
 import AtkTypeSelector from "@/component/AtkTypeSelector.vue";
 import { getColorByElement } from "@/utils/get-color";
 import { Slider } from "vant";
+import { ElementalReactionType } from "@/constants";
 
 interface IProps {
   skill: ISkillRate[];
@@ -14,7 +15,7 @@ interface IProps {
 }
 const skillLevel = defineModel<number>();
 const { skill, calculatorValue, levelAdd, name } = defineProps<IProps>();
-const atkType = ref("none");
+const atkType = ref<ElementalReactionType>(ElementalReactionType.None);
 
 const calculatedResults = computed(() => {
   return skill.map((item: ISkillRate) => {
