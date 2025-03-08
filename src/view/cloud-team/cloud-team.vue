@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import { Popup, Icon, showImagePreview, Field, showNotify } from "vant";
+import { Popup, Icon, showImagePreview, Field, showNotify, Button } from "vant";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 
@@ -18,8 +18,8 @@ import useRelicInfo from "../character-calculation/modules/relic-info";
 import useCharacterInfo from "../character-calculation/modules/chararcter-info";
 import useWeanponInfo from "../character-calculation/modules/weapon-info";
 import { getBackGroundByElement } from "@/utils/get-color";
-import importData from '@/utils/enka/import'
-import request from '@/request'
+import importData from "@/utils/enka/import";
+import request from "@/request";
 
 /** @module 面板数据选择 */
 const show = ref(false);
@@ -45,7 +45,7 @@ const deconstructionBuff = (buff: IBuffBase, result: IUserSavedCalculationData):
     effect,
     // 共享的buff默认关闭状态，以免被重复计算
     enable: false,
-    source: result.title
+    source: result.title,
   };
 };
 
@@ -141,35 +141,57 @@ const handleImagePreview = () => {
 };
 
 /** @module 数据导入 */
-const uid = ref("")
+const uid = ref("");
+const waiting = ref(0);
+const interval = ref(null);
+const importLoading = ref(false);
 const importGameInfo = () => {
-  if (!uid.value) return;
-  request.get(`http://localhost:3000/api/uid/${uid.value}`).then((res) => {
-    if (res.data.data) {
-      const avatarInfoList = res.data.data.avatarInfoList
-      showNotify({
-        type: "success",
-        message: "导入成功",
-      })
-      if (avatarInfoList) return importData(res.data.data.avatarInfoList)
-      else showNotify({
-        type: "warning",
-        message: "该玩家关闭了角色展柜",
-      })
-    } else {
-      showNotify({
-        type: "danger",
-        message: "请求过于频繁",
-      })
-    }
-  })
-}
+  if (!uid.value || waiting.value > 0) return;
+  importLoading.value = true;
+  request
+    .get(`/player-info/uid/${uid.value}`)
+    .then((res) => {
+      if (res.data.data) {
+        const avatarInfoList = res.data.data.avatarInfoList;
+        if (avatarInfoList) {
+          showNotify({
+            type: "success",
+            message: "导入成功",
+          });
+          importData(res.data.data.avatarInfoList);
+        } else {
+          showNotify({
+            type: "warning",
+            message: res.data.message,
+          });
+        }
+        waiting.value = 30;
+        interval.value = setInterval(() => {
+          if (waiting.value > 0) {
+            waiting.value = waiting.value - 1;
+          } else {
+            clearInterval(interval.value);
+          }
+        }, 1000);
+      } else {
+        showNotify({
+          type: "danger",
+          message: res.data.message,
+        });
+      }
+    })
+    .finally(() => {
+      importLoading.value = false;
+    });
+  uid.value = "";
+};
 </script>
 
 <template>
   <TabTitle>角色组队计算</TabTitle>
   <div class="tips">点击+号，选择数据填入队伍，不设上限，可重复添加</div>
   <div class="data-panel">
+    <div class="data-panel__title">攻击目标设置</div>
     <DataItem v-model="store.state.teamBuffs.enemyLevel" title="敌人的等级" :stepperMin="1" />
     <DataItem v-model="store.state.teamBuffs.baseResistance" title="基础抗性%" :stepperMin="-999">
       <div class="extra-btn" @click="handleImagePreview">查看抗性表</div>
@@ -205,14 +227,19 @@ const importGameInfo = () => {
             />
           </div>
           <div class="team-list__item-options" @click="clear(index)">离队<Icon name="revoke" /></div>
-          <div class="team-list__item-look" @click="edit(index)">查看&编辑详细数据<Icon name="arrow-double-right" /></div>
+          <div class="team-list__item-look" @click="edit(index)">
+            查看&编辑详细数据<Icon name="arrow-double-right" />
+          </div>
         </template>
       </div>
     </div>
   </div>
   <div class="show-click" @click="toCreateData">去创建角色数据</div>
-  <Field v-model="uid" label="UID" placeholder="请输入你的UID" />
-  <div class="show-click" @click="importGameInfo">导入游戏数据</div>
+  <div class="data-panel__title">游戏内数据导入</div>
+  <Field v-model="uid" label="UID" placeholder="输入UID" />
+  <Button class="show-click" @click="importGameInfo" :disabled="waiting > 0" :loading="importLoading">
+    <span>{{ waiting > 0 ? `${waiting}s后可再次获取` : '导入' }}</span>
+  </Button>
   <div>
     使用说明：
     <p>

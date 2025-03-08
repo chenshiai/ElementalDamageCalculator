@@ -103,4 +103,6 @@
   border-radius: 4px;
   margin-bottom: 16px;
   line-height: 32px;
+  width: 100%;
+  background-color: transparent;
 }

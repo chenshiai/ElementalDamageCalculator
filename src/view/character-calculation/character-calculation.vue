@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, watchEffect } from "vue";
+import { computed, watchEffect, toRaw } from "vue";
 import { showNotify, showConfirmDialog } from "vant";
 import TabTitle from "@/component/TabTitle.vue";
 import CharacterPanel from "@/component/CharacterPanel.vue";
@@ -54,11 +54,12 @@ const saveCalculationResult = (title: string) => {
     weaponEnkaId: weapon.value?.enkaId,
     affix: affix.value,
     weaponLevel: weapon.value?.level,
-    weaponMainStats: weapon.value?.weaponStats[0],
-    weaponSubStats: weapon.value?.weaponStats[1],
+    weaponMainStats: toRaw(weapon.value?.weaponStats[0]),
+    weaponSubStats: toRaw(weapon.value?.weaponStats[1]),
     relicList: JSON.stringify(relicList.value),
     panel: CalculatorValue.value,
   };
+
   db.add(calDB.storeName, data)
     .then(() => {
       showNotify({
@@ -76,7 +77,7 @@ const saveCalculationResult = (title: string) => {
             message: "重名数据已更新",
           });
         });
-      });
+      }).catch(() => {});
     });
 };
 
