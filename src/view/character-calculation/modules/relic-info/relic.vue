@@ -28,6 +28,9 @@ const selectLocalRelic = (item: IRelicItem) => {
       <div class="relic-detail__hearder">
         <div :class="['relic-name', getlinearBackGroundClassByRarity(relic.rankLevel - 1)]">
           {{ relic.name }}
+          <span class="lv">
+            Lv.{{ relic.level }}
+          </span>
         </div>
         <div class="relic-main-stats">
           <span class="relic-main-stats__text">{{ getAppendPropName2(relic.reliquaryMainstat.mainPropId) }}</span>
@@ -51,7 +54,7 @@ const selectLocalRelic = (item: IRelicItem) => {
 .relic-detail {
   position: relative;
   font-size: 14px;
-  height: 112px;
+  height: 120px;
   border-radius: 4px;
   margin-bottom: 12px;
   box-shadow: inset -1px -1px 1px var(--border);
@@ -92,11 +95,17 @@ const selectLocalRelic = (item: IRelicItem) => {
 }
 .relic-name {
   font-size: 16px;
-  line-height: 32px;
+  line-height: 24px;
   color: var(--light-text);
   text-shadow: 2px 2px 4px var(--stroke-2);
   border-radius: 4px 0 0;
   padding: 0 8px;
+  height: 40px;
+}
+.relic-name .lv {
+  display: block;
+  line-height: 16px;
+  font-size: 12px;
 }
 .relic-detail__stats {
   display: flex;

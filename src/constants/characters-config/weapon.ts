@@ -50,6 +50,36 @@ createWeapon(
 export const Weapons: IWeaponInfo[] = [
   createWeapon(
     {
+      name: "且住亭御咄",
+      enkaId: 13432,
+      weaponType: WeaponType.Polearms,
+      icon: getEnkaUI("UI_EquipIcon_Pole_Aoandon_Awaken"),
+      baseAtk: 565,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.CHARGE_EFFICIENCY,
+      statValue: 30.6,
+    },
+    (affix = 1) => {
+      let a = [20, 25, 30, 35, 40][affix - 1] + "%";
+      return {
+        title: "好事者奔行灯",
+        text: highlight`施放元素战技时，提高${a}攻击力和10%移动速度，持续10秒。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [20, 25, 30, 35, 40][affix - 1];
+      return [
+        {
+          label: "攻击力提升",
+          describe: `施放元素战技时，提高${a}%攻击力`,
+          effect: [{ type: BuffType.ATKPrcent, getValue: () => a }],
+          enable: true,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
       name: "寝正月初晴",
       enkaId: 14518,
       weaponType: WeaponType.Magic,
@@ -92,7 +122,7 @@ export const Weapons: IWeaponInfo[] = [
           enable: false,
         },
       ];
-    },
+    }
   ),
   createWeapon(
     {
@@ -122,7 +152,7 @@ export const Weapons: IWeaponInfo[] = [
           describe: `装备者创造护盾后，获得「照夜之镜」效果：队伍中自己的当前场上角色对附近的敌人造成的伤害提升${b}%`,
           effect: [{ type: BuffType.GlobalPrcent, getValue: () => b }],
           enable: true,
-          shareable: true
+          shareable: true,
         },
         {
           label: "元素精通提升",
@@ -131,7 +161,7 @@ export const Weapons: IWeaponInfo[] = [
           enable: true,
         },
       ];
-    },
+    }
   ),
   createWeapon(
     {
@@ -7656,7 +7686,7 @@ export const Weapons: IWeaponInfo[] = [
     () => {
       return {
         title: "",
-        text: highlight``,
+        text: highlight`能退魔的银剑。大家都知道，其实用料是银合金而不是纯银,`,
       };
     }
   ),
@@ -7674,7 +7704,7 @@ export const Weapons: IWeaponInfo[] = [
     () => {
       return {
         title: "",
-        text: highlight``,
+        text: highlight`沉重坚实的古旧大剑，饱经战火与岁月的洗练。`,
       };
     }
   ),
@@ -7692,7 +7722,7 @@ export const Weapons: IWeaponInfo[] = [
     () => {
       return {
         title: "",
-        text: highlight``,
+        text: highlight`精心编纂，只留下考试重点的魔导参考小册。`,
       };
     }
   ),
@@ -7710,7 +7740,7 @@ export const Weapons: IWeaponInfo[] = [
     () => {
       return {
         title: "",
-        text: highlight``,
+        text: highlight`饱经磨炼又精心护养的弓，经历了漫长的岁月。仿佛会主动配合射手的动作一般好使。`,
       };
     }
   ),
@@ -7728,7 +7758,7 @@ export const Weapons: IWeaponInfo[] = [
     () => {
       return {
         title: "",
-        text: highlight``,
+        text: highlight`一头有尖，可攻可守的护身武器。在旅者当中十分流行。`,
       };
     }
   ),
@@ -7746,7 +7776,7 @@ export const Weapons: IWeaponInfo[] = [
     () => {
       return {
         title: "",
-        text: highlight``,
+        text: highlight`笔直得像旗杆一般的长枪，挥舞起来颇具气势。足以应付大多数情况。`,
       };
     }
   ),
@@ -7764,7 +7794,7 @@ export const Weapons: IWeaponInfo[] = [
     () => {
       return {
         title: "",
-        text: highlight``,
+        text: highlight`仅仅是削出了剑形的厚重铁片。在意志强韧的人手里，也有劈开磐石的力量。`,
       };
     }
   ),
@@ -7782,7 +7812,7 @@ export const Weapons: IWeaponInfo[] = [
     () => {
       return {
         title: "",
-        text: highlight``,
+        text: highlight`某个优等生留下的学习笔记，娟秀的字迹非常好看。记录了不少实用的咒语。`,
       };
     }
   ),
@@ -7800,7 +7830,7 @@ export const Weapons: IWeaponInfo[] = [
     () => {
       return {
         title: "",
-        text: highlight``,
+        text: highlight`猎手演奏的音乐由两种音色组成。弓弦颤动的声音，和羽破空的低啸。`,
       };
     }
   ),
@@ -7818,7 +7848,7 @@ export const Weapons: IWeaponInfo[] = [
     () => {
       return {
         title: "",
-        text: highlight``,
+        text: highlight`少年人的梦想，踏上旅途的兴奋————如果这两种珍贵的品质还不够锋利，那就用勇气补足吧。`,
       };
     }
   ),

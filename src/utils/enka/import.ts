@@ -1,5 +1,3 @@
-import mockData from "../../../public/enkaData/ex.js";
-
 import db from "@/utils/db";
 import { IUserSavedCalculationData, calDB } from "@/constants/db";
 import { EquipType } from "@/types/enum";
@@ -79,11 +77,12 @@ const saveCalculationResult = async (enkaData: EnkaAvatarInfo) => {
   const { weaponBuffs } = useWeanponInfo(wea);
 
   // 从enka数据中筛选出圣遗物信息
-  const relicList: IRelicItem[] = enkaData.equipList
+  const relicList = new Array(5).fill(null);
+  enkaData.equipList
     .filter((item) => {
       return item.reliquary;
     })
-    .map((item) => {
+    .forEach((item) => {
       const targetRelic = relicLibrary
         .find((suit) => {
           return suit.setNameTextMapHash === +item.flat.setNameTextMapHash;
@@ -91,9 +90,10 @@ const saveCalculationResult = async (enkaData: EnkaAvatarInfo) => {
         .equip.find((relic) => {
           return relic.equipType === item.flat.equipType;
         });
-      return {
+
+      const relic = {
         rankLevel: item.flat.rankLevel,
-        level: item.reliquary.level,
+        level: item.reliquary.level - 1,
         setNameTextMapHash: +item.flat.setNameTextMapHash,
         equipType: item.flat.equipType,
         reliquaryMainstat: item.flat.reliquaryMainstat,
@@ -102,13 +102,36 @@ const saveCalculationResult = async (enkaData: EnkaAvatarInfo) => {
         name: targetRelic.name,
         icon: targetRelic.icon,
       };
+
+      switch (targetRelic.equipType) {
+        case EquipType.EQUIP_BRACER:
+          relicList[0] = relic;
+          break;
+        case EquipType.EQUIP_NECKLACE:
+          relicList[1] = relic;
+          break;
+        case EquipType.EQUIP_SHOES:
+          relicList[2] = relic;
+          break;
+        case EquipType.EQUIP_RING:
+          relicList[3] = relic;
+          break;
+        case EquipType.EQUIP_DRESS:
+          relicList[4] = relic;
+          break;
+      }
     });
+
   // 获取圣遗物增益
   const { relicBuffs } = useRelicInfo(relicList);
 
   // 序列化技能等级
   const skillLevelMap = Object.entries(enkaData.skillLevelMap);
-  const affix = Object.entries(weaponInfo.weapon.affixMap)[0][1] + 1;
+
+  let affix = 1;
+  if (weaponInfo.weapon.affixMap) {
+    affix = Object.entries(weaponInfo.weapon.affixMap)[0][1] + 1;
+  }
 
   // 计算角色面板
   const panel = calculationPanel({
@@ -137,7 +160,7 @@ const saveCalculationResult = async (enkaData: EnkaAvatarInfo) => {
     skillLevel: skillLevelMap[1][1],
     burstLevel: skillLevelMap[2][1],
   });
-  
+
   // 保存角色数据
   const data: IUserSavedCalculationData = {
     title: `${cha.name}(玩家数据)`,
@@ -151,7 +174,8 @@ const saveCalculationResult = async (enkaData: EnkaAvatarInfo) => {
     panel,
   };
 
-  return db.add(calDB.storeName, data)
+  return db
+    .add(calDB.storeName, data)
     .then(() => {
       console.log("保存游戏角色成功", cha.name);
     })

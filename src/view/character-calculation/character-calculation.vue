@@ -70,14 +70,16 @@ const saveCalculationResult = (title: string) => {
     .catch(() => {
       showConfirmDialog({
         message: "同名数据已存在，是否覆盖？",
-      }).then(() => {
-        db.put(calDB.storeName, data).then(() => {
-          showNotify({
-            type: "warning",
-            message: "重名数据已更新",
+      })
+        .then(() => {
+          db.put(calDB.storeName, data).then(() => {
+            showNotify({
+              type: "warning",
+              message: "重名数据已更新",
+            });
           });
-        });
-      }).catch(() => {});
+        })
+        .catch(() => {});
     });
 };
 
@@ -101,7 +103,7 @@ const recalculation = (data: IUserSavedCalculationData) => {
   const wea = Weapons.find((w) => w.enkaId === data.weaponEnkaId);
   weapon.value = {
     ...wea,
-    ...(data.weaponMainStats && data.weaponSubStats
+    ...(data.weaponMainStats
       ? {
           weaponStats: [data.weaponMainStats, data.weaponSubStats],
         }

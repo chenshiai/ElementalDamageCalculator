@@ -46,7 +46,6 @@ export function createAttack(
   };
 }
 
-
 export function highlight(strings, ...values) {
   let result = "";
   strings.forEach((string, index) => {
@@ -75,7 +74,7 @@ export function createWeapon(
     name,
     enkaId,
     weaponType,
-    level: rarity === Rarity.Two ? 70 : 90,
+    level: rarity === Rarity.Two || rarity === Rarity.One ? 70 : 90,
     rarity,
     affix: 1,
     icon,

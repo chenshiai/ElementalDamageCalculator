@@ -83,9 +83,9 @@ export function calculateRelicStat(data: ICalculatorValue, relics: IRelicItem[])
 }
 
 export function calculateWeaponSubStat(data: ICalculatorValue, weapon: IWeaponInfo): Partial<ICalculatorValue> {
-  // const data = Object.assign({}, data);
-  const substat = weapon.weaponStats.filter((i) => i.appendPropId !== AppendProp.BASE_ATTACK)[0];
-
-  handleProp(substat, data);
+  const substat = weapon.weaponStats.find((i) => i?.appendPropId !== AppendProp.BASE_ATTACK);
+  // 低星武器没有副属性
+  if (substat)
+    handleProp(substat, data);
   return data;
 }

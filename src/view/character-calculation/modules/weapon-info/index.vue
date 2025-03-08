@@ -27,7 +27,7 @@ const weaponStats = computed(() => {
       value: weapon.value.weaponStats[0].statValue,
       suffix: "",
     },
-    {
+    weapon.value.weaponStats[1]?.statValue > 0 && {
       title: getAppendPropName2(weapon.value.weaponStats[1].appendPropId),
       value: weapon.value.weaponStats[1].statValue,
       suffix: weapon.value.weaponStats[1].appendPropId === AppendProp.ELEMENT_MASTERY ? "" : "%",
@@ -45,7 +45,9 @@ const weaponStats = computed(() => {
           {{ weapon?.name }}
           （Lv.{{ weapon.level }}）
         </div>
-        <div v-for="item in weaponStats">{{ item.title }}: {{ item.value }}{{ item.suffix }}</div>
+        <div v-for="item in weaponStats">
+          <span v-show="item">{{ item.title }}: {{ item.value }}{{ item.suffix }}</span>
+        </div>
         <div class="affix">精炼：<Rate v-model="affix" color="#997874" icon="fire" void-icon="fire-o" /></div>
       </div>
       <div class="avatar" @click="show = true">
@@ -53,7 +55,7 @@ const weaponStats = computed(() => {
         <Icon name="exchange" />
       </div>
     </div>
-    <div class="weapon-describe">{{ describe.title }}：<span v-html="describe.text"></span></div>
+    <div class="weapon-describe">{{ describe.title || '描述' }}：<span v-html="describe.text"></span></div>
   </template>
   <Popup teleport="#app" v-model:show="show" position="right" :style="{ width: '100%', height: '100vh' }">
     <WeaponSelector @close="show = false" :defaultName="weapon?.name || ''" :handleChange="handleWeaponChange" />
