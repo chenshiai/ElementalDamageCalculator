@@ -4,7 +4,7 @@ import FourSvg from './svg.vue'
 </script>
 
 <template>
-  <TabTitle>首页</TabTitle>
+  <TabTitle>原神数值计算工具</TabTitle>
   <router-link to="/elemental" class="card">
     <FourSvg />
     <div>剧变反应计算</div>
@@ -26,7 +26,7 @@ import FourSvg from './svg.vue'
   <router-link to="/cloud-team" class="card">
     <FourSvg />
     <div>角色组队计算</div>
-    <span>使用角色数据进行组队计算</span>
+    <span>用角色数据进行计算，支持导入游戏数据</span>
     <img src="/img/hutao.png" alt="" />
   </router-link>
   <router-link to="/shield" class="card">
