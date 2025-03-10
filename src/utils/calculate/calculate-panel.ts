@@ -4,7 +4,6 @@ import { calculateRelicStat, calculateWeaponSubStat } from "./calculate-equip";
 import { IBuffBase, ICalculatorValue, ICharacterInfo, IWeaponInfo } from "@/types/interface";
 import CalculatorValueClass from "@/constants/characters-config/calculator-value-class";
 import { IRelicItem } from "@/constants/characters-config/relic-class";
-import { log } from "console";
 
 interface ICalculatorPanelArgs {
   characterInfo: ICharacterInfo;

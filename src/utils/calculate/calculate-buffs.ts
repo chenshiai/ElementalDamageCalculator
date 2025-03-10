@@ -3,8 +3,6 @@ import { IBuffBase, ICalculatorValue } from "@/types/interface";
 
 /** 计算buff的数值，累加在面板数据上 */
 const calculateBuffs = (data: Partial<ICalculatorValue>, buffs: IBuffBase[], actionOn: ActionOn) => {
-  // const data = Object.assign({}, data);
-
   buffs.forEach((buff: IBuffBase) => {
     if (!buff.enable) return;
 
@@ -18,10 +16,14 @@ const calculateBuffs = (data: Partial<ICalculatorValue>, buffs: IBuffBase[], act
       // 若buff存在独特标识，则单独处理
       if (eff.special) {
         if (!data.specialValue) data.specialValue = {};
-        data.specialValue[eff.special] = {
-          ...(data.specialValue[eff.special] || {}),
-          [eff.type]: value,
-        };
+        if (data.specialValue?.[eff.special]?.[eff.type]) {
+          data.specialValue[eff.special][eff.type] += value;
+        } else {
+          data.specialValue[eff.special] = {
+            ...(data.specialValue[eff.special] || {}),
+            [eff.type]: value,
+          };
+        }
       } else {
         switch (eff.type) {
           case BuffType.ATKPrcent:
@@ -54,7 +56,7 @@ const calculateBuffs = (data: Partial<ICalculatorValue>, buffs: IBuffBase[], act
           case BuffType.ChargeFixed:
             eff.transform ? (data.chargeEfficiency_NT += value) : (data.chargeEfficiency += value);
             break;
-            // @TODO 各类元素附魔的优先级顺序待定
+          // @TODO 各类元素附魔的优先级顺序待定
           case BuffType.Enchanting:
             data.enchanting = value;
             break;

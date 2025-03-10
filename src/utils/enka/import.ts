@@ -137,10 +137,11 @@ const saveCalculationResult = async (enkaData: EnkaAvatarInfo) => {
   const panel = calculationPanel({
     characterInfo: {
       ...cha,
+      baseHP: Math.floor(enkaData.fightPropMap[1]),
       baseATK: Math.floor(enkaData.fightPropMap[4] - weaponInfo.flat.weaponStats[0].statValue),
       baseDEF: Math.floor(enkaData.fightPropMap[7]),
-      baseHP: Math.floor(enkaData.fightPropMap[1]),
       level: +enkaData.propMap[4001].val,
+      overshoot: +enkaData.propMap[1002].val,
     },
     weapon: {
       ...wea,

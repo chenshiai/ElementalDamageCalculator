@@ -3,12 +3,13 @@ import { IBuffBase } from "@/types/interface";
 
 function createBuff(type: BuffType, value: number, star: "A" | "S", descSuffix: string): IBuffBase {
   return {
-    label: `80级突破，${descSuffix}+${value}${type !== BuffType.MysteryFixed ? "%" : ""}`,
-    describe: `${star === "A" ? "4星角色" : "5星角色"}80级突破后+${value}${
+    label: `80级突破6阶，${descSuffix}+${value}${type !== BuffType.MysteryFixed ? "%" : ""}`,
+    describe: `${star === "A" ? "4星角色" : "5星角色"}突破到6阶后+${value}${
       type !== BuffType.MysteryFixed ? "%" : ""
     }${descSuffix}`,
     effect: [{ type, getValue: () => value }],
     enable: true,
+    condition: ({ overshoot }) => overshoot === 6
   };
 }
 

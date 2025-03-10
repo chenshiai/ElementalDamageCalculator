@@ -88,13 +88,12 @@ import { Character } from "@/constants/characters-config/character";
 import { Weapons } from "@/constants/characters-config/weapon";
 const recalculation = (data: IUserSavedCalculationData) => {
   const cha = Character.find((c) => c.enkaId === data.characterEnkaId);
+  if (data.weaponMainStats) {
+  }
   characterInfo.value = {
     ...cha,
-    ...(data.weaponMainStats
-      ? {
-          baseATK: data.panel.baseATK - data.weaponMainStats.statValue,
-        }
-      : {}),
+    baseATK: data.weaponMainStats ? data.panel.baseATK - data.weaponMainStats.statValue : cha.baseATK,
+    overshoot: data.panel.overshoot || 6, // 旧版面板数据不存在overshoot字段，默认为6
     baseDEF: data.panel.baseDEF,
     baseHP: data.panel.baseHP,
     level: data.panel.level,
@@ -142,7 +141,7 @@ const pageTitle = computed(() => {
 
 <template>
   <TabTitle>{{ pageTitle }}</TabTitle>
-  <div class="tips">角色、武器和圣遗物均以满级数据计算。可以自由搭配。</div>
+  <div class="tips">默认的角色、武器和圣遗物均以满级数据计算。可以自由搭配。</div>
   <CharacterInfo v-model="characterInfo" v-model:constellation="constellation" />
   <WeaponInfo v-model="weapon" v-model:affix="affix" />
   <RelicInfo v-model="relicList" :relic-suit-texts="relicSuitTexts" />

@@ -16,6 +16,7 @@ export function cha(enkaId: number, name: string, element: ElementType, weapon: 
         element,
         rarity,
         level: 90,
+        overshoot: 6,
         baseATK,
         baseDEF,
         baseHP,

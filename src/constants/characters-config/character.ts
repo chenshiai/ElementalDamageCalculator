@@ -107,14 +107,16 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
       createAttack("拾取点心回复生命值", AttackType.Heal, ElementType.None, {
         em: [1.306, 1.403, 1.501, 1.632, 1.73, 1.828, 1.958, 2.089, 2.22, 2.35, 2.481, 2.611, 2.774],
-        fixed: [314, 346, 380, 417, 456, 498, 543, 590, 640, 692, 747, 805, 865]
+        fixed: [314, 346, 380, 417, 456, 498, 543, 590, 640, 692, 747, 805, 865],
       }),
     ],
     otherSkill: [],
-    buffs: [S_80_MYSTERY_115,
+    buffs: [
+      S_80_MYSTERY_115,
       {
         label: "昼想夜梦",
-        describe: "梦见月瑞希处于梦浮状态下时，队伍中附近的其他角色的元素类型为火元素、水元素、冰元素或雷元素的攻击命中敌人时，梦见月瑞希的元素精通提升100点。",
+        describe:
+          "梦见月瑞希处于梦浮状态下时，队伍中附近的其他角色的元素类型为火元素、水元素、冰元素或雷元素的攻击命中敌人时，梦见月瑞希的元素精通提升100点。",
         effect: [
           {
             type: BuffType.MysteryFixed,
@@ -125,7 +127,8 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       },
       {
         label: "2命·「缠忆君影梦相见」",
-        describe: "进入梦浮状态时，梦见月瑞希的每点元素精通，会为附近的队伍中所有其他角色提供0.04%火元素、水元素、冰元素与雷元素伤害加成，效果持续至梦浮状态结束。",
+        describe:
+          "进入梦浮状态时，梦见月瑞希的每点元素精通，会为附近的队伍中所有其他角色提供0.04%火元素、水元素、冰元素与雷元素伤害加成，效果持续至梦浮状态结束。",
         effect: [
           {
             type: BuffType.PyroPrcent,
@@ -154,7 +157,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         ],
         shareable: true,
         enable: false,
-        condition: ({ constellation }) => constellation >= 2
+        condition: ({ constellation }) => constellation >= 2,
       },
       Constellation_E_3,
       Constellation_Q_5,
@@ -533,7 +536,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         {
           atk: [0.573, 0.619, 0.666, 0.732, 0.779, 0.832, 0.906, 0.979, 1.052, 1.132, 1.212, 1.292, 1.372],
         },
-        "mavuika"
+        "Mavuika"
       ),
       createAttack(
         "驰轮车普攻二段伤害",
@@ -700,6 +703,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
               return s === 1 ? (data.baseATK + data.extraATK + data.extraATK_NT) * 0.6 : 0;
             },
             special: "Mavuika",
+            actionOn: ActionOn.Indirect
           },
           {
             type: BuffType.StrongFixed,
@@ -707,12 +711,14 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
               return s === 1 ? (data.baseATK + data.extraATK + data.extraATK_NT) * 0.9 : 0;
             },
             special: "Mavuika",
+            actionOn: ActionOn.Indirect
           },
           {
             type: BuffType.BurstFixed,
             getValue: (data, s) => {
               return s === 1 ? (data.baseATK + data.extraATK + data.extraATK_NT) * 1.2 : 0;
             },
+            actionOn: ActionOn.Indirect
           },
         ],
         condition: ({ constellation }) => constellation >= 2,
@@ -3687,7 +3693,6 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
             getValue: (_, s) => {
               return Math.min(250, s * 0.25);
             },
-            actionOn: ActionOn.Indirect,
             transform: true,
           },
         ],
@@ -10700,7 +10705,14 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         label: "小小的慧风",
         describe:
           "风灵作成·陆叁零捌或禁·风灵作成·染伍同构贰型命中敌人时，基于砂糖基础元素精通的20%，为队伍中所有角色（不包括砂糖自己）提供非基础元素精通加成",
-        effect: [{ type: BuffType.MysteryFixed, getValue: (data) => data.elementalMystery * 0.2, transform: true }],
+        effect: [
+          {
+            type: BuffType.MysteryFixed,
+            getValue: (data) => data.elementalMystery * 0.2,
+            transform: true,
+            actionOn: ActionOn.Indirect,
+          },
+        ],
         enable: false,
         shareable: true,
         target: BuffTarget.Other,

@@ -235,11 +235,13 @@ const importGameInfo = () => {
     </div>
   </div>
   <div class="show-click" @click="toCreateData">去创建角色数据</div>
-  <div class="data-panel__title">游戏内数据导入</div>
-  <Field v-model="uid" label="UID" placeholder="输入UID" />
-  <Button class="show-click" @click="importGameInfo" :disabled="waiting > 0" :loading="importLoading">
-    <span>{{ waiting > 0 ? `${waiting}s后可再次获取` : '导入' }}</span>
-  </Button>
+  <div v-if="0">
+    <div class="data-panel__title">游戏内数据导入</div>
+    <Field v-model="uid" label="UID" placeholder="输入UID" />
+    <Button class="show-click" @click="importGameInfo" :disabled="waiting > 0" :loading="importLoading">
+      <span>{{ waiting > 0 ? `${waiting}s后可再次获取` : '导入' }}</span>
+    </Button>
+  </div>
   <div>
     使用说明：
     <p>

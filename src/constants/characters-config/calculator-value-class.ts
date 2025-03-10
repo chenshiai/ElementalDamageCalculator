@@ -4,6 +4,7 @@ import { ICalculatorValue } from "@/types/interface";
 class CalculatorValue implements ICalculatorValue {
   // 角色面板属性
   level: number = 90;
+  overshoot: number = 6;
   constellation: number = 0;
   baseHP: number = 0;
   baseATK: number = 0;

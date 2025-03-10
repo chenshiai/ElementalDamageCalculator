@@ -55,30 +55,30 @@ export interface IRate {
   fixed?: number[];
 }
 export interface ICharacterInfo {
-  enkaId: number;
-  name: string;
-  rarity: Rarity;
-  element: ElementType;
-  weapon: WeaponType;
-  baseATK: number;
-  baseHP: number;
-  baseDEF: number;
-  level: number;
-  burstCharge: number;
-  icons: {
+  readonly enkaId: number;
+  readonly name: string;
+  readonly rarity: Rarity;
+  readonly element: ElementType;
+  readonly weapon: WeaponType;
+  readonly burstCharge: number;
+  readonly icons: {
     avatarIcon: string;
     constsIcon: string[];
     skillsIcon?: string[];
   };
-  buffs?: IBuffBase[];
-  talentNames: string[];
+  readonly buffs?: IBuffBase[];
+  readonly talentNames: string[];
+  readonly normalAttack: ISkillRate[];
+  readonly elementSkill: ISkillRate[];
+  readonly burstSkill: ISkillRate[];
+  readonly otherSkill: ISkillRate[];
 
-  normalAttack: ISkillRate[];
-
-  elementSkill: ISkillRate[];
-
-  burstSkill: ISkillRate[];
-  otherSkill: ISkillRate[];
+  /** 变量属性，根据实际数据来自动调整 */
+  baseATK: number;
+  baseHP: number;
+  baseDEF: number;
+  level: number;
+  overshoot: number;
 }
 
 export interface IWeaponInfo {
@@ -112,6 +112,8 @@ export interface IRelicBase {
 export interface ICalculatorValue {
   /** 角色等级 */
   level: number;
+  /** 角色突破阶段 */
+  overshoot: number;
   /** 命之座 */
   constellation: number;
   /** 基础生命值 */

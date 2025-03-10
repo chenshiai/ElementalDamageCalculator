@@ -13,9 +13,9 @@ const setConsts = (value: number) => {
     constellation.value = value;
   }
 };
-const character = defineModel<null | ICharacterInfo>();
-const handleCharacterChange = (characters: ICharacterInfo) => {
-  character.value = characters;
+const character = defineModel<ICharacterInfo>();
+const handleCharacterChange = (characterInfo: ICharacterInfo) => {
+  character.value = characterInfo;
 };
 
 const constellation = defineModel("constellation", {
@@ -29,14 +29,15 @@ const constellation = defineModel("constellation", {
     <div class="character-info">
       <div class="avatar-info">
         <div :class="['name', getBackGroundByRarity(character.rarity)]">
-          {{ character?.name }}
+          {{ character.name }}
           （Lv.{{ character.level }}）
         </div>
+        <div>突破：{{ character.overshoot }}</div>
         <div>生命值：{{ character.baseHP }}</div>
         <div>攻击力：{{ character.baseATK }}</div>
         <div>防御力：{{ character.baseDEF }}</div>
         <span>命之座：{{ constellation }}</span>
-        <span style="margin-left: 32px; font-size: 12px">点击图标开启/关闭命座</span>
+        <span style="margin-left: 32px; font-size: 12px">点击图标开启/关闭命之座</span>
       </div>
       <div class="avatar" @click="show = true">
         <img :src="character?.icons.avatarIcon" />
@@ -95,7 +96,6 @@ const constellation = defineModel("constellation", {
 }
 .constellations {
   display: flex;
-  /* margin: 0 auto; */
   width: 60%;
   justify-content: space-around;
   margin-bottom: 16px;
