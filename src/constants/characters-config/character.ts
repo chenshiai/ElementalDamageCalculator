@@ -50,7 +50,7 @@ const a = {
   elementSkill: [],
   burstSkill: [],
   otherSkill: [],
-  buffs: [S_80_CRITALHUNT_38P],
+  buffs: [...S_80_CRITALHUNT_38P],
 };
 // .replaceAll("%", '').replaceAll(/[\u4e00-\u9fff]+/g, "").replaceAll("\t",",").split(",").map(i=>Math.round(i*100)/10000)
 export const Character: (ICharacterInfo & Record<any, any>)[] = [
@@ -112,7 +112,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
     otherSkill: [],
     buffs: [
-      S_80_MYSTERY_115,
+      ...S_80_MYSTERY_115,
       {
         label: "昼想夜梦",
         describe:
@@ -242,7 +242,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
     otherSkill: [],
     buffs: [
-      A_80_ATK_24P,
+      ...A_80_ATK_24P,
       {
         label: "苍翎镇邪敕符",
         describe: "元素战技凤缕随翦舞与元素爆发鹍弦踏月出造成的伤害值提升，提升值分别相当于蓝砚元素精通的309%和774%。",
@@ -347,7 +347,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     buffs: [
-      S_80_MYSTERY_115,
+      ...S_80_MYSTERY_115,
       {
         label: "五重天的寒雨",
         describe:
@@ -613,7 +613,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     buffs: [
-      S_80_CRITALHUNT_38P,
+      ...S_80_CRITALHUNT_38P,
       {
         label: "炎花献礼",
         describe: "队伍中的附近的角色触发「夜魂迸发」时，玛薇卡的攻击力提升30%。",
@@ -824,7 +824,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       ),
     ],
     buffs: [
-      A_80_ATK_24P,
+      ...A_80_ATK_24P,
       {
         label: "1命·林雾间的行迹",
         describe:
@@ -1017,7 +1017,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     buffs: [
-      S_80_CRITAL_19P,
+      ...S_80_CRITAL_19P,
       {
         label: "子弹的戏法",
         describe:
@@ -1126,7 +1126,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     buffs: [
-      S_80_DEF_28P,
+      ...S_80_DEF_28P,
       {
         label: "四境四象回声",
         describe: "若希诺宁拥有少于两枚经过元素转化的「源音采样」，普通攻击与下落攻击造成的伤害提升30%",
@@ -1385,7 +1385,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       ),
     ],
     buffs: [
-      S_80_CRITALHUNT_38P,
+      ...S_80_CRITALHUNT_38P,
       {
         label: "焰灵的契约",
         describe:
@@ -1481,7 +1481,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
     otherSkill: [],
     buffs: [
-      S_80_CRITAL_19P,
+      ...S_80_CRITAL_19P,
       {
         label: "1命·悠闲的「梅兹特利」",
         describe:
@@ -1605,7 +1605,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       ),
     ],
     buffs: [
-      S_80_CRITALHUNT_38P,
+      ...S_80_CRITALHUNT_38P,
       {
         label: "精馏",
         describe:
@@ -1732,7 +1732,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     buffs: [
-      S_80_HP_28P,
+      ...S_80_HP_28P,
       {
         label: "应有适当的休憩",
         describe:
@@ -1869,7 +1869,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     buffs: [
-      S_80_CRITAL_19P,
+      ...S_80_CRITAL_19P,
       {
         label: "破夜的明焰",
         describe:
@@ -2000,7 +2000,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     buffs: [
-      S_80_CRITALHUNT_38P,
+      ...S_80_CRITALHUNT_38P,
       {
         label: "普通攻击·红死之宴",
         describe:
@@ -2131,7 +2131,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
     otherSkill: [],
     buffs: [
-      S_80_CRITAL_19P,
+      ...S_80_CRITAL_19P,
       {
         label: "量体裁衣",
         describe: "施放羽袖一触的上挑攻击后点按普通攻击则触发「裁锦」，千织获得岩元素附魔",
@@ -2257,7 +2257,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     buffs: [
-      S_80_ATK_28P,
+      ...S_80_ATK_28P,
       {
         label: "霜翎高逐祥风势",
         describe:
@@ -2401,7 +2401,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
     otherSkill: [],
     buffs: [
-      S_80_CRITALHUNT_38P,
+      ...S_80_CRITALHUNT_38P,
       {
         label: "元素战技·「裂晶弹片」",
         describe: "消耗的「裂晶弹片」超过3枚时，超过3枚的每枚「裂晶弹片」都将使本次射击造成的伤害额外提升15%",
@@ -2560,7 +2560,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     buffs: [
-      S_80_CRITAL_19P,
+      ...S_80_CRITAL_19P,
       {
         label: "元素战技·荒性",
         describe:
@@ -2717,7 +2717,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
     otherSkill: [],
     buffs: [
-      S_80_CRITALHUNT_38P,
+      ...S_80_CRITALHUNT_38P,
       {
         label: "元素战技·寒烈的惩裁",
         describe: "生命值高于50%时，强化「普通攻击·迅烈倾霜拳」的斥逐拳，使其造成的伤害提升",
@@ -2852,7 +2852,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       ),
     ],
     buffs: [
-      S_80_CRITALHUNT_38P,
+      ...S_80_CRITALHUNT_38P,
       {
         label: "古海孑遗的权柄",
         describe:
@@ -2968,7 +2968,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
     otherSkill: [],
     buffs: [
-      S_80_CRITAL_19P,
+      ...S_80_CRITAL_19P,
       {
         label: "元素战技·「隐具余数」",
         describe: "施放时，将清除已有的「隐具余数」，根据清除的层数，提升造成的伤害",
@@ -3125,7 +3125,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     buffs: [
-      S_80_HP_28P,
+      ...S_80_HP_28P,
       {
         label: "五运终天·伤害",
         describe: "当前场上角色的生命值高于或等于50%时，白术获得25%草元素伤害加成",
@@ -3251,7 +3251,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
     otherSkill: [],
     buffs: [
-      S_80_HP_28P,
+      ...S_80_HP_28P,
       {
         label: "1命·皎洁之火铓辉灿漫",
         describe:
@@ -3375,7 +3375,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
     otherSkill: [],
     buffs: [
-      S_80_DENDRO_28P,
+      ...S_80_DENDRO_28P,
       {
         label: "元素战技·琢光镜",
         describe: "持有琢光镜时，艾尔海森的普通攻击、重击与下落攻击将转为无法被附魔覆盖的草元素伤害",
@@ -3523,7 +3523,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     buffs: [
-      S_80_CRITAL_19P,
+      ...S_80_CRITAL_19P,
       {
         label: "拾玉得花·火",
         describe: "施放羽画·风姿华歌时，若接触了火元素，攻击力提升30%",
@@ -3651,7 +3651,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       ),
     ],
     buffs: [
-      S_80_MYSTERY_115,
+      ...S_80_MYSTERY_115,
       {
         label: "元素爆发·心景幻成",
         describe: "根据队伍中火元素角色的数量，提升纳西妲元素战技「所闻遍计」的灭净三业造成的伤害；",
@@ -3839,7 +3839,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
     otherSkill: [],
     buffs: [
-      S_80_HP_28P,
+      ...S_80_HP_28P,
       {
         label: "折旋落英之庭",
         describe: "处于金杯的丰馈状态下的角色受到草元素攻击会使附近的所有角色元素精通提升100点",
@@ -4054,7 +4054,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       ),
     ],
     buffs: [
-      S_80_CRITALHUNT_38P,
+      ...S_80_CRITALHUNT_38P,
       {
         label: "元素爆发·启途誓使",
         describe: "赛诺的元素精通提升100点",
@@ -4189,7 +4189,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     buffs: [
-      S_80_DENDRO_28P,
+      ...S_80_DENDRO_28P,
       {
         label: "眼识殊明",
         describe: "提纳里发射花筥箭后，元素精通提升50点",
@@ -4323,7 +4323,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     buffs: [
-      S_80_CRITAL_19P,
+      ...S_80_CRITAL_19P,
       {
         label: "猜先有方",
         describe: "队伍存在1/2/3/4种元素类型的角色时，夜兰的生命值上限提升6%/12%/18%/30%",
@@ -4488,7 +4488,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     buffs: [
-      S_80_CRITALHUNT_38P,
+      ...S_80_CRITALHUNT_38P,
       {
         label: "泷廻鉴花·浪闪",
         describe: "「浪闪」效果，基于神里绫人自己当前的生命值上限，提升瞬水剑造成的伤害。浪闪初始至多叠4层，2命解锁5层",
@@ -4629,7 +4629,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
     otherSkill: [],
     buffs: [
-      S_80_CRITAL_19P,
+      ...S_80_CRITAL_19P,
       {
         label: "启蜇之祝词",
         describe: `八重神子的每点元素精通，能使杀生樱造成的伤害提升0.15%`,
@@ -4727,7 +4727,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
     otherSkill: [],
     buffs: [
-      S_80_ATK_28P,
+      ...S_80_ATK_28P,
       {
         label: "元素战技·冰翎",
         describe: `普通攻击、重击、下落攻击、元素战技和元素爆发对敌人造成冰元素伤害时，基于申鹤自己当前的攻击力，提高造成的伤害`,
@@ -4894,7 +4894,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     burstSkill: [],
     otherSkill: [],
     buffs: [
-      S_80_CRITAL_19P,
+      ...S_80_CRITAL_19P,
       {
         label: "元素爆发·「怒目鬼王」",
         describe: `普通攻击、重击与下落攻击造成的伤害转为无法被附魔覆盖的岩元素伤害；
@@ -5017,7 +5017,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     buffs: [
-      S_80_HYDRO_28P,
+      ...S_80_HYDRO_28P,
       {
         label: "庙算无遗",
         describe: "珊瑚宫心海的治疗加成提升25%，暴击率降低100%",
@@ -5189,7 +5189,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
     otherSkill: [],
     buffs: [
-      S_80_CRYO_28P,
+      ...S_80_CRYO_28P,
       {
         label: "冰尘雪野",
         describe:
@@ -5410,7 +5410,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
     otherSkill: [],
     buffs: [
-      S_80_CHARGE_32P,
+      ...S_80_CHARGE_32P,
       {
         label: "元素战技·雷罚恶曜之眼",
         describe: "雷罚恶曜之眼的角色在持续期间内，元素爆发造成的伤害获得提升，提升程度基于元素爆发的元素能量",
@@ -5569,7 +5569,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
     otherSkill: [],
     buffs: [
-      S_80_CRITAL_19P,
+      ...S_80_CRITAL_19P,
       {
         label: "元素战技·焰硝庭火舞",
         describe: "将宵宫的普通攻击发射的箭矢转为炽焰箭，造成的伤害转为火元素伤害，并提高普通攻击造成的伤害",
@@ -5688,7 +5688,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
     otherSkill: [],
     buffs: [
-      S_80_CRITALHUNT_38P,
+      ...S_80_CRITALHUNT_38P,
       {
         label: "神里流·霰步",
         describe: "结束霰步现身时，使神里绫华在短时间内获得冰元素附魔；获得18%冰元素伤害加成",
@@ -5818,7 +5818,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     buffs: [
-      S_80_MYSTERY_115,
+      ...S_80_MYSTERY_115,
       {
         label: "风物之诗咏[水增伤]",
         describe: "枫原万叶触发扩散反应后，枫原万叶的每点元素精通，会为队伍中所有角色提供0.04%对应元素伤害加成",
@@ -6006,7 +6006,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
     otherSkill: [],
     buffs: [
-      S_80_CRITALHUNT_38P,
+      ...S_80_CRITALHUNT_38P,
       {
         label: "点按元素战技·冰潮的涡旋",
         describe: "命中敌人时，优菈自己获得一层冷酷之心效果，提高优菈的防御力，最多叠加2次",
@@ -6145,7 +6145,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
     otherSkill: [],
     buffs: [
-      S_80_CRITALHUNT_38P,
+      ...S_80_CRITALHUNT_38P,
       {
         label: "元素战技·蝶引来生",
         describe:
@@ -6271,7 +6271,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     burstSkill: [],
     otherSkill: [],
     buffs: [
-      S_80_CRITAL_19P,
+      ...S_80_CRITAL_19P,
       {
         label: "元素爆发·靖妖傩舞",
         describe: "将攻击伤害转为风元素伤害；普通攻击/重击/下落攻击伤害提升",
@@ -6403,7 +6403,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
     otherSkill: [],
     buffs: [
-      S_80_CRITALHUNT_38P,
+      ...S_80_CRITALHUNT_38P,
       {
         label: "唯此一心",
         describe: "霜华矢发射后的5秒内，会使接下来的发射的霜华矢与这些霜华矢引发的霜华绽发的暴击率提高20%",
@@ -6512,7 +6512,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
     otherSkill: [],
     buffs: [
-      S_80_GEO_28P,
+      ...S_80_GEO_28P,
       {
         label: "白垩色的威压",
         describe: "创生法·拟造阳华的刹那之花对生命值低于50%的敌人造成的伤害提高25%",
@@ -6633,7 +6633,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
     otherSkill: [],
     buffs: [
-      S_80_GEO_28P,
+      ...S_80_GEO_28P,
       {
         label: "悬岩宸断",
         describe: "玉璋护盾受到伤害时，处于玉璋护盾庇护下的角色，护盾强效提升5%；",
@@ -6801,7 +6801,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
     otherSkill: [],
     buffs: [
-      S_80_HYDRO_28P,
+      ...S_80_HYDRO_28P,
       {
         label: "诸武精通",
         describe: "队伍中自己的角色普通攻击等级提高1级",
@@ -6868,7 +6868,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     buffs: [
-      S_80_PYRO_28P,
+      ...S_80_PYRO_28P,
       {
         label: "砰砰礼物",
         describe:
@@ -6977,7 +6977,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
     otherSkill: [],
     buffs: [
-      S_80_CHARGE_32P,
+      ...S_80_CHARGE_32P,
       {
         label: "2命·眷恋的泠风",
         describe: `高天之歌会使敌人的风元素抗性与物理抗性降低12%。 被高天之歌击飞的敌人在落地前，风元素抗性与物理抗性额外降低12%`,
@@ -7117,7 +7117,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     buffs: [
-      S_80_HEALADD_22P,
+      ...S_80_HEALADD_22P,
       {
         label: "1命·流转剑脊的暴风",
         describe: "风压剑长按超过1秒后，提升牵引速度，并使造成的伤害提升40%",
@@ -7214,7 +7214,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     buffs: [
-      S_80_CRITALHUNT_38P,
+      ...S_80_CRITALHUNT_38P,
       {
         label: "抵天雷罚",
         describe: "雷楔存在期间再次施放星斗归位后的5秒内，刻晴获得雷元素附魔",
@@ -7330,7 +7330,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
     otherSkill: [],
     buffs: [
-      S_80_CRITAL_19P,
+      ...S_80_CRITAL_19P,
       {
         label: "元素爆发·熔毁之翼",
         describe: "黎明提供的火元素附魔持续时间延长4秒；此外，在效果持续期间，迪卢克获得20%火元素伤害加成",
@@ -7429,7 +7429,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
     otherSkill: [],
     buffs: [
-      S_80_CHARGE_32P,
+      ...S_80_CHARGE_32P,
       {
         label: "「托付于命运吧!」",
         describe: "莫娜的水元素伤害加成获得额外提升，提升程度相当于她的元素充能效率的20%",
@@ -7566,7 +7566,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
     otherSkill: [],
     buffs: [
-      S_80_HEALADD_22P,
+      ...S_80_HEALADD_22P,
       {
         label: "延命妙法",
         describe: "处于仙法·寒病鬼差状态下的角色触发元素反应时，受治疗加成提升20%",
@@ -7650,7 +7650,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     buffs: [
-      A_80_GEO_24P,
+      ...A_80_GEO_24P,
       {
         label: "山的回声",
         describe: "队伍中的附近的角色触发「夜魂迸发」后，卡齐娜的岩元素伤害加成提升20%",
@@ -7751,7 +7751,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
     otherSkill: [],
     buffs: [
-      A_80_MYSTERY_96,
+      ...A_80_MYSTERY_96,
       {
         label: "砂王的赐礼",
         describe: "使贯影箭造成的伤害值提升，提升值相当于赛索斯的元素精通的700%",
@@ -7862,7 +7862,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     buffs: [
-      A_80_ATK_24P,
+      ...A_80_ATK_24P,
       {
         label: "祥烟瑞气",
         describe: "嘉明的生命值高于或等于50%时，下落攻击·踏云献瑞造成的伤害提升20%",
@@ -7967,7 +7967,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     buffs: [
-      A_80_HP_24P,
+      ...A_80_HP_24P,
       {
         label: "尖兵协同战法",
         describe: `队伍中所有角色的元素类型均为火元素与雷元素，并且至少有一名火元素角色、一名雷元素角色时；
@@ -8094,7 +8094,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     buffs: [
-      A_80_ATK_24P,
+      ...A_80_ATK_24P,
       {
         label: "多样性调查",
         describe:
@@ -8264,7 +8264,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
     otherSkill: [],
     buffs: [
-      A_80_ATK_24P,
+      ...A_80_ATK_24P,
       {
         label: "并流式冷凝机关",
         describe: "菲米尼对敌人触发碎冰反应后，会使浮冰增压·高压粉碎造成的伤害提高40%",
@@ -8377,7 +8377,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
     otherSkill: [],
     buffs: [
-      A_80_ATK_24P,
+      ...A_80_ATK_24P,
       {
         label: "巧施协同",
         describe:
@@ -8489,7 +8489,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     buffs: [
-      A_80_HP_24P,
+      ...A_80_HP_24P,
       {
         label: "应时惑目之灵",
         describe:
@@ -8590,7 +8590,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     buffs: [
-      A_80_MYSTERY_96,
+      ...A_80_MYSTERY_96,
       {
         label: "工艺家的奇想",
         describe: "在繁绘隅穹持续期间，卡维在普通攻击、重击或下落攻击命中敌人后，元素精通将提升25点，至多叠加4层",
@@ -8678,7 +8678,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
     otherSkill: [],
     buffs: [
-      A_80_HP_24P,
+      ...A_80_HP_24P,
       {
         label: "速射牵制",
         describe:
@@ -8777,7 +8777,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     buffs: [
-      A_80_HP_24P,
+      ...A_80_HP_24P,
       {
         label: "1命·妙受琼阁",
         describe: "白玉萝卜炸裂时，处在其影响范围内的当前场上角色获得15%草元素伤害加成",
@@ -8862,7 +8862,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
     otherSkill: [],
     buffs: [
-      A_80_ATK_24P,
+      ...A_80_ATK_24P,
       {
         label: "元素爆发·烈风波",
         describe: "降低敌人的风元素抗性；所有角色获得风元素伤害加成",
@@ -8973,7 +8973,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
     otherSkill: [],
     buffs: [
-      A_80_HP_24P,
+      ...A_80_HP_24P,
       {
         label: "如光骤现角色",
         describe: "安眠帷幕护盾在存在期间，每获得一枚晚星时，处于安眠帷幕护盾庇护下的角色，护盾强效提升6%，至多叠加4次",
@@ -9109,7 +9109,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     buffs: [
-      A_80_HP_24P,
+      ...A_80_HP_24P,
       {
         label: "元素爆发·赤冕祝祷",
         describe: "角色的普通攻击对敌人造成元素伤害时，提高造成的伤害；单手剑、双手剑、长柄武器角色会获得水元素附魔",
@@ -9204,7 +9204,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     buffs: [
-      A_80_HP_24P,
+      ...A_80_HP_24P,
       Constellation_Q_3,
       {
         label: "4命·酌盈剂虚",
@@ -9289,7 +9289,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     buffs: [
-      A_80_ATK_24P,
+      ...A_80_ATK_24P,
       {
         label: "1命·巡护深林",
         describe: "柯莱处于队伍后台时，元素充能效率提升20%",
@@ -9441,7 +9441,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
     otherSkill: [],
     buffs: [
-      A_80_ANEMO_24P,
+      ...A_80_ANEMO_24P,
       {
         label: "因由勘破",
         describe: "勠心拳命中敌人后，队伍中所有角色（不包括鹿野院平藏自己）的元素精通提升80点",
@@ -9534,7 +9534,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     buffs: [
-      A_80_HP_24P,
+      ...A_80_HP_24P,
       {
         label: "安心之所",
         describe: "基于久岐忍的元素精通，越祓雷草之轮伤害提升，值为元素精通的25%",
@@ -9621,7 +9621,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
     otherSkill: [],
     buffs: [
-      A_80_CHARGE_26P,
+      ...A_80_CHARGE_26P,
       {
         label: "破嶂见旌仪·飞云旗阵",
         describe:
@@ -9743,7 +9743,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     buffs: [
-      A_80_GEO_24P,
+      ...A_80_GEO_24P,
       {
         label: "大将旗指物",
         describe: "领域内的当前场上角色防御力提升，队伍中存在3名及以上岩元素角色时，岩元素伤害增加15%",
@@ -9888,7 +9888,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
     otherSkill: [],
     buffs: [
-      A_80_ATK_24P,
+      ...A_80_ATK_24P,
       {
         label: "甲衣交叠",
         describe: "当前场上自己的角色获取或刷新烈烧佑命护盾时，护盾强效提升5%，至多叠加5次",
@@ -9995,7 +9995,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
     otherSkill: [],
     buffs: [
-      A_80_ATK_24P,
+      ...A_80_ATK_24P,
       {
         label: "天狗咒雷•伏",
         describe: "对范围内当前场上当前角色基于九条裟罗的基础攻击力，以一定比例获得攻击力加成",
@@ -10173,7 +10173,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     buffs: [
-      A_80_MYSTERY_96,
+      ...A_80_MYSTERY_96,
       {
         label: "2命·理清逃跑路线",
         describe: `点按施放时，风风轮舞踢造成的伤害提高3.3%。处于长按施放后的风风轮状态下时，每0.5秒，就会使这次施展的风风轮舞造成的伤害提高3.3%。通过这种方式，风风轮舞踢造成的伤害至多可以提高66%。`,
@@ -10274,7 +10274,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     buffs: [
-      A_80_PYRO_24P,
+      ...A_80_PYRO_24P,
       {
         label: "关联条款",
         describe: "烟绯通过重击消耗丹火印时，每枚丹火印会提升烟绯5%的火元素伤害加成",
@@ -10365,7 +10365,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
     otherSkill: [],
     buffs: [
-      A_80_ATK_24P,
+      ...A_80_ATK_24P,
       {
         label: "聆听忏悔的幽影",
         describe: "噬罪的告解从技能目标的背后攻击时，罗莎莉亚的暴击率提升12%",
@@ -10486,7 +10486,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
     otherSkill: [],
     buffs: [
-      A_80_ATK_24P,
+      ...A_80_ATK_24P,
       {
         label: "「这才是摇滚！」",
         describe: "处于热情拂扫的护盾保护下的角色造成的物理伤害提高15%",
@@ -10605,7 +10605,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
     otherSkill: [],
     buffs: [
-      A_80_CRYO_24P,
+      ...A_80_CRYO_24P,
       {
         label: "2命·猫爪冰摇",
         describe: "猫爪冻冻造成的伤害、护盾吸收量提高15%",
@@ -10692,7 +10692,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
     otherSkill: [],
     buffs: [
-      A_80_ANEMO_24P,
+      ...A_80_ANEMO_24P,
       {
         label: "触媒置换术",
         describe: "砂糖触发扩散反应时，使队伍中所有对应元素类型的角色（不包括砂糖自己）基础元素精通提升50点",
@@ -10837,7 +10837,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     buffs: [
-      A_80_ATK_24P,
+      ...A_80_ATK_24P,
       {
         label: "2命·圣裁影羽",
         describe: "施放夜巡影翼时，能额外造成200%攻击力的伤害",
@@ -10914,7 +10914,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
     otherSkill: [],
     buffs: [
-      A_80_MYSTERY_96,
+      ...A_80_MYSTERY_96,
       {
         label: "静电立场",
         describe: "敌人受到蔷薇的雷光攻击后，降低15%防御力",
@@ -11016,7 +11016,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     buffs: [
-      A_80_PHYSICAL_30P,
+      ...A_80_PHYSICAL_30P,
       {
         label: "饥饿",
         describe: "雷泽的元素能量在50%以下时，元素充能效率提高30%",
@@ -11165,7 +11165,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     buffs: [
-      A_80_ELECTRO_24P,
+      ...A_80_ELECTRO_24P,
       Constellation_E_3,
       Constellation_Q_5,
       {
@@ -11249,7 +11249,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     buffs: [
-      A_80_MYSTERY_96,
+      ...A_80_MYSTERY_96,
       {
         label: "绝云朝天椒",
         describe: "锅巴会在消失的位置留下辣椒。拾取辣椒会提高10%攻击力",
@@ -11340,7 +11340,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
     otherSkill: [],
     buffs: [
-      A_80_ATK_24P,
+      ...A_80_ATK_24P,
       {
         label: "百发百中！",
         describe: "箭雨的暴击率提高10%",
@@ -11459,7 +11459,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
     otherSkill: [],
     buffs: [
-      A_80_CHARGE_26P,
+      ...A_80_CHARGE_26P,
       {
         label: "元素爆发·美妙旅程",
         describe: "基于班尼特的基础攻击力，以一定比例获得非基础攻击力加成",
@@ -11575,7 +11575,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     buffs: [
-      A_80_ATK_24P,
+      ...A_80_ATK_24P,
       {
         label: "虚实工笔",
         describe: "行秋获得20%水元素伤害加成",
@@ -11664,7 +11664,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
     otherSkill: [],
     buffs: [
-      A_80_HP_24P,
+      ...A_80_HP_24P,
       {
         label: "2命·元气迸发",
         describe: "演唱，开始♪技能持续期间，当前场上自己的角色获得15%水元素伤害加成",
@@ -11721,7 +11721,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
     otherSkill: [],
     buffs: [
-      A_80_GEO_24P,
+      ...A_80_GEO_24P,
       {
         label: "储之千日，用之一刻",
         describe: "穿过璇玑屏的角色会获得12%岩元素伤害加成",
@@ -11801,7 +11801,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     buffs: [
-      A_80_DEF_24P,
+      ...A_80_DEF_24P,
       {
         label: "元素爆发·大扫除",
         describe: "基于诺艾尔的防御力，提高攻击力；将攻击伤害转为岩元素伤害",
@@ -11896,7 +11896,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     buffs: [
-      A_80_CHARGE_26P,
+      ...A_80_CHARGE_26P,
       {
         label: "1命·卓越的血脉",
         describe: "对受到冰元素影响的敌人，凯亚的普通攻击与重击暴击率提升15%",
@@ -11972,7 +11972,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     buffs: [
-      A_80_ATK_24P,
+      ...A_80_ATK_24P,
       {
         label: "追冰剑诀·敌人冰元素抗性降低",
         describe: "灵刃·重华叠霜领域消失时，会唤出一柄灵刃自动攻击附近的敌人，被击中的敌人冰元素抗性降低10%",
@@ -12075,7 +12075,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     buffs: [
-      A_80_ATK_24P,
+      ...A_80_ATK_24P,
       {
         label: "2命·革新的旋风",
         describe: "元素充能效率提升16%",
@@ -12214,7 +12214,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     buffs: [
-      A_80_ATK_24P,
+      ...A_80_ATK_24P,
       {
         label: "2命·革新的旋风",
         describe: "元素充能效率提升16%",
@@ -12333,7 +12333,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     buffs: [
-      A_80_ATK_24P,
+      ...A_80_ATK_24P,
       {
         label: "1命·巍然的青岩",
         describe: "队伍中角色处于岩潮叠嶂的岩嶂包围中时，暴击率提升10%",
@@ -12408,7 +12408,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     buffs: [
-      A_80_ATK_24P,
+      ...A_80_ATK_24P,
       {
         label: "1命·巍然的青岩",
         describe: "队伍中角色处于岩潮叠嶂的岩嶂包围中时，暴击率提升10%",
@@ -12483,7 +12483,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
     otherSkill: [],
     buffs: [
-      A_80_ATK_24P,
+      ...A_80_ATK_24P,
       {
         label: "雷影剑·丰穰勾玉",
         describe: "元素充能效率提升20%",
@@ -12579,7 +12579,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
     otherSkill: [],
     buffs: [
-      A_80_ATK_24P,
+      ...A_80_ATK_24P,
       {
         label: "雷影剑·丰穰勾玉",
         describe: "元素充能效率提升20%",
@@ -12676,7 +12676,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
     otherSkill: [],
     buffs: [
-      A_80_ATK_24P,
+      ...A_80_ATK_24P,
       {
         label: "蔓生的埜草",
         describe:
@@ -12809,7 +12809,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
     otherSkill: [],
     buffs: [
-      A_80_ATK_24P,
+      ...A_80_ATK_24P,
       {
         label: "蔓生的埜草",
         describe:
@@ -12930,7 +12930,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     buffs: [
-      A_80_ATK_24P,
+      ...A_80_ATK_24P,
       {
         label: "澄明的净水",
         describe:
@@ -13026,7 +13026,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     buffs: [
-      A_80_ATK_24P,
+      ...A_80_ATK_24P,
       {
         label: "澄明的净水",
         describe:
@@ -13113,7 +13113,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     buffs: [
-      A_80_ATK_24P,
+      ...A_80_ATK_24P,
       {
         label: "1命·流光的星火",
         describe:
@@ -13239,7 +13239,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       }),
     ],
     buffs: [
-      A_80_ATK_24P,
+      ...A_80_ATK_24P,
       {
         label: "1命·流光的星火",
         describe:

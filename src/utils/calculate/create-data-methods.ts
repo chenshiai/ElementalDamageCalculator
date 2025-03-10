@@ -6,6 +6,10 @@ function getEnkaUIs(name: string[]): string[] {
   return name.map(getEnkaUI);
 }
 
+function getEnkaImg(name: string): string {
+  return `https://enka.network/ui/${name.replace("UI_AvatarIcon_", "UI_Gacha_AvatarImg_")}.png`;
+}
+
 export function cha(enkaId: number, name: string, element: ElementType, weapon: WeaponType) {
   return (rarity: Rarity, baseHP: number, baseATK: number, baseDEF: number, burstCharge: number) => {
     return (avatarIcon: string, constsIcon: string[], talentNames: string[]) => {
@@ -24,6 +28,7 @@ export function cha(enkaId: number, name: string, element: ElementType, weapon: 
         icons: {
           avatarIcon: getEnkaUI(avatarIcon),
           constsIcon: getEnkaUIs(constsIcon),
+          gachaImage: getEnkaImg(avatarIcon),
         },
         talentNames,
       };

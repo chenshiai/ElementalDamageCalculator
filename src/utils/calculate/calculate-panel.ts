@@ -57,6 +57,7 @@ function calculationPanel({
       level: characterInfo.level,
       element: characterInfo.element,
       weapon: characterInfo.weapon,
+      overshoot: characterInfo.overshoot,
       constellation: constellation,
       burstCharge: characterInfo.burstCharge,
 

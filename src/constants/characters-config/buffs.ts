@@ -1,51 +1,109 @@
 import { ActionOn, BuffTarget, BuffType } from "@/types/enum";
 import { IBuffBase } from "@/types/interface";
 
-function createBuff(type: BuffType, value: number, star: "A" | "S", descSuffix: string): IBuffBase {
+function createBuff(type: BuffType, value: number, star: "A" | "S", descSuffix: string, shoot): IBuffBase {
   return {
-    label: `80级突破6阶，${descSuffix}+${value}${type !== BuffType.MysteryFixed ? "%" : ""}`,
-    describe: `${star === "A" ? "4星角色" : "5星角色"}突破到6阶后+${value}${
+    label: `角色突破${shoot}阶，${descSuffix}+${value}${type !== BuffType.MysteryFixed ? "%" : ""}`,
+    describe: `${star === "A" ? "4星角色" : "5星角色"}突破到${shoot}阶后+${value}${
       type !== BuffType.MysteryFixed ? "%" : ""
     }${descSuffix}`,
     effect: [{ type, getValue: () => value }],
     enable: true,
-    condition: ({ overshoot }) => overshoot === 6
+    condition: ({ overshoot }) => overshoot === shoot,
   };
 }
+export const A_80_ATK_24P = [6, 12, 12, 18, 24].map((value, index) =>
+  createBuff(BuffType.ATKPrcent, value, "A", "攻击力", index + 2)
+);
+export const A_80_HP_24P = [6, 12, 12, 18, 24].map((value, index) =>
+  createBuff(BuffType.HPPrcent, value, "A", "生命值上限", index + 2)
+);
+export const A_80_DEF_24P = [6, 12, 12, 18, 24].map((value, index) =>
+  createBuff(BuffType.DEFPrcent, value, "A", "防御力", index + 2)
+);
+export const A_80_MYSTERY_96 = [24, 48, 48, 72, 96].map((value, index) =>
+  createBuff(BuffType.MysteryFixed, value, "A", "元素精通", index + 2)
+);
+export const A_80_CHARGE_26P = [6.7, 13.3, 13.3, 20, 26.7].map((value, index) =>
+  createBuff(BuffType.ChargeFixed, value, "A", "元素充能效率", index + 2)
+);
 
-export const A_80_ATK_24P = createBuff(BuffType.ATKPrcent, 24, "A", "攻击力");
-export const A_80_HP_24P = createBuff(BuffType.HPPrcent, 24, "A", "生命值上限");
-export const A_80_DEF_24P = createBuff(BuffType.DEFPrcent, 24, "A", "防御力");
-export const A_80_MYSTERY_96 = createBuff(BuffType.MysteryFixed, 96, "A", "元素精通");
-export const A_80_CHARGE_26P = createBuff(BuffType.ChargeFixed, 26.7, "A", "元素充能效率");
-
-export const A_80_GEO_24P = createBuff(BuffType.GeoPrcent, 24, "A", "岩元素伤害加成");
-export const A_80_CRYO_24P = createBuff(BuffType.CryoPrcent, 24, "A", "冰元素伤害加成");
-export const A_80_PYRO_24P = createBuff(BuffType.PyroPrcent, 24, "A", "火元素伤害加成");
-export const A_80_HYDRO_24P = createBuff(BuffType.HydroPrcent, 24, "A", "水元素伤害加成");
-export const A_80_ELECTRO_24P = createBuff(BuffType.ElectroPrcent, 24, "A", "雷元素伤害加成");
-export const A_80_ANEMO_24P = createBuff(BuffType.AnemoPrcent, 24, "A", "风元素伤害加成");
-export const A_80_DENDRO_24P = createBuff(BuffType.DendroPrcent, 24, "A", "草元素伤害加成");
-export const A_80_PHYSICAL_30P = createBuff(BuffType.PhysicalPrcent, 30, "A", "物理伤害加成");
+export const A_80_GEO_24P = [6, 12, 12, 18, 24].map((value, index) =>
+  createBuff(BuffType.GeoPrcent, value, "A", "岩元素伤害加成", index + 2)
+);
+export const A_80_CRYO_24P = [6, 12, 12, 18, 24].map((value, index) =>
+  createBuff(BuffType.CryoPrcent, value, "A", "冰元素伤害加成", index + 2)
+);
+export const A_80_PYRO_24P = [6, 12, 12, 18, 24].map((value, index) =>
+  createBuff(BuffType.PyroPrcent, value, "A", "火元素伤害加成", index + 2)
+);
+export const A_80_HYDRO_24P = [6, 12, 12, 18, 24].map((value, index) =>
+  createBuff(BuffType.HydroPrcent, value, "A", "水元素伤害加成", index + 2)
+);
+export const A_80_ELECTRO_24P = [6, 12, 12, 18, 24].map((value, index) =>
+  createBuff(BuffType.ElectroPrcent, value, "A", "雷元素伤害加成", index + 2)
+);
+export const A_80_ANEMO_24P = [6, 12, 12, 18, 24].map((value, index) =>
+  createBuff(BuffType.AnemoPrcent, value, "A", "风元素伤害加成", index + 2)
+);
+export const A_80_DENDRO_24P = [6, 12, 12, 18, 24].map((value, index) =>
+  createBuff(BuffType.DendroPrcent, value, "A", "草元素伤害加成", index + 2)
+);
+export const A_80_PHYSICAL_30P = [7.5, 15, 15, 22.5, 30].map((value, index) =>
+  createBuff(BuffType.PhysicalPrcent, value, "A", "物理伤害加成", index + 2)
+);
 
 // 五星角色的buff
-export const S_80_HP_28P = createBuff(BuffType.HPPrcent, 28.8, "S", "生命值上限");
-export const S_80_ATK_28P = createBuff(BuffType.ATKPrcent, 28.8, "S", "攻击力");
-export const S_80_DEF_28P = createBuff(BuffType.DEFPrcent, 28.8, "S", "防御力");
-export const S_80_CHARGE_32P = createBuff(BuffType.ChargeFixed, 32, "S", "元素充能效率");
-export const S_80_MYSTERY_115 = createBuff(BuffType.MysteryFixed, 115, "S", "元素精通");
-export const S_80_CRITAL_19P = createBuff(BuffType.Critcal, 19.2, "S", "暴击率");
-export const S_80_CRITALHUNT_38P = createBuff(BuffType.CritcalHurt, 38.4, "S", "暴击伤害");
-export const S_80_HEALADD_22P = createBuff(BuffType.HealAdd, 22.2, "S", "治疗加成");
+export const S_80_HP_28P = [7.2, 14.4, 14.4, 21.6, 28.8].map((value, index) =>
+  createBuff(BuffType.HPPrcent, value, "S", "生命值上限", index + 2)
+);
+export const S_80_ATK_28P = [7.2, 14.4, 14.4, 21.6, 28.8].map((value, index) =>
+  createBuff(BuffType.ATKPrcent, value, "S", "攻击力", index + 2)
+);
+export const S_80_DEF_28P = [7.2, 14.4, 14.4, 21.6, 28.8].map((value, index) =>
+  createBuff(BuffType.DEFPrcent, value, "S", "防御力", index + 2)
+);
+export const S_80_CHARGE_32P = [8, 16, 16, 24, 32].map((value, index) =>
+  createBuff(BuffType.ChargeFixed, value, "S", "元素充能效率", index + 2)
+);
+export const S_80_MYSTERY_115 = [29, 58, 58, 86, 115].map((value, index) =>
+  createBuff(BuffType.MysteryFixed, value, "S", "元素精通", index + 2)
+);
+export const S_80_CRITAL_19P = [4.8, 9.6, 9.6, 14.4, 19.2].map((value, index) =>
+  createBuff(BuffType.Critcal, value, "S", "暴击率", index + 2)
+);
+export const S_80_CRITALHUNT_38P = [9.6, 19.2, 19.2, 28.8, 38.4].map((value, index) =>
+  createBuff(BuffType.CritcalHurt, value, "S", "暴击伤害", index + 2)
+);
 
-export const S_80_GEO_28P = createBuff(BuffType.GeoPrcent, 28.8, "S", "岩元素伤害加成");
-export const S_80_CRYO_28P = createBuff(BuffType.CryoPrcent, 28.8, "S", "冰元素伤害加成");
-export const S_80_PYRO_28P = createBuff(BuffType.PyroPrcent, 28.8, "S", "火元素伤害加成");
-export const S_80_HYDRO_28P = createBuff(BuffType.HydroPrcent, 28.8, "S", "水元素伤害加成");
-export const S_80_ELECTRO_28P = createBuff(BuffType.ElectroPrcent, 28.8, "S", "雷元素伤害加成");
-export const S_80_ANEMO_28P = createBuff(BuffType.AnemoPrcent, 28.8, "S", "风元素伤害加成");
-export const S_80_DENDRO_28P = createBuff(BuffType.DendroPrcent, 28.8, "S", "草元素伤害加成");
-export const S_80_PHYSICAL_36P = createBuff(BuffType.PhysicalPrcent, 36, "S", "物理伤害加成");
+export const S_80_HEALADD_22P = [5.5, 11.1, 11.1, 16.6, 22.2].map((value, index) =>
+  createBuff(BuffType.HealAdd, value, "S", "治疗加成", index + 2)
+);
+
+export const S_80_GEO_28P = [7.2, 14.4, 14.4, 21.6, 28.8].map((value, index) =>
+  createBuff(BuffType.GeoPrcent, value, "S", "岩元素伤害加成", index + 2)
+);
+export const S_80_CRYO_28P = [7.2, 14.4, 14.4, 21.6, 28.8].map((value, index) =>
+  createBuff(BuffType.CryoPrcent, value, "S", "冰元素伤害加成", index + 2)
+);
+export const S_80_PYRO_28P = [7.2, 14.4, 14.4, 21.6, 28.8].map((value, index) =>
+  createBuff(BuffType.PyroPrcent, value, "S", "火元素伤害加成", index + 2)
+);
+export const S_80_HYDRO_28P = [7.2, 14.4, 14.4, 21.6, 28.8].map((value, index) =>
+  createBuff(BuffType.HydroPrcent, value, "S", "水元素伤害加成", index + 2)
+);
+export const S_80_ELECTRO_28P = [7.2, 14.4, 14.4, 21.6, 28.8].map((value, index) =>
+  createBuff(BuffType.ElectroPrcent, value, "S", "雷元素伤害加成", index + 2)
+);
+export const S_80_ANEMO_28P = [7.2, 14.4, 14.4, 21.6, 28.8].map((value, index) =>
+  createBuff(BuffType.AnemoPrcent, value, "S", "风元素伤害加成", index + 2)
+);
+export const S_80_DENDRO_28P = [7.2, 14.4, 14.4, 21.6, 28.8].map((value, index) =>
+  createBuff(BuffType.DendroPrcent, value, "S", "草元素伤害加成", index + 2)
+);
+export const S_80_PHYSICAL_36P = [9, 18, 18, 27, 36].map((value, index) =>
+  createBuff(BuffType.PhysicalPrcent, value, "S", "物理伤害加成", index + 2)
+);
 
 const skillTypeLabel = {
   [BuffType.NormalLevel]: "普通攻击",

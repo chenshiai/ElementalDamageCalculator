@@ -54,10 +54,13 @@ interface EnkaAvatarInfo {
   equipList: Equip[];
 }
 
-function importData(avatarInfoList) {
-  return avatarInfoList.forEach(async (element) => {
-    await saveCalculationResult(element);
-  });
+async function importData(avatarInfoList) {
+  const list = [];
+  for (const element of avatarInfoList) {
+    const name = await saveCalculationResult(element);
+    list.push(name);
+  }
+  return list;
 }
 
 const saveCalculationResult = async (enkaData: EnkaAvatarInfo) => {
@@ -178,12 +181,14 @@ const saveCalculationResult = async (enkaData: EnkaAvatarInfo) => {
   return db
     .add(calDB.storeName, data)
     .then(() => {
-      console.log("保存游戏角色成功", cha.name);
+      return cha.name;
     })
     .catch(() => {
-      db.put(calDB.storeName, data).then(() => {
-        console.log("游戏角色数据更新", cha.name);
-      });
+      return db.put(calDB.storeName, data)
+        .then(() => {
+          return cha.name;
+        })
+        .catch(() => {});
     });
 };
 

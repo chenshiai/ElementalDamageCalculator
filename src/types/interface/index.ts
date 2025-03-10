@@ -64,7 +64,7 @@ export interface ICharacterInfo {
   readonly icons: {
     avatarIcon: string;
     constsIcon: string[];
-    skillsIcon?: string[];
+    gachaImage: string;
   };
   readonly buffs?: IBuffBase[];
   readonly talentNames: string[];

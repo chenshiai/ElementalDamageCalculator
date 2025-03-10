@@ -5,10 +5,9 @@ import { ref, watchEffect } from "vue";
 import _ from "lodash";
 import { ICharacterInfo, IBuffBase } from "@/types/interface";
 
-const useCharacterInfo = (initData: ICharacterInfo | null = null, cons: number = 0, over: number = 6) => {
+const useCharacterInfo = (initData: ICharacterInfo | null = null, cons: number = 0) => {
   const characterInfo = ref<null | ICharacterInfo>(initData);
   const constellation = ref<number>(cons);
-  const overshoot = ref<number>(over);
   const characterBuffs = ref<IBuffBase[]>([]);
 
   watchEffect(() => {
@@ -16,7 +15,10 @@ const useCharacterInfo = (initData: ICharacterInfo | null = null, cons: number =
       characterInfo.value?.buffs
         .filter((buff) => {
           if (buff.condition) {
-            return buff.condition({ constellation: constellation.value });
+            return buff.condition({
+              constellation: constellation.value,
+              overshoot: characterInfo.value.overshoot || 6,
+            });
           } else {
             return true;
           }
@@ -34,7 +36,6 @@ const useCharacterInfo = (initData: ICharacterInfo | null = null, cons: number =
     characterInfo,
     characterBuffs,
     constellation,
-    overshoot,
     initCharacterInfo,
   };
 };

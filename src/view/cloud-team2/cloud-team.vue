@@ -236,7 +236,7 @@ const importGameInfo = () => {
     </div>
   </div>
   <div class="show-click" @click="toCreateData">去创建角色数据</div>
-  <div v-if="0">
+  <div v-if="1">
     <div class="data-panel__title">游戏内数据导入</div>
     <Field v-model="uid" label="UID" placeholder="输入UID" />
     <Button class="show-click" @click="importGameInfo" :disabled="waiting > 0" :loading="importLoading">

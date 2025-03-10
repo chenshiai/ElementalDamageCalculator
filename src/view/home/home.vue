@@ -25,8 +25,10 @@ import FourSvg from './svg.vue'
   </router-link>
   <router-link to="/cloud-team" class="card">
     <FourSvg />
-    <div>角色组队计算</div>
-    <span>用角色数据进行计算，支持导入游戏数据</span>
+    <div>角色组队计算（测试版）</div>
+    <span>用角色数据进行计算
+      <!-- 支持导入游戏数据 -->
+    </span>
     <img src="/img/hutao.png" alt="" />
   </router-link>
   <router-link to="/shield" class="card">
