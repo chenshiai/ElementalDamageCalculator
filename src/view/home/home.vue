@@ -26,9 +26,7 @@ import FourSvg from './svg.vue'
   <router-link to="/cloud-team" class="card">
     <FourSvg />
     <div>角色组队计算（测试版）</div>
-    <span>用角色数据进行计算
-      <!-- 支持导入游戏数据 -->
-    </span>
+    <span>用角色数据进行计算</span>
     <img src="/img/hutao.png" alt="" />
   </router-link>
   <router-link to="/shield" class="card">
@@ -36,6 +34,12 @@ import FourSvg from './svg.vue'
     <div>护盾承伤计算</div>
     <span>计算护盾的实际吸收量</span>
     <img src="/img/zhongli.png" alt="" />
+  </router-link>
+  <router-link to="/import" class="card">
+    <FourSvg />
+    <div>游戏数据导入</div>
+    <span>导入玩家的角色培养数据</span>
+    <img src="/img/paimeng.png" alt="" />
   </router-link>
 </template>
 

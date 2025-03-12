@@ -4,7 +4,6 @@ import { EquipType } from "@/types/enum";
 import { MainstatType, SubstatType } from "@/constants/characters-config/relic-class";
 import { Character } from "@/constants/characters-config/character";
 import relicLibrary from "@/constants/characters-config/relic";
-import { IRelicItem } from "@/constants/characters-config/relic-class";
 import calculationPanel from "@/utils/calculate/calculate-panel";
 import { Weapons } from "@/constants/characters-config/weapon";
 import useWeanponInfo from "@/view/character-calculation/modules/weapon-info/index.js";
