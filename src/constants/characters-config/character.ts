@@ -6055,7 +6055,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
               );
             },
             special: "Eula",
-            actionOn: ActionOn.Indirect,
+            actionOn: ActionOn.External,
           },
         ],
         enable: true,
@@ -6670,27 +6670,27 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
           {
             type: BuffType.NormalFixed,
             getValue: (data) => (data.baseHP + data.extraHP + data.extraHP_NT) * 0.0139,
-            actionOn: ActionOn.Indirect,
+            actionOn: ActionOn.External,
           },
           {
             type: BuffType.FallingFixed,
             getValue: (data) => (data.baseHP + data.extraHP + data.extraHP_NT) * 0.0139,
-            actionOn: ActionOn.Indirect,
+            actionOn: ActionOn.External,
           },
           {
             type: BuffType.StrongFixed,
             getValue: (data) => (data.baseHP + data.extraHP + data.extraHP_NT) * 0.0139,
-            actionOn: ActionOn.Indirect,
+            actionOn: ActionOn.External,
           },
           {
             type: BuffType.SkillFixed,
             getValue: (data) => (data.baseHP + data.extraHP + data.extraHP_NT) * 0.019,
-            actionOn: ActionOn.Indirect,
+            actionOn: ActionOn.External,
           },
           {
             type: BuffType.BurstFixed,
             getValue: (data) => (data.baseHP + data.extraHP + data.extraHP_NT) * 0.33,
-            actionOn: ActionOn.Indirect,
+            actionOn: ActionOn.External,
           },
         ],
         enable: true,
@@ -7664,7 +7664,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
           {
             type: BuffType.SkillFixed,
             getValue: (data) => (data.baseDEF + data.extraDEF + data.extraDEF_NT) * 0.2,
-            actionOn: ActionOn.Indirect,
+            actionOn: ActionOn.External,
           },
         ],
         enable: true,
@@ -7759,7 +7759,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
           {
             type: BuffType.StrongFixed,
             getValue: (data) => (data.elementalMystery + data.elementalMystery_NT) * 7,
-            actionOn: ActionOn.Indirect,
+            actionOn: ActionOn.External,
             special: "Sethos",
           },
         ],
@@ -8794,7 +8794,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         effect: [
           {
             type: BuffType.MysteryFixed,
-            getValue: (data) => Math.min(120, (data.baseHP + data.extraHP + data.extraHP_NT) * 0.003),
+            getValue: (data) => Math.min(120, (data.baseHP + data.extraHP) * 0.003),
             transform: true,
             actionOn: ActionOn.Indirect,
           },
@@ -8993,7 +8993,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
           {
             type: BuffType.BurstFixed,
             getValue: (data) => (data.baseHP + data.extraHP + data.extraHP_NT) * 0.015,
-            actionOn: ActionOn.Indirect,
+            actionOn: ActionOn.External,
             special: "Layla",
           },
         ],
@@ -9015,12 +9015,12 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
           {
             type: BuffType.NormalFixed,
             getValue: (data) => (data.baseHP + data.extraHP + data.extraHP_NT) * 0.05,
-            actionOn: ActionOn.Indirect,
+            actionOn: ActionOn.External,
           },
           {
             type: BuffType.StrongFixed,
             getValue: (data) => (data.baseHP + data.extraHP + data.extraHP_NT) * 0.05,
-            actionOn: ActionOn.Indirect,
+            actionOn: ActionOn.External,
           },
         ],
         enable: true,
@@ -9542,7 +9542,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
           {
             type: BuffType.SkillFixed,
             getValue: (data) => (data.elementalMystery + data.elementalMystery_NT) * 0.25,
-            actionOn: ActionOn.Indirect,
+            actionOn: ActionOn.External,
           },
         ],
         enable: true,
@@ -9636,7 +9636,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
               ];
               return (a + b) * (data.baseDEF + data.extraDEF + data.extraDEF_NT);
             },
-            actionOn: ActionOn.Indirect,
+            actionOn: ActionOn.External,
           },
           {
             type: BuffType.NormalPrcent,
@@ -9783,13 +9783,13 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
           {
             type: BuffType.SkillFixed,
             getValue: (data) => (data.baseDEF + data.extraDEF + data.extraDEF_NT) * 1.56,
-            actionOn: ActionOn.Indirect,
+            actionOn: ActionOn.External,
             special: "Gorou",
           },
           {
             type: BuffType.BurstFixed,
             getValue: (data) => (data.baseDEF + data.extraDEF + data.extraDEF_NT) * 0.156,
-            actionOn: ActionOn.Indirect,
+            actionOn: ActionOn.External,
             special: "Gorou",
           },
         ],
@@ -9908,7 +9908,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
             type: BuffType.BurstFixed,
             getValue: (data) => (data.baseHP + data.extraHP + data.extraHP_NT) * 0.022,
             special: "Tohma",
-            actionOn: ActionOn.Indirect,
+            actionOn: ActionOn.External,
           },
         ],
         enable: true,
@@ -12487,7 +12487,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       {
         label: "雷影剑·丰穰勾玉",
         describe: "元素充能效率提升20%",
-        effect: [{ type: BuffType.ChargeFixed, getValue: () => 20, actionOn: ActionOn.Indirect }],
+        effect: [{ type: BuffType.ChargeFixed, getValue: () => 20 }],
         enable: false,
         shareable: true,
         target: BuffTarget.All,
@@ -12583,7 +12583,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       {
         label: "雷影剑·丰穰勾玉",
         describe: "元素充能效率提升20%",
-        effect: [{ type: BuffType.ChargeFixed, getValue: () => 20, actionOn: ActionOn.Indirect }],
+        effect: [{ type: BuffType.ChargeFixed, getValue: () => 20 }],
         enable: false,
         shareable: true,
         target: BuffTarget.All,
