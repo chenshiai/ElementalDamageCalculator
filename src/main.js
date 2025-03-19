@@ -8,7 +8,7 @@ import route from "./router";
 import store from "./store";
 import "default-passive-events";
 import db from "./utils/db";
-import { calDB, relicDB } from "./constants/db";
+import { calDB, relicDB, playerInfoDB } from "./constants/db";
 import VConsole from "vconsole";
 
 if (process.env.NODE_ENV !== "production") {
@@ -17,6 +17,7 @@ if (process.env.NODE_ENV !== "production") {
 
 db.createStore(calDB.storeName, calDB.keyPath);
 db.createStore(relicDB.storeName, relicDB.keyPath);
+db.createStore(playerInfoDB.storeName, playerInfoDB.keyPath);
 
 setNotifyDefaultOptions({
   duration: 1500,

@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { Button, Collapse, CollapseItem, SwipeCell } from "vant";
+import { Button, Collapse, CollapseItem, SwipeCell, Tab, Tabs } from "vant";
 import db from "@/utils/db";
-import { IUserSavedCalculationData, calDB } from "@/constants/db";
-import { ref, watchEffect } from "vue";
+import { IUserSavedCalculationData, IPlayerInfoData, calDB, playerInfoDB } from "@/constants/db";
+import { ref, watchEffect, computed } from "vue";
 const emit = defineEmits<{
   recalculation: [value: IUserSavedCalculationData];
 }>();
@@ -14,11 +14,16 @@ const props = defineProps({
   },
 });
 const localData = ref<IUserSavedCalculationData[]>([]);
+const playerData = ref<IPlayerInfoData[]>([]);
+const filterActive = ref(0)
 
 watchEffect(() => {
   if (props.showDataPopup) {
     db.getAll(calDB.storeName).then((res) => {
       localData.value = res;
+    });
+    db.getAll(playerInfoDB.storeName).then((res) => {
+      playerData.value = res;
     });
   }
 });
@@ -29,6 +34,18 @@ const deleteLocalData = (title: string) => {
   const index = localData.value.findIndex((item) => item.title === title);
   localData.value.splice(index, 1);
 };
+
+const localDataFilter = computed(() => {
+  return localData.value.filter((item) => {
+    if (filterActive.value === 0) {
+      return true;
+    }
+    if (filterActive.value === 1) {
+      return !item.owner;
+    }
+    return item.owner === playerData.value[filterActive.value - 2].uid;
+  });
+})
 
 // 重算数据
 const recalculation = (data: IUserSavedCalculationData) => {
@@ -64,8 +81,18 @@ const getStatValueText = (stat): string => {
 <template>
   <div class="tips">点击展开查看圣遗物详情。支持「填入」，左滑「删除」</div>
   <div class="data-selector-title">本地数据存档</div>
-  <Collapse class="data-popup__collapse" v-if="localData.length > 0" v-model="opened">
-    <SwipeCell v-for="item in localData" :key="item.title">
+  <Tabs v-model:active="filterActive">
+    <Tab title="全部数据"></Tab>
+    <Tab title="自定义数据"></Tab>
+    <Tab v-for="item in playerData" :key="item.uid" :title="item.nickname">
+      <section class="player-info">
+        <data>UID：{{ item.uid }}</data>
+        <data>签名：{{ item.signature }}</data>
+      </section>
+    </Tab>
+  </Tabs>
+  <Collapse class="data-popup__collapse" v-if="localDataFilter.length > 0" v-model="opened">
+    <SwipeCell v-for="item in localDataFilter" :key="item.title">
       <CollapseItem class="data-popup__collapse-item" :is-link="false" title-class="data-title">
         <template #title>
           <span>{{ item.title }}</span>
@@ -204,5 +231,12 @@ const getStatValueText = (stat): string => {
 }
 .swipecell-right-button {
   height: 100%;
+}
+.player-info {
+  padding: 16px;
+}
+.player-info data {
+  display: block;
+  text-align: center;
 }
 </style>

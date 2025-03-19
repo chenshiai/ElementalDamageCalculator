@@ -53,16 +53,16 @@ interface EnkaAvatarInfo {
   equipList: Equip[];
 }
 
-async function importData(avatarInfoList) {
+async function importData(avatarInfoList, uid) {
   const list = [];
   for (const element of avatarInfoList) {
-    const name = await saveCalculationResult(element);
+    const name = await saveCalculationResult(element, uid);
     list.push(name);
   }
   return list;
 }
 
-const saveCalculationResult = async (enkaData: EnkaAvatarInfo) => {
+const saveCalculationResult = async (enkaData: EnkaAvatarInfo, uid: string) => {
   // 根据avatarId 查找角色信息
   const cha = Character.find((item) => {
     return item.enkaId === enkaData.avatarId;
@@ -166,7 +166,8 @@ const saveCalculationResult = async (enkaData: EnkaAvatarInfo) => {
 
   // 保存角色数据
   const data: IUserSavedCalculationData = {
-    title: `${cha.name}(玩家数据)`,
+    owner: uid,
+    title: `${cha.name}(${uid})`,
     characterEnkaId: enkaData.avatarId,
     weaponEnkaId: weaponInfo.itemId,
     affix,

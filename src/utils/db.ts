@@ -7,7 +7,7 @@ interface Database {
 
 class calculateDatabase implements Database {
   private _db?: IDBDatabase;
-  public version = 3;
+  public version = 4;
   public name = "calculationDatabase";
   private _tempCreateStores = [];
 

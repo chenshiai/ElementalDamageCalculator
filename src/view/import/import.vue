@@ -2,6 +2,8 @@
 import { ref } from "vue";
 import { Field, showNotify, Button } from "vant";
 
+import db from "@/utils/db";
+import { playerInfoDB } from "@/constants/db";
 import TabTitle from "@/component/TabTitle.vue";
 import importData from "@/utils/enka/import";
 import request from "@/request";
@@ -18,9 +20,10 @@ const importGameInfo = () => {
     .get(`/player-info/uid/${uid.value}`)
     .then((res) => {
       if (res.data.data) {
+        const playerInfo = res.data.data.playerInfo;
         const avatarInfoList = res.data.data.avatarInfoList;
         if (avatarInfoList) {
-          importData(res.data.data.avatarInfoList).then((nameList) => {
+          importData(res.data.data.avatarInfoList, uid.value).then((nameList) => {
             showNotify({
               type: "success",
               message: `${nameList}，导入成功`,
@@ -30,6 +33,12 @@ const importGameInfo = () => {
           showNotify({
             type: "warning",
             message: res.data.message,
+          });
+        }
+        if (playerInfo) {
+          playerInfo.uid = uid.value;
+          db.add(playerInfoDB.storeName, playerInfo).catch(() => {
+            db.put(playerInfoDB.storeName, playerInfo).catch(() => {});
           });
         }
         waiting.value = 30;
@@ -48,9 +57,9 @@ const importGameInfo = () => {
       }
     })
     .finally(() => {
+      uid.value = "";
       importLoading.value = false;
     });
-  uid.value = "";
 };
 </script>
 
@@ -65,9 +74,7 @@ const importGameInfo = () => {
       浏览器会提示你“不安全”。选择“高级” -> “继续访问”。<br />
       <s><i>作者：低成本项目，没钱搞SSL安全证书。</i></s>
     </p>
-    <p>
-      导入后的数据会存在本地浏览器缓存中，可以在“角色组队计算”中填入查看。
-    </p>
+    <p>导入后的数据会存在本地浏览器缓存中，可以在“角色组队计算”中填入查看。</p>
   </div>
   <Field class="uid-input" v-model="uid" label="UID" placeholder="输入UID" />
   <Button class="show-click" @click="importGameInfo" :disabled="waiting > 0" :loading="importLoading">

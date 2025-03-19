@@ -11,8 +11,15 @@ export const relicDB = {
   keyPath: "timetemp",
 }
 
+export const playerInfoDB = {
+  storeName: "playerInfo",
+  keyPath: "uid",
+}
+
 /** 保存角色数据 */
 export interface IUserSavedCalculationData {
+  /** 所有者 */
+  owner?: string;
   /** 数据标题 */
   title: string;
   /** 角色ID */
@@ -31,4 +38,30 @@ export interface IUserSavedCalculationData {
   relicList: string;
   /** 角色面板数据 */
   panel: ICalculatorValue
+}
+
+export interface IPlayerInfoData {
+  uid: string;
+  nickname: string;
+  level: number;
+  signature: string;
+  worldLevel: number;
+  nameCardId: number;
+  finishAchievementNum: number;
+  towerFloorIndex: number;
+  towerLevelIndex: number;
+  showAvatarInfoList: {
+    avatarId: number;
+    level: number;
+    energyType: number;
+  }[];
+  showNameCardIdList: number[];
+  profilePicture: {
+    id: number;
+  };
+  theaterActIndex: number;
+  theaterModeIndex: number;
+  theaterStarIndex: number;
+  fetterCount: number;
+  towerStarIndex: number;
 }
