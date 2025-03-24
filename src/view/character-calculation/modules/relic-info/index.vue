@@ -109,6 +109,8 @@ const selectRelic = (index: number) => {
     setStatForm.value.reliquarySubstats.forEach((substat) => {
       substatsArray.value.push(substat.appendPropId);
     });
+  } else {
+    setStatBase.value = null;
   }
 };
 // 使用本地圣遗物数据
@@ -125,9 +127,6 @@ const closePopup = () => {
   };
   substatsArray.value = [];
   selectStatus.value = 0;
-  nextTick(() => {
-    setStatBase.value = null;
-  });
 };
 
 const removeRelic = () => {
