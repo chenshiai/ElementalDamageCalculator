@@ -118,7 +118,6 @@ const selectLocalRelic = (relic: IRelicItem) => {
 };
 const closePopup = () => {
   showPopup.value = false;
-  setStatBase.value = null;
   showLocalRelics.value = false;
   setStatForm.value = {
     reliquaryMainstat: {} as MainstatType,
@@ -126,6 +125,9 @@ const closePopup = () => {
   };
   substatsArray.value = [];
   selectStatus.value = 0;
+  nextTick(() => {
+    setStatBase.value = null;
+  });
 };
 
 const removeRelic = () => {

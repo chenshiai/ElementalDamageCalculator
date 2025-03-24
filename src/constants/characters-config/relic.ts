@@ -29,7 +29,7 @@ export type IRelicLibraryItemEquip = [
   IRelicBase & { equipType: EquipType.EQUIP_SHOES },
   IRelicBase & { equipType: EquipType.EQUIP_RING },
   IRelicBase & { equipType: EquipType.EQUIP_DRESS }
-]
+];
 
 export interface IRelicLibraryItem {
   name: string;
@@ -94,6 +94,83 @@ const getBuffByElement4 = (label: string, type: BuffType) => {
 };
 
 const relicLibrary: IRelicLibraryItem[] = [
+  {
+    name: "长夜之誓",
+    itemType: ItemType.ITEM_RELIQUARY,
+    setNameTextMapHash: 17745379403,
+    equip: [
+      setReliquartStat(17745379403, "执灯人的誓词", "UI_RelicIcon_15038_4", EquipType.EQUIP_BRACER),
+      setReliquartStat(17745379403, "夜鸣莺的尾羽", "UI_RelicIcon_15038_2", EquipType.EQUIP_NECKLACE),
+      setReliquartStat(17745379403, "不死者的哀铃", "UI_RelicIcon_15038_5", EquipType.EQUIP_SHOES),
+      setReliquartStat(17745379403, "未吹响的号角", "UI_RelicIcon_15038_1", EquipType.EQUIP_RING),
+      setReliquartStat(17745379403, "被浸染的缨盔", "UI_RelicIcon_15038_3", EquipType.EQUIP_DRESS),
+    ],
+    suit2: "二件套：下落攻击造成的伤害提升25%。",
+    suit4:
+      "四件套：装备者的下落攻击/重击/元素战技命中敌人后，获得1/2/2层「永照的流辉」，由下落攻击、重击或元素战技产生的该效果分别每1秒至多触发一次。永照的流辉：下落攻击造成的伤害提升15%，持续6秒，至多叠加5层，每层持续时间独立计算。",
+    buffs: {
+      suit2: [
+        {
+          label: "二件套·下落攻击伤害提升",
+          effect: [{ type: BuffType.FallingPrcent, getValue: () => 25 }],
+          describe: "下落攻击造成的伤害提升25%。",
+          enable: true,
+        },
+      ],
+      suit4: [
+        {
+          label: "四件套·下落攻击伤害提升",
+          effect: [{ type: BuffType.FallingPrcent, getValue: (_, s) => 15 * s }],
+          describe:
+            "装备者的下落攻击/重击/元素战技命中敌人后，获得1/2/2层「永照的流辉」，由下落攻击、重击或元素战技产生的该效果分别每1秒至多触发一次。永照的流辉：下落攻击造成的伤害提升15%，持续6秒，至多叠加5层，每层持续时间独立计算。",
+          enable: true,
+          stackable: true,
+          stackText: "「永照的流辉」层数",
+          stack: 5,
+          limit: 5,
+        },
+      ],
+    },
+  },
+  {
+    name: "深廊终曲",
+    itemType: ItemType.ITEM_RELIQUARY,
+    setNameTextMapHash: 17274579403,
+    equip: [
+      setReliquartStat(17274579403, "深廊的回奏之歌", "UI_RelicIcon_15038_4", EquipType.EQUIP_BRACER),
+      setReliquartStat(17274579403, "深廊的漫远之约", "UI_RelicIcon_15038_4", EquipType.EQUIP_NECKLACE),
+      setReliquartStat(17274579403, "深廊的湮落之刻", "UI_RelicIcon_15038_4", EquipType.EQUIP_SHOES),
+      setReliquartStat(17274579403, "深廊的饫赐之宴", "UI_RelicIcon_15038_4", EquipType.EQUIP_RING),
+      setReliquartStat(17274579403, "深廊的遂失之冕", "UI_RelicIcon_15038_4", EquipType.EQUIP_DRESS),
+    ],
+    suit2: "二件套：获得15%冰元素伤害加成。",
+    suit4:
+      "四件套：装备者的元素能量为0时，普通攻击造成的伤害提升60%，元素爆发造成的伤害提升60%。装备者的普通攻击造成伤害后，上述元素爆发伤害提升效果将失效6秒；装备者的元素爆发造成伤害后，上述普通攻击伤害提升效果将失效6秒。角色处于队伍后台也能触发。",
+    buffs: {
+      suit2: [
+        {
+          label: "二件套·冰元素伤害加成提升",
+          effect: [{ type: BuffType.CryoPrcent, getValue: () => 15 }],
+          describe: "获得15%冰元素伤害加成。",
+          enable: true,
+        },
+      ],
+      suit4: [
+        {
+          label: "四件套·普通攻击伤害提升",
+          effect: [{ type: BuffType.NormalPrcent, getValue: () => 60 }],
+          describe: "装备者的元素能量为0时，普通攻击造成的伤害提升60%，元素爆发造成伤害后失效。",
+          enable: true,
+        },
+        {
+          label: "四件套·元素爆发伤害提升",
+          effect: [{ type: BuffType.BurstPrcent, getValue: () => 60 }],
+          describe: "装备者的元素能量为0时，元素爆发造成的伤害提升60%，普通攻击造成伤害后失效。",
+          enable: true,
+        },
+      ],
+    },
+  },
   {
     name: "黑曜秘典",
     itemType: ItemType.ITEM_RELIQUARY,

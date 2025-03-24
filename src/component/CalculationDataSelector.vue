@@ -1,13 +1,28 @@
 <script setup lang="ts">
-import { Button, Collapse, CollapseItem, SwipeCell, Tab, Tabs } from "vant";
+import { Button, SwipeCell, Tab, Tabs } from "vant";
 import db from "@/utils/db";
 import { IUserSavedCalculationData, IPlayerInfoData, calDB, playerInfoDB } from "@/constants/db";
-import { ref, watchEffect, computed } from "vue";
+import { ref, watchEffect, computed, onMounted, nextTick } from "vue";
+import { getEnkaUI } from "@/constants/characters-config/append-prop";
+
 const emit = defineEmits<{
   recalculation: [value: IUserSavedCalculationData];
 }>();
 
-const opened = ref([]);
+const namecards = ref([]);
+const pfps = ref([]);
+onMounted(() => {
+  fetch("/enkaData/namecards.json")
+    .then((res) => res.json())
+    .then((res) => {
+      namecards.value = res;
+    });
+  fetch("/enkaData/pfps.json")
+    .then((res) => res.json())
+    .then((res) => {
+      pfps.value = res;
+    });
+});
 const props = defineProps({
   showDataPopup: {
     default: false,
@@ -15,7 +30,7 @@ const props = defineProps({
 });
 const localData = ref<IUserSavedCalculationData[]>([]);
 const playerData = ref<IPlayerInfoData[]>([]);
-const filterActive = ref(0)
+const filterActive = ref(0);
 
 watchEffect(() => {
   if (props.showDataPopup) {
@@ -36,16 +51,16 @@ const deleteLocalData = (title: string) => {
 };
 
 const localDataFilter = computed(() => {
+  if (filterActive.value === 0) {
+    return localData.value;
+  }
   return localData.value.filter((item) => {
-    if (filterActive.value === 0) {
-      return true;
-    }
     if (filterActive.value === 1) {
       return !item.owner;
     }
     return item.owner === playerData.value[filterActive.value - 2].uid;
   });
-})
+});
 
 // 重算数据
 const recalculation = (data: IUserSavedCalculationData) => {
@@ -86,15 +101,20 @@ const getStatValueText = (stat): string => {
     <Tab title="自定义数据"></Tab>
     <Tab v-for="item in playerData" :key="item.uid" :title="item.nickname">
       <section class="player-info">
-        <data>UID：{{ item.uid }}</data>
-        <data>签名：{{ item.signature }}</data>
+        <img class="namecard" :src="getEnkaUI(namecards[item.nameCardId].icon)" />
+        <img class="profile" :src="getEnkaUI(pfps[item.profilePicture.id].iconPath)" />
+        <div>
+          <data class="nickname">{{ item.nickname }}</data>
+          <data>{{ item.signature }}</data>
+        </div>
       </section>
     </Tab>
   </Tabs>
-  <Collapse class="data-popup__collapse" v-if="localDataFilter.length > 0" v-model="opened">
+
+  <section class="data-popup__collapse">
     <SwipeCell v-for="item in localDataFilter" :key="item.title">
-      <CollapseItem class="data-popup__collapse-item" :is-link="false" title-class="data-title">
-        <template #title>
+      <details class="data-popup__collapse-item">
+        <summary class="data-title">
           <span>{{ item.title }}</span>
           <div class="first-row">
             <img :src="getAvatarIcon(item.characterEnkaId)" />
@@ -107,44 +127,37 @@ const getStatValueText = (stat): string => {
               <div class="name">{{ getWeaponName(item.weaponEnkaId) }}</div>
               <div class="conts">精炼：{{ item.affix }}</div>
             </div>
+            <Button class="replay" square type="primary" @click.stop="recalculation(item)">
+              填入
+            </Button>
           </div>
-          <Button
-            class="swipecell-right-button replay-icon"
-            square
-            type="primary"
-            @click.stop="recalculation(item)"
-          >
-            填入
-          </Button>
-        </template>
-        <div class="container">
-          <div class="second-row">
-            <div class="relic-detail" v-for="(relic, index) in getRelics(item.relicList)" :key="index">
-              <template v-if="relic">
-                <img class="relic-icon" v-lazy="relic.icon" />
-                <div class="relic-detail__hearder">
-                  <div class="relic-name">
-                    {{ relic.name }}
-                  </div>
-                  <div class="relic-main-stats">
-                    <span>{{ getAppendPropName2(relic.reliquaryMainstat.mainPropId) }}</span>
-                    <span>{{ getStatValueText(relic.reliquaryMainstat) }}</span>
-                  </div>
+        </summary>
+        <div class="second-row">
+          <div class="relic-detail" v-for="(relic, index) in getRelics(item.relicList)" :key="index">
+            <template v-if="relic">
+              <img class="relic-icon" v-lazy="relic.icon" />
+              <div class="relic-detail__hearder">
+                <div class="relic-name">
+                  {{ relic.name }}
                 </div>
-                <div
-                  class="relic-detail__stats"
-                  v-for="(subitem, index) in relic.reliquarySubstats"
-                  :key="subitem.appendPropId + index"
-                >
-                  <label>{{ getAppendPropName2(subitem.appendPropId) }}</label>
-                  <span>{{ getStatValueText(subitem) }}</span>
+                <div class="relic-main-stats">
+                  <span>{{ getAppendPropName2(relic.reliquaryMainstat.mainPropId) }}</span>
+                  <span>{{ getStatValueText(relic.reliquaryMainstat) }}</span>
                 </div>
-              </template>
-              <div class="empty" v-else>该部位未佩戴圣遗物</div>
-            </div>
+              </div>
+              <div
+                class="relic-detail__stats"
+                v-for="(subitem, index) in relic.reliquarySubstats"
+                :key="subitem.appendPropId + index"
+              >
+                <label>{{ getAppendPropName2(subitem.appendPropId) }}</label>
+                <span>{{ getStatValueText(subitem) }}</span>
+              </div>
+            </template>
+            <div class="empty" v-else>该部位未佩戴圣遗物</div>
           </div>
         </div>
-      </CollapseItem>
+      </details>
       <template #right>
         <Button
           class="swipecell-right-button"
@@ -155,8 +168,8 @@ const getStatValueText = (stat): string => {
         />
       </template>
     </SwipeCell>
-  </Collapse>
-  <div class="empty" v-else>无</div>
+  </section>
+  <div class="empty" v-show="localDataFilter.length === 0">无</div>
 </template>
 
 <style scoped>
@@ -170,11 +183,13 @@ const getStatValueText = (stat): string => {
   color: #f51e1e;
   transform: translateY(-50%);
 }
-.replay-icon {
+.replay {
+  width: 60px;
+  margin-left: auto;
   position: absolute;
-  right: 0;
   top: 0;
-  /* color: var(--ligth-text); */
+  right: 0;
+  height: 92px;
 }
 
 .container {
@@ -198,6 +213,7 @@ const getStatValueText = (stat): string => {
   display: grid;
   gap: 4px;
   grid-template-columns: repeat(3, 1fr);
+  padding: 10px 16px 0 0;
 }
 .relic-detail {
   position: relative;
@@ -233,10 +249,38 @@ const getStatValueText = (stat): string => {
   height: 100%;
 }
 .player-info {
-  padding: 16px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
 }
 .player-info data {
   display: block;
-  text-align: center;
+  color: #fff;
+  margin-left: 16px;
+  text-shadow: 0 0 4px #000;
+}
+.player-info .namecard {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  z-index: -1;
+}
+.player-info .profile {
+  width: 60px;
+  border: solid 2px var(--light-text);
+  border-radius: 50%;
+  margin: 16px;
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1);
+}
+.player-info .nickname {
+  font-size: 24px;
+  line-height: 30px;
+  margin-top: 6px;
+}
+.data-popup__collapse-item {
+  border-bottom: 1px solid var(--border);
+}
+.data-popup__collapse-item .data-title {
+  padding: 10px;
 }
 </style>
