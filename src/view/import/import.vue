@@ -1,66 +1,10 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import { Field, showNotify, Button } from "vant";
+import { Field, Button } from "vant";
 
-import db from "@/utils/db";
-import { playerInfoDB } from "@/constants/db";
 import TabTitle from "@/component/TabTitle.vue";
-import importData from "@/utils/enka/import";
-import request from "@/request";
+import useImport from "@/utils/enka/useImport";
 
-/** @module 数据导入 */
-const uid = ref("");
-const waiting = ref(0);
-const interval = ref(null);
-const importLoading = ref(false);
-const importGameInfo = () => {
-  if (!uid.value || waiting.value > 0) return;
-  importLoading.value = true;
-  request
-    .get(`/player-info/uid/${uid.value}`)
-    .then((res) => {
-      if (res.data.data) {
-        const playerInfo = res.data.data.playerInfo;
-        const avatarInfoList = res.data.data.avatarInfoList;
-        if (avatarInfoList) {
-          importData(res.data.data.avatarInfoList, uid.value).then((nameList) => {
-            showNotify({
-              type: "success",
-              message: `${nameList}，导入成功`,
-            });
-          });
-        } else {
-          showNotify({
-            type: "warning",
-            message: res.data.message,
-          });
-        }
-        if (playerInfo) {
-          playerInfo.uid = uid.value;
-          db.add(playerInfoDB.storeName, playerInfo).catch(() => {
-            db.put(playerInfoDB.storeName, playerInfo).catch(() => {});
-          });
-        }
-        waiting.value = 30;
-        interval.value = setInterval(() => {
-          if (waiting.value > 0) {
-            waiting.value = waiting.value - 1;
-          } else {
-            clearInterval(interval.value);
-          }
-        }, 1000);
-      } else {
-        showNotify({
-          type: "danger",
-          message: res.data.message,
-        });
-      }
-    })
-    .finally(() => {
-      uid.value = "";
-      importLoading.value = false;
-    });
-};
+const { uid, waiting, importLoading, importGameInfo } = useImport();
 </script>
 
 <template>
