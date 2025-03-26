@@ -81,11 +81,11 @@ export enum Rarity {
 export enum BuffType {
   ATKBase = "baseATK",
   // ================= 在面板上的buff =============
-  /** 基础生命值百分比提升 */
+  /** 生命值百分比提升 */
   HPPrcent = "hpPrcent",
-  /** 基础攻击力百分比提升 */
+  /** 攻击力百分比提升 */
   ATKPrcent = "atkPrcent",
-  /** 基础防御力百分比提升 */
+  /** 防御力百分比提升 */
   DEFPrcent = "defPrcent",
 
   /** 固定生命值提升 */

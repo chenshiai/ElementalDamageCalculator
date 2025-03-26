@@ -39,6 +39,7 @@ import {
   S_80_DENDRO_28P,
   S_80_HP_28P,
   S_80_DEF_28P,
+  Constellation_A_5,
 } from "./buffs";
 
 import { cha, createAttack } from "@/utils/calculate/create-data-methods";
@@ -54,6 +55,239 @@ const a = {
 };
 // .replaceAll("%", '').replaceAll(/[\u4e00-\u9fff]+/g, "").replaceAll("\t",",").split(",").map(i=>Math.round(i*100)/10000)
 export const Character: (ICharacterInfo & Record<any, any>)[] = [
+  {
+    ...cha(10000111, "瓦雷莎", ElementType.Electro, WeaponType.Magic)(Rarity.Five, 12699, 356, 782, 70)(
+      "UI_AvatarIcon_Varesa",
+      [
+        "UI_Talent_S_Varesa_01",
+        "UI_Talent_S_Varesa_02",
+        "UI_Talent_U_Varesa_01",
+        "UI_Talent_S_Varesa_03",
+        "UI_Talent_U_Varesa_02",
+        "UI_Talent_S_Varesa_04",
+      ],
+      ["普通攻击·角力搏摔", "夜虹逐跃", "闪烈降临！"]
+    ),
+    normalAttack: [
+      createAttack("一段伤害", AttackType.Normal, ElementType.Electro, {
+        atk: [0.468, 0.503, 0.538, 0.585, 0.62, 0.655, 0.702, 0.748, 0.795, 0.842, 0.889, 0.936, 0.994, 1.052],
+      }),
+      createAttack("二段伤害", AttackType.Normal, ElementType.Electro, {
+        atk: [0.4, 0.43, 0.46, 0.5, 0.53, 0.56, 0.6, 0.64, 0.68, 0.721, 0.76, 0.801, 0.851, 0.901],
+      }),
+      createAttack("三段伤害", AttackType.Normal, ElementType.Electro, {
+        atk: [0.563, 0.605, 0.648, 0.704, 0.746, 0.788, 0.845, 0.901, 0.957, 1.014, 1.07, 1.126, 1.197, 1.267],
+      }),
+      createAttack("重击伤害", AttackType.Strong, ElementType.Electro, {
+        atk: [0.893, 0.96, 1.027, 1.116, 1.183, 1.25, 1.339, 1.428, 1.518, 1.607, 1.696, 1.786, 1.897, 2.009],
+      }),
+      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Electro, {
+        atk: [0.746, 0.807, 0.867, 0.954, 1.015, 1.084, 1.18, 1.275, 1.37, 1.474, 1.578, 1.683, 1.787, 1.891],
+      }),
+      createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Electro, {
+        atk: [1.49, 1.61, 1.73, 1.91, 2.03, 2.17, 2.36, 2.55, 2.74, 2.95, 3.16, 3.36, 3.57, 3.78],
+      }),
+      createAttack("高空坠地冲击伤害", AttackType.Falling, ElementType.Electro, {
+        atk: [1.86, 2.01, 2.17, 2.38, 2.53, 2.71, 2.95, 3.18, 3.42, 3.68, 3.94, 4.2, 4.46, 4.72],
+      }),
+      createAttack("炽热激情状态一段伤害", AttackType.Normal, ElementType.Electro, {
+        atk: [0.544, 0.585, 0.626, 0.68, 0.721, 0.762, 0.816, 0.871, 0.925, 0.979, 1.034, 1.088, 1.156, 1.224],
+      }),
+      createAttack("炽热激情状态二段伤害", AttackType.Normal, ElementType.Electro, {
+        atk: [0.52, 0.559, 0.598, 0.65, 0.689, 0.728, 0.78, 0.832, 0.884, 0.937, 0.985, 1.041, 1.106, 1.171],
+      }),
+      createAttack("炽热激情状态三段伤害", AttackType.Normal, ElementType.Electro, {
+        atk: [0.736, 0.791, 0.846, 0.92, 0.975, 1.03, 1.104, 1.177, 1.251, 1.325, 1.398, 1.472, 1.564, 1.656],
+      }),
+      createAttack("炽热激情状态重击伤害", AttackType.Strong, ElementType.Electro, {
+        atk: [0.926, 0.996, 1.065, 1.158, 1.227, 1.297, 1.39, 1.482, 1.575, 1.668, 1.76, 1.853, 1.969, 2.084],
+      }),
+      createAttack("炽热激情状态下坠期间伤害", AttackType.FallPeriod, ElementType.Electro, {
+        atk: [0.746, 0.807, 0.867, 0.954, 1.015, 1.084, 1.18, 1.275, 1.37, 1.474, 1.578, 1.683, 1.787, 1.891],
+      }),
+      createAttack("炽热激情状态低空坠地冲击伤害", AttackType.Falling, ElementType.Electro, {
+        atk: [2.24, 2.42, 2.6, 2.86, 3.04, 3.25, 3.54, 3.82, 4.11, 4.42, 4.73, 5.05, 5.36, 5.67],
+      }),
+      createAttack("炽热激情状态高空坠地冲击伤害", AttackType.Falling, ElementType.Electro, {
+        atk: [2.79, 3.02, 3.25, 3.57, 3.8, 4.06, 4.42, 4.78, 5.13, 5.52, 5.91, 6.3, 6.69, 7.08],
+      }),
+    ],
+    elementSkill: [
+      createAttack("突进伤害", AttackType.Skill, ElementType.Electro, {
+        atk: [0.745, 0.801, 0.857, 0.931, 0.987, 1.043, 1.117, 1.192, 1.266, 1.341, 1.415],
+      }),
+      createAttack("炽热激情状态突进伤害", AttackType.Skill, ElementType.Electro, {
+        atk: [1.064, 1.144, 1.224, 1.33, 1.41, 1.49, 1.596, 1.702, 1.809, 1.915, 2.022],
+      }),
+    ],
+    burstSkill: [
+      createAttack("飞踢伤害", AttackType.Burst, ElementType.Electro, {
+        atk: [3.454, 3.71, 3.969, 4.314, 4.573, 4.832, 5.177, 5.522, 5.867, 6.212, 6.557, 6.902, 7.334],
+      }),
+      createAttack("炽热激情状态飞踢伤害", AttackType.Burst, ElementType.Electro, {
+        atk: [5.752, 6.183, 6.615, 7.19, 7.621, 8.053, 8.628, 9.203, 9.778, 10.354, 10.929, 11.504, 12.223],
+      }),
+      createAttack("「大火山崩落」伤害", AttackType.Falling, ElementType.Electro, {
+        atk: [4.026, 4.328, 4.63, 5.033, 5.335, 5.637, 6.04, 6.442, 6.845, 7.248, 7.65, 8.053, 8.556],
+      }),
+    ],
+    otherSkill: [],
+    buffs: [
+      ...S_80_CRITAL_19P,
+      {
+        label: "连势，三重腾跃！",
+        describe:
+          "施放元素战技夜虹逐跃后，瓦雷莎获得「虹色坠击」，瓦雷莎进行下落攻击时，坠地冲击能额外造成50%攻击力的伤害；若瓦雷莎处于炽热激情状态，则坠地冲击改为能额外造成180%攻击力的伤害。",
+        effect: [
+          {
+            type: BuffType.FallingFixed,
+            getValue: (d, s) => {
+              return (d.baseATK + d.extraATK + d.extraATK_NT) * (s === 1 ? 1.8 : 0.5);
+            },
+            actionOn: ActionOn.External,
+          },
+        ],
+        enable: true,
+        stack: 1,
+        limit: 1,
+        stackType: "switch",
+        stackable: true,
+        stackText: "炽热激情状态",
+      },
+      {
+        label: "英雄，二度归来！",
+        describe:
+          "队伍中的附近的角色触发「夜魂迸发」时，瓦雷莎的攻击力提升35%，持续12秒。该效果至多叠加两层，每层独立计算持续时间。",
+        effect: [{ type: BuffType.ATKPrcent, getValue: (_, s) => s * 35 }],
+        enable: false,
+        stack: 2,
+        limit: 2,
+        stackable: true,
+      },
+      Constellation_Q_3,
+      Constellation_A_5,
+      {
+        label: "6命·正义英雄的凯旋",
+        describe: "瓦雷莎的下落攻击与元素爆发闪烈降临！的暴击率提升10%，暴击伤害提升100%。",
+        effect: [
+          { type: BuffType.FallingCritcal, getValue: () => 10 },
+          { type: BuffType.FallingCritcalHurt, getValue: () => 100 },
+          { type: BuffType.BurstCritcal, getValue: () => 10 },
+          { type: BuffType.BurstCritcalHurt, getValue: () => 100 },
+        ],
+        enable: true,
+        condition: ({ constellation }) => constellation >= 6,
+      },
+    ],
+  },
+  {
+    ...cha(10000110, "伊安珊", ElementType.Electro, WeaponType.Polearms)(Rarity.Four, 10657, 257, 638, 70)(
+      "UI_AvatarIcon_Iansan",
+      [
+        "UI_Talent_S_Iansan_01",
+        "UI_Talent_S_Iansan_02",
+        "UI_Talent_U_Iansan_01",
+        "UI_Talent_S_Iansan_03",
+        "UI_Talent_U_Iansan_02",
+        "UI_Talent_S_Iansan_04",
+      ],
+      ["普通攻击·负重锥击", "电掣雷驰", "力的三原理"]
+    ),
+    normalAttack: [
+      createAttack("一段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.47, 0.508, 0.546, 0.601, 0.639, 0.683, 0.743, 0.803, 0.863, 0.929, 0.994],
+      }),
+      createAttack("二段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.428, 0.462, 0.497, 0.547, 0.582, 0.622, 0.676, 0.731, 0.786, 0.845, 0.905],
+      }),
+      createAttack("三段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.644, 0.696, 0.749, 0.824, 0.876, 0.936, 1.018, 1.101, 1.183, 1.273, 1.363],
+      }),
+      createAttack("重击伤害", AttackType.Strong, ElementType.Physical, {
+        atk: [1.003, 1.084, 1.166, 1.283, 1.364, 1.458, 1.586, 1.714, 1.842, 1.982, 2.122],
+      }),
+      createAttack("雷霆飞缒伤害", AttackType.Strong, ElementType.Electro, {
+        atk: [0.842, 0.91, 0.979, 1.077, 1.145, 1.224, 1.331, 1.439, 1.547, 1.664, 1.782],
+      }),
+      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
+        atk: [0.639, 0.691, 0.743, 0.818, 0.87, 0.929, 1.011, 1.093, 1.175, 1.264, 1.353],
+      }),
+      createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+        atk: [1.28, 1.38, 1.49, 1.64, 1.74, 1.86, 2.02, 2.19, 2.35, 2.53, 2.71],
+      }),
+      createAttack("高空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+        atk: [1.6, 1.73, 1.86, 2.04, 2.17, 2.32, 2.53, 2.73, 2.93, 3.16, 3.38],
+      }),
+    ],
+    elementSkill: [
+      createAttack("技能伤害", AttackType.Skill, ElementType.Electro, {
+        atk: [2.864, 3.079, 3.294, 3.58, 3.795, 4.01, 4.296, 4.582, 4.869, 5.155, 5.442, 5.728, 6.086],
+      }),
+    ],
+    burstSkill: [
+      createAttack("技能伤害", AttackType.Burst, ElementType.Electro, {
+        atk: [4.304, 4.627, 4.95, 5.38, 5.703, 6.026, 6.456, 6.886, 7.317, 7.747, 8.178, 8.608, 9.146],
+      }),
+    ],
+    otherSkill: [
+      createAttack("「热身效应」治疗量", AttackType.Heal, ElementType.None, {
+        atk: [0.6],
+      }),
+    ],
+    buffs: [
+      ...A_80_ATK_24P,
+      {
+        label: "强化抗阻练习",
+        describe: "「雷霆飞缒」命中敌人后，伊安珊将获得「标准动作」效果，伊安珊的攻击力提升20%",
+        effect: [{ type: BuffType.ATKPrcent, getValue: () => 20 }],
+        enable: true,
+      },
+      {
+        label: "元素爆发·力的三原理",
+        describe: `
+        使队伍中自己的当前场上角色的攻击力提升<br />
+        ·若伊安珊的夜魂值少于42点，将基于伊安珊的夜魂值与攻击力，获得攻击力加成；<br />
+        ·若伊安珊拥有至少42点夜魂值，动能标示将切换至「炽烈声援！」模式，基于伊安珊的攻击力，获得更高的攻击力加成
+        `,
+        effect: [
+          {
+            type: BuffType.ATKFixed,
+            getValue: (d, s) => {
+              let l = [330, 370, 410, 450, 490, 530, 570, 610, 650, 690, 730, 770, 810];
+              return Math.min((d.baseATK + d.extraATK) * (s < 42 ? s * 0.005 : 0.27), l[d.burstLevel+d.burstLevelAdd])
+            },
+            actionOn: ActionOn.Indirect,
+            transform: true,
+          },
+        ],
+        enable: true,
+        stackable: true,
+        limit: 60,
+        stack: 54,
+        stackText: "夜魂值",
+      },
+      {
+        label: "偷懒是健身大忌！",
+        describe: "「标准动作」效果持续期间，若伊安珊处于队伍后台，还会使队伍中自己的当前场上角色的攻击力提升30%。",
+        effect: [{ type: BuffType.ATKPrcent, getValue: () => 30 }],
+        enable: false,
+        shareable: true,
+        target: BuffTarget.All,
+        condition: ({ constellation }) => constellation >= 2,
+      },
+      Constellation_E_3,
+      Constellation_Q_5,
+      {
+        label: "6命·「沃陆之邦」的训教",
+        describe: "伊安珊触发恢复夜魂值的效果时，若夜魂值恢复量溢出，将获得「极限发力」效果，使队伍中自己的当前场上角色造成的伤害提升25%。",
+        effect: [{ type: BuffType.GlobalPrcent, getValue: () => 25 }],
+        enable: false,
+        shareable: true,
+        target: BuffTarget.All,
+        condition: ({ constellation }) => constellation >= 6,
+      },
+    ],
+  },
   {
     ...cha(10000109, "梦见月瑞希", ElementType.Anemo, WeaponType.Magic)(Rarity.Five, 12736, 215, 757, 60)(
       "UI_AvatarIcon_Mizuki",
@@ -703,7 +937,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
               return s === 1 ? (data.baseATK + data.extraATK + data.extraATK_NT) * 0.6 : 0;
             },
             special: "Mavuika",
-            actionOn: ActionOn.Indirect
+            actionOn: ActionOn.Indirect,
           },
           {
             type: BuffType.StrongFixed,
@@ -711,14 +945,14 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
               return s === 1 ? (data.baseATK + data.extraATK + data.extraATK_NT) * 0.9 : 0;
             },
             special: "Mavuika",
-            actionOn: ActionOn.Indirect
+            actionOn: ActionOn.Indirect,
           },
           {
             type: BuffType.BurstFixed,
             getValue: (data, s) => {
               return s === 1 ? (data.baseATK + data.extraATK + data.extraATK_NT) * 1.2 : 0;
             },
-            actionOn: ActionOn.Indirect
+            actionOn: ActionOn.Indirect,
           },
         ],
         condition: ({ constellation }) => constellation >= 2,

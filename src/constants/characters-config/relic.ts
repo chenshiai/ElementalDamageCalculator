@@ -97,13 +97,13 @@ const relicLibrary: IRelicLibraryItem[] = [
   {
     name: "长夜之誓",
     itemType: ItemType.ITEM_RELIQUARY,
-    setNameTextMapHash: 17745379403,
+    setNameTextMapHash: 3761477451,
     equip: [
-      setReliquartStat(17745379403, "执灯人的誓词", "UI_RelicIcon_15038_4", EquipType.EQUIP_BRACER),
-      setReliquartStat(17745379403, "夜鸣莺的尾羽", "UI_RelicIcon_15038_2", EquipType.EQUIP_NECKLACE),
-      setReliquartStat(17745379403, "不死者的哀铃", "UI_RelicIcon_15038_5", EquipType.EQUIP_SHOES),
-      setReliquartStat(17745379403, "未吹响的号角", "UI_RelicIcon_15038_1", EquipType.EQUIP_RING),
-      setReliquartStat(17745379403, "被浸染的缨盔", "UI_RelicIcon_15038_3", EquipType.EQUIP_DRESS),
+      setReliquartStat(3761477451, "执灯人的誓词", "UI_RelicIcon_15039_4", EquipType.EQUIP_BRACER),
+      setReliquartStat(3761477451, "夜鸣莺的尾羽", "UI_RelicIcon_15039_2", EquipType.EQUIP_NECKLACE),
+      setReliquartStat(3761477451, "不死者的哀铃", "UI_RelicIcon_15039_5", EquipType.EQUIP_SHOES),
+      setReliquartStat(3761477451, "未吹响的号角", "UI_RelicIcon_15039_1", EquipType.EQUIP_RING),
+      setReliquartStat(3761477451, "被浸染的缨盔", "UI_RelicIcon_15039_3", EquipType.EQUIP_DRESS),
     ],
     suit2: "二件套：下落攻击造成的伤害提升25%。",
     suit4:
@@ -135,13 +135,13 @@ const relicLibrary: IRelicLibraryItem[] = [
   {
     name: "深廊终曲",
     itemType: ItemType.ITEM_RELIQUARY,
-    setNameTextMapHash: 17274579403,
+    setNameTextMapHash: 2177723555,
     equip: [
-      setReliquartStat(17274579403, "深廊的回奏之歌", "UI_RelicIcon_15038_4", EquipType.EQUIP_BRACER),
-      setReliquartStat(17274579403, "深廊的漫远之约", "UI_RelicIcon_15038_4", EquipType.EQUIP_NECKLACE),
-      setReliquartStat(17274579403, "深廊的湮落之刻", "UI_RelicIcon_15038_4", EquipType.EQUIP_SHOES),
-      setReliquartStat(17274579403, "深廊的饫赐之宴", "UI_RelicIcon_15038_4", EquipType.EQUIP_RING),
-      setReliquartStat(17274579403, "深廊的遂失之冕", "UI_RelicIcon_15038_4", EquipType.EQUIP_DRESS),
+      setReliquartStat(2177723555, "深廊的回奏之歌", "UI_RelicIcon_15040_4", EquipType.EQUIP_BRACER),
+      setReliquartStat(2177723555, "深廊的漫远之约", "UI_RelicIcon_15040_2", EquipType.EQUIP_NECKLACE),
+      setReliquartStat(2177723555, "深廊的湮落之刻", "UI_RelicIcon_15040_4", EquipType.EQUIP_SHOES),
+      setReliquartStat(2177723555, "深廊的饫赐之宴", "UI_RelicIcon_15040_1", EquipType.EQUIP_RING),
+      setReliquartStat(2177723555, "深廊的遂失之冕", "UI_RelicIcon_15040_3", EquipType.EQUIP_DRESS),
     ],
     suit2: "二件套：获得15%冰元素伤害加成。",
     suit4:
