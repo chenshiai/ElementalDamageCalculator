@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { Button, SwipeCell, Tab, Tabs } from "vant";
+import { Button, SwipeCell, Tab, Tabs, Icon } from "vant";
 import db from "@/utils/db";
 import { IUserSavedCalculationData, IPlayerInfoData, calDB, playerInfoDB } from "@/constants/db";
 import { ref, watchEffect, computed, onMounted, nextTick } from "vue";
 import { getEnkaUI } from "@/constants/characters-config/append-prop";
+import useImport from "@/utils/enka/useImport";
 
 const emit = defineEmits<{
   recalculation: [value: IUserSavedCalculationData];
@@ -23,6 +24,7 @@ onMounted(() => {
       pfps.value = res;
     });
 });
+
 const props = defineProps({
   showDataPopup: {
     default: false,
@@ -32,15 +34,18 @@ const localData = ref<IUserSavedCalculationData[]>([]);
 const playerData = ref<IPlayerInfoData[]>([]);
 const filterActive = ref(0);
 
+/** 读取本地数据库 */
+const getLocalData = () => {
+  db.getAll(calDB.storeName).then((res) => {
+    localData.value = res;
+  });
+  db.getAll(playerInfoDB.storeName).then((res) => {
+    playerData.value = res;
+  });
+};
+
 watchEffect(() => {
-  if (props.showDataPopup) {
-    db.getAll(calDB.storeName).then((res) => {
-      localData.value = res;
-    });
-    db.getAll(playerInfoDB.storeName).then((res) => {
-      playerData.value = res;
-    });
-  }
+  if (props.showDataPopup) getLocalData()
 });
 
 // 删除数据
@@ -91,6 +96,19 @@ const getStatValueText = (stat): string => {
   const shouldAppendPercent = percentProps.includes(stat.mainPropId || stat.appendPropId);
   return `+${statValue}${shouldAppendPercent ? "%" : ""}`;
 };
+
+/** 数据导入 */
+const { uid, waiting, importLoading, importGameInfo } = useImport();
+const update = (playerUid) => {
+  uid.value = playerUid;
+  if (waiting.value > 0 || importLoading.value) return;
+  importGameInfo().then(() => {
+    getLocalData()
+  });
+};
+const replayText = computed(() => {
+  return importLoading.value ? "读取中..." : waiting.value > 0 ? `${waiting.value}s后可再次获取` : "更新数据";
+});
 </script>
 
 <template>
@@ -102,10 +120,16 @@ const getStatValueText = (stat): string => {
     <Tab v-for="item in playerData" :key="item.uid" :title="item.nickname">
       <section class="player-info">
         <img class="namecard" :src="getEnkaUI(namecards[item.nameCardId].icon)" />
-        <img class="profile" :src="getEnkaUI(pfps[item.profilePicture.id].iconPath)" />
-        <div>
+        <div style="width: 126px; text-align: center; margin: 6px 0 6px">
+          <img class="profile" :src="getEnkaUI(pfps[item.profilePicture.id].iconPath)" />
+          <data class="uid">UID {{ item.uid }}</data>
+        </div>
+        <span class="replay-icon" @click="update(item.uid)">
+          {{ replayText }}
+        </span>
+        <div style="flex: 1">
           <data class="nickname">{{ item.nickname }}</data>
-          <data>{{ item.signature }}</data>
+          <data class="signature">{{ item.signature }}</data>
         </div>
       </section>
     </Tab>
@@ -127,9 +151,7 @@ const getStatValueText = (stat): string => {
               <div class="name">{{ getWeaponName(item.weaponEnkaId) }}</div>
               <div class="conts">精炼：{{ item.affix }}</div>
             </div>
-            <Button class="replay" square type="primary" @click.stop="recalculation(item)">
-              填入
-            </Button>
+            <Button class="replay" square type="primary" @click.stop="recalculation(item)">填入</Button>
           </div>
         </summary>
         <div class="second-row">
@@ -191,7 +213,18 @@ const getStatValueText = (stat): string => {
   right: 0;
   height: 92px;
 }
-
+.replay-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: 6px;
+  margin-right: 16px;
+  color: #fff;
+  text-shadow: 0 0 4px #000;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  padding: 0 6px;
+}
 .container {
   display: flex;
   flex-direction: column;
@@ -256,7 +289,6 @@ const getStatValueText = (stat): string => {
 .player-info data {
   display: block;
   color: #fff;
-  margin-left: 16px;
   text-shadow: 0 0 4px #000;
 }
 .player-info .namecard {
@@ -266,16 +298,25 @@ const getStatValueText = (stat): string => {
   z-index: -1;
 }
 .player-info .profile {
-  width: 60px;
+  width: 46px;
   border: solid 2px var(--light-text);
   border-radius: 50%;
-  margin: 16px;
   box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1);
 }
 .player-info .nickname {
-  font-size: 24px;
+  font-size: 20px;
   line-height: 30px;
   margin-top: 6px;
+}
+.player-info .signature {
+  font-size: 12px;
+  padding-right: 16px;
+}
+.player-info .uid {
+  font-size: 12px;
+  line-height: 20px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
 }
 .data-popup__collapse-item {
   border-bottom: 1px solid var(--border);

@@ -147,6 +147,7 @@ const showSetRelicStatPop = (equip: IRelicLibraryItemEquip) => {
 
 // 主词条变化后设置默认数值，并删除相同的副词条
 const mainStatChanged = (appendPropId: AppendProp) => {
+  if (!appendPropId) return;
   nextTick(() => {
     const stat = ReliceMainStats.find((item) => {
       return item.mainPropId === appendPropId;
@@ -164,28 +165,17 @@ const mainStatChanged = (appendPropId: AppendProp) => {
 
 // 副词条变化
 const substatsChange = (arr: AppendProp[]) => {
-  if (arr.length < setStatForm.value.reliquarySubstats.length) {
-    // 删除
-    let target = 0;
-    setStatForm.value.reliquarySubstats.forEach((current, index) => {
-      if (!arr.includes(current.appendPropId)) target = index;
+  setStatForm.value.reliquarySubstats = arr.map((appendPropId) => {
+    const stat = setStatForm.value.reliquarySubstats.find((item) => {
+      return item.appendPropId === appendPropId;
     });
-    setStatForm.value.reliquarySubstats.splice(target, 1);
-  } else {
-    // 添加
-    arr.forEach((appendPropId) => {
-      let skip = false;
-      setStatForm.value.reliquarySubstats.forEach((current) => {
-        // 若存在已选择的副词条，则跳过添加
-        if (appendPropId === current.appendPropId) skip = true;
-      });
-      !skip &&
-        setStatForm.value.reliquarySubstats.push({
+    return stat
+      ? stat
+      : {
           appendPropId,
           statValue: 0,
-        });
-    });
-  }
+        };
+  });
 };
 
 // 根据部位类型来获取主词条列表
@@ -257,8 +247,8 @@ const deleteLocalData = (item: IRelicItem) => {
           <span :class="showLocalRelics && 'active'">选择历史圣遗物</span>
         </div>
         <Search v-if="!showLocalRelics" v-model="searchRelic" placeholder="搜索圣遗物套装" />
-        <div v-else="showLocalRelics" style="text-align: center; line-height: 54px;">
-          {{ localRelics.length === 0 ? '该部位没有圣遗物存档' : 'Tips：点击添加，左滑删除' }}
+        <div v-else="showLocalRelics" style="text-align: center; line-height: 54px">
+          {{ localRelics.length === 0 ? "该部位没有圣遗物存档" : "Tips：点击添加，左滑删除" }}
         </div>
       </div>
       <div v-show="showLocalRelics" class="relic-select">
