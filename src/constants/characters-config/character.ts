@@ -13361,6 +13361,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         stackText: "夜魂加持",
         shareable: true,
         target: BuffTarget.All,
+        condition: ({ constellation }) => constellation >= 1,
       },
       Constellation_E_3,
       {
@@ -13368,9 +13369,21 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         describe: "施放元素爆发灼火燎原后，旅行者获得20%火元素伤害加成。",
         effect: [{ type: BuffType.PyroPrcent, getValue: () => 20 }],
         enable: false,
+        condition: ({ constellation }) => constellation >= 4,
       },
       Constellation_Q_5,
-
+      {
+        label: "6命·永燃的圣火",
+        describe: "处于夜魂加持状态下时，旅行者的普通攻击、重击与下落攻击将转化为具有夜魂性质且无法被附魔覆盖的火元素伤害，且这些攻击的暴击伤害提升40%。",
+        effect: [
+          { type: BuffType.Transform, getValue: () => EnchantingType[ElementType.Pyro] },
+          { type: BuffType.NormalCritcalHurt, getValue: () => 40 },
+          { type: BuffType.StrongCritcalHurt, getValue: () => 40 },
+          { type: BuffType.FallingCritcalHurt, getValue: () => 40 },
+        ],
+        enable: true,
+        condition: ({ constellation }) => constellation >= 6,
+      },
       {
         label: "对抗「古斯托特」，攻击力提升",
         describe: "对抗「古斯托特」化形的蚀灭的源焰之主时，焰烈之槛或灼火之槛存在期间，旅行者的攻击力提高40%。",
@@ -13487,6 +13500,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         stackText: "夜魂加持",
         shareable: true,
         target: BuffTarget.All,
+        condition: ({ constellation }) => constellation >= 1,
       },
       Constellation_E_3,
       {
@@ -13494,9 +13508,21 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         describe: "施放元素爆发灼火燎原后，旅行者获得20%火元素伤害加成。",
         effect: [{ type: BuffType.PyroPrcent, getValue: () => 20 }],
         enable: false,
+        condition: ({ constellation }) => constellation >= 4,
       },
       Constellation_Q_5,
-
+      {
+        label: "6命·永燃的圣火",
+        describe: "处于夜魂加持状态下时，旅行者的普通攻击、重击与下落攻击将转化为具有夜魂性质且无法被附魔覆盖的火元素伤害，且这些攻击的暴击伤害提升40%。",
+        effect: [
+          { type: BuffType.Transform, getValue: () => EnchantingType[ElementType.Pyro] },
+          { type: BuffType.NormalCritcalHurt, getValue: () => 40 },
+          { type: BuffType.StrongCritcalHurt, getValue: () => 40 },
+          { type: BuffType.FallingCritcalHurt, getValue: () => 40 },
+        ],
+        enable: true,
+        condition: ({ constellation }) => constellation >= 6,
+      },
       {
         label: "对抗「古斯托特」，攻击力提升",
         describe: "对抗「古斯托特」化形的蚀灭的源焰之主时，焰烈之槛或灼火之槛存在期间，旅行者的攻击力提高40%。",

@@ -57,7 +57,7 @@ async function importData(avatarInfoList, uid) {
   const list = [];
   for (const element of avatarInfoList) {
     const name = await saveCalculationResult(element, uid);
-    list.push(name);
+    name && list.push(name);
   }
   return list;
 }
@@ -67,6 +67,7 @@ const saveCalculationResult = async (enkaData: EnkaAvatarInfo, uid: string) => {
   const cha = Character.find((item) => {
     return item.enkaId === enkaData.avatarId;
   });
+  if (!cha) return null;
   // 获取角色增益
   const { characterBuffs } = useCharacterInfo(cha);
 
