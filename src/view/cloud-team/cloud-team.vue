@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import { Popup, Icon, showImagePreview, Field, showNotify, Button } from "vant";
+import { Popup, Icon, showImagePreview } from "vant";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 
@@ -18,8 +18,6 @@ import useRelicInfo from "../character-calculation/modules/relic-info";
 import useCharacterInfo from "../character-calculation/modules/chararcter-info";
 import useWeanponInfo from "../character-calculation/modules/weapon-info";
 import { getBackGroundByElement } from "@/utils/get-color";
-import importData from "@/utils/enka/import";
-import request from "@/request";
 
 /** @module 面板数据选择 */
 const show = ref(false);
@@ -61,9 +59,11 @@ onMounted(() => {
   }
 });
 
+// 获取共享的buff
 const getShareBuff = (buffs: IBuffBase[], result: IUserSavedCalculationData): IBuffExtra[] => {
   return buffs.filter((buff) => buff.shareable).map((buff) => deconstructionBuff(buff, result));
 };
+// 将角色加入队伍的处理
 const characterJoinTeam = (result: IUserSavedCalculationData, index: number) => {
   const map = new Map();
   const { characterInfo, characterBuffs } = useCharacterInfo(
@@ -139,53 +139,6 @@ const getRelics = (relicList: string) => {
 const handleImagePreview = () => {
   showImagePreview(["https://saomdpb.com/IMG_1457.PNG"]);
 };
-
-/** @module 数据导入 */
-const uid = ref("");
-const waiting = ref(0);
-const interval = ref(null);
-const importLoading = ref(false);
-const importGameInfo = () => {
-  if (!uid.value || waiting.value > 0) return;
-  importLoading.value = true;
-  request
-    .get(`/player-info/uid/${uid.value}`)
-    .then((res) => {
-      if (res.data.data) {
-        const avatarInfoList = res.data.data.avatarInfoList;
-        if (avatarInfoList) {
-          importData(res.data.data.avatarInfoList).then((nameList) => {
-            showNotify({
-              type: "success",
-              message: `${nameList}，导入成功`,
-            });
-          });
-        } else {
-          showNotify({
-            type: "warning",
-            message: res.data.message,
-          });
-        }
-        waiting.value = 30;
-        interval.value = setInterval(() => {
-          if (waiting.value > 0) {
-            waiting.value = waiting.value - 1;
-          } else {
-            clearInterval(interval.value);
-          }
-        }, 1000);
-      } else {
-        showNotify({
-          type: "danger",
-          message: res.data.message,
-        });
-      }
-    })
-    .finally(() => {
-      importLoading.value = false;
-    });
-  uid.value = "";
-};
 </script>
 
 <template>
@@ -236,13 +189,6 @@ const importGameInfo = () => {
     </div>
   </div>
   <div class="show-click" @click="toCreateData">去创建角色数据</div>
-  <div v-if="0">
-    <div class="data-panel__title">游戏内数据导入</div>
-    <Field v-model="uid" label="UID" placeholder="输入UID" />
-    <Button class="show-click" @click="importGameInfo" :disabled="waiting > 0" :loading="importLoading">
-      <span>{{ waiting > 0 ? `${waiting}s后可再次获取` : "导入" }}</span>
-    </Button>
-  </div>
   <div>
     使用说明：
     <p>

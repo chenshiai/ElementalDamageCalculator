@@ -1,9 +1,15 @@
 <template>
-  <span class="card-svg" v-html="crihSvg"></span>
-  <span class="card-svg" v-html="crihSvg"></span>
-  <span class="card-svg" v-html="crihSvg"></span>
-  <span class="card-svg" v-html="crihSvg"></span>
+  <Icon 
+    v-for="i in 4" 
+    :key="i" 
+    class="card-svg" 
+    :icon="crih"
+    fill="#FDFBF6"
+    stroke="#FDFBF6"
+  />
 </template>
 <script setup>
-import { crihSvg } from "@/constants/svg.js";
+import Icon from "@/component/Icon.vue";
+import allImages from "@/constants/imageConstant";
+const { crih } = allImages;
 </script>

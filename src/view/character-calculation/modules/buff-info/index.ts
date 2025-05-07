@@ -51,6 +51,7 @@ const useBuffInfo = () => {
       }
     }
 
+    // 生成角色的共享buff
     teamList.forEach((item) => {
       if (item) {
         item.buffMap.forEach((buffList, name) => {

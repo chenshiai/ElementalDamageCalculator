@@ -56,6 +56,209 @@ const a = {
 // .replaceAll("%", '').replaceAll(/[\u4e00-\u9fff]+/g, "").replaceAll("\t",",").split(",").map(i=>Math.round(i*100)/10000)
 export const Character: (ICharacterInfo & Record<any, any>)[] = [
   {
+    ...cha(1000000, "爱可菲", ElementType.Cryo, WeaponType.Polearms)(Rarity.Five, 13348, 370, 732, 60)(
+      "UI_AvatarIcon_Escoffier",
+      [
+        "UI_Talent_S_Escoffier_01",
+        "UI_Talent_S_Escoffier_02",
+        "UI_Talent_U_Escoffier_01",
+        "UI_Talent_S_Escoffier_03",
+        "UI_Talent_U_Escoffier_02",
+        "UI_Talent_S_Escoffier_04",
+      ],
+      ["普通攻击·后厨手艺", "低温烹饪", "花刀技法"]
+    ),
+    normalAttack: [
+      createAttack("一段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.516, 0.557, 0.599, 0.659, 0.701, 0.749, 0.815, 0.881, 0.947, 1.019, 1.091],
+      }),
+      createAttack("二段伤害", AttackType.Normal, ElementType.Physical, {
+        atk: [0.476, 0.515, 0.559, 0.609, 0.647, 0.692, 0.753, 0.814, 0.874, 0.941, 1.007],
+      }),
+      createAttack("三段伤害·1", AttackType.Normal, ElementType.Physical, {
+        atk: [0.33, 0.357, 0.384, 0.422, 0.449, 0.48, 0.522, 0.564, 0.606, 0.652, 0.698],
+      }),
+      createAttack("三段伤害·2", AttackType.Normal, ElementType.Physical, {
+        atk: [0.403, 0.436, 0.469, 0.516, 0.549, 0.586, 0.638, 0.689, 0.741, 0.797, 0.854],
+      }),
+      createAttack("重击伤害", AttackType.Strong, ElementType.Physical, {
+        atk: [1.154, 1.248, 1.342, 1.476, 1.57, 1.678, 1.825, 1.973, 2.12, 2.281, 2.442],
+      }),
+      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
+        atk: [0.639, 0.691, 0.743, 0.818, 0.87, 0.929, 1.011, 1.093, 1.175, 1.264, 1.353],
+      }),
+      createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+        atk: [1.28, 1.38, 1.48, 1.64, 1.74, 1.86, 2.02, 2.19, 2.35, 2.53, 2.71],
+      }),
+      createAttack("高空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+        atk: [1.6, 1.73, 1.86, 2.04, 2.17, 2.32, 2.53, 2.73, 2.93, 3.16, 3.38],
+      }),
+    ],
+    elementSkill: [
+      createAttack("技能伤害", AttackType.Skill, ElementType.Cryo, {
+        atk: [0.504, 0.542, 0.58, 0.63, 0.668, 0.706, 0.756, 0.806, 0.857, 0.907, 0.958, 1.008, 1.071],
+      }),
+      createAttack("冻霜芭菲伤害", AttackType.Skill, ElementType.Cryo, {
+        atk: [1.2, 1.29, 1.38, 1.5, 1.59, 1.68, 1.8, 1.92, 2.04, 2.16, 2.28, 2.4, 2.55],
+      }),
+      createAttack("流涌之刃伤害", AttackType.Other, ElementType.Cryo, {
+        atk: [0.336, 0.361, 0.386, 0.42, 0.445, 0.47, 0.504, 0.538, 0.571, 0.605, 0.638, 0.672, 0.714],
+      }),
+    ],
+    burstSkill: [
+      createAttack("技能伤害", AttackType.Burst, ElementType.Cryo, {
+        atk: [5.928, 6.373, 6.817, 7.41, 7.855, 8.299, 8.892, 9.485, 10.078, 10.67, 11.263, 11.856, 12.597],
+      }),
+      createAttack("治疗量", AttackType.Heal, ElementType.None, {
+        atk: [1.72, 1.849, 1.978, 2.15, 2.279, 2.408, 2.58, 2.753, 2.925, 3.097, 3.226, 3.441, 3.656],
+        fixed: [1079, 1186, 1303, 1429, 1564, 1708, 1861, 2022, 2193, 2373, 2562, 2759, 2966],
+      }),
+    ],
+    otherSkill: [
+      createAttack("美食胜过良药", AttackType.Heal, ElementType.None, {
+        atk: [1.3824],
+      }),
+      createAttack("6命·特级冻霜芭菲伤害", AttackType.Skill, ElementType.Cryo, {
+        atk: [5],
+      }),
+    ],
+    buffs: [
+      ...S_80_CRITAL_19P,
+      {
+        label: "灵感浸入调味",
+        describe:
+          "当队伍中存在1/2/3/4名水元素或冰元素角色时，爱可菲的元素战技低温烹饪或元素爆发花刀技法命中敌人时，将使该敌人的水元素抗性与冰元素抗性降低5%/10%/15%/55%。",
+        stackable: true,
+        shareable: true,
+        limit: 4,
+        stack: 4,
+        stackText: "水/冰元素角色数量",
+        effect: [
+          {
+            type: BuffType.EnemyCryoResistance,
+            getValue: (_, s) => {
+              return [-5, -10, -15, -55][s - 1] || 0;
+            },
+          },
+        ],
+        enable: true,
+        target: BuffTarget.Enemy,
+      },
+      {
+        label: "1命·味蕾绽放的餐前旋舞",
+        describe:
+          "队伍中4名角色的元素类型均为水元素或冰元素时，爱可菲施放元素战技低温烹饪或元素爆发花刀技法后的15秒内，队伍中附近的所有角色造成冰元素伤害时的暴击伤害提升60%。",
+        shareable: true,
+        effect: [
+          {
+            type: BuffType.CryoCritcalHurt,
+            getValue: () => 60,
+          },
+        ],
+        enable: true,
+        target: BuffTarget.All,
+        condition: ({ constellation }) => constellation >= 1, 
+      },
+      {
+        label: "2命·鲜香味腴的炖煮艺术",
+        describe:
+          "爱可菲以低温冷藏模式启动厨艺机关时，将获得「现制名肴」效果，持续15秒：持续期间，爱可菲获得5层「冷煮」，除爱可菲外的附近的当前场上角色普通攻击、重击、下落攻击、元素战技和元素爆发对敌人造成冰元素伤害时，将消耗1层「冷煮」，提升造成的伤害，提升值相当于爱可菲攻击力的240%。",
+        shareable: true,
+        effect: [
+          {
+            type: BuffType.CryoFixed,
+            getValue: (d) => (d.baseATK + d.extraATK + d.extraATK_NT) * 2.4,
+            actionOn: ActionOn.External,
+          },
+        ],
+        enable: true,
+        target: BuffTarget.Other,
+        condition: ({ constellation }) => constellation >= 2, 
+      },
+      Constellation_E_3,
+      Constellation_Q_5,
+    ],
+  },
+  {
+    ...cha(1000000, "伊法", ElementType.Anemo, WeaponType.Magic)(Rarity.Four, 10081, 201, 605, 60)(
+      "UI_AvatarIcon_Ifa",
+      [
+        "UI_Talent_S_Ifa_01",
+        "UI_Talent_S_Ifa_02",
+        "UI_Talent_U_Ifa_01",
+        "UI_Talent_S_Ifa_03",
+        "UI_Talent_U_Ifa_02",
+        "UI_Talent_S_Ifa_04",
+      ],
+      ["普通攻击·祛风妙仪", "空天疾护", "复合镇静域"]
+    ),
+    normalAttack: [
+      createAttack("一段伤害", AttackType.Normal, ElementType.Anemo, {
+        atk: [0.536, 0.576, 0.616, 0.67, 0.71, 0.751, 0.804, 0.858, 0.911, 0.965, 1.018],
+      }),
+      createAttack("二段伤害", AttackType.Normal, ElementType.Anemo, {
+        atk: [0.475, 0.51, 0.546, 0.593, 0.629, 0.665, 0.712, 0.759, 0.807, 0.854, 0.902],
+      }),
+      createAttack("三段伤害", AttackType.Normal, ElementType.Anemo, {
+        atk: [0.748, 0.804, 0.86, 0.934, 0.991, 1.047, 1.121, 1.196, 1.271, 1.346, 1.42],
+      }),
+      createAttack("重击伤害", AttackType.Strong, ElementType.Anemo, {
+        atk: [1.47, 1.581, 1.691, 1.838, 1.948, 2.059, 2.206, 2.353, 2.5, 2.647, 2.794],
+      }),
+      createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Anemo, {
+        atk: [0.568, 0.615, 0.661, 0.727, 0.773, 0.826, 0.899, 0.971, 1.044, 1.123, 1.203],
+      }),
+      createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Anemo, {
+        atk: [1.14, 1.23, 1.32, 1.45, 1.55, 1.65, 1.8, 1.94, 2.09, 2.25, 2.4],
+      }),
+      createAttack("高空坠地冲击伤害", AttackType.Falling, ElementType.Anemo, {
+        atk: [1.42, 1.53, 1.65, 1.82, 1.93, 2.06, 2.24, 2.43, 2.61, 2.81, 3],
+      }),
+    ],
+    elementSkill: [
+      createAttack("秘药弹伤害", AttackType.Normal, ElementType.Anemo, {
+        atk: [1.334, 1.434, 1.534, 1.667, 1.767, 1.867, 2, 2.134, 2.267, 2.4, 2.534, 2.667, 2.834],
+      }),
+      createAttack("秘药弹命中治疗量", AttackType.Heal, ElementType.None, {
+        em: [0.202, 0.217, 0.232, 0.252, 0.267, 0.282, 0.302, 0.323, 0.343, 0.363, 0.383, 0.403, 0.428],
+        fixed: [48.1, 53, 58.2, 63.8, 69.8, 76.2, 83.1, 90.3, 97.9, 105.9, 114.4, 123.2, 132.4],
+      }),
+    ],
+    burstSkill: [
+      createAttack("技能伤害", AttackType.Burst, ElementType.Anemo, {
+        atk: [5.085, 5.466, 5.848, 6.356, 6.737, 7.119, 7.627, 8.136, 8.644, 9.153, 9.661, 10.17, 10.805],
+      }),
+      createAttack("镇定标记伤害", AttackType.Burst, ElementType.Anemo, {
+        atk: [1.09, 1.171, 1.253, 1.362, 1.444, 1.525, 1.634, 1.743, 1.852, 1.961, 2.07, 2.179, 2.315],
+      }),
+    ],
+    otherSkill: [
+      createAttack("6命·秘药弹伤害", AttackType.Normal, ElementType.Anemo, {
+        atk: [1.2],
+      }),
+    ],
+    buffs: [
+      ...A_80_MYSTERY_96,
+      {
+        label: "互助救援协议",
+        describe: "队伍中的附近的角色触发「夜魂迸发」时，伊法的元素精通提升80点。",
+        effect: [{ type: BuffType.MysteryFixed, getValue: () => 80 }],
+        enable: true,
+        target: BuffTarget.Self,
+      },
+      Constellation_E_3,
+      {
+        label: "6命·糜烂应体的置换",
+        describe: "施放元素爆发复合镇静域后，伊法的元素精通提升100点。",
+        effect: [{ type: BuffType.MysteryFixed, getValue: () => 100 }],
+        enable: true,
+        condition: ({ constellation }) => constellation >= 4,
+        target: BuffTarget.Self,
+      },
+      Constellation_Q_5,
+    ],
+  },
+  {
     ...cha(10000111, "瓦雷莎", ElementType.Electro, WeaponType.Magic)(Rarity.Five, 12699, 356, 782, 70)(
       "UI_AvatarIcon_Varesa",
       [
@@ -254,7 +457,10 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
             type: BuffType.ATKFixed,
             getValue: (d, s) => {
               let l = [330, 370, 410, 450, 490, 530, 570, 610, 650, 690, 730, 770, 810];
-              return Math.min((d.baseATK + d.extraATK) * (s < 42 ? s * 0.005 : 0.27), l[d.burstLevel+d.burstLevelAdd])
+              return Math.min(
+                (d.baseATK + d.extraATK) * (s < 42 ? s * 0.005 : 0.27),
+                l[d.burstLevel + d.burstLevelAdd]
+              );
             },
             actionOn: ActionOn.Indirect,
             transform: true,
@@ -279,7 +485,8 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       Constellation_Q_5,
       {
         label: "6命·「沃陆之邦」的训教",
-        describe: "伊安珊触发恢复夜魂值的效果时，若夜魂值恢复量溢出，将获得「极限发力」效果，使队伍中自己的当前场上角色造成的伤害提升25%。",
+        describe:
+          "伊安珊触发恢复夜魂值的效果时，若夜魂值恢复量溢出，将获得「极限发力」效果，使队伍中自己的当前场上角色造成的伤害提升25%。",
         effect: [{ type: BuffType.GlobalPrcent, getValue: () => 25 }],
         enable: false,
         shareable: true,
@@ -604,13 +811,13 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
           {
             type: BuffType.SkillFixed,
             getValue: (data) => (data.elementalMystery + data.elementalMystery_NT) * 0.9,
-            actionOn: ActionOn.Indirect,
+            actionOn: ActionOn.External,
             special: "Citlali",
           },
           {
             type: BuffType.BurstFixed,
             getValue: (data) => (data.elementalMystery + data.elementalMystery_NT) * 12,
-            actionOn: ActionOn.Indirect,
+            actionOn: ActionOn.External,
             special: "Citlali",
           },
         ],
@@ -623,27 +830,27 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
           {
             type: BuffType.NormalFixed,
             getValue: (data) => (data.elementalMystery + data.elementalMystery_NT) * 2,
-            actionOn: ActionOn.Indirect,
+            actionOn: ActionOn.External,
           },
           {
             type: BuffType.StrongFixed,
             getValue: (data) => (data.elementalMystery + data.elementalMystery_NT) * 2,
-            actionOn: ActionOn.Indirect,
+            actionOn: ActionOn.External,
           },
           {
             type: BuffType.FallingFixed,
             getValue: (data) => (data.elementalMystery + data.elementalMystery_NT) * 2,
-            actionOn: ActionOn.Indirect,
+            actionOn: ActionOn.External,
           },
           {
             type: BuffType.SkillFixed,
             getValue: (data) => (data.elementalMystery + data.elementalMystery_NT) * 2,
-            actionOn: ActionOn.Indirect,
+            actionOn: ActionOn.External,
           },
           {
             type: BuffType.BurstFixed,
             getValue: (data) => (data.elementalMystery + data.elementalMystery_NT) * 2,
-            actionOn: ActionOn.Indirect,
+            actionOn: ActionOn.External,
           },
         ],
         condition: ({ constellation }) => constellation >= 1,
@@ -879,7 +1086,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
               ][data.burstLevel + data.burstLevelAdd - 1];
               return sk * (data.baseATK + data.extraATK + data.extraATK_NT) * s;
             },
-            actionOn: ActionOn.Indirect,
+            actionOn: ActionOn.External,
           },
           {
             type: BuffType.NormalFixed,
@@ -889,7 +1096,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
               ][data.burstLevel + data.burstLevelAdd - 1];
               return sk * (data.baseATK + data.extraATK + data.extraATK_NT) * s;
             },
-            actionOn: ActionOn.Indirect,
+            actionOn: ActionOn.External,
             special: "Mavuika",
           },
           {
@@ -901,7 +1108,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
                 ] * 2;
               return sk * (data.baseATK + data.extraATK + data.extraATK_NT) * s;
             },
-            actionOn: ActionOn.Indirect,
+            actionOn: ActionOn.External,
             special: "Mavuika",
           },
         ],
@@ -937,7 +1144,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
               return s === 1 ? (data.baseATK + data.extraATK + data.extraATK_NT) * 0.6 : 0;
             },
             special: "Mavuika",
-            actionOn: ActionOn.Indirect,
+            actionOn: ActionOn.External,
           },
           {
             type: BuffType.StrongFixed,
@@ -945,14 +1152,14 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
               return s === 1 ? (data.baseATK + data.extraATK + data.extraATK_NT) * 0.9 : 0;
             },
             special: "Mavuika",
-            actionOn: ActionOn.Indirect,
+            actionOn: ActionOn.External,
           },
           {
             type: BuffType.BurstFixed,
             getValue: (data, s) => {
               return s === 1 ? (data.baseATK + data.extraATK + data.extraATK_NT) * 1.2 : 0;
             },
-            actionOn: ActionOn.Indirect,
+            actionOn: ActionOn.External,
           },
         ],
         condition: ({ constellation }) => constellation >= 2,
@@ -2869,17 +3076,17 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
           {
             type: BuffType.NormalFixed,
             getValue: (data) => (data.baseHP + data.extraHP + data.extraHP_NT) * 0.43,
-            actionOn: ActionOn.Indirect,
+            actionOn: ActionOn.External,
           },
           {
             type: BuffType.FallingFixed,
             getValue: (data) => (data.baseHP + data.extraHP + data.extraHP_NT) * 0.43,
-            actionOn: ActionOn.Indirect,
+            actionOn: ActionOn.External,
           },
           {
             type: BuffType.StrongFixed,
             getValue: (data) => (data.baseHP + data.extraHP + data.extraHP_NT) * 0.43,
-            actionOn: ActionOn.Indirect,
+            actionOn: ActionOn.External,
           },
           { type: BuffType.Transform, getValue: () => EnchantingType[ElementType.Hydro] },
         ],
@@ -3215,7 +3422,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
               ];
               return a * s * (data.baseATK + data.extraATK + data.extraATK_NT);
             },
-            actionOn: ActionOn.Indirect,
+            actionOn: ActionOn.External,
           },
         ],
         enable: true,
@@ -3234,7 +3441,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
             getValue: (data) => {
               return 0.8 * (data.baseATK + data.extraATK + data.extraATK_NT);
             },
-            actionOn: ActionOn.Indirect,
+            actionOn: ActionOn.External,
             special: "Liney",
           },
         ],
@@ -3405,7 +3612,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
           {
             type: BuffType.BurstFixed,
             getValue: (data) => (data.baseHP + data.extraHP + data.extraHP_NT) * 0.08,
-            actionOn: ActionOn.Indirect,
+            actionOn: ActionOn.External,
           },
         ],
         enable: true,
@@ -3495,12 +3702,12 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
           {
             type: BuffType.SkillFixed,
             getValue: (data) => (data.baseHP + data.extraHP + data.extraHP_NT) * 0.036,
-            actionOn: ActionOn.Indirect,
+            actionOn: ActionOn.External,
           },
           {
             type: BuffType.BurstFixed,
             getValue: (data) => (data.baseHP + data.extraHP + data.extraHP_NT) * 0.06,
-            actionOn: ActionOn.Indirect,
+            actionOn: ActionOn.External,
           },
         ],
         enable: true,
@@ -4323,13 +4530,13 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
             type: BuffType.NormalFixed,
             getValue: (data) => (data.elementalMystery + data.elementalMystery_NT) * 1.5,
             special: "Cyno",
-            actionOn: ActionOn.Indirect,
+            actionOn: ActionOn.External,
           },
           {
             type: BuffType.SkillFixed,
             getValue: (data) => (data.elementalMystery + data.elementalMystery_NT) * 2.5,
             special: "Cyno2",
-            actionOn: ActionOn.Indirect,
+            actionOn: ActionOn.External,
           },
         ],
         enable: true,
@@ -4736,7 +4943,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
               return (data.baseHP + data.extraHP + data.extraHP_NT) * a * s;
             },
             special: "Ayato",
-            actionOn: ActionOn.Indirect,
+            actionOn: ActionOn.External,
           },
         ],
         enable: true,
@@ -4974,7 +5181,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
               ];
               return (data.baseATK + data.extraATK + data.extraATK_NT) * a;
             },
-            actionOn: ActionOn.Indirect,
+            actionOn: ActionOn.External,
           },
         ],
         enable: false,
@@ -5160,7 +5367,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
             getValue: (data) => {
               return (data.baseDEF + data.extraDEF + data.extraDEF_NT) * 0.35;
             },
-            actionOn: ActionOn.Indirect,
+            actionOn: ActionOn.External,
             special: "Itto",
           },
         ],
@@ -5275,7 +5482,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
               ];
               return (data.baseHP + data.extraHP + data.extraHP_NT) * a;
             },
-            actionOn: ActionOn.Indirect,
+            actionOn: ActionOn.External,
           },
           {
             type: BuffType.StrongFixed,
@@ -5285,7 +5492,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
               ];
               return (data.baseHP + data.extraHP + data.extraHP_NT) * a;
             },
-            actionOn: ActionOn.Indirect,
+            actionOn: ActionOn.External,
           },
           {
             type: BuffType.SkillFixed,
@@ -5295,7 +5502,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
               ];
               return (data.baseHP + data.extraHP + data.extraHP_NT) * a;
             },
-            actionOn: ActionOn.Indirect,
+            actionOn: ActionOn.External,
           },
         ],
         enable: false,
@@ -5309,14 +5516,14 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
             getValue: (data) => {
               return ((data.baseHP + data.extraHP + data.extraHP_NT) * data.healAdd * 0.15) / 100;
             },
-            actionOn: ActionOn.Indirect,
+            actionOn: ActionOn.External,
           },
           {
             type: BuffType.StrongFixed,
             getValue: (data) => {
               return ((data.baseHP + data.extraHP + data.extraHP_NT) * data.healAdd * 0.15) / 100;
             },
-            actionOn: ActionOn.Indirect,
+            actionOn: ActionOn.External,
           },
         ],
         enable: false,
@@ -5693,7 +5900,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
                 (data.baseATK + data.extraATK + data.extraATK_NT)
               );
             },
-            actionOn: ActionOn.Indirect,
+            actionOn: ActionOn.External,
             special: "Shougun",
           },
           {
@@ -5708,7 +5915,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
                 (data.baseATK + data.extraATK + data.extraATK_NT)
               );
             },
-            actionOn: ActionOn.Indirect,
+            actionOn: ActionOn.External,
             special: "Shougun2",
           },
         ],
@@ -6420,10 +6627,11 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         label: "2命·最不安神晴又复雨",
         describe: "血梅香造成的伤害提高，提高值相当于效果附加时胡桃生命值上限的10%",
         effect: [
-          { type: BuffType.SkillFixed, getValue: (data) => (data.baseHP + data.extraHP + data.extraHP_NT) * 0.1 },
+          { type: BuffType.SkillFixed, getValue: (data) => (data.baseHP + data.extraHP + data.extraHP_NT) * 0.1, actionOn: ActionOn.External },
         ],
         enable: true,
         condition: ({ constellation }) => constellation >= 2,
+      
       },
       Constellation_E_3,
       {
@@ -6769,6 +6977,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
           {
             type: BuffType.BurstFixed,
             getValue: (data, s) => (data.baseDEF + data.extraDEF + data.extraDEF_NT) * 0.3 * s,
+            actionOn: ActionOn.External,  
           },
         ],
         enable: false,
@@ -9121,7 +9330,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         label: "七窟遗智",
         describe:
           "处于抟风秘道的「祈风之赐」效果下的角色的普通攻击、重击、下落攻击、元素战技或元素爆发对敌人造成风元素伤害时，会产生烈风护持效果：基于珐露珊基础攻击力的32%，提高造成的伤害",
-        effect: [{ type: BuffType.AnemoFixed, getValue: (data) => data.baseATK * 0.32, actionOn: ActionOn.Indirect }],
+        effect: [{ type: BuffType.AnemoFixed, getValue: (data) => data.baseATK * 0.32, actionOn: ActionOn.External }],
         enable: false,
         shareable: true,
       },
@@ -10436,6 +10645,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
                 100
               );
             },
+            actionOn: ActionOn.External
           },
         ],
       },
@@ -10756,6 +10966,8 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
             getValue: (data) => {
               return (data.baseDEF + data.extraDEF) * 0.5;
             },
+            actionOn: ActionOn.Indirect,
+            transform: true,
           },
         ],
         enable: false,
@@ -11076,7 +11288,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         label: "2命·圣裁影羽",
         describe: "施放夜巡影翼时，能额外造成200%攻击力的伤害",
         effect: [
-          { type: BuffType.SkillFixed, getValue: (data) => (data.baseATK + data.extraATK + data.extraATK_NT) * 2 },
+          { type: BuffType.SkillFixed, getValue: (data) => (data.baseATK + data.extraATK + data.extraATK_NT) * 2, actionOn: ActionOn.External },
         ],
         enable: true,
         condition: ({ constellation }) => constellation >= 2,
@@ -13374,7 +13586,8 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       Constellation_Q_5,
       {
         label: "6命·永燃的圣火",
-        describe: "处于夜魂加持状态下时，旅行者的普通攻击、重击与下落攻击将转化为具有夜魂性质且无法被附魔覆盖的火元素伤害，且这些攻击的暴击伤害提升40%。",
+        describe:
+          "处于夜魂加持状态下时，旅行者的普通攻击、重击与下落攻击将转化为具有夜魂性质且无法被附魔覆盖的火元素伤害，且这些攻击的暴击伤害提升40%。",
         effect: [
           { type: BuffType.Transform, getValue: () => EnchantingType[ElementType.Pyro] },
           { type: BuffType.NormalCritcalHurt, getValue: () => 40 },
@@ -13513,7 +13726,8 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       Constellation_Q_5,
       {
         label: "6命·永燃的圣火",
-        describe: "处于夜魂加持状态下时，旅行者的普通攻击、重击与下落攻击将转化为具有夜魂性质且无法被附魔覆盖的火元素伤害，且这些攻击的暴击伤害提升40%。",
+        describe:
+          "处于夜魂加持状态下时，旅行者的普通攻击、重击与下落攻击将转化为具有夜魂性质且无法被附魔覆盖的火元素伤害，且这些攻击的暴击伤害提升40%。",
         effect: [
           { type: BuffType.Transform, getValue: () => EnchantingType[ElementType.Pyro] },
           { type: BuffType.NormalCritcalHurt, getValue: () => 40 },

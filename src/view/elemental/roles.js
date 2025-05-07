@@ -44,3 +44,14 @@ export function useMizuki() {
     mizukiGain
   }
 }
+
+export function useYiFa() {
+  const yehun = ref(0);
+  const yehunGain = computed(() => {
+    return yehun.value * 1.5;
+  })
+  return {
+    yehun,
+    yehunGain
+  }
+}

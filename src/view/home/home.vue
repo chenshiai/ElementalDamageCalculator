@@ -87,8 +87,7 @@ import FourSvg from './svg.vue'
 </style>
 
 <style>
-.card-svg svg {
-  color: var(--page-bg);
+.card-svg {
   height: 12px;
   display: block;
   padding: 12px 12px 0 0;

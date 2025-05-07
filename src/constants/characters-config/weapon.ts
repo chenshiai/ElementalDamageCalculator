@@ -50,6 +50,87 @@ createWeapon(
 export const Weapons: IWeaponInfo[] = [
   createWeapon(
     {
+      name: "香韵奏者",
+      enkaId: 12513,
+      weaponType: WeaponType.Polearms,
+      icon: getEnkaUI("UI_EquipIcon_Catalyst_VaresaTransformer_Awaken"),
+      baseAtk: 608,
+      rarity: Rarity.Five,
+      appendPropId: AppendProp.CRITICAL_HURT,
+      statValue: 66.2,
+    },
+    (affix = 1) => {
+      let a = [12, 15, 18, 21, 24][affix - 1] + "%";
+      let b = [32, 40, 48, 56, 64][affix - 1] + "%";
+      return {
+        title: "百味交响",
+        text: highlight`攻击力提升${a}；当装备此武器的角色处于队伍后台时，攻击力额外提升${a}。进行治疗后，装备者与受到治疗的角色会获得「甘美回奏」的效果，攻击力提升${b}，持续3秒。装备者处于队伍后台时，依然能触发上述效果。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [12, 15, 18, 21, 24][affix - 1];
+      let b = [32, 40, 48, 56, 64][affix - 1];
+      return [
+        {
+          label: "攻击力提升",
+          describe: `攻击力提升${a}%`,
+          effect: [{ type: BuffType.ATKPrcent, getValue: () => a }],
+          enable: true,
+        },
+        {
+          label: "处于后台攻击力提升",
+          describe: `攻击力提升${a}%`,
+          effect: [{ type: BuffType.ATKPrcent, getValue: () => a }],
+          enable: true,
+        },
+        {
+          label: "治疗后攻击力提升",
+          describe: `装备者与受治疗者，攻击力提升${b}%`,
+          effect: [
+            { type: BuffType.ATKPrcent, getValue: () => b },
+          ],
+          enable: false,
+          shareable: true,
+          target: BuffTarget.All,
+        }
+      ]
+    },
+  ),
+  createWeapon(
+    {
+      name: "冷寂迸音",
+      enkaId: 12513,
+      weaponType: WeaponType.Bow,
+      icon: getEnkaUI("UI_EquipIcon_Catalyst_VaresaTransformer_Awaken"),
+      baseAtk: 510,
+      rarity: Rarity.Four,
+      appendPropId: AppendProp.HP_PERCENT,
+      statValue: 41.3,
+    },
+    (affix = 1) => {
+      let a = [40, 50, 60, 70, 80][affix - 1] + "%";
+      return {
+        title: "静发",
+        text: highlight`攻击命中敌人时，在目标位置基于生命值上限的${a}，造成范围伤害。该效果每15秒至多触发一次。`,
+      };
+    },
+    () => [],
+    (affix = 1) => {
+      let a = [40, 50, 60, 70, 80][affix - 1]/100;
+      return [
+        {
+          label: "冷寂迸音·静发",
+          rate: {
+            hp: [a],
+          },
+          attackType: AttackType.Other,
+          elementType: ElementType.Physical,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
       name: "溢彩心念",
       enkaId: 14519,
       weaponType: WeaponType.Magic,

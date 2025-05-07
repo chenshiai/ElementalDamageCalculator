@@ -48,15 +48,15 @@
       </div>
     </div>
     <div>
-        <span class="holy-relic__title">角色提升</span>
-        <span class="holy-relic-tips">数值大于0开始计算增益</span>
-      </div>
+      <span class="holy-relic__title">角色提升</span>
+      <span class="holy-relic-tips">数值大于0开始计算增益</span>
+    </div>
     <div class="gain">
       <img class="base-damage__img" src="https://enka.network/ui/UI_AvatarIcon_Nilou.png" alt="" />
       <div class="cha-gain-inner">
         <span class="base-damage__title">生命上限</span>
         <Stepper v-model="niLuo" input-width="66px" integer button-size="20" theme="round" min="0" max="80000" />
-        <span class="holy-relic-tips">折旋落英之庭</span>
+        <span class="holy-relic-tips">「折旋落英之庭」</span>
       </div>
     </div>
     <div class="gain">
@@ -64,7 +64,7 @@
       <div class="cha-gain-inner">
         <span class="base-damage__title">生命上限</span>
         <Stepper v-model="baiZhu" input-width="66px" integer button-size="20" theme="round" min="0" max="80000" />
-        <span class="holy-relic-tips">在地为化</span>
+        <span class="holy-relic-tips">「在地为化」</span>
       </div>
     </div>
     <div class="gain">
@@ -85,26 +85,31 @@
         />
       </div>
     </div>
+    <div class="gain">
+      <img class="base-damage__img" src="https://enka.network/ui/UI_AvatarIcon_Mizuki.png" alt="" />
+      <div class="cha-gain-inner">
+        <span class="base-damage__title">夜魂总和</span>
+        <Stepper v-model="yehun" input-width="66px" integer button-size="20" theme="round" min="0" max="200" />
+        <span class="holy-relic-tips">「救援要义」</span>
+      </div>
+    </div>
   </div>
   <DetailBlock :elementalMystery="elementalMystery" :currentRelic="currentRelic">
     <template v-slot:servitude>
-      <span v-show="niLuoGain" class="more-rate"
-        ><br />
-        妮露：丰穰之核+{{ niLuoGain.toFixed(1) }}%;
+      <span v-show="niLuoGain" class="more-rate"><br />妮露：丰穰之核+{{ niLuoGain.toFixed(1) }}%; </span>
+      <span v-show="baiZhuBloomGain" class="more-rate">
+        <br />白术：燃烧、绽放、超绽放、烈绽放+{{ baiZhuBloomGain.toFixed(1) }}%
       </span>
-      <span v-show="baiZhuBloomGain" class="more-rate"
-        ><br />
-        白术：燃烧、绽放、超绽放、烈绽放+{{ baiZhuBloomGain.toFixed(1) }}%
+      <span v-show="mizukiGain" class="more-rate">
+        <br />梦见月瑞希：扩散+{{ mizukiGain.toFixed(1) }}%
       </span>
-      <span v-show="mizukiGain" class="more-rate"
-        ><br />
-        梦见月瑞希：扩散+{{ mizukiGain.toFixed(1) }}%
+      <span v-show="yehunGain" class="more-rate">
+        <br />伊法：扩散、感电+{{ yehunGain.toFixed(1) }}%
       </span>
     </template>
     <template v-slot:catalyze>
-      <span v-show="baiZhuCatalyzeGain" class="more-rate"
-        ><br />
-        白术：超激化、蔓激化+{{ baiZhuCatalyzeGain.toFixed(1) }}%
+      <span v-show="baiZhuCatalyzeGain" class="more-rate">
+        <br />白术：超激化、蔓激化+{{ baiZhuCatalyzeGain.toFixed(1) }}%
       </span>
     </template>
   </DetailBlock>
@@ -123,10 +128,10 @@ import { WITCH, THUNDER, EMERALD, EDEN } from "@/constants";
 import { BaseDMG } from "@/constants/elementalReaction";
 import { getServitudeRate, getCrystallizeRate, getCatalyzeRate } from "@/utils";
 import TabTitle from "@/component/TabTitle.vue";
-import DetailBlock from "@/component/Detail.vue";
+import DetailBlock from "./Detail.vue";
 import { Slider, Stepper } from "vant";
 import useHolyRelic from "./holy-relic";
-import { useNiLuo, useBaiZhu, useMizuki } from "./roles";
+import { useNiLuo, useBaiZhu, useMizuki, useYiFa } from "./roles";
 
 const elementalMystery = ref(786);
 const level = ref(90);
@@ -134,6 +139,7 @@ const [currentRelic, setCurrentRelic] = useHolyRelic();
 const { niLuo, niLuoGain } = useNiLuo();
 const { baiZhu, baiZhuBloomGain, baiZhuCatalyzeGain } = useBaiZhu();
 const { mizukiEm, mizukiSkillLevel, mizukiGain } = useMizuki();
+const { yehun, yehunGain } = useYiFa();
 
 // 剧变反应伤害提升数值
 const servitudeDamage = (baseDamage) => {
@@ -148,7 +154,7 @@ const catalyzeDamage = (baseDamage) => {
 // 感电伤害值
 const electroChargedDamage = computed(() => {
   const basenumber = BaseDMG.electroCharged[level.value];
-  const r = servitudeDamage(basenumber);
+  const r = servitudeDamage(basenumber) + Math.round((basenumber * yehunGain.value) / 100);
   return currentRelic.value === THUNDER ? Math.round(basenumber * 0.4) + r : r;
 });
 
@@ -191,7 +197,10 @@ const burningDamage = computed(() => {
 // 扩散伤害值
 const swirlDamage = computed(() => {
   const basenumber = BaseDMG.swirl[level.value];
-  const r = servitudeDamage(basenumber) + Math.round((basenumber * mizukiGain.value) / 100);
+  const r =
+    servitudeDamage(basenumber) +
+    Math.round((basenumber * mizukiGain.value) / 100) +
+    Math.round((basenumber * yehunGain.value) / 100);
   if (currentRelic.value === EMERALD) return Math.round(basenumber * 0.6) + r;
   return r;
 });
