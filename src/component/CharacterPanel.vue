@@ -4,24 +4,8 @@ import { Popup, Icon } from "vant";
 
 import { ICalculatorValue } from "@/types/interface";
 import { ElementType, elementTypeToLabel } from "@/types/enum";
-import {
-  hpSvg,
-  atkSvg,
-  defSvg,
-  anemoSvg,
-  emSvg,
-  criSvg,
-  healSvg,
-  phySvg,
-  crihSvg,
-  chSvg,
-  pyroSvg,
-  hydroSvg,
-  cryoSvg,
-  eleSvg,
-  denSvg,
-  geoSvg,
-} from "@/constants/svg.js";
+import allImages from "@/constants/imageConstant";
+const { anemo, atk, ch, cri, crih, cryo, den, def, ele, em, geo, heal, hp, hydro, phy, pyro } = allImages;
 
 interface IProps {
   characterPanelData: ICalculatorValue;
@@ -56,25 +40,25 @@ const baseValue = computed<IPanelValue[]>(() => {
       label: "生命值",
       baseValue: baseHP,
       extraValue: extraHP + extraHP_NT,
-      svg: hpSvg,
+      svg: hp,
     },
     {
       label: "攻击力",
       baseValue: baseATK,
       extraValue: extraATK + extraATK_NT,
-      svg: atkSvg,
+      svg: atk,
     },
     {
       label: "防御力",
       baseValue: baseDEF,
       extraValue: extraDEF + extraDEF_NT,
-      svg: defSvg,
+      svg: def,
     },
     {
       label: "元素精通",
       baseValue: elementalMystery + elementalMystery_NT,
       extraValue: 0,
-      svg: emSvg,
+      svg: em,
     },
   ];
 });
@@ -86,43 +70,43 @@ const extraValue = computed<IPanelValue[]>(() => {
       label: "暴击率",
       baseValue: critcal,
       extraValue: 0,
-      svg: criSvg,
+      svg: cri,
     },
     {
       label: "暴击伤害",
       baseValue: critcalHurt,
       extraValue: 0,
-      svg: crihSvg,
+      svg: crih,
     },
     {
       label: "治疗加成",
       baseValue: healAdd,
       extraValue: 0,
-      svg: healSvg,
+      svg: heal,
     },
     {
       label: "受治疗加成",
       baseValue: beHealAdd,
       extraValue: 0,
-      svg: healSvg,
+      svg: heal,
     },
     {
       label: "元素充能效率",
       baseValue: chargeEfficiency + chargeEfficiency_NT,
       extraValue: 0,
-      svg: chSvg,
+      svg: ch,
     },
     {
       label: "冷却缩减",
       baseValue: coolDown,
       extraValue: 0,
-      svg: chSvg,
+      svg: ch,
     },
     {
       label: "护盾强效",
       baseValue: shieldStrong,
       extraValue: 0,
-      svg: defSvg,
+      svg: def,
     },
   ];
 });
@@ -144,49 +128,49 @@ const elementValue = computed<IPanelValue[]>(() => {
       label: elementTypeToLabel[ElementType.Pyro],
       baseValue: pyroAddHunt,
       extraValue: 0,
-      svg: pyroSvg,
+      svg: pyro,
     },
     {
       label: elementTypeToLabel[ElementType.Hydro],
       baseValue: hydroAddHunt,
       extraValue: 0,
-      svg: hydroSvg,
+      svg: hydro,
     },
     {
       label: elementTypeToLabel[ElementType.Dendro],
       baseValue: dendroAddHunt,
       extraValue: 0,
-      svg: denSvg,
+      svg: den,
     },
     {
       label: elementTypeToLabel[ElementType.Electro],
       baseValue: electroAddHunt,
       extraValue: 0,
-      svg: eleSvg,
+      svg: ele,
     },
     {
       label: elementTypeToLabel[ElementType.Anemo],
       baseValue: anemoAddHunt,
       extraValue: 0,
-      svg: anemoSvg,
+      svg: anemo,
     },
     {
       label: elementTypeToLabel[ElementType.Cryo],
       baseValue: cryoAddHunt,
       extraValue: 0,
-      svg: cryoSvg,
+      svg: cryo,
     },
     {
       label: elementTypeToLabel[ElementType.Geo],
       baseValue: geoAddHunt,
       extraValue: 0,
-      svg: geoSvg,
+      svg: geo,
     },
     {
       label: elementTypeToLabel[ElementType.Physical],
       baseValue: physicalAddHunt,
       extraValue: 0,
-      svg: phySvg,
+      svg: phy,
     },
   ];
 });
@@ -208,7 +192,7 @@ function round(a: number, precision: number = 0): number {
     <div class="left">
       <div class="panel-item" v-for="(val, index) in leftValue">
         <div class="panel-leabel">
-          <span v-html="val.svg"></span>
+          <img :src="val.svg" />
           {{ val.label }}
         </div>
         <data v-show="val.extraValue" class="panel-detail">
@@ -216,14 +200,15 @@ function round(a: number, precision: number = 0): number {
           <div class="extra-text">+{{ round(val.extraValue) }}</div>
         </data>
         <data class="panel-number">
-          {{ round(val.baseValue + val.extraValue, index === 4 ? 1 : 0) }}{{ index === leftValue.length - 1 ? '%' : '' }}
+          {{ round(val.baseValue + val.extraValue, index === 4 ? 1 : 0)
+          }}{{ index === leftValue.length - 1 ? "%" : "" }}
         </data>
       </div>
     </div>
     <div class="right">
       <div class="panel-item" v-for="val in extraValue.slice(0, 5)">
         <div class="panel-leabel">
-          <span v-html="val.svg"></span>
+          <img :src="val.svg" />
           {{ val.label }}
         </div>
         <data class="panel-number">{{ round(val.baseValue + val.extraValue, 1) }}%</data>
@@ -236,17 +221,18 @@ function round(a: number, precision: number = 0): number {
       <div class="data-panel__title">基础属性</div>
       <div class="panel-item" v-for="(val, index) in baseValue">
         <div class="panel-leabel">
-          <span v-html="val.svg"></span>
+          <img :src="val.svg" />
           {{ val.label }}
         </div>
-        <data>{{ round(val.baseValue) }}
+        <data
+          >{{ round(val.baseValue) }}
           <data class="extra-text">+{{ round(val.extraValue) }}</data>
         </data>
       </div>
       <div class="data-panel__title">进阶属性</div>
       <div class="panel-item" v-for="val in extraValue">
         <div class="panel-leabel">
-          <span v-html="val.svg"></span>
+          <img :src="val.svg" />
           {{ val.label }}
         </div>
         <data>
@@ -257,7 +243,7 @@ function round(a: number, precision: number = 0): number {
       <div class="data-panel__title">元素属性</div>
       <div class="panel-item" v-for="val in elementValue">
         <div class="panel-leabel">
-          <span v-html="val.svg"></span>
+          <img :src="val.svg" />
           {{ val.label }}
         </div>
         <data>
@@ -328,7 +314,7 @@ function round(a: number, precision: number = 0): number {
 }
 </style>
 <style>
-.panel-leabel span svg {
+.panel-leabel img {
   height: 1em;
   margin-right: 8px;
 }

@@ -6,6 +6,9 @@
         "src/*"
       ]
     },
+    "module": "ES2022",
+    "types": ["vite/client"],
+    "moduleResolution": "node",
     "downlevelIteration": true,
   }
 }
