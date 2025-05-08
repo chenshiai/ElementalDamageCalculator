@@ -156,16 +156,18 @@
 }
 
 .base-damage__img {
-  display: block;
   width: 44px;
   height: 44px;
-  border-radius: 50%;
-  border: 2px solid var(--border);
-  margin-right: 8px;
+  /* border-radius: 50%; */
 }
-
+.gain-group {
+  /* display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr); */
+}
 .gain {
+}
+.cha-gain-inner {
   display: flex;
   align-items: center;
-  margin-bottom: 8px;
 }

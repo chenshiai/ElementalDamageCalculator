@@ -56,7 +56,7 @@ const a = {
 // .replaceAll("%", '').replaceAll(/[\u4e00-\u9fff]+/g, "").replaceAll("\t",",").split(",").map(i=>Math.round(i*100)/10000)
 export const Character: (ICharacterInfo & Record<any, any>)[] = [
   {
-    ...cha(1000000, "爱可菲", ElementType.Cryo, WeaponType.Polearms)(Rarity.Five, 13348, 370, 732, 60)(
+    ...cha(10000112, "爱可菲", ElementType.Cryo, WeaponType.Polearms)(Rarity.Five, 13348, 370, 732, 60)(
       "UI_AvatarIcon_Escoffier",
       [
         "UI_Talent_S_Escoffier_01",
@@ -180,7 +180,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     ],
   },
   {
-    ...cha(1000000, "伊法", ElementType.Anemo, WeaponType.Magic)(Rarity.Four, 10081, 201, 605, 60)(
+    ...cha(10000113, "伊法", ElementType.Anemo, WeaponType.Magic)(Rarity.Four, 10081, 201, 605, 60)(
       "UI_AvatarIcon_Ifa",
       [
         "UI_Talent_S_Ifa_01",

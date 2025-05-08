@@ -47,67 +47,80 @@
         </div>
       </div>
     </div>
-    <div>
-      <span class="holy-relic__title">角色提升</span>
-      <span class="holy-relic-tips">数值大于0开始计算增益</span>
-    </div>
-    <div class="gain">
-      <img class="base-damage__img" src="https://enka.network/ui/UI_AvatarIcon_Nilou.png" alt="" />
-      <div class="cha-gain-inner">
-        <span class="base-damage__title">生命上限</span>
-        <Stepper v-model="niLuo" input-width="66px" integer button-size="20" theme="round" min="0" max="80000" />
-        <span class="holy-relic-tips">「折旋落英之庭」</span>
+    <details>
+      <summary>
+        <span class="holy-relic__title">角色提升</span>
+        <span class="holy-relic-tips">点此处展开&收起</span>
+      </summary>
+      <div class="gain-group">
+        <Divider :style="{ margin: '0px', color: '#766461', borderColor: '#766461' }">妮露</Divider>
+        <div class="gain">
+          <div class="cha-gain-inner">
+            <img class="base-damage__img" src="https://enka.network/ui/UI_AvatarIcon_Nilou.png" alt="" />
+            <CellGroup inset>
+              <Field v-model="niLuo" type="number" label="生命上限" />
+            </CellGroup>
+          </div>
+          <span class="holy-relic-tips">折旋落英之庭：提高<b class="bloom">绽放</b>反应伤害</span>
+        </div>
+
+        <Divider :style="{ margin: '10px 0 0', color: '#766461', borderColor: '#766461' }">白术</Divider>
+        <div class="gain">
+          <div class="cha-gain-inner">
+            <img class="base-damage__img" src="https://enka.network/ui/UI_AvatarIcon_Baizhuer.png" alt="" />
+            <CellGroup inset>
+              <Field v-model="baiZhu" type="number" label="生命上限" />
+            </CellGroup>
+          </div>
+          <span class="holy-relic-tips">
+            在地为化：提高
+            <b class="bloom">绽放</b>、
+            <b class="aggravate">超</b>/<b class="burning">烈绽放</b>、
+            <b class="burning">燃烧</b>、
+            <b class="aggravate">超激化</b>和<b class="bloom">蔓激化</b>反应伤害
+          </span>
+        </div>
+
+        <Divider :style="{ margin: '10px 0 0', color: '#766461', borderColor: '#766461' }">梦见月瑞希</Divider>
+        <div class="gain">
+          <div class="cha-gain-inner">
+            <img class="base-damage__img" src="https://enka.network/ui/UI_AvatarIcon_Mizuki.png" alt="" />
+            <CellGroup inset>
+              <Field v-model="mizukiEm" type="number" label="元素精通" />
+              <Field v-model="mizukiSkillLevel" type="number" label="战技等级" />
+            </CellGroup>
+          </div>
+          <span class="holy-relic-tips">梦浮：提高<b class="swirl">扩散</b>反应伤害</span>
+        </div>
+
+        <Divider :style="{ margin: '10px 0 0', color: '#766461', borderColor: '#766461' }">伊法</Divider>
+        <div class="gain">
+          <div class="cha-gain-inner">
+            <img class="base-damage__img" src="https://enka.network/ui/UI_AvatarIcon_Ifa.png" alt="" />
+            <CellGroup inset>
+              <Field v-model="yehun" type="number" label="夜魂总和" />
+            </CellGroup>
+          </div>
+          <span class="holy-relic-tips">救援要义：提高<b class="swirl">扩散</b>、<b class="elector">感电</b>反应伤害</span>
+        </div>
       </div>
-    </div>
-    <div class="gain">
-      <img class="base-damage__img" src="https://enka.network/ui/UI_AvatarIcon_Baizhuer.png" alt="" />
-      <div class="cha-gain-inner">
-        <span class="base-damage__title">生命上限</span>
-        <Stepper v-model="baiZhu" input-width="66px" integer button-size="20" theme="round" min="0" max="80000" />
-        <span class="holy-relic-tips">「在地为化」</span>
-      </div>
-    </div>
-    <div class="gain">
-      <img class="base-damage__img" src="https://enka.network/ui/UI_AvatarIcon_Mizuki.png" alt="" />
-      <div class="cha-gain-inner">
-        <span class="base-damage__title">元素精通</span>
-        <Stepper v-model="mizukiEm" input-width="66px" integer button-size="20" theme="round" min="0" max="4000" />
-        <div></div>
-        <span class="base-damage__title">战技等级</span>
-        <Stepper
-          v-model="mizukiSkillLevel"
-          input-width="66px"
-          integer
-          button-size="20"
-          theme="round"
-          min="1"
-          max="13"
-        />
-      </div>
-    </div>
-    <div class="gain">
-      <img class="base-damage__img" src="https://enka.network/ui/UI_AvatarIcon_Mizuki.png" alt="" />
-      <div class="cha-gain-inner">
-        <span class="base-damage__title">夜魂总和</span>
-        <Stepper v-model="yehun" input-width="66px" integer button-size="20" theme="round" min="0" max="200" />
-        <span class="holy-relic-tips">「救援要义」</span>
-      </div>
-    </div>
+    </details>
   </div>
-  <DetailBlock :elementalMystery="elementalMystery" :currentRelic="currentRelic">
+  <DetailBlock :elementalMystery="elementalMystery">
+    <template v-slot:base>
+      <data v-show="moreRate" class="more-rate"><br/>{{ moreRate }}</data>
+    </template>
     <template v-slot:servitude>
+      <data v-show="servitudeMoreRate" class="more-rate"><br/>{{ servitudeMoreRate }}</data>
       <span v-show="niLuoGain" class="more-rate"><br />妮露：丰穰之核+{{ niLuoGain.toFixed(1) }}%; </span>
       <span v-show="baiZhuBloomGain" class="more-rate">
         <br />白术：燃烧、绽放、超绽放、烈绽放+{{ baiZhuBloomGain.toFixed(1) }}%
       </span>
-      <span v-show="mizukiGain" class="more-rate">
-        <br />梦见月瑞希：扩散+{{ mizukiGain.toFixed(1) }}%
-      </span>
-      <span v-show="yehunGain" class="more-rate">
-        <br />伊法：扩散、感电+{{ yehunGain.toFixed(1) }}%
-      </span>
+      <span v-show="mizukiGain" class="more-rate"> <br />梦见月瑞希：扩散+{{ mizukiGain.toFixed(1) }}% </span>
+      <span v-show="yehunGain" class="more-rate"> <br />伊法：扩散、感电+{{ yehunGain.toFixed(1) }}% </span>
     </template>
     <template v-slot:catalyze>
+      <data v-show="catalyzeMoreRate" class="more-rate"><br/>{{ catalyzeMoreRate }}</data>
       <span v-show="baiZhuCatalyzeGain" class="more-rate">
         <br />白术：超激化、蔓激化+{{ baiZhuCatalyzeGain.toFixed(1) }}%
       </span>
@@ -129,7 +142,7 @@ import { BaseDMG } from "@/constants/elementalReaction";
 import { getServitudeRate, getCrystallizeRate, getCatalyzeRate } from "@/utils";
 import TabTitle from "@/component/TabTitle.vue";
 import DetailBlock from "./Detail.vue";
-import { Slider, Stepper } from "vant";
+import { Slider, Stepper, Field, CellGroup, Divider } from "vant";
 import useHolyRelic from "./holy-relic";
 import { useNiLuo, useBaiZhu, useMizuki, useYiFa } from "./roles";
 
@@ -231,6 +244,36 @@ const crystallizeValue = computed(() => {
   return Math.round(basenumber * (1 + getCrystallizeRate(elementalMystery.value) / 100));
 });
 
+// 魔女4
+const moreRate = computed(() => {
+  if (currentRelic.value === WITCH) {
+    return " 魔女套：蒸发、融化+15%";
+  }
+  return "";
+});
+
+// 如雷4
+const servitudeMoreRate = computed(() => {
+  switch (currentRelic.value) {
+    case THUNDER: {
+      return "如雷套：超载、超导、感电、超绽放+40%";
+    }
+    case WITCH: {
+      return "魔女套：超载、燃烧、烈绽放+40%";
+    }
+    case EMERALD: {
+      return "风套：扩散+60%";
+    }
+    case EDEN: {
+      return "乐园套：绽放、超绽放、烈绽放+80%";
+    }
+  }
+  return "";
+});
+
+const catalyzeMoreRate = computed(() => {
+  return currentRelic.value === THUNDER ? "如雷套：超激化+20%" : "";
+});
 const damageResult = computed(() => {
   return [
     {

@@ -48,7 +48,7 @@ export function useMizuki() {
 export function useYiFa() {
   const yehun = ref(0);
   const yehunGain = computed(() => {
-    return yehun.value * 1.5;
+    return Math.min(300, yehun.value * 1.5);
   })
   return {
     yehun,

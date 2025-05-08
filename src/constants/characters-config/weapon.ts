@@ -51,9 +51,9 @@ export const Weapons: IWeaponInfo[] = [
   createWeapon(
     {
       name: "香韵奏者",
-      enkaId: 12513,
+      enkaId: 13514,
       weaponType: WeaponType.Polearms,
-      icon: getEnkaUI("UI_EquipIcon_Catalyst_VaresaTransformer_Awaken"),
+      icon: getEnkaUI("UI_EquipIcon_Pole_Trident_Awaken"),
       baseAtk: 608,
       rarity: Rarity.Five,
       appendPropId: AppendProp.CRITICAL_HURT,
@@ -99,9 +99,9 @@ export const Weapons: IWeaponInfo[] = [
   createWeapon(
     {
       name: "冷寂迸音",
-      enkaId: 12513,
+      enkaId: 15432,
       weaponType: WeaponType.Bow,
-      icon: getEnkaUI("UI_EquipIcon_Catalyst_VaresaTransformer_Awaken"),
+      icon: getEnkaUI("UI_EquipIcon_Bow_Stinger_Awaken"),
       baseAtk: 510,
       rarity: Rarity.Four,
       appendPropId: AppendProp.HP_PERCENT,
