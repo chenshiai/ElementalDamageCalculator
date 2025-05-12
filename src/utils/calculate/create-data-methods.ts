@@ -1,6 +1,10 @@
-import { getEnkaUI } from "@/constants/characters-config/append-prop";
+
 import { AppendProp, AttackType, ElementType, Rarity, WeaponType } from "@/types/enum";
 import { IRate, ISkillRate, IWeaponInfo } from "@/types/interface";
+
+function getEnkaUI(name: string): string {
+  return `https://enka.network/ui/${name}.png`;
+}
 
 function getEnkaUIs(name: string[]): string[] {
   return name.map(getEnkaUI);
@@ -36,7 +40,7 @@ export function cha(enkaId: number, name: string, element: ElementType, weapon: 
   };
 }
 
-export function createAttack(
+export function action(
   label: string,
   attackType: AttackType,
   elementType: ElementType,

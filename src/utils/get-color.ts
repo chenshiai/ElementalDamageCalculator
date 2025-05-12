@@ -37,8 +37,10 @@ export function getColorByElement(elementType: ElementType | string) {
       return "text-dendro";
     case ElementType.Pyro:
       return "text-pyro";
-    default:
+    case ElementType.None:
       return "text-heal";
+    default:
+      return "";
   }
 }
 

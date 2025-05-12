@@ -2,3 +2,9 @@ export *  from "./Mualani";
 export * from "./Sigewinne"
 export * from "./Furina";
 export * from "./Neuvillette";
+export * from "./Yelan";
+export * from "./Ayato";
+export * from "./Nilou";
+export * from "./Kokomi";
+export * from "./Tartaglia";
+export * from "./Mona";

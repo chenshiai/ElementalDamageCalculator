@@ -3,7 +3,7 @@ import { Button, SwipeCell, Tab, Tabs, Icon } from "vant";
 import db from "@/utils/db";
 import { IUserSavedCalculationData, IPlayerInfoData, calDB, playerInfoDB } from "@/constants/db";
 import { ref, watchEffect, computed, onMounted, nextTick } from "vue";
-import { getEnkaUI } from "@/constants/characters-config/append-prop";
+import { getEnkaUI } from "@/constants/characters-config/decorator";
 import useImport from "@/utils/enka/useImport";
 
 const emit = defineEmits<{

@@ -6,7 +6,7 @@ import {
   Constellation_E_5,
   Constellation_Q_3,
 } from "../buffs";
-import { createAttack } from "@/utils/calculate/create-data-methods";
+import { Weapon, Element, Icons, EnKaId, BaseData, action } from "../decorator";
 
 class OlorunData extends Character implements ICharacterInfo {
   constructor() {
@@ -39,46 +39,46 @@ class OlorunData extends Character implements ICharacterInfo {
   talentNames = ["普通攻击·宿灵闪箭", "暝色缒索", "黯声回响"];
 
   normalAttack = [
-    createAttack("一段伤害", AttackType.Normal, ElementType.Physical, {
+    action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.506, 0.548, 0.589, 0.648, 0.689, 0.736, 0.801, 0.866, 0.93, 1.001, 1.072],
     }),
-    createAttack("二段伤害", AttackType.Normal, ElementType.Physical, {
+    action("二段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.444, 0.48, 0.516, 0.568, 0.604, 0.645, 0.702, 0.758, 0.815, 0.877, 0.939],
     }),
-    createAttack("三段伤害", AttackType.Normal, ElementType.Physical, {
+    action("三段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.698, 0.755, 0.812, 0.893, 0.95, 1.015, 1.104, 1.193, 1.283, 1.38, 1.478],
     }),
-    createAttack("瞄准射击", AttackType.Strong, ElementType.Physical, {
+    action("瞄准射击", AttackType.Strong, ElementType.Physical, {
       atk: [0.439, 0.474, 0.51, 0.561, 0.597, 0.638, 0.694, 0.75, 0.806, 0.867, 0.928],
     }),
-    createAttack("满蓄力瞄准射击", AttackType.Strong, ElementType.Electro, {
+    action("满蓄力瞄准射击", AttackType.Strong, ElementType.Electro, {
       atk: [1.24, 1.33, 1.43, 1.55, 1.64, 1.74, 1.86, 1.98, 2.11, 2.23, 2.36],
     }),
-    createAttack("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
+    action("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
       atk: [0.568, 0.615, 0.661, 0.727, 0.773, 0.826, 0.899, 0.971, 1.04, 1.12, 1.2],
     }),
-    createAttack("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+    action("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
       atk: [1.14, 1.23, 1.32, 1.45, 1.55, 1.65, 1.8, 1.94, 2.09, 2.25, 2.4],
     }),
-    createAttack("高空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+    action("高空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
       atk: [1.42, 1.53, 1.65, 1.82, 1.93, 2.06, 2.24, 2.43, 2.61, 2.81, 3],
     }),
   ];
   elementSkill = [
-    createAttack("宿灵球伤害", AttackType.Skill, ElementType.Electro, {
+    action("宿灵球伤害", AttackType.Skill, ElementType.Electro, {
       atk: [1.976, 2.124, 2.272, 2.47, 2.618, 2.766, 2.964, 3.162, 3.359, 3.557, 3.754, 3.952, 4.199],
     }),
   ];
   burstSkill = [
-    createAttack("秘仪伤害", AttackType.Burst, ElementType.Electro, {
+    action("秘仪伤害", AttackType.Burst, ElementType.Electro, {
       atk: [1.744, 1.875, 2.005, 2.18, 2.311, 2.441, 2.616, 2.79, 2.965, 3.139, 3.313, 3.488, 3.706],
     }),
-    createAttack("音波碰撞伤害", AttackType.Burst, ElementType.Electro, {
+    action("音波碰撞伤害", AttackType.Burst, ElementType.Electro, {
       atk: [0.332, 0.357, 0.382, 0.415, 0.44, 0.465, 0.498, 0.531, 0.564, 0.598, 0.631, 0.664, 0.706],
     }),
   ];
   otherSkill = [
-    createAttack(
+    action(
       "显像超感",
       AttackType.Other,
       ElementType.Electro,
@@ -87,7 +87,7 @@ class OlorunData extends Character implements ICharacterInfo {
       },
       "Olorun"
     ),
-    createAttack(
+    action(
       "6命·显像超感",
       AttackType.Other,
       ElementType.Electro,

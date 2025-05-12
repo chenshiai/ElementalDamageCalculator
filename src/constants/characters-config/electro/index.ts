@@ -2,3 +2,8 @@ export *  from "./Varesa";
 export *  from "./Iansan";
 export *  from "./Olorun";
 export * from "./Clorinde";
+export * from "./Cyno";
+export * from "./Yae";
+export * from "./Shougun";
+export * from "./Keqing";
+export * from "./Sethos";

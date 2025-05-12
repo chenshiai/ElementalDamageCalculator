@@ -1,11 +1,23 @@
-import { getEnkaUI } from "@/constants/characters-config/append-prop";
 import { AppendProp, AttackType, ElementType, Rarity, WeaponType } from "@/types/enum";
 import { IRate, ISkillRate, IWeaponInfo } from "@/types/interface";
 
 abstract class Character {
   level = 90;
   overshoot = 6;
-
+  name: string;
+  weapon: WeaponType;
+  element: ElementType;
+  rarity: Rarity;
+  enkaId: number;
+  baseHP: number;
+  baseATK: number;
+  baseDEF: number;
+  burstCharge: number;
+  icons: {
+    avatarIcon: string;
+    constsIcon: string[];
+    gachaImage: string;
+  };
   constructor() {}
 
   getEnkaImg(name: string): string {

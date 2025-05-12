@@ -128,7 +128,3 @@ export function getAppendPropName(appendProp: AppendProp) {
 export function getAppendPropName2(appendProp: AppendProp) {
   return appendPropMap2[appendProp];
 }
-
-export function getEnkaUI(name: string): string {
-  return `https://enka.network/ui/${name}.png`;
-}
