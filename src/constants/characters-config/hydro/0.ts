@@ -8,3 +8,5 @@ export * from "./Nilou";
 export * from "./Kokomi";
 export * from "./Tartaglia";
 export * from "./Mona";
+export * from "./Candace";
+export * from "./Xingqiu";

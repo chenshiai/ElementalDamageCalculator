@@ -13,7 +13,7 @@ import {
 import { Weapon, Element, Icons, EnKaId, BaseData, action } from "../decorator";
 import { Constellation_E_3, Constellation_Q_5, S_80_CRITAL_19P } from "../buffs";
 
-@EnKaId(10000069, "荒泷一斗")
+@EnKaId(10000057, "荒泷一斗")
 @Weapon(WeaponType.GreatSword)
 @Element(ElementType.Geo)
 @BaseData(Rarity.Five, 12858, 227, 959, 70)

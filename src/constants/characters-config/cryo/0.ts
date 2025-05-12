@@ -10,3 +10,6 @@ export * from "./Qiqi";
 export * from "./Charlotte";
 export * from "./Freminet";
 export * from "./Mika";
+export * from "./Layla";
+export * from "./Rosaria";
+export * from "./Diona";

@@ -5,3 +5,5 @@ export * from "./Itto";
 export * from "./Albedo";
 export * from "./Zhongli";
 export * from "./Kachina";
+export * from "./Yunjin";
+export * from "./Gorou";
