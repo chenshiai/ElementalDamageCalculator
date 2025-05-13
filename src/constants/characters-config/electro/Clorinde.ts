@@ -2,97 +2,81 @@ import Character from "../character-class";
 import { ICharacterInfo } from "@/types/interface";
 import { ActionOn, AttackType, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
 import { Constellation_E_3, Constellation_Q_5, S_80_CRITAL_19P } from "../buffs";
+import { EnKaId, Weapon, Element, BaseData, Icons, action } from "../decorator";
 
+@EnKaId(10000098, "克洛琳德")
+@Weapon(WeaponType.Sword)
+@Element(ElementType.Electro)
+@BaseData(Rarity.Five, 12956, 337, 784, 60)
+@Icons("UI_AvatarIcon_Clorinde")
 class ClorindeData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  enkaId = 10000098;
-  name = "克洛琳德";
-  element = ElementType.Electro;
-  weapon = WeaponType.Sword;
-  rarity = Rarity.Five;
-  baseHP = 12956;
-  baseATK = 337;
-  baseDEF = 784;
-  burstCharge = 60;
-
-  icons = {
-    avatarIcon: this.getEnkaUI("UI_AvatarIcon_Clorinde"),
-    constsIcon: this.getEnkaUIs([
-      "UI_Talent_S_Clorinde_01",
-      "UI_Talent_S_Clorinde_02",
-      "UI_Talent_U_Clorinde_01",
-      "UI_Talent_S_Clorinde_03",
-      "UI_Talent_U_Clorinde_02",
-      "UI_Talent_S_Clorinde_04",
-    ]),
-    gachaImage: this.getEnkaImg("UI_AvatarIcon_Clorinde"),
-  };
   talentNames = ["普通攻击·逐影之誓", "狩夜之巡", "残光将终"];
 
   normalAttack = [
-    this.action("一段伤害", AttackType.Normal, ElementType.Physical, {
+    action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.541, 0.585, 0.629, 0.691, 0.735, 0.786, 0.855, 0.924, 0.993, 1.069, 1.144],
     }),
-    this.action("二段伤害", AttackType.Normal, ElementType.Physical, {
+    action("二段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.516, 0.558, 0.6, 0.66, 0.702, 0.75, 0.816, 0.882, 0.949, 1.021, 1.093],
     }),
-    this.action("三段伤害·1", AttackType.Normal, ElementType.Physical, {
+    action("三段伤害·1", AttackType.Normal, ElementType.Physical, {
       atk: [0.342, 0.37, 0.398, 0.437, 0.465, 0.497, 0.541, 0.584, 0.628, 0.676, 0.723],
     }),
-    this.action("三段伤害·2", AttackType.Normal, ElementType.Physical, {
+    action("三段伤害·2", AttackType.Normal, ElementType.Physical, {
       atk: [0.342, 0.37, 0.398, 0.437, 0.465, 0.497, 0.541, 0.584, 0.628, 0.676, 0.723],
     }),
-    this.action("四段伤害·单次", AttackType.Normal, ElementType.Physical, {
+    action("四段伤害·单次", AttackType.Normal, ElementType.Physical, {
       atk: [0.231, 0.25, 0.269, 0.296, 0.315, 0.336, 0.366, 0.395, 0.425, 0.457, 0.49],
     }),
-    this.action("五段伤害", AttackType.Normal, ElementType.Physical, {
+    action("五段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.9, 0.973, 1.047, 1.151, 1.225, 1.308, 1.423, 1.539, 1.654, 1.779, 1.905],
     }),
-    this.action("重击伤害", AttackType.Strong, ElementType.Physical, {
+    action("重击伤害", AttackType.Strong, ElementType.Physical, {
       atk: [1.281, 1.386, 1.49, 1.639, 1.743, 1.863, 2.026, 2.19, 2.354, 2.533, 2.712],
     }),
-    this.action("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
+    action("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
       atk: [0.639, 0.691, 0.743, 0.818, 0.87, 0.929, 1.011, 1.093, 1.175, 1.264, 1.353],
     }),
-    this.action("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+    action("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
       atk: [1.28, 1.38, 1.49, 1.64, 1.74, 1.86, 2.02, 2.19, 2.35, 2.53, 2.71],
     }),
-    this.action("高空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+    action("高空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
       atk: [1.6, 1.73, 1.86, 2.04, 2.17, 2.32, 2.53, 2.73, 2.93, 3.16, 3.38],
     }),
   ];
   elementSkill = [
-    this.action("驰猎伤害", AttackType.Normal, ElementType.Electro, {
+    action("驰猎伤害", AttackType.Normal, ElementType.Electro, {
       atk: [0.268, 0.289, 0.311, 0.342, 0.364, 0.389, 0.423, 0.457, 0.492, 0.529, 0.566, 0.604, 0.641],
     }),
-    this.action("驰猎伤害·强化", AttackType.Normal, ElementType.Electro, {
+    action("驰猎伤害·强化", AttackType.Normal, ElementType.Electro, {
       atk: [0.388, 0.419, 0.451, 0.496, 0.528, 0.564, 0.613, 0.663, 0.713, 0.767, 0.821, 0.875, 0.929],
     }),
-    this.action("贯夜伤害·基础", AttackType.Normal, ElementType.Electro, {
+    action("贯夜伤害·基础", AttackType.Normal, ElementType.Electro, {
       atk: [0.33, 0.357, 0.383, 0.422, 0.449, 0.479, 0.521, 0.564, 0.606, 0.652, 0.698, 0.744, 0.79],
     }),
-    this.action("贯夜伤害·普通", AttackType.Normal, ElementType.Electro, {
+    action("贯夜伤害·普通", AttackType.Normal, ElementType.Electro, {
       atk: [0.44, 0.475, 0.511, 0.562, 0.598, 0.639, 0.695, 0.751, 0.808, 0.869, 0.93, 0.992, 1.053],
     }),
-    this.action("贯夜伤害·强化单次", AttackType.Normal, ElementType.Electro, {
+    action("贯夜伤害·强化单次", AttackType.Normal, ElementType.Electro, {
       atk: [0.251, 0.272, 0.292, 0.321, 0.342, 0.365, 0.397, 0.429, 0.461, 0.496, 0.531, 0.566, 0.602],
     }),
-    this.action("流涌之刃伤害", AttackType.Other, ElementType.Electro, {
+    action("流涌之刃伤害", AttackType.Other, ElementType.Electro, {
       atk: [0.432, 0.464, 0.497, 0.54, 0.572, 0.605, 0.648, 0.691, 0.734, 0.778, 0.821, 0.864, 0.918],
     }),
   ];
   burstSkill = [
-    this.action("技能伤害·单次", AttackType.Burst, ElementType.Electro, {
+    action("技能伤害·单次", AttackType.Burst, ElementType.Electro, {
       atk: [1.269, 1.364, 1.459, 1.586, 1.681, 1.776, 1.903, 2.03, 2.157, 2.284, 2.411, 2.538, 2.696],
     }),
   ];
   otherSkill = [
-    this.action("1命·夜巡之影伤害", AttackType.Normal, ElementType.Electro, {
+    action("1命·夜巡之影伤害", AttackType.Normal, ElementType.Electro, {
       atk: [0.3],
     }),
-    this.action("6命·夜巡之影伤害", AttackType.Normal, ElementType.Electro, {
+    action("6命·夜巡之影伤害", AttackType.Normal, ElementType.Electro, {
       atk: [2],
     }),
   ];

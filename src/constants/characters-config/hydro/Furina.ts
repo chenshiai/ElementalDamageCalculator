@@ -10,74 +10,54 @@ import {
   Rarity,
   WeaponType,
 } from "@/types/enum";
-import {
-  Constellation_E_5,
-  Constellation_Q_3,
-  S_80_CRITAL_19P,
-} from "../buffs";
+import { Constellation_E_5, Constellation_Q_3, S_80_CRITAL_19P } from "../buffs";
+import { EnKaId, Weapon, Element, BaseData, Icons, action } from "../decorator";
 
+@EnKaId(10000089, "芙宁娜")
+@Weapon(WeaponType.Sword)
+@Element(ElementType.Hydro)
+@BaseData(Rarity.Five, 15307, 244, 696, 60)
+@Icons("UI_AvatarIcon_Furina")
 class FurinaData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  enkaId = 10000089;
-  name = "芙宁娜";
-  element = ElementType.Hydro;
-  weapon = WeaponType.Sword;
-  rarity = Rarity.Five;
-  baseHP = 15307;
-  baseATK = 244;
-  baseDEF = 696;
-  burstCharge = 60;
-
-  icons = {
-    avatarIcon: this.getEnkaUI("UI_AvatarIcon_Furina"),
-    constsIcon: this.getEnkaUIs([
-      "UI_Talent_S_Furina_01",
-      "UI_Talent_S_Furina_02",
-      "UI_Talent_U_Furina_01",
-      "UI_Talent_S_Furina_03",
-      "UI_Talent_U_Furina_02",
-      "UI_Talent_S_Furina_04",
-    ]),
-    gachaImage: this.getEnkaImg("UI_AvatarIcon_Furina"),
-  };
   talentNames = ["普通攻击·独舞之邀", "孤心沙龙", "万众狂欢"];
 
   normalAttack = [
-    this.action("一段伤害", AttackType.Normal, ElementType.Physical, {
+    action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.484, 0.523, 0.563, 0.619, 0.658, 0.703, 0.765, 0.827, 0.889, 0.957, 1.024],
     }),
-    this.action("二段伤害", AttackType.Normal, ElementType.Physical, {
+    action("二段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.437, 0.473, 0.509, 0.559, 0.595, 0.636, 0.692, 0.748, 0.803, 0.864, 0.925],
     }),
-    this.action("三段伤害", AttackType.Normal, ElementType.Physical, {
+    action("三段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.551, 0.596, 0.641, 0.705, 0.75, 0.801, 0.872, 0.942, 1.013, 1.09, 1.167],
     }),
-    this.action("四段伤害", AttackType.Normal, ElementType.Physical, {
+    action("四段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.733, 0.793, 0.852, 0.938, 0.997, 1.065, 1.159, 1.253, 1.347, 1.449, 1.551],
     }),
-    this.action("重击伤害", AttackType.Strong, ElementType.Physical, {
+    action("重击伤害", AttackType.Strong, ElementType.Physical, {
       atk: [0.742, 0.803, 0.863, 0.949, 1.01, 1.079, 1.174, 1.269, 1.364, 1.467, 1.571],
     }),
-    this.action("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
+    action("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
       atk: [0.639, 0.691, 0.743, 0.818, 0.87, 0.929, 1.011, 1.093, 1.175, 1.264, 1.353],
     }),
-    this.action("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+    action("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
       atk: [1.28, 1.38, 1.49, 1.64, 1.74, 1.86, 2.02, 2.19, 2.35, 2.53, 2.71],
     }),
-    this.action("高空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+    action("高空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
       atk: [1.6, 1.73, 1.86, 2.04, 2.17, 2.32, 2.53, 2.73, 2.93, 3.16, 3.38],
     }),
-    this.action("灵息之刺/流涌之刃伤害", AttackType.Other, ElementType.Hydro, {
+    action("灵息之刺/流涌之刃伤害", AttackType.Other, ElementType.Hydro, {
       atk: [0.095, 0.102, 0.11, 0.121, 0.129, 0.138, 0.15, 0.162, 0.174, 0.187, 0.2],
     }),
   ];
   elementSkill = [
-    this.action("荒性泡沫伤害", AttackType.Skill, ElementType.Hydro, {
+    action("荒性泡沫伤害", AttackType.Skill, ElementType.Hydro, {
       hp: [0.0786, 0.0845, 0.0904, 0.0983, 0.1042, 0.1101, 0.118, 0.1258, 0.1337, 0.1416, 0.1494, 0.1573, 0.1671],
     }),
-    this.action(
+    action(
       "乌瑟勋爵伤害",
       AttackType.Skill,
       ElementType.Hydro,
@@ -86,7 +66,7 @@ class FurinaData extends Character implements ICharacterInfo {
       },
       "Furina"
     ),
-    this.action(
+    action(
       "海薇玛夫人伤害",
       AttackType.Skill,
       ElementType.Hydro,
@@ -95,7 +75,7 @@ class FurinaData extends Character implements ICharacterInfo {
       },
       "Furina"
     ),
-    this.action(
+    action(
       "谢贝蕾妲小姐伤害",
       AttackType.Skill,
       ElementType.Hydro,
@@ -104,18 +84,18 @@ class FurinaData extends Character implements ICharacterInfo {
       },
       "Furina"
     ),
-    this.action("众水的歌者治疗量", AttackType.Heal, ElementType.None, {
+    action("众水的歌者治疗量", AttackType.Heal, ElementType.None, {
       hp: [0.048, 0.0516, 0.0552, 0.06, 0.0636, 0.0672, 0.072, 0.0768, 0.0816, 0.0864, 0.0912, 0.096, 0.102],
       fixed: [462, 508, 559, 612, 670, 732, 797, 867, 940, 1017, 1098, 1183, 1271],
     }),
   ];
   burstSkill = [
-    this.action("技能伤害", AttackType.Burst, ElementType.Hydro, {
+    action("技能伤害", AttackType.Burst, ElementType.Hydro, {
       hp: [0.114, 0.123, 0.131, 0.143, 0.151, 0.16, 0.171, 0.183, 0.194, 0.205, 0.217, 0.228, 0.242],
     }),
   ];
   otherSkill = [
-    this.action("6命·荒性治疗量", AttackType.Heal, ElementType.None, {
+    action("6命·荒性治疗量", AttackType.Heal, ElementType.None, {
       hp: [0.04],
     }),
   ];

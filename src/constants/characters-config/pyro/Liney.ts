@@ -2,61 +2,45 @@ import Character from "../character-class";
 import { IBuffBase, ICharacterInfo } from "@/types/interface";
 import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
 import { Constellation_A_3, Constellation_Q_5, S_80_CRITAL_19P } from "../buffs";
+import { EnKaId, Weapon, Element, BaseData, Icons, action } from "../decorator";
 
+@EnKaId(10000084, "林尼")
+@Weapon(WeaponType.Bow)
+@Element(ElementType.Pyro)
+@BaseData(Rarity.Five, 11021, 318, 538, 60)
+@Icons("UI_AvatarIcon_Liney")
 class LineyData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  enkaId = 10000084;
-  name = "林尼";
-  element = ElementType.Pyro;
-  weapon = WeaponType.Bow;
-  rarity = Rarity.Five;
-  baseHP = 11021;
-  baseATK = 318;
-  baseDEF = 538;
-  burstCharge = 60;
-
-  icons = {
-    avatarIcon: this.getEnkaUI("UI_AvatarIcon_Liney"),
-    constsIcon: this.getEnkaUIs([
-      "UI_Talent_S_Liney_01",
-      "UI_Talent_S_Liney_02",
-      "UI_Talent_U_Liney_01",
-      "UI_Talent_S_Liney_03",
-      "UI_Talent_U_Liney_02",
-      "UI_Talent_S_Liney_04",
-    ]),
-    gachaImage: this.getEnkaImg("UI_AvatarIcon_Liney"),
-  };
   talentNames = ["普通攻击·迫牌易位式", "眩惑光戏法", "大魔术·灵迹巡游"];
 
   normalAttack = [
-    this.action("一段伤害", AttackType.Normal, ElementType.Physical, {
+    action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.388, 0.419, 0.451, 0.496, 0.528, 0.564, 0.613, 0.663, 0.713, 0.767, 0.821, 0.875, 0.929, 0.983],
     }),
-    this.action("二段伤害", AttackType.Normal, ElementType.Physical, {
+    action("二段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.38, 0.411, 0.442, 0.486, 0.517, 0.553, 0.601, 0.65, 0.698, 0.751, 0.804, 0.858, 0.911, 0.964],
     }),
-    this.action("三段伤害·1", AttackType.Normal, ElementType.Physical, {
+    action("三段伤害·1", AttackType.Normal, ElementType.Physical, {
       atk: [0.273, 0.295, 0.317, 0.349, 0.371, 0.396, 0.431, 0.466, 0.501, 0.539, 0.577, 0.615, 0.653, 0.691],
     }),
-    this.action("三段伤害·2", AttackType.Normal, ElementType.Physical, {
+    action("三段伤害·2", AttackType.Normal, ElementType.Physical, {
       atk: [0.273, 0.295, 0.317, 0.349, 0.371, 0.396, 0.431, 0.466, 0.501, 0.539, 0.577, 0.615, 0.653, 0.691],
     }),
-    this.action("四段伤害", AttackType.Normal, ElementType.Physical, {
+    action("四段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.569, 0.616, 0.662, 0.728, 0.775, 0.828, 0.9, 0.973, 1.046, 1.125, 1.205, 1.284, 1.364, 1.443],
     }),
-    this.action("瞄准射击", AttackType.Strong, ElementType.Physical, {
+    action("瞄准射击", AttackType.Strong, ElementType.Physical, {
       atk: [0.439, 0.474, 0.51, 0.561, 0.597, 0.638, 0.694, 0.75, 0.806, 0.867, 0.928, 0.989, 1.051, 1.112],
     }),
-    this.action("一段蓄力瞄准射击", AttackType.Strong, ElementType.Pyro, {
+    action("一段蓄力瞄准射击", AttackType.Strong, ElementType.Pyro, {
       atk: [1.24, 1.33, 1.43, 1.55, 1.64, 1.74, 1.86, 1.98, 2.11, 2.23, 2.36, 2.48, 2.635, 2.79],
     }),
-    this.action("隐具魔术箭伤害", AttackType.Strong, ElementType.Pyro, {
+    action("隐具魔术箭伤害", AttackType.Strong, ElementType.Pyro, {
       atk: [1.728, 1.86, 1.99, 2.16, 2.29, 2.42, 2.59, 2.76, 2.94, 3.11, 3.28, 3.456, 3.672, 3.888],
     }),
-    this.action(
+    action(
       "礼花术弹伤害",
       AttackType.Strong,
       ElementType.Pyro,
@@ -65,32 +49,32 @@ class LineyData extends Character implements ICharacterInfo {
       },
       "Liney"
     ),
-    this.action("6命·礼花术弹·重奏伤害", AttackType.Strong, ElementType.Pyro, {
+    action("6命·礼花术弹·重奏伤害", AttackType.Strong, ElementType.Pyro, {
       atk: [2.12, 2.28, 2.44, 2.65, 2.81, 2.97, 3.18, 3.39, 3.6, 3.82, 4.03, 4.24, 4.51, 4.77].map((i) => i * 0.8),
     }),
-    this.action("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
+    action("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
       atk: [0.568, 0.615, 0.661, 0.727, 0.773, 0.826, 0.899, 0.971, 1.04, 1.12, 1.2, 1.282, 1.361, 1.441],
     }),
-    this.action("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+    action("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
       atk: [1.14, 1.23, 1.32, 1.45, 1.55, 1.65, 1.8, 1.94, 2.09, 2.25, 2.4, 2.563, 2.722, 2.881],
     }),
-    this.action("高空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+    action("高空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
       atk: [1.42, 1.53, 1.65, 1.82, 1.93, 2.06, 2.24, 2.43, 2.61, 2.81, 3, 3.202, 3.4, 3.598],
     }),
-    this.action("灵息之刺伤害", AttackType.Other, ElementType.Pyro, {
+    action("灵息之刺伤害", AttackType.Other, ElementType.Pyro, {
       atk: [0.276, 0.296, 0.317, 0.344, 0.365, 0.386, 0.413, 0.441, 0.468, 0.496, 0.524, 0.551, 0.586, 0.62],
     }),
   ];
   elementSkill = [
-    this.action("技能伤害", AttackType.Skill, ElementType.Pyro, {
+    action("技能伤害", AttackType.Skill, ElementType.Pyro, {
       atk: [1.672, 1.797, 1.923, 2.09, 2.215, 2.341, 2.508, 2.675, 2.842, 3.01],
     }),
   ];
   burstSkill = [
-    this.action("技能伤害", AttackType.Burst, ElementType.Pyro, {
+    action("技能伤害", AttackType.Burst, ElementType.Pyro, {
       atk: [1.54, 1.656, 1.771, 1.925, 2.041, 2.156, 2.31, 2.464, 2.618, 2.772, 2.926, 3.08, 3.273],
     }),
-    this.action("引爆礼花伤害", AttackType.Burst, ElementType.Pyro, {
+    action("引爆礼花伤害", AttackType.Burst, ElementType.Pyro, {
       atk: [4.14, 4.451, 4.761, 5.175, 5.486, 5.796, 6.21, 6.624, 7.038, 7.452, 7.866, 8.28, 8.798],
     }),
   ];

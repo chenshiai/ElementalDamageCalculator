@@ -12,62 +12,47 @@ import {
 } from "@/types/enum";
 import { Constellation_E_3, Constellation_Q_5, S_80_CRITALHUNT_38P } from "../buffs";
 
+import { EnKaId, Weapon, Element, BaseData, Icons, action } from "../decorator";
+
+@EnKaId(10000099, "艾梅莉埃")
+@Weapon(WeaponType.Polearms)
+@Element(ElementType.Dendro)
+@BaseData(Rarity.Five, 13568, 335, 730, 50)
+@Icons("UI_AvatarIcon_Emilie")
 class EmilieData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  enkaId = 10000099;
-  name = "艾梅莉埃";
-  element = ElementType.Dendro;
-  weapon = WeaponType.Polearms;
-  rarity = Rarity.Five;
-  baseHP = 13568;
-  baseATK = 335;
-  baseDEF = 730;
-  burstCharge = 50;
-
-  icons = {
-    avatarIcon: this.getEnkaUI("UI_AvatarIcon_Emilie"),
-    constsIcon: this.getEnkaUIs([
-      "UI_Talent_S_Emilie_01",
-      "UI_Talent_S_Emilie_02",
-      "UI_Talent_U_Emilie_01",
-      "UI_Talent_S_Emilie_03",
-      "UI_Talent_U_Emilie_02",
-      "UI_Talent_S_Emilie_04",
-    ]),
-    gachaImage: this.getEnkaImg("UI_AvatarIcon_Emilie"),
-  };
   talentNames = ["普通攻击·逐影枪术·改", "撷萃调香", "香氛演绎"];
 
   normalAttack = [
-    this.action("一段伤害", AttackType.Normal, ElementType.Physical, {
+    action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.486, 0.525, 0.565, 0.621, 0.661, 0.706, 0.768, 0.83, 0.892, 0.96, 1.028],
     }),
-    this.action("二段伤害", AttackType.Normal, ElementType.Physical, {
+    action("二段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.449, 0.486, 0.522, 0.574, 0.611, 0.653, 0.71, 0.767, 0.825, 0.887, 0.95],
     }),
-    this.action("三段伤害", AttackType.Normal, ElementType.Physical, {
+    action("三段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.593, 0.641, 0.69, 0.758, 0.807, 0.862, 0.938, 1.014, 1.089, 1.172, 1.255],
     }),
-    this.action("四段伤害", AttackType.Normal, ElementType.Physical, {
+    action("四段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.751, 0.812, 0.873, 0.961, 1.022, 1.092, 1.188, 1.284, 1.38, 1.485, 1.589],
     }),
-    this.action("重击伤害", AttackType.Strong, ElementType.Physical, {
+    action("重击伤害", AttackType.Strong, ElementType.Physical, {
       atk: [0.913, 0.988, 1.062, 1.168, 1.243, 1.328, 1.444, 1.561, 1.678, 1.805, 1.933],
     }),
-    this.action("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
+    action("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
       atk: [0.639, 0.691, 0.743, 0.818, 0.87, 0.929, 1.011, 1.093, 1.175, 1.264, 1.353],
     }),
-    this.action("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+    action("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
       atk: [1.28, 1.38, 1.48, 1.64, 1.74, 1.86, 2.02, 2.19, 2.35, 2.53, 2.71],
     }),
-    this.action("高空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+    action("高空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
       atk: [1.6, 1.73, 1.86, 2.04, 2.17, 2.32, 2.53, 2.73, 2.93, 3.16, 3.38],
     }),
   ];
   elementSkill = [
-    this.action(
+    action(
       "技能伤害",
       AttackType.Skill,
       ElementType.Dendro,
@@ -76,7 +61,7 @@ class EmilieData extends Character implements ICharacterInfo {
       },
       "Emilie"
     ),
-    this.action(
+    action(
       "柔灯之匣·一阶伤害",
       AttackType.Skill,
       ElementType.Dendro,
@@ -85,7 +70,7 @@ class EmilieData extends Character implements ICharacterInfo {
       },
       "Emilie"
     ),
-    this.action(
+    action(
       "柔灯之匣·二阶伤害·单次",
       AttackType.Skill,
       ElementType.Dendro,
@@ -94,17 +79,17 @@ class EmilieData extends Character implements ICharacterInfo {
       },
       "Emilie"
     ),
-    this.action("灵息之刺伤害", AttackType.Skill, ElementType.Dendro, {
+    action("灵息之刺伤害", AttackType.Skill, ElementType.Dendro, {
       atk: [0.385, 0.414, 0.443, 0.482, 0.51, 0.539, 0.578, 0.616, 0.655, 0.693, 0.732, 0.77, 0.819],
     }),
   ];
   burstSkill = [
-    this.action("柔灯之匣·三阶伤害", AttackType.Burst, ElementType.Dendro, {
+    action("柔灯之匣·三阶伤害", AttackType.Burst, ElementType.Dendro, {
       atk: [2.172, 2.335, 2.498, 2.715, 2.878, 3.041, 3.258, 3.475, 3.692, 3.91, 4.127, 4.344, 4.616],
     }),
   ];
   otherSkill = [
-    this.action(
+    action(
       "固有天赋·余薰",
       AttackType.Other,
       ElementType.Dendro,

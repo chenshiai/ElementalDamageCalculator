@@ -2,86 +2,70 @@ import Character from "../character-class";
 import { ICharacterInfo } from "@/types/interface";
 import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
 import { Constellation_E_3, Constellation_Q_5, S_80_HP_28P } from "../buffs";
+import { EnKaId, Weapon, Element, BaseData, Icons, action } from "../decorator";
 
+@EnKaId(10000099, "希格雯")
+@Weapon(WeaponType.Bow)
+@Element(ElementType.Hydro)
+@BaseData(Rarity.Five, 13348, 193, 500, 70)
+@Icons("UI_AvatarIcon_Sigewinne")
 class SigewinneData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  enkaId = 10000099;
-  name = "希格雯";
-  element = ElementType.Hydro;
-  weapon = WeaponType.Bow;
-  rarity = Rarity.Five;
-  baseHP = 13348;
-  baseATK = 193;
-  baseDEF = 500;
-  burstCharge = 70;
-
-  icons = {
-    avatarIcon: this.getEnkaUI("UI_AvatarIcon_Sigewinne"),
-    constsIcon: this.getEnkaUIs([
-      "UI_Talent_S_Sigewinne_01",
-      "UI_Talent_S_Sigewinne_02",
-      "UI_Talent_U_Sigewinne_01",
-      "UI_Talent_S_Sigewinne_03",
-      "UI_Talent_U_Sigewinne_02",
-      "UI_Talent_S_Sigewinne_04",
-    ]),
-    gachaImage: this.getEnkaImg("UI_AvatarIcon_Sigewinne"),
-  };
   talentNames = ["普通攻击·靶向治疗", "弹跳水疗法", "过饱和心意注射"];
 
   normalAttack = [
-    this.action("一段伤害", AttackType.Normal, ElementType.Physical, {
+    action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.526, 0.569, 0.612, 0.673, 0.716, 0.765, 0.832, 0.899, 0.967, 1.04, 1.114],
     }),
-    this.action("二段伤害", AttackType.Normal, ElementType.Physical, {
+    action("二段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.511, 0.552, 0.594, 0.653, 0.695, 0.742, 0.808, 0.873, 0.938, 1.01, 1.081],
     }),
-    this.action("三段伤害", AttackType.Normal, ElementType.Physical, {
+    action("三段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.783, 0.847, 0.91, 1.001, 1.065, 1.138, 1.238, 1.338, 1.438, 1.548, 1.657],
     }),
-    this.action("瞄准射击", AttackType.Strong, ElementType.Physical, {
+    action("瞄准射击", AttackType.Strong, ElementType.Physical, {
       atk: [0.439, 0.474, 0.51, 0.561, 0.597, 0.638, 0.694, 0.75, 0.806, 0.867, 0.928],
     }),
-    this.action("满蓄力瞄准射击", AttackType.Strong, ElementType.Hydro, {
+    action("满蓄力瞄准射击", AttackType.Strong, ElementType.Hydro, {
       atk: [1.24, 1.33, 1.43, 1.55, 1.64, 1.74, 1.86, 1.98, 2.11, 2.23, 2.36],
     }),
-    this.action("小小关心气泡伤害", AttackType.Strong, ElementType.Hydro, {
+    action("小小关心气泡伤害", AttackType.Strong, ElementType.Hydro, {
       atk: [0.248, 0.267, 0.285, 0.31, 0.329, 0.347, 0.372, 0.397, 0.422, 0.446, 0.471],
     }),
-    this.action("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
+    action("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
       atk: [0.568, 0.615, 0.661, 0.727, 0.773, 0.826, 0.899, 0.971, 1.04, 1.12, 1.2],
     }),
-    this.action("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+    action("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
       atk: [1.14, 1.23, 1.32, 1.45, 1.55, 1.65, 1.8, 1.94, 2.09, 2.25, 2.4],
     }),
-    this.action("高空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+    action("高空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
       atk: [1.42, 1.53, 1.65, 1.82, 1.93, 2.06, 2.24, 2.43, 2.61, 2.81, 3],
     }),
   ];
   elementSkill = [
-    this.action("激愈水球伤害", AttackType.Skill, ElementType.Hydro, {
+    action("激愈水球伤害", AttackType.Skill, ElementType.Hydro, {
       hp: [0.0228, 0.0245, 0.0262, 0.0285, 0.0302, 0.0319, 0.0342, 0.0365, 0.0388, 0.041, 0.0433, 0.0456, 0.0485],
     }),
-    this.action("流涌之刃伤害", AttackType.Other, ElementType.Hydro, {
+    action("流涌之刃伤害", AttackType.Other, ElementType.Hydro, {
       hp: [0.0068, 0.0074, 0.0079, 0.0086, 0.0091, 0.0096, 0.0103, 0.0109, 0.0116, 0.0123, 0.013, 0.0137, 0.0145],
     }),
-    this.action("激愈水球治疗量", AttackType.Heal, ElementType.None, {
+    action("激愈水球治疗量", AttackType.Heal, ElementType.None, {
       hp: [0.028, 0.0301, 0.0322, 0.035, 0.0371, 0.0392, 0.042, 0.0448, 0.0476, 0.0504, 0.0532, 0.056, 0.0595],
       fixed: [270, 297, 326, 357, 391, 427, 465, 506, 548, 593, 640, 690, 742],
     }),
-    this.action("弹跳结束治疗量", AttackType.Heal, ElementType.None, {
+    action("弹跳结束治疗量", AttackType.Heal, ElementType.None, {
       hp: new Array(13).fill(0.5),
     }),
   ];
   burstSkill = [
-    this.action("技能伤害", AttackType.Burst, ElementType.Hydro, {
+    action("技能伤害", AttackType.Burst, ElementType.Hydro, {
       hp: [0.118, 0.127, 0.135, 0.147, 0.156, 0.165, 0.177, 0.188, 0.2, 0.212, 0.224, 0.235, 0.25],
     }),
   ];
   otherSkill = [
-    this.action("2命·护盾吸收量", AttackType.Shield, ElementType.None, {
+    action("2命·护盾吸收量", AttackType.Shield, ElementType.None, {
       hp: [0.3],
     }),
   ];

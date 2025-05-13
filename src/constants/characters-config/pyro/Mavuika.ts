@@ -2,72 +2,53 @@ import Character from "../character-class";
 import { IBuffBase, ICharacterInfo } from "@/types/interface";
 import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
 import { Constellation_E_5, Constellation_Q_3, S_80_CRITALHUNT_38P } from "../buffs";
+import { EnKaId, Weapon, Element, BaseData, Icons, action } from "../decorator";
 
+@EnKaId(10000106, "玛薇卡")
+@Weapon(WeaponType.GreatSword)
+@Element(ElementType.Pyro)
+@BaseData(Rarity.Five, 12552, 359, 792, 0)
+@Icons("UI_AvatarIcon_Mavuika")
 class MavuikaData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-
-  enkaId = 10000106;
-  name = "玛薇卡";
-  element = ElementType.Pyro;
-  weapon = WeaponType.GreatSword;
-  rarity = Rarity.Five;
-
-  baseATK = 359;
-  baseDEF = 792;
-  baseHP = 12552;
-  burstCharge = 0;
-
-  icons = {
-    avatarIcon: this.getEnkaUI("UI_AvatarIcon_Mavuika"),
-    constsIcon: this.getEnkaUIs([
-      "UI_Talent_S_Mavuika_01",
-      "UI_Talent_S_Mavuika_02",
-      "UI_Talent_U_Mavuika_01",
-      "UI_Talent_S_Mavuika_03",
-      "UI_Talent_U_Mavuika_02",
-      "UI_Talent_S_Mavuika_04",
-    ]),
-    gachaImage: this.getEnkaImg("UI_AvatarIcon_Mavuika"),
-  };
   talentNames = ["普通攻击·以命织火", "称名之刻", "燔天之时"];
-
   normalAttack = [
-    this.action("一段伤害", AttackType.Normal, ElementType.Physical, {
+    action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.8, 0.865, 0.931, 1.024, 1.089, 1.163, 1.266, 1.368, 1.47, 1.582, 1.694],
     }),
-    this.action("二段伤害·单次", AttackType.Normal, ElementType.Physical, {
+    action("二段伤害·单次", AttackType.Normal, ElementType.Physical, {
       atk: [0.365, 0.394, 0.424, 0.467, 0.496, 0.53, 0.577, 0.624, 0.67, 0.721, 0.772],
     }),
-    this.action("三段伤害·单次", AttackType.Normal, ElementType.Physical, {
+    action("三段伤害·单次", AttackType.Normal, ElementType.Physical, {
       atk: [0.332, 0.359, 0.386, 0.425, 0.452, 0.483, 0.525, 0.567, 0.61, 0.657, 0.703],
     }),
-    this.action("四段伤害", AttackType.Normal, ElementType.Physical, {
+    action("四段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [1.162, 1.257, 1.351, 1.486, 1.581, 1.689, 1.837, 1.986, 2.135, 2.297, 2.459],
     }),
-    this.action("重击伤害", AttackType.Strong, ElementType.Physical, {
+    action("重击伤害", AttackType.Strong, ElementType.Physical, {
       atk: [1.94, 2.1, 2.25, 2.48, 2.64, 2.82, 3.07, 3.31, 3.56, 3.83, 4.1],
     }),
-    this.action("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
+    action("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
       atk: [0.746, 0.807, 0.867, 0.954, 1.015, 1.084, 1.18, 1.275, 1.37, 1.474, 1.579],
     }),
-    this.action("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+    action("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
       atk: [1.49, 1.61, 1.73, 1.91, 2.03, 2.17, 2.36, 2.55, 2.74, 2.95, 3.16],
     }),
-    this.action("高空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+    action("高空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
       atk: [1.86, 2.01, 2.17, 2.38, 2.53, 2.71, 2.95, 3.18, 3.42, 3.68, 3.94],
     }),
   ];
 
   elementSkill = [
-    this.action("技能伤害", AttackType.Skill, ElementType.Pyro, {
+    action("技能伤害", AttackType.Skill, ElementType.Pyro, {
       atk: [0.744, 0.8, 0.856, 0.93, 0.986, 1.042, 1.116, 1.19, 1.265, 1.339, 1.414, 1.488, 1.581],
     }),
-    this.action("焚曜之环伤害", AttackType.Skill, ElementType.Pyro, {
+    action("焚曜之环伤害", AttackType.Skill, ElementType.Pyro, {
       atk: [1.28, 1.376, 1.472, 1.6, 1.696, 1.792, 1.92, 2.048, 2.176, 2.304, 2.432, 2.56, 2.72],
     }),
-    this.action(
+    action(
       "驰轮车普攻一段伤害",
       AttackType.Normal,
       ElementType.Pyro,
@@ -76,7 +57,7 @@ class MavuikaData extends Character implements ICharacterInfo {
       },
       "Mavuika"
     ),
-    this.action(
+    action(
       "驰轮车普攻二段伤害",
       AttackType.Normal,
       ElementType.Pyro,
@@ -85,7 +66,7 @@ class MavuikaData extends Character implements ICharacterInfo {
       },
       "Mavuika"
     ),
-    this.action(
+    action(
       "驰轮车普攻三段伤害",
       AttackType.Normal,
       ElementType.Pyro,
@@ -94,7 +75,7 @@ class MavuikaData extends Character implements ICharacterInfo {
       },
       "Mavuika"
     ),
-    this.action(
+    action(
       "驰轮车普攻四段伤害",
       AttackType.Normal,
       ElementType.Pyro,
@@ -103,7 +84,7 @@ class MavuikaData extends Character implements ICharacterInfo {
       },
       "Mavuika"
     ),
-    this.action(
+    action(
       "驰轮车普攻五段伤害",
       AttackType.Normal,
       ElementType.Pyro,
@@ -112,10 +93,10 @@ class MavuikaData extends Character implements ICharacterInfo {
       },
       "Mavuika"
     ),
-    this.action("驰轮车冲刺伤害", AttackType.Skill, ElementType.Pyro, {
+    action("驰轮车冲刺伤害", AttackType.Skill, ElementType.Pyro, {
       atk: [0.808, 0.874, 0.94, 1.034, 1.1, 1.175, 1.278, 1.382, 1.485, 1.598, 1.711, 1.824, 1.936],
     }),
-    this.action(
+    action(
       "驰轮车重击循环伤害",
       AttackType.Strong,
       ElementType.Pyro,
@@ -124,7 +105,7 @@ class MavuikaData extends Character implements ICharacterInfo {
       },
       "Mavuika"
     ),
-    this.action(
+    action(
       "驰轮车重击终结伤害",
       AttackType.Strong,
       ElementType.Pyro,
@@ -133,22 +114,22 @@ class MavuikaData extends Character implements ICharacterInfo {
       },
       "Mavuika"
     ),
-    this.action("驰轮车坠地冲击伤害", AttackType.Falling, ElementType.Pyro, {
+    action("驰轮车坠地冲击伤害", AttackType.Falling, ElementType.Pyro, {
       atk: [1.6, 1.73, 1.86, 2.046, 2.176, 2.325, 2.53, 2.734, 2.939, 3.162, 3.385, 3.608, 3.832],
     }),
   ];
 
   burstSkill = [
-    this.action("技能伤害", AttackType.Burst, ElementType.Pyro, {
+    action("技能伤害", AttackType.Burst, ElementType.Pyro, {
       atk: [4.448, 4.782, 5.115, 5.56, 5.894, 6.227, 6.672, 7.117, 7.562, 8.006, 8.451, 8.896, 9.452],
     }),
   ];
 
   otherSkill = [
-    this.action("6命·驰轮车伤害", AttackType.Skill, ElementType.Pyro, {
+    action("6命·驰轮车伤害", AttackType.Skill, ElementType.Pyro, {
       atk: [2],
     }),
-    this.action("6命·焚曜之环·灼象伤害", AttackType.Skill, ElementType.Pyro, {
+    action("6命·焚曜之环·灼象伤害", AttackType.Skill, ElementType.Pyro, {
       atk: [5],
     }),
   ];

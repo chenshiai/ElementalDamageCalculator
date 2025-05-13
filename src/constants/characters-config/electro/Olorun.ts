@@ -1,41 +1,18 @@
 import Character from "../character-class";
 import { ICharacterInfo } from "@/types/interface";
 import { AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
-import {
-  A_80_ATK_24P,
-  Constellation_E_5,
-  Constellation_Q_3,
-} from "../buffs";
-import { Weapon, Element, Icons, EnKaId, BaseData, action } from "../decorator";
+import { A_80_ATK_24P, Constellation_E_5, Constellation_Q_3 } from "../buffs";
+import { EnKaId, Weapon, Element, BaseData, Icons, action } from "../decorator";
 
+@EnKaId(10000105, "欧洛伦")
+@Weapon(WeaponType.Bow)
+@Element(ElementType.Electro)
+@BaseData(Rarity.Four, 9244, 244, 587, 60)
+@Icons("UI_AvatarIcon_Olorun")
 class OlorunData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-
-  enkaId = 10000105;
-  name = "欧洛伦";
-  element = ElementType.Electro;
-  weapon = WeaponType.Bow;
-  rarity = Rarity.Four;
-
-  baseHP = 9244;
-  baseATK = 244;
-  baseDEF = 587;
-  burstCharge = 60;
-
-  icons = {
-    avatarIcon: this.getEnkaUI("UI_AvatarIcon_Olorun"),
-    constsIcon: this.getEnkaUIs([
-      "UI_Talent_S_Olorun_01",
-      "UI_Talent_S_Olorun_02",
-      "UI_Talent_U_Olorun_01",
-      "UI_Talent_S_Olorun_03",
-      "UI_Talent_U_Olorun_02",
-      "UI_Talent_S_Olorun_04",
-    ]),
-    gachaImage: this.getEnkaImg("UI_AvatarIcon_Olorun"),
-  };
   talentNames = ["普通攻击·宿灵闪箭", "暝色缒索", "黯声回响"];
 
   normalAttack = [

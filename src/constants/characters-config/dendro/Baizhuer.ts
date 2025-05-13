@@ -6,95 +6,79 @@ import {
   Constellation_Q_3,
   S_80_HP_28P,
 } from "../buffs";
+import { EnKaId, Weapon, Element, BaseData, Icons, action } from "../decorator";
 
+@EnKaId(10000082, "白术")
+@Weapon(WeaponType.Magic)
+@Element(ElementType.Dendro)
+@BaseData(Rarity.Five, 13348, 193, 500, 80)
+@Icons("UI_AvatarIcon_Baizhuer")
 class BaizhuerData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  enkaId = 10000082;
-  name = "白术";
-  element = ElementType.Dendro;
-  weapon = WeaponType.Magic;
-  rarity = Rarity.Five;
-  baseHP = 13348;
-  baseATK = 193;
-  baseDEF = 500;
-  burstCharge = 80;
-
-  icons = {
-    avatarIcon: this.getEnkaUI("UI_AvatarIcon_Baizhuer"),
-    constsIcon: this.getEnkaUIs([
-      "UI_Talent_S_Baizhuer_01",
-      "UI_Talent_S_Baizhuer_02",
-      "UI_Talent_U_Baizhuer_01",
-      "UI_Talent_S_Baizhuer_03",
-      "UI_Talent_U_Baizhuer_02",
-      "UI_Talent_S_Baizhuer_04",
-    ]),
-    gachaImage: this.getEnkaImg("UI_AvatarIcon_Baizhuer"),
-  };
   talentNames = ["普通攻击·金匮针解", "太素诊要", "愈气全形论"];
 
   normalAttack = [
-    this.action("一段伤害", AttackType.Normal, ElementType.Dendro, {
+    action("一段伤害", AttackType.Normal, ElementType.Dendro, {
       atk: [0.374, 0.402, 0.43, 0.467, 0.495, 0.523, 0.561, 0.598, 0.635, 0.673, 0.71],
     }),
-    this.action("二段伤害", AttackType.Normal, ElementType.Dendro, {
+    action("二段伤害", AttackType.Normal, ElementType.Dendro, {
       atk: [0.364, 0.392, 0.419, 0.455, 0.483, 0.51, 0.546, 0.583, 0.619, 0.656, 0.692],
     }),
-    this.action("三段伤害·1", AttackType.Normal, ElementType.Dendro, {
+    action("三段伤害·1", AttackType.Normal, ElementType.Dendro, {
       atk: [0.225, 0.242, 0.259, 0.282, 0.299, 0.316, 0.338, 0.361, 0.383, 0.406, 0.428],
     }),
-    this.action("三段伤害·2", AttackType.Normal, ElementType.Dendro, {
+    action("三段伤害·2", AttackType.Normal, ElementType.Dendro, {
       atk: [0.225, 0.242, 0.259, 0.282, 0.299, 0.316, 0.338, 0.361, 0.383, 0.406, 0.428],
     }),
-    this.action("四段伤害", AttackType.Normal, ElementType.Dendro, {
+    action("四段伤害", AttackType.Normal, ElementType.Dendro, {
       atk: [0.541, 0.582, 0.623, 0.677, 0.717, 0.758, 0.812, 0.866, 0.92, 0.975, 1.029],
     }),
-    this.action("重击", AttackType.Strong, ElementType.Dendro, {
+    action("重击", AttackType.Strong, ElementType.Dendro, {
       atk: [1.21, 1.301, 1.392, 1.513, 1.604, 1.695, 1.816, 1.937, 2.058, 2.179, 2.3],
     }),
-    this.action("下坠期间伤害", AttackType.FallPeriod, ElementType.Dendro, {
+    action("下坠期间伤害", AttackType.FallPeriod, ElementType.Dendro, {
       atk: [0.568, 0.615, 0.661, 0.727, 0.773, 0.826, 0.899, 0.971, 1.04, 1.12, 1.2],
     }),
-    this.action("低空坠地冲击伤害", AttackType.Falling, ElementType.Dendro, {
+    action("低空坠地冲击伤害", AttackType.Falling, ElementType.Dendro, {
       atk: [1.14, 1.23, 1.32, 1.45, 1.55, 1.65, 1.8, 1.94, 2.09, 2.25, 2.4],
     }),
-    this.action("高空坠地冲击伤害", AttackType.Falling, ElementType.Dendro, {
+    action("高空坠地冲击伤害", AttackType.Falling, ElementType.Dendro, {
       atk: [1.42, 1.53, 1.65, 1.82, 1.93, 2.06, 2.24, 2.43, 2.61, 2.81, 3],
     }),
   ];
   elementSkill = [
-    this.action("技能伤害", AttackType.Skill, ElementType.Dendro, {
+    action("技能伤害", AttackType.Skill, ElementType.Dendro, {
       atk: [0.792, 0.851, 0.911, 0.99, 1.049, 1.109, 1.188, 1.267, 1.346, 1.426, 1.505, 1.584, 1.683],
     }),
-    this.action("治疗量", AttackType.Heal, ElementType.None, {
+    action("治疗量", AttackType.Heal, ElementType.None, {
       hp: [0.08, 0.086, 0.092, 0.1, 0.106, 0.112, 0.12, 0.128, 0.136, 0.144, 0.152, 0.16, 0.17],
       fixed: [770, 847, 931, 1021, 1117, 1220, 1329, 1445, 1567, 1695, 1830, 1971, 2119],
     }),
-    this.action("2命·游丝徵灵·切治疗量", AttackType.Heal, ElementType.None, {
+    action("2命·游丝徵灵·切治疗量", AttackType.Heal, ElementType.None, {
       hp: [0.08, 0.086, 0.092, 0.1, 0.106, 0.112, 0.12, 0.128, 0.136, 0.144, 0.152, 0.16, 0.17].map((i) => i * 0.2),
       fixed: [770, 847, 931, 1021, 1117, 1220, 1329, 1445, 1567, 1695, 1830, 1971, 2119].map((i) => i * 0.2),
     }),
   ];
   burstSkill = [
-    this.action("灵气脉技能伤害", AttackType.Burst, ElementType.Dendro, {
+    action("灵气脉技能伤害", AttackType.Burst, ElementType.Dendro, {
       atk: [0.971, 1.043, 1.116, 1.213, 1.286, 1.359, 1.456, 1.553, 1.65, 1.747, 1.844, 1.941, 2.063],
     }),
-    this.action("无郤气护盾吸收量", AttackType.Shield, ElementType.None, {
+    action("无郤气护盾吸收量", AttackType.Shield, ElementType.None, {
       hp: [0.008, 0.0086, 0.0092, 0.01, 0.0106, 0.0112, 0.012, 0.0128, 0.0136, 0.0144, 0.0152, 0.016, 0.017],
       fixed: [77, 85, 93, 102, 112, 122, 133, 144, 157, 170, 183, 197, 212],
     }),
-    this.action("无郤气护盾治疗量", AttackType.Heal, ElementType.None, {
+    action("无郤气护盾治疗量", AttackType.Heal, ElementType.None, {
       hp: [0.052, 0.0559, 0.0598, 0.065, 0.0689, 0.0728, 0.078, 0.0832, 0.0884, 0.0936, 0.0988, 0.104, 0.1105],
       fixed: [501, 551, 605, 664, 726, 793, 864, 939, 1018, 1102, 1189, 1281, 1377],
     }),
   ];
   otherSkill = [
-    this.action("味草之滋", AttackType.Heal, ElementType.None, {
+    action("味草之滋", AttackType.Heal, ElementType.None, {
       hp: [0.025],
     }),
-    this.action("2命·游丝徵灵·切伤害", AttackType.Skill, ElementType.Dendro, {
+    action("2命·游丝徵灵·切伤害", AttackType.Skill, ElementType.Dendro, {
       atk: [2.5],
     }),
   ];

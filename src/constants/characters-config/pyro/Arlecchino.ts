@@ -1,90 +1,70 @@
 import Character from "../character-class";
 import { ICharacterInfo } from "@/types/interface";
 import { ActionOn, AttackType, BuffType, ElementType, EnchantingType, Rarity, WeaponType } from "@/types/enum";
-import {
-  Constellation_A_3,
-  Constellation_Q_5,
-  S_80_CRITALHUNT_38P,
-} from "../buffs";
+import { Constellation_A_3, Constellation_Q_5, S_80_CRITALHUNT_38P } from "../buffs";
+import { EnKaId, Weapon, Element, BaseData, Icons, action } from "../decorator";
 
+@EnKaId(10000096, "阿蕾奇诺")
+@Weapon(WeaponType.Polearms)
+@Element(ElementType.Pyro)
+@BaseData(Rarity.Five, 13103, 342, 765, 60)
+@Icons("UI_AvatarIcon_Arlecchino")
 class ArlecchinoData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  enkaId = 10000096;
-  name = "阿蕾奇诺";
-  element = ElementType.Pyro;
-  weapon = WeaponType.Polearms;
-  rarity = Rarity.Five;
-  baseHP = 13103;
-  baseATK = 342;
-  baseDEF = 765;
-  burstCharge = 60;
-
-  icons = {
-    avatarIcon: this.getEnkaUI("UI_AvatarIcon_Arlecchino"),
-    constsIcon: this.getEnkaUIs([
-      "UI_Talent_S_Arlecchino_01",
-      "UI_Talent_S_Arlecchino_02",
-      "UI_Talent_U_Arlecchino_01",
-      "UI_Talent_S_Arlecchino_03",
-      "UI_Talent_U_Arlecchino_02",
-      "UI_Talent_S_Arlecchino_04",
-    ]),
-    gachaImage: this.getEnkaImg("UI_AvatarIcon_Arlecchino"),
-  };
   talentNames = ["普通攻击·斩首之邀", "万相化灰", "厄月将升"];
 
   normalAttack = [
-    this.action("一段伤害", AttackType.Normal, ElementType.Physical, {
+    action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.475, 0.514, 0.552, 0.608, 0.646, 0.69, 0.751, 0.812, 0.873, 0.939, 1.005, 1.072, 1.138, 1.204],
     }),
-    this.action("二段伤害", AttackType.Normal, ElementType.Physical, {
+    action("二段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.521, 0.563, 0.606, 0.666, 0.709, 0.757, 0.824, 0.891, 0.957, 1.03, 1.103, 1.175, 1.248, 1.321],
     }),
-    this.action("三段伤害·1", AttackType.Normal, ElementType.Physical, {
+    action("三段伤害·1", AttackType.Normal, ElementType.Physical, {
       atk: [0.654, 0.707, 0.76, 0.836, 0.89, 0.95, 1.034, 1.118, 1.201, 1.293, 1.384, 1.475, 1.566, 1.657],
     }),
-    this.action("三段伤害·2", AttackType.Normal, ElementType.Physical, {
+    action("三段伤害·2", AttackType.Normal, ElementType.Physical, {
       atk: [0.371, 0.402, 0.432, 0.475, 0.505, 0.54, 0.587, 0.635, 0.682, 0.734, 0.786, 0.838, 0.89, 0.942],
     }),
-    this.action("四段伤害", AttackType.Normal, ElementType.Physical, {
+    action("四段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.371, 0.402, 0.432, 0.475, 0.505, 0.54, 0.587, 0.635, 0.682, 0.734, 0.786, 0.838, 0.89, 0.942],
     }),
-    this.action("五段伤害", AttackType.Normal, ElementType.Physical, {
+    action("五段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.7, 0.757, 0.814, 0.895, 0.952, 1.017, 1.107, 1.196, 1.286, 1.383, 1.481, 1.579, 1.676, 1.774],
     }),
-    this.action("重击伤害", AttackType.Strong, ElementType.Physical, {
+    action("重击伤害", AttackType.Strong, ElementType.Physical, {
       atk: [0.908, 0.982, 1.056, 1.162, 1.236, 1.32, 1.436, 1.552, 1.668, 1.795, 1.922, 2.049, 2.175, 2.302],
     }),
-    this.action("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
+    action("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
       atk: [0.639, 0.691, 0.743, 0.818, 0.87, 0.929, 1.011, 1.093, 1.175, 1.264, 1.353, 1.442, 1.531, 1.621],
     }),
-    this.action("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+    action("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
       atk: [1.28, 1.38, 1.49, 1.64, 1.74, 1.86, 2.02, 2.19, 2.35, 2.53, 2.71, 2.884, 3.062, 3.241],
     }),
-    this.action("高空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
+    action("高空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
       atk: [1.6, 1.73, 1.86, 2.04, 2.17, 2.32, 2.53, 2.73, 2.93, 3.16, 3.38, 3.602, 3.825, 4.048],
     }),
   ];
   elementSkill = [
-    this.action("尖刺伤害", AttackType.Skill, ElementType.Pyro, {
+    action("尖刺伤害", AttackType.Skill, ElementType.Pyro, {
       atk: [0.148, 0.16, 0.171, 0.186, 0.197, 0.208, 0.223, 0.237, 0.252, 0.267],
     }),
-    this.action("切斩伤害", AttackType.Skill, ElementType.Pyro, {
+    action("切斩伤害", AttackType.Skill, ElementType.Pyro, {
       atk: [1.336, 1.436, 1.536, 1.67, 1.77, 1.87, 2.003, 2.137, 2.271, 2.404],
     }),
-    this.action("血偿勒令伤害", AttackType.Skill, ElementType.Pyro, {
+    action("血偿勒令伤害", AttackType.Skill, ElementType.Pyro, {
       atk: [0.318, 0.342, 0.366, 0.398, 0.421, 0.445, 0.477, 0.509, 0.541, 0.572],
     }),
   ];
   burstSkill = [
-    this.action("技能伤害", AttackType.Burst, ElementType.Pyro, {
+    action("技能伤害", AttackType.Burst, ElementType.Pyro, {
       atk: [3.704, 3.982, 4.26, 4.63, 4.908, 5.186, 5.556, 5.926, 6.297, 6.667, 7.038, 7.408, 7.871],
     }),
   ];
   otherSkill = [
-    this.action("2命·厄月血火", AttackType.Other, ElementType.Pyro, {
+    action("2命·厄月血火", AttackType.Other, ElementType.Pyro, {
       atk: [9],
     }),
   ];
