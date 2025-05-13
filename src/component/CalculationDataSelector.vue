@@ -139,7 +139,7 @@ const replayText = computed(() => {
     <SwipeCell v-for="item in localDataFilter" :key="item.title">
       <details class="data-popup__collapse-item">
         <summary class="data-title">
-          <span>{{ item.title }}</span>
+          <data>{{ item.title }}</data>
           <div class="first-row">
             <img :src="getAvatarIcon(item.characterEnkaId)" />
             <div class="info">
@@ -234,6 +234,7 @@ const replayText = computed(() => {
 .first-row img {
   border-radius: 4px;
   height: 38px;
+  width: 38px;
   border: 2px solid var(--border);
 }
 

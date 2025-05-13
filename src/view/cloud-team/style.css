@@ -46,6 +46,7 @@
 .weapon-icon {
   border-radius: 4px;
   height: 36px;
+  width: 36px;
   border: 2px solid var(--border);
   background: var(--bg);
 }

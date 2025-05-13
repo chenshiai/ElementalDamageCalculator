@@ -143,6 +143,11 @@ const removeRelic = () => {
 const showSetRelicStatPop = (equip: IRelicLibraryItemEquip) => {
   // 根据部位下标来获取部位的具体类型和图标
   setStatBase.value = equip[selectedPartIndex.value];
+  if (mainStatFilter.value.length === 1) {
+    setStatForm.value.reliquaryMainstat.mainPropId = mainStatFilter.value[0].mainPropId;
+    setStatForm.value.reliquaryMainstat.statValue = mainStatFilter.value[0].statValue;
+    selectStatus.value = 1;
+  }
 };
 
 // 主词条变化后设置默认数值，并删除相同的副词条
@@ -269,9 +274,10 @@ const deleteLocalData = (item: IRelicItem) => {
       <div class="set-relic-title">
         <span @click="setStatBase = null">切换圣遗物</span>
         <span><img v-lazy="setStatBase.icon" />{{ setStatBase.name }}</span>
-        <span class="set-relic-title__close" @click="removeRelic">卸下圣遗物</span>
+        <span v-if="relicList[selectedPartIndex]" class="set-relic-title__close" @click="removeRelic">卸下圣遗物</span>
+        <span v-else class="set-relic-title__close" @click="closePopup">取消编辑</span>
       </div>
-      <Tabs class="relic-tabs" v-model:active="selectStatus" type="card" @click-tab="selectStatus = 1">
+      <Tabs class="relic-tabs" type="card"  v-model:active="selectStatus">
         <Tab title="选择主属性">
           <RadioGroup
             class="substats-check-group"
@@ -476,7 +482,6 @@ const deleteLocalData = (item: IRelicItem) => {
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(4, 28px);
   gap: 4px;
-  /* margin-bottom: 60px; */
   margin-top: 4px;
   font-size: 12px;
 }
@@ -492,7 +497,7 @@ const deleteLocalData = (item: IRelicItem) => {
 }
 .substats-check-group > div {
   border: 1px solid var(--main-text);
-  border-radius: 4px;
+  border-radius: 2px;
 }
 .substats-check-group > div > span {
   margin: 0;

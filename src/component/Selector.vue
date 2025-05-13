@@ -90,7 +90,7 @@ const configFilter = computed(() => {
   }
   // 搜索关键字
   if (keyword.value) {
-    res = Character.filter((item) => item.name.indexOf(keyword.value) >= 0);
+    res = res.filter((item) => item.name.indexOf(keyword.value) >= 0);
   }
   return res;
 });

@@ -17,12 +17,6 @@ import FourSvg from './svg.vue'
     <span>自由填入各项数值的计算</span>
     <img src="/img/image.png" alt="" />
   </router-link>
-  <router-link to="/character/create" class="card">
-    <FourSvg />
-    <div>创建角色数据</div>
-    <span>角色、武器、圣遗物自由搭配</span>
-    <img src="/img/daiyin.png" alt="" />
-  </router-link>
   <router-link to="/cloud-team" class="card">
     <FourSvg />
     <div>角色组队计算（测试版）</div>
@@ -34,6 +28,12 @@ import FourSvg from './svg.vue'
     <div>护盾承伤计算</div>
     <span>计算护盾的实际吸收量</span>
     <img src="/img/zhongli.png" alt="" />
+  </router-link>
+  <router-link to="/character/create" class="card">
+    <FourSvg />
+    <div>创建角色数据</div>
+    <span>角色、武器、圣遗物自由搭配</span>
+    <img src="/img/daiyin.png" alt="" />
   </router-link>
   <router-link to="/import" class="card">
     <FourSvg />
