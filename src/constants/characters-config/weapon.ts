@@ -3045,7 +3045,7 @@ export const Weapons: IWeaponInfo[] = [
           enable: true,
         },
         {
-          label: "全队攻击力提升",
+          label: "攻击力提升",
           describe: `基于装备者的元素精通的${a}，提升该角色的攻击力，并基于该提升的30%为队伍中附近的其他角色提升攻击力`,
           effect: [
             {
@@ -3057,7 +3057,7 @@ export const Weapons: IWeaponInfo[] = [
           ],
           enable: true,
           shareable: true,
-          target: BuffTarget.All,
+          target: BuffTarget.Other,
         },
       ];
     }

@@ -4,6 +4,8 @@ import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, Weapon
 import { Weapon, Element, Icons, EnKaId, BaseData, action } from "../decorator";
 
 
+// .replaceAll("%", '').replaceAll(/[\u4e00-\u9fff]+/g, "").replaceAll("\t",",").split(",").map(i=>Math.round(i*100)/10000)
+
 @EnKaId(10000069, "nnn")
 @Weapon(WeaponType.Bow)
 @Element(ElementType.Hydro)

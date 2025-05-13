@@ -40,6 +40,7 @@ interface EnkaAvatarInfo {
     4001: { type: number; val: string };
   };
   talentIdList?: number[];
+  inherentProudSkillList: number[];
   fightPropMap: {
     // 基础生命值
     1: number;
@@ -64,6 +65,53 @@ async function importData(avatarInfoList, uid) {
 
 const saveCalculationResult = async (enkaData: EnkaAvatarInfo, uid: string) => {
   // 根据avatarId 查找角色信息
+  // 女主
+  if (enkaData.avatarId === 10000007) {
+    // 火
+    if (enkaData.inherentProudSkillList[0] === 52101) {
+      enkaData.avatarId = 1000000702;
+    }
+    // 水
+    if (enkaData.inherentProudSkillList[0] === 62101) {
+      enkaData.avatarId = 1000000703;
+    }
+    // 岩
+    if (enkaData.inherentProudSkillList[0] === 92101) {
+      enkaData.avatarId = 1000000706;
+    }
+    // 雷
+    if (enkaData.inherentProudSkillList[0] === 102101) {
+      enkaData.avatarId = 1000000707;
+    }
+    // 草
+    if (enkaData.inherentProudSkillList[0] === 112101) {
+      enkaData.avatarId = 1000000708;
+    }
+  }
+  // 男主
+  if (enkaData.avatarId === 10000005) {
+    // 火
+    if (enkaData.inherentProudSkillList[0] === 52101) {
+      enkaData.avatarId = 1000000502;
+    }
+    // 水
+    if (enkaData.inherentProudSkillList[0] === 62101) {
+      enkaData.avatarId = 1000000503;
+    }
+    // 岩
+    if (enkaData.inherentProudSkillList[0] === 92101) {
+      enkaData.avatarId = 1000000506;
+    }
+    // 雷
+    if (enkaData.inherentProudSkillList[0] === 102101) {
+      enkaData.avatarId = 1000000507;
+    }
+    // 草
+    if (enkaData.inherentProudSkillList[0] === 112101) {
+      enkaData.avatarId = 1000000508;
+    }
+  }
+
   const cha = Character.find((item) => {
     return item.enkaId === enkaData.avatarId;
   });
@@ -135,9 +183,10 @@ const saveCalculationResult = async (enkaData: EnkaAvatarInfo, uid: string) => {
   if (weaponInfo.weapon.affixMap) {
     affix = Object.entries(weaponInfo.weapon.affixMap)[0][1] + 1;
   }
+  console.log(cha);
 
   // 计算角色面板
-  const panel = calculationPanel({
+  const panel = calculationPanel({    
     characterInfo: {
       ...cha,
       baseHP: Math.floor(enkaData.fightPropMap[1]),
@@ -185,7 +234,8 @@ const saveCalculationResult = async (enkaData: EnkaAvatarInfo, uid: string) => {
       return cha.name;
     })
     .catch(() => {
-      return db.put(calDB.storeName, data)
+      return db
+        .put(calDB.storeName, data)
         .then(() => {
           return cha.name;
         })

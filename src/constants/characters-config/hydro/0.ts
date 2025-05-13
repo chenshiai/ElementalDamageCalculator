@@ -10,3 +10,6 @@ export * from "./Tartaglia";
 export * from "./Mona";
 export * from "./Candace";
 export * from "./Xingqiu";
+export * from "./Barbara";
+export * from "./PlayerBoy";
+export * from "./PlayerGirl";

@@ -8,3 +8,5 @@ export * from "./Momoka";
 export * from "./Kaveh";
 export * from "./Yaoyao";
 export * from "./Collei";
+export * from "./PlayerBoy";
+export * from "./PlayerGirl";

@@ -55,23 +55,23 @@ export interface IRate {
   fixed?: number[];
 }
 export interface ICharacterInfo {
-  readonly enkaId: number;
-  readonly name: string;
-  readonly rarity: Rarity;
-  readonly element: ElementType;
-  readonly weapon: WeaponType;
-  readonly burstCharge: number;
-  readonly icons: {
+   enkaId: number;
+   name: string;
+   rarity: Rarity;
+   element: ElementType;
+   weapon: WeaponType;
+   burstCharge: number;
+   icons: {
     avatarIcon: string;
     constsIcon: string[];
     gachaImage: string;
   };
-  readonly buffs?: IBuffBase[];
-  readonly talentNames: string[];
-  readonly normalAttack: ISkillRate[];
-  readonly elementSkill: ISkillRate[];
-  readonly burstSkill: ISkillRate[];
-  readonly otherSkill: ISkillRate[];
+   buffs?: IBuffBase[];
+   talentNames: string[];
+   normalAttack: ISkillRate[];
+   elementSkill: ISkillRate[];
+   burstSkill: ISkillRate[];
+   otherSkill: ISkillRate[];
 
   /** 变量属性，根据实际数据来自动调整 */
   baseATK: number;

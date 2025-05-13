@@ -13,3 +13,5 @@ export * from "./Faruzan";
 export * from "./Heizo";
 export * from "./Sayu";
 export * from "./Sucrose";
+export * from "./PlayerBoy";
+export * from "./PlayerGirl";

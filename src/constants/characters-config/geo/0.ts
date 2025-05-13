@@ -7,3 +7,7 @@ export * from "./Zhongli";
 export * from "./Kachina";
 export * from "./Yunjin";
 export * from "./Gorou";
+export * from "./Ningguang";
+export * from "./Noel";
+export * from "./PlayerBoy";
+export * from "./PlayerGirl";

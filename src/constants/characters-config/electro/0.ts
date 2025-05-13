@@ -14,3 +14,5 @@ export * from "./Fischl";
 export * from "./Lisa";
 export * from "./Razor";
 export * from "./Beidou";
+export * from "./PlayerBoy";
+export * from "./PlayerGirl";
