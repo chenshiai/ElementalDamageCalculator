@@ -1,25 +1,25 @@
 :root {
-  --page-bg: #FDFBF6;
+  --page-bg: #fdfbf6;
   --cancel: #ff4343;
-  --stroke-0: #F7F1E6;
+  --stroke-0: #f7f1e6;
   --stroke-1: #928986;
   --stroke-2: #997874;
   --stroke-3: #645856;
   --stroke-4: #14100f;
 
-  --light-text: var(--stroke-0, #F7F1E6);
+  --light-text: var(--stroke-0, #f7f1e6);
   --tip-text: var(--stroke-1, #928986);
   --button-bg: var(--stroke-2, #997874);
   --main-text: var(--stroke-3, #645856);
-  
+
   --border: #766461;
   --bg: #b7a19e;
   --extra-text: #2ee27f;
 
   --one-rarity: #606368;
-  --two-rarity: #577C6C;
-  --three-rarity: #55859F;
-  --four-rarity: #A17CC2;
+  --two-rarity: #577c6c;
+  --three-rarity: #55859f;
+  --four-rarity: #a17cc2;
   --five-rarity: #cc8d41;
 
   --van-collapse-item-content-padding: 0;
@@ -29,12 +29,11 @@
   --van-back-top-background: var(--stroke-2);
   --van-floating-bubble-background: var(--stroke-2);
   --van-primary-color: var(--stroke-2);
-  --van-gray-3: var(--stroke-0);
-  --van-cell-background: var(--light-text);
+  --van-cell-background: var(--stroke-0);
   --van-cell-text-color: var(--main-text);
-  
+
   --text-electro: #b380ff;
-  --text-hydro: #6495ED;
+  --text-hydro: #6495ed;
   --text-anemo: #5ddac1;
   --text-cryo: #5df;
   --text-geo: #fc0;
@@ -52,16 +51,16 @@
 }
 
 body {
+  -webkit-text-size-adjust: 100%;
   margin: 0;
   padding: 0;
   background-color: var(--page-bg);
   background-repeat: no-repeat;
   background-position-x: 50%;
   background-position-y: 80%;
-  user-select: none;
   height: 100vh;
 
-  font-family: 'eng', HYWenHei-85W, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "eng", HYWenHei-85W, Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: var(--main-text);
@@ -108,23 +107,19 @@ body {
 }
 
 .highlight {
-  color: #0097E1;
+  color: #0097e1;
 }
-
-@media screen and (min-width: 1025px) {
-  #app {
-    width: 375px;
-    margin: 0 auto;
-  }
+#app {
+  max-width: 1200px;
+  margin: 0 auto;
 }
-
 .van-collapse-item {
   margin-bottom: 4px;
 }
 
 .van-floating-bubble {
   overflow: auto;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, .12);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
 }
 
 .van-tabs__nav--card {
@@ -133,7 +128,12 @@ body {
 .van-cell {
   border-radius: 4px;
 }
-
+.van-cell-group .van-cell {
+  border-radius: 0 !important;
+}
+.van-form .van-cell {
+  background-color: #fff !important;
+}
 .text-electro {
   color: var(--text-electro);
 }
@@ -180,7 +180,9 @@ body {
 .bg-pyro {
   background-color: var(--bg-pyro);
 }
-
+summary {
+  cursor: pointer;
+}
 summary::marker {
   font-size: 0;
 }

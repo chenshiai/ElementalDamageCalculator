@@ -6,7 +6,6 @@
 
 <style scoped>
 .tab-title {
-  text-align: center;
   line-height: 40px;
   font-weight: 600;
   background-color: #fff;
@@ -14,8 +13,11 @@
   position: fixed;
   top: 0;
   left: 0;
+  padding-left: 50px;
   width: 100%;
   margin-bottom: 16px;
   z-index: 99;
+  text-align: center;
+  padding: 0;
 }
 </style>

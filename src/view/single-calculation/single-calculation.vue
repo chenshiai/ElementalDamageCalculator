@@ -63,9 +63,9 @@
     <div v-show="basicPanelSelect === basicPanelSelectType.ATK">
       <DataItem v-model="baseATK" title="基础攻击力" tips="面板攻击力白字" stepperInteger :stepperMin="0" />
       <DataItem v-model="extraATK" title="额外攻击力" tips="常驻攻击力绿字" stepperInteger :stepperMin="0">
-        <Popover class="data-item-popover" v-model:show="showPopoverExtraATK" placement="left-end">
+        <Popover theme="dark" class="data-item-popover" v-model:show="showPopoverExtraATK" placement="top-end">
           <div class="data-item-popover__content">
-            攻击力加成%会以『基础攻击力』的百分比来算，会直接加在最上方『攻击力总计』的
+            『攻击力加成%』是根据『基础攻击力』的百分比来计算攻击力提升，其计算后的数值会直接加在最上方『攻击力总计』的
             <span style="color: #49ff39">绿字</span>里。 <br /><br />
             一些无法常驻的攻击力加成%可以在下方的标签组里保存，方便切换。
           </div>
@@ -100,21 +100,30 @@
         <input class="basic-panel-input" type="number" v-model="emRate" />
       </div>
     </div>
-    <DataItem v-model="extraRate" title="倍率增幅%" :stepperMin="0" :decimalLength="1" />
-    <DataItem v-model="additionalDemage" title="伤害提高值" tips="" :stepperMin="0" :decimalLength="2">
-      <Popover class="data-item-popover" v-model:show="showPopoverExtraRate" placement="left-end">
+    <DataItem v-model="extraRate" title="倍率增幅%" :stepperMin="0" :decimalLength="1">
+      <Popover theme="dark" class="data-item-popover" v-model:show="showPopoverExtraRate" placement="top-end">
         <div class="data-item-popover__content">
-          <b>攻击伤害值 = (基础属性x最终倍率) + 伤害提高值 + 激化提高值</b><br />
-          <p><b>最终倍率</b> = 攻击倍率 x (1 + 倍率增幅)</p>
+          <b>基础伤害值 = (基础属性x最终倍率) + 伤害提高值 + 激化提高值</b><br />
+          <p>其中<b>最终倍率</b> = 技能倍率 x (1 + <span style="color: #49ff39">倍率增幅</span>)</p>
           <p>
             <b>倍率增幅：</b>
             例：宵宫释放元素战技后的普通攻击“造成152%普通攻击伤害”，即“普通攻击<b>倍率增幅</b>为(152%-100%)=<b>52%</b>”；还有行秋4命、流浪者普攻、莱欧斯利普攻、那维莱特重击160%和芙宁娜战技140%。<br />
           </p>
+        </div>
+        <template #reference>
+          <Icon size="26" name="question" />
+        </template>
+      </Popover>
+    </DataItem>
+    <DataItem v-model="additionalDemage" title="伤害提高值" tips="" :stepperMin="0" :decimalLength="2">
+      <Popover theme="dark" class="data-item-popover" v-model:show="showPopoverExtra" placement="top-end">
+        <div class="data-item-popover__content">
+          <b>基础伤害值 = (基础属性x最终倍率) + 伤害提高值 + 激化提高值</b><br />
           <p><b>基础伤害值：</b>基础属性乘以最终倍率的数值为基础伤害值。</p>
           <p><b>激化提高值：</b>雷元素和草元素的激化反应带来的提升值，受角色等级和元素精通影响。</p>
           <p>
             <b>伤害提高值：</b
-            >部分角色或武器技能带有“xx伤害值提升(高)”的描述，例如：钟离·炊金馔玉、云堇·元素爆发、申鹤·元素战技、一斗·荒泷逆袈裟和圣遗物来歆余响等。
+            >部分角色天赋或装备带有“xx<span style="color: #49ff39">伤害值提升(高)</span>”的描述，例如：钟离·炊金馔玉、云堇·元素爆发、申鹤·元素战技、一斗·荒泷逆袈裟和圣遗物来歆余响等。
           </p>
           <b>可以点击下方【伤害提高值】便签进行添加</b>
         </div>
@@ -131,7 +140,7 @@
 
     <DataItem v-model="critDemage" title="暴击伤害%" tips="" :stepperMin="0" :decimalLength="1" />
     <DataItem v-model="elementDemage" title="伤害加成%" tips="各种增伤、减伤" :stepperMin="-200" :decimalLength="2">
-      <Popover class="data-item-popover" v-model:show="showPopover" placement="left-end">
+      <Popover theme="dark" class="data-item-popover" v-model:show="showPopover" placement="top-end">
         <div class="data-item-popover__content">
           <b>攻击伤害值以一定比例改变：</b>
           <br />
@@ -218,7 +227,12 @@
       <Switch v-model="floatChecked" active-color="#766461" inactive-color="#b7a19e" size="16" />
     </template>
   </Cell>
-  <SaveData :damageModule="reactiveProps" :saveDataModule="saveDataModule" :notes-config="NotesConfig" @setUnifiedState="setUnifiedState"/>
+  <SaveData
+    :damageModule="reactiveProps"
+    :saveDataModule="saveDataModule"
+    :notes-config="NotesConfig"
+    @setUnifiedState="setUnifiedState"
+  />
 </template>
 
 <script setup lang="ts">
@@ -258,6 +272,7 @@ const otherChecked = ref(false);
 const floatChecked = ref(false);
 const showPopover = ref(false);
 const showPopoverExtraRate = ref(false);
+const showPopoverExtra = ref(false);
 const showPopoverExtraATK = ref(false);
 
 /** @module 面板数值 */
@@ -278,9 +293,9 @@ const extraFixedHP = ref(0);
 const extraPercentHP = ref(0);
 const elementalMystery = ref(0);
 
-const additionalDemage = ref(0.00);
+const additionalDemage = ref(0.0);
 const critDemage = ref(50);
-const elementDemage = ref(0.00);
+const elementDemage = ref(0.0);
 
 const witch = ref(false);
 const thunder = ref(false);

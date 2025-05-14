@@ -5,15 +5,12 @@
     <div class="base-data-item">
       <span class="base-damage__title">角色等级</span>
       <Stepper v-model="level" input-width="66px" integer button-size="20" theme="round" min="1" max="90" />
-      <!-- <span class="holy-relic-tips">点击数字可以手动输入</span> -->
     </div>
     <div class="base-data-item">
       <span class="base-damage__title">元素精通</span>
       <Stepper v-model="elementalMystery" integer input-width="66px" button-size="20" theme="round" min="0" />
-      <!-- <span class="holy-relic-tips">滑块最大值为2000</span> -->
     </div>
     <Slider v-model="elementalMystery" :max="2000" />
-
     <div class="holy-relic">
       <div>
         <span class="holy-relic__title">圣遗物套装</span>
@@ -47,71 +44,94 @@
         </div>
       </div>
     </div>
-    <details>
-      <summary>
-        <span class="holy-relic__title">角色提升</span>
-        <span class="holy-relic-tips">点此处展开&收起</span>
-      </summary>
-      <div class="gain-group">
-        <Divider :style="{ margin: '0px', color: '#766461', borderColor: '#766461' }">妮露</Divider>
-        <div class="gain">
-          <div class="cha-gain-inner">
-            <img class="base-damage__img" src="https://enka.network/ui/UI_AvatarIcon_Nilou.png" alt="" />
-            <CellGroup inset>
-              <Field v-model="niLuo" type="number" label="生命上限" />
-            </CellGroup>
+  </div>
+  <details class="gain-group-details" open>
+    <summary>
+      <span class="holy-relic__title">角色提升</span>
+      <span class="holy-relic-tips open">展开</span>
+      <span class="holy-relic-tips close">收起</span>
+    </summary>
+    <div class="gain-group">
+      <div class="cha-gain-inner">
+        <img class="base-damage__img" src="https://enka.network/ui/UI_AvatarIcon_Nilou.png" alt="" />
+        <CellGroup inset>
+          <Field v-model="niLuo" type="number" label="生命上限" />
+        </CellGroup>
+        <Popover class="data-item-popover" v-model:show="showNiluoPopover" theme="dark" placement="top-end">
+          <div class="data-item-popover__content">
+            <span>妮露：折旋落英之庭，提高<b class="bloom">绽放</b>反应伤害</span>
           </div>
-          <span class="holy-relic-tips">折旋落英之庭：提高<b class="bloom">绽放</b>反应伤害</span>
-        </div>
+          <template #reference>
+            <Icon size="26" name="question" />
+          </template>
+        </Popover>
+      </div>
+      <div class="gain">
+        <div class="cha-gain-inner">
+          <img class="base-damage__img" src="https://enka.network/ui/UI_AvatarIcon_Baizhuer.png" alt="" />
+          <CellGroup inset>
+            <Field v-model="baiZhu" type="number" label="生命上限" />
+          </CellGroup>
 
-        <Divider :style="{ margin: '10px 0 0', color: '#766461', borderColor: '#766461' }">白术</Divider>
-        <div class="gain">
-          <div class="cha-gain-inner">
-            <img class="base-damage__img" src="https://enka.network/ui/UI_AvatarIcon_Baizhuer.png" alt="" />
-            <CellGroup inset>
-              <Field v-model="baiZhu" type="number" label="生命上限" />
-            </CellGroup>
-          </div>
-          <span class="holy-relic-tips">
-            在地为化：提高
-            <b class="bloom">绽放</b>、
-            <b class="aggravate">超</b>/<b class="burning">烈绽放</b>、
-            <b class="burning">燃烧</b>、
-            <b class="aggravate">超激化</b>和<b class="bloom">蔓激化</b>反应伤害
-          </span>
-        </div>
-
-        <Divider :style="{ margin: '10px 0 0', color: '#766461', borderColor: '#766461' }">梦见月瑞希</Divider>
-        <div class="gain">
-          <div class="cha-gain-inner">
-            <img class="base-damage__img" src="https://enka.network/ui/UI_AvatarIcon_Mizuki.png" alt="" />
-            <CellGroup inset>
-              <Field v-model="mizukiEm" type="number" label="元素精通" />
-              <Field v-model="mizukiSkillLevel" type="number" label="战技等级" />
-            </CellGroup>
-          </div>
-          <span class="holy-relic-tips">梦浮：提高<b class="swirl">扩散</b>反应伤害</span>
-        </div>
-
-        <Divider :style="{ margin: '10px 0 0', color: '#766461', borderColor: '#766461' }">伊法</Divider>
-        <div class="gain">
-          <div class="cha-gain-inner">
-            <img class="base-damage__img" src="https://enka.network/ui/UI_AvatarIcon_Ifa.png" alt="" />
-            <CellGroup inset>
-              <Field v-model="yehun" type="number" label="夜魂总和" />
-            </CellGroup>
-          </div>
-          <span class="holy-relic-tips">救援要义：提高<b class="swirl">扩散</b>、<b class="elector">感电</b>反应伤害</span>
+          <Popover class="data-item-popover" v-model:show="showBaizhuPopover" theme="dark" placement="top-end">
+            <div class="data-item-popover__content">
+              <span>
+                白术：在地为化，提高
+                <b class="bloom">绽放</b>、 <b class="aggravate">超</b>/<b class="burning">烈绽放</b>、
+                <b class="burning">燃烧</b>、 <b class="aggravate">超激化</b>和<b class="bloom">蔓激化</b>反应伤害
+              </span>
+            </div>
+            <template #reference>
+              <Icon size="26" name="question" />
+            </template>
+          </Popover>
         </div>
       </div>
-    </details>
-  </div>
+
+      <div class="gain">
+        <div class="cha-gain-inner">
+          <img class="base-damage__img" src="https://enka.network/ui/UI_AvatarIcon_Mizuki.png" alt="" />
+          <CellGroup inset>
+            <Field v-model="mizukiEm" type="number" label="元素精通" />
+            <Field v-model="mizukiSkillLevel" type="number" label="战技等级" />
+          </CellGroup>
+
+          <Popover class="data-item-popover" v-model:show="showMizukiPopover" theme="dark" placement="top-end">
+            <div class="data-item-popover__content">
+              <span>梦见月瑞希：梦浮，提高<b class="swirl">扩散</b>反应伤害</span>
+            </div>
+            <template #reference>
+              <Icon size="26" name="question" />
+            </template>
+          </Popover>
+        </div>
+      </div>
+
+      <div class="gain">
+        <div class="cha-gain-inner">
+          <img class="base-damage__img" src="https://enka.network/ui/UI_AvatarIcon_Ifa.png" alt="" />
+          <CellGroup inset>
+            <Field v-model="yehun" type="number" label="夜魂总和" />
+          </CellGroup>
+          <Popover class="data-item-popover" v-model:show="showIfaPopover" theme="dark" placement="top-end">
+            <div class="data-item-popover__content">
+              <span>伊法：救援要义，提高<b class="swirl">扩散</b>、<b class="elector">感电</b>反应伤害</span>
+            </div>
+            <template #reference>
+              <Icon size="26" name="question" />
+            </template>
+          </Popover>
+        </div>
+        <span class="holy-relic-tips"> </span>
+      </div>
+    </div>
+  </details>
   <DetailBlock :elementalMystery="elementalMystery">
     <template v-slot:base>
-      <data v-show="moreRate" class="more-rate"><br/>{{ moreRate }}</data>
+      <data v-show="moreRate" class="more-rate"><br />{{ moreRate }}</data>
     </template>
     <template v-slot:servitude>
-      <data v-show="servitudeMoreRate" class="more-rate"><br/>{{ servitudeMoreRate }}</data>
+      <data v-show="servitudeMoreRate" class="more-rate"><br />{{ servitudeMoreRate }}</data>
       <span v-show="niLuoGain" class="more-rate"><br />妮露：丰穰之核+{{ niLuoGain.toFixed(1) }}%; </span>
       <span v-show="baiZhuBloomGain" class="more-rate">
         <br />白术：燃烧、绽放、超绽放、烈绽放+{{ baiZhuBloomGain.toFixed(1) }}%
@@ -120,14 +140,14 @@
       <span v-show="yehunGain" class="more-rate"> <br />伊法：扩散、感电+{{ yehunGain.toFixed(1) }}% </span>
     </template>
     <template v-slot:catalyze>
-      <data v-show="catalyzeMoreRate" class="more-rate"><br/>{{ catalyzeMoreRate }}</data>
+      <data v-show="catalyzeMoreRate" class="more-rate"><br />{{ catalyzeMoreRate }}</data>
       <span v-show="baiZhuCatalyzeGain" class="more-rate">
         <br />白术：超激化、蔓激化+{{ baiZhuCatalyzeGain.toFixed(1) }}%
       </span>
     </template>
   </DetailBlock>
   <div class="result">
-    <div class="damage-tag" v-for="item in damageResult" :key="item.name">
+    <div :class="['damage-tag', item.name2 ? 'two' : '']" v-for="item in damageResult" :key="item.name">
       <data :class="['damage-tag__title', item.class]">{{ item.name }}</data>
       <data v-show="item.name2" :class="['damage-tag__title', item.class2]">{{ item.name2 }}</data>
       <data class="damage-tag__detail">{{ item.detail }}</data>
@@ -142,17 +162,17 @@ import { BaseDMG } from "@/constants/elementalReaction";
 import { getServitudeRate, getCrystallizeRate, getCatalyzeRate } from "@/utils";
 import TabTitle from "@/component/TabTitle.vue";
 import DetailBlock from "./Detail.vue";
-import { Slider, Stepper, Field, CellGroup, Divider } from "vant";
+import { Slider, Stepper, Field, CellGroup, Popover, Icon } from "vant";
 import useHolyRelic from "./holy-relic";
 import { useNiLuo, useBaiZhu, useMizuki, useYiFa } from "./roles";
 
 const elementalMystery = ref(786);
 const level = ref(90);
 const [currentRelic, setCurrentRelic] = useHolyRelic();
-const { niLuo, niLuoGain } = useNiLuo();
-const { baiZhu, baiZhuBloomGain, baiZhuCatalyzeGain } = useBaiZhu();
-const { mizukiEm, mizukiSkillLevel, mizukiGain } = useMizuki();
-const { yehun, yehunGain } = useYiFa();
+const { niLuo, niLuoGain, showNiluoPopover } = useNiLuo();
+const { baiZhu, baiZhuBloomGain, baiZhuCatalyzeGain, showBaizhuPopover } = useBaiZhu();
+const { mizukiEm, mizukiSkillLevel, mizukiGain, showMizukiPopover } = useMizuki();
+const { yehun, yehunGain, showIfaPopover } = useYiFa();
 
 // 剧变反应伤害提升数值
 const servitudeDamage = (baseDamage) => {

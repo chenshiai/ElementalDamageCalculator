@@ -1,7 +1,6 @@
 .base-data {
   line-height: 24px;
 }
-
 .base-data-item {
   margin-bottom: 8px;
 }
@@ -66,9 +65,9 @@
   text-align: center;
   padding: 0 2px;
   font-size: 14px;
+  cursor: pointer;
   opacity: 0.3;
 }
-
 .holy-relic__img {
   width: 70px;
   height: 70px;
@@ -76,16 +75,20 @@
 }
 
 .damage-tag {
+  display: flex;
   line-height: 20px;
   border-bottom: 2px solid var(--button-bg);
   font-weight: bold;
-  margin-bottom: 12px;
-  min-width: 30%;
+  padding-bottom: 2px;
+  align-items: center;
 }
-
+.damage-tag.two {
+  grid-column: span 2;
+}
 .damage-tag__title {
   margin-right: 6px;
   font-size: 20px;
+  text-wrap: nowrap;
 }
 
 .elector {
@@ -146,9 +149,20 @@
 
 .result {
   margin-bottom: 16px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 10px;
+}
+@media screen and (min-width: 768px) {
+  .gain-group {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .result {
+    grid-template-columns: repeat(6, 1fr);
+  }
 }
 .shield-data {
   text-align: center;
@@ -156,18 +170,26 @@
 }
 
 .base-damage__img {
+  display: block;
   width: 44px;
   height: 44px;
-  /* border-radius: 50%; */
-}
-.gain-group {
-  /* display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr); */
-}
-.gain {
+  border-radius: 50%;
+  border: solid 2px var(--border);
 }
 .cha-gain-inner {
   display: flex;
   align-items: center;
+  margin-top: 12px;
+}
+.damage-tag__detail {
+  text-align: center;
+  flex: 1;
+}
+.gain-group-details .close,
+.gain-group-details[open] .open {
+  display: none;
+}
+.gain-group-details .open,
+.gain-group-details[open] .close {
+  display: inline-block;
 }

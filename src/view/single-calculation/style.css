@@ -75,7 +75,7 @@
 
 .data-item-popover {
   max-width: 80%;
-  transform: translateY(8px);
+  transform: translateX(8px);
 }
 
 .data-item-popover__content {

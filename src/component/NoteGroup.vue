@@ -67,7 +67,7 @@ import { onMounted, reactive, ref, computed } from "vue";
 import { Icon, Popup, Field, Form, showNotify, Button, Tab, Tabs } from "vant";
 import { floatNum, getLocalStorage, EventBus } from "@/utils";
 import { ICalculationMode } from "@/types/interface/calculation-mode";
-import { NodeType } from '@/types'
+import { NodeType } from "@/types";
 
 interface IProps {
   title: string;
@@ -114,7 +114,7 @@ function selectMemo(name, value) {
     selectedMemos.set(name, value);
     changeValue(floatNum(+modelValue.value + +value, 2));
   }
-  
+
   // 最后将变更后的【已选择便签】更新
   props.setSelectedNotes([...selectedMemos]);
 }
@@ -365,11 +365,5 @@ onMounted(() => {
 .additional-tab-title-span {
   line-height: 26px;
   font-size: 12px;
-}
-</style>
-
-<style>
-.van-form .van-cell {
-  background-color: #fff !important;
 }
 </style>

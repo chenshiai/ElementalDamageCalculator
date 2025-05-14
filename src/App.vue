@@ -1,5 +1,6 @@
 <script setup>
 import Foot from "./component/Foot.vue";
+import Navigate from "./component/Navigate.vue";
 import { Popup, Icon } from "vant";
 import { ref } from "vue";
 
@@ -11,19 +12,12 @@ const showLeft = ref(false);
     <Icon name="bars" />
   </div>
   <Popup v-model:show="showLeft" teleport="#app" position="left" :style="{ width: '40%', height: '100%' }">
-    <nav class="app-menu"  @click="showLeft = false">
-      <img src="/img/image.png" />
-      <router-link to="/" class="top-tabs__item">首页</router-link>
-      <router-link to="/elemental" class="top-tabs__item">剧变反应计算</router-link>
-      <router-link to="/increasing-range" class="top-tabs__item">单次伤害计算</router-link>
-      <router-link to="/cloud-team" class="top-tabs__item">角色组队计算</router-link>
-      <router-link to="/shield" class="top-tabs__item">护盾承伤计算</router-link>
-      <router-link to="/character/create" class="top-tabs__item">创建角色数据</router-link>
-      <router-link to="/import" class="top-tabs__item">游戏数据导入</router-link>
-      <router-link to="/question-answer" class="top-tabs__item">常见问题</router-link>
-    </nav>
+    <Navigate @click="showLeft = false" />
   </Popup>
-  <div class="content">
+  <section class="side-navigator-wrap">
+    <Navigate />
+  </section>
+  <div class="main-content">
     <router-view v-slot="{ Component }">
       <keep-alive>
         <component :is="Component" />
@@ -36,7 +30,7 @@ const showLeft = ref(false);
 
 <style>
 .tips {
-  margin: 16px 0;
+  margin: 0 0 16px 0;
   font-size: 12px;
   padding: 0 30px 0 30px;
   color: var(--tip-text);
@@ -70,29 +64,14 @@ const showLeft = ref(false);
   font-size: 26px;
 }
 
-.app-menu {
-  text-align: center;
+.main-content {
+    padding: 60px 16px 0;
 }
-.top-tabs__item {
-  display: block;
-  width: 100%;
-  box-sizing: border-box;
-  background-color: #fff;
-  line-height: 40px;
-  color: var(--tip-text);
-}
-
-.router-link-active {
-  color: var(--light-text);
-  background-color: var(--main-text);
-}
-
-.top-tabs__item:nth-last-child(1) {
-  margin-right: 0;
-}
-
-.content {
-  padding: 40px 16px 0 16px;
+.side-navigator-wrap {
+  display: none;
+  margin-right: 20px;
+  position: fixed;
+  top: 60px;
 }
 
 .question-title,
@@ -104,5 +83,21 @@ const showLeft = ref(false);
   font-weight: 600;
   margin-bottom: 12px;
   line-height: 26px;
+}
+@media screen and (min-width: 768px)  {
+  .main-content {
+    padding: 60px 60px 0;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .top-overhang {
+    display: none;
+  }
+  .main-content {
+    padding: 60px 200px 0;
+  }
+  .side-navigator-wrap {
+    display: block;
+  }
 }
 </style>

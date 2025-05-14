@@ -3,6 +3,7 @@ import { Magnification } from "@/constants/magnification.js";
 
 export function useNiLuo() {
   const niLuo = ref(0);
+  const showNiluoPopover = ref(false);
   const niLuoGain = computed(() =>　{
     if (niLuo.value > 30000) {
       return Math.min((niLuo.value - 30000) / 1000 * 9, 400);
@@ -12,12 +13,14 @@ export function useNiLuo() {
 
   return {
     niLuoGain,
-    niLuo
+    niLuo,
+    showNiluoPopover,
   }
 }
 
 export function useBaiZhu() {
   const baiZhu = ref(0);
+  const showBaizhuPopover = ref(false);
   const baiZhuBloomGain = computed(() =>　{
     return Math.min(baiZhu.value, 50000) / 1000 * 2;
   });
@@ -29,29 +32,34 @@ export function useBaiZhu() {
     baiZhu,
     baiZhuCatalyzeGain,
     baiZhuBloomGain,
+    showBaizhuPopover,
   }
 }
 
 export function useMizuki() {
   const mizukiEm = ref(0);
   const mizukiSkillLevel = ref(10);
+  const showMizukiPopover = ref(false);
   const mizukiGain = computed(() => {
     return mizukiEm.value * Magnification.Mizuki.sk[mizukiSkillLevel.value - 1];
   })
   return {
     mizukiEm,
     mizukiSkillLevel,
-    mizukiGain
+    mizukiGain,
+    showMizukiPopover
   }
 }
 
 export function useYiFa() {
   const yehun = ref(0);
+  const showIfaPopover = ref(false);
   const yehunGain = computed(() => {
     return Math.min(300, yehun.value * 1.5);
   })
   return {
     yehun,
-    yehunGain
+    yehunGain,
+    showIfaPopover
   }
 }
