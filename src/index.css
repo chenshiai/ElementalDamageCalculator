@@ -65,7 +65,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: var(--main-text);
 }
-
+q {
+  /* 使用quotes属性定义前后引号 */
+  quotes: "「" "」";
+}
 .bg-one-rarity {
   background-color: var(--one-rarity);
 }

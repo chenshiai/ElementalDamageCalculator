@@ -57,11 +57,12 @@
         <CellGroup inset>
           <Field v-model="niLuo" type="number" label="生命上限" />
         </CellGroup>
-        <Popover class="data-item-popover" v-model:show="showNiluoPopover" theme="dark" placement="top-end">
+        <Popover position="top-right">
           <div class="data-item-popover__content">
-            <span>妮露：折旋落英之庭，提高<b class="bloom">绽放</b>反应伤害</span>
+            妮露：翩舞永世之梦，基于妮露生命值上限超过30000的部分，每1000点生命值上限将提升<q class="bloom">丰穰之核</q
+            >9%的伤害，至多提升400%
           </div>
-          <template #reference>
+          <template #trigger>
             <Icon size="26" name="question" />
           </template>
         </Popover>
@@ -73,15 +74,13 @@
             <Field v-model="baiZhu" type="number" label="生命上限" />
           </CellGroup>
 
-          <Popover class="data-item-popover" v-model:show="showBaizhuPopover" theme="dark" placement="top-end">
+          <Popover position="top-right">
             <div class="data-item-popover__content">
-              <span>
-                白术：在地为化，提高
-                <b class="bloom">绽放</b>、 <b class="aggravate">超</b>/<b class="burning">烈绽放</b>、
-                <b class="burning">燃烧</b>、 <b class="aggravate">超激化</b>和<b class="bloom">蔓激化</b>反应伤害
-              </span>
+              白术：在地为化，基于白术生命值不超过50000的部分，每1000点提高
+              <q class="bloom">绽放</q>、 <q class="aggravate">超绽放</q>、<q class="burning">烈绽放</q>、
+              <q class="burning">燃烧</q>反应2%的伤害。 提升<q class="aggravate">超激化</q>和<q class="bloom">蔓激化</q>反应0.8%的伤害
             </div>
-            <template #reference>
+            <template #trigger>
               <Icon size="26" name="question" />
             </template>
           </Popover>
@@ -96,11 +95,11 @@
             <Field v-model="mizukiSkillLevel" type="number" label="战技等级" />
           </CellGroup>
 
-          <Popover class="data-item-popover" v-model:show="showMizukiPopover" theme="dark" placement="top-end">
+          <Popover position="top-right">
             <div class="data-item-popover__content">
-              <span>梦见月瑞希：梦浮，提高<b class="swirl">扩散</b>反应伤害</span>
+              梦见月瑞希：梦浮，基于梦见月瑞希的元素精，提高<q class="swirl">扩散</q>反应伤害
             </div>
-            <template #reference>
+            <template #trigger>
               <Icon size="26" name="question" />
             </template>
           </Popover>
@@ -113,11 +112,14 @@
           <CellGroup inset>
             <Field v-model="yehun" type="number" label="夜魂总和" />
           </CellGroup>
-          <Popover class="data-item-popover" v-model:show="showIfaPopover" theme="dark" placement="top-end">
+          <Popover position="top-right">
             <div class="data-item-popover__content">
-              <span>伊法：救援要义，提高<b class="swirl">扩散</b>、<b class="elector">感电</b>反应伤害</span>
+              伊法：救援要义，基于队伍中所有角色当前夜魂值的总和，每1点夜魂值提升<q class="swirl">扩散</q>、<q
+                class="elector"
+                >感电</q
+              >反应1.5%的伤害，最多记录200点夜魂值
             </div>
-            <template #reference>
+            <template #trigger>
               <Icon size="26" name="question" />
             </template>
           </Popover>
@@ -161,8 +163,9 @@ import { WITCH, THUNDER, EMERALD, EDEN } from "@/constants";
 import { BaseDMG } from "@/constants/elementalReaction";
 import { getServitudeRate, getCrystallizeRate, getCatalyzeRate } from "@/utils";
 import TabTitle from "@/component/TabTitle.vue";
+import Popover from "@/component/Popover.vue";
 import DetailBlock from "./Detail.vue";
-import { Slider, Stepper, Field, CellGroup, Popover, Icon } from "vant";
+import { Slider, Stepper, Field, CellGroup, Icon } from "vant";
 import useHolyRelic from "./holy-relic";
 import { useNiLuo, useBaiZhu, useMizuki, useYiFa } from "./roles";
 

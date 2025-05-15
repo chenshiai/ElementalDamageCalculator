@@ -2,183 +2,189 @@
   <tab-title>单次伤害计算</tab-title>
   <div class="tips">可以自由填入属性值查看相应的伤害，适合对游戏伤害计算方式比较熟悉的人使用。</div>
   <div class="data-panel">
-    <div class="data-panel__title">基础属性</div>
-    <div class="data-panel__basic">
-      <details class="basic-panel-item" name="basic-panel" open>
-        <summary @click="basicPanelSelect = basicPanelSelectType.ATK">
-          <span class="basic-panel-item-title">攻击力</span>
-          <div class="basic-panel-item-total">
-            {{ baseATK + sumExtraATKNumber }}
-          </div>
-          <div class="basic-detial">
-            {{ baseATK }} +
-            <span style="color: #49ff39">{{ sumExtraATKNumber }}</span>
-          </div>
-        </summary>
-      </details>
-      <details class="basic-panel-item" name="basic-panel">
-        <summary @click="basicPanelSelect = basicPanelSelectType.HP">
-          <span class="basic-panel-item-title">生命值</span>
-          <div class="basic-panel-item-total">
-            {{ baseHP + sumExtraHPNumber }}
-          </div>
-          <div class="basic-detial">
-            {{ baseHP }}+
-            <span style="color: #49ff39">{{ sumExtraHPNumber }}</span>
-          </div>
-        </summary>
-      </details>
-      <details class="basic-panel-item" name="basic-panel">
-        <summary @click="basicPanelSelect = basicPanelSelectType.DEF">
-          <span class="basic-panel-item-title">防御力</span>
-          <div class="basic-panel-item-total">
-            {{ baseDEF + sumExtraDEFNumber }}
-          </div>
-          <div class="basic-detial">
-            {{ baseDEF }}+
-            <span style="color: #49ff39">{{ sumExtraDEFNumber }}</span>
-          </div>
-        </summary>
-      </details>
-      <details class="basic-panel-item" name="basic-panel">
-        <summary @click="basicPanelSelect = basicPanelSelectType.EM">
-          <span class="basic-panel-item-title">元素精通</span>
-          <div>
-            {{ elementalMystery }}
-          </div>
-        </summary>
-      </details>
-    </div>
-    <div v-show="basicPanelSelect === basicPanelSelectType.DEF">
-      <DataItem v-model="baseDEF" title="基础防御力" tips="面板防御力白字" stepperInteger :stepperMin="0" />
-      <DataItem v-model="extraDEF" title="额外防御力" tips="常驻防御力绿字" stepperInteger :stepperMin="0" />
-      <NoteGroup v-model="extraPercentDEF" v-bind="NotesConfig.percentDEF" :selectedNotes="selectedExtraDEFNotes" />
-      <NoteGroup v-model="extraFixedDEF" v-bind="NotesConfig.fixedDEF" :selectedNotes="selectedFixedDEFNotes" />
-    </div>
-    <div v-show="basicPanelSelect === basicPanelSelectType.HP">
-      <DataItem v-model="baseHP" title="基础生命值" tips="面板生命值白字" stepperInteger :stepperMin="0" />
-      <DataItem v-model="extraHP" title="额外生命值" tips="常驻生命值绿字" stepperInteger :stepperMin="0" />
-      <NoteGroup v-model="extraPercentHP" v-bind="NotesConfig.percentHP" :selectedNotes="selectedExtraHPNotes" />
-    </div>
-    <div v-show="basicPanelSelect === basicPanelSelectType.ATK">
-      <DataItem v-model="baseATK" title="基础攻击力" tips="面板攻击力白字" stepperInteger :stepperMin="0" />
-      <DataItem v-model="extraATK" title="额外攻击力" tips="常驻攻击力绿字" stepperInteger :stepperMin="0">
-        <Popover theme="dark" class="data-item-popover" v-model:show="showPopoverExtraATK" placement="top-end">
+    <section>
+      <div class="data-panel__title">基础属性</div>
+      <div class="data-panel__basic">
+        <details class="basic-panel-item" name="basic-panel" open>
+          <summary @click="basicPanelSelect = basicPanelSelectType.ATK">
+            <span class="basic-panel-item-title">攻击力</span>
+            <div class="basic-panel-item-total">
+              {{ baseATK + sumExtraATKNumber }}
+            </div>
+            <div class="basic-detial">
+              {{ baseATK }} +
+              <span style="color: #49ff39">{{ sumExtraATKNumber }}</span>
+            </div>
+          </summary>
+        </details>
+        <details class="basic-panel-item" name="basic-panel">
+          <summary @click="basicPanelSelect = basicPanelSelectType.HP">
+            <span class="basic-panel-item-title">生命值</span>
+            <div class="basic-panel-item-total">
+              {{ baseHP + sumExtraHPNumber }}
+            </div>
+            <div class="basic-detial">
+              {{ baseHP }}+
+              <span style="color: #49ff39">{{ sumExtraHPNumber }}</span>
+            </div>
+          </summary>
+        </details>
+        <details class="basic-panel-item" name="basic-panel">
+          <summary @click="basicPanelSelect = basicPanelSelectType.DEF">
+            <span class="basic-panel-item-title">防御力</span>
+            <div class="basic-panel-item-total">
+              {{ baseDEF + sumExtraDEFNumber }}
+            </div>
+            <div class="basic-detial">
+              {{ baseDEF }}+
+              <span style="color: #49ff39">{{ sumExtraDEFNumber }}</span>
+            </div>
+          </summary>
+        </details>
+        <details class="basic-panel-item" name="basic-panel">
+          <summary @click="basicPanelSelect = basicPanelSelectType.EM">
+            <span class="basic-panel-item-title">元素精通</span>
+            <div>
+              {{ elementalMystery }}
+            </div>
+          </summary>
+        </details>
+      </div>
+      <div v-show="basicPanelSelect === basicPanelSelectType.DEF">
+        <DataItem v-model="baseDEF" title="基础防御力" tips="面板防御力白字" stepperInteger :stepperMin="0" />
+        <DataItem v-model="extraDEF" title="额外防御力" tips="常驻防御力绿字" stepperInteger :stepperMin="0" />
+        <NoteGroup v-model="extraPercentDEF" v-bind="NotesConfig.percentDEF" :selectedNotes="selectedExtraDEFNotes" />
+        <NoteGroup v-model="extraFixedDEF" v-bind="NotesConfig.fixedDEF" :selectedNotes="selectedFixedDEFNotes" />
+      </div>
+      <div v-show="basicPanelSelect === basicPanelSelectType.HP">
+        <DataItem v-model="baseHP" title="基础生命值" tips="面板生命值白字" stepperInteger :stepperMin="0" />
+        <DataItem v-model="extraHP" title="额外生命值" tips="常驻生命值绿字" stepperInteger :stepperMin="0" />
+        <NoteGroup v-model="extraPercentHP" v-bind="NotesConfig.percentHP" :selectedNotes="selectedExtraHPNotes" />
+      </div>
+      <div v-show="basicPanelSelect === basicPanelSelectType.ATK">
+        <DataItem v-model="baseATK" title="基础攻击力" tips="面板攻击力白字" stepperInteger :stepperMin="0" />
+        <DataItem v-model="extraATK" title="额外攻击力" tips="常驻攻击力绿字" stepperInteger :stepperMin="0">
+          <Popover position="top-right">
+            <div class="data-item-popover__content">
+              『攻击力加成%』是根据『基础攻击力』的百分比来计算攻击力提升，其计算后的数值会直接加在最上方『攻击力总计』的
+              <span style="color: #49ff39">绿字</span>里。 <br /><br />
+              一些无法常驻的攻击力加成%可以在下方的标签组里保存，方便切换。
+            </div>
+            <template #trigger>
+              <Icon size="26" name="question" />
+            </template>
+          </Popover>
+        </DataItem>
+        <NoteGroup v-model="extraPercentATK" v-bind="NotesConfig.percentATK" :selectedNotes="selectedExtraATKNotes" />
+        <NoteGroup v-model="extraFixedATK" v-bind="NotesConfig.fixedATK" :selectedNotes="selectedFixedATKNotes" />
+      </div>
+      <div v-show="basicPanelSelect === basicPanelSelectType.EM">
+        <DataItem v-model="elementalMystery" title="元素精通" tips="" :stepperMin="0" />
+        <NoteGroup v-model="elementalMystery" v-bind="NotesConfig.fixedEM" :selectedNotes="selectedFixedEMNotes" />
+      </div>
+    </section>
+
+    <section>
+      <div class="data-panel__title">技能倍率</div>
+      <div class="data-panel__basic">
+        <div class="basic-panel-item">
+          <span class="basic-panel-item-title">攻击倍率%</span>
+          <input class="basic-panel-input" type="number" v-model="atkRate" />
+        </div>
+        <div class="basic-panel-item">
+          <span class="basic-panel-item-title">生命倍率%</span>
+          <input class="basic-panel-input" type="number" v-model="hpRate" />
+        </div>
+        <div class="basic-panel-item">
+          <span class="basic-panel-item-title">防御倍率%</span>
+          <input class="basic-panel-input" type="number" v-model="armRate" />
+        </div>
+        <div class="basic-panel-item">
+          <span class="basic-panel-item-title">精通倍率%</span>
+          <input class="basic-panel-input" type="number" v-model="emRate" />
+        </div>
+      </div>
+      <DataItem v-model="extraRate" title="倍率增幅%" :stepperMin="0" :decimalLength="1">
+        <Popover position="top-right">
           <div class="data-item-popover__content">
-            『攻击力加成%』是根据『基础攻击力』的百分比来计算攻击力提升，其计算后的数值会直接加在最上方『攻击力总计』的
-            <span style="color: #49ff39">绿字</span>里。 <br /><br />
-            一些无法常驻的攻击力加成%可以在下方的标签组里保存，方便切换。
+            <b>基础伤害值 = (基础属性x最终倍率) + 伤害提高值 + 激化提高值</b><br />
+            <p>其中<b>最终倍率</b> = 技能倍率 x (1 + <span style="color: #49ff39">倍率增幅</span>)</p>
+            <p>
+              <b>倍率增幅：</b>
+              例：宵宫释放元素战技后的普通攻击“造成152%普通攻击伤害”，即“普通攻击<b>倍率增幅</b>为(152%-100%)=<b>52%</b>”；还有行秋4命、流浪者普攻、莱欧斯利普攻、那维莱特重击160%和芙宁娜战技140%。<br />
+            </p>
           </div>
-          <template #reference>
+          <template #trigger>
             <Icon size="26" name="question" />
           </template>
         </Popover>
       </DataItem>
-      <NoteGroup v-model="extraPercentATK" v-bind="NotesConfig.percentATK" :selectedNotes="selectedExtraATKNotes" />
-      <NoteGroup v-model="extraFixedATK" v-bind="NotesConfig.fixedATK" :selectedNotes="selectedFixedATKNotes" />
-    </div>
-    <div v-show="basicPanelSelect === basicPanelSelectType.EM">
-      <DataItem v-model="elementalMystery" title="元素精通" tips="" :stepperMin="0" />
-      <NoteGroup v-model="elementalMystery" v-bind="NotesConfig.fixedEM" :selectedNotes="selectedFixedEMNotes" />
-    </div>
-    <div class="data-panel__title">技能倍率</div>
-    <div class="data-panel__basic">
-      <div class="basic-panel-item">
-        <span class="basic-panel-item-title">攻击倍率%</span>
-        <input class="basic-panel-input" type="number" v-model="atkRate" />
-      </div>
-      <div class="basic-panel-item">
-        <span class="basic-panel-item-title">生命倍率%</span>
-        <input class="basic-panel-input" type="number" v-model="hpRate" />
-      </div>
-      <div class="basic-panel-item">
-        <span class="basic-panel-item-title">防御倍率%</span>
-        <input class="basic-panel-input" type="number" v-model="armRate" />
-      </div>
-      <div class="basic-panel-item">
-        <span class="basic-panel-item-title">精通倍率%</span>
-        <input class="basic-panel-input" type="number" v-model="emRate" />
-      </div>
-    </div>
-    <DataItem v-model="extraRate" title="倍率增幅%" :stepperMin="0" :decimalLength="1">
-      <Popover theme="dark" class="data-item-popover" v-model:show="showPopoverExtraRate" placement="top-end">
-        <div class="data-item-popover__content">
-          <b>基础伤害值 = (基础属性x最终倍率) + 伤害提高值 + 激化提高值</b><br />
-          <p>其中<b>最终倍率</b> = 技能倍率 x (1 + <span style="color: #49ff39">倍率增幅</span>)</p>
-          <p>
-            <b>倍率增幅：</b>
-            例：宵宫释放元素战技后的普通攻击“造成152%普通攻击伤害”，即“普通攻击<b>倍率增幅</b>为(152%-100%)=<b>52%</b>”；还有行秋4命、流浪者普攻、莱欧斯利普攻、那维莱特重击160%和芙宁娜战技140%。<br />
-          </p>
-        </div>
-        <template #reference>
-          <Icon size="26" name="question" />
-        </template>
-      </Popover>
-    </DataItem>
-    <DataItem v-model="additionalDemage" title="伤害提高值" tips="" :stepperMin="0" :decimalLength="2">
-      <Popover theme="dark" class="data-item-popover" v-model:show="showPopoverExtra" placement="top-end">
-        <div class="data-item-popover__content">
-          <b>基础伤害值 = (基础属性x最终倍率) + 伤害提高值 + 激化提高值</b><br />
-          <p><b>基础伤害值：</b>基础属性乘以最终倍率的数值为基础伤害值。</p>
-          <p><b>激化提高值：</b>雷元素和草元素的激化反应带来的提升值，受角色等级和元素精通影响。</p>
-          <p>
-            <b>伤害提高值：</b
-            >部分角色天赋或装备带有“xx<span style="color: #49ff39">伤害值提升(高)</span>”的描述，例如：钟离·炊金馔玉、云堇·元素爆发、申鹤·元素战技、一斗·荒泷逆袈裟和圣遗物来歆余响等。
-          </p>
-          <b>可以点击下方【伤害提高值】便签进行添加</b>
-        </div>
-        <template #reference>
-          <Icon size="26" name="question" />
-        </template>
-      </Popover>
-    </DataItem>
-    <NoteGroup
-      v-model="additionalDemage"
-      v-bind="NotesConfig.additionalDemage"
-      :selectedNotes="selectedAdditionalDemageNotes"
-    />
+      <DataItem v-model="additionalDemage" title="伤害提高值" tips="" :stepperMin="0" :decimalLength="2">
+        <Popover position="top-right">
+          <div class="data-item-popover__content">
+            <b>基础伤害值 = (基础属性x最终倍率) + 伤害提高值 + 激化提高值</b><br />
+            <p><b>基础伤害值：</b>基础属性乘以最终倍率的数值为基础伤害值。</p>
+            <p><b>激化提高值：</b>雷元素和草元素的激化反应带来的提升值，受角色等级和元素精通影响。</p>
+            <p>
+              <b>伤害提高值：</b>部分角色天赋或装备带有“xx<span style="color: #49ff39">伤害值提升(高)</span
+              >”的描述，例如：钟离·炊金馔玉、云堇·元素爆发、申鹤·元素战技、一斗·荒泷逆袈裟和圣遗物来歆余响等。
+            </p>
+            <b>可以点击下方【伤害提高值】便签进行添加</b>
+          </div>
+          <template #trigger>
+            <Icon size="26" name="question" />
+          </template>
+        </Popover>
+      </DataItem>
+      <NoteGroup
+        v-model="additionalDemage"
+        v-bind="NotesConfig.additionalDemage"
+        :selectedNotes="selectedAdditionalDemageNotes"
+      />
+    </section>
 
-    <DataItem v-model="critDemage" title="暴击伤害%" tips="" :stepperMin="0" :decimalLength="1" />
-    <DataItem v-model="elementDemage" title="伤害加成%" tips="各种增伤、减伤" :stepperMin="-200" :decimalLength="2">
-      <Popover theme="dark" class="data-item-popover" v-model:show="showPopover" placement="top-end">
-        <div class="data-item-popover__content">
-          <b>攻击伤害值以一定比例改变：</b>
-          <br />
-          基础100% + 特定技能加伤% + 元素加伤% + 造成伤害提高% + 受到伤害提高%。
-          <br />
-          <p>
-            <b>技能加伤：</b>满足条件时的加伤，例如角色天赋/命座、圣遗物套装、武器技能等<br />
-            <b>元素加伤：</b>面板上的对应元素(物理)伤害加成<br />
-            <b>造成伤害：</b>角色造成的伤害提高(加伤)、造成的伤害降低(降伤)<br />
-            <b>受到伤害：</b>敌人受到的伤害提高(易伤)、受到的伤害降低(减伤)<br />
-          </p>
-          <b>可以在下方标签组中快捷添加各种加成。</b>
-        </div>
-        <template #reference>
-          <Icon size="26" name="question" />
-        </template>
-      </Popover>
-    </DataItem>
-    <NoteGroup v-model="elementDemage" v-bind="NotesConfig.elementDemage" :selectedNotes="selectedElementDemageNotes" />
+    <section>
+      <DataItem v-model="critDemage" title="暴击伤害%" tips="" :stepperMin="0" :decimalLength="1" />
+      <DataItem v-model="elementDemage" title="伤害加成%" tips="各种增伤、减伤" :stepperMin="-200" :decimalLength="2">
+        <Popover position="top-right">
+          <div class="data-item-popover__content">
+            <b>攻击伤害值以一定比例改变：</b>
+            <br />
+            基础100% + 特定技能加伤% + 元素加伤% + 造成伤害提高% + 受到伤害提高%。
+            <br />
+            <p>
+              <b>技能加伤：</b>满足条件时的加伤，例如角色天赋/命座、圣遗物套装、武器技能等<br />
+              <b>元素加伤：</b>面板上的对应元素(物理)伤害加成<br />
+              <b>造成伤害：</b>角色造成的伤害提高(加伤)、造成的伤害降低(降伤)<br />
+              <b>受到伤害：</b>敌人受到的伤害提高(易伤)、受到的伤害降低(减伤)<br />
+            </p>
+            <b>可以在下方标签组中快捷添加各种加成。</b>
+          </div>
+          <template #trigger>
+            <Icon size="26" name="question" />
+          </template>
+        </Popover>
+      </DataItem>
+      <NoteGroup
+        v-model="elementDemage"
+        v-bind="NotesConfig.elementDemage"
+        :selectedNotes="selectedElementDemageNotes"
+      />
+    </section>
+  <section>
+    
     <DataItem v-model="characterLevel" title="角色等级" :stepperMax="90" :stepperMin="1" />
-    <DataItem v-model="enemyLevel" title="敌人等级" :stepperMin="1" />
-
-    <Cell
-      @click="otherChecked = !otherChecked"
-      center
-      title="敌人防御力、抗性调整"
-      is-link
-      :arrow-direction="otherChecked ? 'up' : 'down'"
-    />
-    <div v-show="otherChecked" class="data-panel">
+      <DataItem v-model="enemyLevel" title="敌人等级" :stepperMin="1" />
       <DataItem v-model="enemyResistance" title="敌人抗性%" :stepperMin="-999">
         <div class="extra-btn" @click="handleImagePreview">查看抗性表</div>
       </DataItem>
       <DataItem v-model="weaken" title="减少抗性%" :stepperMin="0" :stepperMax="300" />
       <DataItem v-model="armour" title="减少防御%" :stepperMin="0" :stepperMax="90" />
       <DataItem v-model="armourPiercing" title="无视防御%" :stepperMin="0" :stepperMax="100" />
-    </div>
+    </section>
+  </div>
 
+  <section>
     <div class="data-panel__title">反应类型</div>
     <AtkTypeSelector v-model="atkType" />
     <Cell
@@ -204,7 +210,7 @@
         <input class="ex-input" type="number" v-model="baizhuHP" />
       </template>
     </Cell>
-  </div>
+  </section>
   <div :class="['dmg-result', floatChecked && 'increase-result__top']">
     <div class="result-grid">
       <div class="grid-item">
@@ -237,7 +243,7 @@
 
 <script setup lang="ts">
 import { computed, ref } from "vue";
-import { Switch, Cell, Icon, showImagePreview, Popover } from "vant";
+import { Switch, Cell, Icon, showImagePreview } from "vant";
 
 import TabTitle from "@/component/TabTitle.vue";
 import DataItem from "@/component/DataItem.vue";
@@ -245,6 +251,7 @@ import NoteGroup from "@/component/NoteGroup.vue";
 import SaveData from "@/component/SaveData.vue";
 import CompositionAnalysis from "@/component/CompositionAnalysis.vue";
 import AtkTypeSelector from "@/component/AtkTypeSelector.vue";
+import Popover from "@/component/Popover.vue";
 
 import { basicPanelSelectType, ElementalReaction, ElementalReactionType } from "@/constants";
 import {

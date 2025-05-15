@@ -1,6 +1,17 @@
 .data-panel {
   margin-bottom: 24px;
   line-height: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.data-panel section {
+  width: 100%;
+}
+@media screen and (min-width: 768px) {
+  .data-panel section {
+    width: calc(50% - 10px);
+  }
 }
 
 .data-panel .van-stepper--round .van-stepper__minus {
@@ -62,6 +73,7 @@
   position: fixed;
   top: 60px;
   width: calc(100% - 32px);
+  max-width: 400px;
 }
 
 .extra-btn {
@@ -80,6 +92,8 @@
 
 .data-item-popover__content {
   padding: 12px;
+  width: 300px;
+  font-size: 14px;
 }
 
 .data-panel__basic {

@@ -144,13 +144,12 @@ const handleImagePreview = () => {
 <template>
   <TabTitle>角色组队计算</TabTitle>
   <div class="tips">点击+号，选择数据填入队伍，不设上限，可重复添加</div>
-  <div class="data-panel">
-    <div class="data-panel__title">攻击目标设置</div>
+  
+  <div class="data-panel__title">攻击目标设置</div>
     <DataItem v-model="store.state.teamBuffs.enemyLevel" title="敌人的等级" :stepperMin="1" />
     <DataItem v-model="store.state.teamBuffs.baseResistance" title="基础抗性%" :stepperMin="-999">
       <div class="extra-btn" @click="handleImagePreview">查看抗性表</div>
     </DataItem>
-  </div>
   <div class="team-list">
     <span class="holy-relic-tips">更新角色数据后需要重新入队。</span>
     <div class="data-panel__title">队伍编辑</div>
