@@ -43,6 +43,18 @@ class SethosData extends Character implements ICharacterInfo {
       },
       "Sethos"
     ),
+    action("瞑弦矢一段伤害", AttackType.Strong, ElementType.Electro, {
+      atk: [0.526, 0.569, 0.612, 0.673, 0.716, 0.765, 0.832, 0.899, 0.967, 1.04, 1.113, 1.187, 1.26, 1.334],
+    }, "Sethos2"),
+    action("瞑弦矢二段伤害·1", AttackType.Strong, ElementType.Electro, {
+      atk: [0.238, 0.257, 0.277, 0.304, 0.324, 0.346, 0.376, 0.407, 0.437, 0.47, 0.504, 0.537, 0.57, 0.603],
+    }, "Sethos2"),
+    action("瞑弦矢二段伤害·2", AttackType.Strong, ElementType.Electro, {
+      atk: [0.266, 0.288, 0.309, 0.34, 0.362, 0.387, 0.421, 0.455, 0.489, 0.526, 0.563, 0.6, 0.637, 0.674],
+    }, "Sethos2"),
+    action("瞑弦矢三段伤害", AttackType.Strong, ElementType.Electro, {
+      atk: [0.74, 0.8, 0.86, 0.946, 1.007, 1.075, 1.17, 1.265, 1.359, 1.463, 1.566, 1.669, 1.772, 1.875],
+    }, "Sethos2"),
     action("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
       atk: [0.568, 0.615, 0.661, 0.727, 0.773, 0.826, 0.899, 0.971, 1.044, 1.123, 1.203, 1.282, 1.361, 1.441],
     }),
@@ -59,7 +71,7 @@ class SethosData extends Character implements ICharacterInfo {
     }),
   ];
   burstSkill = [
-    action("瞑弦矢伤害提升", AttackType.Strong, ElementType.Electro, {
+    action("瞑弦矢伤害提升", AttackType.Shield, ElementType.None, {
       em: [1.962, 2.109, 2.256, 2.452, 2.599, 2.746, 2.942, 3.139, 3.335, 3.531, 3.727, 3.923, 4.168],
     }),
   ];
@@ -75,6 +87,22 @@ class SethosData extends Character implements ICharacterInfo {
           getValue: (data) => (data.elementalMystery + data.elementalMystery_NT) * 7,
           actionOn: ActionOn.External,
           special: "Sethos",
+        },
+      ],
+      enable: true,
+    },
+    {
+      label: "元素爆发·寂想瞑影",
+      describe: "塞索斯的普通攻击转化为发射能穿透敌人的瞑弦矢，对敌人造成雷元素伤害，基于元素精通提升其造成的伤害。",
+      effect: [
+        {
+          type: BuffType.StrongFixed,
+          getValue: (data) => {
+            const a = [1.962, 2.109, 2.256, 2.452, 2.599, 2.746, 2.942, 3.139, 3.335, 3.531, 3.727, 3.923, 4.168][data.burstLevel+data.burstLevelAdd-1]
+            return (data.elementalMystery + data.elementalMystery_NT) * a
+          },
+          actionOn: ActionOn.External,
+          special: "Sethos2",
         },
       ],
       enable: true,

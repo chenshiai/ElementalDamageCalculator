@@ -1125,7 +1125,7 @@ const relicLibrary: IRelicLibraryItem[] = [
           label: "四件套·法器、弓箭角色重击造成的伤害提高",
           effect: [{ type: BuffType.StrongPrcent, getValue: () => 35 }],
           describe: "角色为法器、弓箭角色时，角色重击造成的伤害提高35%",
-          enable: false,
+          enable: true,
         },
       ],
     },
