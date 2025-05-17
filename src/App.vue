@@ -94,7 +94,7 @@ const showLeft = ref(false);
     display: none;
   }
   .main-content {
-    padding: 60px 200px 0;
+    padding: 60px 160px 0;
   }
   .side-navigator-wrap {
     display: block;

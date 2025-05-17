@@ -58,6 +58,7 @@ const selectLocalRelic = (item: IRelicItem) => {
   border-radius: 4px;
   margin-bottom: 12px;
   box-shadow: inset -1px -1px 1px var(--border);
+  cursor: pointer;
 }
 .relic-suit-detail {
   overflow: scroll;

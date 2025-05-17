@@ -107,12 +107,8 @@
       <DataItem v-model="extraRate" title="倍率增幅%" :stepperMin="0" :decimalLength="1">
         <Popover position="top-right">
           <div class="data-item-popover__content">
-            <b>基础伤害值 = (基础属性x最终倍率) + 伤害提高值 + 激化提高值</b><br />
-            <p>其中<b>最终倍率</b> = 技能倍率 x (1 + <span style="color: #49ff39">倍率增幅</span>)</p>
-            <p>
-              <b>倍率增幅：</b>
-              例：宵宫释放元素战技后的普通攻击“造成152%普通攻击伤害”，即“普通攻击<b>倍率增幅</b>为(152%-100%)=<b>52%</b>”；还有行秋4命、流浪者普攻、莱欧斯利普攻、那维莱特重击160%和芙宁娜战技140%。<br />
-            </p>
+            <b>倍率增幅：</b>
+            例：宵宫释放元素战技后的普通攻击“造成152%普通攻击伤害”，即“普通攻击<b>倍率增幅</b>为(152%-100%)=<b>52%</b>”；还有行秋4命、流浪者普攻、莱欧斯利普攻、那维莱特重击160%和芙宁娜战技140%。<br />
           </div>
           <template #trigger>
             <Icon size="26" name="question" />
@@ -120,7 +116,7 @@
         </Popover>
       </DataItem>
       <DataItem v-model="additionalDemage" title="伤害提高值" tips="" :stepperMin="0" :decimalLength="2">
-        <Popover position="top-right">
+        <Popover position="bottom-right">
           <div class="data-item-popover__content">
             <b>基础伤害值 = (基础属性x最终倍率) + 伤害提高值 + 激化提高值</b><br />
             <p><b>基础伤害值：</b>基础属性乘以最终倍率的数值为基础伤害值。</p>
@@ -171,68 +167,64 @@
         :selectedNotes="selectedElementDemageNotes"
       />
     </section>
-  <section>
-    
-    <DataItem v-model="characterLevel" title="角色等级" :stepperMax="90" :stepperMin="1" />
-      <DataItem v-model="enemyLevel" title="敌人等级" :stepperMin="1" />
-      <DataItem v-model="enemyResistance" title="敌人抗性%" :stepperMin="-999">
-        <div class="extra-btn" @click="handleImagePreview">查看抗性表</div>
-      </DataItem>
+    <section class="result-section">
+      <DataItem v-model="characterLevel" title="角色的等级" :stepperMax="90" :stepperMin="1" />
+      <DataItem v-model="enemyLevel" title="敌人的等级" :stepperMin="1" />
+      <DataItem v-model="enemyResistance" title="敌人抗性%" :stepperMin="-999" />
       <DataItem v-model="weaken" title="减少抗性%" :stepperMin="0" :stepperMax="300" />
       <DataItem v-model="armour" title="减少防御%" :stepperMin="0" :stepperMax="90" />
       <DataItem v-model="armourPiercing" title="无视防御%" :stepperMin="0" :stepperMax="100" />
     </section>
-  </div>
-
-  <section>
-    <div class="data-panel__title">反应类型</div>
-    <AtkTypeSelector v-model="atkType" />
-    <Cell
-      v-show="atkType === ElementalReaction.Rate || atkType === ElementalReaction.Rate2"
-      center
-      title="炽烈的炎之魔女，增幅反应伤害提升15%"
-    >
-      <template #right-icon>
-        <Switch v-model="witch" active-color="#766461" inactive-color="#b7a19e" size="16" />
-      </template>
-    </Cell>
-    <Cell v-show="atkType === ElementalReaction.Aggravate" center title="如雷的盛怒，超激化[伤害提升]提高20%">
-      <template #right-icon>
-        <Switch v-model="thunder" active-color="#766461" inactive-color="#b7a19e" size="16" />
-      </template>
-    </Cell>
-    <Cell
-      v-show="atkType === ElementalReaction.Aggravate || atkType === ElementalReaction.Spread"
-      title="白术天赋·在地为化 输入生命值"
-      center
-    >
-      <template #right-icon>
-        <input class="ex-input" type="number" v-model="baizhuHP" />
-      </template>
-    </Cell>
-  </section>
-  <div :class="['dmg-result', floatChecked && 'increase-result__top']">
-    <div class="result-grid">
-      <div class="grid-item">
-        伤害数值
-        <div class="normal-damage">
-          {{ increaseResult.common }}
+    <section>
+      <div class="data-panel__title">反应类型</div>
+      <AtkTypeSelector v-model="atkType" />
+      <Cell
+        v-show="atkType === ElementalReaction.Rate || atkType === ElementalReaction.Rate2"
+        center
+        title="炽烈的炎之魔女，增幅反应伤害提升15%"
+      >
+        <template #right-icon>
+          <Switch v-model="witch" active-color="#766461" inactive-color="#b7a19e" size="16" />
+        </template>
+      </Cell>
+      <Cell v-show="atkType === ElementalReaction.Aggravate" center title="如雷的盛怒，超激化[伤害提升]提高20%">
+        <template #right-icon>
+          <Switch v-model="thunder" active-color="#766461" inactive-color="#b7a19e" size="16" />
+        </template>
+      </Cell>
+      <Cell
+        v-show="atkType === ElementalReaction.Aggravate || atkType === ElementalReaction.Spread"
+        title="白术天赋·在地为化 输入生命值"
+        center
+      >
+        <template #right-icon>
+          <input class="ex-input" type="number" v-model="baizhuHP" />
+        </template>
+      </Cell>
+      <div :class="['dmg-result', floatChecked && 'increase-result__top']">
+        <div class="result-grid">
+          <div class="grid-item">
+            伤害数值
+            <div class="normal-damage">
+              {{ increaseResult.common }}
+            </div>
+          </div>
+          <div class="grid-item">
+            暴击伤害
+            <div class="crit-damage">
+              {{ increaseResult.crit }}
+            </div>
+          </div>
         </div>
+        <CompositionAnalysis :damageModule="reactiveProps" />
       </div>
-      <div class="grid-item">
-        暴击伤害
-        <div class="crit-damage">
-          {{ increaseResult.crit }}
-        </div>
-      </div>
-    </div>
-    <CompositionAnalysis :damageModule="reactiveProps" />
+      <Cell center title="置顶展示">
+        <template #right-icon>
+          <Switch v-model="floatChecked" active-color="#766461" inactive-color="#b7a19e" size="16" />
+        </template>
+      </Cell>
+    </section>
   </div>
-  <Cell center title="置顶展示">
-    <template #right-icon>
-      <Switch v-model="floatChecked" active-color="#766461" inactive-color="#b7a19e" size="16" />
-    </template>
-  </Cell>
   <SaveData
     :damageModule="reactiveProps"
     :saveDataModule="saveDataModule"
@@ -243,7 +235,7 @@
 
 <script setup lang="ts">
 import { computed, ref } from "vue";
-import { Switch, Cell, Icon, showImagePreview } from "vant";
+import { Switch, Cell, Icon } from "vant";
 
 import TabTitle from "@/component/TabTitle.vue";
 import DataItem from "@/component/DataItem.vue";
@@ -520,10 +512,6 @@ const NotesConfig = {
       selectedFixedEMNotes.value = value;
     },
   },
-};
-
-const handleImagePreview = () => {
-  showImagePreview(["https://saomdpb.com/IMG_1457.PNG"]);
 };
 </script>
 

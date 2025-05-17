@@ -2,7 +2,7 @@
 import { computed, watchEffect, toRaw } from "vue";
 import { showNotify, showConfirmDialog } from "vant";
 import TabTitle from "@/component/TabTitle.vue";
-import CharacterPanel from "@/component/CharacterPanel.vue";
+import CharacterPanel from "./modules/CharacterPanel.vue";
 
 import { ICalculatorValue } from "@/types/interface";
 import CalculatorValueClass from "@/constants/characters-config/calculator-value-class";
@@ -56,6 +56,7 @@ const saveCalculationResult = (title: string) => {
     weaponLevel: weapon.value?.level,
     weaponMainStats: toRaw(weapon.value?.weaponStats[0]),
     weaponSubStats: toRaw(weapon.value?.weaponStats[1]),
+    // indexDB存不了数组，转化为JSON字符串
     relicList: JSON.stringify(relicList.value),
     panel: CalculatorValue.value,
   };
@@ -142,27 +143,63 @@ const pageTitle = computed(() => {
 <template>
   <TabTitle>{{ pageTitle }}</TabTitle>
   <div class="tips">默认的角色、武器和圣遗物均以满级数据计算。可以自由搭配。</div>
-  <CharacterInfo v-model="characterInfo" v-model:constellation="constellation" />
-  <WeaponInfo v-model="weapon" v-model:affix="affix" />
+  <section class="calculation-section">
+    <div class="calculation-section__item">
+      <CharacterInfo v-model="characterInfo" v-model:constellation="constellation" />
+    </div>
+    <div class="calculation-section__item">
+      <WeaponInfo v-model="weapon" v-model:affix="affix" />
+    </div>
+  </section>
   <RelicInfo v-model="relicList" :relic-suit-texts="relicSuitTexts" />
   <template v-if="characterInfo && weapon">
     <CharacterPanel :character-panel-data="CalculatorValue" :element-type="characterInfo?.element" />
-    <BuffInfo
-      v-model="buffs"
-      v-model:character-buffs="characterBuffs"
-      v-model:weapon-buffs="weaponBuffs"
-      v-model:relic-buffs="relicBuffs"
-      :character-info="characterInfo"
-    />
-    <SkillInfo
-      :calculator-value="CalculatorValue"
-      :character-info="characterInfo"
-      :weapon="weapon"
-      :affix="affix"
-      v-model:normalLevel="normalLevel"
-      v-model:skillLevel="skillLevel"
-      v-model:burstLevel="burstLevel"
-    />
+    <section class="calculation-section scroll-y">
+      <div class="calculation-section-buffs">
+        <BuffInfo
+          v-model="buffs"
+          v-model:character-buffs="characterBuffs"
+          v-model:weapon-buffs="weaponBuffs"
+          v-model:relic-buffs="relicBuffs"
+          :character-info="characterInfo"
+        />
+      </div>
+      <div class="calculation-section-skillinfo">
+        <SkillInfo
+          :calculator-value="CalculatorValue"
+          :character-info="characterInfo"
+          :weapon="weapon"
+          :affix="affix"
+          v-model:normalLevel="normalLevel"
+          v-model:skillLevel="skillLevel"
+          v-model:burstLevel="burstLevel"
+        />
+      </div>
+    </section>
     <SaveCalculation @save-data="saveCalculationResult" @recalculation="recalculation" />
   </template>
 </template>
+
+<style scoped>
+@media screen and (min-width: 768px) {
+  .calculation-section {
+    display: flex;
+    gap: 16px;
+  }
+  .calculation-section__item {
+    flex: 1;
+  }
+  .scroll-y {
+    overflow-y: scroll;
+    height: 550px;
+  }
+  .calculation-section-skillinfo {
+    position: sticky;
+    flex: 1;
+    top: 0;
+  }
+  .calculation-section-buffs {
+    width: 40%;
+  }
+}
+</style>

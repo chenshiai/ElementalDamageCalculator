@@ -131,6 +131,9 @@ const getCharacterName = (enkaId: number) => {
 const getWeaponIcon = (enkaId: number) => {
   return Weapons.find((c) => c.enkaId === enkaId).icon;
 };
+const getWeaponName = (enkaId: number) => {
+  return Weapons.find((c) => c.enkaId === enkaId).name;
+};
 
 const getRelics = (relicList: string) => {
   return JSON.parse(relicList) as IRelicItem[];
@@ -144,48 +147,53 @@ const handleImagePreview = () => {
 <template>
   <TabTitle>角色组队计算</TabTitle>
   <div class="tips">点击+号，选择数据填入队伍，不设上限，可重复添加</div>
-  
+
   <div class="data-panel__title">攻击目标设置</div>
-    <DataItem v-model="store.state.teamBuffs.enemyLevel" title="敌人的等级" :stepperMin="1" />
-    <DataItem v-model="store.state.teamBuffs.baseResistance" title="基础抗性%" :stepperMin="-999">
-      <div class="extra-btn" @click="handleImagePreview">查看抗性表</div>
-    </DataItem>
+  <DataItem v-model="store.state.teamBuffs.enemyLevel" title="敌人的等级" :stepperMin="1" />
+  <DataItem v-model="store.state.teamBuffs.baseResistance" title="基础抗性%" :stepperMin="-999" />
   <div class="team-list">
     <span class="holy-relic-tips">更新角色数据后需要重新入队。</span>
     <div class="data-panel__title">队伍编辑</div>
-    <div class="team-list__item" v-for="(item, index) in teamList" :key="index">
-      <div class="team-list__item-avatar" @click="setSlotByIndex(index)">
-        <template v-if="item">
-          <img
-            :class="getBackGroundByElement(item.calculation.panel.element)"
-            :src="getAvatarIcon(item.calculation.characterEnkaId)"
-          />
-          <div class="team-list__item-name">
-            {{ getCharacterName(item.calculation.characterEnkaId) }}
-          </div>
-        </template>
-        <div class="empty" v-else></div>
-      </div>
-      <div class="team-list__item-detail">
-        <template v-if="item">
-          <div class="dataname">数据名：{{ item.calculation?.title || "" }}</div>
-          <div class="team-list__item-imgs">
-            <img class="weapon-icon" :src="getWeaponIcon(item.calculation.weaponEnkaId)" />
+    <section class="team-list__section">
+      <div class="team-list__item" v-for="(item, index) in teamList" :key="index">
+        <div class="team-list__item-avatar" @click="setSlotByIndex(index)">
+          <template v-if="item">
             <img
-              v-for="(relic, index) in getRelics(item.calculation.relicList)"
-              :key="index"
-              class="relic-icon"
-              v-lazy="relic?.icon || ''"
-              :alt="relic ? relic.name : null"
+              :class="getBackGroundByElement(item.calculation.panel.element)"
+              :src="getAvatarIcon(item.calculation.characterEnkaId)"
             />
-          </div>
-          <div class="team-list__item-options" @click="clear(index)">离队<Icon name="revoke" /></div>
-          <div class="team-list__item-look" @click="edit(index)">
-            查看&编辑详细数据<Icon name="arrow-double-right" />
-          </div>
-        </template>
+            <div class="team-list__item-name">
+              {{ getCharacterName(item.calculation.characterEnkaId) }}
+            </div>
+          </template>
+          <div class="empty" v-else></div>
+        </div>
+        <div class="team-list__item-detail">
+          <template v-if="item">
+            <div class="dataname">数据名：{{ item.calculation?.title || "" }}</div>
+            <div class="team-list__item-imgs">
+              <img
+                class="weapon-icon"
+                :src="getWeaponIcon(item.calculation.weaponEnkaId)"
+                :title="getWeaponName(item.calculation.weaponEnkaId)"
+              />
+              <img
+                v-for="(relic, index) in getRelics(item.calculation.relicList)"
+                :key="index"
+                class="relic-icon"
+                v-lazy="relic?.icon || ''"
+                :title="relic?.name || ''"
+                :alt="relic ? relic.name : null"
+              />
+            </div>
+            <div class="team-list__item-options" @click="clear(index)">离队<Icon name="revoke" /></div>
+            <div class="team-list__item-look" @click="edit(index)">
+              查看&编辑详细数据<Icon name="arrow-double-right" />
+            </div>
+          </template>
+        </div>
       </div>
-    </div>
+    </section>
   </div>
   <div class="show-click" @click="toCreateData">去创建角色数据</div>
   <div>
@@ -203,15 +211,14 @@ const handleImagePreview = () => {
       可以点击【去创建角色数据】前往编辑页面，在编辑、保存完成后，可以点击“+”号选择角色数据填入队伍。
     </p>
     <br />
-    使用Q&A：
+    使用答疑：
     <p>
       问：更新了辅助角色的面板数据、武器或者圣遗物，但是TA提供的队伍增益却没有变化？<br />
       答：角色面板数据更新后，需要先离队再重新填入来更新队伍数据。[角色数据更新]只会出现在【重复命名】的情况下，如果是想对比同一个角色带不同装备的效果，建议不要重复命名。在保存数据时会有提示。
     </p>
     <p>
-      【角色配置】：<br />
       问：为什么法器角色可以使用双手剑武器？<br />
-      答：武器和圣遗物均未做严格限制，角色可以无视武器类型使用任何武器、圣遗物效果，你可以让那维莱特拿上暗影阔剑、可以让迪卢克拿上神乐之真意。旨在提高自由度更高的体验以及满足一些幻想（不是因为偷懒没做嗷），使用时请注意是否符合实际情况。
+      答：武器和圣遗物均未做严格限制，在本计算器中，角色可以无视武器类型使用任何武器、圣遗物效果，你可以让那维莱特拿上暗影阔剑、可以让迪卢克拿上神乐之真意。旨在提高自由度更高的体验以及满足一些幻想（不是因为偷懒没做嗷），使用时请注意是否符合实际情况。
     </p>
     <p>
       问：为什么计算器得出的数据和游戏内的数值不一样？<br />

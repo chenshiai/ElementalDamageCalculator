@@ -74,6 +74,7 @@ const constellation = defineModel("constellation", {
   right: 0;
   width: 130px;
   box-sizing: border-box;
+  cursor: pointer;
 }
 .avatar img {
   display: inline-block;
@@ -106,6 +107,7 @@ const constellation = defineModel("constellation", {
   border: var(--stroke-2) 2px solid;
   background-color: var(--light-text);
   position: relative;
+  cursor: pointer;
 }
 .consts-icon i {
   position: absolute;

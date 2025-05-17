@@ -70,7 +70,6 @@
       <Stepper v-model="data.shieldStrong" integer input-width="66px" button-size="20" theme="round" min="0" />
       <span class="holy-relic-tips">被保护角色的护盾强效</span>
     </div>
-    <Slider v-model="data.shieldStrong" :max="200" />
   </div>
   <div class="shield-data">可吸收【{{ shieldData }}】点伤害</div>
   <div class="detail">
@@ -86,7 +85,7 @@
 <script setup>
 import { computed, reactive, ref } from "vue";
 import TabTitle from "../component/TabTitle.vue";
-import { CellGroup, Cell, Slider, Stepper, Radio, RadioGroup } from "vant";
+import { CellGroup, Cell, Stepper, Radio, RadioGroup } from "vant";
 
 const otherChecked = ref(false);
 const data = reactive({

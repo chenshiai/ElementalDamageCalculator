@@ -1,16 +1,20 @@
 .data-panel {
   margin-bottom: 24px;
   line-height: 24px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
+  position: relative;
 }
 .data-panel section {
   width: 100%;
 }
+.result-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+}
 @media screen and (min-width: 768px) {
-  .data-panel section {
-    width: calc(50% - 10px);
+  .data-panel .result-section {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
   }
 }
 
@@ -85,14 +89,8 @@
   padding: 0 4px;
 }
 
-.data-item-popover {
-  max-width: 80%;
-  transform: translateX(8px);
-}
-
 .data-item-popover__content {
   padding: 12px;
-  width: 300px;
   font-size: 14px;
 }
 

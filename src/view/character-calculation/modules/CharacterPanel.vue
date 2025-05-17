@@ -216,7 +216,7 @@ function round(a: number, precision: number = 0): number {
     </div>
   </div>
   <div class="show-detail" @click="show = true"><Icon name="description" />详细属性</div>
-  <Popup v-model:show="show" teleport="#app" position="bottom" round style="height: 80%" closeable>
+  <Popup v-model:show="show" teleport="#app" position="bottom" round style="height: 86%" closeable>
     <div class="character-panel-popup">
       <div class="data-panel__title">基础属性</div>
       <div class="panel-item" v-for="(val, index) in baseValue">
@@ -283,6 +283,11 @@ function round(a: number, precision: number = 0): number {
   line-height: 12px;
   text-align: right;
 }
+@media screen and (min-width: 550px) {
+  .panel-detail {
+    display: flex;
+  }
+}
 .extra-text {
   color: var(--extra-text);
 }
@@ -303,6 +308,7 @@ function round(a: number, precision: number = 0): number {
   margin-bottom: 16px;
   font-size: 12px;
   border-radius: 0 0 4px 4px;
+  cursor: pointer;
 }
 .panel-item + .data-panel__title {
   margin-top: 20px;

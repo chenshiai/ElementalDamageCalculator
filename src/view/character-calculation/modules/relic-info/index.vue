@@ -11,6 +11,7 @@ import {
   Tabs,
   RadioGroup,
   Radio,
+  Icon,
 } from "vant";
 import { ref, computed, nextTick } from "vue";
 import _ from "lodash";
@@ -229,7 +230,7 @@ const deleteLocalData = (item: IRelicItem) => {
     <Relic
       v-for="(item, index) in relicList"
       :relic="item"
-      :key="item?.timetemp || index"
+      :key="item?.timetemp + index || index"
       :emptyText="RelicText[index]"
       @select-relic="selectRelic(index)"
     />
@@ -253,16 +254,14 @@ const deleteLocalData = (item: IRelicItem) => {
         </div>
         <Search v-if="!showLocalRelics" v-model="searchRelic" placeholder="搜索圣遗物套装" />
         <div v-else="showLocalRelics" style="text-align: center; line-height: 54px">
-          {{ localRelics.length === 0 ? "该部位没有圣遗物存档" : "Tips：点击添加，左滑删除" }}
+          {{ localRelics.length === 0 ? "该部位没有圣遗物存档" : "Tips：点击添加，右上角可删除" }}
         </div>
       </div>
       <div v-show="showLocalRelics" class="relic-select">
-        <SwipeCell v-for="item in localRelics">
-          <Relic :relic="item" :key="item.timetemp" @select-relic="selectLocalRelic" />
-          <template #right>
-            <Button class="swipecell-right-button" square type="danger" text="删除" @click="deleteLocalData(item)" />
-          </template>
-        </SwipeCell>
+        <div v-for="item in localRelics" class="relic-select__local-item">
+          <Relic style="flex: 1" :relic="item" :key="item.timetemp" @select-relic="selectLocalRelic" />
+          <Icon class="delete" name="delete-o" size="40" @click.stop="deleteLocalData(item)" text="删除" />
+        </div>
       </div>
       <div v-show="!showLocalRelics" class="relic-select">
         <div v-for="item in filteredRelics" class="relic-select__item" @click="showSetRelicStatPop(item.equip)">
@@ -277,7 +276,7 @@ const deleteLocalData = (item: IRelicItem) => {
         <span v-if="relicList[selectedPartIndex]" class="set-relic-title__close" @click="removeRelic">卸下圣遗物</span>
         <span v-else class="set-relic-title__close" @click="closePopup">取消编辑</span>
       </div>
-      <Tabs class="relic-tabs" type="card"  v-model:active="selectStatus">
+      <Tabs class="relic-tabs" type="card" v-model:active="selectStatus">
         <Tab title="选择主属性">
           <RadioGroup
             class="substats-check-group"
@@ -323,9 +322,8 @@ const deleteLocalData = (item: IRelicItem) => {
   margin-bottom: 16px;
   display: grid;
   gap: 8px;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr 1fr;
 }
-
 .relic-search {
   position: fixed;
   width: 100%;
@@ -333,6 +331,7 @@ const deleteLocalData = (item: IRelicItem) => {
   left: 0;
   z-index: 10;
   box-shadow: var(--button-bg) 0px 0px 10px;
+  box-sizing: border-box;
 }
 
 .relic-search span {
@@ -349,13 +348,29 @@ const deleteLocalData = (item: IRelicItem) => {
   grid-template-columns: repeat(2, 1fr);
 }
 
+@media screen and (min-width: 768px) {
+  .relic-info {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .relic-select {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
 .relic-select__item {
   display: flex;
   height: 32px;
   line-height: 32px;
   border: 2px solid var(--border);
-}
+  cursor: pointer;
 
+  &:hover {
+    color: var(--light-text);
+    background-color: var(--button-bg);
+  }
+}
+.relic-select__local-item {
+  display: flex;
+}
 .relic-select__item img {
   height: inherit;
 }
@@ -367,6 +382,10 @@ const deleteLocalData = (item: IRelicItem) => {
   line-height: 48px;
   justify-content: space-between;
   box-sizing: border-box;
+
+  & span {
+    cursor: pointer;
+  }
 }
 .set-relic-title__close {
   color: var(--cancel);
@@ -450,6 +469,7 @@ const deleteLocalData = (item: IRelicItem) => {
   margin: 0 12px 4px 12px;
   display: flex;
   border-radius: 4px;
+  cursor: pointer;
 }
 .relic-package span.active {
   background-color: var(--button-bg);
@@ -457,14 +477,13 @@ const deleteLocalData = (item: IRelicItem) => {
 }
 .relic-suit-detail {
   font-size: 14px;
-  overflow: scroll;
+  overflow-y: scroll;
   height: 112px;
   border-radius: 4px;
   mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 90%, rgba(0, 0, 0, 0) 100%);
   -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 90%, rgba(0, 0, 0, 0) 100%); /* Safari 和 Chrome */
 }
 .relic-suit-text {
-  overflow: scroll;
   color: var(--extra-text);
   padding: 0 8px;
 }
@@ -508,5 +527,14 @@ const deleteLocalData = (item: IRelicItem) => {
 .substats-check-group > [aria-checked="true"] > span {
   background-color: var(--main-text);
   color: #fff;
+}
+
+.delete {
+  color: red;
+  cursor: pointer;
+  height: 40px;
+  &:hover {
+    background-color: var(--light-text);
+  }
 }
 </style>

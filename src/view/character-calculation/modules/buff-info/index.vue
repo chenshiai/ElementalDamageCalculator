@@ -57,51 +57,56 @@ const activeNames = ref<string[]>([]);
 <template>
   <!-- buff信息 -->
   <div class="data-panel__title">增益情况</div>
-  <div class="buffs-container">
-    <Collapse v-model="activeNames" :border="false">
-      <CollapseItem v-if="characterBuffsFilter?.length > 0" title="角色自身增益" name="character">
-        <BuffItem
-          v-for="(buff, index) in characterBuffsFilter"
-          :key="buff.label + index"
-          v-model="buff.enable"
-          v-model:stack="buff.stack"
-          :buff="buff"
-        />
-      </CollapseItem>
-      <CollapseItem v-if="weaponBuffsFilter.length > 0" title="武器技能增益" name="weapon">
-        <BuffItem
-          v-for="(buff, index) in weaponBuffsFilter"
-          :key="buff.label + index"
-          v-model="buff.enable"
-          v-model:stack="buff.stack"
-          :buff="buff"
-        />
-      </CollapseItem>
-      <CollapseItem v-if="relicBuffsFilter.length > 0" title="圣遗物套装增益" name="relic">
-        <BuffItem
-          v-for="(buff, index) in relicBuffsFilter"
-          :key="buff.label + index"
-          v-model="buff.enable"
-          v-model:stack="buff.stack"
-          :buff="buff"
-        />
-      </CollapseItem>
-      <CollapseItem v-if="teamBuffsFilter.length > 0" title="队伍增益" name="other">
-        <BuffItem
-          v-for="(buff, index) in teamBuffsFilter"
-          :key="buff.label + index"
-          v-model="buff.enable"
-          v-model:stack="buff.stack"
-          :buff="buff"
-        />
-      </CollapseItem>
-    </Collapse>
-  </div>
+  <Collapse v-model="activeNames" :border="false" class="buffs-container">
+    <CollapseItem v-if="characterBuffsFilter?.length > 0" title="角色自身增益" name="character">
+      <BuffItem
+        v-for="(buff, index) in characterBuffsFilter"
+        :key="buff.label + index"
+        v-model="buff.enable"
+        v-model:stack="buff.stack"
+        :buff="buff"
+      />
+    </CollapseItem>
+    <CollapseItem v-if="weaponBuffsFilter.length > 0" title="武器技能增益" name="weapon">
+      <BuffItem
+        v-for="(buff, index) in weaponBuffsFilter"
+        :key="buff.label + index"
+        v-model="buff.enable"
+        v-model:stack="buff.stack"
+        :buff="buff"
+      />
+    </CollapseItem>
+    <CollapseItem v-if="relicBuffsFilter.length > 0" title="圣遗物套装增益" name="relic">
+      <BuffItem
+        v-for="(buff, index) in relicBuffsFilter"
+        :key="buff.label + index"
+        v-model="buff.enable"
+        v-model:stack="buff.stack"
+        :buff="buff"
+      />
+    </CollapseItem>
+    <CollapseItem v-if="teamBuffsFilter.length > 0" title="队伍增益" name="other">
+      <BuffItem
+        v-for="(buff, index) in teamBuffsFilter"
+        :key="buff.label + index"
+        v-model="buff.enable"
+        v-model:stack="buff.stack"
+        :buff="buff"
+      />
+    </CollapseItem>
+  </Collapse>
 </template>
 
 <style scoped>
-.buffs-container {
-  display: flex;
-  flex-direction: column;
+@media screen and (min-width: 768px) {
+  .data-panel__title {
+    position: sticky;
+    top:  0;
+    z-index: 1;
+    background-color: var(--page-bg);
+    padding-bottom: 12px;
+    margin-bottom: 0;
+    box-shadow: 1px 0 0 1px  var(--page-bg);
+  }
 }
 </style>

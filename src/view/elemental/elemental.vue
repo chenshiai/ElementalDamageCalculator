@@ -10,7 +10,6 @@
       <span class="base-damage__title">元素精通</span>
       <Stepper v-model="elementalMystery" integer input-width="66px" button-size="20" theme="round" min="0" />
     </div>
-    <Slider v-model="elementalMystery" :max="2000" />
     <div class="holy-relic">
       <div>
         <span class="holy-relic__title">圣遗物套装</span>

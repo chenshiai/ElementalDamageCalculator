@@ -67,6 +67,7 @@ const stackText = computed(() => {
 }
 .buff-label-text {
   color: var(--main-text);
+  padding-right: 30px;
 }
 
 .buff-description {

@@ -4,7 +4,7 @@ import { ICalculatorValue, ISkillRate } from "@/types/interface";
 import { calculateDamage } from "@/utils/calculate/method-calculation";
 import AtkTypeSelector from "@/component/AtkTypeSelector.vue";
 import { getColorByElement } from "@/utils/get-color";
-import { Slider } from "vant";
+import { Slider, Rate } from "vant";
 import { ElementalReactionType } from "@/constants";
 
 interface IProps {
@@ -46,7 +46,7 @@ const calculatedResults = computed(() => {
         crit: "-",
         desire: "-",
         elementType,
-      }
+      };
     }
     if (SHIELD_VALUE > 0) {
       return {
@@ -55,7 +55,7 @@ const calculatedResults = computed(() => {
         crit: "-",
         desire: "-",
         elementType,
-      }
+      };
     }
     return {
       label: item.label,
@@ -77,7 +77,11 @@ const panelName = computed(() => {
     <span>{{ panelName }}</span>
     <span v-if="skillLevel" class="slider-wrap">
       <span>天赋等级：</span>
-      <Slider v-model="skillLevel" max="10" min="1" />
+      <Slider v-model="skillLevel" max="10" min="1">
+        <template #button>
+          <div class="custom-button">{{ skillLevel+levelAdd }}</div>
+        </template>
+      </Slider>
     </span>
     <template v-if="skill.length > 0">
       <div class="skill-info-item">
@@ -137,5 +141,15 @@ const panelName = computed(() => {
 .slider-wrap span {
   margin-right: 12px;
   flex-shrink: 0;
+}
+.custom-button {
+  width: var(--van-slider-button-width);
+  height: var(--van-slider-button-height);
+  background: var(--van-slider-button-background);
+  border-radius: var(--van-slider-button-radius);
+  box-shadow: var(--van-slider-button-shadow);
+  text-align: center;
+  color: var(--main-text);
+  text-shadow: none;
 }
 </style>

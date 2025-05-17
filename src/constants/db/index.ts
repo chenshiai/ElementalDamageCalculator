@@ -35,7 +35,7 @@ export interface IUserSavedCalculationData {
   /** 武器副属性 */
   weaponSubStats: WeaponStats;
   /** 圣遗物列表JSON字符串 */
-  relicList: string;
+  relicList: string | any;
   /** 角色面板数据 */
   panel: ICalculatorValue
 }

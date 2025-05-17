@@ -122,6 +122,7 @@ const onTab = (val) => {
   font-size: 14px;
   font-weight: 300;
   position: relative;
+  cursor: pointer;
 }
 .tab-icon {
   width: 17px;
@@ -158,7 +159,6 @@ const onTab = (val) => {
   background-color: var(--main-text);
   transform: skewX(10deg);
 }
-
 .not-selected::before {
   content: "";
   position: absolute;

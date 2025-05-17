@@ -39,7 +39,8 @@ const hidePopover = () => {
   z-index: 1000;
   /* 移除边框，调整阴影效果 */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  max-width: 80vw;
+  max-width: 360px;
+  width: 80vw;
 }
 
 .popover-content.top {
@@ -83,6 +84,7 @@ const hidePopover = () => {
 
 .popover-content.bottom-right {
   top: calc(100% + 10px);
+  right: 0;
 }
 
 .popover-content.top::after {
@@ -169,7 +171,7 @@ const hidePopover = () => {
   content: "";
   position: absolute;
   top: -9px;
-  right: 20px;
+  right: 4px;
   border-width: 0 9px 9px 9px;
   border-style: solid;
   border-color: transparent transparent white transparent;

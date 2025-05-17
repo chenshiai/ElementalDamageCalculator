@@ -76,6 +76,7 @@ const weaponStats = computed(() => {
   right: 0;
   width: 130px;
   box-sizing: border-box;
+  cursor: pointer;
 }
 
 .avatar img {

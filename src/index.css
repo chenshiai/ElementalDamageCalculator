@@ -192,3 +192,16 @@ summary::marker {
 summary::-webkit-details-marker {
   font-size: 0;
 }
+
+@media screen and (min-width: 768px)  {
+  .van-popup--right {
+    max-width: 40%;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .relic-search,
+  .van-popup.van-popup--bottom,
+  .van-popup.van-popup--top {
+    padding: 0 26%;
+  }
+}

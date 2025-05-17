@@ -45,7 +45,7 @@ const getLocalData = () => {
 };
 
 watchEffect(() => {
-  if (props.showDataPopup) getLocalData()
+  if (props.showDataPopup) getLocalData();
 });
 
 // 删除数据
@@ -103,7 +103,7 @@ const update = (playerUid) => {
   uid.value = playerUid;
   if (waiting.value > 0 || importLoading.value) return;
   importGameInfo().then(() => {
-    getLocalData()
+    getLocalData();
   });
 };
 const replayText = computed(() => {
@@ -112,7 +112,11 @@ const replayText = computed(() => {
 </script>
 
 <template>
-  <div class="tips">点击展开查看圣遗物详情。支持「填入」，左滑「删除」</div>
+  <div class="tips">
+    点击展开查看圣遗物详情。
+    <span style="color: green">绿色</span>按钮「填入」，
+    <span style="color: red">红色</span>按钮「删除」
+  </div>
   <div class="data-selector-title">本地数据存档</div>
   <Tabs v-model:active="filterActive">
     <Tab title="全部数据"></Tab>
@@ -136,9 +140,9 @@ const replayText = computed(() => {
   </Tabs>
 
   <section class="data-popup__collapse">
-    <SwipeCell v-for="item in localDataFilter" :key="item.title">
-      <details class="data-popup__collapse-item">
-        <summary class="data-title">
+    <details class="data-popup__collapse-item" v-for="item in localDataFilter" :key="item.title">
+      <summary class="data-title">
+        <div>
           <data>{{ item.title }}</data>
           <div class="first-row">
             <img :src="getAvatarIcon(item.characterEnkaId)" />
@@ -151,45 +155,61 @@ const replayText = computed(() => {
               <div class="name">{{ getWeaponName(item.weaponEnkaId) }}</div>
               <div class="conts">精炼：{{ item.affix }}</div>
             </div>
-            <Button class="replay" square type="primary" @click.stop="recalculation(item)">填入</Button>
-          </div>
-        </summary>
-        <div class="second-row">
-          <div class="relic-detail" v-for="(relic, index) in getRelics(item.relicList)" :key="index">
-            <template v-if="relic">
-              <img class="relic-icon" v-lazy="relic.icon" />
-              <div class="relic-detail__hearder">
-                <div class="relic-name">
-                  {{ relic.name }}
-                </div>
-                <div class="relic-main-stats">
-                  <span>{{ getAppendPropName2(relic.reliquaryMainstat.mainPropId) }}</span>
-                  <span>{{ getStatValueText(relic.reliquaryMainstat) }}</span>
-                </div>
-              </div>
-              <div
-                class="relic-detail__stats"
-                v-for="(subitem, index) in relic.reliquarySubstats"
-                :key="subitem.appendPropId + index"
-              >
-                <label>{{ getAppendPropName2(subitem.appendPropId) }}</label>
-                <span>{{ getStatValueText(subitem) }}</span>
-              </div>
-            </template>
-            <div class="empty" v-else>该部位未佩戴圣遗物</div>
           </div>
         </div>
-      </details>
-      <template #right>
-        <Button
-          class="swipecell-right-button"
-          square
-          type="danger"
-          @click.stop="deleteLocalData(item.title)"
-          text="删除"
-        />
-      </template>
-    </SwipeCell>
+        <div>
+          <Icon
+            class="replay"
+            name="passed"
+            size="40"
+            @click.stop="
+              (e) => {
+                e.preventDefault();
+                recalculation(item);
+              }
+            "
+            text="填入"
+          />
+          <Icon
+            class="delete"
+            name="delete-o"
+            size="40"
+            @click.stop="
+              (e) => {
+                e.preventDefault();
+                deleteLocalData(item.title);
+              }
+            "
+            text="删除"
+          />
+        </div>
+      </summary>
+      <div class="second-row">
+        <div class="relic-detail" v-for="(relic, index) in getRelics(item.relicList)" :key="index">
+          <template v-if="relic">
+            <div class="relic-detail__hearder">
+              <div class="relic-name">
+                <img class="relic-icon" v-lazy="relic.icon" />
+                <span>{{ relic.name }}</span>
+              </div>
+              <div class="relic-main-stats">
+                <span>{{ getAppendPropName2(relic.reliquaryMainstat.mainPropId) }}</span>
+                <span>{{ getStatValueText(relic.reliquaryMainstat) }}</span>
+              </div>
+            </div>
+            <div
+              class="relic-detail__stats"
+              v-for="(subitem, index) in relic.reliquarySubstats"
+              :key="subitem.appendPropId + index"
+            >
+              <label>{{ getAppendPropName2(subitem.appendPropId) }}</label>
+              <span>{{ getStatValueText(subitem) }}</span>
+            </div>
+          </template>
+          <div class="empty" v-else>该部位未佩戴圣遗物</div>
+        </div>
+      </div>
+    </details>
   </section>
   <div class="empty" v-show="localDataFilter.length === 0">无</div>
 </template>
@@ -206,12 +226,19 @@ const replayText = computed(() => {
   transform: translateY(-50%);
 }
 .replay {
-  width: 60px;
-  margin-left: auto;
-  position: absolute;
-  top: 0;
-  right: 0;
-  height: 92px;
+  cursor: pointer;
+  color: green;
+  margin-right: 30px;
+  &:hover {
+    background-color: var(--light-text);
+  }
+}
+.delete {
+  cursor: pointer;
+  color: red;
+  &:hover {
+    background-color: var(--light-text);
+  }
 }
 .replay-icon {
   position: absolute;
@@ -245,25 +272,34 @@ const replayText = computed(() => {
 
 .second-row {
   display: grid;
-  gap: 4px;
-  grid-template-columns: repeat(3, 1fr);
-  padding: 10px 16px 0 0;
+  gap: 10px;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 16px;
+}
+@media screen and (min-width: 768px) {
+  .second-row {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 .relic-detail {
   position: relative;
   font-size: 12px;
-  transform: scale(0.8);
 }
 .relic-icon {
-  width: 40%;
-  z-index: 1;
-  top: -20%;
-  right: -20%;
-  position: absolute;
+  border-radius: 100%;
+  height: 32px;
+  width: 32px;
+  padding: 2px;
+  box-shadow: inset 0 0 0 2px var(--light-text);
+  border: 2px solid var(--border);
+  background: var(--bg);
 }
 .relic-name {
   font-size: 14px;
   line-height: 32px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 .relic-main-stats {
   display: flex;
@@ -321,8 +357,12 @@ const replayText = computed(() => {
 }
 .data-popup__collapse-item {
   border-bottom: 1px solid var(--border);
+  position: relative;
 }
 .data-popup__collapse-item .data-title {
   padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 </style>
