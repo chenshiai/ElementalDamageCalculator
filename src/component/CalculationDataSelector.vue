@@ -13,12 +13,13 @@ const emit = defineEmits<{
 const namecards = ref([]);
 const pfps = ref([]);
 onMounted(() => {
-  fetch("/enkaData/namecards.json")
+  const date = new Date();
+  fetch(`/enkaData/namecards.json?date=${date.getDay()}`)
     .then((res) => res.json())
     .then((res) => {
       namecards.value = res;
     });
-  fetch("/enkaData/pfps.json")
+  fetch(`/enkaData/pfps.json?date=${date.getDay()}`)
     .then((res) => res.json())
     .then((res) => {
       pfps.value = res;
@@ -114,8 +115,7 @@ const replayText = computed(() => {
 <template>
   <div class="tips">
     点击展开查看圣遗物详情。
-    <span style="color: green">绿色</span>按钮「填入」，
-    <span style="color: red">红色</span>按钮「删除」
+    <span style="color: green">绿色</span>按钮「填入」， <span style="color: red">红色</span>按钮「删除」
   </div>
   <div class="data-selector-title">本地数据存档</div>
   <Tabs v-model:active="filterActive">
@@ -161,7 +161,7 @@ const replayText = computed(() => {
           <Icon
             class="replay"
             name="passed"
-            size="40"
+            size="36"
             @click.stop="
               (e) => {
                 e.preventDefault();
@@ -173,7 +173,7 @@ const replayText = computed(() => {
           <Icon
             class="delete"
             name="delete-o"
-            size="40"
+            size="36"
             @click.stop="
               (e) => {
                 e.preventDefault();
@@ -228,7 +228,7 @@ const replayText = computed(() => {
 .replay {
   cursor: pointer;
   color: green;
-  margin-right: 30px;
+  margin-right: 10px;
   &:hover {
     background-color: var(--light-text);
   }
