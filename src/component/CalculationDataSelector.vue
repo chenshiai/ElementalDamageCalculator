@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { Button, SwipeCell, Tab, Tabs, Icon } from "vant";
+import { showConfirmDialog, Tab, Tabs, Icon } from "vant";
 import db from "@/utils/db";
 import { IUserSavedCalculationData, IPlayerInfoData, calDB, playerInfoDB } from "@/constants/db";
-import { ref, watchEffect, computed, onMounted, nextTick } from "vue";
+import { ref, watchEffect, computed, onMounted } from "vue";
 import { getEnkaUI } from "@/constants/characters-config/decorator";
 import useImport from "@/utils/enka/useImport";
 
@@ -51,9 +51,16 @@ watchEffect(() => {
 
 // 删除数据
 const deleteLocalData = (title: string) => {
-  db.delete(calDB.storeName, title);
-  const index = localData.value.findIndex((item) => item.title === title);
-  localData.value.splice(index, 1);
+  showConfirmDialog({
+    title: "提示",
+    message: "确定要删除该条数据吗？",
+  })
+    .then(() => {
+      db.delete(calDB.storeName, title);
+      const index = localData.value.findIndex((item) => item.title === title);
+      localData.value.splice(index, 1);
+    })
+    .catch(() => {});
 };
 
 const localDataFilter = computed(() => {

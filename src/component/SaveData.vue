@@ -46,11 +46,11 @@
 
 <script setup lang="ts">
 import { ref, computed } from "vue";
-import { Popup, Field, showNotify, Collapse, CollapseItem, Icon } from "vant";
+import { Popup, Field, showNotify, Collapse, CollapseItem, Icon, showConfirmDialog } from "vant";
 import { getLocalStorage, deepCopyObject, computationalFormula, EventBus } from "@/utils";
 import { AtkTypeText } from "@/constants";
 
-const emit = defineEmits(['setUnifiedState'])
+const emit = defineEmits(["setUnifiedState"]);
 const remark = ref("");
 const localData = ref(getLocalStorage("GenShinImpactCustomDataV2", []));
 const opened = ref([]);
@@ -59,7 +59,7 @@ const props = defineProps({
   notesConfig: Object,
   damageModule: Object,
   saveDataModule: Object,
-  setUnifiedState: Function
+  setUnifiedState: Function,
 });
 
 const config = computed(() => {
@@ -241,22 +241,28 @@ const getLabel = (val) => {
 };
 
 const deleteLocalData = (name) => {
-  try {
-    const sourceData = new Map(getLocalStorage("GenShinImpactCustomDataV2", []));
-    sourceData.delete(name);
-
-    window.localStorage.setItem("GenShinImpactCustomDataV2", JSON.stringify([...sourceData]));
-    localData.value = [...sourceData];
-    showNotify({
-      type: "success",
-      message: "删除成功",
-    });
-  } catch {
-    showNotify({
-      type: "danger",
-      message: "删除失败",
-    });
-  }
+  showConfirmDialog({
+    title: "提示",
+    message: "确认删除这条吗？",
+  })
+    .then(() => {
+      try {
+        const sourceData = new Map(getLocalStorage("GenShinImpactCustomDataV2", []));
+        sourceData.delete(name);
+        window.localStorage.setItem("GenShinImpactCustomDataV2", JSON.stringify([...sourceData]));
+        localData.value = [...sourceData];
+        showNotify({
+          type: "success",
+          message: "删除成功",
+        });
+      } catch {
+        showNotify({
+          type: "danger",
+          message: "删除失败",
+        });
+      }
+    })
+    .catch(() => {});
 };
 
 const updateNoteGroup = ({ setSelectedNotes, localStorageName, defaultNotes }, selectedNotes) => {
@@ -278,7 +284,7 @@ const updateNoteGroup = ({ setSelectedNotes, localStorageName, defaultNotes }, s
 const recalculation = (value) => {
   showDataPopup.value = false;
   const NotesConfig = props.notesConfig;
-  emit('setUnifiedState', value)
+  emit("setUnifiedState", value);
   updateNoteGroup(NotesConfig.fixedATK, value.selectedFixedATKNotes);
   updateNoteGroup(NotesConfig.percentATK, value.selectedExtraATKNotes);
   updateNoteGroup(NotesConfig.fixedDEF, value.selectedFixedDEFNotes);
