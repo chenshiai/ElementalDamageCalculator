@@ -3003,9 +3003,9 @@ export const Weapons: IWeaponInfo[] = [
               transform: true,
             },
           ],
-          enable: true,
+          enable: false,
           shareable: true,
-          target: BuffTarget.All,
+          target: BuffTarget.Other,
         },
       ];
     }

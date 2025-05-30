@@ -87,16 +87,16 @@ class KazuhaData extends Character implements ICharacterInfo {
     }),
   ];
   otherSkill = [
-    action("下落攻击·乱岚拨止·水", AttackType.FallingOther, ElementType.Hydro, {
+    action("下落攻击·乱岚拨止·水", AttackType.Falling, ElementType.Hydro, {
       atk: [2],
     }),
-    action("下落攻击·乱岚拨止·火", AttackType.FallingOther, ElementType.Pyro, {
+    action("下落攻击·乱岚拨止·火", AttackType.Falling, ElementType.Pyro, {
       atk: [2],
     }),
-    action("下落攻击·乱岚拨止·冰", AttackType.FallingOther, ElementType.Cryo, {
+    action("下落攻击·乱岚拨止·冰", AttackType.Falling, ElementType.Cryo, {
       atk: [2],
     }),
-    action("下落攻击·乱岚拨止·雷", AttackType.FallingOther, ElementType.Electro, {
+    action("下落攻击·乱岚拨止·雷", AttackType.Falling, ElementType.Electro, {
       atk: [2],
     }),
   ];

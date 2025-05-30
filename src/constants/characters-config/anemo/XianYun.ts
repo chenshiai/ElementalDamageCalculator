@@ -1,19 +1,7 @@
 import Character from "../character-class";
 import { ICharacterInfo } from "@/types/interface";
-import {
-  ActionOn,
-  AttackType,
-  BuffTarget,
-  BuffType,
-  ElementType,
-  Rarity,
-  WeaponType,
-} from "@/types/enum";
-import {
-  Constellation_E_5,
-  Constellation_Q_3,
-  S_80_ATK_28P,
-} from "../buffs";
+import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
+import { Constellation_E_5, Constellation_Q_3, S_80_ATK_28P } from "../buffs";
 
 import { EnKaId, Weapon, Element, BaseData, Icons, action } from "../decorator";
 
@@ -142,9 +130,16 @@ class LiuyunData extends Character implements ICharacterInfo {
     },
     {
       label: "2命·鹤唳远人间",
-      describe: "施放朝起鹤云的步天梯后，闲云的攻击力提升20%；「细想应是洞中仙」的效果翻倍",
+      describe: "施放朝起鹤云的步天梯后，闲云的攻击力提升20%；",
+      effect: [{ type: BuffType.ATKPrcent, getValue: () => 20 }],
+      enable: false,
+      target: BuffTarget.Self,
+      condition: ({ constellation }) => constellation >= 2,
+    },
+    {
+      label: "2命·鹤唳远人间",
+      describe: "「细想应是洞中仙」的效果翻倍",
       effect: [
-        { type: BuffType.ATKPrcent, getValue: () => 20 },
         {
           type: BuffType.FallingFixed,
           getValue: (data) => Math.min(9000, (data.baseATK + data.extraATK + data.extraATK_NT) * 2),
