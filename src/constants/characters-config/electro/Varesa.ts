@@ -13,7 +13,7 @@ class VaresaData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·角力搏摔", "夜虹逐跃", "闪烈降临！"];
+  talentNames = ["角力搏摔", "夜虹逐跃", "闪烈降临！"];
 
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Electro, {

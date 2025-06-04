@@ -17,7 +17,7 @@ class BaizhuerData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·金匮针解", "太素诊要", "愈气全形论"];
+  talentNames = ["金匮针解", "太素诊要", "愈气全形论"];
 
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Dendro, {

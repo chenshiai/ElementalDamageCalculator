@@ -17,7 +17,7 @@ class IfaData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·祛风妙仪", "空天疾护", "复合镇静域"];
+  talentNames = ["祛风妙仪", "空天疾护", "复合镇静域"];
 
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Anemo, {

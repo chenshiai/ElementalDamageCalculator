@@ -13,7 +13,7 @@ class SayuData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·忍刀·终末番", "呜呼流·风隐急进", "呜呼流·影貉缭乱"];
+  talentNames = ["忍刀·终末番", "呜呼流·风隐急进", "呜呼流·影貉缭乱"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.724, 0.782, 0.84, 0.924, 0.983, 1.05, 1.142, 1.235, 1.327, 1.428, 1.544],

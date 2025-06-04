@@ -13,7 +13,7 @@ class RazorData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·钢脊", "利爪与苍雷", "雷牙"];
+  talentNames = ["钢脊", "利爪与苍雷", "雷牙"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.959, 1.024, 1.09, 1.177, 1.24, 1.32, 1.42, 1.52, 1.61, 1.71, 1.81],

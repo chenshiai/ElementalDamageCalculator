@@ -13,7 +13,7 @@ class ZhongliData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·岩雨", "元素战技·地心", "元素爆发·天星"];
+  talentNames = ["岩雨", "元素战技·地心", "元素爆发·天星"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.308, 0.333, 0.358, 0.394, 0.419, 0.448, 0.487, 0.526, 0.565, 0.608, 0.657],

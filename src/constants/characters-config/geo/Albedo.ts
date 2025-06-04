@@ -13,7 +13,7 @@ class AlbedoData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·西风剑术·白", "创生法·拟造阳华", "诞生式·大地之潮"];
+  talentNames = ["西风剑术·白", "创生法·拟造阳华", "诞生式·大地之潮"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.367, 0.3973, 0.4272, 0.4699, 0.4998, 0.534, 0.581, 0.628, 0.675, 0.7262, 0.785],

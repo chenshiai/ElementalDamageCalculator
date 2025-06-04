@@ -22,7 +22,7 @@ class AloyData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·快速射击", "冰尘雪野", "曙光预言"];
+  talentNames = ["快速射击", "冰尘雪野", "曙光预言"];
   icons = {
     ...this.icons,
     constsIcon: [

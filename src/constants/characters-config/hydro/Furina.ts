@@ -22,7 +22,7 @@ class FurinaData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·独舞之邀", "孤心沙龙", "万众狂欢"];
+  talentNames = ["独舞之邀", "孤心沙龙", "万众狂欢"];
 
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {

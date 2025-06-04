@@ -13,7 +13,7 @@ class YaoyaoData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·颠扑连环枪", "云台团团降芦菔", "玉颗珊珊月中落"];
+  talentNames = ["颠扑连环枪", "云台团团降芦菔", "玉颗珊珊月中落"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.51, 0.552, 0.593, 0.652, 0.694, 0.741, 0.807, 0.872, 0.937, 1.008, 1.079],

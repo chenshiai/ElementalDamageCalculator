@@ -13,7 +13,7 @@ class SigewinneData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·靶向治疗", "弹跳水疗法", "过饱和心意注射"];
+  talentNames = ["靶向治疗", "弹跳水疗法", "过饱和心意注射"];
 
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {

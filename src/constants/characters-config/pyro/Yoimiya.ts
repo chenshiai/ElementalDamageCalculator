@@ -22,7 +22,7 @@ class YoimiyaData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·烟火打扬", "焰硝庭火舞", "琉金云间草"];
+  talentNames = ["烟火打扬", "焰硝庭火舞", "琉金云间草"];
   normalAttack = [
     action("一段伤害·1", AttackType.Normal, ElementType.Physical, {
       atk: [0.356, 0.381, 0.405, 0.437, 0.462, 0.49, 0.527, 0.563, 0.599, 0.636, 0.672],

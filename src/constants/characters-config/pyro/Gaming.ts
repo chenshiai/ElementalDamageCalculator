@@ -13,7 +13,7 @@ class GamingData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·刃爪悬星", "瑞兽登高楼", "璨焰金猊舞"];
+  talentNames = ["刃爪悬星", "瑞兽登高楼", "璨焰金猊舞"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.839, 0.907, 0.975, 1.073, 1.141, 1.219, 1.326, 1.433, 1.541, 1.658, 1.775],

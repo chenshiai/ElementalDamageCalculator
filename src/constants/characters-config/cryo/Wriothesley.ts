@@ -23,7 +23,7 @@ class WriothesleyData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·迅烈倾霜拳", "冰牙突驰", "黑金狼噬"];
+  talentNames = ["迅烈倾霜拳", "冰牙突驰", "黑金狼噬"];
 
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Cryo, {
@@ -74,7 +74,7 @@ class WriothesleyData extends Character implements ICharacterInfo {
     ...S_80_CRITALHUNT_38P,
     {
       label: "元素战技·寒烈的惩裁",
-      describe: "生命值高于50%时，强化「普通攻击·迅烈倾霜拳」的斥逐拳，使其造成的伤害提升",
+      describe: "生命值高于50%时，强化「迅烈倾霜拳」的斥逐拳，使其造成的伤害提升",
       effect: [
         {
           type: BuffType.NormalRate,
@@ -88,7 +88,7 @@ class WriothesleyData extends Character implements ICharacterInfo {
     {
       label: "公理终有辩诉之日",
       describe:
-        "莱欧斯利的生命值低于60%时，将获得「恩典之诫」，使下次普通攻击·迅烈倾霜拳的重击强化为惩戒·凌跃拳：不消耗体力，造成的伤害提升50%，解锁1命后提升200%",
+        "莱欧斯利的生命值低于60%时，将获得「恩典之诫」，使下次迅烈倾霜拳的重击强化为惩戒·凌跃拳：不消耗体力，造成的伤害提升50%，解锁1命后提升200%",
       effect: [{ type: BuffType.StrongPrcent, getValue: (data) => (data.constellation >= 1 ? 200 : 50) }],
       enable: true,
     },

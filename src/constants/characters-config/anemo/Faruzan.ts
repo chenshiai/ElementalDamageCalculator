@@ -61,7 +61,7 @@ class FaruzanData extends Character implements ICharacterInfo {
     ...A_80_ATK_24P,
     {
       label: "元素爆发·烈风波",
-      describe: "降低敌人的风元素抗性；所有角色获得风元素伤害加成",
+      describe: "降低敌人的风元素抗性30%；所有角色获得风元素伤害加成。",
       effect: [
         {
           type: BuffType.EnemyAnemoResistance,

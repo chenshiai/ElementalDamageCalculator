@@ -13,7 +13,7 @@ class CitlaliData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·玄鸾画水", "凤缕随翦舞", "鹍弦踏月出"];
+  talentNames = ["玄鸾画水", "凤缕随翦舞", "鹍弦踏月出"];
 
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Cryo, {

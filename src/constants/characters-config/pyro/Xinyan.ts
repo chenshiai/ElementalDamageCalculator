@@ -13,7 +13,7 @@ class XinyanData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·炎舞", "热情拂扫", "叛逆刮弦"];
+  talentNames = ["炎舞", "热情拂扫", "叛逆刮弦"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.765, 0.828, 0.89, 0.979, 1.041, 1.113, 1.21, 1.308, 1.406, 1.513, 1.62],

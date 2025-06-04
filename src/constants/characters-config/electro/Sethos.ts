@@ -13,7 +13,7 @@ class SethosData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·王家苇箭术", "古仪·鸣砂掣雷", "秘仪·瞑光贯影"];
+  talentNames = ["王家苇箭术", "古仪·鸣砂掣雷", "秘仪·瞑光贯影"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.526, 0.569, 0.612, 0.673, 0.716, 0.765, 0.832, 0.899, 0.967, 1.04, 1.113, 1.187, 1.26, 1.334],

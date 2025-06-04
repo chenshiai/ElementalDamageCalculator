@@ -13,7 +13,7 @@ class MomokaData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·箱纸切削术", "呜喵町飞足", "秘法·惊喜特派"];
+  talentNames = ["箱纸切削术", "呜喵町飞足", "秘法·惊喜特派"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.479, 0.518, 0.557, 0.613, 0.652, 0.696, 0.758, 0.819, 0.88, 0.947, 1.014],

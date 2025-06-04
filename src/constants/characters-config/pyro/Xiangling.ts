@@ -13,7 +13,7 @@ class XianglingData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·白案功夫", "锅巴出击", "旋火轮"];
+  talentNames = ["白案功夫", "锅巴出击", "旋火轮"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.421, 0.455, 0.489, 0.538, 0.572, 0.611, 0.665, 0.719, 0.773, 0.831, 0.899],

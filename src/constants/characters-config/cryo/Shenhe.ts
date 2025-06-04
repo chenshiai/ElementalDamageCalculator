@@ -17,7 +17,7 @@ class ShenheData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·踏辰摄斗", "仰灵威召将役咒", "神女遣灵真诀"];
+  talentNames = ["踏辰摄斗", "仰灵威召将役咒", "神女遣灵真诀"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.434, 0.468, 0.503, 0.553, 0.589, 0.629, 0.684, 0.739, 0.795, 0.855, 0.916],

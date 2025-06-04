@@ -23,7 +23,7 @@ class EmilieData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·逐影枪术·改", "撷萃调香", "香氛演绎"];
+  talentNames = ["逐影枪术·改", "撷萃调香", "香氛演绎"];
 
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {

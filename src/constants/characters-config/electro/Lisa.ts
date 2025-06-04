@@ -13,7 +13,7 @@ class LisaData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·指尖雷暴", "苍雷", "蔷薇的雷光"];
+  talentNames = ["指尖雷暴", "苍雷", "蔷薇的雷光"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Electro, {
       atk: [0.396, 0.426, 0.455, 0.495, 0.525, 0.554, 0.594, 0.634, 0.673, 0.713, 0.754],

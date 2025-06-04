@@ -13,7 +13,7 @@ class NeuvilletteData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·如水从平", "泪水啊，我必偿还", "潮水啊，我已归来"];
+  talentNames = ["如水从平", "泪水啊，我必偿还", "潮水啊，我已归来"];
 
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Hydro, {

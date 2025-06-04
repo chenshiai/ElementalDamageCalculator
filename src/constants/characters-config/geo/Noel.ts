@@ -22,7 +22,7 @@ class NoelData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·西风剑术·女仆", "护心铠", "大扫除"];
+  talentNames = ["西风剑术·女仆", "护心铠", "大扫除"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.791, 0.856, 0.92, 1.01, 1.08, 1.15, 1.25, 1.35, 1.45, 1.56, 1.67],

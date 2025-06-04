@@ -13,7 +13,7 @@ class ChioriData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·心织刀流", "羽袖一触", "二刀之形·比翼"];
+  talentNames = ["心织刀流", "羽袖一触", "二刀之形·比翼"];
 
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {

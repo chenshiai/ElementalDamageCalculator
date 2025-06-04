@@ -22,7 +22,7 @@ class LinetteData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·迅捷礼刺剑", "谜影障身法", "魔术·运变惊奇"];
+  talentNames = ["迅捷礼刺剑", "谜影障身法", "魔术·运变惊奇"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.431, 0.466, 0.501, 0.551, 0.586, 0.626, 0.681, 0.736, 0.792, 0.852, 0.912],

@@ -13,7 +13,7 @@ class FeiyanData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·火漆制印", "丹书立约", "凭此结契"];
+  talentNames = ["火漆制印", "丹书立约", "凭此结契"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Pyro, {
       atk: [0.5834, 0.6272, 0.6709, 0.7293, 0.773, 0.8168, 0.8751, 0.9335, 0.9918, 1.0501, 1.1085],

@@ -13,7 +13,7 @@ class ShinobuData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·忍流飞刃斩", "越祓雷草之轮", "御咏鸣神刈山祭"];
+  talentNames = ["忍流飞刃斩", "越祓雷草之轮", "御咏鸣神刈山祭"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.488, 0.527, 0.567, 0.624, 0.663, 0.709, 0.771, 0.834, 0.896, 0.964, 1.032],

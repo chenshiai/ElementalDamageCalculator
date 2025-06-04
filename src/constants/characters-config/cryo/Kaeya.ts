@@ -13,7 +13,7 @@ class KaeyaData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·仪典剑术", "霜袭", "凛冽轮舞"];
+  talentNames = ["仪典剑术", "霜袭", "凛冽轮舞"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.538, 0.581, 0.625, 0.688, 0.731, 0.781, 0.85, 0.919, 0.988, 1.062, 1.148],

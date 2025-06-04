@@ -13,7 +13,7 @@ class BarbaraData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·水之浅唱", "演唱，开始♪", "闪耀奇迹♪"];
+  talentNames = ["水之浅唱", "演唱，开始♪", "闪耀奇迹♪"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Hydro, {
       atk: [0.378, 0.407, 0.435, 0.473, 0.501, 0.53, 0.568, 0.605, 0.643, 0.681, 0.721],

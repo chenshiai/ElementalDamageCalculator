@@ -14,7 +14,7 @@ class SaraData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·天狗传弓术", "鸦羽天狗霆雷召咒", "煌煌千道镇式"];
+  talentNames = ["天狗传弓术", "鸦羽天狗霆雷召咒", "煌煌千道镇式"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.369, 0.399, 0.429, 0.472, 0.502, 0.536, 0.583, 0.631, 0.678, 0.729, 0.781],

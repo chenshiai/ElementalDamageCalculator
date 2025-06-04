@@ -13,7 +13,7 @@ class YunjinData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·拂云出手", "旋云开相", "破嶂见旌仪"];
+  talentNames = ["拂云出手", "旋云开相", "破嶂见旌仪"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.405, 0.438, 0.471, 0.518, 0.551, 0.589, 0.641, 0.692, 0.744, 0.801, 0.857],

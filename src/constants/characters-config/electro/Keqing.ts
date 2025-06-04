@@ -22,7 +22,7 @@ class KeqingData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·云来剑法", "星斗归位", "天街巡游"];
+  talentNames = ["云来剑法", "星斗归位", "天街巡游"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.41, 0.444, 0.477, 0.525, 0.558, 0.596, 0.649, 0.701, 0.754, 0.811, 0.868],

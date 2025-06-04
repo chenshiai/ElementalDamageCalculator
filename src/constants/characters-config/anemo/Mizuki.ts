@@ -13,7 +13,7 @@ class MizukiData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·梦我梦心", "秋沙歌枕巡礼", "安乐秘汤疗法"];
+  talentNames = ["梦我梦心", "秋沙歌枕巡礼", "安乐秘汤疗法"];
 
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Anemo, {

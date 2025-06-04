@@ -13,7 +13,7 @@ class ColleiData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·祈颂射艺", "拂花偈叶", "猫猫秘宝"];
+  talentNames = ["祈颂射艺", "拂花偈叶", "猫猫秘宝"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.436, 0.472, 0.507, 0.558, 0.593, 0.634, 0.69, 0.745, 0.801, 0.862, 0.923],

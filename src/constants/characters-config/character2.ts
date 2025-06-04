@@ -66,7 +66,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Escoffier_02",
         "UI_Talent_S_Escoffier_04",
       ],
-      ["普通攻击·后厨手艺", "低温烹饪", "花刀技法"]
+      ["后厨手艺", "低温烹饪", "花刀技法"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -190,7 +190,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Ifa_02",
         "UI_Talent_S_Ifa_04",
       ],
-      ["普通攻击·祛风妙仪", "空天疾护", "复合镇静域"]
+      ["祛风妙仪", "空天疾护", "复合镇静域"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Anemo, {
@@ -269,7 +269,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Varesa_02",
         "UI_Talent_S_Varesa_04",
       ],
-      ["普通攻击·角力搏摔", "夜虹逐跃", "闪烈降临！"]
+      ["角力搏摔", "夜虹逐跃", "闪烈降临！"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Electro, {
@@ -394,7 +394,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Iansan_02",
         "UI_Talent_S_Iansan_04",
       ],
-      ["普通攻击·负重锥击", "电掣雷驰", "力的三原理"]
+      ["负重锥击", "电掣雷驰", "力的三原理"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -506,7 +506,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Mizuki_02",
         "UI_Talent_S_Mizuki_04",
       ],
-      ["普通攻击·梦我梦心", "秋沙歌枕巡礼", "安乐秘汤疗法"]
+      ["梦我梦心", "秋沙歌枕巡礼", "安乐秘汤疗法"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Anemo, {
@@ -615,7 +615,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Lanyan_02",
         "UI_Talent_S_Lanyan_04",
       ],
-      ["普通攻击·玄鸾画水", "凤缕随翦舞", "鹍弦踏月出"]
+      ["玄鸾画水", "凤缕随翦舞", "鹍弦踏月出"]
     ),
 
     normalAttack: [
@@ -725,7 +725,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Citlali_02",
         "UI_Talent_S_Citlali_04",
       ],
-      ["普通攻击·宿灵捕影", "霜昼黑星", "诸曜饬令"]
+      ["宿灵捕影", "霜昼黑星", "诸曜饬令"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Cryo, {
@@ -935,7 +935,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Mavuika_02",
         "UI_Talent_S_Mavuika_04",
       ],
-      ["普通攻击·以命织火", "称名之刻", "燔天之时"]
+      ["以命织火", "称名之刻", "燔天之时"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -1203,7 +1203,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Olorun_02",
         "UI_Talent_S_Olorun_04",
       ],
-      ["普通攻击·宿灵闪箭", "暝色缒索", "黯声回响"]
+      ["宿灵闪箭", "暝色缒索", "黯声回响"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -1313,7 +1313,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Chasca_02",
         "UI_Talent_S_Chasca_04",
       ],
-      ["普通攻击·迷羽流击", "灵缰追影", "索魂命袭"]
+      ["迷羽流击", "灵缰追影", "索魂命袭"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -1504,7 +1504,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Xilonen_02",
         "UI_Talent_S_Xilonen_04",
       ],
-      ["普通攻击·锐锋攫猎", "音火锻淬", "豹烈律动！"]
+      ["锐锋攫猎", "音火锻淬", "豹烈律动！"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -1764,7 +1764,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Kinich_02",
         "UI_Talent_S_Kinich_04",
       ],
-      ["普通攻击·夜阳斗技", "悬猎·游骋高狩", "向伟大圣龙致意"]
+      ["夜阳斗技", "悬猎·游骋高狩", "向伟大圣龙致意"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -1876,7 +1876,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Mualani_02",
         "UI_Talent_S_Mualani_04",
       ],
-      ["普通攻击·降温处理", "踏鲨破浪", "爆瀑飞弹"]
+      ["降温处理", "踏鲨破浪", "爆瀑飞弹"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Hydro, {
@@ -1969,7 +1969,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Emilie_02",
         "UI_Talent_S_Emilie_04",
       ],
-      ["普通攻击·逐影枪术·改", "撷萃调香", "香氛演绎"]
+      ["逐影枪术·改", "撷萃调香", "香氛演绎"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -2116,7 +2116,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Sigewinne_02",
         "UI_Talent_S_Sigewinne_04",
       ],
-      ["普通攻击·靶向治疗", "弹跳水疗法", "过饱和心意注射"]
+      ["靶向治疗", "弹跳水疗法", "过饱和心意注射"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -2242,7 +2242,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Clorinde_01",
         "UI_Talent_S_Clorinde_04",
       ],
-      ["普通攻击·逐影之誓", "狩夜之巡", "残光将终"]
+      ["逐影之誓", "狩夜之巡", "残光将终"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -2385,7 +2385,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Arlecchino_02",
         "UI_Talent_S_Arlecchino_04",
       ],
-      ["普通攻击·斩首之邀", "万相化灰", "厄月将升"]
+      ["斩首之邀", "万相化灰", "厄月将升"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -2443,7 +2443,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
     buffs: [
       ...S_80_CRITALHUNT_38P,
       {
-        label: "普通攻击·红死之宴",
+        label: "红死之宴",
         describe:
           "阿蕾奇诺具有的生命之契大于或等于生命值上限的30%时，将进入红死之宴状态：普通攻击、重击与下落攻击造成的伤害将转为无法被附魔覆盖的火元素伤害；普通攻击命中敌人时，将提升本次攻击造成的伤害，提升值相当于阿蕾奇诺的攻击力乘以当前生命之契百分比的一定比例；解锁1命后进一步提升",
         effect: [
@@ -2516,7 +2516,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Chiori_02",
         "UI_Talent_S_Chiori_04",
       ],
-      ["普通攻击·心织刀流", "羽袖一触", "二刀之形·比翼"]
+      ["心织刀流", "羽袖一触", "二刀之形·比翼"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -2613,7 +2613,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Liuyun_01",
         "UI_Talent_S_Liuyun_04",
       ],
-      ["普通攻击·清风散花词", "朝起鹤云", "暮集竹星"]
+      ["清风散花词", "朝起鹤云", "暮集竹星"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Anemo, {
@@ -2776,7 +2776,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Navia_02",
         "UI_Talent_S_Navia_04",
       ],
-      ["普通攻击·直率的辞绝", "典仪式晶火", "如霰澄天的鸣礼"]
+      ["直率的辞绝", "典仪式晶火", "如霰澄天的鸣礼"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -2923,7 +2923,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Furina_01",
         "UI_Talent_S_Furina_02",
       ],
-      ["普通攻击·独舞之邀", "孤心沙龙", "万众狂欢"]
+      ["独舞之邀", "孤心沙龙", "万众狂欢"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -3106,7 +3106,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Wriothesley_02",
         "UI_Talent_S_Wriothesley_04",
       ],
-      ["普通攻击·迅烈倾霜拳", "冰牙突驰", "黑金狼噬"]
+      ["迅烈倾霜拳", "冰牙突驰", "黑金狼噬"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Cryo, {
@@ -3161,7 +3161,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       ...S_80_CRITALHUNT_38P,
       {
         label: "元素战技·寒烈的惩裁",
-        describe: "生命值高于50%时，强化「普通攻击·迅烈倾霜拳」的斥逐拳，使其造成的伤害提升",
+        describe: "生命值高于50%时，强化「迅烈倾霜拳」的斥逐拳，使其造成的伤害提升",
         effect: [
           {
             type: BuffType.NormalRate,
@@ -3177,7 +3177,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       {
         label: "公理终有辩诉之日",
         describe:
-          "莱欧斯利的生命值低于60%时，将获得「恩典之诫」，使下次普通攻击·迅烈倾霜拳的重击强化为惩戒·凌跃拳：不消耗体力，造成的伤害提升50%，解锁1命后提升200%",
+          "莱欧斯利的生命值低于60%时，将获得「恩典之诫」，使下次迅烈倾霜拳的重击强化为惩戒·凌跃拳：不消耗体力，造成的伤害提升50%，解锁1命后提升200%",
         effect: [{ type: BuffType.StrongPrcent, getValue: (data) => (data.constellation >= 1 ? 200 : 50) }],
         enable: true,
       },
@@ -3228,7 +3228,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Neuvillette_02",
         "UI_Talent_S_Neuvillette_04",
       ],
-      ["普通攻击·如水从平", "泪水啊，我必偿还", "潮水啊，我已归来"]
+      ["如水从平", "泪水啊，我必偿还", "潮水啊，我已归来"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Hydro, {
@@ -3342,7 +3342,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Liney_02",
         "UI_Talent_S_Liney_04",
       ],
-      ["普通攻击·迫牌易位式", "眩惑光戏法", "大魔术·灵迹巡游"]
+      ["迫牌易位式", "眩惑光戏法", "大魔术·灵迹巡游"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -3500,7 +3500,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Baizhuer_02",
         "UI_Talent_S_Baizhuer_04",
       ],
-      ["普通攻击·金匮针解", "太素诊要", "愈气全形论"]
+      ["金匮针解", "太素诊要", "愈气全形论"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Dendro, {
@@ -3631,7 +3631,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Dehya_02",
         "UI_Talent_S_Dehya_04",
       ],
-      ["普通攻击·拂金剑斗术", "熔铁流狱", "炎啸狮子咬"]
+      ["拂金剑斗术", "熔铁流狱", "炎啸狮子咬"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -3749,7 +3749,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Alhatham_02",
         "UI_Talent_S_Alhatham_04",
       ],
-      ["普通攻击·溯因反绎法", "共相·理式摹写", "殊境·显象缚结"]
+      ["溯因反绎法", "共相·理式摹写", "殊境·显象缚结"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -3907,7 +3907,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Wanderer_01",
         "UI_Talent_S_Wanderer_04",
       ],
-      ["普通攻击·行幡鸣弦", "羽画·风姿华歌", "狂言·式乐五番"]
+      ["行幡鸣弦", "羽画·风姿华歌", "狂言·式乐五番"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Anemo, {
@@ -4032,7 +4032,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Nahida_02",
         "UI_Talent_S_Nahida_04",
       ],
-      ["普通攻击·行相", "所闻遍计", "心景幻成"]
+      ["行相", "所闻遍计", "心景幻成"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Dendro, {
@@ -4213,7 +4213,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Nilou_02",
         "UI_Talent_S_Nilou_04",
       ],
-      ["普通攻击·弦月舞步", "七域舞步", "浮莲舞步·远梦聆泉"]
+      ["弦月舞步", "七域舞步", "浮莲舞步·远梦聆泉"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -4370,7 +4370,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Cyno_02",
         "UI_Talent_S_Cyno_04",
       ],
-      ["普通攻击·七圣枪术", "秘仪·律渊渡魂", "圣仪·煟煌随狼行"]
+      ["七圣枪术", "秘仪·律渊渡魂", "圣仪·煟煌随狼行"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -4571,7 +4571,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Tighnari_02",
         "UI_Talent_S_Tighnari_04",
       ],
-      ["普通攻击·藏蕴破障", "识果种雷", "造生缠藤箭"]
+      ["藏蕴破障", "识果种雷", "造生缠藤箭"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -4702,7 +4702,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Yelan_02",
         "UI_Talent_S_Yelan_04",
       ],
-      ["普通攻击·潜形隐曜弓", "萦络纵命索", "渊图玲珑骰"]
+      ["潜形隐曜弓", "萦络纵命索", "渊图玲珑骰"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -4852,7 +4852,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Ayato_01",
         "UI_Talent_S_Ayato_04",
       ],
-      ["普通攻击·神里流·转", "神里流·镜花", "神里流·水囿"]
+      ["神里流·转", "神里流·镜花", "神里流·水囿"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -4997,7 +4997,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Yae_02",
         "UI_Talent_S_Yae_04",
       ],
-      ["普通攻击·狐灵食罪式", "野干役咒·杀生樱", "大密法·天狐显真"]
+      ["狐灵食罪式", "野干役咒·杀生樱", "大密法·天狐显真"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Electro, {
@@ -5116,7 +5116,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Shenhe_02",
         "UI_Talent_S_Shenhe_04",
       ],
-      ["普通攻击·踏辰摄斗", "仰灵威召将役咒", "神女遣灵真诀"]
+      ["踏辰摄斗", "仰灵威召将役咒", "神女遣灵真诀"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -5281,7 +5281,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Itto_02",
         "UI_Talent_S_Itto_04",
       ],
-      ["普通攻击·喧哗屋传说", "魔杀绝技·赤牛发破！", "最恶鬼王·一斗轰临！！"]
+      ["喧哗屋传说", "魔杀绝技·赤牛发破！", "最恶鬼王·一斗轰临！！"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -5400,7 +5400,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Kokomi_01",
         "UI_Talent_S_Kokomi_04",
       ],
-      ["普通攻击·水有常形", "海月之誓", "海人化羽"]
+      ["水有常形", "海月之誓", "海人化羽"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Hydro, {
@@ -5551,7 +5551,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_S_Aloy_Lock",
         "UI_Talent_S_Aloy_Lock",
       ],
-      ["普通攻击·快速射击", "冰尘雪野", "曙光预言"]
+      ["快速射击", "冰尘雪野", "曙光预言"]
     ),
     normalAttack: [
       action(
@@ -5697,7 +5697,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Shougun_01",
         "UI_Talent_S_Shougun_04",
       ],
-      ["普通攻击·源流", "神变·恶曜开眼", "奥义·梦想真说"]
+      ["源流", "神变·恶曜开眼", "奥义·梦想真说"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -5956,7 +5956,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Yoimiya_02",
         "UI_Talent_S_Yoimiya_04",
       ],
-      ["普通攻击·烟火打扬", "焰硝庭火舞", "琉金云间草"]
+      ["烟火打扬", "焰硝庭火舞", "琉金云间草"]
     ),
     normalAttack: [
       action("一段伤害·1", AttackType.Normal, ElementType.Physical, {
@@ -6078,7 +6078,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Ayaka_01",
         "UI_Talent_S_Ayaka_04",
       ],
-      ["普通攻击·神里流·倾", "神里流·冰华", "神里流·霜灭"]
+      ["神里流·倾", "神里流·冰华", "神里流·霜灭"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -6179,7 +6179,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Kazuha_02",
         "UI_Talent_S_Kazuha_04",
       ],
-      ["普通攻击·我流剑术", "千早振", "万叶之一刀"]
+      ["我流剑术", "千早振", "万叶之一刀"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -6377,7 +6377,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Eula_02",
         "UI_Talent_S_Eula_04",
       ],
-      ["普通攻击·西风剑术·宗室", "冰潮的涡旋", "凝浪之光剑"]
+      ["西风剑术·宗室", "冰潮的涡旋", "凝浪之光剑"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -6534,7 +6534,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Hutao_02",
         "UI_Talent_S_Hutao_04",
       ],
-      ["普通攻击·往生秘传枪法", "蝶引来生", "安神秘法"]
+      ["往生秘传枪法", "蝶引来生", "安神秘法"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -6665,7 +6665,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Xiao_02",
         "UI_Talent_S_Xiao_04",
       ],
-      ["普通攻击·卷积微尘", "风轮两立", "靖妖傩舞"]
+      ["卷积微尘", "风轮两立", "靖妖傩舞"]
     ),
     normalAttack: [
       action("一段伤害·1", AttackType.Normal, ElementType.Physical, {
@@ -6778,7 +6778,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Ganyu_02",
         "UI_Talent_S_Ganyu_04",
       ],
-      ["普通攻击·流天射术", "山泽麟迹", "降众天华"]
+      ["流天射术", "山泽麟迹", "降众天华"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -6896,7 +6896,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Albedo_02",
         "UI_Talent_S_Albedo_04",
       ],
-      ["普通攻击·西风剑术·白", "创生法·拟造阳华", "诞生式·大地之潮"]
+      ["西风剑术·白", "创生法·拟造阳华", "诞生式·大地之潮"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -7020,7 +7020,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Zhongli_02",
         "UI_Talent_S_Zhongli_04",
       ],
-      ["普通攻击·岩雨", "元素战技·地心", "元素爆发·天星"]
+      ["岩雨", "元素战技·地心", "元素爆发·天星"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -7153,7 +7153,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Tartaglia_02",
         "UI_Talent_S_Tartaglia_04",
       ],
-      ["普通攻击·断雨", "魔王武装·狂澜", "极恶技·尽灭闪"]
+      ["断雨", "魔王武装·狂澜", "极恶技·尽灭闪"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -7267,7 +7267,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Klee_02",
         "UI_Talent_S_Klee_04",
       ],
-      ["普通攻击·砰砰", "蹦蹦炸弹", "轰轰火花"]
+      ["砰砰", "蹦蹦炸弹", "轰轰火花"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Pyro, {
@@ -7350,7 +7350,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Venti_01",
         "UI_Talent_S_Venti_04",
       ],
-      ["普通攻击·神代射术", "高天之歌", "风神之诗"]
+      ["神代射术", "高天之歌", "风神之诗"]
     ),
     normalAttack: [
       action("一段伤害·1", AttackType.Normal, ElementType.Physical, {
@@ -7500,7 +7500,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Qin_01",
         "UI_Talent_S_Qin_04",
       ],
-      ["普通攻击·西风剑术", "风压剑", "蒲公英之风"]
+      ["西风剑术", "风压剑", "蒲公英之风"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -7592,7 +7592,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Keqing_02",
         "UI_Talent_S_Keqing_04",
       ],
-      ["普通攻击·云来剑法", "星斗归位", "天街巡游"]
+      ["云来剑法", "星斗归位", "天街巡游"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -7706,7 +7706,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Diluc_02",
         "UI_Talent_S_Diluc_04",
       ],
-      ["普通攻击·淬炼之剑", "逆焰之刃", "黎明"]
+      ["淬炼之剑", "逆焰之刃", "黎明"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -7829,7 +7829,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Mona_02",
         "UI_Talent_S_Mona_04",
       ],
-      ["普通攻击·因果点破", "水中幻愿", "星命定轨"]
+      ["因果点破", "水中幻愿", "星命定轨"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Hydro, {
@@ -7940,7 +7940,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Qiqi_02",
         "UI_Talent_S_Qiqi_04",
       ],
-      ["普通攻击·云来古剑法", "仙法·寒病鬼差", "仙法·救苦度厄"]
+      ["云来古剑法", "仙法·寒病鬼差", "仙法·救苦度厄"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -8043,7 +8043,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Kachina_02",
         "UI_Talent_S_Kachina_04",
       ],
-      ["普通攻击·嵴之啮咬", "出击，冲天转转！", "现在，认真时间！"]
+      ["嵴之啮咬", "出击，冲天转转！", "现在，认真时间！"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -8141,7 +8141,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Sethos_02",
         "UI_Talent_S_Sethos_04",
       ],
-      ["普通攻击·王家苇箭术", "古仪·鸣砂掣雷", "秘仪·瞑光贯影"]
+      ["王家苇箭术", "古仪·鸣砂掣雷", "秘仪·瞑光贯影"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -8249,7 +8249,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Gaming_02",
         "UI_Talent_S_Gaming_04",
       ],
-      ["普通攻击·刃爪悬星", "瑞兽登高楼", "璨焰金猊舞"]
+      ["刃爪悬星", "瑞兽登高楼", "璨焰金猊舞"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -8344,7 +8344,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Chevreuse_02",
         "UI_Talent_S_Chevreuse_04",
       ],
-      ["普通攻击·线列枪刺·改", "近迫式急促拦射", "圆阵掷弹爆轰术"]
+      ["线列枪刺·改", "近迫式急促拦射", "圆阵掷弹爆轰术"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -8473,7 +8473,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Charlotte_02",
         "UI_Talent_S_Charlotte_04",
       ],
-      ["普通攻击·冷色摄影律", "取景·冰点构图法", "定格·全方位确证"]
+      ["冷色摄影律", "取景·冰点构图法", "定格·全方位确证"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Cryo, {
@@ -8586,7 +8586,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Freminet_02",
         "UI_Talent_S_Freminet_04",
       ],
-      ["普通攻击·洑流剑", "浮冰增压", "猎影潜袭"]
+      ["洑流剑", "浮冰增压", "猎影潜袭"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -8756,7 +8756,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Linette_02",
         "UI_Talent_S_Linette_04",
       ],
-      ["普通攻击·迅捷礼刺剑", "谜影障身法", "魔术·运变惊奇"]
+      ["迅捷礼刺剑", "谜影障身法", "魔术·运变惊奇"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -8865,7 +8865,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Momoka_02",
         "UI_Talent_S_Momoka_03",
       ],
-      ["普通攻击·箱纸切削术", "呜喵町飞足", "秘法·惊喜特派"]
+      ["箱纸切削术", "呜喵町飞足", "秘法·惊喜特派"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -8983,7 +8983,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Kaveh_01",
         "UI_Talent_S_Kaveh_04",
       ],
-      ["普通攻击·旋规设矩", "画则巧施", "繁绘隅穹"]
+      ["旋规设矩", "画则巧施", "繁绘隅穹"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -9064,7 +9064,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Mika_02",
         "UI_Talent_S_Mika_04",
       ],
-      ["普通攻击·西风枪术·镝传", "星霜的流旋", "苍翎的颂愿"]
+      ["西风枪术·镝传", "星霜的流旋", "苍翎的颂愿"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -9159,7 +9159,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Yaoyao_02",
         "UI_Talent_S_Yaoyao_04",
       ],
-      ["普通攻击·颠扑连环枪", "云台团团降芦菔", "玉颗珊珊月中落"]
+      ["颠扑连环枪", "云台团团降芦菔", "玉颗珊珊月中落"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -9259,7 +9259,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Faruzan_02",
         "UI_Talent_S_Faruzan_04",
       ],
-      ["普通攻击·迴身箭术", "非想风天", "抟风秘道"]
+      ["迴身箭术", "非想风天", "抟风秘道"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -9357,7 +9357,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Layla_02",
         "UI_Talent_S_Layla_04",
       ],
-      ["普通攻击·熠辉轨度剑", "垂裳端凝之夜", "星流摇床之梦"]
+      ["熠辉轨度剑", "垂裳端凝之夜", "星流摇床之梦"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -9495,7 +9495,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Candace_02",
         "UI_Talent_S_Candace_04",
       ],
-      ["普通攻击·流耀枪术·守势", "圣仪·苍鹭庇卫", "圣仪·灰鸰衒潮"]
+      ["流耀枪术·守势", "圣仪·苍鹭庇卫", "圣仪·灰鸰衒潮"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -9593,7 +9593,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Dori_01",
         "UI_Talent_S_Dori_04",
       ],
-      ["普通攻击·妙显剑舞·改", "镇灵之灯·烦恼解决炮", "卡萨扎莱宫的无微不至"]
+      ["妙显剑舞·改", "镇灵之灯·烦恼解决炮", "卡萨扎莱宫的无微不至"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -9679,7 +9679,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Collei_01",
         "UI_Talent_S_Collei_04",
       ],
-      ["普通攻击·祈颂射艺", "拂花偈叶", "猫猫秘宝"]
+      ["祈颂射艺", "拂花偈叶", "猫猫秘宝"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -9755,7 +9755,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Heizo_02",
         "UI_Talent_S_Heizo_04",
       ],
-      ["普通攻击·不动流格斗术", "勠心拳", "聚风蹴"]
+      ["不动流格斗术", "勠心拳", "聚风蹴"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Anemo, {
@@ -9923,7 +9923,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Shinobu_02",
         "UI_Talent_S_Shinobu_04",
       ],
-      ["普通攻击·忍流飞刃斩", "越祓雷草之轮", "御咏鸣神刈山祭"]
+      ["忍流飞刃斩", "越祓雷草之轮", "御咏鸣神刈山祭"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -10005,7 +10005,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Yunjin_02",
         "UI_Talent_S_Yunjin_04",
       ],
-      ["普通攻击·拂云出手", "旋云开相", "破嶂见旌仪"]
+      ["拂云出手", "旋云开相", "破嶂见旌仪"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -10118,7 +10118,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Gorou_02",
         "UI_Talent_S_Gorou_04",
       ],
-      ["普通攻击·呲牙裂扇箭", "犬坂吠吠方圆阵", "兽牙逐突形胜战法"]
+      ["呲牙裂扇箭", "犬坂吠吠方圆阵", "兽牙逐突形胜战法"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -10267,7 +10267,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Tohma_02",
         "UI_Talent_S_Tohma_04",
       ],
-      ["普通攻击·迅破枪势", "烈烧佑命之侍护", "真红炽火之大铠"]
+      ["迅破枪势", "烈烧佑命之侍护", "真红炽火之大铠"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -10384,7 +10384,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Sara_01",
         "UI_Talent_S_Sara_04",
       ],
-      ["普通攻击·天狗传弓术", "鸦羽天狗霆雷召咒", "煌煌千道镇式"]
+      ["天狗传弓术", "鸦羽天狗霆雷召咒", "煌煌千道镇式"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -10488,7 +10488,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Sayu_01",
         "UI_Talent_S_Sayu_04",
       ],
-      ["普通攻击·忍刀·终末番", "呜呼流·风隐急进", "呜呼流·影貉缭乱"]
+      ["忍刀·终末番", "呜呼流·风隐急进", "呜呼流·影貉缭乱"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -10662,7 +10662,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Feiyan_02",
         "UI_Talent_S_Feiyan_04",
       ],
-      ["普通攻击·火漆制印", "丹书立约", "凭此结契"]
+      ["火漆制印", "丹书立约", "凭此结契"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Pyro, {
@@ -10751,7 +10751,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Rosaria_02",
         "UI_Talent_S_Rosaria_04",
       ],
-      ["普通攻击·教会枪术", "噬罪的告解", "终命的圣礼"]
+      ["教会枪术", "噬罪的告解", "终命的圣礼"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -10863,7 +10863,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Xinyan_02",
         "UI_Talent_S_Xinyan_04",
       ],
-      ["普通攻击·炎舞", "热情拂扫", "叛逆刮弦"]
+      ["炎舞", "热情拂扫", "叛逆刮弦"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -10986,7 +10986,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Diona_02",
         "UI_Talent_S_Diona_04",
       ],
-      ["普通攻击·猎人射术", "猫爪冻冻", "最烈特调"]
+      ["猎人射术", "猫爪冻冻", "最烈特调"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -11086,7 +11086,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Sucrose_02",
         "UI_Talent_S_Sucrose_04",
       ],
-      ["普通攻击·简式风灵作成", "风灵作成·陆叁零捌", "禁·风灵作成·柒伍同构贰型"]
+      ["简式风灵作成", "风灵作成·陆叁零捌", "禁·风灵作成·柒伍同构贰型"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Anemo, {
@@ -11218,7 +11218,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Fischl_02",
         "UI_Talent_S_Fischl_04",
       ],
-      ["普通攻击·罪灭之矢", "夜巡影翼", "至夜幻现"]
+      ["罪灭之矢", "夜巡影翼", "至夜幻现"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -11308,7 +11308,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Lisa_01",
         "UI_Talent_S_Lisa_04",
       ],
-      ["普通攻击·指尖雷暴", "苍雷", "蔷薇的雷光"]
+      ["指尖雷暴", "苍雷", "蔷薇的雷光"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Electro, {
@@ -11384,7 +11384,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Razor_01",
         "UI_Talent_S_Razor_04",
       ],
-      ["普通攻击·钢脊", "利爪与苍雷", "雷牙"]
+      ["钢脊", "利爪与苍雷", "雷牙"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -11517,7 +11517,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Beidou_02",
         "UI_Talent_S_Beidou_04",
       ],
-      ["普通攻击·征涛", "捉浪", "斫雷"]
+      ["征涛", "捉浪", "斫雷"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -11636,7 +11636,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Xiangling_01",
         "UI_Talent_S_Xiangling_04",
       ],
-      ["普通攻击·白案功夫", "锅巴出击", "旋火轮"]
+      ["白案功夫", "锅巴出击", "旋火轮"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -11737,7 +11737,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Ambor_01",
         "UI_Talent_S_Ambor_04",
       ],
-      ["普通攻击·神射手", "爆弹玩偶", "箭雨"]
+      ["神射手", "爆弹玩偶", "箭雨"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -11840,7 +11840,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Bennett_02",
         "UI_Talent_S_Bennett_04",
       ],
-      ["普通攻击·好运剑", "热情过载", "美妙旅程"]
+      ["好运剑", "热情过载", "美妙旅程"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -11962,7 +11962,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Xingqiu_02",
         "UI_Talent_S_Xingqiu_04",
       ],
-      ["普通攻击·古华剑法", "古华剑·画雨笼山", "古华剑·裁雨留虹"]
+      ["古华剑法", "古华剑·画雨笼山", "古华剑·裁雨留虹"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -12059,7 +12059,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Barbara_01",
         "UI_Talent_S_Barbara_04",
       ],
-      ["普通攻击·水之浅唱", "演唱，开始♪", "闪耀奇迹♪"]
+      ["水之浅唱", "演唱，开始♪", "闪耀奇迹♪"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Hydro, {
@@ -12133,7 +12133,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Ningguang_01",
         "UI_Talent_S_Ningguang_04",
       ],
-      ["普通攻击·千金掷", "璇玑屏", "天权崩玉"]
+      ["千金掷", "璇玑屏", "天权崩玉"]
     ),
     normalAttack: [
       action("普通攻击伤害", AttackType.Normal, ElementType.Geo, {
@@ -12189,7 +12189,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Noel_02",
         "UI_Talent_S_Noel_04",
       ],
-      ["普通攻击·西风剑术·女仆", "护心铠", "大扫除"]
+      ["西风剑术·女仆", "护心铠", "大扫除"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -12292,7 +12292,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Kaeya_02",
         "UI_Talent_S_Kaeya_04",
       ],
-      ["普通攻击·仪典剑术", "霜袭", "凛冽轮舞"]
+      ["仪典剑术", "霜袭", "凛冽轮舞"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -12368,7 +12368,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_Chongyun_02",
         "UI_Talent_S_Chongyun_04",
       ],
-      ["普通攻击·灭邪四式", "灵刃·重华叠霜", "灵刃·云开星落"]
+      ["灭邪四式", "灵刃·重华叠霜", "灵刃·云开星落"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -12450,7 +12450,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_PlayerWind_01",
         "UI_Talent_S_PlayerWind_04",
       ],
-      ["普通攻击·异邦铁风", "风涡剑", "风息激荡"]
+      ["异邦铁风", "风涡剑", "风息激荡"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -12589,7 +12589,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_PlayerWind_01",
         "UI_Talent_S_PlayerWind_04",
       ],
-      ["普通攻击·异邦铁风", "风涡剑", "风息激荡"]
+      ["异邦铁风", "风涡剑", "风息激荡"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -12729,7 +12729,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_PlayerRock_01",
         "UI_Talent_S_PlayerRock_04",
       ],
-      ["普通攻击·异邦岩峰", "星陨剑", "岩潮叠嶂"]
+      ["异邦岩峰", "星陨剑", "岩潮叠嶂"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -12804,7 +12804,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_PlayerRock_01",
         "UI_Talent_S_PlayerRock_04",
       ],
-      ["普通攻击·异邦岩峰", "星陨剑", "岩潮叠嶂"]
+      ["异邦岩峰", "星陨剑", "岩潮叠嶂"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -12880,7 +12880,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_PlayerElectric_02",
         "UI_Talent_S_PlayerElectric_04",
       ],
-      ["普通攻击·异邦惊雷", "雷影剑", "雷轰电转"]
+      ["异邦惊雷", "雷影剑", "雷轰电转"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -12976,7 +12976,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_PlayerElectric_02",
         "UI_Talent_S_PlayerElectric_04",
       ],
-      ["普通攻击·异邦惊雷", "雷影剑", "雷轰电转"]
+      ["异邦惊雷", "雷影剑", "雷轰电转"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -13073,7 +13073,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_S_PlayerGrass_05",
         "UI_Talent_S_PlayerGrass_06",
       ],
-      ["普通攻击·异邦草翦", "草缘剑", "偃草若化"]
+      ["异邦草翦", "草缘剑", "偃草若化"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -13206,7 +13206,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_S_PlayerGrass_05",
         "UI_Talent_S_PlayerGrass_06",
       ],
-      ["普通攻击·异邦草翦", "草缘剑", "偃草若化"]
+      ["异邦草翦", "草缘剑", "偃草若化"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -13310,7 +13310,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_PlayerWater_02",
         "UI_Talent_S_PlayerWater_04",
       ],
-      ["普通攻击·异邦激流", "水纹剑", "扬水制流"]
+      ["异邦激流", "水纹剑", "扬水制流"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -13406,7 +13406,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_PlayerWater_02",
         "UI_Talent_S_PlayerWater_04",
       ],
-      ["普通攻击·异邦激流", "水纹剑", "扬水制流"]
+      ["异邦激流", "水纹剑", "扬水制流"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -13503,7 +13503,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_PlayerFire_02",
         "UI_Talent_S_PlayerFire_04",
       ],
-      ["普通攻击·异邦烈焰", "流火剑", "灼火燎原"]
+      ["异邦烈焰", "流火剑", "灼火燎原"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -13643,7 +13643,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
         "UI_Talent_U_PlayerFire_02",
         "UI_Talent_S_PlayerFire_04",
       ],
-      ["普通攻击·异邦烈焰", "流火剑", "灼火燎原"]
+      ["异邦烈焰", "流火剑", "灼火燎原"]
     ),
     normalAttack: [
       action("一段伤害", AttackType.Normal, ElementType.Physical, {

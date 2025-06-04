@@ -13,7 +13,7 @@ class NilouData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·弦月舞步", "七域舞步", "浮莲舞步·远梦聆泉"];
+  talentNames = ["弦月舞步", "七域舞步", "浮莲舞步·远梦聆泉"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.503, 0.544, 0.585, 0.644, 0.684, 0.731, 0.796, 0.86, 0.924, 0.994, 1.065],

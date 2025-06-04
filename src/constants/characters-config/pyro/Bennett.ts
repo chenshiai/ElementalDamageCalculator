@@ -22,7 +22,7 @@ class BennettData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·好运剑", "热情过载", "美妙旅程"];
+  talentNames = ["好运剑", "热情过载", "美妙旅程"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.445, 0.482, 0.518, 0.57, 0.606, 0.648, 0.704, 0.762, 0.819, 0.881, 0.943],

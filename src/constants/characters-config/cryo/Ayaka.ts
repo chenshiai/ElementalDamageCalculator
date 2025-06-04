@@ -22,7 +22,7 @@ class AyakaData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·神里流·倾", "神里流·冰华", "神里流·霜灭"];
+  talentNames = ["神里流·倾", "神里流·冰华", "神里流·霜灭"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.457, 0.494, 0.532, 0.585, 0.622, 0.665, 0.723, 0.781, 0.84, 0.904, 0.968],

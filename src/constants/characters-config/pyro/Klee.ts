@@ -13,7 +13,7 @@ class KleeData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·砰砰", "蹦蹦炸弹", "轰轰火花"];
+  talentNames = ["砰砰", "蹦蹦炸弹", "轰轰火花"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Pyro, {
       atk: [0.722, 0.776, 0.83, 0.902, 0.956, 1.01, 1.08, 1.15, 1.23, 1.3, 1.37],

@@ -13,7 +13,7 @@ class RosariaData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·教会枪术", "噬罪的告解", "终命的圣礼"];
+  talentNames = ["教会枪术", "噬罪的告解", "终命的圣礼"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.525, 0.567, 0.61, 0.671, 0.714, 0.763, 0.83, 0.897, 0.964, 1.037, 1.11],

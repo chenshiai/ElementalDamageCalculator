@@ -13,7 +13,7 @@ class DehyaData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·拂金剑斗术", "熔铁流狱", "炎啸狮子咬"];
+  talentNames = ["拂金剑斗术", "熔铁流狱", "炎啸狮子咬"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.621, 0.672, 0.722, 0.795, 0.845, 0.903, 0.982, 1.062, 1.141, 1.228, 1.315],

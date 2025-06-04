@@ -13,7 +13,7 @@ class MikaData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·西风枪术·镝传", "星霜的流旋", "苍翎的颂愿"];
+  talentNames = ["西风枪术·镝传", "星霜的流旋", "苍翎的颂愿"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.433, 0.468, 0.503, 0.553, 0.589, 0.629, 0.684, 0.74, 0.795, 0.855, 0.916],

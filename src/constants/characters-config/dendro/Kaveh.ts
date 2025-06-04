@@ -22,7 +22,7 @@ class KavehData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·旋规设矩", "画则巧施", "繁绘隅穹"];
+  talentNames = ["旋规设矩", "画则巧施", "繁绘隅穹"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.762, 0.824, 0.886, 0.975, 1.037, 1.107, 1.205, 1.302, 1.4, 1.506, 1.612],

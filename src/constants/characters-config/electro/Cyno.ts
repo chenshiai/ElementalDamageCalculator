@@ -13,7 +13,7 @@ class CynoData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·七圣枪术", "秘仪·律渊渡魂", "圣仪·煟煌随狼行"];
+  talentNames = ["七圣枪术", "秘仪·律渊渡魂", "圣仪·煟煌随狼行"];
 
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {

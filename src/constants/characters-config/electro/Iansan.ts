@@ -13,7 +13,7 @@ class IansanData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·负重锥击", "电掣雷驰", "力的三原理"];
+  talentNames = ["负重锥击", "电掣雷驰", "力的三原理"];
 
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {

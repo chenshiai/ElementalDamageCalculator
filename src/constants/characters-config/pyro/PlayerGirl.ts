@@ -22,7 +22,7 @@ class PlayerGirlData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·异邦烈焰", "流火剑", "灼火燎原"];
+  talentNames = ["异邦烈焰", "流火剑", "灼火燎原"];
 
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {

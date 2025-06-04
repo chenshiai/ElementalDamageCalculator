@@ -13,7 +13,7 @@ class ArlecchinoData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·斩首之邀", "万相化灰", "厄月将升"];
+  talentNames = ["斩首之邀", "万相化灰", "厄月将升"];
 
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
@@ -71,7 +71,7 @@ class ArlecchinoData extends Character implements ICharacterInfo {
   buffs = [
     ...S_80_CRITALHUNT_38P,
     {
-      label: "普通攻击·红死之宴",
+      label: "红死之宴",
       describe:
         "阿蕾奇诺具有的生命之契大于或等于生命值上限的30%时，将进入红死之宴状态：普通攻击、重击与下落攻击造成的伤害将转为无法被附魔覆盖的火元素伤害；普通攻击命中敌人时，将提升本次攻击造成的伤害，提升值相当于阿蕾奇诺的攻击力乘以当前生命之契百分比的一定比例；解锁1命后进一步提升",
       effect: [

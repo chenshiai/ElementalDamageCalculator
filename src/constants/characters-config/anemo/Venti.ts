@@ -13,7 +13,7 @@ class VentiData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·神代射术", "高天之歌", "风神之诗"];
+  talentNames = ["神代射术", "高天之歌", "风神之诗"];
   normalAttack = [
     action("一段伤害·1", AttackType.Normal, ElementType.Physical, {
       atk: [0.204, 0.22, 0.237, 0.261, 0.277, 0.296, 0.322, 0.348, 0.375, 0.403, 0.435],

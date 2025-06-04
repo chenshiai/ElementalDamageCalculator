@@ -13,7 +13,7 @@ class KinichData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·锐锋攫猎", "音火锻淬", "豹烈律动！"];
+  talentNames = ["锐锋攫猎", "音火锻淬", "豹烈律动！"];
 
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {

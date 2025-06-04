@@ -13,7 +13,7 @@ class AmborData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·神射手", "爆弹玩偶", "箭雨"];
+  talentNames = ["神射手", "爆弹玩偶", "箭雨"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.361, 0.391, 0.42, 0.462, 0.491, 0.525, 0.571, 0.617, 0.664, 0.714, 0.764],

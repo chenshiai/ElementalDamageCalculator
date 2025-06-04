@@ -13,7 +13,7 @@ class EulaData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·西风剑术·宗室", "冰潮的涡旋", "凝浪之光剑"];
+  talentNames = ["西风剑术·宗室", "冰潮的涡旋", "凝浪之光剑"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.8973, 0.9704, 1.0434, 1.1477, 1.2208, 1.3043, 1.419, 1.5338, 1.6486, 1.7738, 1.9172],

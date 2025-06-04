@@ -13,7 +13,7 @@ class PlayerGirlData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·异邦岩峰", "星陨剑", "岩潮叠嶂"];
+  talentNames = ["异邦岩峰", "星陨剑", "岩潮叠嶂"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.445, 0.481, 0.517, 0.569, 0.605, 0.646, 0.704, 0.76, 0.817, 0.879, 0.941],

@@ -13,7 +13,7 @@ class LineyData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·迫牌易位式", "眩惑光戏法", "大魔术·灵迹巡游"];
+  talentNames = ["迫牌易位式", "眩惑光戏法", "大魔术·灵迹巡游"];
 
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {

@@ -17,7 +17,7 @@ class EscoffierData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·后厨手艺", "低温烹饪", "花刀技法"];
+  talentNames = ["后厨手艺", "低温烹饪", "花刀技法"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.516, 0.557, 0.599, 0.659, 0.701, 0.749, 0.815, 0.881, 0.947, 1.019, 1.091],

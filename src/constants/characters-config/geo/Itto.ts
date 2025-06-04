@@ -22,7 +22,7 @@ class IttoData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·喧哗屋传说", "魔杀绝技·赤牛发破！", "最恶鬼王·一斗轰临！！"];
+  talentNames = ["喧哗屋传说", "魔杀绝技·赤牛发破！", "最恶鬼王·一斗轰临！！"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.792, 0.857, 0.921, 1.013, 1.078, 1.152, 1.253, 1.354, 1.456, 1.566, 1.693],

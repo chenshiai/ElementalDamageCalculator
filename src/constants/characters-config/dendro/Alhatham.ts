@@ -22,7 +22,7 @@ class AlhathamData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·溯因反绎法", "共相·理式摹写", "殊境·显象缚结"];
+  talentNames = ["溯因反绎法", "共相·理式摹写", "殊境·显象缚结"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.495, 0.536, 0.576, 0.634, 0.674, 0.72, 0.783, 0.847, 0.91, 0.979, 1.048],

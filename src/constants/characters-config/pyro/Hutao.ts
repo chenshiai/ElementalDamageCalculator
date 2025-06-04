@@ -22,7 +22,7 @@ class HutaoData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·往生秘传枪法", "蝶引来生", "安神秘法"];
+  talentNames = ["往生秘传枪法", "蝶引来生", "安神秘法"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.469, 0.501, 0.533, 0.575, 0.607, 0.645, 0.693, 0.741, 0.789, 0.836, 0.884],

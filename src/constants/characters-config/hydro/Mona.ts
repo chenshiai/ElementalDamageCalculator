@@ -13,7 +13,7 @@ class MonaData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·因果点破", "水中幻愿", "星命定轨"];
+  talentNames = ["因果点破", "水中幻愿", "星命定轨"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Hydro, {
       atk: [0.376, 0.404, 0.432, 0.47, 0.498, 0.526, 0.564, 0.602, 0.639, 0.677, 0.714],

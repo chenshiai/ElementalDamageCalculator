@@ -13,7 +13,7 @@ class LaylaData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·熠辉轨度剑", "垂裳端凝之夜", "星流摇床之梦"];
+  talentNames = ["熠辉轨度剑", "垂裳端凝之夜", "星流摇床之梦"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.512, 0.554, 0.596, 0.655, 0.697, 0.744, 0.81, 0.876, 0.941, 1.012, 1.084],

@@ -13,7 +13,7 @@ class NingguangData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·千金掷", "璇玑屏", "天权崩玉"];
+  talentNames = ["千金掷", "璇玑屏", "天权崩玉"];
   normalAttack = [
     action("普通攻击伤害", AttackType.Normal, ElementType.Geo, {
       atk: [0.28, 0.301, 0.322, 0.35, 0.371, 0.392, 0.42, 0.448, 0.469, 0.504, 0.533],

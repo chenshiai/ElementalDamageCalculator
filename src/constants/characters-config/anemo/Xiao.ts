@@ -22,7 +22,7 @@ class XiaoData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·卷积微尘", "风轮两立", "靖妖傩舞"];
+  talentNames = ["卷积微尘", "风轮两立", "靖妖傩舞"];
   normalAttack = [
     action("一段伤害·1", AttackType.Normal, ElementType.Physical, {
       atk: [0.275, 0.294, 0.313, 0.338, 0.357, 0.379, 0.407, 0.435, 0.463, 0.491, 0.52],

@@ -13,7 +13,7 @@ class NaviaData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·直率的辞绝", "典仪式晶火", "如霰澄天的鸣礼"];
+  talentNames = ["直率的辞绝", "典仪式晶火", "如霰澄天的鸣礼"];
 
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {

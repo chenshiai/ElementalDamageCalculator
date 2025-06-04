@@ -13,7 +13,7 @@ class FreminetData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·洑流剑", "浮冰增压", "猎影潜袭"];
+  talentNames = ["洑流剑", "浮冰增压", "猎影潜袭"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.842, 0.911, 0.98, 1.078, 1.146, 1.224, 1.332, 1.44, 1.548, 1.665, 1.783, 1.9, 2.018, 2.135],

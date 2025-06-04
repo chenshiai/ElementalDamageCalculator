@@ -13,7 +13,7 @@ class XingqiuData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·古华剑法", "古华剑·画雨笼山", "古华剑·裁雨留虹"];
+  talentNames = ["古华剑法", "古华剑·画雨笼山", "古华剑·裁雨留虹"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.466, 0.504, 0.542, 0.596, 0.634, 0.678, 0.737, 0.797, 0.856, 0.921, 0.996],

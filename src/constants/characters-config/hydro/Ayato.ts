@@ -13,7 +13,7 @@ class AyatoData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·神里流·转", "神里流·镜花", "神里流·水囿"];
+  talentNames = ["神里流·转", "神里流·镜花", "神里流·水囿"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.45, 0.486, 0.523, 0.575, 0.612, 0.654, 0.711, 0.769, 0.826, 0.889, 0.952],

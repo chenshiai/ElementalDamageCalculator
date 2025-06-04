@@ -13,7 +13,7 @@ class BeidouData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·征涛", "捉浪", "斫雷"];
+  talentNames = ["征涛", "捉浪", "斫雷"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.711, 0.769, 0.827, 0.91, 0.968, 1.03, 1.12, 1.22, 1.31, 1.41, 1.52],

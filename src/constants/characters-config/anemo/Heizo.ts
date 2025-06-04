@@ -13,7 +13,7 @@ class HeizoData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·不动流格斗术", "勠心拳", "聚风蹴"];
+  talentNames = ["不动流格斗术", "勠心拳", "聚风蹴"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Anemo, {
       atk: [0.375, 0.403, 0.431, 0.468, 0.497, 0.525, 0.562, 0.6, 0.637, 0.675, 0.712],

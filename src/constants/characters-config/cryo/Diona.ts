@@ -13,7 +13,7 @@ class DionaData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·猎人射术", "猫爪冻冻", "最烈特调"];
+  talentNames = ["猎人射术", "猫爪冻冻", "最烈特调"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.361, 0.391, 0.42, 0.462, 0.491, 0.525, 0.571, 0.617, 0.664, 0.714, 0.772],

@@ -13,7 +13,7 @@ class KokomiData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·水有常形", "海月之誓", "海人化羽"];
+  talentNames = ["水有常形", "海月之誓", "海人化羽"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Hydro, {
       atk: [0.684, 0.735, 0.786, 0.855, 0.906, 0.957, 1.026, 1.094, 1.162, 1.231, 1.299],

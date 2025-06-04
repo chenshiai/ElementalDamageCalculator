@@ -13,7 +13,7 @@ class WandererData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·行幡鸣弦", "羽画·风姿华歌", "狂言·式乐五番"];
+  talentNames = ["行幡鸣弦", "羽画·风姿华歌", "狂言·式乐五番"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Anemo, {
       atk: [0.687, 0.743, 0.799, 0.879, 0.935, 0.999, 1.087, 1.175, 1.262, 1.358, 1.454],

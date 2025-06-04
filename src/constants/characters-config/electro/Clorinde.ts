@@ -13,7 +13,7 @@ class ClorindeData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·逐影之誓", "狩夜之巡", "残光将终"];
+  talentNames = ["逐影之誓", "狩夜之巡", "残光将终"];
 
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {

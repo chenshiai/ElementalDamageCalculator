@@ -13,7 +13,7 @@ class ShougunData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·源流", "神变·恶曜开眼", "奥义·梦想真说"];
+  talentNames = ["源流", "神变·恶曜开眼", "奥义·梦想真说"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.397, 0.429, 0.461, 0.507, 0.539, 0.576, 0.627, 0.678, 0.728, 0.784, 0.847],

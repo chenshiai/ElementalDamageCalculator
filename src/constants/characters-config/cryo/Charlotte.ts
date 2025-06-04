@@ -13,7 +13,7 @@ class CharlotteData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·冷色摄影律", "取景·冰点构图法", "定格·全方位确证"];
+  talentNames = ["冷色摄影律", "取景·冰点构图法", "定格·全方位确证"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Cryo, {
       atk: [0.499, 0.536, 0.573, 0.623, 0.661, 0.698, 0.748, 0.798, 0.847, 0.897, 0.947],

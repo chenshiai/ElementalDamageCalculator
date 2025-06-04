@@ -13,7 +13,7 @@ class TartagliaData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·断雨", "魔王武装·狂澜", "极恶技·尽灭闪"];
+  talentNames = ["断雨", "魔王武装·狂澜", "极恶技·尽灭闪"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.413, 0.446, 0.48, 0.528, 0.562, 0.6, 0.653, 0.706, 0.758, 0.816, 0.874],

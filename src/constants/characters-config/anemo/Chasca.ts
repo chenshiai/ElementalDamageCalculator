@@ -13,7 +13,7 @@ class ChascaData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·迷羽流击", "灵缰追影", "索魂命袭"];
+  talentNames = ["迷羽流击", "灵缰追影", "索魂命袭"];
 
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {

@@ -13,7 +13,7 @@ class QinData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·西风剑术", "风压剑", "蒲公英之风"];
+  talentNames = ["西风剑术", "风压剑", "蒲公英之风"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.483, 0.523, 0.562, 0.618, 0.658, 0.703, 0.764, 0.826, 0.888, 0.955, 1.03],

@@ -13,7 +13,7 @@ class MavuikaData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·以命织火", "称名之刻", "燔天之时"];
+  talentNames = ["以命织火", "称名之刻", "燔天之时"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.8, 0.865, 0.931, 1.024, 1.089, 1.163, 1.266, 1.368, 1.47, 1.582, 1.694],

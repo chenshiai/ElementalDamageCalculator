@@ -13,7 +13,7 @@ class QiqiData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·云来古剑法", "仙法·寒病鬼差", "仙法·救苦度厄"];
+  talentNames = ["云来古剑法", "仙法·寒病鬼差", "仙法·救苦度厄"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.378, 0.408, 0.439, 0.483, 0.514, 0.549, 0.597, 0.645, 0.694, 0.746, 0.799],

@@ -13,7 +13,7 @@ class ChongyunData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·灭邪四式", "灵刃·重华叠霜", "灵刃·云开星落"];
+  talentNames = ["灭邪四式", "灵刃·重华叠霜", "灵刃·云开星落"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.7, 0.757, 0.814, 0.895, 0.952, 1.018, 1.107, 1.197, 1.286, 1.384, 1.481],

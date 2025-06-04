@@ -13,7 +13,7 @@ class TighnariData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·藏蕴破障", "识果种雷", "造生缠藤箭"];
+  talentNames = ["藏蕴破障", "识果种雷", "造生缠藤箭"];
 
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {

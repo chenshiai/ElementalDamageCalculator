@@ -13,7 +13,7 @@ class TohmaData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·迅破枪势", "烈烧佑命之侍护", "真红炽火之大铠"];
+  talentNames = ["迅破枪势", "烈烧佑命之侍护", "真红炽火之大铠"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.444, 0.48, 0.516, 0.568, 0.604, 0.645, 0.702, 0.759, 0.816, 0.878, 0.94],

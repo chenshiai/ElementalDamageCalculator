@@ -13,7 +13,7 @@ class PlayerBoyData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·异邦草翦", "草缘剑", "偃草若化"];
+  talentNames = ["异邦草翦", "草缘剑", "偃草若化"];
 
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {

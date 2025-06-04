@@ -22,7 +22,7 @@ class DilucData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·淬炼之剑", "逆焰之刃", "黎明"];
+  talentNames = ["淬炼之剑", "逆焰之刃", "黎明"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.897, 0.97, 1.04, 1.15, 1.22, 1.3, 1.42, 1.53, 1.65, 1.77, 1.92],

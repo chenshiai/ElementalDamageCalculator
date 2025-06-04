@@ -13,7 +13,7 @@ class GanyuData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·流天射术", "山泽麟迹", "降众天华"];
+  talentNames = ["流天射术", "山泽麟迹", "降众天华"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.317, 0.343, 0.369, 0.406, 0.432, 0.461, 0.502, 0.542, 0.583, 0.627, 0.678],

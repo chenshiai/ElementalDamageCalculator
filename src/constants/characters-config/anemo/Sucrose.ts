@@ -13,7 +13,7 @@ class SucroseData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·简式风灵作成", "风灵作成·陆叁零捌", "禁·风灵作成·柒伍同构贰型"];
+  talentNames = ["简式风灵作成", "风灵作成·陆叁零捌", "禁·风灵作成·柒伍同构贰型"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Anemo, {
       atk: [0.335, 0.36, 0.385, 0.418, 0.443, 0.468, 0.502, 0.535, 0.569, 0.602, 0.636],

@@ -13,7 +13,7 @@ class ChevreuseData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·线列枪刺·改", "近迫式急促拦射", "圆阵掷弹爆轰术"];
+  talentNames = ["线列枪刺·改", "近迫式急促拦射", "圆阵掷弹爆轰术"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.531, 0.575, 0.618, 0.68, 0.723, 0.772, 0.84, 0.908, 0.976, 1.05, 1.124],

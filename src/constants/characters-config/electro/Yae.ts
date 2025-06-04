@@ -17,7 +17,7 @@ class YaeData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·狐灵食罪式", "野干役咒·杀生樱", "大密法·天狐显真"];
+  talentNames = ["狐灵食罪式", "野干役咒·杀生樱", "大密法·天狐显真"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Electro, {
       atk: [0.397, 0.426, 0.456, 0.496, 0.526, 0.555, 0.595, 0.635, 0.674, 0.714, 0.754],

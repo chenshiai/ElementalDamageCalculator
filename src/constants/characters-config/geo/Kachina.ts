@@ -14,7 +14,7 @@ class KachinaData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·嵴之啮咬", "出击，冲天转转！", "现在，认真时间！"];
+  talentNames = ["嵴之啮咬", "出击，冲天转转！", "现在，认真时间！"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.494, 0.534, 0.574, 0.632, 0.672, 0.718, 0.781, 0.844, 0.908, 0.976, 1.045],

@@ -13,7 +13,7 @@ class NahidaData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·行相", "所闻遍计", "心景幻成"];
+  talentNames = ["行相", "所闻遍计", "心景幻成"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Dendro, {
       atk: [0.403, 0.433, 0.464, 0.504, 0.534, 0.564, 0.605, 0.645, 0.685, 0.726, 0.766],
