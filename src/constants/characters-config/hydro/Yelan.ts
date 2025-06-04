@@ -13,7 +13,7 @@ class YelanData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·潜形隐曜弓", "萦络纵命索", "渊图玲珑骰"];
+  talentNames = ["潜形隐曜弓", "萦络纵命索", "渊图玲珑骰"];
 
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {

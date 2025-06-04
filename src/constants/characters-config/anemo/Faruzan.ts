@@ -13,7 +13,7 @@ class FaruzanData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
-  talentNames = ["普通攻击·迴身箭术", "非想风天", "抟风秘道"];
+  talentNames = ["迴身箭术", "非想风天", "抟风秘道"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [0.447, 0.484, 0.52, 0.572, 0.609, 0.651, 0.707, 0.765, 0.822, 0.884, 0.947],
