@@ -6,7 +6,7 @@ import { ElementType } from "@/types/enum";
 import BuffInfo from "./index.vue";
 export { BuffInfo };
 
-import { useStore } from "vuex";
+import { useStore } from "@/store";
 import { CryoResonance, DendroResonance, DendroResonance1, DendroResonance2, HydroResonance, PyroResonance } from "@/constants/characters-config/buffs";
 
 function countCharacterElements(teamList: ITeamItem[]): Map<ElementType, number> {
@@ -30,7 +30,7 @@ const useBuffInfo = () => {
 
   const stopWatchTeamList = watchEffect(() => {
     buffs.value = [];
-    const teamList = store.state.teamBuffs.teamList as ITeamItem[];
+    const teamList = store.state.teamData.teamList as ITeamItem[];
 
     // 元素共鸣触发的buff
     if (teamList.length >= 5) {

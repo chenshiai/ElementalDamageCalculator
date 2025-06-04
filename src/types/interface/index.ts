@@ -17,7 +17,7 @@ export interface IBuffBase {
   /** BUff层数别名 */
   stackText?: string;
   /** BUff层数控件类型 */
-  stackType?: 'slider' | 'switch';
+  stackType?: "slider" | "switch";
   /** 最大叠加层数 */
   limit?: number;
   /** 当前叠加层数 */
@@ -27,7 +27,7 @@ export interface IBuffBase {
 
   /** Buff的作用对象 */
   target?: BuffTarget;
-  
+
   /** Buff是否可共享，为true则该增益会被纳入团队增益 */
   shareable?: boolean;
   /** 给队友使用的团队增益条件判断函数，入参为队友的面板属性，返回为true即可以展示，false不可展示。不设置则默认展示 */
@@ -55,23 +55,23 @@ export interface IRate {
   fixed?: number[];
 }
 export interface ICharacterInfo {
-   enkaId: number;
-   name: string;
-   rarity: Rarity;
-   element: ElementType;
-   weapon: WeaponType;
-   burstCharge: number;
-   icons: {
+  enkaId: number;
+  name: string;
+  rarity: Rarity;
+  element: ElementType;
+  weapon: WeaponType;
+  burstCharge: number;
+  icons: {
     avatarIcon: string;
     constsIcon: string[];
     gachaImage: string;
   };
-   buffs?: IBuffBase[];
-   talentNames: string[];
-   normalAttack: ISkillRate[];
-   elementSkill: ISkillRate[];
-   burstSkill: ISkillRate[];
-   otherSkill: ISkillRate[];
+  buffs?: IBuffBase[];
+  talentNames: string[];
+  normalAttack: ISkillRate[];
+  elementSkill: ISkillRate[];
+  burstSkill: ISkillRate[];
+  otherSkill: ISkillRate[];
 
   /** 变量属性，根据实际数据来自动调整 */
   baseATK: number;

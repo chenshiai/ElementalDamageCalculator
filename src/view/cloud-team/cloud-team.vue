@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import { Popup, Icon, showImagePreview } from "vant";
-import { useStore } from "vuex";
+import { Popup, Icon } from "vant";
+import { useStore } from "@/store";
 import { useRouter } from "vue-router";
 
-import { IBuffBase, IBuffExtra, ITeamItem } from "@/types/interface";
+import { ITeamItem } from "@/types/interface";
 import { IUserSavedCalculationData } from "@/constants/db";
 import { IRelicItem } from "@/constants/characters-config/relic-class";
 import { Character } from "@/constants/characters-config/character";
@@ -14,10 +14,8 @@ import DataItem from "@/component/DataItem.vue";
 import TabTitle from "@/component/TabTitle.vue";
 import CalculationDataSelector from "@/component/CalculationDataSelector.vue";
 
-import useRelicInfo from "../character-calculation/modules/relic-info";
-import useCharacterInfo from "../character-calculation/modules/chararcter-info";
-import useWeanponInfo from "../character-calculation/modules/weapon-info";
 import { getBackGroundByElement } from "@/utils/get-color";
+import useTeamData from "./useTeamData";
 
 /** @module 面板数据选择 */
 const show = ref(false);
@@ -27,29 +25,10 @@ const setSlotByIndex = (index) => {
   selectedIndex.value = index;
 };
 
-// 解构buff
-const deconstructionBuff = (buff: IBuffBase, result: IUserSavedCalculationData): IBuffExtra => {
-  const effect = buff.effect.map((eff) => {
-    return {
-      ...eff,
-      getValue: (data, stack) => {
-        // 使用闭包，将buff提供者的面板保存下来
-        return eff.getValue(result.panel, stack, data);
-      },
-    };
-  });
-  return {
-    ...buff,
-    effect,
-    // 共享的buff默认关闭状态，以免被重复计算
-    enable: false,
-    source: result.title,
-  };
-};
-
 /** @module 队伍数据 */
 const store = useStore();
-const teamList = ref<ITeamItem[]>([null]);
+const { teamList, characterJoinTeam, leaveTeam }  = useTeamData();
+
 onMounted(() => {
   const a: ITeamItem[] = JSON.parse(sessionStorage.getItem("teamList"));
   if (a) {
@@ -59,59 +38,21 @@ onMounted(() => {
   }
 });
 
-// 获取共享的buff
-const getShareBuff = (buffs: IBuffBase[], result: IUserSavedCalculationData): IBuffExtra[] => {
-  return buffs.filter((buff) => buff.shareable).map((buff) => deconstructionBuff(buff, result));
-};
-// 将角色加入队伍的处理
-const characterJoinTeam = (result: IUserSavedCalculationData, index: number) => {
-  const map = new Map();
-  const { characterInfo, characterBuffs } = useCharacterInfo(
-    Character.find((c) => c.enkaId === result.characterEnkaId),
-    result.panel.constellation
-  );
-  map.set(characterInfo.value.name, getShareBuff(characterBuffs.value, result));
-
-  const { weapon, weaponBuffs } = useWeanponInfo(
-    Weapons.find((w) => w.enkaId === result.weaponEnkaId),
-    result.affix
-  );
-  map.set(weapon.value.name, getShareBuff(weaponBuffs.value, result));
-
-  const { relicBuffs, relicSuitTexts } = useRelicInfo(JSON.parse(result.relicList));
-  relicSuitTexts.value.forEach((item) => {
-    map.set(item.name, getShareBuff(relicBuffs.value, result));
-  });
-
-  teamList.value[index] = {
-    calculation: result,
-    buffMap: map,
-  };
-
-  if (teamList.value[teamList.value.length - 1]) {
-    teamList.value.push(null);
-  }
-  store.commit("setTeamList", teamList.value);
-};
 const handleCharacterChange = (result: IUserSavedCalculationData) => {
   show.value = false;
   characterJoinTeam(result, selectedIndex.value);
 };
 
-/** 清除数据 */
-const clear = (index) => {
-  teamList.value.splice(index, 1);
-  store.commit("setTeamList", teamList.value);
-};
-
 /** @module 编辑页面跳转 */
 const router = useRouter();
 const edit = (index) => {
+  store.commit("setCurrentEdit", teamList[index].calculation.title);
+  sessionStorage.setItem("editCharacter", JSON.stringify(teamList[index].calculation));
+  sessionStorage.setItem("editTeamIndex", index);
+
   router.push({
-    path: "/character/edit",
+    path: `/character/edit/${teamList[index].calculation.title}`,
   });
-  store.commit("setCurrentEdit", teamList.value[index].calculation.title);
-  sessionStorage.setItem("editCharacter", JSON.stringify(teamList.value[index].calculation));
 };
 const toCreateData = () => {
   router.push({
@@ -138,10 +79,6 @@ const getWeaponName = (enkaId: number) => {
 const getRelics = (relicList: string) => {
   return JSON.parse(relicList) as IRelicItem[];
 };
-
-const handleImagePreview = () => {
-  showImagePreview(["https://saomdpb.com/IMG_1457.PNG"]);
-};
 </script>
 
 <template>
@@ -149,8 +86,8 @@ const handleImagePreview = () => {
   <div class="tips">点击+号，选择数据填入队伍，不设上限，可重复添加</div>
 
   <div class="data-panel__title">攻击目标设置</div>
-  <DataItem v-model="store.state.teamBuffs.enemyLevel" title="敌人的等级" :stepperMin="1" />
-  <DataItem v-model="store.state.teamBuffs.baseResistance" title="基础抗性%" :stepperMin="-999" />
+  <DataItem v-model="store.state.teamData.enemyLevel" title="敌人的等级" :stepperMin="1" />
+  <DataItem v-model="store.state.teamData.baseResistance" title="基础抗性%" :stepperMin="-999" />
   <div class="team-list">
     <span class="holy-relic-tips">更新角色数据后需要重新入队。</span>
     <div class="data-panel__title">队伍编辑</div>
@@ -186,7 +123,7 @@ const handleImagePreview = () => {
                 :alt="relic ? relic.name : null"
               />
             </div>
-            <div class="team-list__item-options" @click="clear(index)">离队<Icon name="revoke" /></div>
+            <div class="team-list__item-options" @click="leaveTeam(index)">离队<Icon name="revoke" /></div>
             <div class="team-list__item-look" @click="edit(index)">
               查看&编辑详细数据<Icon name="arrow-double-right" />
             </div>
@@ -212,10 +149,6 @@ const handleImagePreview = () => {
     </p>
     <br />
     使用答疑：
-    <p>
-      问：更新了辅助角色的面板数据、武器或者圣遗物，但是TA提供的队伍增益却没有变化？<br />
-      答：角色面板数据更新后，需要先离队再重新填入来更新队伍数据。[角色数据更新]只会出现在【重复命名】的情况下，如果是想对比同一个角色带不同装备的效果，建议不要重复命名。在保存数据时会有提示。
-    </p>
     <p>
       问：为什么法器角色可以使用双手剑武器？<br />
       答：武器和圣遗物均未做严格限制，在本计算器中，角色可以无视武器类型使用任何武器、圣遗物效果，你可以让那维莱特拿上暗影阔剑、可以让迪卢克拿上神乐之真意。旨在提高自由度更高的体验以及满足一些幻想（不是因为偷懒没做嗷），使用时请注意是否符合实际情况。

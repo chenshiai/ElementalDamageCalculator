@@ -30,7 +30,7 @@ const route = createRouter({
       component: PlayInfo,
     },
     {
-      path: "/character/:mode",
+      path: "/character/:mode/:title?",
       name: "character",
       component: CharacterCalculation,
     },

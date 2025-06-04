@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, watchEffect, toRaw } from "vue";
+import { computed, watchEffect, toRaw, ref } from "vue";
 import { showNotify, showConfirmDialog } from "vant";
 import TabTitle from "@/component/TabTitle.vue";
 import CharacterPanel from "./modules/CharacterPanel.vue";
@@ -12,6 +12,7 @@ import useWeaponInfo, { WeaponInfo } from "./modules/weapon-info";
 import useRelicInfo, { RelicInfo } from "./modules/relic-info";
 import useBuffInfo, { BuffInfo } from "./modules/buff-info";
 import useSkillInfo, { SkillInfo } from "./modules/skill-info";
+import useTeamData from "../cloud-team/useTeamData";
 
 /** @module 页面展示用数据 */
 const { characterInfo, constellation, characterBuffs, initCharacterInfo } = useCharacterInfo();
@@ -22,7 +23,7 @@ const { normalLevel, skillLevel, burstLevel, initSkillInfo } = useSkillInfo();
 
 /** @module 面板计算 */
 import calculationPanel from "@/utils/calculate/calculate-panel";
-import { useStore } from "vuex";
+import { useStore } from "@/store";
 const store = useStore();
 const CalculatorValue = computed<ICalculatorValue>(() => {
   if (!characterInfo.value || !weapon.value) return new CalculatorValueClass();
@@ -35,8 +36,8 @@ const CalculatorValue = computed<ICalculatorValue>(() => {
     relicBuffs: relicBuffs.value,
     buffs: buffs.value,
     constellation: constellation.value,
-    baseResistance: store.state.teamBuffs.baseResistance,
-    enemyLevel: store.state.teamBuffs.enemyLevel,
+    baseResistance: store.state.teamData.baseResistance,
+    enemyLevel: store.state.teamData.enemyLevel,
     normalLevel: normalLevel.value,
     skillLevel: skillLevel.value,
     burstLevel: burstLevel.value,
@@ -45,6 +46,7 @@ const CalculatorValue = computed<ICalculatorValue>(() => {
 
 /** @module 数据保存 */
 import { IUserSavedCalculationData, calDB } from "@/constants/db";
+const { characterJoinTeam } = useTeamData();
 import SaveCalculation from "@/component/SaveCalculation.vue";
 import db from "@/utils/db";
 const saveCalculationResult = (title: string) => {
@@ -60,6 +62,10 @@ const saveCalculationResult = (title: string) => {
     relicList: JSON.stringify(relicList.value),
     panel: CalculatorValue.value,
   };
+
+  if (teamIndex.value >= 0) {
+    characterJoinTeam(data, teamIndex.value);
+  }
 
   db.add(calDB.storeName, data)
     .then(() => {
@@ -121,9 +127,15 @@ const recalculation = (data: IUserSavedCalculationData) => {
 /** @module 路由判断 */
 import { useRoute } from "vue-router";
 const route = useRoute();
+/** 当前编辑角色处于的队伍中的位置 */
+const teamIndex = ref(-1);
+
 watchEffect(() => {
   if (route.params.mode === "edit") {
     const data = sessionStorage.getItem("editCharacter");
+    const index = sessionStorage.getItem("editTeamIndex");
+    teamIndex.value = index ? +index : -1;
+
     if (data) {
       recalculation(JSON.parse(data));
     }
@@ -133,6 +145,7 @@ watchEffect(() => {
     initSkillInfo();
     initWeaponInfo();
     store.commit("setCurrentEdit", "");
+    sessionStorage.setItem("editTeamIndex", null);
   }
 });
 const pageTitle = computed(() => {
@@ -176,7 +189,7 @@ const pageTitle = computed(() => {
         />
       </div>
     </section>
-    <SaveCalculation @save-data="saveCalculationResult" @recalculation="recalculation" />
+    <SaveCalculation @save-data="saveCalculationResult" />
   </template>
 </template>
 

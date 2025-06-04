@@ -4,7 +4,7 @@ import { IBuffBase, IBuffExtra, ICharacterInfo } from "@/types/interface";
 import BuffItem from "./buff-item.vue";
 import { Collapse, CollapseItem } from "vant";
 import { BuffTarget } from "@/types/enum";
-import { useStore } from "vuex";
+import { useStore } from "@/store";
 const store = useStore();
 
 const buffs = defineModel<IBuffExtra[]>({ default: [] });
@@ -33,10 +33,10 @@ const relicBuffsFilter = computed(() => {
   });
 });
 
-const teamBuffsFilter = computed(() => {
+const teamDataFilter = computed(() => {
   buffs.value.forEach((buff) => {
     /** 同一个面板来源的buff 恢复成关闭状态 */
-    if (buff.source === store.state.teamBuffs.currentEdit) {
+    if (buff.source === store.state.teamData.currentEdit) {
       buff.enable = false;
     }
   });
@@ -46,7 +46,7 @@ const teamBuffsFilter = computed(() => {
     return (
       (!buff.shareCondition || buff.shareCondition(characterInfo)) &&
       !buff.label.includes(characterInfo.name) &&
-      buff.source !== store.state.teamBuffs.currentEdit
+      buff.source !== store.state.teamData.currentEdit
     );
   });
 });
@@ -85,9 +85,9 @@ const activeNames = ref<string[]>([]);
         :buff="buff"
       />
     </CollapseItem>
-    <CollapseItem v-if="teamBuffsFilter.length > 0" title="队伍增益" name="other">
+    <CollapseItem v-if="teamDataFilter.length > 0" title="队伍增益" name="other">
       <BuffItem
-        v-for="(buff, index) in teamBuffsFilter"
+        v-for="(buff, index) in teamDataFilter"
         :key="buff.label + index"
         v-model="buff.enable"
         v-model:stack="buff.stack"

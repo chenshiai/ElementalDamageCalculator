@@ -5,7 +5,7 @@ import "vant/lib/index.css";
 import "./font.css";
 import "./index.css";
 import route from "./router";
-import store from "./store";
+import store, { key } from "./store";
 import "default-passive-events";
 import db from "./utils/db";
 import { calDB, relicDB, playerInfoDB } from "./constants/db";
@@ -26,6 +26,6 @@ setNotifyDefaultOptions({
 createApp(App)
 .use(BackTop)
 .use(route)
-.use(store)
+.use(store, key)
 .use(Lazyload)
 .mount("#app");

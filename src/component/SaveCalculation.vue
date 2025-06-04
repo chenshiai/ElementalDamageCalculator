@@ -3,14 +3,14 @@ import { Popup, showNotify, Field, FloatingBubble, Popover } from "vant";
 import { ref } from "vue";
 import {useRouter} from "vue-router";
 import CalculationDataSelector from "./CalculationDataSelector.vue";
-import { useStore } from "vuex";
+import { useStore } from "@/store";
 
 const store = useStore();
-const emit = defineEmits(["save-data", "look-data", "recalculation"]);
+const emit = defineEmits(["save-data"]);
 
 // 保存数据
 const showPopup = ref(false);
-const remark = ref(store.state.teamBuffs.currentEdit);
+const remark = ref(store.state.teamData.currentEdit);
 const saveDataPop = () => {
   showPopup.value = true;
 };
@@ -32,10 +32,15 @@ const lookDataPop = () => {
   showDataPopup.value = true;
 };
 
-// 重算数据
+/** @module 编辑页面跳转 */
 const recalculation = (data: IUserSavedCalculationData) => {
   remark.value = data.title;
-  emit("recalculation", data);
+  store.commit("setCurrentEdit", data.title);
+  sessionStorage.setItem("editCharacter", JSON.stringify(data));
+  
+  router.push({
+    path: `/character/edit/${data.title}`,
+  });
 };
 
 const router = useRouter();
