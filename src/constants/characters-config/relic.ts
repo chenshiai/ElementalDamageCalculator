@@ -44,26 +44,24 @@ export interface IRelicLibraryItem {
   };
 }
 /** 烬城勇者绘卷 */
-const getBuffByElement = (element: ElementType, type: BuffType, text: string) => {
+const getBuffByElement = (type: BuffType, text: string) => {
   return {
     enable: false,
     label: `四件套·${text}元素伤害加成提升12%`,
     effect: [{ type, getValue: () => 12 }],
     describe: "触发其对应元素类型的相关反应后，队伍中附近的所有角色的该元素反应相关的元素伤害加成提升12%",
-    condition: (data) => data.element === element,
     shareable: true,
     target: BuffTarget.All,
   };
 };
 
 /** 烬城勇者绘卷2 */
-const getBuffByElement2 = (element: ElementType, type: BuffType, text: string) => {
+const getBuffByElement2 = (type: BuffType, text: string) => {
   return {
     enable: false,
     label: `四件套·${text}元素伤害加成提升28%`,
     effect: [{ type, getValue: () => 28 }],
     describe: "装备者处于夜魂加持状态下，还将使队伍中附近的所有角色的与该元素反应相关的元素伤害加成提升28%",
-    condition: (data) => data.element === element,
     shareable: true,
     target: BuffTarget.All,
   };
@@ -75,7 +73,6 @@ const getBuffByElement3 = (element: ElementType, type: BuffType) => {
     label: "四件套·全队元素伤害加成提升",
     effect: [{ type, getValue: () => 35 }],
     describe: "获得结晶反应形成的晶片时，队伍中所有角色获得35%对应元素伤害加成",
-    condition: (data) => data.element === element,
     shareable: true,
     target: BuffTarget.All,
   };
@@ -221,20 +218,20 @@ const relicLibrary: IRelicLibraryItem[] = [
       suit2: [],
 
       suit4: [
-        getBuffByElement(ElementType.Anemo, BuffType.AnemoPrcent, "风"),
-        getBuffByElement2(ElementType.Anemo, BuffType.AnemoPrcent, "风"),
-        getBuffByElement(ElementType.Hydro, BuffType.HydroPrcent, "水"),
-        getBuffByElement2(ElementType.Hydro, BuffType.HydroPrcent, "水"),
-        getBuffByElement(ElementType.Pyro, BuffType.PyroPrcent, "火"),
-        getBuffByElement2(ElementType.Pyro, BuffType.PyroPrcent, "火"),
-        getBuffByElement(ElementType.Cryo, BuffType.CryoPrcent, "冰"),
-        getBuffByElement2(ElementType.Cryo, BuffType.CryoPrcent, "冰"),
-        getBuffByElement(ElementType.Electro, BuffType.ElectroPrcent, "雷"),
-        getBuffByElement2(ElementType.Electro, BuffType.ElectroPrcent, "雷"),
-        getBuffByElement(ElementType.Geo, BuffType.GeoPrcent, "岩"),
-        getBuffByElement2(ElementType.Geo, BuffType.GeoPrcent, "岩"),
-        getBuffByElement(ElementType.Dendro, BuffType.DendroPrcent, "草"),
-        getBuffByElement2(ElementType.Dendro, BuffType.DendroPrcent, "草"),
+        getBuffByElement(BuffType.AnemoPrcent, "风"),
+        getBuffByElement2(BuffType.AnemoPrcent, "风"),
+        getBuffByElement(BuffType.HydroPrcent, "水"),
+        getBuffByElement2(BuffType.HydroPrcent, "水"),
+        getBuffByElement(BuffType.PyroPrcent, "火"),
+        getBuffByElement2(BuffType.PyroPrcent, "火"),
+        getBuffByElement(BuffType.CryoPrcent, "冰"),
+        getBuffByElement2(BuffType.CryoPrcent, "冰"),
+        getBuffByElement(BuffType.ElectroPrcent, "雷"),
+        getBuffByElement2(BuffType.ElectroPrcent, "雷"),
+        getBuffByElement(BuffType.GeoPrcent, "岩"),
+        getBuffByElement2(BuffType.GeoPrcent, "岩"),
+        getBuffByElement(BuffType.DendroPrcent, "草"),
+        getBuffByElement2(BuffType.DendroPrcent, "草"),
       ],
     },
   },
@@ -423,7 +420,7 @@ const relicLibrary: IRelicLibraryItem[] = [
           label: "四件套·元素战技造成的伤害进一步提升",
           describe: "处于队伍后台时，元素战技造成的伤害提升25%",
           effect: [{ type: BuffType.SkillPrcent, getValue: () => 25 }],
-          enable: false,
+          enable: true,
         },
       ],
     },
@@ -789,7 +786,7 @@ const relicLibrary: IRelicLibraryItem[] = [
       suit2: [
         {
           label: "二件套·治疗加成提高",
-          effect: [{ type: BuffType.ATKPrcent, getValue: () => 18 }],
+          effect: [{ type: BuffType.HealAdd, getValue: () => 15 }],
           describe: "海染砗磲2件套，治疗加成提高15%",
           enable: true,
         },

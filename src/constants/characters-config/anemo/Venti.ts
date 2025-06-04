@@ -111,7 +111,7 @@ class VentiData extends Character implements ICharacterInfo {
     Constellation_E_5,
     {
       label: "6命·抗争的暴风",
-      describe: `受风神之诗伤害的敌人，风元素抗性降低20%； 若产生了元素转化，则使转换的元素抗性也降低20%`,
+      describe: `受风神之诗伤害的敌人，风元素抗性降低20%； `,
       effect: [{ type: BuffType.EnemyAnemoResistance, getValue: () => -20 }],
       enable: false,
       shareable: true,
@@ -119,7 +119,7 @@ class VentiData extends Character implements ICharacterInfo {
     },
     {
       label: "6命·抗争的暴风·水",
-      describe: `受风神之诗伤害的敌人，风元素抗性降低20%； 若产生了元素转化，则使转换的元素抗性也降低20%`,
+      describe: `若产生了元素转化，则使转换的元素抗性也降低20%`,
       effect: [{ type: BuffType.EnemyHydroResistance, getValue: () => -20 }],
       enable: false,
       shareable: true,
@@ -127,7 +127,7 @@ class VentiData extends Character implements ICharacterInfo {
     },
     {
       label: "6命·抗争的暴风·火",
-      describe: `受风神之诗伤害的敌人，风元素抗性降低20%； 若产生了元素转化，则使转换的元素抗性也降低20%`,
+      describe: `若产生了元素转化，则使转换的元素抗性也降低20%`,
       effect: [{ type: BuffType.EnemyPyroResistance, getValue: () => -20 }],
       enable: false,
       shareable: true,
@@ -135,7 +135,7 @@ class VentiData extends Character implements ICharacterInfo {
     },
     {
       label: "6命·抗争的暴风·冰",
-      describe: `受风神之诗伤害的敌人，风元素抗性降低20%； 若产生了元素转化，则使转换的元素抗性也降低20%`,
+      describe: `若产生了元素转化，则使转换的元素抗性也降低20%`,
       effect: [{ type: BuffType.EnemyCryoResistance, getValue: () => -20 }],
       enable: false,
       shareable: true,
@@ -143,7 +143,7 @@ class VentiData extends Character implements ICharacterInfo {
     },
     {
       label: "6命·抗争的暴风·雷",
-      describe: `受风神之诗伤害的敌人，风元素抗性降低20%； 若产生了元素转化，则使转换的元素抗性也降低20%`,
+      describe: `若产生了元素转化，则使转换的元素抗性也降低20%`,
       effect: [{ type: BuffType.EnemyElectroResistance, getValue: () => -20 }],
       enable: false,
       shareable: true,

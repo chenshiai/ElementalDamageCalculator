@@ -90,6 +90,12 @@ class EscoffierData extends Character implements ICharacterInfo {
             return [-5, -10, -15, -55][s - 1] || 0;
           },
         },
+        {
+          type: BuffType.EnemyHydroResistance,
+          getValue: (_, s) => {
+            return [-5, -10, -15, -55][s - 1] || 0;
+          },
+        },
       ],
       enable: true,
       target: BuffTarget.Enemy,

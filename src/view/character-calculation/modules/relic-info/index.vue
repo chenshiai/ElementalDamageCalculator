@@ -175,12 +175,12 @@ const substatsChange = (arr: AppendProp[]) => {
     const stat = setStatForm.value.reliquarySubstats.find((item) => {
       return item.appendPropId === appendPropId;
     });
-    return stat
-      ? stat
-      : {
-          appendPropId,
-          statValue: 0,
-        };
+    return (
+      stat || {
+        appendPropId,
+        statValue: 0,
+      }
+    );
   });
 };
 
