@@ -2,6 +2,7 @@
 import { computed, watchEffect, toRaw, ref } from "vue";
 import { showNotify, showConfirmDialog } from "vant";
 import TabTitle from "@/component/TabTitle.vue";
+import TeamListNav from "@/component/TeamListNav.vue";
 import CharacterPanel from "./modules/CharacterPanel.vue";
 
 import { ICalculatorValue } from "@/types/interface";
@@ -156,6 +157,7 @@ const pageTitle = computed(() => {
 <template>
   <TabTitle>{{ pageTitle }}</TabTitle>
   <div class="tips">默认的角色、武器和圣遗物均以满级数据计算。可以自由搭配。</div>
+  <TeamListNav />
   <section class="calculation-section">
     <div class="calculation-section__item">
       <CharacterInfo v-model="characterInfo" v-model:constellation="constellation" />

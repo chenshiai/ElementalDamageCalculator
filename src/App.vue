@@ -69,7 +69,6 @@ const showLeft = ref(false);
 }
 .side-navigator-wrap {
   display: none;
-  margin-right: 20px;
   position: fixed;
   top: 60px;
 }

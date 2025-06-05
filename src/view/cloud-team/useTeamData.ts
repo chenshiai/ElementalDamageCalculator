@@ -1,11 +1,15 @@
 import { IUserSavedCalculationData } from "@/constants/db";
 import useCharacterInfo from "../character-calculation/modules/chararcter-info";
 import { Character } from "@/constants/characters-config/character";
-import { IBuffBase, IBuffExtra } from "@/types/interface";
+import { IBuffBase, IBuffExtra, ITeamItem } from "@/types/interface";
 import useWeanponInfo from "../character-calculation/modules/weapon-info";
 import { Weapons } from "@/constants/characters-config/weapon";
 import useRelicInfo from "../character-calculation/modules/relic-info";
 import { useStore } from "@/store";
+import { IRelicItem } from "@/constants/characters-config/relic-class";
+import { useRouter } from "vue-router";
+import { ElementType } from "@/types/enum";
+import allImages from "@/constants/imageConstant";
 
 // 解构buff
 const deconstructionBuff = (buff: IBuffBase, result: IUserSavedCalculationData): IBuffExtra => {
@@ -33,8 +37,19 @@ const getShareBuff = (buffs: IBuffBase[], result: IUserSavedCalculationData): IB
 };
 
 const useTeamData = () => {
+  const router = useRouter();
   const store = useStore();
-  const teamList = store.getters.allTeamList;
+  const teamList = store.getters.allTeamList as ITeamItem[];
+
+  const edit = (index) => {
+    store.commit("setCurrentEdit", teamList[index].calculation.title);
+    sessionStorage.setItem("editCharacter", JSON.stringify(teamList[index].calculation));
+    sessionStorage.setItem("editTeamIndex", index);
+
+    router.push({
+      path: `/character/edit/${teamList[index].calculation.title}`,
+    });
+  };
   /** 角色数据入队 */
   const characterJoinTeam = (result: IUserSavedCalculationData, index: number) => {
     const map = new Map();
@@ -55,7 +70,7 @@ const useTeamData = () => {
     relicSuitTexts.value.forEach((item) => {
       map.set(item.name, getShareBuff(relicBuffs.value, result));
     });
-    
+
     store.commit("joinTeam", {
       data: {
         calculation: result,
@@ -70,10 +85,57 @@ const useTeamData = () => {
     store.commit("leaveTeam", index);
   };
 
+  const getAvatarIcon = (enkaId: number) => {
+    return Character.find((c) => c.enkaId === enkaId).icons.avatarIcon;
+  };
+
+  const getCharacterName = (enkaId: number) => {
+    return Character.find((c) => c.enkaId === enkaId).name;
+  };
+
+  const getWeaponIcon = (enkaId: number) => {
+    return Weapons.find((c) => c.enkaId === enkaId).icon;
+  };
+  const getWeaponName = (enkaId: number) => {
+    return Weapons.find((c) => c.enkaId === enkaId).name;
+  };
+
+  const getElementIcon = (element: ElementType) => {
+    switch (element) {
+      case ElementType.Pyro:
+        return allImages.pyro;
+      case ElementType.Electro:
+        return allImages.ele;
+      case ElementType.Hydro:
+        return allImages.hydro;
+      case ElementType.Anemo:
+        return allImages.anemo;
+      case ElementType.Cryo:
+        return allImages.cryo;
+      case ElementType.Geo:
+        return allImages.geo;
+      case ElementType.Dendro:
+        return allImages.den;
+      default:
+        return "";
+    }
+  };
+
+  const getRelics = (relicList: string) => {
+    return JSON.parse(relicList) as IRelicItem[];
+  };
+
   return {
     teamList,
     leaveTeam,
     characterJoinTeam,
+    getAvatarIcon,
+    getCharacterName,
+    getWeaponIcon,
+    getWeaponName,
+    getRelics,
+    getElementIcon,
+    edit,
   };
 };
 

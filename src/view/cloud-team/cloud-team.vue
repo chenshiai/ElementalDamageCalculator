@@ -6,9 +6,6 @@ import { useRouter } from "vue-router";
 
 import { ITeamItem } from "@/types/interface";
 import { IUserSavedCalculationData } from "@/constants/db";
-import { IRelicItem } from "@/constants/characters-config/relic-class";
-import { Character } from "@/constants/characters-config/character";
-import { Weapons } from "@/constants/characters-config/weapon";
 
 import DataItem from "@/component/DataItem.vue";
 import TabTitle from "@/component/TabTitle.vue";
@@ -27,9 +24,20 @@ const setSlotByIndex = (index) => {
 
 /** @module 队伍数据 */
 const store = useStore();
-const { teamList, characterJoinTeam, leaveTeam }  = useTeamData();
+const {
+  teamList,
+  characterJoinTeam,
+  leaveTeam,
+  getAvatarIcon,
+  getCharacterName,
+  getWeaponIcon,
+  getWeaponName,
+  getRelics,
+  edit,
+} = useTeamData();
 
 onMounted(() => {
+  if (teamList.length > 1) return;
   const a: ITeamItem[] = JSON.parse(sessionStorage.getItem("teamList"));
   if (a) {
     a.forEach((data, index) => {
@@ -43,41 +51,12 @@ const handleCharacterChange = (result: IUserSavedCalculationData) => {
   characterJoinTeam(result, selectedIndex.value);
 };
 
-/** @module 编辑页面跳转 */
+/** @module 新建角色页面跳转 */
 const router = useRouter();
-const edit = (index) => {
-  store.commit("setCurrentEdit", teamList[index].calculation.title);
-  sessionStorage.setItem("editCharacter", JSON.stringify(teamList[index].calculation));
-  sessionStorage.setItem("editTeamIndex", index);
-
-  router.push({
-    path: `/character/edit/${teamList[index].calculation.title}`,
-  });
-};
 const toCreateData = () => {
   router.push({
     path: "/character/create",
   });
-};
-
-/** @module 展示信息获取 */
-const getAvatarIcon = (enkaId: number) => {
-  return Character.find((c) => c.enkaId === enkaId).icons.avatarIcon;
-};
-
-const getCharacterName = (enkaId: number) => {
-  return Character.find((c) => c.enkaId === enkaId).name;
-};
-
-const getWeaponIcon = (enkaId: number) => {
-  return Weapons.find((c) => c.enkaId === enkaId).icon;
-};
-const getWeaponName = (enkaId: number) => {
-  return Weapons.find((c) => c.enkaId === enkaId).name;
-};
-
-const getRelics = (relicList: string) => {
-  return JSON.parse(relicList) as IRelicItem[];
 };
 </script>
 
