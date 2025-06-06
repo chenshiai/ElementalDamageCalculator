@@ -82,7 +82,7 @@ class TohmaData extends Character implements ICharacterInfo {
       describe: "当前场上自己的角色获取或刷新烈烧佑命护盾时，护盾强效提升5%，至多叠加5次",
       effect: [{ type: BuffType.ShieldStrong, getValue: (_, s) => 5 * s }],
       enable: true,
-      stack: 0,
+      stack: 5,
       limit: 5,
       stackable: true,
       shareable: true,

@@ -89,7 +89,7 @@ class BennettData extends Character implements ICharacterInfo {
     ...A_80_CHARGE_26P,
     {
       label: "元素爆发·美妙旅程",
-      describe: "基于班尼特的基础攻击力，以一定比例获得非基础攻击力加成",
+      describe: "基于班尼特的基础攻击力，以一定比例获得非基础攻击力加成；1命后，提升比例增加20%；6命后，提供15%火元素伤害加成，同时提供火元素附魔。",
       effect: [
         {
           type: BuffType.ATKFixed,

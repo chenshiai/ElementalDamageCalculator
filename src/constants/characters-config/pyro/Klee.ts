@@ -51,7 +51,7 @@ class KleeData extends Character implements ICharacterInfo {
     }),
   ];
   otherSkill = [
-    action("一触即发", AttackType.Other, ElementType.Pyro, {
+    action("4命·一触即发伤害", AttackType.Other, ElementType.Pyro, {
       atk: [5.55],
     }),
   ];
@@ -67,7 +67,7 @@ class KleeData extends Character implements ICharacterInfo {
     {
       label: "2命·破破弹片",
       describe: "蹦蹦炸弹的诡雷会使敌人防御力降低23%",
-      effect: [{ type: BuffType.ReduceArmour, getValue: () => -23 }],
+      effect: [{ type: BuffType.ReduceArmour, getValue: () => 23 }],
       enable: false,
       shareable: true,
       condition: ({ constellation }) => constellation >= 2,

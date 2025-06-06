@@ -6152,7 +6152,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       {
         label: "4命·盈缺流返",
         describe: "敌人受到神里流·霜灭的霜见雪关扉造成的伤害后，防御力降低30%",
-        effect: [{ type: BuffType.ReduceArmour, getValue: () => -30 }],
+        effect: [{ type: BuffType.ReduceArmour, getValue: () => 30 }],
         enable: true,
         shareable: true,
         target: BuffTarget.Enemy,
@@ -7322,7 +7322,7 @@ export const Character: (ICharacterInfo & Record<any, any>)[] = [
       {
         label: "2命·破破弹片",
         describe: "蹦蹦炸弹的诡雷会使敌人防御力降低23%",
-        effect: [{ type: BuffType.ReduceArmour, getValue: () => -23 }],
+        effect: [{ type: BuffType.ReduceArmour, getValue: () => 23 }],
         enable: false,
         shareable: true,
         condition: ({ constellation }) => constellation >= 2,

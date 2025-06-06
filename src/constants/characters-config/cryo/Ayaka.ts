@@ -95,7 +95,7 @@ class AyakaData extends Character implements ICharacterInfo {
     {
       label: "4命·盈缺流返",
       describe: "敌人受到神里流·霜灭的霜见雪关扉造成的伤害后，防御力降低30%",
-      effect: [{ type: BuffType.ReduceArmour, getValue: () => -30 }],
+      effect: [{ type: BuffType.ReduceArmour, getValue: () => 30 }],
       enable: true,
       shareable: true,
       target: BuffTarget.Enemy,

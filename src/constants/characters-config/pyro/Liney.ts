@@ -45,7 +45,7 @@ class LineyData extends Character implements ICharacterInfo {
       AttackType.Strong,
       ElementType.Pyro,
       {
-        atk: [2.12, 2.28, 2.44, 2.65, 2.81, 2.97, 3.18, 3.39, 3.6, 3.82, 4.03, 4.24, 4.51, 4.77],
+        atk: [2.12, 2.28, 2.44, 2.65, 2.81, 2.97, 3.18, 3.39, 3.604, 3.816, 4.03, 4.24, 4.51, 4.77],
       },
       "Liney"
     ),
@@ -140,7 +140,7 @@ class LineyData extends Character implements ICharacterInfo {
       label: "2命·巧言贴耳的诱引",
       describe: "林尼在场上时，每2秒将获得一层「集意专注」效果，使林尼的暴击伤害提升20%。此效果至多叠加3层",
       effect: [{ type: BuffType.CritcalHurt, getValue: (_, s) => 20 * s }],
-      enable: false,
+      enable: true,
       stackable: true,
       stack: 3,
       limit: 3,
@@ -152,7 +152,7 @@ class LineyData extends Character implements ICharacterInfo {
       label: "4命·熟稔习练的筹谋",
       describe: "林尼的元素类型为火元素的重击攻击命中敌人后，该敌人的火元素抗性降低20%",
       effect: [{ type: BuffType.EnemyPyroResistance, getValue: () => -20 }],
-      enable: false,
+      enable: true,
       shareable: true,
       target: BuffTarget.Enemy,
       condition: ({ constellation }) => constellation >= 4,

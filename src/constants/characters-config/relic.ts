@@ -683,7 +683,7 @@ const relicLibrary: IRelicLibraryItem[] = [
           label: "四件套·敌人草元素抗性降低",
           describe: "元素战技或元素爆发命中敌人后，使命中目标的草元素抗性降低30%",
           effect: [{ type: BuffType.EnemyDendroResistance, getValue: () => -30 }],
-          enable: false,
+          enable: true,
           shareable: true,
           target: BuffTarget.Enemy,
         },

@@ -128,7 +128,7 @@ class FurinaData extends Character implements ICharacterInfo {
     },
     {
       label: "元素爆发·「普世欢腾」",
-      describe: "基于芙宁娜持有的「气氛值」，附近的队伍中所有角色造成的伤害提升，0命上限300点，1命上限400点",
+      describe: "基于芙宁娜持有的「气氛值」，附近的队伍中所有角色造成的伤害提升。0命上限300点，解锁1命后上限为400点",
       effect: [
         {
           type: BuffType.GlobalPrcent,
@@ -157,9 +157,8 @@ class FurinaData extends Character implements ICharacterInfo {
         "万众狂欢持续期间，基于「气氛值」超过上限的部分，每1点「气氛值」都将使芙宁娜的生命值上限提升0.35%。至多通过这种方式使芙宁娜的生命值上限提升140%",
       effect: [{ type: BuffType.HPPrcent, getValue: (_, s) => Math.min(140, s * 0.35) }],
       enable: true,
-      stack: 300,
+      stack: 400,
       limit: 400,
-      stackType: "slider",
       stackable: true,
       stackText: "超过上限的「气氛值」",
       condition: ({ constellation }) => constellation >= 2,
