@@ -1,7 +1,7 @@
 import db from "@/utils/db";
 import { IUserSavedCalculationData, calDB } from "@/constants/db";
 import { EquipType } from "@/types/enum";
-import { MainstatType, SubstatType } from "@/constants/characters-config/relic-class";
+import { IRelicItem, MainstatType, SubstatType } from "@/constants/characters-config/relic-class";
 import { Character } from "@/constants/characters-config/character";
 import relicLibrary from "@/constants/characters-config/relic";
 import calculationPanel from "@/utils/calculate/calculate-panel";
@@ -18,6 +18,7 @@ interface Equip {
   };
   reliquary?: {
     level: number;
+    appendPropIdList: number[];
   };
   flat: {
     rankLevel?: number;
@@ -128,7 +129,7 @@ const saveCalculationResult = async (enkaData: EnkaAvatarInfo, uid: string) => {
   const { weaponBuffs } = useWeanponInfo(wea);
 
   // 从enka数据中筛选出圣遗物信息
-  const relicList = new Array(5).fill(null);
+  const relicList: IRelicItem[] = new Array(5).fill(null);
   enkaData.equipList
     .filter((item) => {
       return item.reliquary;
@@ -152,6 +153,7 @@ const saveCalculationResult = async (enkaData: EnkaAvatarInfo, uid: string) => {
         timetemp: Date.now().toString(),
         name: targetRelic.name,
         icon: targetRelic.icon,
+        appendPropIdList: item.reliquary.appendPropIdList,
       };
 
       switch (targetRelic.equipType) {
@@ -183,7 +185,6 @@ const saveCalculationResult = async (enkaData: EnkaAvatarInfo, uid: string) => {
   if (weaponInfo.weapon.affixMap) {
     affix = Object.entries(weaponInfo.weapon.affixMap)[0][1] + 1;
   }
-  console.log(cha);
 
   // 计算角色面板
   const panel = calculationPanel({    

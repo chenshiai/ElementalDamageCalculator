@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { getlinearBackGroundClassByRarity } from "@/utils/get-color";
 import { IRelicItem } from "@/constants/characters-config/relic-class";
-import { getAppendPropName2, percentProps } from "@/constants/characters-config/append-prop";
+import { getAppendPropName2, percentProps, getAppendPropCount } from "@/constants/characters-config/append-prop";
+import { computed } from "vue";
 
 const { relic } = defineProps<{
   relic: IRelicItem | null;
@@ -19,6 +20,11 @@ const emit = defineEmits<{
 const selectLocalRelic = (item: IRelicItem) => {
   emit("selectRelic", item);
 };
+
+const subitemCounts = computed(() => {
+  if (!relic) return [];
+  return relic.reliquarySubstats.map((subitem) => getAppendPropCount(subitem.appendPropId, relic.appendPropIdList));
+});
 </script>
 
 <template>
@@ -28,9 +34,7 @@ const selectLocalRelic = (item: IRelicItem) => {
       <div class="relic-detail__hearder">
         <div :class="['relic-name', getlinearBackGroundClassByRarity(relic.rankLevel - 1)]">
           {{ relic.name }}
-          <span class="lv">
-            Lv.{{ relic.level }}
-          </span>
+          <span class="lv"> Lv.{{ relic.level }} </span>
         </div>
         <div class="relic-main-stats">
           <span class="relic-main-stats__text">{{ getAppendPropName2(relic.reliquaryMainstat.mainPropId) }}</span>
@@ -42,7 +46,13 @@ const selectLocalRelic = (item: IRelicItem) => {
         v-for="(subitem, index) in relic.reliquarySubstats"
         :key="subitem.appendPropId + index"
       >
-        <label>{{ getAppendPropName2(subitem.appendPropId) }}</label>
+        <label>
+          {{ getAppendPropName2(subitem.appendPropId) }}
+          <span class="relic-detail__stats-count" v-if="subitemCounts[index] > 0">
+            {{ subitemCounts[index] }}
+          </span>
+          <!-- <span v-for="a in getAppendPropCount(subitem.appendPropId, relic.appendPropIdList)">+</span> -->
+        </label>
         <span>{{ getStatValueText(subitem) }}</span>
       </div>
     </template>
@@ -115,7 +125,15 @@ const selectLocalRelic = (item: IRelicItem) => {
   line-height: 14px;
   padding: 0 8px;
 }
-
+.relic-detail__stats-count {
+  display: inline-block;
+  width: 14px;
+  text-align: center;
+  box-shadow: inset -1px -1px 1px var(--border);
+  color: var(--light-text);
+  background-color: var(--bg);
+  border-radius: 4px;
+}
 .relic__empty {
   text-align: center;
   line-height: 112px;

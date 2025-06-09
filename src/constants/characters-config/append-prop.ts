@@ -1,4 +1,4 @@
-import { AppendProp, EquipType } from "@/types/enum";
+import { AppendProp, EquipType, AppendPropIds } from "@/types/enum";
 
 export const appendPropMap = {
   [AppendProp.BASE_ATTACK]: "基础攻击力",
@@ -127,4 +127,16 @@ export function getAppendPropName(appendProp: AppendProp) {
 
 export function getAppendPropName2(appendProp: AppendProp) {
   return appendPropMap2[appendProp];
+}
+
+export function getAppendPropCount(appendProp: AppendProp, appendPropList: number[]) {
+  if (!appendPropList) return 0;
+  let count = -1;
+  
+  for (let i = 0; i < appendPropList.length; i++) {
+    if (AppendPropIds[appendProp].includes(appendPropList[i])) {
+      count++;
+    }
+  }
+  return Math.max(0, count);
 }

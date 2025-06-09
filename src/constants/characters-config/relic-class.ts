@@ -15,11 +15,10 @@ export type SubstatType = {
 export type RelicStatType = {
   reliquaryMainstat: MainstatType;
   reliquarySubstats: SubstatType[];
+  appendPropIdList?: number[];
 };
 
 export interface IRelicItem extends IRelicBase, RelicStatType {
-  rankLevel: number;
-  level: number;
   timetemp: string;
 }
 

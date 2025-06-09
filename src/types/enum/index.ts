@@ -1,3 +1,5 @@
+import appendPropData from "./data";
+
 /** 攻击方式 */
 export enum AttackType {
   /** 普通攻击类型 */
@@ -304,6 +306,13 @@ export enum AppendProp {
   ROCK_ADD_HURT = "FIGHT_PROP_ROCK_ADD_HURT",
   GRASS_ADD_HURT = "FIGHT_PROP_GRASS_ADD_HURT",
 }
+const allAppendPropIds: Record<AppendProp, number[]> = {} as Record<AppendProp, number[]>;
+Object.values(AppendProp).forEach(prop => {
+  allAppendPropIds[prop] = appendPropData
+    .filter(item => item.propType === prop)
+    .map(item => item.id);
+});
+export const AppendPropIds = allAppendPropIds;
 
 /** 圣遗物的部位类型 */
 export enum EquipType {
@@ -366,7 +375,3 @@ export const elementTypeToLabel = {
   [ElementType.Geo]: "岩元素伤害加成",
   [ElementType.Dendro]: "草元素伤害加成",
 };
-
-export const normalAttackUseData = {
-  [AttackType.Normal]: []
-}
