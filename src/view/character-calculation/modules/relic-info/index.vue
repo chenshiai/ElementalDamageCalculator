@@ -22,6 +22,7 @@ import {
   MainstatType,
   ReliceMainStats,
   ReliceMainStats_Four,
+  ReliceMainStats_Three,
   RelicItem,
   RelicStatType,
 } from "@/constants/characters-config/relic-class";
@@ -51,10 +52,13 @@ const { relicSuitTexts } = defineProps<IProps>();
 /** @module 模糊搜索框 */
 const searchRelic = ref("");
 const filteredRelics = computed(() => {
-  return relics.filter((item) => item.name.indexOf(searchRelic.value) >= 0);
+  return relics
+    .filter((item) => item.name.indexOf(searchRelic.value) >= 0)
+    .filter((item) => item.equip[selectedPartIndex.value]);
 });
 
 /** @module 圣遗物编辑表单 */
+/** 主副属性切换 0主属性 1副属性 */
 const selectStatus = ref(0);
 // 基础数据
 const setStatBase = ref<IRelicBase>();
@@ -140,10 +144,33 @@ const removeRelic = () => {
     message: `已卸下\n[${name}]。`,
   });
 };
+
+// 根据部位类型来获取主词条列表
+const mainStatFilter = computed(() => {
+  if (!setStatBase.value) return [];
+  if (setStatBase.value.rankLevel === 5) {
+    return ReliceMainStats.filter((item) => {
+      return EquipTypeMainstats[setStatBase.value.equipType].includes(item.mainPropId);
+    });
+  }
+  if (setStatBase.value.rankLevel === 4) {
+    return ReliceMainStats_Four.filter((item) => {
+      return EquipTypeMainstats[setStatBase.value.equipType].includes(item.mainPropId);
+    });
+  }
+  if (setStatBase.value.rankLevel === 3) {
+    return ReliceMainStats_Three.filter((item) => {
+      return EquipTypeMainstats[setStatBase.value.equipType].includes(item.mainPropId);
+    });
+  }
+});
+
 /** 设置圣遗物基础数据，显示编辑表单 */
 const showSetRelicStatPop = (equip: IRelicLibraryItemEquip) => {
   // 根据部位下标来获取部位的具体类型和图标
   setStatBase.value = equip[selectedPartIndex.value];
+  
+  // 单个主词条的圣遗物，自动填充数值，并切换到副词条选择
   if (mainStatFilter.value.length === 1) {
     setStatForm.value.reliquaryMainstat.mainPropId = mainStatFilter.value[0].mainPropId;
     setStatForm.value.reliquaryMainstat.statValue = mainStatFilter.value[0].statValue;
@@ -155,7 +182,7 @@ const showSetRelicStatPop = (equip: IRelicLibraryItemEquip) => {
 const mainStatChanged = (appendPropId: AppendProp) => {
   if (!appendPropId) return;
   nextTick(() => {
-    const stat = ReliceMainStats.find((item) => {
+    const stat = mainStatFilter.value.find((item) => {
       return item.mainPropId === appendPropId;
     });
     setStatForm.value.reliquaryMainstat.statValue = stat.statValue;
@@ -183,21 +210,6 @@ const substatsChange = (arr: AppendProp[]) => {
     );
   });
 };
-
-// 根据部位类型来获取主词条列表
-const mainStatFilter = computed(() => {
-  if (!setStatBase.value) return [];
-  if (setStatBase.value.rankLevel === 5) {
-    return ReliceMainStats.filter((item) => {
-      return EquipTypeMainstats[setStatBase.value.equipType].includes(item.mainPropId);
-    });
-  }
-  if (setStatBase.value.rankLevel === 4) {
-    return ReliceMainStats_Four.filter((item) => {
-      return EquipTypeMainstats[setStatBase.value.equipType].includes(item.mainPropId);
-    });
-  }
-});
 
 /** 查询本地圣遗物数据 */
 const localRelics = ref<IRelicItem[]>([]);
@@ -260,12 +272,12 @@ const deleteLocalData = (item: IRelicItem) => {
       <div v-show="showLocalRelics" class="relic-select">
         <div v-for="item in localRelics" class="relic-select__local-item">
           <Relic style="flex: 1" :relic="item" :key="item.timetemp" @select-relic="selectLocalRelic" />
-          <Icon class="delete" name="delete-o" size="40" @click.stop="deleteLocalData(item)" text="删除" />
+          <Icon class="delete" name="delete-o" size="32" @click.stop="deleteLocalData(item)" text="删除" />
         </div>
       </div>
       <div v-show="!showLocalRelics" class="relic-select">
         <div v-for="item in filteredRelics" class="relic-select__item" @click="showSetRelicStatPop(item.equip)">
-          <img v-lazy="item.equip[0].icon" />{{ item.name }}
+          <img v-lazy="item.equip[0]?.icon || item.equip[selectedPartIndex].icon" />{{ item.name }}
         </div>
       </div>
     </template>
@@ -284,8 +296,8 @@ const deleteLocalData = (item: IRelicItem) => {
             max="4"
             @change="mainStatChanged"
           >
-            <Radio v-for="stat in mainStatFilter" :name="stat.mainPropId">
-              {{ getAppendPropName(stat.mainPropId) }}
+            <Radio v-for="stat in EquipTypeMainstats[setStatBase.equipType]" :name="stat">
+              {{ getAppendPropName(stat) }}
             </Radio>
           </RadioGroup>
         </Tab>
@@ -346,6 +358,7 @@ const deleteLocalData = (item: IRelicItem) => {
   display: grid;
   grid-gap: 6px;
   grid-template-columns: repeat(2, 1fr);
+  padding-bottom: 20px;
 }
 
 @media screen and (min-width: 768px) {

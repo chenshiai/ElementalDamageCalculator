@@ -51,7 +51,6 @@ const subitemCounts = computed(() => {
           <span class="relic-detail__stats-count" v-if="subitemCounts[index] > 0">
             {{ subitemCounts[index] }}
           </span>
-          <!-- <span v-for="a in getAppendPropCount(subitem.appendPropId, relic.appendPropIdList)">+</span> -->
         </label>
         <span>{{ getStatValueText(subitem) }}</span>
       </div>

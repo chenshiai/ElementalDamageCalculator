@@ -51,6 +51,14 @@ const { characterJoinTeam } = useTeamData();
 import SaveCalculation from "@/component/SaveCalculation.vue";
 import db from "@/utils/db";
 const saveCalculationResult = (title: string) => {
+  if (!characterInfo.value || !weapon.value) {
+    showNotify({
+      type: "warning",
+      message: "请先配置角色和武器",
+    })
+    return;
+  };
+
   const data: IUserSavedCalculationData = {
     title,
     characterEnkaId: characterInfo.value?.enkaId,
@@ -191,8 +199,8 @@ const pageTitle = computed(() => {
         />
       </div>
     </section>
-    <SaveCalculation @save-data="saveCalculationResult" />
   </template>
+  <SaveCalculation @save-data="saveCalculationResult" />
 </template>
 
 <style scoped>

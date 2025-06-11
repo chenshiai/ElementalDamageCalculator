@@ -1731,5 +1731,153 @@ const relicLibrary: IRelicLibraryItem[] = [
       suit4: [],
     },
   },
+  {
+    name: "祭火之人",
+    itemType: ItemType.ITEM_RELIQUARY,
+    setNameTextMapHash: 2060049099,
+    equip: [
+      null,
+      null,
+      null,
+      null,
+      setReliquartStat(2060049099, "祭火礼冠", "UI_RelicIcon_15009_3", EquipType.EQUIP_DRESS, 4, 16),
+    ],
+    suit2: "",
+    suit4: "",
+    buffs: {
+      suit2: [],
+      suit4: [],
+    },
+  },
+  {
+    name: "祭水之人",
+    itemType: ItemType.ITEM_RELIQUARY,
+    setNameTextMapHash: 3999792907,
+    equip: [
+      null,
+      null,
+      null,
+      null,
+      setReliquartStat(3999792907, "祭水礼冠", "UI_RelicIcon_15010_3", EquipType.EQUIP_DRESS, 4, 16),
+    ],
+    suit2: "",
+    suit4: "",
+    buffs: {
+      suit2: [],
+      suit4: [],
+    },
+  },
+  {
+    name: "祭雷之人",
+    itemType: ItemType.ITEM_RELIQUARY,
+    setNameTextMapHash: 212557731,
+    equip: [
+      null,
+      null,
+      null,
+      null,
+      setReliquartStat(212557731, "祭雷礼冠", "UI_RelicIcon_15011_3", EquipType.EQUIP_DRESS, 4, 16),
+    ],
+    suit2: "",
+    suit4: "",
+    buffs: {
+      suit2: [],
+      suit4: [],
+    },
+  },
+  {
+    name: "祭冰之人",
+    itemType: ItemType.ITEM_RELIQUARY,
+    setNameTextMapHash: 262428003,
+    equip: [
+      null,
+      null,
+      null,
+      null,
+      setReliquartStat(262428003, "祭冰礼冠", "UI_RelicIcon_15013_3", EquipType.EQUIP_DRESS, 4, 16),
+    ],
+    suit2: "",
+    suit4: "",
+    buffs: {
+      suit2: [],
+      suit4: [],
+    },
+  },
+
+  {
+    name: "游医",
+    itemType: ItemType.ITEM_RELIQUARY,
+    setNameTextMapHash: 3782508715,
+    equip: [
+      setReliquartStat(3782508715, "游医的银莲", "UI_RelicIcon_10013_4", EquipType.EQUIP_BRACER, 3, 12),
+      setReliquartStat(3782508715, "游医的枭羽", "UI_RelicIcon_10013_2", EquipType.EQUIP_NECKLACE, 3, 12),
+      setReliquartStat(3782508715, "游医的怀钟", "UI_RelicIcon_10013_5", EquipType.EQUIP_SHOES, 3, 12),
+      setReliquartStat(3782508715, "游医的药壶", "UI_RelicIcon_10013_1", EquipType.EQUIP_RING, 3, 12),
+      setReliquartStat(3782508715, "游医的方巾", "UI_RelicIcon_10013_3", EquipType.EQUIP_DRESS, 3, 12),
+    ],
+    suit2: "二件套：角色受到的治疗效果提升20%。",
+    suit4: "四件套：释放元素爆发时，恢复20%生命值。",
+    buffs: {
+      suit2: [
+        {
+          label: "受治疗效果提升",
+          effect: [{ type: BuffType.BeHealAdd, getValue: () => 20 }],
+          enable: true,
+          describe: "角色受到的治疗效果提升20%",
+        },
+      ],
+      suit4: [],
+    },
+  },
+  {
+    name: "幸运儿",
+    itemType: ItemType.ITEM_RELIQUARY,
+    setNameTextMapHash: 1103732675,
+    equip: [
+      setReliquartStat(1103732675, "幸运儿绿花", "UI_RelicIcon_10011_4", EquipType.EQUIP_BRACER, 3, 12),
+      setReliquartStat(1103732675, "幸运儿鹰羽", "UI_RelicIcon_10011_2", EquipType.EQUIP_NECKLACE, 3, 12),
+      setReliquartStat(1103732675, "幸运儿沙漏", "UI_RelicIcon_10011_5", EquipType.EQUIP_SHOES, 3, 12),
+      setReliquartStat(1103732675, "幸运儿之杯", "UI_RelicIcon_10011_1", EquipType.EQUIP_RING, 3, 12),
+      setReliquartStat(1103732675, "幸运儿银冠", "UI_RelicIcon_10011_3", EquipType.EQUIP_DRESS, 3, 12),
+    ],
+    suit2: "二件套：防御力提升100点。",
+    suit4: "四件套：拾取摩拉时，恢复300点生命值。",
+    buffs: {
+      suit2: [
+        {
+          label: "防御力提升",
+          effect: [{ type: BuffType.DEFFixed, getValue: () => 100 }],
+          enable: true,
+          describe: "防御力提升100点",
+        },
+      ],
+      suit4: [],
+    },
+  },
+  {
+    name: "冒险家",
+    itemType: ItemType.ITEM_RELIQUARY,
+    setNameTextMapHash: 2191797987,
+    equip: [
+      setReliquartStat(2191797987, "冒险家之花", "UI_RelicIcon_10010_4", EquipType.EQUIP_BRACER, 3, 12),
+      setReliquartStat(2191797987, "冒险家尾羽", "UI_RelicIcon_10010_2", EquipType.EQUIP_NECKLACE, 3, 12),
+      setReliquartStat(2191797987, "冒险家怀表", "UI_RelicIcon_10010_5", EquipType.EQUIP_SHOES, 3, 12),
+      setReliquartStat(2191797987, "冒险家金杯", "UI_RelicIcon_10010_1", EquipType.EQUIP_RING, 3, 12),
+      setReliquartStat(2191797987, "冒险家头带", "UI_RelicIcon_10010_3", EquipType.EQUIP_DRESS, 3, 12),
+    ],
+    suit2: "二件套：生命值上限提高1000点。",
+    suit4: "四件套：开启各类宝箱的5秒内，持续恢复30%生命值。",
+    buffs: {
+      suit2: [
+        {
+          label: "生命值提升",
+          effect: [{ type: BuffType.HPFixed, getValue: () => 1000 }],
+          enable: true,
+          describe: "生命值上限提高1000点",
+        },
+      ],
+      suit4: [],
+    },
+  },
 ];
 export default relicLibrary;

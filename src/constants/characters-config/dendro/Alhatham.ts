@@ -93,7 +93,7 @@ class AlhathamData extends Character implements ICharacterInfo {
       label: "元素战技·琢光镜",
       describe: "持有琢光镜时，艾尔海森的普通攻击、重击与下落攻击将转为无法被附魔覆盖的草元素伤害",
       effect: [{ type: BuffType.Transform, getValue: () => EnchantingType[ElementType.Dendro] }],
-      enable: false,
+      enable: true,
     },
     {
       label: "谜林道破",

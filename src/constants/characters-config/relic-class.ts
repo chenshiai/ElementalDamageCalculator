@@ -204,3 +204,79 @@ export const ReliceMainStats_Four: MainstatType[] = [
     statValue: 46.4,
   },
 ];
+
+/** 3星圣遗物主词条列表 */
+export const ReliceMainStats_Three: MainstatType[] = [
+  {
+    mainPropId: AppendProp.ATTACK,
+    statValue: 123,
+  },
+  {
+    mainPropId: AppendProp.HP,
+    statValue: 1893,
+  },
+  {
+    mainPropId: AppendProp.DEFENSE_PERCENT,
+    statValue: 28.8,
+  },
+  {
+    mainPropId: AppendProp.ATTACK_PERCENT,
+    statValue: 23.1,
+  },
+  {
+    mainPropId: AppendProp.HP_PERCENT,
+    statValue: 23.1,
+  },
+  {
+    mainPropId: AppendProp.ELEMENT_MASTERY,
+    statValue: 92,
+  },
+  {
+    mainPropId: AppendProp.CHARGE_EFFICIENCY,
+    statValue: 25.6,
+  },
+  {
+    mainPropId: AppendProp.HEAL_ADD,
+    statValue: 17.8,
+  },
+  {
+    mainPropId: AppendProp.PHYSICAL_ADD_HURT,
+    statValue: 28.8,
+  },
+  {
+    mainPropId: AppendProp.FIRE_ADD_HURT,
+    statValue: 23.1,
+  },
+  {
+    mainPropId: AppendProp.WATER_ADD_HURT,
+    statValue: 23.1,
+  },
+  {
+    mainPropId: AppendProp.WIND_ADD_HURT,
+    statValue: 23.1,
+  },
+  {
+    mainPropId: AppendProp.ICE_ADD_HURT,
+    statValue: 23.1,
+  },
+  {
+    mainPropId: AppendProp.GRASS_ADD_HURT,
+    statValue: 23.1,
+  },
+  {
+    mainPropId: AppendProp.ELEC_ADD_HURT,
+    statValue: 23.1,
+  },
+  {
+    mainPropId: AppendProp.ROCK_ADD_HURT,
+    statValue: 23.1,
+  },
+  {
+    mainPropId: AppendProp.CRITICAL,
+    statValue: 15.4,
+  },
+  {
+    mainPropId: AppendProp.CRITICAL_HURT,
+    statValue: 30.8,
+  },
+];
