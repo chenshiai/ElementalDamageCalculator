@@ -53,13 +53,17 @@
       <div v-show="basicPanelSelect === basicPanelSelectType.DEF">
         <DataItem v-model="baseDEF" title="基础防御力" tips="面板防御力白字" stepperInteger :stepperMin="0" />
         <DataItem v-model="extraDEF" title="额外防御力" tips="常驻防御力绿字" stepperInteger :stepperMin="0" />
-        <NoteGroup v-model="extraPercentDEF" v-bind="NotesConfig.percentDEF" :selectedNotes="selectedExtraDEFNotes" />
-        <NoteGroup v-model="extraFixedDEF" v-bind="NotesConfig.fixedDEF" :selectedNotes="selectedFixedDEFNotes" />
+        <div class="data-panel__note-group">
+          <NoteGroup v-model="extraPercentDEF" v-bind="NotesConfig.percentDEF" :selectedNotes="selectedExtraDEFNotes" />
+          <NoteGroup v-model="extraFixedDEF" v-bind="NotesConfig.fixedDEF" :selectedNotes="selectedFixedDEFNotes" />
+        </div>
       </div>
       <div v-show="basicPanelSelect === basicPanelSelectType.HP">
         <DataItem v-model="baseHP" title="基础生命值" tips="面板生命值白字" stepperInteger :stepperMin="0" />
         <DataItem v-model="extraHP" title="额外生命值" tips="常驻生命值绿字" stepperInteger :stepperMin="0" />
-        <NoteGroup v-model="extraPercentHP" v-bind="NotesConfig.percentHP" :selectedNotes="selectedExtraHPNotes" />
+        <div class="data-panel__note-group">
+          <NoteGroup v-model="extraPercentHP" v-bind="NotesConfig.percentHP" :selectedNotes="selectedExtraHPNotes" />
+        </div>
       </div>
       <div v-show="basicPanelSelect === basicPanelSelectType.ATK">
         <DataItem v-model="baseATK" title="基础攻击力" tips="面板攻击力白字" stepperInteger :stepperMin="0" />
@@ -68,19 +72,23 @@
             <div class="data-item-popover__content">
               『攻击力加成%』是根据『基础攻击力』的百分比来计算攻击力提升，其计算后的数值会直接加在最上方『攻击力总计』的
               <span style="color: #49ff39">绿字</span>里。 <br /><br />
-              一些无法常驻的攻击力加成%可以在下方的标签组里保存，方便切换。
+              一些无法常驻的攻击力加成%可以在标签组里保存，方便切换。
             </div>
             <template #trigger>
               <Icon size="26" name="question" />
             </template>
           </Popover>
         </DataItem>
-        <NoteGroup v-model="extraPercentATK" v-bind="NotesConfig.percentATK" :selectedNotes="selectedExtraATKNotes" />
-        <NoteGroup v-model="extraFixedATK" v-bind="NotesConfig.fixedATK" :selectedNotes="selectedFixedATKNotes" />
+        <div class="data-panel__note-group">
+          <NoteGroup v-model="extraPercentATK" v-bind="NotesConfig.percentATK" :selectedNotes="selectedExtraATKNotes" />
+          <NoteGroup v-model="extraFixedATK" v-bind="NotesConfig.fixedATK" :selectedNotes="selectedFixedATKNotes" />
+        </div>
       </div>
       <div v-show="basicPanelSelect === basicPanelSelectType.EM">
         <DataItem v-model="elementalMystery" title="元素精通" tips="" :stepperMin="0" />
-        <NoteGroup v-model="elementalMystery" v-bind="NotesConfig.fixedEM" :selectedNotes="selectedFixedEMNotes" />
+        <div class="data-panel__note-group">
+          <NoteGroup v-model="elementalMystery" v-bind="NotesConfig.fixedEM" :selectedNotes="selectedFixedEMNotes" />
+        </div>
       </div>
     </section>
 
@@ -125,18 +133,20 @@
               <b>伤害提高值：</b>部分角色天赋或装备带有“xx<span style="color: #49ff39">伤害值提升(高)</span
               >”的描述，例如：钟离·炊金馔玉、云堇·元素爆发、申鹤·元素战技、一斗·荒泷逆袈裟和圣遗物来歆余响等。
             </p>
-            <b>可以点击下方【伤害提高值】便签进行添加</b>
+            <b>可以点击【伤害提高值】便签进行添加</b>
           </div>
           <template #trigger>
             <Icon size="26" name="question" />
           </template>
         </Popover>
       </DataItem>
-      <NoteGroup
-        v-model="additionalDemage"
-        v-bind="NotesConfig.additionalDemage"
-        :selectedNotes="selectedAdditionalDemageNotes"
-      />
+      <div class="data-panel__note-group">
+        <NoteGroup
+          v-model="additionalDemage"
+          v-bind="NotesConfig.additionalDemage"
+          :selectedNotes="selectedAdditionalDemageNotes"
+        />
+      </div>
     </section>
 
     <section>
@@ -161,12 +171,15 @@
           </template>
         </Popover>
       </DataItem>
-      <NoteGroup
-        v-model="elementDemage"
-        v-bind="NotesConfig.elementDemage"
-        :selectedNotes="selectedElementDemageNotes"
-      />
+      <div class="data-panel__note-group">
+        <NoteGroup
+          v-model="elementDemage"
+          v-bind="NotesConfig.elementDemage"
+          :selectedNotes="selectedElementDemageNotes"
+        />
+      </div>
     </section>
+
     <section class="result-section">
       <DataItem v-model="characterLevel" title="角色的等级" :stepperMax="90" :stepperMin="1" />
       <DataItem v-model="enemyLevel" title="敌人的等级" :stepperMin="1" />
@@ -175,56 +188,57 @@
       <DataItem v-model="armour" title="减少防御%" :stepperMin="0" :stepperMax="90" />
       <DataItem v-model="armourPiercing" title="无视防御%" :stepperMin="0" :stepperMax="100" />
     </section>
-    <section>
-      <div class="data-panel__title">反应类型</div>
-      <AtkTypeSelector v-model="atkType" />
-      <Cell
-        v-show="atkType === ElementalReaction.Rate || atkType === ElementalReaction.Rate2"
-        center
-        title="炽烈的炎之魔女，增幅反应伤害提升15%"
-      >
-        <template #right-icon>
-          <Switch v-model="witch" active-color="#766461" inactive-color="#b7a19e" size="16" />
-        </template>
-      </Cell>
-      <Cell v-show="atkType === ElementalReaction.Aggravate" center title="如雷的盛怒，超激化[伤害提升]提高20%">
-        <template #right-icon>
-          <Switch v-model="thunder" active-color="#766461" inactive-color="#b7a19e" size="16" />
-        </template>
-      </Cell>
-      <Cell
-        v-show="atkType === ElementalReaction.Aggravate || atkType === ElementalReaction.Spread"
-        title="白术天赋·在地为化 输入生命值"
-        center
-      >
-        <template #right-icon>
-          <input class="ex-input" type="number" v-model="baizhuHP" />
-        </template>
-      </Cell>
-      <div :class="['dmg-result', floatChecked && 'increase-result__top']">
-        <div class="result-grid">
-          <div class="grid-item">
-            伤害数值
-            <div class="normal-damage">
-              {{ increaseResult.common }}
-            </div>
-          </div>
-          <div class="grid-item">
-            暴击伤害
-            <div class="crit-damage">
-              {{ increaseResult.crit }}
-            </div>
-          </div>
-        </div>
-        <CompositionAnalysis :damageModule="reactiveProps" />
-      </div>
-      <Cell center title="置顶展示">
-        <template #right-icon>
-          <Switch v-model="floatChecked" active-color="#766461" inactive-color="#b7a19e" size="16" />
-        </template>
-      </Cell>
-    </section>
   </div>
+
+  <section>
+    <div class="data-panel__title">反应类型</div>
+    <AtkTypeSelector v-model="atkType" />
+    <Cell
+      v-show="atkType === ElementalReaction.Rate || atkType === ElementalReaction.Rate2"
+      center
+      title="炽烈的炎之魔女，增幅反应伤害提升15%"
+    >
+      <template #right-icon>
+        <Switch v-model="witch" active-color="#766461" inactive-color="#b7a19e" size="16" />
+      </template>
+    </Cell>
+    <Cell v-show="atkType === ElementalReaction.Aggravate" center title="如雷的盛怒，超激化[伤害提升]提高20%">
+      <template #right-icon>
+        <Switch v-model="thunder" active-color="#766461" inactive-color="#b7a19e" size="16" />
+      </template>
+    </Cell>
+    <Cell
+      v-show="atkType === ElementalReaction.Aggravate || atkType === ElementalReaction.Spread"
+      title="白术天赋·在地为化 输入生命值"
+      center
+    >
+      <template #right-icon>
+        <input class="ex-input" type="number" v-model="baizhuHP" />
+      </template>
+    </Cell>
+  </section>
+  <div :class="['dmg-result', floatChecked && 'increase-result__top']">
+    <div class="result-grid">
+      <div class="grid-item">
+        伤害数值
+        <div class="normal-damage">
+          {{ increaseResult.common }}
+        </div>
+      </div>
+      <div class="grid-item">
+        暴击伤害
+        <div class="crit-damage">
+          {{ increaseResult.crit }}
+        </div>
+      </div>
+    </div>
+    <CompositionAnalysis :damageModule="reactiveProps" />
+  </div>
+  <Cell center title="置顶展示">
+    <template #right-icon>
+      <Switch v-model="floatChecked" active-color="#766461" inactive-color="#b7a19e" size="16" />
+    </template>
+  </Cell>
   <SaveData
     :damageModule="reactiveProps"
     :saveDataModule="saveDataModule"

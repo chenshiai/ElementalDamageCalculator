@@ -94,6 +94,7 @@ const analysisList = computed(() => {
 .composition-analysis {
   width: 100%;
   text-align: center;
+  cursor: pointer;
 }
 
 .analysis-panel {

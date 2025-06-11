@@ -5,6 +5,7 @@
 }
 .data-panel section {
   width: 100%;
+  position: relative;
 }
 .result-section {
   display: grid;
@@ -12,7 +13,23 @@
   grid-template-rows: 1fr 1fr 1fr;
 }
 @media screen and (min-width: 768px) {
-  .data-panel .result-section {
+  .data-panel {
+    width: 50%;
+  }
+  .data-panel__note-group {
+    position: absolute;
+    right: -100%;
+    width: 90%;
+    top: 38px;
+    
+    &:has(details[open]) {
+      z-index: 1;
+    }
+  }
+  .data-panel section {
+    margin-bottom: 60px;
+  }
+  .result-section {
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
   }

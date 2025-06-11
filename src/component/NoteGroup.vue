@@ -207,6 +207,9 @@ onMounted(() => {
 <style scoped>
 .note-group {
   margin-bottom: 10px;
+  user-select: none;
+  -webkit-user-select: none;
+  background-color: var(--page-bg);
 }
 
 .data-notes {
