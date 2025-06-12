@@ -56,6 +56,12 @@ const useImport = () => {
           });
         }
       })
+      .catch((err) => {
+        showNotify({
+          type: "danger",
+          message: "获取数据失败，请检查是否完成安全信任授权。",
+        });
+      })
       .finally(() => {
         uid.value = "";
         importLoading.value = false;
