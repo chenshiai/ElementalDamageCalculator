@@ -10,8 +10,9 @@ const emit = defineEmits(["save-data"]);
 
 // 保存数据
 const showPopup = ref(false);
-const remark = ref(store.state.teamData.currentEdit);
+const remark = ref("");
 const saveDataPop = () => {
+  remark.value = store.state.teamData.currentEdit;
   showPopup.value = true;
 };
 const saveData = () => {
