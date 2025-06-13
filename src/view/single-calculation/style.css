@@ -21,7 +21,7 @@
     right: -100%;
     width: 90%;
     top: 38px;
-    
+
     &:has(details[open]) {
       z-index: 1;
     }

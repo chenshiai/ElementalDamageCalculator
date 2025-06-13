@@ -1,5 +1,5 @@
 import { createStore, Store, useStore as baseUseStore } from "vuex";
-import { InjectionKey } from 'vue';
+import { InjectionKey } from "vue";
 import { ITeamItem } from "@/types/interface";
 
 export interface ITeamData {
@@ -7,6 +7,7 @@ export interface ITeamData {
   baseResistance: number;
   teamList: ITeamItem[] | null[];
   currentEdit: string;
+  currentActiveBuffs: Record<string, Record<string, boolean>>;
 }
 
 interface State {
@@ -14,7 +15,7 @@ interface State {
 }
 
 // 定义 injection key
-export const key: InjectionKey<Store<State>> = Symbol()
+export const key: InjectionKey<Store<State>> = Symbol();
 
 // 团队增益
 const teamData = {
@@ -26,6 +27,7 @@ const teamData = {
       teamList: [null],
       // 当前正在编辑的数据名称
       currentEdit: "",
+      currentActiveBuffs: {},
     };
   },
   getters: {
@@ -52,6 +54,12 @@ const teamData = {
     setCurrentEdit(state, value) {
       state.currentEdit = value;
     },
+    setCurrentActiveBuffs(state, payload) {
+      if (!state.currentActiveBuffs[payload.name]) {
+        state.currentActiveBuffs[payload.name] = {};
+      }
+      state.currentActiveBuffs[payload.name][payload.label] = payload.enable;
+    },
   },
 };
 
@@ -62,7 +70,7 @@ const store = createStore<State>({
 });
 
 export function useStore() {
-  return baseUseStore(key)
+  return baseUseStore(key);
 }
 
 export default store;

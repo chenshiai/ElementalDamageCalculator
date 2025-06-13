@@ -2,12 +2,15 @@
 import { Checkbox, Slider, Stepper, Switch } from "vant";
 import { IBuffBase } from "@/types/interface";
 import { computed, ref, watch } from "vue";
+import { useStore } from "@/store";
+
 interface IProps {
   buff: IBuffBase;
 }
 const { buff } = defineProps<IProps>();
 const enable = defineModel<boolean>();
 const stack = defineModel<number>("stack", { default: 0 });
+const store = useStore();
 
 const check = ref(Boolean(stack.value));
 watch(
@@ -23,11 +26,19 @@ const stackText = computed(() => {
   }
   return `${stack.value}/${buff.limit}`;
 });
+
+const enableChange = (checked: boolean) => {
+  store.commit("setCurrentActiveBuffs", {
+    name: store.state.teamData.currentEdit,
+    label: buff.label,
+    enable: checked,
+  });
+};
 </script>
 
 <template>
   <div class="buff-item">
-    <Checkbox v-model="enable">
+    <Checkbox v-model="enable" @change="enableChange">
       <div class="buff-label-text">
         {{ buff.label }}
         <span v-if="buff.stackable">（{{ stackText }}）</span>

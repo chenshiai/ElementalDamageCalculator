@@ -57,8 +57,9 @@ const activeNames = ref<string[]>([]);
 <template>
   <!-- buff信息 -->
   <div class="data-panel__title">增益情况</div>
+  {{  store.state.teamData.currentActiveBuffs }}
   <Collapse v-model="activeNames" :border="false" class="buffs-container">
-    <CollapseItem v-if="characterBuffsFilter?.length > 0" title="角色自身增益" name="character">
+    <CollapseItem v-if="characterBuffsFilter?.length > 0" title="角色自身增益" name="character" >
       <BuffItem
         v-for="(buff, index) in characterBuffsFilter"
         :key="buff.label + index"
