@@ -7,7 +7,7 @@ import BuffInfo from "./index.vue";
 export { BuffInfo };
 
 import { useStore } from "@/store";
-import { CryoResonance, DendroResonance, DendroResonance1, DendroResonance2, HydroResonance, PyroResonance } from "@/constants/characters-config/buffs";
+import { CryoResonance, DendroResonance, DendroResonance1, DendroResonance2, HydroResonance, PyroResonance, GeoResonance } from "@/constants/characters-config/buffs";
 
 function countCharacterElements(teamList: ITeamItem[]): Map<ElementType, number> {
   const elementCount = new Map<ElementType, number>();
@@ -48,6 +48,9 @@ const useBuffInfo = () => {
       }
       if (elementCount.get(ElementType.Hydro) >= 2) {
         buffs.value.push(HydroResonance)
+      }
+      if (elementCount.get(ElementType.Geo) >= 2) {
+        buffs.value.push(GeoResonance) 
       }
     }
 

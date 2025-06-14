@@ -190,6 +190,7 @@ export const GeoResonance = {
   describe:
     "护盾强效提高15%。角色处于护盾庇护下时：造成的伤害提升15%；角色对敌人造成伤害时，会使敌人的岩元素抗性降低20%",
   effect: [
+    { type: BuffType.GlobalPrcent, getValue: () => 15 },
     { type: BuffType.ShieldStrong, getValue: () => 15 },
     { type: BuffType.EnemyGeoResistance, getValue: () => -20 },
   ],
