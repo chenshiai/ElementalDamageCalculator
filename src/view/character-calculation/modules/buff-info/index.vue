@@ -18,11 +18,11 @@ const relicBuffs = defineModel<IBuffBase[]>("relicBuffs");
 const { characterInfo } = defineProps<IProps>();
 
 const currentActiveBuffs = store.state.teamData.currentActiveBuffs;
-const currentEdit = store.state.teamData.currentEdit;
+const currentEdit = computed(() => store.state.teamData.currentEdit);
 const activeBuffs = (b) => {
-  if (currentActiveBuffs[currentEdit]?.[b.label] !== undefined) {
-    b.enable = currentActiveBuffs[currentEdit][b.label].enable;
-    b.stack = currentActiveBuffs[currentEdit][b.label].stack;
+  if (currentActiveBuffs[currentEdit.value]?.[b.label] !== undefined) {
+    b.enable = currentActiveBuffs[currentEdit.value][b.label].enable;
+    b.stack = currentActiveBuffs[currentEdit.value][b.label].stack;
   }
   return b;
 };
@@ -74,7 +74,6 @@ const activeNames = ref<string[]>([]);
 <template>
   <!-- buff信息 -->
   <div class="data-panel__title">增益情况</div>
-  {{ store.state.teamData.currentActiveBuffs }}
   <Collapse v-model="activeNames" :border="false" class="buffs-container">
     <CollapseItem v-if="characterBuffsFilter?.length > 0" title="角色自身增益" name="character">
       <BuffItem
