@@ -21,7 +21,7 @@ export const key: InjectionKey<Store<State>> = Symbol();
 const teamData = {
   state: (): ITeamData => {
     return {
-      enemyLevel: 90,
+      enemyLevel: 95,
       baseResistance: 10,
       // 当前团队列表
       teamList: [null],

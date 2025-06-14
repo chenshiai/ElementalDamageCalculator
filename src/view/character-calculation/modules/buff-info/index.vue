@@ -20,7 +20,7 @@ const { characterInfo } = defineProps<IProps>();
 
 const currentActiveBuffs = store.state.teamData.currentActiveBuffs;
 const currentEdit = computed(() => store.state.teamData.currentEdit);
-const activeBuffs = (b) => {
+const activeBuffs = (b: IBuffBase) => {
   if (currentActiveBuffs[currentEdit.value]?.[b.label] !== undefined) {
     b.enable = currentActiveBuffs[currentEdit.value][b.label].enable;
     b.stack = currentActiveBuffs[currentEdit.value][b.label].stack;
@@ -56,6 +56,8 @@ const teamDataFilter = computed(() => {
       buff.enable = false;
     }
   });
+  // 用于记录已经出现过的 label
+  const seenLabels = new Set<string>();
 
   /** 根据当前角色数据，过滤掉不符合条件的团队buff 同时 排除当前角色自身提供的全队共享buff 同时 排除来自于同一个面板的buff */
   return buffs.value
@@ -65,6 +67,14 @@ const teamDataFilter = computed(() => {
         !buff.label.includes(characterInfo.name) &&
         buff.source !== store.state.teamData.currentEdit
       );
+    })
+    .filter((buff) => {
+      // 增加去重逻辑
+      if (seenLabels.has(buff.label)) {
+        return false;
+      }
+      seenLabels.add(buff.label);
+      return true;
     })
     .map(activeBuffs);
 });
