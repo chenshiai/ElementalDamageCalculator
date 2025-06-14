@@ -7,7 +7,7 @@ export interface ITeamData {
   baseResistance: number;
   teamList: ITeamItem[] | null[];
   currentEdit: string;
-  currentActiveBuffs: Record<string, Record<string, boolean>>;
+  currentActiveBuffs: Record<string, Record<string, { enable: boolean; stack?: number }>>;
 }
 
 interface State {
@@ -58,7 +58,10 @@ const teamData = {
       if (!state.currentActiveBuffs[payload.name]) {
         state.currentActiveBuffs[payload.name] = {};
       }
-      state.currentActiveBuffs[payload.name][payload.label] = payload.enable;
+      state.currentActiveBuffs[payload.name][payload.label] = {
+        enable: payload.enable,
+        stack: payload.stack,
+      };
     },
   },
 };

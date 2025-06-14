@@ -145,6 +145,8 @@ watchEffect(() => {
     const index = sessionStorage.getItem("editTeamIndex");
     teamIndex.value = index ? +index : -1;
 
+    store.commit("setCurrentEdit", route.params.title);
+
     if (data) {
       recalculation(JSON.parse(data));
     }

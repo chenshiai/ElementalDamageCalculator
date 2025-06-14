@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Checkbox, Slider, Stepper, Switch } from "vant";
 import { IBuffBase } from "@/types/interface";
-import { computed, ref, watch } from "vue";
+import { computed, ref, watch, nextTick } from "vue";
 import { useStore } from "@/store";
 
 interface IProps {
@@ -27,18 +27,22 @@ const stackText = computed(() => {
   return `${stack.value}/${buff.limit}`;
 });
 
-const enableChange = (checked: boolean) => {
-  store.commit("setCurrentActiveBuffs", {
-    name: store.state.teamData.currentEdit,
-    label: buff.label,
-    enable: checked,
+/** buff状态改变，变化结果存到store中 */
+const buffStatusChange = () => {
+  nextTick(() => {
+    store.commit("setCurrentActiveBuffs", {
+      name: store.state.teamData.currentEdit,
+      label: buff.label,
+      enable: buff.enable,
+      stack: stack.value,
+    });
   });
 };
 </script>
 
 <template>
   <div class="buff-item">
-    <Checkbox v-model="enable" @change="enableChange">
+    <Checkbox v-model="enable" @change="buffStatusChange">
       <div class="buff-label-text">
         {{ buff.label }}
         <span v-if="buff.stackable">（{{ stackText }}）</span>
@@ -49,12 +53,19 @@ const enableChange = (checked: boolean) => {
       <div class="buff-description">
         <div class="buff-stack" v-if="buff.stackable">
           <span>{{ buff.stackText || "层数" }}：</span>
-          <Slider v-if="buff.stackType === 'slider'" v-model="stack" :max="buff.limit" :min="0" />
+          <Slider
+            v-if="buff.stackType === 'slider'"
+            v-model="stack"
+            @change="buffStatusChange"
+            :max="buff.limit"
+            :min="0"
+          />
           <Stepper
             v-if="!buff.stackType"
             v-model="stack"
             :max="buff.limit"
             :min="0"
+            @change="buffStatusChange"
             input-width="66px"
             button-size="24"
             theme="round"

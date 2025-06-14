@@ -16,7 +16,7 @@ export const playerInfoDB = {
   keyPath: "uid",
 }
 
-/** 保存角色数据 */
+/** 保存的角色数据 */
 export interface IUserSavedCalculationData {
   /** 所有者 */
   owner?: string;
