@@ -41,9 +41,11 @@ import db from "@/utils/db";
 import { IRelicSuitText } from "./index";
 import Relic from "./relic.vue";
 
+
 interface IProps {
   relicSuitTexts: IRelicSuitText[];
 }
+const emit = defineEmits(["changed"]);
 
 /** @module 圣遗物列表数据展示 */
 const relicList = defineModel<IRelicItem[]>();
@@ -79,6 +81,7 @@ const addRelic = () => {
 
   relicList.value.splice(selectedPartIndex.value, 1, relicItem);
   closePopup();
+  emit("changed");
 
   db.add(relicDB.storeName, {
     timetemp: relicItem.timetemp,

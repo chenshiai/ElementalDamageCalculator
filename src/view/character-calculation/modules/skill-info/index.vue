@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import { ref } from "vue";
-import { Slider, Switch } from "vant";
 import { ICharacterInfo, IWeaponInfo, ICalculatorValue } from "@/types/interface";
 import SkillInfoItem from "./skill-info-item.vue";
 import { computed } from "vue";
+const emit = defineEmits(["changed"]);
 
 interface IProps {
   characterInfo: ICharacterInfo;
@@ -58,6 +58,7 @@ const onTab = (val) => {
         :skill="characterInfo.normalAttack"
         :calculator-value="calculatorValue"
         :levelAdd="calculatorValue.normalLevelAdd"
+        @changed="emit('changed')"
       />
     </div>
     <div v-show="activeTab === 1">
@@ -67,6 +68,7 @@ const onTab = (val) => {
         :skill="characterInfo.elementSkill"
         :calculator-value="calculatorValue"
         :levelAdd="calculatorValue.skillLevelAdd"
+        @changed="emit('changed')"
       />
     </div>
     <div v-show="activeTab === 2">
@@ -76,6 +78,7 @@ const onTab = (val) => {
         :skill="characterInfo.burstSkill"
         :calculator-value="calculatorValue"
         :levelAdd="calculatorValue.burstLevelAdd"
+        @changed="emit('changed')"
       />
     </div>
     <div v-show="activeTab === 3">

@@ -7,11 +7,12 @@ import { getAppendPropName2 } from "@/constants/characters-config/append-prop";
 import { ref, computed } from "vue";
 import { Popup, Rate, Icon } from "vant";
 
+const emit = defineEmits(["changed"]);
 const show = ref(false);
 const handleWeaponChange = (weapons: IWeaponInfo) => {
   weapon.value = weapons;
+  emit("changed");
 };
-
 const weapon = defineModel<null | IWeaponInfo>();
 const affix = defineModel<number>("affix", {
   default: 1,
@@ -48,14 +49,16 @@ const weaponStats = computed(() => {
         <div v-for="item in weaponStats">
           <span v-show="item">{{ item.title }}: {{ item.value }}{{ item.suffix }}</span>
         </div>
-        <div class="affix">精炼：<Rate v-model="affix" color="#997874" icon="fire" void-icon="fire-o" /></div>
+        <div class="affix">
+          精炼：<Rate v-model="affix" @change="emit('changed');" color="#997874" icon="fire" void-icon="fire-o" />
+        </div>
       </div>
       <div class="avatar" @click="show = true">
         <img :src="weapon?.icon" />
         <Icon name="exchange" />
       </div>
     </div>
-    <div class="weapon-describe">{{ describe.title || '描述' }}：<span v-html="describe.text"></span></div>
+    <div class="weapon-describe">{{ describe.title || "描述" }}：<span v-html="describe.text"></span></div>
   </template>
   <Popup teleport="#app" v-model:show="show" position="right" :style="{ width: '100%', height: '100vh' }">
     <WeaponSelector @close="show = false" :defaultName="weapon?.name || ''" :handleChange="handleWeaponChange" />

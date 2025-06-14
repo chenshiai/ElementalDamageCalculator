@@ -50,16 +50,9 @@ import { IUserSavedCalculationData, calDB } from "@/constants/db";
 const { characterJoinTeam } = useTeamData();
 import SaveCalculation from "@/component/SaveCalculation.vue";
 import db from "@/utils/db";
-const saveCalculationResult = (title: string) => {
-  if (!characterInfo.value || !weapon.value) {
-    showNotify({
-      type: "warning",
-      message: "请先配置角色和武器",
-    })
-    return;
-  };
 
-  const data: IUserSavedCalculationData = {
+const createCalculationData= (title: string): IUserSavedCalculationData => {
+  return {
     title,
     characterEnkaId: characterInfo.value?.enkaId,
     weaponEnkaId: weapon.value?.enkaId,
@@ -70,8 +63,19 @@ const saveCalculationResult = (title: string) => {
     // indexDB存不了数组，转化为JSON字符串
     relicList: JSON.stringify(relicList.value),
     panel: CalculatorValue.value,
-  };
+  }
+}
 
+const saveCalculationResult = (title: string) => {
+  if (!characterInfo.value || !weapon.value) {
+    showNotify({
+      type: "warning",
+      message: "请先配置角色和武器",
+    });
+    return;
+  }
+
+  const data = createCalculationData(title);
   if (teamIndex.value >= 0) {
     characterJoinTeam(data, teamIndex.value);
   }
@@ -104,8 +108,7 @@ import { Character } from "@/constants/characters-config/character";
 import { Weapons } from "@/constants/characters-config/weapon";
 const recalculation = (data: IUserSavedCalculationData) => {
   const cha = Character.find((c) => c.enkaId === data.characterEnkaId);
-  if (data.weaponMainStats) {
-  }
+
   characterInfo.value = {
     ...cha,
     baseATK: data.weaponMainStats ? data.panel.baseATK - data.weaponMainStats.statValue : cha.baseATK,
@@ -162,6 +165,15 @@ watchEffect(() => {
 const pageTitle = computed(() => {
   return route.params.mode === "edit" ? "编辑角色数据" : "创建角色数据";
 });
+
+/** @module 实时更新队伍数据 */
+const changed = () => {
+  if (!characterInfo.value ||!weapon.value) return;
+  const data = createCalculationData(store.state.teamData.currentEdit);
+  if (teamIndex.value >= 0) {
+    characterJoinTeam(data, teamIndex.value);
+  }
+};
 </script>
 
 <template>
@@ -170,13 +182,13 @@ const pageTitle = computed(() => {
   <TeamListNav />
   <section class="calculation-section">
     <div class="calculation-section__item">
-      <CharacterInfo v-model="characterInfo" v-model:constellation="constellation" />
+      <CharacterInfo v-model="characterInfo" v-model:constellation="constellation" @changed="changed" />
     </div>
     <div class="calculation-section__item">
-      <WeaponInfo v-model="weapon" v-model:affix="affix" />
+      <WeaponInfo v-model="weapon" v-model:affix="affix" @changed="changed" />
     </div>
   </section>
-  <RelicInfo v-model="relicList" :relic-suit-texts="relicSuitTexts" />
+  <RelicInfo v-model="relicList" :relic-suit-texts="relicSuitTexts" @changed="changed" />
   <template v-if="characterInfo && weapon">
     <CharacterPanel :character-panel-data="CalculatorValue" :element-type="characterInfo?.element" />
     <section class="calculation-section scroll-y">
@@ -187,6 +199,7 @@ const pageTitle = computed(() => {
           v-model:weapon-buffs="weaponBuffs"
           v-model:relic-buffs="relicBuffs"
           :character-info="characterInfo"
+          @changed="changed"
         />
       </div>
       <div class="calculation-section-skillinfo">
@@ -198,6 +211,7 @@ const pageTitle = computed(() => {
           v-model:normalLevel="normalLevel"
           v-model:skillLevel="skillLevel"
           v-model:burstLevel="burstLevel"
+          @changed="changed"
         />
       </div>
     </section>

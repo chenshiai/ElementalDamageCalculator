@@ -4,8 +4,9 @@ import { ICalculatorValue, ISkillRate } from "@/types/interface";
 import { calculateDamage } from "@/utils/calculate/method-calculation";
 import AtkTypeSelector from "@/component/AtkTypeSelector.vue";
 import { getColorByElement } from "@/utils/get-color";
-import { Slider, Rate } from "vant";
+import { Slider } from "vant";
 import { ElementalReactionType } from "@/constants";
+const emit = defineEmits(["changed"]);
 
 interface IProps {
   skill: ISkillRate[];
@@ -77,7 +78,7 @@ const panelName = computed(() => {
     <span>{{ panelName }}</span>
     <span v-if="skillLevel" class="slider-wrap">
       <span>天赋等级：</span>
-      <Slider v-model="skillLevel" max="10" min="1">
+      <Slider v-model="skillLevel" max="10" min="1" @change="emit('changed')">
         <template #button>
           <div class="custom-button">{{ skillLevel+levelAdd }}</div>
         </template>

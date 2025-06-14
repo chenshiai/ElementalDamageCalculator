@@ -5,6 +5,8 @@ import Selector from "@/component/Selector.vue";
 import { ICharacterInfo } from "@/types/interface";
 import getBackGroundByRarity from "@/utils/get-color";
 
+const emit = defineEmits(["changed"]);
+
 const show = ref(false);
 const setConsts = (value: number) => {
   if (constellation.value === value) {
@@ -12,10 +14,12 @@ const setConsts = (value: number) => {
   } else {
     constellation.value = value;
   }
+  emit("changed")
 };
 const character = defineModel<ICharacterInfo>();
 const handleCharacterChange = (characterInfo: ICharacterInfo) => {
   character.value = characterInfo;
+  emit("changed")
 };
 
 const constellation = defineModel("constellation", {

@@ -3,6 +3,7 @@ import { Checkbox, Slider, Stepper, Switch } from "vant";
 import { IBuffBase } from "@/types/interface";
 import { computed, ref, watch, nextTick } from "vue";
 import { useStore } from "@/store";
+const emit = defineEmits(["changed"]);
 
 interface IProps {
   buff: IBuffBase;
@@ -30,6 +31,7 @@ const stackText = computed(() => {
 /** buff状态改变，变化结果存到store中 */
 const buffStatusChange = () => {
   nextTick(() => {
+    emit("changed");
     store.commit("setCurrentActiveBuffs", {
       name: store.state.teamData.currentEdit,
       label: buff.label,

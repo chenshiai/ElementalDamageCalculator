@@ -5,6 +5,7 @@ import BuffItem from "./buff-item.vue";
 import { Collapse, CollapseItem } from "vant";
 import { BuffTarget } from "@/types/enum";
 import { useStore } from "@/store";
+const emit = defineEmits(["changed"]);
 
 interface IProps {
   characterInfo: ICharacterInfo;
@@ -82,6 +83,7 @@ const activeNames = ref<string[]>([]);
         v-model="buff.enable"
         v-model:stack="buff.stack"
         :buff="buff"
+        @changed="emit('changed')"
       />
     </CollapseItem>
     <CollapseItem v-if="weaponBuffsFilter.length > 0" title="武器技能增益" name="weapon">
@@ -91,6 +93,7 @@ const activeNames = ref<string[]>([]);
         v-model="buff.enable"
         v-model:stack="buff.stack"
         :buff="buff"
+        @changed="emit('changed')"
       />
     </CollapseItem>
     <CollapseItem v-if="relicBuffsFilter.length > 0" title="圣遗物套装增益" name="relic">
@@ -100,6 +103,7 @@ const activeNames = ref<string[]>([]);
         v-model="buff.enable"
         v-model:stack="buff.stack"
         :buff="buff"
+        @changed="emit('changed')"
       />
     </CollapseItem>
     <CollapseItem v-if="teamDataFilter.length > 0" title="队伍增益" name="other">
@@ -109,6 +113,7 @@ const activeNames = ref<string[]>([]);
         v-model="buff.enable"
         v-model:stack="buff.stack"
         :buff="buff"
+        @changed="emit('changed')"
       />
     </CollapseItem>
   </Collapse>
