@@ -2,6 +2,7 @@
 import { computed, ref } from "vue";
 import { ICalculatorValue, ISkillRate } from "@/types/interface";
 import { calculateDamage } from "@/utils/calculate/method-calculation";
+import CalculateAnalysis from "@/utils/calculate/calculate-analysis";
 import AtkTypeSelector from "@/component/AtkTypeSelector.vue";
 import { getColorByElement } from "@/utils/get-color";
 import { Slider } from "vant";
@@ -30,7 +31,20 @@ const calculatedResults = computed(() => {
       };
     }
 
-    let { RESULT_DMG, CRITICAL_DMG, DEISTE_DMG, elementType, HEAL_VALUE, SHIELD_VALUE } = calculateDamage({
+    let {
+      RESULT_DMG,
+      CRITICAL_DMG,
+      DEISTE_DMG,
+      elementType,
+      HEAL_VALUE,
+      SHIELD_VALUE,
+      BASE_DMG,
+      ADDITIONAL_DMG,
+      BONUS_DMG,
+      MAGNIFICATION_DMG,
+      REACTION_DMG,
+      EVA_DMG,
+    } = calculateDamage({
       calculatorValue,
       attackType: item.attackType,
       elementType: item.elementType,
@@ -64,6 +78,16 @@ const calculatedResults = computed(() => {
       crit: Math.round(RESULT_DMG + CRITICAL_DMG),
       desire: Math.round(RESULT_DMG + DEISTE_DMG),
       elementType,
+      detail: {
+        BASE_DMG,
+        ADDITIONAL_DMG,
+        BONUS_DMG,
+        MAGNIFICATION_DMG,
+        EVA_DMG,
+        CRITICAL_DMG,
+        REACTION_DMG,
+        RESULT_DMG,
+      },
     };
   });
 });
@@ -71,6 +95,11 @@ const calculatedResults = computed(() => {
 const panelName = computed(() => {
   return name + (skillLevel.value ? `（Lv.${skillLevel.value + levelAdd}）` : "");
 });
+
+const showDetail = (detail: any) => {
+  if (!detail) return;
+  console.log(CalculateAnalysis(detail));
+};
 </script>
 
 <template>
@@ -80,7 +109,7 @@ const panelName = computed(() => {
       <span>天赋等级：</span>
       <Slider v-model="skillLevel" max="10" min="1" @change="emit('changed')">
         <template #button>
-          <div class="custom-button">{{ skillLevel+levelAdd }}</div>
+          <div class="custom-button">{{ skillLevel + levelAdd }}</div>
         </template>
       </Slider>
     </span>
@@ -95,6 +124,7 @@ const panelName = computed(() => {
         :class="['skill-info-item', getColorByElement(item.elementType)]"
         v-for="item of calculatedResults"
         :key="item.label"
+        @click="showDetail(item.detail)"
       >
         <span class="skill-info-item-label">{{ item.label }}</span>
         <span>{{ item.crit }}</span>

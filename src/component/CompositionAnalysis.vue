@@ -3,7 +3,7 @@
   <Popup v-model:show="showPopup" teleport="#app">
     <div class="analysis-panel">
       <div class="plotting-scale">
-        <div v-for="(item, index) in analysisList" class="plotting-item" :style="item.style">
+        <div v-for="(item, index) in CalculateAnalysis(compositionAnalysis)" class="plotting-item" :style="item.style">
           <div :class="['plotting-tip top', index % 2 === 0 ? 'left' : 'right']">
             <data>{{ item.title }}</data>
             <data class="plotting-detail">{{ item.number }}</data>
@@ -17,6 +17,7 @@
 <script setup>
 import { computed, ref } from "vue";
 import { computationalFormula } from "@/utils";
+import CalculateAnalysis from "@/utils/calculate/calculate-analysis";
 import { Popup } from "vant";
 
 const props = defineProps({
@@ -24,70 +25,6 @@ const props = defineProps({
 });
 const showPopup = ref(false);
 const compositionAnalysis = computed(() => computationalFormula(props.damageModule).compositionAnalysis);
-
-function calculateHeight(target) {
-  return (target / compositionAnalysis.value.CRIT_DMG) * 520 + "px";
-}
-const analysisList = computed(() => {
-  return [
-    {
-      title: "暴伤提升值",
-      number: Math.round(compositionAnalysis.value.CRITICAL_DMG),
-      style: {
-        height: calculateHeight(compositionAnalysis.value.CRITICAL_DMG),
-        backgroundColor: "#ffb61e",
-      },
-    },
-    {
-      title: "精通提升值",
-      number: Math.round(compositionAnalysis.value.EVA_DMG),
-      style: {
-        height: calculateHeight(compositionAnalysis.value.EVA_DMG),
-        backgroundColor: "#44cef6",
-      },
-    },
-    {
-      title: "增幅提升值",
-      number: Math.round(compositionAnalysis.value.REACTION_DMG),
-      style: {
-        height: calculateHeight(compositionAnalysis.value.REACTION_DMG),
-        backgroundColor: "#dc3023",
-      },
-    },
-    {
-      title: "增伤提升值",
-      number: Math.round(compositionAnalysis.value.MAGNIFICATION_DMG),
-      style: {
-        height: calculateHeight(compositionAnalysis.value.MAGNIFICATION_DMG),
-        backgroundColor: "#9966cc",
-      },
-    },
-    {
-      title: "激化提高值",
-      number: Math.round(compositionAnalysis.value.BONUS_DMG),
-      style: {
-        height: calculateHeight(compositionAnalysis.value.BONUS_DMG),
-        backgroundColor: "#00e09e",
-      },
-    },
-    {
-      title: "伤害提高值",
-      number: Math.round(compositionAnalysis.value.ADDITIONAL_DMG),
-      style: {
-        height: calculateHeight(compositionAnalysis.value.ADDITIONAL_DMG),
-        backgroundColor: "#eedeb0",
-      },
-    },
-    {
-      title: "基础伤害值",
-      number: Math.round(compositionAnalysis.value.BASE_DMG),
-      style: {
-        height: calculateHeight(compositionAnalysis.value.BASE_DMG),
-        backgroundColor: "#bacac6",
-      },
-    },
-  ].filter((item) => item.number > 0);
-});
 </script>
 
 <style scoped>

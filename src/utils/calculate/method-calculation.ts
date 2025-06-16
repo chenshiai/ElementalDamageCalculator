@@ -315,6 +315,7 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
     CRITICAL_DMG: CRITICAL_DMG * ENEMY_RATE,
     DEISTE_DMG: DEISTE_DMG * ENEMY_RATE,
     RESULT_DMG: RESULT_DMG * ENEMY_RATE,
+    REACTION_DMG: REACTION_DMG * ENEMY_RATE,
     criticalHunt,
     addHunt,
     elementType: newElementType,
