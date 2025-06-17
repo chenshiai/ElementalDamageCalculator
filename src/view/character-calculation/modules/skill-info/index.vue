@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import { ICharacterInfo, IWeaponInfo, ICalculatorValue } from "@/types/interface";
+import CompositionAnalysis from "@/component/CompositionAnalysis.vue";
+import { CalculateAnalysisType } from "@/utils/calculate/calculate-analysis";
 import SkillInfoItem from "./skill-info-item.vue";
 import { computed } from "vue";
 const emit = defineEmits(["changed"]);
@@ -33,6 +35,15 @@ const activeTab = ref(0);
 const onTab = (val) => {
   activeTab.value = val;
 };
+
+// 分析伤害组成
+const analysis = ref<CalculateAnalysisType>();
+const showProp = ref(false);
+const showDetail = (detail) => {
+  if (!detail) return;
+  analysis.value = detail;
+  showProp.value = true;
+};
 </script>
 
 <template>
@@ -59,6 +70,7 @@ const onTab = (val) => {
         :calculator-value="calculatorValue"
         :levelAdd="calculatorValue.normalLevelAdd"
         @changed="emit('changed')"
+        @analysis="showDetail"
       />
     </div>
     <div v-show="activeTab === 1">
@@ -69,6 +81,7 @@ const onTab = (val) => {
         :calculator-value="calculatorValue"
         :levelAdd="calculatorValue.skillLevelAdd"
         @changed="emit('changed')"
+        @analysis="showDetail"
       />
     </div>
     <div v-show="activeTab === 2">
@@ -79,12 +92,14 @@ const onTab = (val) => {
         :calculator-value="calculatorValue"
         :levelAdd="calculatorValue.burstLevelAdd"
         @changed="emit('changed')"
+        @analysis="showDetail"
       />
     </div>
     <div v-show="activeTab === 3">
       <SkillInfoItem :skill="getOtherSkill" :calculator-value="calculatorValue" name="其他技能" :levelAdd="0" />
     </div>
   </div>
+  <CompositionAnalysis v-model="showProp" :analysis="analysis" />
 </template>
 
 <style scoped>

@@ -2,13 +2,12 @@
 import { computed, ref } from "vue";
 import { ICalculatorValue, ISkillRate } from "@/types/interface";
 import { calculateDamage } from "@/utils/calculate/method-calculation";
-import CalculateAnalysis, { CalculateAnalysisType } from "@/utils/calculate/calculate-analysis";
-import CompositionAnalysis from "@/component/CompositionAnalysis.vue";
+import { CalculateAnalysisType } from "@/utils/calculate/calculate-analysis";
 import AtkTypeSelector from "@/component/AtkTypeSelector.vue";
 import { getColorByElement } from "@/utils/get-color";
 import { Slider } from "vant";
 import { ElementalReactionType } from "@/constants";
-const emit = defineEmits(["changed"]);
+const emit = defineEmits(["changed", "analysis"]);
 
 interface IProps {
   skill: ISkillRate[];
@@ -96,14 +95,6 @@ const calculatedResults = computed(() => {
 const panelName = computed(() => {
   return name + (skillLevel.value ? `（Lv.${skillLevel.value + levelAdd}）` : "");
 });
-
-const analysis = ref<CalculateAnalysisType>()
-const showProp = ref(false);
-const showDetail = (detail) => {
-  if (!detail) return;
-  analysis.value = detail;
-  showProp.value = true;
-};
 </script>
 
 <template>
@@ -128,7 +119,7 @@ const showDetail = (detail) => {
         :class="['skill-info-item', getColorByElement(item.elementType)]"
         v-for="item of calculatedResults"
         :key="item.label"
-        @click="showDetail(item.detail)"
+        @click="emit('analysis', item.detail)"
       >
         <span class="skill-info-item-label">{{ item.label }}</span>
         <span>{{ item.crit }}</span>
@@ -141,7 +132,6 @@ const showDetail = (detail) => {
     </template>
   </div>
   <AtkTypeSelector v-if="skill.length > 0" v-model="atkType" size="small" />
-  <CompositionAnalysis v-model="showProp" :analysis="analysis" />
 </template>
 
 <style scoped>
