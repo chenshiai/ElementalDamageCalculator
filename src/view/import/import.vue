@@ -16,7 +16,7 @@ const { uid, waiting, importLoading, importGameInfo } = useImport();
       需要先信任授权才可以使用导入服务。<br />
       <a href="https://8.155.52.59" rel="opener">-> 点击这里前往信任授权</a><br />
       浏览器会提示你“不安全”。选择“高级” -> “继续访问”。<br />
-      <s><i>作者：低成本项目，没钱搞SSL安全证书。</i></s>
+      <i>作者：低成本项目，没钱搞SSL安全证书。</i>
     </p>
     <p>导入后的数据会存在本地浏览器缓存中，可以在“角色组队计算”中填入查看。</p>
   </div>

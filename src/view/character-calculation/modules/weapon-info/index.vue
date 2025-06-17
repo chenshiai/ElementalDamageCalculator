@@ -38,7 +38,7 @@ const weaponStats = computed(() => {
 </script>
 
 <template>
-  <div v-if="!weapon" class="show-click" @click="show = true">+添加武器</div>
+  <div v-if="!weapon" class="show-click active-btn" @click="show = true">+添加武器</div>
   <template v-else>
     <div class="weapon-info">
       <div class="avatar-info">
@@ -50,10 +50,10 @@ const weaponStats = computed(() => {
           <span v-show="item">{{ item.title }}: {{ item.value }}{{ item.suffix }}</span>
         </div>
         <div class="affix">
-          精炼：<Rate v-model="affix" @change="emit('changed');" color="#997874" icon="fire" void-icon="fire-o" />
+          精炼：<Rate v-model="affix" @change="emit('changed')" color="#997874" icon="fire" void-icon="fire-o" />
         </div>
       </div>
-      <div class="avatar" @click="show = true">
+      <div class="avatar active-btn" @click="show = true">
         <img :src="weapon?.icon" />
         <Icon name="exchange" />
       </div>
@@ -127,6 +127,7 @@ const weaponStats = computed(() => {
   border-radius: 4px;
   height: 120px;
   line-height: 120px;
+  cursor: pointer;
 }
 .affix {
   margin-top: 20px;

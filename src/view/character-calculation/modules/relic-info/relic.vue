@@ -28,7 +28,7 @@ const subitemCounts = computed(() => {
 </script>
 
 <template>
-  <div :class="[relic ? '' : 'relic__empty', 'relic-detail']" @click="selectLocalRelic(relic)">
+  <div :class="[relic ? '' : 'relic__empty', 'relic-detail', 'active-btn']" @click="selectLocalRelic(relic)">
     <template v-if="relic">
       <img class="relic-icon" v-lazy="relic.icon" />
       <div class="relic-detail__hearder">

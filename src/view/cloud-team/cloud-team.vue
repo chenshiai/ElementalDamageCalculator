@@ -68,7 +68,6 @@ const toCreateData = () => {
   <DataItem v-model="store.state.teamData.enemyLevel" title="敌人的等级" :stepperMin="1" />
   <DataItem v-model="store.state.teamData.baseResistance" title="基础抗性%" :stepperMin="-999" />
   <div class="team-list">
-    <span class="holy-relic-tips">更新角色数据后需要重新入队。</span>
     <div class="data-panel__title">队伍编辑</div>
     <section class="team-list__section">
       <div class="team-list__item" v-for="(item, index) in teamList" :key="index">
@@ -111,9 +110,9 @@ const toCreateData = () => {
       </div>
     </section>
   </div>
-  <div class="show-click" @click="toCreateData">去创建角色数据</div>
-  <div>
-    使用说明：
+  <div class="show-click active-btn" @click="toCreateData">去创建角色数据</div>
+  <details>
+    <summary>点此查看使用说明<Icon name="question" /></summary>
     <p>
       敌人的等级：<br />
       是角色攻击目标的等级，目标等级会影响到防御力减伤。在计算角色的伤害前，请先设置好被攻击目标的等级。
@@ -140,8 +139,7 @@ const toCreateData = () => {
       问：得到了较大误差（0.5%以上），怎么办？<br />
       答：因为本计算器没做太多限制，先检查一下是否存在不符合实际情况的设置。若确定设置基本正确，仍出现了较大误差，可以联系作者反馈。
     </p>
-  </div>
-
+  </details>
   <Popup class="data-popup" teleport="#app" v-model:show="show" style="max-height: 80%" position="top">
     <CalculationDataSelector :show-data-popup="show" @recalculation="handleCharacterChange" />
   </Popup>

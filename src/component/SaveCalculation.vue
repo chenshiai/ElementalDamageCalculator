@@ -77,8 +77,8 @@ const onSelect = (action) => {
     </Popover>
   </FloatingBubble>
   <div class="save-data">
-    <div class="save-btn" @click="saveDataPop">保存角色</div>
-    <div class="save-btn" @click="lookDataPop">查看存档</div>
+    <div class="save-btn active-btn" @click="saveDataPop">保存角色</div>
+    <div class="save-btn active-btn" @click="lookDataPop">查看存档</div>
   </div>
   <Popup class="data-popup" teleport="#app" v-model:show="showPopup" position="top">
     <div class="tips">

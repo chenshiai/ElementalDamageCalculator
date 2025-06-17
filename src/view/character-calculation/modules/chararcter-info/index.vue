@@ -28,7 +28,7 @@ const constellation = defineModel("constellation", {
 </script>
 
 <template>
-  <div v-if="!character" class="show-click" @click="show = true">+添加角色</div>
+  <div v-if="!character" class="show-click active-btn" @click="show = true">+添加角色</div>
   <template v-else>
     <div class="character-info">
       <div class="avatar-info">
@@ -43,7 +43,7 @@ const constellation = defineModel("constellation", {
         <span>命之座：{{ constellation }}</span>
         <span style="margin-left: 32px; font-size: 12px">点击图标开启/关闭命之座</span>
       </div>
-      <div class="avatar" @click="show = true">
+      <div class="avatar active-btn" @click="show = true">
         <img :src="character?.icons.avatarIcon" />
         <Icon name="exchange" />
       </div>
@@ -150,5 +150,6 @@ const constellation = defineModel("constellation", {
   margin-bottom: 16px;
   height: 120px;
   line-height: 120px;
+  cursor: pointer;
 }
 </style>
