@@ -59,17 +59,16 @@ const teamDataFilter = computed(() => {
   // 用于记录已经出现过的 label
   const seenLabels = new Set<string>();
 
-  /** 根据当前角色数据，过滤掉不符合条件的团队buff 同时 排除当前角色自身提供的全队共享buff 同时 排除来自于同一个面板的buff */
   return buffs.value
     .filter((buff) => {
       return (
-        (!buff.shareCondition || buff.shareCondition(characterInfo)) &&
-        !buff.label.includes(characterInfo.name) &&
-        buff.source !== store.state.teamData.currentEdit
+        (!buff.shareCondition || buff.shareCondition(characterInfo)) && // 根据当前角色数据，过滤掉不符合生效条件的buff
+        !buff.label.includes(characterInfo.name) && // 排除当前角色自身提供的全队共享buff
+        buff.source !== store.state.teamData.currentEdit // 排除来自于同一个面板的buff
       );
     })
     .filter((buff) => {
-      // 增加去重逻辑
+      // 去除同名的团队buff
       if (seenLabels.has(buff.label)) {
         return false;
       }

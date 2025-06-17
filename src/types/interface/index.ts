@@ -25,13 +25,16 @@ export interface IBuffBase {
   /** 个人增益展示条件判断函数，返回为true即可以展示，false不可展示。不设置则默认展示 */
   condition?: BuffCondition;
 
-  /** Buff的作用对象 */
+  /** Buff的生效对象 */
   target?: BuffTarget;
 
   /** Buff是否可共享，为true则该增益会被纳入团队增益 */
   shareable?: boolean;
   /** 给队友使用的团队增益条件判断函数，入参为队友的面板属性，返回为true即可以展示，false不可展示。不设置则默认展示 */
   shareCondition?: BuffCondition;
+
+  /** 同名Buff是否可以重复生效 */
+  repeatable?: boolean;
 }
 
 /** Buff对象的拓展属性，用于处理部分场景 */

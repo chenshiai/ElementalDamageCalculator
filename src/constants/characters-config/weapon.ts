@@ -2904,6 +2904,7 @@ export const Weapons: IWeaponInfo[] = [
           enable: true,
           shareable: true,
           target: BuffTarget.Other,
+          repeatable: true,
         },
         getWeaponEffect(ElementType.Anemo, BuffType.AnemoPrcent),
         getWeaponEffect(ElementType.Hydro, BuffType.HydroPrcent),

@@ -55,12 +55,16 @@ const useBuffInfo = () => {
     }
 
     // 生成角色的共享buff
-    teamList.forEach((item) => {
+    teamList.forEach((item, index) => {
       if (item) {
         item.buffMap.forEach((buffList, name) => {
           buffList.forEach((buff) => {
             const b = _.cloneDeep(buff);
-            b.label = `[${name}]${buff.label}`;
+            if (buff.repeatable) {
+              b.label = `[${name}·来自${index+1}号角色]${buff.label}`;
+            } else {
+              b.label = `[${name}]${buff.label}`;
+            }
             buffs.value.push(b);
           });
         });
