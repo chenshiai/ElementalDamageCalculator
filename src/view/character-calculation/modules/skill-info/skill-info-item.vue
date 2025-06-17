@@ -2,7 +2,8 @@
 import { computed, ref } from "vue";
 import { ICalculatorValue, ISkillRate } from "@/types/interface";
 import { calculateDamage } from "@/utils/calculate/method-calculation";
-import CalculateAnalysis from "@/utils/calculate/calculate-analysis";
+import CalculateAnalysis, { CalculateAnalysisType } from "@/utils/calculate/calculate-analysis";
+import CompositionAnalysis from "@/component/CompositionAnalysis.vue";
 import AtkTypeSelector from "@/component/AtkTypeSelector.vue";
 import { getColorByElement } from "@/utils/get-color";
 import { Slider } from "vant";
@@ -87,7 +88,7 @@ const calculatedResults = computed(() => {
         CRITICAL_DMG,
         REACTION_DMG,
         RESULT_DMG,
-      },
+      } as CalculateAnalysisType,
     };
   });
 });
@@ -96,9 +97,12 @@ const panelName = computed(() => {
   return name + (skillLevel.value ? `（Lv.${skillLevel.value + levelAdd}）` : "");
 });
 
-const showDetail = (detail: any) => {
+const analysis = ref<CalculateAnalysisType>()
+const showProp = ref(false);
+const showDetail = (detail) => {
   if (!detail) return;
-  console.log(CalculateAnalysis(detail));
+  analysis.value = detail;
+  showProp.value = true;
 };
 </script>
 
@@ -137,6 +141,7 @@ const showDetail = (detail: any) => {
     </template>
   </div>
   <AtkTypeSelector v-if="skill.length > 0" v-model="atkType" size="small" />
+  <CompositionAnalysis v-model="showProp" :analysis="analysis" />
 </template>
 
 <style scoped>
@@ -153,6 +158,12 @@ const showDetail = (detail: any) => {
   display: grid;
   grid-template-columns: 4fr 2fr 2fr 2fr;
   text-align: left;
+  cursor: pointer;
+  border-radius: 4px;
+
+  &:hover {
+    background-color: var(--button-bg);
+  }
 }
 .skill-info-item-label {
   /* text-align: center; */

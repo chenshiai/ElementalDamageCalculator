@@ -1,6 +1,14 @@
-import { computed } from "vue";
-
-const CalculateAnalysis = (compositionAnalysis) => {
+export type CalculateAnalysisType = {
+  RESULT_DMG: number;
+  CRITICAL_DMG: number;
+  EVA_DMG: number;
+  REACTION_DMG: number;
+  MAGNIFICATION_DMG: number;
+  BONUS_DMG: number;
+  ADDITIONAL_DMG: number;
+  BASE_DMG: number;
+}
+const CalculateAnalysis = (compositionAnalysis: CalculateAnalysisType) => {
   function calculateHeight(target) {
     return (target / (compositionAnalysis.RESULT_DMG + compositionAnalysis.CRITICAL_DMG)) * 520 + "px";
   }

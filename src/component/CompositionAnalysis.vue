@@ -1,9 +1,8 @@
 <template>
-  <div class="composition-analysis" @click="showPopup = true">查看伤害组成</div>
   <Popup v-model:show="showPopup" teleport="#app">
     <div class="analysis-panel">
       <div class="plotting-scale">
-        <div v-for="(item, index) in CalculateAnalysis(compositionAnalysis)" class="plotting-item" :style="item.style">
+        <div v-for="(item, index) in CalculateAnalysis(analysis)" class="plotting-item" :style="item.style">
           <div :class="['plotting-tip top', index % 2 === 0 ? 'left' : 'right']">
             <data>{{ item.title }}</data>
             <data class="plotting-detail">{{ item.number }}</data>
@@ -14,25 +13,17 @@
   </Popup>
 </template>
 
-<script setup>
-import { computed, ref } from "vue";
-import { computationalFormula } from "@/utils";
-import CalculateAnalysis from "@/utils/calculate/calculate-analysis";
+<script setup lang="ts">
+import CalculateAnalysis, { CalculateAnalysisType } from "@/utils/calculate/calculate-analysis";
 import { Popup } from "vant";
 
-const props = defineProps({
-  damageModule: Object,
-});
-const showPopup = ref(false);
-const compositionAnalysis = computed(() => computationalFormula(props.damageModule).compositionAnalysis);
+const props = defineProps<{
+  analysis: CalculateAnalysisType;
+}>();
+const showPopup = defineModel<boolean>({ default: false });
 </script>
 
 <style scoped>
-.composition-analysis {
-  width: 100%;
-  text-align: center;
-  cursor: pointer;
-}
 
 .analysis-panel {
   height: 560px;

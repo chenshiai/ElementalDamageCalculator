@@ -232,7 +232,8 @@
         </div>
       </div>
     </div>
-    <CompositionAnalysis :damageModule="reactiveProps" />
+    <div class="composition-analysis" @click="showPopup = true">查看伤害组成</div>
+    <CompositionAnalysis v-model="showPopup" :analysis="increaseResult.compositionAnalysis" />
   </div>
   <Cell center title="置顶展示">
     <template #right-icon>
@@ -279,14 +280,9 @@ import { AdditionalDamageMode } from "@/constants/calculation-mode/additionalDem
 import { computationalFormula } from "@/utils";
 import { NodeType } from "@/types";
 
-/** 防御抗性乘区开关 */
-const otherChecked = ref(false);
 /** 置顶展示开关 */
 const floatChecked = ref(false);
-const showPopover = ref(false);
-const showPopoverExtraRate = ref(false);
-const showPopoverExtra = ref(false);
-const showPopoverExtraATK = ref(false);
+const showPopup = ref(false);
 
 /** @module 面板数值 */
 const basicPanelSelect = ref("攻击力");
