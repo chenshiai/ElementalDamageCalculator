@@ -103,7 +103,7 @@ const toCreateData = () => {
             </div>
             <div class="team-list__item-options" @click="leaveTeam(index)">离队<Icon name="revoke" /></div>
             <div class="team-list__item-look" @click="edit(index)">
-              查看&编辑详细数据<Icon name="arrow-double-right" />
+              查看/编辑 详细数据<Icon name="arrow-double-right" />
             </div>
           </template>
         </div>

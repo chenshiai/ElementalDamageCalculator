@@ -2883,27 +2883,27 @@ export const Weapons: IWeaponInfo[] = [
       let getWeaponEffect = (element: ElementType, type: BuffType) => {
         return {
           label: `千夜的曙歌`,
-          describe: `元素精通提升${em}或元素伤害加成提升${add}%`,
+          describe: `每有1个相同元素角色，元素精通提升${em}；每有1个不同元素角色，元素伤害加成提升${add}%`,
           condition: (data) => data.element === element,
           effect: [
             { type: BuffType.MysteryFixed, getValue: (_, stack) => em * stack },
             { type, getValue },
           ],
-          stackText: "同元素数量",
+          stackText: "同元素角色数量",
           stackable: true,
           limit: 3,
-          stack: 3,
-          enable: false,
+          stack: 0,
+          enable: true,
         };
       };
       return [
         {
-          label: "全队元素精通提升",
-          describe: `全队元素精通提升${enm}`,
+          label: "装备者以外的角色元素精通提升",
+          describe: `装备者以外的角色元素精通提升${enm}`,
           effect: [{ type: BuffType.MysteryFixed, getValue: () => enm }],
           enable: true,
           shareable: true,
-          target: BuffTarget.All,
+          target: BuffTarget.Other,
         },
         getWeaponEffect(ElementType.Anemo, BuffType.AnemoPrcent),
         getWeaponEffect(ElementType.Hydro, BuffType.HydroPrcent),

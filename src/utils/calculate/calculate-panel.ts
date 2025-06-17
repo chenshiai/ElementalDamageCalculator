@@ -30,7 +30,7 @@ function calculationPanel({
   relicList,
   constellation,
   baseResistance = 10,
-  enemyLevel = 90,
+  enemyLevel = 95,
   normalLevel,
   skillLevel,
   burstLevel,

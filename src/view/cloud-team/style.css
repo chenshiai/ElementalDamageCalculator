@@ -77,6 +77,9 @@
   text-align: center;
   width: 60px;
   cursor: pointer;
+  &:hover {
+    color: var(--cancel);
+  }
 }
 .team-list__item-look {
   border-top: solid 1px var(--border);
@@ -85,6 +88,9 @@
   height: 24px;
   font-size: 16px;
   cursor: pointer;
+  &:hover {
+    color: var(--button-bg);
+  }
 }
 .team-list .empty {
   text-align: center;

@@ -52,6 +52,7 @@ const useTeamData = () => {
   };
   /** 角色数据入队 */
   const characterJoinTeam = (result: IUserSavedCalculationData, index: number) => {
+    // 存储共享的buff，key为buff提供者名称，value为buff对象
     const map = new Map();
 
     const { characterInfo, characterBuffs } = useCharacterInfo(
