@@ -194,7 +194,7 @@ const saveCalculationResult = async (enkaData: EnkaAvatarInfo, uid: string) => {
       baseATK: Math.floor(enkaData.fightPropMap[4] - weaponInfo.flat.weaponStats[0].statValue),
       baseDEF: Math.floor(enkaData.fightPropMap[7]),
       level: +enkaData.propMap[4001].val,
-      overshoot: +enkaData.propMap[1002].val,
+      overshoot: +enkaData.propMap[1002].val || 0,
     },
     weapon: {
       ...wea,

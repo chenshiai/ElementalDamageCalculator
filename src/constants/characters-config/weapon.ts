@@ -88,18 +88,6 @@ export const Weapons: IWeaponInfo[] = [
         },
       ];
     },
-    (affix = 1) => {
-      return [
-        {
-          label: "",
-          rate: {
-            atk: [],
-          },
-          attackType: AttackType.Other,
-          elementType: ElementType.Physical,
-        },
-      ];
-    }
   ),
   createWeapon(
     {
