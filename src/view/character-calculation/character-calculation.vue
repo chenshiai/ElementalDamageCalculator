@@ -158,6 +158,7 @@ watchEffect(() => {
     initRelicInfo();
     initSkillInfo();
     initWeaponInfo();
+    teamIndex.value = -1;
     store.commit("setCurrentEdit", "");
     sessionStorage.setItem("editTeamIndex", null);
   }

@@ -50,6 +50,59 @@ createWeapon(
 export const Weapons: IWeaponInfo[] = [
   createWeapon(
     {
+      name: "苍耀",
+      enkaId: 11517,
+      weaponType: WeaponType.Sword,
+      icon: getEnkaUI("UI_EquipIcon_Sword_OuterSword_Awaken"),
+      baseAtk: 674,
+      rarity: Rarity.Five,
+      appendPropId: AppendProp.CRITICAL,
+      statValue: 22.1,
+    },
+    (affix = 1) => {
+      let a = [24, 30, 36, 42, 48][affix - 1] + "%";
+      let b = [40, 50, 60, 70, 80][affix - 1] + "%";
+      return {
+        title: "白山的馈赐",
+        text: highlight`施放元素战技后的12秒内，攻击力提升${a}。持续期间，装备者的元素能量为0时，攻击力还会提升${a}，且暴击伤害提升${b}。`,
+      };
+    },
+    (affix = 1) => {
+      let a = [24, 30, 36, 42, 48][affix - 1];
+      let b = [40, 50, 60, 70, 80][affix - 1];
+      return [
+        {
+          label: "施放元素战技后，攻击力提升",
+          describe: `施放元素战技后，攻击力提升${a}%。`,
+          effect: [{ type: BuffType.ATKPrcent, getValue: () => a }],
+          enable: true,
+        },
+        {
+          label: "装备者的元素能量为0时，攻击力还会提升，且暴击伤害提升",
+          describe: `装备者的元素能量为0时，攻击力还会提升${a}%，且暴击伤害提升${b}%。`,
+          effect: [
+            { type: BuffType.ATKPrcent, getValue: () => a },
+            { type: BuffType.CritcalHurt, getValue: () => b },
+          ],
+          enable: false,
+        },
+      ];
+    },
+    (affix = 1) => {
+      return [
+        {
+          label: "",
+          rate: {
+            atk: [],
+          },
+          attackType: AttackType.Other,
+          elementType: ElementType.Physical,
+        },
+      ];
+    }
+  ),
+  createWeapon(
+    {
       name: "香韵奏者",
       enkaId: 13514,
       weaponType: WeaponType.Polearms,
@@ -86,15 +139,13 @@ export const Weapons: IWeaponInfo[] = [
         {
           label: "治疗后攻击力提升",
           describe: `装备者与受治疗者，攻击力提升${b}%`,
-          effect: [
-            { type: BuffType.ATKPrcent, getValue: () => b },
-          ],
+          effect: [{ type: BuffType.ATKPrcent, getValue: () => b }],
           enable: false,
           shareable: true,
           target: BuffTarget.All,
-        }
-      ]
-    },
+        },
+      ];
+    }
   ),
   createWeapon(
     {
@@ -116,7 +167,7 @@ export const Weapons: IWeaponInfo[] = [
     },
     () => [],
     (affix = 1) => {
-      let a = [40, 50, 60, 70, 80][affix - 1]/100;
+      let a = [40, 50, 60, 70, 80][affix - 1] / 100;
       return [
         {
           label: "冷寂迸音·静发",
@@ -141,7 +192,7 @@ export const Weapons: IWeaponInfo[] = [
       statValue: 44.1,
     },
     (affix = 1) => {
-      let a= [28, 35, 42, 49, 56][affix - 1] + "%";
+      let a = [28, 35, 42, 49, 56][affix - 1] + "%";
       let b = [40, 50, 60, 70, 80][affix - 1] + "%";
       return {
         title: "落虹之愿",
@@ -149,7 +200,7 @@ export const Weapons: IWeaponInfo[] = [
       };
     },
     (affix = 1) => {
-      let a= [28, 35, 42, 49, 56][affix - 1];
+      let a = [28, 35, 42, 49, 56][affix - 1];
       let b = [40, 50, 60, 70, 80][affix - 1];
       return [
         {
@@ -171,7 +222,7 @@ export const Weapons: IWeaponInfo[] = [
           enable: true,
         },
       ];
-    },
+    }
   ),
   createWeapon(
     {

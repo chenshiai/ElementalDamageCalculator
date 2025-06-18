@@ -96,7 +96,13 @@ const showDetail = (detail) => {
       />
     </div>
     <div v-show="activeTab === 3">
-      <SkillInfoItem :skill="getOtherSkill" :calculator-value="calculatorValue" name="其他技能" :levelAdd="0" />
+      <SkillInfoItem
+        :skill="getOtherSkill"
+        :calculator-value="calculatorValue"
+        name="其他技能"
+        :levelAdd="0"
+        @analysis="showDetail"
+      />
     </div>
   </div>
   <CompositionAnalysis v-model="showProp" :analysis="analysis" />
