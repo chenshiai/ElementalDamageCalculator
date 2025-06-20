@@ -2,7 +2,7 @@ import Character from "../character-class";
 import { IBuffBase, ICharacterInfo } from "@/types/interface";
 import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
 import { Weapon, Element, Icons, EnKaId, BaseData, action, getEnkaUI } from "../decorator";
-import { A_80_ATK_24P, Constellation_E_5, Constellation_Q_3 } from "../buffs";
+import { A_80_ATK_24P, Constellation_E_5, Constellation_Q_3, ExtraBuff } from "../buffs";
 
 @EnKaId(1000000707, "荧·雷")
 @Weapon(WeaponType.Sword)
@@ -63,6 +63,7 @@ class PlayerGirlData extends Character implements ICharacterInfo {
   otherSkill = [];
   buffs: IBuffBase[] = [
     ...A_80_ATK_24P,
+    ...ExtraBuff,
     {
       label: "雷影剑·丰穰勾玉",
       describe: "元素充能效率提升20%",

@@ -2,7 +2,7 @@ import Character from "../character-class";
 import { IBuffBase, ICharacterInfo } from "@/types/interface";
 import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
 import { Weapon, Element, Icons, EnKaId, BaseData, action, getEnkaUI } from "../decorator";
-import { A_80_ATK_24P, Constellation_E_5, Constellation_Q_3 } from "../buffs";
+import { A_80_ATK_24P, Constellation_E_5, Constellation_Q_3, ExtraBuff } from "../buffs";
 
 @EnKaId(1000000506, "空·岩")
 @Weapon(WeaponType.Sword)
@@ -63,6 +63,7 @@ class PlayerBoyData extends Character implements ICharacterInfo {
   ];
   buffs: IBuffBase[] = [
     ...A_80_ATK_24P,
+    ...ExtraBuff,
     {
       label: "1命·巍然的青岩",
       describe: "队伍中角色处于岩潮叠嶂的岩嶂包围中时，暴击率提升10%",

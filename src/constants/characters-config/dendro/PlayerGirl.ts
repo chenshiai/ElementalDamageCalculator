@@ -2,7 +2,7 @@ import Character from "../character-class";
 import { IBuffBase, ICharacterInfo } from "@/types/interface";
 import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
 import { Weapon, Element, Icons, EnKaId, BaseData, action, getEnkaUI } from "../decorator";
-import { A_80_ATK_24P, Constellation_E_3, Constellation_E_5, Constellation_Q_3, Constellation_Q_5 } from "../buffs";
+import { A_80_ATK_24P, Constellation_E_3, Constellation_Q_5, ExtraBuff } from "../buffs";
 
 @EnKaId(1000000708, "荧·草")
 @Weapon(WeaponType.Sword)
@@ -63,6 +63,7 @@ class PlayerGirlData extends Character implements ICharacterInfo {
   otherSkill = [];
   buffs = [
     ...A_80_ATK_24P,
+    ...ExtraBuff,
     {
       label: "蔓生的埜草",
       describe:

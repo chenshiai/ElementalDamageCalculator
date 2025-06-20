@@ -16,6 +16,7 @@ const useCharacterInfo = (initData: ICharacterInfo | null = null, cons: number =
         .filter((buff) => {
           if (buff.condition) {
             return buff.condition({
+              baseHP: characterInfo.value.baseHP,
               constellation: constellation.value,
               overshoot: characterInfo.value.overshoot || 6,
             });

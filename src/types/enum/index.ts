@@ -81,6 +81,7 @@ export enum Rarity {
 
 /** Buff的类型 */
 export enum BuffType {
+  HPBase = "baseHP", // 基础生命值
   ATKBase = "baseATK",
   // ================= 在面板上的buff =============
   /** 生命值百分比提升 */

@@ -12,6 +12,34 @@ function createBuff(type: BuffType, value: number, star: "A" | "S", descSuffix: 
     condition: ({ overshoot }) => overshoot === shoot,
   };
 }
+export const ExtraBuff = [
+  {
+    label: "单手剑战斗技巧·八（右侧查看详情）",
+    describe: "从多莉手中购买的罐装知识，使用后主角基础攻击力提升3点。（如果游戏中已经使用，从游戏内导入的数据就会直接加在角色面板上，启用该增益会重复提升）",
+    effect: [
+      { type: BuffType.ATKBase, getValue: () => 3, actionOn: ActionOn.Front },
+    ],
+    enable: false,
+  },
+  {
+    label: "丝柯克的特训（右侧查看详情）",
+    describe: "主角经过丝柯克的特训后，基础生命值提升50点，基础攻击力提升7点。（如果游戏中已经完成，从游戏内导入的数据已经加在角色面板上，启用该增益会重复提升）",
+    effect: [
+      { type: BuffType.ATKBase, getValue: () => 7, actionOn: ActionOn.Front },
+      { type: BuffType.HPBase, getValue: () => 50, actionOn: ActionOn.Front },
+    ],
+    enable: false,
+  },
+  {
+    
+    label: "丝柯克的元素力特训",
+    describe: "主角经过丝柯克的特训后，元素精通提升15点。",
+    effect: [
+      { type: BuffType.MysteryFixed, getValue: () => 15, actionOn: ActionOn.Front },
+    ],
+    enable: true,
+  }
+]
 export const A_80_ATK_24P = [6, 12, 12, 18, 24].map((value, index) =>
   createBuff(BuffType.ATKPrcent, value, "A", "攻击力", index + 2)
 );
