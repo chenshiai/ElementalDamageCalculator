@@ -3,7 +3,7 @@ import { AttackType, ElementType, Rarity, WeaponType } from "@/types/enum";
 
 export function getEnkaUI(name: string, local: boolean = true): string {
   return local
-    ? `/ui/${name}.png?x-oss-process=image/auto-orient,1/resize,p_50`
+    ? `/ui/${name}.png`
     : `https://enka.network/ui/${name}.png`;
 }
 export function Weapon(weaponType: WeaponType): any {
