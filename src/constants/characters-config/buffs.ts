@@ -14,16 +14,16 @@ function createBuff(type: BuffType, value: number, star: "A" | "S", descSuffix: 
 }
 export const ExtraBuff = [
   {
-    label: "单手剑战斗技巧·八（右侧查看详情）",
-    describe: "从多莉手中购买的罐装知识，使用后主角基础攻击力提升3点。（如果游戏中已经使用，从游戏内导入的数据就会直接加在角色面板上，启用该增益会重复提升）",
+    label: "单手剑战斗技巧·八（注意使用场景-->>>",
+    describe: "从多莉手中购买的罐装知识，使用后主角基础攻击力提升3点。（如果游戏中已经使用，从游戏导入的的数据已经加上了该增益，无需启用）",
     effect: [
       { type: BuffType.ATKBase, getValue: () => 3, actionOn: ActionOn.Front },
     ],
     enable: false,
   },
   {
-    label: "丝柯克的特训（右侧查看详情）",
-    describe: "主角经过丝柯克的特训后，基础生命值提升50点，基础攻击力提升7点。（如果游戏中已经完成，从游戏内导入的数据已经加在角色面板上，启用该增益会重复提升）",
+    label: "丝柯克的特训（注意使用场景-->>>",
+    describe: "主角经过丝柯克的特训后，基础生命值提升50点，基础攻击力提升7点。（如果游戏中已经完成特训，从游戏导入的的数据已经加上了该增益，无需启用）",
     effect: [
       { type: BuffType.ATKBase, getValue: () => 7, actionOn: ActionOn.Front },
       { type: BuffType.HPBase, getValue: () => 50, actionOn: ActionOn.Front },

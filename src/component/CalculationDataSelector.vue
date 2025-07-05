@@ -14,12 +14,12 @@ const namecards = ref([]);
 const pfps = ref([]);
 onMounted(() => {
   const date = new Date();
-  fetch(`/enkaData/namecards.json?date=${date.getDay()}`)
+  fetch(`/json/namecards.json?date=${date.getDay()}`)
     .then((res) => res.json())
     .then((res) => {
       namecards.value = res;
     });
-  fetch(`/enkaData/pfps.json?date=${date.getDay()}`)
+  fetch(`/json/pfps.json?date=${date.getDay()}`)
     .then((res) => res.json())
     .then((res) => {
       pfps.value = res;
@@ -130,9 +130,9 @@ const replayText = computed(() => {
     <Tab title="自定义数据"></Tab>
     <Tab v-for="item in playerData" :key="item.uid" :title="item.nickname">
       <section class="player-info">
-        <img class="namecard" :src="getEnkaUI(namecards[item.nameCardId].icon)" />
+        <img class="namecard" :src="getEnkaUI(namecards[item.nameCardId].icon, false)" />
         <div style="width: 126px; text-align: center; margin: 6px 0 6px">
-          <img class="profile" :src="getEnkaUI(pfps[item.profilePicture.id].iconPath)" />
+          <img class="profile" :src="getEnkaUI(pfps[item.profilePicture.id].iconPath, false)" />
           <data class="uid">UID {{ item.uid }}</data>
         </div>
         <span class="replay-icon" @click="update(item.uid)">

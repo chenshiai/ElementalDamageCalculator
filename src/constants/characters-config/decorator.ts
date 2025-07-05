@@ -1,8 +1,10 @@
 import { IRate, ISkillRate } from "@/types/interface";
 import { AttackType, ElementType, Rarity, WeaponType } from "@/types/enum";
 
-export function getEnkaUI(name: string): string {
-  return `https://enka.network/ui/${name}.png`;
+export function getEnkaUI(name: string, local: boolean = true): string {
+  return local
+    ? `/ui/${name}.png?x-oss-process=image/auto-orient,1/resize,p_50`
+    : `https://enka.network/ui/${name}.png`;
 }
 export function Weapon(weaponType: WeaponType): any {
   return function (target: any) {
@@ -40,7 +42,7 @@ export function Icons(str: string, consts?: string, gacha?: string): any {
           `UI_Talent_S_${consts || str.replace("UI_AvatarIcon_", "")}_03`,
           `UI_Talent_U_${consts || str.replace("UI_AvatarIcon_", "")}_02`,
           `UI_Talent_S_${consts || str.replace("UI_AvatarIcon_", "")}_04`,
-        ].map(getEnkaUI),
+        ].map((str) => getEnkaUI(str)),
         gachaImage: `https://enka.network/ui/${gacha || str.replace("UI_AvatarIcon_", "UI_Gacha_AvatarImg_")}.png`,
       };
     };

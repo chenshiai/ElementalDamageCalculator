@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { Popup, Icon } from "vant";
+import { Popup, Icon, Stepper } from "vant";
 import Selector from "@/component/Selector.vue";
 import { ICharacterInfo } from "@/types/interface";
 import getBackGroundByRarity from "@/utils/get-color";
@@ -14,12 +14,12 @@ const setConsts = (value: number) => {
   } else {
     constellation.value = value;
   }
-  emit("changed")
+  emit("changed");
 };
 const character = defineModel<ICharacterInfo>();
 const handleCharacterChange = (characterInfo: ICharacterInfo) => {
   character.value = characterInfo;
-  emit("changed")
+  emit("changed");
 };
 
 const constellation = defineModel("constellation", {
@@ -36,19 +36,21 @@ const constellation = defineModel("constellation", {
           {{ character.name }}
           （Lv.{{ character.level }}）
         </div>
-        <div>突破：{{ character.overshoot }}</div>
-        <div>生命值：{{ character.baseHP }}</div>
-        <div>攻击力：{{ character.baseATK }}</div>
-        <div>防御力：{{ character.baseDEF }}</div>
-        <span>命之座：{{ constellation }}</span>
-        <span style="margin-left: 32px; font-size: 12px">点击图标开启/关闭命之座</span>
+        <div>突破等阶：{{ character.overshoot }}</div>
+        <div>基础生命值：{{ character.baseHP }}</div>
+        <div>基础攻击力：{{ character.baseATK }}</div>
+        <div>基础防御力：{{ character.baseDEF }}</div>
+        <span>
+          解锁命之座：<Stepper theme="round" button-size="20" input-width="66px" v-model="constellation" min="0" max="6" />
+        </span>
+        <!-- <span style="margin-left: 32px; font-size: 12px">点击图标开启/关闭命之座</span> -->
       </div>
       <div class="avatar active-btn" @click="show = true">
         <img :src="character?.icons.avatarIcon" />
         <Icon name="exchange" />
       </div>
     </div>
-    <div class="constellations">
+    <!-- <div class="constellations">
       <span
         v-for="(src, index) in character?.icons.constsIcon"
         :class="['consts-icon', index + 1 === constellation ? 'consts-active' : '']"
@@ -57,20 +59,17 @@ const constellation = defineModel("constellation", {
         <Icon name="lock" />
         <img :src="src" />
       </span>
-    </div>
+    </div> -->
   </template>
   <Popup teleport="#app" v-model:show="show" position="right" :style="{ width: '100%', height: '100vh' }">
-    <Selector
-      @close="show = false"
-      :defaultName="character?.name || ''"
-      :handleChange="handleCharacterChange"
-    />
+    <Selector @close="show = false" :defaultName="character?.name || ''" :handleChange="handleCharacterChange" />
   </Popup>
 </template>
 
 <style scoped>
 .character-info {
   position: relative;
+  margin-bottom: 16px;
 }
 .avatar {
   position: absolute;
@@ -151,5 +150,15 @@ const constellation = defineModel("constellation", {
   height: 120px;
   line-height: 120px;
   cursor: pointer;
+}
+.custom-button {
+  width: var(--van-slider-button-width);
+  height: var(--van-slider-button-height);
+  background: var(--van-slider-button-background);
+  border-radius: var(--van-slider-button-radius);
+  box-shadow: var(--van-slider-button-shadow);
+  text-align: center;
+  color: var(--main-text);
+  text-shadow: none;
 }
 </style>
