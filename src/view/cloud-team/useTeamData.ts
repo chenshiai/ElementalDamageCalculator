@@ -45,9 +45,9 @@ const useTeamData = () => {
     store.commit("setCurrentEdit", teamList[index].calculation.title);
     sessionStorage.setItem("editCharacter", JSON.stringify(teamList[index].calculation));
     sessionStorage.setItem("editTeamIndex", index);
-
+    
     router.push({
-      path: `/character/edit/${teamList[index].calculation.title}`,
+      path: `/character/edit/${encodeURIComponent(teamList[index].calculation.title)}`,
     });
   };
   /** 角色数据入队 */

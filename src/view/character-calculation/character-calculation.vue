@@ -51,7 +51,7 @@ const { characterJoinTeam } = useTeamData();
 import SaveCalculation from "@/component/SaveCalculation.vue";
 import db from "@/utils/db";
 
-const createCalculationData= (title: string): IUserSavedCalculationData => {
+const createCalculationData = (title: string): IUserSavedCalculationData => {
   return {
     title,
     characterEnkaId: characterInfo.value?.enkaId,
@@ -63,8 +63,8 @@ const createCalculationData= (title: string): IUserSavedCalculationData => {
     // indexDB存不了数组，转化为JSON字符串
     relicList: JSON.stringify(relicList.value),
     panel: CalculatorValue.value,
-  }
-}
+  };
+};
 
 const saveCalculationResult = (title: string) => {
   if (!characterInfo.value || !weapon.value) {
@@ -148,7 +148,7 @@ watchEffect(() => {
     const index = sessionStorage.getItem("editTeamIndex");
     teamIndex.value = index ? +index : -1;
 
-    store.commit("setCurrentEdit", route.params.title);
+    store.commit("setCurrentEdit", decodeURIComponent(route.params.title as string));
 
     if (data) {
       recalculation(JSON.parse(data));
@@ -169,7 +169,7 @@ const pageTitle = computed(() => {
 
 /** @module 实时更新队伍数据 */
 const changed = () => {
-  if (!characterInfo.value ||!weapon.value) return;
+  if (!characterInfo.value || !weapon.value) return;
   const data = createCalculationData(store.state.teamData.currentEdit);
   if (teamIndex.value >= 0) {
     characterJoinTeam(data, teamIndex.value);
