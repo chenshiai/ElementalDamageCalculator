@@ -2,10 +2,12 @@
 import { ITeamItem } from "@/types/interface";
 import useTeamData from "@/view/cloud-team/useTeamData";
 import { onMounted } from "vue";
+import { useStore } from "@/store";
 
-const { teamList, characterJoinTeam, getAvatarIcon, edit, getElementIcon } = useTeamData();
+const store = useStore();
+const { characterJoinTeam, getAvatarIcon, edit, getElementIcon } = useTeamData();
 onMounted(() => {
-  if (teamList.length > 1) return;
+  if (store.getters.allTeamList.length > 1) return;
   const a: ITeamItem[] = JSON.parse(sessionStorage.getItem("teamList"));
   if (a) {
     a.forEach((data, index) => {
@@ -16,9 +18,9 @@ onMounted(() => {
 </script>
 
 <template>
-  <section v-show="teamList.length > 1" class="team-list-nav">
+  <section v-show="store.getters.allTeamList.length > 1" class="team-list-nav">
     <div class="name">当前队伍组成</div>
-    <div class="team-list-nav__item" v-for="(item, index) in teamList" :key="index">
+    <div class="team-list-nav__item" v-for="(item, index) in store.getters.allTeamList" :key="index">
       <div v-if="item" class="team-list-nav__item-avatar" @click="edit(index)" :title="item.calculation.title">
         <img :src="getAvatarIcon(item.calculation.characterEnkaId)" />
         <img class="team-list-nav__item-element" :src="getElementIcon(item.calculation.panel.element)" alt="" />

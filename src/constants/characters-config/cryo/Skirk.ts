@@ -176,14 +176,13 @@ class SkirkData extends Character implements ICharacterInfo {
       describe: `依据施放时丝柯克拥有的蛇之狡谋超过50点的部分，每1点蛇之狡谋都将提升本次元素爆发造成的伤害，至多通过这种方式计入12点蛇之狡谋。解锁2命后上限提升至22点。`,
       effect: [
         {
-          type: BuffType.BurstFixed,
+          type: BuffType.BurstAdd,
           getValue: (d, s) => {
-            let a = [
+            return [
               0.1932, 0.2077, 0.2222, 0.2415, 0.256, 0.2705, 0.2899, 0.3092, 0.3285, 0.3478, 0.3671, 0.3865, 0.4106,
-            ][d.burstLevel + d.burstLevelAdd - 1];
-            return (d.baseATK + d.extraATK + d.extraATK_NT) * a * s;
+            ][d.burstLevel + d.burstLevelAdd - 1] * s;
           },
-          actionOn: ActionOn.External,
+          actionOn: ActionOn.Indirect,
           special: "skk",
         },
       ],

@@ -22,7 +22,7 @@ export enum AttackType {
   /** 治疗类型 */
   Heal = "Heal",
   /** 护盾类型 */
-  Shield = "Shield"
+  Shield = "Shield",
 }
 
 /** 元素类型 */
@@ -35,7 +35,7 @@ export enum ElementType {
   Cryo = "Cryo",
   Geo = "Geo",
   Dendro = "Dendro",
-  None = "None"
+  None = "None",
 }
 
 export const EnchantingType = {
@@ -77,7 +77,6 @@ export enum Rarity {
   Four,
   Five,
 }
-
 
 /** Buff的类型 */
 export enum BuffType {
@@ -231,16 +230,28 @@ export enum BuffType {
 
   /** 生命之契 */
   LifeContract = "lifeContract",
-  /** 普攻倍率提升 */
+  /** 普攻倍率最终提升 */
   NormalRate = "normalRateAdd",
-  /** 重击倍率提升 */
+  /** 重击倍率最终提升 */
   StrongRate = "strongRateAdd",
-  /** 下落攻击倍率提升 */
+  /** 下落攻击倍率最终提升 */
   FallingRateAdd = "fallingRateAdd",
-  /** 元素战技倍率提升 */
+  /** 元素战技倍率最终提升 */
   SkillRate = "skillRateAdd",
-  /** 元素爆发倍率提升 */
+  /** 元素爆发倍率最终提升 */
   BurstRate = "burstRateAdd",
+
+  /** 普攻倍率提升 */
+  NormalAdd = "normalAdd",
+  /** 重击倍率提升 */
+  StrongAdd = "strongAdd",
+  /** 下落攻击倍率提升 */
+  FallingAdd = "fallingAdd",
+  /** 元素战技倍率提升 */
+  SkillAdd = "skillAdd",
+  /** 元素爆发倍率提升 */
+  BurstAdd = "burstAdd",
+  
   /** 冷却缩减 */
   CoolDown = "coolDown",
   /** 治疗加成 */
@@ -308,10 +319,8 @@ export enum AppendProp {
   GRASS_ADD_HURT = "FIGHT_PROP_GRASS_ADD_HURT",
 }
 const allAppendPropIds: Record<AppendProp, number[]> = {} as Record<AppendProp, number[]>;
-Object.values(AppendProp).forEach(prop => {
-  allAppendPropIds[prop] = appendPropData
-    .filter(item => item.propType === prop)
-    .map(item => item.id);
+Object.values(AppendProp).forEach((prop) => {
+  allAppendPropIds[prop] = appendPropData.filter((item) => item.propType === prop).map((item) => item.id);
 });
 export const AppendPropIds = allAppendPropIds;
 
@@ -335,7 +344,7 @@ export const EquipIndexToType = {
   2: EquipType.EQUIP_SHOES,
   3: EquipType.EQUIP_RING,
   4: EquipType.EQUIP_DRESS,
-}
+};
 
 export enum ItemType {
   ITEM_WEAPON = "ITEM_WEAPON",

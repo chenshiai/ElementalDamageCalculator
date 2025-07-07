@@ -160,36 +160,36 @@ class MavuikaData extends Character implements ICharacterInfo {
       describe: "依据元素爆发施放时的战意，提升坠日斩、「古名解放」时的普通攻击与重击造成的伤害。",
       effect: [
         {
-          type: BuffType.BurstFixed,
+          type: BuffType.BurstAdd,
           getValue: (data, s) => {
             let sk = [0.016, 0.0172, 0.0184, 0.02, 0.0212, 0.0224, 0.024, 0.0256, 0.0272, 0.0288, 0.0304, 0.032, 0.034][
               data.burstLevel + data.burstLevelAdd - 1
             ];
-            return sk * (data.baseATK + data.extraATK + data.extraATK_NT) * s;
+            return sk * s;
           },
-          actionOn: ActionOn.External,
+          actionOn: ActionOn.Indirect,
         },
         {
-          type: BuffType.NormalFixed,
+          type: BuffType.NormalAdd,
           getValue: (data, s) => {
             let sk = [
               0.0026, 0.0028, 0.003, 0.0033, 0.0035, 0.0038, 0.0041, 0.0044, 0.0047, 0.0051, 0.0055, 0.0058, 0.0062,
             ][data.burstLevel + data.burstLevelAdd - 1];
-            return sk * (data.baseATK + data.extraATK + data.extraATK_NT) * s;
+            return sk * s;
           },
-          actionOn: ActionOn.External,
+          actionOn: ActionOn.Indirect,
           special: "Mavuika",
         },
         {
-          type: BuffType.StrongFixed,
+          type: BuffType.StrongAdd,
           getValue: (data, s) => {
             let sk =
               [0.0026, 0.0028, 0.003, 0.0033, 0.0035, 0.0038, 0.0041, 0.0044, 0.0047, 0.0051, 0.0055, 0.0058, 0.0062][
                 data.burstLevel + data.burstLevelAdd - 1
               ] * 2;
-            return sk * (data.baseATK + data.extraATK + data.extraATK_NT) * s;
+            return sk * s;
           },
-          actionOn: ActionOn.External,
+          actionOn: ActionOn.Indirect,
           special: "Mavuika",
         },
       ],

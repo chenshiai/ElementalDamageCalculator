@@ -204,33 +204,29 @@ class ShougunData extends Character implements ICharacterInfo {
       describe: "依据消耗的愿力层数，增加梦想一刀与梦想一心的攻击造成的伤害",
       effect: [
         {
-          type: BuffType.BurstFixed,
+          type: BuffType.BurstAdd,
           getValue: (data, s) => {
             return (
               [
                 0.0389, 0.0418, 0.0447, 0.0486, 0.0515, 0.0544, 0.0583, 0.0622, 0.0661, 0.07, 0.0739, 0.0778, 0.0826,
                 0.0875,
-              ][data.burstLevel + data.burstLevelAdd - 1] *
-              s *
-              (data.baseATK + data.extraATK + data.extraATK_NT)
+              ][data.burstLevel + data.burstLevelAdd - 1] * s
             );
           },
-          actionOn: ActionOn.External,
+          actionOn: ActionOn.Indirect,
           special: "Shougun",
         },
         {
-          type: BuffType.BurstFixed,
+          type: BuffType.BurstAdd,
           getValue: (data, s) => {
             return (
               [
                 0.0073, 0.0078, 0.0084, 0.0091, 0.0096, 0.0102, 0.0109, 0.0116, 0.0123, 0.0131, 0.0138, 0.0145, 0.0154,
                 0.0163,
-              ][data.burstLevel + data.burstLevelAdd - 1] *
-              s *
-              (data.baseATK + data.extraATK + data.extraATK_NT)
+              ][data.burstLevel + data.burstLevelAdd - 1] * s
             );
           },
-          actionOn: ActionOn.External,
+          actionOn: ActionOn.Indirect,
           special: "Shougun2",
         },
       ],

@@ -113,6 +113,12 @@ class CalculatorValue implements ICalculatorValue {
   skillRateAdd: number = 0;
   burstRateAdd: number = 0;
 
+  burstAdd: number = 0;
+  skillAdd: number = 0;
+  normalAdd: number = 0;
+  strongAdd: number = 0;
+  fallingAdd: number = 0;
+
   normalLevel: number = 0;
   skillLevel: number = 0;
   burstLevel: number = 0;

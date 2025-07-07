@@ -5,7 +5,7 @@ import { BaseDMG } from "@/constants/elementalReaction";
 import { getCatalyzeRate, getAmplifiedRate, getResistanceRate, getDefRate } from "@/utils";
 
 /**
- * 
+ * 计算某一段攻击的所有属性
  * @param calculatorValue 角色面板属性
  * @param attackType 所计算的技能类型
  * @param elementType 所计算的技能的元素类型
@@ -18,14 +18,25 @@ function getMoreDataBySwitch(
   elementType: ElementType,
   weapon: WeaponType
 ) {
+  /** 附加伤害提升 */
   let ADDITIONAL_DMG = calculatorValue[BuffType.GlobalFixed] || 0;
+  /** 增伤 */
   let addHunt = calculatorValue[BuffType.GlobalPrcent] || 0;
+  /** 倍率加成 */
+  let extraRate = 0;
+  /** 最终倍率提升 */
   let addRate = 0;
+  /** 暴击伤害 */
   let criticalHunt = (calculatorValue[BuffType.CritcalHurt] || 0) + (calculatorValue[BuffType.GlobalCritcalHunt] || 0);
+  /** 暴击率 */
   let critical = (calculatorValue[BuffType.Critcal] || 0) + (calculatorValue[BuffType.GlobalCritcal] || 0);
+  /** 敌人对应抗性 */
   let resistance = 0;
+  /** 敌人对应防御 */
   let defensePenetration = calculatorValue[BuffType.DefensePenetration] || 0;
+  /** 治疗加成 */
   let healAdd = 0;
+  /** 护盾量提升 */
   let shieldAdd = 0;
 
   // 处理攻击类型的加成
@@ -36,6 +47,7 @@ function getMoreDataBySwitch(
       criticalHunt += calculatorValue[BuffType.NormalCritcalHurt] || 0;
       critical += calculatorValue[BuffType.NormalCritcal] || 0;
       addRate += calculatorValue[BuffType.NormalRate] || 0;
+      extraRate += calculatorValue[BuffType.NormalAdd] || 0;
       break;
     case AttackType.Strong:
       ADDITIONAL_DMG += calculatorValue[BuffType.StrongFixed] || 0;
@@ -43,6 +55,7 @@ function getMoreDataBySwitch(
       criticalHunt += calculatorValue[BuffType.StrongCritcalHurt] || 0;
       critical += calculatorValue[BuffType.StrongCritcal] || 0;
       addRate += calculatorValue[BuffType.StrongRate] || 0;
+      extraRate += calculatorValue[BuffType.StrongAdd] || 0;
       break;
     case AttackType.FallPeriod:
       // 应该不会有提高下坠期间伤害的技能吧
@@ -57,6 +70,7 @@ function getMoreDataBySwitch(
       criticalHunt += calculatorValue[BuffType.FallingCritcalHurt] || 0;
       critical += calculatorValue[BuffType.FallingCritcal] || 0;
       addRate += calculatorValue[BuffType.FallingRateAdd] || 0;
+      extraRate += calculatorValue[BuffType.FallingAdd] || 0;
       break;
     case AttackType.Skill:
       ADDITIONAL_DMG += calculatorValue[BuffType.SkillFixed] || 0;
@@ -64,6 +78,7 @@ function getMoreDataBySwitch(
       criticalHunt += calculatorValue[BuffType.SkillCritcalHurt] || 0;
       critical += calculatorValue[BuffType.SkillCritcal] || 0;
       addRate += calculatorValue[BuffType.SkillRate] || 0;
+      extraRate += calculatorValue[BuffType.SkillAdd] || 0;
       break;
     case AttackType.Burst:
       ADDITIONAL_DMG += calculatorValue[BuffType.BurstFixed] || 0;
@@ -71,6 +86,7 @@ function getMoreDataBySwitch(
       criticalHunt += calculatorValue[BuffType.BurstCritcalHurt] || 0;
       critical += calculatorValue[BuffType.BurstCritcal] || 0;
       addRate += calculatorValue[BuffType.BurstRate] || 0;
+      extraRate += calculatorValue[BuffType.BurstAdd] || 0;
       break;
     case AttackType.FallingOther:
       // 不吃闲云天赋加成的坠地攻击
@@ -78,6 +94,7 @@ function getMoreDataBySwitch(
       criticalHunt += calculatorValue[BuffType.FallingCritcalHurt] || 0;
       critical += calculatorValue[BuffType.FallingCritcal] || 0;
       addRate += calculatorValue[BuffType.FallingRateAdd] || 0;
+      extraRate += calculatorValue[BuffType.FallingAdd] || 0;
       break;
     case AttackType.Heal:
       healAdd += calculatorValue[BuffType.HealAdd] || 0;
@@ -177,6 +194,7 @@ function getMoreDataBySwitch(
     newElementType,
     healAdd,
     shieldAdd,
+    extraRate,
   };
 }
 
@@ -203,6 +221,7 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
     defensePenetration,
     healAdd,
     shieldAdd,
+    extraRate,
   } = getMoreDataBySwitch(calculatorValue, attackType, elementType, calculatorValue.weapon);
 
   /** 计算独特buff的加成 */
@@ -223,25 +242,26 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
     defensePenetration += specialData.defensePenetration;
     healAdd += specialData.healAdd;
     shieldAdd += specialData.shieldAdd;
+    extraRate += specialData.extraRate;
   }
 
   // 基础伤害
   let BASE_DMG = 0;
   if (rate.atk) {
     const atk = calculatorValue.baseATK + calculatorValue.extraATK + calculatorValue.extraATK_NT;
-    BASE_DMG += atk * rate.atk[level - 1] * (1 + addRate / 100);
+    BASE_DMG += atk * (rate.atk[level - 1] + extraRate) * (1 + addRate / 100);
   }
   if (rate.def) {
     const def = calculatorValue.baseDEF + calculatorValue.extraDEF + calculatorValue.extraDEF_NT;
-    BASE_DMG += def * rate.def[level - 1] * (1 + addRate / 100);
+    BASE_DMG += def * (rate.def[level - 1] + extraRate) * (1 + addRate / 100);
   }
   if (rate.hp) {
     const hp = calculatorValue.baseHP + calculatorValue.extraHP + calculatorValue.extraHP_NT;
-    BASE_DMG += hp * rate.hp[level - 1] * (1 + addRate / 100);
+    BASE_DMG += hp * (rate.hp[level - 1] + extraRate) * (1 + addRate / 100);
   }
   const em = calculatorValue.elementalMystery + calculatorValue.elementalMystery_NT;
   if (rate.em) {
-    BASE_DMG += em * rate.em[level - 1] * (1 + addRate / 100);
+    BASE_DMG += em * (rate.em[level - 1] + extraRate) * (1 + addRate / 100);
   }
   if (rate.fixed) {
     BASE_DMG += rate.fixed[level - 1];
