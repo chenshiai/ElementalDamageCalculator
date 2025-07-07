@@ -50,7 +50,7 @@ const constellation = defineModel("constellation", {
         <Icon name="exchange" />
       </div>
     </div>
-    <!-- <div class="constellations">
+    <div class="constellations">
       <span
         v-for="(src, index) in character?.icons.constsIcon"
         :class="['consts-icon', index + 1 === constellation ? 'consts-active' : '']"
@@ -59,7 +59,7 @@ const constellation = defineModel("constellation", {
         <Icon name="lock" />
         <img :src="src" />
       </span>
-    </div> -->
+    </div>
   </template>
   <Popup teleport="#app" v-model:show="show" position="right" :style="{ width: '100%', height: '100vh' }">
     <Selector @close="show = false" :defaultName="character?.name || ''" :handleChange="handleCharacterChange" />
@@ -69,7 +69,6 @@ const constellation = defineModel("constellation", {
 <style scoped>
 .character-info {
   position: relative;
-  margin-bottom: 16px;
 }
 .avatar {
   position: absolute;
