@@ -51,7 +51,7 @@ export function Icons(str: string, consts?: string, gacha?: string): any {
           `UI_Talent_S_${consts || str.replace("UI_AvatarIcon_", "")}_03`,
           `UI_Talent_U_${consts || str.replace("UI_AvatarIcon_", "")}_02`,
           `UI_Talent_S_${consts || str.replace("UI_AvatarIcon_", "")}_04`,
-        ].map((str) => getEnkaUI(str, false, true)),
+        ].map((str) => getEnkaUI(str, false, false)),
         gachaImage: `https://enka.network/ui/${gacha || str.replace("UI_AvatarIcon_", "UI_Gacha_AvatarImg_")}.png`,
       };
     };
