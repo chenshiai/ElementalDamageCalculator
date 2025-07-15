@@ -73,35 +73,57 @@ class YunjinData extends Character implements ICharacterInfo {
   buffs: IBuffBase[] = [
     ...A_80_CHARGE_26P,
     {
-      label: "破嶂见旌仪·飞云旗阵",
+      label: "元素爆发·破嶂见旌仪",
+      describe: "为附近的队伍中所有角色赋予飞云旗阵。对敌人造成普通攻击伤害时，基于云堇自己当前的防御力，提高造成的伤害。",
+      effect: [
+        {
+          type: BuffType.NormalFixed,
+          getValue: (data) => {
+            let b = [0.32, 0.35, 0.37, 0.4, 0.43, 0.45, 0.48, 0.51, 0.55, 0.58, 0.61, 0.64, 0.68][
+              data.burstLevel + data.burstLevelAdd - 1
+            ];
+            return b * (data.baseDEF + data.extraDEF + data.extraDEF_NT);
+          },
+          actionOn: ActionOn.External,
+        },
+      ],
+      enable: false,
+      shareable: true,
+      target: BuffTarget.All,
+    },
+    {
+      label: "莫从恒蹊",
       describe:
-        "对敌人造成普通攻击伤害时，基于云堇自己当前的防御力，提高造成的伤害。当队伍中存在1/2/3/4种元素类型的角色时，数值上进一步追加云堇防御力的2.5%/5.0%/7.5%/11.5%。2命还将提高普攻伤害15%",
+        "飞云旗阵提供的普通攻击伤害提高，当队伍中存在1/2/3/4种元素类型的角色时，数值上进一步追加云堇防御力的2.5%/5.0%/7.5%/11.5%。",
       effect: [
         {
           type: BuffType.NormalFixed,
           getValue: (data, s) => {
             let a = [0.025, 0.05, 0.075, 0.115][s - 1] || 0;
-            let b = [0.32, 0.35, 0.37, 0.4, 0.43, 0.45, 0.48, 0.51, 0.55, 0.58, 0.61, 0.64, 0.68][
-              data.burstLevel + data.burstLevelAdd - 1
-            ];
-            return (a + b) * (data.baseDEF + data.extraDEF + data.extraDEF_NT);
+            return a * (data.baseDEF + data.extraDEF + data.extraDEF_NT);
           },
           actionOn: ActionOn.External,
         },
-        {
-          type: BuffType.NormalPrcent,
-          getValue: (data) => {
-            return data.constellation >= 2 ? 15 : 0;
-          },
-        },
       ],
       enable: false,
-      stack: 1,
+      stack: 4,
       limit: 4,
       stackable: true,
       stackText: "元素种类数量",
       shareable: true,
       target: BuffTarget.All,
+    },
+    {
+      label: "2命·诸般切末",
+      describe: "施放破嶂见旌仪后，附近队伍中的所有角色普通攻击造成的伤害提升15%",
+      effect: [
+        {
+          type: BuffType.NormalPrcent,
+          getValue: () => 15,
+        },
+      ],
+      enable: false,
+      condition: ({ constellation }) => constellation >= 2,
     },
     Constellation_Q_3,
     {
