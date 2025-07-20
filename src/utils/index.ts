@@ -1,6 +1,6 @@
 
 import { showNotify } from "vant";
-import { ElementalReaction, ReactionRate } from '@/constants';
+import { ElementalReactionType, ReactionRate } from '@/constants';
 import { BaseDMG } from '@/constants/elementalReaction';
 
 /** 获取增幅反应比例 */
@@ -22,6 +22,12 @@ export const getCrystallizeRate = (em) => {
 export const getCatalyzeRate = (em) => {
   return 5 * em / (em + 1200) * 100;
 }
+
+/** 月感电精通转化增伤比例 */
+export const getMoonElectroRate = (em) => {
+  return 5 * em / (em + 2100) * 100;
+}
+
 
 // 抗性承伤
 export const getResistanceRate = (enemyResistance, weaken = 0) => {
@@ -126,7 +132,7 @@ export const computationalFormula = (data) => {
 
   // 增幅精通加成
   let eva = 0;
-  if (atkType === ElementalReaction.Rate || atkType === ElementalReaction.Rate2) {
+  if (atkType === ElementalReactionType.Rate || atkType === ElementalReactionType.Rate2) {
     eva = (getAmplifiedRate(elementalMystery) + (witch ? 15 : 0)) / 100
   }
 
@@ -135,10 +141,10 @@ export const computationalFormula = (data) => {
   const BASE_DMG = basic * (1 + (extraRate / 100)) * ENEMY_RATE;
   // 激化伤害值
   let BONUS_DMG = 0;
-  if (atkType === ElementalReaction.Aggravate) {
+  if (atkType === ElementalReactionType.Aggravate) {
     BONUS_DMG = BaseDMG.aggravate[characterLevel] * (1 + (getCatalyzeRate(elementalMystery) + (thunder ? 20 : 0)) / 100 + baizhuHP / 1000 * 0.8 /100) * ENEMY_RATE;
   }
-  if (atkType === ElementalReaction.Spread) {
+  if (atkType === ElementalReactionType.Spread) {
     BONUS_DMG = BaseDMG.spread[characterLevel] * (1 + getCatalyzeRate(elementalMystery) / 100 + baizhuHP / 1000 * 0.8 /100) * ENEMY_RATE;
   }
   // 附加伤害值

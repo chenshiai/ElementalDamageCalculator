@@ -24,19 +24,19 @@ export const ElementalReaction = {
 };
 
 export const AtkTypeText = {
-  [ElementalReaction.Rate]: "2.0倍增幅",
-  [ElementalReaction.Rate2]: "1.5倍增幅",
-  [ElementalReaction.Aggravate]: "超激化",
-  [ElementalReaction.Spread]: "蔓激化",
-  none: "无反应",
+  [ElementalReactionType.Rate]: "2.0倍增幅",
+  [ElementalReactionType.Rate2]: "1.5倍增幅",
+  [ElementalReactionType.Aggravate]: "超激化",
+  [ElementalReactionType.Spread]: "蔓激化",
+  [ElementalReactionType.None]: "无反应",
 };
 
 export const ReactionRate = {
-  none: 0,
-  [ElementalReaction.Rate]: 1,
-  [ElementalReaction.Rate2]: 0.5,
-  [ElementalReaction.Aggravate]: 0,
-  [ElementalReaction.Spread]: 0,
+  [ElementalReactionType.None]: 0,
+  [ElementalReactionType.Rate]: 1,
+  [ElementalReactionType.Rate2]: 0.5,
+  [ElementalReactionType.Aggravate]: 0,
+  [ElementalReactionType.Spread]: 0,
 };
 
 export const basicPanelSelectType = {

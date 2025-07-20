@@ -25,6 +25,8 @@ export function getColorByElement(elementType: ElementType | string) {
       return "text-physical";
     case ElementType.Electro:
       return "text-electro";
+    case ElementType.MoonElectro:
+      return "text-moon-electro";
     case ElementType.Hydro:
       return "text-hydro";
     case ElementType.Anemo:

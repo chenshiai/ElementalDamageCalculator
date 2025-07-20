@@ -1,8 +1,35 @@
-import { ElementalReaction, ElementalReactionType, ReactionRate } from "@/constants";
+import { ElementalReactionType, ReactionRate } from "@/constants";
 import { AttackType, BuffType, ElementType, EnchantingType, NumberToElementType, WeaponType } from "@/types/enum";
 import { ICalculatorValue, IRate } from "@/types/interface";
 import { BaseDMG } from "@/constants/elementalReaction";
-import { getCatalyzeRate, getAmplifiedRate, getResistanceRate, getDefRate } from "@/utils";
+import { getCatalyzeRate, getAmplifiedRate, getResistanceRate, getDefRate, getMoonElectroRate } from "@/utils";
+
+type MoreData = {
+  /** 伤害提高 */
+  ADDITIONAL_DMG: number;
+  /** 增伤 */
+  addHunt: number;
+  /** 月类型增伤 - @TODO 待定 2025/07/20 姑且把月xx当成一种全新的伤害类型 */
+  moonAddHunt: number;
+  /** 暴击伤害 */
+  criticalHunt: number;
+  /** 暴击 */
+  critical: number;
+  /** 敌人对应抗性 */
+  resistance: number;
+  /** 最终倍率提升 */
+  addRate: number;
+  /** 无视敌人防御 */
+  defensePenetration: number;
+  /** 元素类型 */
+  newElementType: ElementType;
+  /** 治疗加成 */
+  healAdd: number;
+  /** 护盾量提升 */
+  shieldAdd: number;
+  /** 额外技能倍率 */
+  extraRate: number;
+};
 
 /**
  * 计算某一段攻击的所有属性
@@ -10,34 +37,25 @@ import { getCatalyzeRate, getAmplifiedRate, getResistanceRate, getDefRate } from
  * @param attackType 所计算的技能类型
  * @param elementType 所计算的技能的元素类型
  * @param weapon 角色的武器类型
- * @returns 
+ * @returns
  */
 function getMoreDataBySwitch(
   calculatorValue: Partial<ICalculatorValue>,
   attackType: AttackType,
   elementType: ElementType,
   weapon: WeaponType
-) {
-  /** 附加伤害提升 */
+): MoreData {
   let ADDITIONAL_DMG = calculatorValue[BuffType.GlobalFixed] || 0;
-  /** 增伤 */
   let addHunt = calculatorValue[BuffType.GlobalPrcent] || 0;
-  /** 倍率加成 */
   let extraRate = 0;
-  /** 最终倍率提升 */
   let addRate = 0;
-  /** 暴击伤害 */
   let criticalHunt = (calculatorValue[BuffType.CritcalHurt] || 0) + (calculatorValue[BuffType.GlobalCritcalHunt] || 0);
-  /** 暴击率 */
   let critical = (calculatorValue[BuffType.Critcal] || 0) + (calculatorValue[BuffType.GlobalCritcal] || 0);
-  /** 敌人对应抗性 */
   let resistance = 0;
-  /** 敌人对应防御 */
   let defensePenetration = calculatorValue[BuffType.DefensePenetration] || 0;
-  /** 治疗加成 */
   let healAdd = 0;
-  /** 护盾量提升 */
   let shieldAdd = 0;
+  let moonAddHunt = calculatorValue[BuffType.GlobalMoonPrcent] || 0;
 
   // 处理攻击类型的加成
   switch (attackType) {
@@ -96,6 +114,9 @@ function getMoreDataBySwitch(
       addRate += calculatorValue[BuffType.FallingRateAdd] || 0;
       extraRate += calculatorValue[BuffType.FallingAdd] || 0;
       break;
+    case AttackType.Moon:
+      ADDITIONAL_DMG += calculatorValue[BuffType.GlobalMoonFixed] || 0;
+      break;
     case AttackType.Heal:
       healAdd += calculatorValue[BuffType.HealAdd] || 0;
       break;
@@ -106,9 +127,9 @@ function getMoreDataBySwitch(
 
   // 元素附魔
   let newElementType = elementType;
+  // 只有近战的普通攻击、重击和下落攻击可以进行元素附魔
   if (
     calculatorValue.enchanting &&
-    calculatorValue.enchanting !== EnchantingType.Physical &&
     (attackType === AttackType.Normal ||
       attackType === AttackType.Strong ||
       attackType === AttackType.Falling ||
@@ -181,6 +202,17 @@ function getMoreDataBySwitch(
       critical += calculatorValue[BuffType.CryoCritcal] || 0;
       resistance += calculatorValue[BuffType.EnemyCryoResistance] || 0;
       break;
+    case ElementType.MoonElectro:
+      // 月感电伤害无视敌人防御
+      defensePenetration = 100;
+      ADDITIONAL_DMG += calculatorValue[BuffType.MoonElectroFixed] || 0;
+      criticalHunt += calculatorValue[BuffType.MoonElectroCritcalHurt] || 0;
+      critical += calculatorValue[BuffType.MoonElectroCritcal] || 0;
+      resistance += calculatorValue[BuffType.EnemyElectroResistance] || 0;
+      // @TODO 2025/07/20 目前只有伊涅芙可以给月感电伤害提升最终倍率，暂时先用addRate计算
+      addRate += calculatorValue[BuffType.MoonElectroRate] || 0;
+      moonAddHunt += calculatorValue[BuffType.MoonElectroPrcent] || 0;
+      break;
   }
 
   return {
@@ -195,6 +227,7 @@ function getMoreDataBySwitch(
     healAdd,
     shieldAdd,
     extraRate,
+    moonAddHunt,
   };
 }
 
@@ -222,6 +255,7 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
     healAdd,
     shieldAdd,
     extraRate,
+    moonAddHunt,
   } = getMoreDataBySwitch(calculatorValue, attackType, elementType, calculatorValue.weapon);
 
   /** 计算独特buff的加成 */
@@ -243,9 +277,10 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
     healAdd += specialData.healAdd;
     shieldAdd += specialData.shieldAdd;
     extraRate += specialData.extraRate;
+    moonAddHunt = specialData.moonAddHunt;
   }
 
-  // 基础伤害
+  // 基础数值
   let BASE_DMG = 0;
   if (rate.atk) {
     const atk = calculatorValue.baseATK + calculatorValue.extraATK + calculatorValue.extraATK_NT;
@@ -266,6 +301,10 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
   if (rate.fixed) {
     BASE_DMG += rate.fixed[level - 1];
   }
+  if (newElementType === ElementType.MoonElectro) {
+    // 月感电的基础伤害固定乘以3
+    BASE_DMG *= 3;
+  }
 
   // 治疗量
   let HEAL_VALUE = 0;
@@ -280,25 +319,32 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
 
   // 激化伤害
   let BONUS_DMG = 0;
-  if (atkType === ElementalReaction.Aggravate && newElementType === ElementType.Electro) {
+  if (atkType === ElementalReactionType.Aggravate && newElementType === ElementType.Electro) {
     BONUS_DMG =
       BaseDMG.aggravate[calculatorValue.level] * (1 + (getCatalyzeRate(em) + calculatorValue.catalyzeRate) / 100);
   }
-  if (atkType === ElementalReaction.Spread && newElementType === ElementType.Dendro) {
+  if (atkType === ElementalReactionType.Spread && newElementType === ElementType.Dendro) {
     BONUS_DMG =
       BaseDMG.spread[calculatorValue.level] * (1 + (getCatalyzeRate(em) + calculatorValue.catalyzeRate) / 100);
   }
+
   // 加成伤害
-  let MAGNIFICATION_DMG = ((BASE_DMG + ADDITIONAL_DMG + BONUS_DMG) * addHunt) / 100;
+  let MAGNIFICATION_DMG = BASE_DMG + ADDITIONAL_DMG + BONUS_DMG;
+  if (newElementType === ElementType.MoonElectro) {
+    // 月感电的加成伤害，不受传统增伤影响，且有一部分来自于元素精通
+    MAGNIFICATION_DMG *= (getMoonElectroRate(em) + moonAddHunt) / 100;
+  } else {
+    MAGNIFICATION_DMG *= addHunt / 100;
+  }
 
   // 增幅反应伤害
   let REACTION_DMG = 0;
   // 精通提升伤害
   let EVA_DMG = 0;
   if (
-    (atkType === ElementalReaction.Rate &&
+    (atkType === ElementalReactionType.Rate &&
       (newElementType === ElementType.Pyro || newElementType === ElementType.Hydro)) ||
-    (atkType === ElementalReaction.Rate2 &&
+    (atkType === ElementalReactionType.Rate2 &&
       (newElementType === ElementType.Pyro || newElementType === ElementType.Cryo))
   ) {
     let eva = (getAmplifiedRate(em) + calculatorValue.amplifiedRate) / 100;
@@ -338,6 +384,7 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
     REACTION_DMG: REACTION_DMG * ENEMY_RATE,
     criticalHunt,
     addHunt,
+    moonAddHunt,
     elementType: newElementType,
     HEAL_VALUE,
     SHIELD_VALUE,

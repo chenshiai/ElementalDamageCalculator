@@ -190,6 +190,8 @@ export interface ICalculatorValue {
   [BuffType.GeoPrcent]: number;
   /** 草元素伤害加成 */
   [BuffType.DendroPrcent]: number;
+  /** 月感电伤害加成 - 与精通乘区加算 */
+  [BuffType.MoonElectroPrcent]: number;
 
   // 各种隐式暴击率
   /** 全局暴击率提升 */
@@ -220,6 +222,8 @@ export interface ICalculatorValue {
   [BuffType.GeoCritcal]: number;
   /** 草元素伤害暴击率加成 */
   [BuffType.DendroCritcal]: number;
+  /** 月感电伤害暴击率加成 */
+  [BuffType.MoonElectroCritcal]: number;
 
   // 各种隐式爆伤
   /** 全局暴击伤害提升 */
@@ -250,6 +254,8 @@ export interface ICalculatorValue {
   [BuffType.GeoCritcalHurt]: number;
   /** 草元素伤害暴击伤害加成 */
   [BuffType.DendroCritcalHurt]: number;
+  /** 月感电伤害暴击伤害加成 */
+  [BuffType.MoonElectroCritcalHurt]: number;
 
   // 攻击增伤
   /** 普通攻击伤害加成 */
@@ -264,6 +270,8 @@ export interface ICalculatorValue {
   [BuffType.BurstPrcent]: number;
   /** 全局伤害加成 */
   [BuffType.GlobalPrcent]: number;
+  /** 全局月伤害加成 */
+  [BuffType.GlobalMoonPrcent]: number;
 
   // 攻击伤害提高
   /** 普攻伤害提高 */
@@ -278,6 +286,8 @@ export interface ICalculatorValue {
   [BuffType.BurstFixed]: number;
   /** 全局伤害提高 */
   [BuffType.GlobalFixed]: number;
+  /** 全局月伤害提高 */
+  [BuffType.GlobalMoonFixed]: number;
 
   // 元素伤害提高
   /** 物理伤害提高 */
@@ -296,6 +306,8 @@ export interface ICalculatorValue {
   [BuffType.GeoFixed]: number;
   /** 草元素伤害提高 */
   [BuffType.DendroFixed]: number;
+  /** 月感电伤害提高 */
+  [BuffType.MoonElectroFixed]: number;
 
   /** 生命之契 */
   [BuffType.LifeContract]: number;
@@ -310,6 +322,8 @@ export interface ICalculatorValue {
   [BuffType.SkillRate]: number;
   /** 元素爆发倍率提升 */
   [BuffType.BurstRate]: number;
+  /** 月感电倍率提升 */
+  [BuffType.MoonElectroRate]: number;
 
   /** 普攻天赋等级加成 */
   [BuffType.NormalLevel]: number;

@@ -140,6 +140,17 @@ q {
 .text-electro {
   color: var(--text-electro);
 }
+.text-moon-electro {
+  span:not(:first-child) {
+    -webkit-text-stroke: 0.3px #663c77; 
+    text-shadow: none;
+    transform: skewX(-15deg);
+    background: linear-gradient(to bottom, var(--text-electro), #fff); /* 从红色渐变到绿色 */
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
 .text-hydro {
   color: var(--text-hydro);
 }
@@ -193,7 +204,7 @@ summary::-webkit-details-marker {
   font-size: 0;
 }
 
-@media screen and (min-width: 768px)  {
+@media screen and (min-width: 768px) {
   .van-popup--right {
     max-width: 40%;
   }

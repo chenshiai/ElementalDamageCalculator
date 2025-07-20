@@ -156,8 +156,8 @@ const panelName = computed(() => {
   }
 }
 .skill-info-item-label {
-  /* text-align: center; */
   color: #fff;
+  transform: skewX(0);
 }
 .skill-info-empty {
   text-align: center;

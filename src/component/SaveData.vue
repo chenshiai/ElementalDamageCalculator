@@ -277,7 +277,7 @@ const updateNoteGroup = ({ setSelectedNotes, localStorageName, defaultNotes }, s
   // 若临时组的长度大于零，则更新本地便签组，并通知对应组件更新便签
   if (supplementNotes.length > 0) {
     window.localStorage.setItem(localStorageName, JSON.stringify(supplementNotes.concat(Array.from(localNotes))));
-    EventBus.$emit(`${localStorageName}Changed`);
+    EventBus.$emit(`${localStorageName}Changed`, null);
   }
   setSelectedNotes(selectedNotes);
 };
