@@ -8,6 +8,7 @@ import Shield from "./view/shield.vue";
 import PlayInfo from "./view/PlayInfo.vue";
 import CharacterCalculation from "./view/character-calculation/character-calculation.vue";
 import Home from './view/home/home.vue'
+import MoonElectro from './view/moon-electro/index.vue'
 
 const route = createRouter({
   history: createWebHashHistory(),
@@ -34,6 +35,7 @@ const route = createRouter({
       name: "character",
       component: CharacterCalculation,
     },
+    { path: "/moon-electro", component: MoonElectro }
   ],
 });
 

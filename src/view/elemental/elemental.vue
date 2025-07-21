@@ -156,7 +156,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lant="ts">
 import { computed, ref } from "vue";
 import { WITCH, THUNDER, EMERALD, EDEN } from "@/constants";
 import { BaseDMG } from "@/constants/elementalReaction";
@@ -164,17 +164,17 @@ import { getServitudeRate, getCrystallizeRate, getCatalyzeRate } from "@/utils";
 import TabTitle from "@/component/TabTitle.vue";
 import Popover from "@/component/Popover.vue";
 import DetailBlock from "./Detail.vue";
-import { Slider, Stepper, Field, CellGroup, Icon } from "vant";
+import { Stepper, Field, CellGroup, Icon } from "vant";
 import useHolyRelic from "./holy-relic";
 import { useNiLuo, useBaiZhu, useMizuki, useYiFa } from "./roles";
 
 const elementalMystery = ref(786);
 const level = ref(90);
 const [currentRelic, setCurrentRelic] = useHolyRelic();
-const { niLuo, niLuoGain, showNiluoPopover } = useNiLuo();
-const { baiZhu, baiZhuBloomGain, baiZhuCatalyzeGain, showBaizhuPopover } = useBaiZhu();
-const { mizukiEm, mizukiSkillLevel, mizukiGain, showMizukiPopover } = useMizuki();
-const { yehun, yehunGain, showIfaPopover } = useYiFa();
+const { niLuo, niLuoGain } = useNiLuo();
+const { baiZhu, baiZhuBloomGain, baiZhuCatalyzeGain } = useBaiZhu();
+const { mizukiEm, mizukiSkillLevel, mizukiGain } = useMizuki();
+const { yehun, yehunGain } = useYiFa();
 
 // 剧变反应伤害提升数值
 const servitudeDamage = (baseDamage) => {
