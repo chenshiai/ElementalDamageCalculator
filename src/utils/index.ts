@@ -180,6 +180,31 @@ export const computationalFormula = (data) => {
   }
 };
 
+export function generateAllSortedResults(arr) {
+  const n = arr.length;
+  const totalCombinations = Math.pow(2, n);
+  const uniqueResults = new Set<string>();
+
+  // 遍历所有可能的组合（用二进制表示选择）
+  for (let i = 0; i < totalCombinations; i++) {
+    const combination = [];
+    // 将数字转换为n位二进制字符串，控制每个子数组的选择
+    const binary = i.toString(2).padStart(n, '0');
+
+    // 根据二进制位选择元素
+    for (let j = 0; j < n; j++) {
+      const index = parseInt(binary[j], 10); // 0或1，表示选择子数组中的第几个元素
+      combination.push(arr[j][index]);
+    }
+
+    // 从大到小排序并转为字符串存入Set（自动去重）
+    const sorted = combination.sort((a, b) => b - a);
+    uniqueResults.add(sorted.join(','));
+  }
+
+  // 将Set转换为数组格式返回
+  return Array.from(uniqueResults).map(item => item.split(',').map(Number));
+}
 
 class Event {
   eventList = {};

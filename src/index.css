@@ -142,10 +142,11 @@ q {
 }
 .text-moon-electro {
   span:not(:first-child) {
+    display: inline-block;
     -webkit-text-stroke: 0.3px #663c77; 
     text-shadow: none;
     transform: skewX(-15deg);
-    background: linear-gradient(to bottom, var(--text-electro), #fff); /* 从红色渐变到绿色 */
+    background: linear-gradient(to bottom, var(--text-electro), #fff);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
