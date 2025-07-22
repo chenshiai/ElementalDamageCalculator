@@ -103,15 +103,6 @@ const damageResult = computed(() => {
   <TabTitle>月反应计算</TabTitle>
   <div class="tips">仅计算由普通剧变反应转化的月反应伤害，不计算角色直接造成的月反应伤害。</div>
 
-  <div class="data-panel__title">攻击目标属性</div>
-  <section class="moon-panel">
-    <Cell title="敌人抗性%" center>
-      <template #right-icon>
-        <input class="ex-input" type="number" v-model="enemyResistance" />
-      </template>
-    </Cell>
-  </section>
-
   <div class="data-panel__title">角色属性</div>
   <section class="moon-panel">
     <div v-for="(item, index) in teamList" :key="index">
@@ -146,13 +137,8 @@ const damageResult = computed(() => {
     <div v-show="teamList.length < 4" class="show-click" @click="addData">新增角色属性</div>
   </section>
   <br />
-  <div class="data-panel__title">其它加成</div>
-  <section class="moon-panel">
-    <Cell title="伊涅芙攻击力" center>
-      <template #right-icon>
-        <input class="ex-input" type="number" v-model="ineffaAtk" />
-      </template>
-    </Cell>
+  <div class="data-panel__title">全场生效属性</div>
+  <section class="gain-group">
     <div class="gain">
       <div class="cha-gain-inner">
         <img class="base-damage__img" src="https://enka.network/ui/UI_AvatarIcon_Ineffa.png" alt="" />
@@ -186,14 +172,23 @@ const damageResult = computed(() => {
         </Popover>
       </div>
     </div>
+    <br />
+    <span></span>
     <Cell title="全队月感电伤害提升%" center>
       <template #right-icon>
         <input class="ex-input" type="number" v-model="otherData" />
       </template>
     </Cell>
+
+    <Cell title="敌人抗性%" center>
+      <template #right-icon>
+        <input class="ex-input" type="number" v-model="enemyResistance" />
+      </template>
+    </Cell>
   </section>
+  <br />
   <div class="data-panel__title">期望伤害</div>
-  <div>
+  <section class="moon-panel">
     <Collapse v-model="activeNames">
       <CollapseItem v-for="item in damageResult" :key="item.name" :name="item.name">
         <template #title>
@@ -208,7 +203,7 @@ const damageResult = computed(() => {
         </div>
       </CollapseItem>
     </Collapse>
-  </div>
+  </section>
 </template>
 
 <style scoped>
