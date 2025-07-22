@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import TabTitle from "@/component/TabTitle.vue";
-import { Cell, Switch, Collapse, CollapseItem } from "vant";
+import { Cell, CellGroup, Switch, Collapse, CollapseItem, Field, Icon } from "vant";
 import { computed, ref } from "vue";
 import { useYiFa, useIneffa } from "../elemental/roles";
 import { BaseDMG } from "@/constants/elementalReaction";
+import Popover from "@/component/Popover.vue";
 import { getMoonElectroRate, generateAllSortedResults, getResistanceRate } from "@/utils";
 
 type teamItem = {
@@ -52,9 +53,10 @@ const moonElectroDamage = (teamData: teamItem) => {
   );
 
   const critcal = common * (1 + teamData.criticalDamage / 100);
+  let finalCommon = teamData.criticalRate >= 100 ? critcal : common;
   return {
-    result: [common, critcal],
-    common,
+    result: [finalCommon, critcal],
+    common: finalCommon,
     desire: common * (1 + (Math.min(100, teamData.criticalRate) * teamData.criticalDamage) / 10000),
     critcal,
   };
@@ -99,9 +101,7 @@ const damageResult = computed(() => {
 
 <template>
   <TabTitle>月反应计算</TabTitle>
-  <div class="tips">
-    仅计算由普通剧变反应转化的月反应伤害，不计算角色直接造成的月反应伤害。
-  </div>
+  <div class="tips">仅计算由普通剧变反应转化的月反应伤害，不计算角色直接造成的月反应伤害。</div>
 
   <div class="data-panel__title">攻击目标属性</div>
   <section class="moon-panel">
@@ -148,17 +148,45 @@ const damageResult = computed(() => {
   <br />
   <div class="data-panel__title">其它加成</div>
   <section class="moon-panel">
-    <Cell title="伊涅芙得攻击力" center>
+    <Cell title="伊涅芙攻击力" center>
       <template #right-icon>
         <input class="ex-input" type="number" v-model="ineffaAtk" />
       </template>
     </Cell>
-    <Cell title="伊法天赋计入的夜魂总和" center>
-      <template #right-icon>
-        <input class="ex-input" type="number" v-model="yehun" />
-      </template>
-    </Cell>
-    <Cell title="其它月感电伤害提升%" center>
+    <div class="gain">
+      <div class="cha-gain-inner">
+        <img class="base-damage__img" src="https://enka.network/ui/UI_AvatarIcon_Ineffa.png" alt="" />
+        <CellGroup inset>
+          <Field v-model="ineffaAtk" type="number" label="伊涅芙攻击力" />
+        </CellGroup>
+        <Popover position="top-right">
+          <div class="data-item-popover__content">
+            伊涅芙：提升队伍中所有角色<q class="elector">月感电</q>的基础伤害，每100点攻击力提升0.7%，最大14%
+          </div>
+          <template #trigger>
+            <Icon size="26" name="question" />
+          </template>
+        </Popover>
+      </div>
+    </div>
+    <div class="gain">
+      <div class="cha-gain-inner">
+        <img class="base-damage__img" src="https://enka.network/ui/UI_AvatarIcon_Ifa.png" alt="" />
+        <CellGroup inset>
+          <Field v-model="yehun" type="number" label="夜魂总和" />
+        </CellGroup>
+        <Popover position="top-right">
+          <div class="data-item-popover__content">
+            伊法：救援要义，基于队伍中所有角色当前夜魂值的总和，每1点夜魂值提升<q class="swirl">扩散</q>、
+            <q class="elector">感电</q>反应1.5%的伤害，最多记录200点夜魂值
+          </div>
+          <template #trigger>
+            <Icon size="26" name="question" />
+          </template>
+        </Popover>
+      </div>
+    </div>
+    <Cell title="全队月感电伤害提升%" center>
       <template #right-icon>
         <input class="ex-input" type="number" v-model="otherData" />
       </template>
