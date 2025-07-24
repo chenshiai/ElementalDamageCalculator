@@ -1,4 +1,7 @@
-const updateLog = [
+const updateLog = [{
+    data: "2025-07-24",
+    msg: ["新增了月感电反应的伤害计算页面。"]
+  },
   {
     data: "2025-07-15",
     msg: ["修复了那维莱特元素爆发的数据错误。"]
