@@ -113,10 +113,10 @@
           </CellGroup>
           <Popover position="top-right">
             <div class="data-item-popover__content">
-              伊法：救援要义，基于队伍中所有角色当前夜魂值的总和，每1点夜魂值提升<q class="swirl">扩散</q>、<q
+              伊法：救援要义基于队伍中所有角色当前夜魂值的总和，每1点救援要义提升<q class="swirl">扩散</q>、<q
                 class="elector"
                 >感电</q
-              >反应1.5%的伤害，最多记录200点夜魂值
+              >反应1.5%的伤害，最多记录200点救援要义
             </div>
             <template #trigger>
               <Icon size="26" name="question" />
@@ -128,10 +128,10 @@
     </div>
   </details>
   <DetailBlock :elementalMystery="elementalMystery">
-    <template v-slot:base>
+    <template #base>
       <data v-show="moreRate" class="more-rate"><br />{{ moreRate }}</data>
     </template>
-    <template v-slot:servitude>
+    <template #servitude>
       <data v-show="servitudeMoreRate" class="more-rate"><br />{{ servitudeMoreRate }}</data>
       <span v-show="niLuoGain" class="more-rate"><br />妮露：丰穰之核+{{ niLuoGain.toFixed(1) }}%; </span>
       <span v-show="baiZhuBloomGain" class="more-rate">
@@ -140,7 +140,10 @@
       <span v-show="mizukiGain" class="more-rate"> <br />梦见月瑞希：扩散+{{ mizukiGain.toFixed(1) }}% </span>
       <span v-show="yehunGain" class="more-rate"> <br />伊法：扩散、感电+{{ yehunGain.toFixed(1) }}% </span>
     </template>
-    <template v-slot:catalyze>
+    <template #moonServitude>
+      <data v-show="moonServitudeMoreRate" class="more-rate"><br />{{ moonServitudeMoreRate }}</data>
+    </template>
+    <template #catalyze>
       <data v-show="catalyzeMoreRate" class="more-rate"><br />{{ catalyzeMoreRate }}</data>
       <span v-show="baiZhuCatalyzeGain" class="more-rate">
         <br />白术：超激化、蔓激化+{{ baiZhuCatalyzeGain.toFixed(1) }}%
@@ -296,6 +299,9 @@ const servitudeMoreRate = computed(() => {
 const catalyzeMoreRate = computed(() => {
   return currentRelic.value === THUNDER ? "如雷套：超激化+20%" : "";
 });
+const moonServitudeMoreRate = computed(() => {
+  return currentRelic.value === THUNDER ? "如雷套：月感电+20%" : "";
+})
 const damageResult = computed(() => {
   return [
     {

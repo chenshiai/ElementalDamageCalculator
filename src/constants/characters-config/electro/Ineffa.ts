@@ -7,7 +7,7 @@ import { Weapon, Element, Icons, EnKaId, BaseData, action } from "../decorator";
 @Weapon(WeaponType.Polearms)
 @Element(ElementType.Electro)
 @BaseData(Rarity.Five, 12613, 330, 828, 60)
-@Icons("UI_AvatarIcon_Iansan")
+@Icons("UI_AvatarIcon_Ineffa")
 class IneffaData extends Character implements ICharacterInfo {
   constructor() {
     super();
@@ -24,5 +24,5 @@ class IneffaData extends Character implements ICharacterInfo {
   buffs: IBuffBase[] = [];
 }
 
-/** ![伊涅芙](https://enka.network/ui/UI_AvatarIcon_Iansan.png) */
+/** ![伊涅芙](https://enka.network/ui/UI_AvatarIcon_Ineffa.png) */
 export const Ineffa = new IneffaData();

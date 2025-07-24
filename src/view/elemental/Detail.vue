@@ -9,13 +9,16 @@
     超激化、蔓激化带来的[伤害提升]提高{{ catalyze }}%;
     <slot name="catalyze"></slot>
     <br/>
+    月感电反应造成的伤害提升{{ moonServitude }}%;
+    <slot name="moonServitude"></slot>
+    <br/>
     结晶反应护盾提供的[伤害吸收量]提升{{ crystallization }}%;
   </div>
 </template>
 
 <script setup>
 import {computed} from "vue";
-import {getAmplifiedRate, getServitudeRate, getCrystallizeRate, getCatalyzeRate} from "@/utils";
+import {getAmplifiedRate, getServitudeRate, getCrystallizeRate, getCatalyzeRate, getMoonElectroRate} from "@/utils";
 
 const props = defineProps({
   elementalMystery: Number,
@@ -39,6 +42,10 @@ const crystallization = computed(() => {
 const catalyze = computed(() => {
   return getCatalyzeRate(props.elementalMystery).toFixed(1);
 });
+
+const moonServitude = computed(() => {
+  return getMoonElectroRate(props.elementalMystery).toFixed(1);
+})
 </script>
 
 <style>

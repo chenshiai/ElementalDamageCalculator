@@ -25,7 +25,7 @@ export const getCatalyzeRate = (em) => {
 
 /** 月感电精通转化增伤比例 */
 export const getMoonElectroRate = (em) => {
-  return 5 * em / (em + 2100) * 100;
+  return 6 * em / (em + 2000) * 100;
 }
 
 

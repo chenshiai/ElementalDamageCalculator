@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import TabTitle from "@/component/TabTitle.vue";
-import { Cell, CellGroup, Switch, Collapse, CollapseItem, Field, Icon } from "vant";
+import { CellGroup, RadioGroup, Radio, Collapse, CollapseItem, Field, Icon, Stepper } from "vant";
 import { computed, ref } from "vue";
 import { useYiFa, useIneffa } from "../elemental/roles";
 import { BaseDMG } from "@/constants/elementalReaction";
@@ -12,7 +12,7 @@ type teamItem = {
   elementMastery: number;
   criticalRate: number;
   criticalDamage: number;
-  thunder: boolean;
+  checked: string;
 };
 
 const teamList = ref<teamItem[]>([
@@ -21,12 +21,12 @@ const teamList = ref<teamItem[]>([
     elementMastery: 0,
     criticalRate: 5,
     criticalDamage: 50,
-    thunder: false,
+    checked: "",
   },
 ]);
 const otherData = ref(0);
 const enemyResistance = ref(10);
-const { yehun, yehunGain } = useYiFa();
+const { yehun, yehunMoonGain } = useYiFa();
 const { ineffaAtk, ineffaGain } = useIneffa();
 const activeNames = ref<string[]>([]);
 
@@ -40,24 +40,25 @@ const moonElectroDamage = (teamData: teamItem) => {
       critcal: 0,
     };
   const baseDamage = BaseDMG.moonElectroCharged[teamData.level];
+
   const common = Math.round(
     baseDamage *
       (1 +
         (getMoonElectroRate(teamData.elementMastery) +
-          yehunGain.value +
-          otherData.value +
-          (teamData.thunder ? 20 : 0)) /
+          yehunMoonGain.value +
+          +otherData.value +
+          (teamData.checked === "thunder" ? 20 : 0)) /
           100) *
       (1 + ineffaGain.value / 100) *
       getResistanceRate(enemyResistance.value)
   );
 
-  const critcal = common * (1 + teamData.criticalDamage / 100);
+  const critcal = teamData.criticalRate <= 0 ? common : common * (1 + teamData.criticalDamage / 100);
   let finalCommon = teamData.criticalRate >= 100 ? critcal : common;
   return {
     result: [finalCommon, critcal],
     common: finalCommon,
-    desire: common * (1 + (Math.min(100, teamData.criticalRate) * teamData.criticalDamage) / 10000),
+    desire: common * (1 + (Math.max(0, Math.min(100, teamData.criticalRate)) * teamData.criticalDamage) / 10000),
     critcal,
   };
 };
@@ -71,7 +72,7 @@ const addData = () => {
     elementMastery: 0,
     criticalRate: 5,
     criticalDamage: 50,
-    thunder: false,
+    checked: "",
   });
 };
 const removeData = (index: number) => {
@@ -107,7 +108,7 @@ const damageResult = computed(() => {
   <section class="moon-panel">
     <div v-for="(item, index) in teamList" :key="index">
       <div class="moon-panel__title">
-        {{ index + 1 }}号角色属性
+        角色{{ index + 1 }}
         <span v-show="index !== 0" class="moon-panel__delete" @click="removeData(index)">移除</span>
       </div>
       <div class="moon-panel__basic">
@@ -128,64 +129,72 @@ const damageResult = computed(() => {
           <input class="basic-panel-input" type="number" v-model="item.criticalDamage" />
         </div>
       </div>
-      <Cell center title="是否装备如雷4件套">
-        <template #right-icon>
-          <Switch v-model="item.thunder" active-color="#766461" inactive-color="#b7a19e" size="16" />
-        </template>
-      </Cell>
+      <div class="moon-panel__title">套装效果</div>
+      <RadioGroup class="holy-relic-radio" v-model="item.checked">
+        <Radio name="">无套装效果</Radio>
+        <Radio name="thunder">如雷的盛怒</Radio>
+      </RadioGroup>
     </div>
     <div v-show="teamList.length < 4" class="show-click" @click="addData">新增角色属性</div>
   </section>
   <br />
-  <div class="data-panel__title">全场生效属性</div>
-  <section class="gain-group">
-    <div class="gain">
-      <div class="cha-gain-inner">
-        <img class="base-damage__img" src="https://enka.network/ui/UI_AvatarIcon_Ineffa.png" alt="" />
-        <CellGroup inset>
-          <Field v-model="ineffaAtk" type="number" label="伊涅芙攻击力" />
-        </CellGroup>
-        <Popover position="top-right">
-          <div class="data-item-popover__content">
-            伊涅芙：提升队伍中所有角色<q class="elector">月感电</q>的基础伤害，每100点攻击力提升0.7%，最大14%
-          </div>
-          <template #trigger>
-            <Icon size="26" name="question" />
-          </template>
-        </Popover>
+  <details class="gain-group-details" open>
+    <summary>
+      <span class="data-panel__title">全场效果</span>
+      <span class="holy-relic-tips open">展开</span>
+      <span class="holy-relic-tips close">收起</span>
+    </summary>
+    <section class="gain-group">
+      <div class="gain">
+        <div class="cha-gain-inner">
+          <img
+            class="base-damage__img"
+            src="https://homdgcat.wiki/homdgcat-res/Avatar/UI_AvatarIcon_Ineffa.png"
+            alt=""
+          />
+          <CellGroup inset>
+            <Field v-model="ineffaAtk" type="number" label="伊涅芙攻击力" />
+          </CellGroup>
+          <Popover position="top-right">
+            <div class="data-item-popover__content">
+              伊涅芙：提升队伍中所有角色<q class="elector">月感电</q>的基础伤害，每100点攻击力提升0.7%，最大14%
+            </div>
+            <template #trigger>
+              <Icon size="26" name="question" />
+            </template>
+          </Popover>
+        </div>
       </div>
-    </div>
-    <div class="gain">
-      <div class="cha-gain-inner">
-        <img class="base-damage__img" src="https://enka.network/ui/UI_AvatarIcon_Ifa.png" alt="" />
-        <CellGroup inset>
-          <Field v-model="yehun" type="number" label="夜魂总和" />
-        </CellGroup>
-        <Popover position="top-right">
-          <div class="data-item-popover__content">
-            伊法：救援要义，基于队伍中所有角色当前夜魂值的总和，每1点夜魂值提升<q class="swirl">扩散</q>、
-            <q class="elector">感电</q>反应1.5%的伤害，最多记录200点夜魂值
-          </div>
-          <template #trigger>
-            <Icon size="26" name="question" />
-          </template>
-        </Popover>
+      <div class="gain">
+        <div class="cha-gain-inner">
+          <img class="base-damage__img" src="https://enka.network/ui/UI_AvatarIcon_Ifa.png" alt="" />
+          <CellGroup inset>
+            <Field v-model="yehun" type="number" label="夜魂总和" />
+          </CellGroup>
+          <Popover position="top-right">
+            <div class="data-item-popover__content">
+              伊法：救援要义基于队伍中所有角色当前夜魂值的总和，每1点救援要义提升
+              <q class="elector">月感电</q>反应0.2%的伤害，最多记录200点救援要义
+            </div>
+            <template #trigger>
+              <Icon size="26" name="question" />
+            </template>
+          </Popover>
+        </div>
       </div>
-    </div>
-    <br />
-    <span></span>
-    <Cell title="全队月感电伤害提升%" center>
-      <template #right-icon>
-        <input class="ex-input" type="number" v-model="otherData" />
-      </template>
-    </Cell>
+      <br />
+      <span></span>
+      <div class="base-data">
+        <span class="base-damage__title">全队月感电伤害提升%</span>
+        <Stepper v-model="otherData" input-width="66px" integer button-size="20" theme="round" min="0" />
+      </div>
 
-    <Cell title="敌人抗性%" center>
-      <template #right-icon>
-        <input class="ex-input" type="number" v-model="enemyResistance" />
-      </template>
-    </Cell>
-  </section>
+      <div class="base-data">
+        <span class="base-damage__title">敌人抗性%</span>
+        <Stepper v-model="enemyResistance" input-width="66px" integer button-size="20" theme="round" />
+      </div>
+    </section>
+  </details>
   <br />
   <div class="data-panel__title">期望伤害</div>
   <section class="moon-panel">
@@ -197,7 +206,7 @@ const damageResult = computed(() => {
             <span>{{ item.desire }}</span>
           </div>
         </template>
-        <div :class="item.class">
+        <div>
           <span style="margin-right: 10px">实际伤害数值：</span>
           <span>{{ item.allResult.join("、") }}</span>
         </div>
@@ -241,5 +250,9 @@ const damageResult = computed(() => {
   width: 100%;
   background-color: transparent;
   cursor: pointer;
+}
+.holy-relic-radio {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 }
 </style>

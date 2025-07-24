@@ -50,9 +50,13 @@ export function useYiFa() {
   const yehunGain = computed(() => {
     return Math.min(300, yehun.value * 1.5);
   });
+  const yehunMoonGain = computed(() => {
+    return Math.min(40, yehun.value * 0.2);
+  });
   return {
     yehun,
     yehunGain,
+    yehunMoonGain
   };
 }
 
