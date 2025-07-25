@@ -1,11 +1,7 @@
 import Character from "../character-class";
 import { ICharacterInfo } from "@/types/interface";
 import { AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
-import {
-  A_80_MYSTERY_96,
-  Constellation_E_3,
-  Constellation_Q_5,
-} from "../buffs";
+import { A_80_MYSTERY_96, Constellation_E_3, Constellation_Q_5 } from "../buffs";
 import { EnKaId, Weapon, Element, BaseData, Icons, action } from "../decorator";
 
 @EnKaId(10000113, "伊法")
@@ -73,9 +69,22 @@ class IfaData extends Character implements ICharacterInfo {
       enable: true,
       target: BuffTarget.Self,
     },
+    {
+      label: "场中医者视野",
+      describe:
+        "伊法出于夜魂加持状态下时，将基于队伍中所有角色当前夜魂值的总和，每1点夜魂值都将使伊法获得1点「救援要义」。救援要义可以提升队伍中附近的角色触发的月感电反应造成的伤害。每点救援要义提升0.2%。",
+      effect: [{ type: BuffType.MoonElectroPrcent, getValue: (_, s) => 0.2 * s }],
+      enable: true,
+      target: BuffTarget.All,
+      stackable: true,
+      stackText: "救援要义",
+      limit: 200,
+      stack: 80,
+      shareable: true,
+    },
     Constellation_E_3,
     {
-      label: "6命·糜烂应体的置换",
+      label: "4命·糜烂应体的置换",
       describe: "施放元素爆发复合镇静域后，伊法的元素精通提升100点。",
       effect: [{ type: BuffType.MysteryFixed, getValue: () => 100 }],
       enable: true,
