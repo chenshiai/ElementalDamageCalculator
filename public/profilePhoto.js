@@ -37,6 +37,7 @@ const __global__ = {
     KujoSara: 'https://uploadstatic.mihoyo.com/ys-obc/2021/11/02/75379475/6aca9977c55c6ca83ade6d5593173b25_5748245248319174043.png?x-oss-process=image/quality,q_75/resize,s_40',
     Beelzebul: 'https://uploadstatic.mihoyo.com/ys-obc/2022/08/15/75379475/4f2125e44d2b9e15611877eda1794ec7_971228898754945838.png?x-oss-process=image/quality,q_75/resize,s_40',
     YaeMiko: 'https://uploadstatic.mihoyo.com/ys-obc/2022/02/15/6276411/2a54cd4008e8bc398f3f8bdc08225048_2883595654384922672.jpg?x-oss-process=image/quality,q_75/resize,s_40',
+    Iansan: "https://act-upload.mihoyo.com/ys-obc/2025/07/04/345102903/af5a02b2a5ea15640b1865c3db117b8c_3633384268305212083.png?x-oss-process=image/format,webp/quality,Q_75/resize,w_40,h_40",
 
     /**
      * 岩元素角色

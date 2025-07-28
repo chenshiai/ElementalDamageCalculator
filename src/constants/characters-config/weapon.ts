@@ -53,7 +53,7 @@ export const Weapons: IWeaponInfo[] = [
       name: "支离轮光",
       enkaId: 11518,
       weaponType: WeaponType.Polearms,
-      icon: getEnkaUI("UI_EquipIcon_Sword_OuterSword_Awaken"),
+      icon: getEnkaUI("UI_EquipIcon_Pole_Perdix_Awaken"),
       baseAtk: 608,
       rarity: Rarity.Five,
       appendPropId: AppendProp.CRITICAL_HURT,

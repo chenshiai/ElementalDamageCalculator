@@ -1,5 +1,5 @@
-import { Magnification } from '../magnification';
-import { ICalculationMode } from '@/types/interface/calculation-mode';
+import { Magnification } from "../magnification";
+import { ICalculationMode } from "@/types/interface/calculation-mode";
 
 // @ts-ignore
 const ProfilePhoto = __global__.ProfilePhoto;
@@ -19,7 +19,7 @@ export const AtkPercentCalculationMode: ICalculationMode[] = [
           },
         ],
         getResult: ({ number }) => number,
-      }
+      },
     ],
   },
   {
@@ -39,13 +39,13 @@ export const AtkPercentCalculationMode: ICalculationMode[] = [
         getResult: ({ hp }) => {
           return Math.round(Math.min(40, hp / 1000));
         },
-      }
+      },
     ],
   },
 ];
 
 /** 固定攻击力buff计算公式 */
-export const AtkFixedCalculationMode: ICalculationMode[]  = [
+export const AtkFixedCalculationMode: ICalculationMode[] = [
   {
     title: "通用加攻",
     children: [
@@ -60,7 +60,41 @@ export const AtkFixedCalculationMode: ICalculationMode[]  = [
           },
         ],
         getResult: ({ number }) => number,
-      }
+      },
+    ],
+  },
+  {
+    title: "伊安珊",
+    img: ProfilePhoto.Iansan,
+    children: [
+      {
+        title: "力的三原理",
+        fields: [
+          {
+            name: "lv",
+            label: "天赋等级",
+            type: "digit",
+            placeholder: "输入伊安珊元素爆发等级",
+          },
+          {
+            name: "atk",
+            label: "攻击力",
+            type: "digit",
+            placeholder: "输入伊安珊的攻击力",
+          },
+          {
+            name: "fate",
+            label: "夜魂值",
+            type: "digit",
+            placeholder: "输入伊安珊的夜魂值",
+          },
+        ],
+        getResult: ({ lv, atk, fate }) => {
+          lv = Math.min(13, lv);
+          lv = Math.max(1, lv);
+          return Math.min(atk * (fate < 42 ? fate * 0.005 : 0.27), Magnification.Iansan[lv - 1]);
+        },
+      },
     ],
   },
   {
@@ -94,7 +128,7 @@ export const AtkFixedCalculationMode: ICalculationMode[]  = [
           lv = Math.max(1, lv);
           return Math.round((Magnification.Bennett[lv - 1] + (fate > 0 ? 0.2 : 0)) * atk);
         },
-      }
+      },
     ],
   },
   {
@@ -122,7 +156,7 @@ export const AtkFixedCalculationMode: ICalculationMode[]  = [
           lv = Math.max(1, lv);
           return Math.round(Magnification.HuTao[lv - 1] * hp);
         },
-      }
+      },
     ],
   },
   {
@@ -150,7 +184,7 @@ export const AtkFixedCalculationMode: ICalculationMode[]  = [
           lv = Math.max(1, lv);
           return Math.round(Magnification.KujoSara[lv - 1] * atk);
         },
-      }
+      },
     ],
   },
   {
@@ -184,7 +218,7 @@ export const AtkFixedCalculationMode: ICalculationMode[]  = [
           lv = Math.max(1, lv);
           return Math.round((Magnification.Noelle[lv - 1] + (fate >= 6 ? 0.5 : 0)) * def);
         },
-      }
+      },
     ],
   },
   {
@@ -212,7 +246,7 @@ export const AtkFixedCalculationMode: ICalculationMode[]  = [
           lv = Math.max(1, lv);
           return Math.round(Magnification.AratakiItto[lv - 1] * def);
         },
-      }
+      },
     ],
   },
 ];
