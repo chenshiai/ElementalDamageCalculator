@@ -2,14 +2,14 @@ import Character from "../character-class";
 import { IBuffBase, ICharacterInfo } from "@/types/interface";
 import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
 import { Constellation_E_5, Constellation_Q_3, S_80_CRITALHUNT_38P } from "../buffs";
-import { EnKaId, Weapon, Element, BaseData, Icons, action } from "../decorator";
+import { EnKaId, Weapon, Element, BaseData, Icons, action } from "@/utils/decorator";
 
 @EnKaId(10000106, "玛薇卡")
 @Weapon(WeaponType.GreatSword)
 @Element(ElementType.Pyro)
 @BaseData(Rarity.Five, 12552, 359, 792, 0)
 @Icons("UI_AvatarIcon_Mavuika")
-class MavuikaData extends Character implements ICharacterInfo {
+export class MavuikaData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }

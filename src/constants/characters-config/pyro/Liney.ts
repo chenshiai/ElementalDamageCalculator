@@ -2,14 +2,14 @@ import Character from "../character-class";
 import { IBuffBase, ICharacterInfo } from "@/types/interface";
 import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
 import { Constellation_A_3, Constellation_Q_5, S_80_CRITAL_19P } from "../buffs";
-import { EnKaId, Weapon, Element, BaseData, Icons, action } from "../decorator";
+import { EnKaId, Weapon, Element, BaseData, Icons, action } from "@/utils/decorator";
 
 @EnKaId(10000084, "林尼")
 @Weapon(WeaponType.Bow)
 @Element(ElementType.Pyro)
 @BaseData(Rarity.Five, 11021, 318, 538, 60)
 @Icons("UI_AvatarIcon_Liney")
-class LineyData extends Character implements ICharacterInfo {
+export class LineyData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }

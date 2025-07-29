@@ -10,7 +10,7 @@ import {
   Rarity,
   WeaponType,
 } from "@/types/enum";
-import { Weapon, Element, Icons, EnKaId, BaseData, action } from "../decorator";
+import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 import { Constellation_E_3, Constellation_Q_5, S_80_CRITALHUNT_38P } from "../buffs";
 
 @EnKaId(10000046, "胡桃")
@@ -18,7 +18,7 @@ import { Constellation_E_3, Constellation_Q_5, S_80_CRITALHUNT_38P } from "../bu
 @Element(ElementType.Pyro)
 @BaseData(Rarity.Five, 15552, 106, 876, 60)
 @Icons("UI_AvatarIcon_Hutao")
-class HutaoData extends Character implements ICharacterInfo {
+export class HutaoData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }

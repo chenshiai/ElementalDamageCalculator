@@ -3,14 +3,14 @@ import { ICharacterInfo } from "@/types/interface";
 import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
 import { A_80_ATK_24P, Constellation_E_3, Constellation_Q_5 } from "../buffs";
 
-import { EnKaId, Weapon, Element, BaseData, Icons, action } from "../decorator";
+import { EnKaId, Weapon, Element, BaseData, Icons, action } from "@/utils/decorator";
 
 @EnKaId(10000108, "蓝砚")
 @Weapon(WeaponType.Magic)
 @Element(ElementType.Anemo)
 @BaseData(Rarity.Four, 9244, 251, 580, 60)
 @Icons("UI_AvatarIcon_Lanyan")
-class LanYanData extends Character implements ICharacterInfo {
+export class LanYanData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }

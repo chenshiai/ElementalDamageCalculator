@@ -12,14 +12,14 @@ import {
 } from "@/types/enum";
 import { Constellation_E_3, Constellation_Q_5, S_80_CRITALHUNT_38P } from "../buffs";
 
-import { EnKaId, Weapon, Element, BaseData, Icons, action } from "../decorator";
+import { EnKaId, Weapon, Element, BaseData, Icons, action } from "@/utils/decorator";
 
 @EnKaId(10000099, "艾梅莉埃")
 @Weapon(WeaponType.Polearms)
 @Element(ElementType.Dendro)
 @BaseData(Rarity.Five, 13568, 335, 730, 50)
 @Icons("UI_AvatarIcon_Emilie")
-class EmilieData extends Character implements ICharacterInfo {
+export class EmilieData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }

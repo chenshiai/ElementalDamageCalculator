@@ -3,7 +3,7 @@ import { showConfirmDialog, Tab, Tabs, Icon } from "vant";
 import db from "@/utils/db";
 import { IUserSavedCalculationData, IPlayerInfoData, calDB, playerInfoDB } from "@/constants/db";
 import { ref, watchEffect, computed, onMounted } from "vue";
-import { getEnkaUI } from "@/constants/characters-config/decorator";
+import { getEnkaUI } from "@/utils/decorator";
 import useImport from "@/utils/enka/useImport";
 
 const emit = defineEmits<{
@@ -81,10 +81,12 @@ const recalculation = (data: IUserSavedCalculationData) => {
 };
 
 import { Character } from "@/constants/characters-config/character";
-import { Weapons } from "@/constants/characters-config/weapon";
-import { IRelicItem } from "@/constants/characters-config/relic-class";
-import { getAppendPropName2, percentProps } from "@/constants/characters-config/append-prop";
+import { Weapons } from "@/constants/weapon-config/weapon";
+import { IRelicItem } from "@/constants/relics-config/relic-class";
+import { getAppendPropName2, percentProps } from "@/constants/append-prop";
 const getAvatarIcon = (enkaId: number) => {
+  console.log(enkaId);
+  
   return Character.find((c) => c.enkaId === enkaId).icons.avatarIcon;
 };
 const getCharacterName = (enkaId: number) => {

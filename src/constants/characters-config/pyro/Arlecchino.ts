@@ -2,14 +2,14 @@ import Character from "../character-class";
 import { ICharacterInfo } from "@/types/interface";
 import { ActionOn, AttackType, BuffType, ElementType, EnchantingType, Rarity, WeaponType } from "@/types/enum";
 import { Constellation_A_3, Constellation_Q_5, S_80_CRITALHUNT_38P } from "../buffs";
-import { EnKaId, Weapon, Element, BaseData, Icons, action } from "../decorator";
+import { EnKaId, Weapon, Element, BaseData, Icons, action } from "@/utils/decorator";
 
 @EnKaId(10000096, "阿蕾奇诺")
 @Weapon(WeaponType.Polearms)
 @Element(ElementType.Pyro)
 @BaseData(Rarity.Five, 13103, 342, 765, 60)
 @Icons("UI_AvatarIcon_Arlecchino")
-class ArlecchinoData extends Character implements ICharacterInfo {
+export class ArlecchinoData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }

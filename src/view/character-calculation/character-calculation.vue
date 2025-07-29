@@ -105,7 +105,7 @@ const saveCalculationResult = (title: string) => {
 
 /** @module 数据重算（再次编辑） */
 import { Character } from "@/constants/characters-config/character";
-import { Weapons } from "@/constants/characters-config/weapon";
+import { Weapons } from "@/constants/weapon-config/weapon";
 const recalculation = (data: IUserSavedCalculationData) => {
   const cha = Character.find((c) => c.enkaId === data.characterEnkaId);
 

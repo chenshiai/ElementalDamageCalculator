@@ -10,7 +10,7 @@ import {
   Rarity,
   WeaponType,
 } from "@/types/enum";
-import { Weapon, Element, Icons, EnKaId, BaseData, action } from "../decorator";
+import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 import { A_80_HP_24P, Constellation_E_5, Constellation_Q_3 } from "../buffs";
 
 @EnKaId(10000072, "坎蒂丝")
@@ -18,7 +18,7 @@ import { A_80_HP_24P, Constellation_E_5, Constellation_Q_3 } from "../buffs";
 @Element(ElementType.Hydro)
 @BaseData(Rarity.Four, 10875, 212, 683, 60)
 @Icons("UI_AvatarIcon_Candace")
-class CandaceData extends Character implements ICharacterInfo {
+export class CandaceData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }

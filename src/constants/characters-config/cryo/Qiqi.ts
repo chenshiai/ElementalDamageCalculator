@@ -1,7 +1,7 @@
 import Character from "../character-class";
 import { IBuffBase, ICharacterInfo } from "@/types/interface";
 import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
-import { Weapon, Element, Icons, EnKaId, BaseData, action } from "../decorator";
+import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 import { Constellation_E_3, Constellation_Q_5, S_80_HEALADD_22P } from "../buffs";
 
 @EnKaId(10000035, "七七")
@@ -9,7 +9,7 @@ import { Constellation_E_3, Constellation_Q_5, S_80_HEALADD_22P } from "../buffs
 @Element(ElementType.Cryo)
 @BaseData(Rarity.Five, 12368, 287, 922, 80)
 @Icons("UI_AvatarIcon_Qiqi")
-class QiqiData extends Character implements ICharacterInfo {
+export class QiqiData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }

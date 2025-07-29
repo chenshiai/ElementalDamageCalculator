@@ -1,7 +1,7 @@
 import Character from "../character-class";
 import { IBuffBase, ICharacterInfo } from "@/types/interface";
 import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
-import { Weapon, Element, Icons, EnKaId, BaseData, action } from "../decorator";
+import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 import { A_80_HP_24P, Constellation_E_5, Constellation_Q_3 } from "../buffs";
 
 // .replaceAll("%", '').replaceAll(/[\u4e00-\u9fff]+/g, "").replaceAll("\t",",").split(",").map(i=>Math.round(i*100)/10000)
@@ -11,7 +11,7 @@ import { A_80_HP_24P, Constellation_E_5, Constellation_Q_3 } from "../buffs";
 @Element(ElementType.Hydro)
 @BaseData(Rarity.Four, 12506, 189, 506, 60)
 @Icons("UI_AvatarIcon_Dahlia")
-class DahliaData extends Character implements ICharacterInfo {
+export class DahliaData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }

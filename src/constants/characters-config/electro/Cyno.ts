@@ -2,14 +2,14 @@ import Character from "../character-class";
 import { IBuffBase, ICharacterInfo } from "@/types/interface";
 import { ActionOn, AttackType, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
 import { Constellation_E_5, Constellation_Q_3, S_80_CRITALHUNT_38P } from "../buffs";
-import { EnKaId, Weapon, Element, BaseData, Icons, action } from "../decorator";
+import { EnKaId, Weapon, Element, BaseData, Icons, action } from "@/utils/decorator";
 
 @EnKaId(10000071, "赛诺")
 @Weapon(WeaponType.Polearms)
 @Element(ElementType.Electro)
 @BaseData(Rarity.Five, 12491, 318, 859, 80)
 @Icons("UI_AvatarIcon_Cyno")
-class CynoData extends Character implements ICharacterInfo {
+export class CynoData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }

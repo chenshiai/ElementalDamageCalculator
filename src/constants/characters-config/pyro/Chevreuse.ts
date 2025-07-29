@@ -1,7 +1,7 @@
 import Character from "../character-class";
 import { IBuffBase, ICharacterInfo } from "@/types/interface";
 import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
-import { Weapon, Element, Icons, EnKaId, BaseData, action } from "../decorator";
+import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 import { A_80_HP_24P, Constellation_E_3, Constellation_Q_5 } from "../buffs";
 
 @EnKaId(10000090, "夏沃蕾")
@@ -9,7 +9,7 @@ import { A_80_HP_24P, Constellation_E_3, Constellation_Q_5 } from "../buffs";
 @Element(ElementType.Pyro)
 @BaseData(Rarity.Four, 11962, 193, 605, 60)
 @Icons("UI_AvatarIcon_Chevreuse")
-class ChevreuseData extends Character implements ICharacterInfo {
+export class ChevreuseData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }

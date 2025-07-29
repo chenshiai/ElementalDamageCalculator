@@ -11,14 +11,14 @@ import {
   WeaponType,
 } from "@/types/enum";
 import { Constellation_E_5, Constellation_Q_3, S_80_CRITAL_19P } from "../buffs";
-import { EnKaId, Weapon, Element, BaseData, Icons, action } from "../decorator";
+import { EnKaId, Weapon, Element, BaseData, Icons, action } from "@/utils/decorator";
 
 @EnKaId(10000089, "芙宁娜")
 @Weapon(WeaponType.Sword)
 @Element(ElementType.Hydro)
 @BaseData(Rarity.Five, 15307, 244, 696, 60)
 @Icons("UI_AvatarIcon_Furina")
-class FurinaData extends Character implements ICharacterInfo {
+export class FurinaData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }

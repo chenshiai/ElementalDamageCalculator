@@ -2,14 +2,14 @@ import Character from "../character-class";
 import { ICharacterInfo } from "@/types/interface";
 import { AttackType, BuffTarget, BuffType, ElementType, EnchantingType, Rarity, WeaponType } from "@/types/enum";
 import { Constellation_E_3, Constellation_Q_5, S_80_CRITALHUNT_38P } from "../buffs";
-import { EnKaId, Weapon, Element, BaseData, Icons, action } from "../decorator";
+import { EnKaId, Weapon, Element, BaseData, Icons, action } from "@/utils/decorator";
 
 @EnKaId(10000091, "娜维娅")
 @Weapon(WeaponType.GreatSword)
 @Element(ElementType.Geo)
 @BaseData(Rarity.Five, 12650, 352, 793, 60)
 @Icons("UI_AvatarIcon_Navia")
-class NaviaData extends Character implements ICharacterInfo {
+export class NaviaData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }

@@ -10,7 +10,7 @@ import {
   Rarity,
   WeaponType,
 } from "@/types/enum";
-import { Weapon, Element, Icons, EnKaId, BaseData, action } from "../decorator";
+import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 import { A_80_CHARGE_26P, Constellation_E_3, Constellation_Q_5 } from "../buffs";
 
 @EnKaId(10000032, "班尼特")
@@ -18,7 +18,7 @@ import { A_80_CHARGE_26P, Constellation_E_3, Constellation_Q_5 } from "../buffs"
 @Element(ElementType.Pyro)
 @BaseData(Rarity.Four, 12397, 191, 771, 60)
 @Icons("UI_AvatarIcon_Bennett")
-class BennettData extends Character implements ICharacterInfo {
+export class BennettData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }

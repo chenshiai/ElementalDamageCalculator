@@ -8,6 +8,8 @@
     "module": "ES2020",
     "types": ["vite/client"],
     "moduleResolution": "node",
-    "downlevelIteration": true
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   }
 }

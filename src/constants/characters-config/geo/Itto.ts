@@ -10,7 +10,7 @@ import {
   Rarity,
   WeaponType,
 } from "@/types/enum";
-import { Weapon, Element, Icons, EnKaId, BaseData, action } from "../decorator";
+import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 import { Constellation_E_3, Constellation_Q_5, S_80_CRITAL_19P } from "../buffs";
 
 @EnKaId(10000057, "荒泷一斗")
@@ -18,7 +18,7 @@ import { Constellation_E_3, Constellation_Q_5, S_80_CRITAL_19P } from "../buffs"
 @Element(ElementType.Geo)
 @BaseData(Rarity.Five, 12858, 227, 959, 70)
 @Icons("UI_AvatarIcon_Itto")
-class IttoData extends Character implements ICharacterInfo {
+export class IttoData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }

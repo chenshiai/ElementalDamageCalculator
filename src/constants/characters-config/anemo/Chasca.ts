@@ -2,14 +2,14 @@ import Character from "../character-class";
 import { ICharacterInfo } from "@/types/interface";
 import { AttackType, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
 import { Constellation_E_3, Constellation_Q_5, S_80_CRITAL_19P, S_80_MYSTERY_115 } from "../buffs";
-import { EnKaId, Weapon, Element, BaseData, Icons, action } from "../decorator";
+import { EnKaId, Weapon, Element, BaseData, Icons, action } from "@/utils/decorator";
 
 @EnKaId(10000104, "恰斯卡")
 @Weapon(WeaponType.Bow)
 @Element(ElementType.Anemo)
 @BaseData(Rarity.Five, 9797, 347, 615, 60)
 @Icons("UI_AvatarIcon_Chasca")
-class ChascaData extends Character implements ICharacterInfo {
+export class ChascaData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }

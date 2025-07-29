@@ -10,7 +10,7 @@ import {
   Rarity,
   WeaponType,
 } from "@/types/enum";
-import { Weapon, Element, Icons, EnKaId, BaseData, action } from "../decorator";
+import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 import { A_80_DEF_24P, Constellation_E_3, Constellation_Q_5 } from "../buffs";
 
 @EnKaId(10000034, "诺艾尔")
@@ -18,7 +18,7 @@ import { A_80_DEF_24P, Constellation_E_3, Constellation_Q_5 } from "../buffs";
 @Element(ElementType.Geo)
 @BaseData(Rarity.Four, 12071, 191, 799, 60)
 @Icons("UI_AvatarIcon_Noel")
-class NoelData extends Character implements ICharacterInfo {
+export class NoelData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }

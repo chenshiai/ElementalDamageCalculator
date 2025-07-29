@@ -10,7 +10,7 @@ import {
   Rarity,
   WeaponType,
 } from "@/types/enum";
-import { Weapon, Element, Icons, EnKaId, BaseData, action } from "../decorator";
+import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 import { A_80_MYSTERY_96, Constellation_E_5, Constellation_Q_3 } from "../buffs";
 
 @EnKaId(10000081, "卡维")
@@ -18,7 +18,7 @@ import { A_80_MYSTERY_96, Constellation_E_5, Constellation_Q_3 } from "../buffs"
 @Element(ElementType.Dendro)
 @BaseData(Rarity.Four, 11962, 234, 751, 80)
 @Icons("UI_AvatarIcon_Kaveh")
-class KavehData extends Character implements ICharacterInfo {
+export class KavehData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }

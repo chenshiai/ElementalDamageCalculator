@@ -1,7 +1,7 @@
 import Character from "../character-class";
 import { IBuffBase, ICharacterInfo } from "@/types/interface";
 import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
-import { Weapon, Element, Icons, EnKaId, BaseData, action } from "../decorator";
+import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 import { A_80_HP_24P, Constellation_E_3, Constellation_Q_5 } from "../buffs";
 
 @EnKaId(10000077, "瑶瑶")
@@ -9,7 +9,7 @@ import { A_80_HP_24P, Constellation_E_3, Constellation_Q_5 } from "../buffs";
 @Element(ElementType.Dendro)
 @BaseData(Rarity.Four, 12289, 212, 751, 80)
 @Icons("UI_AvatarIcon_Yaoyao")
-class YaoyaoData extends Character implements ICharacterInfo {
+export class YaoyaoData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }

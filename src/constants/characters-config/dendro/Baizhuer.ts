@@ -6,14 +6,14 @@ import {
   Constellation_Q_3,
   S_80_HP_28P,
 } from "../buffs";
-import { EnKaId, Weapon, Element, BaseData, Icons, action } from "../decorator";
+import { EnKaId, Weapon, Element, BaseData, Icons, action } from "@/utils/decorator";
 
 @EnKaId(10000082, "白术")
 @Weapon(WeaponType.Magic)
 @Element(ElementType.Dendro)
 @BaseData(Rarity.Five, 13348, 193, 500, 80)
 @Icons("UI_AvatarIcon_Baizhuer")
-class BaizhuerData extends Character implements ICharacterInfo {
+export class BaizhuerData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }

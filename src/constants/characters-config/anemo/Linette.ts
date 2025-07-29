@@ -10,7 +10,7 @@ import {
   Rarity,
   WeaponType,
 } from "@/types/enum";
-import { Weapon, Element, Icons, EnKaId, BaseData, action } from "../decorator";
+import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 import { A_80_ATK_24P, Constellation_E_5, Constellation_Q_3 } from "../buffs";
 
 @EnKaId(10000083, "琳妮特")
@@ -18,7 +18,7 @@ import { A_80_ATK_24P, Constellation_E_5, Constellation_Q_3 } from "../buffs";
 @Element(ElementType.Anemo)
 @BaseData(Rarity.Four, 12397, 232, 712, 70)
 @Icons("UI_AvatarIcon_Linette")
-class LinetteData extends Character implements ICharacterInfo {
+export class LinetteData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }

@@ -1,7 +1,7 @@
 import Character from "../character-class";
 import { IBuffBase, ICharacterInfo } from "@/types/interface";
 import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
-import { Weapon, Element, Icons, EnKaId, BaseData, action } from "../decorator";
+import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 import { Constellation_E_5, Constellation_Q_3, S_80_CRITALHUNT_38P } from "../buffs";
 
 @EnKaId(10000114, "丝柯克")
@@ -9,7 +9,7 @@ import { Constellation_E_5, Constellation_Q_3, S_80_CRITALHUNT_38P } from "../bu
 @Element(ElementType.Cryo)
 @BaseData(Rarity.Five, 12417, 359, 806, 0)
 @Icons("UI_AvatarIcon_SkirkNew")
-class SkirkData extends Character implements ICharacterInfo {
+export class SkirkData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }

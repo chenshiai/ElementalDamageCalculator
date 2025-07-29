@@ -6,14 +6,14 @@ import {
   Constellation_Q_5,
   S_80_ATK_28P,
 } from "../buffs";
-import { Weapon, Element, Icons, EnKaId, BaseData, action } from "../decorator";
+import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 
 @EnKaId(10000063, "申鹤")
 @Weapon(WeaponType.Polearms)
 @Element(ElementType.Cryo)
 @BaseData(Rarity.Five, 12993, 304, 830, 80)
 @Icons("UI_AvatarIcon_Shenhe")
-class ShenheData extends Character implements ICharacterInfo {
+export class ShenheData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }

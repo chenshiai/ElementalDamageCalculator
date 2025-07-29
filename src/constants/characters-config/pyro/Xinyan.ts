@@ -1,7 +1,7 @@
 import Character from "../character-class";
 import { IBuffBase, ICharacterInfo } from "@/types/interface";
 import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
-import { Weapon, Element, Icons, EnKaId, BaseData, action } from "../decorator";
+import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 import { A_80_ATK_24P, Constellation_E_3, Constellation_Q_5 } from "../buffs";
 
 @EnKaId(10000044, "辛焱")
@@ -9,7 +9,7 @@ import { A_80_ATK_24P, Constellation_E_3, Constellation_Q_5 } from "../buffs";
 @Element(ElementType.Pyro)
 @BaseData(Rarity.Four, 11201, 249, 799, 60)
 @Icons("UI_AvatarIcon_Xinyan")
-class XinyanData extends Character implements ICharacterInfo {
+export class XinyanData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }

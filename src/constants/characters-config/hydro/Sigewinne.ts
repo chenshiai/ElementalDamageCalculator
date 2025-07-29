@@ -2,14 +2,14 @@ import Character from "../character-class";
 import { ICharacterInfo } from "@/types/interface";
 import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
 import { Constellation_E_3, Constellation_Q_5, S_80_HP_28P } from "../buffs";
-import { EnKaId, Weapon, Element, BaseData, Icons, action } from "../decorator";
+import { EnKaId, Weapon, Element, BaseData, Icons, action } from "@/utils/decorator";
 
 @EnKaId(10000099, "希格雯")
 @Weapon(WeaponType.Bow)
 @Element(ElementType.Hydro)
 @BaseData(Rarity.Five, 13348, 193, 500, 70)
 @Icons("UI_AvatarIcon_Sigewinne")
-class SigewinneData extends Character implements ICharacterInfo {
+export class SigewinneData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }

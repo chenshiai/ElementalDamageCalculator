@@ -1,7 +1,7 @@
 import Character from "../character-class";
 import { IBuffBase, ICharacterInfo } from "@/types/interface";
 import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
-import { Weapon, Element, Icons, EnKaId, BaseData, action } from "../decorator";
+import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 import { Constellation_E_5, Constellation_Q_3, S_80_HEALADD_22P } from "../buffs";
 
 @EnKaId(10000003, "琴")
@@ -9,7 +9,7 @@ import { Constellation_E_5, Constellation_Q_3, S_80_HEALADD_22P } from "../buffs
 @Element(ElementType.Anemo)
 @BaseData(Rarity.Five, 14695, 239, 769, 80)
 @Icons("UI_AvatarIcon_Qin")
-class QinData extends Character implements ICharacterInfo {
+export class QinData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }

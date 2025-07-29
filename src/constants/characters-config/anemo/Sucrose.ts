@@ -1,7 +1,7 @@
 import Character from "../character-class";
 import { IBuffBase, ICharacterInfo } from "@/types/interface";
 import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
-import { Weapon, Element, Icons, EnKaId, BaseData, action } from "../decorator";
+import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 import { A_80_ANEMO_24P, Constellation_E_3, Constellation_Q_5 } from "../buffs";
 
 @EnKaId(10000043, "砂糖")
@@ -9,7 +9,7 @@ import { A_80_ANEMO_24P, Constellation_E_3, Constellation_Q_5 } from "../buffs";
 @Element(ElementType.Anemo)
 @BaseData(Rarity.Four, 9244, 170, 703, 80)
 @Icons("UI_AvatarIcon_Sucrose")
-class SucroseData extends Character implements ICharacterInfo {
+export class SucroseData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }

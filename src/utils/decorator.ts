@@ -1,5 +1,5 @@
 import { IRate, ISkillRate } from "@/types/interface";
-import { AttackType, ElementType, Rarity, WeaponType } from "@/types/enum";
+import { AppendProp, AttackType, ElementType, Rarity, WeaponType } from "@/types/enum";
 
 /**
  * 图片资源的获取地址拼接
@@ -16,15 +16,15 @@ export function getEnkaUI(
   homdgcat: boolean = false
 ): string {
   if (local) {
-    return `/ui/${name}.png`
+    return `/ui/${name}.png`;
   }
   if (homdgcat) {
-    return `https://homdgcat.wiki/homdgcat-res/AvatarSkill/${name}.png`
+    return `https://homdgcat.wiki/homdgcat-res/AvatarSkill/${name}.png`;
   }
   if (proxy) {
-    return `https://8.155.52.59/ui/${name}.png`
+    return `https://8.155.52.59/ui/${name}.png`;
   } else {
-    return `https://enka.network/ui/${name}.png`
+    return `https://enka.network/ui/${name}.png`;
   }
 }
 export function Weapon(weaponType: WeaponType): any {
@@ -37,6 +37,7 @@ export function Weapon(weaponType: WeaponType): any {
     };
   };
 }
+
 export function Element(ElementType: ElementType): any {
   return function (target: any) {
     return class extends target {
@@ -51,9 +52,6 @@ export function Element(ElementType: ElementType): any {
 export function Icons(str: string, consts?: string, gacha?: string): any {
   return function (target: any) {
     return class extends target {
-      constructor() {
-        super();
-      }
       icons = {
         avatarIcon: getEnkaUI(str),
         constsIcon: [
@@ -66,6 +64,9 @@ export function Icons(str: string, consts?: string, gacha?: string): any {
         ].map((str) => getEnkaUI(str, false, false, true)),
         gachaImage: `https://enka.network/ui/${gacha || str.replace("UI_AvatarIcon_", "UI_Gacha_AvatarImg_")}.png`,
       };
+      constructor() {
+        super();
+      }
     };
   };
 }
@@ -73,11 +74,11 @@ export function Icons(str: string, consts?: string, gacha?: string): any {
 export function EnKaId(id: number, name: string): any {
   return function (target: any) {
     return class extends target {
+      enkaId = id;
+      name = name;
       constructor() {
         super();
       }
-      enkaId = id;
-      name = name;
     };
   };
 }
@@ -85,18 +86,55 @@ export function EnKaId(id: number, name: string): any {
 export function BaseData(rarity: Rarity, hp: number, atk: number, def: number, burstCharge: number): any {
   return function (target: any) {
     return class extends target {
-      constructor() {
-        super();
-      }
       rarity = rarity;
       baseHP = hp;
       baseATK = atk;
       baseDEF = def;
       burstCharge = burstCharge;
+      constructor() {
+        super();
+      }
     };
   };
 }
 
+export function WeaponData(
+  type: WeaponType,
+  rarity: Rarity,
+  baseAtk: number,
+  appendPropId: AppendProp,
+  statValue: number
+): any {
+  return function (target: any) {
+    return class extends target {
+      weaponType = type;
+      rarity = rarity;
+      weaponStats = [
+        {
+          appendPropId: AppendProp.BASE_ATTACK,
+          statValue: baseAtk,
+        },
+        {
+          appendPropId,
+          statValue,
+        },
+      ];
+      constructor() {
+        super();
+      }
+    };
+  };
+}
+export function WeaponIcon(str: string): any {
+  return function (target: any) {
+    return class extends target {
+      icon = getEnkaUI(str);
+      constructor() {
+        super();
+      }
+    };
+  };
+}
 export function action(
   label: string,
   attackType: AttackType,
@@ -111,4 +149,15 @@ export function action(
     rate,
     special,
   };
+}
+
+export function highlight(strings, ...values) {
+  let result = "";
+  strings.forEach((string, index) => {
+    result += string;
+    if (index < values.length) {
+      result += `<span class="highlight">${values[index]}</span>`;
+    }
+  });
+  return result;
 }

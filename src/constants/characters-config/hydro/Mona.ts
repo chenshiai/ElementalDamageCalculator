@@ -1,7 +1,7 @@
 import Character from "../character-class";
 import { IBuffBase, ICharacterInfo } from "@/types/interface";
 import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
-import { Weapon, Element, Icons, EnKaId, BaseData, action } from "../decorator";
+import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 import { Constellation_E_5, Constellation_Q_3, S_80_CHARGE_32P } from "../buffs";
 
 @EnKaId(10000041, "莫娜")
@@ -9,7 +9,7 @@ import { Constellation_E_5, Constellation_Q_3, S_80_CHARGE_32P } from "../buffs"
 @Element(ElementType.Hydro)
 @BaseData(Rarity.Five, 10409, 287, 653, 60)
 @Icons("UI_AvatarIcon_Mona")
-class MonaData extends Character implements ICharacterInfo {
+export class MonaData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }

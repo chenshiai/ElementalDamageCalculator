@@ -3,7 +3,7 @@ import calculateBuffs from "./calculate-buffs";
 import { calculateRelicStat, calculateWeaponSubStat } from "./calculate-equip";
 import { IBuffBase, ICalculatorValue, ICharacterInfo, IWeaponInfo } from "@/types/interface";
 import CalculatorValueClass from "@/constants/characters-config/calculator-value-class";
-import { IRelicItem } from "@/constants/characters-config/relic-class";
+import { IRelicItem } from "@/constants/relics-config/relic-class";
 
 interface ICalculatorPanelArgs {
   characterInfo: ICharacterInfo;

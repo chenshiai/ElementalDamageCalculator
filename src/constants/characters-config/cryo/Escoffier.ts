@@ -6,14 +6,14 @@ import {
   Constellation_Q_5,
   S_80_CRITAL_19P,
 } from "../buffs";
-import { EnKaId, Weapon, Element, BaseData, Icons, action } from "../decorator";
+import { EnKaId, Weapon, Element, BaseData, Icons, action } from "@/utils/decorator";
 
 @EnKaId(10000112, "爱可菲")
 @Weapon(WeaponType.Polearms)
 @Element(ElementType.Cryo)
 @BaseData(Rarity.Five, 13348, 370, 732, 60)
 @Icons("UI_AvatarIcon_Escoffier")
-class EscoffierData extends Character implements ICharacterInfo {
+export class EscoffierData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }

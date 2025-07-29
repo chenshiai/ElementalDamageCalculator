@@ -1,11 +1,11 @@
 import db from "@/utils/db";
 import { IUserSavedCalculationData, calDB } from "@/constants/db";
 import { EquipType } from "@/types/enum";
-import { IRelicItem, MainstatType, SubstatType } from "@/constants/characters-config/relic-class";
+import { IRelicItem, MainstatType, SubstatType } from "@/constants/relics-config/relic-class";
 import { Character } from "@/constants/characters-config/character";
-import relicLibrary from "@/constants/characters-config/relic";
+import relicLibrary from "@/constants/relics-config/relic";
 import calculationPanel from "@/utils/calculate/calculate-panel";
-import { Weapons } from "@/constants/characters-config/weapon";
+import { Weapons } from "@/constants/weapon-config/weapon";
 import useWeanponInfo from "@/view/character-calculation/modules/weapon-info/index.js";
 import useCharacterInfo from "@/view/character-calculation/modules/chararcter-info/index.js";
 import useRelicInfo from "@/view/character-calculation/modules/relic-info/index.js";

@@ -1,4 +1,4 @@
-
+import { WeaponStats } from "@/types";
 import { AppendProp, AttackType, ElementType, Rarity, WeaponType } from "@/types/enum";
 import { IRate, ISkillRate, IWeaponInfo } from "@/types/interface";
 
@@ -40,22 +40,6 @@ export function cha(enkaId: number, name: string, element: ElementType, weapon: 
   };
 }
 
-export function action(
-  label: string,
-  attackType: AttackType,
-  elementType: ElementType,
-  rate: IRate,
-  special?: string
-): ISkillRate {
-  return {
-    label,
-    attackType,
-    elementType,
-    rate,
-    special,
-  };
-}
-
 export function highlight(strings, ...values) {
   let result = "";
   strings.forEach((string, index) => {
@@ -67,12 +51,8 @@ export function highlight(strings, ...values) {
   return result;
 }
 
-export interface WeaponStats {
-  baseAtk: number;
-  appendPropId: AppendProp;
-  statValue: number;
-}
-export type WeaponConfig = Pick<IWeaponInfo, "name" | "enkaId" | "weaponType" | "icon" | "rarity"> & WeaponStats;
+export type WeaponConfig = Pick<IWeaponInfo, "name" | "enkaId" | "weaponType" | "icon" | "rarity"> &
+  WeaponStats & { baseAtk: number };
 
 export function createWeapon(
   { name, enkaId, weaponType, rarity, icon, baseAtk, appendPropId, statValue }: WeaponConfig,

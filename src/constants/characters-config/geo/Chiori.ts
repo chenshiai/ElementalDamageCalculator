@@ -2,14 +2,14 @@ import Character from "../character-class";
 import { ICharacterInfo } from "@/types/interface";
 import { ActionOn, AttackType, BuffType, ElementType, EnchantingType, Rarity, WeaponType } from "@/types/enum";
 import { Constellation_E_3, Constellation_Q_5, S_80_CRITAL_19P } from "../buffs";
-import { EnKaId, Weapon, Element, BaseData, Icons, action } from "../decorator";
+import { EnKaId, Weapon, Element, BaseData, Icons, action } from "@/utils/decorator";
 
 @EnKaId(10000094, "千织")
 @Weapon(WeaponType.Sword)
 @Element(ElementType.Geo)
 @BaseData(Rarity.Five, 11439, 323, 953, 50)
 @Icons("UI_AvatarIcon_Chiori")
-class ChioriData extends Character implements ICharacterInfo {
+export class ChioriData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }

@@ -2,14 +2,14 @@ import Character from "../character-class";
 import { ICharacterInfo } from "@/types/interface";
 import { ActionOn, AttackType, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
 import { Constellation_E_3, Constellation_Q_5, S_80_CRITAL_19P } from "../buffs";
-import { EnKaId, Weapon, Element, BaseData, Icons, action } from "../decorator";
+import { EnKaId, Weapon, Element, BaseData, Icons, action } from "@/utils/decorator";
 
 @EnKaId(10000098, "克洛琳德")
 @Weapon(WeaponType.Sword)
 @Element(ElementType.Electro)
 @BaseData(Rarity.Five, 12956, 337, 784, 60)
 @Icons("UI_AvatarIcon_Clorinde")
-class ClorindeData extends Character implements ICharacterInfo {
+export class ClorindeData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }

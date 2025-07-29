@@ -1,7 +1,7 @@
 import Character from "../character-class";
 import { IBuffBase, ICharacterInfo } from "@/types/interface";
 import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
-import { Weapon, Element, Icons, EnKaId, BaseData, action } from "../decorator";
+import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 import { A_80_GEO_24P, Constellation_E_3, Constellation_Q_5 } from "../buffs";
 
 
@@ -10,7 +10,7 @@ import { A_80_GEO_24P, Constellation_E_3, Constellation_Q_5 } from "../buffs";
 @Element(ElementType.Geo)
 @BaseData(Rarity.Four,11799, 217, 792, 70)
 @Icons("UI_AvatarIcon_Kachina")
-class KachinaData extends Character implements ICharacterInfo {
+export class KachinaData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }

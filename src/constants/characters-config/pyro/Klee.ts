@@ -1,7 +1,7 @@
 import Character from "../character-class";
 import { IBuffBase, ICharacterInfo } from "@/types/interface";
 import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
-import { Weapon, Element, Icons, EnKaId, BaseData, action } from "../decorator";
+import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 import { Constellation_E_3, Constellation_Q_5, S_80_PYRO_28P } from "../buffs";
 
 @EnKaId(10000029, "可莉")
@@ -9,7 +9,7 @@ import { Constellation_E_3, Constellation_Q_5, S_80_PYRO_28P } from "../buffs";
 @Element(ElementType.Pyro)
 @BaseData(Rarity.Five, 10287, 311, 615, 60)
 @Icons("UI_AvatarIcon_Klee")
-class KleeData extends Character implements ICharacterInfo {
+export class KleeData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }

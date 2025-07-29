@@ -1,7 +1,7 @@
 import Character from "../character-class";
 import { IBuffBase, ICharacterInfo } from "@/types/interface";
 import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
-import { Weapon, Element, Icons, EnKaId, BaseData, action, getEnkaUI } from "../decorator";
+import { Weapon, Element, Icons, EnKaId, BaseData, action, getEnkaUI } from "@/utils/decorator";
 import { A_80_ATK_24P, Constellation_E_5, Constellation_Q_3, ExtraBuff } from "../buffs";
 
 @EnKaId(1000000707, "荧·雷")
@@ -9,7 +9,7 @@ import { A_80_ATK_24P, Constellation_E_5, Constellation_Q_3, ExtraBuff } from ".
 @Element(ElementType.Electro)
 @BaseData(Rarity.Five, 10875, 213, 683, 60)
 @Icons("UI_AvatarIcon_PlayerGirl", "PlayerElectric")
-class PlayerGirlData extends Character implements ICharacterInfo {
+export class PlayerGirlData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }

@@ -16,7 +16,7 @@ import {
 import { ref, computed, nextTick } from "vue";
 import _ from "lodash";
 
-import relics, { IRelicLibraryItemEquip } from "@/constants/characters-config/relic";
+import relics, { IRelicLibraryItemEquip } from "@/constants/relics-config/relic";
 import {
   IRelicItem,
   MainstatType,
@@ -25,13 +25,13 @@ import {
   ReliceMainStats_Three,
   RelicItem,
   RelicStatType,
-} from "@/constants/characters-config/relic-class";
+} from "@/constants/relics-config/relic-class";
 import {
   getAppendPropName,
   RelicText,
   EquipTypeMainstats,
   EquipTypeSubstats,
-} from "@/constants/characters-config/append-prop";
+} from "@/constants/append-prop";
 import { relicDB } from "@/constants/db";
 
 import { IRelicBase } from "@/types/interface";

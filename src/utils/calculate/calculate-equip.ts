@@ -1,4 +1,4 @@
-import { IRelicItem, MainstatType, SubstatType } from "@/constants/characters-config/relic-class";
+import { IRelicItem, MainstatType, SubstatType } from "@/constants/relics-config/relic-class";
 import { AppendProp } from "@/types/enum";
 import { ICalculatorValue, IWeaponInfo } from "@/types/interface";
 

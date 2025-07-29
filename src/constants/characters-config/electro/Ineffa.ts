@@ -1,7 +1,7 @@
 import Character from "../character-class";
 import { IBuffBase, ICharacterInfo } from "@/types/interface";
 import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
-import { Weapon, Element, Icons, EnKaId, BaseData, action } from "../decorator";
+import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 import { S_80_CRITAL_19P, Constellation_E_3, Constellation_Q_5 } from "../buffs";
 
 @EnKaId(10000116, "伊涅芙")
@@ -9,7 +9,7 @@ import { S_80_CRITAL_19P, Constellation_E_3, Constellation_Q_5 } from "../buffs"
 @Element(ElementType.Electro)
 @BaseData(Rarity.Five, 12613, 330, 828, 60)
 @Icons("UI_AvatarIcon_Ineffa")
-class IneffaData extends Character implements ICharacterInfo {
+export class IneffaData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }

@@ -1,7 +1,7 @@
 import Character from "../character-class";
 import { IBuffBase, ICharacterInfo } from "@/types/interface";
 import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
-import { Weapon, Element, Icons, EnKaId, BaseData, action } from "../decorator";
+import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 import { A_80_ATK_24P, Constellation_A_3, Constellation_E_5 } from "../buffs";
 
 @EnKaId(10000085, "菲米尼")
@@ -9,7 +9,7 @@ import { A_80_ATK_24P, Constellation_A_3, Constellation_E_5 } from "../buffs";
 @Element(ElementType.Cryo)
 @BaseData(Rarity.Four, 12070, 255, 708, 60)
 @Icons("UI_AvatarIcon_Freminet")
-class FreminetData extends Character implements ICharacterInfo {
+export class FreminetData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }

@@ -10,7 +10,7 @@ import {
   Rarity,
   WeaponType,
 } from "@/types/enum";
-import { Weapon, Element, Icons, EnKaId, BaseData, action, getEnkaUI } from "../decorator";
+import { Weapon, Element, Icons, EnKaId, BaseData, action, getEnkaUI } from "@/utils/decorator";
 import { S_80_CRYO_28P } from "../buffs";
 
 @EnKaId(10000062, "埃洛伊")
@@ -18,7 +18,7 @@ import { S_80_CRYO_28P } from "../buffs";
 @Element(ElementType.Cryo)
 @BaseData(Rarity.Five, 10899, 234, 676, 40)
 @Icons("UI_AvatarIcon_Aloy")
-class AloyData extends Character implements ICharacterInfo {
+export class AloyData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
@@ -32,7 +32,7 @@ class AloyData extends Character implements ICharacterInfo {
       "UI_Talent_S_Aloy_Lock",
       "UI_Talent_S_Aloy_Lock",
       "UI_Talent_S_Aloy_Lock",
-    ].map(getEnkaUI),
+    ].map((str) => getEnkaUI(str)),
   };
   normalAttack = [
     action(

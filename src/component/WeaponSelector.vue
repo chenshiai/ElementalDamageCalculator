@@ -52,7 +52,7 @@
 
 <script setup lang="ts">
 import { ref, computed, watch } from "vue";
-import { Weapons } from "@/constants/characters-config/weapon";
+import { Weapons } from "@/constants/weapon-config/weapon";
 import { IWeaponInfo } from "@/types/interface";
 import { Search, Checkbox, CheckboxGroup, RadioGroup, Radio } from "vant";
 import getBackGroundByRarity from "@/utils/get-color";

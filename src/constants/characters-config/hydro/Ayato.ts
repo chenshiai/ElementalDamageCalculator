@@ -2,14 +2,14 @@ import Character from "../character-class";
 import { ICharacterInfo } from "@/types/interface";
 import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
 import { Constellation_E_3, Constellation_Q_5, S_80_CRITALHUNT_38P } from "../buffs";
-import { Weapon, Element, Icons, EnKaId, BaseData, action } from "../decorator";
+import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 
 @EnKaId(10000066, "神里绫人")
 @Weapon(WeaponType.Sword)
 @Element(ElementType.Hydro)
 @BaseData(Rarity.Five, 13715, 299, 769, 80)
 @Icons("UI_AvatarIcon_Ayato")
-class AyatoData extends Character implements ICharacterInfo {
+export class AyatoData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }

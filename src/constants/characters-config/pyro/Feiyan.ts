@@ -1,7 +1,7 @@
 import Character from "../character-class";
 import { IBuffBase, ICharacterInfo } from "@/types/interface";
 import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
-import { Weapon, Element, Icons, EnKaId, BaseData, action } from "../decorator";
+import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 import { A_80_PYRO_24P, Constellation_E_3, Constellation_Q_5 } from "../buffs";
 
 @EnKaId(10000048, "烟绯")
@@ -9,7 +9,7 @@ import { A_80_PYRO_24P, Constellation_E_3, Constellation_Q_5 } from "../buffs";
 @Element(ElementType.Pyro)
 @BaseData(Rarity.Four, 9352, 240, 587, 80)
 @Icons("UI_AvatarIcon_Feiyan")
-class FeiyanData extends Character implements ICharacterInfo {
+export class FeiyanData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }

@@ -1,7 +1,7 @@
 import Character from "../character-class";
 import { IBuffBase, ICharacterInfo } from "@/types/interface";
 import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
-import { Weapon, Element, Icons, EnKaId, BaseData, action } from "../decorator";
+import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 import { A_80_CHARGE_26P, Constellation_E_5, Constellation_Q_3 } from "../buffs";
 
 @EnKaId(10000064, "云堇")
@@ -9,7 +9,7 @@ import { A_80_CHARGE_26P, Constellation_E_5, Constellation_Q_3 } from "../buffs"
 @Element(ElementType.Geo)
 @BaseData(Rarity.Four, 10657, 191, 734, 60)
 @Icons("UI_AvatarIcon_Yunjin")
-class YunjinData extends Character implements ICharacterInfo {
+export class YunjinData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }

@@ -1,6 +1,6 @@
 import { EquipType, BuffType, ItemType, ActionOn, ElementType, BuffTarget } from "@/types/enum";
 import { IRelicBase, IBuffBase } from "@/types/interface";
-import { getEnkaUI } from "./decorator";
+import { getEnkaUI } from "@/utils/decorator";
 
 function setReliquartStat<T>(
   setNameTextMapHash: number,

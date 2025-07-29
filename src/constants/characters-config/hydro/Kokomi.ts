@@ -1,7 +1,7 @@
 import Character from "../character-class";
 import { IBuffBase, ICharacterInfo } from "@/types/interface";
 import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
-import { Weapon, Element, Icons, EnKaId, BaseData, action } from "../decorator";
+import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 import { Constellation_E_5, Constellation_Q_3, S_80_HYDRO_28P } from "../buffs";
 
 @EnKaId(10000054, "珊瑚宫心海")
@@ -9,7 +9,7 @@ import { Constellation_E_5, Constellation_Q_3, S_80_HYDRO_28P } from "../buffs";
 @Element(ElementType.Hydro)
 @BaseData(Rarity.Five, 13471, 234, 657, 70)
 @Icons("UI_AvatarIcon_Kokomi")
-class KokomiData extends Character implements ICharacterInfo {
+export class KokomiData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }

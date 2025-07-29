@@ -2,14 +2,14 @@ import Character from "../character-class";
 import { ICharacterInfo } from "@/types/interface";
 import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
 import { Constellation_E_3, Constellation_Q_5, S_80_MYSTERY_115 } from "../buffs";
-import { EnKaId, Weapon, Element, BaseData, Icons, action } from "../decorator";
+import { EnKaId, Weapon, Element, BaseData, Icons, action } from "@/utils/decorator";
 
 @EnKaId(10000107, "茜特菈莉")
 @Weapon(WeaponType.Magic)
 @Element(ElementType.Cryo)
 @BaseData(Rarity.Five, 11634, 127, 763, 60)
 @Icons("UI_AvatarIcon_Citlali")
-class CitlaliData extends Character implements ICharacterInfo {
+export class CitlaliData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }

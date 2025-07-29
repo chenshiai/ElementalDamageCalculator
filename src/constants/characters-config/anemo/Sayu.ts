@@ -1,7 +1,7 @@
 import Character from "../character-class";
 import { IBuffBase, ICharacterInfo } from "@/types/interface";
 import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
-import { Weapon, Element, Icons, EnKaId, BaseData, action } from "../decorator";
+import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 import { A_80_MYSTERY_96, Constellation_E_5, Constellation_Q_3 } from "../buffs";
 
 @EnKaId(10000053, "早柚")
@@ -9,7 +9,7 @@ import { A_80_MYSTERY_96, Constellation_E_5, Constellation_Q_3 } from "../buffs"
 @Element(ElementType.Anemo)
 @BaseData(Rarity.Four, 11854, 244, 745, 80)
 @Icons("UI_AvatarIcon_Sayu")
-class SayuData extends Character implements ICharacterInfo {
+export class SayuData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }

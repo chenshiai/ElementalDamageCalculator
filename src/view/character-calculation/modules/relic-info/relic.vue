@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { getlinearBackGroundClassByRarity } from "@/utils/get-color";
-import { IRelicItem } from "@/constants/characters-config/relic-class";
-import { getAppendPropName2, percentProps, getAppendPropCount } from "@/constants/characters-config/append-prop";
+import { IRelicItem } from "@/constants/relics-config/relic-class";
+import { getAppendPropName2, percentProps, getAppendPropCount } from "@/constants/append-prop";
 import { computed } from "vue";
 
 const { relic } = defineProps<{

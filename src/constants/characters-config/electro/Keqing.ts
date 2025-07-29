@@ -10,7 +10,7 @@ import {
   Rarity,
   WeaponType,
 } from "@/types/enum";
-import { Weapon, Element, Icons, EnKaId, BaseData, action } from "../decorator";
+import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 import { Constellation_E_5, Constellation_Q_3, S_80_CRITALHUNT_38P } from "../buffs";
 
 @EnKaId(10000042, "刻晴")
@@ -18,7 +18,7 @@ import { Constellation_E_5, Constellation_Q_3, S_80_CRITALHUNT_38P } from "../bu
 @Element(ElementType.Electro)
 @BaseData(Rarity.Five, 13103, 323, 799, 40)
 @Icons("UI_AvatarIcon_Keqing")
-class KeqingData extends Character implements ICharacterInfo {
+export class KeqingData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }

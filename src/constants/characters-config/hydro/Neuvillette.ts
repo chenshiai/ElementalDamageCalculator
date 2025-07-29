@@ -2,14 +2,14 @@ import Character from "../character-class";
 import { IBuffBase, ICharacterInfo } from "@/types/interface";
 import { AttackType, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
 import { Constellation_A_3, Constellation_Q_5, S_80_CRITALHUNT_38P } from "../buffs";
-import { EnKaId, Weapon, Element, BaseData, Icons, action } from "../decorator";
+import { EnKaId, Weapon, Element, BaseData, Icons, action } from "@/utils/decorator";
 
 @EnKaId(10000087, "那维莱特")
 @Weapon(WeaponType.Magic)
 @Element(ElementType.Hydro)
 @BaseData(Rarity.Five, 14695, 208, 576, 70)
 @Icons("UI_AvatarIcon_Neuvillette")
-class NeuvilletteData extends Character implements ICharacterInfo {
+export class NeuvilletteData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }

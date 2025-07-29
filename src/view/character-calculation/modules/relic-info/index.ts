@@ -3,8 +3,8 @@ import _ from "lodash";
 import RelicInfo from "./index.vue";
 export { RelicInfo };
 import { IBuffBase } from "@/types/interface";
-import relicLibrary from "@/constants/characters-config/relic";
-import { IRelicItem } from "@/constants/characters-config/relic-class";
+import relicLibrary from "@/constants/relics-config/relic";
+import { IRelicItem } from "@/constants/relics-config/relic-class";
 
 export interface IRelicSuitText {
   name: string;

@@ -1,7 +1,7 @@
 import Character from "../character-class";
 import { IBuffBase, ICharacterInfo } from "@/types/interface";
 import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
-import { Weapon, Element, Icons, EnKaId, BaseData, action } from "../decorator";
+import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 import { A_80_ATK_24P, Constellation_E_3, Constellation_Q_5 } from "../buffs";
 
 @EnKaId(10000045, "罗莎莉亚")
@@ -9,7 +9,7 @@ import { A_80_ATK_24P, Constellation_E_3, Constellation_Q_5 } from "../buffs";
 @Element(ElementType.Cryo)
 @BaseData(Rarity.Four, 12289, 240, 710, 60)
 @Icons("UI_AvatarIcon_Rosaria")
-class RosariaData extends Character implements ICharacterInfo {
+export class RosariaData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }

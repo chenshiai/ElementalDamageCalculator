@@ -2,14 +2,14 @@ import Character from "../character-class";
 import { IBuffBase, ICharacterInfo } from "@/types/interface";
 import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
 import { Constellation_E_5, Constellation_Q_3, S_80_DENDRO_28P } from "../buffs";
-import { EnKaId, Weapon, Element, BaseData, Icons, action } from "../decorator";
+import { EnKaId, Weapon, Element, BaseData, Icons, action } from "@/utils/decorator";
 
 @EnKaId(10000069, "提纳里")
 @Weapon(WeaponType.Bow)
 @Element(ElementType.Dendro)
 @BaseData(Rarity.Five, 10850, 268, 630, 40)
 @Icons("UI_AvatarIcon_Tighnari")
-class TighnariData extends Character implements ICharacterInfo {
+export class TighnariData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }

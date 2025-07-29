@@ -1,7 +1,9 @@
 import { WeaponType, Rarity, AppendProp, BuffType, AttackType, ElementType, ActionOn, BuffTarget } from "@/types/enum";
 import { ICalculatorValue, IWeaponInfo } from "@/types/interface";
-import { getEnkaUI } from "./decorator";
+import { getEnkaUI } from "@/utils/decorator";
 import { highlight, createWeapon } from "@/utils/calculate/create-data-methods";
+import * as polearms from './polearms/0';
+import * as sword from './sword/0';
 
 createWeapon(
   {
@@ -48,88 +50,8 @@ createWeapon(
 );
 
 export const Weapons: IWeaponInfo[] = [
-  createWeapon(
-    {
-      name: "支离轮光",
-      enkaId: 11518,
-      weaponType: WeaponType.Polearms,
-      icon: getEnkaUI("UI_EquipIcon_Pole_Perdix_Awaken"),
-      baseAtk: 608,
-      rarity: Rarity.Five,
-      appendPropId: AppendProp.CRITICAL_HURT,
-      statValue: 66.2,
-    },
-    (affix = 1) => {
-      let a = [24, 30, 36, 42, 48][affix - 1] + "%";
-      let b = [40, 50, 60, 70, 80][affix - 1] + "%";
-      return {
-        title: "洁霜的玉冕",
-        text: highlight`施放元素战技或元素爆发后的20秒内，攻击力提升${a}。持续期间内，若装备者创造了护盾，则接下来的20秒内，还会获得「流电圣敕」效果：队伍中附近所有角色触发的月感电反应造成的伤害提升${b}。`,
-      };
-    },
-    (affix = 1) => {
-      let a = [24, 30, 36, 42, 48][affix - 1];
-      let b = [40, 50, 60, 70, 80][affix - 1];
-      return [
-        {
-          label: "施放元素战技或元素爆发后攻击力提升",
-          describe: `施放元素战技或元素爆发后的20秒内，攻击力提升${a}%`,
-          effect: [{ type: BuffType.ATKPrcent, getValue: () => a }],
-          enable: true,
-          target: BuffTarget.Self,
-        },
-        {
-          label: "「流电圣敕」",
-          describe: `角色触发的月感电反应造成的伤害提升${b}%`,
-          effect: [{ type: BuffType.MoonElectroPrcent, getValue: () => b }],
-          enable: true,
-          shareable: true,
-          target: BuffTarget.All,
-        },
-      ];
-    }
-  ),
-  createWeapon(
-    {
-      name: "苍耀",
-      enkaId: 11517,
-      weaponType: WeaponType.Sword,
-      icon: getEnkaUI("UI_EquipIcon_Sword_OuterSword_Awaken"),
-      baseAtk: 674,
-      rarity: Rarity.Five,
-      appendPropId: AppendProp.CRITICAL,
-      statValue: 22.1,
-    },
-    (affix = 1) => {
-      let a = [24, 30, 36, 42, 48][affix - 1] + "%";
-      let b = [40, 50, 60, 70, 80][affix - 1] + "%";
-      return {
-        title: "白山的馈赐",
-        text: highlight`施放元素战技后的12秒内，攻击力提升${a}。持续期间，装备者的元素能量为0时，攻击力还会提升${a}，且暴击伤害提升${b}。`,
-      };
-    },
-    (affix = 1) => {
-      let a = [24, 30, 36, 42, 48][affix - 1];
-      let b = [40, 50, 60, 70, 80][affix - 1];
-      return [
-        {
-          label: "施放元素战技后，攻击力提升",
-          describe: `施放元素战技后，攻击力提升${a}%。`,
-          effect: [{ type: BuffType.ATKPrcent, getValue: () => a }],
-          enable: true,
-        },
-        {
-          label: "装备者的元素能量为0时，攻击力还会提升，且暴击伤害提升",
-          describe: `装备者的元素能量为0时，攻击力还会提升${a}%，且暴击伤害提升${b}%。`,
-          effect: [
-            { type: BuffType.ATKPrcent, getValue: () => a },
-            { type: BuffType.CritcalHurt, getValue: () => b },
-          ],
-          enable: false,
-        },
-      ];
-    }
-  ),
+  polearms.PolePerdix,
+  sword.OuterSword,
   createWeapon(
     {
       name: "香韵奏者",

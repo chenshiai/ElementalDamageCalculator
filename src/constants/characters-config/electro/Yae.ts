@@ -6,14 +6,14 @@ import {
   Constellation_Q_5,
   S_80_CRITAL_19P,
 } from "../buffs";
-import { Weapon, Element, Icons, EnKaId, BaseData, action } from "../decorator";
+import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 
 @EnKaId(10000058, "八重神子")
 @Weapon(WeaponType.Magic)
 @Element(ElementType.Electro)
 @BaseData(Rarity.Five, 10372, 340, 569, 90)
 @Icons("UI_AvatarIcon_Yae")
-class YaeData extends Character implements ICharacterInfo {
+export class YaeData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
