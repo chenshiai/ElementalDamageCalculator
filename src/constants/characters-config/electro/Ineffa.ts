@@ -4,7 +4,7 @@ import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, Weapon
 import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 import { S_80_CRITAL_19P, Constellation_E_3, Constellation_Q_5 } from "../buffs";
 
-@EnKaId(10000903, "伊涅芙")
+@EnKaId(10000116, "伊涅芙")
 @Weapon(WeaponType.Polearms)
 @Element(ElementType.Electro)
 @BaseData(Rarity.Five, 12613, 330, 828, 60)
