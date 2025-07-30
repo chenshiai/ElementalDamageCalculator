@@ -3,7 +3,7 @@ import Weapon from "../weapon-class";
 import { EnKaId, WeaponData, WeaponIcon, highlight } from "@/utils/decorator";
 import { AppendProp, BuffTarget, BuffType, Rarity, WeaponType } from "@/types/enum";
 
-@EnKaId(11518, "支离轮光")
+@EnKaId(13515, "支离轮光")
 @WeaponIcon("UI_EquipIcon_Pole_Perdix_Awaken")
 @WeaponData(WeaponType.Polearms, Rarity.Five, 608, AppendProp.CRITICAL_HURT, 66.2)
 class PerdixData extends Weapon implements IWeaponInfo {
