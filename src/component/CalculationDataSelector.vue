@@ -80,27 +80,10 @@ const recalculation = (data: IUserSavedCalculationData) => {
   emit("recalculation", data);
 };
 
-import { Character } from "@/constants/characters-config/character";
-import { Weapons } from "@/constants/weapon-config/weapon";
-import { IRelicItem } from "@/constants/relics-config/relic-class";
 import { getAppendPropName2, percentProps } from "@/constants/append-prop";
-const getAvatarIcon = (enkaId: number) => {
-  console.log(enkaId);
-  
-  return Character.find((c) => c.enkaId === enkaId).icons.avatarIcon;
-};
-const getCharacterName = (enkaId: number) => {
-  return Character.find((c) => c.enkaId === enkaId).name;
-};
-const getWeaponIcon = (enkaId: number) => {
-  return Weapons.find((c) => c.enkaId === enkaId).icon;
-};
-const getWeaponName = (enkaId: number) => {
-  return Weapons.find((c) => c.enkaId === enkaId).name;
-};
-const getRelics = (relicList: string) => {
-  return JSON.parse(relicList) as IRelicItem[];
-};
+import useTeamData from "@/view/cloud-team/useTeamData";
+const { getAvatarIcon, getCharacterName, getWeaponIcon, getWeaponName, getRelics } = useTeamData();
+
 const getStatValueText = (stat): string => {
   const statValue = stat.statValue;
   const shouldAppendPercent = percentProps.includes(stat.mainPropId || stat.appendPropId);

@@ -6,7 +6,7 @@ import { AppendProp, BuffType, Rarity, WeaponType } from "@/types/enum";
 @EnKaId(11517, "苍耀")
 @WeaponIcon("UI_EquipIcon_Sword_OuterSword_Awaken")
 @WeaponData(WeaponType.Sword, Rarity.Five, 674, AppendProp.CRITICAL, 22.1)
-class OuterSwordData extends Weapon implements IWeaponInfo {
+class OuterData extends Weapon implements IWeaponInfo {
   constructor() {
     super();
   }
@@ -40,4 +40,5 @@ class OuterSwordData extends Weapon implements IWeaponInfo {
     ];
   }
 }
-export const OuterSword = new OuterSwordData();
+/** 苍耀 */
+export const Outer = new OuterData();

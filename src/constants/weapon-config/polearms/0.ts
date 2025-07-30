@@ -1,1 +1,3 @@
-export * from './PolePerdix'
+export * from './Perdix'
+export * from './Trident'
+export * from './Aoandon';

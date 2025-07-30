@@ -30,4 +30,5 @@ class XXXXData extends Weapon implements IWeaponInfo {
     ];
   }
 }
+/** nnn */
 export const XXXX = new XXXXData();

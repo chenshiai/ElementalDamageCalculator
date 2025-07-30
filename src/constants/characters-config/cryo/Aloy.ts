@@ -23,17 +23,6 @@ export class AloyData extends Character implements ICharacterInfo {
     super();
   }
   talentNames = ["快速射击", "冰尘雪野", "曙光预言"];
-  icons = {
-    ...this.icons,
-    constsIcon: [
-      "UI_Talent_S_Aloy_Lock",
-      "UI_Talent_S_Aloy_Lock",
-      "UI_Talent_S_Aloy_Lock",
-      "UI_Talent_S_Aloy_Lock",
-      "UI_Talent_S_Aloy_Lock",
-      "UI_Talent_S_Aloy_Lock",
-    ].map((str) => getEnkaUI(str)),
-  };
   normalAttack = [
     action(
       "一段伤害·1",
@@ -169,4 +158,16 @@ export class AloyData extends Character implements ICharacterInfo {
 }
 
 /** ![埃洛伊](https://enka.network/ui/UI_AvatarIcon_Aloy.png) */
-export const Aloy = new AloyData();
+const Aloy = new AloyData();
+Aloy.icons = {
+  ...Aloy.icons,
+  constsIcon: [
+    "UI_Talent_S_Aloy_Lock",
+    "UI_Talent_S_Aloy_Lock",
+    "UI_Talent_S_Aloy_Lock",
+    "UI_Talent_S_Aloy_Lock",
+    "UI_Talent_S_Aloy_Lock",
+    "UI_Talent_S_Aloy_Lock",
+  ].map((str) => getEnkaUI(str, false, false, true)),
+};
+export { Aloy };

@@ -6,7 +6,7 @@ import { AppendProp, BuffTarget, BuffType, Rarity, WeaponType } from "@/types/en
 @EnKaId(11518, "支离轮光")
 @WeaponIcon("UI_EquipIcon_Pole_Perdix_Awaken")
 @WeaponData(WeaponType.Polearms, Rarity.Five, 608, AppendProp.CRITICAL_HURT, 66.2)
-class PolePerdixData extends Weapon implements IWeaponInfo {
+class PerdixData extends Weapon implements IWeaponInfo {
   constructor() {
     super();
   }
@@ -40,4 +40,5 @@ class PolePerdixData extends Weapon implements IWeaponInfo {
     ];
   }
 }
-export const PolePerdix = new PolePerdixData();
+/** 支离轮光 */
+export const Perdix = new PerdixData();
