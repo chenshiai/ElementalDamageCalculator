@@ -10,14 +10,14 @@ class AoandonData extends Weapon implements IWeaponInfo {
   constructor() {
     super();
   }
-  getSkillDescribe(affix = 1) {
+  getSkillDescribe = (affix = 1) => {
     let a = [20, 25, 30, 35, 40][affix - 1] + "%";
     return {
       title: "好事者奔行灯",
       text: highlight`施放元素战技时，提高${a}攻击力和10%移动速度，持续10秒。`,
     };
-  }
-  getBuffs(affix = 1) {
+  };
+  getBuffs = (affix = 1) => {
     let a = [20, 25, 30, 35, 40][affix - 1];
     return [
       {
@@ -27,7 +27,7 @@ class AoandonData extends Weapon implements IWeaponInfo {
         enable: true,
       },
     ];
-  }
+  };
 }
 /** 且住亭御咄 */
 export const Aoandon = new AoandonData();

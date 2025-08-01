@@ -10,7 +10,7 @@ class RadianceSwordData extends Weapon implements IWeaponInfo {
   constructor() {
     super();
   }
-  getSkillDescribe(affix = 1) {
+  getSkillDescribe = (affix = 1) => {
     let a = [20, 25, 30, 35, 40][affix - 1] + "%";
     let b = [28, 35, 42, 49, 56][affix - 1] + "%";
     return {
@@ -19,8 +19,8 @@ class RadianceSwordData extends Weapon implements IWeaponInfo {
         <br />持续期间内，普通攻击或重击造成元素伤害后，将使此次「焚光」效果的持续时间延长2秒，该效果每1秒至多触发一次，至多通过这种方式使持续时间延长6秒。
         <br />此外，处于夜魂加持状态下时，「焚光」效果提高75%，且「焚光」效果在装备者处于后台时不进行计时。`,
     };
-  }
-  getBuffs(affix = 1) {
+  };
+  getBuffs = (affix = 1) => {
     let a = [20, 25, 30, 35, 40][affix - 1];
     let b = [28, 35, 42, 49, 56][affix - 1];
     return [
@@ -39,7 +39,7 @@ class RadianceSwordData extends Weapon implements IWeaponInfo {
         stackType: "switch" as const,
       },
     ];
-  }
+  };
 }
 /** 焚曜千阳 */
 export const RadianceSword = new RadianceSwordData();

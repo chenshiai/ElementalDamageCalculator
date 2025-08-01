@@ -10,15 +10,15 @@ class FigurinesData extends Weapon implements IWeaponInfo {
   constructor() {
     super();
   }
-  getSkillDescribe(affix = 1) {
+  getSkillDescribe = (affix = 1) => {
     let a = [100, 125, 150, 175, 200][affix - 1];
     let b = [28, 35, 42, 49, 56][affix - 1] + "%";
     return {
       title: "奉予风阳的禋祀",
       text: highlight`元素精通提升${a}点。装备者创造护盾后的15秒内，获得「照夜之镜」效果：队伍中自己的当前场上角色对附近的敌人造成的伤害提升${b}，每14秒至多获得一次「照夜之镜」效果。`,
     };
-  }
-  getBuffs(affix = 1) {
+  };
+  getBuffs = (affix = 1) => {
     let a = [100, 125, 150, 175, 200][affix - 1];
     let b = [28, 35, 42, 49, 56][affix - 1];
     return [
@@ -36,7 +36,7 @@ class FigurinesData extends Weapon implements IWeaponInfo {
         enable: true,
       },
     ];
-  }
+  };
 }
 /** 祭星者之望 */
 export const Figurines = new FigurinesData();

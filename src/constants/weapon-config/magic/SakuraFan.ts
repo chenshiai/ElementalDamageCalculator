@@ -10,7 +10,7 @@ class SakuraFanData extends Weapon implements IWeaponInfo {
   constructor() {
     super();
   }
-  getSkillDescribe(affix = 1) {
+  getSkillDescribe = (affix = 1) => {
     let a = [120, 150, 180, 210, 240][affix - 1];
     let b = [96, 120, 144, 168, 192][affix - 1];
     let c = [32, 40, 48, 56, 64][affix - 1];
@@ -18,8 +18,8 @@ class SakuraFanData extends Weapon implements IWeaponInfo {
       title: "一汤二鹰三鸣神",
       text: highlight`触发扩散反应后的6秒内，元素精通提升${a}点；元素战技命中敌人后的9秒内，元素精通提升${b}点；元素爆发命中敌人后的30秒内，元素精通提升${c}点。`,
     };
-  }
-  getBuffs(affix = 1) {
+  };
+  getBuffs = (affix = 1) => {
     let a = [120, 150, 180, 210, 240][affix - 1];
     let b = [96, 120, 144, 168, 192][affix - 1];
     let c = [32, 40, 48, 56, 64][affix - 1];
@@ -43,7 +43,7 @@ class SakuraFanData extends Weapon implements IWeaponInfo {
         enable: false,
       },
     ];
-  }
+  };
 }
 /** 寝正月初晴 */
 export const SakuraFan = new SakuraFanData();

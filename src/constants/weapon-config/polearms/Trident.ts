@@ -10,15 +10,15 @@ class TridentData extends Weapon implements IWeaponInfo {
   constructor() {
     super();
   }
-  getSkillDescribe(affix = 1) {
+  getSkillDescribe = (affix = 1) => {
     let a = [12, 15, 18, 21, 24][affix - 1] + "%";
     let b = [32, 40, 48, 56, 64][affix - 1] + "%";
     return {
       title: "百味交响",
       text: highlight`攻击力提升${a}；当装备此武器的角色处于队伍后台时，攻击力额外提升${a}。进行治疗后，装备者与受到治疗的角色会获得「甘美回奏」的效果，攻击力提升${b}，持续3秒。装备者处于队伍后台时，依然能触发上述效果。`,
     };
-  }
-  getBuffs(affix = 1) {
+  };
+  getBuffs = (affix = 1) => {
     let a = [12, 15, 18, 21, 24][affix - 1];
     let b = [32, 40, 48, 56, 64][affix - 1];
     return [
@@ -43,7 +43,7 @@ class TridentData extends Weapon implements IWeaponInfo {
         target: BuffTarget.All,
       },
     ];
-  }
+  };
 }
 /** 香韵奏者 */
 export const Trident = new TridentData();

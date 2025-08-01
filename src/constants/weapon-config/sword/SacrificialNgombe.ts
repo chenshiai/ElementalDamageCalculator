@@ -10,15 +10,15 @@ class SacrificialNgombeData extends Weapon implements IWeaponInfo {
   constructor() {
     super();
   }
-  getSkillDescribe(affix = 1) {
+  getSkillDescribe = (affix = 1) => {
     let a = [20, 25, 30, 35, 40][affix - 1] + "%";
     let c = [8, 10, 12, 14, 16][affix - 1] + "%";
     return {
       title: "弥漫的边界",
       text: highlight`角色处于护盾庇护下时，普通攻击和重击造成的伤害提升${a}，普通攻击和重击的暴击率提升${c}。`,
     };
-  }
-  getBuffs(affix = 1) {
+  };
+  getBuffs = (affix = 1) => {
     let a = [20, 25, 30, 35, 40][affix - 1];
     let c = [8, 10, 12, 14, 16][affix - 1];
     return [
@@ -34,7 +34,7 @@ class SacrificialNgombeData extends Weapon implements IWeaponInfo {
         enable: true,
       },
     ];
-  }
+  };
 }
 /** 厄水之祸 */
 export const SacrificialNgombe = new SacrificialNgombeData();
