@@ -75,7 +75,7 @@ onMounted(() => {
 
     border: 2px solid var(--border);
     padding: 2px;
-    background: var(--bg);
+    background: var(--light-text);
     right: -10px;
     bottom: -4px;
   }
