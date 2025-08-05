@@ -16,19 +16,19 @@ import FourSvg from "./svg.vue";
       <FourSvg />
       <div>月反应计算</div>
       <span>计算全队月反应的伤害</span>
-      <img src="/img/shatang2.png" alt="" />
+      <img src="/img/inf.png" alt="" />
     </router-link>
     <router-link to="/increasing-range" class="card active-btn">
       <FourSvg />
       <div>单次伤害计算</div>
       <span>自由填入各项数值的计算</span>
-      <img src="/img/image.png" alt="" />
+      <img src="/img/hutao.png" alt="" />
     </router-link>
     <router-link to="/cloud-team" class="card active-btn">
       <FourSvg />
       <div>角色组队计算（BETA）</div>
       <span>用角色数据进行计算</span>
-      <img src="/img/hutao.png" alt="" />
+      <img src="/img/bnt.png" alt="" />
     </router-link>
     <router-link to="/shield" class="card active-btn">
       <FourSvg />
