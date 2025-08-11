@@ -10,9 +10,8 @@ export default defineConfig({
         port: 3000,
         proxy: {
             "/player-info": {
-              target: "https://enka.network/api",
+              target: "http://8.155.52.59:8088/",
               changeOrigin: true,
-              rewrite: (path) => path.replace(/\/player-info/g, '')
             },
           },
     },

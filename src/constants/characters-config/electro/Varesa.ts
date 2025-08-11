@@ -33,10 +33,10 @@ export class VaresaData extends Character implements ICharacterInfo {
     }),
     action("低空坠地冲击伤害", AttackType.Falling, ElementType.Electro, {
       atk: [1.49, 1.61, 1.73, 1.91, 2.03, 2.17, 2.36, 2.55, 2.74, 2.95, 3.16, 3.36, 3.57, 3.78],
-    }),
+    }, 'varesa'),
     action("高空坠地冲击伤害", AttackType.Falling, ElementType.Electro, {
       atk: [1.86, 2.01, 2.17, 2.38, 2.53, 2.71, 2.95, 3.18, 3.42, 3.68, 3.94, 4.2, 4.46, 4.72],
-    }),
+    }, 'varesa'),
     action("炽热激情状态一段伤害", AttackType.Normal, ElementType.Electro, {
       atk: [0.544, 0.585, 0.626, 0.68, 0.721, 0.762, 0.816, 0.871, 0.925, 0.979, 1.034, 1.088, 1.156, 1.224],
     }),
@@ -54,10 +54,10 @@ export class VaresaData extends Character implements ICharacterInfo {
     }),
     action("炽热激情状态低空坠地冲击伤害", AttackType.Falling, ElementType.Electro, {
       atk: [2.24, 2.42, 2.6, 2.86, 3.04, 3.25, 3.54, 3.82, 4.11, 4.42, 4.73, 5.05, 5.36, 5.67],
-    }),
+    }, 'varesa'),
     action("炽热激情状态高空坠地冲击伤害", AttackType.Falling, ElementType.Electro, {
       atk: [2.79, 3.02, 3.25, 3.57, 3.8, 4.06, 4.42, 4.78, 5.13, 5.52, 5.91, 6.3, 6.69, 7.08],
-    }),
+    }, 'varesa'),
   ];
   elementSkill = [
     action("突进伤害", AttackType.Skill, ElementType.Electro, {
@@ -87,11 +87,12 @@ export class VaresaData extends Character implements ICharacterInfo {
         "施放元素战技夜虹逐跃后，瓦雷莎获得「虹色坠击」，瓦雷莎进行下落攻击时，坠地冲击能额外造成50%攻击力的伤害；若瓦雷莎处于炽热激情状态，则坠地冲击改为能额外造成180%攻击力的伤害。",
       effect: [
         {
-          type: BuffType.FallingFixed,
-          getValue: (d, s) => {
-            return (d.baseATK + d.extraATK + d.extraATK_NT) * (s === 1 ? 1.8 : 0.5);
+          type: BuffType.FallingAdd,
+          getValue: (_, s) => {
+            return (s === 1 ? 1.8 : 0.5);
           },
-          actionOn: ActionOn.External,
+          special: 'varesa',
+          actionOn: ActionOn.Direct,
         },
       ],
       enable: true,
