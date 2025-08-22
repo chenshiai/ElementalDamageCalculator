@@ -36,7 +36,7 @@
 .selector {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 2px;
   justify-content: space-between;
 }
 
@@ -58,17 +58,16 @@
 
 .element-selece__item {
   border: 1px solid var(--main-text);
-  margin-bottom: 8px;
   border-radius: 4px;
   padding: 0 12px;
 }
 
-.element-selece__item[aria-checked='true'] {
+.element-selece__item[aria-checked="true"] {
   background-color: var(--main-text);
 }
 
-.element-selece__item[aria-checked='true'] .van-checkbox__label {
-  color: #fff;
+.element-selece__item[aria-checked="true"] .van-checkbox__label {
+  color: var(--light-text);
 }
 
 .element-selece__item .van-checkbox__label {
@@ -93,12 +92,12 @@
   visibility: hidden;
 }
 
-.selector-items[aria-checked='true'] {
+.selector-items[aria-checked="true"] {
   box-shadow: 0 0 10px #818181;
 }
 
-.selector-items[aria-checked='true']::after {
-  content: '';
+.selector-items[aria-checked="true"]::after {
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -110,8 +109,8 @@
   border: 2px solid #998974;
 }
 
-.selector-items[aria-checked='true']::before {
-  content: '';
+.selector-items[aria-checked="true"]::before {
+  content: "";
   position: absolute;
   right: -8px;
   top: -8px;
@@ -142,13 +141,6 @@
   height: 86px;
 }
 
-.selector-items .logo {
-  width: 100%;
-  height: 26px;
-  background-repeat: no-repeat;
-  background-position: center center;
-}
-
 .selector-items .logo::after {
   position: absolute;
   display: block;
@@ -169,76 +161,74 @@
   margin-top: 6px;
 }
 
-.selector-items[aria-checked='true'] .selector-item__name {
+.selector-items[aria-checked="true"] .selector-item__name {
   background-color: #998974;
   color: #ffffff;
   border-radius: 4px;
 }
 
-.logo-Pyro,
-.logo-Hydro,
-.logo-Cryo,
-.logo-Electro,
-.logo-Geo,
-.logo-Anemo,
-.logo-Dendro {
+.logo {
+  height: 32px;
+  width: 100%;
+  min-width: 22px;
   background-size: 22px;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
+.selector-items {
+  .logo {
+    height: 26px;
+  }
+  .logo-Pyro::after {
+    content: "Pyro";
+  }
+  .logo-Hydro::after {
+    content: "Hydro";
+  }
+
+  .logo-Cryo::after {
+    content: "Cryo";
+  }
+  .logo-Electro::after {
+    content: "Electro";
+  }
+  .logo-Geo::after {
+    content: "Geo";
+  }
+  .logo-Anemo::after {
+    content: "Anemo";
+  }
+  .logo-Dendro::after {
+    content: "Dendro";
+  }
+}
+
 .logo-Pyro {
   position: relative;
-  background-image: url('/img/pyro.png');
+  background-image: url("/img/pyro.png");
 }
-
-.logo-Pyro::after {
-  content: 'Pyro';
-}
-
 .logo-Hydro {
-  background-image: url('/img/hydro.png');
-}
-
-.logo-Hydro::after {
-  content: 'Hydro';
+  background-image: url("/img/hydro.png");
 }
 
 .logo-Cryo {
-  background-image: url('/img/cryo.png');
-}
-
-.logo-Cryo::after {
-  content: 'Cryo';
+  background-image: url("/img/cryo.png");
 }
 
 .logo-Electro {
-  background-image: url('/img/electro.png');
-}
-
-.logo-Electro::after {
-  content: 'Electro';
+  background-image: url("/img/electro.png");
 }
 
 .logo-Geo {
-  background-image: url('/img/geo.png');
-}
-
-.logo-Geo::after {
-  content: 'Geo';
+  background-image: url("/img/geo.png");
 }
 
 .logo-Anemo {
-  background-image: url('/img/anemo.png');
-}
-
-.logo-Anemo::after {
-  content: 'Anemo';
+  background-image: url("/img/anemo.png");
 }
 
 .logo-Dendro {
-  background-image: url('/img/dendro.png');
-}
-
-.logo-Dendro::after {
-  content: 'Dendro';
+  background-image: url("/img/dendro.png");
 }
 
 .check-area.element-select .van-radio__icon,
@@ -270,21 +260,21 @@
 }
 
 .logo-Sword::after {
-  content: '单手剑';
+  content: "单手剑";
 }
 
 .logo-GreatSword::after {
-  content: '双手剑';
+  content: "双手剑";
 }
 
 .logo-Bow::after {
-  content: '弓箭';
+  content: "弓箭";
 }
 
 .logo-Magic::after {
-  content: '法器';
+  content: "法器";
 }
 
 .logo-Polearms::after {
-  content: '长柄武器';
+  content: "长柄武器";
 }

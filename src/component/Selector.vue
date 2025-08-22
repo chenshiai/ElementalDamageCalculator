@@ -15,13 +15,27 @@
       <div class="selector-block">
         元素属性<span class="holy-relic-tips">（可多选）</span>
         <CheckboxGroup class="check-area element-select" v-model="element">
-          <Checkbox class="element-selece__item" name="Pyro">火</Checkbox>
-          <Checkbox class="element-selece__item" name="Anemo">风</Checkbox>
-          <Checkbox class="element-selece__item" name="Geo">岩</Checkbox>
-          <Checkbox class="element-selece__item" name="Electro">雷</Checkbox>
-          <Checkbox class="element-selece__item" name="Hydro">水</Checkbox>
-          <Checkbox class="element-selece__item" name="Cryo">冰</Checkbox>
-          <Checkbox class="element-selece__item" name="Dendro">草</Checkbox>
+          <Checkbox class="element-selece__item" name="Pyro">
+             <div :class="['logo', 'logo-Pyro']" />
+          </Checkbox>
+          <Checkbox class="element-selece__item" name="Hydro">
+            <div :class="['logo', 'logo-Hydro']" />
+          </Checkbox>
+          <Checkbox class="element-selece__item" name="Electro">
+            <div :class="['logo', 'logo-Electro']" />
+          </Checkbox>
+          <Checkbox class="element-selece__item" name="Cryo">
+            <div :class="['logo', 'logo-Cryo']" />
+          </Checkbox>
+          <Checkbox class="element-selece__item" name="Anemo">
+            <div :class="['logo', 'logo-Anemo']" />
+          </Checkbox>
+          <Checkbox class="element-selece__item" name="Geo">
+            <div :class="['logo', 'logo-Geo']" />
+          </Checkbox>
+          <Checkbox class="element-selece__item" name="Dendro">
+            <div :class="['logo', 'logo-Dendro']" />
+          </Checkbox>
         </CheckboxGroup>
       </div>
       <div class="selector-block">

@@ -3,10 +3,12 @@ import { getlinearBackGroundClassByRarity } from "@/utils/get-color";
 import { IRelicItem } from "@/constants/relics-config/relic-class";
 import { getAppendPropName2, percentProps, getAppendPropCount } from "@/constants/append-prop";
 import { computed } from "vue";
+import { Icon } from "vant";
 
 const { relic } = defineProps<{
   relic: IRelicItem | null;
   emptyText?: string;
+  canDelete?: boolean;
 }>();
 const getStatValueText = (stat): string => {
   const statValue = stat.statValue;
@@ -16,9 +18,13 @@ const getStatValueText = (stat): string => {
 
 const emit = defineEmits<{
   selectRelic: [value: IRelicItem];
+  deleteRelic: [value: IRelicItem];
 }>();
 const selectLocalRelic = (item: IRelicItem) => {
   emit("selectRelic", item);
+};
+const deleteRelic = (item: IRelicItem) => {
+  emit("deleteRelic", item);
 };
 
 const subitemCounts = computed(() => {
@@ -28,8 +34,12 @@ const subitemCounts = computed(() => {
 </script>
 
 <template>
-  <div :class="[relic ? '' : 'relic__empty', 'relic-detail', 'active-btn']" @click="selectLocalRelic(relic)">
+  <div
+    :class="[relic ? '' : 'relic__empty', 'relic-detail', 'active-btn', { 'relic__can-delete': canDelete }]"
+    @click="selectLocalRelic(relic)"
+  >
     <template v-if="relic">
+      <Icon class="relic__delete" name="delete-o" size="26" @click.stop="deleteRelic(relic)" text="删除" />
       <img class="relic-icon" v-lazy="relic.icon" />
       <div class="relic-detail__hearder">
         <div :class="['relic-name', getlinearBackGroundClassByRarity(relic.rankLevel - 1)]">
@@ -63,7 +73,7 @@ const subitemCounts = computed(() => {
 .relic-detail {
   position: relative;
   font-size: 14px;
-  height: 120px;
+  height: 122px;
   border-radius: 4px;
   margin-bottom: 12px;
   box-shadow: inset -1px -1px 1px var(--border);
@@ -139,5 +149,27 @@ const subitemCounts = computed(() => {
   border: solid 1px var(--border);
   border-radius: 4px;
   box-shadow: none;
+}
+.relic__delete {
+  z-index: 2;
+  display: none;
+  top: 0;
+  right: 0;
+  position: absolute;
+  color: red;
+  cursor: pointer;
+  opacity: 0.7;
+  &:hover {
+    background-color: var(--light-text);
+  }
+}
+
+.relic__can-delete {
+  .relic-icon {
+    right: 6%;
+  }
+  .relic__delete {
+    display: block;
+  }
 }
 </style>

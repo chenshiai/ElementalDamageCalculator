@@ -11,7 +11,6 @@ import {
   Tabs,
   RadioGroup,
   Radio,
-  Icon,
 } from "vant";
 import { ref, computed, nextTick } from "vue";
 import _ from "lodash";
@@ -26,12 +25,7 @@ import {
   RelicItem,
   RelicStatType,
 } from "@/constants/relics-config/relic-class";
-import {
-  getAppendPropName,
-  RelicText,
-  EquipTypeMainstats,
-  EquipTypeSubstats,
-} from "@/constants/append-prop";
+import { getAppendPropName, RelicText, EquipTypeMainstats, EquipTypeSubstats } from "@/constants/append-prop";
 import { relicDB } from "@/constants/db";
 
 import { IRelicBase } from "@/types/interface";
@@ -40,7 +34,6 @@ import db from "@/utils/db";
 
 import { IRelicSuitText } from "./index";
 import Relic from "./relic.vue";
-
 
 interface IProps {
   relicSuitTexts: IRelicSuitText[];
@@ -172,7 +165,7 @@ const mainStatFilter = computed(() => {
 const showSetRelicStatPop = (equip: IRelicLibraryItemEquip) => {
   // 根据部位下标来获取部位的具体类型和图标
   setStatBase.value = equip[selectedPartIndex.value];
-  
+
   // 单个主词条的圣遗物，自动填充数值，并切换到副词条选择
   if (mainStatFilter.value.length === 1) {
     setStatForm.value.reliquaryMainstat.mainPropId = mainStatFilter.value[0].mainPropId;
@@ -274,8 +267,8 @@ const deleteLocalData = (item: IRelicItem) => {
       </div>
       <div v-show="showLocalRelics" class="relic-select">
         <div v-for="item in localRelics" class="relic-select__local-item">
-          <Relic style="flex: 1" :relic="item" :key="item.timetemp" @select-relic="selectLocalRelic" />
-          <Icon class="delete" name="delete-o" size="32" @click.stop="deleteLocalData(item)" text="删除" />
+          <Relic canDelete style="flex: 1" :relic="item" :key="item.timetemp" @select-relic="selectLocalRelic" @delete-relic="deleteLocalData" />
+
         </div>
       </div>
       <div v-show="!showLocalRelics" class="relic-select">
@@ -543,14 +536,5 @@ const deleteLocalData = (item: IRelicItem) => {
 .substats-check-group > [aria-checked="true"] > span {
   background-color: var(--main-text);
   color: #fff;
-}
-
-.delete {
-  color: red;
-  cursor: pointer;
-  height: 40px;
-  &:hover {
-    background-color: var(--light-text);
-  }
 }
 </style>

@@ -5,7 +5,7 @@ import { AppendProp } from "@/types/enum";
 import getBackGroundByRarity from "@/utils/get-color";
 import { getAppendPropName2 } from "@/constants/append-prop";
 import { ref, computed } from "vue";
-import { Popup, Rate, Icon } from "vant";
+import { Popup, Rate, Icon, Stepper } from "vant";
 
 const emit = defineEmits(["changed"]);
 const show = ref(false);
@@ -49,8 +49,10 @@ const weaponStats = computed(() => {
         <div v-for="item in weaponStats">
           <span v-show="item">{{ item.title }}: {{ item.value }}{{ item.suffix }}</span>
         </div>
+        
+          <Rate v-model="affix" @change="emit('changed')" color="#997874" icon="fire" void-icon="fire-o" />
         <div class="affix">
-          精炼：<Rate v-model="affix" @change="emit('changed')" color="#997874" icon="fire" void-icon="fire-o" />
+          精炼：<Stepper theme="round" button-size="20" input-width="66px" v-model="affix" min="1" max="5" /><br />
         </div>
       </div>
       <div class="avatar active-btn" @click="show = true">
@@ -128,8 +130,5 @@ const weaponStats = computed(() => {
   height: 120px;
   line-height: 120px;
   cursor: pointer;
-}
-.affix {
-  margin-top: 20px;
 }
 </style>
