@@ -121,13 +121,15 @@ const selectLocalRelic = (relic: IRelicItem) => {
 };
 const closePopup = () => {
   showPopup.value = false;
-  showLocalRelics.value = false;
   setStatForm.value = {
     reliquaryMainstat: {} as MainstatType,
     reliquarySubstats: [],
   };
   substatsArray.value = [];
   selectStatus.value = 0;
+  setTimeout(()=> {
+    showLocalRelics.value = false;
+  }, 500)
 };
 
 const removeRelic = () => {
