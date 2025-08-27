@@ -1,12 +1,12 @@
 import Character from "../character-class";
 import { ICharacterInfo } from "@/types/interface";
-import { ActionOn, AttackType, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
+import { ActionOn, AttackType, BuffType, ElementType, Rarity, SecondElementType, WeaponType } from "@/types/enum";
 import { Constellation_E_3, Constellation_Q_5, S_80_CRITALHUNT_38P } from "../buffs";
 import { EnKaId, Weapon, Element, BaseData, Icons, action } from "@/utils/decorator";
 
 @EnKaId(10000101, "基尼奇")
 @Weapon(WeaponType.GreatSword)
-@Element(ElementType.Dendro)
+@Element(ElementType.Dendro, SecondElementType.Nightsoul)
 @BaseData(Rarity.Five, 12858, 332, 802, 70)
 @Icons("UI_AvatarIcon_Kinich")
 export class KinichData extends Character implements ICharacterInfo {

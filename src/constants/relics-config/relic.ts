@@ -1,4 +1,4 @@
-import { EquipType, BuffType, ItemType, ActionOn, ElementType, BuffTarget } from "@/types/enum";
+import { EquipType, BuffType, ItemType, ActionOn, ElementType, BuffTarget, SecondElementType } from "@/types/enum";
 import { IRelicBase, IBuffBase } from "@/types/interface";
 import { getEnkaUI } from "@/utils/decorator";
 
@@ -64,6 +64,7 @@ const getBuffByElement2 = (type: BuffType, text: string) => {
     describe: "装备者处于夜魂加持状态下，还将使队伍中附近的所有角色的与该元素反应相关的元素伤害加成提升28%",
     shareable: true,
     target: BuffTarget.All,
+    condition: (data) => data.secondElement === SecondElementType.Nightsoul
   };
 };
 /** 悠古的磐岩 */

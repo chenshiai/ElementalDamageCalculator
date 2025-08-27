@@ -1,12 +1,12 @@
 import Character from "../character-class";
 import { ICharacterInfo } from "@/types/interface";
-import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
+import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, SecondElementType, WeaponType } from "@/types/enum";
 import { A_80_ATK_24P, Constellation_E_3, Constellation_Q_5 } from "../buffs";
 import { EnKaId, Weapon, Element, BaseData, Icons, action } from "@/utils/decorator";
 
 @EnKaId(10000110, "伊安珊")
 @Weapon(WeaponType.Polearms)
-@Element(ElementType.Electro)
+@Element(ElementType.Electro, SecondElementType.Nightsoul)
 @BaseData(Rarity.Four, 10657, 257, 638, 70)
 @Icons("UI_AvatarIcon_Iansan")
 export class IansanData extends Character implements ICharacterInfo {

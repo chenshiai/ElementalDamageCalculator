@@ -19,11 +19,15 @@ type teamItem = {
 enum RelicType {
   none = "none",
   thunder = "thunder",
+  night = "night",
+  moon = "moon",
 }
 
 const RelicText = {
   [RelicType.none]: "无",
   [RelicType.thunder]: "如雷的盛怒",
+  [RelicType.night]: "穹境示现之夜",
+  [RelicType.moon]: "纺月的夜歌",
 };
 
 const teamList = ref<teamItem[]>([
@@ -40,6 +44,16 @@ const moonElectroOtherData = ref(0);
 const enemyResistance = ref(10);
 const { yehun, yehunMoonGain } = useYiFa();
 const { ineffaAtk, ineffaGain } = useIneffa();
+
+const relicEff = computed(() => {
+  const relicSet = new Set();
+  teamList.value.forEach((item) => {
+    if (item.checked === RelicType.moon || item.checked === RelicType.night) {
+      relicSet.add(item.checked);
+    }
+  });
+  return relicSet.size * 10;
+});
 
 // 单人月感电反应伤害计算
 const moonElectroDamage = (teamData: teamItem) => {
@@ -58,7 +72,8 @@ const moonElectroDamage = (teamData: teamItem) => {
         (getMoonElectroRate(teamData.elementMastery) +
           yehunMoonGain.value +
           +moonElectroOtherData.value +
-          (teamData.checked === RelicType.thunder ? 20 : 0)) /
+          (teamData.checked === RelicType.thunder ? 20 : 0) +
+          relicEff.value) /
           100) *
       (1 + ineffaGain.value / 100) *
       getResistanceRate(enemyResistance.value)
@@ -164,6 +179,12 @@ const damageResult = computed(() => {
         </Radio>
         <Radio class="holy-relic-radio__item" label-position="left" :name="RelicType.thunder">
           <img :src="getEnkaUI('UI_RelicIcon_15005_4')" alt="" />
+        </Radio>
+        <Radio class="holy-relic-radio__item" label-position="left" :name="RelicType.night">
+          <img :src="getEnkaUI('UI_RelicIcon_15041_4')" alt="" />
+        </Radio>
+        <Radio class="holy-relic-radio__item" label-position="left" :name="RelicType.moon">
+          <img :src="getEnkaUI('UI_RelicIcon_15042_4')" alt="" />
         </Radio>
       </RadioGroup>
     </li>

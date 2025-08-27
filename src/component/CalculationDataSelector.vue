@@ -5,6 +5,7 @@ import { IUserSavedCalculationData, IPlayerInfoData, calDB, playerInfoDB } from 
 import { ref, watchEffect, computed, onMounted } from "vue";
 import { getEnkaUI } from "@/utils/decorator";
 import useImport from "@/utils/enka/useImport";
+import { Character } from "@/constants/characters-config/character";
 
 const emit = defineEmits<{
   recalculation: [value: IUserSavedCalculationData];
@@ -38,6 +39,11 @@ const filterActive = ref(0);
 /** 读取本地数据库 */
 const getLocalData = () => {
   db.getAll(calDB.storeName).then((res) => {
+    /** 旧数据补丁 - 旧数据缺少secondElement属性 */
+    res.forEach((item) => {
+      if (!item.panel.secondElement)
+        item.panel.secondElement = Character.find((cha) => item.characterEnkaId === cha.enkaId)?.secondElement;
+    });
     localData.value = res;
   });
   db.getAll(playerInfoDB.storeName).then((res) => {

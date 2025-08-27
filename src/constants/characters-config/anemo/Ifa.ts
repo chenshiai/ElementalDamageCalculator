@@ -1,12 +1,12 @@
 import Character from "../character-class";
 import { ICharacterInfo } from "@/types/interface";
-import { AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
+import { AttackType, BuffTarget, BuffType, ElementType, Rarity, SecondElementType, WeaponType } from "@/types/enum";
 import { A_80_MYSTERY_96, Constellation_E_3, Constellation_Q_5 } from "../buffs";
 import { EnKaId, Weapon, Element, BaseData, Icons, action } from "@/utils/decorator";
 
 @EnKaId(10000113, "伊法")
 @Weapon(WeaponType.Magic)
-@Element(ElementType.Anemo)
+@Element(ElementType.Anemo, SecondElementType.Nightsoul)
 @BaseData(Rarity.Four, 10081, 201, 605, 60)
 @Icons("UI_AvatarIcon_Ifa")
 export class IfaData extends Character implements ICharacterInfo {

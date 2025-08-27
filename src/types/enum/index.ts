@@ -44,9 +44,14 @@ export enum ElementType {
 
 /** 第二类型 */
 export enum SecondElementType {
+  /** 月兆 */
   Moon = 'moon',
+  /** 芒 */
   Awn = 'awn',
+  /** 荒 */
   Desolate = 'desolate',
+  /** 夜魂 */
+  Nightsoul = 'nightsoul',
 }
 
 export const EnchantingType = {

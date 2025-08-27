@@ -1,12 +1,12 @@
 import Character from "../character-class";
 import { ICharacterInfo } from "@/types/interface";
-import { AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
+import { AttackType, BuffTarget, BuffType, ElementType, Rarity, SecondElementType, WeaponType } from "@/types/enum";
 import { A_80_ATK_24P, Constellation_E_5, Constellation_Q_3 } from "../buffs";
 import { EnKaId, Weapon, Element, BaseData, Icons, action } from "@/utils/decorator";
 
 @EnKaId(10000105, "欧洛伦")
 @Weapon(WeaponType.Bow)
-@Element(ElementType.Electro)
+@Element(ElementType.Electro, SecondElementType.Nightsoul)
 @BaseData(Rarity.Four, 9244, 244, 587, 60)
 @Icons("UI_AvatarIcon_Olorun")
 export class OlorunData extends Character implements ICharacterInfo {

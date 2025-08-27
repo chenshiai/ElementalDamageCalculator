@@ -33,7 +33,9 @@ const deconstructionBuff = (buff: IBuffBase, result: IUserSavedCalculationData):
 
 // 获取共享的buff
 const getShareBuff = (buffs: IBuffBase[], result: IUserSavedCalculationData): IBuffExtra[] => {
-  return buffs.filter((buff) => buff.shareable).map((buff) => deconstructionBuff(buff, result));
+  return buffs
+    .filter((buff) => (buff.shareable && !buff.condition) || (buff.shareable && buff.condition(result.panel)))
+    .map((buff) => deconstructionBuff(buff, result));
 };
 
 const useTeamData = () => {
@@ -45,7 +47,7 @@ const useTeamData = () => {
     store.commit("setCurrentEdit", teamList[index].calculation.title);
     sessionStorage.setItem("editCharacter", JSON.stringify(teamList[index].calculation));
     sessionStorage.setItem("editTeamIndex", index);
-    
+
     router.push({
       path: `/character/edit/${encodeURIComponent(teamList[index].calculation.title)}`,
     });

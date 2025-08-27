@@ -1,5 +1,5 @@
 import { BuffEffect, BuffCondition, WeaponStats } from "../index";
-import { ElementType, AttackType, Rarity, WeaponType, EquipType, BuffType, BuffTarget } from "../enum";
+import { ElementType, AttackType, Rarity, WeaponType, EquipType, BuffType, BuffTarget, SecondElementType } from "../enum";
 import { IUserSavedCalculationData } from "@/constants/db";
 
 export interface IBuffBase {
@@ -62,6 +62,7 @@ export interface ICharacterInfo {
   name: string;
   rarity: Rarity;
   element: ElementType;
+  secondElement?: SecondElementType;
   weapon: WeaponType;
   burstCharge: number;
   icons: {

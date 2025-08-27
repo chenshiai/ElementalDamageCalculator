@@ -1,4 +1,4 @@
-import { ElementType, Rarity, WeaponType } from "@/types/enum";
+import { ElementType, Rarity, SecondElementType, WeaponType } from "@/types/enum";
 
 abstract class Character {
   level = 90;
@@ -6,6 +6,7 @@ abstract class Character {
   name: string;
   weapon: WeaponType;
   element: ElementType;
+  secondElement: SecondElementType;
   rarity: Rarity;
   enkaId: number;
   baseHP: number;
