@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import TabTitle from "@/component/TabTitle.vue";
-import { CellGroup, RadioGroup, Radio, Field, Icon, Stepper } from "vant";
+import { CellGroup, RadioGroup, Radio, Field, Icon, Stepper, Popup } from "vant";
 import { computed, ref } from "vue";
 import { useYiFa, useIneffa } from "../elemental/roles";
 import { BaseDMG } from "@/constants/elementalReaction";
@@ -92,7 +92,13 @@ const removeData = (index: number) => {
 // 月感电伤害值
 const moonElectroChargedDamage = computed(() => {
   const resultList = teamList.value.map(moonElectroDamage);
-  const allResult = generateAllSortedResults(resultList.map((i) => i.result)).map(sum);
+  const allResult = [
+    ...new Set(
+      generateAllSortedResults(resultList.map((i) => i.result))
+        .map(sum)
+        .sort((a, b) => b - a)
+    ),
+  ];
   const desire = sum(resultList.map((i) => i.desire).sort((a, b) => b - a));
   return {
     allResult,
@@ -219,12 +225,16 @@ const damageResult = computed(() => {
   </details>
   <br />
   <div class="data-panel__title">期望伤害</div>
-  <div class="result">
-    <div v-for="item in damageResult" :key="item.name" :name="item.name" :class="['damage-tag', item.class]">
+  <details v-for="item in damageResult" :key="item.name" :name="item.name" :class="[item.class, 'damage-details']">
+    <summary class="damage-tag">
       <data class="damage-tag__title" :data-text="item.name">{{ item.name }}</data>
       <data class="damage-tag__detail" :data-text="item.desire">{{ item.desire }}</data>
+      <div>查看实际数值</div>
+    </summary>
+    <div class="all-result">
+      {{ item.allResult }}
     </div>
-  </div>
+  </details>
 </template>
 
 <style scoped>
@@ -241,11 +251,10 @@ const damageResult = computed(() => {
     border-radius: 4px;
   }
 }
-@media screen and (max-width: 768px) {
-  .moon-panel {
-    grid-template-columns: 1fr;
-  }
+.damage-details {
+  width: 50%;
 }
+
 .moon-panel__delete {
   float: right;
   cursor: pointer;
@@ -300,11 +309,23 @@ const damageResult = computed(() => {
     display: inline-block;
     vertical-align: bottom;
   }
-  .van-radio[aria-checked="true"] :deep(.van-radio__label){
+  .van-radio[aria-checked="true"] :deep(.van-radio__label) {
     background: var(--bg);
     box-shadow: inset 0 0 0 2px var(--light-text);
     border: 1px solid var(--border);
     color: var(--light-text);
+  }
+}
+
+.all-result {
+  width: 100%;
+}
+@media screen and (max-width: 768px) {
+  .moon-panel {
+    grid-template-columns: 1fr;
+  }
+  .damage-details {
+    width: 100%;
   }
 }
 </style>

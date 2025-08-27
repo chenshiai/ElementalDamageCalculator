@@ -91,6 +91,99 @@ const getBuffByElement4 = (label: string, type: BuffType) => {
 };
 
 const relicLibrary: IRelicLibraryItem[] = [
+  // hash待更新
+  {
+    name: "纺月的夜歌",
+    itemType: ItemType.ITEM_RELIQUARY,
+    setNameTextMapHash: 376147745100,
+    equip: [
+      setReliquartStat(376147745100, "流离者的晶泪", "UI_RelicIcon_15042_4", EquipType.EQUIP_BRACER),
+      setReliquartStat(376147745100, "受福者的白羽", "UI_RelicIcon_15042_2", EquipType.EQUIP_NECKLACE),
+      setReliquartStat(376147745100, "祭霜者的迷狂", "UI_RelicIcon_15042_5", EquipType.EQUIP_SHOES),
+      setReliquartStat(376147745100, "至纯者的欢荣", "UI_RelicIcon_15042_1", EquipType.EQUIP_RING),
+      setReliquartStat(376147745100, "司信者的圣冕", "UI_RelicIcon_15042_3", EquipType.EQUIP_DRESS),
+    ],
+    suit2: "二件套：元素充能效率提高20%。",
+    suit4:
+      "四件套：造成元素伤害时，获得持续8秒的「月辉明光·崇信」效果：队伍的月兆为初辉/满辉时，队伍中的所有角色的元素精通提高60点/120点。装备者处于后台时也能触发上述效果。队伍中的角色每拥有一种不同的「月辉明光」效果，队伍中的所有角色触发的月曜反应造成的伤害提升10%。由「月辉明光」产生的效果无法叠加。",
+    buffs: {
+      suit2: [
+        {
+          label: "二件套·元素充能效率提高",
+          effect: [{ type: BuffType.ChargeFixed, getValue: () => 20 }],
+          describe: "元素充能效率提高20%。",
+          enable: true,
+        },
+      ],
+      suit4: [
+        {
+          label: "四件套·角色元素精通提高",
+          effect: [{ type: BuffType.MysteryFixed, getValue: (_, s) => (s ? 120 : 60) }],
+          describe: "队伍的月兆为初辉/满辉时，队伍中的所有角色的元素精通提高60点/120点。",
+          shareable: true,
+          enable: true,
+          stackable: true,
+          stackType: "switch",
+          stackText: "月兆·满辉",
+          stack: 0,
+          limit: 1,
+        },
+        {
+          label: "四件套·「月辉明光·崇信」",
+          effect: [{ type: BuffType.GlobalMoonPrcent, getValue: () => 10 }],
+          describe: "队伍中的所有角色触发的月曜反应造成的伤害提升10%。同名效果无法叠加。",
+          shareable: true,
+          enable: true,
+        },
+      ],
+    },
+  },
+  {
+    name: "穹境示现之夜",
+    itemType: ItemType.ITEM_RELIQUARY,
+    setNameTextMapHash: 376147745111,
+    equip: [
+      setReliquartStat(376147745111, "渴真之花", "UI_RelicIcon_15041_4", EquipType.EQUIP_BRACER),
+      setReliquartStat(376147745111, "深罪之羽", "UI_RelicIcon_15041_2", EquipType.EQUIP_NECKLACE),
+      setReliquartStat(376147745111, "谕告之钟", "UI_RelicIcon_15041_5", EquipType.EQUIP_SHOES),
+      setReliquartStat(376147745111, "满溢之壶", "UI_RelicIcon_15041_1", EquipType.EQUIP_RING),
+      setReliquartStat(376147745111, "永劫之冕", "UI_RelicIcon_15041_3", EquipType.EQUIP_DRESS),
+    ],
+    suit2: "二件套：元素精通提高80点。",
+    suit4:
+      "四件套：队伍中附近的角色触发月曜反应时，若装备者在场上，将获得持续4秒的「月辉明光·蓄念」效果：队伍的月兆为初辉/满辉时，暴击率提升15%/30%。队伍中的角色每拥有一种不同的「月辉明光」效果，队伍中的所有角色触发的月曜反应造成的伤害提升10%。由「月辉明光」产生的效果无法叠加。",
+    buffs: {
+      suit2: [
+        {
+          label: "二件套·元素精通提高",
+          effect: [{ type: BuffType.MysteryFixed, getValue: () => 80 }],
+          describe: "元素精通提高80点。",
+          enable: true,
+        },
+      ],
+      suit4: [
+        {
+          label: "四件套·暴击率提升",
+          effect: [{ type: BuffType.Critcal, getValue: (_, s) => (s ? 30 : 15) }],
+          describe: "队伍的月兆为初辉/满辉时，暴击率提升15%/30%。",
+          enable: true,
+          stackable: true,
+          stackType: "switch",
+          stackText: "月兆·满辉",
+          stack: 0,
+          limit: 1,
+        },
+        {
+          label: "四件套·「月辉明光·蓄念」",
+          effect: [{ type: BuffType.GlobalMoonPrcent, getValue: () => 10 }],
+          describe: "队伍中的所有角色触发的月曜反应造成的伤害提升10%。同名效果无法叠加。",
+          shareable: true,
+          enable: true,
+        },
+      ],
+    },
+  },
+  // ======
   {
     name: "长夜之誓",
     itemType: ItemType.ITEM_RELIQUARY,

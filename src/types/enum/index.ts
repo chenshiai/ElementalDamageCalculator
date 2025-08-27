@@ -38,7 +38,15 @@ export enum ElementType {
   Geo = "Geo",
   Dendro = "Dendro",
   MoonElectro = "MoonElectro",
+  MoonSwirl = "MoonSwirl",
   None = "None",
+}
+
+/** 第二类型 */
+export enum SecondElementType {
+  Moon = 'moon',
+  Awn = 'awn',
+  Desolate = 'desolate',
 }
 
 export const EnchantingType = {
@@ -51,6 +59,7 @@ export const EnchantingType = {
   [ElementType.Geo]: 6,
   [ElementType.Dendro]: 7,
   [ElementType.MoonElectro]: 8,
+  [ElementType.MoonSwirl]: 9,
 };
 
 // 数字映射到 ElementType 的对象
@@ -64,6 +73,7 @@ export const NumberToElementType: Record<number, ElementType> = {
   6: ElementType.Geo,
   7: ElementType.Dendro,
   8: ElementType.MoonElectro,
+  9: ElementType.MoonSwirl,
 };
 /** 武器类型 */
 export enum WeaponType {
@@ -141,6 +151,8 @@ export enum BuffType {
   BurstPrcent = "elementalBurstAddHunt",
   /** 月感电伤害百分比提升 - 与精通乘区加算*/
   MoonElectroPrcent = "moonElectroAddHunt",
+  /** 月绽放伤害百分比提升 - 与精通乘区加算*/
+  MoonSwirlPrcent = "moonSwirlAddHunt",
 
   /** 普攻伤害提高 */
   NormalFixed = "normalIncreaseHurt",
@@ -171,6 +183,8 @@ export enum BuffType {
   DendroFixed = "dendroIncreaseHunt",
   /** 月感电伤害提高 */
   MoonElectroFixed = "moonElectroIncreaseHunt",
+  /** 月绽放伤害提高 */
+  MoonSwirlFixed = "moonSwirlIncreaseHunt",
 
   /** 全局暴击率提升 */
   GlobalCritcal = "globalCritcal",
@@ -180,9 +194,9 @@ export enum BuffType {
   GlobalPrcent = "globalAddHunt",
   /** 全局伤害提高 */
   GlobalFixed = "globalIncreaseHunt",
-  /** 全局月伤害提升 单位% - 应该用不上*/
+  /** 全局月反应伤害提升 单位% */
   GlobalMoonPrcent = "globalMoonAddHunt",
-  /** 全局月伤害提高 - 不知道该不该和【全局伤害提高】区分开还是加一起算 */
+  /** 全局月反应伤害提高 */
   GlobalMoonFixed = "globalMoonIncreaseHunt",
 
   /** 普攻暴击率提升 */
@@ -214,6 +228,8 @@ export enum BuffType {
   AnemoCritcal = "anemoCritcal",
   /** 月感电暴击率提升% */
   MoonElectroCritcal = "moonElectroCritcal",
+  /** 月绽放暴击率提升% */
+  MoonSwirlCritcal = "moonSwirlCritcal",
 
   /** 普攻暴击伤害提升%*/
   NormalCritcalHurt = "normalAttackCritcalHurt",
@@ -242,8 +258,10 @@ export enum BuffType {
   DendroCritcalHurt = "dendroCritcalHurt",
   /** 风伤暴击伤害提升%*/
   AnemoCritcalHurt = "anemoCritcalHurt",
-  /** 月感电伤暴击伤害提升%*/
+  /** 月感电暴击伤害提升%*/
   MoonElectroCritcalHurt = "moonElectroCritcalHurt",
+  /** 月绽放暴击伤害提升%*/
+  MoonSwirlCritcalHurt = "moonSwirlCritcalHurt",
 
   /** 生命之契 */
   LifeContract = "lifeContract",
@@ -271,6 +289,8 @@ export enum BuffType {
   
   /** 月感电倍率提升 */
   MoonElectroRate = "moonElectroRateAdd",
+  /** 月绽放倍率提升 */
+  MoonSwirlRate = "moonSwirlRateAdd",
   /** 冷却缩减 */
   CoolDown = "coolDown",
   /** 治疗加成 */

@@ -127,6 +127,8 @@ export interface ICalculatorValue {
   baseDEF: number;
   /** 角色元素类型 */
   element: ElementType;
+  /** 角色的第二类型 芒、荒、月兆 */
+  secondElement?: ElementType;
   /** 角色武器类型 */
   weapon: WeaponType;
   /** 元素爆发能量 */
@@ -192,6 +194,8 @@ export interface ICalculatorValue {
   [BuffType.DendroPrcent]: number;
   /** 月感电伤害加成 - 与精通乘区加算 */
   [BuffType.MoonElectroPrcent]: number;
+  /** 月绽放伤害加成 - 与精通乘区加算 */
+  [BuffType.MoonSwirlPrcent]: number;
 
   // 各种隐式暴击率
   /** 全局暴击率提升 */
@@ -224,6 +228,8 @@ export interface ICalculatorValue {
   [BuffType.DendroCritcal]: number;
   /** 月感电伤害暴击率加成 */
   [BuffType.MoonElectroCritcal]: number;
+  /** 月绽放伤害暴击率加成 */
+  [BuffType.MoonSwirlCritcal]: number;
 
   // 各种隐式爆伤
   /** 全局暴击伤害提升 */
@@ -256,6 +262,8 @@ export interface ICalculatorValue {
   [BuffType.DendroCritcalHurt]: number;
   /** 月感电伤害暴击伤害加成 */
   [BuffType.MoonElectroCritcalHurt]: number;
+  /** 月绽放伤害暴击伤害加成 */
+  [BuffType.MoonSwirlCritcalHurt]: number;
 
   // 攻击增伤
   /** 普通攻击伤害加成 */
@@ -308,6 +316,8 @@ export interface ICalculatorValue {
   [BuffType.DendroFixed]: number;
   /** 月感电伤害提高 */
   [BuffType.MoonElectroFixed]: number;
+  /** 月绽放伤害提高 */
+  [BuffType.MoonSwirlFixed]: number;
 
   /** 生命之契 */
   [BuffType.LifeContract]: number;
@@ -324,6 +334,8 @@ export interface ICalculatorValue {
   [BuffType.BurstRate]: number;
   /** 月感电倍率提升 */
   [BuffType.MoonElectroRate]: number;
+  /** 月绽放倍率提升 */
+  [BuffType.MoonSwirlRate]: number;
 
   /** 普攻天赋等级加成 */
   [BuffType.NormalLevel]: number;

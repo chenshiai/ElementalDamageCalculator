@@ -1,5 +1,5 @@
 import { IRate, ISkillRate } from "@/types/interface";
-import { AppendProp, AttackType, ElementType, Rarity, WeaponType } from "@/types/enum";
+import { AppendProp, AttackType, ElementType, Rarity, SecondElementType, WeaponType } from "@/types/enum";
 
 /**
  * 图片资源的获取地址拼接
@@ -38,10 +38,11 @@ export function Weapon(weaponType: WeaponType): any {
   };
 }
 
-export function Element(ElementType: ElementType): any {
+export function Element(ElementType: ElementType, secondElement?: SecondElementType): any {
   return function (target: any) {
     return class extends target {
       element = ElementType;
+      secondElement = secondElement;
       constructor() {
         super();
       }

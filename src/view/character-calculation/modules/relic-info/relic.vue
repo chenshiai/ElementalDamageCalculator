@@ -117,7 +117,7 @@ const subitemCounts = computed(() => {
   font-size: 16px;
   line-height: 24px;
   color: var(--light-text);
-  text-shadow: 2px 2px 4px var(--stroke-2);
+  text-shadow: 1px 1px 0px var(--stroke-2);
   border-radius: 4px 0 0;
   padding: 0 8px;
   height: 40px;

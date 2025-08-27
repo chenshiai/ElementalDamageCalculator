@@ -1,12 +1,12 @@
 import Character from "../character-class";
 import { IBuffBase, ICharacterInfo } from "@/types/interface";
-import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
+import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, SecondElementType, WeaponType } from "@/types/enum";
 import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 import { S_80_CRITAL_19P, Constellation_E_3, Constellation_Q_5 } from "../buffs";
 
 @EnKaId(10000116, "伊涅芙")
 @Weapon(WeaponType.Polearms)
-@Element(ElementType.Electro)
+@Element(ElementType.Electro, SecondElementType.Moon)
 @BaseData(Rarity.Five, 12613, 330, 828, 60)
 @Icons("UI_AvatarIcon_Ineffa")
 export class IneffaData extends Character implements ICharacterInfo {
@@ -101,8 +101,9 @@ export class IneffaData extends Character implements ICharacterInfo {
       effect: [
         {
           type: BuffType.MysteryFixed,
-          getValue: (data) => (data.baseATK + data.extraATK + data.extraATK_NT) * 0.06,
+          getValue: (data) => (data.baseATK + data.extraATK) * 0.06,
           transform: true,
+          actionOn: ActionOn.Indirect,
         },
       ],
       enable: true,

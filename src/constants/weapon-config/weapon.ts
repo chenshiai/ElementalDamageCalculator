@@ -1,5 +1,5 @@
-import { WeaponType, Rarity, AppendProp, BuffType, AttackType, ElementType, ActionOn, BuffTarget } from "@/types/enum";
-import { ICalculatorValue, IWeaponInfo } from "@/types/interface";
+import { WeaponType, Rarity, AppendProp, BuffType, AttackType, ElementType, BuffTarget } from "@/types/enum";
+import {  IWeaponInfo } from "@/types/interface";
 import { getEnkaUI } from "@/utils/decorator";
 import { highlight, createWeapon } from "@/utils/calculate/create-data-methods";
 import * as polearms from "./polearms/0";

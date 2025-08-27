@@ -9,7 +9,7 @@ type MoreData = {
   ADDITIONAL_DMG: number;
   /** 增伤 */
   addHunt: number;
-  /** 月类型增伤 - @TODO 待定 2025/07/20 姑且把月xx当成一种全新的伤害类型 */
+  /** 月类型增伤 */
   moonAddHunt: number;
   /** 暴击伤害 */
   criticalHunt: number;
@@ -212,6 +212,15 @@ function getMoreDataBySwitch(
       // @TODO 2025/07/20 目前只有伊涅芙可以给月感电伤害提升最终倍率，暂时先用addRate计算
       addRate += calculatorValue[BuffType.MoonElectroRate] || 0;
       moonAddHunt += calculatorValue[BuffType.MoonElectroPrcent] || 0;
+      break;
+    case ElementType.MoonSwirl:
+      defensePenetration = 100;
+      ADDITIONAL_DMG += calculatorValue[BuffType.MoonSwirlFixed] || 0;
+      criticalHunt += calculatorValue[BuffType.MoonSwirlCritcalHurt] || 0;
+      critical += calculatorValue[BuffType.MoonSwirlCritcal] || 0;
+      resistance += calculatorValue[BuffType.EnemyDendroResistance] || 0;
+      moonAddHunt += calculatorValue[BuffType.MoonSwirlPrcent] || 0;
+      addRate += calculatorValue[BuffType.MoonSwirlRate] || 0;
       break;
   }
 

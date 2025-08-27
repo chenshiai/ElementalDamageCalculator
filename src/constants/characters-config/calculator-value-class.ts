@@ -51,6 +51,7 @@ class CalculatorValue implements ICalculatorValue {
   geoCritcal: number = 0;
   dendroCritcal: number = 0;
   moonElectroCritcal: number = 0;
+  moonSwirlCritcal: number = 0;
 
   // 各种隐式爆伤
   globalCritcalHunt: number = 0;
@@ -68,6 +69,7 @@ class CalculatorValue implements ICalculatorValue {
   geoCritcalHurt: number = 0;
   dendroCritcalHurt: number = 0;
   moonElectroCritcalHurt: number = 0;
+  moonSwirlCritcalHurt: number = 0;
 
   // 攻击增伤
   normalAttackAddHunt: number = 0;
@@ -97,6 +99,7 @@ class CalculatorValue implements ICalculatorValue {
   geoAddHunt: number = 0;
   dendroAddHunt: number = 0;
   moonElectroAddHunt: number = 0;
+  moonSwirlAddHunt: number = 0;
 
   // 元素伤害提高
   phycalIncreaseHunt: number = 0;
@@ -108,6 +111,7 @@ class CalculatorValue implements ICalculatorValue {
   geoIncreaseHunt: number = 0;
   dendroIncreaseHunt: number = 0;
   moonElectroIncreaseHunt: number = 0;
+  moonSwirlIncreaseHunt: number = 0;
 
   // 生命之契
   lifeContract: number = 0;
@@ -119,6 +123,7 @@ class CalculatorValue implements ICalculatorValue {
   skillRateAdd: number = 0;
   burstRateAdd: number = 0;
   moonElectroRateAdd: number = 0;
+  moonSwirlRateAdd: number = 0;
 
   burstAdd: number = 0;
   skillAdd: number = 0;
