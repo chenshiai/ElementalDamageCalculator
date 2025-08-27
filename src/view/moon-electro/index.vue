@@ -1,18 +1,29 @@
 <script setup lang="ts">
 import TabTitle from "@/component/TabTitle.vue";
-import { CellGroup, RadioGroup, Radio, Collapse, CollapseItem, Field, Icon, Stepper } from "vant";
+import { CellGroup, RadioGroup, Radio, Field, Icon, Stepper } from "vant";
 import { computed, ref } from "vue";
 import { useYiFa, useIneffa } from "../elemental/roles";
 import { BaseDMG } from "@/constants/elementalReaction";
 import Popover from "@/component/Popover.vue";
 import { getMoonElectroRate, generateAllSortedResults, getResistanceRate } from "@/utils";
+import { getEnkaUI } from "@/utils/decorator";
 
 type teamItem = {
   level: number;
   elementMastery: number;
   criticalRate: number;
   criticalDamage: number;
-  checked: string;
+  checked: RelicType;
+};
+
+enum RelicType {
+  none = "none",
+  thunder = "thunder",
+}
+
+const RelicText = {
+  [RelicType.none]: "无",
+  [RelicType.thunder]: "如雷的盛怒",
 };
 
 const teamList = ref<teamItem[]>([
@@ -21,14 +32,14 @@ const teamList = ref<teamItem[]>([
     elementMastery: 0,
     criticalRate: 5,
     criticalDamage: 50,
-    checked: "",
+    checked: RelicType.none,
   },
 ]);
-const otherData = ref(0);
+
+const moonElectroOtherData = ref(0);
 const enemyResistance = ref(10);
 const { yehun, yehunMoonGain } = useYiFa();
 const { ineffaAtk, ineffaGain } = useIneffa();
-const activeNames = ref<string[]>([]);
 
 // 单人月感电反应伤害计算
 const moonElectroDamage = (teamData: teamItem) => {
@@ -46,8 +57,8 @@ const moonElectroDamage = (teamData: teamItem) => {
       (1 +
         (getMoonElectroRate(teamData.elementMastery) +
           yehunMoonGain.value +
-          +otherData.value +
-          (teamData.checked === "thunder" ? 20 : 0)) /
+          +moonElectroOtherData.value +
+          (teamData.checked === RelicType.thunder ? 20 : 0)) /
           100) *
       (1 + ineffaGain.value / 100) *
       getResistanceRate(enemyResistance.value)
@@ -72,7 +83,7 @@ const addData = () => {
     elementMastery: 0,
     criticalRate: 5,
     criticalDamage: 50,
-    checked: "",
+    checked: RelicType.none,
   });
 };
 const removeData = (index: number) => {
@@ -101,14 +112,22 @@ const damageResult = computed(() => {
 </script>
 
 <template>
-  <TabTitle>月反应计算</TabTitle>
+  <TabTitle>月曜反应计算</TabTitle>
   <div class="tips">仅计算由普通剧变反应转化的月反应伤害，不计算角色直接造成的月反应伤害。</div>
 
-  <div class="data-panel__title">角色属性</div>
-  <section class="moon-panel">
-    <div v-for="(item, index) in teamList" :key="index">
+  <div class="base-data">
+    <span class="base-damage__title">敌人抗性%</span>
+    <Stepper v-model="enemyResistance" input-width="66px" integer button-size="20" theme="round" />
+  </div>
+  <br />
+  <div>
+    <span class="data-panel__title">队伍属性</span>
+    <span class="holy-relic-tips">输入能参与反应的角色面板</span>
+  </div>
+  <ul class="moon-panel">
+    <li v-for="(item, index) in teamList" :key="index">
       <div class="moon-panel__title">
-        角色{{ index + 1 }}
+        角色{{ index + 1 }}面板
         <span v-show="index !== 0" class="moon-panel__delete" @click="removeData(index)">移除</span>
       </div>
       <div class="moon-panel__basic">
@@ -129,98 +148,98 @@ const damageResult = computed(() => {
           <input class="basic-panel-input" type="number" v-model="item.criticalDamage" />
         </div>
       </div>
-      <div class="moon-panel__title">套装效果</div>
+      <div class="moon-panel__title">
+        圣遗物套装
+        <span class="holy-relic-tips">{{ RelicText[item.checked] }}</span>
+      </div>
       <RadioGroup class="holy-relic-radio" v-model="item.checked">
-        <Radio name="">无套装效果</Radio>
-        <Radio name="thunder">如雷的盛怒</Radio>
+        <Radio class="holy-relic-radio__item" label-position="left" :name="RelicType.none">
+          <span>无</span>
+        </Radio>
+        <Radio class="holy-relic-radio__item" label-position="left" :name="RelicType.thunder">
+          <img :src="getEnkaUI('UI_RelicIcon_15005_4')" alt="" />
+        </Radio>
       </RadioGroup>
-    </div>
+    </li>
     <div v-show="teamList.length < 4" class="show-click" @click="addData">新增角色属性</div>
-  </section>
+  </ul>
   <br />
   <details class="gain-group-details" open>
     <summary>
-      <span class="data-panel__title">全场效果</span>
+      <span class="data-panel__title">角色提升</span>
       <span class="holy-relic-tips open">展开</span>
       <span class="holy-relic-tips close">收起</span>
     </summary>
     <section class="gain-group">
-      <div class="gain">
-        <div class="cha-gain-inner">
-          <img
-            class="base-damage__img"
-            src="https://homdgcat.wiki/homdgcat-res/Avatar/UI_AvatarIcon_Ineffa.png"
-            alt=""
-          />
-          <CellGroup inset>
-            <Field v-model="ineffaAtk" type="number" label="伊涅芙攻击力" />
-          </CellGroup>
-          <Popover position="top-right">
-            <div class="data-item-popover__content">
-              伊涅芙：提升队伍中所有角色<q class="elector">月感电</q>的基础伤害，每100点攻击力提升0.7%，最大14%
-            </div>
-            <template #trigger>
-              <Icon size="26" name="question" />
-            </template>
-          </Popover>
-        </div>
-      </div>
-      <div class="gain">
-        <div class="cha-gain-inner">
-          <img class="base-damage__img" src="https://enka.network/ui/UI_AvatarIcon_Ifa.png" alt="" />
-          <CellGroup inset>
-            <Field v-model="yehun" type="number" label="夜魂总和" />
-          </CellGroup>
-          <Popover position="top-right">
-            <div class="data-item-popover__content">
-              伊法：救援要义基于队伍中所有角色当前夜魂值的总和，每1点救援要义提升
-              <q class="elector">月感电</q>反应0.2%的伤害，最多记录200点救援要义
-            </div>
-            <template #trigger>
-              <Icon size="26" name="question" />
-            </template>
-          </Popover>
-        </div>
-      </div>
-      <br />
-      <span></span>
-      <div class="base-data">
-        <span class="base-damage__title">全队月感电伤害提升%</span>
-        <Stepper v-model="otherData" input-width="66px" integer button-size="20" theme="round" min="0" />
+      <div class="cha-gain-inner">
+        <img class="base-damage__img" src="https://homdgcat.wiki/homdgcat-res/Avatar/UI_AvatarIcon_Ineffa.png" alt="" />
+        <CellGroup inset>
+          <Field v-model="ineffaAtk" type="number" label="伊涅芙攻击力" />
+        </CellGroup>
+        <Popover position="top-right">
+          <div class="data-item-popover__content">
+            伊涅芙：提升队伍中所有角色<q class="elector">月感电</q>的基础伤害，每100点攻击力提升0.7%，最大14%
+          </div>
+          <template #trigger>
+            <Icon size="26" name="question" />
+          </template>
+        </Popover>
       </div>
 
+      <div class="cha-gain-inner">
+        <img class="base-damage__img" src="https://enka.network/ui/UI_AvatarIcon_Ifa.png" alt="" />
+        <CellGroup inset>
+          <Field v-model="yehun" type="number" label="夜魂总和" />
+        </CellGroup>
+        <Popover position="top-right">
+          <div class="data-item-popover__content">
+            伊法：救援要义基于队伍中所有角色当前夜魂值的总和，每1点救援要义提升
+            <q class="elector">月感电</q>反应0.2%的伤害，最多记录200点救援要义
+          </div>
+          <template #trigger>
+            <Icon size="26" name="question" />
+          </template>
+        </Popover>
+      </div>
+    </section>
+  </details>
+  <br />
+  <details class="gain-group-details" open>
+    <summary>
+      <span class="data-panel__title">全队增益</span>
+      <span class="holy-relic-tips open">展开</span>
+      <span class="holy-relic-tips close">收起</span>
+    </summary>
+    <section class="gain-group">
       <div class="base-data">
-        <span class="base-damage__title">敌人抗性%</span>
-        <Stepper v-model="enemyResistance" input-width="66px" integer button-size="20" theme="round" />
+        <span class="base-damage__title">月感电伤害提升%</span>
+        <Stepper v-model="moonElectroOtherData" input-width="66px" integer button-size="20" theme="round" min="0" />
       </div>
     </section>
   </details>
   <br />
   <div class="data-panel__title">期望伤害</div>
-  <section class="moon-panel">
-    <Collapse v-model="activeNames">
-      <CollapseItem v-for="item in damageResult" :key="item.name" :name="item.name">
-        <template #title>
-          <div :class="item.class">
-            <span style="margin-right: 10px">{{ item.name }}</span>
-            <span>{{ item.desire }}</span>
-          </div>
-        </template>
-        <div>
-          <span style="margin-right: 10px">实际伤害数值：</span>
-          <span>{{ item.allResult.join("、") }}</span>
-        </div>
-      </CollapseItem>
-    </Collapse>
-  </section>
+  <div class="result">
+    <div v-for="item in damageResult" :key="item.name" :name="item.name" :class="['damage-tag', item.class]">
+      <data class="damage-tag__title" :data-text="item.name">{{ item.name }}</data>
+      <data class="damage-tag__detail" :data-text="item.desire">{{ item.desire }}</data>
+    </div>
+  </div>
 </template>
 
 <style scoped>
 .moon-panel {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-gap: 16px;
+  grid-gap: 10px;
   margin-bottom: 16px;
+  padding-top: 10px;
+
+  li {
+    border: 1px solid var(--border);
+    padding: 4px 12px 12px;
+    border-radius: 4px;
+  }
 }
 @media screen and (max-width: 768px) {
   .moon-panel {
@@ -244,15 +263,48 @@ const damageResult = computed(() => {
   text-align: center;
   border: 1px solid var(--border);
   border-radius: 4px;
-  margin-bottom: 16px;
-  line-height: 32px;
-  height: 32px;
+  padding: 12px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
   width: 100%;
   background-color: transparent;
   cursor: pointer;
 }
 .holy-relic-radio {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
+
+  .holy-relic-radio__item {
+    display: flex;
+    justify-content: center;
+  }
+  &:deep(.van-radio__icon--round) {
+    display: none;
+  }
+  &:deep(.van-radio__label) {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    border-radius: 4px;
+  }
+  .van-radio__label img,
+  .van-radio__label span {
+    text-align: center;
+    line-height: 32px;
+    height: 32px;
+    width: 32px;
+    padding: 2px;
+    display: inline-block;
+    vertical-align: bottom;
+  }
+  .van-radio[aria-checked="true"] :deep(.van-radio__label){
+    background: var(--bg);
+    box-shadow: inset 0 0 0 2px var(--light-text);
+    border: 1px solid var(--border);
+    color: var(--light-text);
+  }
 }
 </style>

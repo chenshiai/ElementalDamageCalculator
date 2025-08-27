@@ -42,10 +42,6 @@
   border-radius: 4px;
 }
 
-.holy-relic__title {
-  margin-bottom: 12px;
-}
-
 .base-damage__input {
   line-height: 24px;
   width: 80px;
@@ -154,6 +150,11 @@
   grid-template-rows: repeat(4, 1fr);
   gap: 10px;
 }
+.gain-group {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+}
 @media screen and (min-width: 768px) {
   .gain-group {
     display: grid;
@@ -179,11 +180,13 @@
 .cha-gain-inner {
   display: flex;
   align-items: center;
-  margin-top: 12px;
 }
 .damage-tag__detail {
   text-align: center;
   flex: 1;
+}
+.gain-group-details summary {
+  margin-bottom: 12px;
 }
 .gain-group-details .close,
 .gain-group-details[open] .open {

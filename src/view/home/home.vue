@@ -14,7 +14,7 @@ import FourSvg from "./svg.vue";
     </router-link>
     <router-link to="/moon-electro" class="card active-btn">
       <FourSvg />
-      <div>月反应计算</div>
+      <div>月曜反应计算</div>
       <span>计算全队月反应的伤害</span>
       <img src="/img/inf.png" alt="" />
     </router-link>

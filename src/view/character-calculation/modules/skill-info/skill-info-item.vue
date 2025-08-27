@@ -122,9 +122,9 @@ const panelName = computed(() => {
         @click="emit('analysis', item.detail)"
       >
         <span class="skill-info-item-label">{{ item.label }}</span>
-        <span>{{ item.crit }}</span>
-        <span>{{ item.desire }}</span>
-        <span>{{ item.common }}</span>
+        <data :data-text="item.crit">{{ item.crit }}</data>
+        <data :data-text="item.desire">{{ item.desire }}</data>
+        <data :data-text="item.common">{{ item.common }}</data>
       </div>
     </template>
     <template v-else>

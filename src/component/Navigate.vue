@@ -3,7 +3,7 @@
     <img src="/img/image.png" />
     <router-link to="/" class="top-tabs__item">首页</router-link>
     <router-link to="/elemental" class="top-tabs__item">剧变反应计算</router-link>
-    <router-link to="/moon-electro" class="top-tabs__item">月反应计算</router-link>
+    <router-link to="/moon-electro" class="top-tabs__item">月曜反应计算</router-link>
     <router-link to="/increasing-range" class="top-tabs__item">单次伤害计算</router-link>
     <router-link to="/cloud-team" class="top-tabs__item">角色组队计算</router-link>
     <router-link to="/shield" class="top-tabs__item">护盾承伤计算</router-link>

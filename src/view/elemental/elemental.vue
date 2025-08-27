@@ -66,64 +66,68 @@
           </template>
         </Popover>
       </div>
-      <div class="gain">
-        <div class="cha-gain-inner">
-          <img class="base-damage__img" src="https://enka.network/ui/UI_AvatarIcon_Baizhuer.png" alt="" />
-          <CellGroup inset>
-            <Field v-model="baiZhu" type="number" label="生命上限" />
-          </CellGroup>
-
-          <Popover position="top-right">
-            <div class="data-item-popover__content">
-              白术：在地为化，基于白术生命值不超过50000的部分，每1000点提高
-              <q class="bloom">绽放</q>、 <q class="aggravate">超绽放</q>、<q class="burning">烈绽放</q>、
-              <q class="burning">燃烧</q>反应2%的伤害。 提升<q class="aggravate">超激化</q>和<q class="bloom">蔓激化</q>反应0.8%的伤害
-            </div>
-            <template #trigger>
-              <Icon size="26" name="question" />
-            </template>
-          </Popover>
-        </div>
+      <div class="cha-gain-inner">
+        <img class="base-damage__img" src="https://enka.network/ui/UI_AvatarIcon_Baizhuer.png" alt="" />
+        <CellGroup inset>
+          <Field v-model="baiZhu" type="number" label="生命上限" />
+        </CellGroup>
+        <Popover position="top-right">
+          <div class="data-item-popover__content">
+            白术：在地为化，基于白术生命值不超过50000的部分，每1000点提高
+            <q class="bloom">绽放</q>、 <q class="aggravate">超绽放</q>、<q class="burning">烈绽放</q>、
+            <q class="burning">燃烧</q>反应2%的伤害。 提升<q class="aggravate">超激化</q>和<q class="bloom">蔓激化</q
+            >反应0.8%的伤害
+          </div>
+          <template #trigger>
+            <Icon size="26" name="question" />
+          </template>
+        </Popover>
       </div>
-
-      <div class="gain">
-        <div class="cha-gain-inner">
-          <img class="base-damage__img" src="https://enka.network/ui/UI_AvatarIcon_Mizuki.png" alt="" />
-          <CellGroup inset>
-            <Field v-model="mizukiEm" type="number" label="元素精通" />
-            <Field v-model="mizukiSkillLevel" type="number" label="战技等级" />
-          </CellGroup>
-
-          <Popover position="top-right">
-            <div class="data-item-popover__content">
-              梦见月瑞希：梦浮，基于梦见月瑞希的元素精，提高<q class="swirl">扩散</q>反应伤害
-            </div>
-            <template #trigger>
-              <Icon size="26" name="question" />
-            </template>
-          </Popover>
-        </div>
+      <div class="cha-gain-inner">
+        <img class="base-damage__img" src="https://enka.network/ui/UI_AvatarIcon_Ifa.png" alt="" />
+        <CellGroup inset>
+          <Field v-model="yehun" type="number" label="夜魂总和" />
+        </CellGroup>
+        <Popover position="top-right">
+          <div class="data-item-popover__content">
+            伊法：救援要义基于队伍中所有角色当前夜魂值的总和，每1点救援要义提升
+            <q class="swirl">扩散</q>、 <q class="elector">感电</q>反应1.5%的伤害，最多记录200点救援要义
+          </div>
+          <template #trigger>
+            <Icon size="26" name="question" />
+          </template>
+        </Popover>
       </div>
-
-      <div class="gain">
-        <div class="cha-gain-inner">
-          <img class="base-damage__img" src="https://enka.network/ui/UI_AvatarIcon_Ifa.png" alt="" />
-          <CellGroup inset>
-            <Field v-model="yehun" type="number" label="夜魂总和" />
-          </CellGroup>
-          <Popover position="top-right">
-            <div class="data-item-popover__content">
-              伊法：救援要义基于队伍中所有角色当前夜魂值的总和，每1点救援要义提升<q class="swirl">扩散</q>、<q
-                class="elector"
-                >感电</q
-              >反应1.5%的伤害，最多记录200点救援要义
-            </div>
-            <template #trigger>
-              <Icon size="26" name="question" />
-            </template>
-          </Popover>
-        </div>
-        <span class="holy-relic-tips"> </span>
+      <div class="cha-gain-inner">
+        <img class="base-damage__img" src="https://enka.network/ui/UI_AvatarIcon_Mizuki.png" alt="" />
+        <CellGroup inset>
+          <Field v-model="mizukiEm" type="number" label="元素精通" />
+          <Field v-model="mizukiSkillLevel" type="number" label="战技等级" />
+        </CellGroup>
+        <Popover position="top-right">
+          <div class="data-item-popover__content">
+            梦见月瑞希：梦浮，基于梦见月瑞希的元素精通，提高<q class="swirl">扩散</q>反应伤害
+          </div>
+          <template #trigger>
+            <Icon size="26" name="question" />
+          </template>
+        </Popover>
+      </div>
+      <div class="cha-gain-inner">
+        <img class="base-damage__img" src="https://homdgcat.wiki/homdgcat-res/Avatar/UI_AvatarIcon_Lauma.png" alt="" />
+        <CellGroup inset>
+          <Field v-model="laumaEm" type="number" label="元素精通" />
+          <Field v-model="laumaLevel" type="number" label="元素爆发等级" />
+        </CellGroup>
+        <Popover position="top-right">
+          <div class="data-item-popover__content">
+            菈乌玛：苍色祷歌，基于菈乌玛的元素精通，提高
+            <q class="bloom">绽放</q>、 <q class="aggravate">超绽放</q>和 <q class="burning">烈绽放</q>反应伤害
+          </div>
+          <template #trigger>
+            <Icon size="26" name="question" />
+          </template>
+        </Popover>
       </div>
     </div>
   </details>
@@ -137,6 +141,7 @@
       <span v-show="baiZhuBloomGain" class="more-rate">
         <br />白术：燃烧、绽放、超绽放、烈绽放+{{ baiZhuBloomGain.toFixed(1) }}%
       </span>
+      <span v-show="laumaGain" class="more-rate"><br />菈乌玛：绽放、超绽放、烈绽放+{{ laumaGain.toFixed(1) }}; </span>
       <span v-show="mizukiGain" class="more-rate"> <br />梦见月瑞希：扩散+{{ mizukiGain.toFixed(1) }}% </span>
       <span v-show="yehunGain" class="more-rate"> <br />伊法：扩散、感电+{{ yehunGain.toFixed(1) }}% </span>
     </template>
@@ -169,7 +174,7 @@ import Popover from "@/component/Popover.vue";
 import DetailBlock from "./Detail.vue";
 import { Stepper, Field, CellGroup, Icon } from "vant";
 import useHolyRelic from "./holy-relic";
-import { useNiLuo, useBaiZhu, useMizuki, useYiFa } from "./roles";
+import { useNiLuo, useBaiZhu, useMizuki, useYiFa, useLauma } from "./roles";
 
 const elementalMystery = ref(786);
 const level = ref(90);
@@ -178,6 +183,7 @@ const { niLuo, niLuoGain } = useNiLuo();
 const { baiZhu, baiZhuBloomGain, baiZhuCatalyzeGain } = useBaiZhu();
 const { mizukiEm, mizukiSkillLevel, mizukiGain } = useMizuki();
 const { yehun, yehunGain } = useYiFa();
+const { laumaEm, laumaLevel, laumaGain } = useLauma();
 
 // 剧变反应伤害提升数值
 const servitudeDamage = (baseDamage) => {
@@ -207,14 +213,14 @@ const overloadDamage = computed(() => {
 // 绽放伤害值
 const bloomDamage = computed(() => {
   const basenumber = BaseDMG.bloom[level.value];
-  const r = servitudeDamage(basenumber) + Math.round((basenumber * (niLuoGain.value + baiZhuBloomGain.value)) / 100);
+  const r = servitudeDamage(basenumber) + Math.round((basenumber * (niLuoGain.value + baiZhuBloomGain.value)) / 100) + laumaGain.value;
   return currentRelic.value === EDEN ? Math.round(basenumber * 0.8) + r : r;
 });
 
 // 超烈绽放伤害值
 const hyperbloomDamage = computed(() => {
   const basenumber = BaseDMG.hyperbloom[level.value];
-  const r = servitudeDamage(basenumber) + Math.round((basenumber * baiZhuBloomGain.value) / 100);
+  const r = servitudeDamage(basenumber) + Math.round((basenumber * baiZhuBloomGain.value) / 100) + laumaGain.value;
   if (currentRelic.value === THUNDER || currentRelic.value === WITCH) return Math.round(basenumber * 0.4) + r;
   else if (currentRelic.value === EDEN) return Math.round(basenumber * 0.8) + r;
   return r;
@@ -301,7 +307,7 @@ const catalyzeMoreRate = computed(() => {
 });
 const moonServitudeMoreRate = computed(() => {
   return currentRelic.value === THUNDER ? "如雷套：月感电+20%" : "";
-})
+});
 const damageResult = computed(() => {
   return [
     {

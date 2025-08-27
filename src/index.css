@@ -140,16 +140,24 @@ q {
 .text-electro {
   color: var(--text-electro);
 }
-.text-moon-electro {
-  span:not(:first-child) {
-    display: inline-block;
-    -webkit-text-stroke: 0.3px #663c77; 
+.text-moon-electro data {
+  display: inline-block;
+  text-shadow: 1px 1px 0px #663c77;
+  transform: skewX(-15deg);
+
+  &::after {
+    content: attr(data-text);
     text-shadow: none;
-    transform: skewX(-15deg);
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background: linear-gradient(to bottom, var(--text-electro), #fff);
     -webkit-background-clip: text;
     background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: transparent;
   }
 }
 .text-hydro {
@@ -166,6 +174,26 @@ q {
 }
 .text-dendro {
   color: var(--text-dendro);
+}
+.text-moon-swirl data {
+  display: inline-block;
+  text-shadow: 1px 1px 0px #468663;
+  transform: skewX(-15deg);
+
+  &::after {
+    content: attr(data-text);
+    text-shadow: none;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--text-dendro), #fff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
 }
 .text-pyro {
   color: var(--text-pyro);

@@ -1,0 +1,14 @@
+User-agent: *
+Disallow: 
+
+# 禁止爬虫访问的目录
+# Disallow: /admin/
+# Disallow: /login/
+# Disallow: /api/
+
+# 允许特定爬虫访问
+# User-agent: Googlebot
+# Allow: /
+
+# 站点地图位置
+# Sitemap: https://example.com/sitemap.xml
