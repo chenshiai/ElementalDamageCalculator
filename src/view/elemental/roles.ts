@@ -73,7 +73,7 @@ export function useIneffa() {
 
 export function useLauma() {
   const laumaEm = ref(0);
-  const laumaLevel = ref(1);
+  const laumaLevel = ref(10);
   const laumaGain = computed(() => {
     return Math.round(laumaEm.value * Magnification.Lauma[Math.min(15, laumaLevel.value) - 1]);
   });

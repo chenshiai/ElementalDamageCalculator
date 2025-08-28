@@ -208,6 +208,8 @@ function getMoreDataBySwitch(
       ADDITIONAL_DMG += calculatorValue[BuffType.MoonElectroFixed] || 0;
       criticalHunt += calculatorValue[BuffType.MoonElectroCritcalHurt] || 0;
       critical += calculatorValue[BuffType.MoonElectroCritcal] || 0;
+      criticalHunt += calculatorValue[BuffType.ElectroCritcalHurt] || 0;
+      critical += calculatorValue[BuffType.ElectroCritcal] || 0;
       resistance += calculatorValue[BuffType.EnemyElectroResistance] || 0;
       // @TODO 2025/07/20 目前只有伊涅芙可以给月感电伤害提升最终倍率，暂时先用addRate计算
       addRate += calculatorValue[BuffType.MoonElectroRate] || 0;

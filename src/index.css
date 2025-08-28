@@ -144,6 +144,7 @@ q {
   display: inline-block;
   text-shadow: 1px 1px 0px #663c77;
   transform: skewX(-15deg);
+  font-weight: 200;
 
   &::after {
     content: attr(data-text);
@@ -153,7 +154,7 @@ q {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 20px;
     background: linear-gradient(to bottom, var(--text-electro), #fff);
     -webkit-background-clip: text;
     background-clip: text;
@@ -188,7 +189,7 @@ q {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 20px;
     background: linear-gradient(to bottom, var(--text-dendro), #fff);
     -webkit-background-clip: text;
     background-clip: text;

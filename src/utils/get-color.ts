@@ -37,6 +37,8 @@ export function getColorByElement(elementType: ElementType | string) {
       return "text-geo";
     case ElementType.Dendro:
       return "text-dendro";
+    case ElementType.MoonSwirl:
+      return "text-moon-swirl";
     case ElementType.Pyro:
       return "text-pyro";
     case ElementType.None:

@@ -129,7 +129,7 @@ export interface ICalculatorValue {
   /** 角色元素类型 */
   element: ElementType;
   /** 角色的第二类型 芒、荒、月兆 */
-  secondElement?: ElementType;
+  secondElement?: SecondElementType;
   /** 角色武器类型 */
   weapon: WeaponType;
   /** 元素爆发能量 */
