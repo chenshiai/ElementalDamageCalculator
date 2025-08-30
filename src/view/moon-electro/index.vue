@@ -135,10 +135,9 @@ const damageResult = computed(() => {
 <template>
   <TabTitle>月曜反应计算</TabTitle>
   <div class="tips">仅计算由普通剧变反应转化的月反应伤害，不计算角色直接造成的月反应伤害。</div>
-
   <div class="base-data">
     <span class="base-damage__title">敌人抗性%</span>
-    <Stepper v-model="enemyResistance" input-width="66px" integer button-size="20" theme="round" />
+    <Stepper v-model="enemyResistance" input-width="66px" integer button-size="20" theme="round" min="-999" />
   </div>
   <br />
   <div>
@@ -154,7 +153,7 @@ const damageResult = computed(() => {
       <div class="moon-panel__basic">
         <div class="basic-panel-item">
           <span class="basic-panel-item-title">等级</span>
-          <input class="basic-panel-input" type="number" max="90" min="1" v-model="item.level" />
+          <input class="basic-panel-input" type="number" max="100" min="1" v-model="item.level" />
         </div>
         <div class="basic-panel-item">
           <span class="basic-panel-item-title">元素精通</span>
@@ -229,8 +228,8 @@ const damageResult = computed(() => {
         </Popover>
       </div>
     </section>
+    <br />
   </details>
-  <br />
   <details class="gain-group-details" open>
     <summary>
       <span class="data-panel__title">全队增益</span>
@@ -243,8 +242,8 @@ const damageResult = computed(() => {
         <Stepper v-model="moonElectroOtherData" input-width="66px" integer button-size="20" theme="round" min="0" />
       </div>
     </section>
+    <br />
   </details>
-  <br />
   <div class="data-panel__title">期望伤害</div>
   <details v-for="item in damageResult" :key="item.name" :name="item.name" :class="[item.class, 'damage-details']">
     <summary class="damage-tag">

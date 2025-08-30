@@ -18,7 +18,9 @@ const { uid, waiting, importLoading, importGameInfo } = useImport();
       浏览器会提示你“不安全”。选择“高级” -> “继续访问”。<br />
       <i>作者：低成本项目，没钱搞SSL安全证书。</i>
     </p>
-    <p>导入后的数据会存在本地浏览器缓存中，可以在“角色组队计算”中填入查看。</p>
+    <p>
+      导入后的数据会存在本地浏览器缓存中，可以在<router-link to="/cloud-team">【角色组队计算】</router-link>中填入查看。
+    </p>
   </div>
   <Field class="uid-input" v-model="uid" label="UID" placeholder="输入UID" />
   <Button class="show-click" @click="importGameInfo" :disabled="waiting > 0" :loading="importLoading">

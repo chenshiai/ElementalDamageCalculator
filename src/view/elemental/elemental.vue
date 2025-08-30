@@ -1,14 +1,18 @@
 <template>
   <TabTitle>剧变反应计算</TabTitle>
-  <div class="tips">存在细小误差，伤害均为对0抗性敌人的伤害，仅供参考。</div>
+  <div class="tips">存在细小误差，90级以上只会在95级、100级时提升数据；超激化、蔓激化为[伤害提升]的数值，不是具体伤害数值；</div>
   <div class="base-data">
     <div class="base-data-item">
       <span class="base-damage__title">角色等级</span>
-      <Stepper v-model="level" input-width="66px" integer button-size="20" theme="round" min="1" max="90" />
+      <Stepper v-model="level" input-width="66px" integer button-size="20" theme="round" min="1" max="100" />
     </div>
     <div class="base-data-item">
       <span class="base-damage__title">元素精通</span>
       <Stepper v-model="elementalMystery" integer input-width="66px" button-size="20" theme="round" min="0" />
+    </div>
+    <div class="base-data-item">
+      <span class="base-damage__title">敌人抗性%</span>
+      <Stepper v-model="enemyResistance" input-width="66px" integer button-size="20" theme="round" min="-999" />
     </div>
     <div class="holy-relic">
       <div>
@@ -52,7 +56,7 @@
     </summary>
     <div class="gain-group">
       <div class="cha-gain-inner">
-        <img class="base-damage__img" src="https://enka.network/ui/UI_AvatarIcon_Nilou.png" alt="" />
+        <img class="base-damage__img" src="/ui/UI_AvatarIcon_Nilou.png" alt="" />
         <CellGroup inset>
           <Field v-model="niLuo" type="number" label="生命上限" />
         </CellGroup>
@@ -67,7 +71,7 @@
         </Popover>
       </div>
       <div class="cha-gain-inner">
-        <img class="base-damage__img" src="https://enka.network/ui/UI_AvatarIcon_Baizhuer.png" alt="" />
+        <img class="base-damage__img" src="/ui/UI_AvatarIcon_Baizhuer.png" alt="" />
         <CellGroup inset>
           <Field v-model="baiZhu" type="number" label="生命上限" />
         </CellGroup>
@@ -84,7 +88,7 @@
         </Popover>
       </div>
       <div class="cha-gain-inner">
-        <img class="base-damage__img" src="https://enka.network/ui/UI_AvatarIcon_Ifa.png" alt="" />
+        <img class="base-damage__img" src="/ui/UI_AvatarIcon_Ifa.png" alt="" />
         <CellGroup inset>
           <Field v-model="yehun" type="number" label="夜魂总和" />
         </CellGroup>
@@ -99,7 +103,7 @@
         </Popover>
       </div>
       <div class="cha-gain-inner">
-        <img class="base-damage__img" src="https://enka.network/ui/UI_AvatarIcon_Mizuki.png" alt="" />
+        <img class="base-damage__img" src="/ui/UI_AvatarIcon_Mizuki.png" alt="" />
         <CellGroup inset>
           <Field v-model="mizukiEm" type="number" label="元素精通" />
           <Field v-model="mizukiSkillLevel" type="number" label="战技等级" />
@@ -114,7 +118,7 @@
         </Popover>
       </div>
       <div class="cha-gain-inner">
-        <img class="base-damage__img" src="https://homdgcat.wiki/homdgcat-res/Avatar/UI_AvatarIcon_Lauma.png" alt="" />
+        <img class="base-damage__img" src="/ui/UI_AvatarIcon_Lauma.png" alt="" />
         <CellGroup inset>
           <Field v-model="laumaEm" type="number" label="元素精通" />
           <Field v-model="laumaLevel" type="number" label="元素爆发等级" />
@@ -168,7 +172,7 @@
 import { computed, ref } from "vue";
 import { WITCH, THUNDER, EMERALD, EDEN } from "@/constants";
 import { BaseDMG } from "@/constants/elementalReaction";
-import { getServitudeRate, getCrystallizeRate, getCatalyzeRate } from "@/utils";
+import { getServitudeRate, getCrystallizeRate, getCatalyzeRate, getResistanceRate } from "@/utils";
 import TabTitle from "@/component/TabTitle.vue";
 import Popover from "@/component/Popover.vue";
 import DetailBlock from "./Detail.vue";
@@ -178,6 +182,7 @@ import { useNiLuo, useBaiZhu, useMizuki, useYiFa, useLauma } from "./roles";
 
 const elementalMystery = ref(786);
 const level = ref(90);
+const enemyResistance = ref(10);
 const [currentRelic, setCurrentRelic] = useHolyRelic();
 const { niLuo, niLuoGain } = useNiLuo();
 const { baiZhu, baiZhuBloomGain, baiZhuCatalyzeGain } = useBaiZhu();
@@ -195,16 +200,20 @@ const catalyzeDamage = (baseDamage) => {
   return Math.round(baseDamage * (1 + getCatalyzeRate(elementalMystery.value) / 100));
 };
 
+const resistancceRate = computed(() => {
+  return getResistanceRate(enemyResistance.value);
+});
+
 // 感电伤害值
 const electroChargedDamage = computed(() => {
-  const basenumber = BaseDMG.electroCharged[level.value];
+  const basenumber = BaseDMG.electroCharged[level.value] * resistancceRate.value;
   const r = servitudeDamage(basenumber) + Math.round((basenumber * yehunGain.value) / 100);
-  return currentRelic.value === THUNDER ? Math.round(basenumber * 0.4) + r : r;
+  return currentRelic.value === THUNDER ? Math.round(basenumber * 0.4 + r) : r;
 });
 
 // 超载伤害值
 const overloadDamage = computed(() => {
-  const basenumber = BaseDMG.overload[level.value];
+  const basenumber = BaseDMG.overload[level.value] * resistancceRate.value;
   const r = servitudeDamage(basenumber);
   if (currentRelic.value === THUNDER || currentRelic.value === WITCH) return Math.round(basenumber * 0.4) + r;
   return r;
@@ -213,34 +222,38 @@ const overloadDamage = computed(() => {
 // 绽放伤害值
 const bloomDamage = computed(() => {
   const basenumber = BaseDMG.bloom[level.value];
-  const r = servitudeDamage(basenumber) + Math.round((basenumber * (niLuoGain.value + baiZhuBloomGain.value)) / 100) + laumaGain.value;
-  return currentRelic.value === EDEN ? Math.round(basenumber * 0.8) + r : r;
+  const r =
+    servitudeDamage(basenumber) +
+    Math.round((basenumber * (niLuoGain.value + baiZhuBloomGain.value)) / 100) +
+    laumaGain.value;
+  return Math.round((currentRelic.value === EDEN ? basenumber * 0.8 + r : r) * resistancceRate.value);
 });
 
 // 超烈绽放伤害值
 const hyperbloomDamage = computed(() => {
   const basenumber = BaseDMG.hyperbloom[level.value];
   const r = servitudeDamage(basenumber) + Math.round((basenumber * baiZhuBloomGain.value) / 100) + laumaGain.value;
-  if (currentRelic.value === THUNDER || currentRelic.value === WITCH) return Math.round(basenumber * 0.4) + r;
-  else if (currentRelic.value === EDEN) return Math.round(basenumber * 0.8) + r;
-  return r;
+  if (currentRelic.value === THUNDER || currentRelic.value === WITCH)
+    return Math.round((basenumber * 0.4 + r) * resistancceRate.value);
+  else if (currentRelic.value === EDEN) return Math.round((basenumber * 0.8 + r) * resistancceRate.value);
+  return Math.round(r * resistancceRate.value);
 });
 
 // 碎冰伤害值
 const shatterDamage = computed(() => {
-  return servitudeDamage(BaseDMG.shatter[level.value]);
+  return servitudeDamage(BaseDMG.shatter[level.value] * resistancceRate.value);
 });
 
 // 燃烧伤害值
 const burningDamage = computed(() => {
-  const basenumber = BaseDMG.burning[level.value];
+  const basenumber = BaseDMG.burning[level.value] * resistancceRate.value;
   const r = servitudeDamage(basenumber) + Math.round((basenumber * baiZhuBloomGain.value) / 100);
   return currentRelic.value === WITCH ? Math.round(basenumber * 0.4) + r : r;
 });
 
 // 扩散伤害值
 const swirlDamage = computed(() => {
-  const basenumber = BaseDMG.swirl[level.value];
+  const basenumber = BaseDMG.swirl[level.value] * resistancceRate.value;
   const r =
     servitudeDamage(basenumber) +
     Math.round((basenumber * mizukiGain.value) / 100) +
@@ -251,7 +264,7 @@ const swirlDamage = computed(() => {
 
 // 超导伤害值
 const superconductDamage = computed(() => {
-  const basenumber = BaseDMG.superconduct[level.value];
+  const basenumber = BaseDMG.superconduct[level.value] * resistancceRate.value;
   const r = servitudeDamage(basenumber);
   return currentRelic.value === THUNDER ? Math.round(basenumber * 0.4) + r : r;
 });

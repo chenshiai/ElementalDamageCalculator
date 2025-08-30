@@ -181,7 +181,7 @@
     </section>
 
     <section class="result-section">
-      <DataItem v-model="characterLevel" title="角色的等级" :stepperMax="90" :stepperMin="1" />
+      <DataItem v-model="characterLevel" title="角色的等级" :stepperMax="100" :stepperMin="1" />
       <DataItem v-model="enemyLevel" title="敌人的等级" :stepperMin="1" />
       <DataItem v-model="enemyResistance" title="敌人抗性%" :stepperMin="-999" />
       <DataItem v-model="weaken" title="减少抗性%" :stepperMin="0" :stepperMax="300" />
