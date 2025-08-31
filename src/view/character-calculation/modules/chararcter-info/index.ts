@@ -12,10 +12,6 @@ const useCharacterInfo = (initData: ICharacterInfo | null = null, cons: number =
 
   const characterBuffs = ref<IBuffBase[]>([]);
 
-  const calculateStat = (baseStat: number, limitStat: number) => {
-    if (characterInfo.value?.level <= 90 || !characterInfo.value?.limitData) return baseStat;
-    return levelUp.value === 1 ? Math.round((baseStat + limitStat) / 2) : levelUp.value === 2 ? limitStat : baseStat;
-  };
 
   watchEffect(() => {
     characterBuffs.value =

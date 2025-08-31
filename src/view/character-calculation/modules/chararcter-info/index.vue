@@ -37,16 +37,23 @@ const levelUp = defineModel("levelUp", { default: 0 });
           {{ character.name }}
           （Lv.{{ character.level }}）
         </div>
-
-        <div class="avatar-info__base"><img src="/img/_HP.png" />{{ character.baseHP }}</div>
-        <div class="avatar-info__base"><img src="/img/_ATK.png" />{{ character.baseATK }}</div>
-        <div class="avatar-info__base"><img src="/img/_DEF.png" />{{ character.baseDEF }}</div>
         <span v-if="character.level >= 90">
           上限突破：<Stepper theme="round" button-size="20" input-width="66px" v-model="levelUp" min="0" max="2" />
         </span>
+        <div class="avatar-info__base-data">
+          <div class="avatar-info__base-data-item">
+            <img src="/img/_HP.png" /><data>{{ character.baseHP }}</data>
+          </div>
+          <div class="avatar-info__base-data-item">
+            <img src="/img/_ATK.png" /><data>{{ character.baseATK }}</data>
+          </div>
+          <div class="avatar-info__base-data-item">
+            <img src="/img/_DEF.png" /><data>{{ character.baseDEF }}</data>
+          </div>
+        </div>
         <div>突破等阶：{{ character.overshoot }}</div>
         <div>
-          解锁命之座：<Stepper
+          解锁命座：<Stepper
             theme="round"
             button-size="20"
             input-width="66px"
@@ -109,15 +116,34 @@ const levelUp = defineModel("levelUp", { default: 0 });
 .avatar-info {
   flex: 1;
 }
-.avatar-info__base {
+.avatar-info__base-data {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-gap: 4px;
+  width: 60%;
+  margin-top: 4px;
+}
+.avatar-info__base-data-item {
   display: flex;
   align-items: center;
+  background-color: var(--light-text);
+  border-radius: 4px;
+  overflow: hidden;
+
+  &:nth-child(1) {
+    grid-column: 1 / -1;
+  }
 }
-.avatar-info__base img {
+.avatar-info__base-data-item img {
   width: 24px;
   height: 24px;
   margin-right: 4px;
-  background-color: var(--bg);
+  background-color: var(--main-text);
+}
+.avatar-info__base-data-item data {
+  text-align: center;
+  flex: 1;
 }
 
 .constellations {

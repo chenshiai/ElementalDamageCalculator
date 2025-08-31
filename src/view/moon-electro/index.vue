@@ -198,7 +198,7 @@ const damageResult = computed(() => {
     </summary>
     <section class="gain-group">
       <div class="cha-gain-inner">
-        <img class="base-damage__img" src="https://homdgcat.wiki/homdgcat-res/Avatar/UI_AvatarIcon_Ineffa.png" alt="" />
+        <img class="base-damage__img" src="/ui/UI_AvatarIcon_Ineffa.png" alt="" />
         <CellGroup inset>
           <Field v-model="ineffaAtk" type="number" label="伊涅芙攻击力" />
         </CellGroup>
@@ -213,7 +213,7 @@ const damageResult = computed(() => {
       </div>
 
       <div class="cha-gain-inner">
-        <img class="base-damage__img" src="https://enka.network/ui/UI_AvatarIcon_Ifa.png" alt="" />
+        <img class="base-damage__img" src="/ui/UI_AvatarIcon_Ifa.png" alt="" />
         <CellGroup inset>
           <Field v-model="yehun" type="number" label="夜魂总和" />
         </CellGroup>
