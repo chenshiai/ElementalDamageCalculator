@@ -211,7 +211,6 @@ function getMoreDataBySwitch(
       criticalHunt += calculatorValue[BuffType.ElectroCritcalHurt] || 0;
       critical += calculatorValue[BuffType.ElectroCritcal] || 0;
       resistance += calculatorValue[BuffType.EnemyElectroResistance] || 0;
-      // @TODO 2025/07/20 目前只有伊涅芙可以给月感电伤害提升最终倍率，暂时先用addRate计算
       addRate += calculatorValue[BuffType.MoonElectroRate] || 0;
       moonAddHunt += calculatorValue[BuffType.MoonElectroPrcent] || 0;
       break;
@@ -243,11 +242,17 @@ function getMoreDataBySwitch(
 }
 
 interface IArgs {
+  /** 面板数据 */
   calculatorValue: ICalculatorValue;
+  /** 攻击方式 */
   attackType: AttackType;
+  /** 伤害的元素属性 */
   elementType: ElementType;
+  /** 技能全等级的伤害倍率 */
   rate: IRate;
+  /** 技能等级 */
   level: number;
+  /** 反应类型 */
   atkType: ElementalReactionType;
   /** 本次伤害的独特标识 */
   special?: string;
@@ -291,7 +296,7 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
     moonAddHunt = specialData.moonAddHunt;
   }
 
-  // 基础数值
+  /** 基础伤害 */
   let BASE_DMG = 0;
   if (rate.atk) {
     const atk = calculatorValue.baseATK + calculatorValue.extraATK + calculatorValue.extraATK_NT;
@@ -317,18 +322,18 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
     BASE_DMG *= 3;
   }
 
-  // 治疗量
+  /** 治疗量 */
   let HEAL_VALUE = 0;
   if (attackType === AttackType.Heal) {
     HEAL_VALUE = BASE_DMG * (1 + healAdd / 100);
   }
-  // 护盾量
+  /** 护盾量 */
   let SHIELD_VALUE = 0;
   if (attackType === AttackType.Shield) {
     SHIELD_VALUE = BASE_DMG * (1 + shieldAdd / 100);
   }
 
-  // 激化伤害
+  /** 激化伤害 */
   let BONUS_DMG = 0;
   if (atkType === ElementalReactionType.Aggravate && newElementType === ElementType.Electro) {
     BONUS_DMG =
@@ -339,18 +344,18 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
       BaseDMG.spread[calculatorValue.level] * (1 + (getCatalyzeRate(em) + calculatorValue.catalyzeRate) / 100);
   }
 
-  // 加成伤害
-  let MAGNIFICATION_DMG = BASE_DMG + ADDITIONAL_DMG + BONUS_DMG;
-  if (newElementType === ElementType.MoonElectro) {
-    // 月感电的加成伤害，不受传统增伤影响，且有一部分来自于元素精通
-    MAGNIFICATION_DMG *= (getMoonElectroRate(em) + moonAddHunt) / 100;
+  /** 加成伤害 */
+  let MAGNIFICATION_DMG = 0;
+  if (newElementType === ElementType.MoonElectro || newElementType === ElementType.MoonSwirl) {
+    // 月曜反应伤害的加成伤害，不受传统增伤影响，且有一部分来自于元素精通，且额外提升不受益于任何增伤效果，即固定伤害提升。
+    MAGNIFICATION_DMG = ADDITIONAL_DMG + (BASE_DMG * (getMoonElectroRate(em) + moonAddHunt)) / 100;
   } else {
-    MAGNIFICATION_DMG *= addHunt / 100;
+    MAGNIFICATION_DMG = ((BASE_DMG + ADDITIONAL_DMG + BONUS_DMG) * addHunt) / 100;
   }
 
-  // 增幅反应伤害
+  /** 增幅反应伤害 */
   let REACTION_DMG = 0;
-  // 精通提升伤害
+  /** 精通提升伤害 */
   let EVA_DMG = 0;
   if (
     (atkType === ElementalReactionType.Rate &&

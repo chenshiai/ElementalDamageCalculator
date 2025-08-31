@@ -85,7 +85,7 @@ const showLeft = ref(false);
 }
 @media screen and (min-width: 768px)  {
   .main-content {
-    padding: 60px 60px 0;
+    /* padding: 46px 46px 0; */
   }
 }
 @media screen and (min-width: 1200px) {

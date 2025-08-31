@@ -29,16 +29,27 @@ export enum AttackType {
 
 /** 元素类型 */
 export enum ElementType {
+  /** 物理属性 */
   Physical = "Physical",
+  /** 火属性 */
   Pyro = "Pyro",
+  /** 雷属性 */
   Electro = "Electro",
+  /** 水属性 */
   Hydro = "Hydro",
+  /** 风属性 */
   Anemo = "Anemo",
+  /** 冰属性 */
   Cryo = "Cryo",
+  /** 岩属性 */
   Geo = "Geo",
+  /** 草属性 */
   Dendro = "Dendro",
+  /** 月感电属性 */
   MoonElectro = "MoonElectro",
+  /** 月绽放属性 */
   MoonSwirl = "MoonSwirl",
+  /** 无属性 */
   None = "None",
 }
 
@@ -287,15 +298,15 @@ export enum BuffType {
   /** 元素爆发倍率最终提升 */
   BurstRate = "burstRateAdd",
 
-  /** 普攻倍率提升 */
+  /** 普攻倍率加成 */
   NormalAdd = "normalAdd",
-  /** 重击倍率提升 */
+  /** 重击倍率加成 */
   StrongAdd = "strongAdd",
-  /** 下落攻击倍率提升 */
+  /** 下落攻击倍率加成 */
   FallingAdd = "fallingAdd",
-  /** 元素战技倍率提升 */
+  /** 元素战技倍率加成 */
   SkillAdd = "skillAdd",
-  /** 元素爆发倍率提升 */
+  /** 元素爆发倍率加成 */
   BurstAdd = "burstAdd",
   
   /** 月感电倍率提升 */

@@ -32,25 +32,28 @@ const levelUp = defineModel("levelUp", { default: 0 });
   <div v-if="!character" class="show-click active-btn" @click="show = true">+添加角色</div>
   <template v-else>
     <div class="character-info">
+      <div :class="['name', getBackGroundByRarity(character.rarity)]">
+        {{ character.name }}
+        （Lv.{{ character.level }}）
+      </div>
       <div class="avatar-info">
-        <div :class="['name', getBackGroundByRarity(character.rarity)]">
-          {{ character.name }}
-          （Lv.{{ character.level }}）
+        <div class="avatar-info__base-data">
+          <div class="avatar-info__base-data-item">
+            <img src="/img/_HP.png" />
+            <data>{{ character.baseHP }}</data>
+          </div>
+          <div class="avatar-info__base-data-item">
+            <img src="/img/_ATK.png" />
+            <data>{{ character.baseATK }}</data>
+          </div>
+          <div class="avatar-info__base-data-item">
+            <img src="/img/_DEF.png" />
+            <data>{{ character.baseDEF }}</data>
+          </div>
         </div>
         <span v-if="character.level >= 90">
           上限突破：<Stepper theme="round" button-size="20" input-width="66px" v-model="levelUp" min="0" max="2" />
         </span>
-        <div class="avatar-info__base-data">
-          <div class="avatar-info__base-data-item">
-            <img src="/img/_HP.png" /><data>{{ character.baseHP }}</data>
-          </div>
-          <div class="avatar-info__base-data-item">
-            <img src="/img/_ATK.png" /><data>{{ character.baseATK }}</data>
-          </div>
-          <div class="avatar-info__base-data-item">
-            <img src="/img/_DEF.png" /><data>{{ character.baseDEF }}</data>
-          </div>
-        </div>
         <div>突破等阶：{{ character.overshoot }}</div>
         <div>
           解锁命座：<Stepper
@@ -62,25 +65,25 @@ const levelUp = defineModel("levelUp", { default: 0 });
             max="6"
           />
         </div>
+        <div class="constellations">
+          <span
+            v-for="(src, index) in character?.icons.constsIcon"
+            :class="['consts-icon', index + 1 === constellation ? 'consts-active' : '']"
+            @click="setConsts(index + 1)"
+            :key="index"
+          >
+            <Icon name="lock" />
+            <img :src="src" />
+          </span>
+        </div>
       </div>
       <div class="avatar active-btn" @click="show = true">
         <img :src="character?.icons.avatarIcon" />
         <Icon name="exchange" />
       </div>
     </div>
-    <div class="constellations">
-      <span
-        v-for="(src, index) in character?.icons.constsIcon"
-        :class="['consts-icon', index + 1 === constellation ? 'consts-active' : '']"
-        @click="setConsts(index + 1)"
-        :key="index"
-      >
-        <Icon name="lock" />
-        <img :src="src" />
-      </span>
-    </div>
   </template>
-  <Popup teleport="#app" v-model:show="show" position="right" :style="{ width: '100%', height: '100vh' }">
+  <Popup teleport="#app" v-model:show="show" position="right" :style="{ width: '100%' }">
     <Selector @close="show = false" :defaultName="character?.name || ''" :handleChange="handleCharacterChange" />
   </Popup>
 </template>
@@ -114,14 +117,13 @@ const levelUp = defineModel("levelUp", { default: 0 });
   background-color: var(--bg);
 }
 .avatar-info {
-  flex: 1;
+  width: 60%;
 }
 .avatar-info__base-data {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   grid-gap: 4px;
-  width: 60%;
   margin-top: 4px;
 }
 .avatar-info__base-data-item {
@@ -138,7 +140,6 @@ const levelUp = defineModel("levelUp", { default: 0 });
 .avatar-info__base-data-item img {
   width: 24px;
   height: 24px;
-  margin-right: 4px;
   background-color: var(--main-text);
 }
 .avatar-info__base-data-item data {
@@ -148,13 +149,13 @@ const levelUp = defineModel("levelUp", { default: 0 });
 
 .constellations {
   display: flex;
-  width: 60%;
   justify-content: space-around;
   margin-bottom: 16px;
+  gap: 2px;
 }
 .consts-icon {
-  width: 14%;
   border-radius: 50%;
+  min-width: 14%;
   border: var(--stroke-2) 2px solid;
   background-color: var(--light-text);
   position: relative;

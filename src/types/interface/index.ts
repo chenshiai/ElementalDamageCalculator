@@ -51,10 +51,15 @@ export interface ISkillRate {
   special?: string;
 }
 export interface IRate {
+  /** 攻击倍率 */
   atk?: number[];
+  /** 生命倍率 */
   hp?: number[];
+  /** 防御倍率 */
   def?: number[];
+  /** 元素精通倍率 */
   em?: number[];
+  /** 固定数值 */
   fixed?: number[];
 }
 export interface LimitDataType {
@@ -158,15 +163,15 @@ export interface ICalculatorValue {
   chargeEfficiency: number;
 
   // 由面板属性转化而来的属性，不可用于二次面板转化。统一用 _NT 结尾
-  /** 额外生命值，不可二次转化 */
+  /** 额外生命值，不可被二次转化 */
   extraHP_NT: number;
-  /** 额外攻击力。不可二次转化 */
+  /** 额外攻击力。不可被二次转化 */
   extraATK_NT: number;
-  /** 额外防御力，不可二次转化 */
+  /** 额外防御力，不可被二次转化 */
   extraDEF_NT: number;
-  /** 额外元素精通，不可二次转化 */
+  /** 额外元素精通，不可被二次转化 */
   elementalMystery_NT: number;
-  /** 额外充能效率，不可二次转化 */
+  /** 额外充能效率，不可被二次转化 */
   chargeEfficiency_NT: number;
   // 进阶属性
   /** 暴击率 */

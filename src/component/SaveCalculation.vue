@@ -53,7 +53,7 @@ const createCha = () => {
 
 // 悬浮球
 const showPopover = ref(false);
-const offset = ref({ x: 20, y: 250 });
+const offset = ref({ x: 20, y: 650 });
 const popoberActions = [
   { text: "保存当前角色面板", click: saveDataPop },
   { text: "查看存档", click: lookDataPop },

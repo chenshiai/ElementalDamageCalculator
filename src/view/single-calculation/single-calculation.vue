@@ -194,7 +194,7 @@
     <div class="data-panel__title">反应类型</div>
     <AtkTypeSelector v-model="atkType" />
     <Cell
-      v-show="atkType === ElementalReaction.Rate || atkType === ElementalReaction.Rate2"
+      v-show="atkType === ElementalReactionType.Rate || atkType === ElementalReactionType.Rate2"
       center
       title="炽烈的炎之魔女，增幅反应伤害提升15%"
     >
@@ -202,13 +202,13 @@
         <Switch v-model="witch" active-color="#766461" inactive-color="#b7a19e" size="16" />
       </template>
     </Cell>
-    <Cell v-show="atkType === ElementalReaction.Aggravate" center title="如雷的盛怒，超激化[伤害提升]提高20%">
+    <Cell v-show="atkType === ElementalReactionType.Aggravate" center title="如雷的盛怒，超激化[伤害提升]提高20%">
       <template #right-icon>
         <Switch v-model="thunder" active-color="#766461" inactive-color="#b7a19e" size="16" />
       </template>
     </Cell>
     <Cell
-      v-show="atkType === ElementalReaction.Aggravate || atkType === ElementalReaction.Spread"
+      v-show="atkType === ElementalReactionType.Aggravate || atkType === ElementalReactionType.Spread"
       title="白术天赋·在地为化 输入生命值"
       center
     >
@@ -260,7 +260,7 @@ import CompositionAnalysis from "@/component/CompositionAnalysis.vue";
 import AtkTypeSelector from "@/component/AtkTypeSelector.vue";
 import Popover from "@/component/Popover.vue";
 
-import { basicPanelSelectType, ElementalReaction, ElementalReactionType } from "@/constants";
+import { basicPanelSelectType, ElementalReactionType } from "@/constants";
 import {
   AtkFixedNotes,
   EnhancedDamageNotes,

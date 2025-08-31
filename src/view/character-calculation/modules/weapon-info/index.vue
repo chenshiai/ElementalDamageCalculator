@@ -47,13 +47,15 @@ const weaponStats = computed(() => {
           （Lv.{{ weapon.level }}）
         </div>
         <div v-for="item in weaponStats">
-          <span v-show="item">{{ item.title }}: {{ item.value }}{{ item.suffix }}</span>
+          <span v-show="item" class="weapon-info__base-data-item">
+            <span>{{ item.title }}</span>
+            <data>{{ item.value }}{{ item.suffix }}</data>
+          </span>
         </div>
-        
-          <Rate v-model="affix" @change="emit('changed')" color="#997874" icon="fire" void-icon="fire-o" />
         <div class="affix">
-          精炼：<Stepper theme="round" button-size="20" input-width="66px" v-model="affix" min="1" max="5" /><br />
+          精炼等阶：<Stepper theme="round" button-size="20" input-width="66px" v-model="affix" min="1" max="5" /><br />
         </div>
+        <Rate v-model="affix" @change="emit('changed')" color="#997874" icon="fire" void-icon="fire-o" />
       </div>
       <div class="avatar active-btn" @click="show = true">
         <img :src="weapon?.icon" />
@@ -104,7 +106,25 @@ const weaponStats = computed(() => {
 .avatar-info {
   flex: 1;
 }
+.weapon-info__base-data-item {
+  display: flex;
+  width: 60%;
+  margin-top: 4px;
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: var(--light-text);
 
+  & span {
+    background-color: var(--main-text);
+    color: var(--light-text);
+    padding: 0 4px;
+  }
+
+  & data {
+    flex: 1;
+    text-align: center;
+  }
+}
 .name {
   line-height: 24px;
   font-size: 16px;
