@@ -16,7 +16,7 @@ import { A_80_DEF_24P, Constellation_E_3, Constellation_Q_5 } from "../buffs";
 @EnKaId(10000034, "诺艾尔")
 @Weapon(WeaponType.GreatSword)
 @Element(ElementType.Geo)
-@BaseData(Rarity.Four, 12071, 191, 799, 60)
+@BaseData(Rarity.Four, [12071, 191, 799], 60, [12906, 239, 854])
 @Icons("UI_AvatarIcon_Noel")
 export class NoelData extends Character implements ICharacterInfo {
   constructor() {

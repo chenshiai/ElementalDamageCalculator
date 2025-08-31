@@ -7,7 +7,7 @@ import { EnKaId, Weapon, Element, BaseData, Icons, action } from "@/utils/decora
 @EnKaId(10000110, "伊安珊")
 @Weapon(WeaponType.Polearms)
 @Element(ElementType.Electro, SecondElementType.Nightsoul)
-@BaseData(Rarity.Four, 10657, 257, 638, 70)
+@BaseData(Rarity.Four, [10657, 257, 638], 70, [11395, 322, 682])
 @Icons("UI_AvatarIcon_Iansan")
 export class IansanData extends Character implements ICharacterInfo {
   constructor() {

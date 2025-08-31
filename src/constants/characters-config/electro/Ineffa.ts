@@ -1,19 +1,29 @@
 import Character from "../character-class";
 import { IBuffBase, ICharacterInfo } from "@/types/interface";
-import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, SecondElementType, WeaponType } from "@/types/enum";
+import {
+  ActionOn,
+  AttackType,
+  BuffTarget,
+  BuffType,
+  ElementType,
+  Rarity,
+  SecondElementType,
+  WeaponType,
+} from "@/types/enum";
 import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 import { S_80_CRITAL_19P, Constellation_E_3, Constellation_Q_5 } from "../buffs";
 
 @EnKaId(10000116, "伊涅芙")
 @Weapon(WeaponType.Polearms)
 @Element(ElementType.Electro, SecondElementType.Moon)
-@BaseData(Rarity.Five, 12613, 330, 828, 60)
+@BaseData(Rarity.Five, [12613, 330, 828], 60, [13510, 405, 887])
 @Icons("UI_AvatarIcon_Ineffa")
 export class IneffaData extends Character implements ICharacterInfo {
   constructor() {
     super();
   }
   talentNames = ["除尘旋刃", "涤净模式·稳态载频", "至高律令·全域扫灭"];
+
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Physical, {
       atk: [

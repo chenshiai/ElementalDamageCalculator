@@ -7,7 +7,7 @@ import { A_80_ATK_24P, Constellation_E_5, Constellation_Q_3 } from "../buffs";
 @EnKaId(10000025, "行秋")
 @Weapon(WeaponType.Sword)
 @Element(ElementType.Hydro)
-@BaseData(Rarity.Four, 10222, 202, 758, 80)
+@BaseData(Rarity.Four, [10222, 202, 758], 80, [10930, 253, 810])
 @Icons("UI_AvatarIcon_Xingqiu")
 export class XingqiuData extends Character implements ICharacterInfo {
   constructor() {

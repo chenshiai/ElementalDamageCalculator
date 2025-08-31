@@ -7,7 +7,7 @@ import { A_80_ATK_24P, Constellation_E_3, Constellation_Q_5 } from "../buffs";
 @EnKaId(10000067, "柯莱")
 @Weapon(WeaponType.Bow)
 @Element(ElementType.Dendro)
-@BaseData(Rarity.Four, 9787, 223, 601, 60)
+@BaseData(Rarity.Four, [9787, 223, 601], 60, [10464, 250, 642])
 @Icons("UI_AvatarIcon_Collei")
 export class ColleiData extends Character implements ICharacterInfo {
   constructor() {

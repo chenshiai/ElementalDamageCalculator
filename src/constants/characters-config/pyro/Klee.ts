@@ -7,7 +7,7 @@ import { Constellation_E_3, Constellation_Q_5, S_80_PYRO_28P } from "../buffs";
 @EnKaId(10000029, "可莉")
 @Weapon(WeaponType.Magic)
 @Element(ElementType.Pyro)
-@BaseData(Rarity.Five, 10287, 311, 615, 60)
+@BaseData(Rarity.Five, [10287, 311, 615], 60, [11018, 381, 659])
 @Icons("UI_AvatarIcon_Klee")
 export class KleeData extends Character implements ICharacterInfo {
   constructor() {

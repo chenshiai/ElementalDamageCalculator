@@ -7,7 +7,7 @@ import { Constellation_E_5, Constellation_Q_3, S_80_HYDRO_28P } from "../buffs";
 @EnKaId(10000054, "珊瑚宫心海")
 @Weapon(WeaponType.Magic)
 @Element(ElementType.Hydro)
-@BaseData(Rarity.Five, 13471, 234, 657, 70)
+@BaseData(Rarity.Five, [13471, 234, 657], 70, [14428, 287, 704])
 @Icons("UI_AvatarIcon_Kokomi")
 export class KokomiData extends Character implements ICharacterInfo {
   constructor() {

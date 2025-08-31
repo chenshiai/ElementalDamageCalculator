@@ -7,7 +7,7 @@ import { Constellation_E_5, Constellation_Q_3, S_80_CRITALHUNT_38P } from "../bu
 @EnKaId(10000037, "甘雨")
 @Weapon(WeaponType.Bow)
 @Element(ElementType.Cryo)
-@BaseData(Rarity.Five, 9797, 335, 630, 60)
+@BaseData(Rarity.Five, [9797, 335, 630], 60, [10493, 410, 675])
 @Icons("UI_AvatarIcon_Ganyu")
 export class GanyuData extends Character implements ICharacterInfo {
   constructor() {

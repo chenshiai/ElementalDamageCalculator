@@ -16,7 +16,7 @@ import { Constellation_E_3, Constellation_Q_5, S_80_CRITALHUNT_38P } from "../bu
 @EnKaId(10000046, "胡桃")
 @Weapon(WeaponType.Polearms)
 @Element(ElementType.Pyro)
-@BaseData(Rarity.Five, 15552, 106, 876, 60)
+@BaseData(Rarity.Five, [15552, 106, 876], 60, [16658, 130, 938])
 @Icons("UI_AvatarIcon_Hutao")
 export class HutaoData extends Character implements ICharacterInfo {
   constructor() {

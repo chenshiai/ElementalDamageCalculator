@@ -7,7 +7,7 @@ import { A_80_PYRO_24P, Constellation_E_3, Constellation_Q_5 } from "../buffs";
 @EnKaId(10000048, "烟绯")
 @Weapon(WeaponType.Magic)
 @Element(ElementType.Pyro)
-@BaseData(Rarity.Four, 9352, 240, 587, 80)
+@BaseData(Rarity.Four, [9352, 240, 587], 80, [9999, 301, 628])
 @Icons("UI_AvatarIcon_Feiyan")
 export class FeiyanData extends Character implements ICharacterInfo {
   constructor() {

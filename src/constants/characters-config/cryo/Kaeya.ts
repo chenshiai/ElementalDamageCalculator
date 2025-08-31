@@ -7,7 +7,7 @@ import { A_80_CHARGE_26P, Constellation_E_3, Constellation_Q_5 } from "../buffs"
 @EnKaId(10000015, "凯亚")
 @Weapon(WeaponType.Sword)
 @Element(ElementType.Cryo)
-@BaseData(Rarity.Four, 11636, 223, 792, 60)
+@BaseData(Rarity.Four, [11636, 223, 792], 60, [12441, 279, 846])
 @Icons("UI_AvatarIcon_Kaeya")
 export class KaeyaData extends Character implements ICharacterInfo {
   constructor() {

@@ -16,7 +16,7 @@ import { A_80_ATK_24P, Constellation_E_3, Constellation_Q_5, ExtraBuff } from ".
 @EnKaId(1000000702, "荧·火")
 @Weapon(WeaponType.Sword)
 @Element(ElementType.Pyro)
-@BaseData(Rarity.Five, 10875, 213, 683, 60)
+@BaseData(Rarity.Five, [10875, 213, 683], 60, [11627, 266, 730])
 @Icons("UI_AvatarIcon_PlayerGirl", "PlayerFire")
 export class PlayerGirlData extends Character implements ICharacterInfo {
   constructor() {

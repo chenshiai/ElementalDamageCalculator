@@ -7,7 +7,7 @@ import { A_80_HP_24P, Constellation_E_3, Constellation_Q_5 } from "../buffs";
 @EnKaId(10000077, "瑶瑶")
 @Weapon(WeaponType.Polearms)
 @Element(ElementType.Dendro)
-@BaseData(Rarity.Four, 12289, 212, 751, 80)
+@BaseData(Rarity.Four, [12289, 212, 751], 80, [13139, 266, 803])
 @Icons("UI_AvatarIcon_Yaoyao")
 export class YaoyaoData extends Character implements ICharacterInfo {
   constructor() {

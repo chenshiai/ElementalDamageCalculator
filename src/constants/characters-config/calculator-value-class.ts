@@ -1,6 +1,7 @@
 import { ElementType, EnchantingType, WeaponType } from "@/types/enum";
 import { ICalculatorValue } from "@/types/interface";
 
+/** 计算用的数据对象 */
 class CalculatorValue implements ICalculatorValue {
   // 角色面板属性
   level: number = 90;

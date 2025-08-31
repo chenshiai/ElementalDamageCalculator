@@ -16,7 +16,7 @@ import { A_80_HP_24P, Constellation_E_5, Constellation_Q_3 } from "../buffs";
 @EnKaId(10000072, "坎蒂丝")
 @Weapon(WeaponType.Polearms)
 @Element(ElementType.Hydro)
-@BaseData(Rarity.Four, 10875, 212, 683, 60)
+@BaseData(Rarity.Four, [10875, 212, 683], 60, [11627, 266, 730])
 @Icons("UI_AvatarIcon_Candace")
 export class CandaceData extends Character implements ICharacterInfo {
   constructor() {

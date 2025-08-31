@@ -7,7 +7,7 @@ import { EnKaId, Weapon, Element, BaseData, Icons, action } from "@/utils/decora
 @EnKaId(10000084, "林尼")
 @Weapon(WeaponType.Bow)
 @Element(ElementType.Pyro)
-@BaseData(Rarity.Five, 11021, 318, 538, 60)
+@BaseData(Rarity.Five, [11021, 318, 538], 60, [11805, 390, 576])
 @Icons("UI_AvatarIcon_Liney")
 export class LineyData extends Character implements ICharacterInfo {
   constructor() {

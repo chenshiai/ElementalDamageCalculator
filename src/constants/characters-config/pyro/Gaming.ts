@@ -7,7 +7,7 @@ import { A_80_ATK_24P, Constellation_E_3, Constellation_Q_5 } from "../buffs";
 @EnKaId(10000092, "嘉明")
 @Weapon(WeaponType.GreatSword)
 @Element(ElementType.Pyro)
-@BaseData(Rarity.Four, 11419, 302, 703, 60)
+@BaseData(Rarity.Four, [11419, 302, 703], 60, [12208, 378, 752])
 @Icons("UI_AvatarIcon_Gaming")
 export class GamingData extends Character implements ICharacterInfo {
   constructor() {

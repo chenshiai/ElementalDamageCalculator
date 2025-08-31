@@ -7,7 +7,7 @@ import { Constellation_E_3, Constellation_Q_5, S_80_MYSTERY_115 } from "../buffs
 @EnKaId(10000073, "纳西妲")
 @Weapon(WeaponType.Magic)
 @Element(ElementType.Dendro)
-@BaseData(Rarity.Five, 10360, 299, 630, 50)
+@BaseData(Rarity.Five, [10360, 299, 630], 50, [11096, 366, 675])
 @Icons("UI_AvatarIcon_Nahida")
 export class NahidaData extends Character implements ICharacterInfo {
   constructor() {

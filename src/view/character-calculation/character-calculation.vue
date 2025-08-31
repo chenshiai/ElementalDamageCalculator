@@ -16,7 +16,7 @@ import useSkillInfo, { SkillInfo } from "./modules/skill-info";
 import useTeamData from "../cloud-team/useTeamData";
 
 /** @module 页面展示用数据 */
-const { characterInfo, constellation, characterBuffs, initCharacterInfo } = useCharacterInfo();
+const { characterInfo, constellation, levelUp, characterBuffs, initCharacterInfo } = useCharacterInfo();
 const { weapon, affix, weaponBuffs, initWeaponInfo } = useWeaponInfo();
 const { relicList, relicBuffs, relicSuitTexts, initRelicInfo } = useRelicInfo();
 const { buffs } = useBuffInfo();
@@ -79,7 +79,7 @@ const saveCalculationResult = (title: string) => {
   if (teamIndex.value >= 0) {
     characterJoinTeam(data, teamIndex.value);
   }
-
+  
   db.add(calDB.storeName, data)
     .then(() => {
       showNotify({
@@ -117,6 +117,8 @@ const recalculation = (data: IUserSavedCalculationData) => {
     baseHP: data.panel.baseHP,
     level: data.panel.level,
   };
+  if (data.panel.level === 95) levelUp.value = 1;
+  if (data.panel.level === 100) levelUp.value = 2;
 
   const wea = Weapons.find((w) => w.enkaId === data.weaponEnkaId);
   weapon.value = {
@@ -183,7 +185,12 @@ const changed = () => {
   <TeamListNav />
   <section class="calculation-section">
     <div class="calculation-section__item">
-      <CharacterInfo v-model="characterInfo" v-model:constellation="constellation" @changed="changed" />
+      <CharacterInfo
+        v-model="characterInfo"
+        v-model:level-up="levelUp"
+        v-model:constellation="constellation"
+        @changed="changed"
+      />
     </div>
     <div class="calculation-section__item">
       <WeaponInfo v-model="weapon" v-model:affix="affix" @changed="changed" />

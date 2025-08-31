@@ -8,7 +8,7 @@ import { EnKaId, Weapon, Element, BaseData, Icons, action } from "@/utils/decora
 @EnKaId(10000108, "蓝砚")
 @Weapon(WeaponType.Magic)
 @Element(ElementType.Anemo)
-@BaseData(Rarity.Four, 9244, 251, 580, 60)
+@BaseData(Rarity.Four, [9244, 251, 580], 60, [9883, 314, 620])
 @Icons("UI_AvatarIcon_Lanyan")
 export class LanYanData extends Character implements ICharacterInfo {
   constructor() {

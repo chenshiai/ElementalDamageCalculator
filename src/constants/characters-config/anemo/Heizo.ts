@@ -7,7 +7,7 @@ import { A_80_ANEMO_24P, Constellation_E_3, Constellation_Q_5 } from "../buffs";
 @EnKaId(10000059, "鹿野院平藏")
 @Weapon(WeaponType.Magic)
 @Element(ElementType.Anemo)
-@BaseData(Rarity.Four, 10657, 225, 684, 40)
+@BaseData(Rarity.Four, [10657, 225, 684], 40, [11395, 282, 731])
 @Icons("UI_AvatarIcon_Heizo")
 export class HeizoData extends Character implements ICharacterInfo {
   constructor() {

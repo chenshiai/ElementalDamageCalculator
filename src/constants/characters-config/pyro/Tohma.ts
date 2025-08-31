@@ -7,7 +7,7 @@ import { A_80_ATK_24P, Constellation_E_3, Constellation_Q_5 } from "../buffs";
 @EnKaId(10000050, "托马")
 @Weapon(WeaponType.Polearms)
 @Element(ElementType.Pyro)
-@BaseData(Rarity.Four, 10331, 202, 751, 80)
+@BaseData(Rarity.Four, [10331, 202, 751], 80, [11046, 253, 803])
 @Icons("UI_AvatarIcon_Tohma")
 export class TohmaData extends Character implements ICharacterInfo {
   constructor() {

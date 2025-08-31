@@ -7,7 +7,7 @@ import { A_80_HP_24P, Constellation_E_3, Constellation_Q_5 } from "../buffs";
 @EnKaId(10000090, "夏沃蕾")
 @Weapon(WeaponType.Polearms)
 @Element(ElementType.Pyro)
-@BaseData(Rarity.Four, 11962, 193, 605, 60)
+@BaseData(Rarity.Four, [11962, 193, 605], 60, [12790, 242, 647])
 @Icons("UI_AvatarIcon_Chevreuse")
 export class ChevreuseData extends Character implements ICharacterInfo {
   constructor() {

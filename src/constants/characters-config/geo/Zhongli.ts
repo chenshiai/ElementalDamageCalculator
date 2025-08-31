@@ -7,7 +7,7 @@ import { Constellation_E_3, Constellation_Q_5, S_80_GEO_28P } from "../buffs";
 @EnKaId(10000030, "钟离")
 @Weapon(WeaponType.Polearms)
 @Element(ElementType.Geo)
-@BaseData(Rarity.Five, 14695, 251, 738, 40)
+@BaseData(Rarity.Five, [14695, 251, 738], 40, [15740, 308, 790])
 @Icons("UI_AvatarIcon_Zhongli")
 export class ZhongliData extends Character implements ICharacterInfo {
   constructor() {

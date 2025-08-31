@@ -7,7 +7,7 @@ import { A_80_CHARGE_26P, Constellation_E_5, Constellation_Q_3 } from "../buffs"
 @EnKaId(10000064, "云堇")
 @Weapon(WeaponType.Polearms)
 @Element(ElementType.Geo)
-@BaseData(Rarity.Four, 10657, 191, 734, 60)
+@BaseData(Rarity.Four, [10657, 191, 734], 60, [11395, 239, 785])
 @Icons("UI_AvatarIcon_Yunjin")
 export class YunjinData extends Character implements ICharacterInfo {
   constructor() {
@@ -74,7 +74,8 @@ export class YunjinData extends Character implements ICharacterInfo {
     ...A_80_CHARGE_26P,
     {
       label: "元素爆发·破嶂见旌仪",
-      describe: "为附近的队伍中所有角色赋予飞云旗阵。对敌人造成普通攻击伤害时，基于云堇自己当前的防御力，提高造成的伤害。",
+      describe:
+        "为附近的队伍中所有角色赋予飞云旗阵。对敌人造成普通攻击伤害时，基于云堇自己当前的防御力，提高造成的伤害。",
       effect: [
         {
           type: BuffType.NormalFixed,

@@ -57,6 +57,12 @@ export interface IRate {
   em?: number[];
   fixed?: number[];
 }
+export interface LimitDataType {
+  baseHP: number;
+  baseATK: number;
+  baseDEF: number;
+}
+/** 角色数据类型 */
 export interface ICharacterInfo {
   enkaId: number;
   name: string;
@@ -76,6 +82,7 @@ export interface ICharacterInfo {
   elementSkill: ISkillRate[];
   burstSkill: ISkillRate[];
   otherSkill: ISkillRate[];
+  limitData: LimitDataType[];
 
   /** 变量属性，根据实际数据来自动调整 */
   baseATK: number;
@@ -122,13 +129,13 @@ export interface ICalculatorValue {
   constellation: number;
   /** 基础生命值 */
   baseHP: number;
-  /** 基础攻击力 */
+  /** 角色基础攻击力+武器基础攻击力 */
   baseATK: number;
   /** 基础防御力 */
   baseDEF: number;
   /** 角色元素类型 */
   element: ElementType;
-  /** 角色的第二类型 芒、荒、月兆 */
+  /** 角色的第二类型 芒、荒、月兆、夜魂 */
   secondElement?: SecondElementType;
   /** 角色武器类型 */
   weapon: WeaponType;

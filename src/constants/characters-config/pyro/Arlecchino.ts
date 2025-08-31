@@ -7,7 +7,7 @@ import { EnKaId, Weapon, Element, BaseData, Icons, action } from "@/utils/decora
 @EnKaId(10000096, "阿蕾奇诺")
 @Weapon(WeaponType.Polearms)
 @Element(ElementType.Pyro)
-@BaseData(Rarity.Five, 13103, 342, 765, 60)
+@BaseData(Rarity.Five, [13103, 342, 765], 60, [14034, 419, 819])
 @Icons("UI_AvatarIcon_Arlecchino")
 export class ArlecchinoData extends Character implements ICharacterInfo {
   constructor() {

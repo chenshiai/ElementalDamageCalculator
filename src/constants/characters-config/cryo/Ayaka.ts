@@ -16,7 +16,7 @@ import { Constellation_E_5, Constellation_Q_3, S_80_CRITALHUNT_38P } from "../bu
 @EnKaId(10000002, "神里绫华")
 @Weapon(WeaponType.Sword)
 @Element(ElementType.Cryo)
-@BaseData(Rarity.Five, 12858, 342, 784, 80)
+@BaseData(Rarity.Five, [12858, 342, 784], 80, [13772, 419, 840])
 @Icons("UI_AvatarIcon_Ayaka")
 export class AyakaData extends Character implements ICharacterInfo {
   constructor() {

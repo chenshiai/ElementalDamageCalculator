@@ -1,17 +1,13 @@
 import Character from "../character-class";
 import { IBuffBase, ICharacterInfo } from "@/types/interface";
 import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
-import {
-  Constellation_E_3,
-  Constellation_Q_5,
-  S_80_CRITAL_19P,
-} from "../buffs";
+import { Constellation_E_3, Constellation_Q_5, S_80_CRITAL_19P } from "../buffs";
 import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 
 @EnKaId(10000058, "八重神子")
 @Weapon(WeaponType.Magic)
 @Element(ElementType.Electro)
-@BaseData(Rarity.Five, 10372, 340, 569, 90)
+@BaseData(Rarity.Five, [10372, 340, 569], 90, [11109, 416, 609])
 @Icons("UI_AvatarIcon_Yae")
 export class YaeData extends Character implements ICharacterInfo {
   constructor() {

@@ -16,7 +16,7 @@ import { Constellation_E_3, Constellation_Q_5, S_80_CRITAL_19P } from "../buffs"
 @EnKaId(10000049, "宵宫")
 @Weapon(WeaponType.Bow)
 @Element(ElementType.Pyro)
-@BaseData(Rarity.Five, 10164, 323, 615, 60)
+@BaseData(Rarity.Five, [10164, 323, 615], 60, [10887, 396, 659])
 @Icons("UI_AvatarIcon_Yoimiya")
 export class YoimiyaData extends Character implements ICharacterInfo {
   constructor() {

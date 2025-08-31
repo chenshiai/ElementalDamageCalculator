@@ -7,7 +7,7 @@ import { Constellation_E_5, Constellation_Q_3, S_80_HP_28P } from "../buffs";
 @EnKaId(10000070, "妮露")
 @Weapon(WeaponType.Sword)
 @Element(ElementType.Hydro)
-@BaseData(Rarity.Five, 15185, 230, 729, 70)
+@BaseData(Rarity.Five, [15185, 230, 729], 70, [16264, 281, 780])
 @Icons("UI_AvatarIcon_Nilou")
 export class NilouData extends Character implements ICharacterInfo {
   constructor() {

@@ -7,7 +7,7 @@ import { A_80_ATK_24P, Constellation_E_3, Constellation_Q_5 } from "../buffs";
 @EnKaId(10000031, "菲谢尔")
 @Weapon(WeaponType.Bow)
 @Element(ElementType.Electro)
-@BaseData(Rarity.Four, 9189, 244, 594, 60)
+@BaseData(Rarity.Four, [9189, 244, 594], 60, [9825, 306, 635])
 @Icons("UI_AvatarIcon_Fischl")
 export class FischlData extends Character implements ICharacterInfo {
   constructor() {

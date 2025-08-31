@@ -7,7 +7,7 @@ import { A_80_HP_24P, Constellation_E_3, Constellation_Q_5 } from "../buffs";
 @EnKaId(10000065, "久岐忍")
 @Weapon(WeaponType.Sword)
 @Element(ElementType.Electro)
-@BaseData(Rarity.Four, 12289, 212, 751, 60)
+@BaseData(Rarity.Four, [12289, 212, 751], 60, [13139, 266, 803])
 @Icons("UI_AvatarIcon_Shinobu")
 export class ShinobuData extends Character implements ICharacterInfo {
   constructor() {

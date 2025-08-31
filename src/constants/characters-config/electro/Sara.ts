@@ -8,7 +8,7 @@ import { A_80_ATK_24P, Constellation_E_3, Constellation_Q_5 } from "../buffs";
 @EnKaId(10000056, "九条裟罗")
 @Weapon(WeaponType.Bow)
 @Element(ElementType.Electro)
-@BaseData(Rarity.Four, 9570, 195, 628, 80)
+@BaseData(Rarity.Four, [9570, 195, 628], 80, [10232, 245, 671])
 @Icons("UI_AvatarIcon_Sara")
 export class SaraData extends Character implements ICharacterInfo {
   constructor() {

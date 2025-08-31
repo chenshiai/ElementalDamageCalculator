@@ -16,7 +16,7 @@ import { Constellation_E_3, Constellation_Q_5, S_80_CRITAL_19P } from "../buffs"
 @EnKaId(10000016, "迪卢克")
 @Weapon(WeaponType.GreatSword)
 @Element(ElementType.Pyro)
-@BaseData(Rarity.Five, 12981, 335, 784, 40)
+@BaseData(Rarity.Five, [12981, 335, 784], 40, [13903, 410, 840])
 @Icons("UI_AvatarIcon_Diluc")
 export class DilucData extends Character implements ICharacterInfo {
   constructor() {

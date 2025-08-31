@@ -7,7 +7,7 @@ import { A_80_ATK_24P, Constellation_E_5, Constellation_Q_3 } from "../buffs";
 @EnKaId(10000036, "重云")
 @Weapon(WeaponType.GreatSword)
 @Element(ElementType.Cryo)
-@BaseData(Rarity.Four, 10984, 223, 648, 40)
+@BaseData(Rarity.Four, [10984, 223, 648], 40, [11743, 279, 693])
 @Icons("UI_AvatarIcon_Chongyun")
 export class ChongyunData extends Character implements ICharacterInfo {
   constructor() {

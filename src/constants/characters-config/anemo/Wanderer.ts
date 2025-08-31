@@ -7,7 +7,7 @@ import { Constellation_E_5, Constellation_Q_3, S_80_CRITAL_19P } from "../buffs"
 @EnKaId(10000075, "流浪者")
 @Weapon(WeaponType.Magic)
 @Element(ElementType.Anemo)
-@BaseData(Rarity.Five, 10164, 328, 607, 60)
+@BaseData(Rarity.Five, [10164, 328, 607], 60, [10887, 402, 650])
 @Icons("UI_AvatarIcon_Wanderer")
 export class WandererData extends Character implements ICharacterInfo {
   constructor() {

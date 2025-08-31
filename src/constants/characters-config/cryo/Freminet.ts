@@ -7,7 +7,7 @@ import { A_80_ATK_24P, Constellation_A_3, Constellation_E_5 } from "../buffs";
 @EnKaId(10000085, "菲米尼")
 @Weapon(WeaponType.GreatSword)
 @Element(ElementType.Cryo)
-@BaseData(Rarity.Four, 12070, 255, 708, 60)
+@BaseData(Rarity.Four, [12070, 255, 708], 60, [12906, 319, 757])
 @Icons("UI_AvatarIcon_Freminet")
 export class FreminetData extends Character implements ICharacterInfo {
   constructor() {

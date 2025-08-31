@@ -1,13 +1,22 @@
 import Character from "../character-class";
 import { IBuffBase, ICharacterInfo } from "@/types/interface";
-import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, SecondElementType, WeaponType } from "@/types/enum";
+import {
+  ActionOn,
+  AttackType,
+  BuffTarget,
+  BuffType,
+  ElementType,
+  Rarity,
+  SecondElementType,
+  WeaponType,
+} from "@/types/enum";
 import { Constellation_E_5, Constellation_Q_3, S_80_CRITALHUNT_38P } from "../buffs";
 import { EnKaId, Weapon, Element, BaseData, Icons, action } from "@/utils/decorator";
 
 @EnKaId(10000106, "玛薇卡")
 @Weapon(WeaponType.GreatSword)
 @Element(ElementType.Pyro, SecondElementType.Nightsoul)
-@BaseData(Rarity.Five, 12552, 359, 792, 0)
+@BaseData(Rarity.Five, [12552, 359, 792], 0, [13444, 440, 848])
 @Icons("UI_AvatarIcon_Mavuika")
 export class MavuikaData extends Character implements ICharacterInfo {
   constructor() {

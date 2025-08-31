@@ -7,7 +7,7 @@ import { A_80_HP_24P, Constellation_E_3, Constellation_Q_5 } from "../buffs";
 @EnKaId(10000074, "莱依拉")
 @Weapon(WeaponType.Sword)
 @Element(ElementType.Cryo)
-@BaseData(Rarity.Four, 11092, 217, 655, 40)
+@BaseData(Rarity.Four, [11092, 217, 655], 40, [11860, 271, 701])
 @Icons("UI_AvatarIcon_Layla")
 export class LaylaData extends Character implements ICharacterInfo {
   constructor() {

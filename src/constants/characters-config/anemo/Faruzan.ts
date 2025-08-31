@@ -7,7 +7,7 @@ import { A_80_ATK_24P, Constellation_E_3, Constellation_Q_5 } from "../buffs";
 @EnKaId(10000076, "珐露珊")
 @Weapon(WeaponType.Bow)
 @Element(ElementType.Anemo)
-@BaseData(Rarity.Four, 9570, 196, 628, 80)
+@BaseData(Rarity.Four, [9570, 196, 628], 80, [10232, 246, 671])
 @Icons("UI_AvatarIcon_Faruzan")
 export class FaruzanData extends Character implements ICharacterInfo {
   constructor() {

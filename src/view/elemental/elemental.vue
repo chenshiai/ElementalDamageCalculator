@@ -1,6 +1,6 @@
 <template>
   <TabTitle>剧变反应计算</TabTitle>
-  <div class="tips">存在细小误差，90级以上只会在95级、100级时提升数据；超激化、蔓激化为[伤害提升]的数值，不是具体伤害数值；</div>
+  <div class="tips">存在细小误差，90级以上只会在95级、100级时提升数值；超激化、蔓激化为[伤害提升]的数值，不是具体伤害数值；</div>
   <div class="base-data">
     <div class="base-data-item">
       <span class="base-damage__title">角色等级</span>

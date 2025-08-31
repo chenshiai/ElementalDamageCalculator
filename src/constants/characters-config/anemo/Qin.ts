@@ -7,7 +7,7 @@ import { Constellation_E_5, Constellation_Q_3, S_80_HEALADD_22P } from "../buffs
 @EnKaId(10000003, "琴")
 @Weapon(WeaponType.Sword)
 @Element(ElementType.Anemo)
-@BaseData(Rarity.Five, 14695, 239, 769, 80)
+@BaseData(Rarity.Five, [14695, 239, 769], 80, [15740, 293, 823])
 @Icons("UI_AvatarIcon_Qin")
 export class QinData extends Character implements ICharacterInfo {
   constructor() {

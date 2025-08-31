@@ -7,7 +7,7 @@ import { A_80_ATK_24P, Constellation_E_5, Constellation_Q_3 } from "../buffs";
 @EnKaId(10000088, "夏洛蒂")
 @Weapon(WeaponType.Magic)
 @Element(ElementType.Cryo)
-@BaseData(Rarity.Four, 10766, 173, 546, 80)
+@BaseData(Rarity.Four, [10766, 173, 546], 80, [11511, 217, 584])
 @Icons("UI_AvatarIcon_Charlotte")
 export class CharlotteData extends Character implements ICharacterInfo {
   constructor() {

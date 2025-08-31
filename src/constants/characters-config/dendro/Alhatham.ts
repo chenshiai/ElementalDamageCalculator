@@ -16,7 +16,7 @@ import { Constellation_E_3, Constellation_Q_5, S_80_DENDRO_28P } from "../buffs"
 @EnKaId(10000078, "艾尔海森")
 @Weapon(WeaponType.Sword)
 @Element(ElementType.Dendro)
-@BaseData(Rarity.Five, 13348, 313, 782, 70)
+@BaseData(Rarity.Five, [13348, 313, 782], 70, [14297, 384, 837])
 @Icons("UI_AvatarIcon_Alhatham")
 export class AlhathamData extends Character implements ICharacterInfo {
   constructor() {

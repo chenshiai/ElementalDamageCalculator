@@ -7,7 +7,7 @@ import { A_80_ATK_24P, Constellation_E_3, Constellation_Q_5, ExtraBuff } from ".
 @EnKaId(1000000503, "空·水")
 @Weapon(WeaponType.Sword)
 @Element(ElementType.Hydro)
-@BaseData(Rarity.Five, 10875, 213, 683, 60)
+@BaseData(Rarity.Five, [10875, 213, 683], 60, [11627, 266, 730])
 @Icons("UI_AvatarIcon_PlayerBoy", "PlayerWater")
 export class PlayerBoyData extends Character implements ICharacterInfo {
   constructor() {

@@ -7,7 +7,7 @@ import { A_80_MYSTERY_96, Constellation_E_5, Constellation_Q_3 } from "../buffs"
 @EnKaId(10000006, "丽莎")
 @Weapon(WeaponType.Magic)
 @Element(ElementType.Electro)
-@BaseData(Rarity.Four, 9570, 232, 573, 80)
+@BaseData(Rarity.Four, [9570, 232, 573], 80, [10232, 290, 613])
 @Icons("UI_AvatarIcon_Lisa")
 export class LisaData extends Character implements ICharacterInfo {
   constructor() {

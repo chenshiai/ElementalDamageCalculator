@@ -7,7 +7,7 @@ import { A_80_HP_24P, Constellation_E_3, Constellation_Q_5 } from "../buffs";
 @EnKaId(10000061, "绮良良")
 @Weapon(WeaponType.Sword)
 @Element(ElementType.Dendro)
-@BaseData(Rarity.Four, 12180, 223, 546, 60)
+@BaseData(Rarity.Four, [12180, 223, 546], 60, [13022, 279, 584])
 @Icons("UI_AvatarIcon_Momoka")
 export class MomokaData extends Character implements ICharacterInfo {
   constructor() {

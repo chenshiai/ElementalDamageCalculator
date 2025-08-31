@@ -7,7 +7,7 @@ import { A_80_MYSTERY_96, Constellation_E_5, Constellation_Q_3 } from "../buffs"
 @EnKaId(10000023, "香菱")
 @Weapon(WeaponType.Polearms)
 @Element(ElementType.Pyro)
-@BaseData(Rarity.Four, 10875, 225, 669, 80)
+@BaseData(Rarity.Four, [10875, 225, 669], 80, [11627, 282, 715])
 @Icons("UI_AvatarIcon_Xiangling")
 export class XianglingData extends Character implements ICharacterInfo {
   constructor() {

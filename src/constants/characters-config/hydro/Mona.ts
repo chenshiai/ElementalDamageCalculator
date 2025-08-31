@@ -7,7 +7,7 @@ import { Constellation_E_5, Constellation_Q_3, S_80_CHARGE_32P } from "../buffs"
 @EnKaId(10000041, "莫娜")
 @Weapon(WeaponType.Magic)
 @Element(ElementType.Hydro)
-@BaseData(Rarity.Five, 10409, 287, 653, 60)
+@BaseData(Rarity.Five, [10409, 287, 653], 60, [11149, 352, 700])
 @Icons("UI_AvatarIcon_Mona")
 export class MonaData extends Character implements ICharacterInfo {
   constructor() {

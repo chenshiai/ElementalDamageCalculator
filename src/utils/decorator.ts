@@ -84,14 +84,33 @@ export function EnKaId(id: number, name: string): any {
   };
 }
 
-export function BaseData(rarity: Rarity, hp: number, atk: number, def: number, burstCharge: number): any {
+export function BaseData(rarity: Rarity, data90: number[], burstCharge: number, data100: number[]): any {
   return function (target: any) {
     return class extends target {
       rarity = rarity;
-      baseHP = hp;
-      baseATK = atk;
-      baseDEF = def;
+      baseHP = data90[0];
+      baseATK = data90[1];
+      baseDEF = data90[2];
       burstCharge = burstCharge;
+
+      limitData = [
+        {
+          baseHP: data90[0],
+          baseATK: data90[1],
+          baseDEF: data90[2],
+        },
+        {
+          baseHP: Math.round((data90[0] + data100[0]) / 2),
+          baseATK: Math.round((data90[1] + data100[1]) / 2),
+          baseDEF: Math.round((data90[2] + data100[2]) / 2),
+        },
+        {
+          baseHP: data100[0],
+          baseATK: data100[1],
+          baseDEF: data100[2],
+        },
+      ];
+
       constructor() {
         super();
       }

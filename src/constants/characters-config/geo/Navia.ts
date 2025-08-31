@@ -7,7 +7,7 @@ import { EnKaId, Weapon, Element, BaseData, Icons, action } from "@/utils/decora
 @EnKaId(10000091, "娜维娅")
 @Weapon(WeaponType.GreatSword)
 @Element(ElementType.Geo)
-@BaseData(Rarity.Five, 12650, 352, 793, 60)
+@BaseData(Rarity.Five, [12650, 352, 793], 60, [13549, 431, 850])
 @Icons("UI_AvatarIcon_Navia")
 export class NaviaData extends Character implements ICharacterInfo {
   constructor() {

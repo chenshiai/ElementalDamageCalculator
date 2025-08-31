@@ -16,7 +16,7 @@
         元素属性<span class="holy-relic-tips">（可多选）</span>
         <CheckboxGroup class="check-area element-select" v-model="element">
           <Checkbox class="element-selece__item" name="Pyro">
-             <div :class="['logo', 'logo-Pyro']" />
+            <div :class="['logo', 'logo-Pyro']" />
           </Checkbox>
           <Checkbox class="element-selece__item" name="Hydro">
             <div :class="['logo', 'logo-Hydro']" />
@@ -111,11 +111,11 @@ const configFilter = computed(() => {
 
 const resultChange = (value) => {
   if (!value || value === props.defaultName) return;
-  props.handleChange(
-    Character.find((item: ICharacterInfo) => {
+  props.handleChange({
+    ...Character.find((item: ICharacterInfo) => {
       return value.includes(item.name);
-    })
-  );
+    }),
+  });
   emit("close");
 };
 

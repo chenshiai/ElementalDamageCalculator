@@ -7,7 +7,7 @@ import { A_80_PHYSICAL_30P, Constellation_E_5, Constellation_Q_3 } from "../buff
 @EnKaId(10000020, "雷泽")
 @Weapon(WeaponType.GreatSword)
 @Element(ElementType.Electro)
-@BaseData(Rarity.Four, 11962, 234, 751, 80)
+@BaseData(Rarity.Four, [11962, 234, 751], 80, [12790, 293, 803])
 @Icons("UI_AvatarIcon_Razor")
 export class RazorData extends Character implements ICharacterInfo {
   constructor() {

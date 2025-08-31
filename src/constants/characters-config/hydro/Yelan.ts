@@ -7,7 +7,7 @@ import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decora
 @EnKaId(10000060, "夜兰")
 @Weapon(WeaponType.Bow)
 @Element(ElementType.Hydro)
-@BaseData(Rarity.Five, 14450, 244, 548, 70)
+@BaseData(Rarity.Five, [14450, 244, 548], 70, [15477, 299, 587])
 @Icons("UI_AvatarIcon_Yelan")
 export class YelanData extends Character implements ICharacterInfo {
   constructor() {

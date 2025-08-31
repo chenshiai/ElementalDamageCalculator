@@ -7,7 +7,7 @@ import { Constellation_E_5, Constellation_Q_3, S_80_CHARGE_32P } from "../buffs"
 @EnKaId(10000052, "雷电将军")
 @Weapon(WeaponType.Polearms)
 @Element(ElementType.Electro)
-@BaseData(Rarity.Five, 12907, 337, 789, 90)
+@BaseData(Rarity.Five, [12907, 337, 789], 90, [13825, 413, 845])
 @Icons("UI_AvatarIcon_Shougun")
 export class ShougunData extends Character implements ICharacterInfo {
   constructor() {

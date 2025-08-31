@@ -7,7 +7,7 @@ import { Constellation_E_5, Constellation_Q_3, S_80_CRITALHUNT_38P } from "../bu
 @EnKaId(10000114, "丝柯克")
 @Weapon(WeaponType.Sword)
 @Element(ElementType.Cryo)
-@BaseData(Rarity.Five, 12417, 359, 806, 0)
+@BaseData(Rarity.Five, [12417, 359, 806], 0, [13300, 440, 864])
 @Icons("UI_AvatarIcon_SkirkNew")
 export class SkirkData extends Character implements ICharacterInfo {
   constructor() {

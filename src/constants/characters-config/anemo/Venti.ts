@@ -7,7 +7,7 @@ import { Constellation_E_5, Constellation_Q_3, S_80_CHARGE_32P } from "../buffs"
 @EnKaId(10000022, "温迪")
 @Weapon(WeaponType.Bow)
 @Element(ElementType.Anemo)
-@BaseData(Rarity.Five, 10531, 263, 669, 60)
+@BaseData(Rarity.Five, [10531, 263, 669], 60, [11280, 323, 716])
 @Icons("UI_AvatarIcon_Venti")
 export class VentiData extends Character implements ICharacterInfo {
   constructor() {

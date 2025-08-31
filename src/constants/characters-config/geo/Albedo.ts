@@ -7,7 +7,7 @@ import { Constellation_E_3, Constellation_Q_5, S_80_GEO_28P } from "../buffs";
 @EnKaId(10000038, "阿贝多")
 @Weapon(WeaponType.Sword)
 @Element(ElementType.Geo)
-@BaseData(Rarity.Five, 13226, 251, 876, 40)
+@BaseData(Rarity.Five, [13226, 251, 876], 40, [14166, 308, 938])
 @Icons("UI_AvatarIcon_Albedo")
 export class AlbedoData extends Character implements ICharacterInfo {
   constructor() {

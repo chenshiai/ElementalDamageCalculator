@@ -20,6 +20,7 @@ interface ICalculatorPanelArgs {
   burstLevel: number;
   relicList: IRelicItem[];
 }
+/** 加成角色所有属性 */
 function calculationPanel({
   relicBuffs,
   characterBuffs,

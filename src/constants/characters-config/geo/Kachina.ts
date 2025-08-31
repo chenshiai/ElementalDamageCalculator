@@ -4,11 +4,10 @@ import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, Weapon
 import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 import { A_80_GEO_24P, Constellation_E_3, Constellation_Q_5 } from "../buffs";
 
-
 @EnKaId(10000100, "卡齐娜")
 @Weapon(WeaponType.Polearms)
 @Element(ElementType.Geo)
-@BaseData(Rarity.Four,11799, 217, 792, 70)
+@BaseData(Rarity.Four, [11799, 217, 792], 70, [12615, 271, 847])
 @Icons("UI_AvatarIcon_Kachina")
 export class KachinaData extends Character implements ICharacterInfo {
   constructor() {
@@ -43,7 +42,7 @@ export class KachinaData extends Character implements ICharacterInfo {
     action("高空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
       atk: [1.6, 1.73, 1.86, 2.04, 2.17, 2.32, 2.53, 2.73, 2.93, 3.16, 3.38],
     }),
-  ]
+  ];
   elementSkill = [
     action("冲天转转搭乘伤害", AttackType.Skill, ElementType.Geo, {
       def: [0.878, 0.943, 1.009, 1.097, 1.163, 1.229, 1.316, 1.404, 1.492, 1.58, 1.667, 1.755, 1.865],
@@ -51,17 +50,17 @@ export class KachinaData extends Character implements ICharacterInfo {
     action("冲天转转独立伤害", AttackType.Skill, ElementType.Geo, {
       def: [0.638, 0.685, 0.733, 0.797, 0.845, 0.893, 0.956, 1.02, 1.084, 1.148, 1.211, 1.275, 1.355],
     }),
-  ]
+  ];
   burstSkill = [
     action("现在，认真时间！", AttackType.Burst, ElementType.Geo, {
       def: [3.806, 4.137, 4.425, 4.81, 5.099, 5.387, 5.772, 6.157, 6.542, 6.926, 7.311, 7.696, 8.177],
     }),
-  ]
+  ];
   otherSkill = [
     action("6命·这一次，我一定要赢", AttackType.Other, ElementType.Geo, {
       def: [2],
     }),
-  ]
+  ];
   buffs: IBuffBase[] = [
     ...A_80_GEO_24P,
     {
@@ -98,7 +97,7 @@ export class KachinaData extends Character implements ICharacterInfo {
       condition: ({ constellation }) => constellation >= 4,
     },
     Constellation_Q_5,
-  ]
+  ];
 }
 
 /** ![卡齐娜](https://enka.network/ui/UI_AvatarIcon_Kachina.png) */

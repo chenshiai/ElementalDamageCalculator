@@ -7,7 +7,7 @@ import { A_80_ANEMO_24P, Constellation_E_3, Constellation_Q_5 } from "../buffs";
 @EnKaId(10000043, "砂糖")
 @Weapon(WeaponType.Magic)
 @Element(ElementType.Anemo)
-@BaseData(Rarity.Four, 9244, 170, 703, 80)
+@BaseData(Rarity.Four, [9244, 170, 703], 80, [9883, 213, 752])
 @Icons("UI_AvatarIcon_Sucrose")
 export class SucroseData extends Character implements ICharacterInfo {
   constructor() {

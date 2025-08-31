@@ -7,7 +7,7 @@ import { A_80_HP_24P, Constellation_E_5, Constellation_Q_3 } from "../buffs";
 @EnKaId(10000080, "米卡")
 @Weapon(WeaponType.Polearms)
 @Element(ElementType.Cryo)
-@BaseData(Rarity.Four, 12506, 223, 713, 70)
+@BaseData(Rarity.Four, [12506, 223, 713], 70, [13371, 279, 763])
 @Icons("UI_AvatarIcon_Mika")
 export class MikaData extends Character implements ICharacterInfo {
   constructor() {

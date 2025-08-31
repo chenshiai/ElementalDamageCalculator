@@ -7,7 +7,7 @@ import { A_80_GEO_24P, Constellation_E_3, Constellation_Q_5 } from "../buffs";
 @EnKaId(10000055, "五郎")
 @Weapon(WeaponType.Bow)
 @Element(ElementType.Geo)
-@BaseData(Rarity.Four, 9570, 183, 648, 80)
+@BaseData(Rarity.Four, [9570, 183, 648], 80, [10232, 229, 693])
 @Icons("UI_AvatarIcon_Gorou")
 export class GorouData extends Character implements ICharacterInfo {
   constructor() {

@@ -8,7 +8,7 @@ import { EnKaId, Weapon, Element, BaseData, Icons, action } from "@/utils/decora
 @EnKaId(10000093, "闲云")
 @Weapon(WeaponType.Magic)
 @Element(ElementType.Anemo)
-@BaseData(Rarity.Five, 10409, 335, 573, 70)
+@BaseData(Rarity.Five, [10409, 335, 573], 70, [11149, 410, 613])
 @Icons("UI_AvatarIcon_Liuyun")
 export class LiuyunData extends Character implements ICharacterInfo {
   constructor() {

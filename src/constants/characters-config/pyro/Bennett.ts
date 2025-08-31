@@ -16,7 +16,7 @@ import { A_80_CHARGE_26P, Constellation_E_3, Constellation_Q_5 } from "../buffs"
 @EnKaId(10000032, "班尼特")
 @Weapon(WeaponType.Sword)
 @Element(ElementType.Pyro)
-@BaseData(Rarity.Four, 12397, 191, 771, 60)
+@BaseData(Rarity.Four, [12397, 191, 771], 60, [13255, 239, 825])
 @Icons("UI_AvatarIcon_Bennett")
 export class BennettData extends Character implements ICharacterInfo {
   constructor() {

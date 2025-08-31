@@ -16,7 +16,7 @@ import { A_80_HP_24P, Constellation_E_5, Constellation_Q_3 } from "../buffs";
 @EnKaId(10000068, "多莉")
 @Weapon(WeaponType.GreatSword)
 @Element(ElementType.Electro)
-@BaseData(Rarity.Four, 12397, 223, 723, 80)
+@BaseData(Rarity.Four, [12397, 223, 723], 80, [13255, 279, 774])
 @Icons("UI_AvatarIcon_Dori")
 export class DoriData extends Character implements ICharacterInfo {
   constructor() {

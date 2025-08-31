@@ -16,7 +16,7 @@ import { Constellation_E_5, Constellation_Q_3, S_80_CRITALHUNT_38P } from "../bu
 @EnKaId(10000042, "刻晴")
 @Weapon(WeaponType.Sword)
 @Element(ElementType.Electro)
-@BaseData(Rarity.Five, 13103, 323, 799, 40)
+@BaseData(Rarity.Five, [13103, 323, 799], 40, [14034, 396, 856])
 @Icons("UI_AvatarIcon_Keqing")
 export class KeqingData extends Character implements ICharacterInfo {
   constructor() {

@@ -7,7 +7,8 @@ import { A_80_CRYO_24P, Constellation_E_5, Constellation_Q_3 } from "../buffs";
 @EnKaId(10000039, "迪奥娜")
 @Weapon(WeaponType.Bow)
 @Element(ElementType.Cryo)
-@BaseData(Rarity.Four, 9570, 212, 601, 80)
+@BaseData(Rarity.Four, [9570, 212, 601], 80, [10232, 266, 642])
+
 @Icons("UI_AvatarIcon_Diona")
 export class DionaData extends Character implements ICharacterInfo {
   constructor() {

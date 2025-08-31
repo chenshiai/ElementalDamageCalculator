@@ -7,7 +7,7 @@ import { A_80_MYSTERY_96, Constellation_A_3, Constellation_Q_5 } from "../buffs"
 @EnKaId(10000097, "赛索斯")
 @Weapon(WeaponType.Bow)
 @Element(ElementType.Electro)
-@BaseData(Rarity.Four, 9787, 227, 560, 60)
+@BaseData(Rarity.Four, [9787, 227, 560], 60, [10464, 285, 598])
 @Icons("UI_AvatarIcon_Sethos")
 export class SethosData extends Character implements ICharacterInfo {
   constructor() {

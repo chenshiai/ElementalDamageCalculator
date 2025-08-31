@@ -7,7 +7,7 @@ import { A_80_HP_24P, Constellation_E_5, Constellation_Q_3 } from "../buffs";
 @EnKaId(10000014, "芭芭拉")
 @Weapon(WeaponType.Magic)
 @Element(ElementType.Hydro)
-@BaseData(Rarity.Four, 9787, 159, 669, 80)
+@BaseData(Rarity.Four, [9787, 159, 669], 80, [10464, 199, 715])
 @Icons("UI_AvatarIcon_Barbara")
 export class BarbaraData extends Character implements ICharacterInfo {
   constructor() {

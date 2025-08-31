@@ -16,7 +16,7 @@ import { Constellation_E_3, Constellation_Q_5, S_80_MYSTERY_115 } from "../buffs
 @EnKaId(10000047, "枫原万叶")
 @Weapon(WeaponType.Sword)
 @Element(ElementType.Anemo)
-@BaseData(Rarity.Five, 13348, 297, 807, 60)
+@BaseData(Rarity.Five, [13348, 297, 807], 60, [14297, 364, 864])
 @Icons("UI_AvatarIcon_Kazuha")
 export class KazuhaData extends Character implements ICharacterInfo {
   constructor() {

@@ -16,7 +16,7 @@ import { Constellation_E_3, Constellation_Q_5, S_80_CRITAL_19P } from "../buffs"
 @EnKaId(10000026, "魈")
 @Weapon(WeaponType.Polearms)
 @Element(ElementType.Anemo)
-@BaseData(Rarity.Five, 12736, 349, 799, 70)
+@BaseData(Rarity.Five, [12736, 349, 799], 70, [13641, 429, 856])
 @Icons("UI_AvatarIcon_Xiao")
 export class XiaoData extends Character implements ICharacterInfo {
   constructor() {

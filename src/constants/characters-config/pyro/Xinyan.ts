@@ -7,7 +7,7 @@ import { A_80_ATK_24P, Constellation_E_3, Constellation_Q_5 } from "../buffs";
 @EnKaId(10000044, "辛焱")
 @Weapon(WeaponType.GreatSword)
 @Element(ElementType.Pyro)
-@BaseData(Rarity.Four, 11201, 249, 799, 60)
+@BaseData(Rarity.Four, [11201, 249, 799], 60, [11976, 311, 854])
 @Icons("UI_AvatarIcon_Xinyan")
 export class XinyanData extends Character implements ICharacterInfo {
   constructor() {

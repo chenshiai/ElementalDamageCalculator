@@ -7,7 +7,7 @@ import { A_80_ATK_24P, Constellation_E_5, Constellation_Q_3, ExtraBuff } from ".
 @EnKaId(10000005, "空·风")
 @Weapon(WeaponType.Sword)
 @Element(ElementType.Anemo)
-@BaseData(Rarity.Five, 10875, 213, 683, 60)
+@BaseData(Rarity.Five, [10875, 213, 683], 60, [11627, 266, 730])
 @Icons("UI_AvatarIcon_PlayerBoy", "PlayerWind")
 export class PlayerBoyData extends Character implements ICharacterInfo {
   constructor() {

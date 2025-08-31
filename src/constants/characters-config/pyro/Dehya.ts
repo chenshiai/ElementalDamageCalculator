@@ -7,7 +7,7 @@ import { Constellation_E_5, Constellation_Q_3, S_80_HP_28P } from "../buffs";
 @EnKaId(10000079, "迪希雅")
 @Weapon(WeaponType.GreatSword)
 @Element(ElementType.Pyro)
-@BaseData(Rarity.Five, 15678, 266, 628, 70)
+@BaseData(Rarity.Five, [15678, 266, 628], 70, [16789, 325, 673])
 @Icons("UI_AvatarIcon_Dehya")
 export class DehyaData extends Character implements ICharacterInfo {
   constructor() {

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { Popup, Icon, Stepper } from "vant";
 import Selector from "@/component/Selector.vue";
 import { ICharacterInfo } from "@/types/interface";
@@ -25,6 +25,7 @@ const handleCharacterChange = (characterInfo: ICharacterInfo) => {
 const constellation = defineModel("constellation", {
   default: 0,
 });
+const levelUp = defineModel("levelUp", { default: 0 });
 </script>
 
 <template>
@@ -36,14 +37,24 @@ const constellation = defineModel("constellation", {
           {{ character.name }}
           （Lv.{{ character.level }}）
         </div>
-        <div>突破等阶：{{ character.overshoot }}</div>
-        <div>基础生命值：{{ character.baseHP }}</div>
-        <div>基础攻击力：{{ character.baseATK }}</div>
-        <div>基础防御力：{{ character.baseDEF }}</div>
-        <span>
-          解锁命之座：<Stepper theme="round" button-size="20" input-width="66px" v-model="constellation" min="0" max="6" />
+
+        <div class="avatar-info__base"><img src="/img/_HP.png" />{{ character.baseHP }}</div>
+        <div class="avatar-info__base"><img src="/img/_ATK.png" />{{ character.baseATK }}</div>
+        <div class="avatar-info__base"><img src="/img/_DEF.png" />{{ character.baseDEF }}</div>
+        <span v-if="character.level >= 90">
+          上限突破：<Stepper theme="round" button-size="20" input-width="66px" v-model="levelUp" min="0" max="2" />
         </span>
-        <!-- <span style="margin-left: 32px; font-size: 12px">点击图标开启/关闭命之座</span> -->
+        <div>突破等阶：{{ character.overshoot }}</div>
+        <div>
+          解锁命之座：<Stepper
+            theme="round"
+            button-size="20"
+            input-width="66px"
+            v-model="constellation"
+            min="0"
+            max="6"
+          />
+        </div>
       </div>
       <div class="avatar active-btn" @click="show = true">
         <img :src="character?.icons.avatarIcon" />
@@ -55,6 +66,7 @@ const constellation = defineModel("constellation", {
         v-for="(src, index) in character?.icons.constsIcon"
         :class="['consts-icon', index + 1 === constellation ? 'consts-active' : '']"
         @click="setConsts(index + 1)"
+        :key="index"
       >
         <Icon name="lock" />
         <img :src="src" />
@@ -97,6 +109,17 @@ const constellation = defineModel("constellation", {
 .avatar-info {
   flex: 1;
 }
+.avatar-info__base {
+  display: flex;
+  align-items: center;
+}
+.avatar-info__base img {
+  width: 24px;
+  height: 24px;
+  margin-right: 4px;
+  background-color: var(--bg);
+}
+
 .constellations {
   display: flex;
   width: 60%;

@@ -7,7 +7,7 @@ import { Constellation_E_5, Constellation_Q_3, S_80_CRITALHUNT_38P } from "../bu
 @EnKaId(10000051, "优菈")
 @Weapon(WeaponType.GreatSword)
 @Element(ElementType.Cryo)
-@BaseData(Rarity.Five, 13226, 342, 751, 80)
+@BaseData(Rarity.Five, [13226, 342, 751], 80, [14166, 419, 804])
 @Icons("UI_AvatarIcon_Eula")
 export class EulaData extends Character implements ICharacterInfo {
   constructor() {

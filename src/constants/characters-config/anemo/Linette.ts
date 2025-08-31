@@ -16,7 +16,7 @@ import { A_80_ATK_24P, Constellation_E_5, Constellation_Q_3 } from "../buffs";
 @EnKaId(10000083, "琳妮特")
 @Weapon(WeaponType.Sword)
 @Element(ElementType.Anemo)
-@BaseData(Rarity.Four, 12397, 232, 712, 70)
+@BaseData(Rarity.Four, [12397, 232, 712], 70, [13255, 290, 761])
 @Icons("UI_AvatarIcon_Linette")
 export class LinetteData extends Character implements ICharacterInfo {
   constructor() {

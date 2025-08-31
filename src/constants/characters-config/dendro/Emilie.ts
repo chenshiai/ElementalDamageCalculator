@@ -17,7 +17,7 @@ import { EnKaId, Weapon, Element, BaseData, Icons, action } from "@/utils/decora
 @EnKaId(10000099, "艾梅莉埃")
 @Weapon(WeaponType.Polearms)
 @Element(ElementType.Dendro)
-@BaseData(Rarity.Five, 13568, 335, 730, 50)
+@BaseData(Rarity.Five, [13568, 335, 730], 50, [14533, 410, 782])
 @Icons("UI_AvatarIcon_Emilie")
 export class EmilieData extends Character implements ICharacterInfo {
   constructor() {

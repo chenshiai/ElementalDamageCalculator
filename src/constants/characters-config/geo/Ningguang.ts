@@ -7,7 +7,7 @@ import { A_80_GEO_24P, Constellation_E_5, Constellation_Q_3 } from "../buffs";
 @EnKaId(10000027, "凝光")
 @Weapon(WeaponType.Magic)
 @Element(ElementType.Geo)
-@BaseData(Rarity.Four, 9787, 212, 573, 40)
+@BaseData(Rarity.Four, [9787, 212, 573], 40, [10464, 266, 613])
 @Icons("UI_AvatarIcon_Ningguang")
 export class NingguangData extends Character implements ICharacterInfo {
   constructor() {

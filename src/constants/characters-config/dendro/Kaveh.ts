@@ -16,7 +16,7 @@ import { A_80_MYSTERY_96, Constellation_E_5, Constellation_Q_3 } from "../buffs"
 @EnKaId(10000081, "卡维")
 @Weapon(WeaponType.GreatSword)
 @Element(ElementType.Dendro)
-@BaseData(Rarity.Four, 11962, 234, 751, 80)
+@BaseData(Rarity.Four, [11962, 234, 751], 80, [12790, 293, 803])
 @Icons("UI_AvatarIcon_Kaveh")
 export class KavehData extends Character implements ICharacterInfo {
   constructor() {

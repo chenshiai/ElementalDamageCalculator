@@ -7,7 +7,7 @@ import { Constellation_E_3, Constellation_Q_5, S_80_HYDRO_28P } from "../buffs";
 @EnKaId(10000033, "达达利亚")
 @Weapon(WeaponType.Bow)
 @Element(ElementType.Hydro)
-@BaseData(Rarity.Five, 13103, 301, 815, 60)
+@BaseData(Rarity.Five, [13103, 301, 815], 60, [14034, 369, 873])
 @Icons("UI_AvatarIcon_Tartaglia")
 export class TartagliaData extends Character implements ICharacterInfo {
   constructor() {

@@ -1,8 +1,10 @@
 import { ElementType, Rarity, SecondElementType, WeaponType } from "@/types/enum";
+import { LimitDataType } from "@/types/interface";
 
-abstract class Character {
+class Character {
   level = 90;
   overshoot = 6;
+  limitData: LimitDataType[];
   name: string;
   weapon: WeaponType;
   element: ElementType;

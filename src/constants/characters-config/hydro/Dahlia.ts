@@ -4,12 +4,10 @@ import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, Weapon
 import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 import { A_80_HP_24P, Constellation_E_5, Constellation_Q_3 } from "../buffs";
 
-// .replaceAll("%", '').replaceAll(/[\u4e00-\u9fff]+/g, "").replaceAll("\t",",").split(",").map(i=>Math.round(i*100)/10000)
-
 @EnKaId(10000115, "塔利雅")
 @Weapon(WeaponType.Sword)
 @Element(ElementType.Hydro)
-@BaseData(Rarity.Four, 12506, 189, 506, 60)
+@BaseData(Rarity.Four, [12506, 189, 506], 60, [13371, 237, 598])
 @Icons("UI_AvatarIcon_Dahlia")
 export class DahliaData extends Character implements ICharacterInfo {
   constructor() {

@@ -7,7 +7,7 @@ import { A_80_MYSTERY_96, Constellation_E_5, Constellation_Q_3 } from "../buffs"
 @EnKaId(10000053, "早柚")
 @Weapon(WeaponType.GreatSword)
 @Element(ElementType.Anemo)
-@BaseData(Rarity.Four, 11854, 244, 745, 80)
+@BaseData(Rarity.Four, [11854, 244, 745], 80, [12674, 306, 796])
 @Icons("UI_AvatarIcon_Sayu")
 export class SayuData extends Character implements ICharacterInfo {
   constructor() {

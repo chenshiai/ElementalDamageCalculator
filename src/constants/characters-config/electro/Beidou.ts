@@ -7,7 +7,7 @@ import { A_80_ELECTRO_24P, Constellation_E_3, Constellation_Q_5 } from "../buffs
 @EnKaId(10000024, "北斗")
 @Weapon(WeaponType.GreatSword)
 @Element(ElementType.Electro)
-@BaseData(Rarity.Four, 13050, 225, 648, 80)
+@BaseData(Rarity.Four, [13050, 225, 648], 80, [13953, 282, 693])
 @Icons("UI_AvatarIcon_Beidou")
 export class BeidouData extends Character implements ICharacterInfo {
   constructor() {

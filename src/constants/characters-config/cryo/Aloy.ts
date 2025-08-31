@@ -16,7 +16,7 @@ import { S_80_CRYO_28P } from "../buffs";
 @EnKaId(10000062, "埃洛伊")
 @Weapon(WeaponType.Bow)
 @Element(ElementType.Cryo)
-@BaseData(Rarity.Five, 10899, 234, 676, 40)
+@BaseData(Rarity.Five, [10899, 234, 676], 40, [11673, 287, 724])
 @Icons("UI_AvatarIcon_Aloy")
 export class AloyData extends Character implements ICharacterInfo {
   constructor() {
