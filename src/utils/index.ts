@@ -171,6 +171,7 @@ export const computationalFormula = (data) => {
     CRITICAL_DMG,
     RESULT_DMG,
     CRIT_DMG: RESULT_DMG + CRITICAL_DMG,
+    PROMOTE_DMG: 0,
   };
 
   return {

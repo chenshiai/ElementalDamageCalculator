@@ -1,5 +1,5 @@
 import { ref, watchEffect } from "vue";
-import _ from 'lodash';
+import _ from "lodash";
 import { IBuffExtra, ITeamItem } from "@/types/interface";
 import { ElementType } from "@/types/enum";
 
@@ -7,7 +7,16 @@ import BuffInfo from "./index.vue";
 export { BuffInfo };
 
 import { useStore } from "@/store";
-import { CryoResonance, DendroResonance, DendroResonance1, DendroResonance2, HydroResonance, PyroResonance, GeoResonance } from "@/constants/characters-config/buffs";
+import {
+  CryoResonance,
+  DendroResonance,
+  DendroResonance1,
+  DendroResonance2,
+  HydroResonance,
+  PyroResonance,
+  GeoResonance,
+  Superconductivity,
+} from "@/constants/characters-config/buffs";
 
 function countCharacterElements(teamList: ITeamItem[]): Map<ElementType, number> {
   const elementCount = new Map<ElementType, number>();
@@ -19,7 +28,6 @@ function countCharacterElements(teamList: ITeamItem[]): Map<ElementType, number>
       elementCount.set(element, currentCount + 1);
     }
   }
-  
 
   return elementCount;
 }
@@ -33,24 +41,29 @@ const useBuffInfo = () => {
     const teamList = store.state.teamData.teamList as ITeamItem[];
 
     // 元素共鸣触发的buff
+    const elementCount = countCharacterElements(teamList);
     if (teamList.length >= 5) {
-      const elementCount = countCharacterElements(teamList);
       if (elementCount.get(ElementType.Pyro) >= 2) {
-        buffs.value.push(PyroResonance)
+        buffs.value.push(PyroResonance);
       }
       if (elementCount.get(ElementType.Dendro) >= 2) {
-        buffs.value.push(DendroResonance)
-        buffs.value.push(DendroResonance1)
-        buffs.value.push(DendroResonance2)
+        buffs.value.push(DendroResonance);
+        buffs.value.push(DendroResonance1);
+        buffs.value.push(DendroResonance2);
       }
       if (elementCount.get(ElementType.Cryo) >= 2) {
-        buffs.value.push(CryoResonance)
+        buffs.value.push(CryoResonance);
       }
       if (elementCount.get(ElementType.Hydro) >= 2) {
-        buffs.value.push(HydroResonance)
+        buffs.value.push(HydroResonance);
       }
       if (elementCount.get(ElementType.Geo) >= 2) {
-        buffs.value.push(GeoResonance) 
+        buffs.value.push(GeoResonance);
+      }
+    }
+    if (teamList.length >= 2) {
+      if (elementCount.get(ElementType.Electro) >= 1 && elementCount.get(ElementType.Cryo) >= 1) {
+        buffs.value.push(Superconductivity);
       }
     }
 
@@ -61,7 +74,7 @@ const useBuffInfo = () => {
           buffList.forEach((buff) => {
             const b = _.cloneDeep(buff);
             if (buff.repeatable) {
-              b.label = `[${name}·来自${index+1}号角色]${buff.label}`;
+              b.label = `[${name}·来自${index + 1}号角色]${buff.label}`;
             } else {
               b.label = `[${name}]${buff.label}`;
             }
@@ -71,7 +84,6 @@ const useBuffInfo = () => {
       }
     });
   });
-
 
   return { buffs, stopWatchTeamList };
 };

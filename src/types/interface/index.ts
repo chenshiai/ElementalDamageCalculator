@@ -350,6 +350,11 @@ export interface ICalculatorValue {
   /** 月绽放倍率提升 */
   [BuffType.MoonSwirlRate]: number;
 
+  /** 月感电擢升 */
+  [BuffType.MoonElectroPromote]: number;
+  /** 月绽放擢升 */
+  [BuffType.MoonSwirlPromote]: number;
+
   /** 普攻天赋等级加成 */
   [BuffType.NormalLevel]: number;
   /** 元素战技天赋等级加成 */
@@ -366,20 +371,27 @@ export interface ICalculatorValue {
   /** 激化反应系数提升 */
   [BuffType.CatalyzeRate]: number;
 
-  /** 敌人等级 */
+  /** 敌人的等级 */
   enemyLevel: number;
-  /** 敌人抗性 */
+  /** 敌人的物理抗性% */
   [BuffType.EnemyPhysicalResistance]: number;
+  /** 敌人的火元素抗性% */
   [BuffType.EnemyPyroResistance]: number;
+  /** 敌人的雷元素抗性% */
   [BuffType.EnemyElectroResistance]: number;
+  /** 敌人的水元素抗性% */
   [BuffType.EnemyHydroResistance]: number;
+  /** 敌人的冰元素抗性% */
   [BuffType.EnemyCryoResistance]: number;
+  /** 敌人的风元素抗性% */
   [BuffType.EnemyAnemoResistance]: number;
+  /** 敌人的岩元素抗性% */
   [BuffType.EnemyGeoResistance]: number;
+  /** 敌人的草元素抗性% */
   [BuffType.EnemyDendroResistance]: number;
-  /** 减少防御 */
+  /** 敌人的防御减少% */
   [BuffType.ReduceArmour]: number;
-  /** 无视防御 */
+  /** 无视敌人的防御% */
   [BuffType.DefensePenetration]: number;
 
   /** 独特数据面板 */

@@ -1,3 +1,4 @@
+import store from "@/store";
 import { ElementType, EnchantingType, WeaponType } from "@/types/enum";
 import { ICalculatorValue } from "@/types/interface";
 
@@ -126,6 +127,9 @@ class CalculatorValue implements ICalculatorValue {
   moonElectroRateAdd: number = 0;
   moonSwirlRateAdd: number = 0;
 
+  moonElectroPromote: number = 0;
+  moonSwirlPromote: number = 0;
+
   burstAdd: number = 0;
   skillAdd: number = 0;
   normalAdd: number = 0;
@@ -161,6 +165,15 @@ class CalculatorValue implements ICalculatorValue {
     if (initialValues) {
       Object.assign(this, initialValues);
     }
+    this.enemyLevel = store.state.teamData.enemyLevel;
+    this.enemyPhysicalResistance = store.state.teamData.baseResistance;
+    this.enemyPyroResistance = store.state.teamData.baseResistance;
+    this.enemyElectroResistance = store.state.teamData.baseResistance;
+    this.enemyHydroResistance = store.state.teamData.baseResistance;
+    this.enemyAnemoResistance = store.state.teamData.baseResistance;
+    this.enemyCryoResistance = store.state.teamData.baseResistance;
+    this.enemyGeoResistance = store.state.teamData.baseResistance;
+    this.enemyDendroResistance = store.state.teamData.baseResistance;
   }
 }
 

@@ -15,6 +15,9 @@ import useBuffInfo, { BuffInfo } from "./modules/buff-info";
 import useSkillInfo, { SkillInfo } from "./modules/skill-info";
 import useTeamData from "../cloud-team/useTeamData";
 
+import { useStore } from "@/store";
+const store = useStore();
+
 /** @module 页面展示用数据 */
 const { characterInfo, constellation, levelUp, characterBuffs, initCharacterInfo } = useCharacterInfo();
 const { weapon, affix, weaponBuffs, initWeaponInfo } = useWeaponInfo();
@@ -24,8 +27,6 @@ const { normalLevel, skillLevel, burstLevel, initSkillInfo } = useSkillInfo();
 
 /** @module 面板计算 */
 import calculationPanel from "@/utils/calculate/calculate-panel";
-import { useStore } from "@/store";
-const store = useStore();
 const CalculatorValue = computed<ICalculatorValue>(() => {
   if (!characterInfo.value || !weapon.value) return new CalculatorValueClass();
   return calculationPanel({
@@ -37,8 +38,6 @@ const CalculatorValue = computed<ICalculatorValue>(() => {
     relicBuffs: relicBuffs.value,
     buffs: buffs.value,
     constellation: constellation.value,
-    baseResistance: store.state.teamData.baseResistance,
-    enemyLevel: store.state.teamData.enemyLevel,
     normalLevel: normalLevel.value,
     skillLevel: skillLevel.value,
     burstLevel: burstLevel.value,

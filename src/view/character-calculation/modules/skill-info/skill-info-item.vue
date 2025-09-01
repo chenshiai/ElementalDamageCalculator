@@ -43,6 +43,7 @@ const calculatedResults = computed(() => {
       BONUS_DMG,
       MAGNIFICATION_DMG,
       REACTION_DMG,
+      PROMOTE_DMG,
       EVA_DMG,
     } = calculateDamage({
       calculatorValue,
@@ -87,6 +88,7 @@ const calculatedResults = computed(() => {
         CRITICAL_DMG,
         REACTION_DMG,
         RESULT_DMG,
+        PROMOTE_DMG,
       } as CalculateAnalysisType,
     };
   });

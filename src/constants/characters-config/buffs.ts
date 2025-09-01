@@ -160,6 +160,15 @@ export const Constellation_A_5 = createConstellationBuff(5, BuffType.NormalLevel
 export const Constellation_E_5 = createConstellationBuff(5, BuffType.SkillLevel);
 export const Constellation_Q_5 = createConstellationBuff(5, BuffType.BurstLevel);
 
+export const Superconductivity = {
+  label: "元素反应·超导",
+  describe: "受到超导反应的目标物理抗性降低40%。",
+  effect: [{ type: BuffType.EnemyPhysicalResistance, getValue: () => -40 }],
+  enable: true,
+  target: BuffTarget.All,
+  source: "元素反应",
+};
+
 // 元素共鸣的增益
 export const PyroResonance = {
   label: "元素共鸣·热诚之火",

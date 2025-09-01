@@ -1,44 +1,6 @@
 import { WeaponStats } from "@/types";
-import { AppendProp, AttackType, ElementType, Rarity, WeaponType } from "@/types/enum";
-import { IRate, ISkillRate, IWeaponInfo } from "@/types/interface";
-
-function getEnkaUI(name: string): string {
-  return `https://enka.network/ui/${name}.png`;
-}
-
-function getEnkaUIs(name: string[]): string[] {
-  return name.map(getEnkaUI);
-}
-
-function getEnkaImg(name: string): string {
-  return `https://enka.network/ui/${name.replace("UI_AvatarIcon_", "UI_Gacha_AvatarImg_")}.png`;
-}
-
-export function cha(enkaId: number, name: string, element: ElementType, weapon: WeaponType) {
-  return (rarity: Rarity, baseHP: number, baseATK: number, baseDEF: number, burstCharge: number) => {
-    return (avatarIcon: string, constsIcon: string[], talentNames: string[]) => {
-      return {
-        name,
-        enkaId,
-        weapon,
-        element,
-        rarity,
-        level: 90,
-        overshoot: 6,
-        baseATK,
-        baseDEF,
-        baseHP,
-        burstCharge,
-        icons: {
-          avatarIcon: getEnkaUI(avatarIcon),
-          constsIcon: getEnkaUIs(constsIcon),
-          gachaImage: getEnkaImg(avatarIcon),
-        },
-        talentNames,
-      };
-    };
-  };
-}
+import { AppendProp, Rarity } from "@/types/enum";
+import {  IWeaponInfo } from "@/types/interface";
 
 export function highlight(strings, ...values) {
   let result = "";

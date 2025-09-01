@@ -117,7 +117,7 @@
           </template>
         </Popover>
       </div>
-      <div class="cha-gain-inner">
+      <!-- <div class="cha-gain-inner">
         <img class="base-damage__img" src="/ui/UI_AvatarIcon_Lauma.png" alt="" />
         <CellGroup inset>
           <Field v-model="laumaEm" type="number" label="元素精通" />
@@ -132,7 +132,7 @@
             <Icon size="26" name="question" />
           </template>
         </Popover>
-      </div>
+      </div> -->
     </div>
   </details>
   <DetailBlock :elementalMystery="elementalMystery">

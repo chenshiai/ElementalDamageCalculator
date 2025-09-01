@@ -208,8 +208,6 @@ const saveCalculationResult = async (enkaData: EnkaAvatarInfo, uid: string) => {
     relicBuffs: relicBuffs.value,
     buffs: [],
     constellation: enkaData.talentIdList ? enkaData.talentIdList.length : 0,
-    baseResistance: 10,
-    enemyLevel: 90,
     normalLevel: skillLevelMap[0][1],
     skillLevel: skillLevelMap[1][1],
     burstLevel: skillLevelMap[2][1],

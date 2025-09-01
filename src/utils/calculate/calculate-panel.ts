@@ -13,8 +13,6 @@ interface ICalculatorPanelArgs {
   weaponBuffs: IBuffBase[];
   buffs: IBuffBase[];
   relicBuffs: IBuffBase[];
-  baseResistance: number;
-  enemyLevel: number;
   normalLevel: number;
   skillLevel: number;
   burstLevel: number;
@@ -30,8 +28,6 @@ function calculationPanel({
   weapon,
   relicList,
   constellation,
-  baseResistance = 10,
-  enemyLevel = 95,
   normalLevel,
   skillLevel,
   burstLevel,
@@ -69,16 +65,6 @@ function calculationPanel({
       normalLevel,
       skillLevel,
       burstLevel,
-
-      enemyLevel,
-      enemyPhysicalResistance: baseResistance,
-      enemyPyroResistance: baseResistance,
-      enemyElectroResistance: baseResistance,
-      enemyHydroResistance: baseResistance,
-      enemyAnemoResistance: baseResistance,
-      enemyCryoResistance: baseResistance,
-      enemyGeoResistance: baseResistance,
-      enemyDendroResistance: baseResistance,
     })
   );
 }
