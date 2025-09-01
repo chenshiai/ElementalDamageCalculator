@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import TabTitle from "@/component/TabTitle.vue";
-import { CellGroup, RadioGroup, Radio, Field, Icon, Stepper, Popup } from "vant";
+import { CellGroup, RadioGroup, Radio, Field, Icon, Stepper } from "vant";
 import { computed, ref } from "vue";
-import { useYiFa, useIneffa } from "../elemental/roles";
+import { useYiFa, useIneffa, useFlins } from "../elemental/roles";
 import { BaseDMG } from "@/constants/elementalReaction";
 import Popover from "@/component/Popover.vue";
 import { getMoonElectroRate, generateAllSortedResults, getResistanceRate } from "@/utils";
@@ -14,6 +14,7 @@ type teamItem = {
   criticalRate: number;
   criticalDamage: number;
   checked: RelicType;
+  promote: number;
 };
 
 enum RelicType {
@@ -37,13 +38,16 @@ const teamList = ref<teamItem[]>([
     criticalRate: 5,
     criticalDamage: 50,
     checked: RelicType.none,
+    promote: 0,
   },
 ]);
 
 const moonElectroOtherData = ref(0);
+const moonElectroPromoteData = ref(0);
 const enemyResistance = ref(10);
 const { yehun, yehunMoonGain } = useYiFa();
 const { ineffaAtk, ineffaGain } = useIneffa();
+const { flinsAtk, flinsGain } = useFlins();
 
 const relicEff = computed(() => {
   const relicSet = new Set();
@@ -75,7 +79,8 @@ const moonElectroDamage = (teamData: teamItem) => {
           (teamData.checked === RelicType.thunder ? 20 : 0) +
           relicEff.value) /
           100) *
-      (1 + ineffaGain.value / 100) *
+      (1 + (ineffaGain.value + flinsGain.value) / 100) *
+      (1 + (teamData.promote + moonElectroPromoteData.value) / 100) *
       getResistanceRate(enemyResistance.value)
   );
 
@@ -99,6 +104,7 @@ const addData = () => {
     criticalRate: 5,
     criticalDamage: 50,
     checked: RelicType.none,
+    promote: 0,
   });
 };
 const removeData = (index: number) => {
@@ -167,6 +173,10 @@ const damageResult = computed(() => {
           <span class="basic-panel-item-title">暴击伤害%</span>
           <input class="basic-panel-input" type="number" v-model="item.criticalDamage" />
         </div>
+        <div class="basic-panel-item">
+          <span class="basic-panel-item-title">擢升%</span>
+          <input class="basic-panel-input" type="number" v-model="item.promote" />
+        </div>
       </div>
       <div class="moon-panel__title">
         圣遗物套装
@@ -211,6 +221,20 @@ const damageResult = computed(() => {
           </template>
         </Popover>
       </div>
+      <!-- <div class="cha-gain-inner">
+        <img class="base-damage__img" src="/ui/UI_AvatarIcon_Flins.png" alt="" />
+        <CellGroup inset>
+          <Field v-model="flinsAtk" type="number" label="菲林斯攻击力" />
+        </CellGroup>
+        <Popover position="top-right">
+          <div class="data-item-popover__content">
+            菲林斯：提升队伍中所有角色<q class="elector">月感电</q>的基础伤害，每100点攻击力提升0.7%，最大14%
+          </div>
+          <template #trigger>
+            <Icon size="26" name="question" />
+          </template>
+        </Popover>
+      </div> -->
 
       <div class="cha-gain-inner">
         <img class="base-damage__img" src="/ui/UI_AvatarIcon_Ifa.png" alt="" />
@@ -241,9 +265,14 @@ const damageResult = computed(() => {
         <span class="base-damage__title">月感电伤害提升%</span>
         <Stepper v-model="moonElectroOtherData" input-width="66px" integer button-size="20" theme="round" min="0" />
       </div>
+      <div class="base-data">
+        <span class="base-damage__title">月感电伤害擢升%</span>
+        <Stepper v-model="moonElectroPromoteData" input-width="66px" integer button-size="20" theme="round" min="0" />
+      </div>
     </section>
     <br />
   </details>
+  <div class="detail">擢升：特殊的伤害提升效果，与其他的伤害提升效果分别独立计算。</div>
   <div class="data-panel__title">期望伤害</div>
   <details v-for="item in damageResult" :key="item.name" :name="item.name" :class="[item.class, 'damage-details']">
     <summary class="damage-tag">
@@ -273,6 +302,7 @@ const damageResult = computed(() => {
 }
 .damage-details {
   width: 50%;
+  margin-bottom: 60px;
 }
 
 .moon-panel__delete {

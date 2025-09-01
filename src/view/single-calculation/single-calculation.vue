@@ -1,6 +1,6 @@
 <template>
   <tab-title>单次伤害计算</tab-title>
-  <div class="tips">可以自由填入属性值查看相应的伤害，适合对游戏伤害计算方式比较熟悉的人使用。</div>
+  <div class="tips">可以自由填入属性值查看相应的伤害，适合对游戏伤害计算方式比较熟悉的人使用。暂不支持月曜反应伤害计算。</div>
   <div class="data-panel">
     <section>
       <div class="data-panel__title">基础属性</div>

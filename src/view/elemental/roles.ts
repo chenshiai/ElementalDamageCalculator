@@ -71,6 +71,17 @@ export function useIneffa() {
   };
 }
 
+export function useFlins() {
+  const flinsAtk = ref(0);
+  const flinsGain = computed(() => {
+    return Math.min(14, flinsAtk.value * 0.007);
+  });
+  return {
+    flinsAtk,
+    flinsGain,
+  };
+}
+
 export function useLauma() {
   const laumaEm = ref(0);
   const laumaLevel = ref(10);
