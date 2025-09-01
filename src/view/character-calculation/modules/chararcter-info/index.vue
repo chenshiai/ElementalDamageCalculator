@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { ref } from "vue";
 import { Popup, Icon, Stepper } from "vant";
 import Selector from "@/component/Selector.vue";
 import { ICharacterInfo } from "@/types/interface";
@@ -14,7 +14,6 @@ const setConsts = (value: number) => {
   } else {
     constellation.value = value;
   }
-  emit("changed");
 };
 const character = defineModel<ICharacterInfo>();
 const handleCharacterChange = (characterInfo: ICharacterInfo) => {
@@ -52,11 +51,20 @@ const levelUp = defineModel("levelUp", { default: 0 });
           </div>
         </div>
         <span v-if="character.level >= 90">
-          上限突破：<Stepper theme="round" button-size="20" input-width="66px" v-model="levelUp" min="0" max="2" />
+          上限突破：<Stepper
+            @change="emit('changed')"
+            theme="round"
+            button-size="20"
+            input-width="66px"
+            v-model="levelUp"
+            min="0"
+            max="2"
+          />
         </span>
         <div>突破等阶：{{ character.overshoot }}</div>
         <div>
           解锁命座：<Stepper
+            @change="emit('changed')"
             theme="round"
             button-size="20"
             input-width="66px"

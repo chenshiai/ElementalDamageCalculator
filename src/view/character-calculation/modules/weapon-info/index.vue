@@ -53,9 +53,17 @@ const weaponStats = computed(() => {
           </span>
         </div>
         <div class="affix">
-          精炼等阶：<Stepper theme="round" button-size="20" input-width="66px" v-model="affix" min="1" max="5" /><br />
+          精炼等阶：<Stepper
+            @change="emit('changed')"
+            theme="round"
+            button-size="20"
+            input-width="66px"
+            v-model="affix"
+            min="1"
+            max="5"
+          /><br />
         </div>
-        <Rate v-model="affix" @change="emit('changed')" color="#997874" icon="fire" void-icon="fire-o" />
+        <Rate v-model="affix" color="#997874" icon="fire" void-icon="fire-o" />
       </div>
       <div class="avatar active-btn" @click="show = true">
         <img :src="weapon?.icon" />

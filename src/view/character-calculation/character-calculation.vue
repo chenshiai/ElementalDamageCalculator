@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, watchEffect, toRaw, ref } from "vue";
+import { computed, watchEffect, toRaw, ref, nextTick } from "vue";
 import { showNotify, showConfirmDialog } from "vant";
 import TabTitle from "@/component/TabTitle.vue";
 import TeamListNav from "@/component/TeamListNav.vue";
@@ -78,7 +78,7 @@ const saveCalculationResult = (title: string) => {
   if (teamIndex.value >= 0) {
     characterJoinTeam(data, teamIndex.value);
   }
-  
+
   db.add(calDB.storeName, data)
     .then(() => {
       showNotify({
@@ -116,6 +116,7 @@ const recalculation = (data: IUserSavedCalculationData) => {
     baseHP: data.panel.baseHP,
     level: data.panel.level,
   };
+  levelUp.value = 0;
   if (data.panel.level === 95) levelUp.value = 1;
   if (data.panel.level === 100) levelUp.value = 2;
 
@@ -171,10 +172,12 @@ const pageTitle = computed(() => {
 /** @module 实时更新队伍数据 */
 const changed = () => {
   if (!characterInfo.value || !weapon.value) return;
-  const data = createCalculationData(store.state.teamData.currentEdit);
-  if (teamIndex.value >= 0) {
-    characterJoinTeam(data, teamIndex.value);
-  }
+  nextTick(() => {
+    const data = createCalculationData(store.state.teamData.currentEdit);
+    if (teamIndex.value >= 0) {
+      characterJoinTeam(data, teamIndex.value);
+    }
+  });
 };
 </script>
 
