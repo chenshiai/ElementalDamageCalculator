@@ -1,6 +1,8 @@
 <template>
   <TabTitle>剧变反应计算</TabTitle>
-  <div class="tips">存在细小误差，90级以上只会在95级、100级时提升数值；超激化、蔓激化为[伤害提升]的数值，不是具体伤害数值；</div>
+  <div class="tips">
+    存在细小误差，90级以上只会在95级、100级时提升数值；超激化、蔓激化为[伤害提升]的数值，不是具体伤害数值；
+  </div>
   <div class="base-data">
     <div class="base-data-item">
       <span class="base-damage__title">角色等级</span>
@@ -48,7 +50,7 @@
       </div>
     </div>
   </div>
-  <details class="gain-group-details" open>
+  <details class="gain-group-details">
     <summary>
       <span class="holy-relic__title">角色提升</span>
       <span class="holy-relic-tips open">展开</span>
@@ -58,7 +60,7 @@
       <div class="cha-gain-inner">
         <img class="base-damage__img" src="/ui/UI_AvatarIcon_Nilou.png" alt="" />
         <CellGroup inset>
-          <Field v-model="niLuo" type="number" label="生命上限" />
+          <Field v-model="niLuo" type="number" :min="0" label="生命上限" />
         </CellGroup>
         <Popover position="top-right">
           <div class="data-item-popover__content">
@@ -73,7 +75,7 @@
       <div class="cha-gain-inner">
         <img class="base-damage__img" src="/ui/UI_AvatarIcon_Baizhuer.png" alt="" />
         <CellGroup inset>
-          <Field v-model="baiZhu" type="number" label="生命上限" />
+          <Field v-model="baiZhu" type="number" :min="0" label="生命上限" />
         </CellGroup>
         <Popover position="top-right">
           <div class="data-item-popover__content">
@@ -90,7 +92,7 @@
       <div class="cha-gain-inner">
         <img class="base-damage__img" src="/ui/UI_AvatarIcon_Ifa.png" alt="" />
         <CellGroup inset>
-          <Field v-model="yehun" type="number" label="夜魂总和" />
+          <Field v-model="yehun" type="number" :min="0" label="夜魂总和" />
         </CellGroup>
         <Popover position="top-right">
           <div class="data-item-popover__content">
@@ -105,8 +107,8 @@
       <div class="cha-gain-inner">
         <img class="base-damage__img" src="/ui/UI_AvatarIcon_Mizuki.png" alt="" />
         <CellGroup inset>
-          <Field v-model="mizukiEm" type="number" label="元素精通" />
-          <Field v-model="mizukiSkillLevel" type="number" label="战技等级" />
+          <Field v-model="mizukiEm" type="number" :min="0" label="元素精通" />
+          <Field v-model="mizukiSkillLevel" type="number" :min="1" :max="15" label="战技等级" />
         </CellGroup>
         <Popover position="top-right">
           <div class="data-item-popover__content">
@@ -117,11 +119,12 @@
           </template>
         </Popover>
       </div>
-      <!-- <div class="cha-gain-inner">
+      <div class="cha-gain-inner">
         <img class="base-damage__img" src="/ui/UI_AvatarIcon_Lauma.png" alt="" />
         <CellGroup inset>
-          <Field v-model="laumaEm" type="number" label="元素精通" />
-          <Field v-model="laumaLevel" type="number" label="元素爆发等级" />
+          <Field v-model="laumaEm" type="number" :min="0" label="元素精通" />
+          <Field v-model="laumaLevel" type="number" :min="1" :max="15" label="元素爆发等级" />
+          <Field v-model="laumaCons" type="number" :min="0" :max="6" label="解锁命之座" />
         </CellGroup>
         <Popover position="top-right">
           <div class="data-item-popover__content">
@@ -132,7 +135,31 @@
             <Icon size="26" name="question" />
           </template>
         </Popover>
-      </div> -->
+      </div>
+      <div class="cha-gain-inner">
+        <img class="base-damage__img" src="/ui/UI_AvatarIcon_Aino.png" alt="" />
+        <CellGroup inset>
+          <Field v-model="ainoCons" type="number" :min="0" :max="6" label="解锁命之座" />
+          <Field v-model="ainoMoon" type="text" label="月兆" readonly>
+            <template #button>
+              <div @click="changeAinoMoon">切换月兆</div>
+            </template>
+          </Field>
+        </CellGroup>
+        <Popover position="top-right">
+          <div class="data-item-popover__content">
+            爱诺6命：天才之为构造之责任，当前场上角色触发的
+            <q class="elector">感电</q>、<q class="bloom">绽放</q>、
+            <q class="text-moon-electro"><data data-text="月感电">月感电</data></q
+            >、
+            <q class="text-moon-swirl"><data data-text="月绽放">月绽放</data></q>
+            造成的伤害提升15%。月兆·满辉：上述反应造成的伤害额外提升20%。
+          </div>
+          <template #trigger>
+            <Icon size="26" name="question" />
+          </template>
+        </Popover>
+      </div>
     </div>
   </details>
   <DetailBlock :elementalMystery="elementalMystery">
@@ -145,12 +172,14 @@
       <span v-show="baiZhuBloomGain" class="more-rate">
         <br />白术：燃烧、绽放、超绽放、烈绽放+{{ baiZhuBloomGain.toFixed(1) }}%
       </span>
-      <span v-show="laumaGain" class="more-rate"><br />菈乌玛：绽放、超绽放、烈绽放+{{ laumaGain.toFixed(1) }}; </span>
-      <span v-show="mizukiGain" class="more-rate"> <br />梦见月瑞希：扩散+{{ mizukiGain.toFixed(1) }}% </span>
-      <span v-show="yehunGain" class="more-rate"> <br />伊法：扩散、感电+{{ yehunGain.toFixed(1) }}% </span>
+      <span v-show="laumaGain" class="more-rate"><br />菈乌玛：绽放、超绽放、烈绽放+{{ laumaGain.toFixed(1) }};</span>
+      <span v-show="mizukiGain" class="more-rate"><br />梦见月瑞希：扩散+{{ mizukiGain.toFixed(1) }}%</span>
+      <span v-show="yehunGain" class="more-rate"><br />伊法：扩散、感电+{{ yehunGain.toFixed(1) }}%</span>
+      <span v-show="ainoGain" class="more-rate"><br />爱诺：绽放、感电+{{ ainoGain.toFixed(1) }}%</span>
     </template>
     <template #moonServitude>
       <data v-show="moonServitudeMoreRate" class="more-rate"><br />{{ moonServitudeMoreRate }}</data>
+      <span v-show="ainoGain" class="more-rate"><br />爱诺：月感电+{{ ainoGain.toFixed(1) }}%</span>
     </template>
     <template #catalyze>
       <data v-show="catalyzeMoreRate" class="more-rate"><br />{{ catalyzeMoreRate }}</data>
@@ -178,7 +207,7 @@ import Popover from "@/component/Popover.vue";
 import DetailBlock from "./Detail.vue";
 import { Stepper, Field, CellGroup, Icon } from "vant";
 import useHolyRelic from "./holy-relic";
-import { useNiLuo, useBaiZhu, useMizuki, useYiFa, useLauma } from "./roles";
+import { useNiLuo, useBaiZhu, useMizuki, useYiFa, useLauma, useAino } from "./roles";
 
 const elementalMystery = ref(786);
 const level = ref(90);
@@ -188,7 +217,8 @@ const { niLuo, niLuoGain } = useNiLuo();
 const { baiZhu, baiZhuBloomGain, baiZhuCatalyzeGain } = useBaiZhu();
 const { mizukiEm, mizukiSkillLevel, mizukiGain } = useMizuki();
 const { yehun, yehunGain } = useYiFa();
-const { laumaEm, laumaLevel, laumaGain } = useLauma();
+const { laumaEm, laumaLevel, laumaCons, laumaGain } = useLauma();
+const { ainoMoon, ainoCons, ainoGain, changeAinoMoon } = useAino();
 
 // 剧变反应伤害提升数值
 const servitudeDamage = (baseDamage) => {
@@ -207,8 +237,10 @@ const resistancceRate = computed(() => {
 // 感电伤害值
 const electroChargedDamage = computed(() => {
   const basenumber = BaseDMG.electroCharged[level.value] * resistancceRate.value;
-  const r = servitudeDamage(basenumber) + Math.round((basenumber * yehunGain.value) / 100);
-  return currentRelic.value === THUNDER ? Math.round(basenumber * 0.4 + r) : r;
+  const r =
+    servitudeDamage(basenumber) +
+    Math.round((basenumber * (yehunGain.value + ainoGain.value + (currentRelic.value === THUNDER ? 40 : 0))) / 100);
+  return r;
 });
 
 // 超载伤害值
@@ -224,9 +256,13 @@ const bloomDamage = computed(() => {
   const basenumber = BaseDMG.bloom[level.value];
   const r =
     servitudeDamage(basenumber) +
-    Math.round((basenumber * (niLuoGain.value + baiZhuBloomGain.value)) / 100) +
+    Math.round(
+      (basenumber *
+        (niLuoGain.value + baiZhuBloomGain.value + ainoGain.value + (currentRelic.value === EDEN ? 80 : 0))) /
+        100
+    ) +
     laumaGain.value;
-  return Math.round((currentRelic.value === EDEN ? basenumber * 0.8 + r : r) * resistancceRate.value);
+  return Math.round(r * resistancceRate.value);
 });
 
 // 超烈绽放伤害值

@@ -158,7 +158,7 @@ q {
     background: linear-gradient(to bottom, var(--text-electro), #fff);
     -webkit-background-clip: text;
     background-clip: text;
-    color: transparent;
+    color: transparent !important;
   }
 }
 .text-hydro {

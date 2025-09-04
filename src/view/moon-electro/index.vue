@@ -2,7 +2,7 @@
 import TabTitle from "@/component/TabTitle.vue";
 import { CellGroup, RadioGroup, Radio, Field, Icon, Stepper } from "vant";
 import { computed, ref } from "vue";
-import { useYiFa, useIneffa, useFlins } from "../elemental/roles";
+import { useYiFa, useIneffa, useFlins, useAino } from "../elemental/roles";
 import { BaseDMG } from "@/constants/elementalReaction";
 import Popover from "@/component/Popover.vue";
 import { getMoonElectroRate, generateAllSortedResults, getResistanceRate } from "@/utils";
@@ -48,6 +48,7 @@ const enemyResistance = ref(10);
 const { yehun, yehunMoonGain } = useYiFa();
 const { ineffaAtk, ineffaGain } = useIneffa();
 const { flinsAtk, flinsGain } = useFlins();
+const { ainoMoon, ainoCons, ainoGain, changeAinoMoon } = useAino();
 
 const relicEff = computed(() => {
   const relicSet = new Set();
@@ -77,6 +78,7 @@ const moonElectroDamage = (teamData: teamItem) => {
           yehunMoonGain.value +
           +moonElectroOtherData.value +
           (teamData.checked === RelicType.thunder ? 20 : 0) +
+          ainoGain.value +
           relicEff.value) /
           100) *
       (1 + (ineffaGain.value + flinsGain.value) / 100) *
@@ -214,7 +216,21 @@ const damageResult = computed(() => {
         </CellGroup>
         <Popover position="top-right">
           <div class="data-item-popover__content">
-            伊涅芙：提升队伍中所有角色<q class="elector">月感电</q>的基础伤害，每100点攻击力提升0.7%，最大14%
+            伊涅芙：提升队伍中所有角色<q class="text-moon-electro"><data data-text="月感电">月感电</data></q>的基础伤害，每100点攻击力提升0.7%，最大14%
+          </div>
+          <template #trigger>
+            <Icon size="26" name="question" />
+          </template>
+        </Popover>
+      </div>
+      <div class="cha-gain-inner">
+        <img class="base-damage__img" src="/ui/UI_AvatarIcon_Flins.png" alt="" />
+        <CellGroup inset>
+          <Field v-model="flinsAtk" type="number" label="菲林斯攻击力" />
+        </CellGroup>
+        <Popover position="top-right">
+          <div class="data-item-popover__content">
+            菲林斯：提升队伍中所有角色<q class="text-moon-electro"><data data-text="月感电">月感电</data></q>的基础伤害，每100点攻击力提升0.7%，最大14%
           </div>
           <template #trigger>
             <Icon size="26" name="question" />
@@ -222,13 +238,20 @@ const damageResult = computed(() => {
         </Popover>
       </div>
       <!-- <div class="cha-gain-inner">
-        <img class="base-damage__img" src="/ui/UI_AvatarIcon_Flins.png" alt="" />
+        <img class="base-damage__img" src="/ui/UI_AvatarIcon_Aino.png" alt="" />
         <CellGroup inset>
-          <Field v-model="flinsAtk" type="number" label="菲林斯攻击力" />
+          <Field v-model="ainoCons" type="number" :min="0" :max="6" label="解锁命之座" />
+          <Field v-model="ainoMoon" type="text" label="月兆" readonly>
+            <template #button>
+              <div @click="changeAinoMoon">切换月兆</div>
+            </template>
+          </Field>
         </CellGroup>
         <Popover position="top-right">
           <div class="data-item-popover__content">
-            菲林斯：提升队伍中所有角色<q class="elector">月感电</q>的基础伤害，每100点攻击力提升0.7%，最大14%
+            爱诺6命：天才之为构造之责任，当前场上角色触发的
+            <q class="text-moon-electro"><data data-text="月感电">月感电</data></q>
+            造成的伤害提升15%。月兆·满辉：上述反应造成的伤害额外提升20%。
           </div>
           <template #trigger>
             <Icon size="26" name="question" />
@@ -244,7 +267,7 @@ const damageResult = computed(() => {
         <Popover position="top-right">
           <div class="data-item-popover__content">
             伊法：救援要义基于队伍中所有角色当前夜魂值的总和，每1点救援要义提升
-            <q class="elector">月感电</q>反应0.2%的伤害，最多记录200点救援要义
+            <q class="text-moon-electro"><data data-text="月感电">月感电</data></q>反应0.2%的伤害，最多记录200点救援要义
           </div>
           <template #trigger>
             <Icon size="26" name="question" />

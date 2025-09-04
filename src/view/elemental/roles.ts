@@ -85,12 +85,40 @@ export function useFlins() {
 export function useLauma() {
   const laumaEm = ref(0);
   const laumaLevel = ref(10);
+  const laumaCons = ref(0);
   const laumaGain = computed(() => {
-    return Math.round(laumaEm.value * Magnification.Lauma[Math.min(15, laumaLevel.value) - 1]);
+    return Math.round(
+      laumaEm.value * Magnification.Lauma[Math.min(15, laumaLevel.value) - 1] +
+        (laumaCons.value >= 2 ? laumaEm.value * 5 : 0)
+    );
   });
   return {
     laumaEm,
     laumaLevel,
     laumaGain,
+    laumaCons,
+  };
+}
+export function useAino() {
+  const ainoCons = ref(0);
+  const ainoMoon = ref("初辉");
+  const changeAinoMoon = () => {
+    if (ainoMoon.value === "初辉") {
+      ainoMoon.value = "满辉";
+    } else {
+      ainoMoon.value = "初辉";
+    }
+  };
+  const ainoGain = computed(() => {
+    if (ainoCons.value >= 6) {
+      return ainoMoon.value === "满辉" ? 35 : 15;
+    }
+    return 0;
+  });
+  return {
+    ainoGain,
+    ainoMoon,
+    ainoCons,
+    changeAinoMoon,
   };
 }
