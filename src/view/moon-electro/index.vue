@@ -2,10 +2,18 @@
 import TabTitle from "@/component/TabTitle.vue";
 import { CellGroup, RadioGroup, Radio, Field, Icon, Stepper } from "vant";
 import { computed, ref } from "vue";
-import { useYiFa, useIneffa, useFlins, useAino } from "../elemental/roles";
+import { useYiFa, useIneffa, useFlins } from "../elemental/roles";
 import { BaseDMG } from "@/constants/elementalReaction";
 import Popover from "@/component/Popover.vue";
-import { getMoonElectroRate, generateAllSortedResults, getResistanceRate } from "@/utils";
+import {
+  getMoonElectroRate,
+  generateAllSortedResults,
+  getResistanceRate,
+  getPyroElectroCryoMoonRate,
+  getHydroMoonRate,
+  getAnemoDendroMoonRate,
+  getGeoMoonRate,
+} from "@/utils";
 import { getEnkaUI } from "@/utils/decorator";
 
 type teamItem = {
@@ -14,7 +22,8 @@ type teamItem = {
   criticalRate: number;
   criticalDamage: number;
   checked: RelicType;
-  promote: number;
+  electroPromote: number;
+  electroAdd: number;
 };
 
 enum RelicType {
@@ -26,9 +35,9 @@ enum RelicType {
 
 const RelicText = {
   [RelicType.none]: "无",
-  [RelicType.thunder]: "如雷的盛怒",
-  [RelicType.night]: "穹境示现之夜",
-  [RelicType.moon]: "纺月的夜歌",
+  [RelicType.thunder]: "如雷的盛怒 月感电+20%",
+  [RelicType.night]: "穹境示现之夜 月曜反应+10%",
+  [RelicType.moon]: "纺月的夜歌 月曜反应+10%",
 };
 
 const teamList = ref<teamItem[]>([
@@ -38,17 +47,22 @@ const teamList = ref<teamItem[]>([
     criticalRate: 5,
     criticalDamage: 50,
     checked: RelicType.none,
-    promote: 0,
+    electroPromote: 0,
+    electroAdd: 0,
   },
 ]);
 
 const moonElectroOtherData = ref(0);
 const moonElectroPromoteData = ref(0);
 const enemyResistance = ref(10);
+const atk = ref(0);
+const hp = ref(0);
+const def = ref(0);
+const em = ref(0);
+
 const { yehun, yehunMoonGain } = useYiFa();
 const { ineffaAtk, ineffaGain } = useIneffa();
 const { flinsAtk, flinsGain } = useFlins();
-const { ainoMoon, ainoCons, ainoGain, changeAinoMoon } = useAino();
 
 const relicEff = computed(() => {
   const relicSet = new Set();
@@ -58,6 +72,15 @@ const relicEff = computed(() => {
     }
   });
   return relicSet.size * 10;
+});
+
+const characterEff = computed(() => {
+  return Math.max(
+    getPyroElectroCryoMoonRate(atk.value),
+    getHydroMoonRate(hp.value),
+    getGeoMoonRate(def.value),
+    getAnemoDendroMoonRate(em.value)
+  );
 });
 
 // 单人月感电反应伤害计算
@@ -78,11 +101,10 @@ const moonElectroDamage = (teamData: teamItem) => {
           yehunMoonGain.value +
           +moonElectroOtherData.value +
           (teamData.checked === RelicType.thunder ? 20 : 0) +
-          ainoGain.value +
           relicEff.value) /
           100) *
-      (1 + (ineffaGain.value + flinsGain.value) / 100) *
-      (1 + (teamData.promote + moonElectroPromoteData.value) / 100) *
+      (1 + (ineffaGain.value + flinsGain.value + teamData.electroAdd + characterEff.value) / 100) *
+      (1 + (teamData.electroPromote + moonElectroPromoteData.value) / 100) *
       getResistanceRate(enemyResistance.value)
   );
 
@@ -106,7 +128,8 @@ const addData = () => {
     criticalRate: 5,
     criticalDamage: 50,
     checked: RelicType.none,
-    promote: 0,
+    electroPromote: 0,
+    electroAdd: 0,
   });
 };
 const removeData = (index: number) => {
@@ -155,29 +178,40 @@ const damageResult = computed(() => {
   <ul class="moon-panel">
     <li v-for="(item, index) in teamList" :key="index">
       <div class="moon-panel__title">
-        角色{{ index + 1 }}面板
+        （{{ index + 1 }}）角色面板
+        <span class="holy-relic-tips">吃满增益后的最终数据</span>
         <span v-show="index !== 0" class="moon-panel__delete" @click="removeData(index)">移除</span>
       </div>
       <div class="moon-panel__basic">
         <div class="basic-panel-item">
           <span class="basic-panel-item-title">等级</span>
-          <input class="basic-panel-input" type="number" max="100" min="1" v-model="item.level" />
+          <input class="basic-panel-input" pattern="[0-9]*" type="number" max="100" min="1" v-model="item.level" />
         </div>
         <div class="basic-panel-item">
           <span class="basic-panel-item-title">元素精通</span>
-          <input class="basic-panel-input" type="number" min="0" v-model="item.elementMastery" />
+          <input class="basic-panel-input" pattern="[0-9]*" type="number" min="0" v-model="item.elementMastery" />
         </div>
         <div class="basic-panel-item">
           <span class="basic-panel-item-title">暴击率%</span>
-          <input class="basic-panel-input" type="number" v-model="item.criticalRate" />
+          <input class="basic-panel-input" pattern="[0-9]*" type="number" v-model="item.criticalRate" />
         </div>
         <div class="basic-panel-item">
           <span class="basic-panel-item-title">暴击伤害%</span>
-          <input class="basic-panel-input" type="number" v-model="item.criticalDamage" />
+          <input class="basic-panel-input" pattern="[0-9]*" type="number" v-model="item.criticalDamage" />
+        </div>
+      </div>
+      <div class="moon-panel__title">
+        个人提升
+        <span class="holy-relic-tips">全队提升的增益不要填在这里</span>
+      </div>
+      <div class="moon-panel__basic">
+        <div class="basic-panel-item">
+          <span class="basic-panel-item-title">月感电提升%</span>
+          <input class="basic-panel-input" pattern="[0-9]*" type="number" v-model="item.electroAdd" />
         </div>
         <div class="basic-panel-item">
-          <span class="basic-panel-item-title">擢升%</span>
-          <input class="basic-panel-input" type="number" v-model="item.promote" />
+          <span class="basic-panel-item-title">月感电擢升%</span>
+          <input class="basic-panel-input" pattern="[0-9]*" type="number" v-model="item.electroPromote" />
         </div>
       </div>
       <div class="moon-panel__title">
@@ -216,7 +250,8 @@ const damageResult = computed(() => {
         </CellGroup>
         <Popover position="top-right">
           <div class="data-item-popover__content">
-            伊涅芙：提升队伍中所有角色<q class="text-moon-electro"><data data-text="月感电">月感电</data></q>的基础伤害，每100点攻击力提升0.7%，最大14%
+            伊涅芙：提升队伍中所有角色<q class="text-moon-electro"><data data-text="月感电">月感电</data></q
+            >的基础伤害，每100点攻击力提升0.7%，最大14%
           </div>
           <template #trigger>
             <Icon size="26" name="question" />
@@ -230,35 +265,14 @@ const damageResult = computed(() => {
         </CellGroup>
         <Popover position="top-right">
           <div class="data-item-popover__content">
-            菲林斯：提升队伍中所有角色<q class="text-moon-electro"><data data-text="月感电">月感电</data></q>的基础伤害，每100点攻击力提升0.7%，最大14%
+            菲林斯：提升队伍中所有角色<q class="text-moon-electro"><data data-text="月感电">月感电</data></q
+            >的基础伤害，每100点攻击力提升0.7%，最大14%
           </div>
           <template #trigger>
             <Icon size="26" name="question" />
           </template>
         </Popover>
       </div>
-      <!-- <div class="cha-gain-inner">
-        <img class="base-damage__img" src="/ui/UI_AvatarIcon_Aino.png" alt="" />
-        <CellGroup inset>
-          <Field v-model="ainoCons" type="number" :min="0" :max="6" label="解锁命之座" />
-          <Field v-model="ainoMoon" type="text" label="月兆" readonly>
-            <template #button>
-              <div @click="changeAinoMoon">切换月兆</div>
-            </template>
-          </Field>
-        </CellGroup>
-        <Popover position="top-right">
-          <div class="data-item-popover__content">
-            爱诺6命：天才之为构造之责任，当前场上角色触发的
-            <q class="text-moon-electro"><data data-text="月感电">月感电</data></q>
-            造成的伤害提升15%。月兆·满辉：上述反应造成的伤害额外提升20%。
-          </div>
-          <template #trigger>
-            <Icon size="26" name="question" />
-          </template>
-        </Popover>
-      </div> -->
-
       <div class="cha-gain-inner">
         <img class="base-damage__img" src="/ui/UI_AvatarIcon_Ifa.png" alt="" />
         <CellGroup inset>
@@ -267,8 +281,70 @@ const damageResult = computed(() => {
         <Popover position="top-right">
           <div class="data-item-popover__content">
             伊法：救援要义基于队伍中所有角色当前夜魂值的总和，每1点救援要义提升
-            <q class="text-moon-electro"><data data-text="月感电">月感电</data></q>反应0.2%的伤害，最多记录200点救援要义
+            <q class="text-moon-electro"><data data-text="月感电">月感电</data></q
+            >反应0.2%的伤害，最多记录200点救援要义
           </div>
+          <template #trigger>
+            <Icon size="26" name="question" />
+          </template>
+        </Popover>
+      </div>
+      <div class="cha-gain-inner">
+        <div class="element-img">
+          <img src="/img/pyro.png" alt="" />
+          <img src="/img/electro.png" alt="" />
+          <img src="/img/cryo.png" alt="" />
+        </div>
+        <CellGroup inset>
+          <Field v-model="atk" type="number" label="火雷冰攻击力" />
+        </CellGroup>
+        <Popover position="top-right">
+          <div class="data-item-popover__content">
+            火元素、雷元素、冰元素：每100点攻击力提升0.9%月曜反应伤害加成，最大36%。
+          </div>
+          <template #trigger>
+            <Icon size="26" name="question" />
+          </template>
+        </Popover>
+      </div>
+      <div class="cha-gain-inner">
+        <div class="element-img">
+          <img src="/img/hydro.png" alt="" />
+        </div>
+        <CellGroup inset>
+          <Field v-model="hp" type="number" label="水元素生命值" />
+        </CellGroup>
+        <Popover position="top-right">
+          <div class="data-item-popover__content">水元素：每1000点生命值提升0.6%月曜反应伤害加成，最大36%。</div>
+          <template #trigger>
+            <Icon size="26" name="question" />
+          </template>
+        </Popover>
+      </div>
+      <div class="cha-gain-inner">
+        <div class="element-img">
+          <img src="/img/geo.png" alt="" />
+        </div>
+        <CellGroup inset>
+          <Field v-model="def" type="number" label="岩元素防御力" />
+        </CellGroup>
+        <Popover position="top-right">
+          <div class="data-item-popover__content">岩元素：每100点防御力提升1%月曜反应伤害加成，最大36%。</div>
+          <template #trigger>
+            <Icon size="26" name="question" />
+          </template>
+        </Popover>
+      </div>
+      <div class="cha-gain-inner">
+        <div class="element-img">
+          <img src="/img/anemo.png" alt="" />
+          <img src="/img/dendro.png" alt="" />
+        </div>
+        <CellGroup inset>
+          <Field v-model="em" type="number" label="风草元素精通" />
+        </CellGroup>
+        <Popover position="top-right">
+          <div class="data-item-popover__content">风元素、草元素：每100点精通提升2.25%月曜反应伤害加成，最大36%。</div>
           <template #trigger>
             <Icon size="26" name="question" />
           </template>
@@ -295,7 +371,12 @@ const damageResult = computed(() => {
     </section>
     <br />
   </details>
-  <div class="detail">擢升：特殊的伤害提升效果，与其他的伤害提升效果分别独立计算。</div>
+  <div class="detail">
+    擢升：特殊的伤害提升效果，与其他的伤害提升效果分别独立计算。
+    <p>
+      月兆·满辉：月兆角色以外的角色施放元素战技或元素爆发后，会基于角色自己的元素类型使所有角色造成的月曜反应伤害提升至多36%，该效果无法叠加。（新效果会覆盖旧效果，想要最大化收益，尽量让属性高的角色后手施放技能）
+    </p>
+  </div>
   <div class="data-panel__title">期望伤害</div>
   <details v-for="item in damageResult" :key="item.name" :name="item.name" :class="[item.class, 'damage-details']">
     <summary class="damage-tag">
@@ -337,9 +418,12 @@ const damageResult = computed(() => {
 }
 .moon-panel__basic {
   display: flex;
+  width: 100%;
+  text-align: center;
+  overflow: hidden;
   margin-bottom: 4px;
   border-radius: 4px;
-  overflow: hidden;
+  height: 54px;
 }
 .show-click {
   text-align: center;
@@ -392,6 +476,22 @@ const damageResult = computed(() => {
 
 .all-result {
   width: 100%;
+}
+.element-img {
+  display: flex;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: solid 2px var(--border);
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+
+  & img {
+    width: 24px;
+    height: 24px;
+    margin: -4px;
+  }
 }
 @media screen and (max-width: 768px) {
   .moon-panel {

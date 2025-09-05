@@ -1,201 +1,4 @@
-<template>
-  <TabTitle>剧变反应计算</TabTitle>
-  <div class="tips">
-    存在细小误差，90级以上只会在95级、100级时提升数值；超激化、蔓激化为[伤害提升]的数值，不是具体伤害数值；
-  </div>
-  <div class="base-data">
-    <div class="base-data-item">
-      <span class="base-damage__title">角色等级</span>
-      <Stepper v-model="level" input-width="66px" integer button-size="20" theme="round" min="1" max="100" />
-    </div>
-    <div class="base-data-item">
-      <span class="base-damage__title">元素精通</span>
-      <Stepper v-model="elementalMystery" integer input-width="66px" button-size="20" theme="round" min="0" />
-    </div>
-    <div class="base-data-item">
-      <span class="base-damage__title">敌人抗性%</span>
-      <Stepper v-model="enemyResistance" input-width="66px" integer button-size="20" theme="round" min="-999" />
-    </div>
-    <div class="holy-relic">
-      <div>
-        <span class="holy-relic__title">圣遗物套装</span>
-        <span class="holy-relic-tips">点击选择，再次点击可以取消选择</span>
-      </div>
-      <div class="holy-relic__check">
-        <div
-          :class="['holy-relic-content', 'witch', currentRelic === WITCH && 'active']"
-          @click="setCurrentRelic(WITCH)"
-        >
-          <img class="holy-relic__img" src="/img/witch2.png" />
-          <div>炽烈的炎之魔女</div>
-        </div>
-        <div
-          :class="['holy-relic-content', 'thunder', currentRelic === THUNDER && 'active']"
-          @click="setCurrentRelic(THUNDER)"
-        >
-          <img class="holy-relic__img" src="/img/thunder2.png" />
-          <div>如雷的盛怒</div>
-        </div>
-        <div
-          :class="['holy-relic-content', 'emerald', currentRelic === EMERALD && 'active']"
-          @click="setCurrentRelic(EMERALD)"
-        >
-          <img class="holy-relic__img" src="/img/emerald2.png" />
-          <div>翠绿之影</div>
-        </div>
-        <div :class="['holy-relic-content', 'eden', currentRelic === EDEN && 'active']" @click="setCurrentRelic(EDEN)">
-          <img class="holy-relic__img" src="/img/eden.png" />
-          <div>乐园遗落之花</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <details class="gain-group-details">
-    <summary>
-      <span class="holy-relic__title">角色提升</span>
-      <span class="holy-relic-tips open">展开</span>
-      <span class="holy-relic-tips close">收起</span>
-    </summary>
-    <div class="gain-group">
-      <div class="cha-gain-inner">
-        <img class="base-damage__img" src="/ui/UI_AvatarIcon_Nilou.png" alt="" />
-        <CellGroup inset>
-          <Field v-model="niLuo" type="number" :min="0" label="生命上限" />
-        </CellGroup>
-        <Popover position="top-right">
-          <div class="data-item-popover__content">
-            妮露：翩舞永世之梦，基于妮露生命值上限超过30000的部分，每1000点生命值上限将提升<q class="bloom">丰穰之核</q
-            >9%的伤害，至多提升400%
-          </div>
-          <template #trigger>
-            <Icon size="26" name="question" />
-          </template>
-        </Popover>
-      </div>
-      <div class="cha-gain-inner">
-        <img class="base-damage__img" src="/ui/UI_AvatarIcon_Baizhuer.png" alt="" />
-        <CellGroup inset>
-          <Field v-model="baiZhu" type="number" :min="0" label="生命上限" />
-        </CellGroup>
-        <Popover position="top-right">
-          <div class="data-item-popover__content">
-            白术：在地为化，基于白术生命值不超过50000的部分，每1000点提高
-            <q class="bloom">绽放</q>、 <q class="aggravate">超绽放</q>、<q class="burning">烈绽放</q>、
-            <q class="burning">燃烧</q>反应2%的伤害。 提升<q class="aggravate">超激化</q>和<q class="bloom">蔓激化</q
-            >反应0.8%的伤害
-          </div>
-          <template #trigger>
-            <Icon size="26" name="question" />
-          </template>
-        </Popover>
-      </div>
-      <div class="cha-gain-inner">
-        <img class="base-damage__img" src="/ui/UI_AvatarIcon_Ifa.png" alt="" />
-        <CellGroup inset>
-          <Field v-model="yehun" type="number" :min="0" label="夜魂总和" />
-        </CellGroup>
-        <Popover position="top-right">
-          <div class="data-item-popover__content">
-            伊法：救援要义基于队伍中所有角色当前夜魂值的总和，每1点救援要义提升
-            <q class="swirl">扩散</q>、 <q class="elector">感电</q>反应1.5%的伤害，最多记录200点救援要义
-          </div>
-          <template #trigger>
-            <Icon size="26" name="question" />
-          </template>
-        </Popover>
-      </div>
-      <div class="cha-gain-inner">
-        <img class="base-damage__img" src="/ui/UI_AvatarIcon_Mizuki.png" alt="" />
-        <CellGroup inset>
-          <Field v-model="mizukiEm" type="number" :min="0" label="元素精通" />
-          <Field v-model="mizukiSkillLevel" type="number" :min="1" :max="15" label="战技等级" />
-        </CellGroup>
-        <Popover position="top-right">
-          <div class="data-item-popover__content">
-            梦见月瑞希：梦浮，基于梦见月瑞希的元素精通，提高<q class="swirl">扩散</q>反应伤害
-          </div>
-          <template #trigger>
-            <Icon size="26" name="question" />
-          </template>
-        </Popover>
-      </div>
-      <div class="cha-gain-inner">
-        <img class="base-damage__img" src="/ui/UI_AvatarIcon_Lauma.png" alt="" />
-        <CellGroup inset>
-          <Field v-model="laumaEm" type="number" :min="0" label="元素精通" />
-          <Field v-model="laumaLevel" type="number" :min="1" :max="15" label="元素爆发等级" />
-          <Field v-model="laumaCons" type="number" :min="0" :max="6" label="解锁命之座" />
-        </CellGroup>
-        <Popover position="top-right">
-          <div class="data-item-popover__content">
-            菈乌玛：苍色祷歌，基于菈乌玛的元素精通，提高
-            <q class="bloom">绽放</q>、 <q class="aggravate">超绽放</q>和 <q class="burning">烈绽放</q>反应伤害
-          </div>
-          <template #trigger>
-            <Icon size="26" name="question" />
-          </template>
-        </Popover>
-      </div>
-      <div class="cha-gain-inner">
-        <img class="base-damage__img" src="/ui/UI_AvatarIcon_Aino.png" alt="" />
-        <CellGroup inset>
-          <Field v-model="ainoCons" type="number" :min="0" :max="6" label="解锁命之座" />
-          <Field v-model="ainoMoon" type="text" label="月兆" readonly>
-            <template #button>
-              <div @click="changeAinoMoon">切换月兆</div>
-            </template>
-          </Field>
-        </CellGroup>
-        <Popover position="top-right">
-          <div class="data-item-popover__content">
-            爱诺6命：天才之为构造之责任，当前场上角色触发的
-            <q class="elector">感电</q>、<q class="bloom">绽放</q>、
-            <q class="text-moon-electro"><data data-text="月感电">月感电</data></q
-            >、
-            <q class="text-moon-swirl"><data data-text="月绽放">月绽放</data></q>
-            造成的伤害提升15%。月兆·满辉：上述反应造成的伤害额外提升20%。
-          </div>
-          <template #trigger>
-            <Icon size="26" name="question" />
-          </template>
-        </Popover>
-      </div>
-    </div>
-  </details>
-  <DetailBlock :elementalMystery="elementalMystery">
-    <template #base>
-      <data v-show="moreRate" class="more-rate"><br />{{ moreRate }}</data>
-    </template>
-    <template #servitude>
-      <data v-show="servitudeMoreRate" class="more-rate"><br />{{ servitudeMoreRate }}</data>
-      <span v-show="niLuoGain" class="more-rate"><br />妮露：丰穰之核+{{ niLuoGain.toFixed(1) }}%; </span>
-      <span v-show="baiZhuBloomGain" class="more-rate">
-        <br />白术：燃烧、绽放、超绽放、烈绽放+{{ baiZhuBloomGain.toFixed(1) }}%
-      </span>
-      <span v-show="laumaGain" class="more-rate"><br />菈乌玛：绽放、超绽放、烈绽放+{{ laumaGain.toFixed(1) }};</span>
-      <span v-show="mizukiGain" class="more-rate"><br />梦见月瑞希：扩散+{{ mizukiGain.toFixed(1) }}%</span>
-      <span v-show="yehunGain" class="more-rate"><br />伊法：扩散、感电+{{ yehunGain.toFixed(1) }}%</span>
-      <span v-show="ainoGain" class="more-rate"><br />爱诺：绽放、感电+{{ ainoGain.toFixed(1) }}%</span>
-    </template>
-    <template #moonServitude>
-      <data v-show="moonServitudeMoreRate" class="more-rate"><br />{{ moonServitudeMoreRate }}</data>
-      <span v-show="ainoGain" class="more-rate"><br />爱诺：月感电+{{ ainoGain.toFixed(1) }}%</span>
-    </template>
-    <template #catalyze>
-      <data v-show="catalyzeMoreRate" class="more-rate"><br />{{ catalyzeMoreRate }}</data>
-      <span v-show="baiZhuCatalyzeGain" class="more-rate">
-        <br />白术：超激化、蔓激化+{{ baiZhuCatalyzeGain.toFixed(1) }}%
-      </span>
-    </template>
-  </DetailBlock>
-  <div class="result">
-    <div :class="['damage-tag', item.name2 ? 'two' : '']" v-for="item in damageResult" :key="item.name">
-      <data :class="['damage-tag__title', item.class]">{{ item.name }}</data>
-      <data v-show="item.name2" :class="['damage-tag__title', item.class2]">{{ item.name2 }}</data>
-      <data class="damage-tag__detail">{{ item.detail }}</data>
-    </div>
-  </div>
-</template>
+
 
 <script setup lant="ts">
 import { computed, ref } from "vue";
@@ -419,5 +222,203 @@ const damageResult = computed(() => {
   ];
 });
 </script>
+
+<template>
+  <TabTitle>剧变反应计算</TabTitle>
+  <div class="tips">
+    存在细小误差，90级以上只会在95级、100级时提升数值；超激化、蔓激化为[伤害提升]的数值，不是具体伤害数值；
+  </div>
+  <div class="base-data">
+    <div class="base-data-item">
+      <span class="base-damage__title">角色等级</span>
+      <Stepper v-model="level" input-width="66px" integer button-size="20" theme="round" min="1" max="100" />
+    </div>
+    <div class="base-data-item">
+      <span class="base-damage__title">元素精通</span>
+      <Stepper v-model="elementalMystery" integer input-width="66px" button-size="20" theme="round" min="0" />
+    </div>
+    <div class="base-data-item">
+      <span class="base-damage__title">敌人抗性%</span>
+      <Stepper v-model="enemyResistance" input-width="66px" integer button-size="20" theme="round" min="-999" />
+    </div>
+    <div class="holy-relic">
+      <div>
+        <span class="holy-relic__title">圣遗物套装</span>
+        <span class="holy-relic-tips">点击选择，再次点击可以取消选择</span>
+      </div>
+      <div class="holy-relic__check">
+        <div
+          :class="['holy-relic-content', 'witch', currentRelic === WITCH && 'active']"
+          @click="setCurrentRelic(WITCH)"
+        >
+          <img class="holy-relic__img" src="/img/witch2.png" />
+          <div>炽烈的炎之魔女</div>
+        </div>
+        <div
+          :class="['holy-relic-content', 'thunder', currentRelic === THUNDER && 'active']"
+          @click="setCurrentRelic(THUNDER)"
+        >
+          <img class="holy-relic__img" src="/img/thunder2.png" />
+          <div>如雷的盛怒</div>
+        </div>
+        <div
+          :class="['holy-relic-content', 'emerald', currentRelic === EMERALD && 'active']"
+          @click="setCurrentRelic(EMERALD)"
+        >
+          <img class="holy-relic__img" src="/img/emerald2.png" />
+          <div>翠绿之影</div>
+        </div>
+        <div :class="['holy-relic-content', 'eden', currentRelic === EDEN && 'active']" @click="setCurrentRelic(EDEN)">
+          <img class="holy-relic__img" src="/img/eden.png" />
+          <div>乐园遗落之花</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <details class="gain-group-details">
+    <summary>
+      <span class="holy-relic__title">角色提升</span>
+      <span class="holy-relic-tips open">展开</span>
+      <span class="holy-relic-tips close">收起</span>
+    </summary>
+    <div class="gain-group">
+      <div class="cha-gain-inner">
+        <img class="base-damage__img" src="/ui/UI_AvatarIcon_Nilou.png" alt="" />
+        <CellGroup inset>
+          <Field v-model="niLuo" type="digit" :min="0" label="生命上限" />
+        </CellGroup>
+        <Popover position="top-right">
+          <div class="data-item-popover__content">
+            妮露：翩舞永世之梦，基于妮露生命值上限超过30000的部分，每1000点生命值上限将提升<q class="bloom">丰穰之核</q
+            >9%的伤害，至多提升400%
+          </div>
+          <template #trigger>
+            <Icon size="26" name="question" />
+          </template>
+        </Popover>
+      </div>
+      <div class="cha-gain-inner">
+        <img class="base-damage__img" src="/ui/UI_AvatarIcon_Baizhuer.png" alt="" />
+        <CellGroup inset>
+          <Field v-model="baiZhu" type="digit" :min="0" label="生命上限" />
+        </CellGroup>
+        <Popover position="top-right">
+          <div class="data-item-popover__content">
+            白术：在地为化，基于白术生命值不超过50000的部分，每1000点提高
+            <q class="bloom">绽放</q><q class="aggravate">超绽放</q><q class="burning">烈绽放</q><q class="burning">燃烧</q>反应2%的伤害。提升<q class="aggravate">超激化</q>和<q class="bloom">蔓激化</q
+            >反应0.8%的伤害
+          </div>
+          <template #trigger>
+            <Icon size="26" name="question" />
+          </template>
+        </Popover>
+      </div>
+      <div class="cha-gain-inner">
+        <img class="base-damage__img" src="/ui/UI_AvatarIcon_Ifa.png" alt="" />
+        <CellGroup inset>
+          <Field v-model="yehun" type="digit" :min="0" label="夜魂总和" />
+        </CellGroup>
+        <Popover position="top-right">
+          <div class="data-item-popover__content">
+            伊法：救援要义基于队伍中所有角色当前夜魂值的总和，每1点救援要义提升
+            <q class="swirl">扩散</q><q class="elector">感电</q>反应1.5%的伤害，最多记录200点救援要义
+          </div>
+          <template #trigger>
+            <Icon size="26" name="question" />
+          </template>
+        </Popover>
+      </div>
+      <div class="cha-gain-inner">
+        <img class="base-damage__img" src="/ui/UI_AvatarIcon_Mizuki.png" alt="" />
+        <CellGroup inset>
+          <Field v-model="mizukiEm" type="digit" :min="0" label="元素精通" />
+          <Field v-model="mizukiSkillLevel" type="digit" :min="1" :max="15" label="战技等级" />
+        </CellGroup>
+        <Popover position="top-right">
+          <div class="data-item-popover__content">
+            梦见月瑞希：梦浮，基于梦见月瑞希的元素精通，提高<q class="swirl">扩散</q>反应伤害
+          </div>
+          <template #trigger>
+            <Icon size="26" name="question" />
+          </template>
+        </Popover>
+      </div>
+      <div class="cha-gain-inner">
+        <img class="base-damage__img" src="/ui/UI_AvatarIcon_Lauma.png" alt="" />
+        <CellGroup inset>
+          <Field v-model="laumaEm" type="digit"  :min="0" label="元素精通" />
+          <Field v-model="laumaLevel" type="digit" :min="1" :max="15" label="元素爆发等级" />
+          <Field v-model="laumaCons" type="digit" :min="0" :max="6" label="解锁命之座" />
+        </CellGroup>
+        <Popover position="top-right">
+          <div class="data-item-popover__content">
+            菈乌玛：苍色祷歌，基于菈乌玛的元素精通，提高
+            <q class="bloom">绽放</q><q class="aggravate">超绽放</q>和<q class="burning">烈绽放</q>反应伤害
+          </div>
+          <template #trigger>
+            <Icon size="26" name="question" />
+          </template>
+        </Popover>
+      </div>
+      <div class="cha-gain-inner">
+        <img class="base-damage__img" src="/ui/UI_AvatarIcon_Aino.png" alt="" />
+        <CellGroup inset>
+          <Field v-model="ainoCons" type="digit" :min="0" :max="6" label="解锁命之座" />
+          <Field v-model="ainoMoon" type="text" label="月兆" readonly style="max-width: 305px;">
+            <template #button>
+              <div style="cursor: pointer;" @click="changeAinoMoon">切换月兆</div>
+            </template>
+          </Field>
+        </CellGroup>
+        <Popover position="top-right">
+          <div class="data-item-popover__content">
+            爱诺6命：天才之为构造之责任，当前场上角色触发的
+            <q class="elector">感电</q><q class="bloom">绽放</q>
+            <q class="text-moon-electro"><data data-text="月感电">月感电</data></q
+            >
+            <q class="text-moon-swirl"><data data-text="月绽放">月绽放</data></q>
+            造成的伤害提升15%。月兆·满辉：上述反应造成的伤害额外提升20%。
+          </div>
+          <template #trigger>
+            <Icon size="26" name="question" />
+          </template>
+        </Popover>
+      </div>
+    </div>
+  </details>
+  <DetailBlock :elementalMystery="elementalMystery">
+    <template #base>
+      <data v-show="moreRate" class="more-rate"><br />{{ moreRate }}</data>
+    </template>
+    <template #servitude>
+      <data v-show="servitudeMoreRate" class="more-rate"><br />{{ servitudeMoreRate }}</data>
+      <span v-show="niLuoGain" class="more-rate"><br />妮露：丰穰之核+{{ niLuoGain.toFixed(1) }}%; </span>
+      <span v-show="baiZhuBloomGain" class="more-rate">
+        <br />白术：燃烧、绽放、超绽放、烈绽放+{{ baiZhuBloomGain.toFixed(1) }}%
+      </span>
+      <span v-show="laumaGain" class="more-rate"><br />菈乌玛：绽放、超绽放、烈绽放+{{ laumaGain.toFixed(1) }};</span>
+      <span v-show="mizukiGain" class="more-rate"><br />梦见月瑞希：扩散+{{ mizukiGain.toFixed(1) }}%</span>
+      <span v-show="yehunGain" class="more-rate"><br />伊法：扩散、感电+{{ yehunGain.toFixed(1) }}%</span>
+      <span v-show="ainoGain" class="more-rate"><br />爱诺：绽放、感电+{{ ainoGain.toFixed(1) }}%</span>
+    </template>
+    <template #moonServitude>
+      <data v-show="moonServitudeMoreRate" class="more-rate"><br />{{ moonServitudeMoreRate }}</data>
+      <span v-show="ainoGain" class="more-rate"><br />爱诺：月感电+{{ ainoGain.toFixed(1) }}%</span>
+    </template>
+    <template #catalyze>
+      <data v-show="catalyzeMoreRate" class="more-rate"><br />{{ catalyzeMoreRate }}</data>
+      <span v-show="baiZhuCatalyzeGain" class="more-rate">
+        <br />白术：超激化、蔓激化+{{ baiZhuCatalyzeGain.toFixed(1) }}%
+      </span>
+    </template>
+  </DetailBlock>
+  <div class="result">
+    <div :class="['damage-tag', item.name2 ? 'two' : '']" v-for="item in damageResult" :key="item.name">
+      <data :class="['damage-tag__title', item.class]">{{ item.name }}</data>
+      <data v-show="item.name2" :class="['damage-tag__title', item.class2]">{{ item.name2 }}</data>
+      <data class="damage-tag__detail">{{ item.detail }}</data>
+    </div>
+  </div>
+</template>
 
 <style src="./style.css" />

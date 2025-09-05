@@ -1,33 +1,51 @@
-
 import { showNotify } from "vant";
-import { ElementalReactionType, ReactionRate } from '@/constants';
-import { BaseDMG } from '@/constants/elementalReaction';
+import { ElementalReactionType, ReactionRate } from "@/constants";
+import { BaseDMG } from "@/constants/elementalReaction";
 
 /** 获取增幅反应比例 */
-export const getAmplifiedRate = (em) => {
+export const getAmplifiedRate = (em: number) => {
   return ((2.78 * em) / (em + 1400)) * 100;
-}
+};
 
 /** 获取剧变反应比例 */
-export const getServitudeRate = (em) => {
-  return 16 * em / (em + 2000) * 100;
-}
+export const getServitudeRate = (em: number) => {
+  return ((16 * em) / (em + 2000)) * 100;
+};
 
 /** 结晶反应 */
-export const getCrystallizeRate = (em) => {
-  return 4.44 * em / (em + 1400) * 100;
-}
+export const getCrystallizeRate = (em: number) => {
+  return ((4.44 * em) / (em + 1400)) * 100;
+};
 
 /** 激化反应 */
-export const getCatalyzeRate = (em) => {
-  return 5 * em / (em + 1200) * 100;
-}
+export const getCatalyzeRate = (em: number) => {
+  return ((5 * em) / (em + 1200)) * 100;
+};
 
 /** 月感电精通转化增伤比例 */
-export const getMoonElectroRate = (em) => {
-  return 6 * em / (em + 2000) * 100;
-}
+export const getMoonElectroRate = (em: number) => {
+  return ((6 * em) / (em + 2000)) * 100;
+};
 
+/** 月兆满辉 火雷冰提供的增伤 */
+export const getPyroElectroCryoMoonRate = (atk: number) => {
+  return Math.min(36, (atk / 100) * 0.9);
+};
+
+/** 月兆满辉 水提供的增伤 */
+export const getHydroMoonRate = (hp: number) => {
+  return Math.min(36, (hp / 1000) * 0.6);
+};
+
+/** 月兆满辉 岩提供的增伤 */
+export const getGeoMoonRate = (def: number) => {
+  return Math.min(36, def / 100);
+};
+
+/** 月兆满辉 风草提供的增伤 */
+export const getAnemoDendroMoonRate = (em: number) => {
+  return Math.min(36, (em / 100) * 2.25);
+};
 
 // 抗性承伤
 export const getResistanceRate = (enemyResistance, weaken = 0) => {
@@ -55,11 +73,7 @@ export const floatNum = (value, digits = 1) => {
   return Number((+value).toFixed(digits));
 };
 
-export const getLocalStorage = (
-  name,
-  defaultValue,
-  description = "本地数据读取失败"
-) => {
+export const getLocalStorage = (name, defaultValue, description = "本地数据读取失败") => {
   const value = window.localStorage.getItem(name);
   try {
     return JSON.parse(value) || defaultValue;
@@ -67,7 +81,7 @@ export const getLocalStorage = (
     showNotify({
       type: "danger",
       message: description,
-    })
+    });
     return defaultValue;
   }
 };
@@ -133,19 +147,25 @@ export const computationalFormula = (data) => {
   // 增幅精通加成
   let eva = 0;
   if (atkType === ElementalReactionType.Rate || atkType === ElementalReactionType.Rate2) {
-    eva = (getAmplifiedRate(elementalMystery) + (witch ? 15 : 0)) / 100
+    eva = (getAmplifiedRate(elementalMystery) + (witch ? 15 : 0)) / 100;
   }
 
   /** 基础伤害值 */
   let basic = atk * (atkRate / 100) + def * (armRate / 100) + hp * (hpRate / 100) + elementalMystery * (emRate / 100);
-  const BASE_DMG = basic * (1 + (extraRate / 100)) * ENEMY_RATE;
+  const BASE_DMG = basic * (1 + extraRate / 100) * ENEMY_RATE;
   // 激化伤害值
   let BONUS_DMG = 0;
   if (atkType === ElementalReactionType.Aggravate) {
-    BONUS_DMG = BaseDMG.aggravate[characterLevel] * (1 + (getCatalyzeRate(elementalMystery) + (thunder ? 20 : 0)) / 100 + baizhuHP / 1000 * 0.8 /100) * ENEMY_RATE;
+    BONUS_DMG =
+      BaseDMG.aggravate[characterLevel] *
+      (1 + (getCatalyzeRate(elementalMystery) + (thunder ? 20 : 0)) / 100 + ((baizhuHP / 1000) * 0.8) / 100) *
+      ENEMY_RATE;
   }
   if (atkType === ElementalReactionType.Spread) {
-    BONUS_DMG = BaseDMG.spread[characterLevel] * (1 + getCatalyzeRate(elementalMystery) / 100 + baizhuHP / 1000 * 0.8 /100) * ENEMY_RATE;
+    BONUS_DMG =
+      BaseDMG.spread[characterLevel] *
+      (1 + getCatalyzeRate(elementalMystery) / 100 + ((baizhuHP / 1000) * 0.8) / 100) *
+      ENEMY_RATE;
   }
   // 附加伤害值
   const ADDITIONAL_DMG = additionalDemage * ENEMY_RATE;
@@ -156,10 +176,9 @@ export const computationalFormula = (data) => {
   // 精通提升伤害值
   const EVA_DMG = (BASE_DMG + ADDITIONAL_DMG + MAGNIFICATION_DMG + REACTION_DMG) * eva;
 
-  const RESULT_DMG = BASE_DMG + ADDITIONAL_DMG + BONUS_DMG + MAGNIFICATION_DMG + REACTION_DMG + EVA_DMG
+  const RESULT_DMG = BASE_DMG + ADDITIONAL_DMG + BONUS_DMG + MAGNIFICATION_DMG + REACTION_DMG + EVA_DMG;
   // 暴击提升伤害值
   const CRITICAL_DMG = RESULT_DMG * (critDemage / 100);
-
 
   const compositionAnalysis = {
     BASE_DMG,
@@ -178,7 +197,7 @@ export const computationalFormula = (data) => {
     common: Math.round(RESULT_DMG),
     crit: Math.round(RESULT_DMG + CRITICAL_DMG),
     compositionAnalysis,
-  }
+  };
 };
 
 export function generateAllSortedResults(arr) {
@@ -190,7 +209,7 @@ export function generateAllSortedResults(arr) {
   for (let i = 0; i < totalCombinations; i++) {
     const combination = [];
     // 将数字转换为n位二进制字符串，控制每个子数组的选择
-    const binary = i.toString(2).padStart(n, '0');
+    const binary = i.toString(2).padStart(n, "0");
 
     // 根据二进制位选择元素
     for (let j = 0; j < n; j++) {
@@ -200,11 +219,11 @@ export function generateAllSortedResults(arr) {
 
     // 从大到小排序并转为字符串存入Set（自动去重）
     const sorted = combination.sort((a, b) => b - a);
-    uniqueResults.add(sorted.join(','));
+    uniqueResults.add(sorted.join(","));
   }
 
   // 将Set转换为数组格式返回
-  return Array.from(uniqueResults).map(item => item.split(',').map(Number));
+  return Array.from(uniqueResults).map((item) => item.split(",").map(Number));
 }
 
 class Event {
@@ -219,7 +238,9 @@ class Event {
 
   $emit(key, val) {
     if (this.eventList.hasOwnProperty(key)) {
-      this.eventList[key].forEach((fn) => { fn(val) });
+      this.eventList[key].forEach((fn) => {
+        fn(val);
+      });
     }
   }
 }
