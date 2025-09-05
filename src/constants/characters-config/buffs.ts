@@ -1,5 +1,6 @@
-import { ActionOn, BuffTarget, BuffType } from "@/types/enum";
-import { IBuffBase } from "@/types/interface";
+import { ActionOn, BuffTarget, BuffType, ElementType } from "@/types/enum";
+import { IBuffBase, ICalculatorValue } from "@/types/interface";
+import { getAnemoDendroMoonRate, getGeoMoonRate, getHydroMoonRate, getPyroElectroCryoMoonRate } from "@/utils";
 
 function createBuff(type: BuffType, value: number, star: "A" | "S", descSuffix: string, shoot): IBuffBase {
   return {
@@ -15,15 +16,15 @@ function createBuff(type: BuffType, value: number, star: "A" | "S", descSuffix: 
 export const ExtraBuff = [
   {
     label: "单手剑战斗技巧·八（注意使用场景-->>>",
-    describe: "从多莉手中购买的罐装知识，使用后主角基础攻击力提升3点。（如果游戏中已经使用，从游戏导入的的数据已经加上了该增益，无需启用）",
-    effect: [
-      { type: BuffType.ATKBase, getValue: () => 3, actionOn: ActionOn.Front },
-    ],
+    describe:
+      "从多莉手中购买的罐装知识，使用后主角基础攻击力提升3点。（如果游戏中已经使用，从游戏导入的的数据已经加上了该增益，无需启用）",
+    effect: [{ type: BuffType.ATKBase, getValue: () => 3, actionOn: ActionOn.Front }],
     enable: false,
   },
   {
     label: "丝柯克的特训（注意使用场景-->>>",
-    describe: "主角经过丝柯克的特训后，基础生命值提升50点，基础攻击力提升7点。（如果游戏中已经完成特训，从游戏导入的的数据已经加上了该增益，无需启用）",
+    describe:
+      "主角经过丝柯克的特训后，基础生命值提升50点，基础攻击力提升7点。（如果游戏中已经完成特训，从游戏导入的的数据已经加上了该增益，无需启用）",
     effect: [
       { type: BuffType.ATKBase, getValue: () => 7, actionOn: ActionOn.Front },
       { type: BuffType.HPBase, getValue: () => 50, actionOn: ActionOn.Front },
@@ -31,15 +32,12 @@ export const ExtraBuff = [
     enable: false,
   },
   {
-    
     label: "丝柯克的元素力特训",
     describe: "主角经过丝柯克的特训后，元素精通提升15点。",
-    effect: [
-      { type: BuffType.MysteryFixed, getValue: () => 15, actionOn: ActionOn.Front },
-    ],
+    effect: [{ type: BuffType.MysteryFixed, getValue: () => 15, actionOn: ActionOn.Front }],
     enable: true,
-  }
-]
+  },
+];
 export const A_80_ATK_24P = [6, 12, 12, 18, 24].map((value, index) =>
   createBuff(BuffType.ATKPrcent, value, "A", "攻击力", index + 2)
 );
@@ -159,6 +157,58 @@ export const Constellation_Q_3 = createConstellationBuff(3, BuffType.BurstLevel)
 export const Constellation_A_5 = createConstellationBuff(5, BuffType.NormalLevel);
 export const Constellation_E_5 = createConstellationBuff(5, BuffType.SkillLevel);
 export const Constellation_Q_5 = createConstellationBuff(5, BuffType.BurstLevel);
+
+export const getMoonBuff = (name: string, baseValue: ICalculatorValue) => {
+  switch (baseValue.element) {
+    case ElementType.Pyro:
+    case ElementType.Cryo:
+    case ElementType.Electro: {
+      const value = getPyroElectroCryoMoonRate(baseValue.baseATK + baseValue.extraATK + baseValue.extraATK_NT);
+      return {
+        label: `[${name}]月兆·满辉`,
+        describe: `非月兆火元素、雷元素、冰元素角色根据攻击力提供${Math.round(value)}%月曜反应增伤`,
+        effect: [{ type: BuffType.GlobalMoonPrcent, getValue: () => value }],
+        enable: false,
+        target: BuffTarget.All,
+        source: "月兆满辉火雷冰",
+      };
+    }
+    case ElementType.Hydro: {
+      const value = getHydroMoonRate(baseValue.baseHP + baseValue.extraHP + baseValue.extraHP_NT);
+      return {
+        label: `[${name}]月兆·满辉`,
+        describe: `非月兆水元素角色根据生命值提供${Math.round(value)}%月曜反应增伤`,
+        effect: [{ type: BuffType.GlobalMoonPrcent, getValue: () => value }],
+        enable: false,
+        target: BuffTarget.All,
+        source: "月兆满辉水",
+      };
+    }
+    case ElementType.Geo: {
+      const value = getGeoMoonRate(baseValue.baseDEF + baseValue.extraDEF + baseValue.extraDEF_NT);
+      return {
+        label: `[${name}]月兆·满辉`,
+        describe: `非月兆岩元素角色根据防御力提供${Math.round(value)}%月曜反应增伤`,
+        effect: [{ type: BuffType.GlobalMoonPrcent, getValue: () => value }],
+        enable: false,
+        target: BuffTarget.All,
+        source: "月兆满辉岩",
+      };
+    }
+    case ElementType.Anemo:
+    case ElementType.Dendro: {
+      const value = getAnemoDendroMoonRate(baseValue.elementalMystery + baseValue.elementalMystery_NT);
+      return {
+        label: `[${name}]月兆·满辉`,
+        describe: `非月兆风元素、草元素角色根据元素精通提供${Math.round(value)}%月曜反应增伤`,
+        effect: [{ type: BuffType.GlobalMoonPrcent, getValue: () => value }],
+        enable: false,
+        target: BuffTarget.All,
+        source: "月兆满辉风草",
+      };
+    }
+  }
+};
 
 export const Superconductivity = {
   label: "元素反应·超导",

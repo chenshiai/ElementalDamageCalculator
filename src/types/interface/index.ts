@@ -403,4 +403,5 @@ export interface ICalculatorValue {
 export interface ITeamItem {
   calculation: IUserSavedCalculationData;
   buffMap: Map<string, IBuffExtra[]>;
+  name: string;
 }

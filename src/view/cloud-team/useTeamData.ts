@@ -78,6 +78,7 @@ const useTeamData = () => {
       data: {
         calculation: result,
         buffMap: map,
+        name: characterInfo.value.name
       },
       index,
     });
