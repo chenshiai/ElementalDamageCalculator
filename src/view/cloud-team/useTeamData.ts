@@ -44,10 +44,8 @@ const useTeamData = () => {
   const teamList = store.getters.allTeamList as ITeamItem[];
 
   const edit = (index) => {
-    store.commit("setCurrentEdit", teamList[index].calculation.title);
     sessionStorage.setItem("editCharacter", JSON.stringify(teamList[index].calculation));
     sessionStorage.setItem("editTeamIndex", index);
-
     router.push({
       path: `/character/edit/${encodeURIComponent(teamList[index].calculation.title)}`,
     });
@@ -61,6 +59,9 @@ const useTeamData = () => {
       Character.find((c) => c.enkaId === result.characterEnkaId),
       result.panel.constellation
     );
+    if (!result.panel.secondElement) {
+      result.panel.secondElement = characterInfo.value.secondElement; // 旧数据缺少secondElement字段，在入队时补充。
+    }
     map.set(characterInfo.value.name, getShareBuff(characterBuffs.value, result));
 
     const { weapon, weaponBuffs } = useWeanponInfo(

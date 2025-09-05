@@ -146,6 +146,11 @@ const panelName = computed(() => {
   text-shadow: var(--stroke-4) 0 0 2px;
   background-color: var(--main-text);
 }
+@media screen and (min-width: 768px) {
+  .skill-info-detail { 
+    font-size: 16px;
+  }
+}
 .skill-info-item {
   display: grid;
   grid-template-columns: 4fr 2fr 2fr 2fr;

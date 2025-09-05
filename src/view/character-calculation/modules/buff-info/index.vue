@@ -63,7 +63,7 @@ const teamDataFilter = computed(() => {
     .filter((buff) => {
       return (
         (!buff.shareCondition || buff.shareCondition(characterInfo)) && // 根据当前角色数据，过滤掉不符合生效条件的buff
-        !buff.label.includes(characterInfo.name) && // 排除当前角色自身提供的全队共享buff
+        !buff.label.includes(`[${characterInfo.name}]`) && // 排除当前角色自身提供的全队共享buff
         buff.source !== store.state.teamData.currentEdit // 排除来自于同一个面板的buff
       );
     })

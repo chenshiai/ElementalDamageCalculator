@@ -165,46 +165,46 @@ export const getMoonBuff = (name: string, baseValue: ICalculatorValue) => {
     case ElementType.Electro: {
       const value = getPyroElectroCryoMoonRate(baseValue.baseATK + baseValue.extraATK + baseValue.extraATK_NT);
       return {
-        label: `[${name}]月兆·满辉`,
-        describe: `非月兆火元素、雷元素、冰元素角色根据攻击力提供${Math.round(value)}%月曜反应增伤`,
+        label: `[月兆·满辉]${name}+${value.toFixed(1)}%`,
+        describe: `非月兆火元素、雷元素、冰元素角色根据攻击力提供月曜反应增伤。该角色可提供${value.toFixed(1)}%月曜反应增伤。`,
         effect: [{ type: BuffType.GlobalMoonPrcent, getValue: () => value }],
         enable: false,
         target: BuffTarget.All,
-        source: "月兆满辉火雷冰",
+        source: "",
       };
     }
     case ElementType.Hydro: {
       const value = getHydroMoonRate(baseValue.baseHP + baseValue.extraHP + baseValue.extraHP_NT);
       return {
-        label: `[${name}]月兆·满辉`,
-        describe: `非月兆水元素角色根据生命值提供${Math.round(value)}%月曜反应增伤`,
+         label: `[月兆·满辉]${name}+${value.toFixed(1)}%`,
+        describe: `非月兆水元素角色根据生命值提供月曜反应增伤。该角色可提供${value.toFixed(1)}%月曜反应增伤。`,
         effect: [{ type: BuffType.GlobalMoonPrcent, getValue: () => value }],
         enable: false,
         target: BuffTarget.All,
-        source: "月兆满辉水",
+        source: "",
       };
     }
     case ElementType.Geo: {
       const value = getGeoMoonRate(baseValue.baseDEF + baseValue.extraDEF + baseValue.extraDEF_NT);
       return {
-        label: `[${name}]月兆·满辉`,
-        describe: `非月兆岩元素角色根据防御力提供${Math.round(value)}%月曜反应增伤`,
+         label: `[月兆·满辉]${name}+${value.toFixed(1)}%`,
+        describe: `非月兆岩元素角色根据防御力提供月曜反应增伤。该角色可提供${value.toFixed(1)}%月曜反应增伤。`,
         effect: [{ type: BuffType.GlobalMoonPrcent, getValue: () => value }],
         enable: false,
         target: BuffTarget.All,
-        source: "月兆满辉岩",
+        source: "",
       };
     }
     case ElementType.Anemo:
     case ElementType.Dendro: {
       const value = getAnemoDendroMoonRate(baseValue.elementalMystery + baseValue.elementalMystery_NT);
       return {
-        label: `[${name}]月兆·满辉`,
-        describe: `非月兆风元素、草元素角色根据元素精通提供${Math.round(value)}%月曜反应增伤`,
+         label: `[月兆·满辉]${name}+${value.toFixed(1)}%`,
+        describe: `非月兆风元素、草元素角色根据元素精通提供月曜反应增伤。该角色可提供${value.toFixed(1)}%月曜反应增伤。`,
         effect: [{ type: BuffType.GlobalMoonPrcent, getValue: () => value }],
         enable: false,
         target: BuffTarget.All,
-        source: "月兆满辉风草",
+        source: "",
       };
     }
   }
@@ -216,7 +216,7 @@ export const Superconductivity = {
   effect: [{ type: BuffType.EnemyPhysicalResistance, getValue: () => -40 }],
   enable: true,
   target: BuffTarget.All,
-  source: "元素反应",
+  source: "",
 };
 
 // 元素共鸣的增益
@@ -226,7 +226,7 @@ export const PyroResonance = {
   effect: [{ type: BuffType.ATKPrcent, getValue: () => 25 }],
   enable: true,
   target: BuffTarget.All,
-  source: "元素共鸣",
+  source: "",
 };
 
 export const CryoResonance = {
@@ -235,7 +235,7 @@ export const CryoResonance = {
   effect: [{ type: BuffType.GlobalCritcal, getValue: () => 15 }],
   enable: false,
   target: BuffTarget.All,
-  source: "元素共鸣",
+  source: "",
 };
 
 export const HydroResonance = {
@@ -244,7 +244,7 @@ export const HydroResonance = {
   effect: [{ type: BuffType.HPPrcent, getValue: () => 25 }],
   enable: true,
   target: BuffTarget.All,
-  source: "元素共鸣",
+  source: "",
 };
 
 export const DendroResonance = {
@@ -253,7 +253,7 @@ export const DendroResonance = {
   effect: [{ type: BuffType.MysteryFixed, getValue: () => 50 }],
   enable: true,
   target: BuffTarget.All,
-  source: "元素共鸣",
+  source: "",
 };
 export const DendroResonance1 = {
   label: "元素共鸣·蔓生之草2",
@@ -261,7 +261,7 @@ export const DendroResonance1 = {
   effect: [{ type: BuffType.MysteryFixed, getValue: () => 30 }],
   enable: false,
   target: BuffTarget.All,
-  source: "元素共鸣",
+  source: "",
 };
 export const DendroResonance2 = {
   label: "元素共鸣·蔓生之草3",
@@ -269,7 +269,7 @@ export const DendroResonance2 = {
   effect: [{ type: BuffType.MysteryFixed, getValue: () => 20 }],
   enable: false,
   target: BuffTarget.All,
-  source: "元素共鸣",
+  source: "",
 };
 
 export const GeoResonance = {
@@ -283,5 +283,5 @@ export const GeoResonance = {
   ],
   enable: true,
   target: BuffTarget.All,
-  source: "元素共鸣",
+  source: "",
 };

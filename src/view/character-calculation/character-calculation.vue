@@ -172,12 +172,11 @@ const pageTitle = computed(() => {
 /** @module 实时更新队伍数据 */
 const changed = () => {
   if (!characterInfo.value || !weapon.value) return;
-  nextTick(() => {
-    const data = createCalculationData(store.state.teamData.currentEdit);
-    if (teamIndex.value >= 0) {
-      characterJoinTeam(data, teamIndex.value);
-    }
-  });
+  const data = createCalculationData(store.state.teamData.currentEdit);
+
+  if (teamIndex.value >= 0) {
+    characterJoinTeam(data, teamIndex.value);
+  }
 };
 </script>
 

@@ -30,14 +30,12 @@ const stackText = computed(() => {
 
 /** buff状态改变，变化结果存到store中 */
 const buffStatusChange = () => {
-  nextTick(() => {
-    emit("changed");
-    store.commit("setCurrentActiveBuffs", {
-      name: store.state.teamData.currentEdit,
-      label: buff.label,
-      enable: buff.enable,
-      stack: stack.value,
-    });
+  emit("changed");
+  store.commit("setCurrentActiveBuffs", {
+    name: store.state.teamData.currentEdit,
+    label: buff.label,
+    enable: buff.enable,
+    stack: stack.value,
   });
 };
 </script>

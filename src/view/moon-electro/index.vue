@@ -300,7 +300,7 @@ const damageResult = computed(() => {
         </CellGroup>
         <Popover position="top-right">
           <div class="data-item-popover__content">
-            火元素、雷元素、冰元素：每100点攻击力提升0.9%月曜反应伤害加成，最大36%。
+            <c class="text-pyro">火元素</c>、<c class="text-electro">雷元素</c>、<c class="text-cryo">冰元素</c>：每100点攻击力提升0.9%月曜反应伤害加成，最大36%。
           </div>
           <template #trigger>
             <Icon size="26" name="question" />
@@ -315,7 +315,9 @@ const damageResult = computed(() => {
           <Field v-model="hp" type="number" label="水元素生命值" />
         </CellGroup>
         <Popover position="top-right">
-          <div class="data-item-popover__content">水元素：每1000点生命值提升0.6%月曜反应伤害加成，最大36%。</div>
+          <div class="data-item-popover__content">
+            <c class="text-hydro">水元素</c>：每1000点生命值提升0.6%月曜反应伤害加成，最大36%。
+          </div>
           <template #trigger>
             <Icon size="26" name="question" />
           </template>
@@ -329,7 +331,9 @@ const damageResult = computed(() => {
           <Field v-model="def" type="number" label="岩元素防御力" />
         </CellGroup>
         <Popover position="top-right">
-          <div class="data-item-popover__content">岩元素：每100点防御力提升1%月曜反应伤害加成，最大36%。</div>
+          <div class="data-item-popover__content">
+            <c class="text-geo">岩元素</c>：每100点防御力提升1%月曜反应伤害加成，最大36%。
+          </div>
           <template #trigger>
             <Icon size="26" name="question" />
           </template>
@@ -344,7 +348,9 @@ const damageResult = computed(() => {
           <Field v-model="em" type="number" label="风草元素精通" />
         </CellGroup>
         <Popover position="top-right">
-          <div class="data-item-popover__content">风元素、草元素：每100点精通提升2.25%月曜反应伤害加成，最大36%。</div>
+          <div class="data-item-popover__content">
+            <c class="text-anemo">风元素</c>、<c class="text-dendro">草元素</c>：每100点精通提升2.25%月曜反应伤害加成，最大36%。
+          </div>
           <template #trigger>
             <Icon size="26" name="question" />
           </template>

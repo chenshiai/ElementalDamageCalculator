@@ -72,11 +72,7 @@ const useBuffInfo = () => {
       if (elementCount.get(ElementType.Geo) >= 2) {
         buffs.value.push(GeoResonance);
       }
-      console.log(secondElementCount);
-      
       if (secondElementCount.get(SecondElementType.Moon) >= 2) {
-        console.log('触发月兆·满辉');
-        
         teamList
           .filter((cha) => cha && (cha.calculation.panel.secondElement !== SecondElementType.Moon))
           .forEach((cha) => {
