@@ -11,7 +11,7 @@ export type CalculateAnalysisType = {
 }
 const CalculateAnalysis = (compositionAnalysis: CalculateAnalysisType) => {
   function calculateHeight(target) {
-    return (target / (compositionAnalysis.RESULT_DMG + compositionAnalysis.CRITICAL_DMG)) * 520 + "px";
+    return (target / (compositionAnalysis.RESULT_DMG + compositionAnalysis.CRITICAL_DMG)) * 600 + "px";
   }
   return [
     {

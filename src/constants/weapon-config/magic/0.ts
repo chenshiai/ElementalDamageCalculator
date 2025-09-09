@@ -35,3 +35,4 @@ export * from "./Truelens";
 export * from "./Everfrost";
 export * from "./Catalyst_Outlaw";
 export * from "./Ludiharpastum";
+export * from "./Catalyst_MenulisRing";

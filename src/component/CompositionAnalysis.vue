@@ -26,7 +26,7 @@ const showPopup = defineModel<boolean>({ default: false });
 <style scoped>
 
 .analysis-panel {
-  height: 560px;
+  height: 660px;
   width: 300px;
   background: #fdfbf6;
   border: 4px solid var(--stroke-2);

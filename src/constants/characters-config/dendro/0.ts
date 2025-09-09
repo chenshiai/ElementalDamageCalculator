@@ -10,3 +10,4 @@ export * from "./Yaoyao";
 export * from "./Collei";
 export * from "./PlayerBoy";
 export * from "./PlayerGirl";
+export * from "./Lauma";

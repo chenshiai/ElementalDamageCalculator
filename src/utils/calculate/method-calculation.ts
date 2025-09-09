@@ -343,6 +343,11 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
   if (attackType === AttackType.Shield) {
     SHIELD_VALUE = BASE_DMG * (1 + shieldAdd / 100);
   }
+  /** 附加值 */
+  let ADDAD_VALUE = 0;
+  if (attackType === AttackType.Added) {
+    ADDAD_VALUE = BASE_DMG;
+  }
 
   /** 激化伤害 */
   let BONUS_DMG = 0;
@@ -422,5 +427,6 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
     elementType: newElementType,
     HEAL_VALUE,
     SHIELD_VALUE,
+    ADDAD_VALUE,
   };
 }

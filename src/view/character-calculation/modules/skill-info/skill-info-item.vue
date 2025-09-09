@@ -45,6 +45,7 @@ const calculatedResults = computed(() => {
       REACTION_DMG,
       PROMOTE_DMG,
       EVA_DMG,
+      ADDAD_VALUE,
     } = calculateDamage({
       calculatorValue,
       attackType: item.attackType,
@@ -68,6 +69,15 @@ const calculatedResults = computed(() => {
       return {
         label: item.label,
         common: Math.round(SHIELD_VALUE),
+        crit: "-",
+        desire: "-",
+        elementType,
+      };
+    }
+    if (ADDAD_VALUE > 0) {
+      return {
+        label: item.label,
+        common: Math.round(ADDAD_VALUE),
         crit: "-",
         desire: "-",
         elementType,

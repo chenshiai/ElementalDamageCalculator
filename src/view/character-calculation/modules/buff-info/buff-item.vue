@@ -30,12 +30,14 @@ const stackText = computed(() => {
 
 /** buff状态改变，变化结果存到store中 */
 const buffStatusChange = () => {
-  emit("changed");
-  store.commit("setCurrentActiveBuffs", {
-    name: store.state.teamData.currentEdit,
-    label: buff.label,
-    enable: buff.enable,
-    stack: stack.value,
+  nextTick(() => {
+    emit("changed");
+    store.commit("setCurrentActiveBuffs", {
+      name: store.state.teamData.currentEdit,
+      label: buff.label,
+      enable: buff.enable,
+      stack: stack.value,
+    });
   });
 };
 </script>
@@ -55,8 +57,8 @@ const buffStatusChange = () => {
           <span>{{ buff.stackText || "层数" }}：</span>
           <Slider
             v-if="buff.stackType === 'slider'"
-            v-model="stack"
             @change="buffStatusChange"
+            v-model="stack"
             :max="buff.limit"
             :min="0"
           />
@@ -71,7 +73,7 @@ const buffStatusChange = () => {
             theme="round"
             integer
           />
-          <Switch v-if="buff.stackType === 'switch'" v-model="check" size="20" />
+          <Switch v-if="buff.stackType === 'switch'" @change="buffStatusChange" v-model="check" size="20" />
         </div>
         <span v-html="buff.describe"></span>
       </div>

@@ -128,6 +128,7 @@ export class IneffaData extends Character implements ICharacterInfo {
         {
           type: BuffType.MoonElectroRate,
           getValue: (data) => Math.min(14, ((data.baseATK + data.extraATK + data.extraATK_NT) / 100) * 0.7),
+          actionOn: ActionOn.External,
         },
       ],
       enable: true,

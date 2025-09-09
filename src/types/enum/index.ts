@@ -18,13 +18,15 @@ export enum AttackType {
   Other = "OtherAttack",
   /** 下落攻击兼其他类型 */
   FallingOther = "FallingOther",
-  /** 月反应类型 */
+  /** 月曜反应类型 */
   Moon = "Moon",
 
   /** 治疗类型 */
   Heal = "Heal",
   /** 护盾类型 */
   Shield = "Shield",
+  /** 附加数值类型 */
+  Added = "Added",
 }
 
 /** 元素类型 */

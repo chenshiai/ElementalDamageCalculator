@@ -27,9 +27,8 @@ export const Ayus = createWeapon(
     let em = 32 + (affix - 1) * 8;
     let add = 10 + (affix - 1) * 4;
     let enm = 40 + (affix - 1) * 2;
-    let getValue = (_, stack) => {
-      return add * (3 - stack);
-    };
+    console.log("前夜");
+
     let getWeaponEffect = (element: ElementType, type: BuffType) => {
       return {
         label: `千夜的曙歌`,
@@ -37,7 +36,12 @@ export const Ayus = createWeapon(
         condition: (data) => data.element === element,
         effect: [
           { type: BuffType.MysteryFixed, getValue: (_, stack) => em * stack },
-          { type, getValue },
+          {
+            type,
+            getValue: (_, stack) => {
+              return add * (3 - stack);
+            },
+          },
         ],
         stackText: "同元素角色数量",
         stackable: true,
