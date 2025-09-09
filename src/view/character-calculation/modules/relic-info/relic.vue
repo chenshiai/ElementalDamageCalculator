@@ -77,7 +77,6 @@ const subitemCounts = computed(() => {
   border-radius: 4px;
   margin-bottom: 12px;
   box-shadow: inset -1px -1px 1px var(--border);
-  cursor: pointer;
 }
 .relic-suit-detail {
   overflow: scroll;
@@ -157,7 +156,6 @@ const subitemCounts = computed(() => {
   right: 0;
   position: absolute;
   color: red;
-  cursor: pointer;
   opacity: 0.7;
   &:hover {
     background-color: var(--light-text);

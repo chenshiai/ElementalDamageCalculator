@@ -165,7 +165,6 @@ const panelName = computed(() => {
   display: grid;
   grid-template-columns: 4fr 2fr 2fr 2fr;
   text-align: left;
-  cursor: pointer;
   border-radius: 4px;
 
   &:hover {

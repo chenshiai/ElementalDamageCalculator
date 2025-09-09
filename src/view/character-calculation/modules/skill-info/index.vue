@@ -146,7 +146,6 @@ const showDetail = (detail) => {
   font-size: 14px;
   font-weight: 300;
   position: relative;
-  cursor: pointer;
 }
 .tab-icon {
   width: 17px;

@@ -372,7 +372,6 @@ const deleteLocalData = (item: IRelicItem) => {
   height: 32px;
   line-height: 32px;
   border: 2px solid var(--border);
-  cursor: pointer;
 
   &:hover {
     color: var(--light-text);
@@ -393,10 +392,6 @@ const deleteLocalData = (item: IRelicItem) => {
   line-height: 48px;
   justify-content: space-between;
   box-sizing: border-box;
-
-  & span {
-    cursor: pointer;
-  }
 }
 .set-relic-title__close {
   color: var(--cancel);
@@ -480,7 +475,6 @@ const deleteLocalData = (item: IRelicItem) => {
   margin: 0 12px 4px 12px;
   display: flex;
   border-radius: 4px;
-  cursor: pointer;
 }
 .relic-package span.active {
   background-color: var(--button-bg);

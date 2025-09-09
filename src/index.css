@@ -31,6 +31,7 @@
   --van-primary-color: var(--stroke-2);
   --van-cell-background: var(--stroke-0);
   --van-cell-text-color: var(--main-text);
+  --van-field-label-width: 7em;
 
   --text-electro: #b380ff;
   --text-hydro: #6495ed;
@@ -64,6 +65,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: var(--main-text);
+}
+.van-checkbox,
+.van-radio,
+body,
+a {
+  cursor: url("/img/原神.cur"), auto;
 }
 q {
   /* 使用quotes属性定义前后引号 */
@@ -225,7 +232,6 @@ q {
   background-color: var(--bg-pyro);
 }
 summary {
-  cursor: pointer;
 }
 summary::marker {
   font-size: 0;
@@ -251,7 +257,7 @@ summary::-webkit-details-marker {
 }
 
 .active-btn {
-  transition: all 0.2s ease-out;
+  transition: all 0.1s ease-out;
   &:hover {
     scale: 1.02;
   }

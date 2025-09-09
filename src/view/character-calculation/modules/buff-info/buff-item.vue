@@ -45,7 +45,7 @@ const buffStatusChange = () => {
 <template>
   <div class="buff-item">
     <Checkbox v-model="enable" @change="buffStatusChange">
-      <div class="buff-label-text">
+      <div class="buff-label-text" :title="buff.describe">
         {{ buff.label }}
         <span v-if="buff.stackable">（{{ stackText }}）</span>
       </div>
@@ -129,7 +129,9 @@ const buffStatusChange = () => {
   border: 1px solid var(--border);
   border-radius: 4px;
 }
-
+.buff-details-summary:hover {
+  background-color: var(--bg);
+}
 .buff-details-summary::before {
   content: "";
   position: absolute;

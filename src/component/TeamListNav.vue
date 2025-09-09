@@ -54,7 +54,6 @@ onMounted(() => {
   border: 2px solid var(--border);
   padding: 2px;
   background: var(--bg);
-  cursor: pointer;
   text-align: center;
   position: relative;
 

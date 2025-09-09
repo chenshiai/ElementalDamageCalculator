@@ -92,7 +92,6 @@ const weaponStats = computed(() => {
   width: 130px;
   height: 130px;
   box-sizing: border-box;
-  cursor: pointer;
 }
 
 .avatar img {
@@ -160,6 +159,5 @@ const weaponStats = computed(() => {
   border-radius: 4px;
   height: 120px;
   line-height: 120px;
-  cursor: pointer;
 }
 </style>

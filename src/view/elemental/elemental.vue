@@ -1,5 +1,3 @@
-
-
 <script setup lant="ts">
 import { computed, ref } from "vue";
 import { WITCH, THUNDER, EMERALD, EDEN } from "@/constants";
@@ -15,6 +13,8 @@ import { useNiLuo, useBaiZhu, useMizuki, useYiFa, useLauma, useAino } from "./ro
 const elementalMystery = ref(786);
 const level = ref(90);
 const enemyResistance = ref(10);
+const swirlPercent = ref(0);
+const electroPercent = ref(0);
 const [currentRelic, setCurrentRelic] = useHolyRelic();
 const { niLuo, niLuoGain } = useNiLuo();
 const { baiZhu, baiZhuBloomGain, baiZhuCatalyzeGain } = useBaiZhu();
@@ -40,9 +40,15 @@ const resistancceRate = computed(() => {
 // 感电伤害值
 const electroChargedDamage = computed(() => {
   const basenumber = BaseDMG.electroCharged[level.value] * resistancceRate.value;
+  console.log(electroPercent.value);
+
   const r =
     servitudeDamage(basenumber) +
-    Math.round((basenumber * (yehunGain.value + ainoGain.value + (currentRelic.value === THUNDER ? 40 : 0))) / 100);
+    Math.round(
+      (basenumber *
+        (yehunGain.value + ainoGain.value + (currentRelic.value === THUNDER ? 40 : 0) + electroPercent.value)) /
+        100
+    );
   return r;
 });
 
@@ -61,7 +67,11 @@ const bloomDamage = computed(() => {
     servitudeDamage(basenumber) +
     Math.round(
       (basenumber *
-        (niLuoGain.value + baiZhuBloomGain.value + ainoGain.value + (currentRelic.value === EDEN ? 80 : 0))) /
+        (niLuoGain.value +
+          baiZhuBloomGain.value +
+          ainoGain.value +
+          (currentRelic.value === EDEN ? 80 : 0) +
+          swirlPercent.value)) /
         100
     ) +
     laumaGain.value;
@@ -174,7 +184,7 @@ const damageResult = computed(() => {
     },
     {
       name: "感电",
-      class: "elector",
+      class: "electro",
       detail: electroChargedDamage.value,
     },
     {
@@ -305,7 +315,8 @@ const damageResult = computed(() => {
         <Popover position="top-right">
           <div class="data-item-popover__content">
             白术：在地为化，基于白术生命值不超过50000的部分，每1000点提高
-            <q class="bloom">绽放</q><q class="aggravate">超绽放</q><q class="burning">烈绽放</q><q class="burning">燃烧</q>反应2%的伤害。提升<q class="aggravate">超激化</q>和<q class="bloom">蔓激化</q
+            <q class="bloom">绽放</q><q class="aggravate">超绽放</q><q class="burning">烈绽放</q
+            ><q class="burning">燃烧</q>反应2%的伤害。提升<q class="aggravate">超激化</q>和<q class="bloom">蔓激化</q
             >反应0.8%的伤害
           </div>
           <template #trigger>
@@ -321,7 +332,7 @@ const damageResult = computed(() => {
         <Popover position="top-right">
           <div class="data-item-popover__content">
             伊法：救援要义基于队伍中所有角色当前夜魂值的总和，每1点救援要义提升
-            <q class="swirl">扩散</q><q class="elector">感电</q>反应1.5%的伤害，最多记录200点救援要义
+            <q class="swirl">扩散</q><q class="electro">感电</q>反应1.5%的伤害，最多记录200点救援要义
           </div>
           <template #trigger>
             <Icon size="26" name="question" />
@@ -346,7 +357,7 @@ const damageResult = computed(() => {
       <div class="cha-gain-inner">
         <img class="base-damage__img" src="/ui/UI_AvatarIcon_Lauma.png" alt="" />
         <CellGroup inset>
-          <Field v-model="laumaEm" type="digit"  :min="0" label="元素精通" />
+          <Field v-model="laumaEm" type="digit" :min="0" label="元素精通" />
           <Field v-model="laumaLevel" type="digit" :min="1" :max="15" label="元素爆发等级" />
           <Field v-model="laumaCons" type="digit" :min="0" :max="6" label="解锁命之座" />
         </CellGroup>
@@ -364,18 +375,17 @@ const damageResult = computed(() => {
         <img class="base-damage__img" src="/ui/UI_AvatarIcon_Aino.png" alt="" />
         <CellGroup inset>
           <Field v-model="ainoCons" type="digit" :min="0" :max="6" label="解锁命之座" />
-          <Field v-model="ainoMoon" type="text" label="月兆" readonly style="max-width: 305px;">
+          <Field v-model="ainoMoon" type="text" label="月兆" readonly style="max-width: 305px">
             <template #button>
-              <div style="cursor: pointer;" @click="changeAinoMoon">切换月兆</div>
+              <div style="" @click="changeAinoMoon">切换月兆</div>
             </template>
           </Field>
         </CellGroup>
         <Popover position="top-right">
           <div class="data-item-popover__content">
             爱诺6命：天才之为构造之责任，当前场上角色触发的
-            <q class="elector">感电</q><q class="bloom">绽放</q>
-            <q class="text-moon-electro"><data data-text="月感电">月感电</data></q
-            >
+            <q class="electro">感电</q><q class="bloom">绽放</q>
+            <q class="text-moon-electro"><data data-text="月感电">月感电</data></q>
             <q class="text-moon-swirl"><data data-text="月绽放">月绽放</data></q>
             造成的伤害提升15%。月兆·满辉：上述反应造成的伤害额外提升20%。
           </div>
@@ -383,6 +393,25 @@ const damageResult = computed(() => {
             <Icon size="26" name="question" />
           </template>
         </Popover>
+      </div>
+    </div>
+  </details>
+  <details class="gain-group-details">
+    <summary>
+      <span class="holy-relic__title">自定义提升</span>
+      <span class="holy-relic-tips open">展开</span>
+      <span class="holy-relic-tips close">收起</span>
+    </summary>
+    <div class="gain-group">
+      <div class="cha-gain-inner">
+        <CellGroup inset>
+          <Field v-model="swirlPercent" type="digit" :min="0" label="绽放伤害提升%" />
+        </CellGroup>
+      </div>
+      <div class="cha-gain-inner">
+        <CellGroup inset>
+          <Field v-model="electroPercent" type="digit" :min="0" label="感电伤害提升%" />
+        </CellGroup>
       </div>
     </div>
   </details>

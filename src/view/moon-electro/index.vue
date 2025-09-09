@@ -417,7 +417,7 @@ const damageResult = computed(() => {
 
 .moon-panel__delete {
   float: right;
-  cursor: pointer;
+  
   &:hover {
     color: var(--cancel);
   }
@@ -443,7 +443,6 @@ const damageResult = computed(() => {
   box-sizing: border-box;
   width: 100%;
   background-color: transparent;
-  cursor: pointer;
 }
 .holy-relic-radio {
   display: grid;

@@ -106,7 +106,6 @@ const levelUp = defineModel("levelUp", { default: 0 });
   right: 0;
   width: 130px;
   box-sizing: border-box;
-  cursor: pointer;
 }
 .avatar img {
   display: inline-block;
@@ -168,7 +167,6 @@ const levelUp = defineModel("levelUp", { default: 0 });
   border: var(--stroke-2) 2px solid;
   background-color: var(--light-text);
   position: relative;
-  cursor: pointer;
 }
 .consts-icon i {
   position: absolute;
@@ -207,7 +205,6 @@ const levelUp = defineModel("levelUp", { default: 0 });
   margin-bottom: 16px;
   height: 120px;
   line-height: 120px;
-  cursor: pointer;
 }
 .custom-button {
   width: var(--van-slider-button-width);

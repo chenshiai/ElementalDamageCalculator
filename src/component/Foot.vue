@@ -73,7 +73,6 @@ const showAuthor = ref(false);
   text-align: center;
   line-height: 60px;
   margin-bottom: 30px;
-  cursor: pointer;
 }
 
 .foot-popup-name img {

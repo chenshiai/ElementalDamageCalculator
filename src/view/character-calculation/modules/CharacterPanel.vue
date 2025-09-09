@@ -308,7 +308,6 @@ function round(a: number, precision: number = 0): number {
   margin-bottom: 16px;
   font-size: 12px;
   border-radius: 0 0 4px 4px;
-  cursor: pointer;
 }
 .panel-item + .data-panel__title {
   margin-top: 20px;

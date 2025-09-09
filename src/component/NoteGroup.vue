@@ -235,7 +235,6 @@ onMounted(() => {
   font-size: 14px;
   position: relative;
   min-width: 80px;
-  cursor: pointer;
 }
 
 .memo.selected {
@@ -255,7 +254,7 @@ onMounted(() => {
   border-radius: 4px;
   margin-left: 6px;
   font-size: 14px;
-  cursor: pointer;
+  
 }
 
 .add-note-button:active {
@@ -358,7 +357,7 @@ onMounted(() => {
 
   width: 25%;
   margin: 2px 0 2px 0;
-  cursor: pointer;
+  
 }
 
 .additional-tab-title-img {

@@ -224,7 +224,6 @@ const replayText = computed(() => {
   transform: translateY(-50%);
 }
 .replay {
-  cursor: pointer;
   color: green;
   margin-right: 10px;
   &:hover {
@@ -232,7 +231,6 @@ const replayText = computed(() => {
   }
 }
 .delete {
-  cursor: pointer;
   color: red;
   &:hover {
     background-color: var(--light-text);
