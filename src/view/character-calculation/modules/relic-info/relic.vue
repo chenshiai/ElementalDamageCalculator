@@ -145,7 +145,7 @@ const subitemCounts = computed(() => {
 }
 .relic__empty {
   text-align: center;
-  line-height: 112px;
+  line-height: 122px;
   border: solid 1px var(--border);
   border-radius: 4px;
   box-shadow: none;
