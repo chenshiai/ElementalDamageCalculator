@@ -90,6 +90,7 @@ const weaponStats = computed(() => {
   top: 0;
   right: 0;
   width: 130px;
+  height: 130px;
   box-sizing: border-box;
   cursor: pointer;
 }
@@ -98,6 +99,8 @@ const weaponStats = computed(() => {
   display: inline-block;
   vertical-align: middle;
   width: 100%;
+  height: 100%;
+  object-fit: contain;
 
   mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0) 100%);
   -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0) 100%); /* Safari 和 Chrome */

@@ -112,6 +112,7 @@ const levelUp = defineModel("levelUp", { default: 0 });
   display: inline-block;
   vertical-align: middle;
   width: 100%;
+  object-fit: contain;
 
   mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0) 100%);
   -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0) 100%); /* Safari 和 Chrome */

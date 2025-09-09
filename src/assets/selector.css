@@ -139,6 +139,7 @@
   display: inline-block;
   vertical-align: middle;
   height: 86px;
+  object-fit: contain;
 }
 
 .selector-items .logo::after {

@@ -31,3 +31,4 @@ export * from "./Claymore_Blackrock";
 export * from "./Claymore_Fossil";
 export * from "./Kione";
 export * from "./Dragonfell";
+export * from "./Claymore_Ilmarinen";

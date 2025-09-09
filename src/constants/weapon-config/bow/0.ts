@@ -33,3 +33,4 @@ export * from "./Viridescent";
 export * from "./Bow_Outlaw";
 export * from "./Bow_Fleurfair";
 export * from "./Nachtblind";
+export * from "./Bow_Ilmarinen";

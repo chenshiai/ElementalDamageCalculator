@@ -38,3 +38,5 @@ export * from "./Sword_Blackrock";
 export * from "./Bloodstained";
 export * from "./Magnum";
 export * from "./Sword_Outlaw";
+export * from "./Sword_Ilmarinen";
+export * from "./Sword_Miekka";

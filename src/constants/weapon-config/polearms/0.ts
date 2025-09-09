@@ -31,3 +31,4 @@ export * from "./Pole_Theocrat";
 export * from "./Everfrost";
 export * from "./Pole_Lapis";
 export * from "./Pole_TummaLyhty";
+export * from "./Pole_Ilmarinen";
