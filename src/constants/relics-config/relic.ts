@@ -97,13 +97,13 @@ const relicLibrary: IRelicLibraryItem[] = [
   {
     name: "纺月的夜歌",
     itemType: ItemType.ITEM_RELIQUARY,
-    setNameTextMapHash: 376147745100,
+    setNameTextMapHash: 625305531,
     equip: [
-      setReliquartStat(376147745100, "流离者的晶泪", "UI_RelicIcon_15042_4", EquipType.EQUIP_BRACER),
-      setReliquartStat(376147745100, "受福者的白羽", "UI_RelicIcon_15042_2", EquipType.EQUIP_NECKLACE),
-      setReliquartStat(376147745100, "祭霜者的迷狂", "UI_RelicIcon_15042_5", EquipType.EQUIP_SHOES),
-      setReliquartStat(376147745100, "至纯者的欢荣", "UI_RelicIcon_15042_1", EquipType.EQUIP_RING),
-      setReliquartStat(376147745100, "司信者的圣冕", "UI_RelicIcon_15042_3", EquipType.EQUIP_DRESS),
+      setReliquartStat(625305531, "流离者的晶泪", "UI_RelicIcon_15042_4", EquipType.EQUIP_BRACER),
+      setReliquartStat(625305531, "受福者的白羽", "UI_RelicIcon_15042_2", EquipType.EQUIP_NECKLACE),
+      setReliquartStat(625305531, "祭霜者的迷狂", "UI_RelicIcon_15042_5", EquipType.EQUIP_SHOES),
+      setReliquartStat(625305531, "至纯者的欢荣", "UI_RelicIcon_15042_1", EquipType.EQUIP_RING),
+      setReliquartStat(625305531, "司信者的圣冕", "UI_RelicIcon_15042_3", EquipType.EQUIP_DRESS),
     ],
     suit2: "二件套：元素充能效率提高20%。",
     suit4:
@@ -143,13 +143,13 @@ const relicLibrary: IRelicLibraryItem[] = [
   {
     name: "穹境示现之夜",
     itemType: ItemType.ITEM_RELIQUARY,
-    setNameTextMapHash: 376147745111,
+    setNameTextMapHash: 3665899652,
     equip: [
-      setReliquartStat(376147745111, "渴真之花", "UI_RelicIcon_15041_4", EquipType.EQUIP_BRACER),
-      setReliquartStat(376147745111, "深罪之羽", "UI_RelicIcon_15041_2", EquipType.EQUIP_NECKLACE),
-      setReliquartStat(376147745111, "谕告之钟", "UI_RelicIcon_15041_5", EquipType.EQUIP_SHOES),
-      setReliquartStat(376147745111, "满溢之壶", "UI_RelicIcon_15041_1", EquipType.EQUIP_RING),
-      setReliquartStat(376147745111, "永劫之冕", "UI_RelicIcon_15041_3", EquipType.EQUIP_DRESS),
+      setReliquartStat(3665899652, "渴真之花", "UI_RelicIcon_15041_4", EquipType.EQUIP_BRACER),
+      setReliquartStat(3665899652, "深罪之羽", "UI_RelicIcon_15041_2", EquipType.EQUIP_NECKLACE),
+      setReliquartStat(3665899652, "谕告之钟", "UI_RelicIcon_15041_5", EquipType.EQUIP_SHOES),
+      setReliquartStat(3665899652, "满溢之壶", "UI_RelicIcon_15041_1", EquipType.EQUIP_RING),
+      setReliquartStat(3665899652, "永劫之冕", "UI_RelicIcon_15041_3", EquipType.EQUIP_DRESS),
     ],
     suit2: "二件套：元素精通提高80点。",
     suit4:
