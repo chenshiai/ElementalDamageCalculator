@@ -6,7 +6,7 @@ import { getEnkaUI } from "@/utils/decorator";
 export const Bow_Ilmarinen = createWeapon(
   {
     name: "罗网勾针",
-    enkaId: 15123123124414,
+    enkaId: 15433,
     weaponType: WeaponType.Bow,
     icon: getEnkaUI("UI_EquipIcon_Bow_Ilmarinen_Awaken"),
     baseAtk: 454,

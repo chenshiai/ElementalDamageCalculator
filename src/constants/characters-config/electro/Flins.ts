@@ -3,10 +3,7 @@ import { IBuffBase, ICharacterInfo } from "@/types/interface";
 import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
 import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 import { Constellation_E_5, Constellation_Q_3, S_80_CRITALHUNT_38P } from "../buffs";
-
-// .replaceAll("%", '').replaceAll(/[\u4e00-\u9fff]+/g, "").replaceAll("\t",",").split(",").map(i=>Math.round(i*100)/10000)
-
-@EnKaId(10000069, "菲林斯")
+@EnKaId(10000120, "菲林斯")
 @Weapon(WeaponType.Polearms)
 @Element(ElementType.Electro)
 @BaseData(Rarity.Five, [12491, 352, 809], 80, [13379, 431, 866])
@@ -66,7 +63,10 @@ class FlinsData extends Character implements ICharacterInfo {
       ],
     }),
     action("高空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
-      atk: [],
+      atk: [
+        1.596762, 1.726731, 1.8567, 2.04237, 2.172339, 2.320875, 2.525112, 2.729349, 2.933586, 3.15639, 3.379194,
+        3.601998, 3.824802, 4.047606, 4.27041,
+      ],
     }),
   ];
   elementSkill = [

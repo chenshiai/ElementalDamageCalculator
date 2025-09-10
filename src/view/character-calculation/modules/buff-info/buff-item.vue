@@ -43,9 +43,9 @@ const buffStatusChange = () => {
 </script>
 
 <template>
-  <div class="buff-item">
-    <Checkbox v-model="enable" @change="buffStatusChange">
-      <div class="buff-label-text" :title="buff.describe">
+  <div class="buff-item" :title="buff.describe">
+    <Checkbox v-model="enable" @change="buffStatusChange" style="padding: 8px;">
+      <div class="buff-label-text">
         {{ buff.label }}
         <span v-if="buff.stackable">（{{ stackText }}）</span>
       </div>
@@ -85,7 +85,6 @@ const buffStatusChange = () => {
 .buff-item {
   position: relative;
   border: 1px solid var(--border);
-  padding: 8px;
   border-radius: 4px;
   margin-top: 4px;
 }
@@ -96,6 +95,7 @@ const buffStatusChange = () => {
 
 .buff-description {
   color: #666;
+  padding: 0 8px 8px;
   font-size: 14px;
 }
 

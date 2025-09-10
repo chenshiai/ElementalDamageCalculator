@@ -2,11 +2,11 @@ import { highlight, createWeapon } from "@/utils/calculate/create-data-methods";
 import { AppendProp, BuffTarget, BuffType, Rarity, WeaponType } from "@/types/enum";
 import { getEnkaUI } from "@/utils/decorator";
 
-/** 谧音吹哨 */
+/** 万能钥匙 */
 export const Claymore_Ilmarinen = createWeapon(
   {
     name: "万能钥匙",
-    enkaId: 123123123,
+    enkaId: 12433,
     weaponType: WeaponType.GreatSword,
     icon: getEnkaUI("UI_EquipIcon_Claymore_Ilmarinen_Awaken"),
     baseAtk: 454,

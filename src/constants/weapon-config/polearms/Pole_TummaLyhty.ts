@@ -6,7 +6,7 @@ import { getEnkaUI } from "@/utils/decorator";
 export const Pole_TummaLyhty = createWeapon(
   {
     name: "血染荒城",
-    enkaId: 66666,
+    enkaId: 13516,
     weaponType: WeaponType.Polearms,
     icon: getEnkaUI("UI_EquipIcon_Pole_TummaLyhty_Awaken"),
     baseAtk: 674,

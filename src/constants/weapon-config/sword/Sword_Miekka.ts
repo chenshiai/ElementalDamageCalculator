@@ -6,7 +6,7 @@ import { getEnkaUI } from "@/utils/decorator";
 export const Sword_Miekka = createWeapon(
   {
     name: "织月者的曙色",
-    enkaId: 123123123,
+    enkaId: 11434,
     weaponType: WeaponType.Sword,
     icon: getEnkaUI("UI_EquipIcon_Sword_Miekka_Awaken"),
     baseAtk: 565,

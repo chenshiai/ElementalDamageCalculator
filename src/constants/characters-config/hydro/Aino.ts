@@ -4,9 +4,7 @@ import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, Weapon
 import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 import { A_80_MYSTERY_96, Constellation_E_5, Constellation_Q_3 } from "../buffs";
 
-// .replaceAll("%", '').replaceAll(/[\u4e00-\u9fff]+/g, "").replaceAll("\t",",").split(",").map(i=>Math.round(i*100)/10000)
-
-@EnKaId(10000069, "爱诺")
+@EnKaId(10000121, "爱诺")
 @Weapon(WeaponType.GreatSword)
 @Element(ElementType.Hydro)
 @BaseData(Rarity.Four, [11201, 242, 607], 50, [11976, 304, 649])

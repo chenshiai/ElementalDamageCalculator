@@ -15,6 +15,7 @@ const level = ref(90);
 const enemyResistance = ref(10);
 const swirlPercent = ref(0);
 const electroPercent = ref(0);
+const hyperbloomPercent = ref(0);
 const [currentRelic, setCurrentRelic] = useHolyRelic();
 const { niLuo, niLuoGain } = useNiLuo();
 const { baiZhu, baiZhuBloomGain, baiZhuCatalyzeGain } = useBaiZhu();
@@ -81,7 +82,10 @@ const bloomDamage = computed(() => {
 // 超烈绽放伤害值
 const hyperbloomDamage = computed(() => {
   const basenumber = BaseDMG.hyperbloom[level.value];
-  const r = servitudeDamage(basenumber) + Math.round((basenumber * baiZhuBloomGain.value) / 100) + laumaGain.value;
+  const r =
+    servitudeDamage(basenumber) +
+    laumaGain.value +
+    (basenumber * (baiZhuBloomGain.value + hyperbloomPercent.value)) / 100;
   if (currentRelic.value === THUNDER || currentRelic.value === WITCH)
     return Math.round((basenumber * 0.4 + r) * resistancceRate.value);
   else if (currentRelic.value === EDEN) return Math.round((basenumber * 0.8 + r) * resistancceRate.value);
@@ -375,7 +379,7 @@ const damageResult = computed(() => {
         <img class="base-damage__img" src="/ui/UI_AvatarIcon_Aino.png" alt="" />
         <CellGroup inset>
           <Field v-model="ainoCons" type="digit" :min="0" :max="6" label="解锁命之座" />
-          <Field v-model="ainoMoon" type="text" label="月兆" readonly style="max-width: 305px">
+          <Field v-model="ainoMoon" type="text" label="月兆" readonly style="max-width: 330px">
             <template #button>
               <div style="" @click="changeAinoMoon">切换月兆</div>
             </template>
@@ -411,6 +415,11 @@ const damageResult = computed(() => {
       <div class="cha-gain-inner">
         <CellGroup inset>
           <Field v-model="electroPercent" type="digit" :min="0" label="感电伤害提升%" />
+        </CellGroup>
+      </div>
+      <div class="cha-gain-inner">
+        <CellGroup inset>
+          <Field v-model="hyperbloomPercent" type="digit" :min="0" label="超烈绽放伤害提升%" />
         </CellGroup>
       </div>
     </div>

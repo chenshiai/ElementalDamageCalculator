@@ -13,7 +13,7 @@ import {
 import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 import { S_80_MYSTERY_115, Constellation_Q_3, Constellation_E_5 } from "../buffs";
 
-@EnKaId(123123123123, "菈乌玛")
+@EnKaId(10000119, "菈乌玛")
 @Weapon(WeaponType.Magic)
 @Element(ElementType.Dendro, SecondElementType.Moon)
 @BaseData(Rarity.Five, [10654, 255, 669], 60, [11411, 312, 716])

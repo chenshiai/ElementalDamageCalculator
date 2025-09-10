@@ -31,7 +31,7 @@
   --van-primary-color: var(--stroke-2);
   --van-cell-background: var(--stroke-0);
   --van-cell-text-color: var(--main-text);
-  --van-field-label-width: 7em;
+  --van-field-label-width: 9em;
 
   --text-electro: #b380ff;
   --text-hydro: #6495ed;

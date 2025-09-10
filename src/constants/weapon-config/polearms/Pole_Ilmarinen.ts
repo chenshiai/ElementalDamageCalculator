@@ -6,7 +6,7 @@ import { getEnkaUI } from "@/utils/decorator";
 export const Pole_Ilmarinen = createWeapon(
   {
     name: "掘金之锹",
-    enkaId: 123123123,
+    enkaId: 13433,
     weaponType: WeaponType.Polearms,
     icon: getEnkaUI("UI_EquipIcon_Pole_Ilmarinen_Awaken"),
     baseAtk: 510,

@@ -6,7 +6,7 @@ import { getEnkaUI } from "@/utils/decorator";
 export const Catalyst_Ilmarinen = createWeapon(
   {
     name: "乌髓孑灯",
-    enkaId: 123123123,
+    enkaId: 14433,
     weaponType: WeaponType.Magic,
     icon: getEnkaUI("UI_EquipIcon_Catalyst_Ilmarinen_Awaken"),
     baseAtk: 454,
