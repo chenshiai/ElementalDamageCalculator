@@ -136,6 +136,23 @@ class LawumaData extends Character implements ICharacterInfo {
       target: BuffTarget.Self,
     },
     {
+      label: "奉向霜夜的明光",
+      describe: `月兆·满辉：施放元素战技后，队伍中附近的所有角色造成的月绽放反应伤害，暴击率提升10%，暴击伤害提升20%`,
+      effect: [
+        {
+          type: BuffType.MoonSwirlCritcal,
+          getValue: () => 10,
+        },
+        {
+          type: BuffType.MoonSwirlCritcalHurt,
+          getValue: () => 20,
+        },
+      ],
+      enable: true,
+      target: BuffTarget.All,
+      shareable: true,
+    },
+    {
       label: "奉向甘泉的沐濯",
       describe: `菈乌玛的每点元素精通，元素战技造成的伤害提升0.04%，通过这种方式至多提升32%。`,
       effect: [
