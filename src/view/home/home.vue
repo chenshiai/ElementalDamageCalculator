@@ -8,45 +8,45 @@ import FourSvg from "./svg.vue";
   <div class="card-group">
     <router-link to="/elemental" class="card active-btn">
       <FourSvg />
+      <img src="/img/shatang.png" alt="" />
       <div>剧变反应计算</div>
       <span>快速查看元素精通的提升效果</span>
-      <img src="/img/shatang.png" alt="" />
     </router-link>
     <router-link to="/moon-electro" class="card active-btn">
       <FourSvg />
+      <img src="/img/inf.png" alt="" />
       <div>月曜反应计算</div>
       <span>计算全队月反应的伤害</span>
-      <img src="/img/inf.png" alt="" />
     </router-link>
     <router-link to="/increasing-range" class="card active-btn">
       <FourSvg />
+      <img src="/img/hutao.png" alt="" />
       <div>单次伤害计算</div>
       <span>自由填入各项数值的计算</span>
-      <img src="/img/hutao.png" alt="" />
     </router-link>
     <router-link to="/cloud-team" class="card active-btn">
       <FourSvg />
-      <div>角色组队计算（BETA）</div>
-      <span>用角色数据进行计算</span>
       <img src="/img/bnt.png" alt="" />
+      <div>角色组队计算</div>
+      <span>用角色数据进行计算</span>
     </router-link>
     <router-link to="/shield" class="card active-btn">
       <FourSvg />
+      <img src="/img/zhongli.png" alt="" />
       <div>护盾承伤计算</div>
       <span>计算护盾的实际吸收量</span>
-      <img src="/img/zhongli.png" alt="" />
     </router-link>
     <router-link to="/character/create" class="card active-btn">
       <FourSvg />
+      <img src="/img/daiyin.png" alt="" />
       <div>创建角色数据</div>
       <span>角色、武器、圣遗物自由搭配</span>
-      <img src="/img/daiyin.png" alt="" />
     </router-link>
     <router-link to="/import" class="card active-btn">
       <FourSvg />
+      <img src="/img/paimeng.png" alt="" />
       <div>游戏数据导入</div>
       <span>导入玩家的角色培养数据</span>
-      <img src="/img/paimeng.png" alt="" />
     </router-link>
   </div>
 </template>
@@ -56,6 +56,7 @@ import FourSvg from "./svg.vue";
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(2, 1fr);
+  gap: 12px;
 }
 @media screen and (max-width: 920px) {
   .card-group {
@@ -65,13 +66,13 @@ import FourSvg from "./svg.vue";
 }
 @media screen and (max-width: 670px) {
   .card-group {
-    display: block;
+    grid-template-columns: 1fr;
+    padding: 0 8px;
   }
 }
 
 .card {
   display: block;
-  margin: 16px;
   padding: 24px;
   position: relative;
   border-radius: 8px;
@@ -105,12 +106,9 @@ import FourSvg from "./svg.vue";
 }
 
 .card > img {
-  position: absolute;
-  top: 0;
-  z-index: 1;
-  top: 15%;
-  height: 70%;
-  right: 20px;
+  float: left;
+  width: 50px;
+  margin-right: 20px;
 }
 </style>
 

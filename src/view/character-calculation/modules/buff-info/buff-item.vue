@@ -129,9 +129,6 @@ const buffStatusChange = () => {
   border: 1px solid var(--border);
   border-radius: 4px;
 }
-.buff-details-summary:hover {
-  background-color: var(--bg);
-}
 .buff-details-summary::before {
   content: "";
   position: absolute;
