@@ -65,7 +65,7 @@ const showLeft = ref(false);
 }
 
 .main-content {
-    padding: 60px 16px 0;
+  padding: 60px 16px 0;
 }
 .side-navigator-wrap {
   display: none;
@@ -83,7 +83,7 @@ const showLeft = ref(false);
   margin-bottom: 12px;
   line-height: 26px;
 }
-@media screen and (min-width: 768px)  {
+@media screen and (min-width: 768px) {
   .main-content {
     /* padding: 46px 46px 0; */
   }

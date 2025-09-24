@@ -6,6 +6,24 @@ import FourSvg from "./svg.vue";
 <template>
   <TabTitle>原神数值计算工具</TabTitle>
   <div class="card-group">
+    <router-link to="/character/create" class="card active-btn">
+      <FourSvg />
+      <img src="/img/daiyin.png" alt="" />
+      <div>创建角色数据</div>
+      <span>角色、武器、圣遗物自由搭配</span>
+    </router-link>
+    <router-link to="/import" class="card active-btn">
+      <FourSvg />
+      <img src="/img/paimeng.png" alt="" />
+      <div>游戏数据导入</div>
+      <span>导入玩家的角色培养数据</span>
+    </router-link>
+    <router-link to="/cloud-team" class="card active-btn">
+      <FourSvg />
+      <img src="/img/bnt.png" alt="" />
+      <div>角色组队计算</div>
+      <span>用角色数据进行计算</span>
+    </router-link>
     <router-link to="/elemental" class="card active-btn">
       <FourSvg />
       <img src="/img/shatang.png" alt="" />
@@ -24,29 +42,11 @@ import FourSvg from "./svg.vue";
       <div>单次伤害计算</div>
       <span>自由填入各项数值的计算</span>
     </router-link>
-    <router-link to="/cloud-team" class="card active-btn">
-      <FourSvg />
-      <img src="/img/bnt.png" alt="" />
-      <div>角色组队计算</div>
-      <span>用角色数据进行计算</span>
-    </router-link>
     <router-link to="/shield" class="card active-btn">
       <FourSvg />
       <img src="/img/zhongli.png" alt="" />
       <div>护盾承伤计算</div>
       <span>计算护盾的实际吸收量</span>
-    </router-link>
-    <router-link to="/character/create" class="card active-btn">
-      <FourSvg />
-      <img src="/img/daiyin.png" alt="" />
-      <div>创建角色数据</div>
-      <span>角色、武器、圣遗物自由搭配</span>
-    </router-link>
-    <router-link to="/import" class="card active-btn">
-      <FourSvg />
-      <img src="/img/paimeng.png" alt="" />
-      <div>游戏数据导入</div>
-      <span>导入玩家的角色培养数据</span>
     </router-link>
   </div>
 </template>

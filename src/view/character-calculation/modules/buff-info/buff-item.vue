@@ -124,7 +124,7 @@ const buffStatusChange = () => {
   position: absolute;
   right: 8px;
   top: 6px;
-  width: 24px;
+  width: 44px;
   height: 24px;
   border: 1px solid var(--border);
   border-radius: 4px;
@@ -135,7 +135,7 @@ const buffStatusChange = () => {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 60%;
+  width: 30%;
   height: 2px;
   background-color: var(--border);
 }
@@ -146,7 +146,7 @@ const buffStatusChange = () => {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) rotate(90deg);
-  width: 60%;
+  width: 30%;
   height: 2px;
   background-color: var(--border);
 }

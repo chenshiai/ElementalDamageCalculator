@@ -281,10 +281,10 @@ const deleteLocalData = (item: IRelicItem) => {
     </template>
     <template v-else>
       <div class="set-relic-title">
-        <span @click="setStatBase = null">切换圣遗物</span>
-        <span><img v-lazy="setStatBase.icon" />{{ setStatBase.name }}</span>
         <span v-if="relicList[selectedPartIndex]" class="set-relic-title__close" @click="removeRelic">卸下圣遗物</span>
         <span v-else class="set-relic-title__close" @click="closePopup">取消编辑</span>
+        <span><img v-lazy="setStatBase.icon" />{{ setStatBase.name }}</span>
+        <span @click="setStatBase = null">切换圣遗物</span>
       </div>
       <Tabs class="relic-tabs" type="card" v-model:active="selectStatus">
         <Tab title="选择主属性">
