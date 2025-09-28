@@ -51,8 +51,9 @@ const fmt = computed(() => {
       }
 
       // 移除百分号并转换为数值
+      // 使用正则表达式移除所有中文字符
       const numValue = Number(
-        item.replace("%", "").replace("元素精通", "").replace("攻击力", "").replace("防御力", "").replace("生命值上限", "")
+        item.replace(/%|[\u4e00-\u9fa5]/g, "")
       );
 
       // 处理无效数字情况
@@ -92,27 +93,19 @@ const fmt2 = computed(() => {
       }
       a.push(
         Number(
-          (
-            item
-              .split(mode.value)[0]
-              .replace("%", "")
-              .replace("元素精通", "")
-              .replace("攻击力", "")
-              .replace("防御力", "")
-              .replace("生命值上限", "") / 100
+          // 使用正则表达式移除所有中文字符
+          (item
+            .split(mode.value)[0]
+            .replace(/%|[\u4e00-\u9fa5]/g, "") / 100
           ).toFixed(6)
         )
       );
       b.push(
         Number(
-          (
-            item
-              .split(mode.value)[1]
-              .replace("%", "")
-              .replace("元素精通", "")
-              .replace("攻击力", "")
-              .replace("防御力", "")
-              .replace("生命值上限", "") / (mode2.value === "1" ? 1 : 100)
+          // 使用正则表达式移除所有中文字符
+          (item
+            .split(mode.value)[1]
+            .replace(/%|[\u4e00-\u9fa5]/g, "") / (mode2.value === "1" ? 1 : 100)
           ).toFixed(6)
         )
       );
