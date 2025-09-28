@@ -16,41 +16,64 @@ export class MonaData extends Character implements ICharacterInfo {
   talentNames = ["因果点破", "水中幻愿", "星命定轨"];
   normalAttack = [
     action("一段伤害", AttackType.Normal, ElementType.Hydro, {
-      atk: [0.376, 0.404, 0.432, 0.47, 0.498, 0.526, 0.564, 0.602, 0.639, 0.677, 0.714],
+      atk: [
+        0.376, 0.4042, 0.4324, 0.47, 0.4982, 0.5264, 0.564, 0.6016, 0.6392, 0.6768, 0.7144, 0.752, 0.799, 0.846, 0.893,
+      ],
     }),
     action("二段伤害", AttackType.Normal, ElementType.Hydro, {
-      atk: [0.36, 0.387, 0.414, 0.45, 0.477, 0.504, 0.54, 0.576, 0.612, 0.648, 0.684],
+      atk: [0.36, 0.387, 0.414, 0.45, 0.477, 0.504, 0.54, 0.576, 0.612, 0.648, 0.684, 0.72, 0.765, 0.81, 0.855],
     }),
     action("三段伤害", AttackType.Normal, ElementType.Hydro, {
-      atk: [0.448, 0.482, 0.515, 0.56, 0.594, 0.627, 0.672, 0.717, 0.762, 0.806, 0.851],
+      atk: [
+        0.448, 0.4816, 0.5152, 0.56, 0.5936, 0.6272, 0.672, 0.7168, 0.7616, 0.8064, 0.8512, 0.896, 0.952, 1.008, 1.064,
+      ],
     }),
     action("四段伤害", AttackType.Normal, ElementType.Hydro, {
-      atk: [0.562, 0.604, 0.646, 0.702, 0.744, 0.786, 0.842, 0.899, 0.955, 1.01, 1.07],
+      atk: [
+        0.5616, 0.60372, 0.64584, 0.702, 0.74412, 0.78624, 0.8424, 0.89856, 0.95472, 1.01088, 1.06704, 1.1232, 1.1934,
+        1.2636, 1.3338,
+      ],
     }),
     action("重击", AttackType.Strong, ElementType.Hydro, {
-      atk: [1.5, 1.61, 1.72, 1.87, 1.98, 2.1, 2.25, 2.4, 2.55, 2.69, 2.85],
+      atk: [
+        1.4972, 1.60949, 1.72178, 1.8715, 1.98379, 2.09608, 2.2458, 2.39552, 2.54524, 2.69496, 2.850669, 3.054288,
+        3.257907, 3.461526, 3.665146,
+      ],
     }),
     action("下坠期间伤害", AttackType.FallPeriod, ElementType.Hydro, {
-      atk: [0.568, 0.615, 0.661, 0.727, 0.773, 0.826, 0.899, 0.971, 1.04, 1.12, 1.203],
+      atk: [
+        0.568288, 0.614544, 0.6608, 0.72688, 0.773136, 0.826, 0.898688, 0.971376, 1.044064, 1.12336, 1.202656, 1.281952,
+        1.361248, 1.440544, 1.51984,
+      ],
     }),
     action("低空坠地冲击伤害", AttackType.Falling, ElementType.Hydro, {
-      atk: [1.14, 1.23, 1.32, 1.45, 1.55, 1.65, 1.8, 1.94, 2.09, 2.25, 2.4],
+      atk: [
+        1.136335, 1.228828, 1.32132, 1.453452, 1.545944, 1.65165, 1.796995, 1.94234, 2.087686, 2.246244, 2.404802,
+        2.563361, 2.721919, 2.880478, 3.039036,
+      ],
     }),
     action("高空坠地冲击伤害", AttackType.Falling, ElementType.Hydro, {
-      atk: [1.42, 1.53, 1.65, 1.82, 1.93, 2.06, 2.24, 2.43, 2.61, 2.81, 3],
+      atk: [
+        1.419344, 1.534872, 1.6504, 1.81544, 1.930968, 2.063, 2.244544, 2.426088, 2.607632, 2.80568, 3.003728, 3.201776,
+        3.399824, 3.597872, 3.79592,
+      ],
     }),
   ];
   elementSkill = [
     action("持续伤害", AttackType.Skill, ElementType.Hydro, {
-      atk: [0.32, 0.344, 0.368, 0.4, 0.424, 0.448, 0.48, 0.512, 0.544, 0.576, 0.608, 0.64, 0.68],
+      atk: [0.32, 0.344, 0.368, 0.4, 0.424, 0.448, 0.48, 0.512, 0.544, 0.576, 0.608, 0.64, 0.68, 0.72, 0.76],
     }),
     action("爆裂伤害", AttackType.Skill, ElementType.Hydro, {
-      atk: [1.33, 1.43, 1.53, 1.66, 1.76, 1.86, 1.99, 2.12, 2.26, 2.39, 2.52, 2.66, 2.82],
+      atk: [
+        1.328, 1.4276, 1.5272, 1.66, 1.7596, 1.8592, 1.992, 2.1248, 2.2576, 2.3904, 2.5232, 2.656, 2.822, 2.988, 3.154,
+      ],
     }),
   ];
   burstSkill = [
     action("泡影破裂伤害", AttackType.Burst, ElementType.Hydro, {
-      atk: [4.42, 4.76, 5.09, 5.53, 5.86, 6.19, 6.64, 7.08, 7.52, 7.96, 8.41, 8.85, 9.4, 9.95],
+      atk: [
+        4.424, 4.7558, 5.0876, 5.53, 5.8618, 6.1936, 6.636, 7.0784, 7.5208, 7.9632, 8.4056, 8.848, 9.401, 9.954, 10.507,
+      ],
     }),
   ];
   otherSkill = [];
@@ -71,11 +94,12 @@ export class MonaData extends Character implements ICharacterInfo {
         {
           type: BuffType.GlobalPrcent,
           getValue: (data) => {
-            return [42, 44, 46, 48, 50, 52, 54, 56, 58, 60, 60, 60, 60, 60][data.burstLevel + data.burstLevelAdd - 1];
+            return [42, 44, 46, 48, 50, 52, 54, 56, 58, 60, 60, 60, 60, 60, 60][data.burstLevel + data.burstLevelAdd - 1];
           },
+          actionOn: ActionOn.Indirect,
         },
       ],
-      enable: false,
+      enable: true,
       shareable: true,
       target: BuffTarget.All,
     },
@@ -83,7 +107,7 @@ export class MonaData extends Character implements ICharacterInfo {
       label: "1命·沉没的预言",
       describe: "队伍中自己的角色攻击命中处于星异状态下的敌人后，蒸发反应造成的伤害提升15%",
       effect: [{ type: BuffType.AmplifiedRate, getValue: () => 15 }],
-      enable: false,
+      enable: true,
       shareable: true,
       target: BuffTarget.All,
       condition: ({ constellation }) => constellation >= 1,
@@ -93,7 +117,7 @@ export class MonaData extends Character implements ICharacterInfo {
       label: "4命·沉没的预言",
       describe: "队伍中所有角色攻击处于星异状态下的敌人时，暴击率提升15%",
       effect: [{ type: BuffType.GlobalCritcal, getValue: () => 15 }],
-      enable: false,
+      enable: true,
       shareable: true,
       target: BuffTarget.All,
       condition: ({ constellation }) => constellation >= 4,

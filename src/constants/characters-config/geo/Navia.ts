@@ -52,7 +52,7 @@ export class NaviaData extends Character implements ICharacterInfo {
         2.8667, 3.0245,
       ],
     }),
-    action("下落期间伤害", AttackType.FallPeriod, ElementType.Physical, {
+    action("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
       atk: [
         0.745878, 0.806589, 0.8673, 0.95403, 1.014741, 1.084125, 1.179528, 1.274931, 1.370334, 1.47441, 1.578486,
         1.682562, 1.786638, 1.890714, 1.99479,

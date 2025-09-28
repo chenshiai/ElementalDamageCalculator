@@ -33,7 +33,7 @@ export class GamingData extends Character implements ICharacterInfo {
     action("重击终结伤害", AttackType.Strong, ElementType.Physical, {
       atk: [1.13, 1.22, 1.32, 1.45, 1.54, 1.64, 1.79, 1.93, 2.08, 2.24, 2.39],
     }),
-    action("下落期间伤害", AttackType.FallPeriod, ElementType.Physical, {
+    action("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
       atk: [0.641, 0.694, 0.746, 0.82, 0.873, 0.932, 1.014, 1.096, 1.178, 1.268, 1.358],
     }),
     action("低空坠地冲击伤害", AttackType.Falling, ElementType.Physical, {
