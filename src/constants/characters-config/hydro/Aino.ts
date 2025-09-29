@@ -1,12 +1,12 @@
 import Character from "../character-class";
 import { IBuffBase, ICharacterInfo } from "@/types/interface";
-import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
+import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, SecondElementType, WeaponType } from "@/types/enum";
 import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 import { A_80_MYSTERY_96, Constellation_E_5, Constellation_Q_3 } from "../buffs";
 
 @EnKaId(10000121, "爱诺")
 @Weapon(WeaponType.GreatSword)
-@Element(ElementType.Hydro)
+@Element(ElementType.Hydro, SecondElementType.Moon)
 @BaseData(Rarity.Four, [11201, 242, 607], 50, [11976, 304, 649])
 @Icons("UI_AvatarIcon_Aino")
 class AinoData extends Character implements ICharacterInfo {
