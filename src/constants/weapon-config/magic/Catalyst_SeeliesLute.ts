@@ -6,7 +6,7 @@ import { getEnkaUI } from "@/utils/decorator";
 export const Catalyst_SeeliesLute = createWeapon(
   {
     name: "天光的纺琴",
-    enkaId: 123123123,
+    enkaId: 14432,
     weaponType: WeaponType.Magic,
     icon: getEnkaUI("UI_EquipIcon_Catalyst_SeeliesLute_Awaken"),
     baseAtk: 510,
