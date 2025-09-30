@@ -484,7 +484,7 @@ const damageResult = computed(() => {
 }
 .element-img {
   display: flex;
-  min-width: 44px;
+  width: 44px;
   height: 44px;
   border-radius: 50%;
   border: solid 2px var(--border);

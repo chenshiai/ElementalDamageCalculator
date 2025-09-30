@@ -48,6 +48,12 @@ import FourSvg from "./svg.vue";
       <div>护盾承伤计算</div>
       <span>计算护盾的实际吸收量</span>
     </router-link>
+    <router-link to="/question-answer" class="card active-btn">
+      <FourSvg />
+      <img src="/img/aino.png" alt="" />
+      <div>问题与反馈</div>
+      <span>一些小说明以及反馈渠道</span>
+    </router-link>
   </div>
 </template>
 

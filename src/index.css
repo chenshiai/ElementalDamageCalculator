@@ -231,8 +231,6 @@ q {
 .bg-pyro {
   background-color: var(--bg-pyro);
 }
-summary {
-}
 summary::marker {
   font-size: 0;
 }
@@ -262,7 +260,7 @@ summary::-webkit-details-marker {
     scale: 1.02;
   }
   &:active {
-    scale: 0.98;
+    scale: 0.99;
   }
 }
 input::-webkit-outer-spin-button,

@@ -33,9 +33,9 @@
       >
         <img src="/img/git.png" />
       </a>
-      @ChenShiAi
+      <a href="https://space.bilibili.com/76824065">@ChenShiAi</a>
     </div>
-    第三方资源&数据来源：
+    <!-- 第三方资源&数据来源：
     <div>
       <a href="https://enka.network/" target="_blank">
         <img src="https://img.shields.io/badge/enka.network-原神角色数据卡-405873" />
@@ -48,7 +48,7 @@
       <a href="https://baike.mihoyo.com/ys/strategy" target="_blank">
         <img src="https://img.shields.io/badge/米游社-原神观测枢-blue" />
       </a>
-    </div>
+    </div> -->
   </Popup>
 </template>
 

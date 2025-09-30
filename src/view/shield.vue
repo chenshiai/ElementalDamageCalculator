@@ -5,7 +5,7 @@
     <div class="base-data-item">
       <span class="base-damage__title">基础属性值</span>
       <Stepper v-model="data.baseData" input-width="66px" integer button-size="20" theme="round" min="0" max="99999" />
-      <span class="holy-relic-tips">角色的攻击力、防御力、生命值</span>
+      <span class="holy-relic-tips">角色的攻击力、防御力、生命值或元素精通</span>
     </div>
     <div class="base-data-item">
       <span class="base-damage__title">技能倍率%</span>
