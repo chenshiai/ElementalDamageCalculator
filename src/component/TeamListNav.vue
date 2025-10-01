@@ -82,7 +82,7 @@ onMounted(() => {
 @media screen and (min-width: 1200px) {
   .team-list-nav {
     display: block;
-    margin-left: 900px;
+    margin-left: 1000px;
     position: fixed;
     top: 60px;
   }

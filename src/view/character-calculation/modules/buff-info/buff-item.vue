@@ -90,7 +90,7 @@ const buffStatusChange = () => {
 }
 .buff-label-text {
   color: var(--main-text);
-  padding-right: 30px;
+  padding-right: 50px;
 }
 
 .buff-description {
