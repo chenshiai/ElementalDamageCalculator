@@ -37,7 +37,6 @@ const route = createRouter({
       component: CharacterCalculation,
     },
     { path: "/moon-electro", component: MoonElectro },
-    { path: "/about-author", component: AboutAuthor }
   ],
 });
 

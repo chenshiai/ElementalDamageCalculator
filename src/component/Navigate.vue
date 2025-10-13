@@ -10,7 +10,6 @@
     <router-link to="/increasing-range" class="top-tabs__item">单次伤害计算</router-link>
     <router-link to="/shield" class="top-tabs__item">护盾承伤计算</router-link>
     <router-link to="/question-answer" class="top-tabs__item">问题与反馈</router-link>
-    <router-link to="/about-author" class="top-tabs__item">关于作者</router-link>
   </nav>
 </template>
 
