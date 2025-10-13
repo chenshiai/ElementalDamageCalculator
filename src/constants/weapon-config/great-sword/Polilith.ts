@@ -10,7 +10,7 @@ class PolilithData extends Weapon implements IWeaponInfo {
   constructor() {
     super();
   }
-  getSkillDescribe(affix = 1) {
+  getSkillDescribe = (affix = 1) => {
     let a = [12, 15, 18, 21, 24][affix - 1];
     let b = [60, 75, 90, 105, 120][affix - 1];
     return {
@@ -18,7 +18,7 @@ class PolilithData extends Weapon implements IWeaponInfo {
       text: highlight`触发感电、月感电或绽放反应时，恢复${a}点元素能量，并在接下来的15秒内使元素精通提升${b}点。该效果每15秒至多触发一次。装备者处于队伍后台时，依然能触发上述效果。`,
     };
   }
-  getBuffs(affix = 1) {
+  getBuffs = (affix = 1) => {
     let b = [60, 75, 90, 105, 120][affix - 1];
     return [
       {

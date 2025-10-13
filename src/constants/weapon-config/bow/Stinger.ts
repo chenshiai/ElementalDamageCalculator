@@ -10,17 +10,17 @@ class StingerData extends Weapon implements IWeaponInfo {
   constructor() {
     super();
   }
-  getSkillDescribe(affix = 1) {
+  getSkillDescribe = (affix = 1) => {
     let a = [40, 50, 60, 70, 80][affix - 1] + "%";
     return {
       title: "静发",
       text: highlight`攻击命中敌人时，在目标位置基于生命值上限的${a}，造成范围伤害。该效果每15秒至多触发一次。`,
     };
   }
-  getBuffs() {
+  getBuffs = () => {
     return [];
   }
-  getSkill(affix = 1) {
+  getSkill = (affix = 1) => {
     let a = [40, 50, 60, 70, 80][affix - 1] / 100;
     return [
       {
