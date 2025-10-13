@@ -335,25 +335,48 @@ export interface ICalculatorValue {
   /** 生命之契 */
   [BuffType.LifeContract]: number;
 
-  /** 普攻倍率提升 */
+  /** 普攻倍率最终提升% */
   [BuffType.NormalRate]: number;
-  /** 重击倍率提升 */
+  /** 重击倍率最终提升% */
   [BuffType.StrongRate]: number;
-  /** 下落攻击倍率提升 */
+  /** 下落攻击倍率最终提升% */
   [BuffType.FallingRateAdd]: number;
-  /** 元素战技倍率提升 */
+  /** 元素战技倍率最终提升% */
   [BuffType.SkillRate]: number;
-  /** 元素爆发倍率提升 */
+  /** 元素爆发倍率最终提升% */
   [BuffType.BurstRate]: number;
-  /** 月感电倍率提升 */
+  /** 月感电倍率最终提升% */
   [BuffType.MoonElectroRate]: number;
-  /** 月绽放倍率提升 */
+  /** 月绽放倍率最终提升% */
   [BuffType.MoonSwirlRate]: number;
 
-  /** 月感电擢升 */
+  /** 普攻倍率加成 */
+  [BuffType.NormalAdd]: number;
+  /** 重击倍率加成 */
+  [BuffType.StrongAdd]: number;
+  /** 下落攻击倍率加成 */
+  [BuffType.FallingAdd]: number;
+  /** 元素战技倍率加成 */
+  [BuffType.SkillAdd]: number;
+  /** 元素爆发倍率加成 */
+  [BuffType.BurstAdd]: number;
+  /** 攻击力倍率加成 - 该buff需要指定为独特buff，否则全技能生效 */
+  [BuffType.AtkAdd]: number;
+  /** 防御力倍率加成 - 该buff需要指定为独特buff，否则全技能生效  */
+  [BuffType.DefAdd]: number;
+  /** 生命值倍率加成 - 该buff需要指定为独特buff，否则全技能生效  */
+  [BuffType.HPAdd]: number;
+  /** 元素精通倍率加成 - 该buff需要指定为独特buff，否则全技能生效  */
+  [BuffType.EmAdd]: number;
+
+  /** 月感电擢升% */
   [BuffType.MoonElectroPromote]: number;
-  /** 月绽放擢升 */
+  /** 月绽放擢升% */
   [BuffType.MoonSwirlPromote]: number;
+  /** 月感电基础伤害提升% */
+  [BuffType.MoonElectroBasePercent]: number;
+  /** 月绽放基础伤害提升% */
+  [BuffType.MoonSwirlBasePercent]: number;
 
   /** 普攻天赋等级加成 */
   [BuffType.NormalLevel]: number;

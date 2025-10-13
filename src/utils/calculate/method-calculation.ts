@@ -29,8 +29,18 @@ type MoreData = {
   shieldAdd: number;
   /** 额外技能倍率 */
   extraRate: number;
-  /** 月曜反应擢升 */
+  /** 月曜反应擢升% */
   moonPromote: number;
+  /** 月曜反应基础伤害提升% */
+  moonBasePercent: number;
+  /** 攻击力倍率加成 */
+  atkAdd: number;
+  /** 防御力倍率加成 */
+  defAdd: number;
+  /** 生命值倍率加成 */
+  hpAdd: number;
+  /** 元素精通倍率加成 */
+  emAdd: number;
 };
 
 /**
@@ -59,6 +69,11 @@ function getMoreDataBySwitch(
   let shieldAdd = 0;
   let moonAddHunt = calculatorValue[BuffType.GlobalMoonPrcent] || 0;
   let moonPromote = 0;
+  let moonBasePercent = 0;
+  let atkAdd = calculatorValue[BuffType.AtkAdd] || 0;
+  let defAdd = calculatorValue[BuffType.DefAdd] || 0;
+  let hpAdd = calculatorValue[BuffType.HPAdd] || 0;
+  let emAdd = calculatorValue[BuffType.EmAdd] || 0;
 
   // 处理攻击类型的加成
   switch (attackType) {
@@ -215,6 +230,7 @@ function getMoreDataBySwitch(
       critical += calculatorValue[BuffType.ElectroCritcal] || 0;
       resistance += calculatorValue[BuffType.EnemyElectroResistance] || 0;
       addRate += calculatorValue[BuffType.MoonElectroRate] || 0;
+      moonBasePercent += calculatorValue[BuffType.MoonElectroBasePercent] || 0;
       moonAddHunt += calculatorValue[BuffType.MoonElectroPrcent] || 0;
       moonPromote += calculatorValue[BuffType.MoonElectroPromote] || 0;
       break;
@@ -227,8 +243,9 @@ function getMoreDataBySwitch(
       critical += calculatorValue[BuffType.MoonSwirlCritcal] || 0;
       critical += calculatorValue[BuffType.DendroCritcal] || 0;
       resistance += calculatorValue[BuffType.EnemyDendroResistance] || 0;
-      moonAddHunt += calculatorValue[BuffType.MoonSwirlPrcent] || 0;
       addRate += calculatorValue[BuffType.MoonSwirlRate] || 0;
+      moonBasePercent += calculatorValue[BuffType.MoonSwirlBasePercent] || 0;
+      moonAddHunt += calculatorValue[BuffType.MoonSwirlPrcent] || 0;
       moonPromote += calculatorValue[BuffType.MoonSwirlPromote] || 0;
       break;
   }
@@ -247,6 +264,11 @@ function getMoreDataBySwitch(
     extraRate,
     moonAddHunt,
     moonPromote,
+    moonBasePercent,
+    atkAdd,
+    defAdd,
+    hpAdd,
+    emAdd,
   };
 }
 
@@ -282,6 +304,11 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
     extraRate,
     moonAddHunt,
     moonPromote,
+    moonBasePercent,
+    atkAdd,
+    defAdd,
+    hpAdd,
+    emAdd,
   } = getMoreDataBySwitch(calculatorValue, attackType, elementType, calculatorValue.weapon);
 
   /** 计算独特buff的加成 */
@@ -305,25 +332,30 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
     extraRate += specialData.extraRate;
     moonAddHunt += specialData.moonAddHunt;
     moonPromote += specialData.moonPromote;
+    moonBasePercent += specialData.moonBasePercent;
+    atkAdd += specialData.atkAdd;
+    defAdd += specialData.defAdd;
+    hpAdd += specialData.hpAdd;
+    emAdd += specialData.emAdd;
   }
 
   /** 基础伤害 */
   let BASE_DMG = 0;
   if (rate.atk) {
     const atk = calculatorValue.baseATK + calculatorValue.extraATK + calculatorValue.extraATK_NT;
-    BASE_DMG += atk * (rate.atk[level - 1] + extraRate) * (1 + addRate / 100);
+    BASE_DMG += atk * (rate.atk[level - 1] + extraRate + atkAdd) * (1 + addRate / 100);
   }
   if (rate.def) {
     const def = calculatorValue.baseDEF + calculatorValue.extraDEF + calculatorValue.extraDEF_NT;
-    BASE_DMG += def * (rate.def[level - 1] + extraRate) * (1 + addRate / 100);
+    BASE_DMG += def * (rate.def[level - 1] + extraRate + defAdd) * (1 + addRate / 100);
   }
   if (rate.hp) {
     const hp = calculatorValue.baseHP + calculatorValue.extraHP + calculatorValue.extraHP_NT;
-    BASE_DMG += hp * (rate.hp[level - 1] + extraRate) * (1 + addRate / 100);
+    BASE_DMG += hp * (rate.hp[level - 1] + extraRate + hpAdd) * (1 + addRate / 100);
   }
   const em = calculatorValue.elementalMystery + calculatorValue.elementalMystery_NT;
   if (rate.em) {
-    BASE_DMG += em * (rate.em[level - 1] + extraRate) * (1 + addRate / 100);
+    BASE_DMG += em * (rate.em[level - 1] + extraRate + emAdd) * (1 + addRate / 100);
   }
   if (rate.fixed) {
     BASE_DMG += rate.fixed[level - 1];
@@ -366,7 +398,8 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
   let EVA_DMG = 0;
   /** 月曜擢升伤害 */
   let PROMOTE_DMG = 0;
-  if (newElementType === ElementType.MoonElectro || newElementType === ElementType.MoonSwirl) {
+  if (attackType === AttackType.Moon) {
+    BASE_DMG *= 1 + moonBasePercent / 100;
     // 月曜反应伤害的加成伤害，来自于元素精通的增伤加成，不受传统增伤影响
     // 同时额外的伤害提高不受益于月反应增伤、精通增伤效果，即固定伤害提升。
     MAGNIFICATION_DMG = (BASE_DMG * moonAddHunt) / 100;

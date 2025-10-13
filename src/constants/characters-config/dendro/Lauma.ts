@@ -173,7 +173,7 @@ class LawumaData extends Character implements ICharacterInfo {
         "队伍中的角色触发绽放反应时，将转为触发月绽放反应，且基于菈乌玛的元素精通，提升队伍中角色造成的月绽放反应的基础伤害：每点元素精通都将提升0.0175%月绽放反应的基础伤害，至多通过这种方式提升14%伤害。",
       effect: [
         {
-          type: BuffType.MoonSwirlRate,
+          type: BuffType.MoonSwirlBasePercent,
           getValue: (data) => Math.min(14, (data.elementalMystery + data.elementalMystery_NT) * 0.0175),
           actionOn: ActionOn.External,
         },

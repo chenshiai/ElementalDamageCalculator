@@ -200,7 +200,7 @@ class FlinsData extends Character implements ICharacterInfo {
         "队伍中的角色触发感电反应时，将转为触发月感电反应，且基于菲林斯的攻击力，提升月感电反应的基础伤害：每100点攻击力都将提升0.7%基础伤害，至多通过这种方式提升14%伤害。",
       effect: [
         {
-          type: BuffType.MoonElectroRate,
+          type: BuffType.MoonElectroBasePercent,
           getValue: (data) => Math.min(14, ((data.baseATK + data.extraATK + data.extraATK_NT) / 100) * 0.7),
           actionOn: ActionOn.External,
         },

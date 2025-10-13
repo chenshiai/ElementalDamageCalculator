@@ -9,7 +9,7 @@ import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decora
 @EnKaId(10000069, "nnn")
 @Weapon(WeaponType.Bow)
 @Element(ElementType.Hydro)
-@BaseData(Rarity.Five, 0, 0, 0, 0)
+@BaseData(Rarity.Five,[ 0, 0, 0], 0, [0,0,0])
 @Icons("cccccccccccc")
 class XXXXXData extends Character implements ICharacterInfo {
   constructor() {

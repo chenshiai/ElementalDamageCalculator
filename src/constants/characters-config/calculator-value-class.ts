@@ -129,12 +129,18 @@ class CalculatorValue implements ICalculatorValue {
 
   moonElectroPromote: number = 0;
   moonSwirlPromote: number = 0;
+  moonElectroBasePercent: number = 0;
+  moonSwirlBasePercent: number = 0;
 
   burstAdd: number = 0;
   skillAdd: number = 0;
   normalAdd: number = 0;
   strongAdd: number = 0;
   fallingAdd: number = 0;
+  atkAdd: number = 0;
+  defAdd: number = 0;
+  hpAdd: number = 0;
+  emAdd: number = 0;
 
   normalLevel: number = 0;
   skillLevel: number = 0;

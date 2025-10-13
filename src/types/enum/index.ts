@@ -291,6 +291,10 @@ export enum BuffType {
   MoonElectroPromote = "moonElectroPromote",
   /** 月绽放擢升% */
   MoonSwirlPromote = "moonSwirlPromote",
+  /** 月感电基础伤害提升% */
+  MoonElectroBasePercent = "moonElectroBasePercent",
+  /** 月绽放基础伤害提升% */
+  MoonSwirlBasePercent = "moonSwirlBasePercent",
 
   /** 普攻倍率最终提升 */
   NormalRate = "normalRateAdd",
@@ -317,6 +321,14 @@ export enum BuffType {
   SkillAdd = "skillAdd",
   /** 元素爆发倍率加成 */
   BurstAdd = "burstAdd",
+  /** 攻击力倍率加成 - 该buff需要指定为独特buff，否则全技能生效 */
+  AtkAdd = "atkAdd",
+  /** 防御力倍率加成 - 该buff需要指定为独特buff，否则全技能生效 */
+  DefAdd = "defAdd",
+  /** 生命值倍率加成 - 该buff需要指定为独特buff，否则全技能生效 */
+  HPAdd = "hpAdd",
+  /** 元素精通倍率加成 - 该buff需要指定为独特buff，否则全技能生效 */
+  EmAdd = "emAdd",
   
   /** 生命之契 */
   LifeContract = "lifeContract",
