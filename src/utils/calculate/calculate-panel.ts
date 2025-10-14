@@ -6,16 +6,27 @@ import CalculatorValueClass from "@/constants/characters-config/calculator-value
 import { IRelicItem } from "@/constants/relics-config/relic-class";
 
 interface ICalculatorPanelArgs {
+  /** 角色数据 */
   characterInfo: ICharacterInfo;
+  /** 命之座 */
   constellation: number;
+  /** 角色增益 */
   characterBuffs: IBuffBase[];
+  /** 武器数据 */
   weapon: IWeaponInfo;
+  /** 武器增益 */
   weaponBuffs: IBuffBase[];
+  /** 队伍增益 */
   buffs: IBuffBase[];
+  /** 圣遗物增益 */
   relicBuffs: IBuffBase[];
+  /** 普攻等级 */
   normalLevel: number;
+  /** 元素战技等级 */
   skillLevel: number;
+  /** 元素爆发等级 */
   burstLevel: number;
+  /** 圣遗物数据 */
   relicList: IRelicItem[];
 }
 /** 加成角色所有属性 */

@@ -41,6 +41,7 @@ const recalculation = (data: IUserSavedCalculationData) => {
   
   router.push({
     path: `/character/edit/${data.title}`,
+    replace: true,
   });
 };
 
@@ -50,12 +51,19 @@ const createCha = () => {
     path: "/character/create",
   });
 }
+const goHome = () => {
+  router.push({
+    path: "/",
+  });
+}
+
 
 // 悬浮球
 const showPopover = ref(false);
 const offset = ref({ x: 20, y: 650 });
 const popoberActions = [
-  { text: "保存当前角色面板", click: saveDataPop },
+  { text: "返回首页", click: goHome },
+  { text: "保存角色", click: saveDataPop },
   { text: "查看存档", click: lookDataPop },
   { text: "创建新角色", click: createCha },
 ];

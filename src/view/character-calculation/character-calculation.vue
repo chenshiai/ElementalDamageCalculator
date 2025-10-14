@@ -170,10 +170,11 @@ const pageTitle = computed(() => {
 });
 
 /** @module 实时更新队伍数据 */
-const changed = () => {
+const changed = (source: string) => {
   if (!characterInfo.value || !weapon.value) return;
   const data = createCalculationData(store.state.teamData.currentEdit);
-
+  console.log('更新队伍数据：', source);
+  
   if (teamIndex.value >= 0) {
     characterJoinTeam(data, teamIndex.value);
   }
@@ -190,14 +191,14 @@ const changed = () => {
         v-model="characterInfo"
         v-model:level-up="levelUp"
         v-model:constellation="constellation"
-        @changed="changed"
+        @changed="changed('角色变更')"
       />
     </div>
     <div class="calculation-section__item">
-      <WeaponInfo v-model="weapon" v-model:affix="affix" @changed="changed" />
+      <WeaponInfo v-model="weapon" v-model:affix="affix" @changed="changed('武器变更')" />
     </div>
   </section>
-  <RelicInfo v-model="relicList" :relic-suit-texts="relicSuitTexts" @changed="changed" />
+  <RelicInfo v-model="relicList" :relic-suit-texts="relicSuitTexts" @changed="changed('圣遗物变更')" />
   <template v-if="characterInfo && weapon">
     <CharacterPanel :character-panel-data="CalculatorValue" :element-type="characterInfo?.element" />
     <section class="calculation-section scroll-y">
@@ -208,7 +209,7 @@ const changed = () => {
           v-model:weapon-buffs="weaponBuffs"
           v-model:relic-buffs="relicBuffs"
           :character-info="characterInfo"
-          @changed="changed"
+          @changed="changed('增益变更')"
         />
       </div>
       <div class="calculation-section-skillinfo">
@@ -220,7 +221,7 @@ const changed = () => {
           v-model:normalLevel="normalLevel"
           v-model:skillLevel="skillLevel"
           v-model:burstLevel="burstLevel"
-          @changed="changed"
+          @changed="changed('技能变更')"
         />
       </div>
     </section>

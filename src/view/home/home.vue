@@ -1,6 +1,29 @@
 <script setup>
 import TabTitle from "@/component/TabTitle.vue";
 import FourSvg from "./svg.vue";
+import { showToast } from "vant";
+
+const copy = (text) => {
+  try {
+    if (!navigator.clipboard) {
+      const textArea = document.createElement("textarea");
+      textArea.value = text;
+      // 将文本区域添加到页面
+      document.body.appendChild(textArea);
+      // 选择文本区域中的文本
+      textArea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textArea);
+      showToast("已复制网址到剪贴板！");
+      return;
+    }
+    navigator.clipboard.writeText(text);
+    showToast("已复制网址到剪贴板！");
+  } catch (e) {
+    showToast("复制失败");
+    throw new Error(e);
+  }
+};
 </script>
 
 <template>
@@ -54,6 +77,12 @@ import FourSvg from "./svg.vue";
       <div>问题与反馈</div>
       <span>一些小说明以及反馈渠道</span>
     </router-link>
+    <div to="/question-answer" class="card active-btn" @click="copy('https://saomdpb.com')">
+      <FourSvg />
+      <img src="/img/shatang2.png" alt="" />
+      <div>分享与收藏</div>
+      <span id="url">点击复制网址，https://saomdpb.com</span>
+    </div>
   </div>
 </template>
 

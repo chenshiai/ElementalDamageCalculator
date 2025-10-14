@@ -21,7 +21,7 @@ onMounted(() => {
   <section v-show="store.getters.allTeamList.length > 1" class="team-list-nav">
     <div class="name">当前队伍组成</div>
     <div class="team-list-nav__item" v-for="(item, index) in store.getters.allTeamList" :key="index">
-      <div v-if="item" class="team-list-nav__item-avatar" @click="edit(index)" :title="item.calculation.title">
+      <div v-if="item" class="team-list-nav__item-avatar" @click="edit(index, true)" :title="item.calculation.title">
         <img :src="getAvatarIcon(item.calculation.characterEnkaId)" />
         <img class="team-list-nav__item-element" :src="getElementIcon(item.calculation.panel.element)" alt="" />
       </div>

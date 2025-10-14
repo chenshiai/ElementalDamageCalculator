@@ -43,11 +43,13 @@ const useTeamData = () => {
   const store = useStore();
   const teamList = store.getters.allTeamList as ITeamItem[];
 
-  const edit = (index) => {
+  const edit = (index, replace = false) => {
     sessionStorage.setItem("editCharacter", JSON.stringify(teamList[index].calculation));
     sessionStorage.setItem("editTeamIndex", index);
+
     router.push({
       path: `/character/edit/${encodeURIComponent(teamList[index].calculation.title)}`,
+      replace,
     });
   };
   /** 角色数据入队 */
@@ -79,7 +81,7 @@ const useTeamData = () => {
       data: {
         calculation: result,
         buffMap: map,
-        name: characterInfo.value.name
+        name: characterInfo.value.name,
       },
       index,
     });
