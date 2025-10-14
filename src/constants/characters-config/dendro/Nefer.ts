@@ -14,8 +14,8 @@ import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decora
 import { Constellation_E_3, Constellation_Q_5, S_80_CRITALHUNT_38P } from "../buffs";
 
 @EnKaId(10000122, "奈芙尔")
-@Weapon(WeaponType.Bow)
-@Element(ElementType.Hydro, SecondElementType.Moon)
+@Weapon(WeaponType.Magic)
+@Element(ElementType.Dendro, SecondElementType.Moon)
 @BaseData(Rarity.Five, [12704, 344, 799], 60, [13607, 422, 856])
 @Icons("UI_AvatarIcon_Nefer")
 class NeferData extends Character implements ICharacterInfo {
@@ -253,7 +253,6 @@ class NeferData extends Character implements ICharacterInfo {
         {
           type: BuffType.EmAdd,
           getValue: () => 0.6,
-          actionOn: ActionOn.External,
           special: "Nefer",
         },
       ],

@@ -138,49 +138,48 @@ const replayText = computed(() => {
   </Tabs>
 
   <section class="data-popup__collapse">
-    <details class="data-popup__collapse-item" v-for="item in localDataFilter" :key="item.title">
+    <details name="a" class="data-popup__collapse-item" v-for="item in localDataFilter" :key="item.title">
       <summary class="data-title">
         <div>
           <data>{{ item.title }}</data>
           <div class="first-row">
-            <img :src="getAvatarIcon(item.characterEnkaId)" />
-            <div class="info">
+            <div class="avatar">
+              <img :src="getAvatarIcon(item.characterEnkaId)" />
+              <div class="conts">{{ item.panel.constellation }}</div>
               <div class="name">{{ getCharacterName(item.characterEnkaId) }}</div>
-              <div class="conts">命之座：{{ item.panel.constellation }}</div>
             </div>
-            <img :src="getWeaponIcon(item.weaponEnkaId)" />
-            <div class="info">
+            <div class="weapon">
+              <img class="weapon-icon" :src="getWeaponIcon(item.weaponEnkaId)" />
               <div class="name">{{ getWeaponName(item.weaponEnkaId) }}</div>
-              <div class="conts">精炼：{{ item.affix }}</div>
+              <div class="conts">精炼{{ item.affix }}阶</div>
             </div>
           </div>
         </div>
-        <div>
-          <Icon
-            class="replay"
-            name="passed"
-            size="36"
-            @click.stop="
-              (e) => {
-                e.preventDefault();
-                recalculation(item);
-              }
-            "
-            text="填入"
-          />
-          <Icon
-            class="delete"
-            name="delete-o"
-            size="36"
-            @click.stop="
-              (e) => {
-                e.preventDefault();
-                deleteLocalData(item.title);
-              }
-            "
-            text="删除"
-          />
-        </div>
+        <Icon
+          class="replay"
+          name="add"
+          size="24"
+          @click.stop="
+            (e) => {
+              e.preventDefault();
+              recalculation(item);
+            }
+          "
+          text="填入"
+        />
+        <Icon
+          class="delete"
+          name="delete-o"
+          size="24"
+          @click.stop="
+            (e) => {
+              e.preventDefault();
+              deleteLocalData(item.title);
+            }
+          "
+          text="删除"
+        />
+        <Icon class="eye" size="24" name="eye-o" />
       </summary>
       <div class="second-row">
         <div class="relic-detail" v-for="(relic, index) in getRelics(item.relicList)" :key="index">
@@ -223,15 +222,54 @@ const replayText = computed(() => {
   color: #f51e1e;
   transform: translateY(-50%);
 }
+.data-popup__collapse {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.data-popup__collapse-item {
+  padding: 10px;
+  border-bottom: 1px solid #000000ab;
+}
+.eye {
+  position: absolute;
+  right: 0;
+  display: none;
+}
+.data-popup__collapse-item[open] .eye {
+  display: block;
+}
+.data-popup__collapse-item .data-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+
+  data {
+    width: 100%;
+    font-size: 12px;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
 .replay {
+  position: absolute;
   color: green;
-  margin-right: 10px;
+  bottom: 0;
+  right: 0;
   &:hover {
     background-color: var(--light-text);
   }
+  display: block;
 }
 .delete {
+  position: absolute;
   color: red;
+  top: 0;
+  right: 0;
+  display: block;
   &:hover {
     background-color: var(--light-text);
   }
@@ -248,33 +286,84 @@ const replayText = computed(() => {
   border-radius: 6px;
   padding: 0 6px;
 }
-.container {
-  display: flex;
-  flex-direction: column;
-  padding: 0 16px;
-  gap: 10px; /* 间距 */
-}
-.first-row img {
-  border-radius: 4px;
-  height: 38px;
-  width: 38px;
-  border: 2px solid var(--border);
-}
-
 .first-row {
   display: flex;
   gap: 10px; /* 间距 */
+
+  .weapon {
+    .conts,
+    .name {
+      font-size: 12px;
+    }
+    .weapon-icon {
+      display: block;
+      height: 24px;
+      border: 1px solid #000000ab;
+      border-radius: 4px;
+      width: 24px;
+    }
+  }
+
+  .avatar {
+    position: relative;
+    border-radius: 4px;
+    height: 64px;
+    width: 64px;
+    border: 2px solid #000000ab;
+    img {
+      width: 100%;
+    }
+    .conts,
+    .name {
+      font-size: 12px;
+      text-align: center;
+      background-color: #000000ab;
+      position: absolute;
+      color: #fff;
+    }
+    .name {
+      bottom: 0;
+      width: 100%;
+      line-height: 14px;
+    }
+    .conts {
+      top: 0;
+      right: 0;
+      width: 14px;
+      border-radius: 0 0 0 4px;
+    }
+  }
 }
 
 .second-row {
-  display: grid;
-  gap: 10px;
-  grid-template-columns: repeat(2, 1fr);
+  position: absolute;
   padding: 16px;
+  gap: 10px;
+  width: 100%;
+  left: 0;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  box-sizing: border-box;
+  background-color: #ffffffea;
 }
 @media screen and (min-width: 768px) {
+  .data-popup__collapse {
+    grid-template-columns: repeat(3, 1fr);
+  }
   .second-row {
     grid-template-columns: repeat(3, 1fr);
+  }
+  .data-popup__collapse-item .data-title {
+    data {
+      width: 100%;
+      font-size: 14px;
+    }
+  }
+}
+@media screen and (min-width: 1280px) {
+  .data-popup__collapse {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 .relic-detail {
@@ -287,7 +376,7 @@ const replayText = computed(() => {
   width: 32px;
   padding: 2px;
   box-shadow: inset 0 0 0 2px var(--light-text);
-  border: 2px solid var(--border);
+  border: 2px solid #000000ab;
   background: var(--bg);
 }
 .relic-name {
@@ -350,15 +439,5 @@ const replayText = computed(() => {
   line-height: 20px;
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: 6px;
-}
-.data-popup__collapse-item {
-  border-bottom: 1px solid var(--border);
-  position: relative;
-}
-.data-popup__collapse-item .data-title {
-  padding: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 </style>
