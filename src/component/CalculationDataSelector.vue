@@ -361,6 +361,15 @@ const replayText = computed(() => {
     }
   }
 }
+@media screen and (min-width: 1200px) {
+  .second-row {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 26%;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 @media screen and (min-width: 1280px) {
   .data-popup__collapse {
     grid-template-columns: repeat(4, 1fr);

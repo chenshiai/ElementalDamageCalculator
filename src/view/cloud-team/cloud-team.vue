@@ -140,7 +140,7 @@ const toCreateData = () => {
       答：因为本计算器没做太多限制，先检查一下是否存在不符合实际情况的设置。若确定设置基本正确，仍出现了较大误差，可以联系作者反馈。
     </p>
   </details>
-  <Popup class="data-popup" teleport="#app" v-model:show="show" style="max-height: 80%" position="top">
+  <Popup class="data-popup" teleport="#app" v-model:show="show" style="height: 80%;" position="top">
     <CalculationDataSelector :show-data-popup="show" @recalculation="handleCharacterChange" />
   </Popup>
 </template>

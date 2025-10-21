@@ -177,12 +177,12 @@ class NeferData extends Character implements ICharacterInfo {
   buffs: IBuffBase[] = [
     ...S_80_CRITALHUNT_38P,
     {
-      label: "初始元素精通+200",
-      describe: "奈芙尔自带200点元素精通。",
+      label: "初始元素精通+100",
+      describe: "奈芙尔自带100点元素精通。",
       effect: [
         {
           type: BuffType.MysteryFixed,
-          getValue: () => 200,
+          getValue: () => 100,
         },
       ],
       enable: true,
