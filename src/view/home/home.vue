@@ -81,7 +81,7 @@ const copy = (text) => {
       <FourSvg />
       <img src="/img/shatang2.png" alt="" />
       <div>分享与收藏</div>
-      <span id="url">点击复制网址，https://saomdpb.com</span>
+      <span id="url">点击复制 https://saomdpb.com</span>
     </div>
   </div>
 </template>

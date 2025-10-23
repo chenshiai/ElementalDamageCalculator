@@ -2036,6 +2036,8 @@
     "QualityType": "QUALITY_ORANGE",
     "WeaponType": "WEAPON_POLE"
   },
+  "10000117": {},
+  "10000118": {},
   "10000119": {
     "Element": "Grass",
     "Consts": [
@@ -2089,6 +2091,24 @@
     "SideIconName": "UI_AvatarIcon_Side_Aino",
     "QualityType": "QUALITY_PURPLE",
     "WeaponType": "WEAPON_CLAYMORE"
+  },
+  "10000122": {
+    "Element": "Grass",
+    "Consts": [
+      "UI_Talent_S_Nefer_01",
+      "UI_Talent_S_Nefer_02",
+      "UI_Talent_U_Nefer_01",
+      "UI_Talent_S_Nefer_03",
+      "UI_Talent_U_Nefer_02",
+      "UI_Talent_S_Nefer_04"
+    ],
+    "SkillOrder": [11221, 11222, 11225],
+    "Skills": { "11221": "Skill_A_Catalyst_MD", "11222": "Skill_S_Nefer_01", "11225": "Skill_E_Nefer_01" },
+    "ProudMap": { "11221": 12231, "11222": 12232, "11225": 12239 },
+    "NameTextMapHash": 2745786202,
+    "SideIconName": "UI_AvatarIcon_Side_Nefer",
+    "QualityType": "QUALITY_ORANGE",
+    "WeaponType": "WEAPON_CATALYST"
   },
   "10000901": {
     "Element": "Fire",
@@ -2144,6 +2164,8 @@
     "QualityType": "QUALITY_ORANGE",
     "WeaponType": "WEAPON_POLE"
   },
+  "10000998": {},
+  "10000999": {},
   "11000046": {
     "Element": "Ice",
     "Consts": [
@@ -2162,6 +2184,8 @@
     "QualityType": "QUALITY_PURPLE",
     "WeaponType": "WEAPON_CLAYMORE"
   },
+  "11000998": {},
+  "11000999": {},
   "10000005-502": {
     "Element": "Fire",
     "Consts": [

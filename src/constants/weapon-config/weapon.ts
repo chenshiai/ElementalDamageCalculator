@@ -9,6 +9,9 @@ import * as magic from "./magic/0";
 import * as greatsword from "./great-sword/0";
 
 export const Weapons: IWeaponInfo[] = [
+  polearms.Pole_Krivule,
+  magic.Catalyst_Ziedas,
+  magic.Catalyst_Sistrum,
   sword.Sword_Miekka,
   bow.Bow_Ilmarinen,
   polearms.Pole_Ilmarinen,

@@ -140,11 +140,16 @@ export class BaizhuerData extends Character implements ICharacterInfo {
     {
       label: "在地为化",
       describe:
-        "受到无郤气护盾治疗的角色，将获得「木运之岁」效果：基于白术生命值上限不超过50000点的部分，每1000点将使该角色触发的超激化、蔓激化反应带来的伤害提升提高0.8%",
+        "受到无郤气护盾治疗的角色，将获得「木运之岁」效果：基于白术生命值上限不超过50000点的部分，每1000点将使该角色触发的超激化、蔓激化反应带来的伤害提升提高0.8%，月绽放反应伤害提升0.7%",
       effect: [
         {
           type: BuffType.CatalyzeRate,
           getValue: (data) => Math.min(40, ((data.baseHP + data.extraHP + data.extraHP_NT) / 1000) * 0.8),
+          actionOn: ActionOn.Indirect,
+        },
+        {
+          type: BuffType.MoonSwirlPrcent,
+          getValue: (data) => Math.min(35, ((data.baseHP + data.extraHP + data.extraHP_NT) / 1000) * 0.7),
           actionOn: ActionOn.Indirect,
         },
       ],

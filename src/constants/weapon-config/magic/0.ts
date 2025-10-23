@@ -38,3 +38,5 @@ export * from "./Ludiharpastum";
 export * from "./Catalyst_MenulisRing";
 export * from "./Catalyst_SeeliesLute";
 export * from "./Catalyst_Ilmarinen";
+export * from "./Catalyst_Sistrum";
+export * from "./Catalyst_Ziedas";
