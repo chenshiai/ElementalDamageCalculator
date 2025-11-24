@@ -346,13 +346,17 @@
                 /* letter-spacing: 4px; */
             }
         }
+        .popup-preview {
+            background-color: #3E4556;
+            color: #fff;
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
         <div class="header">
-            <h1>千星奇域文本编辑器v20251118</h1>
+            <h1>千星奇域文本编辑器v20251124</h1>
             <p>选择文本后使用工具栏插入标签，或直接输入标签</p>
         </div>
 
@@ -431,6 +435,10 @@
                     <input type="radio" id="item-preview" name="preview-mode" value="item">
                     <label for="item-preview">
                         <i>👁️</i>道具预览
+                    </label>
+                    <input type="radio" id="popup-preview" name="preview-mode" value="popup">
+                    <label for="popup-preview">
+                        <i>👁️</i>弹窗预览
                     </label>
                 </h2>
                 <div class="preview-container">
@@ -649,25 +657,21 @@
                 // 处理换行符 - 支持输入\\n或直接回车换行
             content = content.replace(/\\n|\n/g, '<br>');
 
+                    content = content.replace(/<color=([^>]+?)>(.*?)<\/color>/g, '<span style="color: $1">$2</span>');
+                    content = content.replace(/<i>(.*?)<\/i>/g, '<i>$1</i>');
+                    content = content.replace(/<size=(\d+)>(.*?)<\/size>/g, '<span style="font-size: $1px">$2</span>');
+                    content = content.replace(/<b>(.*?)<\/b>/g, '<b>$1</b>');
                 // 根据不同预览模式处理内容
                 if (currentMode === 'normal') {
                     previewContainer.classList.remove('item-preview');
-
-                    // 常规预览：处理基本标签
-                    content = content.replace(/<color=([^>]+?)>(.*?)<\/color>/g, '<span style="color: $1">$2</span>');
-                    content = content.replace(/<i>(.*?)<\/i>/g, '<i>$1</i>');
-                    content = content.replace(/<size=(\d+)>(.*?)<\/size>/g, '<span style="font-size: $1px">$2</span>');
-                    content = content.replace(/<b>(.*?)<\/b>/g, '<b>$1</b>');
+                    previewContainer.classList.remove('popup-preview');
                 } else if (currentMode === 'item') {
                     // 道具预览：处理基本标签 + 道具相关标签
-                    content = content.replace(/<color=([^>]+?)>(.*?)<\/color>/g, '<span style="color: $1">$2</span>');
-                    content = content.replace(/<i>(.*?)<\/i>/g, '<i>$1</i>');
-                    content = content.replace(/<size=(\d+)>(.*?)<\/size>/g, '<span style="font-size: $1px">$2</span>');
-                    content = content.replace(/<b>(.*?)<\/b>/g, '<b>$1</b>');
+                    previewContainer.classList.remove('popup-preview');
                     previewContainer.classList.add('item-preview');
-                    
-                    // 可以在这里添加道具预览特有的标签处理逻辑
-                    // 例如：content = content.replace(/<item=([^>]+?)>(.*?)<\/item>/g, '<div class="item-tag">$2</div>');
+                } else if (currentMode === 'popup') {
+                    previewContainer.classList.remove('item-preview');
+                    previewContainer.classList.add('popup-preview');
                 }
 
                 // 更新预览区域
