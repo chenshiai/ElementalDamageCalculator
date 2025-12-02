@@ -299,7 +299,10 @@ export class ShougunData extends Character implements ICharacterInfo {
     {
       label: "2命·斩铁断金",
       describe: "奥义·梦想真说的梦想一刀与梦想一心状态期间的攻击将无视敌人60%的防御力",
-      effect: [{ type: BuffType.DefensePenetration, getValue: () => 60 }],
+      effect: [
+        { type: BuffType.DefensePenetration, getValue: () => 60, special: "Shougun" },
+        { type: BuffType.DefensePenetration, getValue: () => 60, special: "Shougun2" },
+      ],
       enable: true,
       condition: ({ constellation }) => constellation >= 2,
     },

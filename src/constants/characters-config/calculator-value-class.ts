@@ -77,6 +77,7 @@ class CalculatorValue implements ICalculatorValue {
   normalAttackAddHunt: number = 0;
   strongAttackAddHunt: number = 0;
   fallingAttackAddHunt: number = 0;
+  fallingGroundAttackAddHunt: number = 0;
   elementalSkillAddHunt: number = 0;
   elementalBurstAddHunt: number = 0;
   globalAddHunt: number = 0;
@@ -151,6 +152,7 @@ class CalculatorValue implements ICalculatorValue {
   burstLevelAdd: number = 0;
 
   amplifiedRate: number = 0;
+  amplifiedRate2: number = 0;
   catalyzeRate: number = 0;
   enchanting: number = EnchantingType[ElementType.Physical];
   transform: number = EnchantingType[ElementType.Physical];

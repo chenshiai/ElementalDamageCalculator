@@ -1,12 +1,21 @@
 import Character from "../character-class";
 import { IBuffBase, ICharacterInfo } from "@/types/interface";
-import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
+import {
+  ActionOn,
+  AttackType,
+  BuffTarget,
+  BuffType,
+  ElementType,
+  Rarity,
+  SecondElementType,
+  WeaponType,
+} from "@/types/enum";
 import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 import { Constellation_E_5, Constellation_Q_3, S_80_CHARGE_32P } from "../buffs";
 
 @EnKaId(10000041, "莫娜")
 @Weapon(WeaponType.Magic)
-@Element(ElementType.Hydro)
+@Element(ElementType.Hydro, SecondElementType.Magus)
 @BaseData(Rarity.Five, [10409, 287, 653], 60, [11149, 352, 700])
 @Icons("UI_AvatarIcon_Mona")
 export class MonaData extends Character implements ICharacterInfo {
@@ -94,7 +103,9 @@ export class MonaData extends Character implements ICharacterInfo {
         {
           type: BuffType.GlobalPrcent,
           getValue: (data) => {
-            return [42, 44, 46, 48, 50, 52, 54, 56, 58, 60, 60, 60, 60, 60, 60][data.burstLevel + data.burstLevelAdd - 1];
+            return [42, 44, 46, 48, 50, 52, 54, 56, 58, 60, 60, 60, 60, 60, 60][
+              data.burstLevel + data.burstLevelAdd - 1
+            ];
           },
           actionOn: ActionOn.Indirect,
         },
@@ -104,13 +115,43 @@ export class MonaData extends Character implements ICharacterInfo {
       target: BuffTarget.All,
     },
     {
-      label: "1命·沉没的预言",
-      describe: "队伍中自己的角色攻击命中处于星异状态下的敌人后，蒸发反应造成的伤害提升15%",
-      effect: [{ type: BuffType.AmplifiedRate, getValue: () => 15 }],
+      label: "魔女的前夜礼·天步真原",
+      describe:
+        "队伍中自己的其他角色对敌人触发蒸发反应时，将消耗所有的「水星天的辉光」，每消耗一层都会使本次蒸发反应造成的伤害提升5%。",
+      effect: [{ type: BuffType.AmplifiedRate, getValue: (_, s) => 5 * s }],
       enable: true,
       shareable: true,
+      stack: 3,
+      limit: 3,
+      stackable: true,
+      stackText: "「水星天的辉光」",
+      target: BuffTarget.All,
+    },
+    {
+      label: "1命·沉没的预言",
+      describe:
+        "队伍中自己的角色攻击命中处于星异状态下的敌人后，蒸发反应造成的伤害提升15%，月感电反应造成的伤害提升15%。此外，队伍中处于后台的角色触发上述效果时，伤害提升效果还会提升至原本的160%。",
+      effect: [
+        { type: BuffType.AmplifiedRate, getValue: (_, s) => 15 + s * 15 * 0.6 },
+        { type: BuffType.MoonElectroPrcent, getValue: (_, s) => 15 + s * 15 * 0.6 },
+      ],
+      enable: true,
+      shareable: true,
+      stackable: true,
+      stack: 1,
+      limit: 1,
+      stackType: "switch",
+      stackText: "处于后台",
       target: BuffTarget.All,
       condition: ({ constellation }) => constellation >= 1,
+    },
+    {
+      label: "2命·星月的连珠",
+      describe: "莫娜的重击命中敌人时，还会使队伍中附近的所有角色的元素精通提升80点，持续12秒。",
+      effect: [{ type: BuffType.MysteryFixed, getValue: () => 80 }],
+      enable: false,
+      shareable: true,
+      target: BuffTarget.All,
     },
     Constellation_Q_3,
     {
@@ -122,16 +163,30 @@ export class MonaData extends Character implements ICharacterInfo {
       target: BuffTarget.All,
       condition: ({ constellation }) => constellation >= 4,
     },
+    {
+      label: "4命·沉没的预言·魔导",
+      describe: "队伍中所有魔导角色攻击处于星异状态下的敌人时，暴击伤害提升15%。",
+      effect: [{ type: BuffType.GlobalCritcalHunt, getValue: () => 15 }],
+      enable: true,
+      shareable: true,
+      target: BuffTarget.All,
+      condition: ({ constellation }) => constellation >= 4,
+      shareCondition: ({ secondElement }) => secondElement === SecondElementType.Magus,
+    },
     Constellation_E_5,
     {
       label: "6命·厄运的修辞",
-      describe:
-        "进入虚实流动状态后，每移动1秒，莫娜的下一次重击伤害就增加60%， 通过这种方式至多可以获得180%重击伤害加成",
-      effect: [{ type: BuffType.StrongPrcent, getValue: (_, s) => 60 * s }],
+      describe: "至多可以获得180%重击伤害加成。此外，对处于星异状态下的敌人，莫娜的重击将会造成原本200%的伤害。",
+      effect: [
+        { type: BuffType.StrongPrcent, getValue: () => 180 },
+        { type: BuffType.StrongRate, getValue: (_, s) => 100 * s },
+      ],
       enable: true,
-      stack: 3,
-      limit: 3,
+      stack: 1,
+      limit: 1,
       stackable: true,
+      stackType: "switch",
+      stackText: "星异状态",
       condition: ({ constellation }) => constellation >= 6,
     },
   ];

@@ -1,12 +1,21 @@
 import Character from "../character-class";
 import { IBuffBase, ICharacterInfo } from "@/types/interface";
-import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
+import {
+  ActionOn,
+  AttackType,
+  BuffTarget,
+  BuffType,
+  ElementType,
+  Rarity,
+  SecondElementType,
+  WeaponType,
+} from "@/types/enum";
 import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 import { Constellation_E_3, Constellation_Q_5, S_80_PYRO_28P } from "../buffs";
 
 @EnKaId(10000029, "可莉")
 @Weapon(WeaponType.Magic)
-@Element(ElementType.Pyro)
+@Element(ElementType.Pyro, SecondElementType.Magus)
 @BaseData(Rarity.Five, [10287, 311, 615], 60, [11018, 381, 659])
 @Icons("UI_AvatarIcon_Klee")
 export class KleeData extends Character implements ICharacterInfo {
@@ -39,6 +48,18 @@ export class KleeData extends Character implements ICharacterInfo {
         3.424154, 3.638163, 3.852173,
       ],
     }),
+    action(
+      "嘭嘭轰击伤害",
+      AttackType.Strong,
+      ElementType.Pyro,
+      {
+        atk: [
+          1.5736, 1.69162, 1.80964, 1.967, 2.08502, 2.20304, 2.3604, 2.51776, 2.67512, 2.83248, 2.996134, 3.210144,
+          3.424154, 3.638163, 3.852173,
+        ],
+      },
+      "klee"
+    ),
     action("下坠期间伤害", AttackType.FallPeriod, ElementType.Pyro, {
       atk: [
         0.568288, 0.614544, 0.6608, 0.72688, 0.773136, 0.826, 0.898688, 0.971376, 1.044064, 1.12336, 1.202656, 1.281952,
@@ -79,35 +100,74 @@ export class KleeData extends Character implements ICharacterInfo {
     }),
   ];
   otherSkill = [
-    action("4命·一触即发伤害", AttackType.Other, ElementType.Pyro, {
-      atk: [5.55],
-    }),
+    action(
+      "4命·一触即发伤害",
+      AttackType.Other,
+      ElementType.Pyro,
+      {
+        atk: [5.55],
+      },
+      "klee2"
+    ),
   ];
   buffs: IBuffBase[] = [
     ...S_80_PYRO_28P,
     {
       label: "砰砰礼物",
       describe:
-        "蹦蹦炸弹与普通攻击造成伤害时，有50%的几率赋予可莉一朵爆裂火花。施放重击时将消耗爆裂火花，使本次重击不消耗体力，造成的伤害提升50%",
-      effect: [{ type: BuffType.StrongPrcent, getValue: () => 50 }],
-      enable: false,
+        "蹦蹦炸弹与普通攻击造成伤害时，有50%的几率赋予可莉一朵爆裂火花。施放重击时将消耗爆裂火花，转而施放特殊的、不消耗体力的重击「嘭嘭轰击」，并使其造成的伤害提升50%。",
+      effect: [{ type: BuffType.StrongPrcent, getValue: () => 50, special: "klee" }],
+      enable: true,
+    },
+    {
+      label: "魔女的前夜礼·火花魔法",
+      describe:
+        "可莉的普通攻击、元素战技或元素爆发造成伤害时，会获得一枚「轰轰勋章」，持续20秒，每种类别的攻击至多通过这种方式使可莉获得一枚「轰轰勋章」，通过不同类别的攻击获得的「轰轰勋章」独立存在。当可莉拥有1/2/3枚「轰轰勋章」时，特殊重击「嘭嘭轰击」将会造成原本115%/130%/150%的伤害。",
+      effect: [{ type: BuffType.StrongRate, getValue: (_, s) => [0, 15, 30, 50][s], special: "klee" }],
+      enable: true,
+      stack: 3,
+      limit: 3,
+      stackable: true,
+      stackText: "「轰轰勋章」",
+    },
+    {
+      label: "1命·连环轰隆",
+      describe: "可莉的攻击力提升60%。",
+      effect: [{ type: BuffType.ATKPrcent, getValue: () => 60 }],
+      enable: true,
+      condition: ({ constellation }) => constellation >= 1,
     },
     {
       label: "2命·破破弹片",
-      describe: "蹦蹦炸弹的诡雷会使敌人防御力降低23%",
+      describe: "可莉的元素战技命中敌人时，会使敌人防御力降低23%",
       effect: [{ type: BuffType.ReduceArmour, getValue: () => 23 }],
-      enable: false,
+      enable: true,
       shareable: true,
       condition: ({ constellation }) => constellation >= 2,
     },
     Constellation_E_3,
+    {
+      label: "4命·一触即发",
+      describe: "触发伤害效果时，如果可莉在场上，则造成的伤害提升100%。",
+      effect: [{ type: BuffType.GlobalPrcent, getValue: () => 100, special: "klee2" }],
+      enable: true,
+      condition: ({ constellation }) => constellation >= 4,
+    },
     Constellation_Q_5,
     {
       label: "6命·火力全开",
-      describe: "施放轰轰火花后的25秒内，队伍中所有角色获得10%火元素伤害加成",
+      describe: "施放轰轰火花后的25秒内，可莉获得50%火元素伤害加成。",
+      effect: [{ type: BuffType.PyroPrcent, getValue: () => 50 }],
+      enable: true,
+      condition: ({ constellation }) => constellation >= 6,
+    },
+    {
+      label: "6命·火力全开",
+      describe: "施放轰轰火花后的25秒内，队伍中所有其他角色获得10%火元素伤害加成。",
       effect: [{ type: BuffType.PyroPrcent, getValue: () => 10 }],
       shareable: true,
       enable: false,
+      target: BuffTarget.Other,
       condition: ({ constellation }) => constellation >= 6,
     },
   ];

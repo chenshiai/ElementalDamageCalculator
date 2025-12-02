@@ -1,12 +1,21 @@
 import Character from "../character-class";
 import { IBuffBase, ICharacterInfo } from "@/types/interface";
-import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
+import {
+  ActionOn,
+  AttackType,
+  BuffTarget,
+  BuffType,
+  ElementType,
+  Rarity,
+  SecondElementType,
+  WeaponType,
+} from "@/types/enum";
 import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 import { A_80_ANEMO_24P, Constellation_E_3, Constellation_Q_5 } from "../buffs";
 
 @EnKaId(10000043, "砂糖")
 @Weapon(WeaponType.Magic)
-@Element(ElementType.Anemo)
+@Element(ElementType.Anemo, SecondElementType.Magus)
 @BaseData(Rarity.Four, [9244, 170, 703], 80, [9883, 213, 752])
 @Icons("UI_AvatarIcon_Sucrose")
 export class SucroseData extends Character implements ICharacterInfo {
@@ -114,6 +123,35 @@ export class SucroseData extends Character implements ICharacterInfo {
       enable: false,
       shareable: true,
       target: BuffTarget.Other,
+    },
+    {
+      label: "魔女的前夜礼·七循之理",
+      describe: `召唤小型风灵后的15秒内，队伍中附近的角色的普通攻击、重击、下落攻击、元素战技和元素爆发造成的伤害提升5.71428%。`,
+      effect: [
+        { type: BuffType.NormalPrcent, getValue: () => 5.71428 },
+        { type: BuffType.StrongPrcent, getValue: () => 5.71428 },
+        { type: BuffType.FallingPrcent, getValue: () => 5.71428 },
+        { type: BuffType.SkillPrcent, getValue: () => 5.71428 },
+        { type: BuffType.BurstPrcent, getValue: () => 5.71428 }
+      ],
+      enable: false,
+      shareable: true,
+      target: BuffTarget.All,
+    },
+    {
+      label: "魔女的前夜礼·七循之理·魔导",
+      describe: `召唤大型风灵后的20秒内，队伍中附近的魔导角色的普通攻击、重击、下落攻击、元素战技和元素爆发造成的伤害提升7.14285%`,
+      effect: [
+        { type: BuffType.NormalPrcent, getValue: () => 7.14285 },
+        { type: BuffType.StrongPrcent, getValue: () => 7.14285 },
+        { type: BuffType.FallingPrcent, getValue: () => 7.14285 },
+        { type: BuffType.SkillPrcent, getValue: () => 7.14285 },
+        { type: BuffType.BurstPrcent, getValue: () => 7.14285 }
+      ],
+      enable: false,
+      shareable: true,
+      target: BuffTarget.All,
+      shareCondition: ({ secondElement }) => secondElement === SecondElementType.Magus 
     },
     Constellation_E_3,
     Constellation_Q_5,

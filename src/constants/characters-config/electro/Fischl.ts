@@ -1,12 +1,21 @@
 import Character from "../character-class";
 import { IBuffBase, ICharacterInfo } from "@/types/interface";
-import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
+import {
+  ActionOn,
+  AttackType,
+  BuffTarget,
+  BuffType,
+  ElementType,
+  Rarity,
+  SecondElementType,
+  WeaponType,
+} from "@/types/enum";
 import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 import { A_80_ATK_24P, Constellation_E_3, Constellation_Q_5 } from "../buffs";
 
 @EnKaId(10000031, "菲谢尔")
 @Weapon(WeaponType.Bow)
-@Element(ElementType.Electro)
+@Element(ElementType.Electro, SecondElementType.Magus)
 @BaseData(Rarity.Four, [9189, 244, 594], 60, [9825, 306, 635])
 @Icons("UI_AvatarIcon_Fischl")
 export class FischlData extends Character implements ICharacterInfo {
@@ -113,6 +122,34 @@ export class FischlData extends Character implements ICharacterInfo {
   buffs: IBuffBase[] = [
     ...A_80_ATK_24P,
     {
+      label: "魔女的前夜礼·宵世幻奏·超载",
+      describe:
+        "奥兹在场上时，队伍中附近的角色触发超载反应后的10秒内，菲谢尔与队伍中附近的当前场上其他角色的攻击力提升22.5%。",
+      effect: [
+        {
+          type: BuffType.ATKPrcent,
+          getValue: () => 22.5,
+        },
+      ],
+      enable: false,
+      shareable: true,
+      condition: ({ constellation }) => constellation < 6,
+    },
+    {
+      label: "魔女的前夜礼·宵世幻奏·感电",
+      describe:
+        "奥兹在场上时，队伍中附近的角色触发感电或月感电反应后的10秒内，菲谢尔与队伍中附近的当前场上其他角色元素精通提升90点。",
+      effect: [
+        {
+          type: BuffType.MysteryFixed,
+          getValue: () => 90,
+        },
+      ],
+      enable: false,
+      shareable: true,
+      condition: ({ constellation }) => constellation < 6,
+    },
+    {
       label: "2命·圣裁影羽",
       describe: "施放夜巡影翼时，能额外造成200%攻击力的伤害",
       effect: [
@@ -127,6 +164,34 @@ export class FischlData extends Character implements ICharacterInfo {
     },
     Constellation_E_3,
     Constellation_Q_5,
+    {
+      label: "6命·魔女的前夜礼·宵世幻奏·超载",
+      describe:
+        "奥兹在场上时，队伍中附近的角色触发超载反应后的10秒内，菲谢尔与队伍中附近的当前场上其他角色的攻击力提升45%。",
+      effect: [
+        {
+          type: BuffType.ATKPrcent,
+          getValue: () => 45,
+        },
+      ],
+      enable: false,
+      shareable: true,
+      condition: ({ constellation }) => constellation >= 6,
+    },
+    {
+      label: "6命·魔女的前夜礼·宵世幻奏·感电",
+      describe:
+        "奥兹在场上时，队伍中附近的角色触发感电或月感电反应后的10秒内，菲谢尔与队伍中附近的当前场上其他角色元素精通提升180点。",
+      effect: [
+        {
+          type: BuffType.MysteryFixed,
+          getValue: () => 180,
+        },
+      ],
+      enable: false,
+      shareable: true,
+      condition: ({ constellation }) => constellation >= 6,
+    },
   ];
 }
 

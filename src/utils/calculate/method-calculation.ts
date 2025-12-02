@@ -102,7 +102,7 @@ function getMoreDataBySwitch(
       break;
     case AttackType.Falling:
       ADDITIONAL_DMG += calculatorValue[BuffType.FallingFixed] || 0;
-      addHunt += calculatorValue[BuffType.FallingPrcent] || 0;
+      addHunt += calculatorValue[BuffType.FallingPrcent] + calculatorValue[BuffType.FallingGroundPrcent] || 0;
       criticalHunt += calculatorValue[BuffType.FallingCritcalHurt] || 0;
       critical += calculatorValue[BuffType.FallingCritcal] || 0;
       addRate += calculatorValue[BuffType.FallingRateAdd] || 0;
@@ -411,14 +411,29 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
 
   /** 增幅反应伤害 */
   let REACTION_DMG = 0;
-  if (
-    (atkType === ElementalReactionType.Rate &&
-      (newElementType === ElementType.Pyro || newElementType === ElementType.Hydro)) ||
-    (atkType === ElementalReactionType.Rate2 &&
-      (newElementType === ElementType.Pyro || newElementType === ElementType.Cryo))
-  ) {
-    let eva = (getAmplifiedRate(em) + calculatorValue.amplifiedRate) / 100;
+  let eva = 0;
+  if (newElementType === ElementType.Pyro) {
+    if (atkType === ElementalReactionType.Rate) {
+      eva = (getAmplifiedRate(em) + calculatorValue.amplifiedRate2) / 100;
+    }
+    if (atkType === ElementalReactionType.Rate2) {
+      eva = (getAmplifiedRate(em) + calculatorValue.amplifiedRate) / 100;
+    }
     REACTION_DMG = (BASE_DMG + ADDITIONAL_DMG + MAGNIFICATION_DMG) * ReactionRate[atkType];
+  }
+  if (newElementType === ElementType.Hydro) {
+    if (atkType === ElementalReactionType.Rate) {
+      eva = (getAmplifiedRate(em) + calculatorValue.amplifiedRate) / 100;
+      REACTION_DMG = (BASE_DMG + ADDITIONAL_DMG + MAGNIFICATION_DMG) * ReactionRate[atkType];
+    }
+  }
+  if (newElementType === ElementType.Cryo) {
+    if (atkType === ElementalReactionType.Rate2) {
+      eva = (getAmplifiedRate(em) + calculatorValue.amplifiedRate2) / 100;
+      REACTION_DMG = (BASE_DMG + ADDITIONAL_DMG + MAGNIFICATION_DMG) * ReactionRate[atkType];
+    }
+  }
+  if (atkType === ElementalReactionType.Rate || atkType === ElementalReactionType.Rate2) {
     EVA_DMG = (BASE_DMG + ADDITIONAL_DMG + MAGNIFICATION_DMG + REACTION_DMG) * eva;
   }
 

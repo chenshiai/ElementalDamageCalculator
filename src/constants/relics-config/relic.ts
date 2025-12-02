@@ -1251,6 +1251,7 @@ const relicLibrary: IRelicLibraryItem[] = [
           effect: [
             { type: BuffType.PyroPrcent, getValue: (_, s) => 7.5 * s },
             { type: BuffType.AmplifiedRate, getValue: () => 15 },
+            { type: BuffType.AmplifiedRate2, getValue: () => 15 },
           ],
           describe: "蒸发、融化反应的加成系数提高15%。施放元素战技后，2件套的效果提高50%，该效果最多叠加3次",
           enable: true,

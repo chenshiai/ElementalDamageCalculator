@@ -1,12 +1,21 @@
 import Character from "../character-class";
 import { IBuffBase, ICharacterInfo } from "@/types/interface";
-import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
+import {
+  ActionOn,
+  AttackType,
+  BuffTarget,
+  BuffType,
+  ElementType,
+  Rarity,
+  SecondElementType,
+  WeaponType,
+} from "@/types/enum";
 import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 import { A_80_PHYSICAL_30P, Constellation_E_5, Constellation_Q_3 } from "../buffs";
 
 @EnKaId(10000020, "雷泽")
 @Weapon(WeaponType.GreatSword)
-@Element(ElementType.Electro)
+@Element(ElementType.Electro, SecondElementType.Magus)
 @BaseData(Rarity.Four, [11962, 234, 751], 80, [12790, 293, 803])
 @Icons("UI_AvatarIcon_Razor")
 export class RazorData extends Character implements ICharacterInfo {
@@ -86,53 +95,86 @@ export class RazorData extends Character implements ICharacterInfo {
     action("爆发伤害", AttackType.Burst, ElementType.Electro, {
       atk: [1.6, 1.72, 1.84, 2, 2.12, 2.24, 2.4, 2.56, 2.72, 2.88, 3.04, 3.2, 3.4, 3.6, 3.8],
     }),
-    action("狼魂·一段伤害", AttackType.Burst, ElementType.Electro, {
-      atk: [
-        0.9592, 1.0246, 1.09, 1.1772, 1.2426, 1.3189, 1.417, 1.5151, 1.6132, 1.7113, 1.8094, 1.9075, 2.0056, 2.1037,
-        2.2018,
-      ].map((item, index) => {
-        return (
-          item *
-          [0.24, 0.258, 0.276, 0.3, 0.318, 0.336, 0.36, 0.384, 0.408, 0.432, 0.456, 0.48, 0.51, 0.54, 0.57][index]
-        );
-      }),
-    }),
-    action("狼魂·二段伤害", AttackType.Burst, ElementType.Electro, {
-      atk: [
-        0.82632, 0.88266, 0.939, 1.01412, 1.07046, 1.13619, 1.2207, 1.30521, 1.38972, 1.47423, 1.55874, 1.64325,
-        1.72776, 1.81227, 1.89678,
-      ].map((item, index) => {
-        return (
-          item *
-          [0.24, 0.258, 0.276, 0.3, 0.318, 0.336, 0.36, 0.384, 0.408, 0.432, 0.456, 0.48, 0.51, 0.54, 0.57][index]
-        );
-      }),
-    }),
-    action("狼魂·三段伤害", AttackType.Burst, ElementType.Electro, {
-      atk: [
-        1.03312, 1.10356, 1.174, 1.26792, 1.33836, 1.42054, 1.5262, 1.63186, 1.73752, 1.84318, 1.94884, 2.0545, 2.16016,
-        2.26582, 2.37148,
-      ].map((item, index) => {
-        return (
-          item *
-          [0.24, 0.258, 0.276, 0.3, 0.318, 0.336, 0.36, 0.384, 0.408, 0.432, 0.456, 0.48, 0.51, 0.54, 0.57][index]
-        );
-      }),
-    }),
-    action("狼魂·四段伤害", AttackType.Burst, ElementType.Electro, {
-      atk: [
-        1.36048, 1.45324, 1.546, 1.66968, 1.76244, 1.87066, 2.0098, 2.14894, 2.28808, 2.42722, 2.56636, 2.7055, 2.84464,
-        2.98378, 3.12292,
-      ].map((item, index) => {
-        return (
-          item *
-          [0.24, 0.258, 0.276, 0.3, 0.318, 0.336, 0.36, 0.384, 0.408, 0.432, 0.456, 0.48, 0.51, 0.54, 0.57][index]
-        );
-      }),
-    }),
+    action(
+      "狼魂·一段伤害",
+      AttackType.Burst,
+      ElementType.Electro,
+      {
+        atk: [
+          0.9592, 1.0246, 1.09, 1.1772, 1.2426, 1.3189, 1.417, 1.5151, 1.6132, 1.7113, 1.8094, 1.9075, 2.0056, 2.1037,
+          2.2018,
+        ].map((item, index) => {
+          return (
+            item *
+            [0.24, 0.258, 0.276, 0.3, 0.318, 0.336, 0.36, 0.384, 0.408, 0.432, 0.456, 0.48, 0.51, 0.54, 0.57][index]
+          );
+        }),
+      },
+      "razor"
+    ),
+    action(
+      "狼魂·二段伤害",
+      AttackType.Burst,
+      ElementType.Electro,
+      {
+        atk: [
+          0.82632, 0.88266, 0.939, 1.01412, 1.07046, 1.13619, 1.2207, 1.30521, 1.38972, 1.47423, 1.55874, 1.64325,
+          1.72776, 1.81227, 1.89678,
+        ].map((item, index) => {
+          return (
+            item *
+            [0.24, 0.258, 0.276, 0.3, 0.318, 0.336, 0.36, 0.384, 0.408, 0.432, 0.456, 0.48, 0.51, 0.54, 0.57][index]
+          );
+        }),
+      },
+      "razor"
+    ),
+    action(
+      "狼魂·三段伤害",
+      AttackType.Burst,
+      ElementType.Electro,
+      {
+        atk: [
+          1.03312, 1.10356, 1.174, 1.26792, 1.33836, 1.42054, 1.5262, 1.63186, 1.73752, 1.84318, 1.94884, 2.0545,
+          2.16016, 2.26582, 2.37148,
+        ].map((item, index) => {
+          return (
+            item *
+            [0.24, 0.258, 0.276, 0.3, 0.318, 0.336, 0.36, 0.384, 0.408, 0.432, 0.456, 0.48, 0.51, 0.54, 0.57][index]
+          );
+        }),
+      },
+      "razor"
+    ),
+    action(
+      "狼魂·四段伤害",
+      AttackType.Burst,
+      ElementType.Electro,
+      {
+        atk: [
+          1.36048, 1.45324, 1.546, 1.66968, 1.76244, 1.87066, 2.0098, 2.14894, 2.28808, 2.42722, 2.56636, 2.7055,
+          2.84464, 2.98378, 3.12292,
+        ].map((item, index) => {
+          return (
+            item *
+            [0.24, 0.258, 0.276, 0.3, 0.318, 0.336, 0.36, 0.384, 0.408, 0.432, 0.456, 0.48, 0.51, 0.54, 0.57][index]
+          );
+        }),
+      },
+      "razor"
+    ),
   ];
   otherSkill = [
-    action("6命·天狼落雷", AttackType.Other, ElementType.Electro, {
+    action(
+      "魔导·秘仪·落雷伤害",
+      AttackType.Burst,
+      ElementType.Electro,
+      {
+        atk: [1.5],
+      },
+      "razor"
+    ),
+    action("6命·天狼落雷伤害", AttackType.Other, ElementType.Electro, {
       atk: [1],
     }),
   ];
@@ -151,8 +193,20 @@ export class RazorData extends Character implements ICharacterInfo {
       enable: true,
       stackable: true,
       limit: 3,
-      stack: 0,
+      stack: 3,
       stackText: "雷之印",
+    },
+    {
+      label: "魔女的前夜礼·苍雷奔涌",
+      describe: "雷泽的元素爆发雷牙获得强化：雷狼造成的伤害提升，提升值相当于雷泽的攻击力的70%。",
+      effect: [
+        {
+          type: BuffType.BurstFixed,
+          getValue: (data) => (data.baseATK + data.extraATK + data.extraATK_NT) * 0.7,
+          special: "razor",
+        },
+      ],
+      enable: true,
     },
     {
       label: "1命·狼性",
@@ -179,6 +233,16 @@ export class RazorData extends Character implements ICharacterInfo {
       target: BuffTarget.Enemy,
     },
     Constellation_E_5,
+    {
+      label: "6命·天狼",
+      describe: "消耗雷之印后的15秒内，雷泽的暴击率提升10%，暴击伤害提升50%。",
+      effect: [
+        { type: BuffType.Critcal, getValue: () => 10 },
+        { type: BuffType.CritcalHurt, getValue: () => 50 },
+      ],
+      enable: true,
+      condition: ({ constellation }) => constellation >= 6,
+    },
   ];
 }
 

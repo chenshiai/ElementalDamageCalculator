@@ -1,12 +1,21 @@
 import Character from "../character-class";
 import { IBuffBase, ICharacterInfo } from "@/types/interface";
-import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
+import {
+  ActionOn,
+  AttackType,
+  BuffTarget,
+  BuffType,
+  ElementType,
+  Rarity,
+  SecondElementType,
+  WeaponType,
+} from "@/types/enum";
 import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 import { Constellation_E_3, Constellation_Q_5, S_80_GEO_28P } from "../buffs";
 
 @EnKaId(10000038, "阿贝多")
 @Weapon(WeaponType.Sword)
-@Element(ElementType.Geo)
+@Element(ElementType.Geo, SecondElementType.Magus)
 @BaseData(Rarity.Five, [13226, 251, 876], 40, [14166, 308, 938])
 @Icons("UI_AvatarIcon_Albedo")
 export class AlbedoData extends Character implements ICharacterInfo {
@@ -77,34 +86,59 @@ export class AlbedoData extends Character implements ICharacterInfo {
   ];
   elementSkill = [
     action("技能伤害", AttackType.Skill, ElementType.Geo, {
-      atk: [1.304,1.4018,1.4996,1.63,1.7278,1.8256,1.956,2.0864,2.2168,2.3472,2.4776,2.608,2.771,2.934,3.097]
+      atk: [
+        1.304, 1.4018, 1.4996, 1.63, 1.7278, 1.8256, 1.956, 2.0864, 2.2168, 2.3472, 2.4776, 2.608, 2.771, 2.934, 3.097,
+      ],
     }),
     action(
       "刹那之花伤害",
       AttackType.Skill,
       ElementType.Geo,
       {
-        def: [1.336,1.4362,1.5364,1.67,1.7702,1.8704,2.004,2.1376,2.2712,2.4048,2.5384,2.672,2.839,3.006,3.173]
+        def: [
+          1.336, 1.4362, 1.5364, 1.67, 1.7702, 1.8704, 2.004, 2.1376, 2.2712, 2.4048, 2.5384, 2.672, 2.839, 3.006,
+          3.173,
+        ],
       },
       "Albedo"
     ),
   ];
   burstSkill = [
     action("爆发伤害", AttackType.Burst, ElementType.Geo, {
-      atk: [3.672,3.9474,4.2228,4.59,4.8654,5.1408,5.508,5.8752,6.2424,6.6096,6.9768,7.344,7.803,8.262,8.721]
+      atk: [
+        3.672, 3.9474, 4.2228, 4.59, 4.8654, 5.1408, 5.508, 5.8752, 6.2424, 6.6096, 6.9768, 7.344, 7.803, 8.262, 8.721,
+      ],
     }),
     action("生灭之花", AttackType.Burst, ElementType.Geo, {
-      atk: [0.72,0.774,0.828,0.9,0.954,1.008,1.08,1.152,1.224,1.296,1.368,1.44,1.53,1.62,1.71]
-    }),
+      atk: [0.72, 0.774, 0.828, 0.9, 0.954, 1.008, 1.08, 1.152, 1.224, 1.296, 1.368, 1.44, 1.53, 1.62, 1.71],
+    }, 'Albedo'),
   ];
-  otherSkill = [];
+  otherSkill = [
+    action("2命·生灭之花", AttackType.Burst, ElementType.Geo, {
+      def: [3],
+    }, 'Albedo'),
+  ];
   buffs: IBuffBase[] = [
     ...S_80_GEO_28P,
     {
       label: "白垩色的威压",
-      describe: "创生法·拟造阳华的刹那之花对生命值低于50%的敌人造成的伤害提高25%",
-      effect: [{ type: BuffType.SkillPrcent, getValue: () => 25, special: "Albedo" }],
-      enable: false,
+      describe:
+        "创生法·拟造阳华的刹那之花对生命值低于50%的敌人造成的伤害提高25%。此外，若场上存在由阿贝多自己创造的瑰银，还会提升本次造成的伤害，提升值相当于阿贝多防御力的240%。",
+      effect: [
+        { type: BuffType.SkillPrcent, getValue: (_, s) => s * 25, special: "Albedo" },
+        {
+          type: BuffType.SkillFixed,
+          getValue: (data) => (data.baseDEF + data.extraDEF + data.extraDEF_NT) * 2.4,
+          special: "Albedo",
+          actionOn: ActionOn.External,
+        },
+      ],
+      enable: true,
+      stack: 1,
+      limit: 1,
+      stackable: true,
+      stackText: "敌人生命低于50%",
+      stackType: "switch",
     },
     {
       label: "瓶中人的天慧",
@@ -115,9 +149,87 @@ export class AlbedoData extends Character implements ICharacterInfo {
       target: BuffTarget.All,
     },
     {
+      label: "魔女的前夜礼·白芒之书",
+      describe:
+        "炼成阳华后的20秒内，基于阿贝多的防御力，提升队伍中附近的角色的普通攻击、重击、下落攻击、元素战技和元素爆发造成的伤害：每1000点防御力都将提升4%伤害，至多通过这种方式提升12%伤害。",
+      effect: [
+        {
+          type: BuffType.NormalPrcent,
+          getValue: (data) => Math.max(12, ((data.baseDEF + data.extraDEF + data.extraDEF_NT) / 1000) * 4),
+          actionOn: ActionOn.Indirect,
+        },
+        {
+          type: BuffType.StrongPrcent,
+          getValue: (data) => Math.max(12, ((data.baseDEF + data.extraDEF + data.extraDEF_NT) / 1000) * 4),
+          actionOn: ActionOn.Indirect,
+        },
+        {
+          type: BuffType.FallingPrcent,
+          getValue: (data) => Math.max(12, ((data.baseDEF + data.extraDEF + data.extraDEF_NT) / 1000) * 4),
+          actionOn: ActionOn.Indirect,
+        },
+        {
+          type: BuffType.SkillPrcent,
+          getValue: (data) => Math.max(12, ((data.baseDEF + data.extraDEF + data.extraDEF_NT) / 1000) * 4),
+          actionOn: ActionOn.Indirect,
+        },
+        {
+          type: BuffType.BurstPrcent,
+          getValue: (data) => Math.max(12, ((data.baseDEF + data.extraDEF + data.extraDEF_NT) / 1000) * 4),
+          actionOn: ActionOn.Indirect,
+        },
+      ],
+      enable: false,
+      shareable: true,
+      target: BuffTarget.All,
+    },
+    {
+      label: "魔女的前夜礼·白芒之书·魔导",
+      describe:
+        "炼成瑰银后的20秒内，基于阿贝多的防御力，提升队伍中附近的魔导角色的普通攻击、重击、下落攻击、元素战技和元素爆发造成的伤害：每1000点防御力都将提升10%伤害，至多通过这种方式提升30%伤害。",
+      effect: [
+        {
+          type: BuffType.NormalPrcent,
+          getValue: (data) => Math.max(30, ((data.baseDEF + data.extraDEF + data.extraDEF_NT) / 1000) * 10),
+          actionOn: ActionOn.Indirect,
+        },
+        {
+          type: BuffType.StrongPrcent,
+          getValue: (data) => Math.max(30, ((data.baseDEF + data.extraDEF + data.extraDEF_NT) / 1000) * 10),
+          actionOn: ActionOn.Indirect,
+        },
+        {
+          type: BuffType.FallingPrcent,
+          getValue: (data) => Math.max(30, ((data.baseDEF + data.extraDEF + data.extraDEF_NT) / 1000) * 10),
+          actionOn: ActionOn.Indirect,
+        },
+        {
+          type: BuffType.SkillPrcent,
+          getValue: (data) => Math.max(30, ((data.baseDEF + data.extraDEF + data.extraDEF_NT) / 1000) * 10),
+          actionOn: ActionOn.Indirect,
+        },
+        {
+          type: BuffType.BurstPrcent,
+          getValue: (data) => Math.max(30, ((data.baseDEF + data.extraDEF + data.extraDEF_NT) / 1000) * 10),
+          actionOn: ActionOn.Indirect,
+        },
+      ],
+      enable: false,
+      shareable: true,
+      target: BuffTarget.All,
+      shareCondition: ({ secondElement }) => secondElement === SecondElementType.Magus,
+    },
+    {
+      label: "1命·伊甸之花",
+      describe: "阿贝多施放元素战技创生法·拟造阳华后的20秒内，自身的防御力提升50%。",
+      effect: [{ type: BuffType.DEFPrcent, getValue: () => 50 }],
+      enable: true,
+      condition: ({ constellation }) => constellation >= 1,
+    },
+    {
       label: "2命·显生之宙",
       describe:
-        "创生法·拟造阳华的刹那之花绽放时，会为阿贝多赋予生灭计数效果，每消耗一层生灭计数，诞生式·大地之潮会提高等同于阿贝多防御力的30%的伤害",
+        "创生法·拟造阳华的刹那之花绽放时，会为阿贝多赋予生灭计数效果，每消耗一层生灭计数，诞生式·大地之潮与生灭之花会提高等同于阿贝多防御力的30%的伤害",
       effect: [
         {
           type: BuffType.BurstFixed,
@@ -125,7 +237,7 @@ export class AlbedoData extends Character implements ICharacterInfo {
           actionOn: ActionOn.External,
         },
       ],
-      enable: false,
+      enable: true,
       stackable: true,
       stack: 4,
       limit: 4,
@@ -135,21 +247,52 @@ export class AlbedoData extends Character implements ICharacterInfo {
     Constellation_E_3,
     {
       label: "4命·神性之陨",
-      describe: "处于阳华的领域中的队伍中当前场上角色，造成的下落攻击伤害提高30%",
-      effect: [{ type: BuffType.FallingPrcent, getValue: () => 30 }],
+      describe:
+        "处于阳华的领域中的队伍中当前场上角色，造成的下落攻击伤害提高30%。此外，队伍中附近的当前场上角色在瑰银附近跳跃时，将会摧毁瑰银，使该角色的下落攻击坠地冲击造成的伤害提升30%。",
+      effect: [
+        { type: BuffType.FallingPrcent, getValue: () => 30 },
+        { type: BuffType.FallingGroundPrcent, getValue: (_, s) => 30 * s },
+      ],
       enable: true,
       shareable: true,
+      stack: 1,
+      limit: 1,
+      stackable: true,
+      stackText: "存在瑰银",
+      stackType: "switch",
       target: BuffTarget.All,
       condition: ({ constellation }) => constellation >= 4,
     },
     Constellation_Q_5,
     {
       label: "6命·无垢之土",
-      describe: "处在阳华的领域中的队伍中当前场上角色，若处于结晶反应产生的护盾庇护下，造成的伤害提高17%",
+      describe: "处在阳华的领域中的队伍中当前场上角色，若处于结晶反应产生的护盾庇护下，造成的伤害提高17%。",
       effect: [{ type: BuffType.GlobalPrcent, getValue: () => 17 }],
       enable: false,
       shareable: true,
-      target: BuffTarget.All,
+      target: BuffTarget.Other,
+      condition: ({ constellation }) => constellation >= 6,
+    },
+    {
+      label: "6命·无垢之土",
+      describe:
+        "处在阳华的领域中的队伍中当前场上角色，若处于结晶反应产生的护盾庇护下，造成的伤害提高17%。此外，施放元素爆发诞生式·大地之潮后的20s内，使生灭之花造成的伤害提升，提升值相当于阿贝多防御力的250%。",
+      effect: [
+        { type: BuffType.GlobalPrcent, getValue: (_, s) => 17 * s },
+        {
+          type: BuffType.BurstFixed,
+          getValue: (data) => (data.baseDEF + data.extraDEF + data.extraDEF_NT) * 2.5,
+          actionOn: ActionOn.External,
+          special: "Albedo",
+        },
+      ],
+      enable: true,
+      stack: 1,
+      limit: 1,
+      stackable: true,
+      stackText: "结晶盾庇护",
+      stackType: "switch",
+      target: BuffTarget.Self,
       condition: ({ constellation }) => constellation >= 6,
     },
   ];

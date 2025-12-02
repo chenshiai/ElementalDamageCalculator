@@ -65,6 +65,8 @@ export enum SecondElementType {
   Desolate = 'desolate',
   /** 夜魂 */
   Nightsoul = 'nightsoul',
+  /** 魔导 */
+  Magus = 'Magus'
 }
 
 export const EnchantingType = {
@@ -173,6 +175,8 @@ export enum BuffType {
   StrongPrcent = "strongAttackAddHunt",
   /** 下落攻击伤害百分比提升 */
   FallingPrcent = "fallingAttackAddHunt",
+  /** 下落坠地伤害百分比提升 */
+  FallingGroundPrcent = "fallingGroundAttackAddHunt",
   /** 元素战技百分比提升 */
   SkillPrcent = "elementalSkillAddHunt",
   /** 元素爆发百分比提升 */
@@ -350,8 +354,10 @@ export enum BuffType {
   Enchanting = "enchanting",
   /** 元素转化 */
   Transform = "transform",
-  /** 增幅反应系数提升% */
+  /** 蒸发反应系数提升% */
   AmplifiedRate = "amplifiedRate",
+  /** 融化反应系数提升% */
+  AmplifiedRate2 = "amplifiedRate2",
   /** 激化反应系数提升% */
   CatalyzeRate = "catalyzeRate",
   /** 无视防御% */
