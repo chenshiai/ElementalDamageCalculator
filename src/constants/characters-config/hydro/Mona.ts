@@ -152,6 +152,7 @@ export class MonaData extends Character implements ICharacterInfo {
       enable: false,
       shareable: true,
       target: BuffTarget.All,
+      condition: ({ constellation }) => constellation >= 2,
     },
     Constellation_Q_3,
     {
