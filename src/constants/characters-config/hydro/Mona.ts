@@ -98,7 +98,7 @@ export class MonaData extends Character implements ICharacterInfo {
     },
     {
       label: "元素爆发·星命定轨",
-      describe: "星异持续时间内，提高目标对象受到的伤害",
+      describe: "星异持续时间内，提高目标对象受到的伤害。",
       effect: [
         {
           type: BuffType.GlobalPrcent,

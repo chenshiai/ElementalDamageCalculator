@@ -11,6 +11,7 @@
   <div>{{ fmt2 }}</div>
   <button @click="copyFmt2(0)">复制A</button>
   <button @click="copyFmt2(1)">复制B</button>
+  <button @click="copyFmt2(2)">复制C</button>
   <br />
   <select v-model="mode">
     <option value="+">+</option>
@@ -52,9 +53,7 @@ const fmt = computed(() => {
 
       // 移除百分号并转换为数值
       // 使用正则表达式移除所有中文字符
-      const numValue = Number(
-        item.replace(/%|[\u4e00-\u9fa5]/g, "")
-      );
+      const numValue = Number(item.replace(/%|[\u4e00-\u9fa5]/g, ""));
 
       // 处理无效数字情况
       if (isNaN(numValue)) {
@@ -72,6 +71,7 @@ const fmt = computed(() => {
 const fmt2 = computed(() => {
   const a = [];
   const b = [];
+  const c = [];
   try {
     // 1. 基本输入验证
     if (!value2.value || typeof value2.value !== "string") {
@@ -94,23 +94,25 @@ const fmt2 = computed(() => {
       a.push(
         Number(
           // 使用正则表达式移除所有中文字符
-          (item
-            .split(mode.value)[0]
-            .replace(/%|[\u4e00-\u9fa5]/g, "") / 100
-          ).toFixed(6)
+          (item.split(mode.value)[0].replace(/%|[\u4e00-\u9fa5]/g, "") / 100).toFixed(6)
         )
       );
       b.push(
         Number(
           // 使用正则表达式移除所有中文字符
-          (item
-            .split(mode.value)[1]
-            .replace(/%|[\u4e00-\u9fa5]/g, "") / (mode2.value === "1" ? 1 : 100)
-          ).toFixed(6)
+          (item.split(mode.value)[1].replace(/%|[\u4e00-\u9fa5]/g, "") / (mode2.value === "1" ? 1 : 100)).toFixed(6)
         )
       );
+      if (item.split(mode.value).length > 2) {
+        c.push(
+          Number(
+            // 使用正则表达式移除所有中文字符
+            (item.split(mode.value)[2].replace(/%|[\u4e00-\u9fa5]/g, "") / (mode2.value === "1" ? 1 : 100)).toFixed(6)
+          )
+        );
+      }
     });
-    return [a, b];
+    return [a, b, c];
   } catch (error) {
     console.error("格式化输入时出错:", error);
     return [];

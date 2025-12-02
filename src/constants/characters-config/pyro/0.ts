@@ -16,3 +16,4 @@ export * from "./Ambor";
 export * from "./Bennett";
 export * from "./PlayerBoy";
 export * from "./PlayerGirl";
+export * from "./Durin";
