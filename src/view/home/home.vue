@@ -83,6 +83,12 @@ const copy = (text) => {
       <div>分享与收藏</div>
       <span id="url">点击复制 https://saomdpb.com</span>
     </div>
+    <a href="/UGCEditor.html" target="_blank" class="card active-btn ugceditor">
+      <FourSvg />
+      <img src="/img/ugc.png" alt="" />
+      <div>千星沙箱文本编辑器</div>
+      <span>千星沙箱真好玩</span>
+    </a>
   </div>
 </template>
 
@@ -92,6 +98,15 @@ const copy = (text) => {
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(2, 1fr);
   gap: 12px;
+}
+
+.ugceditor {
+  display: none !important;
+}
+@media screen and (min-width: 1280px) {
+  .ugceditor {
+    display: block !important;
+  }
 }
 @media screen and (max-width: 920px) {
   .card-group {

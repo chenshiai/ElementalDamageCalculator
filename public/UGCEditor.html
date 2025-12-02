@@ -1,684 +1,761 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>千星奇域文本编辑器v20251118</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>千星沙箱文本编辑器v20251118</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
 
-        body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 5px;
-        }
+      body {
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 5px;
+      }
 
-        .container {
-            width: 100%;
-            max-width: 1400px;
-            height: 98vh;
-            background-color: white;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
+      .container {
+        width: 100%;
+        max-width: 1400px;
+        height: 98vh;
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
 
-        .header {
-            background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
-            color: white;
-            padding: 12px;
-            text-align: center;
-            flex-shrink: 0;
-        }
+      .header {
+        background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+        color: white;
+        padding: 12px;
+        text-align: center;
+        flex-shrink: 0;
+      }
 
-        .header h1 {
-            font-size: 26px;
-            margin-bottom: 3px;
-        }
+      .header h1 {
+        font-size: 26px;
+        margin-bottom: 3px;
+      }
 
-        .header p {
-            opacity: 0.9;
-            font-size: 13px;
-        }
+      .header p {
+        opacity: 0.9;
+        font-size: 13px;
+      }
 
-        .toolbar {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            padding: 10px;
-            background-color: #f8f9fa;
-            border-bottom: 1px solid #e9ecef;
-            flex-shrink: 0;
-        }
+      .toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 10px;
+        background-color: #f8f9fa;
+        border-bottom: 1px solid #e9ecef;
+        flex-shrink: 0;
+      }
 
-        .tool-group {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            padding: 4px 8px;
-            background-color: white;
-            border-radius: 6px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
+      .tool-group {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        padding: 4px 8px;
+        background-color: white;
+        border-radius: 6px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
 
-        .tool-group label {
-            font-size: 13px;
-            color: #495057;
-            margin-right: 4px;
-        }
+      .tool-group label {
+        font-size: 13px;
+        color: #495057;
+        margin-right: 4px;
+      }
 
-        button {
-            padding: 6px 10px;
-            border: none;
-            border-radius: 4px;
-            background-color: #4b6cb7;
-            color: white;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            font-size: 13px;
-        }
+      button {
+        padding: 6px 10px;
+        border: none;
+        border-radius: 4px;
+        background-color: #4b6cb7;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        font-size: 13px;
+      }
 
-        button:hover {
-            background-color: #3a5999;
-        }
+      button:hover {
+        background-color: #3a5999;
+      }
 
-        .color-presets {
-            display: flex;
-            gap: 4px;
-        }
+      .color-presets {
+        display: flex;
+        gap: 4px;
+      }
 
-        .color-preset {
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            cursor: pointer;
-            border: 2px solid transparent;
-        }
+      .color-preset {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        cursor: pointer;
+        border: 2px solid transparent;
+      }
 
-        .color-preset:hover {
-            border-color: #333;
-        }
+      .color-preset:hover {
+        border-color: #333;
+      }
 
-        .color-picker-container {
-            position: relative;
-        }
+      .color-picker-container {
+        position: relative;
+      }
 
-        #colorPicker {
-            width: 26px;
-            height: 26px;
-            border: none;
-            background: none;
-            cursor: pointer;
-        }
+      #colorPicker {
+        width: 26px;
+        height: 26px;
+        border: none;
+        background: none;
+        cursor: pointer;
+      }
 
-        select {
-            padding: 5px 8px;
-            border: 1px solid #ced4da;
-            border-radius: 4px;
-            background-color: white;
-            font-size: 13px;
-        }
+      select {
+        padding: 5px 8px;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        background-color: white;
+        font-size: 13px;
+      }
 
+      .content {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 8px;
+        flex-grow: 1;
+        overflow: hidden;
+        gap: 10px;
+      }
+
+      .input-section,
+      .preview-section {
+        flex: 1;
+        min-width: 300px;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
+
+      .section-title {
+        font-size: 16px;
+        margin-bottom: 8px;
+        color: #333;
+        display: flex;
+        align-items: center;
+        flex-shrink: 0;
+        height: 32px;
+      }
+
+      .section-title i {
+        margin-right: 6px;
+        color: #4b6cb7;
+      }
+      /* 自定义radio样式 */
+      .section-title input[type="radio"] {
+        display: none;
+      }
+
+      .section-title label {
+        display: inline-block;
+        padding: 4px 12px;
+        margin: 0 4px;
+        border-radius: 16px;
+        background-color: #e9ecef;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .section-title label:hover {
+        background-color: #dee2e6;
+      }
+
+      .section-title input[type="radio"]:checked + label {
+        background-color: #4b6cb7;
+        color: white;
+      }
+
+      textarea {
+        width: 100%;
+        flex-grow: 1;
+        padding: 12px;
+        border: 2px solid #e1e5eb;
+        border-radius: 8px;
+        font-size: 16px;
+        resize: none;
+        transition: border 0.3s;
+        line-height: 1.5;
+        font-family: monospace;
+        min-height: 0;
+        /* 允许flex缩小 */
+      }
+
+      textarea:focus {
+        border-color: #4b6cb7;
+        outline: none;
+      }
+
+      .preview-container {
+        width: 100%;
+        flex-grow: 1;
+        padding: 12px;
+        border: 2px solid #e1e5eb;
+        border-radius: 8px;
+        background-color: #f9fafb;
+        overflow-y: auto;
+        line-height: 1.6;
+        min-height: 0;
+        font-size: 20px;
+      }
+      .preview-area {
+        width: 100%;
+        line-height: 1.6;
+        min-height: 0;
+        font-size: 20px;
+      }
+
+      .help-section {
+        width: 100%;
+        padding: 10px;
+        background-color: #f0f4f8;
+        border-radius: 8px;
+        flex-shrink: 0;
+        margin-top: 5px;
+      }
+
+      .help-title {
+        font-size: 16px;
+        margin-bottom: 8px;
+        color: #333;
+      }
+
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .tag {
+        background-color: white;
+        padding: 5px 10px;
+        border-radius: 20px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+      }
+
+      .tag code {
+        background-color: #f1f3f4;
+        padding: 2px 5px;
+        border-radius: 4px;
+        margin: 0 4px;
+        font-family: monospace;
+      }
+
+      .tag-example {
+        color: #666;
+        font-size: 11px;
+        margin-left: 4px;
+      }
+
+      .buttons {
+        display: flex;
+        gap: 8px;
+        margin-top: 8px;
+        flex-shrink: 0;
+      }
+
+      .copy-notification {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 4px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+
+      .copy-notification.show {
+        opacity: 1;
+      }
+
+      @media (max-width: 768px) {
         .content {
-            display: flex;
-            flex-wrap: wrap;
-            padding: 8px;
-            flex-grow: 1;
-            overflow: hidden;
-            gap: 10px;
+          flex-direction: column;
         }
 
         .input-section,
         .preview-section {
-            flex: 1;
-            min-width: 300px;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
+          width: 100%;
+          min-height: 40vh;
         }
 
-        .section-title {
-            font-size: 16px;
-            margin-bottom: 8px;
-            color: #333;
-            display: flex;
-            align-items: center;
-            flex-shrink: 0;
-            height: 32px;
+        .toolbar {
+          flex-direction: column;
+          align-items: flex-start;
         }
-
-        .section-title i {
-            margin-right: 6px;
-            color: #4b6cb7;
-        }
-        /* 自定义radio样式 */
-        .section-title input[type="radio"] {
-            display: none;
-        }
-
-        .section-title label {
-            display: inline-block;
-            padding: 4px 12px;
-            margin: 0 4px;
-            border-radius: 16px;
-            background-color: #e9ecef;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .section-title label:hover {
-            background-color: #dee2e6;
-        }
-
-        .section-title input[type="radio"]:checked + label {
-            background-color: #4b6cb7;
-            color: white;
-        }
-
-        textarea {
-            width: 100%;
-            flex-grow: 1;
-            padding: 12px;
-            border: 2px solid #e1e5eb;
-            border-radius: 8px;
-            font-size: 16px;
-            resize: none;
-            transition: border 0.3s;
-            line-height: 1.5;
-            font-family: monospace;
-            min-height: 0;
-            /* 允许flex缩小 */
-        }
-
-        textarea:focus {
-            border-color: #4b6cb7;
-            outline: none;
-        }
-
-        .preview-container {
-            width: 100%;
-            flex-grow: 1;
-            padding: 12px;
-            border: 2px solid #e1e5eb;
-            border-radius: 8px;
-            background-color: #f9fafb;
-            overflow-y: auto;
-            line-height: 1.6;
-            min-height: 0;
-            font-size: 20px;
-        }
-        .preview-area {
-            width: 100%;
-            line-height: 1.6;
-            min-height: 0;
-            font-size: 20px;
-        }
-
-        .help-section {
-            width: 100%;
-            padding: 10px;
-            background-color: #f0f4f8;
-            border-radius: 8px;
-            flex-shrink: 0;
-            margin-top: 5px;
-        }
-
-        .help-title {
-            font-size: 16px;
-            margin-bottom: 8px;
-            color: #333;
-        }
-
-        .tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .tag {
-            background-color: white;
-            padding: 5px 10px;
-            border-radius: 20px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            font-size: 12px;
-            display: flex;
-            align-items: center;
-        }
-
-        .tag code {
-            background-color: #f1f3f4;
-            padding: 2px 5px;
-            border-radius: 4px;
-            margin: 0 4px;
-            font-family: monospace;
-        }
-
-        .tag-example {
-            color: #666;
-            font-size: 11px;
-            margin-left: 4px;
-        }
-
-        .buttons {
-            display: flex;
-            gap: 8px;
-            margin-top: 8px;
-            flex-shrink: 0;
-        }
-
-        .copy-notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 4px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .copy-notification.show {
-            opacity: 1;
-        }
-
-        @media (max-width: 768px) {
-            .content {
-                flex-direction: column;
-            }
-
-            .input-section,
-            .preview-section {
-                width: 100%;
-                min-height: 40vh;
-            }
-
-            .toolbar {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-        }
+      }
+      .item-name,
+      .item-icon,
+      .item-tag,
+      .item-desc {
+        display: none;
+      }
+      .item-preview {
+        width: 490px;
+        border-radius: 0;
+        padding: 0;
+        background-color: transparent;
         .item-name,
         .item-icon,
         .item-tag,
         .item-desc {
-            display: none;
+          padding: 0 30px;
+          display: block;
         }
-        .item-preview {
-            width: 490px;
-            border-radius: 0;
-            padding: 0;
-            background-color: transparent;
-            .item-name,
-            .item-icon,
-            .item-tag,
-            .item-desc {
-                padding: 0 30px;
-                display: block;
-            }
-            .item-name {
-                line-height: 60px;
-                background-color: #bdbdbd;
-            }
-            .item-icon {
-                line-height: 225px;
-                background-color: #ebebeb;
-            }
-            .item-tag {
-                line-height: 80px;
-                background-color: #f5f5f5;
-            }
-            .preview-area {
-                padding: 0 30px;
-                /* letter-spacing: 4px; */
-            }
+        .item-name {
+          line-height: 60px;
+          background-color: #bdbdbd;
         }
-        .popup-preview {
-            background-color: #3E4556;
-            color: #fff;
+        .item-icon {
+          line-height: 225px;
+          background-color: #ebebeb;
         }
+        .item-tag {
+          line-height: 80px;
+          background-color: #f5f5f5;
+        }
+        .preview-area {
+          padding: 0 30px;
+          /* letter-spacing: 4px; */
+        }
+      }
+      .popup-preview {
+        background-color: #3e4556;
+        color: #fff;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="container">
-        <div class="header">
-            <h1>千星奇域文本编辑器v20251124</h1>
-            <p>选择文本后使用工具栏插入标签，或直接输入标签</p>
+      <div class="header">
+        <h1>千星沙箱文本编辑器v20251202</h1>
+        <p>选择文本后使用工具栏插入标签，或直接输入标签</p>
+      </div>
+
+      <div class="toolbar">
+        <div class="tool-group">
+          <label>颜色:</label>
+          <div class="color-presets">
+            <div
+              class="color-preset"
+              title="标题/次要文字"
+              style="background-color: #d3bc8e"
+              data-color="#d3bc8e"
+            ></div>
+            <div
+              class="color-preset"
+              title="深色背景-关键字1"
+              style="background-color: #ffcc33"
+              data-color="#ffcc33"
+            ></div>
+            <div
+              class="color-preset"
+              title="深色背景-关键字2"
+              style="background-color: #37ffff"
+              data-color="#37ffff"
+            ></div>
+            <div class="color-preset" title="警示文字" style="background-color: #ff5e41" data-color="#ff5e41"></div>
+            <div
+              class="color-preset"
+              title="浅色背景-关键字1"
+              style="background-color: #f39000"
+              data-color="#f39000"
+            ></div>
+            <div
+              class="color-preset"
+              title="浅色背景-关键字2"
+              style="background-color: #3399cc"
+              data-color="#3399cc"
+            ></div>
+            <div class="color-preset" title="火元素" style="background-color: #ff6666" data-color="#ff6666"></div>
+            <div class="color-preset" title="水元素" style="background-color: #6495ed" data-color="#6495ed"></div>
+            <div class="color-preset" title="雷元素" style="background-color: #b380ff" data-color="#b380ff"></div>
+            <div class="color-preset" title="冰元素" style="background-color: #55ddff" data-color="#55ddff"></div>
+            <div class="color-preset" title="风元素" style="background-color: #5ddac1" data-color="#5ddac1"></div>
+            <div class="color-preset" title="岩元素" style="background-color: #ffcc00" data-color="#ffcc00"></div>
+            <div class="color-preset" title="草元素" style="background-color: #3cff00" data-color="#3cff00"></div>
+          </div>
+          <div class="color-picker-container">
+            <input type="color" id="colorPicker" value="#d3bc8e" />
+          </div>
+          <button id="applyColor">应用颜色</button>
         </div>
 
-        <div class="toolbar">
-            <div class="tool-group">
-                <label>颜色:</label>
-                <div class="color-presets">
-                    <div class="color-preset" title="标题/次要文字" style="background-color: #d3bc8e;" data-color="#d3bc8e"></div>
-                    <div class="color-preset" title="深色背景-关键字1" style="background-color: #ffcc33;" data-color="#ffcc33"></div>
-                    <div class="color-preset" title="深色背景-关键字2" style="background-color: #37ffff;" data-color="#37ffff"></div>
-                    <div class="color-preset" title="警示文字" style="background-color: #ff5e41;" data-color="#ff5e41"></div>
-                    <div class="color-preset" title="浅色背景-关键字1" style="background-color: #f39000;" data-color="#f39000"></div>
-                    <div class="color-preset" title="浅色背景-关键字2" style="background-color: #3399cc;" data-color="#3399cc"></div>
-                    <div class="color-preset" title="火元素" style="background-color: #ff6666;" data-color="#ff6666"></div>
-                    <div class="color-preset" title="水元素" style="background-color: #6495ed;" data-color="#6495ed"></div>
-                    <div class="color-preset" title="雷元素" style="background-color: #b380ff;" data-color="#b380ff"></div>
-                    <div class="color-preset" title="冰元素" style="background-color: #55ddff;" data-color="#55ddff"></div>
-                    <div class="color-preset" title="风元素" style="background-color: #5ddac1;" data-color="#5ddac1"></div>
-                    <div class="color-preset" title="岩元素" style="background-color: #ffcc00;" data-color="#ffcc00"></div>
-                    <div class="color-preset" title="草元素" style="background-color: #3cff00;" data-color="#3cff00"></div>
-                </div>
-                <div class="color-picker-container">
-                    <input type="color" id="colorPicker" value="#d3bc8e">
-                </div>
-                <button id="applyColor">应用颜色</button>
-            </div>
-
-            <div class="tool-group">
-                <button id="applyItalic">斜体</button>
-            </div>
-
-            <div class="tool-group">
-                <label>字号:</label>
-                <select id="fontSize">
-                    <option value="12">12px</option>
-                    <option value="14">14px</option>
-                    <option value="16">16px</option>
-                    <option value="18">18px</option>
-                    <option value="20" selected>20px</option>
-                    <option value="24">24px</option>
-                    <option value="28">28px</option>
-                    <option value="32">32px</option>
-                </select>
-                <button id="applySize">应用字号</button>
-            </div>
-
-            <div class="tool-group">
-                <button id="applyBold">加粗</button>
-            </div>
-
-            <div class="tool-group">
-                <button id="insertNewline">插入\n换行符</button>
-            </div>
-            <div class="tool-group">提示：{插入变量}后的换行需要使用\n换行符</div>
+        <div class="tool-group">
+          <button id="applyItalic">斜体</button>
         </div>
 
-        <div class="content">
-            <div class="input-section">
-                <h2 class="section-title">
-                    <i>📝</i> 输入区域
-                </h2>
-                <textarea id="inputText" placeholder="在这里输入文本，使用工具栏插入标签或直接输入标签..."></textarea>
-                <div class="buttons">
-                    <button id="clearBtn">清空内容</button>
-                    <button id="exampleBtn">插入示例</button>
-                    <button id="copyBtn">复制内容</button>
-                </div>
-            </div>
-
-            <div class="preview-section">
-                <h2 class="section-title">
-                    <input type="radio" id="normal-preview" name="preview-mode" value="normal" checked>
-                    <label for="normal-preview">
-                        <i>👁️</i>常规预览
-                    </label>
-                    <input type="radio" id="item-preview" name="preview-mode" value="item">
-                    <label for="item-preview">
-                        <i>👁️</i>道具预览
-                    </label>
-                    <input type="radio" id="popup-preview" name="preview-mode" value="popup">
-                    <label for="popup-preview">
-                        <i>👁️</i>弹窗预览
-                    </label>
-                </h2>
-                <div class="preview-container">
-                    <div class="item-name">道具名称</div>
-                    <div class="item-icon">道具图标</div>
-                    <div class="item-tag">道具标签</div>
-                    <div class="item-desc">道具描述：</div>
-                    <div id="preview" class="preview-area"></div>
-                </div>
-            </div>
+        <div class="tool-group">
+          <label>字号:</label>
+          <select id="fontSize">
+            <option value="12">12px</option>
+            <option value="14">14px</option>
+            <option value="16">16px</option>
+            <option value="18">18px</option>
+            <option value="20" selected>20px</option>
+            <option value="24">24px</option>
+            <option value="28">28px</option>
+            <option value="32">32px</option>
+          </select>
+          <button id="applySize">应用字号</button>
         </div>
 
-        <div class="help-section">
-            <h2 class="help-title">支持的标签</h2>
-            <div class="tags">
-                <div class="tag">
-                    修改颜色: <code>&lt;color=#fff&gt;内容&lt;/color&gt;</code>
-                    <span class="tag-example">例如: &lt;color=#d3bc8e&gt;红色文字&lt;/color&gt;</span>
-                </div>
-                <div class="tag">
-                    斜体: <code>&lt;i&gt;内容&lt;/i&gt;</code>
-                </div>
-                <div class="tag">
-                    修改字号: <code>&lt;size=14&gt;内容&lt;/size&gt;</code>
-                    <span class="tag-example">例如: &lt;size=20&gt;大号文字&lt;/size&gt;</span>
-                </div>
-                <div class="tag">
-                    加粗: <code>&lt;b&gt;内容&lt;/b&gt;</code>
-                </div>
-                <div class="tag">
-                    换行: <code>\n</code>或回车
-                </div>
-            </div>
+        <div class="tool-group">
+          <button id="applyBold">加粗</button>
         </div>
+
+        <div class="tool-group">
+          <button id="insertNewline">插入\n换行符</button>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="input-section">
+          <h2 class="section-title"><i>📝</i>输入区域————<i>鼠标框选文本后点击应用颜色即可一键添加颜色</i></h2>
+          <textarea id="inputText" placeholder="在这里输入文本，使用工具栏插入标签或直接输入标签..."></textarea>
+          <div class="buttons">
+            <button id="clearBtn">清空内容</button>
+            <button id="exampleBtn">插入示例</button>
+            <button id="copyBtn">复制内容</button>
+          </div>
+        </div>
+
+        <div class="preview-section">
+          <h2 class="section-title">
+            <input type="radio" id="normal-preview" name="preview-mode" value="normal" checked />
+            <label for="normal-preview"> <i>👁️</i>常规预览 </label>
+            <input type="radio" id="item-preview" name="preview-mode" value="item" />
+            <label for="item-preview"> <i>👁️</i>道具预览 </label>
+            <input type="radio" id="popup-preview" name="preview-mode" value="popup" />
+            <label for="popup-preview"> <i>👁️</i>弹窗预览 </label>
+          </h2>
+          <div class="preview-container">
+            <div class="item-name">道具名称</div>
+            <div class="item-icon">道具图标</div>
+            <div class="item-tag">道具标签</div>
+            <div class="item-desc">道具描述：</div>
+            <div id="preview" class="preview-area"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="help-section">
+        <h2 class="help-title">备注</h2>
+        <div class="tags">
+          <div class="tag">
+            修改颜色: <code>&lt;color=#fff&gt;内容&lt;/color&gt;</code>
+            <span class="tag-example">例如: &lt;color=#d3bc8e&gt;红色文字&lt;/color&gt;</span>
+          </div>
+          <div class="tag">斜体: <code>&lt;i&gt;内容&lt;/i&gt;</code></div>
+          <div class="tag">
+            修改字号: <code>&lt;size=14&gt;内容&lt;/size&gt;</code>
+            <span class="tag-example">例如: &lt;size=20&gt;大号文字&lt;/size&gt;</span>
+          </div>
+          <div class="tag">加粗: <code>&lt;b&gt;内容&lt;/b&gt;</code></div>
+          <div class="tag">换行: <code>\n</code>或回车</div>
+          <div class="tag">注意：界面控件中{插入变量}之后的换行、节点图中字符串变量的换行，需要使用\n换行符；</div>
+        </div>
+      </div>
     </div>
 
     <div class="copy-notification" id="copyNotification">内容已复制到剪贴板！</div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const inputText = document.getElementById('inputText');
-            const preview = document.getElementById('preview');
-            const clearBtn = document.getElementById('clearBtn');
-            const exampleBtn = document.getElementById('exampleBtn');
-            const copyBtn = document.getElementById('copyBtn');
-            const copyNotification = document.getElementById('copyNotification');
-            const applyColor = document.getElementById('applyColor');
-            const applyItalic = document.getElementById('applyItalic');
-            const applySize = document.getElementById('applySize');
-            const applyBold = document.getElementById('applyBold');
-            const insertNewline = document.getElementById('insertNewline');
-            const colorPicker = document.getElementById('colorPicker');
-            const fontSize = document.getElementById('fontSize');
-            const colorPresets = document.querySelectorAll('.color-preset');
+      document.addEventListener("DOMContentLoaded", function () {
+        const inputText = document.getElementById("inputText");
+        const preview = document.getElementById("preview");
+        const clearBtn = document.getElementById("clearBtn");
+        const exampleBtn = document.getElementById("exampleBtn");
+        const copyBtn = document.getElementById("copyBtn");
+        const copyNotification = document.getElementById("copyNotification");
+        const applyColor = document.getElementById("applyColor");
+        const applyItalic = document.getElementById("applyItalic");
+        const applySize = document.getElementById("applySize");
+        const applyBold = document.getElementById("applyBold");
+        const insertNewline = document.getElementById("insertNewline");
+        const colorPicker = document.getElementById("colorPicker");
+        const fontSize = document.getElementById("fontSize");
+        const colorPresets = document.querySelectorAll(".color-preset");
 
-            let selectedColor = '#d3bc8e';
-
-            // 初始渲染
+        let selectedColor = "#d3bc8e";
+        
+        // 撤销历史记录
+        const history = [];
+        const MAX_HISTORY_LENGTH = 200; // 最大历史记录长度
+        let historyIndex = -1; // 当前历史记录索引
+        let isUpdating = false; // 防止循环更新
+        
+        // 保存当前状态到历史记录
+        function saveToHistory() {
+          if (isUpdating) return;
+          
+          // 如果当前不是最新历史记录，移除后面的历史
+          if (historyIndex < history.length - 1) {
+            history.splice(historyIndex + 1);
+          }
+          
+          // 保存当前状态
+          history.push({
+            value: inputText.value,
+            selectionStart: inputText.selectionStart,
+            selectionEnd: inputText.selectionEnd
+          });
+          
+          // 限制历史记录长度
+          if (history.length > MAX_HISTORY_LENGTH) {
+            history.shift();
+          } else {
+            historyIndex++;
+          }
+        }
+        
+        // 撤销操作
+        function undo() {
+          if (historyIndex > 0) {
+            historyIndex--;
+            const state = history[historyIndex];
+            
+            isUpdating = true;
+            inputText.value = state.value;
+            inputText.selectionStart = state.selectionStart;
+            inputText.selectionEnd = state.selectionEnd;
+            isUpdating = false;
+            
+            inputText.focus();
             updatePreview();
-
-            // 监听输入变化
-            inputText.addEventListener('input', updatePreview);
-
-            // 清空按钮
-            clearBtn.addEventListener('click', function () {
-                inputText.value = '';
-                updatePreview();
-            });
-
-            // 示例按钮
-            exampleBtn.addEventListener('click', function () {
-                inputText.value = `这是一个示例文本：\n\n<color=#d3bc8e>这段文字是标题/次要文字色的</color>\n<i>这段文字是斜体</i>\n<size=20>这段文字字号为20</size>\n<b>这段文字是粗体</b>\n\n使用\\n进行换行\n这是新的一行\n\n<color=#009900><b><i>组合使用多种样式</i></b></color>`;
-                updatePreview();
-            });
-
-            // 预览模式切换事件
-            const previewModeRadios = document.querySelectorAll('input[name="preview-mode"]');
-            previewModeRadios.forEach(radio => {
-                radio.addEventListener('change', updatePreview);
-            });
-
-            // 复制按钮
-            copyBtn.addEventListener('click', function () {
-                copyToClipboard(inputText.value);
-            });
-
-            // 颜色预设点击事件
-            colorPresets.forEach(preset => {
-                preset.addEventListener('click', function () {
-                    selectedColor = this.getAttribute('data-color');
-                    colorPicker.value = selectedColor;
-                });
-            });
-
-            // 颜色选择器变化事件
-            colorPicker.addEventListener('input', function () {
-                selectedColor = this.value;
-            });
-
-            // 应用颜色按钮
-            applyColor.addEventListener('click', function () {
-                wrapSelectedText(`<color=${selectedColor}>`, `</color>`);
-            });
-
-            // 应用斜体按钮
-            applyItalic.addEventListener('click', function () {
-                wrapSelectedText('<i>', '</i>');
-            });
-
-            // 应用字号按钮
-            applySize.addEventListener('click', function () {
-                const size = fontSize.value;
-                wrapSelectedText(`<size=${size}>`, `</size>`);
-            });
-
-            // 应用加粗按钮
-            applyBold.addEventListener('click', function () {
-                wrapSelectedText('<b>', '</b>');
-            });
-
-            // 插入换行符按钮
-            insertNewline.addEventListener('click', function () {
-                insertAtCursor('\\n');
-            });
-
-            // 防止回车键换行
-            inputText.addEventListener('keydown', function (e) {
-                if (e.key === 'Enter') {
-                    // e.preventDefault();
-                    // 插入\n而不是换行
-                    // insertAtCursor('\\n');
-                }
-            });
-
-            // 复制文本到剪贴板
-            function copyToClipboard(text) {
-                navigator.clipboard.writeText(text).then(function () {
-                    // 显示复制成功提示
-                    copyNotification.classList.add('show');
-                    setTimeout(function () {
-                        copyNotification.classList.remove('show');
-                    }, 2000);
-                }, function (err) {
-                    // 如果现代API失败，使用传统方法
-                    fallbackCopyTextToClipboard(text);
-                });
-            }
-
-            // 传统复制方法
-            function fallbackCopyTextToClipboard(text) {
-                const textArea = document.createElement("textarea");
-                textArea.value = text;
-                textArea.style.position = "fixed";
-                textArea.style.opacity = 0;
-                document.body.appendChild(textArea);
-                textArea.focus();
-                textArea.select();
-
-                try {
-                    const successful = document.execCommand('copy');
-                    if (successful) {
-                        copyNotification.classList.add('show');
-                        setTimeout(function () {
-                            copyNotification.classList.remove('show');
-                        }, 2000);
-                    }
-                } catch (err) {
-                    console.error('复制失败: ', err);
-                }
-
-                document.body.removeChild(textArea);
-            }
-
-            // 在光标位置插入文本
-            function insertAtCursor(text) {
-                const start = inputText.selectionStart;
-                const end = inputText.selectionEnd;
-                const value = inputText.value;
-
-                inputText.value = value.substring(0, start) + text + value.substring(end);
-                inputText.selectionStart = inputText.selectionEnd = start + text.length;
-                inputText.focus();
-                updatePreview();
-            }
-
-            // 包装选中的文本
-            function wrapSelectedText(prefix, suffix) {
-                const start = inputText.selectionStart;
-                const end = inputText.selectionEnd;
-                const selectedText = inputText.value.substring(start, end);
-
-                if (selectedText) {
-                    // 有选中文本，直接包装
-                    inputText.value = inputText.value.substring(0, start) +
-                        prefix + selectedText + suffix +
-                        inputText.value.substring(end);
-                    inputText.selectionStart = start;
-                    inputText.selectionEnd = start + prefix.length + selectedText.length + suffix.length;
-                } else {
-                    // 没有选中文本，插入空标签并将光标放在中间
-                    inputText.value = inputText.value.substring(0, start) +
-                        prefix + suffix +
-                        inputText.value.substring(end);
-                    inputText.selectionStart = inputText.selectionEnd = start + prefix.length;
-                }
-
-                inputText.focus();
-                updatePreview();
-            }
-
-            function updatePreview() {
-                let content = inputText.value;
-                const currentMode = document.querySelector('input[name="preview-mode"]:checked').value;
-                const previewContainer = document.querySelector('.preview-container');
-
-                // 处理换行符 - 支持输入\\n或直接回车换行
-            content = content.replace(/\\n|\n/g, '<br>');
-
-                    content = content.replace(/<color=([^>]+?)>(.*?)<\/color>/g, '<span style="color: $1">$2</span>');
-                    content = content.replace(/<i>(.*?)<\/i>/g, '<i>$1</i>');
-                    content = content.replace(/<size=(\d+)>(.*?)<\/size>/g, '<span style="font-size: $1px">$2</span>');
-                    content = content.replace(/<b>(.*?)<\/b>/g, '<b>$1</b>');
-                // 根据不同预览模式处理内容
-                if (currentMode === 'normal') {
-                    previewContainer.classList.remove('item-preview');
-                    previewContainer.classList.remove('popup-preview');
-                } else if (currentMode === 'item') {
-                    // 道具预览：处理基本标签 + 道具相关标签
-                    previewContainer.classList.remove('popup-preview');
-                    previewContainer.classList.add('item-preview');
-                } else if (currentMode === 'popup') {
-                    previewContainer.classList.remove('item-preview');
-                    previewContainer.classList.add('popup-preview');
-                }
-
-                // 更新预览区域
-                preview.innerHTML = content;
-            }
+          }
+        }
+        
+        // 监听键盘事件，支持ctrl+z撤销
+        inputText.addEventListener("keydown", function (e) {
+          if ((e.ctrlKey || e.metaKey) && e.key === "z") {
+            e.preventDefault();
+            undo();
+          }
         });
-    </script>
-</body>
+        
+        // 监听文本输入，保存到历史记录
+        inputText.addEventListener("beforeinput", function () {
+          saveToHistory();
+        });
 
+        // 初始渲染
+        updatePreview();
+
+        // 监听输入变化
+        inputText.addEventListener("input", updatePreview);
+
+        // 清空按钮
+        clearBtn.addEventListener("click", function () {
+          saveToHistory();
+          inputText.value = "";
+          updatePreview();
+        });
+
+        // 示例按钮
+        exampleBtn.addEventListener("click", function () {
+          saveToHistory();
+          inputText.value = `这是一个示例文本：\n\n<color=#d3bc8e>这段文字是标题/次要文字色的</color>\n<i>这段文字是斜体</i>\n<size=20>这段文字字号为20</size>\n<b>这段文字是粗体</b>\n\n使用\\n进行换行\n这是新的一行\n\n<color=#009900><b><i>组合使用多种样式</i></b></color>`;
+          updatePreview();
+        });
+
+        // 预览模式切换事件
+        const previewModeRadios = document.querySelectorAll('input[name="preview-mode"]');
+        previewModeRadios.forEach((radio) => {
+          radio.addEventListener("change", updatePreview);
+        });
+
+        // 复制按钮
+        copyBtn.addEventListener("click", function () {
+          copyToClipboard(inputText.value);
+        });
+
+        // 颜色预设点击事件
+        colorPresets.forEach((preset) => {
+          preset.addEventListener("click", function () {
+            selectedColor = this.getAttribute("data-color");
+            colorPicker.value = selectedColor;
+          });
+        });
+
+        // 颜色选择器变化事件
+        colorPicker.addEventListener("input", function () {
+          selectedColor = this.value;
+        });
+
+        // 应用颜色按钮
+        applyColor.addEventListener("click", function () {
+          wrapSelectedText(`<color=${selectedColor}>`, `</color>`);
+        });
+
+        // 应用斜体按钮
+        applyItalic.addEventListener("click", function () {
+          wrapSelectedText("<i>", "</i>");
+        });
+
+        // 应用字号按钮
+        applySize.addEventListener("click", function () {
+          const size = fontSize.value;
+          wrapSelectedText(`<size=${size}>`, `</size>`);
+        });
+
+        // 应用加粗按钮
+        applyBold.addEventListener("click", function () {
+          wrapSelectedText("<b>", "</b>");
+        });
+
+        // 插入换行符按钮
+        insertNewline.addEventListener("click", function () {
+          insertAtCursor("\\n");
+        });
+
+        // 防止回车键换行
+        inputText.addEventListener("keydown", function (e) {
+          if (e.key === "Enter") {
+            // e.preventDefault();
+            // 插入\n而不是换行
+            // insertAtCursor('\\n');
+          }
+        });
+
+        // 复制文本到剪贴板
+        function copyToClipboard(text) {
+          navigator.clipboard.writeText(text).then(
+            function () {
+              // 显示复制成功提示
+              copyNotification.classList.add("show");
+              setTimeout(function () {
+                copyNotification.classList.remove("show");
+              }, 2000);
+            },
+            function (err) {
+              // 如果现代API失败，使用传统方法
+              fallbackCopyTextToClipboard(text);
+            }
+          );
+        }
+
+        // 传统复制方法
+        function fallbackCopyTextToClipboard(text) {
+          const textArea = document.createElement("textarea");
+          textArea.value = text;
+          textArea.style.position = "fixed";
+          textArea.style.opacity = 0;
+          document.body.appendChild(textArea);
+          textArea.focus();
+          textArea.select();
+
+          try {
+            const successful = document.execCommand("copy");
+            if (successful) {
+              copyNotification.classList.add("show");
+              setTimeout(function () {
+                copyNotification.classList.remove("show");
+              }, 2000);
+            }
+          } catch (err) {
+            console.error("复制失败: ", err);
+          }
+
+          document.body.removeChild(textArea);
+        }
+
+        // 在光标位置插入文本
+        function insertAtCursor(text) {
+          // 保存当前状态到历史记录
+          saveToHistory();
+          
+          const start = inputText.selectionStart;
+          const end = inputText.selectionEnd;
+          const value = inputText.value;
+
+          inputText.value = value.substring(0, start) + text + value.substring(end);
+          inputText.selectionStart = inputText.selectionEnd = start + text.length;
+          inputText.focus();
+          updatePreview();
+        }
+
+        // 包装选中的文本
+        function wrapSelectedText(prefix, suffix) {
+          // 保存当前状态到历史记录
+          saveToHistory();
+          
+          const start = inputText.selectionStart;
+          const end = inputText.selectionEnd;
+          const selectedText = inputText.value.substring(start, end);
+
+          if (selectedText) {
+            // 有选中文本，直接包装
+            inputText.value = 
+              inputText.value.substring(0, start) + prefix + selectedText + suffix + inputText.value.substring(end);
+            inputText.selectionStart = start;
+            inputText.selectionEnd = start + prefix.length + selectedText.length + suffix.length;
+          } else {
+            // 没有选中文本，插入空标签并将光标放在中间
+            inputText.value = inputText.value.substring(0, start) + prefix + suffix + inputText.value.substring(end);
+            inputText.selectionStart = inputText.selectionEnd = start + prefix.length;
+          }
+
+          inputText.focus();
+          updatePreview();
+        }
+
+        function updatePreview() {
+          let content = inputText.value;
+          const currentMode = document.querySelector('input[name="preview-mode"]:checked').value;
+          const previewContainer = document.querySelector(".preview-container");
+
+          // 处理换行符 - 支持输入\\n或直接回车换行
+          content = content.replace(/\\n|\n/g, "<br>");
+
+          content = content.replace(/<color=([^>]+?)>(.*?)<\/color>/g, '<span style="color: $1">$2</span>');
+          content = content.replace(/<i>(.*?)<\/i>/g, "<i>$1</i>");
+          content = content.replace(/<size=(\d+)>(.*?)<\/size>/g, '<span style="font-size: $1px">$2</span>');
+          content = content.replace(/<b>(.*?)<\/b>/g, "<b>$1</b>");
+          // 根据不同预览模式处理内容
+          if (currentMode === "normal") {
+            previewContainer.classList.remove("item-preview");
+            previewContainer.classList.remove("popup-preview");
+          } else if (currentMode === "item") {
+            // 道具预览：处理基本标签 + 道具相关标签
+            previewContainer.classList.remove("popup-preview");
+            previewContainer.classList.add("item-preview");
+          } else if (currentMode === "popup") {
+            previewContainer.classList.remove("item-preview");
+            previewContainer.classList.add("popup-preview");
+          }
+
+          // 更新预览区域
+          preview.innerHTML = content;
+        }
+      });
+    </script>
+  </body>
 </html>
