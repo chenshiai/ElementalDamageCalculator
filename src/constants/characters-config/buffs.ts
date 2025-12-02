@@ -53,6 +53,9 @@ export const A_80_MYSTERY_96 = [24, 48, 48, 72, 96].map((value, index) =>
 export const A_80_CHARGE_26P = [6.7, 13.3, 13.3, 20, 26.7].map((value, index) =>
   createBuff(BuffType.ChargeFixed, value, "A", "元素充能效率", index + 2)
 );
+export const A_80_HEALADD_18P = [4.58, 9.25, 9.25, 13.8, 18.5].map((value, index) =>
+  createBuff(BuffType.HealAdd, value, "A", "治疗加成", index + 2)
+);
 
 export const A_80_GEO_24P = [6, 12, 12, 18, 24].map((value, index) =>
   createBuff(BuffType.GeoPrcent, value, "A", "岩元素伤害加成", index + 2)
