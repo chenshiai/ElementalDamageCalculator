@@ -36,7 +36,7 @@ const weaponBuffsFilter = computed(() => {
   /** 根据当前角色数据，过滤掉不符合条件的buff 同时 过滤掉只对队友生效的buff */
   return weaponBuffs.value
     .reduce((prev, buff) => {
-      if (!buff.condition || (buff.condition(characterInfo) && buff.target !== BuffTarget.Other)) {
+      if ((!buff.condition || buff.condition(characterInfo)) && buff.target !== BuffTarget.Other) {
         prev.push(buff);
       } else {
         buff.enable = false;

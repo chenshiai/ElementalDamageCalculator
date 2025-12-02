@@ -40,3 +40,4 @@ export * from "./Magnum";
 export * from "./Sword_Outlaw";
 export * from "./Sword_Ilmarinen";
 export * from "./Sword_Miekka";
+export * from "./Sword_Motsognir";
