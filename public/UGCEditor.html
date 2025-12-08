@@ -3,13 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>千星沙箱文本编辑器v20251204</title>
+    <title>千星沙箱文本编辑器v20251208</title>
+    <link rel="stylesheet" href="font.css" />
     <style>
       * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        font-family: "eng", HYWenHei-85W, Avenir, Helvetica, Arial, sans-serif;
+        font-weight: normal !important;
+        word-break: break-all;
+      }
+      b {
+        font-weight: bolder !important;
       }
 
       body {
@@ -310,7 +316,7 @@
           align-items: flex-start;
         }
       }
-      
+
       /* 大屏幕设备提示蒙层 */
       .screen-size-overlay {
         display: none;
@@ -325,7 +331,7 @@
         align-items: center;
         color: white;
       }
-      
+
       .overlay-content {
         text-align: center;
         max-width: 500px;
@@ -334,24 +340,24 @@
         border-radius: 12px;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
       }
-      
+
       .overlay-icon {
         font-size: 80px;
         margin-bottom: 20px;
       }
-      
+
       .overlay-content h2 {
         font-size: 28px;
         margin-bottom: 15px;
         color: #e74c3c;
       }
-      
+
       .overlay-content p {
         font-size: 18px;
         margin-bottom: 30px;
         line-height: 1.6;
       }
-      
+
       #closeOverlay {
         padding: 12px 30px;
         font-size: 16px;
@@ -362,11 +368,11 @@
         cursor: pointer;
         transition: background-color 0.3s;
       }
-      
+
       #closeOverlay:hover {
         background-color: #2980b9;
       }
-      
+
       /* 在小屏幕设备上显示蒙层 */
       @media (max-width: 1024px) {
         .screen-size-overlay {
@@ -383,7 +389,7 @@
         width: 490px;
         border-radius: 0;
         padding: 0;
-          background-color: #F7F9FB;
+        background-color: #f7f9fb;
         .item-name,
         .item-icon,
         .item-tag,
@@ -406,7 +412,7 @@
         .item-desc,
         .preview-area {
           padding: 0 30px;
-          color: #5A6477;
+          color: #5a6477;
           /* letter-spacing: 4px; */
         }
       }
@@ -551,7 +557,7 @@
     </div>
 
     <div class="copy-notification" id="copyNotification">内容已复制到剪贴板！</div>
-    
+
     <!-- 大屏幕设备提示蒙层 -->
     <div id="screenSizeOverlay" class="screen-size-overlay">
       <div class="overlay-content">
@@ -580,29 +586,29 @@
         const colorPresets = document.querySelectorAll(".color-preset");
 
         let selectedColor = "#d3bc8e";
-        
+
         // 撤销历史记录
         const history = [];
         const MAX_HISTORY_LENGTH = 200; // 最大历史记录长度
         let historyIndex = -1; // 当前历史记录索引
         let isUpdating = false; // 防止循环更新
-        
+
         // 保存当前状态到历史记录
         function saveToHistory() {
           if (isUpdating) return;
-          
+
           // 如果当前不是最新历史记录，移除后面的历史
           if (historyIndex < history.length - 1) {
             history.splice(historyIndex + 1);
           }
-          
+
           // 保存当前状态
           history.push({
             value: inputText.value,
             selectionStart: inputText.selectionStart,
-            selectionEnd: inputText.selectionEnd
+            selectionEnd: inputText.selectionEnd,
           });
-          
+
           // 限制历史记录长度
           if (history.length > MAX_HISTORY_LENGTH) {
             history.shift();
@@ -610,24 +616,24 @@
             historyIndex++;
           }
         }
-        
+
         // 撤销操作
         function undo() {
           if (historyIndex > 0) {
             historyIndex--;
             const state = history[historyIndex];
-            
+
             isUpdating = true;
             inputText.value = state.value;
             inputText.selectionStart = state.selectionStart;
             inputText.selectionEnd = state.selectionEnd;
             isUpdating = false;
-            
+
             inputText.focus();
             updatePreview();
           }
         }
-        
+
         // 监听键盘事件，支持ctrl+z撤销
         inputText.addEventListener("keydown", function (e) {
           if ((e.ctrlKey || e.metaKey) && e.key === "z") {
@@ -635,7 +641,7 @@
             undo();
           }
         });
-        
+
         // 监听文本输入，保存到历史记录
         inputText.addEventListener("beforeinput", function () {
           saveToHistory();
@@ -716,14 +722,14 @@
           if (e.key === "Enter") {
             // e.preventDefault();
             // 插入
-而不是换行
+            而不是换行;
             // insertAtCursor('\n');
           }
         });
-        
+
         // 关闭蒙层按钮事件
-        document.getElementById('closeOverlay').addEventListener('click', function() {
-          document.getElementById('screenSizeOverlay').style.display = 'none';
+        document.getElementById("closeOverlay").addEventListener("click", function () {
+          document.getElementById("screenSizeOverlay").style.display = "none";
         });
 
         // 复制文本到剪贴板
@@ -772,7 +778,7 @@
         function insertAtCursor(text) {
           // 保存当前状态到历史记录
           saveToHistory();
-          
+
           const start = inputText.selectionStart;
           const end = inputText.selectionEnd;
           const value = inputText.value;
@@ -787,14 +793,14 @@
         function wrapSelectedText(prefix, suffix) {
           // 保存当前状态到历史记录
           saveToHistory();
-          
+
           const start = inputText.selectionStart;
           const end = inputText.selectionEnd;
           const selectedText = inputText.value.substring(start, end);
 
           if (selectedText) {
             // 有选中文本，直接包装
-            inputText.value = 
+            inputText.value =
               inputText.value.substring(0, start) + prefix + selectedText + suffix + inputText.value.substring(end);
             inputText.selectionStart = start;
             inputText.selectionEnd = start + prefix.length + selectedText.length + suffix.length;
