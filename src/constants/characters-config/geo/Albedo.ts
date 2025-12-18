@@ -155,27 +155,27 @@ export class AlbedoData extends Character implements ICharacterInfo {
       effect: [
         {
           type: BuffType.NormalPrcent,
-          getValue: (data) => Math.max(12, ((data.baseDEF + data.extraDEF + data.extraDEF_NT) / 1000) * 4),
+          getValue: (data) => Math.min(12, ((data.baseDEF + data.extraDEF + data.extraDEF_NT) / 1000) * 4),
           actionOn: ActionOn.Indirect,
         },
         {
           type: BuffType.StrongPrcent,
-          getValue: (data) => Math.max(12, ((data.baseDEF + data.extraDEF + data.extraDEF_NT) / 1000) * 4),
+          getValue: (data) => Math.min(12, ((data.baseDEF + data.extraDEF + data.extraDEF_NT) / 1000) * 4),
           actionOn: ActionOn.Indirect,
         },
         {
           type: BuffType.FallingPrcent,
-          getValue: (data) => Math.max(12, ((data.baseDEF + data.extraDEF + data.extraDEF_NT) / 1000) * 4),
+          getValue: (data) => Math.min(12, ((data.baseDEF + data.extraDEF + data.extraDEF_NT) / 1000) * 4),
           actionOn: ActionOn.Indirect,
         },
         {
           type: BuffType.SkillPrcent,
-          getValue: (data) => Math.max(12, ((data.baseDEF + data.extraDEF + data.extraDEF_NT) / 1000) * 4),
+          getValue: (data) => Math.min(12, ((data.baseDEF + data.extraDEF + data.extraDEF_NT) / 1000) * 4),
           actionOn: ActionOn.Indirect,
         },
         {
           type: BuffType.BurstPrcent,
-          getValue: (data) => Math.max(12, ((data.baseDEF + data.extraDEF + data.extraDEF_NT) / 1000) * 4),
+          getValue: (data) => Math.min(12, ((data.baseDEF + data.extraDEF + data.extraDEF_NT) / 1000) * 4),
           actionOn: ActionOn.Indirect,
         },
       ],
@@ -190,27 +190,27 @@ export class AlbedoData extends Character implements ICharacterInfo {
       effect: [
         {
           type: BuffType.NormalPrcent,
-          getValue: (data) => Math.max(30, ((data.baseDEF + data.extraDEF + data.extraDEF_NT) / 1000) * 10),
+          getValue: (data) => Math.min(30, ((data.baseDEF + data.extraDEF + data.extraDEF_NT) / 1000) * 10),
           actionOn: ActionOn.Indirect,
         },
         {
           type: BuffType.StrongPrcent,
-          getValue: (data) => Math.max(30, ((data.baseDEF + data.extraDEF + data.extraDEF_NT) / 1000) * 10),
+          getValue: (data) => Math.min(30, ((data.baseDEF + data.extraDEF + data.extraDEF_NT) / 1000) * 10),
           actionOn: ActionOn.Indirect,
         },
         {
           type: BuffType.FallingPrcent,
-          getValue: (data) => Math.max(30, ((data.baseDEF + data.extraDEF + data.extraDEF_NT) / 1000) * 10),
+          getValue: (data) => Math.min(30, ((data.baseDEF + data.extraDEF + data.extraDEF_NT) / 1000) * 10),
           actionOn: ActionOn.Indirect,
         },
         {
           type: BuffType.SkillPrcent,
-          getValue: (data) => Math.max(30, ((data.baseDEF + data.extraDEF + data.extraDEF_NT) / 1000) * 10),
+          getValue: (data) => Math.min(30, ((data.baseDEF + data.extraDEF + data.extraDEF_NT) / 1000) * 10),
           actionOn: ActionOn.Indirect,
         },
         {
           type: BuffType.BurstPrcent,
-          getValue: (data) => Math.max(30, ((data.baseDEF + data.extraDEF + data.extraDEF_NT) / 1000) * 10),
+          getValue: (data) => Math.min(30, ((data.baseDEF + data.extraDEF + data.extraDEF_NT) / 1000) * 10),
           actionOn: ActionOn.Indirect,
         },
       ],

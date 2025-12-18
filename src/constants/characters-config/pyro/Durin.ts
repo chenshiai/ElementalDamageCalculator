@@ -239,7 +239,7 @@ export class DurinData extends Character implements ICharacterInfo {
       effect: [
         {
           type: BuffType.BurstRate,
-          getValue: (data) => Math.max(75, ((data.baseATK + data.extraATK + data.extraATK_NT) / 100) * 3),
+          getValue: (data) => Math.min(75, ((data.baseATK + data.extraATK + data.extraATK_NT) / 100) * 3),
           actionOn: ActionOn.Indirect,
         },
       ],
