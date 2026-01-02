@@ -119,6 +119,21 @@
         position: relative;
       }
 
+      .opacity-container {
+        display: flex;
+        align-items: center;
+        margin-right: 10px;
+      }
+
+      .opacity-container label {
+        margin-right: 5px;
+      }
+
+      #opacitySlider {
+        width: 80px;
+        margin-right: 5px;
+      }
+
       #colorPicker {
         width: 26px;
         height: 26px;
@@ -476,6 +491,11 @@
           <div class="color-picker-container">
             <input type="color" id="colorPicker" value="#d3bc8e" />
           </div>
+          <div class="opacity-container">
+            <label for="opacitySlider">不透明度:</label>
+            <input type="range" id="opacitySlider" min="0" max="100" value="100" />
+            <span id="opacityValue">100%</span>
+          </div>
           <button id="applyColor">应用颜色</button>
         </div>
 
@@ -584,8 +604,11 @@
         const colorPicker = document.getElementById("colorPicker");
         const fontSize = document.getElementById("fontSize");
         const colorPresets = document.querySelectorAll(".color-preset");
+        const opacitySlider = document.getElementById("opacitySlider");
+        const opacityValue = document.getElementById("opacityValue");
 
         let selectedColor = "#d3bc8e";
+        let selectedOpacity = 100;
 
         // 撤销历史记录
         const history = [];
@@ -691,9 +714,24 @@
           selectedColor = this.value;
         });
 
+        // 透明度滑块变化事件
+        opacitySlider.addEventListener("input", function () {
+          selectedOpacity = this.value;
+          opacityValue.textContent = selectedOpacity + "%";
+        });
+
         // 应用颜色按钮
         applyColor.addEventListener("click", function () {
-          wrapSelectedText(`<color=${selectedColor}>`, `</color>`);
+          if (selectedOpacity === 100) {
+            // 不透明度为100%时，只使用6位十六进制颜色代码
+            wrapSelectedText(`<color=${selectedColor}>`, `</color>`);
+          } else {
+            // 将透明度转换为十六进制alpha值（00-FF）
+            const alphaHex = Math.round((selectedOpacity / 100) * 255).toString(16).padStart(2, '0');
+            // 生成#RRGGBBAA格式的颜色代码
+            const colorWithAlpha = `${selectedColor}${alphaHex}`;
+            wrapSelectedText(`<color=${colorWithAlpha}>`, `</color>`);
+          }
         });
 
         // 应用斜体按钮
