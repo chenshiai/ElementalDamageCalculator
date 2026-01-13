@@ -24,6 +24,8 @@ type teamItem = {
   checked: RelicType;
   electroPromote: number;
   electroAdd: number;
+  crystalAdd: number;
+  crystalPromote: number;
 };
 
 enum RelicType {
@@ -31,13 +33,15 @@ enum RelicType {
   thunder = "thunder",
   night = "night",
   moon = "moon",
+  song = "song",
 }
 
 const RelicText = {
   [RelicType.none]: "无",
-  [RelicType.thunder]: "如雷的盛怒 月感电+20%",
-  [RelicType.night]: "穹境示现之夜 月曜反应+10%",
-  [RelicType.moon]: "纺月的夜歌 月曜反应+10%",
+  [RelicType.thunder]: "如雷的盛怒 月感电伤害+20%",
+  [RelicType.night]: "穹境示现之夜 月曜反应伤害+10%",
+  [RelicType.moon]: "纺月的夜歌 月曜反应伤害+10%",
+  [RelicType.song]: "晨星与月的晓歌 月曜反应伤害+60%",
 };
 
 const teamList = ref<teamItem[]>([
@@ -49,11 +53,17 @@ const teamList = ref<teamItem[]>([
     checked: RelicType.none,
     electroPromote: 0,
     electroAdd: 0,
+    crystalAdd: 0,
+    crystalPromote: 0,
   },
 ]);
 
 const moonElectroOtherData = ref(0);
+const moonCrystalOtherData = ref(0);
+
 const moonElectroPromoteData = ref(0);
+const moonCrystalPromoteData = ref(0);
+
 const enemyResistance = ref(10);
 const atk = ref(0);
 const hp = ref(0);
@@ -101,6 +111,7 @@ const moonElectroDamage = (teamData: teamItem) => {
           yehunMoonGain.value +
           +moonElectroOtherData.value +
           (teamData.checked === RelicType.thunder ? 20 : 0) +
+          (teamData.checked === RelicType.song ? 60 : 0) +
           relicEff.value) /
           100) *
       (1 + (ineffaGain.value + flinsGain.value + teamData.electroAdd + characterEff.value) / 100) *
@@ -117,6 +128,41 @@ const moonElectroDamage = (teamData: teamItem) => {
     critcal,
   };
 };
+
+// 单人月结晶反应伤害计算
+const moonCrystalDamage = (teamData: teamItem) => {
+  if (!teamData || teamData.level <= 0)
+    return {
+      result: [0, 0],
+      common: 0,
+      desire: 0,
+      critcal: 0,
+    };
+  const baseDamage = BaseDMG.moonCrystal[teamData.level];
+
+  const common = Math.round(
+    baseDamage *
+      (1 +
+        (getMoonElectroRate(teamData.elementMastery) +
+          +moonCrystalOtherData.value +
+          (teamData.checked === RelicType.song ? 60 : 0) +
+          +relicEff.value) /
+          100) *
+      (1 + (teamData.crystalAdd + characterEff.value) / 100) *
+      (1 + (teamData.crystalPromote + moonCrystalPromoteData.value) / 100) *
+      getResistanceRate(enemyResistance.value)
+  );
+
+  const critcal = teamData.criticalRate <= 0 ? common : common * (1 + teamData.criticalDamage / 100);
+  let finalCommon = teamData.criticalRate >= 100 ? critcal : common;
+  return {
+    result: [finalCommon, critcal],
+    common: finalCommon,
+    desire: common * (1 + (Math.max(0, Math.min(100, teamData.criticalRate)) * teamData.criticalDamage) / 10000),
+    critcal,
+  };
+};
+
 const sum = (result: number[]) => {
   return Math.round(result[0] + 0.5 * (result[1] || 0) + (result[2] || 0 + result[3] || 0) / 12);
 };
@@ -130,6 +176,8 @@ const addData = () => {
     checked: RelicType.none,
     electroPromote: 0,
     electroAdd: 0,
+    crystalAdd: 0,
+    crystalPromote: 0,
   });
 };
 const removeData = (index: number) => {
@@ -151,6 +199,24 @@ const moonElectroChargedDamage = computed(() => {
     desire,
   };
 });
+
+// 月结晶伤害值
+const moonCrystalChargedDamage = computed(() => {
+  const resultList = teamList.value.map(moonCrystalDamage);
+  const allResult = [
+    ...new Set(
+      generateAllSortedResults(resultList.map((i) => i.result))
+        .map(sum)
+        .sort((a, b) => b - a)
+    ),
+  ];
+  const desire = sum(resultList.map((i) => i.desire).sort((a, b) => b - a));
+  return {
+    allResult,
+    desire,
+  };
+});
+
 const damageResult = computed(() => {
   return [
     {
@@ -158,6 +224,12 @@ const damageResult = computed(() => {
       class: "text-moon-electro",
       allResult: moonElectroChargedDamage.value.allResult,
       desire: moonElectroChargedDamage.value.desire,
+    },
+    {
+      name: "月结晶",
+      class: "text-moon-crystal",
+      allResult: moonCrystalChargedDamage.value.allResult,
+      desire: moonCrystalChargedDamage.value.desire,
     },
   ];
 });
@@ -213,6 +285,14 @@ const damageResult = computed(() => {
           <span class="basic-panel-item-title">月感电擢升%</span>
           <input class="basic-panel-input" pattern="[0-9]*" type="number" v-model="item.electroPromote" />
         </div>
+        <div class="basic-panel-item">
+          <span class="basic-panel-item-title">月结晶提升%</span>
+          <input class="basic-panel-input" pattern="[0-9]*" type="number" v-model="item.crystalAdd" />
+        </div>
+        <div class="basic-panel-item">
+          <span class="basic-panel-item-title">月结晶擢升%</span>
+          <input class="basic-panel-input" pattern="[0-9]*" type="number" v-model="item.crystalPromote" />
+        </div>
       </div>
       <div class="moon-panel__title">
         圣遗物套装
@@ -230,6 +310,9 @@ const damageResult = computed(() => {
         </Radio>
         <Radio class="holy-relic-radio__item" label-position="left" :name="RelicType.moon">
           <img :src="getEnkaUI('UI_RelicIcon_15042_4')" alt="" />
+        </Radio>
+        <Radio class="holy-relic-radio__item" label-position="left" :name="RelicType.song">
+          <img :src="getEnkaUI('UI_RelicIcon_15043_4')" alt="" />
         </Radio>
       </RadioGroup>
     </li>
@@ -300,7 +383,8 @@ const damageResult = computed(() => {
         </CellGroup>
         <Popover position="top-right">
           <div class="data-item-popover__content">
-            <c class="text-pyro">火元素</c>、<c class="text-electro">雷元素</c>、<c class="text-cryo">冰元素</c>：每100点攻击力提升0.9%月曜反应伤害加成，最大36%。
+            <c class="text-pyro">火元素</c>、<c class="text-electro">雷元素</c>、<c class="text-cryo">冰元素</c
+            >：每100点攻击力提升0.9%月曜反应伤害加成，最大36%。
           </div>
           <template #trigger>
             <Icon size="26" name="question" />
@@ -349,7 +433,8 @@ const damageResult = computed(() => {
         </CellGroup>
         <Popover position="top-right">
           <div class="data-item-popover__content">
-            <c class="text-anemo">风元素</c>、<c class="text-dendro">草元素</c>：每100点精通提升2.25%月曜反应伤害加成，最大36%。
+            <c class="text-anemo">风元素</c>、<c class="text-dendro">草元素</c
+            >：每100点精通提升2.25%月曜反应伤害加成，最大36%。
           </div>
           <template #trigger>
             <Icon size="26" name="question" />
@@ -367,12 +452,20 @@ const damageResult = computed(() => {
     </summary>
     <section class="gain-group">
       <div class="base-data">
-        <span class="base-damage__title">月感电伤害提升%</span>
+        <span class="base-damage__title text-moon-electro"><data data-text="月感电">月感电</data> 伤害提升%</span>
         <Stepper v-model="moonElectroOtherData" input-width="66px" integer button-size="20" theme="round" min="0" />
       </div>
       <div class="base-data">
-        <span class="base-damage__title">月感电伤害擢升%</span>
+        <span class="base-damage__title text-moon-electro"><data data-text="月感电">月感电</data> 伤害擢升%</span>
         <Stepper v-model="moonElectroPromoteData" input-width="66px" integer button-size="20" theme="round" min="0" />
+      </div>
+      <div class="base-data">
+        <span class="base-damage__title text-moon-crystal"><data data-text="月结晶">月结晶</data> 伤害提升%</span>
+        <Stepper v-model="moonCrystalOtherData" input-width="66px" integer button-size="20" theme="round" min="0" />
+      </div>
+      <div class="base-data">
+        <span class="base-damage__title text-moon-crystal"><data data-text="月结晶">月结晶</data> 伤害擢升%</span>
+        <Stepper v-model="moonCrystalPromoteData" input-width="66px" integer button-size="20" theme="round" min="0" />
       </div>
     </section>
     <br />
@@ -384,16 +477,18 @@ const damageResult = computed(() => {
     </p>
   </div>
   <div class="data-panel__title">期望伤害</div>
-  <details v-for="item in damageResult" :key="item.name" :name="item.name" :class="[item.class, 'damage-details']">
-    <summary class="damage-tag">
-      <data class="damage-tag__title" :data-text="item.name">{{ item.name }}</data>
-      <data class="damage-tag__detail" :data-text="item.desire">{{ item.desire }}</data>
-      <div>查看实际数值</div>
-    </summary>
-    <div class="all-result">
-      {{ item.allResult }}
-    </div>
-  </details>
+  <div class="damage-tag-container">
+    <details v-for="item in damageResult" :key="item.name" :name="item.name" :class="[item.class, 'damage-details']">
+      <summary class="damage-tag">
+        <data class="damage-tag__title" :data-text="item.name">{{ item.name }}</data>
+        <data class="damage-tag__detail" :data-text="item.desire">{{ item.desire }}</data>
+        <div>查看实际数值</div>
+      </summary>
+      <div class="all-result">
+        {{ item.allResult }}
+      </div>
+    </details>
+  </div>
 </template>
 
 <style scoped>
@@ -417,7 +512,7 @@ const damageResult = computed(() => {
 
 .moon-panel__delete {
   float: right;
-  
+
   &:hover {
     color: var(--cancel);
   }
@@ -446,7 +541,7 @@ const damageResult = computed(() => {
 }
 .holy-relic-radio {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
 
   .holy-relic-radio__item {
     display: flex;
@@ -499,12 +594,20 @@ const damageResult = computed(() => {
     margin: -4px;
   }
 }
+.damage-tag-container {
+  display: flex;
+  gap: 20px;
+}
 @media screen and (max-width: 768px) {
   .moon-panel {
     grid-template-columns: 1fr;
   }
   .damage-details {
     width: 100%;
+  }
+  .damage-tag-container {
+    display: block;
+    gap: 0;
   }
 }
 </style>

@@ -51,6 +51,8 @@ export enum ElementType {
   MoonElectro = "MoonElectro",
   /** 月绽放属性 */
   MoonSwirl = "MoonSwirl",
+  /** 月结晶属性 */
+  MoonCrystal = "MoonCrystal",
   /** 无属性 */
   None = "None",
 }
@@ -185,6 +187,8 @@ export enum BuffType {
   MoonElectroPrcent = "moonElectroAddHunt",
   /** 月绽放伤害百分比提升 - 与精通乘区加算*/
   MoonSwirlPrcent = "moonSwirlAddHunt",
+  /** 月结晶伤害百分比提升 - 与精通乘区加算*/
+  MoonCrystalPrcent = "moonCrystalAddHunt",
 
   /** 全局伤害提高 - 适用于传统直伤 */
   GlobalFixed = "globalIncreaseHunt",
@@ -221,6 +225,8 @@ export enum BuffType {
   MoonElectroFixed = "moonElectroIncreaseHunt",
   /** 月绽放伤害提高 - 不吃精通增伤、月反应增伤效果 */
   MoonSwirlFixed = "moonSwirlIncreaseHunt",
+  /** 月结晶伤害提高 - 不吃精通增伤、月反应增伤效果 */
+  MoonCrystalFixed = "moonCrystalIncreaseHunt",
 
   /** 全局暴击率提升 */
   GlobalCritcal = "globalCritcal",
@@ -258,6 +264,8 @@ export enum BuffType {
   MoonElectroCritcal = "moonElectroCritcal",
   /** 月绽放暴击率提升% */
   MoonSwirlCritcal = "moonSwirlCritcal",
+  /** 月结晶暴击率提升% */
+  MoonCrystalCritcal = "moonCrystalCritcal",
 
   /** 普攻暴击伤害提升%*/
   NormalCritcalHurt = "normalAttackCritcalHurt",
@@ -290,15 +298,21 @@ export enum BuffType {
   MoonElectroCritcalHurt = "moonElectroCritcalHurt",
   /** 月绽放暴击伤害提升%*/
   MoonSwirlCritcalHurt = "moonSwirlCritcalHurt",
+  /** 月结晶暴击伤害提升%*/
+  MoonCrystalCritcalHurt = "moonCrystalCritcalHurt",
 
   /** 月感电擢升% */
   MoonElectroPromote = "moonElectroPromote",
   /** 月绽放擢升% */
   MoonSwirlPromote = "moonSwirlPromote",
+  /** 月结晶擢升% */
+  MoonCrystalPromote = "moonCrystalPromote",
   /** 月感电基础伤害提升% */
   MoonElectroBasePercent = "moonElectroBasePercent",
   /** 月绽放基础伤害提升% */
   MoonSwirlBasePercent = "moonSwirlBasePercent",
+  /** 月结晶基础伤害提升% */
+  MoonCrystalBasePercent = "moonCrystalBasePercent",
 
   /** 普攻倍率最终提升 */
   NormalRate = "normalRateAdd",
@@ -314,6 +328,8 @@ export enum BuffType {
   MoonElectroRate = "moonElectroRateAdd",
   /** 月绽放倍率最终提升 */
   MoonSwirlRate = "moonSwirlRateAdd",
+  /** 月结晶倍率最终提升 */
+  MoonCrystalRate = "moonCrystalRateAdd",
 
   /** 普攻倍率加成 */
   NormalAdd = "normalAdd",

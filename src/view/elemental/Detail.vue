@@ -9,7 +9,7 @@
     超激化、蔓激化带来的[伤害提升]提高{{ catalyze }}%;
     <slot name="catalyze"></slot>
     <br/>
-    月感电反应造成的伤害提升{{ moonServitude }}%;
+    月感电、月结晶反应造成的伤害提升{{ moonServitude }}%;
     <slot name="moonServitude"></slot>
     <br/>
     结晶反应护盾提供的[伤害吸收量]提升{{ crystallization }}%;

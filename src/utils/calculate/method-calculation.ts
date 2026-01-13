@@ -248,6 +248,20 @@ function getMoreDataBySwitch(
       moonAddHunt += calculatorValue[BuffType.MoonSwirlPrcent] || 0;
       moonPromote += calculatorValue[BuffType.MoonSwirlPromote] || 0;
       break;
+    case ElementType.MoonCrystal:
+      // 月结晶伤害无视敌人防御
+      defensePenetration = 100;
+      ADDITIONAL_DMG += calculatorValue[BuffType.MoonCrystalFixed] || 0;
+      criticalHunt += calculatorValue[BuffType.MoonCrystalCritcalHurt] || 0;
+      criticalHunt += calculatorValue[BuffType.GeoCritcalHurt] || 0;
+      critical += calculatorValue[BuffType.MoonCrystalCritcal] || 0;
+      critical += calculatorValue[BuffType.GeoCritcal] || 0;
+      resistance += calculatorValue[BuffType.EnemyGeoResistance] || 0;
+      addRate += calculatorValue[BuffType.MoonCrystalRate] || 0;
+      moonBasePercent += calculatorValue[BuffType.MoonCrystalBasePercent] || 0;
+      moonAddHunt += calculatorValue[BuffType.MoonCrystalPrcent] || 0;
+      moonPromote += calculatorValue[BuffType.MoonCrystalPromote] || 0;
+      break;
   }
 
   return {
@@ -363,6 +377,10 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
   if (newElementType === ElementType.MoonElectro) {
     // 月感电的基础伤害固定乘以3
     BASE_DMG *= 3;
+  }
+  if (newElementType === ElementType.MoonCrystal) {
+    // 月结晶的基础伤害固定乘以1.6
+    BASE_DMG *= 1.6;
   }
 
   /** 治疗量 */

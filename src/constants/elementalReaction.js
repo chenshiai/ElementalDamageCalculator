@@ -17,6 +17,8 @@ const ElementalReactionBaseDMG = [0,
 export const BaseDMG = {
   // 月感电
   moonElectroCharged: ElementalReactionBaseDMG.map(i => i * 1.8),
+  // 月结晶
+  moonCrystal: ElementalReactionBaseDMG.map(i => i * 0.96),
   // 感电
   electroCharged: ElementalReactionBaseDMG.map(i => i * 2),
   // 超载

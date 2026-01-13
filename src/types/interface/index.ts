@@ -209,6 +209,8 @@ export interface ICalculatorValue {
   [BuffType.MoonElectroPrcent]: number;
   /** 月绽放伤害加成 - 与精通乘区加算 */
   [BuffType.MoonSwirlPrcent]: number;
+  /** 月结晶伤害加成 - 与精通乘区加算 */
+  [BuffType.MoonCrystalPrcent]: number;
 
   // 各种隐式暴击率
   /** 全局暴击率提升 */
@@ -243,6 +245,8 @@ export interface ICalculatorValue {
   [BuffType.MoonElectroCritcal]: number;
   /** 月绽放伤害暴击率加成 */
   [BuffType.MoonSwirlCritcal]: number;
+  /** 月结晶伤害暴击率加成 */
+  [BuffType.MoonCrystalCritcal]: number;
 
   // 各种隐式爆伤
   /** 全局暴击伤害提升 */
@@ -277,6 +281,8 @@ export interface ICalculatorValue {
   [BuffType.MoonElectroCritcalHurt]: number;
   /** 月绽放伤害暴击伤害加成 */
   [BuffType.MoonSwirlCritcalHurt]: number;
+  /** 月结晶伤害暴击伤害加成 */
+  [BuffType.MoonCrystalCritcalHurt]: number;
 
   // 攻击增伤
   /** 普通攻击伤害加成 */
@@ -333,6 +339,8 @@ export interface ICalculatorValue {
   [BuffType.MoonElectroFixed]: number;
   /** 月绽放伤害提高 */
   [BuffType.MoonSwirlFixed]: number;
+  /** 月结晶伤害提高 */
+  [BuffType.MoonCrystalFixed]: number;
 
   /** 生命之契 */
   [BuffType.LifeContract]: number;
@@ -351,6 +359,8 @@ export interface ICalculatorValue {
   [BuffType.MoonElectroRate]: number;
   /** 月绽放倍率最终提升% */
   [BuffType.MoonSwirlRate]: number;
+  /** 月结晶倍率最终提升% */
+  [BuffType.MoonCrystalRate]: number;
 
   /** 普攻倍率加成 */
   [BuffType.NormalAdd]: number;
@@ -375,10 +385,15 @@ export interface ICalculatorValue {
   [BuffType.MoonElectroPromote]: number;
   /** 月绽放擢升% */
   [BuffType.MoonSwirlPromote]: number;
+  /** 月结晶擢升% */
+  [BuffType.MoonCrystalPromote]: number;
+
   /** 月感电基础伤害提升% */
   [BuffType.MoonElectroBasePercent]: number;
   /** 月绽放基础伤害提升% */
   [BuffType.MoonSwirlBasePercent]: number;
+  /** 月结晶基础伤害提升% */
+  [BuffType.MoonCrystalBasePercent]: number;
 
   /** 普攻天赋等级加成 */
   [BuffType.NormalLevel]: number;

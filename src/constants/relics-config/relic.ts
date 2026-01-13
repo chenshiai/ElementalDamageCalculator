@@ -65,7 +65,7 @@ const getBuffByElement2 = (type: BuffType, text: string) => {
     describe: "装备者处于夜魂加持状态下，还将使队伍中附近的所有角色的与该元素反应相关的元素伤害加成提升28%",
     shareable: true,
     target: BuffTarget.All,
-    condition: (data) => data.secondElement === SecondElementType.Nightsoul
+    condition: (data) => data.secondElement === SecondElementType.Nightsoul,
   };
 };
 /** 悠古的磐岩 */
@@ -93,7 +93,86 @@ const getBuffByElement4 = (label: string, type: BuffType) => {
 };
 
 const relicLibrary: IRelicLibraryItem[] = [
-  // hash待更新
+  {
+    name: "风起之日",
+    itemType: ItemType.ITEM_RELIQUARY,
+    setNameTextMapHash: 625305531,
+    equip: [
+      setReliquartStat(625305531, "风花的箴铭", "UI_RelicIcon_15044_4", EquipType.EQUIP_BRACER),
+      setReliquartStat(625305531, "晨光的明誓", "UI_RelicIcon_15044_2", EquipType.EQUIP_NECKLACE),
+      setReliquartStat(625305531, "春律的片刻", "UI_RelicIcon_15044_2", EquipType.EQUIP_SHOES),
+      setReliquartStat(625305531, "未言的宴话", "UI_RelicIcon_15044_1", EquipType.EQUIP_RING),
+      setReliquartStat(625305531, "哀慕的恋歌", "UI_RelicIcon_15044_3", EquipType.EQUIP_DRESS),
+    ],
+    suit2: "二件套：攻击力提高18%。",
+    suit4:
+      "四件套：普通攻击、重击、元素战技或元素爆发命中敌人后，将获得持续6秒的「风与牧歌的眷怜」：攻击力提高25%。若装备者已经完成了「魔女的课业」，则「风与牧歌的眷怜」将会升级为「风与牧歌的决意」，额外使通过考验的装备者的暴击率提升20%。装备者处于队伍后台时，也能触发上述效果。",
+    buffs: {
+      suit2: [
+        {
+          label: "二件套·攻击力提高",
+          effect: [{ type: BuffType.ATKPrcent, getValue: () => 18 }],
+          describe: "攻击力提高18%。",
+          enable: true,
+        },
+      ],
+      suit4: [
+        {
+          label: "四件套·攻击力提高",
+          effect: [{ type: BuffType.ATKPrcent, getValue: () => 25 }],
+          describe: "普通攻击、重击、元素战技或元素爆发命中敌人后，将获得持续6秒的「风与牧歌的眷怜」：攻击力提高25%。",
+          enable: true,
+        },
+        {
+          label: "四件套·魔导角色暴击率提升",
+          effect: [{ type: BuffType.Critcal, getValue: () => 20 }],
+          describe:
+            "若装备者已经完成了「魔女的课业」，则「风与牧歌的眷怜」将会升级为「风与牧歌的决意」，额外使通过考验的装备者的暴击率提升20%。装备者处于队伍后台时，也能触发上述效果。",
+          enable: true,
+        },
+      ],
+    },
+  },
+  {
+    name: "晨星与月的晓歌",
+    itemType: ItemType.ITEM_RELIQUARY,
+    setNameTextMapHash: 625305531,
+    equip: [
+      setReliquartStat(625305531, "献与月的华梦", "UI_RelicIcon_15043_4", EquipType.EQUIP_BRACER),
+      setReliquartStat(625305531, "献与月的离光", "UI_RelicIcon_15043_2", EquipType.EQUIP_NECKLACE),
+      setReliquartStat(625305531, "献与月的终时", "UI_RelicIcon_15043_2", EquipType.EQUIP_SHOES),
+      setReliquartStat(625305531, "献与月的酹祭", "UI_RelicIcon_15043_1", EquipType.EQUIP_RING),
+      setReliquartStat(625305531, "献与月的银冕", "UI_RelicIcon_15043_3", EquipType.EQUIP_DRESS),
+    ],
+    suit2: "二件套：元素精通提高80点。",
+    suit4:
+      "四件套：装备者处于队伍后台时，造成的月曜反应伤害提升20%；队伍的月兆等级至少为满辉时，造成的月曜反应伤害进一步提升40%。上述效果将在装备者位于场上3秒后移除。",
+    buffs: {
+      suit2: [
+        {
+          label: "二件套·元素精通提高80点",
+          effect: [{ type: BuffType.MysteryFixed, getValue: () => 80 }],
+          describe: "元素精通提高80点。",
+          enable: true,
+        },
+      ],
+      suit4: [
+        {
+          label: "四件套·月曜反应伤害提升",
+          effect: [{ type: BuffType.GlobalMoonPrcent, getValue: (_, s) => (s ? 60 : 20) }],
+          describe:
+            "装备者处于队伍后台时，造成的月曜反应伤害提升20%；队伍的月兆等级至少为满辉时，造成的月曜反应伤害进一步提升40%。",
+          shareable: true,
+          enable: true,
+          stackable: true,
+          stackType: "switch",
+          stackText: "月兆·满辉",
+          stack: 0,
+          limit: 1,
+        },
+      ],
+    },
+  },
   {
     name: "纺月的夜歌",
     itemType: ItemType.ITEM_RELIQUARY,
