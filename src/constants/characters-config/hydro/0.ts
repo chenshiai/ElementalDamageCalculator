@@ -15,3 +15,4 @@ export * from "./PlayerBoy";
 export * from "./PlayerGirl";
 export * from "./Dahlia";
 export * from "./Aino";
+export * from './Columbina';

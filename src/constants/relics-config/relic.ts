@@ -96,13 +96,13 @@ const relicLibrary: IRelicLibraryItem[] = [
   {
     name: "风起之日",
     itemType: ItemType.ITEM_RELIQUARY,
-    setNameTextMapHash: 625305531,
+    setNameTextMapHash: 3721836931,
     equip: [
-      setReliquartStat(625305531, "风花的箴铭", "UI_RelicIcon_15044_4", EquipType.EQUIP_BRACER),
-      setReliquartStat(625305531, "晨光的明誓", "UI_RelicIcon_15044_2", EquipType.EQUIP_NECKLACE),
-      setReliquartStat(625305531, "春律的片刻", "UI_RelicIcon_15044_2", EquipType.EQUIP_SHOES),
-      setReliquartStat(625305531, "未言的宴话", "UI_RelicIcon_15044_1", EquipType.EQUIP_RING),
-      setReliquartStat(625305531, "哀慕的恋歌", "UI_RelicIcon_15044_3", EquipType.EQUIP_DRESS),
+      setReliquartStat(3721836931, "风花的箴铭", "UI_RelicIcon_15044_4", EquipType.EQUIP_BRACER),
+      setReliquartStat(3721836931, "晨光的明誓", "UI_RelicIcon_15044_2", EquipType.EQUIP_NECKLACE),
+      setReliquartStat(3721836931, "春律的片刻", "UI_RelicIcon_15044_2", EquipType.EQUIP_SHOES),
+      setReliquartStat(3721836931, "未言的宴话", "UI_RelicIcon_15044_1", EquipType.EQUIP_RING),
+      setReliquartStat(3721836931, "哀慕的恋歌", "UI_RelicIcon_15044_3", EquipType.EQUIP_DRESS),
     ],
     suit2: "二件套：攻击力提高18%。",
     suit4:
@@ -136,13 +136,13 @@ const relicLibrary: IRelicLibraryItem[] = [
   {
     name: "晨星与月的晓歌",
     itemType: ItemType.ITEM_RELIQUARY,
-    setNameTextMapHash: 625305531,
+    setNameTextMapHash: 894629371,
     equip: [
-      setReliquartStat(625305531, "献与月的华梦", "UI_RelicIcon_15043_4", EquipType.EQUIP_BRACER),
-      setReliquartStat(625305531, "献与月的离光", "UI_RelicIcon_15043_2", EquipType.EQUIP_NECKLACE),
-      setReliquartStat(625305531, "献与月的终时", "UI_RelicIcon_15043_2", EquipType.EQUIP_SHOES),
-      setReliquartStat(625305531, "献与月的酹祭", "UI_RelicIcon_15043_1", EquipType.EQUIP_RING),
-      setReliquartStat(625305531, "献与月的银冕", "UI_RelicIcon_15043_3", EquipType.EQUIP_DRESS),
+      setReliquartStat(894629371, "献与月的华梦", "UI_RelicIcon_15043_4", EquipType.EQUIP_BRACER),
+      setReliquartStat(894629371, "献与月的离光", "UI_RelicIcon_15043_2", EquipType.EQUIP_NECKLACE),
+      setReliquartStat(894629371, "献与月的终时", "UI_RelicIcon_15043_2", EquipType.EQUIP_SHOES),
+      setReliquartStat(894629371, "献与月的酹祭", "UI_RelicIcon_15043_1", EquipType.EQUIP_RING),
+      setReliquartStat(894629371, "献与月的银冕", "UI_RelicIcon_15043_3", EquipType.EQUIP_DRESS),
     ],
     suit2: "二件套：元素精通提高80点。",
     suit4:
@@ -162,7 +162,6 @@ const relicLibrary: IRelicLibraryItem[] = [
           effect: [{ type: BuffType.GlobalMoonPrcent, getValue: (_, s) => (s ? 60 : 20) }],
           describe:
             "装备者处于队伍后台时，造成的月曜反应伤害提升20%；队伍的月兆等级至少为满辉时，造成的月曜反应伤害进一步提升40%。",
-          shareable: true,
           enable: true,
           stackable: true,
           stackType: "switch",
