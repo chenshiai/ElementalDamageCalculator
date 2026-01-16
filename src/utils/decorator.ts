@@ -28,6 +28,11 @@ export function getEnkaUI(
     return `https://enka.network/ui/${name}.png`;
   }
 }
+
+export function getNameCardIcon(name: string): string {
+    return `https://enka.network${name}`;
+}
+
 export function Weapon(weaponType: WeaponType): any {
   return function (target: any) {
     return class extends target {
