@@ -176,6 +176,7 @@ const levelUp = defineModel("levelUp", { default: 0 });
 }
 .consts-icon img {
   width: 100%;
+  max-width: 45px;
   display: inline-block;
   vertical-align: middle;
 }

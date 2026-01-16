@@ -6,7 +6,7 @@ import { Constellation_E_3, Constellation_Q_5, S_80_CRITAL_19P } from "../buffs"
 
 // .replaceAll("%", '').replaceAll(/[\u4e00-\u9fff]+/g, "").replaceAll("\t",",").split(",").map(i=>Math.round(i*100)/10000)
 
-@EnKaId(10000125, "哥伦比亚")
+@EnKaId(10000125, "哥伦比娅")
 @Weapon(WeaponType.Magic)
 @Element(ElementType.Hydro)
 @BaseData(Rarity.Five, [14695, 96, 515], 60, [15740, 117, 552])
@@ -419,5 +419,5 @@ class ColumbinaData extends Character implements ICharacterInfo {
   ];
 }
 
-/** ![哥伦比亚](https://enka.network/ui/UI_AvatarIcon_Columbina.png) */
+/** ![哥伦比娅](https://enka.network/ui/UI_AvatarIcon_Columbina.png) */
 export const Columbina = new ColumbinaData();
