@@ -114,6 +114,46 @@ export class PlayerGirlData extends Character implements ICharacterInfo {
     ...A_80_ATK_24P,
     ...ExtraBuff,
     {
+      label: "元素共鸣强化",
+      describe:
+        "每与一种元素进行过共鸣，旅行者便会获得对应的属性提升：风元素：暴击率提升10%；岩元素：防御力提升20%；雷元素：元素充能效率提升20%；草元素：元素精通提升60点；水元素：生命值提升20%；火元素：攻击力提升20%；冰元素：暴击伤害提升20%。",
+      effect: [
+        {
+          type: BuffType.Critcal,
+          getValue: (_, s) => (s >= 1 ? 10 : 0),
+        },
+        {
+          type: BuffType.DEFPrcent,
+          getValue: (_, s) => (s >= 2 ? 20 : 0),
+        },
+        {
+          type: BuffType.ChargeFixed,
+          getValue: (_, s) => (s >= 3 ? 20 : 0),
+        },
+        {
+          type: BuffType.MysteryFixed,
+          getValue: (_, s) => (s >= 4 ? 60 : 0),
+        },
+        {
+          type: BuffType.HPPrcent,
+          getValue: (_, s) => (s >= 5 ? 20 : 0),
+        },
+        {
+          type: BuffType.ATKPrcent,
+          getValue: (_, s) => (s >= 6 ? 20 : 0),
+        },
+        {
+          type: BuffType.CritcalHurt,
+          getValue: (_, s) => (s >= 7 ? 20 : 0),
+        },
+      ],
+      stack: 6,
+      limit: 7,
+      stackable: true,
+      stackText: "共鸣数量",
+      enable: true,
+    },
+    {
       label: "2命·革新的旋风",
       describe: "元素充能效率提升16%",
       effect: [{ type: BuffType.ChargeFixed, getValue: () => 16 }],
