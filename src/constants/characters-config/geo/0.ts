@@ -12,3 +12,4 @@ export * from "./Noel";
 export * from "./PlayerBoy";
 export * from "./PlayerGirl";
 export * from "./Zibai";
+export * from "./Illuga";
