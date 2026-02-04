@@ -361,6 +361,8 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
   }
   if (rate.def) {
     const def = calculatorValue.baseDEF + calculatorValue.extraDEF + calculatorValue.extraDEF_NT;
+    console.log(addRate);
+    
     BASE_DMG += def * (rate.def[level - 1] + extraRate + defAdd) * (1 + addRate / 100);
   }
   if (rate.hp) {
