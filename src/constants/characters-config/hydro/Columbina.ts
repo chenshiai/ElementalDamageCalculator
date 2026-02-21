@@ -1,6 +1,6 @@
 import Character from "../character-class";
 import { IBuffBase, ICharacterInfo } from "@/types/interface";
-import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
+import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, SecondElementType, WeaponType } from "@/types/enum";
 import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 import { Constellation_E_3, Constellation_Q_5, S_80_CRITAL_19P } from "../buffs";
 
@@ -8,7 +8,7 @@ import { Constellation_E_3, Constellation_Q_5, S_80_CRITAL_19P } from "../buffs"
 
 @EnKaId(10000125, "哥伦比娅")
 @Weapon(WeaponType.Magic)
-@Element(ElementType.Hydro)
+@Element(ElementType.Hydro, SecondElementType.Moon)
 @BaseData(Rarity.Five, [14695, 96, 515], 60, [15740, 117, 552])
 @Icons("UI_AvatarIcon_Columbina")
 class ColumbinaData extends Character implements ICharacterInfo {

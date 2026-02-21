@@ -1,6 +1,6 @@
 import Character from "../character-class";
 import { IBuffBase, ICharacterInfo } from "@/types/interface";
-import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
+import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, SecondElementType, WeaponType } from "@/types/enum";
 import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 import { A_80_MYSTERY_96, Constellation_E_5, Constellation_Q_3 } from "../buffs";
 
@@ -8,7 +8,7 @@ import { A_80_MYSTERY_96, Constellation_E_5, Constellation_Q_3 } from "../buffs"
 
 @EnKaId(10000127, "叶洛亚")
 @Weapon(WeaponType.Polearms)
-@Element(ElementType.Geo)
+@Element(ElementType.Geo, SecondElementType.Moon)
 @BaseData(Rarity.Four, [11962, 191, 814], 60, [12790, 240, 870])
 @Icons("UI_AvatarIcon_Illuga")
 class IllugaData extends Character implements ICharacterInfo {
