@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>千星沙箱文本编辑器v20260102</title>
+    <title>千星沙箱文本编辑器v20260120</title>
     <link rel="stylesheet" href="font.css" />
     <style>
       * {
@@ -157,6 +157,9 @@
         flex-grow: 1;
         overflow: hidden;
         gap: 10px;
+      }
+      .content.reversed {
+        flex-direction: row-reverse;
       }
 
       .input-section,
@@ -441,7 +444,7 @@
   <body>
     <div class="container">
       <div class="header">
-        <h1>千星沙箱文本编辑器v20260102</h1>
+        <h1>千星沙箱文本编辑器v20260120</h1>
         <p>选择文本后使用工具栏插入标签，或直接输入标签</p>
       </div>
 
@@ -548,6 +551,9 @@
 
         <div class="tool-group">
           <button id="insertNewline">插入\n换行符</button>
+        </div>
+        <div class="tool-group">
+          <button id="toggleLayout">🔄 左右切换</button>
         </div>
       </div>
 
@@ -792,6 +798,11 @@
         // 关闭蒙层按钮事件
         document.getElementById("closeOverlay").addEventListener("click", function () {
           document.getElementById("screenSizeOverlay").style.display = "none";
+        });
+
+        document.getElementById("toggleLayout").addEventListener("click", function () {
+          const content = document.querySelector(".content");
+          content.classList.toggle("reversed");
         });
 
         // 复制文本到剪贴板

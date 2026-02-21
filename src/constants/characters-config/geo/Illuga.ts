@@ -129,6 +129,7 @@ class IllugaData extends Character implements ICharacterInfo {
       stack: 1,
       limit: 1,
       stackable: true,
+      stackType: 'switch',
       stackText: "月兆·满辉",
       target: BuffTarget.Other,
       condition: ({ constellation }) => constellation < 6,
@@ -173,7 +174,7 @@ class IllugaData extends Character implements ICharacterInfo {
         {
           type: BuffType.GeoFixed,
           getValue: (data, s) => {
-            const a = [0, 7, 14, 24][s];
+            const a = [0, 0.07, 0.14, 0.24][s];
             return (data.elementalMystery + data.elementalMystery_NT) * a;
           },
           actionOn: ActionOn.External,
@@ -181,7 +182,7 @@ class IllugaData extends Character implements ICharacterInfo {
         {
           type: BuffType.MoonCrystalFixed,
           getValue: (data, s) => {
-            const a = [0, 48, 96, 160][s];
+            const a = [0, 0.48, 0.96, 1.60][s];
             return (data.elementalMystery + data.elementalMystery_NT) * a;
           },
           actionOn: ActionOn.External,
@@ -229,6 +230,7 @@ class IllugaData extends Character implements ICharacterInfo {
       stack: 1,
       limit: 1,
       stackable: true,
+      stackType: 'switch',
       stackText: "月兆·满辉",
       target: BuffTarget.Other,
       condition: ({ constellation }) => constellation >= 6,
