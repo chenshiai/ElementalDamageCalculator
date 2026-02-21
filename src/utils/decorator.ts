@@ -19,8 +19,7 @@ export function getEnkaUI(
     return `/ui/${name}.png`;
   }
   if (homdgcat) {
-    // return `https://homdgcat.wiki/homdgcat-res/AvatarSkill/${name}.png`;
-    return `https://api.hakush.in/gi/UI/${name}.webp`;
+    return `https://homdgcatwiki.hasban.cn/homdgcat-res/AvatarSkill/${name}.png`;
   }
   if (proxy) {
     return `https://8.155.52.59/ui/${name}.png`;
