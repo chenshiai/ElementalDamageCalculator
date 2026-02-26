@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>千星沙箱文本编辑器v20260120</title>
+    <title>千星沙箱文本编辑器v20260209</title>
     <link rel="stylesheet" href="font.css" />
     <style>
       * {
@@ -300,6 +300,25 @@
         flex-shrink: 0;
       }
 
+      .word-count {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 4px 0;
+        font-size: 12px;
+        color: #6c757d;
+        margin-top: 4px;
+      }
+
+      .limit-message {
+        color: #6c757d;
+      }
+
+      .limit-message.exceeded {
+        color: #dc3545;
+        font-weight: bold;
+      }
+
       .copy-notification {
         position: fixed;
         top: 20px;
@@ -444,7 +463,7 @@
   <body>
     <div class="container">
       <div class="header">
-        <h1>千星沙箱文本编辑器v20260120</h1>
+        <h1>千星沙箱文本编辑器v20260209</h1>
         <p>选择文本后使用工具栏插入标签，或直接输入标签</p>
       </div>
 
@@ -561,6 +580,10 @@
         <div class="input-section">
           <h2 class="section-title"><i>📝</i>输入区域————<i>鼠标框选文本后点击应用颜色即可一键添加颜色</i></h2>
           <textarea id="inputText" placeholder="在这里输入文本，使用工具栏插入标签或直接输入标签..."></textarea>
+          <div class="word-count" id="wordCount">
+            <span>当前字数: <span id="currentCount">0</span></span>
+            <span class="limit-message" id="limitMessage"></span>
+          </div>
           <div class="buttons">
             <button id="clearBtn">清空内容</button>
             <button id="exampleBtn">插入示例</button>
@@ -636,6 +659,9 @@
         const colorPresets = document.querySelectorAll(".color-preset");
         const opacitySlider = document.getElementById("opacitySlider");
         const opacityValue = document.getElementById("opacityValue");
+        const wordCount = document.getElementById("wordCount");
+        const currentCount = document.getElementById("currentCount");
+        const limitMessage = document.getElementById("limitMessage");
 
         let selectedColor = "#d3bc8e";
         let selectedOpacity = 100;
@@ -684,6 +710,7 @@
 
             inputText.focus();
             updatePreview();
+            updateWordCount();
           }
         }
 
@@ -702,15 +729,29 @@
 
         // 初始渲染
         updatePreview();
+        updateWordCount();
 
         // 监听输入变化
-        inputText.addEventListener("input", updatePreview);
+        inputText.addEventListener("input", function() {
+          updatePreview();
+          updateWordCount();
+        });
+
+        // 监听预览模式变化
+        const previewModeRadios = document.querySelectorAll('input[name="preview-mode"]');
+        previewModeRadios.forEach((radio) => {
+          radio.addEventListener("change", function() {
+            updatePreview();
+            updateWordCount();
+          });
+        });
 
         // 清空按钮
         clearBtn.addEventListener("click", function () {
           saveToHistory();
           inputText.value = "";
           updatePreview();
+          updateWordCount();
         });
 
         // 示例按钮
@@ -718,12 +759,7 @@
           saveToHistory();
           inputText.value = `这是一个示例文本：\n\n<color=#d3bc8e>这段文字是标题/次要文字色的</color>\n<i>这段文字是斜体</i>\n<size=20>这段文字字号为20</size>\n<b>这段文字是粗体</b>\n\n使用\\n进行换行\n这是新的一行\n\n<color=#009900><b><i>组合使用多种样式</i></b></color>`;
           updatePreview();
-        });
-
-        // 预览模式切换事件
-        const previewModeRadios = document.querySelectorAll('input[name="preview-mode"]');
-        previewModeRadios.forEach((radio) => {
-          radio.addEventListener("change", updatePreview);
+          updateWordCount();
         });
 
         // 复制按钮
@@ -860,6 +896,7 @@
           inputText.selectionStart = inputText.selectionEnd = start + text.length;
           inputText.focus();
           updatePreview();
+          updateWordCount();
         }
 
         // 包装选中的文本
@@ -885,6 +922,7 @@
 
           inputText.focus();
           updatePreview();
+          updateWordCount();
         }
 
         function updatePreview() {
@@ -914,6 +952,49 @@
 
           // 更新预览区域
           preview.innerHTML = content;
+        }
+
+        function updateWordCount() {
+          const content = inputText.value;
+          const currentMode = document.querySelector('input[name="preview-mode"]:checked').value;
+          
+          // 计算输入框内的所有内容的字数，包括标签和换行符
+          // 确保换行符被正确计算为2个字符
+          // 首先将\r\n替换为\n，然后计算换行符数量，最后加上其他字符数量
+          const normalizedContent = content.replace(/\r\n/g, '\n');
+          const newlineCount = (normalizedContent.match(/\n/g) || []).length;
+          const otherCharCount = normalizedContent.replace(/\n/g, '').length;
+          const count = otherCharCount + (newlineCount * 2);
+          
+          // 更新当前字数显示
+          currentCount.textContent = count;
+          
+          // 根据预览模式确定字数限制
+          let limit = 0;
+          let modeName = '';
+          
+          if (currentMode === "item") {
+            limit = 200;
+            modeName = "道具预览";
+          } else if (currentMode === "popup") {
+            limit = 1000;
+            modeName = "弹窗预览";
+          }
+          
+          // 检查是否超过限制
+          if (limit > 0) {
+            if (count > limit) {
+              limitMessage.textContent = `${modeName}模式限制${limit}字符，已超出${count - limit}字符！`;
+              limitMessage.classList.add("exceeded");
+            } else {
+              limitMessage.textContent = `${modeName}模式限制${limit}字符，还可输入${limit - count}字符`;
+              limitMessage.classList.remove("exceeded");
+            }
+          } else {
+            // 常规预览模式无限制
+            limitMessage.textContent = "常规预览模式无字数限制";
+            limitMessage.classList.remove("exceeded");
+          }
         }
       });
     </script>

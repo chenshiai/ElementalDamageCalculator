@@ -16,3 +16,4 @@ export * from "./Sucrose";
 export * from "./PlayerBoy";
 export * from "./PlayerGirl";
 export * from "./Jahoda";
+export * from "./Varka";

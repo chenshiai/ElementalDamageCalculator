@@ -240,7 +240,9 @@ const changed = (source: string) => {
   }
   .scroll-y {
     overflow-y: scroll;
-    height: 550px;
+    min-height: 550px;
+    max-height: 750px;
+    flex-direction: row-reverse;
   }
   .calculation-section-skillinfo {
     position: sticky;
