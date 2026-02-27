@@ -524,7 +524,7 @@ class VarkaData extends Character implements ICharacterInfo {
       stack: 1,
       limit: 1,
       stackType: "switch",
-      stackText: "双风+双同元素",
+      stackText: "吃满220%",
     },
     {
       label: "风帜的先引",
