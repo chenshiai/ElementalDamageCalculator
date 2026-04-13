@@ -36,3 +36,4 @@ export * from "./Nachtblind";
 export * from "./Bow_Ilmarinen";
 export * from "./Bow_Arianna";
 export * from "./Bow_ElegguaBow";
+export * from "./Bow_Alkonost";

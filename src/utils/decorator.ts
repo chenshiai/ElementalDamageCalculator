@@ -77,6 +77,28 @@ export function Icons(str: string, consts?: string, gacha?: string): any {
   };
 }
 
+export function IconsV2(str: string, consts?: string, gacha?: string): any {
+  return function (target: any) {
+    return class extends target {
+      icons = {
+        avatarIcon: getEnkaUI(str),
+        constsIcon: [
+          `UI_Talent_C_${consts || str.replace("UI_AvatarIcon_", "")}_01`,
+          `UI_Talent_C_${consts || str.replace("UI_AvatarIcon_", "")}_02`,
+          `UI_Talent_C_${consts || str.replace("UI_AvatarIcon_", "")}_01`,
+          `UI_Talent_C_${consts || str.replace("UI_AvatarIcon_", "")}_03`,
+          `UI_Talent_C_${consts || str.replace("UI_AvatarIcon_", "")}_02`,
+          `UI_Talent_C_${consts || str.replace("UI_AvatarIcon_", "")}_04`,
+        ].map((str) => getEnkaUI(str, false, false, true)),
+        gachaImage: `https://enka.network/ui/${gacha || str.replace("UI_AvatarIcon_", "UI_Gacha_AvatarImg_")}.png`,
+      };
+      constructor() {
+        super();
+      }
+    };
+  };
+}
+
 export function EnKaId(id: number, name: string): any {
   return function (target: any) {
     return class extends target {
