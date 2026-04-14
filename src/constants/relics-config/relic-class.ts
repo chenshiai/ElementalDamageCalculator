@@ -32,6 +32,7 @@ export class RelicItem {
   public reliquaryMainstat: MainstatType;
   public reliquarySubstats: SubstatType[];
   public timetemp: string;
+  public setId: number;
 
   constructor(data: IRelicItem) {
     this.name = data.name;
@@ -43,6 +44,7 @@ export class RelicItem {
     this.reliquaryMainstat = data.reliquaryMainstat;
     this.reliquarySubstats = data.reliquarySubstats;
     this.timetemp = data.timetemp;
+    this.setId = data.setId;
   }
 
   public setMainstat(data: MainstatType) {

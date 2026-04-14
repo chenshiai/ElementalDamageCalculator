@@ -57,9 +57,11 @@ const useImport = () => {
         }
       })
       .catch((err) => {
+        console.error(err);
+        
         showNotify({
           type: "danger",
-          message: "获取数据失败，请检查是否完成安全信任授权。",
+          message: "获取数据失败。",
         });
       })
       .finally(() => {

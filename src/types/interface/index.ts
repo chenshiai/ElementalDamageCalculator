@@ -122,6 +122,7 @@ export interface IRelicBase {
   icon: string;
   rankLevel: number;
   level: number;
+  setId: number;
 }
 
 /** 用于计算的所有属性 */

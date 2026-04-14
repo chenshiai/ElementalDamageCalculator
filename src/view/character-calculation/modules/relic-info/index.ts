@@ -18,9 +18,9 @@ const useRelicInfo = (initData: IRelicItem[] = new Array(5).fill(null)) => {
   const relicBuffs = ref<IBuffBase[]>([]);
   const relicSuitTexts = ref<IRelicSuitText[]>([]);
 
-  const checkRelicNumber = (hash, num) => {
+  const checkRelicNumber = (hash, num, setId) => {
     const targetRelic = relicLibrary.find((relic) => {
-      return relic.setNameTextMapHash === hash;
+      return relic.setNameTextMapHash === hash || relic.setId === setId;
     });
     if (num === 2) {
       relicSuitTexts.value.push({
@@ -55,10 +55,11 @@ const useRelicInfo = (initData: IRelicItem[] = new Array(5).fill(null)) => {
     // 计算每个 setNameTextMapHash 的出现次数
     relicList.value.forEach((relic) => {
       const hash = relic?.setNameTextMapHash;
+      const setId = relic?.setId;
       if (!hash) return;
       if (countMap[hash]) {
         countMap[hash] += 1;
-        checkRelicNumber(hash, countMap[hash]);
+        checkRelicNumber(hash, countMap[hash], setId);
       } else {
         countMap[hash] = 1;
       }

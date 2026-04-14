@@ -25,6 +25,7 @@ interface Equip {
     equipType?: EquipType;
     itemType?: "ITEM_WEAPON";
     setNameTextMapHash?: string;
+    setId: number;
     weaponStats?: SubstatType[];
     reliquarySubstats?: SubstatType[];
     reliquaryMainstat?: MainstatType;
@@ -130,14 +131,18 @@ const saveCalculationResult = async (enkaData: EnkaAvatarInfo, uid: string) => {
 
   // 从enka数据中筛选出圣遗物信息
   const relicList: IRelicItem[] = new Array(5).fill(null);
+  console.log(enkaData);
+
   enkaData.equipList
     .filter((item) => {
       return item.reliquary;
     })
     .forEach((item) => {
+      console.log(item);
+      
       const targetRelic = relicLibrary
         .find((suit) => {
-          return suit.setNameTextMapHash === +item.flat.setNameTextMapHash;
+          return suit.setNameTextMapHash === +item.flat.setNameTextMapHash || suit.setId === item.flat.setId;
         })
         .equip.find((relic) => {
           return relic.equipType === item.flat.equipType;
@@ -147,6 +152,7 @@ const saveCalculationResult = async (enkaData: EnkaAvatarInfo, uid: string) => {
         rankLevel: item.flat.rankLevel,
         level: item.reliquary.level - 1,
         setNameTextMapHash: +item.flat.setNameTextMapHash,
+        setId: item.flat.setId,
         equipType: item.flat.equipType,
         reliquaryMainstat: item.flat.reliquaryMainstat,
         reliquarySubstats: item.flat.reliquarySubstats,
@@ -187,7 +193,7 @@ const saveCalculationResult = async (enkaData: EnkaAvatarInfo, uid: string) => {
   }
 
   // 计算角色面板
-  const panel = calculationPanel({    
+  const panel = calculationPanel({
     characterInfo: {
       ...cha,
       baseHP: Math.floor(enkaData.fightPropMap[1]),
