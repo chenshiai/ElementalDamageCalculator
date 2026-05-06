@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>千星沙箱文本编辑器v20260329</title>
+    <title>千星沙箱文本编辑器v20260506</title>
     <link rel="stylesheet" href="font.css" />
     <style>
       * {
@@ -27,53 +27,128 @@
         padding: 5px;
       }
 
+      /* 使用CSS变量定义基础尺寸 */
+      :root {
+        --sidebar-base-width: 280px;
+        --sidebar-min-width: 260px;
+        --button-min-height: 36px;
+        --font-size-base: 14px;
+        --spacing-base: 8px;
+      }
+
       .container {
-        width: 90%;
+        width: min(95%, 1800px);
         height: 98vh;
         background-color: white;
         border-radius: 12px;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         overflow: hidden;
         display: flex;
+        flex-direction: row;
+      }
+
+      /* 侧边工具栏 - 使用弹性宽度 */
+      .sidebar {
+        width: clamp(var(--sidebar-min-width), 22vw, var(--sidebar-base-width));
+        min-width: var(--sidebar-min-width);
+        max-width: calc(var(--sidebar-base-width) * 1.3);
+        background-color: #2c3e50;
+        display: flex;
         flex-direction: column;
+        overflow-y: auto;
+        flex-shrink: 0;
+        /* 隐藏默认滚动条 */
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+
+      /* 隐藏侧边栏滚动条但保持滚动功能 */
+      .sidebar::-webkit-scrollbar {
+        display: none;
+      }
+
+      /* 自定义悬浮滚动条 */
+      .sidebar::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 6px;
+        height: 100%;
+        background-color: transparent;
+        transition: background-color 0.2s;
+        z-index: 10;
+      }
+
+      .sidebar:hover::after {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      /* 自定义滚动条滑块 */
+      .sidebar::-webkit-scrollbar-track {
+        background: transparent;
+        width: 0;
+      }
+
+      .sidebar::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 3px;
+        width: 6px;
+      }
+
+      .sidebar::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.5);
       }
 
       .header {
-        background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+        background: linear-gradient(180deg, #4b6cb7 0%, #182848 100%);
         color: white;
-        padding: 12px;
+        padding: clamp(12px, 2vw, 18px);
         text-align: center;
         flex-shrink: 0;
+        border-bottom: 1px solid #34495e;
       }
 
       .header h1 {
-        font-size: 26px;
-        margin-bottom: 3px;
+        font-size: clamp(14px, 3vw, 18px);
+        margin-bottom: 4px;
+        line-height: 1.3;
       }
 
       .header p {
         opacity: 0.9;
-        font-size: 13px;
+        font-size: clamp(10px, 2vw, 12px);
       }
 
       .toolbar {
         display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        padding: 10px;
+        flex-direction: column;
+        gap: clamp(8px, 1.5vw, 12px);
+        padding: clamp(8px, 1.5vw, 12px);
         background-color: #f8f9fa;
-        border-bottom: 1px solid #e9ecef;
         flex-shrink: 0;
+        overflow-y: auto;
       }
 
       .tool-group {
         display: flex;
-        align-items: center;
-        gap: 5px;
-        padding: 4px 8px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: clamp(4px, 1vw, 8px);
+        padding: clamp(6px, 1.5vw, 10px);
         background-color: white;
         border-radius: 6px;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+
+      .tool-group label {
+        font-size: clamp(11px, 2vw, 13px);
+        color: #495057;
+        margin-right: 0;
+        font-weight: bold !important;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       .tool-group label {
@@ -83,31 +158,45 @@
       }
 
       button {
-        padding: 6px 10px;
+        min-height: var(--button-min-height);
+        padding: clamp(6px, 2vw, 8px) clamp(8px, 2.5vw, 12px);
         border: none;
         border-radius: 4px;
         background-color: #4b6cb7;
         color: white;
         cursor: pointer;
         transition: background-color 0.3s;
-        font-size: 13px;
+        font-size: clamp(11px, 2.2vw, 14px);
+        line-height: 1.4;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        flex-shrink: 0;
       }
 
       button:hover {
         background-color: #3a5999;
       }
 
+      /* 按钮组布局优化 */
+      .tool-group .mode-btn {
+        flex: 1;
+        min-width: 0;
+      }
+
       .color-presets {
-        display: flex;
-        gap: 4px;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(20px, 1fr));
+        gap: clamp(3px, 0.8vw, 6px);
       }
 
       .color-preset {
-        width: 18px;
-        height: 18px;
+        width: clamp(16px, 4vw, 22px);
+        height: clamp(16px, 4vw, 22px);
         border-radius: 50%;
         cursor: pointer;
         border: 2px solid transparent;
+        aspect-ratio: 1;
       }
 
       .color-preset:hover {
@@ -148,11 +237,25 @@
       }
 
       select {
-        padding: 5px 8px;
+        min-height: var(--button-min-height);
+        padding: clamp(5px, 1.5vw, 7px) clamp(6px, 2vw, 10px);
         border: 1px solid #ced4da;
         border-radius: 4px;
         background-color: white;
-        font-size: 13px;
+        font-size: clamp(11px, 2vw, 14px);
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      /* 输入框优化 */
+      input[type="number"],
+      input[type="text"] {
+        min-height: var(--button-min-height);
+        padding: clamp(5px, 1.5vw, 7px) clamp(6px, 2vw, 10px);
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        font-size: clamp(11px, 2vw, 14px);
+        box-sizing: border-box;
       }
 
       .content {
@@ -375,6 +478,103 @@
         }
       }
 
+      /* 高DPI屏幕适配 (150%缩放及以上) */
+      @media screen and (min-resolution: 1.25dppx),
+        screen and (-webkit-min-device-pixel-ratio: 1.25),
+        screen and (max-width: 1280px) {
+        :root {
+          --sidebar-base-width: 320px;
+          --sidebar-min-width: 280px;
+          --button-min-height: 40px;
+        }
+
+        .sidebar {
+          width: clamp(280px, 28vw, 340px);
+        }
+
+        button {
+          min-height: 40px;
+          font-size: clamp(12px, 2.5vw, 15px);
+          padding: clamp(8px, 2.5vw, 10px) clamp(10px, 3vw, 14px);
+        }
+
+        .tool-group {
+          gap: clamp(6px, 1.2vw, 10px);
+          padding: clamp(8px, 2vw, 12px);
+        }
+
+        .tool-group label {
+          font-size: clamp(12px, 2.2vw, 14px);
+        }
+
+        select,
+        input[type="number"],
+        input[type="text"] {
+          min-height: 40px;
+          font-size: clamp(12px, 2.5vw, 15px);
+        }
+
+        .color-preset {
+          width: clamp(18px, 5vw, 26px);
+          height: clamp(18px, 5vw, 26px);
+        }
+
+        .toolbar {
+          gap: clamp(10px, 2vw, 14px);
+          padding: clamp(10px, 2vw, 14px);
+        }
+      }
+
+      /* 更高DPI屏幕适配 (200%缩放) */
+      @media screen and (min-resolution: 1.75dppx),
+        screen and (-webkit-min-device-pixel-ratio: 1.75),
+        screen and (max-width: 1024px) {
+        :root {
+          --sidebar-base-width: 360px;
+          --sidebar-min-width: 320px;
+          --button-min-height: 44px;
+        }
+
+        .sidebar {
+          width: clamp(320px, 32vw, 380px);
+        }
+
+        button {
+          min-height: 44px;
+          font-size: clamp(14px, 3vw, 16px);
+          padding: clamp(10px, 3vw, 12px) clamp(12px, 3.5vw, 16px);
+        }
+
+        .tool-group {
+          gap: clamp(8px, 1.5vw, 12px);
+          padding: clamp(10px, 2.5vw, 14px);
+        }
+
+        .tool-group label {
+          font-size: clamp(14px, 2.5vw, 16px);
+        }
+
+        select,
+        input[type="number"],
+        input[type="text"] {
+          min-height: 44px;
+          font-size: clamp(14px, 3vw, 16px);
+        }
+
+        .color-preset {
+          width: clamp(22px, 6vw, 30px);
+          height: clamp(22px, 6vw, 30px);
+        }
+
+        .header h1 {
+          font-size: clamp(16px, 3.5vw, 20px);
+        }
+
+        .header p {
+          font-size: clamp(12px, 2.5vw, 14px);
+        }
+      }
+
       /* 大屏幕设备提示蒙层 */
       .screen-size-overlay {
         display: none;
@@ -546,12 +746,15 @@
       /* 透明背景时显示棋盘格 */
       .pixel.transparent {
         background-color: transparent;
-        background-image: linear-gradient(45deg, #c0c0c0 25%, transparent 25%),
-                          linear-gradient(-45deg, #c0c0c0 25%, transparent 25%),
-                          linear-gradient(45deg, transparent 75%, #c0c0c0 75%),
-                          linear-gradient(-45deg, transparent 75%, #c0c0c0 75%);
+        background-image:
+          linear-gradient(45deg, #c0c0c0 25%, transparent 25%), linear-gradient(-45deg, #c0c0c0 25%, transparent 25%),
+          linear-gradient(45deg, transparent 75%, #c0c0c0 75%), linear-gradient(-45deg, transparent 75%, #c0c0c0 75%);
         background-size: 12px 12px;
-        background-position: 0 0, 0 6px, 6px -6px, -6px 0px;
+        background-position:
+          0 0,
+          0 6px,
+          6px -6px,
+          -6px 0px;
       }
 
       .pixel:hover {
@@ -560,216 +763,289 @@
       #pixelEditorContent {
         flex: 1;
       }
+
+      /* 主内容区域 */
+      .main-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      /* 颜色预设在侧边栏中改为垂直排列 */
+      .color-presets {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 4px;
+      }
+
+      /* 工具栏按钮自适应宽度 */
+      .tool-group button {
+        width: 100%;
+        min-width: 100%;
+      }
+
+      /* 字号选择框自适应宽度 */
+      #fontSize {
+        width: 100%;
+      }
+
+      /* 画布尺寸输入框自适应 */
+      #canvasWidth,
+      #canvasHeight {
+        width: calc(50% - 20px) !important;
+      }
+
+      /* 不透明度容器布局调整 */
+      .opacity-container {
+        display: flex;
+        align-items: center;
+        margin-right: 0;
+      }
+
+      #opacitySlider {
+        flex: 1;
+      }
     </style>
   </head>
 
   <body>
     <div class="container">
-      <div class="header">
-        <h1>千星沙箱文本编辑器v20260329</h1>
-        <p>选择文本后使用工具栏插入标签，或直接输入标签</p>
-      </div>
-
-      <div class="toolbar">
-        <div class="tool-group">
-          <label>模式:</label>
-          <button id="textEditorBtn" class="mode-btn active">文本编辑</button>
-          <button id="pixelEditorBtn" class="mode-btn">像素画绘制</button>
+      <!-- 左侧工具栏 -->
+      <div class="sidebar">
+        <div class="header">
+          <h1>千星沙箱文本编辑器<p>v20260506</p></h1>
         </div>
 
-        <div class="tool-group" id="textTools">
-          <label>颜色:</label>
-          <div class="color-presets">
-            <div
-              class="color-preset"
-              title="标题/次要文字"
-              style="background-color: #d3bc8e"
-              data-color="#d3bc8e"
-            ></div>
-            <div
-              class="color-preset"
-              title="深色背景-关键字1"
-              style="background-color: #ffcc33"
-              data-color="#ffcc33"
-            ></div>
-            <div
-              class="color-preset"
-              title="深色背景-关键字2"
-              style="background-color: #37ffff"
-              data-color="#37ffff"
-            ></div>
-            <div class="color-preset" title="警示文字" style="background-color: #ff5e41" data-color="#ff5e41"></div>
-            <div
-              class="color-preset"
-              title="浅色背景-关键字1"
-              style="background-color: #f39000"
-              data-color="#f39000"
-            ></div>
-            <div
-              class="color-preset"
-              title="浅色背景-关键字2"
-              style="background-color: #3399cc"
-              data-color="#3399cc"
-            ></div>
-            <div class="color-preset" title="火元素" style="background-color: #ff6666" data-color="#ff6666"></div>
-            <div class="color-preset" title="水元素" style="background-color: #6495ed" data-color="#6495ed"></div>
-            <div class="color-preset" title="雷元素" style="background-color: #b380ff" data-color="#b380ff"></div>
-            <div class="color-preset" title="冰元素" style="background-color: #55ddff" data-color="#55ddff"></div>
-            <div class="color-preset" title="风元素" style="background-color: #5ddac1" data-color="#5ddac1"></div>
-            <div class="color-preset" title="岩元素" style="background-color: #ffcc00" data-color="#ffcc00"></div>
-            <div class="color-preset" title="草元素" style="background-color: #3cff00" data-color="#3cff00"></div>
-            <div class="color-preset" title="透明色" style="background-color: transparent; border: 1px solid #333" data-color="transparent"></div>
+        <div class="toolbar">
+          <div class="tool-group">
+            <label>模式:</label>
+            <button id="textEditorBtn" class="mode-btn active">文本编辑</button>
+            <button id="pixelEditorBtn" class="mode-btn">像素画绘制</button>
           </div>
-          <div class="color-picker-container">
-            <input type="color" id="colorPicker" value="#d3bc8e" />
-          </div>
-          <div class="opacity-container">
-            <label for="opacitySlider">不透明度:</label>
-            <input type="range" id="opacitySlider" min="0" max="100" value="100" />
-            <span id="opacityValue">100%</span>
-          </div>
-          <button id="applyColor">应用颜色</button>
-        </div>
 
-        <div class="tool-group" id="textTools3">
-          <label>字号:</label>
-          <select id="fontSize">
-            <option value="12">12px</option>
-            <option value="14">14px</option>
-            <option value="16">16px</option>
-            <option value="18">18px</option>
-            <option value="20" selected>20px</option>
-            <option value="24">24px</option>
-            <option value="28">28px</option>
-            <option value="32">32px</option>
-            <option value="36">36px</option>
-            <option value="40">40px</option>
-            <option value="44">44px</option>
-            <option value="48">48px</option>
-            <option value="52">52px</option>
-            <option value="56">56px</option>
-            <option value="60">60px</option>
-            <option value="64">64px</option>
-            <option value="68">68px</option>
-            <option value="72">72px</option>
-            <option value="76">76px</option>
-            <option value="80">80px</option>
-            <option value="84">84px</option>
-            <option value="88">88px</option>
-            <option value="92">92px</option>
-            <option value="96">96px</option>
-            <option value="100">100px</option>
-            <option value="104">104px</option>
-            <option value="108">108px</option>
-            <option value="112">112px</option>
-            <option value="116">116px</option>
-            <option value="120">120px</option>
-            <option value="124">124px</option>
-            <option value="128">128px</option>
-          </select>
-          <button id="applySize">应用字号</button>
-        </div>
-
-        <div class="tool-group" id="textTools2">
-          <button id="applyItalic">斜体</button>
-        </div>
-        <div class="tool-group" id="textTools4">
-          <button id="applyBold">加粗</button>
-        </div>
-
-        <div class="tool-group" id="textTools5">
-          <button id="insertNewline">插入\n换行符</button>
-        </div>
-
-        <div class="tool-group" id="pixelTools" style="display: none;">
-          <label>画布尺寸:</label>
-          <input type="number" id="canvasWidth" min="2" max="38" value="10" style="width: 60px;" />
-          <span>x</span>
-          <input type="number" id="canvasHeight" min="2" max="38" value="10" style="width: 60px;" />
-          <button id="resizeCanvas">调整尺寸</button>
-          <button id="toggleBorders">网格：显示</button>
-          <button id="toggleCenterOptimization" title="开启后，复制单行时会将左右两边的透明色像素给删除。非左右对称图形不要开启。" style="background-color: #4b6cb7;">居中优化：关闭</button>
-        </div>
-
-        <div class="tool-group" id="pixelTools2" style="display: none;">
-          <button id="clearCanvas" style="background-color: #ff5e41;">以白色填充画布</button>
-          <button id="fillTransparent" style="background-color: #ff5e41;">以透明色填充画布</button>
-        </div>
-
-        <div class="tool-group" id="pixelTools3" style="display: none;">
-          <button id="copyPixelArt">复制整张像素画</button>
-        </div>
-
-        <div class="tool-group" id="layoutTools">
-          <button id="toggleLayout">🔄 左右切换</button>
-        </div>
-      </div>
-
-      <div class="content">
-        <div class="input-section">
-          <h2 class="section-title" id="textEditorTitle"><i>📝</i>输入区域————<i>鼠标框选文本后点击应用颜色即可一键添加颜色</i></h2>
-          <h2 class="section-title" id="pixelEditorTitle" style="display: none;"><i>🎨</i>像素画绘制区域————<i>选择颜色后，左键点击对应方格填入颜色，右键恢复为默认白色</i></h2>
-          
-          <div id="textEditorContent">
-            <textarea id="inputText" placeholder="在这里输入文本，使用工具栏插入标签或直接输入标签..."></textarea>
-            <div class="word-count" id="wordCount">
-              <span>当前字数: <span id="currentCount">0</span></span>
-              <span class="limit-message" id="limitMessage"></span>
+          <div class="tool-group" id="textTools">
+            <label>颜色:</label>
+            <div class="color-presets">
+              <div
+                class="color-preset"
+                title="标题/次要文字"
+                style="background-color: #d3bc8e"
+                data-color="#d3bc8e"
+              ></div>
+              <div
+                class="color-preset"
+                title="深色背景-关键字1"
+                style="background-color: #ffcc33"
+                data-color="#ffcc33"
+              ></div>
+              <div
+                class="color-preset"
+                title="深色背景-关键字2"
+                style="background-color: #37ffff"
+                data-color="#37ffff"
+              ></div>
+              <div class="color-preset" title="警示文字" style="background-color: #ff5e41" data-color="#ff5e41"></div>
+              <div
+                class="color-preset"
+                title="浅色背景-关键字1"
+                style="background-color: #f39000"
+                data-color="#f39000"
+              ></div>
+              <div
+                class="color-preset"
+                title="浅色背景-关键字2"
+                style="background-color: #3399cc"
+                data-color="#3399cc"
+              ></div>
+              <div class="color-preset" title="火元素" style="background-color: #ff6666" data-color="#ff6666"></div>
+              <div class="color-preset" title="水元素" style="background-color: #6495ed" data-color="#6495ed"></div>
+              <div class="color-preset" title="雷元素" style="background-color: #b380ff" data-color="#b380ff"></div>
+              <div class="color-preset" title="冰元素" style="background-color: #55ddff" data-color="#55ddff"></div>
+              <div class="color-preset" title="风元素" style="background-color: #5ddac1" data-color="#5ddac1"></div>
+              <div class="color-preset" title="岩元素" style="background-color: #ffcc00" data-color="#ffcc00"></div>
+              <div class="color-preset" title="草元素" style="background-color: #3cff00" data-color="#3cff00"></div>
+              <div
+                class="color-preset"
+                title="透明色"
+                style="background-color: transparent; border: 1px solid #333"
+                data-color="transparent"
+              ></div>
             </div>
-            <div class="buttons">
-              <button id="clearBtn">清空内容</button>
-              <button id="exampleBtn">插入示例</button>
-              <button id="copyBtn">复制内容</button>
+            <div class="color-picker-container">
+              <input type="color" id="colorPicker" value="#d3bc8e" />
             </div>
+            <div class="opacity-container">
+              <label for="opacitySlider">不透明度:</label>
+              <input type="range" id="opacitySlider" min="0" max="100" value="100" />
+              <span id="opacityValue">100%</span>
+            </div>
+            <button id="applyColor">应用颜色</button>
           </div>
-          
-          <div id="pixelEditorContent" style="display: none;">
-            <div class="pixel-canvas-container">
-              <div style="display: flex;">
-                <div id="pixelCanvas"></div>
-                <div id="copyButtonsContainer" style="margin-left: 10px;margin-top: 2px"></div>
+
+          <div class="tool-group" id="textTools3">
+            <label>字号:</label>
+            <select id="fontSize">
+              <option value="12">12px</option>
+              <option value="14">14px</option>
+              <option value="16">16px</option>
+              <option value="18">18px</option>
+              <option value="20" selected>20px</option>
+              <option value="24">24px</option>
+              <option value="28">28px</option>
+              <option value="32">32px</option>
+              <option value="36">36px</option>
+              <option value="40">40px</option>
+              <option value="44">44px</option>
+              <option value="48">48px</option>
+              <option value="52">52px</option>
+              <option value="56">56px</option>
+              <option value="60">60px</option>
+              <option value="64">64px</option>
+              <option value="68">68px</option>
+              <option value="72">72px</option>
+              <option value="76">76px</option>
+              <option value="80">80px</option>
+              <option value="84">84px</option>
+              <option value="88">88px</option>
+              <option value="92">92px</option>
+              <option value="96">96px</option>
+              <option value="100">100px</option>
+              <option value="104">104px</option>
+              <option value="108">108px</option>
+              <option value="112">112px</option>
+              <option value="116">116px</option>
+              <option value="120">120px</option>
+              <option value="124">124px</option>
+              <option value="128">128px</option>
+            </select>
+            <button id="applySize">应用字号</button>
+          </div>
+
+          <div class="tool-group" id="textTools2">
+            <button id="applyItalic">斜体</button>
+          </div>
+          <div class="tool-group" id="textTools4">
+            <button id="applyBold">加粗</button>
+          </div>
+
+          <div class="tool-group" id="textTools5">
+            <button id="insertNewline">插入\n换行符</button>
+          </div>
+
+          <div class="tool-group" id="pixelTools" style="display: none">
+            <label>画布尺寸:</label>
+            <div>
+              <input type="number" id="canvasWidth" min="2" max="38" value="10" style="width: 60px" /><span>x</span
+              ><input type="number" id="canvasHeight" min="2" max="38" value="10" style="width: 60px" />
+            </div>
+            <button id="resizeCanvas">调整尺寸</button>
+            <button id="toggleBorders">网格：显示</button>
+            <button
+              id="toggleCenterOptimization"
+              title="开启后，复制单行时会将左右两边的透明色像素给删除。非左右对称图形不要开启。"
+              style="background-color: #4b6cb7"
+            >
+              居中优化：关闭
+            </button>
+          </div>
+
+          <div class="tool-group" id="pixelTools2" style="display: none">
+            <button id="clearCanvas" style="background-color: #ff5e41">以白色填充画布</button>
+            <button id="fillTransparent" style="background-color: #ff5e41">以透明色填充画布</button>
+          </div>
+
+          <div class="tool-group" id="pixelTools3" style="display: none">
+            <button id="copyPixelArt">复制整张像素画</button>
+            <button id="savePixelArt" style="background-color: #4caf50">保存像素画</button>
+            <button id="loadPixelArt" style="background-color: #2196f3">加载像素画</button>
+            <button id="downloadPixelArt" style="background-color: #ff9800">下载JSON文件</button>
+            <button id="importPixelArt" style="background-color: #9c27b0">导入JSON文件</button>
+          </div>
+
+          <div class="tool-group" id="layoutTools">
+            <button id="toggleLayout">🔄 左右切换</button>
+          </div>
+        </div>
+        <!-- 关闭 toolbar -->
+      </div>
+      <!-- 关闭 sidebar -->
+
+      <!-- 主内容区域 -->
+      <div class="main-content">
+        <div class="content">
+          <div class="input-section">
+            <h2 class="section-title" id="textEditorTitle">
+              <i>📝</i>输入区域————<i>鼠标框选文本后点击应用颜色即可一键添加颜色</i>
+            </h2>
+            <h2 class="section-title" id="pixelEditorTitle" style="display: none">
+              <i>🎨</i>像素画绘制区域————<i>选择颜色后，左键点击对应方格填入颜色，右键恢复为默认白色</i>
+            </h2>
+
+            <div id="textEditorContent">
+              <textarea id="inputText" placeholder="在这里输入文本，使用工具栏插入标签或直接输入标签..."></textarea>
+              <div class="word-count" id="wordCount">
+                <span>当前字数: <span id="currentCount">0</span></span>
+                <span class="limit-message" id="limitMessage"></span>
+              </div>
+              <div class="buttons">
+                <button id="clearBtn">清空内容</button>
+                <button id="exampleBtn">插入示例</button>
+                <button id="copyBtn">复制内容</button>
+              </div>
+            </div>
+
+            <div id="pixelEditorContent" style="display: none">
+              <div class="pixel-canvas-container">
+                <div style="display: flex">
+                  <div id="pixelCanvas"></div>
+                  <div id="copyButtonsContainer" style="margin-left: 10px; margin-top: 2px"></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div class="preview-section">
-          <h2 class="section-title">
-            <input type="radio" id="normal-preview" name="preview-mode" value="normal" checked />
-            <label for="normal-preview"> <i>👁️</i>常规预览 </label>
-            <input type="radio" id="item-preview" name="preview-mode" value="item" />
-            <label for="item-preview"> <i>👁️</i>道具预览 </label>
-            <input type="radio" id="popup-preview" name="preview-mode" value="popup" />
-            <label for="popup-preview"> <i>👁️</i>弹窗预览 </label>
-          </h2>
-          <div class="preview-container">
-            <div class="item-name">道具名称</div>
-            <div class="item-icon">道具图标</div>
-            <div class="item-tag">道具标签</div>
-            <div class="item-desc">道具描述：</div>
-            <div id="preview" class="preview-area"></div>
+          <div class="preview-section">
+            <h2 class="section-title">
+              <input type="radio" id="normal-preview" name="preview-mode" value="normal" checked />
+              <label for="normal-preview"> <i>👁️</i>常规预览 </label>
+              <input type="radio" id="item-preview" name="preview-mode" value="item" />
+              <label for="item-preview"> <i>👁️</i>道具预览 </label>
+              <input type="radio" id="popup-preview" name="preview-mode" value="popup" />
+              <label for="popup-preview"> <i>👁️</i>弹窗预览 </label>
+            </h2>
+            <div class="preview-container">
+              <div class="item-name">道具名称</div>
+              <div class="item-icon">道具图标</div>
+              <div class="item-tag">道具标签</div>
+              <div class="item-desc">道具描述：</div>
+              <div id="preview" class="preview-area"></div>
+            </div>
           </div>
-        </div>
-      </div>
 
-      <div class="help-section">
-        <h2 class="help-title">备注</h2>
-        <div class="tags">
-          <div class="tag">
-            修改颜色: <code>&lt;color=#fff&gt;内容&lt;/color&gt;</code>
-            <span class="tag-example">例如: &lt;color=#d3bc8e&gt;红色文字&lt;/color&gt;</span>
+          <div class="help-section">
+            <h2 class="help-title">备注</h2>
+            <div class="tags">
+              <div class="tag">
+                修改颜色: <code>&lt;color=#fff&gt;内容&lt;/color&gt;</code>
+                <span class="tag-example">例如: &lt;color=#d3bc8e&gt;红色文字&lt;/color&gt;</span>
+              </div>
+              <div class="tag">
+                修改字号: <code>&lt;size=14&gt;内容&lt;/size&gt;</code>
+                <span class="tag-example">例如: &lt;size=20&gt;大号文字&lt;/size&gt;</span>
+              </div>
+              <div class="tag">斜体: <code>&lt;i&gt;内容&lt;/i&gt;</code></div>
+              <div class="tag">加粗: <code>&lt;b&gt;内容&lt;/b&gt;</code></div>
+              <div class="tag">换行: <code>\n</code>或回车</div>
+              <div class="tag">注意：界面控件中{插入变量}之后的换行、节点图中字符串变量的换行，需要使用\n换行符；</div>
+            </div>
           </div>
-          <div class="tag">
-            修改字号: <code>&lt;size=14&gt;内容&lt;/size&gt;</code>
-            <span class="tag-example">例如: &lt;size=20&gt;大号文字&lt;/size&gt;</span>
-          </div>
-          <div class="tag">斜体: <code>&lt;i&gt;内容&lt;/i&gt;</code></div>
-          <div class="tag">加粗: <code>&lt;b&gt;内容&lt;/b&gt;</code></div>
-          <div class="tag">换行: <code>\n</code>或回车</div>
-          <div class="tag">注意：界面控件中{插入变量}之后的换行、节点图中字符串变量的换行，需要使用\n换行符；</div>
         </div>
+        <!-- 关闭 content -->
       </div>
+      <!-- 关闭 main-content -->
     </div>
+    <!-- 关闭 container -->
 
     <div class="copy-notification" id="copyNotification">内容已复制到剪贴板！</div>
 
@@ -807,10 +1083,10 @@
 
         let selectedColor = "#d3bc8e";
         let selectedOpacity = 100;
-        
+
         // 初始化默认选中状态
         if (colorPresets.length > 0) {
-          colorPresets[0].classList.add('selected');
+          colorPresets[0].classList.add("selected");
         }
 
         // 撤销历史记录
@@ -879,7 +1155,7 @@
         updateWordCount();
 
         // 监听输入变化
-        inputText.addEventListener("input", function() {
+        inputText.addEventListener("input", function () {
           updatePreview();
           updateWordCount();
         });
@@ -887,7 +1163,7 @@
         // 监听预览模式变化
         const previewModeRadios = document.querySelectorAll('input[name="preview-mode"]');
         previewModeRadios.forEach((radio) => {
-          radio.addEventListener("change", function() {
+          radio.addEventListener("change", function () {
             updatePreview();
             updateWordCount();
           });
@@ -919,13 +1195,13 @@
           preset.addEventListener("click", function () {
             const color = this.getAttribute("data-color");
             // 移除所有颜色预设的选中状态
-            colorPresets.forEach(p => p.classList.remove('selected'));
+            colorPresets.forEach((p) => p.classList.remove("selected"));
             // 添加当前颜色预设的选中状态
-            this.classList.add('selected');
+            this.classList.add("selected");
             // 更新文本编辑器的selectedColor
             selectedColor = color;
             // 处理透明色，颜色选择器不支持transparent值
-            if (color !== 'transparent') {
+            if (color !== "transparent") {
               colorPicker.value = color;
             }
             // 同步更新像素画的selectedColor
@@ -939,11 +1215,11 @@
         colorPicker.addEventListener("input", function () {
           const color = this.value;
           // 移除所有颜色预设的选中状态
-          colorPresets.forEach(p => p.classList.remove('selected'));
+          colorPresets.forEach((p) => p.classList.remove("selected"));
           // 查找并选中对应的颜色预设
-          colorPresets.forEach(p => {
-            if (p.getAttribute('data-color') === color) {
-              p.classList.add('selected');
+          colorPresets.forEach((p) => {
+            if (p.getAttribute("data-color") === color) {
+              p.classList.add("selected");
             }
           });
           // 更新文本编辑器的selectedColor
@@ -969,22 +1245,24 @@
         // 应用颜色按钮
         applyColor.addEventListener("click", function () {
           let colorToUse = selectedColor;
-          
+
           // 处理透明色，使用#0000
-          if (selectedColor === 'transparent') {
-            colorToUse = '#0000';
+          if (selectedColor === "transparent") {
+            colorToUse = "#0000";
           }
-          
+
           if (selectedOpacity === 100) {
             // 不透明度为100%时，只使用颜色代码
             wrapSelectedText(`<color=${colorToUse}>`, `</color>`);
           } else {
             // 处理透明色时，忽略透明度设置
-            if (selectedColor === 'transparent') {
+            if (selectedColor === "transparent") {
               wrapSelectedText(`<color=${colorToUse}>`, `</color>`);
             } else {
               // 将透明度转换为十六进制alpha值（00-FF）
-              const alphaHex = Math.round((selectedOpacity / 100) * 255).toString(16).padStart(2, '0');
+              const alphaHex = Math.round((selectedOpacity / 100) * 255)
+                .toString(16)
+                .padStart(2, "0");
               // 生成#RRGGBBAA格式的颜色代码
               const colorWithAlpha = `${colorToUse}${alphaHex}`;
               wrapSelectedText(`<color=${colorWithAlpha}>`, `</color>`);
@@ -1149,22 +1427,22 @@
         function updateWordCount() {
           const content = inputText.value;
           const currentMode = document.querySelector('input[name="preview-mode"]:checked').value;
-          
+
           // 计算输入框内的所有内容的字数，包括标签和换行符
           // 确保换行符被正确计算为2个字符
           // 首先将\r\n替换为\n，然后计算换行符数量，最后加上其他字符数量
-          const normalizedContent = content.replace(/\r\n/g, '\n');
+          const normalizedContent = content.replace(/\r\n/g, "\n");
           const newlineCount = (normalizedContent.match(/\n/g) || []).length;
-          const otherCharCount = normalizedContent.replace(/\n/g, '').length;
-          const count = otherCharCount + (newlineCount * 2);
-          
+          const otherCharCount = normalizedContent.replace(/\n/g, "").length;
+          const count = otherCharCount + newlineCount * 2;
+
           // 更新当前字数显示
           currentCount.textContent = count;
-          
+
           // 根据预览模式确定字数限制
           let limit = 0;
-          let modeName = '';
-          
+          let modeName = "";
+
           if (currentMode === "item") {
             limit = 200;
             modeName = "道具预览";
@@ -1172,7 +1450,7 @@
             limit = 1000;
             modeName = "弹窗预览";
           }
-          
+
           // 检查是否超过限制
           if (limit > 0) {
             if (count > limit) {
@@ -1193,31 +1471,31 @@
 
     <script>
       // 像素画功能
-      const textEditorBtn = document.getElementById('textEditorBtn');
-      const pixelEditorBtn = document.getElementById('pixelEditorBtn');
-      const textTools = document.getElementById('textTools');
-      const textTools2 = document.getElementById('textTools2');
-      const textTools3 = document.getElementById('textTools3');
-      const textTools4 = document.getElementById('textTools4');
-      const textTools5 = document.getElementById('textTools5');
-      const layoutTools = document.getElementById('layoutTools');
-      const pixelTools = document.getElementById('pixelTools');
-      const pixelTools2 = document.getElementById('pixelTools2');
-      const pixelTools3 = document.getElementById('pixelTools3');
-      const textEditorTitle = document.getElementById('textEditorTitle');
-      const pixelEditorTitle = document.getElementById('pixelEditorTitle');
-      const textEditorContent = document.getElementById('textEditorContent');
-      const pixelEditorContent = document.getElementById('pixelEditorContent');
-      const pixelCanvas = document.getElementById('pixelCanvas');
-      const canvasWidthInput = document.getElementById('canvasWidth');
-      const canvasHeightInput = document.getElementById('canvasHeight');
-      const resizeCanvasBtn = document.getElementById('resizeCanvas');
-      const opacitySlider = document.getElementById('opacitySlider');
-      const opacityValue = document.getElementById('opacityValue');
-      const copyPixelArtBtn = document.getElementById('copyPixelArt');
-      const clearCanvasBtn = document.getElementById('clearCanvas');
+      const textEditorBtn = document.getElementById("textEditorBtn");
+      const pixelEditorBtn = document.getElementById("pixelEditorBtn");
+      const textTools = document.getElementById("textTools");
+      const textTools2 = document.getElementById("textTools2");
+      const textTools3 = document.getElementById("textTools3");
+      const textTools4 = document.getElementById("textTools4");
+      const textTools5 = document.getElementById("textTools5");
+      const layoutTools = document.getElementById("layoutTools");
+      const pixelTools = document.getElementById("pixelTools");
+      const pixelTools2 = document.getElementById("pixelTools2");
+      const pixelTools3 = document.getElementById("pixelTools3");
+      const textEditorTitle = document.getElementById("textEditorTitle");
+      const pixelEditorTitle = document.getElementById("pixelEditorTitle");
+      const textEditorContent = document.getElementById("textEditorContent");
+      const pixelEditorContent = document.getElementById("pixelEditorContent");
+      const pixelCanvas = document.getElementById("pixelCanvas");
+      const canvasWidthInput = document.getElementById("canvasWidth");
+      const canvasHeightInput = document.getElementById("canvasHeight");
+      const resizeCanvasBtn = document.getElementById("resizeCanvas");
+      const opacitySlider = document.getElementById("opacitySlider");
+      const opacityValue = document.getElementById("opacityValue");
+      const copyPixelArtBtn = document.getElementById("copyPixelArt");
+      const clearCanvasBtn = document.getElementById("clearCanvas");
 
-      let currentMode = 'text';
+      let currentMode = "text";
       let canvasWidth = 10;
       let canvasHeight = 10;
       let pixelData = [];
@@ -1226,62 +1504,62 @@
       let isDrawing = false;
       let bordersVisible = true;
       let centerOptimization = false;
-      
+
       // 颜色相关变量，与文本编辑器保持同步
       let selectedColor = "#d3bc8e";
       let selectedOpacity = 100;
-      
+
       // 暴露到全局，以便文本编辑器脚本可以访问
       window.pixelSelectedColor = selectedColor;
       window.pixelSelectedOpacity = selectedOpacity;
-      
+
       // 监听全局变量变化，同步到本地变量
-      Object.defineProperty(window, 'pixelSelectedColor', {
-        get: function() {
+      Object.defineProperty(window, "pixelSelectedColor", {
+        get: function () {
           return selectedColor;
         },
-        set: function(value) {
+        set: function (value) {
           selectedColor = value;
-        }
+        },
       });
-      
-      Object.defineProperty(window, 'pixelSelectedOpacity', {
-        get: function() {
+
+      Object.defineProperty(window, "pixelSelectedOpacity", {
+        get: function () {
           return selectedOpacity;
         },
-        set: function(value) {
+        set: function (value) {
           selectedOpacity = value;
-        }
+        },
       });
 
       // 保存历史状态
       function saveHistory() {
         // 深拷贝当前像素数据
-        const snapshot = pixelData.map(row => [...row]);
+        const snapshot = pixelData.map((row) => [...row]);
         history.push(snapshot);
-        
+
         // 限制历史记录大小
         if (history.length > MAX_HISTORY_SIZE) {
           history.shift();
         }
       }
-      
+
       // 填充像素函数
       function fillPixel(x, y) {
         if (isDrawing && x >= 0 && x < canvasWidth && y >= 0 && y < canvasHeight) {
           saveHistory();
           let rgbaColor;
           let isTransparent = false;
-          
+
           // 检查是否选择了透明色
-          if (selectedColor === 'transparent') {
-            rgbaColor = 'rgba(0, 0, 0, 0)';
+          if (selectedColor === "transparent") {
+            rgbaColor = "rgba(0, 0, 0, 0)";
             isTransparent = true;
           } else {
             const color = colorPicker.value;
             // 确保opacitySlider存在且有value属性
             const opacity = opacitySlider ? parseInt(selectedOpacity) / 100 : 1;
-            
+
             // 转换为带透明度的rgba
             const r = parseInt(color.substring(1, 3), 16);
             const g = parseInt(color.substring(3, 5), 16);
@@ -1292,12 +1570,12 @@
               isTransparent = true;
             }
           }
-          
+
           // 更新像素数据
           pixelData[y][x] = rgbaColor;
-          
+
           // 更新DOM
-          const pixelCanvas = document.getElementById('pixelCanvas');
+          const pixelCanvas = document.getElementById("pixelCanvas");
           if (pixelCanvas) {
             const rowElement = pixelCanvas.children[y];
             if (rowElement) {
@@ -1306,21 +1584,21 @@
                 pixel.style.backgroundColor = rgbaColor;
                 // 添加或移除transparent类
                 if (isTransparent) {
-                  pixel.classList.add('transparent');
+                  pixel.classList.add("transparent");
                 } else {
-                  pixel.classList.remove('transparent');
+                  pixel.classList.remove("transparent");
                 }
               }
             }
           }
         }
       }
-      
+
       // 全局鼠标移动处理
       function handleMouseMove(e) {
         if (isDrawing) {
           const pixel = e.target;
-          if (pixel.classList.contains('pixel')) {
+          if (pixel.classList.contains("pixel")) {
             const x = parseInt(pixel.dataset.x);
             const y = parseInt(pixel.dataset.y);
             if (!isNaN(x) && !isNaN(y)) {
@@ -1329,7 +1607,7 @@
           }
         }
       }
-      
+
       // 全局鼠标释放处理
       function handleMouseUp() {
         isDrawing = false;
@@ -1349,105 +1627,107 @@
 
       // 重绘画布
       function redrawCanvas() {
-        pixelCanvas.innerHTML = '';
-        const copyButtonsContainer = document.getElementById('copyButtonsContainer');
-        copyButtonsContainer.innerHTML = '';
-        
+        pixelCanvas.innerHTML = "";
+        const copyButtonsContainer = document.getElementById("copyButtonsContainer");
+        copyButtonsContainer.innerHTML = "";
+
         for (let y = 0; y < canvasHeight; y++) {
           // 创建像素行
-          const rowElement = document.createElement('div');
-          rowElement.className = 'pixel-row';
-          
+          const rowElement = document.createElement("div");
+          rowElement.className = "pixel-row";
+
           for (let x = 0; x < canvasWidth; x++) {
-            const pixel = document.createElement('div');
-            pixel.className = 'pixel';
+            const pixel = document.createElement("div");
+            pixel.className = "pixel";
             const color = pixelData[y][x];
             pixel.style.backgroundColor = color;
             // 检查是否为透明色
-            if (color === 'rgba(0, 0, 0, 0)') {
-              pixel.classList.add('transparent');
+            if (color === "rgba(0, 0, 0, 0)") {
+              pixel.classList.add("transparent");
             }
-            pixel.style.border = bordersVisible ? '1px solid #ddd' : 'none';
+            pixel.style.border = bordersVisible ? "1px solid #ddd" : "none";
             pixel.dataset.x = x;
             pixel.dataset.y = y;
-            
+
             // 鼠标按下开始绘制
-            pixel.addEventListener('mousedown', (e) => {
+            pixel.addEventListener("mousedown", (e) => {
               e.stopPropagation(); // 阻止事件冒泡
-              if (e.button === 0) { // 左键
+              if (e.button === 0) {
+                // 左键
                 isDrawing = true;
                 fillPixel(x, y); // 点击时也填充
               }
             });
-            
+
             // 右键点击恢复为白色
-            pixel.addEventListener('contextmenu', (e) => {
+            pixel.addEventListener("contextmenu", (e) => {
               e.preventDefault(); // 阻止默认右键菜单
               e.stopPropagation(); // 阻止事件冒泡
               saveHistory();
-              pixel.style.backgroundColor = 'white';
-              pixelData[y][x] = 'white';
+              pixel.style.backgroundColor = "white";
+              pixelData[y][x] = "white";
             });
-            
+
             rowElement.appendChild(pixel);
           }
-          
+
           // 将像素行添加到画布
           pixelCanvas.appendChild(rowElement);
-          
+
           // 添加复制按钮到外部容器
-          const copyBtn = document.createElement('div');
-          copyBtn.className = 'copy-row-btn';
-          copyBtn.textContent = `📋 - ${y+1}`;
+          const copyBtn = document.createElement("div");
+          copyBtn.className = "copy-row-btn";
+          copyBtn.textContent = `📋 - ${y + 1}`;
           copyBtn.title = `复制第${y + 1}行`;
           // copyBtn.style.marginBottom = '1px'; // 与像素行对齐
-          copyBtn.addEventListener('click', (e) => {
+          copyBtn.addEventListener("click", (e) => {
             e.stopPropagation();
             copyRow(y);
           });
-          
+
           copyButtonsContainer.appendChild(copyBtn);
         }
-        
+
         // 确保全局事件监听器已添加
-        pixelCanvas.addEventListener('mousemove', handleMouseMove);
-        document.addEventListener('mouseup', handleMouseUp);
-        document.addEventListener('mouseleave', handleMouseUp);
+        pixelCanvas.addEventListener("mousemove", handleMouseMove);
+        document.addEventListener("mouseup", handleMouseUp);
+        document.addEventListener("mouseleave", handleMouseUp);
       }
 
       // 初始化画布
       function initCanvas() {
         pixelData = [];
         history = [];
-        pixelCanvas.innerHTML = '';
-        const copyButtonsContainer = document.getElementById('copyButtonsContainer');
-        copyButtonsContainer.innerHTML = '';
-        
+        pixelCanvas.innerHTML = "";
+        const copyButtonsContainer = document.getElementById("copyButtonsContainer");
+        copyButtonsContainer.innerHTML = "";
+
         for (let y = 0; y < canvasHeight; y++) {
           const row = [];
           // 创建像素行
-          const rowElement = document.createElement('div');
-          rowElement.className = 'pixel-row';
-          
+          const rowElement = document.createElement("div");
+          rowElement.className = "pixel-row";
+
           for (let x = 0; x < canvasWidth; x++) {
-            const pixel = document.createElement('div');
-            pixel.className = 'pixel';
-            pixel.style.backgroundColor = 'rgba(255, 255, 255, 1)';
-            pixel.style.border = bordersVisible ? '1px solid #ddd' : 'none';
+            const pixel = document.createElement("div");
+            pixel.className = "pixel";
+            pixel.style.backgroundColor = "rgba(255, 255, 255, 1)";
+            pixel.style.border = bordersVisible ? "1px solid #ddd" : "none";
             pixel.dataset.x = x;
             pixel.dataset.y = y;
-            
+
             // 鼠标按下开始绘制
-            pixel.addEventListener('mousedown', (e) => {
+            pixel.addEventListener("mousedown", (e) => {
               e.stopPropagation(); // 阻止事件冒泡
-              if (e.button === 0) { // 左键
+              if (e.button === 0) {
+                // 左键
                 isDrawing = true;
                 // 直接更新数据
                 let rgbaColor;
-                
+
                 // 检查是否选择了透明色
-                if (selectedColor === 'transparent') {
-                  rgbaColor = 'rgba(0, 0, 0, 0)';
+                if (selectedColor === "transparent") {
+                  rgbaColor = "rgba(0, 0, 0, 0)";
                 } else {
                   const color = colorPicker.value;
                   const opacity = opacitySlider ? parseInt(selectedOpacity) / 100 : 1;
@@ -1456,7 +1736,7 @@
                   const b = parseInt(color.substring(5, 7), 16);
                   rgbaColor = `rgba(${r}, ${g}, ${b}, ${opacity})`;
                 }
-                
+
                 row[x] = rgbaColor;
                 // 更新DOM
                 pixel.style.backgroundColor = row[x];
@@ -1464,64 +1744,64 @@
                 saveHistory();
               }
             });
-            
+
             // 右键点击恢复为白色
-            pixel.addEventListener('contextmenu', (e) => {
+            pixel.addEventListener("contextmenu", (e) => {
               e.preventDefault(); // 阻止默认右键菜单
               e.stopPropagation(); // 阻止事件冒泡
               saveHistory();
-              pixel.style.backgroundColor = 'rgba(255, 255, 255, 1)';
-              pixel.classList.remove('transparent');
-              row[x] = 'rgba(255, 255, 255, 1)';
+              pixel.style.backgroundColor = "rgba(255, 255, 255, 1)";
+              pixel.classList.remove("transparent");
+              row[x] = "rgba(255, 255, 255, 1)";
             });
-            
+
             rowElement.appendChild(pixel);
-            row.push('rgba(255, 255, 255, 1)')
+            row.push("rgba(255, 255, 255, 1)");
           }
-          
+
           // 将像素行添加到画布
           pixelCanvas.appendChild(rowElement);
-          
+
           // 添加复制按钮到外部容器
-          const copyBtn = document.createElement('div');
-          copyBtn.className = 'copy-row-btn';
-          copyBtn.textContent = `📋 - ${y+1}`;
+          const copyBtn = document.createElement("div");
+          copyBtn.className = "copy-row-btn";
+          copyBtn.textContent = `📋 - ${y + 1}`;
           copyBtn.title = `复制第${y + 1}行`;
           // copyBtn.style.marginBottom = '2px'; // 与像素行对齐
-          copyBtn.addEventListener('click', (e) => {
+          copyBtn.addEventListener("click", (e) => {
             e.stopPropagation();
             copyRow(y);
           });
-          
+
           copyButtonsContainer.appendChild(copyBtn);
-          
+
           // 确保全局事件监听器已添加
-          pixelCanvas.addEventListener('mousemove', handleMouseMove);
-          document.addEventListener('mouseup', handleMouseUp);
-          document.addEventListener('mouseleave', handleMouseUp);
-          
+          pixelCanvas.addEventListener("mousemove", handleMouseMove);
+          document.addEventListener("mouseup", handleMouseUp);
+          document.addEventListener("mouseleave", handleMouseUp);
+
           pixelData.push(row);
         }
       }
 
       // 调整画布尺寸
-      resizeCanvasBtn.addEventListener('click', () => {
+      resizeCanvasBtn.addEventListener("click", () => {
         const newWidth = parseInt(canvasWidthInput.value);
         const newHeight = parseInt(canvasHeightInput.value);
-        
+
         if (newWidth >= 2 && newWidth <= 38 && newHeight >= 2 && newHeight <= 38) {
           // 保存当前像素数据
           const oldPixelData = JSON.parse(JSON.stringify(pixelData));
           const oldWidth = canvasWidth;
           const oldHeight = canvasHeight;
-          
+
           // 更新画布尺寸
           canvasWidth = newWidth;
           canvasHeight = newHeight;
-          
+
           // 创建新的像素数据数组，保留原有像素点
           const newPixelData = [];
-          
+
           for (let y = 0; y < newHeight; y++) {
             const row = [];
             for (let x = 0; x < newWidth; x++) {
@@ -1529,107 +1809,109 @@
               if (y < oldHeight && x < oldWidth) {
                 row.push(oldPixelData[y][x]);
               } else {
-                row.push('white');
+                row.push("white");
               }
             }
             newPixelData.push(row);
           }
-          
+
           // 更新像素数据
           pixelData = newPixelData;
           history = []; // 清空历史记录
-          
+
           // 重绘画布
           redrawCanvas();
         }
       });
 
       // 清空画布
-      clearCanvasBtn.addEventListener('click', () => {
+      clearCanvasBtn.addEventListener("click", () => {
         initCanvas();
       });
 
       // 以透明色填充画布
-      const fillTransparentBtn = document.getElementById('fillTransparent');
-      fillTransparentBtn.addEventListener('click', () => {
+      const fillTransparentBtn = document.getElementById("fillTransparent");
+      fillTransparentBtn.addEventListener("click", () => {
         saveHistory();
-        const transparentColor = 'rgba(0, 0, 0, 0)';
-        
+        const transparentColor = "rgba(0, 0, 0, 0)";
+
         // 遍历所有像素点，设置为透明色
         for (let y = 0; y < canvasHeight; y++) {
           for (let x = 0; x < canvasWidth; x++) {
             pixelData[y][x] = transparentColor;
           }
         }
-        
+
         // 重绘画布
         redrawCanvas();
       });
 
       // 切换边框显隐
-      const toggleBordersBtn = document.getElementById('toggleBorders');
-      toggleBordersBtn.addEventListener('click', () => {
+      const toggleBordersBtn = document.getElementById("toggleBorders");
+      toggleBordersBtn.addEventListener("click", () => {
         bordersVisible = !bordersVisible;
-        toggleBordersBtn.textContent = bordersVisible ? '网格：显示' : '网格：关闭';
+        toggleBordersBtn.textContent = bordersVisible ? "网格：显示" : "网格：关闭";
         // 重新绘制画布以更新边框状态
         redrawCanvas();
       });
 
       // 切换居中优化
-      const toggleCenterOptimizationBtn = document.getElementById('toggleCenterOptimization');
-      toggleCenterOptimizationBtn.addEventListener('click', () => {
+      const toggleCenterOptimizationBtn = document.getElementById("toggleCenterOptimization");
+      toggleCenterOptimizationBtn.addEventListener("click", () => {
         centerOptimization = !centerOptimization;
-        toggleCenterOptimizationBtn.textContent = centerOptimization ? '居中优化：开启' : '居中优化：关闭';
+        toggleCenterOptimizationBtn.textContent = centerOptimization ? "居中优化：开启" : "居中优化：关闭";
       });
 
       // 解析颜色为十六进制格式，支持透明度
       function parseColorToHex(color) {
-        if (color === 'white' || color === 'rgba(255, 255, 255, 1)') {
+        if (color === "white" || color === "rgba(255, 255, 255, 1)") {
           return null;
         }
-        
+
         // 处理透明色
-        if (color === 'transparent' || color === 'rgba(0, 0, 0, 0)') {
-          return '#0000';
+        if (color === "transparent" || color === "rgba(0, 0, 0, 0)") {
+          return "#0000";
         }
-        
+
         // 处理rgba格式
-        if (color.startsWith('rgba')) {
+        if (color.startsWith("rgba")) {
           const match = color.match(/rgba\((\d+),\s*(\d+),\s*(\d+),\s*(\d+\.?\d*)\)/);
           if (match) {
             const r = parseInt(match[1]);
             const g = parseInt(match[2]);
             const b = parseInt(match[3]);
             const a = parseFloat(match[4]);
-            
+
             // 检查是否为完全透明
             if (a === 0) {
-              return '#0000';
+              return "#0000";
             }
-            
+
             // 转换为十六进制，格式为#RRGGBBAA
-            const rHex = r.toString(16).padStart(2, '0');
-            const gHex = g.toString(16).padStart(2, '0');
-            const bHex = b.toString(16).padStart(2, '0');
-            const aHex = Math.round(a * 255).toString(16).padStart(2, '0');
+            const rHex = r.toString(16).padStart(2, "0");
+            const gHex = g.toString(16).padStart(2, "0");
+            const bHex = b.toString(16).padStart(2, "0");
+            const aHex = Math.round(a * 255)
+              .toString(16)
+              .padStart(2, "0");
             return `#${rHex}${gHex}${bHex}${aHex}`;
           }
         }
-        
+
         // 处理普通颜色格式
         return color;
       }
 
       // 复制整行像素
       function copyRow(y) {
-        let result = '';
+        let result = "";
         let currentColor = null;
         let currentCount = 0;
-        
+
         for (let x = 0; x < canvasWidth; x++) {
           const color = pixelData[y][x];
           const hexColor = parseColorToHex(color);
-          
+
           if (hexColor === currentColor) {
             // 颜色相同，增加计数
             currentCount++;
@@ -1637,9 +1919,9 @@
             // 颜色不同，输出之前的颜色块
             if (currentCount > 0) {
               if (!currentColor) {
-                result += '█'.repeat(currentCount);
+                result += "█".repeat(currentCount);
               } else {
-                result += `<color=${currentColor}>${'█'.repeat(currentCount)}</color>`;
+                result += `<color=${currentColor}>${"█".repeat(currentCount)}</color>`;
               }
             }
             // 更新当前颜色和计数
@@ -1647,41 +1929,41 @@
             currentCount = 1;
           }
         }
-        
+
         // 输出最后一个颜色块
         if (currentCount > 0) {
           if (!currentColor) {
-            result += '█'.repeat(currentCount);
+            result += "█".repeat(currentCount);
           } else {
-            result += `<color=${currentColor}>${'█'.repeat(currentCount)}</color>`;
+            result += `<color=${currentColor}>${"█".repeat(currentCount)}</color>`;
           }
         }
-        
+
         // 居中优化：移除左右两边的透明色像素点
         if (centerOptimization) {
           // 移除开头的透明色
-          result = result.replace(/^<color=#0000>█+<\/color>/, '');
+          result = result.replace(/^<color=#0000>█+<\/color>/, "");
           // 移除结尾的透明色
-          result = result.replace(/<color=#0000>█+<\/color>$/, '');
+          result = result.replace(/<color=#0000>█+<\/color>$/, "");
         }
-        
+
         navigator.clipboard.writeText(result).then(() => {
           showCopyNotification(`第${y + 1}行已复制到剪贴板`);
         });
       }
 
       // 复制像素画
-      copyPixelArtBtn.addEventListener('click', () => {
-        let result = '';
-        
+      copyPixelArtBtn.addEventListener("click", () => {
+        let result = "";
+
         for (let y = 0; y < canvasHeight; y++) {
           let currentColor = null;
           let currentCount = 0;
-          
+
           for (let x = 0; x < canvasWidth; x++) {
             const color = pixelData[y][x];
             const hexColor = parseColorToHex(color);
-            
+
             if (hexColor === currentColor) {
               // 颜色相同，增加计数
               currentCount++;
@@ -1689,9 +1971,9 @@
               // 颜色不同，输出之前的颜色块
               if (currentCount > 0) {
                 if (!currentColor) {
-                  result += '█'.repeat(currentCount);
+                  result += "█".repeat(currentCount);
                 } else {
-                  result += `<color=${currentColor}>${'█'.repeat(currentCount)}</color>`;
+                  result += `<color=${currentColor}>${"█".repeat(currentCount)}</color>`;
                 }
               }
               // 更新当前颜色和计数
@@ -1699,35 +1981,453 @@
               currentCount = 1;
             }
           }
-          
+
           // 输出最后一个颜色块
           if (currentCount > 0) {
             if (!currentColor) {
-              result += '█'.repeat(currentCount);
+              result += "█".repeat(currentCount);
             } else {
-              result += `<color=${currentColor}>${'█'.repeat(currentCount)}</color>`;
+              result += `<color=${currentColor}>${"█".repeat(currentCount)}</color>`;
             }
           }
-          
+
           if (y < canvasHeight - 1) {
-            result += '\n';
+            result += "\n";
           }
         }
-        
+
         navigator.clipboard.writeText(result).then(() => {
-          showCopyNotification('像素画已复制到剪贴板');
+          showCopyNotification("像素画已复制到剪贴板");
         });
       });
 
+      // 保存像素画到localStorage（支持多个保存）
+      const savePixelArtBtn = document.getElementById("savePixelArt");
+      savePixelArtBtn.addEventListener("click", () => {
+        // 创建保存弹窗
+        const saveModal = document.createElement("div");
+        saveModal.style.cssText = `
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.5);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 10000;
+        `;
+
+        const modalContent = document.createElement("div");
+        modalContent.style.cssText = `
+          background-color: white;
+          padding: 20px;
+          border-radius: 12px;
+          width: 400px;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        `;
+
+        modalContent.innerHTML = `
+          <h3 style="margin-bottom: 15px; color: #333;">保存像素画</h3>
+          <input type="text" id="saveNameInput" placeholder="请输入像素画名称" 
+                 style="width: 100%; padding: 10px; margin-bottom: 15px; border: 2px solid #e1e5eb; border-radius: 6px; font-size: 14px;" />
+          <div style="display: flex; gap: 10px;">
+            <button id="confirmSaveBtn" style="flex: 1; padding: 10px; background-color: #4CAF50; color: white; border: none; border-radius: 6px; cursor: pointer;">保存</button>
+            <button id="cancelSaveBtn" style="flex: 1; padding: 10px; background-color: #6c757d; color: white; border: none; border-radius: 6px; cursor: pointer;">取消</button>
+          </div>
+        `;
+
+        saveModal.appendChild(modalContent);
+        document.body.appendChild(saveModal);
+
+        // 获取已保存的像素画列表
+        const savedList = getSavedPixelArtList();
+
+        const confirmBtn = document.getElementById("confirmSaveBtn");
+        const cancelBtn = document.getElementById("cancelSaveBtn");
+        const nameInput = document.getElementById("saveNameInput");
+
+        confirmBtn.addEventListener("click", () => {
+          const name = nameInput.value.trim();
+          if (!name) {
+            alert("请输入像素画名称");
+            return;
+          }
+
+          // 检查名称是否已存在
+          const existingIndex = savedList.findIndex((item) => item.name === name);
+          if (existingIndex !== -1) {
+            if (!confirm("该名称已存在，是否覆盖？")) {
+              return;
+            }
+            // 删除旧数据
+            savedList.splice(existingIndex, 1);
+          }
+
+          // 创建像素画数据
+          const pixelArtData = {
+            name: name,
+            width: canvasWidth,
+            height: canvasHeight,
+            pixelData: pixelData,
+            savedAt: new Date().toISOString(),
+          };
+
+          // 添加新数据
+          savedList.push(pixelArtData);
+          localStorage.setItem("pixelArtList", JSON.stringify(savedList));
+
+          document.body.removeChild(saveModal);
+          showCopyNotification("像素画已保存");
+        });
+
+        cancelBtn.addEventListener("click", () => {
+          document.body.removeChild(saveModal);
+        });
+      });
+
+      // 获取已保存的像素画列表
+      function getSavedPixelArtList() {
+        const data = localStorage.getItem("pixelArtList");
+        return data ? JSON.parse(data) : [];
+      }
+
+      // 从localStorage加载像素画（显示列表供选择）
+      const loadPixelArtBtn = document.getElementById("loadPixelArt");
+      loadPixelArtBtn.addEventListener("click", () => {
+        const savedList = getSavedPixelArtList();
+
+        if (savedList.length === 0) {
+          showCopyNotification("未找到保存的像素画");
+          return;
+        }
+
+        // 创建加载弹窗
+        const loadModal = document.createElement("div");
+        loadModal.style.cssText = `
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.5);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 10000;
+        `;
+
+        const modalContent = document.createElement("div");
+        modalContent.style.cssText = `
+          background-color: white;
+          padding: 20px;
+          border-radius: 12px;
+          width: 500px;
+          max-height: 60vh;
+          overflow-y: auto;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        `;
+
+        // 构建列表HTML
+        let listHtml = '<h3 style="margin-bottom: 15px; color: #333;">选择要加载的像素画</h3>';
+        listHtml += '<div style="display: flex; flex-direction: column; gap: 8px;">';
+
+        savedList.forEach((item, index) => {
+          const date = new Date(item.savedAt).toLocaleString("zh-CN");
+          listHtml += `
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px; border: 1px solid #e1e5eb; border-radius: 6px; cursor: pointer;" 
+                 class="load-item" data-index="${index}">
+              <div>
+                <span style="font-weight: bold; color: #333;">${item.name}</span>
+                <span style="margin-left: 10px; color: #6c757d; font-size: 12px;">${item.width}x${item.height}</span>
+                <span style="margin-left: 10px; color: #999; font-size: 12px;">${date}</span>
+              </div>
+              <button class="delete-pixel-btn" data-index="${index}" style="background-color: #dc3545; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px;">删除</button>
+            </div>
+          `;
+        });
+
+        listHtml += "</div>";
+        listHtml +=
+          '<button id="cancelLoadBtn" style="width: 100%; margin-top: 15px; padding: 10px; background-color: #6c757d; color: white; border: none; border-radius: 6px; cursor: pointer;">关闭</button>';
+
+        modalContent.innerHTML = listHtml;
+        loadModal.appendChild(modalContent);
+        document.body.appendChild(loadModal);
+
+        // 添加事件监听
+        const items = modalContent.querySelectorAll(".load-item");
+        items.forEach((item) => {
+          item.addEventListener("click", (e) => {
+            if (e.target.classList.contains("delete-pixel-btn")) return;
+
+            const index = parseInt(item.dataset.index);
+            const pixelArtData = savedList[index];
+
+            // 更新画布尺寸
+            canvasWidth = pixelArtData.width;
+            canvasHeight = pixelArtData.height;
+
+            // 更新输入框显示
+            canvasWidthInput.value = canvasWidth;
+            canvasHeightInput.value = canvasHeight;
+
+            // 更新像素数据
+            pixelData = pixelArtData.pixelData;
+            history = []; // 清空历史记录
+
+            // 重绘画布
+            redrawCanvas();
+
+            document.body.removeChild(loadModal);
+            showCopyNotification(`已加载像素画: ${pixelArtData.name}`);
+          });
+        });
+
+        // 删除按钮事件
+        const deleteBtns = modalContent.querySelectorAll(".delete-pixel-btn");
+        deleteBtns.forEach((btn) => {
+          btn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            const index = parseInt(btn.dataset.index);
+            const name = savedList[index].name;
+
+            if (confirm(`确定要删除 "${name}" 吗？`)) {
+              savedList.splice(index, 1);
+              localStorage.setItem("pixelArtList", JSON.stringify(savedList));
+              document.body.removeChild(loadModal);
+              // 重新打开加载弹窗显示更新后的列表
+              loadPixelArtBtn.click();
+            }
+          });
+        });
+
+        const cancelBtn = document.getElementById("cancelLoadBtn");
+        cancelBtn.addEventListener("click", () => {
+          document.body.removeChild(loadModal);
+        });
+      });
+
+      // 下载像素画为JSON文件
+      const downloadPixelArtBtn = document.getElementById("downloadPixelArt");
+      downloadPixelArtBtn.addEventListener("click", () => {
+        const savedList = getSavedPixelArtList();
+
+        if (savedList.length === 0) {
+          showCopyNotification("没有可下载的像素画");
+          return;
+        }
+
+        // 创建下载弹窗
+        const downloadModal = document.createElement("div");
+        downloadModal.style.cssText = `
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.5);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 10000;
+        `;
+
+        const modalContent = document.createElement("div");
+        modalContent.style.cssText = `
+          background-color: white;
+          padding: 20px;
+          border-radius: 12px;
+          width: 500px;
+          max-height: 60vh;
+          overflow-y: auto;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        `;
+
+        // 构建列表HTML
+        let listHtml = '<h3 style="margin-bottom: 15px; color: #333;">选择要下载的像素画</h3>';
+        listHtml += '<div style="display: flex; flex-direction: column; gap: 8px;">';
+
+        savedList.forEach((item, index) => {
+          const date = new Date(item.savedAt).toLocaleString("zh-CN");
+          listHtml += `
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px; border: 1px solid #e1e5eb; border-radius: 6px;" 
+                 class="download-item" data-index="${index}">
+              <div>
+                <span style="font-weight: bold; color: #333;">${item.name}</span>
+                <span style="margin-left: 10px; color: #6c757d; font-size: 12px;">${item.width}x${item.height}</span>
+                <span style="margin-left: 10px; color: #999; font-size: 12px;">${date}</span>
+              </div>
+              <button class="download-btn" data-index="${index}" style="background-color: #ff9800; color: white; border: none; padding: 5px 15px; border-radius: 4px; font-size: 12px;">下载</button>
+            </div>
+          `;
+        });
+
+        // 添加"下载全部"按钮
+        listHtml += `
+          <button id="downloadAllBtn" style="width: 100%; margin-top: 10px; padding: 10px; background-color: #795548; color: white; border: none; border-radius: 6px; cursor: pointer;">下载全部</button>
+        `;
+        listHtml += "</div>";
+        listHtml +=
+          '<button id="cancelDownloadBtn" style="width: 100%; margin-top: 15px; padding: 10px; background-color: #6c757d; color: white; border: none; border-radius: 6px; cursor: pointer;">关闭</button>';
+
+        modalContent.innerHTML = listHtml;
+        downloadModal.appendChild(modalContent);
+        document.body.appendChild(downloadModal);
+
+        // 单个下载按钮事件
+        const downloadBtns = modalContent.querySelectorAll(".download-btn");
+        downloadBtns.forEach((btn) => {
+          btn.addEventListener("click", (e) => {
+            const index = parseInt(btn.dataset.index);
+            const pixelArtData = savedList[index];
+
+            // 创建下载链接
+            const blob = new Blob([JSON.stringify(pixelArtData, null, 2)], { type: "application/json" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = `${pixelArtData.name}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            showCopyNotification(`已下载: ${pixelArtData.name}.json`);
+          });
+        });
+
+        // 下载全部按钮事件
+        const downloadAllBtn = document.getElementById("downloadAllBtn");
+        downloadAllBtn.addEventListener("click", () => {
+          const allData = {
+            version: "1.0",
+            savedAt: new Date().toISOString(),
+            pixelArts: savedList,
+          };
+
+          const blob = new Blob([JSON.stringify(allData, null, 2)], { type: "application/json" });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = `像素画合集_${new Date().toLocaleDateString("zh-CN").replace(/\//g, "-")}.json`;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+
+          showCopyNotification("已下载全部像素画");
+        });
+
+        const cancelBtn = document.getElementById("cancelDownloadBtn");
+        cancelBtn.addEventListener("click", () => {
+          document.body.removeChild(downloadModal);
+        });
+      });
+
+      // 导入像素画JSON文件
+      const importPixelArtBtn = document.getElementById("importPixelArt");
+      importPixelArtBtn.addEventListener("click", () => {
+        // 创建隐藏的文件输入
+        const input = document.createElement("input");
+        input.type = "file";
+        input.accept = ".json";
+        input.style.display = "none";
+
+        // 添加事件监听
+        input.addEventListener("change", (e) => {
+          const file = e.target.files[0];
+          if (!file) return;
+
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            try {
+              const data = JSON.parse(event.target.result);
+
+              // 判断是单个像素画还是合集文件
+              if (data.pixelArts && Array.isArray(data.pixelArts)) {
+                // 合集文件
+                importMultiplePixelArts(data.pixelArts);
+              } else if (data.name && data.width && data.height && data.pixelData) {
+                // 单个像素画
+                importSinglePixelArt(data);
+              } else {
+                showCopyNotification("无效的像素画文件格式");
+              }
+            } catch (error) {
+              showCopyNotification("文件解析失败，请确保是有效的JSON文件");
+            }
+          };
+
+          reader.readAsText(file);
+        });
+
+        // 触发文件选择对话框
+        document.body.appendChild(input);
+        input.click();
+        document.body.removeChild(input);
+      });
+
+      // 导入单个像素画
+      function importSinglePixelArt(pixelArtData) {
+        const savedList = getSavedPixelArtList();
+
+        // 检查名称是否已存在
+        const existingIndex = savedList.findIndex((item) => item.name === pixelArtData.name);
+        if (existingIndex !== -1) {
+          if (!confirm(`已存在名为 "${pixelArtData.name}" 的像素画，是否覆盖？`)) {
+            showCopyNotification("导入已取消");
+            return;
+          }
+          // 删除旧数据
+          savedList.splice(existingIndex, 1);
+        }
+
+        // 添加新数据
+        savedList.push(pixelArtData);
+        localStorage.setItem("pixelArtList", JSON.stringify(savedList));
+
+        showCopyNotification(`已导入像素画: ${pixelArtData.name}`);
+      }
+
+      // 导入多个像素画
+      function importMultiplePixelArts(pixelArts) {
+        const savedList = getSavedPixelArtList();
+        let importedCount = 0;
+        let skippedCount = 0;
+
+        pixelArts.forEach((pixelArtData) => {
+          // 检查名称是否已存在
+          const existingIndex = savedList.findIndex((item) => item.name === pixelArtData.name);
+          if (existingIndex !== -1) {
+            if (confirm(`已存在名为 "${pixelArtData.name}" 的像素画，是否覆盖？`)) {
+              savedList.splice(existingIndex, 1);
+            } else {
+              skippedCount++;
+              return;
+            }
+          }
+
+          // 添加新数据
+          savedList.push(pixelArtData);
+          importedCount++;
+        });
+
+        localStorage.setItem("pixelArtList", JSON.stringify(savedList));
+
+        showCopyNotification(`导入完成: 成功 ${importedCount} 个，跳过 ${skippedCount} 个`);
+      }
+
       // 显示复制通知
       function showCopyNotification(message) {
-        const notification = document.createElement('div');
-        notification.className = 'copy-notification show';
+        const notification = document.createElement("div");
+        notification.className = "copy-notification show";
         notification.textContent = message;
         document.body.appendChild(notification);
-        
+
         setTimeout(() => {
-          notification.classList.remove('show');
+          notification.classList.remove("show");
           setTimeout(() => {
             document.body.removeChild(notification);
           }, 300);
@@ -1737,68 +2437,68 @@
       // 切换模式
       function switchMode(mode) {
         currentMode = mode;
-        
-        if (mode === 'text') {
-          textEditorBtn.classList.add('active');
-          pixelEditorBtn.classList.remove('active');
-          textTools2.style.display = 'flex';
-          textTools3.style.display = 'flex';
-          textTools4.style.display = 'flex';
-          textTools5.style.display = 'flex';
-          layoutTools.style.display = 'flex';
-          pixelTools.style.display = 'none';
-          pixelTools2.style.display = 'none';
-          pixelTools3.style.display = 'none';
-          textEditorTitle.style.display = 'block';
-          pixelEditorTitle.style.display = 'none';
-          textEditorContent.style.display = 'flex';
-          textEditorContent.style.flexDirection = 'column';
-          textEditorContent.style.flexGrow = '1';
-          textEditorContent.querySelector('textarea').style.flexGrow = '1';
-          pixelEditorContent.style.display = 'none';
+
+        if (mode === "text") {
+          textEditorBtn.classList.add("active");
+          pixelEditorBtn.classList.remove("active");
+          textTools2.style.display = "flex";
+          textTools3.style.display = "flex";
+          textTools4.style.display = "flex";
+          textTools5.style.display = "flex";
+          layoutTools.style.display = "flex";
+          pixelTools.style.display = "none";
+          pixelTools2.style.display = "none";
+          pixelTools3.style.display = "none";
+          textEditorTitle.style.display = "block";
+          pixelEditorTitle.style.display = "none";
+          textEditorContent.style.display = "flex";
+          textEditorContent.style.flexDirection = "column";
+          textEditorContent.style.flexGrow = "1";
+          textEditorContent.querySelector("textarea").style.flexGrow = "1";
+          pixelEditorContent.style.display = "none";
           // 显示文本预览
-          const previewSection = document.querySelector('.preview-section');
+          const previewSection = document.querySelector(".preview-section");
           if (previewSection) {
-            previewSection.style.display = 'flex';
-            previewSection.style.flexDirection = 'column';
-            previewSection.style.height = '100%';
-            
+            previewSection.style.display = "flex";
+            previewSection.style.flexDirection = "column";
+            previewSection.style.height = "100%";
+
             // 确保预览容器也有正确的flex布局
-            const previewContainer = previewSection.querySelector('.preview-container');
+            const previewContainer = previewSection.querySelector(".preview-container");
             if (previewContainer) {
-              previewContainer.style.flexGrow = '1';
-              previewContainer.style.display = 'flex';
-              previewContainer.style.flexDirection = 'column';
-              previewContainer.style.overflowY = 'auto';
+              previewContainer.style.flexGrow = "1";
+              previewContainer.style.display = "flex";
+              previewContainer.style.flexDirection = "column";
+              previewContainer.style.overflowY = "auto";
             }
-            
+
             // 确保预览区域也有正确的flex布局
-            const previewArea = previewSection.querySelector('.preview-area');
+            const previewArea = previewSection.querySelector(".preview-area");
             if (previewArea) {
-              previewArea.style.flexGrow = '1';
+              previewArea.style.flexGrow = "1";
             }
           }
           // 检查updatePreview函数是否存在
-          if (typeof updatePreview === 'function') {
+          if (typeof updatePreview === "function") {
             updatePreview();
           }
         } else {
-          textEditorBtn.classList.remove('active');
-          pixelEditorBtn.classList.add('active');
-          textTools2.style.display = 'none';
-          textTools3.style.display = 'none';
-          textTools4.style.display = 'none';
-          textTools5.style.display = 'none';
-          layoutTools.style.display = 'none';
-          pixelTools.style.display = 'flex';
-          pixelTools2.style.display = 'flex';
-          pixelTools3.style.display = 'flex';
-          textEditorTitle.style.display = 'none';
-          pixelEditorTitle.style.display = 'block';
-          textEditorContent.style.display = 'none';
-          pixelEditorContent.style.display = 'block';
+          textEditorBtn.classList.remove("active");
+          pixelEditorBtn.classList.add("active");
+          textTools2.style.display = "none";
+          textTools3.style.display = "none";
+          textTools4.style.display = "none";
+          textTools5.style.display = "none";
+          layoutTools.style.display = "none";
+          pixelTools.style.display = "flex";
+          pixelTools2.style.display = "flex";
+          pixelTools3.style.display = "flex";
+          textEditorTitle.style.display = "none";
+          pixelEditorTitle.style.display = "block";
+          textEditorContent.style.display = "none";
+          pixelEditorContent.style.display = "block";
           // 隐藏文本预览，因为像素画有独立的导出功能
-          document.querySelector('.preview-section').style.display = 'none';
+          document.querySelector(".preview-section").style.display = "none";
           // 不要清空画布，保持之前的绘制内容
           if (pixelData.length === 0) {
             initCanvas();
@@ -1811,7 +2511,7 @@
 
       // 绑定不透明度滑块事件
       if (opacitySlider && opacityValue) {
-        opacitySlider.addEventListener('input', () => {
+        opacitySlider.addEventListener("input", () => {
           const opacity = opacitySlider.value;
           if (opacityValue) {
             opacityValue.textContent = `${opacity}%`;
@@ -1820,12 +2520,12 @@
       }
 
       // 绑定事件
-      textEditorBtn.addEventListener('click', () => switchMode('text'));
-      pixelEditorBtn.addEventListener('click', () => switchMode('pixel'));
+      textEditorBtn.addEventListener("click", () => switchMode("text"));
+      pixelEditorBtn.addEventListener("click", () => switchMode("pixel"));
 
       // 绑定键盘事件
-      document.addEventListener('keydown', (e) => {
-        if (currentMode === 'pixel' && e.ctrlKey && e.key === 'z') {
+      document.addEventListener("keydown", (e) => {
+        if (currentMode === "pixel" && e.ctrlKey && e.key === "z") {
           e.preventDefault();
           undo();
         }
