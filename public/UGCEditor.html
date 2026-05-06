@@ -69,7 +69,7 @@
 
       /* 自定义悬浮滚动条 */
       .sidebar::after {
-        content: '';
+        content: "";
         position: absolute;
         top: 0;
         right: 0;
@@ -783,6 +783,9 @@
       .tool-group button {
         width: 100%;
         min-width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
 
       /* 字号选择框自适应宽度 */
@@ -814,7 +817,10 @@
       <!-- 左侧工具栏 -->
       <div class="sidebar">
         <div class="header">
-          <h1>千星沙箱文本编辑器<p>v20260506</p></h1>
+          <h1>
+            千星沙箱文本编辑器
+            <p>v20260506</p>
+          </h1>
         </div>
 
         <div class="toolbar">
@@ -956,11 +962,24 @@
           </div>
 
           <div class="tool-group" id="pixelTools3" style="display: none">
-            <button id="copyPixelArt">复制整张像素画</button>
-            <button id="savePixelArt" style="background-color: #4caf50">保存像素画</button>
-            <button id="loadPixelArt" style="background-color: #2196f3">加载像素画</button>
-            <button id="downloadPixelArt" style="background-color: #ff9800">下载JSON文件</button>
-            <button id="importPixelArt" style="background-color: #9c27b0">导入JSON文件</button>
+            <button id="copyPixelArt">
+              复制整张像素画
+            </button>
+            <button id="savePixelArt" title="将当前像素画保存到浏览器本地" style="background-color: #4caf50">
+              保存像素画
+            </button>
+            <button id="loadPixelArt" title="从浏览器本地存储中加载像素画" style="background-color: #2196f3">
+              加载像素画
+            </button>
+            <button
+              id="downloadPixelArt"
+              title="将浏览器本地存储的像素画下载为JSON文件"
+              title="下载JSON文件"
+              style="background-color: #ff9800"
+            >
+              导出所有像素画
+            </button>
+            <button id="importPixelArt" title="从JSON文件导入像素画" style="background-color: #9c27b0">导入文件</button>
           </div>
 
           <div class="tool-group" id="layoutTools">
