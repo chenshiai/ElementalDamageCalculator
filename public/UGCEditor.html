@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>千星沙箱文本编辑器v20260506</title>
+    <title>千星沙箱文本编辑器v20260511</title>
     <link rel="stylesheet" href="font.css" />
     <style>
       * {
@@ -819,7 +819,7 @@
         <div class="header">
           <h1>
             千星沙箱文本编辑器
-            <p>v20260506</p>
+            <p>v20260511</p>
           </h1>
         </div>
 
@@ -964,6 +964,9 @@
           <div class="tool-group" id="pixelTools3" style="display: none">
             <button id="copyPixelArt">
               复制整张像素画
+            </button>
+            <button id="copyAllRows" title="将所有行复制到字符串数组并保存到剪贴板" style="background-color: #e91e63">
+              复制所有行(数组)
             </button>
             <button id="savePixelArt" title="将当前像素画保存到浏览器本地" style="background-color: #4caf50">
               保存像素画
@@ -2017,6 +2020,61 @@
 
         navigator.clipboard.writeText(result).then(() => {
           showCopyNotification("像素画已复制到剪贴板");
+        });
+      });
+
+      // 复制所有行到字符串数组
+      const copyAllRowsBtn = document.getElementById("copyAllRows");
+      copyAllRowsBtn.addEventListener("click", () => {
+        // 创建字符串数组存储每一行
+        const rowsArray = [];
+
+        for (let y = 0; y < canvasHeight; y++) {
+          let rowResult = "";
+          let currentColor = null;
+          let currentCount = 0;
+
+          for (let x = 0; x < canvasWidth; x++) {
+            const color = pixelData[y][x];
+            const hexColor = parseColorToHex(color);
+
+            if (hexColor === currentColor) {
+              currentCount++;
+            } else {
+              if (currentCount > 0) {
+                if (!currentColor) {
+                  rowResult += "█".repeat(currentCount);
+                } else {
+                  rowResult += `<color=${currentColor}>${"█".repeat(currentCount)}</color>`;
+                }
+              }
+              currentColor = hexColor;
+              currentCount = 1;
+            }
+          }
+
+          // 输出最后一个颜色块
+          if (currentCount > 0) {
+            if (!currentColor) {
+              rowResult += "█".repeat(currentCount);
+            } else {
+              rowResult += `<color=${currentColor}>${"█".repeat(currentCount)}</color>`;
+            }
+          }
+
+          // 居中优化：移除左右两边的透明色像素点
+          if (centerOptimization) {
+            rowResult = rowResult.replace(/^<color=#0000>█+<\/color>/, "");
+            rowResult = rowResult.replace(/<color=#0000>█+<\/color>$/, "");
+          }
+
+          rowsArray.push(rowResult);
+        }
+
+        // 将数组转换为JSON字符串复制到剪贴板
+        const jsonResult = JSON.stringify(rowsArray, null, 2);
+        navigator.clipboard.writeText(jsonResult).then(() => {
+          showCopyNotification(`已复制 ${rowsArray.length} 行到剪贴板`);
         });
       });
 
