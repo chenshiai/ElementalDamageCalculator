@@ -13,13 +13,9 @@ export function getEnkaUI(
   name: string,
   local: boolean = true,
   proxy: boolean = false,
-  homdgcat: boolean = false
 ): string {
   if (local) {
     return `/ui/${name}.png`;
-  }
-  if (homdgcat) {
-    return `https://homdgcatwiki.hasban.cn/homdgcat-res/AvatarSkill/${name}.png`;
   }
   if (proxy) {
     return `https://8.155.52.59/ui/${name}.png`;
@@ -67,7 +63,7 @@ export function Icons(str: string, consts?: string, gacha?: string): any {
           `UI_Talent_S_${consts || str.replace("UI_AvatarIcon_", "")}_03`,
           `UI_Talent_U_${consts || str.replace("UI_AvatarIcon_", "")}_02`,
           `UI_Talent_S_${consts || str.replace("UI_AvatarIcon_", "")}_04`,
-        ].map((str) => getEnkaUI(str, false, false, true)),
+        ].map((str) => getEnkaUI(str, false, false)),
         gachaImage: `https://enka.network/ui/${gacha || str.replace("UI_AvatarIcon_", "UI_Gacha_AvatarImg_")}.png`,
       };
       constructor() {
@@ -89,7 +85,7 @@ export function IconsV2(str: string, consts?: string, gacha?: string): any {
           `UI_Talent_C_${consts || str.replace("UI_AvatarIcon_", "")}_03`,
           `UI_Talent_C_${consts || str.replace("UI_AvatarIcon_", "")}_02`,
           `UI_Talent_C_${consts || str.replace("UI_AvatarIcon_", "")}_04`,
-        ].map((str) => getEnkaUI(str, false, false, true)),
+        ].map((str) => getEnkaUI(str, false, false)),
         gachaImage: `https://enka.network/ui/${gacha || str.replace("UI_AvatarIcon_", "UI_Gacha_AvatarImg_")}.png`,
       };
       constructor() {

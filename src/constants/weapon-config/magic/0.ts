@@ -41,3 +41,4 @@ export * from "./Catalyst_Ilmarinen";
 export * from "./Catalyst_Sistrum";
 export * from "./Catalyst_Ziedas";
 export * from "./Catalyst_Brisingamen";
+export * from "./Catalyst_FairyGarden";

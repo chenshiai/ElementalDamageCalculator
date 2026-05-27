@@ -95,7 +95,61 @@ const getBuffByElement4 = (label: string, type: BuffType) => {
   };
 };
 
+/** 天之美赐 */
+const getBuffByElement5 = (label: string, type: BuffType, target: ElementType): IBuffBase => {
+  return {
+    label,
+    effect: [{ type, getValue: (_, s) => (s === 1 ? 40 : 20) }],
+    describe: "队伍中附近的所有角色获得20%对应元素伤害加成，魔导·秘仪效果下，对应元素伤害加成提升至40%",
+    enable: false,
+    shareable: true,
+    stackable: true,
+    stackText: "魔导·秘仪",
+    stack: 1,
+    limit: 1,
+    stackType: "switch",
+    target: BuffTarget.All,
+    // condition: ({ element }) => element === target,
+  };
+};
+
+
 const relicLibrary: IRelicLibraryItem[] = [
+  {
+    name: "天之美赐",
+    itemType: ItemType.ITEM_RELIQUARY,
+    setNameTextMapHash: 287571027,
+    setId: 15045,
+    equip: [
+      setReliquartStat(287571027, 15045, "天授之馨", "UI_RelicIcon_15045_4", EquipType.EQUIP_BRACER),
+      setReliquartStat(287571027, 15045, "天授之殁", "UI_RelicIcon_15045_2", EquipType.EQUIP_NECKLACE),
+      setReliquartStat(287571027, 15045, "天授之令", "UI_RelicIcon_15045_5", EquipType.EQUIP_SHOES),
+      setReliquartStat(287571027, 15045, "天授之禄", "UI_RelicIcon_15045_1", EquipType.EQUIP_RING),
+      setReliquartStat(287571027, 15045, "天授之冕", "UI_RelicIcon_15045_3", EquipType.EQUIP_DRESS),
+    ],
+    suit2: "二件套：元素充能效率提高20%。",
+    suit4:
+      "四件套：若装备者已经完成了魔女的课业，则施放元素战技后，会获得「天光之引」效果：依据装备者的元素类型，使队伍中附近的所有角色获得20%对应元素伤害加成，持续20秒。装备者处于后台时也能触发上述效果，同名圣遗物套装产生的伤害加成效果无法叠加。\n·队伍拥有「魔导·秘仪」效果时，「天光之引」效果将会升级为「凡世颂歌」，除装备者的元素类型外，还会依据队伍中自己的当前场上角色的元素类型，使队伍中附近的所有角色获得对应元素伤害加成，且上述两种元素伤害加成提升至40%，同元素类型的元素伤害加成效果无法叠加。",
+    buffs: {
+      suit2: [
+        {
+          label: "二件套·元素充能效率提高",
+          effect: [{ type: BuffType.ChargeFixed, getValue: () => 20 }],
+          describe: "元素充能效率提高20%。",
+          enable: true,
+        },
+      ],
+      suit4: [
+        getBuffByElement5('四件套·「天光之引」火', BuffType.PyroPrcent, ElementType.Pyro),
+        getBuffByElement5('四件套·「天光之引」水', BuffType.HydroPrcent, ElementType.Pyro),
+        getBuffByElement5('四件套·「天光之引」雷', BuffType.ElectroPrcent, ElementType.Pyro),
+        getBuffByElement5('四件套·「天光之引」冰', BuffType.CryoPrcent, ElementType.Pyro),
+        getBuffByElement5('四件套·「天光之引」风', BuffType.AnemoPrcent, ElementType.Pyro),
+        getBuffByElement5('四件套·「天光之引」岩', BuffType.GeoPrcent, ElementType.Pyro),
+        getBuffByElement5('四件套·「天光之引」草', BuffType.DendroPrcent, ElementType.Pyro),
+      ],
+    },
+  },
   {
     name: "风起之日",
     itemType: ItemType.ITEM_RELIQUARY,
@@ -104,7 +158,7 @@ const relicLibrary: IRelicLibraryItem[] = [
     equip: [
       setReliquartStat(3721836931, 15044, "风花的箴铭", "UI_RelicIcon_15044_4", EquipType.EQUIP_BRACER),
       setReliquartStat(3721836931, 15044, "晨光的明誓", "UI_RelicIcon_15044_2", EquipType.EQUIP_NECKLACE),
-      setReliquartStat(3721836931, 15044, "春律的片刻", "UI_RelicIcon_15044_2", EquipType.EQUIP_SHOES),
+      setReliquartStat(3721836931, 15044, "春律的片刻", "UI_RelicIcon_15044_5", EquipType.EQUIP_SHOES),
       setReliquartStat(3721836931, 15044, "未言的宴话", "UI_RelicIcon_15044_1", EquipType.EQUIP_RING),
       setReliquartStat(3721836931, 15044, "哀慕的恋歌", "UI_RelicIcon_15044_3", EquipType.EQUIP_DRESS),
     ],
@@ -145,7 +199,7 @@ const relicLibrary: IRelicLibraryItem[] = [
     equip: [
       setReliquartStat(894629371, 15043, "献与月的华梦", "UI_RelicIcon_15043_4", EquipType.EQUIP_BRACER),
       setReliquartStat(894629371, 15043, "献与月的离光", "UI_RelicIcon_15043_2", EquipType.EQUIP_NECKLACE),
-      setReliquartStat(894629371, 15043, "献与月的终时", "UI_RelicIcon_15043_2", EquipType.EQUIP_SHOES),
+      setReliquartStat(894629371, 15043, "献与月的终时", "UI_RelicIcon_15043_5", EquipType.EQUIP_SHOES),
       setReliquartStat(894629371, 15043, "献与月的酹祭", "UI_RelicIcon_15043_1", EquipType.EQUIP_RING),
       setReliquartStat(894629371, 15043, "献与月的银冕", "UI_RelicIcon_15043_3", EquipType.EQUIP_DRESS),
     ],
