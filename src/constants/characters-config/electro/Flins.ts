@@ -266,7 +266,7 @@ class FlinsData extends Character implements ICharacterInfo {
           getValue: () => 10,
         },
       ],
-      enable: true,
+      enable: false,
       target: BuffTarget.Other,
       shareable: true,
       condition: ({ constellation }) => constellation >= 6,

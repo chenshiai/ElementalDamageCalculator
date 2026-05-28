@@ -200,6 +200,6 @@ Aloy.icons = {
     "UI_Talent_S_Aloy_Lock",
     "UI_Talent_S_Aloy_Lock",
     "UI_Talent_S_Aloy_Lock",
-  ].map((str) => getEnkaUI(str, false, false, true)),
+  ].map((str) => getEnkaUI(str, false, false)),
 };
 export { Aloy };

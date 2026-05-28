@@ -160,7 +160,7 @@ export class EscoffierData extends Character implements ICharacterInfo {
           actionOn: ActionOn.External,
         },
       ],
-      enable: true,
+      enable: false,
       target: BuffTarget.Other,
       condition: ({ constellation }) => constellation >= 2,
     },
