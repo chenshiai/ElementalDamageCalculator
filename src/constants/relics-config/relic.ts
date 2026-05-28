@@ -113,8 +113,40 @@ const getBuffByElement5 = (label: string, type: BuffType, target: ElementType): 
   };
 };
 
-
 const relicLibrary: IRelicLibraryItem[] = [
+  {
+    name: "影中沉凝的幻灭",
+    itemType: ItemType.ITEM_RELIQUARY,
+    setNameTextMapHash: 2639070347,
+    setId: 15046,
+    equip: [
+      setReliquartStat(2639070347, 15046, "止于荣礼的缎彩", "UI_RelicIcon_15046_4", EquipType.EQUIP_BRACER),
+      setReliquartStat(2639070347, 15046, "止于妙想成型的锋毫", "UI_RelicIcon_15046_2", EquipType.EQUIP_NECKLACE),
+      setReliquartStat(2639070347, 15046, "止于宏伟梦醒的时刻", "UI_RelicIcon_15046_5", EquipType.EQUIP_SHOES),
+      setReliquartStat(2639070347, 15046, "止于祝庆的喝礼", "UI_RelicIcon_15046_1", EquipType.EQUIP_RING),
+      setReliquartStat(2639070347, 15046, "止于阔步跌坠的灵摆", "UI_RelicIcon_15046_3", EquipType.EQUIP_DRESS),
+    ],
+    suit2: "二件套：攻击力提高18%。",
+    suit4: "四件套：超导反应造成的伤害提升80%，装备者攻击受到超导反应影响的敌人时，本次攻击的暴击率提高16%。",
+    buffs: {
+      suit2: [
+        {
+          label: "二件套·攻击力提高",
+          effect: [{ type: BuffType.ATKPrcent, getValue: () => 18 }],
+          describe: "攻击力提高18%。",
+          enable: true,
+        },
+      ],
+      suit4: [
+        {
+          label: "四件套·暴击率提高",
+          effect: [{ type: BuffType.GlobalCritcal, getValue: () => 16 }],
+          describe: "攻击受到超导反应影响的敌人时，本次攻击暴击率提高16%。",
+          enable: true,
+        },
+      ],
+    },
+  },
   {
     name: "天之美赐",
     itemType: ItemType.ITEM_RELIQUARY,
@@ -140,13 +172,13 @@ const relicLibrary: IRelicLibraryItem[] = [
         },
       ],
       suit4: [
-        getBuffByElement5('四件套·「天光之引」火', BuffType.PyroPrcent, ElementType.Pyro),
-        getBuffByElement5('四件套·「天光之引」水', BuffType.HydroPrcent, ElementType.Pyro),
-        getBuffByElement5('四件套·「天光之引」雷', BuffType.ElectroPrcent, ElementType.Pyro),
-        getBuffByElement5('四件套·「天光之引」冰', BuffType.CryoPrcent, ElementType.Pyro),
-        getBuffByElement5('四件套·「天光之引」风', BuffType.AnemoPrcent, ElementType.Pyro),
-        getBuffByElement5('四件套·「天光之引」岩', BuffType.GeoPrcent, ElementType.Pyro),
-        getBuffByElement5('四件套·「天光之引」草', BuffType.DendroPrcent, ElementType.Pyro),
+        getBuffByElement5("四件套·「天光之引」火", BuffType.PyroPrcent, ElementType.Pyro),
+        getBuffByElement5("四件套·「天光之引」水", BuffType.HydroPrcent, ElementType.Pyro),
+        getBuffByElement5("四件套·「天光之引」雷", BuffType.ElectroPrcent, ElementType.Pyro),
+        getBuffByElement5("四件套·「天光之引」冰", BuffType.CryoPrcent, ElementType.Pyro),
+        getBuffByElement5("四件套·「天光之引」风", BuffType.AnemoPrcent, ElementType.Pyro),
+        getBuffByElement5("四件套·「天光之引」岩", BuffType.GeoPrcent, ElementType.Pyro),
+        getBuffByElement5("四件套·「天光之引」草", BuffType.DendroPrcent, ElementType.Pyro),
       ],
     },
   },
