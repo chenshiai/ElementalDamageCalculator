@@ -304,26 +304,24 @@ interface IArgs {
 }
 
 export function calculateDamage({ calculatorValue, attackType, elementType, rate, level, atkType, special }: IArgs) {
-  let {
-    ADDITIONAL_DMG,
-    addHunt,
-    criticalHunt,
-    critical,
-    resistance,
-    addRate,
-    newElementType,
-    defensePenetration,
-    healAdd,
-    shieldAdd,
-    extraRate,
-    moonAddHunt,
-    moonPromote,
-    moonBasePercent,
-    atkAdd,
-    defAdd,
-    hpAdd,
-    emAdd,
-  } = getMoreDataBySwitch(calculatorValue, attackType, elementType, calculatorValue.weapon);
+  let ADDITIONAL_DMG =0 ,
+    addHunt = 0,
+    criticalHunt = 0,
+    critical = 0,
+    resistance = 0,
+    addRate = 0,
+    newElementType = elementType,
+    defensePenetration = 0,
+    healAdd = 0,
+    shieldAdd = 0,
+    extraRate = 0,
+    moonAddHunt = 0,
+    moonPromote = 0,
+    moonBasePercent = 0,
+    atkAdd = 0,
+    defAdd = 0,
+    hpAdd = 0,
+    emAdd = 0;
 
   /** 计算独特buff的加成 */
   if (special && calculatorValue.specialValue && calculatorValue.specialValue[special]) {
@@ -352,6 +350,26 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
     hpAdd += specialData.hpAdd;
     emAdd += specialData.emAdd;
   }
+  const normalData = getMoreDataBySwitch(calculatorValue, attackType, newElementType, calculatorValue.weapon);
+  ADDITIONAL_DMG += normalData.ADDITIONAL_DMG;
+  addHunt += normalData.addHunt;
+  criticalHunt += normalData.criticalHunt;
+  critical += normalData.critical;
+  resistance += normalData.resistance;
+  addRate += normalData.addRate;
+  newElementType = normalData.newElementType;
+  defensePenetration += normalData.defensePenetration;
+  healAdd += normalData.healAdd;
+  shieldAdd += normalData.shieldAdd;
+  extraRate += normalData.extraRate;
+  moonAddHunt += normalData.moonAddHunt;
+  moonPromote += normalData.moonPromote;
+  moonBasePercent += normalData.moonBasePercent;
+  atkAdd += normalData.atkAdd;
+  defAdd += normalData.defAdd;
+  hpAdd += normalData.hpAdd;
+  emAdd += normalData.emAdd;
+  
 
   /** 基础伤害 */
   let BASE_DMG = 0;
