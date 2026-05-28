@@ -12,13 +12,13 @@ import {
   WeaponType,
 } from "@/types/enum";
 import { Constellation_E_3, Constellation_Q_5, S_80_CRITAL_19P, S_80_CRITALHUNT_38P } from "../buffs";
-import { EnKaId, Weapon, Element, BaseData, IconsV2, action } from "@/utils/decorator";
+import { EnKaId, Weapon, Element, BaseData, Icons, action } from "@/utils/decorator";
 
 @EnKaId(10000130, "莉奈娅")
 @Weapon(WeaponType.Bow)
 @Element(ElementType.Geo, SecondElementType.Moon)
 @BaseData(Rarity.Five, [9895, 144, 907], 60, [10598, 176, 971])
-@IconsV2("UI_AvatarIcon_Linnea")
+@Icons("UI_AvatarIcon_Linnea")
 export class LinneaData extends Character implements ICharacterInfo {
   constructor() {
     super();

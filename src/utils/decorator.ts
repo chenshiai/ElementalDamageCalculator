@@ -4,9 +4,8 @@ import { AppendProp, AttackType, ElementType, Rarity, SecondElementType, WeaponT
 /**
  * 图片资源的获取地址拼接
  * @param name
- * @param local true 从网站本地资源获取；false 从enka.network获取
- * @param proxy true 走代理服务；false 直接访问enka.network
- * @param homdgcat true 玉衡杯数据库
+ * @param local 默认 true [true 从网站本地资源获取]；[false 从enka.network获取]
+ * @param proxy 默认false [true 走代理服务访问enka.network]；[false 直接访问enka.network]
  * @returns
  */
 export function getEnkaUI(
@@ -17,6 +16,9 @@ export function getEnkaUI(
   if (local) {
     return `/ui/${name}.png`;
   }
+  // if (homdgcat) {
+  //   return `https://homdgcatwiki.hasban.cn/homdgcat-res/AvatarSkill/${name}.png`;
+  // }
   if (proxy) {
     return `https://8.155.52.59/ui/${name}.png`;
   } else {
@@ -63,28 +65,6 @@ export function Icons(str: string, consts?: string, gacha?: string): any {
           `UI_Talent_S_${consts || str.replace("UI_AvatarIcon_", "")}_03`,
           `UI_Talent_U_${consts || str.replace("UI_AvatarIcon_", "")}_02`,
           `UI_Talent_S_${consts || str.replace("UI_AvatarIcon_", "")}_04`,
-        ].map((str) => getEnkaUI(str, false, false)),
-        gachaImage: `https://enka.network/ui/${gacha || str.replace("UI_AvatarIcon_", "UI_Gacha_AvatarImg_")}.png`,
-      };
-      constructor() {
-        super();
-      }
-    };
-  };
-}
-
-export function IconsV2(str: string, consts?: string, gacha?: string): any {
-  return function (target: any) {
-    return class extends target {
-      icons = {
-        avatarIcon: getEnkaUI(str),
-        constsIcon: [
-          `UI_Talent_C_${consts || str.replace("UI_AvatarIcon_", "")}_01`,
-          `UI_Talent_C_${consts || str.replace("UI_AvatarIcon_", "")}_02`,
-          `UI_Talent_C_${consts || str.replace("UI_AvatarIcon_", "")}_01`,
-          `UI_Talent_C_${consts || str.replace("UI_AvatarIcon_", "")}_03`,
-          `UI_Talent_C_${consts || str.replace("UI_AvatarIcon_", "")}_02`,
-          `UI_Talent_C_${consts || str.replace("UI_AvatarIcon_", "")}_04`,
         ].map((str) => getEnkaUI(str, false, false)),
         gachaImage: `https://enka.network/ui/${gacha || str.replace("UI_AvatarIcon_", "UI_Gacha_AvatarImg_")}.png`,
       };
