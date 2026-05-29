@@ -125,7 +125,7 @@ class IllugaData extends Character implements ICharacterInfo {
         },
       ],
       shareable: true,
-      enable: true,
+      enable: false,
       stack: 1,
       limit: 1,
       stackable: true,

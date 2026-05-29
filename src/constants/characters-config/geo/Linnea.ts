@@ -228,7 +228,7 @@ export class LinneaData extends Character implements ICharacterInfo {
       describe:
         "触发月笼谐奏后的5秒内，莉奈娅与队伍中自己的当前场上角色的防御力分别提升25%。莉奈娅在场上时，上述防御力提升效果可叠加。",
       effect: [{ type: BuffType.DEFPrcent, getValue: () => 25 }],
-      enable: true,
+      enable: false,
       shareable: true,
       condition: ({ constellation }) => constellation >= 4,
       target: BuffTarget.Other,

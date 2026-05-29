@@ -311,7 +311,7 @@ export class ShougunData extends Character implements ICharacterInfo {
       label: "4命·誓奉常道",
       describe: "奥义·梦想真说施加的梦想一心状态结束后，附近的队伍中所有角色（不包括雷电将军自己）的攻击力提升30%",
       effect: [{ type: BuffType.ATKPrcent, getValue: () => 30 }],
-      enable: true,
+      enable: false,
       shareable: true,
       target: BuffTarget.Other,
       condition: ({ constellation }) => constellation >= 4,
