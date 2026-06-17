@@ -33,3 +33,4 @@ export * from "./Pole_Lapis";
 export * from "./Pole_TummaLyhty";
 export * from "./Pole_Ilmarinen";
 export * from "./Pole_Krivule";
+export * from "./Pole_Carbine";
