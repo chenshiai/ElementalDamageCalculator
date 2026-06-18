@@ -158,9 +158,11 @@ export class LohenData extends Character implements ICharacterInfo {
       ],
     }),
   ];
-  otherSkill = [action("2命·破邪之刃伤害", AttackType.Other, ElementType.Cryo, {
+  otherSkill = [
+    action("2命·破邪之刃伤害", AttackType.Other, ElementType.Cryo, {
       atk: [5],
-    }),];
+    }),
+  ];
   buffs: IBuffBase[] = [
     ...S_80_CRITALHUNT_38P,
     {
@@ -193,10 +195,9 @@ export class LohenData extends Character implements ICharacterInfo {
     },
     {
       label: "戏言的杰作",
-      describe: "在奇谋状态下，队伍中附近的其他角色对敌人触发冰元素相关反应后的8秒内，该角色的攻击力提升15%，洛恩的攻击力提升15%",
-      effect: [
-        { type: BuffType.ATKPrcent, getValue: () => 15 },
-      ],
+      describe:
+        "在奇谋状态下，队伍中附近的其他角色对敌人触发冰元素相关反应后的8秒内，该角色的攻击力提升15%，洛恩的攻击力提升15%",
+      effect: [{ type: BuffType.ATKPrcent, getValue: () => 15 }],
       enable: false,
       shareable: true,
       target: BuffTarget.All,
@@ -204,27 +205,23 @@ export class LohenData extends Character implements ICharacterInfo {
     {
       label: "兴尽且去来",
       describe: "施放元素战技奇兵诡出后，洛恩还会获得9秒的「乘兴」效果：持续期间，元素战技奇兵诡出的技能等级提高1级",
-      effect: [
-        { type: BuffType.SkillLevel, getValue: () => 1, actionOn: ActionOn.Front},
-      ],
+      effect: [{ type: BuffType.SkillLevel, getValue: () => 1, actionOn: ActionOn.Front }],
       enable: true,
     },
     {
       label: "魔女的前夜礼·不愈之刺",
       describe: "若争胜至少为上限的50%，则洛恩的普通攻击与重击造成的伤害提升40%",
       effect: [
-        { type: BuffType.NormalPrcent, getValue: () => 40},
-        { type: BuffType.StrongPrcent, getValue: () => 40},
+        { type: BuffType.NormalPrcent, getValue: () => 40 },
+        { type: BuffType.StrongPrcent, getValue: () => 40 },
       ],
       enable: true,
     },
     {
       label: "2命·凡飞翔者，皆为靶标",
       describe: "洛恩将获得「破邪之刃」效果，使队伍中附近的其他角色的元素精通提升200点",
-      effect: [
-        { type: BuffType.MysteryFixed, getValue: () => 200},
-      ],
-      enable: true,
+      effect: [{ type: BuffType.MysteryFixed, getValue: () => 200 }],
+      enable: false,
       shareable: true,
       target: BuffTarget.Other,
       condition: ({ constellation }) => constellation >= 2,
