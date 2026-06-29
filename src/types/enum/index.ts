@@ -20,6 +20,8 @@ export enum AttackType {
   FallingOther = "FallingOther",
   /** 月曜反应类型 */
   Moon = "Moon",
+  /** 星辉反应类型 */
+  Start = "Start",
 
   /** 治疗类型 */
   Heal = "Heal",
@@ -53,12 +55,18 @@ export enum ElementType {
   MoonSwirl = "MoonSwirl",
   /** 月结晶属性 */
   MoonCrystal = "MoonCrystal",
+  /** 星超导-雷属性 */
+  StellarConductElectro = "StellarConductElectro",
+  /** 星超导-冰属性 */
+  StellarConductCryo = "StellarConductCryo",
   /** 无属性 */
   None = "None",
 }
 
 /** 第二类型 */
 export enum SecondElementType {
+  /** 星辉 */
+  Start = "Start",
   /** 月兆 */
   Moon = 'moon',
   /** 芒 */
@@ -82,6 +90,9 @@ export const EnchantingType = {
   [ElementType.Dendro]: 7,
   [ElementType.MoonElectro]: 8,
   [ElementType.MoonSwirl]: 9,
+  [ElementType.MoonCrystal]: 10,
+  [ElementType.StellarConductElectro]: 11,
+  [ElementType.StellarConductCryo]: 12,
 };
 
 // 数字映射到 ElementType 的对象
@@ -96,6 +107,9 @@ export const NumberToElementType: Record<number, ElementType> = {
   7: ElementType.Dendro,
   8: ElementType.MoonElectro,
   9: ElementType.MoonSwirl,
+  10: ElementType.MoonCrystal,
+  11: ElementType.StellarConductElectro,
+  12: ElementType.StellarConductCryo,
 };
 /** 武器类型 */
 export enum WeaponType {
@@ -171,6 +185,8 @@ export enum BuffType {
   GlobalPrcent = "globalAddHunt",
   /** 全局月反应伤害提升 单位% - 与精通乘区提升加算 */
   GlobalMoonPrcent = "globalMoonAddHunt",
+  /** 全局星辉伤害提升 单位% - 与精通乘区提升加算 */
+  GlobalStartPrcent = "globalStartAddHunt",
   /** 普攻伤害百分比提升 */
   NormalPrcent = "normalAttackAddHunt",
   /** 重击伤害百分比提升 */
@@ -189,11 +205,15 @@ export enum BuffType {
   MoonSwirlPrcent = "moonSwirlAddHunt",
   /** 月结晶伤害百分比提升 - 与精通乘区加算*/
   MoonCrystalPrcent = "moonCrystalAddHunt",
+  /** 星超导伤害百分比提升 - 与精通乘区加算*/
+  StellarConductPrcent = "stellarConductAddHunt",
 
   /** 全局伤害提高 - 适用于传统直伤 */
   GlobalFixed = "globalIncreaseHunt",
   /** 全局月反应伤害提高 - 不吃精通增伤、月反应增伤效果 */
   GlobalMoonFixed = "globalMoonIncreaseHunt",
+  /** 全局星反应伤害提高 - 不吃精通增伤、星辉增伤效果 */
+  GlobalStartFixed = "globalStartIncreaseHunt",
   /** 普攻伤害提高 */
   NormalFixed = "normalIncreaseHurt",
   /** 重击伤害提高 */
@@ -227,6 +247,8 @@ export enum BuffType {
   MoonSwirlFixed = "moonSwirlIncreaseHunt",
   /** 月结晶伤害提高 - 不吃精通增伤、月反应增伤效果 */
   MoonCrystalFixed = "moonCrystalIncreaseHunt",
+  /** 星超导伤害提高 - 不吃精通增伤、星辉增伤效果 */
+  StellarConductFixed = "stellarConductIncreaseHunt",
 
   /** 全局暴击率提升 */
   GlobalCritcal = "globalCritcal",
@@ -266,6 +288,8 @@ export enum BuffType {
   MoonSwirlCritcal = "moonSwirlCritcal",
   /** 月结晶暴击率提升% */
   MoonCrystalCritcal = "moonCrystalCritcal",
+  /** 星超导暴击率提升% */
+  StellarConductCritcal = "stellarConductCritcal",
 
   /** 普攻暴击伤害提升%*/
   NormalCritcalHurt = "normalAttackCritcalHurt",
@@ -300,6 +324,8 @@ export enum BuffType {
   MoonSwirlCritcalHurt = "moonSwirlCritcalHurt",
   /** 月结晶暴击伤害提升%*/
   MoonCrystalCritcalHurt = "moonCrystalCritcalHurt",
+  /** 星超导暴击伤害提升%*/
+  StellarConductCritcalHurt = "stellarConductCritcalHurt",
 
   /** 月感电擢升% */
   MoonElectroPromote = "moonElectroPromote",
@@ -307,12 +333,16 @@ export enum BuffType {
   MoonSwirlPromote = "moonSwirlPromote",
   /** 月结晶擢升% */
   MoonCrystalPromote = "moonCrystalPromote",
+  /** 星超导擢升% */
+  StellarConductPromote = "stellarConductPromote",
   /** 月感电基础伤害提升% */
   MoonElectroBasePercent = "moonElectroBasePercent",
   /** 月绽放基础伤害提升% */
   MoonSwirlBasePercent = "moonSwirlBasePercent",
   /** 月结晶基础伤害提升% */
   MoonCrystalBasePercent = "moonCrystalBasePercent",
+  /** 星超导基础伤害提升% */
+  StellarConductBasePercent = "stellarConductBasePercent",
 
   /** 普攻倍率最终提升 */
   NormalRate = "normalRateAdd",
@@ -330,6 +360,8 @@ export enum BuffType {
   MoonSwirlRate = "moonSwirlRateAdd",
   /** 月结晶倍率最终提升 */
   MoonCrystalRate = "moonCrystalRateAdd",
+  /** 星超导倍率最终提升 */
+  StellarConductRate = "stellarConductRateAdd",
 
   /** 普攻倍率加成 */
   NormalAdd = "normalAdd",
@@ -362,6 +394,8 @@ export enum BuffType {
   ShieldStrong = "shieldStrong",
   /** 护盾构建加成 */
   ShieldAdd = "shieldAdd",
+  /** 星超导-冰雷hit数 */
+  HitCount = "hitCount",
 
   NormalLevel = "normalLevelAdd",
   SkillLevel = "skillLevelAdd",

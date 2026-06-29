@@ -2,11 +2,11 @@
 import TabTitle from "@/component/TabTitle.vue";
 import { CellGroup, RadioGroup, Radio, Field, Icon, Stepper } from "vant";
 import { computed, ref } from "vue";
-import { useYiFa, useIneffa, useFlins } from "../elemental/roles";
+import { useYiFa, useIneffa, useFlins, useLinnea, useZibai, useColumbina } from "../elemental/roles";
 import { BaseDMG } from "@/constants/elementalReaction";
 import Popover from "@/component/Popover.vue";
 import {
-  getMoonElectroRate,
+  getMoonStartRate,
   generateAllSortedResults,
   getResistanceRate,
   getPyroElectroCryoMoonRate,
@@ -73,6 +73,9 @@ const em = ref(0);
 const { yehun, yehunMoonGain } = useYiFa();
 const { ineffaAtk, ineffaGain } = useIneffa();
 const { flinsAtk, flinsGain } = useFlins();
+const { linneaDef, linneaGain } = useLinnea();
+const { zibaiDef, zibaiGain } = useZibai();
+const { columbinaHP, columbinaGain } = useColumbina();
 
 const relicEff = computed(() => {
   const relicSet = new Set();
@@ -107,14 +110,16 @@ const moonElectroDamage = (teamData: teamItem) => {
   const common = Math.round(
     baseDamage *
       (1 +
-        (getMoonElectroRate(teamData.elementMastery) +
+        (getMoonStartRate(teamData.elementMastery) +
           yehunMoonGain.value +
           +moonElectroOtherData.value +
           (teamData.checked === RelicType.thunder ? 20 : 0) +
           (teamData.checked === RelicType.song ? 60 : 0) +
+          teamData.electroAdd +
+          characterEff.value +
           relicEff.value) /
           100) *
-      (1 + (ineffaGain.value + flinsGain.value + teamData.electroAdd + characterEff.value) / 100) *
+      (1 + (ineffaGain.value + flinsGain.value + columbinaGain.value) / 100) *
       (1 + (teamData.electroPromote + moonElectroPromoteData.value) / 100) *
       getResistanceRate(enemyResistance.value)
   );
@@ -143,12 +148,14 @@ const moonCrystalDamage = (teamData: teamItem) => {
   const common = Math.round(
     baseDamage *
       (1 +
-        (getMoonElectroRate(teamData.elementMastery) +
+        (getMoonStartRate(teamData.elementMastery) +
           +moonCrystalOtherData.value +
           (teamData.checked === RelicType.song ? 60 : 0) +
+          teamData.crystalAdd +
+          characterEff.value +
           +relicEff.value) /
           100) *
-      (1 + (teamData.crystalAdd + characterEff.value) / 100) *
+      (1 + (linneaGain.value + zibaiGain.value + columbinaGain.value) / 100) *
       (1 + (teamData.crystalPromote + moonCrystalPromoteData.value) / 100) *
       getResistanceRate(enemyResistance.value)
   );
@@ -366,6 +373,50 @@ const damageResult = computed(() => {
             伊法：救援要义基于队伍中所有角色当前夜魂值的总和，每1点救援要义提升
             <q class="text-moon-electro"><data data-text="月感电">月感电</data></q
             >反应0.2%的伤害，最多记录200点救援要义
+          </div>
+          <template #trigger>
+            <Icon size="26" name="question" />
+          </template>
+        </Popover>
+      </div>
+      <div class="cha-gain-inner">
+        <img class="base-damage__img" src="/ui/UI_AvatarIcon_Linnea.png" alt="" />
+        <CellGroup inset>
+          <Field v-model="linneaDef" type="number" label="莉奈娅防御力" />
+        </CellGroup>
+        <Popover position="top-right">
+          <div class="data-item-popover__content">
+            莉奈娅：提升队伍中所有角色<q class="text-moon-crystal"><data data-text="月结晶">月结晶</data></q
+            >的基础伤害，每100点防御力提升0.7%，最大14%
+          </div>
+          <template #trigger>
+            <Icon size="26" name="question" />
+          </template>
+        </Popover>
+      </div>
+      <div class="cha-gain-inner">
+        <img class="base-damage__img" src="/ui/UI_AvatarIcon_Zibai.png" alt="" />
+        <CellGroup inset>
+          <Field v-model="zibaiDef" type="number" label="兹白防御力" />
+        </CellGroup>
+        <Popover position="top-right">
+          <div class="data-item-popover__content">
+            兹白：提升队伍中所有角色<q class="text-moon-crystal"><data data-text="月结晶">月结晶</data></q
+            >的基础伤害，每100点防御力提升0.7%，最大14%
+          </div>
+          <template #trigger>
+            <Icon size="26" name="question" />
+          </template>
+        </Popover>
+      </div>
+      <div class="cha-gain-inner">
+        <img class="base-damage__img" src="/ui/UI_AvatarIcon_Columbina.png" alt="" />
+        <CellGroup inset>
+          <Field v-model="columbinaHP" type="number" label="哥伦比娅生命值" />
+        </CellGroup>
+        <Popover position="top-right">
+          <div class="data-item-popover__content">
+            哥伦比娅：每1000点生命值上限都将提升0.2%月曜反应的基础伤害，至多通过这种方式提升7%伤害
           </div>
           <template #trigger>
             <Icon size="26" name="question" />

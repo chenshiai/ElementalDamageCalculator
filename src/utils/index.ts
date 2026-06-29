@@ -22,8 +22,8 @@ export const getCatalyzeRate = (em: number) => {
   return ((5 * em) / (em + 1200)) * 100;
 };
 
-/** 月感电精通转化增伤比例 */
-export const getMoonElectroRate = (em: number) => {
+/** 月曜、星辉反应精通转化增伤比例 */
+export const getMoonStartRate = (em: number) => {
   return ((6 * em) / (em + 2000)) * 100;
 };
 

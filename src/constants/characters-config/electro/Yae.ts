@@ -1,12 +1,21 @@
 import Character from "../character-class";
 import { IBuffBase, ICharacterInfo } from "@/types/interface";
-import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
-import { Constellation_E_3, Constellation_Q_5, S_80_CRITAL_19P } from "../buffs";
+import {
+  ActionOn,
+  AttackType,
+  BuffTarget,
+  BuffType,
+  ElementType,
+  Rarity,
+  SecondElementType,
+  WeaponType,
+} from "@/types/enum";
+import { Constellation_E_3, Constellation_Q_5, S_80_CRITAL_19P, PolestarField } from "../buffs";
 import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 
 @EnKaId(10000058, "八重神子")
 @Weapon(WeaponType.Magic)
-@Element(ElementType.Electro)
+@Element(ElementType.Electro, SecondElementType.Start)
 @BaseData(Rarity.Five, [10372, 340, 569], 90, [11109, 416, 609])
 @Icons("UI_AvatarIcon_Yae")
 export class YaeData extends Character implements ICharacterInfo {
@@ -119,7 +128,17 @@ export class YaeData extends Character implements ICharacterInfo {
       ],
     }),
   ];
-  otherSkill = [];
+  otherSkill = [
+    action("神篱之御荫·伤害", AttackType.Other, ElementType.Electro, {
+      atk: [0.4],
+    }),
+    action("神篱之御荫·伤害·极星辉域", AttackType.Start, ElementType.StellarConductElectro, {
+      atk: [0.5],
+    }),
+    action("祓所之讬宣·伤害·极星辉域", AttackType.Start, ElementType.StellarConductElectro, {
+      atk: [2],
+    }),
+  ];
   buffs: IBuffBase[] = [
     ...S_80_CRITAL_19P,
     {
@@ -136,6 +155,49 @@ export class YaeData extends Character implements ICharacterInfo {
       ],
       enable: true,
     },
+    {
+      label: "祓所之讬宣",
+      describe: `队伍中附近的角色触发超导或星超导反应后，杀生樱的伤害提高，每2.5秒至多触发一次`,
+      effect: [
+        {
+          type: BuffType.SkillFixed,
+          getValue: (data) => {
+            return (data.baseATK + data.extraATK + data.extraATK_NT) * 0.8;
+          },
+          actionOn: ActionOn.External,
+        },
+      ],
+      enable: true,
+    },
+    PolestarField,
+    {
+      label: "1命·野狐供真篇",
+      describe: `触发超导/星超导后，队伍中附近的所有角色获得50%雷元素伤害加成和星超导伤害加成`,
+      effect: [
+        { type: BuffType.ElectroPrcent, getValue: () => 50 },
+        {
+          type: BuffType.StellarConductPrcent,
+          getValue: () => 50,
+        },
+      ],
+      enable: true,
+      shareable: true,
+      target: BuffTarget.All,
+      condition: ({ constellation }) => constellation >= 1,
+    },
+    {
+      label: "2命·望月吼哕声",
+      describe: `根据杀生樱的位阶，使八重神子与队伍中自己的当前场上角色的元素精通提升60/90/120/200`,
+      effect: [{ type: BuffType.MysteryFixed, getValue: (_, s) => [0, 60, 90, 120, 200][s] }],
+      stack: 3,
+      limit: 4,
+      stackable: true,
+      stackText: "杀生樱位阶",
+      enable: true,
+      shareable: true,
+      target: BuffTarget.All,
+      condition: ({ constellation }) => constellation >= 2,
+    },
     Constellation_E_3,
     {
       label: "4命·绯樱引雷章",
@@ -149,8 +211,14 @@ export class YaeData extends Character implements ICharacterInfo {
     Constellation_Q_5,
     {
       label: "6命·大杀生咒禁",
-      describe: `杀生樱在攻击时无视敌人60%的防御力`,
-      effect: [{ type: BuffType.DefensePenetration, getValue: () => 60, special: "Yae" }],
+      describe: `杀生樱在攻击时无视敌人60%的防御力。星超导反应伤害的暴击伤害提升200%`,
+      effect: [
+        { type: BuffType.DefensePenetration, getValue: () => 60, special: "Yae" },
+        {
+          type: BuffType.StellarConductCritcalHurt,
+          getValue: () => 200,
+        },
+      ],
       enable: true,
       condition: ({ constellation }) => constellation >= 6,
     },

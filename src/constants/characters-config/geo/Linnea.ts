@@ -250,7 +250,7 @@ export class LinneaData extends Character implements ICharacterInfo {
     {
       label: "6命·黄金猎犬之梦",
       describe:
-        "消耗「历览编录」时，将消耗原本2倍的层数，并使伤害提升效果提高至原本的150%。月兆 · 满辉队伍中附近的角色造成的月结晶反应伤害擢升25%。",
+        "消耗「历览编录」时，将消耗原本2倍的层数，并使伤害提升效果提高至原本的150%。月兆·满辉队伍中附近的角色造成的月结晶反应伤害擢升25%。",
       effect: [{ type: BuffType.MoonCrystalPromote, getValue: () => 25 }],
       enable: true,
       shareable: true,

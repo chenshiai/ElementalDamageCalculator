@@ -55,6 +55,7 @@ class CalculatorValue implements ICalculatorValue {
   moonElectroCritcal: number = 0;
   moonSwirlCritcal: number = 0;
   moonCrystalCritcal: number = 0;
+  stellarConductCritcal: number = 0;
 
   // 各种隐式爆伤
   globalCritcalHunt: number = 0;
@@ -74,6 +75,7 @@ class CalculatorValue implements ICalculatorValue {
   moonElectroCritcalHurt: number = 0;
   moonSwirlCritcalHurt: number = 0;
   moonCrystalCritcalHurt: number = 0;
+  stellarConductCritcalHurt: number = 0;
 
   // 攻击增伤
   normalAttackAddHunt: number = 0;
@@ -84,6 +86,7 @@ class CalculatorValue implements ICalculatorValue {
   elementalBurstAddHunt: number = 0;
   globalAddHunt: number = 0;
   globalMoonAddHunt: number = 0;
+  globalStartAddHunt: number = 0;
 
   // 攻击伤害提高
   normalIncreaseHurt: number = 0;
@@ -93,6 +96,7 @@ class CalculatorValue implements ICalculatorValue {
   elementalBurstIncreaseHurt: number = 0;
   globalIncreaseHunt: number = 0;
   globalMoonIncreaseHunt: number = 0;
+  globalStartIncreaseHunt: number = 0;
 
   // 元素增伤
   physicalAddHunt: number = 0;
@@ -106,6 +110,7 @@ class CalculatorValue implements ICalculatorValue {
   moonElectroAddHunt: number = 0;
   moonSwirlAddHunt: number = 0;
   moonCrystalAddHunt: number = 0;
+  stellarConductAddHunt: number = 0;
 
   // 元素伤害提高
   phycalIncreaseHunt: number = 0;
@@ -119,9 +124,12 @@ class CalculatorValue implements ICalculatorValue {
   moonElectroIncreaseHunt: number = 0;
   moonSwirlIncreaseHunt: number = 0;
   moonCrystalIncreaseHunt: number = 0;
+  stellarConductIncreaseHunt: number = 0;
 
   // 生命之契
   lifeContract: number = 0;
+  // 极辉星域 冰雷命中次数
+  hitCount: number = 0;
 
   // 倍率提升
   normalRateAdd: number = 0;
@@ -132,13 +140,17 @@ class CalculatorValue implements ICalculatorValue {
   moonElectroRateAdd: number = 0;
   moonSwirlRateAdd: number = 0;
   moonCrystalRateAdd: number = 0;
+  stellarConductRateAdd: number = 0;
 
   moonElectroPromote: number = 0;
   moonSwirlPromote: number = 0;
   moonCrystalPromote: number = 0;
+  stellarConductPromote: number = 0;
+  
   moonElectroBasePercent: number = 0;
   moonSwirlBasePercent: number = 0;
   moonCrystalBasePercent: number = 0;
+  stellarConductBasePercent: number = 0;
 
   burstAdd: number = 0;
   skillAdd: number = 0;

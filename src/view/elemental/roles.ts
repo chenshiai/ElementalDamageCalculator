@@ -122,3 +122,36 @@ export function useAino() {
     changeAinoMoon,
   };
 }
+
+export function useLinnea() {
+  const linneaDef = ref(0);
+  const linneaGain = computed(() => {
+    return Math.min(14, linneaDef.value * 0.007);
+  });
+  return {
+    linneaDef,
+    linneaGain,
+  };
+}
+
+export function useZibai() {
+  const zibaiDef = ref(0);
+  const zibaiGain = computed(() => {
+    return Math.min(14, zibaiDef.value * 0.007);
+  });
+  return {
+    zibaiDef,
+    zibaiGain,
+  };
+}
+
+export function useColumbina() {
+  const columbinaHP = ref(0);
+  const columbinaGain = computed(() => {
+    return Math.min(7, columbinaHP.value * 0.0002);
+  });
+  return {
+    columbinaHP,
+    columbinaGain,
+  };
+}

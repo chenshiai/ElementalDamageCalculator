@@ -21,7 +21,7 @@ export const Wheatley = createWeapon(
     let sp = [8, 10, 12, 14, 16][affix - 1] + "%";
     return {
       title: "黄金的血潮",
-      text: highlight`攻击力提升${atk}。当前生命值提升或降低时，普通攻击造成的伤害提升${add}，重击造成的伤害提升${add2}。该效果持续4秒，至多叠加3层，每0.3秒至多触发一次；处于叠加3层的状态下时，攻击速度提升${sp}。`,
+      text: highlight`攻击力提升${atk}。当前生命值提升或降低时，普通攻击造成的伤害提升${add}，重击造成的伤害提升${add2}，造成的星超导反应伤害提升${add2}。该效果持续4秒，至多叠加3层，每0.3秒至多触发一次；处于叠加3层的状态下时，攻击速度提升${sp}。`,
     };
   },
   (affix = 1) => {
@@ -36,11 +36,12 @@ export const Wheatley = createWeapon(
         enable: true,
       },
       {
-        label: "普通攻击伤害，重击伤害提升",
-        describe: `普通攻击造成的伤害提升${add}%，重击造成的伤害提升${add2}%。至多叠加3层`,
+        label: "普通攻击伤害/重击伤害，星超导反应伤害提升",
+        describe: `普通攻击造成的伤害提升${add}%，重击造成的伤害提升${add2}%，造成的星超导反应伤害提升${add2}%。至多叠加3层`,
         effect: [
           { type: BuffType.NormalPrcent, getValue: (_, stack) => add * stack },
           { type: BuffType.StrongPrcent, getValue: (_, stack) => add2 * stack },
+          { type: BuffType.StellarConductPrcent, getValue: (_, stack) => add2 * stack },
         ],
         enable: true,
         stackable: true,

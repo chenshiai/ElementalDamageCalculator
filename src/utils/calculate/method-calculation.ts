@@ -2,15 +2,13 @@ import { ElementalReactionType, ReactionRate } from "@/constants";
 import { AttackType, BuffType, ElementType, EnchantingType, NumberToElementType, WeaponType } from "@/types/enum";
 import { ICalculatorValue, IRate } from "@/types/interface";
 import { BaseDMG } from "@/constants/elementalReaction";
-import { getCatalyzeRate, getAmplifiedRate, getResistanceRate, getDefRate, getMoonElectroRate } from "@/utils";
+import { getCatalyzeRate, getAmplifiedRate, getResistanceRate, getDefRate, getMoonStartRate } from "@/utils";
 
 type MoreData = {
   /** 伤害提高 */
   ADDITIONAL_DMG: number;
   /** 传统增伤 */
   addHunt: number;
-  /** 月曜增伤 */
-  moonAddHunt: number;
   /** 暴击伤害 */
   criticalHunt: number;
   /** 暴击 */
@@ -29,10 +27,21 @@ type MoreData = {
   shieldAdd: number;
   /** 额外技能倍率 */
   extraRate: number;
+
+  /** 月曜增伤 */
+  moonAddHunt: number;
   /** 月曜反应擢升% */
   moonPromote: number;
   /** 月曜反应基础伤害提升% */
   moonBasePercent: number;
+
+  /** 星辉增伤 */
+  startAddHunt: number;
+  /** 星辉反应提升% */
+  startPromote: number;
+  /** 星辉反应基础伤害提升% */
+  startBasePercent: number;
+
   /** 攻击力倍率加成 */
   atkAdd: number;
   /** 防御力倍率加成 */
@@ -70,6 +79,9 @@ function getMoreDataBySwitch(
   let moonAddHunt = calculatorValue[BuffType.GlobalMoonPrcent] || 0;
   let moonPromote = 0;
   let moonBasePercent = 0;
+  let startAddHunt = calculatorValue[BuffType.GlobalStartPrcent] || 0;
+  let startPromote = 0;
+  let startBasePercent = 0;
   let atkAdd = calculatorValue[BuffType.AtkAdd] || 0;
   let defAdd = calculatorValue[BuffType.DefAdd] || 0;
   let hpAdd = calculatorValue[BuffType.HPAdd] || 0;
@@ -134,6 +146,9 @@ function getMoreDataBySwitch(
       break;
     case AttackType.Moon:
       ADDITIONAL_DMG += calculatorValue[BuffType.GlobalMoonFixed] || 0;
+      break;
+    case AttackType.Start:
+      ADDITIONAL_DMG += calculatorValue[BuffType.GlobalStartFixed] || 0;
       break;
     case AttackType.Heal:
       healAdd += calculatorValue[BuffType.HealAdd] || 0;
@@ -262,6 +277,34 @@ function getMoreDataBySwitch(
       moonAddHunt += calculatorValue[BuffType.MoonCrystalPrcent] || 0;
       moonPromote += calculatorValue[BuffType.MoonCrystalPromote] || 0;
       break;
+    case ElementType.StellarConductCryo:
+      // 星超导-冰伤害无视敌人防御
+      defensePenetration = 100;
+      ADDITIONAL_DMG += calculatorValue[BuffType.StellarConductFixed] || 0;
+      criticalHunt += calculatorValue[BuffType.StellarConductCritcalHurt] || 0;
+      criticalHunt += calculatorValue[BuffType.CryoCritcalHurt] || 0;
+      critical += calculatorValue[BuffType.StellarConductCritcal] || 0;
+      critical += calculatorValue[BuffType.CryoCritcal] || 0;
+      resistance += calculatorValue[BuffType.EnemyCryoResistance] || 0;
+      addRate += calculatorValue[BuffType.StellarConductRate] || 0;
+      startBasePercent += calculatorValue[BuffType.StellarConductBasePercent] || 0;
+      startAddHunt += calculatorValue[BuffType.StellarConductPrcent] || 0;
+      startPromote += calculatorValue[BuffType.StellarConductPromote] || 0;
+      break;
+    case ElementType.StellarConductElectro:
+      // 星超导-雷伤害无视敌人防御
+      defensePenetration = 100;
+      ADDITIONAL_DMG += calculatorValue[BuffType.StellarConductFixed] || 0;
+      criticalHunt += calculatorValue[BuffType.StellarConductCritcalHurt] || 0;
+      criticalHunt += calculatorValue[BuffType.ElectroCritcalHurt] || 0;
+      critical += calculatorValue[BuffType.StellarConductCritcal] || 0;
+      critical += calculatorValue[BuffType.ElectroCritcal] || 0;
+      resistance += calculatorValue[BuffType.EnemyElectroResistance] || 0;
+      addRate += calculatorValue[BuffType.StellarConductRate] || 0;
+      startBasePercent += calculatorValue[BuffType.StellarConductBasePercent] || 0;
+      startAddHunt += calculatorValue[BuffType.StellarConductPrcent] || 0;
+      startPromote += calculatorValue[BuffType.StellarConductPromote] || 0;
+      break;
   }
 
   return {
@@ -283,6 +326,9 @@ function getMoreDataBySwitch(
     defAdd,
     hpAdd,
     emAdd,
+    startPromote,
+    startBasePercent,
+    startAddHunt,
   };
 }
 
@@ -304,7 +350,7 @@ interface IArgs {
 }
 
 export function calculateDamage({ calculatorValue, attackType, elementType, rate, level, atkType, special }: IArgs) {
-  let ADDITIONAL_DMG =0 ,
+  let ADDITIONAL_DMG = 0,
     addHunt = 0,
     criticalHunt = 0,
     critical = 0,
@@ -321,7 +367,10 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
     atkAdd = 0,
     defAdd = 0,
     hpAdd = 0,
-    emAdd = 0;
+    emAdd = 0,
+    startPromote = 0,
+    startBasePercent = 0,
+    startAddHunt = 0;
 
   /** 计算独特buff的加成 */
   if (special && calculatorValue.specialValue && calculatorValue.specialValue[special]) {
@@ -349,6 +398,9 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
     defAdd += specialData.defAdd;
     hpAdd += specialData.hpAdd;
     emAdd += specialData.emAdd;
+    startPromote += specialData.startPromote;
+    startBasePercent += specialData.startBasePercent;
+    startAddHunt += specialData.startAddHunt;
   }
   const normalData = getMoreDataBySwitch(calculatorValue, attackType, newElementType, calculatorValue.weapon);
   ADDITIONAL_DMG += normalData.ADDITIONAL_DMG;
@@ -369,7 +421,9 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
   defAdd += normalData.defAdd;
   hpAdd += normalData.hpAdd;
   emAdd += normalData.emAdd;
-  
+  startPromote += normalData.startPromote;
+  startBasePercent += normalData.startBasePercent;
+  startAddHunt += normalData.startAddHunt;
 
   /** 基础伤害 */
   let BASE_DMG = 0;
@@ -399,6 +453,13 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
   if (newElementType === ElementType.MoonCrystal) {
     // 月结晶的基础伤害固定乘以1.6
     BASE_DMG *= 1.6;
+  }
+  if (
+    calculatorValue[BuffType.HitCount] > 0 &&
+    (newElementType === ElementType.StellarConductElectro || newElementType === ElementType.StellarConductCryo)
+  ) {
+    // 星超导的基础伤害系数根据hit数变化
+    BASE_DMG *= 1.45 + (calculatorValue[BuffType.HitCount] - 1) * 0.05;
   }
 
   /** 治疗量 */
@@ -434,13 +495,21 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
   let EVA_DMG = 0;
   /** 月曜擢升伤害 */
   let PROMOTE_DMG = 0;
+  /** 星辉擢升伤害 */
+  let START_PROMOTE_DMG = 0;
+
+  // 月曜、星辉反应伤害的加成伤害，来自于元素精通的增伤加成，不受传统增伤影响
+  // 同时额外的伤害提高不受益于月反应增伤、精通增伤效果，即固定伤害提升。
   if (attackType === AttackType.Moon) {
     BASE_DMG *= 1 + moonBasePercent / 100;
-    // 月曜反应伤害的加成伤害，来自于元素精通的增伤加成，不受传统增伤影响
-    // 同时额外的伤害提高不受益于月反应增伤、精通增伤效果，即固定伤害提升。
     MAGNIFICATION_DMG = (BASE_DMG * moonAddHunt) / 100;
-    EVA_DMG = (BASE_DMG * getMoonElectroRate(em)) / 100;
+    EVA_DMG = (BASE_DMG * getMoonStartRate(em)) / 100;
     PROMOTE_DMG = ((BASE_DMG + ADDITIONAL_DMG + MAGNIFICATION_DMG + EVA_DMG) * moonPromote) / 100;
+  } else if (attackType === AttackType.Start) {
+    BASE_DMG *= 1 + startBasePercent / 100;
+    MAGNIFICATION_DMG = (BASE_DMG * startAddHunt) / 100;
+    EVA_DMG = (BASE_DMG * getMoonStartRate(em)) / 100;
+    START_PROMOTE_DMG = ((BASE_DMG + ADDITIONAL_DMG + MAGNIFICATION_DMG + EVA_DMG) * startPromote) / 100;
   } else {
     MAGNIFICATION_DMG = ((BASE_DMG + ADDITIONAL_DMG + BONUS_DMG) * addHunt) / 100;
   }
@@ -505,9 +574,11 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
     RESULT_DMG: RESULT_DMG * ENEMY_RATE,
     REACTION_DMG: REACTION_DMG * ENEMY_RATE,
     PROMOTE_DMG: PROMOTE_DMG * ENEMY_RATE,
+    START_PROMOTE_DMG: START_PROMOTE_DMG * ENEMY_RATE,
     criticalHunt,
     addHunt,
     moonAddHunt,
+    startAddHunt,
     elementType: newElementType,
     HEAL_VALUE,
     SHIELD_VALUE,

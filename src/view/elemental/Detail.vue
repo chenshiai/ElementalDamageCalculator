@@ -18,7 +18,7 @@
 
 <script setup>
 import {computed} from "vue";
-import {getAmplifiedRate, getServitudeRate, getCrystallizeRate, getCatalyzeRate, getMoonElectroRate} from "@/utils";
+import {getAmplifiedRate, getServitudeRate, getCrystallizeRate, getCatalyzeRate, getMoonStartRate} from "@/utils";
 
 const props = defineProps({
   elementalMystery: Number,
@@ -44,7 +44,7 @@ const catalyze = computed(() => {
 });
 
 const moonServitude = computed(() => {
-  return getMoonElectroRate(props.elementalMystery).toFixed(1);
+  return getMoonStartRate(props.elementalMystery).toFixed(1);
 })
 </script>
 

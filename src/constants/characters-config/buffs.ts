@@ -179,7 +179,7 @@ export const getMoonBuff = (name: string, baseValue: ICalculatorValue) => {
     case ElementType.Hydro: {
       const value = getHydroMoonRate(baseValue.baseHP + baseValue.extraHP + baseValue.extraHP_NT);
       return {
-         label: `[月兆·满辉]${name}+${value.toFixed(1)}%`,
+        label: `[月兆·满辉]${name}+${value.toFixed(1)}%`,
         describe: `非月兆水元素角色根据生命值提供月曜反应增伤。该角色可提供${value.toFixed(1)}%月曜反应增伤。`,
         effect: [{ type: BuffType.GlobalMoonPrcent, getValue: () => value }],
         enable: false,
@@ -190,7 +190,7 @@ export const getMoonBuff = (name: string, baseValue: ICalculatorValue) => {
     case ElementType.Geo: {
       const value = getGeoMoonRate(baseValue.baseDEF + baseValue.extraDEF + baseValue.extraDEF_NT);
       return {
-         label: `[月兆·满辉]${name}+${value.toFixed(1)}%`,
+        label: `[月兆·满辉]${name}+${value.toFixed(1)}%`,
         describe: `非月兆岩元素角色根据防御力提供月曜反应增伤。该角色可提供${value.toFixed(1)}%月曜反应增伤。`,
         effect: [{ type: BuffType.GlobalMoonPrcent, getValue: () => value }],
         enable: false,
@@ -202,7 +202,7 @@ export const getMoonBuff = (name: string, baseValue: ICalculatorValue) => {
     case ElementType.Dendro: {
       const value = getAnemoDendroMoonRate(baseValue.elementalMystery + baseValue.elementalMystery_NT);
       return {
-         label: `[月兆·满辉]${name}+${value.toFixed(1)}%`,
+        label: `[月兆·满辉]${name}+${value.toFixed(1)}%`,
         describe: `非月兆风元素、草元素角色根据元素精通提供月曜反应增伤。该角色可提供${value.toFixed(1)}%月曜反应增伤。`,
         effect: [{ type: BuffType.GlobalMoonPrcent, getValue: () => value }],
         enable: false,
@@ -287,4 +287,19 @@ export const GeoResonance = {
   enable: true,
   target: BuffTarget.All,
   source: "",
+};
+
+export const PolestarField = {
+  label: "极星辉域",
+  describe: "极星辉域会根据冰元素或雷元素攻击命中次数，提供雷/冰元素伤害加成",
+  effect: [
+    { type: BuffType.ElectroPrcent, getValue: (_, s) => (s === 0 ? 20 : 29 + s - 1) },
+    { type: BuffType.CryoPrcent, getValue: (_, s) => (s === 0 ? 20 : 29 + s - 1) },
+    { type: BuffType.HitCount, getValue: (_, s) => s },
+  ],
+  enable: true,
+  stackable: true,
+  stackText: "冰雷命中次数",
+  limit: 12,
+  stack: 12,
 };

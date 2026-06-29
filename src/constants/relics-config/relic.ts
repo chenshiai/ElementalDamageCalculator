@@ -127,7 +127,7 @@ const relicLibrary: IRelicLibraryItem[] = [
       setReliquartStat(2639070347, 15046, "止于阔步跌坠的灵摆", "UI_RelicIcon_15046_3", EquipType.EQUIP_DRESS),
     ],
     suit2: "二件套：攻击力提高18%。",
-    suit4: "四件套：超导反应造成的伤害提升80%，装备者攻击受到超导反应影响的敌人时，本次攻击的暴击率提高16%。",
+    suit4: "四件套：超导反应造成的伤害提升80%，星超导反应造成的伤害提升40%；装备者攻击受到超导或星超导反应影响的敌人时，本次攻击的暴击率提高16%。",
     buffs: {
       suit2: [
         {

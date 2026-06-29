@@ -46,6 +46,7 @@ const calculatedResults = computed(() => {
       PROMOTE_DMG,
       EVA_DMG,
       ADDAD_VALUE,
+      START_PROMOTE_DMG,
     } = calculateDamage({
       calculatorValue,
       attackType: item.attackType,
@@ -83,6 +84,23 @@ const calculatedResults = computed(() => {
         elementType,
       };
     }
+    console.log({
+      RESULT_DMG,
+      CRITICAL_DMG,
+      DEISTE_DMG,
+      elementType,
+      HEAL_VALUE,
+      SHIELD_VALUE,
+      BASE_DMG,
+      ADDITIONAL_DMG,
+      BONUS_DMG,
+      MAGNIFICATION_DMG,
+      REACTION_DMG,
+      PROMOTE_DMG,
+      EVA_DMG,
+      ADDAD_VALUE,
+      START_PROMOTE_DMG,
+    })
     return {
       label: item.label,
       common: Math.round(RESULT_DMG),
@@ -99,6 +117,7 @@ const calculatedResults = computed(() => {
         REACTION_DMG,
         RESULT_DMG,
         PROMOTE_DMG,
+        START_PROMOTE_DMG,
       } as CalculateAnalysisType,
     };
   });

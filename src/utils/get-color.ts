@@ -27,12 +27,16 @@ export function getColorByElement(elementType: ElementType | string) {
       return "text-electro";
     case ElementType.MoonElectro:
       return "text-moon-electro";
+    case ElementType.StellarConductElectro:
+      return "text-star-electro";
     case ElementType.Hydro:
       return "text-hydro";
     case ElementType.Anemo:
       return "text-anemo";
     case ElementType.Cryo:
       return "text-cryo";
+    case ElementType.StellarConductCryo:
+      return "text-star-cryo";
     case ElementType.Geo:
       return "text-geo";
     case ElementType.MoonCrystal:

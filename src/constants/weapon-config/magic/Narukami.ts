@@ -18,16 +18,19 @@ export const Narukami = createWeapon(
     let a = [12, 15, 18, 21, 24][affix - 1] + "%";
     return {
       title: "神樱神游神乐舞",
-      text: highlight`施放元素战技时，将获得「神乐舞」的效果，使装备该武器的角色的元素战技造成的伤害提高${a}，该效果持续16秒，至多叠加3层。持有3层时，该角色获得${a}所有元素伤害加成。`,
+      text: highlight`施放元素战技时，将获得「神乐舞」的效果，使装备该武器的角色的元素战技造成的伤害提高${a}，造成的星超导反应伤害提升${a}，该效果持续16秒，至多叠加3层。持有3层时，该角色获得${a}所有元素伤害加成。`,
     };
   },
   (affix = 1) => {
     let a = [12, 15, 18, 21, 24][affix - 1];
     return [
       {
-        label: "元素战技伤害提高",
-        describe: `使装备该武器的角色的元素战技造成的伤害提高${a}%，至多叠加3层`,
-        effect: [{ type: BuffType.SkillPrcent, getValue: (_, stack) => a * stack }],
+        label: "元素战技伤害/星超导伤害提高",
+        describe: `使装备该武器的角色的元素战技造成的伤害提高${a}%，造成的星超导反应伤害提升${a}%，至多叠加3层`,
+        effect: [
+          { type: BuffType.SkillPrcent, getValue: (_, stack) => a * stack },
+          { type: BuffType.StellarConductPrcent, getValue: (_, stack) => a * stack },
+        ],
         stackable: true,
         stackText: "神乐舞",
         limit: 3,

@@ -1,7 +1,7 @@
 import Character from "../character-class";
 import { ICharacterInfo } from "@/types/interface";
 import { AttackType, BuffType, ElementType, Rarity, SecondElementType, WeaponType } from "@/types/enum";
-import { Constellation_E_3, Constellation_Q_5, S_80_CRITAL_19P, S_80_MYSTERY_115 } from "../buffs";
+import { Constellation_E_3, Constellation_Q_5, S_80_CRITAL_19P } from "../buffs";
 import { EnKaId, Weapon, Element, BaseData, Icons, action } from "@/utils/decorator";
 
 @EnKaId(10000104, "恰斯卡")
