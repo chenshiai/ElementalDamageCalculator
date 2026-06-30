@@ -1,12 +1,12 @@
 import Character from "../character-class";
 import { IBuffBase, ICharacterInfo } from "@/types/interface";
-import { AttackType, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
+import { ActionOn, AttackType, BuffType, ElementType, Rarity, SecondElementType, WeaponType } from "@/types/enum";
 import { Constellation_A_3, Constellation_Q_5, S_80_CRITALHUNT_38P } from "../buffs";
 import { EnKaId, Weapon, Element, BaseData, Icons, action } from "@/utils/decorator";
 
 @EnKaId(10000086, "莱欧斯利")
 @Weapon(WeaponType.Magic)
-@Element(ElementType.Cryo)
+@Element(ElementType.Cryo, SecondElementType.Start)
 @BaseData(Rarity.Five, [13593, 311, 763], 60, [14559, 381, 817])
 @Icons("UI_AvatarIcon_Wriothesley")
 export class WriothesleyData extends Character implements ICharacterInfo {
@@ -34,6 +34,18 @@ export class WriothesleyData extends Character implements ICharacterInfo {
         1.51642, 1.61022, 1.704019, 1.797818,
       ],
     }),
+    action(
+      "三段伤害·星超导",
+      AttackType.Start,
+      ElementType.StellarConductCryo,
+      {
+        atk: [
+          0.672228, 0.726944, 0.78166, 0.859826, 0.914542, 0.977075, 1.063058, 1.14904, 1.235023, 1.328822, 1.422621,
+          1.51642, 1.61022, 1.704019, 1.797818,
+        ],
+      },
+      "laiou3"
+    ),
     action("四段伤害·单次", AttackType.Normal, ElementType.Cryo, {
       atk: [
         0.379041, 0.409893, 0.440745, 0.48482, 0.515672, 0.550931, 0.599413, 0.647895, 0.696377, 0.749266, 0.802156,
@@ -46,18 +58,66 @@ export class WriothesleyData extends Character implements ICharacterInfo {
         2.046972, 2.173588, 2.300205, 2.426822,
       ],
     }),
-    action("重击", AttackType.Strong, ElementType.Cryo, {
+    action(
+      "五段伤害·星超导",
+      AttackType.Start,
+      ElementType.StellarConductCryo,
+      {
+        atk: [
+          0.90742, 0.98128, 1.05514, 1.160654, 1.234514, 1.318925, 1.43499, 1.551056, 1.667121, 1.793738, 1.920355,
+          2.046972, 2.173588, 2.300205, 2.426822,
+        ],
+      },
+      "laiou5"
+    ),
+    action("重击伤害", AttackType.Strong, ElementType.Cryo, {
       atk: [
         1.5296, 1.64432, 1.75904, 1.912, 2.02672, 2.14144, 2.2944, 2.44736, 2.60032, 2.75328, 2.90624, 3.0592, 3.2504,
         3.4416, 3.6328,
       ],
     }),
-    action("6命·冰锥", AttackType.Strong, ElementType.Cryo, {
+    action(
+      "重击伤害·星超导",
+      AttackType.Start,
+      ElementType.StellarConductCryo,
+      {
+        atk: [
+          1.5296, 1.64432, 1.75904, 1.912, 2.02672, 2.14144, 2.2944, 2.44736, 2.60032, 2.75328, 2.90624, 3.0592, 3.2504,
+          3.4416, 3.6328,
+        ],
+      },
+      "laiouZ"
+    ),
+    action("6命·重击冰锥伤害", AttackType.Strong, ElementType.Cryo, {
       atk: [
         1.5296, 1.64432, 1.75904, 1.912, 2.02672, 2.14144, 2.2944, 2.44736, 2.60032, 2.75328, 2.90624, 3.0592, 3.2504,
         3.4416, 3.6328,
       ],
     }),
+    action(
+      "6命·重击冰锥伤害·星超导",
+      AttackType.Start,
+      ElementType.StellarConductCryo,
+      {
+        atk: [
+          1.5296, 1.64432, 1.75904, 1.912, 2.02672, 2.14144, 2.2944, 2.44736, 2.60032, 2.75328, 2.90624, 3.0592, 3.2504,
+          3.4416, 3.6328,
+        ].map((v) => v * 0.2),
+      },
+      "laiou"
+    ),
+    action(
+      "6命·五段伤害·冰锥",
+      AttackType.Start,
+      ElementType.StellarConductCryo,
+      {
+        atk: [
+          0.90742, 0.98128, 1.05514, 1.160654, 1.234514, 1.318925, 1.43499, 1.551056, 1.667121, 1.793738, 1.920355,
+          2.046972, 2.173588, 2.300205, 2.426822,
+        ].map((v) => v * 0.2),
+      },
+      "laiou5"
+    ),
     action("下坠期间伤害", AttackType.FallPeriod, ElementType.Cryo, {
       atk: [
         0.568288, 0.614544, 0.6608, 0.72688, 0.773136, 0.826, 0.898688, 0.971376, 1.044064, 1.12336, 1.202656, 1.281952,
@@ -105,6 +165,7 @@ export class WriothesleyData extends Character implements ICharacterInfo {
               87.1145,
             ][data.skillLevel + data.skillLevelAdd - 1];
           },
+          actionOn: ActionOn.Indirect,
         },
       ],
       enable: true,
@@ -128,6 +189,94 @@ export class WriothesleyData extends Character implements ICharacterInfo {
       stackText: "「检偿之敕」",
     },
     {
+      label: "冤苦终有显明之期",
+      describe:
+        "辉映·星超导：被寒烈的惩裁强化的第三段、第五段斥逐拳将分别造成原本60%/80%的冰元素伤害，且天辉·凌跃拳将造成原本100%的冰元素范围伤害；莱欧斯利造成的星超导反应伤害提升30%。",
+      effect: [
+        { type: BuffType.StellarConductPrcent, getValue: () => 30 },
+        {
+          type: BuffType.StellarConductRate,
+          getValue: (data) => {
+            return [
+              43.1695, 45.7545, 48.3395, 51.7, 54.285, 56.87, 60.2305, 63.591, 66.9515, 70.312, 80.3935, 83.754,
+              87.1145,
+            ].map((value) => {
+              return (value + 100) * 0.6 - 100;
+            })[data.skillLevel + data.skillLevelAdd - 1];
+          },
+          actionOn: ActionOn.Indirect,
+          special: "laiou3",
+        },
+        {
+          type: BuffType.StellarConductRate,
+          getValue: (data) => {
+            return [
+              43.1695, 45.7545, 48.3395, 51.7, 54.285, 56.87, 60.2305, 63.591, 66.9515, 70.312, 80.3935, 83.754,
+              87.1145,
+            ].map((value) => {
+              return (value + 100) * 0.8 - 100;
+            })[data.skillLevel + data.skillLevelAdd - 1];
+          },
+          actionOn: ActionOn.Indirect,
+          special: "laiou5",
+        },
+      ],
+      enable: true,
+      condition: ({ constellation }) => constellation < 2,
+    },
+    {
+      label: "冤苦终有显明之期",
+      describe:
+        "辉映·星超导：被寒烈的惩裁强化的第三段、第五段斥逐拳将分别造成原本90%/120%的冰元素伤害，且天辉·凌跃拳将造成原本150%的冰元素范围伤害；莱欧斯利造成的星超导反应伤害提升30%。",
+      effect: [
+        { type: BuffType.StellarConductPrcent, getValue: () => 30 },
+        {
+          type: BuffType.StellarConductRate,
+          getValue: (data) => {
+            return [
+              43.1695, 45.7545, 48.3395, 51.7, 54.285, 56.87, 60.2305, 63.591, 66.9515, 70.312, 80.3935, 83.754,
+              87.1145,
+            ].map((value) => {
+              return (value + 100) * 0.9 - 100;
+            })[data.skillLevel + data.skillLevelAdd - 1];
+          },
+          actionOn: ActionOn.Indirect,
+          special: "laiou3",
+        },
+        {
+          type: BuffType.StellarConductRate,
+          getValue: (data) => {
+            return [
+              43.1695, 45.7545, 48.3395, 51.7, 54.285, 56.87, 60.2305, 63.591, 66.9515, 70.312, 80.3935, 83.754,
+              87.1145,
+            ].map((value) => {
+              return (value + 100) * 1.2 - 100;
+            })[data.skillLevel + data.skillLevelAdd - 1];
+          },
+          actionOn: ActionOn.Indirect,
+          special: "laiou5",
+        },
+        {
+          type: BuffType.StellarConductRate,
+          getValue: () => 50,
+          actionOn: ActionOn.Indirect,
+          special: "laiouZ",
+        },
+      ],
+      enable: true,
+      condition: ({ constellation }) => constellation >= 2,
+    },
+    {
+      label: "1命·予行恶者以惩惧",
+      describe: "辉映·星超导：斥逐拳的第五段攻击造成的伤害提升50%；天辉·凌跃拳造成的伤害提升50%",
+      effect: [
+        { type: BuffType.StellarConductPrcent, getValue: () => 50, special: "laiou5" },
+        { type: BuffType.StellarConductPrcent, getValue: () => 50, special: "laiouZ" },
+      ],
+      enable: true,
+      condition: ({ constellation }) => constellation >= 1,
+    },
+    {
       label: "2命·予骄暴者以镣锁",
       describe: "施放黑金狼噬时，固有天赋「罪业终有报偿之时」的每层「检偿之敕」效果都将使造成的伤害提升40%",
       effect: [{ type: BuffType.BurstPrcent, getValue: (_, s) => 40 * s }],
@@ -138,16 +287,58 @@ export class WriothesleyData extends Character implements ICharacterInfo {
       stackText: "「检偿之敕」",
       condition: ({ constellation }) => constellation >= 2,
     },
+    {
+      label: "2命·予骄暴者以镣锁·星超导",
+      describe: "不处于辉映·星超导状态：普通攻击与重击分别造成原本125%/130%的伤害",
+      effect: [
+        { type: BuffType.StrongRate, getValue: (_, s) => 30 * (1 - s) },
+        {
+          type: BuffType.NormalRate,
+          getValue: (data, s) => {
+            return s < 1
+              ? [
+                  43.1695, 45.7545, 48.3395, 51.7, 54.285, 56.87, 60.2305, 63.591, 66.9515, 70.312, 80.3935, 83.754,
+                  87.1145,
+                ].map((val) => {
+                  return (val + 100) * 1.25 - val - 100;
+                })[data.skillLevel + data.skillLevelAdd - 1]
+              : 0;
+          },
+          actionOn: ActionOn.Indirect,
+        },
+      ],
+      enable: true,
+      stackable: true,
+      stack: 1,
+      limit: 1,
+      stackText: "辉映·星超导",
+      stackType: "switch",
+      condition: ({ constellation }) => constellation >= 2,
+    },
     Constellation_A_3,
     Constellation_Q_5,
     {
       label: "6命·予无罪者以念抚",
-      describe: "惩戒·凌跃拳的暴击率提升10%，暴击伤害提升80%",
+      describe:
+        "惩戒·凌跃拳的暴击率提升10%，暴击伤害提升80%。辉映·星超导：斥逐拳与天辉·凌跃拳的暴击率提升10%，暴击伤害提升80%，且被寒烈的惩裁强化的第五段斥逐拳与天辉·凌跃拳能够额外生成冰锥，造成原本20%的冰元素伤害",
       effect: [
         { type: BuffType.StrongCritcal, getValue: () => 10 },
         { type: BuffType.StrongCritcalHurt, getValue: () => 80 },
+        { type: BuffType.NormalCritcal, getValue: (_, s) => 10 * s },
+        { type: BuffType.NormalCritcalHurt, getValue: (_, s) => 80 * s },
+        { type: BuffType.StellarConductCritcal, getValue: (_, s) => 10 * s, special: "laiou3" },
+        { type: BuffType.StellarConductCritcal, getValue: (_, s) => 10 * s, special: "laiou5" },
+        { type: BuffType.StellarConductCritcal, getValue: (_, s) => 10 * s, special: "laiouZ" },
+        { type: BuffType.StellarConductCritcalHurt, getValue: (_, s) => 80 * s, special: "laiou3" },
+        { type: BuffType.StellarConductCritcalHurt, getValue: (_, s) => 80 * s, special: "laiou5" },
+        { type: BuffType.StellarConductCritcalHurt, getValue: (_, s) => 80 * s, special: "laiouZ" },
       ],
       enable: true,
+      stackable: true,
+      stack: 1,
+      limit: 1,
+      stackText: "辉映·星超导",
+      stackType: "switch",
       condition: ({ constellation }) => constellation >= 6,
     },
   ];

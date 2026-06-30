@@ -127,7 +127,8 @@ const relicLibrary: IRelicLibraryItem[] = [
       setReliquartStat(2639070347, 15046, "止于阔步跌坠的灵摆", "UI_RelicIcon_15046_3", EquipType.EQUIP_DRESS),
     ],
     suit2: "二件套：攻击力提高18%。",
-    suit4: "四件套：超导反应造成的伤害提升80%，星超导反应造成的伤害提升40%；装备者攻击受到超导或星超导反应影响的敌人时，本次攻击的暴击率提高16%。",
+    suit4:
+      "四件套：超导反应造成的伤害提升80%，星超导反应造成的伤害提升40%；装备者攻击受到超导或星超导反应影响的敌人时，本次攻击的暴击率提高16%。",
     buffs: {
       suit2: [
         {
@@ -139,9 +140,15 @@ const relicLibrary: IRelicLibraryItem[] = [
       ],
       suit4: [
         {
-          label: "四件套·暴击率提高",
-          effect: [{ type: BuffType.GlobalCritcal, getValue: () => 16 }],
-          describe: "攻击受到超导反应影响的敌人时，本次攻击暴击率提高16%。",
+          label: "四件套·星超导反应伤害提升，暴击率提高",
+          effect: [
+            { type: BuffType.GlobalCritcal, getValue: () => 16 },
+            {
+              type: BuffType.StellarConductPrcent,
+              getValue: () => 40,
+            },
+          ],
+          describe: "星超导反应伤害提升40%，攻击受到超导反应影响的敌人时，本次攻击暴击率提高16%。",
           enable: true,
         },
       ],
@@ -1596,7 +1603,7 @@ const relicLibrary: IRelicLibraryItem[] = [
     ],
     suit2: "二件套：获得15%雷元素伤害加成。",
     suit4:
-      "四件套：超载、感电、超导、超绽放反应造成的伤害提升40%，超激化反应带来的伤害提升提高20%。触发上述元素反应或原激化反应时，元素战技冷却时间减少1秒。该效果每0.8秒最多触发一次。",
+      "四件套：超载、感电、超导、超绽放反应造成的伤害提升40%，超激化反应带来的伤害提升提高20%，月感电、星超导反应造成的伤害提升20%。触发上述元素反应或原激化反应时，元素战技冷却时间减少1秒。该效果每0.8秒最多触发一次。",
     buffs: {
       suit2: [
         {
@@ -1608,9 +1615,12 @@ const relicLibrary: IRelicLibraryItem[] = [
       ],
       suit4: [
         {
-          label: "四件套·超激化反应伤害提升",
-          effect: [{ type: BuffType.CatalyzeRate, getValue: () => 20 }],
-          describe: "超激化反应带来的伤害提升提高20%",
+          label: "四件套·超激化、月感电、星超导反应伤害提升",
+          effect: [{ type: BuffType.CatalyzeRate, getValue: () => 20 },
+            { type: BuffType.StellarConductPrcent, getValue: () => 20 },
+            { type: BuffType.MoonElectroPrcent, getValue: () => 20 },
+          ],
+          describe: "超激化反应带来的伤害提升提高20%；月感电、星超导反应伤害提升20%",
           enable: true,
         },
       ],

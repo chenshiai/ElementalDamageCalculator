@@ -1,12 +1,21 @@
 import Character from "../character-class";
 import { IBuffBase, ICharacterInfo } from "@/types/interface";
-import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
+import {
+  ActionOn,
+  AttackType,
+  BuffTarget,
+  BuffType,
+  ElementType,
+  Rarity,
+  SecondElementType,
+  WeaponType,
+} from "@/types/enum";
 import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 import { Constellation_E_3, Constellation_Q_5, S_80_HEALADD_22P } from "../buffs";
 
 @EnKaId(10000035, "七七")
 @Weapon(WeaponType.Sword)
-@Element(ElementType.Cryo)
+@Element(ElementType.Cryo, SecondElementType.Start)
 @BaseData(Rarity.Five, [12368, 287, 922], 80, [13247, 352, 988])
 @Icons("UI_AvatarIcon_Qiqi")
 export class QiqiData extends Character implements ICharacterInfo {
@@ -77,6 +86,9 @@ export class QiqiData extends Character implements ICharacterInfo {
     action("寒病鬼差伤害", AttackType.Skill, ElementType.Cryo, {
       atk: [0.36, 0.387, 0.414, 0.45, 0.477, 0.504, 0.54, 0.576, 0.612, 0.648, 0.684, 0.72, 0.765, 0.81, 0.855],
     }),
+    action("寒病鬼差协同攻击伤害", AttackType.Skill, ElementType.Cryo, {
+      atk: [0.24, 0.258, 0.276, 0.3, 0.318, 0.336, 0.36, 0.384, 0.408, 0.432, 0.456, 0.48, 0.51, 0.54, 0.57],
+    }),
     action("命中治疗量", AttackType.Heal, ElementType.None, {
       atk: [
         0.1056, 0.11352, 0.12144, 0.132, 0.13992, 0.14784, 0.1584, 0.16896, 0.17952, 0.19008, 0.20064, 0.2112, 0.2244,
@@ -103,6 +115,12 @@ export class QiqiData extends Character implements ICharacterInfo {
         2.848, 3.0616, 3.2752, 3.56, 3.7736, 3.9872, 4.272, 4.5568, 4.8416, 5.1264, 5.4112, 5.696, 6.052, 6.408, 6.764,
       ],
     }),
+    action("星超导伤害", AttackType.Start, ElementType.StellarConductCryo, {
+      atk: [
+        2.9733, 3.1963, 3.4193, 3.7167, 3.9397, 4.1627, 4.46, 4.7573, 5.0547, 5.352, 5.6493, 5.9467, 6.3183, 6.69,
+        7.0617,
+      ],
+    }),
     action("治疗量", AttackType.Heal, ElementType.None, {
       atk: [0.9, 0.9675, 1.035, 1.125, 1.1925, 1.26, 1.35, 1.44, 1.53, 1.62, 1.71, 1.8, 1.9125, 2.025, 2.1375],
       fixed: [
@@ -123,17 +141,46 @@ export class QiqiData extends Character implements ICharacterInfo {
       target: BuffTarget.All,
     },
     {
+      label: "七宝奉真",
+      describe: "辉映·星超导：队伍中自己的角色造成的超导、星超导反应伤害提升50%",
+      effect: [{ type: BuffType.StellarConductPrcent, getValue: () => 50 }],
+      enable: true,
+      shareable: true,
+      target: BuffTarget.All,
+    },
+    {
       label: "2命·冰寒蚀骨",
-      describe: "对受到冰元素影响的敌人，七七的普通攻击与重击造成的伤害提升15%",
+      describe: "对受到冰元素影响的敌人，七七的普通攻击与重击造成的伤害提升15%。辉映·星超导：七七的攻击力提升50%",
       effect: [
         { type: BuffType.NormalPrcent, getValue: () => 15 },
         { type: BuffType.StrongPrcent, getValue: () => 15 },
+        { type: BuffType.ATKPrcent, getValue: (_, s) => 50 * s },
       ],
       enable: true,
       condition: ({ constellation }) => constellation >= 2,
+      stackable: true,
+      stackText: "辉映·星超导",
+      stack: 1,
+      limit: 1,
+      stackType: "switch",
     },
     Constellation_E_3,
     Constellation_Q_5,
+    {
+      label: "6命·起死回骸",
+      describe:
+        "辉映·星超导：除七七外的队伍中自己的当前场上角色造成星超导反应伤害时，将消耗1层洞玄，提升造成的伤害，提升值相当于七七攻击力的600%",
+      effect: [
+        {
+          type: BuffType.StellarConductFixed,
+          getValue: (data) => (data.baseATK + data.extraATK + data.extraATK_NT) * 6,
+        },
+      ],
+      enable: true,
+      shareable: true,
+      target: BuffTarget.All,
+      condition: ({ constellation }) => constellation >= 6,
+    },
   ];
 }
 

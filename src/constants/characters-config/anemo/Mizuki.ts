@@ -1,6 +1,6 @@
 import Character from "../character-class";
 import { ICharacterInfo } from "@/types/interface";
-import { ActionOn, AttackType, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
+import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
 import { Constellation_E_3, Constellation_Q_5, S_80_MYSTERY_115 } from "../buffs";
 import { EnKaId, Weapon, Element, BaseData, Icons, action } from "@/utils/decorator";
 
@@ -94,7 +94,14 @@ export class MizukiData extends Character implements ICharacterInfo {
       ],
     }),
   ];
-  otherSkill = [];
+  otherSkill = [
+    action("1命·宿雾若水遥伤害", AttackType.Other, ElementType.Anemo, {
+      em: [10],
+    }),
+    action("4命·泉轻流花暖治疗", AttackType.Heal, ElementType.None, {
+      em: [2.66],
+    }),
+  ];
   buffs = [
     ...S_80_MYSTERY_115,
     {
@@ -110,9 +117,44 @@ export class MizukiData extends Character implements ICharacterInfo {
       enable: true,
     },
     {
+      label: "廊然梦生",
+      describe:
+        "造成的风元素范围伤害将会提升，提升值相当于梦见月瑞希元素精通的1000%。队伍中附近的角色的元素精通提升，提升值相当于梦见月瑞希自己的元素精通的10%",
+      effect: [
+        {
+          type: BuffType.AnemoFixed,
+          getValue: (data) => data.elementalMystery + data.elementalMystery_NT * 1000,
+          actionOn: ActionOn.External,
+        },
+        {
+          type: BuffType.MysteryFixed,
+          getValue: (data) => data.elementalMystery * 0.1,
+          transform: true,
+          actionOn: ActionOn.Indirect,
+        },
+      ],
+      enable: true,
+      target: BuffTarget.Self,
+    },
+    {
+      label: "廊然梦生",
+      describe: "队伍中附近的角色的元素精通提升，提升值相当于梦见月瑞希自己的元素精通的10%",
+      effect: [
+        {
+          type: BuffType.MysteryFixed,
+          getValue: (data) => data.elementalMystery * 0.1,
+          transform: true,
+          actionOn: ActionOn.Indirect,
+        },
+      ],
+      enable: false,
+      shareable: true,
+      target: BuffTarget.Other,
+    },
+    {
       label: "2命·「缠忆君影梦相见」",
       describe:
-        "进入梦浮状态时，梦见月瑞希的每点元素精通，会为附近的队伍中所有其他角色提供0.04%火元素、水元素、冰元素与雷元素伤害加成，效果持续至梦浮状态结束。",
+        "进入梦浮状态时，梦见月瑞希的每点元素精通，会为附近的队伍中所有其他角色提供0.04%火元素、水元素、冰元素与雷元素伤害加成，效果持续至梦浮状态结束。此外，梦见月瑞希处于梦浮状态下时，附近敌人的火元素抗性、水元素抗性、冰元素抗性、雷元素抗性与风元素抗性降低20%",
       effect: [
         {
           type: BuffType.PyroPrcent,
@@ -138,6 +180,26 @@ export class MizukiData extends Character implements ICharacterInfo {
           transform: true,
           actionOn: ActionOn.Indirect,
         },
+        {
+          type: BuffType.EnemyCryoResistance,
+          getValue: () => -20,
+        },
+        {
+          type: BuffType.EnemyAnemoResistance,
+          getValue: () => -20,
+        },
+        {
+          type: BuffType.EnemyHydroResistance,
+          getValue: () => -20,
+        },
+        {
+          type: BuffType.EnemyElectroResistance,
+          getValue: () => -20,
+        },
+        {
+          type: BuffType.EnemyPyroResistance,
+          getValue: () => -20,
+        },
       ],
       shareable: true,
       enable: false,
@@ -145,6 +207,29 @@ export class MizukiData extends Character implements ICharacterInfo {
     },
     Constellation_E_3,
     Constellation_Q_5,
+    {
+      label: "6命·「慕念萦心间」",
+      describe:
+        "基于梦见月瑞希元素精通超过500的部分，每点元素精通都会使梦见月瑞希的暴击率提升0.04%、暴击伤害提升0.16%，至多通过这种方式使梦见月瑞希的暴击率提升20%、暴击伤害提升80%",
+      effect: [
+        {
+          type: BuffType.Critcal,
+          getValue: (data) => Math.min(20, Math.max(0, data.elementalMystery - 500) * 0.04),
+          transform: true,
+          actionOn: ActionOn.Indirect,
+        },
+        
+        {
+          type: BuffType.CritcalHurt,
+          getValue: (data) => Math.min(80, Math.max(0, data.elementalMystery - 500) * 0.16),
+          transform: true,
+          actionOn: ActionOn.Indirect,
+        },
+      ],
+      enable: true,
+      condition: ({ constellation }) => constellation >= 6,
+    },
+
   ];
 }
 /**

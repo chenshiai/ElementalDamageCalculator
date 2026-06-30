@@ -1,12 +1,21 @@
 import Character from "../character-class";
 import { IBuffBase, ICharacterInfo } from "@/types/interface";
-import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
+import {
+  ActionOn,
+  AttackType,
+  BuffTarget,
+  BuffType,
+  ElementType,
+  Rarity,
+  SecondElementType,
+  WeaponType,
+} from "@/types/enum";
 import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 import { A_80_CRYO_24P, Constellation_E_5, Constellation_Q_3 } from "../buffs";
 
 @EnKaId(10000039, "迪奥娜")
 @Weapon(WeaponType.Bow)
-@Element(ElementType.Cryo)
+@Element(ElementType.Cryo, SecondElementType.Start)
 @BaseData(Rarity.Four, [9570, 212, 601], 80, [10232, 266, 642])
 @Icons("UI_AvatarIcon_Diona")
 export class DionaData extends Character implements ICharacterInfo {
@@ -136,12 +145,27 @@ export class DionaData extends Character implements ICharacterInfo {
     Constellation_E_5,
     {
       label: "6命·猫尾打烊之时",
-      describe: "最烈特调领域内的角色生命值高于50%时，元素精通提升200",
-      effect: [{ type: BuffType.MysteryFixed, getValue: () => 200 }],
+      describe: "最烈特调领域内的角色生命值高于50%时，元素精通提升200，此外，迪奥娜的生命值上限提升25%。",
+      effect: [
+        { type: BuffType.MysteryFixed, getValue: () => 200 },
+        { type: BuffType.HPPrcent, getValue: () => 25 },
+      ],
       enable: true,
       condition: ({ constellation }) => constellation >= 6,
+      target: BuffTarget.Self,
+    },
+    {
+      label: "6命·猫尾打烊之时",
+      describe:
+        "最烈特调领域内的角色生命值高于50%时，元素精通提升200；辉映·星超导：处在最烈特调领域内的角色造成的超导、星超导反应伤害提升40%。",
+      effect: [
+        { type: BuffType.MysteryFixed, getValue: () => 200 },
+        { type: BuffType.StellarConductPrcent, getValue: () => 40 },
+      ],
+      enable: false,
+      condition: ({ constellation }) => constellation >= 6,
       shareable: true,
-      target: BuffTarget.All,
+      target: BuffTarget.Other,
     },
   ];
 }
