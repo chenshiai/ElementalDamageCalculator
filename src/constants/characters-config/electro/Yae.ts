@@ -189,7 +189,7 @@ export class YaeData extends Character implements ICharacterInfo {
       label: "2命·望月吼哕声",
       describe: `根据杀生樱的位阶，使八重神子与队伍中自己的当前场上角色的元素精通提升60/90/120/200`,
       effect: [{ type: BuffType.MysteryFixed, getValue: (_, s) => [0, 60, 90, 120, 200][s] }],
-      stack: 3,
+      stack: 4,
       limit: 4,
       stackable: true,
       stackText: "杀生樱位阶",
