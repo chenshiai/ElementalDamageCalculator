@@ -1,12 +1,21 @@
 import Character from "../character-class";
 import { IBuffBase, ICharacterInfo } from "@/types/interface";
-import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
+import {
+  ActionOn,
+  AttackType,
+  BuffTarget,
+  BuffType,
+  ElementType,
+  Rarity,
+  SecondElementType,
+  WeaponType,
+} from "@/types/enum";
 import { Weapon, Element, Icons, EnKaId, BaseData, action } from "@/utils/decorator";
 import { A_80_ELECTRO_24P, Constellation_E_3, Constellation_Q_5 } from "../buffs";
 
 @EnKaId(10000024, "北斗")
 @Weapon(WeaponType.GreatSword)
-@Element(ElementType.Electro)
+@Element(ElementType.Electro, SecondElementType.Start)
 @BaseData(Rarity.Four, [13050, 225, 648], 80, [13953, 282, 693])
 @Icons("UI_AvatarIcon_Beidou")
 export class BeidouData extends Character implements ICharacterInfo {
@@ -154,12 +163,21 @@ export class BeidouData extends Character implements ICharacterInfo {
     Constellation_Q_5,
     {
       label: "6命·北斗祓幽孽",
-      describe: "斫雷持续期间，周围敌人的雷元素抗性降低15%",
-      effect: [{ type: BuffType.EnemyElectroResistance, getValue: () => -15 }],
+      describe:
+        "斫雷持续期间，周围敌人的雷元素抗性降低15%；辉映·星超导：斫雷持续期间，附近敌人的冰元素抗性还会降低15%，且当前场上角色元素精通提升200点。",
+      effect: [
+        { type: BuffType.EnemyElectroResistance, getValue: () => -15 },
+        { type: BuffType.EnemyCryoResistance, getValue: (_, s) => s * -15 },
+        { type: BuffType.MysteryFixed, getValue: (_, s) => s * 200 },
+      ],
       enable: false,
       condition: ({ constellation }) => constellation >= 6,
       shareable: true,
-      target: BuffTarget.Enemy,
+      stackable: true,
+      stack: 1,
+      limit: 1,
+      stackType: "switch",
+      stackText: "辉映·星超导",
     },
   ];
 }

@@ -1,12 +1,12 @@
 import Character from "../character-class";
 import { IBuffBase, ICharacterInfo } from "@/types/interface";
-import { ActionOn, AttackType, BuffType, ElementType, Rarity, WeaponType } from "@/types/enum";
+import { ActionOn, AttackType, BuffTarget, BuffType, ElementType, Rarity, SecondElementType, WeaponType } from "@/types/enum";
 import { Constellation_E_5, Constellation_Q_3, S_80_CRITALHUNT_38P } from "../buffs";
 import { EnKaId, Weapon, Element, BaseData, Icons, action } from "@/utils/decorator";
 
 @EnKaId(10000071, "赛诺")
 @Weapon(WeaponType.Polearms)
-@Element(ElementType.Electro)
+@Element(ElementType.Electro, SecondElementType.Start)
 @BaseData(Rarity.Five, [12491, 318, 859], 80, [13379, 390, 920])
 @Icons("UI_AvatarIcon_Cyno")
 export class CynoData extends Character implements ICharacterInfo {
@@ -180,6 +180,15 @@ export class CynoData extends Character implements ICharacterInfo {
       },
       "Cyno2"
     ),
+    action(
+      "渡荒之雷·星偕伤害",
+      AttackType.Start,
+      ElementType.StellarConductElectro,
+      {
+        atk: [2],
+      },
+      "Cyno3"
+    ),
   ];
   buffs: IBuffBase[] = [
     ...S_80_CRITALHUNT_38P,
@@ -197,7 +206,7 @@ export class CynoData extends Character implements ICharacterInfo {
     {
       label: "落羽的裁择",
       describe:
-        "赛诺在「末途真眼」状态期间施放秘仪·律渊渡魂时，将触发「裁定」效果，使此次秘仪·律渊渡魂造成的伤害提升35%",
+        "赛诺在「末途真眼」状态期间施放秘仪·律渊渡魂时，将触发「裁定」效果，使此次秘仪·律渊渡魂造成的伤害提升35%;辉映·星超导：触发裁定效果时，会转为向前方发射3道渡荒之雷·星偕，造成等同于赛诺攻击力200%的雷元素伤害，该伤害视为星超导反应造成的伤害",
       effect: [
         {
           type: BuffType.SkillPrcent,
@@ -209,9 +218,10 @@ export class CynoData extends Character implements ICharacterInfo {
     },
     {
       label: "九弓的执命",
-      describe: `基于赛诺的元素精通，提高自身以下攻击造成的伤害值：
-      启途誓使状态下的普通攻击：元素精通的150%；
-      固有天赋「落羽的裁择」的渡荒之雷：元素精通的250%`,
+      describe: `基于赛诺的元素精通，提高自身以下攻击造成的伤害值：\n
+      启途誓使状态下的普通攻击：元素精通的150%；\n
+      固有天赋「落羽的裁择」的渡荒之雷：元素精通的250%；\n
+      突破天赋「落羽的裁择」的渡荒之雷·星偕：元素精通的600%`,
       effect: [
         {
           type: BuffType.NormalFixed,
@@ -225,22 +235,67 @@ export class CynoData extends Character implements ICharacterInfo {
           special: "Cyno2",
           actionOn: ActionOn.External,
         },
+        {
+          type: BuffType.StellarConductFixed,
+          getValue: (data) => (data.elementalMystery + data.elementalMystery_NT) * 6,
+          special: "Cyno3",
+          actionOn: ActionOn.External,
+        },
       ],
       enable: true,
     },
     {
+      label: "1命·立仪·俯览昼冥",
+      describe: "辉映·星超导：进入启途誓使状态时，还会额外获得偕日共升效果：元素精通提升200点。\n持续期间，赛诺在当前场上切换角色时，下一名登场角色将会继承偕日共升效果与其剩余持续时间。",
+      effect: [
+        {
+          type: BuffType.MysteryFixed,
+          getValue: (_, s) => s * 200,
+        },
+      ],
+      enable: true,
+      stackable: true,
+      shareable: true,
+      stack: 1,
+      limit: 1,
+      stackType: "switch",
+      stackText: "辉映·星超导",
+      condition: ({ constellation }) => constellation >= 1,
+    },
+    {
       label: "2命·令仪·引谒归灵",
-      describe: "赛诺的普通攻击命中敌人后，雷元素伤害加成提升10%，至多叠加5层",
+      describe: "赛诺的普通攻击命中敌人后，雷元素伤害加成提升10%，至多叠加5层；处于偕日共升效果影响下的角色的普通攻击与重击命中敌人时，该角色造成的星超导反应伤害提升16%",
       effect: [
         {
           type: BuffType.ElectroPrcent,
           getValue: (_, s) => s * 10,
+        },
+        {
+          type: BuffType.StellarConductPrcent,
+          getValue: (_, s) => s * 16,
         },
       ],
       enable: true,
       stackable: true,
       stack: 5,
       limit: 5,
+      condition: ({ constellation }) => constellation >= 2,
+    },
+    
+    {
+      label: "2命·令仪·引谒归灵",
+      describe: "处于偕日共升效果影响下的角色的普通攻击与重击命中敌人时，该角色造成的星超导反应伤害提升16%",
+      effect: [
+        {
+          type: BuffType.StellarConductPrcent,
+          getValue: (_, s) => s * 16,
+        },
+      ],
+      enable: false,
+      stackable: true,
+      stack: 5,
+      limit: 5,
+      target: BuffTarget.Other,
       condition: ({ constellation }) => constellation >= 2,
     },
     Constellation_Q_3,
