@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>千星沙箱文本编辑器v20260529</title>
+    <title>千星沙箱工具箱v20260703</title>
     <link rel="stylesheet" href="font.css" />
     <style>
       * {
@@ -777,6 +777,94 @@
       #opacitySlider {
         flex: 1;
       }
+
+      .resilience-container {
+        width: 100%;
+        max-width: 1200px;
+        padding: 16px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .resilience-table-wrapper {
+        flex: 1;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .resilience-table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+
+      .resilience-table th,
+      .resilience-table td {
+        padding: 12px 8px;
+        text-align: center;
+        border-bottom: 1px solid #e1e5eb;
+        font-size: 14px;
+      }
+
+      .resilience-table th {
+        background-color: #4b6cb7;
+        color: white;
+        font-weight: bold !important;
+        position: sticky;
+        top: 0;
+        z-index: 1;
+      }
+
+      .resilience-table tbody tr:hover {
+        background-color: #f8f9fa;
+      }
+
+      .resilience-table tbody tr:last-child td {
+        border-bottom: none;
+      }
+
+      .icon-cell {
+        width: 60px;
+        background-color: #f0f0f0;
+      }
+
+      .target-input {
+        width: 100%;
+        max-width: 120px;
+        text-align: center;
+      }
+
+      .rate-cell {
+        color: #4caf50;
+        font-weight: bold;
+        min-width: 100px;
+      }
+
+      .resilience-actions {
+        display: flex;
+        gap: 8px;
+        margin-top: 12px;
+        justify-content: flex-end;
+        flex-shrink: 0;
+      }
+
+      .resilience-actions button {
+        padding: 8px 20px;
+        font-size: 14px;
+      }
+
+      #resetAllBtn {
+        background-color: #6c757d;
+      }
+
+      #resetAllBtn:hover {
+        background-color: #5a6268;
+      }
     </style>
   </head>
 
@@ -786,20 +874,21 @@
       <div class="sidebar">
         <div class="header">
           <h1>
-            千星沙箱文本编辑器
-            <p>v20260529</p>
+            千星沙箱工具箱
+            <p>v20260703 by 琳妮特的毛绒球</p>
           </h1>
         </div>
 
         <div class="toolbar">
           <div class="tool-group">
-            <label>模式:</label>
+            <label>功能:</label>
             <button id="textEditorBtn" class="mode-btn active">文本编辑</button>
             <button id="pixelEditorBtn" class="mode-btn">像素画绘制</button>
+            <button id="creatureResilienceBtn" class="mode-btn">造物韧性计算</button>
           </div>
 
           <div class="tool-group" id="textTools">
-            <label>颜色:</label>
+            <label>常用颜色:</label>
             <div class="color-presets">
               <div
                 class="color-preset"
@@ -846,6 +935,7 @@
                 data-color="transparent"
               ></div>
             </div>
+            <label>调色盘:</label>
             <div class="color-picker-container">
               <input type="color" id="colorPicker" value="#d3bc8e" />
             </div>
@@ -892,7 +982,9 @@
               <option value="120">120px</option>
               <option value="124">124px</option>
               <option value="128">128px</option>
+              <option value="custom">自定义</option>
             </select>
+            <input type="number" id="customFontSize" placeholder="输入数字" min="1" max="999" style="width: 100%; display: none;" />
             <button id="applySize">应用字号</button>
           </div>
 
@@ -930,13 +1022,11 @@
           </div>
 
           <div class="tool-group" id="pixelTools3" style="display: none">
-            <button id="copyPixelArt">
-              复制整张像素画
-            </button>
+            <button id="copyPixelArt">复制整张像素画</button>
             <button id="copyAllRows" title="将所有行复制到字符串数组并保存到剪贴板" style="background-color: #e91e63">
               复制所有行(数组)
             </button>
-            <button id="savePixelArt" title="将当前像素画保存到浏览器本地" style="background-color: #4caf50">
+            <button id="savePixelArt" title="将当前像素画保存到浏览器本地缓存中" style="background-color: #4caf50">
               保存像素画
             </button>
             <button id="loadPixelArt" title="从浏览器本地存储中加载像素画" style="background-color: #2196f3">
@@ -969,7 +1059,12 @@
               <i>📝</i>输入区域————<i>鼠标框选文本后点击应用颜色即可一键添加颜色</i>
             </h2>
             <h2 class="section-title" id="pixelEditorTitle" style="display: none">
-              <i>🎨</i>像素画绘制区域————<i>选择颜色后，左键点击对应方格填入颜色，右键恢复为默认白色，中键拖动画布，CTRL+Z 撤回</i>
+              <i>🎨</i>像素画绘制区域————<i
+                >选择颜色后，左键点击对应方格填入颜色，右键恢复为默认白色，中键拖动画布，CTRL+Z 撤回</i
+              >
+            </h2>
+            <h2 class="section-title" id="creatureResilienceTitle" style="display: none">
+              <i>🐉</i>造物韧性设置————<i>设置各类造物的受打断值上限和目标值，自动计算受打断倍率</i>
             </h2>
 
             <div id="textEditorContent">
@@ -987,9 +1082,30 @@
 
             <div id="pixelEditorContent" style="display: none">
               <div class="pixel-canvas-container">
-                <div id="canvasWrapper" style="position: relative; overflow: visible;">
+                <div id="canvasWrapper" style="position: relative; overflow: visible">
                   <canvas id="pixelCanvas"></canvas>
-                  <div id="copyButtonsContainer" style="position: absolute; left: calc(100% + 10px); top: 0;"></div>
+                  <div id="copyButtonsContainer" style="position: absolute; left: calc(100% + 10px); top: 0"></div>
+                </div>
+              </div>
+            </div>
+
+            <div id="creatureResilienceContent" style="display: none;flex: 1;justify-content: center;overflow: hidden;">
+              <div class="resilience-container">
+                <div class="resilience-table-wrapper">
+                  <table class="resilience-table">
+                  <thead>
+                    <tr>
+                      <th>造物名称</th>
+                      <th>受打断值上限</th>
+                      <th>目标受打断值</th>
+                      <th>受打断倍率</th>
+                    </tr>
+                  </thead>
+                  <tbody id="resilienceTableBody"></tbody>
+                  </table>
+                </div>
+                <div class="resilience-actions">
+                  <button id="resetAllBtn">重置所有</button>
                 </div>
               </div>
             </div>
@@ -1265,9 +1381,22 @@
           wrapSelectedText("<i>", "</i>");
         });
 
+        // 下拉菜单选择时处理显示/隐藏输入框
+        fontSize.addEventListener("change", function () {
+          const customInput = document.getElementById("customFontSize");
+          if (this.value === "custom") {
+            customInput.style.display = "block";
+            customInput.focus();
+          } else {
+            customInput.style.display = "none";
+            customInput.value = this.value;
+          }
+        });
+
         // 应用字号按钮
         applySize.addEventListener("click", function () {
-          const size = fontSize.value;
+          const customSize = document.getElementById("customFontSize").value;
+          const size = fontSize.value === "custom" ? customSize : fontSize.value;
           wrapSelectedText(`<size=${size}>`, `</size>`);
         });
 
@@ -1463,6 +1592,7 @@
       // 像素画功能 - 使用Canvas实现
       const textEditorBtn = document.getElementById("textEditorBtn");
       const pixelEditorBtn = document.getElementById("pixelEditorBtn");
+      const creatureResilienceBtn = document.getElementById("creatureResilienceBtn");
       const textTools = document.getElementById("textTools");
       const textTools2 = document.getElementById("textTools2");
       const textTools3 = document.getElementById("textTools3");
@@ -1474,8 +1604,10 @@
       const pixelTools3 = document.getElementById("pixelTools3");
       const textEditorTitle = document.getElementById("textEditorTitle");
       const pixelEditorTitle = document.getElementById("pixelEditorTitle");
+      const creatureResilienceTitle = document.getElementById("creatureResilienceTitle");
       const textEditorContent = document.getElementById("textEditorContent");
       const pixelEditorContent = document.getElementById("pixelEditorContent");
+      const creatureResilienceContent = document.getElementById("creatureResilienceContent");
       const pixelCanvas = document.getElementById("pixelCanvas");
       const canvasWrapper = document.getElementById("canvasWrapper");
       const canvasWidthInput = document.getElementById("canvasWidth");
@@ -1550,7 +1682,7 @@
         if (color === "transparent") {
           return "rgba(0, 0, 0, 0)";
         }
-        
+
         const r = parseInt(color.substring(1, 3), 16);
         const g = parseInt(color.substring(3, 5), 16);
         const b = parseInt(color.substring(5, 7), 16);
@@ -1579,18 +1711,13 @@
           const checkerSize = pixelSize / 2;
           const white = "#ffffff";
           const gray = "#e0e0e0";
-          
+
           for (let i = 0; i < 2; i++) {
             for (let j = 0; j < 2; j++) {
               // 棋盘格颜色判断
               const isWhite = (i + j) % 2 === 0;
               ctx.fillStyle = isWhite ? white : gray;
-              ctx.fillRect(
-                x * pixelSize + j * checkerSize,
-                y * pixelSize + i * checkerSize,
-                checkerSize,
-                checkerSize
-              );
+              ctx.fillRect(x * pixelSize + j * checkerSize, y * pixelSize + i * checkerSize, checkerSize, checkerSize);
             }
           }
         } else {
@@ -1616,7 +1743,7 @@
           saveHistory();
           hasSavedHistory = true;
         }
-        
+
         let rgbaColor;
         if (selectedColor === "transparent") {
           rgbaColor = "rgba(0, 0, 0, 0)";
@@ -1641,7 +1768,7 @@
           saveHistory();
           hasSavedHistory = true;
         }
-        
+
         const whiteColor = "rgba(255, 255, 255, 1)";
         pixelData[y][x] = whiteColor;
         drawPixel(x, y, whiteColor);
@@ -1681,7 +1808,7 @@
       // 鼠标按下处理
       function handleMouseDown(e) {
         e.preventDefault();
-        
+
         // 中键拖拽
         if (e.button === 1) {
           isDragging = true;
@@ -1690,10 +1817,10 @@
           pixelCanvas.style.cursor = "grabbing";
           return;
         }
-        
+
         isDrawing = true;
         const pos = getPixelPos(e);
-        
+
         if (e.button === 0) {
           fillPixel(pos.x, pos.y);
         } else if (e.button === 2) {
@@ -1733,7 +1860,7 @@
       function initCanvas() {
         // 初始化Canvas上下文
         ctx = pixelCanvas.getContext("2d");
-        
+
         // 设置画布尺寸
         updateCanvasSize();
 
@@ -1758,7 +1885,7 @@
         // 重新创建复制按钮
         const copyButtonsContainer = document.getElementById("copyButtonsContainer");
         copyButtonsContainer.innerHTML = "";
-        
+
         for (let y = 0; y < canvasHeight; y++) {
           const copyBtn = document.createElement("div");
           copyBtn.className = "copy-row-btn";
@@ -1775,11 +1902,11 @@
       // 处理鼠标滚轮缩放
       function handleWheel(e) {
         e.preventDefault();
-        
+
         // 计算缩放增量
         const zoomIncrement = e.deltaY > 0 ? -0.1 : 0.1;
         const newZoom = zoom + zoomIncrement;
-        
+
         // 限制缩放范围
         if (newZoom >= 0.5 && newZoom <= 3) {
           zoom = newZoom;
@@ -1806,12 +1933,12 @@
         pixelCanvas.addEventListener("mousemove", handleMouseMove);
         document.addEventListener("mouseup", handleMouseUp);
         document.addEventListener("mouseleave", handleMouseUp);
-        
+
         // 阻止右键菜单
         pixelCanvas.addEventListener("contextmenu", (e) => {
           e.preventDefault();
         });
-        
+
         // 绑定滚轮缩放事件
         pixelCanvas.addEventListener("wheel", handleWheel);
       }
@@ -1863,7 +1990,7 @@
           // 更新复制按钮
           const copyButtonsContainer = document.getElementById("copyButtonsContainer");
           copyButtonsContainer.innerHTML = "";
-          
+
           for (let y = 0; y < canvasHeight; y++) {
             const copyBtn = document.createElement("div");
             copyBtn.className = "copy-row-btn";
@@ -2295,7 +2422,7 @@
             // 更新复制按钮
             const copyButtonsContainer = document.getElementById("copyButtonsContainer");
             copyButtonsContainer.innerHTML = "";
-            
+
             for (let y = 0; y < canvasHeight; y++) {
               const copyBtn = document.createElement("div");
               copyBtn.className = "copy-row-btn";
@@ -2569,6 +2696,8 @@
         if (mode === "text") {
           textEditorBtn.classList.add("active");
           pixelEditorBtn.classList.remove("active");
+          creatureResilienceBtn.classList.remove("active");
+          textTools.style.display = "flex";
           textTools2.style.display = "flex";
           textTools3.style.display = "flex";
           textTools4.style.display = "flex";
@@ -2579,11 +2708,13 @@
           pixelTools3.style.display = "none";
           textEditorTitle.style.display = "block";
           pixelEditorTitle.style.display = "none";
+          creatureResilienceTitle.style.display = "none";
           textEditorContent.style.display = "flex";
           textEditorContent.style.flexDirection = "column";
           textEditorContent.style.flexGrow = "1";
           textEditorContent.querySelector("textarea").style.flexGrow = "1";
           pixelEditorContent.style.display = "none";
+          creatureResilienceContent.style.display = "none";
           // 显示文本预览
           const previewSection = document.querySelector(".preview-section");
           if (previewSection) {
@@ -2610,9 +2741,11 @@
           if (typeof updatePreview === "function") {
             updatePreview();
           }
-        } else {
+        } else if (mode === "pixel") {
           textEditorBtn.classList.remove("active");
           pixelEditorBtn.classList.add("active");
+          creatureResilienceBtn.classList.remove("active");
+          textTools.style.display = "flex";
           textTools2.style.display = "none";
           textTools3.style.display = "none";
           textTools4.style.display = "none";
@@ -2623,8 +2756,10 @@
           pixelTools3.style.display = "flex";
           textEditorTitle.style.display = "none";
           pixelEditorTitle.style.display = "block";
+          creatureResilienceTitle.style.display = "none";
           textEditorContent.style.display = "none";
           pixelEditorContent.style.display = "block";
+          creatureResilienceContent.style.display = "none";
           // 隐藏文本预览，因为像素画有独立的导出功能
           document.querySelector(".preview-section").style.display = "none";
           // 不要清空画布，保持之前的绘制内容
@@ -2634,6 +2769,27 @@
             // 重绘画布以显示之前的内容
             redrawCanvas();
           }
+        } else if (mode === "resilience") {
+          textEditorBtn.classList.remove("active");
+          pixelEditorBtn.classList.remove("active");
+          creatureResilienceBtn.classList.add("active");
+          textTools.style.display = "none";
+          textTools2.style.display = "none";
+          textTools3.style.display = "none";
+          textTools4.style.display = "none";
+          textTools5.style.display = "none";
+          layoutTools.style.display = "none";
+          pixelTools.style.display = "none";
+          pixelTools2.style.display = "none";
+          pixelTools3.style.display = "none";
+          textEditorTitle.style.display = "none";
+          pixelEditorTitle.style.display = "none";
+          creatureResilienceTitle.style.display = "block";
+          textEditorContent.style.display = "none";
+          pixelEditorContent.style.display = "none";
+          creatureResilienceContent.style.display = "flex";
+          // 隐藏文本预览
+          document.querySelector(".preview-section").style.display = "none";
         }
       }
 
@@ -2650,6 +2806,7 @@
       // 绑定事件
       textEditorBtn.addEventListener("click", () => switchMode("text"));
       pixelEditorBtn.addEventListener("click", () => switchMode("pixel"));
+      creatureResilienceBtn.addEventListener("click", () => switchMode("resilience"));
 
       // 绑定键盘事件
       document.addEventListener("keydown", (e) => {
@@ -2658,6 +2815,92 @@
           undo();
         }
       });
+
+      // 造物韧性设置相关功能
+      const creatures = [
+        { name: "小史莱姆", base: 30 },
+        { name: "大型史莱姆", base: 120 },
+        { name: "小丘丘人", base: 60 },
+        { name: "丘丘暴徒", base: 210 },
+        { name: "丘丘王", base: 280 },
+        { name: "深渊法师", base: 100 },
+        { name: "盗宝团", base: 60 },
+        { name: "骗骗花", base: 60 },
+        { name: "小蕈兽", base: 30 },
+        { name: "大蕈兽", base: 210 },
+        { name: "野猪", base: 60 },
+        { name: "漂浮鸟", base: 60 },
+        { name: "愚人众先遣队·冰铳重卫士", base: 210 },
+        { name: "愚人众先遣队·雷锤前锋军", base: 210 },
+        { name: "愚人众先遣队·火铳游击兵", base: 120 },
+        { name: "深渊使徒", base: 210 },
+        { name: "野伏众", base: 100 },
+        { name: "海乱鬼", base: 210 },
+        { name: "镀金旅团·阵前斧手", base: 60 },
+        { name: "镀金旅团·沙中净水", base: 120 },
+        { name: "疾迅勇士·引索客", base: 60 },
+        { name: "大灵", base: 210 }
+      ];
+
+      function renderResilienceTable() {
+        const tbody = document.getElementById("resilienceTableBody");
+        tbody.innerHTML = "";
+
+        creatures.forEach((creature) => {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td>${creature.name}</td>
+            <td>${creature.base}</td>
+            <td><input type="number" class="target-input" data-base="${creature.base}" value="${creature.base}" min="1" /></td>
+            <td class="rate-cell">100%</td>
+          `;
+          tbody.appendChild(tr);
+        });
+
+        bindResilienceEvents();
+      }
+
+      function updateResilienceRate(input) {
+        const base = parseFloat(input.dataset.base);
+        const target = parseFloat(input.value);
+        const rateCell = input.parentElement.nextElementSibling;
+
+        if (target && target > 0) {
+          const rate = (base / target) * 100;
+          rateCell.textContent = rate.toFixed(2) + "%";
+        } else {
+          rateCell.textContent = "--";
+        }
+      }
+
+      function bindResilienceEvents() {
+        const targetInputs = document.querySelectorAll(".target-input");
+        targetInputs.forEach((input) => {
+          input.addEventListener("input", function () {
+            if (this.value < 1) {
+              this.value = 1;
+            }
+            updateResilienceRate(this);
+          });
+          input.addEventListener("change", function () {
+            updateResilienceRate(this);
+          });
+        });
+      }
+
+      const resetAllBtn = document.getElementById("resetAllBtn");
+      if (resetAllBtn) {
+        resetAllBtn.addEventListener("click", () => {
+          const inputs = document.querySelectorAll(".target-input");
+          inputs.forEach((input) => {
+            input.value = input.dataset.base;
+            updateResilienceRate(input);
+          });
+          showCopyNotification("已重置所有造物的目标受打断值");
+        });
+      }
+
+      renderResilienceTable();
 
       // 初始化
       initCanvas();
