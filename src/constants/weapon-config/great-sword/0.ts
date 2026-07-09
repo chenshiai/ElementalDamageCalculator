@@ -33,3 +33,4 @@ export * from "./Kione";
 export * from "./Dragonfell";
 export * from "./Claymore_Ilmarinen";
 export * from "./Claymore_EnsisAquilonis";
+export * from "./CrystallineSword";

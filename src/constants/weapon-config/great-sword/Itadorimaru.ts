@@ -29,7 +29,7 @@ export const Itadorimaru = createWeapon(
       {
         label: "防御力提高",
         describe: `防御力提高${a}%`,
-        effect: [{ type: BuffType.DEFPrcent, getValue: () => d }],
+        effect: [{ type: BuffType.DEFPrcent, getValue: () => a }],
         enable: true,
       },
       {

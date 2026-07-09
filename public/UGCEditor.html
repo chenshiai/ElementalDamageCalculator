@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>千星沙箱工具箱v20260703</title>
+    <title>千星沙箱工具箱v20260706</title>
     <link rel="stylesheet" href="font.css" />
     <style>
       * {
@@ -875,7 +875,7 @@
         <div class="header">
           <h1>
             千星沙箱工具箱
-            <p>v20260703 by 琳妮特的毛绒球</p>
+            <p>v20260706 by 琳妮特的毛绒球</p>
           </h1>
         </div>
 
@@ -984,7 +984,14 @@
               <option value="128">128px</option>
               <option value="custom">自定义</option>
             </select>
-            <input type="number" id="customFontSize" placeholder="输入数字" min="1" max="999" style="width: 100%; display: none;" />
+            <input
+              type="number"
+              id="customFontSize"
+              placeholder="输入数字"
+              min="1"
+              max="999"
+              style="width: 100%; display: none"
+            />
             <button id="applySize">应用字号</button>
           </div>
 
@@ -1007,6 +1014,15 @@
             </div>
             <button id="resizeCanvas">调整尺寸</button>
             <button id="toggleBorders">网格：显示</button>
+          </div>
+
+          <div class="tool-group" id="pixelTools2" style="display: none">
+            <label>基础模式:</label>
+            <button id="clearCanvas" style="background-color: #ff5e41">以白色填充画布</button>
+            <button id="fillTransparent" style="background-color: #ff5e41">以透明色填充画布</button>
+            <button id="toggle4BitMode" title="开启后，颜色色值将会压缩为4位。" style="background-color: #795548">
+              4bit模式: 关
+            </button>
             <button
               id="toggleCenterOptimization"
               title="开启后，每行会将左右两边的透明色像素给删除。非左右对称图形不要开启。"
@@ -1016,13 +1032,8 @@
             </button>
           </div>
 
-          <div class="tool-group" id="pixelTools2" style="display: none">
-            <button id="clearCanvas" style="background-color: #ff5e41">以白色填充画布</button>
-            <button id="fillTransparent" style="background-color: #ff5e41">以透明色填充画布</button>
-            <button id="toggle4BitMode" style="background-color: #795548">4bit模式: 关</button>
-          </div>
-
           <div class="tool-group" id="pixelTools3" style="display: none">
+            <label>导出:</label>
             <button id="copyPixelArt">复制整张像素画</button>
             <button id="copyAllRows" title="将所有行复制到字符串数组并保存到剪贴板" style="background-color: #e91e63">
               复制所有行(数组)
@@ -1041,6 +1052,7 @@
             >
               导出所有像素画
             </button>
+            <label>导入:</label>
             <button id="importPixelArt" title="从JSON文件导入像素画" style="background-color: #9c27b0">导入文件</button>
             <button id="importImageBtn" title="从图片导入转为像素画" style="background-color: #00bcd4">导入图片</button>
           </div>
@@ -1092,19 +1104,22 @@
               <input type="file" id="imageInput" accept="image/*" style="display: none" />
             </div>
 
-            <div id="creatureResilienceContent" style="display: none;flex: 1;justify-content: center;overflow: hidden;">
+            <div
+              id="creatureResilienceContent"
+              style="display: none; flex: 1; justify-content: center; overflow: hidden"
+            >
               <div class="resilience-container">
                 <div class="resilience-table-wrapper">
                   <table class="resilience-table">
-                  <thead>
-                    <tr>
-                      <th>造物名称</th>
-                      <th>受打断值上限</th>
-                      <th>目标受打断值</th>
-                      <th>受打断倍率</th>
-                    </tr>
-                  </thead>
-                  <tbody id="resilienceTableBody"></tbody>
+                    <thead>
+                      <tr>
+                        <th>造物名称</th>
+                        <th>受打断值上限</th>
+                        <th>目标受打断值</th>
+                        <th>受打断倍率</th>
+                      </tr>
+                    </thead>
+                    <tbody id="resilienceTableBody"></tbody>
                   </table>
                 </div>
                 <div class="resilience-actions">
@@ -2962,7 +2977,7 @@
         { name: "镀金旅团·阵前斧手", base: 60 },
         { name: "镀金旅团·沙中净水", base: 120 },
         { name: "疾迅勇士·引索客", base: 60 },
-        { name: "大灵", base: 210 }
+        { name: "大灵", base: 210 },
       ];
 
       function renderResilienceTable() {

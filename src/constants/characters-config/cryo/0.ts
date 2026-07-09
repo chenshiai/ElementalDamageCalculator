@@ -17,3 +17,4 @@ export * from "./Diona";
 export * from "./Kaeya";
 export * from "./Chongyun";
 export * from "./Lohen";
+export * from "./Sandrone";
