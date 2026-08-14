@@ -42,3 +42,4 @@ export * from "./Sword_Ilmarinen";
 export * from "./Sword_Miekka";
 export * from "./Sword_Motsognir";
 export * from "./Sword_SilverwareSaw";
+export * from "./Swanlake";

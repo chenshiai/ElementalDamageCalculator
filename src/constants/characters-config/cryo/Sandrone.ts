@@ -54,6 +54,21 @@ export class SandroneData extends Character implements ICharacterInfo {
       },
       "sdnz1"
     ),
+    action(
+      "重击冷凝射线星扩散伤害",
+      AttackType.Start,
+      ElementType.StellarSwirlCryo,
+      {
+        atk: [
+          1.2255, 1.3253, 1.425, 1.5675, 1.6673, 1.7812, 1.938, 2.0947, 2.2515, 2.4225, 2.5935, 2.7645, 2.9355, 3.1065,
+          3.2775,
+        ],
+      },
+      "sdnz1"
+    ),
+    action("功率过载时伤害", AttackType.Strong, ElementType.Cryo, {
+      atk: [0.43, 0.465, 0.5, 0.55, 0.585, 0.625, 0.68, 0.735, 0.79, 0.85, 0.91, 0.97, 1.03, 1.09, 1.15],
+    }),
     action("下坠期间伤害", AttackType.FallPeriod, ElementType.Physical, {
       atk: [
         0.7459, 0.8066, 0.8673, 0.954, 1.0147, 1.0841, 1.1795, 1.2749, 1.3703, 1.4744, 1.5785, 1.6826, 1.7866, 1.8907,
@@ -92,6 +107,18 @@ export class SandroneData extends Character implements ICharacterInfo {
       },
       "sdn1"
     ),
+    action(
+      "棱晶弹星扩散伤害",
+      AttackType.Start,
+      ElementType.StellarSwirlCryo,
+      {
+        atk: [
+          0.324, 0.3483, 0.3726, 0.405, 0.4293, 0.4536, 0.486, 0.5184, 0.5508, 0.5832, 0.6156, 0.648, 0.6885, 0.729,
+          0.7695,
+        ],
+      },
+      "sdn1"
+    ),
   ];
 
   burstSkill = [
@@ -119,10 +146,25 @@ export class SandroneData extends Character implements ICharacterInfo {
       },
       "sdn2"
     ),
+    action(
+      "聚能光束星扩散伤害",
+      AttackType.Start,
+      ElementType.StellarSwirlCryo,
+      {
+        atk: [
+          3.308, 3.5561, 3.8042, 4.135, 4.3831, 4.6312, 4.962, 5.2928, 5.6236, 5.9544, 6.2852, 6.616, 7.0295, 7.443,
+          7.8565,
+        ],
+      },
+      "sdn2"
+    ),
   ];
   otherSkill = [
     action("4命·世事皆数，昼来夜往·伤害", AttackType.Start, ElementType.StellarConductCryo, {
       atk: [1.25],
+    }),
+    action("4命·世事皆数，昼来夜往·伤害", AttackType.Start, ElementType.StellarSwirlCryo, {
+      atk: [1.875],
     }),
     action("6命·水仙梦醒，且望晨光·伤害", AttackType.Strong, ElementType.Cryo, {
       atk: [1],
@@ -133,6 +175,15 @@ export class SandroneData extends Character implements ICharacterInfo {
       ElementType.StellarConductCryo,
       {
         atk: [0.8],
+      },
+      "sdnz1"
+    ),
+    action(
+      "6命·水仙梦醒，且望晨光·星扩散伤害",
+      AttackType.Start,
+      ElementType.StellarSwirlCryo,
+      {
+        atk: [1.2],
       },
       "sdnz1"
     ),
@@ -151,6 +202,16 @@ export class SandroneData extends Character implements ICharacterInfo {
         },
         {
           type: BuffType.StellarConductRate,
+          getValue: (_, s) => s * 10,
+          special: "sdn2",
+        },
+        {
+          type: BuffType.StellarSwirlRate,
+          getValue: () => 300,
+          special: "sdn1",
+        },
+        {
+          type: BuffType.StellarSwirlRate,
           getValue: (_, s) => s * 10,
           special: "sdn2",
         },
@@ -178,10 +239,15 @@ export class SandroneData extends Character implements ICharacterInfo {
     {
       label: "星耀祝礼·唯理为光",
       describe:
-        "基于桑多涅的攻击力，提升队伍中角色造成的星超导反应的基础伤害：每100点攻击力都将提升0.7%星超导反应的基础伤害，至多通过这种方式提升14%伤害",
+        "基于桑多涅的攻击力，提升队伍中角色造成的星烁反应的基础伤害：每100点攻击力都将提升0.7%星烁反应的基础伤害，至多通过这种方式提升14%伤害",
       effect: [
         {
           type: BuffType.StellarConductBasePercent,
+          getValue: (data) => Math.min(14, (data.baseATK + data.extraATK + data.extraATK_NT) * 0.007),
+          actionOn: ActionOn.External,
+        },
+        {
+          type: BuffType.StellarSwirlBasePercent,
           getValue: (data) => Math.min(14, (data.baseATK + data.extraATK + data.extraATK_NT) * 0.007),
           actionOn: ActionOn.External,
         },
@@ -193,7 +259,7 @@ export class SandroneData extends Character implements ICharacterInfo {
     {
       label: "1命·鎏金未凋，夕暮已远",
       describe: "队伍中的所有角色造成的星超导反应伤害提升30%",
-      effect: [{ type: BuffType.StellarConductPrcent, getValue: () => 30 }],
+      effect: [{ type: BuffType.GlobalStartPrcent, getValue: () => 30 }],
       enable: true,
       condition: ({ constellation }) => constellation >= 1,
       shareable: true,
@@ -201,8 +267,11 @@ export class SandroneData extends Character implements ICharacterInfo {
     {
       label: "2命·回望镜中，时岁翩然",
       describe:
-        "辉映·星超导：重击发射的冷凝射线的暴击伤害提升40%，且每次发射冷凝射线时，都会使本次解算模式期间，发射的所有冷凝射线的暴击伤害进一步提升20%，该效果至多叠加3层",
-      effect: [{ type: BuffType.StellarConductCritcalHurt, getValue: (_, s) => 40 + 20 * s, special: "sdnz1" }],
+        "辉映·星烁：重击发射的冷凝射线的暴击伤害提升40%，且每次发射冷凝射线时，都会使本次解算模式期间，发射的所有冷凝射线的暴击伤害进一步提升20%，该效果至多叠加3层",
+      effect: [
+        { type: BuffType.StellarConductCritcalHurt, getValue: (_, s) => 40 + 20 * s, special: "sdnz1" },
+        { type: BuffType.StellarSwirlCritcalHurt, getValue: (_, s) => 40 + 20 * s, special: "sdnz1" },
+      ],
       enable: true,
       stackable: true,
       stack: 3,
@@ -213,8 +282,11 @@ export class SandroneData extends Character implements ICharacterInfo {
     Constellation_Q_5,
     {
       label: "6命·水仙梦醒，且望晨光",
-      describe: "桑多涅造成的所有星超导反应伤害擢升20%",
-      effect: [{ type: BuffType.StellarConductPromote, getValue: () => 20 }],
+      describe: "桑多涅造成的所有星烁反应伤害擢升20%",
+      effect: [
+        { type: BuffType.StellarConductPromote, getValue: () => 20 },
+        { type: BuffType.StellarSwirlPromote, getValue: () => 20 },
+      ],
       enable: true,
       condition: ({ constellation }) => constellation >= 6,
     },

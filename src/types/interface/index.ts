@@ -214,6 +214,8 @@ export interface ICalculatorValue {
   [BuffType.MoonCrystalPrcent]: number;
   /** 星超导伤害加成 - 与精通乘区加算 */
   [BuffType.StellarConductPrcent]: number;
+  /** 星扩散伤害加成 - 与精通乘区加算 */
+  [BuffType.StellarSwirlPrcent]: number;
 
   // 各种隐式暴击率
   /** 全局暴击率提升 */
@@ -252,6 +254,8 @@ export interface ICalculatorValue {
   [BuffType.MoonCrystalCritcal]: number;
   /** 星超导伤害暴击率加成 */
   [BuffType.StellarConductCritcal]: number;
+  /** 星扩散伤害暴击率加成 */
+  [BuffType.StellarSwirlCritcal]: number;
 
   // 各种隐式爆伤
   /** 全局暴击伤害提升 */
@@ -354,6 +358,8 @@ export interface ICalculatorValue {
   [BuffType.MoonCrystalFixed]: number;
   /** 星超导伤害提高 */
   [BuffType.StellarConductFixed]: number;
+  /** 星扩散伤害提高 */
+  [BuffType.StellarSwirlFixed]: number;
 
   /** 生命之契 */
   [BuffType.LifeContract]: number;
@@ -376,6 +382,8 @@ export interface ICalculatorValue {
   [BuffType.MoonCrystalRate]: number;
   /** 星超导倍率最终提升% */
   [BuffType.StellarConductRate]: number;
+  /** 星扩散倍率最终提升% */
+  [BuffType.StellarSwirlRate]: number;
 
   /** 普攻倍率加成 */
   [BuffType.NormalAdd]: number;
@@ -402,8 +410,10 @@ export interface ICalculatorValue {
   [BuffType.MoonSwirlPromote]: number;
   /** 月结晶擢升% */
   [BuffType.MoonCrystalPromote]: number;
-  /** 星超导拔升% */
+  /** 星超导擢升% */
   [BuffType.StellarConductPromote]: number;
+  /** 星扩散擢升% */
+  [BuffType.StellarSwirlPromote]: number;
 
   /** 月感电基础伤害提升% */
   [BuffType.MoonElectroBasePercent]: number;
@@ -413,6 +423,8 @@ export interface ICalculatorValue {
   [BuffType.MoonCrystalBasePercent]: number;
   /** 星超导基础伤害提升% */
   [BuffType.StellarConductBasePercent]: number;
+  /** 星扩散基础伤害提升% */
+  [BuffType.StellarSwirlBasePercent]: number;
 
   /** 普攻天赋等级加成 */
   [BuffType.NormalLevel]: number;

@@ -19,7 +19,7 @@ export const CrystallineSword = createWeapon(
     let d = [16, 20, 24, 28, 32][affix - 1] + "%";
     return {
       title: "白女皇的升变",
-      text: highlight`攻击力提高${a}；<br/>此外，装备者的重击每次命中敌人后，都会短暂达成「超越」：使装备者的星超导反应伤害提升${d}，持续5秒。该效果至多叠加3层，每0.2秒至多叠加一层。`,
+      text: highlight`攻击力提高${a}；<br/>此外，装备者的重击每次命中敌人后，都会短暂达成「超越」：使装备者的星烁反应伤害提升${d}，持续5秒。该效果至多叠加3层，每0.2秒至多叠加一层。`,
     };
   },
   (affix = 1) => {
@@ -33,11 +33,17 @@ export const CrystallineSword = createWeapon(
         enable: true,
       },
       {
-        label: "星超导反应伤害提升",
-        describe: `使装备者的星超导反应伤害提升${d}%，该效果至多叠加3层`,
+        label: "星烁反应伤害提升",
+        describe: `使装备者的星烁反应伤害提升${d}%，该效果至多叠加3层`,
         effect: [
           {
             type: BuffType.StellarConductPrcent,
+            getValue: (_,s) => {
+              return d * s;
+            },
+          },
+          {
+            type: BuffType.StellarSwirlPrcent,
             getValue: (_,s) => {
               return d * s;
             },

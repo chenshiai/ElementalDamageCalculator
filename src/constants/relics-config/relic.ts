@@ -115,6 +115,90 @@ const getBuffByElement5 = (label: string, type: BuffType, target: ElementType): 
 
 const relicLibrary: IRelicLibraryItem[] = [
   {
+    name: "炉火融炼之心",
+    itemType: ItemType.ITEM_RELIQUARY,
+    setNameTextMapHash: 2639070349,
+    setId: 15048,
+    equip: [
+      setReliquartStat(2639070349, 15048, "熔铸者的揣度", "UI_RelicIcon_15047_4", EquipType.EQUIP_BRACER),
+      setReliquartStat(2639070349, 15048, "熔铸者的观测", "UI_RelicIcon_15047_2", EquipType.EQUIP_NECKLACE),
+      setReliquartStat(2639070349, 15048, "熔铸者的计算", "UI_RelicIcon_15047_5", EquipType.EQUIP_SHOES),
+      setReliquartStat(2639070349, 15048, "熔铸者的雅量", "UI_RelicIcon_15047_1", EquipType.EQUIP_RING),
+      setReliquartStat(2639070349, 15048, "熔铸者的继志", "UI_RelicIcon_15047_3", EquipType.EQUIP_DRESS),
+    ],
+    suit2: "二件套：攻击力提高18%。",
+    suit4: "四件套：装备者触发星烁反应或造成星烁反应伤害后的12秒内，攻击力提升12%，队伍中附近的所有角色造成的星烁反应伤害提升50%。装备者处于后台时也能触发上述效果。同名圣遗物套装产生的伤害加成效果无法叠加。",
+    buffs: {
+      suit2: [
+        {
+          label: "二件套·攻击力提高",
+          effect: [{ type: BuffType.ATKPrcent, getValue: () => 18 }],
+          describe: "攻击力提高18%。",
+          enable: true,
+        },
+      ],
+      suit4: [
+        {
+          label: "四件套·攻击力提高",
+          effect: [
+            { type: BuffType.ATKPrcent, getValue: () => 12  },
+          ],
+          describe: "装备者触发星烁反应或造成星烁反应伤害后的12秒内，攻击力提升12%",
+          enable: true,
+        },
+        {
+          label: "四件套·全队星烁反应伤害提升",
+          effect: [
+            { type: BuffType.GlobalStartPrcent, getValue: () => 50 },
+          ],
+          describe: "队伍中附近的所有角色造成的星烁反应伤害提升50%",
+          enable: true,
+          shareable: true,
+          target: BuffTarget.All
+        },
+      ],
+    },
+  },
+  {
+    name: "血红之证",
+    itemType: ItemType.ITEM_RELIQUARY,
+    setNameTextMapHash: 2639070348,
+    setId: 15047,
+    equip: [
+      setReliquartStat(2639070348, 15047, "感谢你的奉献", "UI_RelicIcon_15047_4", EquipType.EQUIP_BRACER),
+      setReliquartStat(2639070348, 15047, "铭记你的功勋", "UI_RelicIcon_15047_2", EquipType.EQUIP_NECKLACE),
+      setReliquartStat(2639070348, 15047, "授予你的年华", "UI_RelicIcon_15047_5", EquipType.EQUIP_SHOES),
+      setReliquartStat(2639070348, 15047, "饮尽你的血泪", "UI_RelicIcon_15047_1", EquipType.EQUIP_RING),
+      setReliquartStat(2639070348, 15047, "缅怀你的信仰", "UI_RelicIcon_15047_3", EquipType.EQUIP_DRESS),
+    ],
+    suit2: "二件套：攻击力提高18%。",
+    suit4: "四件套：装备者触发星扩散反应后的10秒内，暴击率提升16%，星扩散反应伤害提升40%。",
+    buffs: {
+      suit2: [
+        {
+          label: "二件套·攻击力提高",
+          effect: [{ type: BuffType.ATKPrcent, getValue: () => 18 }],
+          describe: "攻击力提高18%。",
+          enable: true,
+        },
+      ],
+      suit4: [
+        {
+          label: "四件套·星扩散反应伤害提升，暴击率提高",
+          effect: [
+            { type: BuffType.Critcal, getValue: () => 16 },
+            {
+              type: BuffType.StellarSwirlPrcent,
+              getValue: () => 40,
+            },
+          ],
+          describe: "星扩散反应伤害提升40%，暴击率提高16%。",
+          enable: true,
+        },
+      ],
+    },
+  },
+  {
     name: "影中沉凝的幻灭",
     itemType: ItemType.ITEM_RELIQUARY,
     setNameTextMapHash: 2639070347,
@@ -1616,7 +1700,8 @@ const relicLibrary: IRelicLibraryItem[] = [
       suit4: [
         {
           label: "四件套·超激化、月感电、星超导反应伤害提升",
-          effect: [{ type: BuffType.CatalyzeRate, getValue: () => 20 },
+          effect: [
+            { type: BuffType.CatalyzeRate, getValue: () => 20 },
             { type: BuffType.StellarConductPrcent, getValue: () => 20 },
             { type: BuffType.MoonElectroPrcent, getValue: () => 20 },
           ],

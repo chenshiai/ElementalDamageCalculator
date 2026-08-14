@@ -20,7 +20,7 @@ export enum AttackType {
   FallingOther = "FallingOther",
   /** 月曜反应类型 */
   Moon = "Moon",
-  /** 星辉反应类型 */
+  /** 星烁反应类型 */
   Start = "Start",
 
   /** 治疗类型 */
@@ -49,23 +49,29 @@ export enum ElementType {
   Geo = "Geo",
   /** 草属性 */
   Dendro = "Dendro",
+
   /** 月感电属性 */
   MoonElectro = "MoonElectro",
   /** 月绽放属性 */
-  MoonSwirl = "MoonSwirl",
+  MoonSwirl = "MoonSwirl", // 英文写成月扩散了，懒得改了
   /** 月结晶属性 */
   MoonCrystal = "MoonCrystal",
+
   /** 星超导-雷属性 */
   StellarConductElectro = "StellarConductElectro",
   /** 星超导-冰属性 */
   StellarConductCryo = "StellarConductCryo",
+  /** 星扩散-冰属性 */
+  StellarSwirlCryo = "StellarSwirlCryo",
+  /** 星扩散-风属性 */
+  StellarSwirlAnemo = "StellarSwirlAnemo",
   /** 无属性 */
   None = "None",
 }
 
 /** 第二类型 */
 export enum SecondElementType {
-  /** 星辉 */
+  /** 星烁 */
   Start = "Start",
   /** 月兆 */
   Moon = 'moon',
@@ -93,6 +99,8 @@ export const EnchantingType = {
   [ElementType.MoonCrystal]: 10,
   [ElementType.StellarConductElectro]: 11,
   [ElementType.StellarConductCryo]: 12,
+  [ElementType.StellarSwirlCryo]: 13,
+  [ElementType.StellarSwirlAnemo]: 14,
 };
 
 // 数字映射到 ElementType 的对象
@@ -110,6 +118,8 @@ export const NumberToElementType: Record<number, ElementType> = {
   10: ElementType.MoonCrystal,
   11: ElementType.StellarConductElectro,
   12: ElementType.StellarConductCryo,
+  13: ElementType.StellarSwirlCryo,
+  14: ElementType.StellarSwirlAnemo,
 };
 /** 武器类型 */
 export enum WeaponType {
@@ -185,7 +195,7 @@ export enum BuffType {
   GlobalPrcent = "globalAddHunt",
   /** 全局月反应伤害提升 单位% - 与精通乘区提升加算 */
   GlobalMoonPrcent = "globalMoonAddHunt",
-  /** 全局星辉伤害提升 单位% - 与精通乘区提升加算 */
+  /** 全局星烁伤害提升 单位% - 与精通乘区提升加算 */
   GlobalStartPrcent = "globalStartAddHunt",
   /** 普攻伤害百分比提升 */
   NormalPrcent = "normalAttackAddHunt",
@@ -207,12 +217,14 @@ export enum BuffType {
   MoonCrystalPrcent = "moonCrystalAddHunt",
   /** 星超导伤害百分比提升 - 与精通乘区加算*/
   StellarConductPrcent = "stellarConductAddHunt",
+  /** 星扩散伤害百分比提升 - 与精通乘区加算*/
+  StellarSwirlPrcent = "stellarSwirlAddHunt",
 
   /** 全局伤害提高 - 适用于传统直伤 */
   GlobalFixed = "globalIncreaseHunt",
   /** 全局月反应伤害提高 - 不吃精通增伤、月反应增伤效果 */
   GlobalMoonFixed = "globalMoonIncreaseHunt",
-  /** 全局星反应伤害提高 - 不吃精通增伤、星辉增伤效果 */
+  /** 全局星反应伤害提高 - 不吃精通增伤、星烁增伤效果 */
   GlobalStartFixed = "globalStartIncreaseHunt",
   /** 普攻伤害提高 */
   NormalFixed = "normalIncreaseHurt",
@@ -247,8 +259,10 @@ export enum BuffType {
   MoonSwirlFixed = "moonSwirlIncreaseHunt",
   /** 月结晶伤害提高 - 不吃精通增伤、月反应增伤效果 */
   MoonCrystalFixed = "moonCrystalIncreaseHunt",
-  /** 星超导伤害提高 - 不吃精通增伤、星辉增伤效果 */
+  /** 星超导伤害提高 - 不吃精通增伤、星烁增伤效果 */
   StellarConductFixed = "stellarConductIncreaseHunt",
+  /** 星扩散伤害提高 - 不吃精通增伤、星烁增伤效果 */
+  StellarSwirlFixed = "stellarSwirlIncreaseHunt",
 
   /** 全局暴击率提升 */
   GlobalCritcal = "globalCritcal",
@@ -290,6 +304,8 @@ export enum BuffType {
   MoonCrystalCritcal = "moonCrystalCritcal",
   /** 星超导暴击率提升% */
   StellarConductCritcal = "stellarConductCritcal",
+  /** 星扩散暴击率提升% */
+  StellarSwirlCritcal = "stellarSwirlCritcal",
 
   /** 普攻暴击伤害提升%*/
   NormalCritcalHurt = "normalAttackCritcalHurt",
@@ -326,6 +342,8 @@ export enum BuffType {
   MoonCrystalCritcalHurt = "moonCrystalCritcalHurt",
   /** 星超导暴击伤害提升%*/
   StellarConductCritcalHurt = "stellarConductCritcalHurt",
+  /** 星扩散暴击伤害提升%*/
+  StellarSwirlCritcalHurt = "stellarSwirlCritcalHurt",
 
   /** 月感电擢升% */
   MoonElectroPromote = "moonElectroPromote",
@@ -335,6 +353,9 @@ export enum BuffType {
   MoonCrystalPromote = "moonCrystalPromote",
   /** 星超导擢升% */
   StellarConductPromote = "stellarConductPromote",
+  /** 星扩散擢升% */
+  StellarSwirlPromote = "stellarSwirlPromote",
+
   /** 月感电基础伤害提升% */
   MoonElectroBasePercent = "moonElectroBasePercent",
   /** 月绽放基础伤害提升% */
@@ -343,6 +364,8 @@ export enum BuffType {
   MoonCrystalBasePercent = "moonCrystalBasePercent",
   /** 星超导基础伤害提升% */
   StellarConductBasePercent = "stellarConductBasePercent",
+  /** 星扩散基础伤害提升% */
+  StellarSwirlBasePercent = "stellarSwirlBasePercent",
 
   /** 普攻倍率最终提升 */
   NormalRate = "normalRateAdd",
@@ -362,6 +385,8 @@ export enum BuffType {
   MoonCrystalRate = "moonCrystalRateAdd",
   /** 星超导倍率最终提升 */
   StellarConductRate = "stellarConductRateAdd",
+  /** 星扩散倍率最终提升 */
+  StellarSwirlRate = "stellarSwirlRateAdd",
 
   /** 普攻倍率加成 */
   NormalAdd = "normalAdd",

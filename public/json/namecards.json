@@ -832,5 +832,38 @@
     },
     "210283": {
         "Icon": "/ui/UI_NameCardPic_Bp50_P.jpg"
+    },
+    "210284": {
+        "Icon": "/ui/UI_NameCardPic_MarionetteNew_P.jpg"
+    },
+    "210285": {
+        "Icon": "/ui/UI_NameCardPic_Moon_P.jpg"
+    },
+    "210286": {
+        "Icon": "/ui/UI_NameCardPic_Bp51_P.jpg"
+    },
+    "210287": {
+        "Icon": "/ui/UI_NameCardPic_Odette_P.jpg"
+    },
+    "210288": {
+        "Icon": "/ui/UI_NameCardPic_Alyosha_P.jpg"
+    },
+    "210289": {
+        "Icon": "/ui/UI_NameCardPic_Ysxf7_P.jpg"
+    },
+    "210290": {
+        "Icon": "/ui/UI_NameCardPic_Snezhnaya1_P.jpg"
+    },
+    "210291": {
+        "Icon": "/ui/UI_NameCardPic_Csxy7_P.jpg"
+    },
+    "210292": {
+        "Icon": "/ui/UI_NameCardPic_Tps1_P.jpg"
+    },
+    "210293": {
+        "Icon": "/ui/UI_NameCardPic_Shadow_P.jpg"
+    },
+    "210294": {
+        "Icon": "/ui/UI_NameCardPic_Bp52_P.jpg"
     }
 }

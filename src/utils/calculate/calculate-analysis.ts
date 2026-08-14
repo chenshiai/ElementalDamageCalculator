@@ -8,6 +8,7 @@ export type CalculateAnalysisType = {
   ADDITIONAL_DMG: number;
   BASE_DMG: number;
   PROMOTE_DMG: number;
+  START_PROMOTE_DMG: number;
 }
 const CalculateAnalysis = (compositionAnalysis: CalculateAnalysisType) => {
   function calculateHeight(target) {
@@ -27,6 +28,14 @@ const CalculateAnalysis = (compositionAnalysis: CalculateAnalysisType) => {
       number: Math.round(compositionAnalysis.PROMOTE_DMG),
       style: {
         height: calculateHeight(compositionAnalysis.PROMOTE_DMG),
+        backgroundColor: "#b380ff",
+      },
+    },
+    {
+      title: "擢升值",
+      number: Math.round(compositionAnalysis.START_PROMOTE_DMG),
+      style: {
+        height: calculateHeight(compositionAnalysis.START_PROMOTE_DMG),
         backgroundColor: "#b380ff",
       },
     },

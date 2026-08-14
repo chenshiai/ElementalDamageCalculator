@@ -33,9 +33,12 @@ export function getColorByElement(elementType: ElementType | string) {
       return "text-hydro";
     case ElementType.Anemo:
       return "text-anemo";
+    case ElementType.StellarSwirlAnemo:
+      return "text-star-anemo";
     case ElementType.Cryo:
       return "text-cryo";
     case ElementType.StellarConductCryo:
+    case ElementType.StellarSwirlCryo:
       return "text-star-cryo";
     case ElementType.Geo:
       return "text-geo";

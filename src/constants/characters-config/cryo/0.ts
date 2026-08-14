@@ -18,3 +18,4 @@ export * from "./Kaeya";
 export * from "./Chongyun";
 export * from "./Lohen";
 export * from "./Sandrone";
+export * from "./Odette";

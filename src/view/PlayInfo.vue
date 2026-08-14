@@ -309,8 +309,8 @@ const pasteFmt2 = async () => {
     }
   }
 };
+// https://lunaris.moe/characters
 </script>
-
 <style scoped>
 .copy-success,
 .paste-success,

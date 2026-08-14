@@ -56,6 +56,7 @@ class CalculatorValue implements ICalculatorValue {
   moonSwirlCritcal: number = 0;
   moonCrystalCritcal: number = 0;
   stellarConductCritcal: number = 0;
+  stellarSwirlCritcal: number = 0;
 
   // 各种隐式爆伤
   globalCritcalHunt: number = 0;
@@ -76,6 +77,7 @@ class CalculatorValue implements ICalculatorValue {
   moonSwirlCritcalHurt: number = 0;
   moonCrystalCritcalHurt: number = 0;
   stellarConductCritcalHurt: number = 0;
+  stellarSwirlCritcalHurt: number = 0;
 
   // 攻击增伤
   normalAttackAddHunt: number = 0;
@@ -111,6 +113,7 @@ class CalculatorValue implements ICalculatorValue {
   moonSwirlAddHunt: number = 0;
   moonCrystalAddHunt: number = 0;
   stellarConductAddHunt: number = 0;
+  stellarSwirlAddHunt: number = 0;
 
   // 元素伤害提高
   phycalIncreaseHunt: number = 0;
@@ -125,6 +128,7 @@ class CalculatorValue implements ICalculatorValue {
   moonSwirlIncreaseHunt: number = 0;
   moonCrystalIncreaseHunt: number = 0;
   stellarConductIncreaseHunt: number = 0;
+  stellarSwirlIncreaseHunt: number = 0;
 
   // 生命之契
   lifeContract: number = 0;
@@ -141,16 +145,19 @@ class CalculatorValue implements ICalculatorValue {
   moonSwirlRateAdd: number = 0;
   moonCrystalRateAdd: number = 0;
   stellarConductRateAdd: number = 0;
+  stellarSwirlRateAdd: number = 0;
 
   moonElectroPromote: number = 0;
   moonSwirlPromote: number = 0;
   moonCrystalPromote: number = 0;
   stellarConductPromote: number = 0;
+  stellarSwirlPromote: number = 0;
   
   moonElectroBasePercent: number = 0;
   moonSwirlBasePercent: number = 0;
   moonCrystalBasePercent: number = 0;
   stellarConductBasePercent: number = 0;
+  stellarSwirlBasePercent: number = 0;
 
   burstAdd: number = 0;
   skillAdd: number = 0;

@@ -305,6 +305,34 @@ function getMoreDataBySwitch(
       startAddHunt += calculatorValue[BuffType.StellarConductPrcent] || 0;
       startPromote += calculatorValue[BuffType.StellarConductPromote] || 0;
       break;
+    case ElementType.StellarSwirlCryo:
+      // 星扩散-冰伤害无视敌人防御
+      defensePenetration = 100;
+      ADDITIONAL_DMG += calculatorValue[BuffType.StellarSwirlFixed] || 0;
+      criticalHunt += calculatorValue[BuffType.StellarSwirlCritcalHurt] || 0;
+      criticalHunt += calculatorValue[BuffType.CryoCritcalHurt] || 0;
+      critical += calculatorValue[BuffType.StellarSwirlCritcal] || 0;
+      critical += calculatorValue[BuffType.CryoCritcal] || 0;
+      resistance += calculatorValue[BuffType.EnemyCryoResistance] || 0;
+      addRate += calculatorValue[BuffType.StellarSwirlRate] || 0;
+      startBasePercent += calculatorValue[BuffType.StellarSwirlBasePercent] || 0;
+      startAddHunt += calculatorValue[BuffType.StellarSwirlPrcent] || 0;
+      startPromote += calculatorValue[BuffType.StellarSwirlPromote] || 0;
+      break;
+    case ElementType.StellarSwirlAnemo:
+      // 星扩散-风伤害无视敌人防御
+      defensePenetration = 100;
+      ADDITIONAL_DMG += calculatorValue[BuffType.StellarSwirlFixed] || 0;
+      criticalHunt += calculatorValue[BuffType.StellarSwirlCritcalHurt] || 0;
+      criticalHunt += calculatorValue[BuffType.AnemoCritcalHurt] || 0;
+      critical += calculatorValue[BuffType.StellarSwirlCritcal] || 0;
+      critical += calculatorValue[BuffType.AnemoCritcal] || 0;
+      resistance += calculatorValue[BuffType.EnemyAnemoResistance] || 0;
+      addRate += calculatorValue[BuffType.StellarSwirlRate] || 0;
+      startBasePercent += calculatorValue[BuffType.StellarSwirlBasePercent] || 0;
+      startAddHunt += calculatorValue[BuffType.StellarSwirlPrcent] || 0;
+      startPromote += calculatorValue[BuffType.StellarSwirlPromote] || 0;
+      break;
   }
 
   return {
@@ -538,12 +566,16 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
       REACTION_DMG = (BASE_DMG + ADDITIONAL_DMG + MAGNIFICATION_DMG) * ReactionRate[atkType];
     }
   }
-  if (atkType === ElementalReactionType.Rate || atkType === ElementalReactionType.Rate2) {
+  if (
+    (atkType === ElementalReactionType.Rate || atkType === ElementalReactionType.Rate2) &&
+    attackType !== AttackType.Moon &&
+    attackType !== AttackType.Start
+  ) {
     EVA_DMG = (BASE_DMG + ADDITIONAL_DMG + MAGNIFICATION_DMG + REACTION_DMG) * eva;
   }
 
   /** 最终伤害 */
-  let RESULT_DMG = BASE_DMG + ADDITIONAL_DMG + BONUS_DMG + MAGNIFICATION_DMG + REACTION_DMG + EVA_DMG + PROMOTE_DMG;
+  let RESULT_DMG = BASE_DMG + ADDITIONAL_DMG + BONUS_DMG + MAGNIFICATION_DMG + REACTION_DMG + EVA_DMG + PROMOTE_DMG + START_PROMOTE_DMG;
 
   /** 暴击伤害 */
   let CRITICAL_DMG = (RESULT_DMG * criticalHunt) / 100;
