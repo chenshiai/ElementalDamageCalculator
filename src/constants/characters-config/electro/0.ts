@@ -18,3 +18,4 @@ export * from "./Beidou";
 export * from "./PlayerBoy";
 export * from "./PlayerGirl";
 export * from "./Flins";
+export * from "./Alyosha";

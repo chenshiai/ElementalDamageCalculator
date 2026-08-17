@@ -142,15 +142,21 @@ export class QiqiData extends Character implements ICharacterInfo {
     },
     {
       label: "七宝奉真",
-      describe: "辉映·星超导：队伍中自己的角色造成的超导、星超导反应伤害提升50%",
-      effect: [{ type: BuffType.StellarConductPrcent, getValue: () => 50 }],
+      describe: "辉映·星超导：队伍中自己的角色造成的超导、星超导、冰元素扩散、星扩散反应伤害提升50%",
+      effect: [
+        { type: BuffType.StellarConductPrcent, getValue: () => 50 },
+        {
+          type: BuffType.StellarSwirlPrcent,
+          getValue: () => 50,
+        },
+      ],
       enable: true,
       shareable: true,
       target: BuffTarget.All,
     },
     {
       label: "2命·冰寒蚀骨",
-      describe: "对受到冰元素影响的敌人，七七的普通攻击与重击造成的伤害提升15%。辉映·星超导：七七的攻击力提升50%",
+      describe: "对受到冰元素影响的敌人，七七的普通攻击与重击造成的伤害提升15%。辉映·星烁：七七的攻击力提升50%",
       effect: [
         { type: BuffType.NormalPrcent, getValue: () => 15 },
         { type: BuffType.StrongPrcent, getValue: () => 15 },
@@ -169,10 +175,14 @@ export class QiqiData extends Character implements ICharacterInfo {
     {
       label: "6命·起死回骸",
       describe:
-        "辉映·星超导：除七七外的队伍中自己的当前场上角色造成星超导反应伤害时，将消耗1层洞玄，提升造成的伤害，提升值相当于七七攻击力的600%",
+        "辉映·星烁：除七七外的队伍中自己的当前场上角色造成星超导或星扩散反应伤害时，将消耗1层洞玄，提升造成的伤害，提升值相当于七七攻击力的600%",
       effect: [
         {
           type: BuffType.StellarConductFixed,
+          getValue: (data) => (data.baseATK + data.extraATK + data.extraATK_NT) * 6,
+        },
+        {
+          type: BuffType.StellarSwirlFixed,
           getValue: (data) => (data.baseATK + data.extraATK + data.extraATK_NT) * 6,
         },
       ],

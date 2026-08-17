@@ -9,6 +9,17 @@ import * as magic from "./magic/0";
 import * as greatsword from "./great-sword/0";
 
 export const Weapons: IWeaponInfo[] = [
+  sword.WeaponQuestSnezhnaya,
+  magic.GlintstoneCatalyst,
+  bow.GlintstoneBow,
+  polearms.GlintstonePolearm,
+  greatsword.GlintstoneClaymore,
+  sword.GlintstoneSword,
+  magic.SandMemoria,
+  bow.ShatteredMirror,
+  polearms.FaesCrystalle,
+  greatsword.EscapeWheel,
+  sword.SerpentTooth,
   sword.Sword_Swanlake,
   greatsword.CrystallineSword,
   polearms.Carbine,

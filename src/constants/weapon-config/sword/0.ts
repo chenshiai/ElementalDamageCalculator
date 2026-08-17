@@ -43,3 +43,6 @@ export * from "./Sword_Miekka";
 export * from "./Sword_Motsognir";
 export * from "./Sword_SilverwareSaw";
 export * from "./Swanlake";
+export * from "./SerpentTooth";
+export * from "./GlintstoneSword";
+export * from "./WeaponQuestSnezhnaya";

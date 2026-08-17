@@ -34,3 +34,5 @@ export * from "./Dragonfell";
 export * from "./Claymore_Ilmarinen";
 export * from "./Claymore_EnsisAquilonis";
 export * from "./CrystallineSword";
+export * from "./EscapeWheel";
+export * from "./GlintstoneClaymore";

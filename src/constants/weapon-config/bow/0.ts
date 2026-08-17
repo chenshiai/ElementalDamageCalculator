@@ -37,3 +37,5 @@ export * from "./Bow_Ilmarinen";
 export * from "./Bow_Arianna";
 export * from "./Bow_ElegguaBow";
 export * from "./Bow_Alkonost";
+export * from "./GlintstoneBow";
+export * from "./ShatteredMirror";

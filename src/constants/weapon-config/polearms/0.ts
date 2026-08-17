@@ -34,3 +34,5 @@ export * from "./Pole_TummaLyhty";
 export * from "./Pole_Ilmarinen";
 export * from "./Pole_Krivule";
 export * from "./Pole_Carbine";
+export * from "./FaesCrystalle";
+export * from "./Pole_GlintstonePolearm";
