@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>千星沙箱工具箱v20260706</title>
+    <title>千星沙箱工具箱v20260819</title>
     <link rel="stylesheet" href="font.css" />
     <style>
       * {
@@ -24,7 +24,11 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 5px;
+        padding: 0;
+        margin: 0;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
       }
 
       /* 使用CSS变量定义基础尺寸 */
@@ -37,11 +41,11 @@
       }
 
       .container {
-        width: min(95%, 1800px);
-        height: 98vh;
+        width: 100vw;
+        height: 100vh;
         background-color: white;
-        border-radius: 12px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        border-radius: 0;
+        box-shadow: none;
         overflow: hidden;
         display: flex;
         flex-direction: row;
@@ -182,6 +186,21 @@
       .tool-group .mode-btn {
         flex: 1;
         min-width: 0;
+      }
+
+      /* 常驻显示的功能切换按钮组（无 tool-group 边距与背景） */
+      .mode-switcher {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: clamp(4px, 1vw, 8px);
+      }
+
+      .mode-switcher button {
+        flex: 1 1 auto;
+        white-space: nowrap;
+        word-break: keep-all;
       }
 
       .color-presets {
@@ -875,13 +894,12 @@
         <div class="header">
           <h1>
             千星沙箱工具箱
-            <p>v20260706 by 琳妮特的毛绒球</p>
+            <p>v20260819 by 琳妮特的毛绒球</p>
           </h1>
         </div>
 
         <div class="toolbar">
-          <div class="tool-group">
-            <label>功能:</label>
+          <div class="mode-switcher">
             <button id="textEditorBtn" class="mode-btn active">文本编辑</button>
             <button id="pixelEditorBtn" class="mode-btn">像素画绘制</button>
             <button id="creatureResilienceBtn" class="mode-btn">造物韧性计算</button>
@@ -921,6 +939,15 @@
                 style="background-color: #3399cc"
                 data-color="#3399cc"
               ></div>
+              <div
+                class="color-preset"
+                title="透明色"
+                style="background-color: transparent; border: 1px solid #333"
+                data-color="transparent"
+              ></div>
+            </div>
+            <label>七元素色:</label>
+            <div class="color-presets">
               <div class="color-preset" title="火元素" style="background-color: #ff6666" data-color="#ff6666"></div>
               <div class="color-preset" title="水元素" style="background-color: #6495ed" data-color="#6495ed"></div>
               <div class="color-preset" title="雷元素" style="background-color: #b380ff" data-color="#b380ff"></div>
@@ -928,12 +955,7 @@
               <div class="color-preset" title="风元素" style="background-color: #5ddac1" data-color="#5ddac1"></div>
               <div class="color-preset" title="岩元素" style="background-color: #ffcc00" data-color="#ffcc00"></div>
               <div class="color-preset" title="草元素" style="background-color: #3cff00" data-color="#3cff00"></div>
-              <div
-                class="color-preset"
-                title="透明色"
-                style="background-color: transparent; border: 1px solid #333"
-                data-color="transparent"
-              ></div>
+              
             </div>
             <label>调色盘:</label>
             <div class="color-picker-container">
