@@ -44,3 +44,4 @@ export * from "./Catalyst_Brisingamen";
 export * from "./Catalyst_FairyGarden";
 export * from "./SandMemoria";
 export * from "./GlintstoneCatalyst";
+export * from "./Catalyst_Bludnye";

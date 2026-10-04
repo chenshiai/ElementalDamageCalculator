@@ -46,3 +46,4 @@ export * from "./Swanlake";
 export * from "./SerpentTooth";
 export * from "./GlintstoneSword";
 export * from "./WeaponQuestSnezhnaya";
+export * from "./Sword_Samosvist";
