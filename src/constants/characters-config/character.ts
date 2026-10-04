@@ -10,6 +10,8 @@ import * as hydro from "./hydro/0";
 
 // .replaceAll("%", '').replaceAll(/[\u4e00-\u9fff]+/g, "").replaceAll("\t",",").split(",").map(i=>Math.round(i*100)/10000)
 export const Character: ICharacterInfo[] = [
+  anemo.Vesna,
+  hydro.Vodyanitsa,
   cryo.Odette,
   electro.Alyosha,
   cryo.Sandrone,

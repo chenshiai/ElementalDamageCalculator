@@ -173,7 +173,14 @@ function getMoreDataBySwitch(
   }
 
   // 元素转化
-  if (calculatorValue.transform && calculatorValue.transform !== EnchantingType.Physical) {
+  if (
+    calculatorValue.transform &&
+    (attackType === AttackType.Normal ||
+      attackType === AttackType.Strong ||
+      attackType === AttackType.Falling ||
+      attackType === AttackType.FallPeriod) &&
+    calculatorValue.transform !== EnchantingType.Physical
+  ) {
     newElementType = NumberToElementType[calculatorValue.transform];
   }
 
@@ -575,7 +582,15 @@ export function calculateDamage({ calculatorValue, attackType, elementType, rate
   }
 
   /** 最终伤害 */
-  let RESULT_DMG = BASE_DMG + ADDITIONAL_DMG + BONUS_DMG + MAGNIFICATION_DMG + REACTION_DMG + EVA_DMG + PROMOTE_DMG + START_PROMOTE_DMG;
+  let RESULT_DMG =
+    BASE_DMG +
+    ADDITIONAL_DMG +
+    BONUS_DMG +
+    MAGNIFICATION_DMG +
+    REACTION_DMG +
+    EVA_DMG +
+    PROMOTE_DMG +
+    START_PROMOTE_DMG;
 
   /** 暴击伤害 */
   let CRITICAL_DMG = (RESULT_DMG * criticalHunt) / 100;

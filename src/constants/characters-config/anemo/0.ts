@@ -18,3 +18,4 @@ export * from "./PlayerGirl";
 export * from "./Jahoda";
 export * from "./Varka";
 export * from "./Prune";
+export * from "./Vesna";
